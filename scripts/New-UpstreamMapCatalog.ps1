@@ -23,7 +23,9 @@ $definitions = @(
     [pscustomobject]@{ Id = 'video'; Tool = 'Video'; Repository = 'opencv' },
     [pscustomobject]@{ Id = 'videoio'; Tool = 'VideoIO'; Repository = 'opencv' },
     [pscustomobject]@{ Id = 'xphoto'; Tool = 'XPhoto'; Repository = 'opencv_contrib' },
-    [pscustomobject]@{ Id = 'ximgproc'; Tool = 'XImgProc'; Repository = 'opencv_contrib' }
+    [pscustomobject]@{ Id = 'ximgproc'; Tool = 'XImgProc'; Repository = 'opencv_contrib' },
+    [pscustomobject]@{ Id = 'optflow'; Tool = 'OptFlow'; Repository = 'opencv_contrib' },
+    [pscustomobject]@{ Id = 'bgsegm'; Tool = 'BgSegm'; Repository = 'opencv_contrib' }
 )
 
 function Get-HeaderRows {

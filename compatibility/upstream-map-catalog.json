@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 16,
+  "moduleCount": 18,
   "maps": [
     {
       "id": "calib3d",
@@ -1386,6 +1386,116 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "3ff4c561d2ea50b155c35ca8678b54ac1c0839c123dff8d889b204eb440311d8",
         "familyInventorySha256": "f420634500533c2b3cfca72a8a609ecd7d3c74391ae6da3ed2b5ced6445246ed",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "optflow",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/OptFlowUpstreamMap",
+      "extractorScript": "tools/OptFlowUpstreamMap/extract_optflow.py",
+      "generationScript": "scripts/Generate-OptFlowUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-OptFlowUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/optflow.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow.hpp",
+          "sha256": "50f41e0be6043b6460061fcac23ea96377baaee6bc4335c565b5ed639e0aac80"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/motempl.hpp",
+            "sha256": "eb184510d8676411c7e45d68367ca93bcff60271f504684c254ea54a895e4f37",
+            "startOrdinal": 0,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/pcaflow.hpp",
+            "sha256": "7177edd21d8760c859060966b7a41ae45211f10c22606ebe806ee82afe475794",
+            "startOrdinal": 4,
+            "declarationCount": 3
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+            "sha256": "595fc93147154ba0838532d28a250f6eb36611bec2218bdad338f74734e88ade",
+            "startOrdinal": 7,
+            "declarationCount": 72
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/sparse_matching_gpc.hpp",
+            "sha256": "2cc5d6ce96ee04e68e807caaadd473455f9d69c4a82eaba6f4ed7339735f54db",
+            "startOrdinal": 79,
+            "declarationCount": 6
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/optflow-upstream-raw.json",
+        "classifications": "compatibility/optflow-upstream-classifications.json",
+        "mapping": "compatibility/optflow-upstream-map.txt",
+        "summary": "compatibility/optflow-upstream-summary.json",
+        "familyInventory": "compatibility/optflow-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 85,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "cd8fa9cdd1042db842b87ea7de793ca09cdfe82bba624879f7156cb04cdfdf00",
+        "familyInventorySha256": "f07162653f429e6cd8e8ee48429e0972e6eaa34a2c3eb7a4906357175d7f7c20",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "bgsegm",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/BgSegmUpstreamMap",
+      "extractorScript": "tools/BgSegmUpstreamMap/extract_bgsegm.py",
+      "generationScript": "scripts/Generate-BgSegmUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-BgSegmUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/bgsegm.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+          "sha256": "b400c61e75bbc1a771ecf5e171324babbe47fbb916aee03e54a3619fb58f6ace"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+            "sha256": "b400c61e75bbc1a771ecf5e171324babbe47fbb916aee03e54a3619fb58f6ace",
+            "startOrdinal": 0,
+            "declarationCount": 66
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/bgsegm-upstream-raw.json",
+        "classifications": "compatibility/bgsegm-upstream-classifications.json",
+        "mapping": "compatibility/bgsegm-upstream-map.txt",
+        "summary": "compatibility/bgsegm-upstream-summary.json",
+        "familyInventory": "compatibility/bgsegm-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 66,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "379d02696b586f223c2577eaf9c09e6bd05b3a0b8894b7083799ce4d9fefe1fc",
+        "familyInventorySha256": "7b08a7d928ec7ac75e760b5735cc9e97d6476dcfc094038af93354ccd134ac36",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

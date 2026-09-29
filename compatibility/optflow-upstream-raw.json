@@ -1,0 +1,1919 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/OptFlowUpstreamMap/extract_optflow.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow.hpp",
+  "headerSha256": "50f41e0be6043b6460061fcac23ea96377baaee6bc4335c565b5ed639e0aac80",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/motempl.hpp",
+      "sha256": "eb184510d8676411c7e45d68367ca93bcff60271f504684c254ea54a895e4f37",
+      "startOrdinal": 0,
+      "declarationCount": 4
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/pcaflow.hpp",
+      "sha256": "7177edd21d8760c859060966b7a41ae45211f10c22606ebe806ee82afe475794",
+      "startOrdinal": 4,
+      "declarationCount": 3
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "sha256": "595fc93147154ba0838532d28a250f6eb36611bec2218bdad338f74734e88ade",
+      "startOrdinal": 7,
+      "declarationCount": 72
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/sparse_matching_gpc.hpp",
+      "sha256": "2cc5d6ce96ee04e68e807caaadd473455f9d69c4a82eaba6f4ed7339735f54db",
+      "startOrdinal": 79,
+      "declarationCount": 6
+    }
+  ],
+  "declarationCount": 85,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/motempl.hpp",
+      "kind": "callable",
+      "name": "cv.motempl.updateMotionHistory",
+      "identity": "cv.motempl.updateMotionHistory(Mat silhouette;Mat mhi[/IO];double timestamp;double duration)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "silhouette",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mhi",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "timestamp",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "duration",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Updates the motion history image by a moving silhouette.\n\n@param silhouette Silhouette mask that has non-zero pixels where the motion occurs.\n@param mhi Motion history image that is updated by the function (single-channel, 32-bit\nfloating-point).\n@param timestamp Current time in milliseconds or other units.\n@param duration Maximal duration of the motion track in the same units as timestamp .\n\nThe function updates the motion history image as follows:\n\n\\f[\\texttt{mhi} (x,y)= \\forkthree{\\texttt{timestamp}}{if \\(\\texttt{silhouette}(x,y) \\ne 0\\)}{0}{if \\(\\texttt{silhouette}(x,y) = 0\\) and \\(\\texttt{mhi} < (\\texttt{timestamp} - \\texttt{duration})\\)}{\\texttt{mhi}(x,y)}{otherwise}\\f]\n\nThat is, MHI pixels where the motion occurs are set to the current timestamp , while the pixels\nwhere the motion happened last time a long time ago are cleared.\n\nThe function, together with calcMotionGradient and calcGlobalOrientation , implements a motion\ntemplates technique described in @cite Davis97 and @cite Bradski00 ."
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/motempl.hpp",
+      "kind": "callable",
+      "name": "cv.motempl.calcMotionGradient",
+      "identity": "cv.motempl.calcMotionGradient(Mat mhi;Mat mask[/O];Mat orientation[/O];double delta1;double delta2;int apertureSize=3)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "mhi",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "orientation",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "delta1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "delta2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "apertureSize",
+          "default": "3",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Calculates a gradient orientation of a motion history image.\n\n@param mhi Motion history single-channel floating-point image.\n@param mask Output mask image that has the type CV_8UC1 and the same size as mhi . Its non-zero\nelements mark pixels where the motion gradient data is correct.\n@param orientation Output motion gradient orientation image that has the same type and the same\nsize as mhi . Each pixel of the image is a motion orientation, from 0 to 360 degrees.\n@param delta1 Minimal (or maximal) allowed difference between mhi values within a pixel\nneighborhood.\n@param delta2 Maximal (or minimal) allowed difference between mhi values within a pixel\nneighborhood. That is, the function finds the minimum ( \\f$m(x,y)\\f$ ) and maximum ( \\f$M(x,y)\\f$ ) mhi\nvalues over \\f$3 \\times 3\\f$ neighborhood of each pixel and marks the motion orientation at \\f$(x, y)\\f$\nas valid only if\n\\f[\\min ( \\texttt{delta1}  ,  \\texttt{delta2}  )  \\le  M(x,y)-m(x,y)  \\le   \\max ( \\texttt{delta1}  , \\texttt{delta2} ).\\f]\n@param apertureSize Aperture size of the Sobel operator.\n\nThe function calculates a gradient orientation at each pixel \\f$(x, y)\\f$ as:\n\n\\f[\\texttt{orientation} (x,y)= \\arctan{\\frac{d\\texttt{mhi}/dy}{d\\texttt{mhi}/dx}}\\f]\n\nIn fact, fastAtan2 and phase are used so that the computed angle is measured in degrees and covers\nthe full range 0..360. Also, the mask is filled to indicate pixels where the computed angle is\nvalid.\n\n@note\n   -   (Python) An example on how to perform a motion template technique can be found at\n        opencv_source_code/samples/python2/motempl.py"
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/motempl.hpp",
+      "kind": "callable",
+      "name": "cv.motempl.calcGlobalOrientation",
+      "identity": "cv.motempl.calcGlobalOrientation(Mat orientation;Mat mask;Mat mhi;double timestamp;double duration)->double",
+      "returnType": "double",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "orientation",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mhi",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "timestamp",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "duration",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Calculates a global motion orientation in a selected region.\n\n@param orientation Motion gradient orientation image calculated by the function calcMotionGradient\n@param mask Mask image. It may be a conjunction of a valid gradient mask, also calculated by\ncalcMotionGradient , and the mask of a region whose direction needs to be calculated.\n@param mhi Motion history image calculated by updateMotionHistory .\n@param timestamp Timestamp passed to updateMotionHistory .\n@param duration Maximum duration of a motion track in milliseconds, passed to updateMotionHistory\n\nThe function calculates an average motion direction in the selected region and returns the angle\nbetween 0 degrees and 360 degrees. The average direction is computed from the weighted orientation\nhistogram, where a recent motion has a larger weight and the motion occurred in the past has a\nsmaller weight, as recorded in mhi ."
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/motempl.hpp",
+      "kind": "callable",
+      "name": "cv.motempl.segmentMotion",
+      "identity": "cv.motempl.segmentMotion(Mat mhi;Mat segmask[/O];vector_Rect boundingRects[/O,/Ref];double timestamp;double segThresh)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "mhi",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "segmask",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "vector_Rect",
+          "name": "boundingRects",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "timestamp",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "segThresh",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Splits a motion history image into a few parts corresponding to separate independent motions (for\nexample, left hand, right hand).\n\n@param mhi Motion history image.\n@param segmask Image where the found mask should be stored, single-channel, 32-bit floating-point.\n@param boundingRects Vector containing ROIs of motion connected components.\n@param timestamp Current time in milliseconds or other units.\n@param segThresh Segmentation threshold that is recommended to be equal to the interval between\nmotion history \"steps\" or greater.\n\nThe function finds all of the motion segments and marks them in segmask with individual values\n(1,2,...). It also computes a vector with ROIs of motion connected components. After that the motion\ndirection for every component can be calculated with calcGlobalOrientation using the extracted mask\nof the particular component."
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/pcaflow.hpp",
+      "kind": "class",
+      "name": "cv.optflow.PCAPrior",
+      "identity": "class cv.optflow.PCAPrior",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief\n * This class can be used for imposing a learned prior on the resulting optical flow.\n * Solution will be regularized according to this prior.\n * You need to generate appropriate prior file with \"learn_prior.py\" script beforehand."
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/pcaflow.hpp",
+      "kind": "class",
+      "name": "cv.optflow.OpticalFlowPCAFlow",
+      "identity": "class cv.optflow.OpticalFlowPCAFlow",
+      "returnType": ": cv::optflow::DenseOpticalFlow",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::optflow::DenseOpticalFlow",
+      "documentation": "@brief PCAFlow algorithm."
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/pcaflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.createOptFlow_PCAFlow",
+      "identity": "cv.optflow.createOptFlow_PCAFlow()->Ptr<DenseOpticalFlow>",
+      "returnType": "Ptr<DenseOpticalFlow>",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates an instance of PCAFlow"
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "enum",
+      "name": "cv.optflow.SupportRegionType",
+      "identity": "enum cv.optflow.SupportRegionType[const cv.optflow.SR_FIXED=0;const cv.optflow.SR_CROSS=1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.optflow.SR_FIXED",
+          "value": "0"
+        },
+        {
+          "name": "const cv.optflow.SR_CROSS",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "enum",
+      "name": "cv.optflow.SolverType",
+      "identity": "enum cv.optflow.SolverType[const cv.optflow.ST_STANDART=0;const cv.optflow.ST_BILINEAR=1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.optflow.ST_STANDART",
+          "value": "0"
+        },
+        {
+          "name": "const cv.optflow.ST_BILINEAR",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "enum",
+      "name": "cv.optflow.InterpolationType",
+      "identity": "enum cv.optflow.InterpolationType[const cv.optflow.INTERP_GEO=0;const cv.optflow.INTERP_EPIC=1;const cv.optflow.INTERP_RIC=2]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.optflow.INTERP_GEO",
+          "value": "0"
+        },
+        {
+          "name": "const cv.optflow.INTERP_EPIC",
+          "value": "1"
+        },
+        {
+          "name": "const cv.optflow.INTERP_RIC",
+          "value": "2"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "class",
+      "name": "cv.optflow.RLOFOpticalFlowParameter",
+      "identity": "class cv.optflow.RLOFOpticalFlowParameter",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief This is used store and set up the parameters of the robust local optical flow (RLOF) algoritm.\n *\n * The RLOF is a fast local optical flow approach described in @cite Senst2012 @cite Senst2013 @cite Senst2014\n * and @cite Senst2016 similar to the pyramidal iterative Lucas-Kanade method as\n * proposed by @cite Bouguet00. More details and experiments can be found in the following thesis @cite Senst2019.\n * The implementation is derived from optflow::calcOpticalFlowPyrLK().\n * This RLOF implementation can be seen as an improved pyramidal iterative Lucas-Kanade and includes\n * a set of improving modules. The main improvements in respect to the pyramidal iterative Lucas-Kanade\n * are:\n *  - A more robust redecending M-estimator framework (see @cite Senst2012) to improve the accuracy at\n *     motion boundaries and appearing and disappearing pixels.\n *  - an adaptive support region strategies to improve the accuracy at motion boundaries to reduce the\n *     corona effect, i.e oversmoothing of the PLK at motion/object boundaries. The cross-based segementation\n *     strategy (SR_CROSS) proposed in @cite Senst2014 uses a simple segmenation approach to obtain the optimal\n *     shape of the support region.\n *  - To deal with illumination changes (outdoor sequences and shadow) the intensity constancy assumption\n *     based optical flow equation has been adopt with the Gennert and Negahdaripour illumination model\n *     (see @cite Senst2016). This model can be switched on/off with the useIlluminationModel variable.\n *  - By using a global motion prior initialization (see @cite Senst2016) of the iterative refinement\n *     the accuracy could be significantly improved for large displacements. This initialization can be\n *     switched on and of with useGlobalMotionPrior variable.\n *\n * The RLOF can be computed with the SparseOpticalFlow class or function interface to track a set of features\n * or with the DenseOpticalFlow class or function interface to compute dense optical flow.\n *\n * @see optflow::DenseRLOFOpticalFlow, optflow::calcOpticalFlowDenseRLOF(), optflow::SparseRLOFOpticalFlow, optflow::calcOpticalFlowSparseRLOF()"
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.setUseMEstimator",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.setUseMEstimator(bool val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Enables M-estimator by setting sigma parameters to (3.2, 7.0). Disabling M-estimator can reduce\n     *  runtime, while enabling can improve the accuracy.\n     *  @param val If true M-estimator is used. If false least-square estimator is used.\n     *    @see setNormSigma0, setNormSigma1"
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.setSolverType",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.setSolverType(SolverType val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "SolverType",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.getSolverType",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.getSolverType()->SolverType",
+      "returnType": "SolverType",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.setSupportRegionType",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.setSupportRegionType(SupportRegionType val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "SupportRegionType",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.getSupportRegionType",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.getSupportRegionType()->SupportRegionType",
+      "returnType": "SupportRegionType",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.setNormSigma0",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.setNormSigma0(float val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.getNormSigma0",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.getNormSigma0()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.setNormSigma1",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.setNormSigma1(float val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.getNormSigma1",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.getNormSigma1()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.setSmallWinSize",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.setSmallWinSize(int val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.getSmallWinSize",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.getSmallWinSize()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.setLargeWinSize",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.setLargeWinSize(int val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.getLargeWinSize",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.getLargeWinSize()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.setCrossSegmentationThreshold",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.setCrossSegmentationThreshold(int val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.getCrossSegmentationThreshold",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.getCrossSegmentationThreshold()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.setMaxLevel",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.setMaxLevel(int val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.getMaxLevel",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.getMaxLevel()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.setUseInitialFlow",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.setUseInitialFlow(bool val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.getUseInitialFlow",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.getUseInitialFlow()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.setUseIlluminationModel",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.setUseIlluminationModel(bool val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.getUseIlluminationModel",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.getUseIlluminationModel()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.setUseGlobalMotionPrior",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.setUseGlobalMotionPrior(bool val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.getUseGlobalMotionPrior",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.getUseGlobalMotionPrior()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.setMaxIteration",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.setMaxIteration(int val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.getMaxIteration",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.getMaxIteration()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.setMinEigenValue",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.setMinEigenValue(float val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 37,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.getMinEigenValue",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.getMinEigenValue()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 38,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.setGlobalMotionRansacThreshold",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.setGlobalMotionRansacThreshold(float val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 39,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.getGlobalMotionRansacThreshold",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.getGlobalMotionRansacThreshold()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 40,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.RLOFOpticalFlowParameter.create",
+      "identity": "cv.optflow.RLOFOpticalFlowParameter.create()->Ptr<RLOFOpticalFlowParameter>",
+      "returnType": "Ptr<RLOFOpticalFlowParameter>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 41,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "class",
+      "name": "cv.optflow.DenseRLOFOpticalFlow",
+      "identity": "class cv.optflow.DenseRLOFOpticalFlow",
+      "returnType": ": cv::optflow::DenseOpticalFlow",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::optflow::DenseOpticalFlow",
+      "documentation": "@brief Fast dense optical flow computation based on robust local optical flow (RLOF) algorithms and sparse-to-dense interpolation\n * scheme.\n *\n * The RLOF is a fast local optical flow approach described in @cite Senst2012 @cite Senst2013 @cite Senst2014\n * and @cite Senst2016 similar to the pyramidal iterative Lucas-Kanade method as\n * proposed by @cite Bouguet00. More details and experiments can be found in the following thesis @cite Senst2019.\n * The implementation is derived from optflow::calcOpticalFlowPyrLK().\n *\n * The sparse-to-dense interpolation scheme allows for fast computation of dense optical flow using RLOF (see @cite Geistert2016).\n * For this scheme the following steps are applied:\n * -# motion vector seeded at a regular sampled grid are computed. The sparsity of this grid can be configured with setGridStep\n * -# (optinally) errornous motion vectors are filter based on the forward backward confidence. The threshold can be configured\n * with setForwardBackward. The filter is only applied if the threshold >0 but than the runtime is doubled due to the estimation\n * of the backward flow.\n * -# Vector field interpolation is applied to the motion vector set to obtain a dense vector field.\n *\n * For the RLOF configuration see optflow::RLOFOpticalFlowParameter for further details.\n * Parameters have been described in @cite Senst2012 @cite Senst2013 @cite Senst2014 and @cite Senst2016.\n *\n * @note If the grid size is set to (1,1) and the forward backward threshold <= 0 than pixelwise dense optical flow field is\n * computed by RLOF without using interpolation.\n *\n * @note Note that in output, if no correspondences are found between \\a I0 and \\a I1, the \\a flow is set to 0.\n * @see optflow::calcOpticalFlowDenseRLOF(), optflow::RLOFOpticalFlowParameter"
+    },
+    {
+      "ordinal": 42,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.setRLOFOpticalFlowParameter",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.setRLOFOpticalFlowParameter(Ptr_RLOFOpticalFlowParameter val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Ptr_RLOFOpticalFlowParameter",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see optflow::RLOFOpticalFlowParameter, getRLOFOpticalFlowParameter"
+    },
+    {
+      "ordinal": 43,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.getRLOFOpticalFlowParameter",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.getRLOFOpticalFlowParameter()->Ptr<RLOFOpticalFlowParameter>",
+      "returnType": "Ptr<RLOFOpticalFlowParameter>",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief setRLOFOpticalFlowParameter\n        @see optflow::RLOFOpticalFlowParameter, setRLOFOpticalFlowParameter"
+    },
+    {
+      "ordinal": 44,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.setForwardBackward",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.setForwardBackward(float val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "For each grid point \\f$ \\mathbf{x} \\f$ a motion vector \\f$ d_{I0,I1}(\\mathbf{x}) \\f$ is computed.\n     *     If the forward backward error \\f[ EP_{FB} = || d_{I0,I1} + d_{I1,I0} || \\f]\n     *     is larger than threshold given by this function then the motion vector will not be used by the following\n     *    vector field interpolation. \\f$ d_{I1,I0} \\f$ denotes the backward flow. Note, the forward backward test\n     *    will only be applied if the threshold > 0. This may results into a doubled runtime for the motion estimation.\n     *    @see getForwardBackward, setGridStep"
+    },
+    {
+      "ordinal": 45,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.getForwardBackward",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.getForwardBackward()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief setForwardBackward\n        @see setForwardBackward"
+    },
+    {
+      "ordinal": 46,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.getGridStep",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.getGridStep()->Size",
+      "returnType": "Size",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "For each grid point a motion vector is computed. Some motion vectors will be removed due to the forwatd backward\n     *  threshold (if set >0). The rest will be the base of the vector field interpolation.\n     *    @see getForwardBackward, setGridStep"
+    },
+    {
+      "ordinal": 47,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.setGridStep",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.setGridStep(Size val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getGridStep\n     *    @see getGridStep"
+    },
+    {
+      "ordinal": 48,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.setInterpolation",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.setInterpolation(InterpolationType val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "InterpolationType",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Two interpolation algorithms are supported\n     * - **INTERP_GEO** applies the fast geodesic interpolation, see @cite Geistert2016.\n     * - **INTERP_EPIC_RESIDUAL** applies the edge-preserving interpolation, see @cite Revaud2015,Geistert2016.\n     * @see ximgproc::EdgeAwareInterpolator, getInterpolation"
+    },
+    {
+      "ordinal": 49,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.getInterpolation",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.getInterpolation()->InterpolationType",
+      "returnType": "InterpolationType",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief setInterpolation\n     *    @see ximgproc::EdgeAwareInterpolator, setInterpolation"
+    },
+    {
+      "ordinal": 50,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.getEPICK",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.getEPICK()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "K is a number of nearest-neighbor matches considered, when fitting a locally affine\n     *    model. Usually it should be around 128. However, lower values would make the interpolation noticeably faster.\n     *    @see ximgproc::EdgeAwareInterpolator,  setEPICK"
+    },
+    {
+      "ordinal": 51,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.setEPICK",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.setEPICK(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getEPICK\n     *    @see ximgproc::EdgeAwareInterpolator, getEPICK"
+    },
+    {
+      "ordinal": 52,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.getEPICSigma",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.getEPICSigma()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Sigma is a parameter defining how fast the weights decrease in the locally-weighted affine\n     *  fitting. Higher values can help preserve fine details, lower values can help to get rid of noise in the\n     *  output flow.\n     *    @see ximgproc::EdgeAwareInterpolator, setEPICSigma"
+    },
+    {
+      "ordinal": 53,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.setEPICSigma",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.setEPICSigma(float val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getEPICSigma\n     *  @see ximgproc::EdgeAwareInterpolator, getEPICSigma"
+    },
+    {
+      "ordinal": 54,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.getEPICLambda",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.getEPICLambda()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Lambda is a parameter defining the weight of the edge-aware term in geodesic distance,\n     *    should be in the range of 0 to 1000.\n     *    @see ximgproc::EdgeAwareInterpolator, setEPICSigma"
+    },
+    {
+      "ordinal": 55,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.setEPICLambda",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.setEPICLambda(float val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getEPICLambda\n     *    @see ximgproc::EdgeAwareInterpolator, getEPICLambda"
+    },
+    {
+      "ordinal": 56,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.getFgsLambda",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.getFgsLambda()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Sets the respective fastGlobalSmootherFilter() parameter.\n     *    @see ximgproc::EdgeAwareInterpolator, setFgsLambda"
+    },
+    {
+      "ordinal": 57,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.setFgsLambda",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.setFgsLambda(float val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getFgsLambda\n     *    @see ximgproc::EdgeAwareInterpolator, ximgproc::fastGlobalSmootherFilter, getFgsLambda"
+    },
+    {
+      "ordinal": 58,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.getFgsSigma",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.getFgsSigma()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Sets the respective fastGlobalSmootherFilter() parameter.\n     *    @see ximgproc::EdgeAwareInterpolator, ximgproc::fastGlobalSmootherFilter, setFgsSigma"
+    },
+    {
+      "ordinal": 59,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.setFgsSigma",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.setFgsSigma(float val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getFgsSigma\n     *    @see ximgproc::EdgeAwareInterpolator, ximgproc::fastGlobalSmootherFilter, getFgsSigma"
+    },
+    {
+      "ordinal": 60,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.setUsePostProc",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.setUsePostProc(bool val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @see getUsePostProc"
+    },
+    {
+      "ordinal": 61,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.getUsePostProc",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.getUsePostProc()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief setUsePostProc\n     *    @see ximgproc::fastGlobalSmootherFilter, setUsePostProc"
+    },
+    {
+      "ordinal": 62,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.setUseVariationalRefinement",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.setUseVariationalRefinement(bool val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @see getUseVariationalRefinement"
+    },
+    {
+      "ordinal": 63,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.getUseVariationalRefinement",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.getUseVariationalRefinement()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief setUseVariationalRefinement\n     *    @see ximgproc::fastGlobalSmootherFilter, setUsePostProc"
+    },
+    {
+      "ordinal": 64,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.setRICSPSize",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.setRICSPSize(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @see cv::ximgproc::createSuperpixelSLIC, cv::ximgproc::RICInterpolator"
+    },
+    {
+      "ordinal": 65,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.getRICSPSize",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.getRICSPSize()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief setRICSPSize\n    *    @see setRICSPSize"
+    },
+    {
+      "ordinal": 66,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.setRICSLICType",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.setRICSLICType(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Parameter to choose superpixel algorithm variant to use:\n     * - cv::ximgproc::SLICType SLIC segments image using a desired region_size (value: 100)\n     * - cv::ximgproc::SLICType SLICO will optimize using adaptive compactness factor (value: 101)\n     * - cv::ximgproc::SLICType MSLIC will optimize using manifold methods resulting in more content-sensitive superpixels (value: 102).\n     *  @see cv::ximgproc::createSuperpixelSLIC, cv::ximgproc::RICInterpolator"
+    },
+    {
+      "ordinal": 67,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.getRICSLICType",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.getRICSLICType()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief setRICSLICType\n     *    @see setRICSLICType"
+    },
+    {
+      "ordinal": 68,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.DenseRLOFOpticalFlow.create",
+      "identity": "cv.optflow.DenseRLOFOpticalFlow.create(Ptr_RLOFOpticalFlowParameter rlofParam=Ptr<RLOFOpticalFlowParameter>();float forwardBackwardThreshold=1.f;Size gridStep=Size(6, 6);InterpolationType interp_type=InterpolationType::INTERP_EPIC;int epicK=128;float epicSigma=0.05f;float epicLambda=999.0f;int ricSPSize=15;int ricSLICType=100;bool use_post_proc=true;float fgsLambda=500.0f;float fgsSigma=1.5f;bool use_variational_refinement=false)->Ptr<DenseRLOFOpticalFlow>",
+      "returnType": "Ptr<DenseRLOFOpticalFlow>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Ptr_RLOFOpticalFlowParameter",
+          "name": "rlofParam",
+          "default": "Ptr<RLOFOpticalFlowParameter>()",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "forwardBackwardThreshold",
+          "default": "1.f",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "gridStep",
+          "default": "Size(6, 6)",
+          "modifiers": []
+        },
+        {
+          "type": "InterpolationType",
+          "name": "interp_type",
+          "default": "InterpolationType::INTERP_EPIC",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "epicK",
+          "default": "128",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "epicSigma",
+          "default": "0.05f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "epicLambda",
+          "default": "999.0f",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "ricSPSize",
+          "default": "15",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "ricSLICType",
+          "default": "100",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "use_post_proc",
+          "default": "true",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "fgsLambda",
+          "default": "500.0f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "fgsSigma",
+          "default": "1.5f",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "use_variational_refinement",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "*    @param rlofParam see optflow::RLOFOpticalFlowParameter\n     *    @param forwardBackwardThreshold see setForwardBackward\n     *    @param gridStep see setGridStep\n     *    @param interp_type see setInterpolation\n     *    @param epicK see setEPICK\n     *    @param epicSigma see setEPICSigma\n     *    @param epicLambda see setEPICLambda\n     *    @param ricSPSize see setRICSPSize\n     *    @param ricSLICType see setRICSLICType\n     *    @param use_post_proc see setUsePostProc\n     *    @param fgsLambda see setFgsLambda\n     *    @param fgsSigma see setFgsSigma\n     *    @param use_variational_refinement see setUseVariationalRefinement"
+    },
+    {
+      "ordinal": 69,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "class",
+      "name": "cv.optflow.SparseRLOFOpticalFlow",
+      "identity": "class cv.optflow.SparseRLOFOpticalFlow",
+      "returnType": ": cv::optflow::SparseOpticalFlow",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::optflow::SparseOpticalFlow",
+      "documentation": "@brief Class used for calculation sparse optical flow and feature tracking with robust local optical flow (RLOF) algorithms.\n*\n* The RLOF is a fast local optical flow approach described in @cite Senst2012 @cite Senst2013 @cite Senst2014\n * and @cite Senst2016 similar to the pyramidal iterative Lucas-Kanade method as\n* proposed by @cite Bouguet00. More details and experiments can be found in the following thesis @cite Senst2019.\n* The implementation is derived from optflow::calcOpticalFlowPyrLK().\n*\n* For the RLOF configuration see optflow::RLOFOpticalFlowParameter for further details.\n* Parameters have been described in @cite Senst2012, @cite Senst2013, @cite Senst2014 and @cite Senst2016.\n*\n* @note SIMD parallelization is only available when compiling with SSE4.1.\n* @see optflow::calcOpticalFlowSparseRLOF(), optflow::RLOFOpticalFlowParameter"
+    },
+    {
+      "ordinal": 70,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.SparseRLOFOpticalFlow.setRLOFOpticalFlowParameter",
+      "identity": "cv.optflow.SparseRLOFOpticalFlow.setRLOFOpticalFlowParameter(Ptr_RLOFOpticalFlowParameter val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Ptr_RLOFOpticalFlowParameter",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copydoc DenseRLOFOpticalFlow::setRLOFOpticalFlowParameter"
+    },
+    {
+      "ordinal": 71,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.SparseRLOFOpticalFlow.getRLOFOpticalFlowParameter",
+      "identity": "cv.optflow.SparseRLOFOpticalFlow.getRLOFOpticalFlowParameter()->Ptr<RLOFOpticalFlowParameter>",
+      "returnType": "Ptr<RLOFOpticalFlowParameter>",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief setRLOFOpticalFlowParameter\n     *    @see setRLOFOpticalFlowParameter"
+    },
+    {
+      "ordinal": 72,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.SparseRLOFOpticalFlow.setForwardBackward",
+      "identity": "cv.optflow.SparseRLOFOpticalFlow.setForwardBackward(float val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "For each feature point a motion vector \\f$ d_{I0,I1}(\\mathbf{x}) \\f$ is computed.\n     *     If the forward backward error \\f[ EP_{FB} = || d_{I0,I1} + d_{I1,I0} || \\f]\n     *     is larger than threshold given by this function then the status  will not be used by the following\n     *    vector field interpolation. \\f$ d_{I1,I0} \\f$ denotes the backward flow. Note, the forward backward test\n     *    will only be applied if the threshold > 0. This may results into a doubled runtime for the motion estimation.\n     *    @see setForwardBackward"
+    },
+    {
+      "ordinal": 73,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.SparseRLOFOpticalFlow.getForwardBackward",
+      "identity": "cv.optflow.SparseRLOFOpticalFlow.getForwardBackward()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief setForwardBackward\n     *    @see setForwardBackward"
+    },
+    {
+      "ordinal": 74,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.SparseRLOFOpticalFlow.create",
+      "identity": "cv.optflow.SparseRLOFOpticalFlow.create(Ptr_RLOFOpticalFlowParameter rlofParam=Ptr<RLOFOpticalFlowParameter>();float forwardBackwardThreshold=1.f)->Ptr<SparseRLOFOpticalFlow>",
+      "returnType": "Ptr<SparseRLOFOpticalFlow>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Ptr_RLOFOpticalFlowParameter",
+          "name": "rlofParam",
+          "default": "Ptr<RLOFOpticalFlowParameter>()",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "forwardBackwardThreshold",
+          "default": "1.f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "*    @param rlofParam see setRLOFOpticalFlowParameter\n     *    @param forwardBackwardThreshold see setForwardBackward"
+    },
+    {
+      "ordinal": 75,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.calcOpticalFlowDenseRLOF",
+      "identity": "cv.optflow.calcOpticalFlowDenseRLOF(Mat I0;Mat I1;Mat flow[/IO];Ptr_RLOFOpticalFlowParameter rlofParam=Ptr<RLOFOpticalFlowParameter>();float forwardBackwardThreshold=0;Size gridStep=Size(6, 6);InterpolationType interp_type=InterpolationType::INTERP_EPIC;int epicK=128;float epicSigma=0.05f;float epicLambda=100.f;int ricSPSize=15;int ricSLICType=100;bool use_post_proc=true;float fgsLambda=500.0f;float fgsSigma=1.5f;bool use_variational_refinement=false)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "I0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "I1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "flow",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Ptr_RLOFOpticalFlowParameter",
+          "name": "rlofParam",
+          "default": "Ptr<RLOFOpticalFlowParameter>()",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "forwardBackwardThreshold",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "gridStep",
+          "default": "Size(6, 6)",
+          "modifiers": []
+        },
+        {
+          "type": "InterpolationType",
+          "name": "interp_type",
+          "default": "InterpolationType::INTERP_EPIC",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "epicK",
+          "default": "128",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "epicSigma",
+          "default": "0.05f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "epicLambda",
+          "default": "100.f",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "ricSPSize",
+          "default": "15",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "ricSLICType",
+          "default": "100",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "use_post_proc",
+          "default": "true",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "fgsLambda",
+          "default": "500.0f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "fgsSigma",
+          "default": "1.5f",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "use_variational_refinement",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Fast dense optical flow computation based on robust local optical flow (RLOF) algorithms and sparse-to-dense interpolation scheme.\n *\n * The RLOF is a fast local optical flow approach described in @cite Senst2012 @cite Senst2013 @cite Senst2014\n * and @cite Senst2016 similar to the pyramidal iterative Lucas-Kanade method as\n * proposed by @cite Bouguet00. More details and experiments can be found in the following thesis @cite Senst2019.\n * The implementation is derived from optflow::calcOpticalFlowPyrLK().\n *\n * The sparse-to-dense interpolation scheme allows for fast computation of dense optical flow using RLOF (see @cite Geistert2016).\n * For this scheme the following steps are applied:\n * -# motion vector seeded at a regular sampled grid are computed. The sparsity of this grid can be configured with setGridStep\n * -# (optinally) errornous motion vectors are filter based on the forward backward confidence. The threshold can be configured\n * with setForwardBackward. The filter is only applied if the threshold >0 but than the runtime is doubled due to the estimation\n * of the backward flow.\n * -# Vector field interpolation is applied to the motion vector set to obtain a dense vector field.\n *\n * @param I0 first 8-bit input image. If The cross-based RLOF is used (by selecting optflow::RLOFOpticalFlowParameter::supportRegionType\n * = SupportRegionType::SR_CROSS) image has to be a 8-bit 3 channel image.\n * @param I1 second 8-bit input image. If The cross-based RLOF is used (by selecting optflow::RLOFOpticalFlowParameter::supportRegionType\n * = SupportRegionType::SR_CROSS) image has to be a 8-bit 3 channel image.\n * @param flow computed flow image that has the same size as I0 and type CV_32FC2.\n * @param rlofParam see optflow::RLOFOpticalFlowParameter\n * @param forwardBackwardThreshold Threshold for the forward backward confidence check.\n * For each grid point \\f$ \\mathbf{x} \\f$ a motion vector \\f$ d_{I0,I1}(\\mathbf{x}) \\f$ is computed.\n * If the forward backward error \\f[ EP_{FB} = || d_{I0,I1} + d_{I1,I0} || \\f]\n * is larger than threshold given by this function then the motion vector will not be used by the following\n * vector field interpolation. \\f$ d_{I1,I0} \\f$ denotes the backward flow. Note, the forward backward test\n *    will only be applied if the threshold > 0. This may results into a doubled runtime for the motion estimation.\n * @param gridStep Size of the grid to spawn the motion vectors. For each grid point a motion vector is computed.\n * Some motion vectors will be removed due to the forwatd backward threshold (if set >0). The rest will be the\n * base of the vector field interpolation.\n * @param interp_type interpolation method used to compute the dense optical flow. Two interpolation algorithms are\n * supported:\n * - **INTERP_GEO** applies the fast geodesic interpolation, see @cite Geistert2016.\n * - **INTERP_EPIC_RESIDUAL** applies the edge-preserving interpolation, see @cite Revaud2015,Geistert2016.\n * @param epicK see ximgproc::EdgeAwareInterpolator sets the respective parameter.\n * @param epicSigma see ximgproc::EdgeAwareInterpolator sets the respective parameter.\n * @param epicLambda see ximgproc::EdgeAwareInterpolator sets the respective parameter.\n * @param ricSPSize  see ximgproc::RICInterpolator sets the respective parameter.\n * @param ricSLICType see ximgproc::RICInterpolator sets the respective parameter.\n * @param use_post_proc enables ximgproc::fastGlobalSmootherFilter() parameter.\n * @param fgsLambda sets the respective ximgproc::fastGlobalSmootherFilter() parameter.\n * @param fgsSigma sets the respective ximgproc::fastGlobalSmootherFilter() parameter.\n * @param use_variational_refinement enables VariationalRefinement\n *\n * Parameters have been described in @cite Senst2012, @cite Senst2013, @cite Senst2014, @cite Senst2016.\n * For the RLOF configuration see optflow::RLOFOpticalFlowParameter for further details.\n * @note If the grid size is set to (1,1) and the forward backward threshold <= 0 that the dense optical flow field is purely\n * computed with the RLOF.\n *\n * @note SIMD parallelization is only available when compiling with SSE4.1.\n * @note Note that in output, if no correspondences are found between \\a I0 and \\a I1, the \\a flow is set to 0.\n *\n * @sa optflow::DenseRLOFOpticalFlow, optflow::RLOFOpticalFlowParameter"
+    },
+    {
+      "ordinal": 76,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.calcOpticalFlowSparseRLOF",
+      "identity": "cv.optflow.calcOpticalFlowSparseRLOF(Mat prevImg;Mat nextImg;Mat prevPts;Mat nextPts[/IO];Mat status[/O];Mat err[/O];Ptr_RLOFOpticalFlowParameter rlofParam=Ptr<RLOFOpticalFlowParameter>();float forwardBackwardThreshold=0)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "prevImg",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "nextImg",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "prevPts",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "nextPts",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "status",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "err",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Ptr_RLOFOpticalFlowParameter",
+          "name": "rlofParam",
+          "default": "Ptr<RLOFOpticalFlowParameter>()",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "forwardBackwardThreshold",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Calculates fast optical flow for a sparse feature set using the robust local optical flow (RLOF) similar\n* to optflow::calcOpticalFlowPyrLK().\n*\n* The RLOF is a fast local optical flow approach described in @cite Senst2012 @cite Senst2013 @cite Senst2014\n * and @cite Senst2016 similar to the pyramidal iterative Lucas-Kanade method as\n* proposed by @cite Bouguet00. More details and experiments can be found in the following thesis @cite Senst2019.\n* The implementation is derived from optflow::calcOpticalFlowPyrLK().\n*\n* @param prevImg first 8-bit input image. If The cross-based RLOF is used (by selecting optflow::RLOFOpticalFlowParameter::supportRegionType\n* = SupportRegionType::SR_CROSS) image has to be a 8-bit 3 channel image.\n* @param nextImg second 8-bit input image. If The cross-based RLOF is used (by selecting optflow::RLOFOpticalFlowParameter::supportRegionType\n* = SupportRegionType::SR_CROSS) image has to be a 8-bit 3 channel image.\n* @param prevPts vector of 2D points for which the flow needs to be found; point coordinates must be single-precision\n* floating-point numbers.\n* @param nextPts output vector of 2D points (with single-precision floating-point coordinates) containing the calculated\n* new positions of input features in the second image; when optflow::RLOFOpticalFlowParameter::useInitialFlow variable is true  the vector must\n* have the same size as in the input and contain the initialization point correspondences.\n* @param status output status vector (of unsigned chars); each element of the vector is set to 1 if the flow for the\n* corresponding features has passed the forward backward check.\n* @param err output vector of errors; each element of the vector is set to the forward backward error for the corresponding feature.\n* @param rlofParam see optflow::RLOFOpticalFlowParameter\n* @param forwardBackwardThreshold Threshold for the forward backward confidence check. If forewardBackwardThreshold <=0 the forward\n*\n* @note SIMD parallelization is only available when compiling with SSE4.1.\n*\n* Parameters have been described in @cite Senst2012, @cite Senst2013, @cite Senst2014 and @cite Senst2016.\n* For the RLOF configuration see optflow::RLOFOpticalFlowParameter for further details."
+    },
+    {
+      "ordinal": 77,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.createOptFlow_DenseRLOF",
+      "identity": "cv.optflow.createOptFlow_DenseRLOF()->Ptr<DenseOpticalFlow>",
+      "returnType": "Ptr<DenseOpticalFlow>",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 78,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/rlofflow.hpp",
+      "kind": "callable",
+      "name": "cv.optflow.createOptFlow_SparseRLOF",
+      "identity": "cv.optflow.createOptFlow_SparseRLOF()->Ptr<SparseOpticalFlow>",
+      "returnType": "Ptr<SparseOpticalFlow>",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 79,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/sparse_matching_gpc.hpp",
+      "kind": "class",
+      "name": "cv.optflow.GPCPatchDescriptor",
+      "identity": "class cv.optflow.GPCPatchDescriptor",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @file   sparse_matching_gpc.hpp\n * @author Vladislav Samsonov <vvladxx@gmail.com>\n * @brief  Implementation of the Global Patch Collider.\n *\n * Implementation of the Global Patch Collider algorithm from the following paper:\n * http://research.microsoft.com/en-us/um/people/pkohli/papers/wfrik_cvpr2016.pdf\n *\n * @cite Wang_2016_CVPR"
+    },
+    {
+      "ordinal": 80,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/sparse_matching_gpc.hpp",
+      "kind": "class",
+      "name": "cv.optflow.GPCPatchSample",
+      "identity": "class cv.optflow.GPCPatchSample",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 81,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/sparse_matching_gpc.hpp",
+      "kind": "enum",
+      "name": "cv.optflow.GPCDescType",
+      "identity": "enum cv.optflow.GPCDescType[const cv.optflow.GPC_DESCRIPTOR_DCT=0;const cv.optflow.GPC_DESCRIPTOR_WHT=0+1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.optflow.GPC_DESCRIPTOR_DCT",
+          "value": "0"
+        },
+        {
+          "name": "const cv.optflow.GPC_DESCRIPTOR_WHT",
+          "value": "0+1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 82,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/sparse_matching_gpc.hpp",
+      "kind": "class",
+      "name": "cv.optflow.GPCTrainingSamples",
+      "identity": "class cv.optflow.GPCTrainingSamples",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Class encapsulating training samples."
+    },
+    {
+      "ordinal": 83,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/sparse_matching_gpc.hpp",
+      "kind": "class",
+      "name": "cv.optflow.GPCTree",
+      "identity": "class cv.optflow.GPCTree",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Class for individual tree."
+    },
+    {
+      "ordinal": 84,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/optflow/include/opencv2/optflow/sparse_matching_gpc.hpp",
+      "kind": "class",
+      "name": "cv.optflow.GPCDetails",
+      "identity": "class cv.optflow.GPCDetails",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Find correspondences between two images.\n   * @param[in] imgFrom First image in a sequence.\n   * @param[in] imgTo Second image in a sequence.\n   * @param[out] corr Output vector with pairs of corresponding points.\n   * @param[in] params Additional matching parameters for fine-tuning."
+    }
+  ]
+}

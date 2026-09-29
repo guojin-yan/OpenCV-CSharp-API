@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 0,
+  "managedPublicMemberAdditionCount": 0,
+  "families": [
+    {
+      "id": "bgsegm-wrapper-surface",
+      "rationale": "Current BgSegm managed/native wrapper declarations with parser-backed evidence.",
+      "declarations": [
+        {
+          "ordinal": 1,
+          "upstreamIdentity": "cv.bgsegm.BackgroundSubtractorMOG.apply(Mat image;Mat fgmask[/O];double learningRate=-1)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bgsegm_background_subtractor_apply"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorMOG|method|protected;instance;override|System.Void ValidateApplyImage(JYPPX.OpenCvSharp.Core.Mat image)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BgSegm/BgSegmTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bgsegm-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 2,
+          "upstreamIdentity": "cv.bgsegm.BackgroundSubtractorMOG.apply(Mat image;Mat knownForegroundMask;Mat fgmask[/O];double learningRate=-1)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bgsegm_background_subtractor_apply"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorMOG|method|protected;instance;override|System.Void ValidateApplyImage(JYPPX.OpenCvSharp.Core.Mat image)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BgSegm/BgSegmTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bgsegm-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 38,
+          "upstreamIdentity": "cv.bgsegm.BackgroundSubtractorCNT.apply(Mat image;Mat fgmask[/O];double learningRate=-1)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bgsegm_background_subtractor_apply"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorCNT|method|protected;instance;override|System.Void ValidateApplyImage(JYPPX.OpenCvSharp.Core.Mat image)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BgSegm/BgSegmTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bgsegm-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 39,
+          "upstreamIdentity": "cv.bgsegm.BackgroundSubtractorCNT.apply(Mat image;Mat knownForegroundMask;Mat fgmask[/O];double learningRate=-1)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bgsegm_background_subtractor_apply"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorCNT|method|protected;instance;override|System.Void ValidateApplyImage(JYPPX.OpenCvSharp.Core.Mat image)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BgSegm/BgSegmTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bgsegm-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 63,
+          "upstreamIdentity": "cv.bgsegm.SyntheticSequenceGenerator.SyntheticSequenceGenerator(Mat background;Mat object;double amplitude;double wavelength;double wavespeed;double objspeed)->",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bgsegm_background_subtractor_apply"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BgSegm.SyntheticSequenceGenerator|method|public;instance;sealed-override|System.Void Dispose()",
+            "MEMBER|JYPPX.OpenCvSharp.BgSegm.SyntheticSequenceGenerator|method|public;instance|System.Void GetNextFrame(JYPPX.OpenCvSharp.Core.Mat frame,JYPPX.OpenCvSharp.Core.Mat gtMask)",
+            "MEMBER|JYPPX.OpenCvSharp.BgSegm.SyntheticSequenceGenerator|method|public;static|JYPPX.OpenCvSharp.BgSegm.SyntheticSequenceGenerator Create(JYPPX.OpenCvSharp.Core.Mat background,JYPPX.OpenCvSharp.Core.Mat objectImage,System.Double amplitude=2,System.Double wavelength=20,System.Double wavespeed=0.2,System.Double objspeed=6)",
+            "MEMBER|JYPPX.OpenCvSharp.BgSegm.SyntheticSequenceGenerator|property|instance;get:public|System.Boolean IsDisposed",
+            "TYPE|class|public;sealed|JYPPX.OpenCvSharp.BgSegm.SyntheticSequenceGenerator|base=|interfaces=System.IDisposable"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BgSegm/BgSegmTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bgsegm-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 64,
+          "upstreamIdentity": "cv.bgsegm.SyntheticSequenceGenerator.getNextFrame(Mat frame[/O];Mat gtMask[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bgsegm_background_subtractor_apply"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BgSegm.SyntheticSequenceGenerator|method|public;instance|System.Void GetNextFrame(JYPPX.OpenCvSharp.Core.Mat frame,JYPPX.OpenCvSharp.Core.Mat gtMask)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BgSegm/BgSegmTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bgsegm-upstream-parity-guide.md"
+        }
+      ]
+    }
+  ]
+}

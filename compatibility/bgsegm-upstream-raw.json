@@ -1,0 +1,1767 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/BgSegmUpstreamMap/extract_bgsegm.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+  "headerSha256": "b400c61e75bbc1a771ecf5e171324babbe47fbb916aee03e54a3619fb58f6ace",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "sha256": "b400c61e75bbc1a771ecf5e171324babbe47fbb916aee03e54a3619fb58f6ace",
+      "startOrdinal": 0,
+      "declarationCount": 66
+    }
+  ],
+  "declarationCount": 66,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "class",
+      "name": "cv.bgsegm.BackgroundSubtractorMOG",
+      "identity": "class cv.bgsegm.BackgroundSubtractorMOG",
+      "returnType": ": cv::bgsegm::BackgroundSubtractor",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::bgsegm::BackgroundSubtractor",
+      "documentation": "@brief Gaussian Mixture-based Background/Foreground Segmentation Algorithm.\n\nThe class implements the algorithm described in @cite KB2001 ."
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorMOG.apply",
+      "identity": "cv.bgsegm.BackgroundSubtractorMOG.apply(Mat image;Mat fgmask[/O];double learningRate=-1)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "fgmask",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "learningRate",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a foreground mask.\n\n    @param image Next video frame of type CV_8UC(n),CV_8SC(n),CV_16UC(n),CV_16SC(n),CV_32SC(n),CV_32FC(n),CV_64FC(n), where n is 1,2,3,4.\n    @param fgmask The output foreground mask as an 8-bit binary image.\n    @param learningRate The value between 0 and 1 that indicates how fast the background model is\n    learnt. Negative parameter value makes the algorithm to use some automatically chosen learning\n    rate. 0 means that the background model is not updated at all, 1 means that the background model\n    is completely reinitialized from the last frame."
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorMOG.apply",
+      "identity": "cv.bgsegm.BackgroundSubtractorMOG.apply(Mat image;Mat knownForegroundMask;Mat fgmask[/O];double learningRate=-1)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "knownForegroundMask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "fgmask",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "learningRate",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a foreground mask and skips known foreground in evaluation.\n\n    @param image Next video frame of type CV_8UC(n),CV_8SC(n),CV_16UC(n),CV_16SC(n),CV_32SC(n),CV_32FC(n),CV_64FC(n), where n is 1,2,3,4.\n    @param fgmask The output foreground mask as an 8-bit binary image.\n    @param knownForegroundMask The mask for inputting already known foreground, allows model to ignore learning known pixels.\n    @param learningRate The value between 0 and 1 that indicates how fast the background model is\n    learnt. Negative parameter value makes the algorithm to use some automatically chosen learning\n    rate. 0 means that the background model is not updated at all, 1 means that the background model\n    is completely reinitialized from the last frame."
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorMOG.getHistory",
+      "identity": "cv.bgsegm.BackgroundSubtractorMOG.getHistory()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorMOG.setHistory",
+      "identity": "cv.bgsegm.BackgroundSubtractorMOG.setHistory(int nframes)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nframes",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorMOG.getNMixtures",
+      "identity": "cv.bgsegm.BackgroundSubtractorMOG.getNMixtures()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorMOG.setNMixtures",
+      "identity": "cv.bgsegm.BackgroundSubtractorMOG.setNMixtures(int nmix)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nmix",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorMOG.getBackgroundRatio",
+      "identity": "cv.bgsegm.BackgroundSubtractorMOG.getBackgroundRatio()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorMOG.setBackgroundRatio",
+      "identity": "cv.bgsegm.BackgroundSubtractorMOG.setBackgroundRatio(double backgroundRatio)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "backgroundRatio",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorMOG.getNoiseSigma",
+      "identity": "cv.bgsegm.BackgroundSubtractorMOG.getNoiseSigma()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorMOG.setNoiseSigma",
+      "identity": "cv.bgsegm.BackgroundSubtractorMOG.setNoiseSigma(double noiseSigma)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "noiseSigma",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.createBackgroundSubtractorMOG",
+      "identity": "cv.bgsegm.createBackgroundSubtractorMOG(int history=200;int nmixtures=5;double backgroundRatio=0.7;double noiseSigma=0)->Ptr<BackgroundSubtractorMOG>",
+      "returnType": "Ptr<BackgroundSubtractorMOG>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "history",
+          "default": "200",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "nmixtures",
+          "default": "5",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "backgroundRatio",
+          "default": "0.7",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "noiseSigma",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates mixture-of-gaussian background subtractor\n\n@param history Length of the history.\n@param nmixtures Number of Gaussian mixtures.\n@param backgroundRatio Background ratio.\n@param noiseSigma Noise strength (standard deviation of the brightness or each color channel). 0\nmeans some automatic value."
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "class",
+      "name": "cv.bgsegm.BackgroundSubtractorGMG",
+      "identity": "class cv.bgsegm.BackgroundSubtractorGMG",
+      "returnType": ": cv::bgsegm::BackgroundSubtractor",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::bgsegm::BackgroundSubtractor",
+      "documentation": "@brief Background Subtractor module based on the algorithm given in @cite Gold2012 .\n\n Takes a series of images and returns a sequence of mask (8UC1)\n images of the same size, where 255 indicates Foreground and 0 represents Background.\n This class implements an algorithm described in \"Visual Tracking of Human Visitors under\n Variable-Lighting Conditions for a Responsive Audio Art Installation,\" A. Godbehere,\n A. Matsukawa, K. Goldberg, American Control Conference, Montreal, June 2012."
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGMG.apply",
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.apply(Mat image;Mat fgmask[/O];double learningRate=-1)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "fgmask",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "learningRate",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a foreground mask.\n\n    @param image Next video frame of type CV_8UC(n),CV_8SC(n),CV_16UC(n),CV_16SC(n),CV_32SC(n),CV_32FC(n),CV_64FC(n), where n is 1,2,3,4.\n    @param fgmask The output foreground mask as an 8-bit binary image.\n    @param learningRate The value between 0 and 1 that indicates how fast the background model is\n    learnt. Negative parameter value makes the algorithm to use some automatically chosen learning\n    rate. 0 means that the background model is not updated at all, 1 means that the background model\n    is completely reinitialized from the last frame."
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGMG.apply",
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.apply(Mat image;Mat knownForegroundMask;Mat fgmask[/O];double learningRate=-1)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "knownForegroundMask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "fgmask",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "learningRate",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a foreground mask with known foreground mask input.\n\n    @param image Next video frame.\n    @param fgmask The output foreground mask as an 8-bit binary image.\n    @param knownForegroundMask The mask for inputting already known foreground.\n    @param learningRate The value between 0 and 1 that indicates how fast the background model is\n    learnt. Negative parameter value makes the algorithm to use some automatically chosen learning\n    rate. 0 means that the background model is not updated at all, 1 means that the background model\n    is completely reinitialized from the last frame.\n\n    @note This method has a default virtual implementation that throws a \"not implemented\" error.\n    Foreground masking may not be supported by all background subtractors."
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGMG.getBackgroundImage",
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.getBackgroundImage(Mat backgroundImage[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "backgroundImage",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGMG.getMaxFeatures",
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.getMaxFeatures()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns total number of distinct colors to maintain in histogram."
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGMG.setMaxFeatures",
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.setMaxFeatures(int maxFeatures)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "maxFeatures",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets total number of distinct colors to maintain in histogram."
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGMG.getDefaultLearningRate",
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.getDefaultLearningRate()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the learning rate of the algorithm.\n\n    It lies between 0.0 and 1.0. It determines how quickly features are \"forgotten\" from\n    histograms."
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGMG.setDefaultLearningRate",
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.setDefaultLearningRate(double lr)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "lr",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the learning rate of the algorithm."
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGMG.getNumFrames",
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.getNumFrames()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the number of frames used to initialize background model."
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGMG.setNumFrames",
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.setNumFrames(int nframes)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nframes",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the number of frames used to initialize background model."
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGMG.getQuantizationLevels",
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.getQuantizationLevels()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the parameter used for quantization of color-space.\n\n    It is the number of discrete levels in each channel to be used in histograms."
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGMG.setQuantizationLevels",
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.setQuantizationLevels(int nlevels)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nlevels",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the parameter used for quantization of color-space"
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGMG.getBackgroundPrior",
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.getBackgroundPrior()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the prior probability that each individual pixel is a background pixel."
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGMG.setBackgroundPrior",
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.setBackgroundPrior(double bgprior)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "bgprior",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the prior probability that each individual pixel is a background pixel."
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGMG.getSmoothingRadius",
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.getSmoothingRadius()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the kernel radius used for morphological operations"
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGMG.setSmoothingRadius",
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.setSmoothingRadius(int radius)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "radius",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the kernel radius used for morphological operations"
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGMG.getDecisionThreshold",
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.getDecisionThreshold()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the value of decision threshold.\n\n    Decision value is the value above which pixel is determined to be FG."
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGMG.setDecisionThreshold",
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.setDecisionThreshold(double thresh)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "thresh",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the value of decision threshold."
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGMG.getUpdateBackgroundModel",
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.getUpdateBackgroundModel()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the status of background model update"
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGMG.setUpdateBackgroundModel",
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.setUpdateBackgroundModel(bool update)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "update",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the status of background model update"
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGMG.getMinVal",
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.getMinVal()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the minimum value taken on by pixels in image sequence. Usually 0."
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGMG.setMinVal",
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.setMinVal(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the minimum value taken on by pixels in image sequence."
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGMG.getMaxVal",
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.getMaxVal()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the maximum value taken on by pixels in image sequence. e.g. 1.0 or 255."
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGMG.setMaxVal",
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.setMaxVal(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the maximum value taken on by pixels in image sequence."
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.createBackgroundSubtractorGMG",
+      "identity": "cv.bgsegm.createBackgroundSubtractorGMG(int initializationFrames=120;double decisionThreshold=0.8)->Ptr<BackgroundSubtractorGMG>",
+      "returnType": "Ptr<BackgroundSubtractorGMG>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "initializationFrames",
+          "default": "120",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "decisionThreshold",
+          "default": "0.8",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates a GMG Background Subtractor\n\n@param initializationFrames number of frames used to initialize the background models.\n@param decisionThreshold Threshold value, above which it is marked foreground, else background."
+    },
+    {
+      "ordinal": 37,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "class",
+      "name": "cv.bgsegm.BackgroundSubtractorCNT",
+      "identity": "class cv.bgsegm.BackgroundSubtractorCNT",
+      "returnType": ": cv::bgsegm::BackgroundSubtractor",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::bgsegm::BackgroundSubtractor",
+      "documentation": "@brief Background subtraction based on counting.\n\n  About as fast as MOG2 on a high end system.\n  More than twice faster than MOG2 on cheap hardware (benchmarked on Raspberry Pi3).\n\n  %Algorithm by Sagi Zeevi ( https://github.com/sagi-z/BackgroundSubtractorCNT )"
+    },
+    {
+      "ordinal": 38,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorCNT.apply",
+      "identity": "cv.bgsegm.BackgroundSubtractorCNT.apply(Mat image;Mat fgmask[/O];double learningRate=-1)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "fgmask",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "learningRate",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 39,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorCNT.apply",
+      "identity": "cv.bgsegm.BackgroundSubtractorCNT.apply(Mat image;Mat knownForegroundMask;Mat fgmask[/O];double learningRate=-1)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "knownForegroundMask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "fgmask",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "learningRate",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a foreground mask with known foreground mask input.\n\n    @param image Next video frame.\n    @param knownForegroundMask The mask for inputting already known foreground.\n    @param fgmask The output foreground mask as an 8-bit binary image.\n    @param learningRate The value between 0 and 1 that indicates how fast the background model is\n    learnt. Negative parameter value makes the algorithm to use some automatically chosen learning\n    rate. 0 means that the background model is not updated at all, 1 means that the background model\n    is completely reinitialized from the last frame.\n\n    @note This method has a default virtual implementation that throws a \"not impemented\" error.\n    Foreground masking may not be supported by all background subtractors."
+    },
+    {
+      "ordinal": 40,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorCNT.getBackgroundImage",
+      "identity": "cv.bgsegm.BackgroundSubtractorCNT.getBackgroundImage(Mat backgroundImage[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "backgroundImage",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 41,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorCNT.getMinPixelStability",
+      "identity": "cv.bgsegm.BackgroundSubtractorCNT.getMinPixelStability()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns number of frames with same pixel color to consider stable."
+    },
+    {
+      "ordinal": 42,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorCNT.setMinPixelStability",
+      "identity": "cv.bgsegm.BackgroundSubtractorCNT.setMinPixelStability(int value)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "value",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the number of frames with same pixel color to consider stable."
+    },
+    {
+      "ordinal": 43,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorCNT.getMaxPixelStability",
+      "identity": "cv.bgsegm.BackgroundSubtractorCNT.getMaxPixelStability()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns maximum allowed credit for a pixel in history."
+    },
+    {
+      "ordinal": 44,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorCNT.setMaxPixelStability",
+      "identity": "cv.bgsegm.BackgroundSubtractorCNT.setMaxPixelStability(int value)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "value",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the maximum allowed credit for a pixel in history."
+    },
+    {
+      "ordinal": 45,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorCNT.getUseHistory",
+      "identity": "cv.bgsegm.BackgroundSubtractorCNT.getUseHistory()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns if we're giving a pixel credit for being stable for a long time."
+    },
+    {
+      "ordinal": 46,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorCNT.setUseHistory",
+      "identity": "cv.bgsegm.BackgroundSubtractorCNT.setUseHistory(bool value)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "value",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets if we're giving a pixel credit for being stable for a long time."
+    },
+    {
+      "ordinal": 47,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorCNT.getIsParallel",
+      "identity": "cv.bgsegm.BackgroundSubtractorCNT.getIsParallel()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns if we're parallelizing the algorithm."
+    },
+    {
+      "ordinal": 48,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorCNT.setIsParallel",
+      "identity": "cv.bgsegm.BackgroundSubtractorCNT.setIsParallel(bool value)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "value",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets if we're parallelizing the algorithm."
+    },
+    {
+      "ordinal": 49,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.createBackgroundSubtractorCNT",
+      "identity": "cv.bgsegm.createBackgroundSubtractorCNT(int minPixelStability=15;bool useHistory=true;int maxPixelStability=15*60;bool isParallel=true)->Ptr<BackgroundSubtractorCNT>",
+      "returnType": "Ptr<BackgroundSubtractorCNT>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "minPixelStability",
+          "default": "15",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "useHistory",
+          "default": "true",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "maxPixelStability",
+          "default": "15*60",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "isParallel",
+          "default": "true",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates a CNT Background Subtractor\n\n@param minPixelStability number of frames with same pixel color to consider stable\n@param useHistory determines if we're giving a pixel credit for being stable for a long time\n@param maxPixelStability maximum allowed credit for a pixel in history\n@param isParallel determines if we're parallelizing the algorithm"
+    },
+    {
+      "ordinal": 50,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "enum",
+      "name": "cv.bgsegm.LSBPCameraMotionCompensation",
+      "identity": "enum cv.bgsegm.LSBPCameraMotionCompensation[const cv.bgsegm.LSBP_CAMERA_MOTION_COMPENSATION_NONE=0;const cv.bgsegm.LSBP_CAMERA_MOTION_COMPENSATION_LK=0+1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.bgsegm.LSBP_CAMERA_MOTION_COMPENSATION_NONE",
+          "value": "0"
+        },
+        {
+          "name": "const cv.bgsegm.LSBP_CAMERA_MOTION_COMPENSATION_LK",
+          "value": "0+1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 51,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "class",
+      "name": "cv.bgsegm.BackgroundSubtractorGSOC",
+      "identity": "class cv.bgsegm.BackgroundSubtractorGSOC",
+      "returnType": ": cv::bgsegm::BackgroundSubtractor",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::bgsegm::BackgroundSubtractor",
+      "documentation": "@brief Implementation of the different yet better algorithm which is called GSOC, as it was implemented during GSOC and was not originated from any paper.\n\nThis algorithm demonstrates better performance on CDNET 2014 dataset compared to other algorithms in OpenCV."
+    },
+    {
+      "ordinal": 52,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGSOC.apply",
+      "identity": "cv.bgsegm.BackgroundSubtractorGSOC.apply(Mat image;Mat fgmask[/O];double learningRate=-1)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "fgmask",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "learningRate",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 53,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGSOC.apply",
+      "identity": "cv.bgsegm.BackgroundSubtractorGSOC.apply(Mat image;Mat knownForegroundMask;Mat fgmask[/O];double learningRate=-1)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "knownForegroundMask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "fgmask",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "learningRate",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 54,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorGSOC.getBackgroundImage",
+      "identity": "cv.bgsegm.BackgroundSubtractorGSOC.getBackgroundImage(Mat backgroundImage[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "backgroundImage",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 55,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "class",
+      "name": "cv.bgsegm.BackgroundSubtractorLSBP",
+      "identity": "class cv.bgsegm.BackgroundSubtractorLSBP",
+      "returnType": ": cv::bgsegm::BackgroundSubtractor",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::bgsegm::BackgroundSubtractor",
+      "documentation": "@brief Background Subtraction using Local SVD Binary Pattern. More details about the algorithm can be found at @cite LGuo2016"
+    },
+    {
+      "ordinal": 56,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorLSBP.apply",
+      "identity": "cv.bgsegm.BackgroundSubtractorLSBP.apply(Mat image;Mat fgmask[/O];double learningRate=-1)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "fgmask",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "learningRate",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 57,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorLSBP.apply",
+      "identity": "cv.bgsegm.BackgroundSubtractorLSBP.apply(Mat image;Mat knownForegroundMask;Mat fgmask[/O];double learningRate=-1)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "knownForegroundMask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "fgmask",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "learningRate",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 58,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.BackgroundSubtractorLSBP.getBackgroundImage",
+      "identity": "cv.bgsegm.BackgroundSubtractorLSBP.getBackgroundImage(Mat backgroundImage[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "backgroundImage",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 59,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "class",
+      "name": "cv.bgsegm.BackgroundSubtractorLSBPDesc",
+      "identity": "class cv.bgsegm.BackgroundSubtractorLSBPDesc",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief This is for calculation of the LSBP descriptors."
+    },
+    {
+      "ordinal": 60,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.createBackgroundSubtractorGSOC",
+      "identity": "cv.bgsegm.createBackgroundSubtractorGSOC(int mc=LSBP_CAMERA_MOTION_COMPENSATION_NONE;int nSamples=20;float replaceRate=0.003f;float propagationRate=0.01f;int hitsThreshold=32;float alpha=0.01f;float beta=0.0022f;float blinkingSupressionDecay=0.1f;float blinkingSupressionMultiplier=0.1f;float noiseRemovalThresholdFacBG=0.0004f;float noiseRemovalThresholdFacFG=0.0008f)->Ptr<BackgroundSubtractorGSOC>",
+      "returnType": "Ptr<BackgroundSubtractorGSOC>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "mc",
+          "default": "LSBP_CAMERA_MOTION_COMPENSATION_NONE",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "nSamples",
+          "default": "20",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "replaceRate",
+          "default": "0.003f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "propagationRate",
+          "default": "0.01f",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "hitsThreshold",
+          "default": "32",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "alpha",
+          "default": "0.01f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "beta",
+          "default": "0.0022f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "blinkingSupressionDecay",
+          "default": "0.1f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "blinkingSupressionMultiplier",
+          "default": "0.1f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "noiseRemovalThresholdFacBG",
+          "default": "0.0004f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "noiseRemovalThresholdFacFG",
+          "default": "0.0008f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates an instance of BackgroundSubtractorGSOC algorithm.\n\nImplementation of the different yet better algorithm which is called GSOC, as it was implemented during GSOC and was not originated from any paper.\n\n@param mc Whether to use camera motion compensation.\n@param nSamples Number of samples to maintain at each point of the frame.\n@param replaceRate Probability of replacing the old sample - how fast the model will update itself.\n@param propagationRate Probability of propagating to neighbors.\n@param hitsThreshold How many positives the sample must get before it will be considered as a possible replacement.\n@param alpha Scale coefficient for threshold.\n@param beta Bias coefficient for threshold.\n@param blinkingSupressionDecay Blinking supression decay factor.\n@param blinkingSupressionMultiplier Blinking supression multiplier.\n@param noiseRemovalThresholdFacBG Strength of the noise removal for background points.\n@param noiseRemovalThresholdFacFG Strength of the noise removal for foreground points."
+    },
+    {
+      "ordinal": 61,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.createBackgroundSubtractorLSBP",
+      "identity": "cv.bgsegm.createBackgroundSubtractorLSBP(int mc=LSBP_CAMERA_MOTION_COMPENSATION_NONE;int nSamples=20;int LSBPRadius=16;float Tlower=2.0f;float Tupper=32.0f;float Tinc=1.0f;float Tdec=0.05f;float Rscale=10.0f;float Rincdec=0.005f;float noiseRemovalThresholdFacBG=0.0004f;float noiseRemovalThresholdFacFG=0.0008f;int LSBPthreshold=8;int minCount=2)->Ptr<BackgroundSubtractorLSBP>",
+      "returnType": "Ptr<BackgroundSubtractorLSBP>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "mc",
+          "default": "LSBP_CAMERA_MOTION_COMPENSATION_NONE",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "nSamples",
+          "default": "20",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "LSBPRadius",
+          "default": "16",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "Tlower",
+          "default": "2.0f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "Tupper",
+          "default": "32.0f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "Tinc",
+          "default": "1.0f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "Tdec",
+          "default": "0.05f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "Rscale",
+          "default": "10.0f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "Rincdec",
+          "default": "0.005f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "noiseRemovalThresholdFacBG",
+          "default": "0.0004f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "noiseRemovalThresholdFacFG",
+          "default": "0.0008f",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "LSBPthreshold",
+          "default": "8",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "minCount",
+          "default": "2",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates an instance of BackgroundSubtractorLSBP algorithm.\n\nBackground Subtraction using Local SVD Binary Pattern. More details about the algorithm can be found at @cite LGuo2016\n\n@param mc Whether to use camera motion compensation.\n@param nSamples Number of samples to maintain at each point of the frame.\n@param LSBPRadius LSBP descriptor radius.\n@param Tlower Lower bound for T-values. See @cite LGuo2016 for details.\n@param Tupper Upper bound for T-values. See @cite LGuo2016 for details.\n@param Tinc Increase step for T-values. See @cite LGuo2016 for details.\n@param Tdec Decrease step for T-values. See @cite LGuo2016 for details.\n@param Rscale Scale coefficient for threshold values.\n@param Rincdec Increase/Decrease step for threshold values.\n@param noiseRemovalThresholdFacBG Strength of the noise removal for background points.\n@param noiseRemovalThresholdFacFG Strength of the noise removal for foreground points.\n@param LSBPthreshold Threshold for LSBP binary string.\n@param minCount Minimal number of matches for sample to be considered as foreground."
+    },
+    {
+      "ordinal": 62,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "class",
+      "name": "cv.bgsegm.SyntheticSequenceGenerator",
+      "identity": "class cv.bgsegm.SyntheticSequenceGenerator",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Synthetic frame sequence generator for testing background subtraction algorithms.\n\n It will generate the moving object on top of the background.\n It will apply some distortion to the background to make the test more complex."
+    },
+    {
+      "ordinal": 63,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.SyntheticSequenceGenerator.SyntheticSequenceGenerator",
+      "identity": "cv.bgsegm.SyntheticSequenceGenerator.SyntheticSequenceGenerator(Mat background;Mat object;double amplitude;double wavelength;double wavespeed;double objspeed)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "background",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "object",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "amplitude",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "wavelength",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "wavespeed",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "objspeed",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates an instance of SyntheticSequenceGenerator.\n\n    @param background Background image for object.\n    @param object Object image which will move slowly over the background.\n    @param amplitude Amplitude of wave distortion applied to background.\n    @param wavelength Length of waves in distortion applied to background.\n    @param wavespeed How fast waves will move.\n    @param objspeed How fast object will fly over background."
+    },
+    {
+      "ordinal": 64,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.SyntheticSequenceGenerator.getNextFrame",
+      "identity": "cv.bgsegm.SyntheticSequenceGenerator.getNextFrame(Mat frame[/O];Mat gtMask[/O])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "frame",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "gtMask",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Obtain the next frame in the sequence.\n\n    @param frame Output frame.\n    @param gtMask Output ground-truth (reference) segmentation mask object/background."
+    },
+    {
+      "ordinal": 65,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bgsegm/include/opencv2/bgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.bgsegm.createSyntheticSequenceGenerator",
+      "identity": "cv.bgsegm.createSyntheticSequenceGenerator(Mat background;Mat object;double amplitude=2.0;double wavelength=20.0;double wavespeed=0.2;double objspeed=6.0)->Ptr<SyntheticSequenceGenerator>",
+      "returnType": "Ptr<SyntheticSequenceGenerator>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "background",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "object",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "amplitude",
+          "default": "2.0",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "wavelength",
+          "default": "20.0",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "wavespeed",
+          "default": "0.2",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "objspeed",
+          "default": "6.0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates an instance of SyntheticSequenceGenerator.\n\n@param background Background image for object.\n@param object Object image which will move slowly over the background.\n@param amplitude Amplitude of wave distortion applied to background.\n@param wavelength Length of waves in distortion applied to background.\n@param wavespeed How fast waves will move.\n@param objspeed How fast object will fly over background."
+    }
+  ]
+}

@@ -57,19 +57,24 @@ def main():
     parser.add_argument("--workspace", required=True)
     parser.add_argument("--opencv-root", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument("--module", default="ximgproc")
     args = parser.parse_args()
     workspace = Path(args.workspace).resolve()
     root = Path(args.opencv_root).resolve()
     output = Path(args.output).resolve()
     parser_path = root / "modules/python/src2/hdr_parser.py"
-    contrib_root = root.parent.parent / "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc"
-    umbrella = root.parent.parent / "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc.hpp"
-    files = sorted(contrib_root.glob("*.hpp"))
+    module = args.module
+    if module not in {"ximgproc", "optflow", "bgsegm"}:
+        raise RuntimeError("Unsupported contrib extraction module: " + module)
+    contrib_include = root.parent.parent / f"opencv-source/opencv_contrib-5.0.0/modules/{module}/include/opencv2"
+    contrib_root = contrib_include / module
+    umbrella = contrib_include / f"{module}.hpp"
+    files = [umbrella] if module == "bgsegm" else sorted(contrib_root.glob("*.hpp"))
     spec = importlib.util.spec_from_file_location("opencv_hdr_parser", parser_path)
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
+    hdr_module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(hdr_module)
     definitions = {"CV_VERSION_MAJOR": 5, "OPENCV_ABI_COMPATIBILITY": 500, "HAVE_OPENCV_FLANN": 1, "HAVE_OPENCV_DNN": 1}
-    parser_instance = module.CppHeaderParser(preprocessor_definitions=dict(definitions))
+    parser_instance = hdr_module.CppHeaderParser(preprocessor_definitions=dict(definitions))
     declarations = []
     source_headers = []
     for file in files:
@@ -81,10 +86,11 @@ def main():
     if len(identities) != len(set(identities)):
         duplicates = sorted(item for item in set(identities) if identities.count(item) > 1)
         raise RuntimeError("XImgProc parser closure contains duplicate identities: " + ", ".join(duplicates))
-    result = {"schemaVersion": 1, "generator": "tools/XImgProcUpstreamMap/extract_ximgproc.py", "upstreamOpenCvVersion": "5.0.0", "headerPath": rel(umbrella, workspace), "headerSha256": sha256(umbrella), "parserPath": rel(parser_path, workspace), "parserSha256": sha256(parser_path), "preprocessorDefinitions": definitions, "sourceHeaders": source_headers, "declarationCount": len(declarations), "declarations": declarations}
+    title = {"ximgproc": "XImgProc", "optflow": "OptFlow", "bgsegm": "BgSegm"}[module]
+    result = {"schemaVersion": 1, "generator": f"tools/{title}UpstreamMap/extract_{module}.py", "upstreamOpenCvVersion": "5.0.0", "headerPath": rel(umbrella, workspace), "headerSha256": sha256(umbrella), "parserPath": rel(parser_path, workspace), "parserSha256": sha256(parser_path), "preprocessorDefinitions": definitions, "sourceHeaders": source_headers, "declarationCount": len(declarations), "declarations": declarations}
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, ensure_ascii=True, indent=2) + "\n", encoding="utf-8", newline="\n")
-    print("XIMGPROC_UPSTREAM_EXTRACTION_OK declarations={} headers={}".format(len(declarations), len(files)))
+    print("{}_UPSTREAM_EXTRACTION_OK declarations={} headers={}".format(module.upper(), len(declarations), len(files)))
 
 
 if __name__ == "__main__":
