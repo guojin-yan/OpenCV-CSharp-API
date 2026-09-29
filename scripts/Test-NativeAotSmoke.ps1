@@ -81,7 +81,7 @@ try {
                         })
                 }
             }
-            elseif ($text -match '(?i)\bwarning\b|警告') {
+            elseif (($text -match '(?i)\bwarning\b|警告') -and $text -notmatch '(?i)\b0\s*warnings?\b|0\s*个警告') {
                 $key = "$Phase|UNCLASS|$($text.Trim())"
                 if ($warningKeys.Add($key)) {
                     [void]$warningRecords.Add([ordered]@{
