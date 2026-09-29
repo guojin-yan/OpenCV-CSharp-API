@@ -92,11 +92,11 @@ try {
         $passed = [int]$counters.passed
         $failed = [int]$counters.failed
         $skipped = [int]$counters.notExecuted
-        $error = [int]$counters.error
+        $errorCount = [int]$counters.error
         $timeout = [int]$counters.timeout
         $aborted = [int]$counters.aborted
-        if ($total -ne 9 -or $executed -ne 9 -or $passed -ne 9 -or $failed -ne 0 -or $skipped -ne 0 -or $error -ne 0 -or $timeout -ne 0 -or $aborted -ne 0) {
-            throw "Typed Mat lifetime counters drifted for ${framework}: total=$total executed=$executed passed=$passed failed=$failed skipped=$skipped error=$error timeout=$timeout aborted=$aborted."
+        if ($total -ne 9 -or $executed -ne 9 -or $passed -ne 9 -or $failed -ne 0 -or $skipped -ne 0 -or $errorCount -ne 0 -or $timeout -ne 0 -or $aborted -ne 0) {
+            throw "Typed Mat lifetime counters drifted for ${framework}: total=$total executed=$executed passed=$passed failed=$failed skipped=$skipped error=$errorCount timeout=$timeout aborted=$aborted."
         }
         $testAssembly = Join-Path $repo ("tests/OpenCvSharp.Tests/bin/Release/$framework/OpenCvSharp.Tests.dll" -replace '/', [IO.Path]::DirectorySeparatorChar)
         $apiAssembly = Join-Path $repo ("src/OpenCvSharp/bin/Release/$framework/JYPPX.OpenCV.CSharp.API.dll" -replace '/', [IO.Path]::DirectorySeparatorChar)
@@ -108,7 +108,7 @@ try {
             passed = $passed
             failed = $failed
             skipped = $skipped
-            error = $error
+            error = $errorCount
             timeout = $timeout
             aborted = $aborted
             testAssemblySha256 = (Get-FileHash -LiteralPath $testAssembly -Algorithm SHA256).Hash.ToLowerInvariant()
