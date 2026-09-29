@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/a44b196deddabae0",
-  "SourceIdentity": "sha256:a44b196deddabae053e130c8119937899e9e802b3e80f8be525141b0e5d9a73d",
+  "CandidateId": "local-closeout/sha256/0643c9b54337fbc5",
+  "SourceIdentity": "sha256:0643c9b54337fbc52450e4e91a69fe2ac30ed59db9783cafd00f060db05b3b75",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1809,
-    "Sha256": "a44b196deddabae053e130c8119937899e9e802b3e80f8be525141b0e5d9a73d",
+    "FileCount": 1813,
+    "Sha256": "0643c9b54337fbc52450e4e91a69fe2ac30ed59db9783cafd00f060db05b3b75",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -858,8 +858,8 @@
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "f8596b9b9d08eca89be4575a03c755ebe5b123b5b3d3944f6ea35fd67d11ffa7",
-      "Length": 6695
+      "Sha256": "a2c13bbf2cf008b0a292a81849f6d971417bc99c9e5d7629a1c669a015860148",
+      "Length": 6930
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -953,8 +953,8 @@
     },
     {
       "Path": "docs/articles/codec-preflight-and-limits.md",
-      "Sha256": "b426c2655d82adf323aacc62afa23d90a8016c225a7fff81fe996b626f64a9ad",
-      "Length": 22073
+      "Sha256": "3f1130abe897c1c1aef4e8ed9ad932016042422170bd03714480a16e6bd49efd",
+      "Length": 22781
     },
     {
       "Path": "docs/articles/core-upstream-parity-guide.md",
@@ -1240,6 +1240,16 @@
       "Path": "nuget/logo.jpg",
       "Sha256": "f85de97828d9f152903c8b90e8ee89aa1575ff8d0ef1c3704526e27dfe0d54d0",
       "Length": 77499
+    },
+    {
+      "Path": "packaging/codec/codec-native-mutation-evidence.json",
+      "Sha256": "5be86b4e8d7898a26c7c2cd2305398383368346c34e21f0105cd40a503a5c71c",
+      "Length": 8819
+    },
+    {
+      "Path": "packaging/codec/codec-native-mutation-evidence.schema.json",
+      "Sha256": "e4674cd6f0f50051757a9202236561239b05577a4029bdae72610e1260ce504f",
+      "Length": 4850
     },
     {
       "Path": "packaging/codec/image-format-policy.json",
@@ -1657,6 +1667,11 @@
       "Length": 11584
     },
     {
+      "Path": "scripts/Measure-CodecNativeMutationEvidence.ps1",
+      "Sha256": "3889831007ef04693d4ea37cb440c367863e6270019992ef8cb5d125fcc04f46",
+      "Length": 15666
+    },
+    {
       "Path": "scripts/Measure-CodecTypedMatBenchmark.ps1",
       "Sha256": "80c9fb5e60fea0ecfc2def3f2a25e70e94c482e392af92266d1b3a609e136db6",
       "Length": 9395
@@ -1708,8 +1723,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "24604748b5c8dc830c042610740ba6c04ef58f05356828230e0c515a61d32c91",
-      "Length": 70573
+      "Sha256": "cd56aed63a5ce98ec84851cec74f70e914b56fcbf6d0ce4c89ab69f17474f326",
+      "Length": 70821
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1750,6 +1765,11 @@
       "Path": "scripts/Test-CodecBenchmarkHarness.ps1",
       "Sha256": "dbe9d6e3b4f9ad4845a64a492192cfffcd29870161e461dec34e09755e218684",
       "Length": 3852
+    },
+    {
+      "Path": "scripts/Test-CodecNativeMutationEvidence.ps1",
+      "Sha256": "aff77edfa3f95de367abd453b86a974c002085459254c346811003b577dd1f94",
+      "Length": 6418
     },
     {
       "Path": "scripts/Test-CodecWriterNativeEvidence.ps1",
@@ -1983,8 +2003,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "c63289aa3f74f125fdb637a8db5368a191300fbc38c5798f05896f7724566508",
-      "Length": 68175
+      "Sha256": "36c86911b37954e5bc1b5d25d859697df65a83c1e66ff74692723b54b5203e32",
+      "Length": 68423
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -1993,7 +2013,7 @@
     },
     {
       "Path": "scripts/Test-ReleaseChangeControlRecord.ps1",
-      "Sha256": "a73151012b3b25d6e8a1e2e1707119c008eca702471d89b50769db48d4cf059f",
+      "Sha256": "b9036135aa71c88b00e55a839af530b86edd77704bc58dad97281c8bd7e0911a",
       "Length": 45784
     },
     {
@@ -2589,7 +2609,7 @@
   ],
   "LocalValidation": {
     "Status": "locally-validated",
-    "InvariantGuardCount": 88,
+    "InvariantGuardCount": 89,
     "RequiredChecks": [
       "actionlint-1.7.12",
       "api-abi-baseline",
