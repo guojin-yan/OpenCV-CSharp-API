@@ -2,13 +2,13 @@
   "$schema": "video-dnn-benchmark-evidence.schema.json",
   "schemaVersion": 1,
   "status": "measured",
-  "sourceCommit": "d927d30002f94c69ade8a604f8ac1bb533b5fbd5",
+  "sourceCommit": "45ef1609a0232026c99cce657106e6eb3dd4faa5",
   "runner": {
     "os": "Microsoft Windows 10.0.26200",
     "architecture": "x64",
     "dotnet": "10.0.401",
     "configuration": "Release",
-    "managedAssemblySha256": "f4f1e3730fd8d492217e42149280bd2c9faa1f87c9d7bdfd8c059e5ee58c759f",
+    "managedAssemblySha256": "8825b0dfaa3dcf282683af75e195dccbc4a294c79d11713bfeb50e1805ecf121",
     "nativeRuntimePackage": "jyppx.opencv.runtime.win-x64.5.0.0.nupkg",
     "nativeRuntimePackageSha256": "07de65af0ec14420d84d49caa4663d08393880a1bae402c789177d2dfff2544e",
     "nativePayload": [
@@ -115,10 +115,10 @@
     "fileSha256": "3137a5dc45d1dadf29aee22d2eb140a55c31fe240a80fe66dd4cc069fe27fd56",
     "metric": {
       "managedAllocatedBytes": 1312912,
-      "elapsedTicks": 23436359,
+      "elapsedTicks": 21825618,
       "checksum": 46555200,
-      "baselineWorkingSetBytes": 38838272,
-      "peakWorkingSetBytes": 41451520
+      "baselineWorkingSetBytes": 38645760,
+      "peakWorkingSetBytes": 41865216
     }
   },
   "dnn": {
@@ -128,16 +128,16 @@
     "modelSha256": "326793cdb2fc2da739a715c3f3ff71d09779b389ad29e56bbfccc4313e900744",
     "outputName": "output",
     "outputChecksum": 1000000,
-    "profileTickCount": 2700,
+    "profileTickCount": 5700,
     "profileLayerCount": 2,
     "weightsBytes": 0,
     "blobBytes": 48,
     "metric": {
-      "managedAllocatedBytes": 384864,
-      "elapsedTicks": 5556781,
+      "managedAllocatedBytes": 385632,
+      "elapsedTicks": 5289545,
       "checksum": 1000000,
-      "baselineWorkingSetBytes": 42930176,
-      "peakWorkingSetBytes": 43106304
+      "baselineWorkingSetBytes": 42901504,
+      "peakWorkingSetBytes": 43937792
     }
   },
   "limitations": [
