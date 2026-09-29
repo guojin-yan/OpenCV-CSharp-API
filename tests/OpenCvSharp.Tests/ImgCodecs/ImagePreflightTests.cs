@@ -1,6 +1,8 @@
 using System;
 using System.IO;
 using System.Text;
+using JYPPX.OpenCvSharp;
+using JYPPX.OpenCvSharp.Core;
 using JYPPX.OpenCvSharp.ImgCodecs;
 using ImgCodecsCv2 = JYPPX.OpenCvSharp.ImgCodecs.Cv2;
 
@@ -1037,6 +1039,89 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             }
 
             Assert.True(streamCases >= 50, "The stream mutation corpus must exercise both stream kinds across all fixtures.");
+        }
+
+        [Fact]
+        public void ImDecodeDeterministicMutationCorpusStaysWithinNativeBoundary()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled()) return;
+
+            byte[] validPng;
+            byte[] validJpeg;
+            using (var source = new Mat(4, 4, MatType.CV_8UC1))
+            {
+                source.SetTo(new Scalar(9));
+                validPng = ImgCodecsCv2.ImEncode(".png", source);
+                validJpeg = ImgCodecsCv2.ImEncode(".jpg", source);
+            }
+
+            var fixtures = new[]
+            {
+                new { Name = "png", Bytes = validPng },
+                new { Name = "jpeg", Bytes = validJpeg },
+                new { Name = "gif", Bytes = CreateAnimatedGif(2) },
+                new { Name = "apng", Bytes = CreateApng(3) },
+                new { Name = "webp", Bytes = CreateAnimatedWebp(4) },
+                new { Name = "bmp", Bytes = CreateBmpFixture(24, 0) },
+                new { Name = "pam", Bytes = Encoding.ASCII.GetBytes("P7\nWIDTH 2\nHEIGHT 3\nDEPTH 4\nMAXVAL 255\nENDHDR\n") },
+                new { Name = "sunraster", Bytes = CreateSunRaster(24) },
+                new { Name = "hdr", Bytes = CreateRadianceHdr(8, 2, true) },
+                new { Name = "exr", Bytes = CreateOpenExrHeader(2, 3, 3, 1) },
+                new { Name = "tiff", Bytes = CreateTiff(false, 2) },
+                new { Name = "bigtiff", Bytes = CreateBigTiff(false, 2) },
+                new { Name = "j2k", Bytes = CreateJpeg2000Codestream(2, 3, 8) },
+                new { Name = "jp2", Bytes = CreateJp2(CreateJpeg2000Codestream(2, 3, 8), true) }
+            };
+            var options = new ImageDecodeOptions(1_048_576, 64, 64, 4096, 4, false, false);
+
+            using (Mat decodedPng = ImgCodecsCv2.ImDecode(validPng, options))
+            using (Mat decodedJpeg = ImgCodecsCv2.ImDecode(validJpeg, options))
+            {
+                Assert.False(decodedPng.Empty);
+                Assert.False(decodedJpeg.Empty);
+                Assert.InRange(decodedPng.Rows, 1, 64);
+                Assert.InRange(decodedPng.Cols, 1, 64);
+                Assert.InRange(decodedJpeg.Rows, 1, 64);
+                Assert.InRange(decodedJpeg.Cols, 1, 64);
+            }
+
+            byte[] mutationValues = { 0x00, 0xFF };
+            int mutationCount = 0;
+            foreach (var fixture in fixtures)
+            {
+                int[] offsets = { 0, fixture.Bytes.Length / 2, fixture.Bytes.Length - 1 };
+                foreach (int offset in offsets)
+                {
+                    foreach (byte replacement in mutationValues)
+                    {
+                        if (fixture.Bytes[offset] == replacement) continue;
+                        byte[] mutated = (byte[])fixture.Bytes.Clone();
+                        mutated[offset] = replacement;
+                        try
+                        {
+                            using (Mat decoded = ImgCodecsCv2.ImDecode(mutated, options))
+                            {
+                                if (!decoded.Empty)
+                                {
+                                    Assert.True(decoded.Rows >= 1 && decoded.Rows <= 64, fixture.Name + " mutation rows");
+                                    Assert.True(decoded.Cols >= 1 && decoded.Cols <= 64, fixture.Name + " mutation columns");
+                                }
+                            }
+                        }
+                        catch (InvalidDataException)
+                        {
+                            // Managed admission is an expected fail-closed result.
+                        }
+                        catch (OpenCvException)
+                        {
+                            // Native codec rejection is an expected malformed-input result.
+                        }
+                        mutationCount++;
+                    }
+                }
+            }
+
+            Assert.True(mutationCount >= 64, "Native mutation smoke must exercise at least 64 bounded decode inputs.");
         }
 
         [Fact]

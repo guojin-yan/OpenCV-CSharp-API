@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/codec/codec-native-mutation-evidence.schema.json",
+  "title": "Native codec mutation smoke evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [ "$schema", "schemaVersion", "status", "sourceCommit", "corpusManifestSha256", "testFilter", "timeoutSeconds", "maxWorkingSetGrowthBytes", "nativeRuntimeRequired", "runner", "runtimePackages", "frameworks", "classifications", "limitations" ],
+  "properties": {
+    "$schema": { "const": "codec-native-mutation-evidence.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "status": { "const": "verified" },
+    "sourceCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "corpusManifestSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "testFilter": { "const": "FullyQualifiedName~ImDecodeDeterministicMutationCorpusStaysWithinNativeBoundary" },
+    "timeoutSeconds": { "type": "integer", "minimum": 10, "maximum": 600 },
+    "maxWorkingSetGrowthBytes": { "type": "integer", "minimum": 1 },
+    "nativeRuntimeRequired": { "const": true },
+    "runner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "os", "architecture", "dotnet", "configuration" ],
+      "properties": {
+        "os": { "type": "string", "minLength": 1 },
+        "architecture": { "const": "x64" },
+        "dotnet": { "type": "string", "pattern": "^10\\.0\\.\\d+$" },
+        "configuration": { "const": "Release" }
+      }
+    },
+    "runtimePackages": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [ "profile", "packageFileName", "packageSha256", "nativeDllCount", "payload" ],
+        "properties": {
+          "profile": { "enum": [ "full", "mini" ] },
+          "packageFileName": { "type": "string", "minLength": 1 },
+          "packageSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "nativeDllCount": { "type": "integer", "enum": [ 7, 18 ] },
+          "payload": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [ "name", "bytes", "sha256" ],
+              "properties": {
+                "name": { "type": "string", "minLength": 1 },
+                "bytes": { "type": "integer", "minimum": 1 },
+                "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "frameworks": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [ "profile", "targetFramework", "status", "failureClass", "exitCode", "passed", "nativeSmokeEnabled", "durationMilliseconds", "fixtureCount", "baselineProcessTreeWorkingSetBytes", "peakProcessTreeWorkingSetBytes", "processTreeWorkingSetGrowthBytes", "maxProcessTreeWorkingSetGrowthBytes", "resourceLeakObserved", "oomCount", "crashCount", "hangCount", "failureSummary" ],
+        "properties": {
+          "profile": { "enum": [ "full", "mini" ] },
+          "targetFramework": { "enum": [ "net8.0", "net10.0" ] },
+          "status": { "const": "clean" },
+          "failureClass": { "const": "clean" },
+          "exitCode": { "const": 0 },
+          "passed": { "const": true },
+          "nativeSmokeEnabled": { "const": true },
+          "durationMilliseconds": { "type": "integer", "minimum": 0 },
+          "fixtureCount": { "const": 14 },
+          "baselineProcessTreeWorkingSetBytes": { "type": "integer", "minimum": 0 },
+          "peakProcessTreeWorkingSetBytes": { "type": "integer", "minimum": 0 },
+          "processTreeWorkingSetGrowthBytes": { "type": "integer", "minimum": 0 },
+          "maxProcessTreeWorkingSetGrowthBytes": { "type": "integer", "minimum": 1 },
+          "resourceLeakObserved": { "const": false },
+          "oomCount": { "const": 0 },
+          "crashCount": { "const": 0 },
+          "hangCount": { "const": 0 },
+          "failureSummary": { "const": "" }
+        }
+      }
+    },
+    "classifications": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "clean", "oom", "crash", "hang", "managedTestFailure", "resourceLeak" ],
+      "properties": {
+        "clean": { "const": 4 },
+        "oom": { "const": 0 },
+        "crash": { "const": 0 },
+        "hang": { "const": 0 },
+        "managedTestFailure": { "const": 0 },
+        "resourceLeak": { "const": 0 }
+      }
+    },
+    "limitations": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+  }
+}

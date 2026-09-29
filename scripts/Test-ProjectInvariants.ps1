@@ -336,6 +336,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Native codec mutation evidence"
+        Script = Join-Path $repo "scripts/Test-CodecNativeMutationEvidence.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Typed Mat benchmark harness"
         Script = Join-Path $repo "scripts/Test-TypedMatBenchmarkHarness.ps1"
         Arguments = @("-RepositoryRoot", $repo)
