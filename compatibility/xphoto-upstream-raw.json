@@ -1,0 +1,1289 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/XPhotoUpstreamMap/extract_xphoto.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto.hpp",
+  "headerSha256": "fd60f384fe26dcb16a3a7e7e8003676dd385b8a755c753fb3b24093cff179050",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/bm3d_image_denoising.hpp",
+      "sha256": "f469d6d72e84f247ee1fce24414fefde9c31b4e02b63e8e6ec79da7370da7138",
+      "startOrdinal": 0,
+      "declarationCount": 4
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/dct_image_denoising.hpp",
+      "sha256": "ecc1f6518d639905f1dd25db7662247ccc41522ab3f8223cb465c98c2292307f",
+      "startOrdinal": 4,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/inpainting.hpp",
+      "sha256": "c4c148d636ce46741025cf9c0027c470b7af4bf430600e06b41dbda7c09a2384",
+      "startOrdinal": 5,
+      "declarationCount": 2
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/oilpainting.hpp",
+      "sha256": "2ab0b4e5a8e4a6cdf3b925c58779e2bdc9f729fc657793190d93f63c6f7f4cde",
+      "startOrdinal": 7,
+      "declarationCount": 2
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/tonemap.hpp",
+      "sha256": "b4bedc62e15eedc4e9c2b85968c47b273ae6d8cf695d1d5e20e2c42a846b1018",
+      "startOrdinal": 9,
+      "declarationCount": 10
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "sha256": "30fae76a70bd2a6776fcecf1cc01d54538845e4dad80cdfa61b8a10832bda88f",
+      "startOrdinal": 19,
+      "declarationCount": 28
+    }
+  ],
+  "declarationCount": 47,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/bm3d_image_denoising.hpp",
+      "kind": "enum",
+      "name": "cv.xphoto.TransformTypes",
+      "identity": "enum cv.xphoto.TransformTypes[const cv.xphoto.HAAR=0]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.xphoto.HAAR",
+          "value": "0"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/bm3d_image_denoising.hpp",
+      "kind": "enum",
+      "name": "cv.xphoto.Bm3dSteps",
+      "identity": "enum cv.xphoto.Bm3dSteps[const cv.xphoto.BM3D_STEPALL=0;const cv.xphoto.BM3D_STEP1=1;const cv.xphoto.BM3D_STEP2=2]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.xphoto.BM3D_STEPALL",
+          "value": "0"
+        },
+        {
+          "name": "const cv.xphoto.BM3D_STEP1",
+          "value": "1"
+        },
+        {
+          "name": "const cv.xphoto.BM3D_STEP2",
+          "value": "2"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/bm3d_image_denoising.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.bm3dDenoising",
+      "identity": "cv.xphoto.bm3dDenoising(Mat src;Mat dstStep1[/IO];Mat dstStep2[/O];float h=1;int templateWindowSize=4;int searchWindowSize=16;int blockMatchingStep1=2500;int blockMatchingStep2=400;int groupSize=8;int slidingStep=1;float beta=2.0f;int normType=cv::NORM_L2;int step=cv::xphoto::BM3D_STEPALL;int transformType=cv::xphoto::HAAR)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dstStep1",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "dstStep2",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "h",
+          "default": "1",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "templateWindowSize",
+          "default": "4",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "searchWindowSize",
+          "default": "16",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "blockMatchingStep1",
+          "default": "2500",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "blockMatchingStep2",
+          "default": "400",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "groupSize",
+          "default": "8",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "slidingStep",
+          "default": "1",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "beta",
+          "default": "2.0f",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "normType",
+          "default": "cv::NORM_L2",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "step",
+          "default": "cv::xphoto::BM3D_STEPALL",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "transformType",
+          "default": "cv::xphoto::HAAR",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Performs image denoising using the Block-Matching and 3D-filtering algorithm\n        <http://www.cs.tut.fi/~foi/GCF-BM3D/BM3D_TIP_2007.pdf> with several computational\n        optimizations. Noise expected to be a gaussian white noise.\n\n        @param src Input 8-bit or 16-bit 1-channel image.\n        @param dstStep1 Output image of the first step of BM3D with the same size and type as src.\n        @param dstStep2 Output image of the second step of BM3D with the same size and type as src.\n        @param h Parameter regulating filter strength. Big h value perfectly removes noise but also\n        removes image details, smaller h value preserves details but also preserves some noise.\n        @param templateWindowSize Size in pixels of the template patch that is used for block-matching.\n        Should be power of 2.\n        @param searchWindowSize Size in pixels of the window that is used to perform block-matching.\n        Affect performance linearly: greater searchWindowsSize - greater denoising time.\n        Must be larger than templateWindowSize.\n        @param blockMatchingStep1 Block matching threshold for the first step of BM3D (hard thresholding),\n        i.e. maximum distance for which two blocks are considered similar.\n        Value expressed in euclidean distance.\n        @param blockMatchingStep2 Block matching threshold for the second step of BM3D (Wiener filtering),\n        i.e. maximum distance for which two blocks are considered similar.\n        Value expressed in euclidean distance.\n        @param groupSize Maximum size of the 3D group for collaborative filtering.\n        @param slidingStep Sliding step to process every next reference block.\n        @param beta Kaiser window parameter that affects the sidelobe attenuation of the transform of the\n        window. Kaiser window is used in order to reduce border effects. To prevent usage of the window,\n        set beta to zero.\n        @param normType Norm used to calculate distance between blocks. L2 is slower than L1\n        but yields more accurate results.\n        @param step Step of BM3D to be executed. Possible variants are: step 1, step 2, both steps.\n        @param transformType Type of the orthogonal transform used in collaborative filtering step.\n        Currently only Haar transform is supported.\n\n        This function expected to be applied to grayscale images. Advanced usage of this function\n        can be manual denoising of colored image in different colorspaces.\n\n        @sa\n        fastNlMeansDenoising"
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/bm3d_image_denoising.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.bm3dDenoising",
+      "identity": "cv.xphoto.bm3dDenoising(Mat src;Mat dst[/O];float h=1;int templateWindowSize=4;int searchWindowSize=16;int blockMatchingStep1=2500;int blockMatchingStep2=400;int groupSize=8;int slidingStep=1;float beta=2.0f;int normType=cv::NORM_L2;int step=cv::xphoto::BM3D_STEPALL;int transformType=cv::xphoto::HAAR)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "h",
+          "default": "1",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "templateWindowSize",
+          "default": "4",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "searchWindowSize",
+          "default": "16",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "blockMatchingStep1",
+          "default": "2500",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "blockMatchingStep2",
+          "default": "400",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "groupSize",
+          "default": "8",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "slidingStep",
+          "default": "1",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "beta",
+          "default": "2.0f",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "normType",
+          "default": "cv::NORM_L2",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "step",
+          "default": "cv::xphoto::BM3D_STEPALL",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "transformType",
+          "default": "cv::xphoto::HAAR",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Performs image denoising using the Block-Matching and 3D-filtering algorithm\n        <http://www.cs.tut.fi/~foi/GCF-BM3D/BM3D_TIP_2007.pdf> with several computational\n        optimizations. Noise expected to be a gaussian white noise.\n\n        @param src Input 8-bit or 16-bit 1-channel image.\n        @param dst Output image with the same size and type as src.\n        @param h Parameter regulating filter strength. Big h value perfectly removes noise but also\n        removes image details, smaller h value preserves details but also preserves some noise.\n        @param templateWindowSize Size in pixels of the template patch that is used for block-matching.\n        Should be power of 2.\n        @param searchWindowSize Size in pixels of the window that is used to perform block-matching.\n        Affect performance linearly: greater searchWindowsSize - greater denoising time.\n        Must be larger than templateWindowSize.\n        @param blockMatchingStep1 Block matching threshold for the first step of BM3D (hard thresholding),\n        i.e. maximum distance for which two blocks are considered similar.\n        Value expressed in euclidean distance.\n        @param blockMatchingStep2 Block matching threshold for the second step of BM3D (Wiener filtering),\n        i.e. maximum distance for which two blocks are considered similar.\n        Value expressed in euclidean distance.\n        @param groupSize Maximum size of the 3D group for collaborative filtering.\n        @param slidingStep Sliding step to process every next reference block.\n        @param beta Kaiser window parameter that affects the sidelobe attenuation of the transform of the\n        window. Kaiser window is used in order to reduce border effects. To prevent usage of the window,\n        set beta to zero.\n        @param normType Norm used to calculate distance between blocks. L2 is slower than L1\n        but yields more accurate results.\n        @param step Step of BM3D to be executed. Allowed are only BM3D_STEP1 and BM3D_STEPALL.\n        BM3D_STEP2 is not allowed as it requires basic estimate to be present.\n        @param transformType Type of the orthogonal transform used in collaborative filtering step.\n        Currently only Haar transform is supported.\n\n        This function expected to be applied to grayscale images. Advanced usage of this function\n        can be manual denoising of colored image in different colorspaces.\n\n        @sa\n        fastNlMeansDenoising"
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/dct_image_denoising.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.dctDenoising",
+      "identity": "cv.xphoto.dctDenoising(Mat src[/C,/Ref];Mat dst[/Ref];double sigma[/C];int psize=16[/C])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "sigma",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "psize",
+          "default": "16",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief The function implements simple dct-based denoising\n\n    <http://www.ipol.im/pub/art/2011/ys-dct/>.\n    @param src source image\n    @param dst destination image\n    @param sigma expected noise standard deviation\n    @param psize size of block side where dct is computed\n\n    @sa\n       fastNlMeansDenoising"
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/inpainting.hpp",
+      "kind": "enum",
+      "name": "cv.xphoto.InpaintTypes",
+      "identity": "enum cv.xphoto.InpaintTypes[const cv.xphoto.INPAINT_SHIFTMAP=0;const cv.xphoto.INPAINT_FSR_BEST=1;const cv.xphoto.INPAINT_FSR_FAST=2]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.xphoto.INPAINT_SHIFTMAP",
+          "value": "0"
+        },
+        {
+          "name": "const cv.xphoto.INPAINT_FSR_BEST",
+          "value": "1"
+        },
+        {
+          "name": "const cv.xphoto.INPAINT_FSR_FAST",
+          "value": "2"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.inpaint",
+      "identity": "cv.xphoto.inpaint(Mat src[/C,/Ref];Mat mask[/C,/Ref];Mat dst[/Ref];int algorithmType[/C])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "algorithmType",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief The function implements different single-image inpainting algorithms.\n\n    See the original papers @cite He2012 (Shiftmap) or @cite GenserPCS2018 and @cite SeilerTIP2015 (FSR) for details.\n\n    @param src source image\n    - #INPAINT_SHIFTMAP: it could be of any type and any number of channels from 1 to 4. In case of\n    3- and 4-channels images the function expect them in CIELab colorspace or similar one, where first\n    color component shows intensity, while second and third shows colors. Nonetheless you can try any\n    colorspaces.\n    - #INPAINT_FSR_BEST or #INPAINT_FSR_FAST: 1-channel grayscale or 3-channel BGR image.\n    @param mask mask (#CV_8UC1), where non-zero pixels indicate valid image area, while zero pixels\n    indicate area to be inpainted\n    @param dst destination image\n    @param algorithmType see xphoto::InpaintTypes"
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/oilpainting.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.oilPainting",
+      "identity": "cv.xphoto.oilPainting(Mat src;Mat dst[/O];int size;int dynRatio;int code)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "size",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dynRatio",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "code",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief oilPainting\nSee the book @cite Holzmann1988 for details.\n@param src Input three-channel or one channel image (either CV_8UC3 or CV_8UC1)\n@param dst Output image of the same size and type as src.\n@param size neighbouring size is 2-size+1\n@param dynRatio image is divided by dynRatio before histogram processing\n@param code\tcolor space conversion code(see ColorConversionCodes). Histogram will used only first plane"
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/oilpainting.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.oilPainting",
+      "identity": "cv.xphoto.oilPainting(Mat src;Mat dst[/O];int size;int dynRatio)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "size",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dynRatio",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief oilPainting\nSee the book @cite Holzmann1988 for details.\n@param src Input three-channel or one channel image (either CV_8UC3 or CV_8UC1)\n@param dst Output image of the same size and type as src.\n@param size neighbouring size is 2-size+1\n@param dynRatio image is divided by dynRatio before histogram processing"
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/tonemap.hpp",
+      "kind": "class",
+      "name": "cv.xphoto.TonemapDurand",
+      "identity": "class cv.xphoto.TonemapDurand",
+      "returnType": ": cv::xphoto::Tonemap",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::xphoto::Tonemap",
+      "documentation": "@brief This algorithm decomposes image into two layers: base layer and detail layer using bilateral filter\nand compresses contrast of the base layer thus preserving all the details.\n\nThis implementation uses regular bilateral filter from OpenCV.\n\nSaturation enhancement is possible as in cv::TonemapDrago.\n\nFor more information see @cite DD02 ."
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/tonemap.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.TonemapDurand.getSaturation",
+      "identity": "cv.xphoto.TonemapDurand.getSaturation()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/tonemap.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.TonemapDurand.setSaturation",
+      "identity": "cv.xphoto.TonemapDurand.setSaturation(float saturation)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "saturation",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/tonemap.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.TonemapDurand.getContrast",
+      "identity": "cv.xphoto.TonemapDurand.getContrast()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/tonemap.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.TonemapDurand.setContrast",
+      "identity": "cv.xphoto.TonemapDurand.setContrast(float contrast)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "contrast",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/tonemap.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.TonemapDurand.getSigmaSpace",
+      "identity": "cv.xphoto.TonemapDurand.getSigmaSpace()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/tonemap.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.TonemapDurand.setSigmaSpace",
+      "identity": "cv.xphoto.TonemapDurand.setSigmaSpace(float sigma_space)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "sigma_space",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/tonemap.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.TonemapDurand.getSigmaColor",
+      "identity": "cv.xphoto.TonemapDurand.getSigmaColor()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/tonemap.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.TonemapDurand.setSigmaColor",
+      "identity": "cv.xphoto.TonemapDurand.setSigmaColor(float sigma_color)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "sigma_color",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/tonemap.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.createTonemapDurand",
+      "identity": "cv.xphoto.createTonemapDurand(float gamma=1.0f;float contrast=4.0f;float saturation=1.0f;float sigma_color=2.0f;float sigma_space=2.0f)->Ptr<TonemapDurand>",
+      "returnType": "Ptr<TonemapDurand>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "gamma",
+          "default": "1.0f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "contrast",
+          "default": "4.0f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "saturation",
+          "default": "1.0f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "sigma_color",
+          "default": "2.0f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "sigma_space",
+          "default": "2.0f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates TonemapDurand object\n\nYou need to set the OPENCV_ENABLE_NONFREE option in cmake to use those. Use them at your own risk.\n\n@param gamma gamma value for gamma correction. See createTonemap\n@param contrast resulting contrast on logarithmic scale, i. e. log(max / min), where max and min\nare maximum and minimum luminance values of the resulting image.\n@param saturation saturation enhancement value. See createTonemapDrago\n@param sigma_color bilateral filter sigma in color space\n@param sigma_space bilateral filter sigma in coordinate space"
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "class",
+      "name": "cv.xphoto.WhiteBalancer",
+      "identity": "class cv.xphoto.WhiteBalancer",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief The base class for auto white balance algorithms."
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.WhiteBalancer.balanceWhite",
+      "identity": "cv.xphoto.WhiteBalancer.balanceWhite(Mat src;Mat dst[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Applies white balancing to the input image\n\n    @param src Input image\n    @param dst White balancing result\n    @sa cvtColor, equalizeHist"
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "class",
+      "name": "cv.xphoto.SimpleWB",
+      "identity": "class cv.xphoto.SimpleWB",
+      "returnType": ": cv::xphoto::WhiteBalancer",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::xphoto::WhiteBalancer",
+      "documentation": "@brief A simple white balance algorithm that works by independently stretching\n    each of the input image channels to the specified range. For increased robustness\n    it ignores the top and bottom \\f$p\\%\\f$ of pixel values."
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.SimpleWB.getInputMin",
+      "identity": "cv.xphoto.SimpleWB.getInputMin()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Input image range minimum value\n@see setInputMin"
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.SimpleWB.setInputMin",
+      "identity": "cv.xphoto.SimpleWB.setInputMin(float val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getInputMin @see getInputMin"
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.SimpleWB.getInputMax",
+      "identity": "cv.xphoto.SimpleWB.getInputMax()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Input image range maximum value\n@see setInputMax"
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.SimpleWB.setInputMax",
+      "identity": "cv.xphoto.SimpleWB.setInputMax(float val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getInputMax @see getInputMax"
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.SimpleWB.getOutputMin",
+      "identity": "cv.xphoto.SimpleWB.getOutputMin()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Output image range minimum value\n@see setOutputMin"
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.SimpleWB.setOutputMin",
+      "identity": "cv.xphoto.SimpleWB.setOutputMin(float val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getOutputMin @see getOutputMin"
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.SimpleWB.getOutputMax",
+      "identity": "cv.xphoto.SimpleWB.getOutputMax()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Output image range maximum value\n@see setOutputMax"
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.SimpleWB.setOutputMax",
+      "identity": "cv.xphoto.SimpleWB.setOutputMax(float val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getOutputMax @see getOutputMax"
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.SimpleWB.getP",
+      "identity": "cv.xphoto.SimpleWB.getP()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Percent of top/bottom values to ignore\n@see setP"
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.SimpleWB.setP",
+      "identity": "cv.xphoto.SimpleWB.setP(float val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getP @see getP"
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.createSimpleWB",
+      "identity": "cv.xphoto.createSimpleWB()->Ptr<SimpleWB>",
+      "returnType": "Ptr<SimpleWB>",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates an instance of SimpleWB"
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "class",
+      "name": "cv.xphoto.GrayworldWB",
+      "identity": "class cv.xphoto.GrayworldWB",
+      "returnType": ": cv::xphoto::WhiteBalancer",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::xphoto::WhiteBalancer",
+      "documentation": "@brief Gray-world white balance algorithm\n\nThis algorithm scales the values of pixels based on a\ngray-world assumption which states that the average of all channels\nshould result in a gray image.\n\nIt adds a modification which thresholds pixels based on their\nsaturation value and only uses pixels below the provided threshold in\nfinding average pixel values.\n\nSaturation is calculated using the following for a 3-channel RGB image per\npixel I and is in the range [0, 1]:\n\n\\f[ \\texttt{Saturation} [I] = \\frac{\\textrm{max}(R,G,B) - \\textrm{min}(R,G,B)\n}{\\textrm{max}(R,G,B)} \\f]\n\nA threshold of 1 means that all pixels are used to white-balance, while a\nthreshold of 0 means no pixels are used. Lower thresholds are useful in\nwhite-balancing saturated images.\n\nCurrently supports images of type @ref CV_8UC3 and @ref CV_16UC3."
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.GrayworldWB.getSaturationThreshold",
+      "identity": "cv.xphoto.GrayworldWB.getSaturationThreshold()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Maximum saturation for a pixel to be included in the\n        gray-world assumption\n@see setSaturationThreshold"
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.GrayworldWB.setSaturationThreshold",
+      "identity": "cv.xphoto.GrayworldWB.setSaturationThreshold(float val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getSaturationThreshold @see getSaturationThreshold"
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.createGrayworldWB",
+      "identity": "cv.xphoto.createGrayworldWB()->Ptr<GrayworldWB>",
+      "returnType": "Ptr<GrayworldWB>",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates an instance of GrayworldWB"
+    },
+    {
+      "ordinal": 37,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "class",
+      "name": "cv.xphoto.LearningBasedWB",
+      "identity": "class cv.xphoto.LearningBasedWB",
+      "returnType": ": cv::xphoto::WhiteBalancer",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::xphoto::WhiteBalancer",
+      "documentation": "@brief More sophisticated learning-based automatic white balance algorithm.\n\nAs @ref GrayworldWB, this algorithm works by applying different gains to the input\nimage channels, but their computation is a bit more involved compared to the\nsimple gray-world assumption. More details about the algorithm can be found in\n@cite Cheng2015 .\n\nTo mask out saturated pixels this function uses only pixels that satisfy the\nfollowing condition:\n\n\\f[ \\frac{\\textrm{max}(R,G,B)}{\\texttt{range_max_val}} < \\texttt{saturation_thresh} \\f]\n\nCurrently supports images of type @ref CV_8UC3 and @ref CV_16UC3."
+    },
+    {
+      "ordinal": 38,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.LearningBasedWB.extractSimpleFeatures",
+      "identity": "cv.xphoto.LearningBasedWB.extractSimpleFeatures(Mat src;Mat dst[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Implements the feature extraction part of the algorithm.\n\n    In accordance with @cite Cheng2015 , computes the following features for the input image:\n    1. Chromaticity of an average (R,G,B) tuple\n    2. Chromaticity of the brightest (R,G,B) tuple (while ignoring saturated pixels)\n    3. Chromaticity of the dominant (R,G,B) tuple (the one that has the highest value in the RGB histogram)\n    4. Mode of the chromaticity palette, that is constructed by taking 300 most common colors according to\n       the RGB histogram and projecting them on the chromaticity plane. Mode is the most high-density point\n       of the palette, which is computed by a straightforward fixed-bandwidth kernel density estimator with\n       a Epanechnikov kernel function.\n\n    @param src Input three-channel image (BGR color space is assumed).\n    @param dst An array of four (r,g) chromaticity tuples corresponding to the features listed above."
+    },
+    {
+      "ordinal": 39,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.LearningBasedWB.getRangeMaxVal",
+      "identity": "cv.xphoto.LearningBasedWB.getRangeMaxVal()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Maximum possible value of the input image (e.g. 255 for 8 bit images,\n               4095 for 12 bit images)\n@see setRangeMaxVal"
+    },
+    {
+      "ordinal": 40,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.LearningBasedWB.setRangeMaxVal",
+      "identity": "cv.xphoto.LearningBasedWB.setRangeMaxVal(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getRangeMaxVal @see getRangeMaxVal"
+    },
+    {
+      "ordinal": 41,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.LearningBasedWB.getSaturationThreshold",
+      "identity": "cv.xphoto.LearningBasedWB.getSaturationThreshold()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Threshold that is used to determine saturated pixels, i.e. pixels where at least one of the\n        channels exceeds \\f$\\texttt{saturation_threshold}\\times\\texttt{range_max_val}\\f$ are ignored.\n@see setSaturationThreshold"
+    },
+    {
+      "ordinal": 42,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.LearningBasedWB.setSaturationThreshold",
+      "identity": "cv.xphoto.LearningBasedWB.setSaturationThreshold(float val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getSaturationThreshold @see getSaturationThreshold"
+    },
+    {
+      "ordinal": 43,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.LearningBasedWB.getHistBinNum",
+      "identity": "cv.xphoto.LearningBasedWB.getHistBinNum()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Defines the size of one dimension of a three-dimensional RGB histogram that is used internally\n        by the algorithm. It often makes sense to increase the number of bins for images with higher bit depth\n        (e.g. 256 bins for a 12 bit image).\n@see setHistBinNum"
+    },
+    {
+      "ordinal": 44,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.LearningBasedWB.setHistBinNum",
+      "identity": "cv.xphoto.LearningBasedWB.setHistBinNum(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getHistBinNum @see getHistBinNum"
+    },
+    {
+      "ordinal": 45,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.createLearningBasedWB",
+      "identity": "cv.xphoto.createLearningBasedWB(String path_to_model=String()[/C,/Ref])->Ptr<LearningBasedWB>",
+      "returnType": "Ptr<LearningBasedWB>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "path_to_model",
+          "default": "String()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates an instance of LearningBasedWB\n\n@param path_to_model Path to a .yml file with the model. If not specified, the default model is used"
+    },
+    {
+      "ordinal": 46,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+      "kind": "callable",
+      "name": "cv.xphoto.applyChannelGains",
+      "identity": "cv.xphoto.applyChannelGains(Mat src;Mat dst[/O];float gainB;float gainG;float gainR)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "gainB",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "gainG",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "gainR",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Implements an efficient fixed-point approximation for applying channel gains, which is\n    the last step of multiple white balance algorithms.\n\n@param src Input three-channel image in the BGR color space (either CV_8UC3 or CV_16UC3)\n@param dst Output image of the same size and type as src.\n@param gainB gain for the B channel\n@param gainG gain for the G channel\n@param gainR gain for the R channel"
+    }
+  ]
+}

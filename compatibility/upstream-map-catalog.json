@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 14,
+  "moduleCount": 15,
   "maps": [
     {
       "id": "calib3d",
@@ -1114,6 +1114,82 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "b7605406830526c0b1afc4afc674aaa4a0cf307f1cb3652a489f8545a5cb8de8",
         "familyInventorySha256": "ea33bbf4ba627b7405902794d85736d65bb27ad19304b49a1d4aa82da8b5ce99",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "xphoto",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/XPhotoUpstreamMap",
+      "extractorScript": "tools/XPhotoUpstreamMap/extract_xphoto.py",
+      "generationScript": "scripts/Generate-XPhotoUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-XPhotoUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/xphoto.hpp contrib public header closure across six parser-emitted XPhoto headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto.hpp",
+          "sha256": "fd60f384fe26dcb16a3a7e7e8003676dd385b8a755c753fb3b24093cff179050"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/bm3d_image_denoising.hpp",
+            "sha256": "f469d6d72e84f247ee1fce24414fefde9c31b4e02b63e8e6ec79da7370da7138",
+            "startOrdinal": 0,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/dct_image_denoising.hpp",
+            "sha256": "ecc1f6518d639905f1dd25db7662247ccc41522ab3f8223cb465c98c2292307f",
+            "startOrdinal": 4,
+            "declarationCount": 1
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/inpainting.hpp",
+            "sha256": "c4c148d636ce46741025cf9c0027c470b7af4bf430600e06b41dbda7c09a2384",
+            "startOrdinal": 5,
+            "declarationCount": 2
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/oilpainting.hpp",
+            "sha256": "2ab0b4e5a8e4a6cdf3b925c58779e2bdc9f729fc657793190d93f63c6f7f4cde",
+            "startOrdinal": 7,
+            "declarationCount": 2
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/tonemap.hpp",
+            "sha256": "b4bedc62e15eedc4e9c2b85968c47b273ae6d8cf695d1d5e20e2c42a846b1018",
+            "startOrdinal": 9,
+            "declarationCount": 10
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/xphoto/include/opencv2/xphoto/white_balance.hpp",
+            "sha256": "30fae76a70bd2a6776fcecf1cc01d54538845e4dad80cdfa61b8a10832bda88f",
+            "startOrdinal": 19,
+            "declarationCount": 28
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/xphoto-upstream-raw.json",
+        "classifications": "compatibility/xphoto-upstream-classifications.json",
+        "mapping": "compatibility/xphoto-upstream-map.txt",
+        "summary": "compatibility/xphoto-upstream-summary.json",
+        "familyInventory": "compatibility/xphoto-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 47,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "5f95301454159c3f7cbfc50e0707f7f52a9c47bc57c7e165c2421e2978cc50cc",
+        "familyInventorySha256": "3a4871a3a766d58bb378eda9be161efeb2e9ed288fabc7c0ad178a1960540676",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false
