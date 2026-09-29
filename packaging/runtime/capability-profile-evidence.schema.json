@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/guojin-yan/OpenCV-CSharp-API/capability-profile-evidence.schema.json",
+  "title": "OpenCvCapabilities full/mini/no-runtime profile evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [ "$schema", "schemaVersion", "status", "sourceCommit", "runner", "runtimePackages", "profiles", "boundary" ],
+  "properties": {
+    "$schema": { "const": "capability-profile-evidence.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "status": { "const": "verified" },
+    "sourceCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "runner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "os", "dotnetSdk", "processArchitecture", "configuration", "managedAssemblySha256", "sampleAssemblySha256" ],
+      "properties": {
+        "os": { "type": "string", "minLength": 1 },
+        "dotnetSdk": { "type": "string", "pattern": "^10\\.0\\." },
+        "processArchitecture": { "const": "X64" },
+        "configuration": { "const": "Release" },
+        "managedAssemblySha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "sampleAssemblySha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "runtimePackages": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": { "$ref": "#/$defs/runtimePackage" }
+    },
+    "profiles": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/profile" }
+    },
+    "boundary": { "type": "string", "minLength": 1 }
+  },
+  "$defs": {
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "name", "bytes", "sha256" ],
+      "properties": {
+        "name": { "type": "string", "pattern": "^(JYPPX\\.OpenCV\\.Native|opencv_[a-z0-9]+500)\\.dll$" },
+        "bytes": { "type": "integer", "minimum": 1 },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "runtimePackage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "profile", "package" ],
+      "properties": {
+        "profile": { "enum": [ "full", "mini" ] },
+        "package": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [ "packageFileName", "packageSha256", "payload" ],
+          "properties": {
+            "packageFileName": { "type": "string", "pattern": "^jyppx\\.opencv\\.runtime\\.win-x64(\\.mini)?\\.5\\.0\\.0\\.nupkg$" },
+            "packageSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+            "payload": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/payload" } }
+          }
+        }
+      }
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "name", "snapshotSha256", "nativeRuntimeState", "requiredModuleStates", "guiBackendState", "dnnBackendStates", "codecWriterStates", "optionalModuleCount", "warningsCount" ],
+      "properties": {
+        "name": { "enum": [ "none", "full", "mini" ] },
+        "snapshotSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "nativeRuntimeState": { "enum": [ "Unknown", "Declared", "Available", "Verified", "Unavailable" ] },
+        "requiredModuleStates": { "type": "array", "minItems": 4, "items": { "type": "string" } },
+        "guiBackendState": { "enum": [ "Unknown", "Declared", "Available", "Verified", "Unavailable" ] },
+        "dnnBackendStates": { "type": "array", "minItems": 8, "items": { "type": "string" } },
+        "codecWriterStates": { "type": "array", "minItems": 8, "items": { "type": "string" } },
+        "optionalModuleCount": { "const": 25 },
+        "warningsCount": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}
