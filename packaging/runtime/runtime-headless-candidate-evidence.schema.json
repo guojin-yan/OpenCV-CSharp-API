@@ -4,7 +4,7 @@
   "title": "Headless runtime candidate negative smoke evidence",
   "type": "object",
   "additionalProperties": false,
-  "required": [ "$schema", "schemaVersion", "status", "sourceCommit", "candidateProfile", "candidatePackageIdentityAllowed", "runner", "runtimePackage", "environment", "frameworks", "verifiedCases", "limitations" ],
+  "required": [ "$schema", "schemaVersion", "status", "sourceCommit", "candidateProfile", "candidatePackageIdentityAllowed", "runner", "runtimePackage", "environment", "frameworks", "videoio", "verifiedCases", "limitations" ],
   "properties": {
     "$schema": { "const": "runtime-headless-candidate-evidence.schema.json" },
     "schemaVersion": { "const": 1 },
@@ -52,7 +52,17 @@
         { "targetFramework": "net10.0", "total": 1, "executed": 1, "passed": 1, "failed": 0, "skipped": 0 }
       ]
     },
-    "verifiedCases": { "type": "array", "const": [ "HighGui NamedWindow deterministic missing-entrypoint or NOT_LINKED path", "HighGui DestroyWindow deterministic missing-entrypoint or NOT_LINKED path", "HighGui ImShow deterministic missing-entrypoint or NOT_LINKED path", "HighGui CreateTrackbar deterministic missing-entrypoint or NOT_LINKED path", "HighGui current UI framework deterministic missing-entrypoint or NOT_LINKED path", "codec PNG encode remains usable after failed HighGui calls" ] },
+    "videoio": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "backends", "cameraBackends", "missingFileOpen" ],
+      "properties": {
+        "backends": { "type": "string" },
+        "cameraBackends": { "type": "string" },
+        "missingFileOpen": { "const": "returned-false" }
+      }
+    },
+    "verifiedCases": { "type": "array", "const": [ "HighGui NamedWindow deterministic missing-entrypoint or NOT_LINKED path", "HighGui DestroyWindow deterministic missing-entrypoint or NOT_LINKED path", "HighGui ImShow deterministic missing-entrypoint or NOT_LINKED path", "HighGui CreateTrackbar deterministic missing-entrypoint or NOT_LINKED path", "HighGui current UI framework deterministic missing-entrypoint or NOT_LINKED path", "codec PNG encode remains usable after failed HighGui calls", "VideoIO missing-file open returns explicit false and disposes cleanly" ] },
     "limitations": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
   }
 }

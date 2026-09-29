@@ -24,6 +24,8 @@ $payload = @($runtimeFiles | ForEach-Object { [ordered]@{ name = $_.Name; bytes 
 $dotnet = Get-Command dotnet -ErrorAction Stop
 $project = Join-Path $repo 'tests/OpenCvSharp.Tests/OpenCvSharp.Tests.csproj'
 $results = [System.Collections.Generic.List[object]]::new()
+$videoioBackends = [System.Collections.Generic.List[string]]::new()
+$videoioCameraBackends = [System.Collections.Generic.List[string]]::new()
 $environmentNames = @('OPENCV_CSHARP_NATIVE_SMOKE','OPENCV_CSHARP_HEADLESS_SMOKE','DISPLAY','WAYLAND_DISPLAY','LD_LIBRARY_PATH','OPENCV_CSHARP_OPENCV_RUNTIME_ROOT')
 $savedEnvironment = @{}
 foreach ($name in $environmentNames) { $savedEnvironment[$name] = [Environment]::GetEnvironmentVariable($name, 'Process') }
@@ -38,8 +40,14 @@ try {
         $env:WAYLAND_DISPLAY = $null
         $env:LD_LIBRARY_PATH = $null
         $env:OPENCV_CSHARP_OPENCV_RUNTIME_ROOT = $null
-        & $dotnet.Source test $project -c Release -f $framework --no-restore --filter 'FullyQualifiedName~HeadlessRuntimeCandidateTests' ("-p:OpenCvNativeRuntimeDir=" + $miniRuntime) --logger ("trx;LogFileName=" + $trxPath) | Out-Host
+        $consoleLines = @(& $dotnet.Source test $project -c Release -f $framework --no-restore --filter 'FullyQualifiedName~HeadlessRuntimeCandidateTests' ("-p:OpenCvNativeRuntimeDir=" + $miniRuntime) --logger ("trx;LogFileName=" + $trxPath) 2>&1)
+        $consoleLines | ForEach-Object { Write-Host ([string]$_) }
         if ($LASTEXITCODE -ne 0) { throw "Headless mini candidate tests failed for $framework with exit code $LASTEXITCODE." }
+        foreach ($line in $consoleLines) {
+            $text = [string]$line
+            if ($text -match '^HEADLESS_VIDEOIO_BACKENDS=(.*)$') { $videoioBackends.Add($Matches[1]) }
+            if ($text -match '^HEADLESS_VIDEOIO_CAMERA_BACKENDS=(.*)$') { $videoioCameraBackends.Add($Matches[1]) }
+        }
         [xml]$trx = Get-Content -LiteralPath $trxPath -Raw
         $counters = $trx.TestRun.ResultSummary.Counters
         if ($null -eq $counters -or [int]$counters.total -ne 1 -or [int]$counters.executed -ne 1 -or [int]$counters.passed -ne 1 -or [int]$counters.failed -ne 0 -or [int]$counters.notExecuted -ne 0) { throw "Headless mini candidate counters drifted for $framework." }
@@ -63,8 +71,9 @@ $evidence = [ordered]@{
     runtimePackage = [ordered]@{ packageFileName = [IO.Path]::GetFileName($miniPackage); packageSha256 = $packageHash; nativeDllCount = 7; payload = $payload }
     environment = [ordered]@{ displayUnset = $true; waylandDisplayUnset = $true; ldLibraryPathUnset = $true; runtimeRootUnset = $true }
     frameworks = @($results)
-    verifiedCases = @('HighGui NamedWindow deterministic missing-entrypoint or NOT_LINKED path','HighGui DestroyWindow deterministic missing-entrypoint or NOT_LINKED path','HighGui ImShow deterministic missing-entrypoint or NOT_LINKED path','HighGui CreateTrackbar deterministic missing-entrypoint or NOT_LINKED path','HighGui current UI framework deterministic missing-entrypoint or NOT_LINKED path','codec PNG encode remains usable after failed HighGui calls')
-    limitations = @('This candidate evidence covers the existing Mini runtime payload, whose native wrapper omits HighGui entrypoints; it does not create a new headless package identity.', 'Full headless requires a separately rebuilt wrapper/profile without HighGui and is intentionally pending.', 'The evidence is Windows x64 only and does not cover VideoIO backend or multi-distro consumer gates.')
+    videoio = [ordered]@{ backends = [string]($videoioBackends -join '||'); cameraBackends = [string]($videoioCameraBackends -join '||'); missingFileOpen = 'returned-false' }
+    verifiedCases = @('HighGui NamedWindow deterministic missing-entrypoint or NOT_LINKED path','HighGui DestroyWindow deterministic missing-entrypoint or NOT_LINKED path','HighGui ImShow deterministic missing-entrypoint or NOT_LINKED path','HighGui CreateTrackbar deterministic missing-entrypoint or NOT_LINKED path','HighGui current UI framework deterministic missing-entrypoint or NOT_LINKED path','codec PNG encode remains usable after failed HighGui calls','VideoIO missing-file open returns explicit false and disposes cleanly')
+    limitations = @('This candidate evidence covers the existing Mini runtime payload, whose native wrapper omits HighGui entrypoints; it does not create a new headless package identity.', 'Full headless requires a separately rebuilt wrapper/profile without HighGui and is intentionally pending.', 'The VideoIO result is a bounded missing-file negative case; camera/network backend availability and multi-distro consumer gates remain pending.')
 }
 $outputFullPath = if ([IO.Path]::IsPathRooted($OutputPath)) { [IO.Path]::GetFullPath($OutputPath) } else { [IO.Path]::GetFullPath((Join-Path $repo ($OutputPath -replace '/', [IO.Path]::DirectorySeparatorChar))) }
 New-Item -ItemType Directory -Force -Path (Split-Path -Parent $outputFullPath) | Out-Null

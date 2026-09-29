@@ -2,6 +2,8 @@ using System;
 using JYPPX.OpenCvSharp.Core;
 using JYPPX.OpenCvSharp.HighGui;
 using JYPPX.OpenCvSharp.ImgCodecs;
+using JYPPX.OpenCvSharp.VideoIO;
+using Xunit.Abstractions;
 using HighGuiCv2 = JYPPX.OpenCvSharp.HighGui.Cv2;
 using ImgCodecsCv2 = JYPPX.OpenCvSharp.ImgCodecs.Cv2;
 
@@ -9,6 +11,13 @@ namespace JYPPX.OpenCvSharp.Tests.Headless
 {
     public sealed class HeadlessRuntimeCandidateTests
     {
+        private readonly ITestOutputHelper output;
+
+        public HeadlessRuntimeCandidateTests(ITestOutputHelper output)
+        {
+            this.output = output;
+        }
+
         [Fact]
         public void MiniProfileRejectsHighGuiAndKeepsCodecUsable()
         {
@@ -32,7 +41,29 @@ namespace JYPPX.OpenCvSharp.Tests.Headless
                 Assert.Equal((byte)'P', encoded[1]);
                 Assert.Equal((byte)'N', encoded[2]);
                 Assert.Equal((byte)'G', encoded[3]);
+
+                using (var capture = new VideoCapture())
+                {
+                    Assert.False(capture.Open("JYPPX-headless-missing-input.avi", VideoCaptureAPIs.Any));
+                    Assert.False(capture.IsOpened);
+                }
+
+                output.WriteLine("HEADLESS_VIDEOIO_BACKENDS=" + DescribeBackends(VideoIORegistry.GetBackends()));
+                output.WriteLine("HEADLESS_VIDEOIO_CAMERA_BACKENDS=" + DescribeBackends(VideoIORegistry.GetCameraBackends()));
+                output.WriteLine("HEADLESS_VIDEOIO_MISSING_FILE_OPEN=returned-false");
             }
+        }
+
+        private static string DescribeBackends(VideoCaptureAPIs[] backends)
+        {
+            var descriptions = new string[backends.Length];
+            for (int index = 0; index < backends.Length; index++)
+            {
+                VideoCaptureAPIs backend = backends[index];
+                descriptions[index] = ((int)backend).ToString() + ":" + VideoIORegistry.GetBackendName(backend)
+                    + (VideoIORegistry.IsBackendBuiltIn(backend) ? ":built-in" : ":plugin");
+            }
+            return string.Join("|", descriptions);
         }
 
         private static void AssertDeterministicUnavailable(Action action)
