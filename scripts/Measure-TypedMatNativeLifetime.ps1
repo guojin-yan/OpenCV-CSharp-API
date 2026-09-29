@@ -43,6 +43,8 @@ $payloadEvidence = @($nativePayload | ForEach-Object {
         sha256 = (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
     }
 })
+$payloadByName = @{}
+foreach ($payloadRow in $payloadEvidence) { $payloadByName[[string]$payloadRow.name] = $payloadRow }
 
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 $archive = [IO.Compression.ZipFile]::OpenRead($packagePath)
@@ -139,10 +141,10 @@ $evidence = [ordered]@{
         openCvVersion = '5.0.0'
         nativeAbiVersion = 1
         nativeModuleFiles = 17
-        wrapperLoaderSha256 = [string]($payloadEvidence | Where-Object name -ceq 'JYPPX.OpenCV.Native.dll' | Select-Object -ExpandProperty sha256)
-        opencvCoreSha256 = [string]($payloadEvidence | Where-Object name -ceq 'opencv_core500.dll' | Select-Object -ExpandProperty sha256)
-        opencvImgProcSha256 = [string]($payloadEvidence | Where-Object name -ceq 'opencv_imgproc500.dll' | Select-Object -ExpandProperty sha256)
-        opencvImgCodecsSha256 = [string]($payloadEvidence | Where-Object name -ceq 'opencv_imgcodecs500.dll' | Select-Object -ExpandProperty sha256)
+        wrapperLoaderSha256 = [string]$payloadByName['JYPPX.OpenCV.Native.dll']['sha256']
+        opencvCoreSha256 = [string]$payloadByName['opencv_core500.dll']['sha256']
+        opencvImgProcSha256 = [string]$payloadByName['opencv_imgproc500.dll']['sha256']
+        opencvImgCodecsSha256 = [string]$payloadByName['opencv_imgcodecs500.dll']['sha256']
     }
     test = [ordered]@{
         class = 'JYPPX.OpenCvSharp.Tests.Core.MatViewTests'
