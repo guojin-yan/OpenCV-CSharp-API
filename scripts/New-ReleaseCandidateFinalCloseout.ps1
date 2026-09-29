@@ -311,6 +311,8 @@ function Get-Record {
         "packaging/performance/codec-typed-mat-benchmark-evidence.schema.json",
         "packaging/performance/codec-writer-native-evidence.json",
         "packaging/performance/codec-writer-native-evidence.schema.json",
+        "packaging/performance/codec-writer-allocation-evidence.json",
+        "packaging/performance/codec-writer-allocation-evidence.schema.json",
         "packaging/performance/video-dnn-benchmark-evidence.json",
         "packaging/performance/video-dnn-benchmark-evidence.schema.json",
         "packaging/performance/perf-001-regression-baseline.json",
@@ -983,7 +985,7 @@ function Get-Record {
         EvidenceReferences = $evidence
         LocalValidation = [ordered]@{
             Status = "locally-validated"
-            InvariantGuardCount = 85
+            InvariantGuardCount = 86
             RequiredChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
             SdkPolicy = ".NET 10 (any installed feature band)"
             PublicationAllowed = $false

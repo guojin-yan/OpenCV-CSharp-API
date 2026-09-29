@@ -35,6 +35,17 @@ internal static class Program
 
             MeasureArray(image, out long arrayAllocations, out long arrayTicks, out int arrayBytes);
             MeasureWriter(image, out long writerAllocations, out long writerTicks, out int writerBytes);
+            MeasureReusedWriter(
+                image,
+                out long reusedWriterAllocations,
+                out long reusedWriterTicks,
+                out int reusedWriterBytes,
+                out int reusedWriterGetSpanCalls,
+                out int reusedWriterAdvanceCalls);
+            if (reusedWriterGetSpanCalls != Iterations || reusedWriterAdvanceCalls != Iterations)
+            {
+                throw new InvalidOperationException("The reusable writer must receive exactly one GetSpan and one Advance per iteration.");
+            }
             byte[] encoded = ImgCodecsCv2.ImEncode(".png", image);
             string encodedHash = Convert.ToHexString(SHA256.HashData(encoded)).ToLowerInvariant();
             using (var decodeStream = new MemoryStream(encoded, writable: false))
@@ -67,6 +78,13 @@ internal static class Program
                     "\"managedAllocatedBytes\":" + writerAllocations.ToString(CultureInfo.InvariantCulture) +
                     ",\"encodedBytes\":" + writerBytes.ToString(CultureInfo.InvariantCulture) +
                     ",\"elapsedTicks\":" + writerTicks.ToString(CultureInfo.InvariantCulture) + "}," +
+                    "\"encodeBufferWriterReused\":{" +
+                    "\"managedAllocatedBytes\":" + reusedWriterAllocations.ToString(CultureInfo.InvariantCulture) +
+                    ",\"encodedBytes\":" + reusedWriterBytes.ToString(CultureInfo.InvariantCulture) +
+                    ",\"elapsedTicks\":" + reusedWriterTicks.ToString(CultureInfo.InvariantCulture) +
+                    ",\"getSpanCalls\":" + reusedWriterGetSpanCalls.ToString(CultureInfo.InvariantCulture) +
+                    ",\"advanceCalls\":" + reusedWriterAdvanceCalls.ToString(CultureInfo.InvariantCulture) +
+                    ",\"writerCapacity\":4096,\"writerReused\":true}," +
                     "\"decodeByteArray\":{" + Metrics(decodeArrayAllocations, decodeArrayTicks, decodeArrayBytes, decodeArrayChecksum) + "}," +
                     "\"decodeSpanWithPreflight\":{" + Metrics(decodeSpanAllocations, decodeSpanTicks, decodeSpanBytes, decodeSpanChecksum) + "}," +
                     "\"decodeStreamWithPreflight\":{" + Metrics(decodeStreamAllocations, decodeStreamTicks, decodeStreamBytes, decodeStreamChecksum) + "}}";
@@ -128,6 +146,42 @@ internal static class Program
         stopwatch.Stop();
         allocated = GC.GetAllocatedBytesForCurrentThread() - before;
         ticks = stopwatch.ElapsedTicks;
+    }
+
+    private static void MeasureReusedWriter(
+        Mat image,
+        out long allocated,
+        out long ticks,
+        out int encodedBytes,
+        out int getSpanCalls,
+        out int advanceCalls)
+    {
+        var destination = new ReusableWriter(4096);
+        for (int i = 0; i < 5; i++)
+        {
+            destination.Reset();
+            ImgCodecsCv2.ImEncodeTo(".png", image, destination);
+        }
+
+        destination.ResetCounters();
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
+        long before = GC.GetAllocatedBytesForCurrentThread();
+        var stopwatch = Stopwatch.StartNew();
+        encodedBytes = 0;
+        for (int i = 0; i < Iterations; i++)
+        {
+            destination.Reset();
+            ImgCodecsCv2.ImEncodeTo(".png", image, destination);
+            encodedBytes = destination.WrittenCount;
+        }
+
+        stopwatch.Stop();
+        allocated = GC.GetAllocatedBytesForCurrentThread() - before;
+        ticks = stopwatch.ElapsedTicks;
+        getSpanCalls = destination.GetSpanCalls;
+        advanceCalls = destination.AdvanceCalls;
     }
 
     private static void MeasureDecodeByteArray(byte[] encoded, out long allocated, out long ticks, out int decodedBytes, out long checksum)
@@ -197,5 +251,65 @@ internal static class Program
     private static string Escape(string value)
     {
         return value.Replace("\\", "\\\\", StringComparison.Ordinal).Replace("\"", "\\\"", StringComparison.Ordinal);
+    }
+
+    private sealed class ReusableWriter : IBufferWriter<byte>
+    {
+        private readonly byte[] buffer;
+
+        public ReusableWriter(int capacity)
+        {
+            buffer = new byte[capacity];
+        }
+
+        public int WrittenCount { get; private set; }
+
+        public int GetSpanCalls { get; private set; }
+
+        public int AdvanceCalls { get; private set; }
+
+        public void Reset()
+        {
+            WrittenCount = 0;
+        }
+
+        public void ResetCounters()
+        {
+            GetSpanCalls = 0;
+            AdvanceCalls = 0;
+        }
+
+        public void Advance(int count)
+        {
+            AdvanceCalls++;
+            if (count < 0 || count > buffer.Length)
+            {
+                throw new ArgumentOutOfRangeException(nameof(count));
+            }
+
+            WrittenCount = count;
+        }
+
+        public Memory<byte> GetMemory(int sizeHint = 0)
+        {
+            ValidateSizeHint(sizeHint);
+            GetSpanCalls++;
+            return buffer;
+        }
+
+        public Span<byte> GetSpan(int sizeHint = 0)
+        {
+            ValidateSizeHint(sizeHint);
+            GetSpanCalls++;
+            return buffer.AsSpan();
+        }
+
+        private void ValidateSizeHint(int sizeHint)
+        {
+            if (sizeHint < 0 || sizeHint > buffer.Length)
+            {
+                throw new ArgumentOutOfRangeException(nameof(sizeHint));
+            }
+        }
     }
 }

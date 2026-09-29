@@ -54,7 +54,7 @@
     },
     "codec": {
       "type": "object",
-      "required": [ "targetFramework", "iterations", "rows", "columns", "inputBytes", "inputSha256", "encodedBytes", "encodedSha256", "encodeByteArray", "encodeBufferWriter", "decodeByteArray", "decodeSpanWithPreflight", "decodeStreamWithPreflight" ],
+      "required": [ "targetFramework", "iterations", "rows", "columns", "inputBytes", "inputSha256", "encodedBytes", "encodedSha256", "encodeByteArray", "encodeBufferWriter", "encodeBufferWriterReused", "decodeByteArray", "decodeSpanWithPreflight", "decodeStreamWithPreflight" ],
       "properties": {
         "targetFramework": { "const": "net8.0" },
         "iterations": { "const": 100 },
@@ -66,6 +66,7 @@
         "encodedSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
         "encodeByteArray": { "$ref": "#/$defs/encodeMetric" },
         "encodeBufferWriter": { "$ref": "#/$defs/encodeMetric" },
+        "encodeBufferWriterReused": { "$ref": "#/$defs/reusedEncodeMetric" },
         "decodeByteArray": { "$ref": "#/$defs/metric" },
         "decodeSpanWithPreflight": { "$ref": "#/$defs/metric" },
         "decodeStreamWithPreflight": { "$ref": "#/$defs/metric" }
@@ -100,6 +101,19 @@
         "managedAllocatedBytes": { "type": "integer", "minimum": 0 },
         "elapsedTicks": { "type": "integer", "minimum": 0 },
         "encodedBytes": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "reusedEncodeMetric": {
+      "type": "object",
+      "required": [ "managedAllocatedBytes", "elapsedTicks", "encodedBytes", "getSpanCalls", "advanceCalls", "writerCapacity", "writerReused" ],
+      "properties": {
+        "managedAllocatedBytes": { "type": "integer", "minimum": 0 },
+        "elapsedTicks": { "type": "integer", "minimum": 0 },
+        "encodedBytes": { "type": "integer", "minimum": 0 },
+        "getSpanCalls": { "type": "integer", "minimum": 0 },
+        "advanceCalls": { "type": "integer", "minimum": 0 },
+        "writerCapacity": { "type": "integer", "minimum": 1 },
+        "writerReused": { "const": true }
       }
     },
     "metric": {

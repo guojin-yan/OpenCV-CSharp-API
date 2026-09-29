@@ -37,6 +37,16 @@ foreach ($path in $decodePaths) {
 foreach ($path in @('encodeByteArray','encodeBufferWriter')) {
     if ([int64]$evidence.codec.$path.managedAllocatedBytes -lt 0 -or [int64]$evidence.codec.$path.elapsedTicks -lt 0 -or [int]$evidence.codec.$path.encodedBytes -ne [int]$evidence.codec.encodedBytes) { throw "Codec metric is invalid: $path" }
 }
+$reusedWriter = $evidence.codec.encodeBufferWriterReused
+if ([int64]$reusedWriter.managedAllocatedBytes -lt 0 -or
+    [int64]$reusedWriter.elapsedTicks -lt 0 -or
+    [int]$reusedWriter.encodedBytes -ne [int]$evidence.codec.encodedBytes -or
+    [int]$reusedWriter.getSpanCalls -ne [int]$evidence.codec.iterations -or
+    [int]$reusedWriter.advanceCalls -ne [int]$evidence.codec.iterations -or
+    [int]$reusedWriter.writerCapacity -lt [int]$evidence.codec.encodedBytes -or
+    [bool]$reusedWriter.writerReused -ne $true) {
+    throw 'Reusable codec writer allocation evidence is invalid.'
+}
 
 $typed = @($evidence.typedMat)
 if ($typed.Count -lt 2) { throw 'Typed Mat evidence must contain net8.0 and net10.0 rows.' }
