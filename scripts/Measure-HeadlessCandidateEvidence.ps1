@@ -63,7 +63,7 @@ $evidence = [ordered]@{
     runtimePackage = [ordered]@{ packageFileName = [IO.Path]::GetFileName($miniPackage); packageSha256 = $packageHash; nativeDllCount = 7; payload = $payload }
     environment = [ordered]@{ displayUnset = $true; waylandDisplayUnset = $true; ldLibraryPathUnset = $true; runtimeRootUnset = $true }
     frameworks = @($results)
-    verifiedCases = @('HighGui NamedWindow deterministic missing-entrypoint or NOT_LINKED path','HighGui current UI framework deterministic missing-entrypoint or NOT_LINKED path','codec PNG encode remains usable after failed HighGui calls')
+    verifiedCases = @('HighGui NamedWindow deterministic missing-entrypoint or NOT_LINKED path','HighGui DestroyWindow deterministic missing-entrypoint or NOT_LINKED path','HighGui ImShow deterministic missing-entrypoint or NOT_LINKED path','HighGui CreateTrackbar deterministic missing-entrypoint or NOT_LINKED path','HighGui current UI framework deterministic missing-entrypoint or NOT_LINKED path','codec PNG encode remains usable after failed HighGui calls')
     limitations = @('This candidate evidence covers the existing Mini runtime payload, whose native wrapper omits HighGui entrypoints; it does not create a new headless package identity.', 'Full headless requires a separately rebuilt wrapper/profile without HighGui and is intentionally pending.', 'The evidence is Windows x64 only and does not cover VideoIO backend or multi-distro consumer gates.')
 }
 $outputFullPath = if ([IO.Path]::IsPathRooted($OutputPath)) { [IO.Path]::GetFullPath($OutputPath) } else { [IO.Path]::GetFullPath((Join-Path $repo ($OutputPath -replace '/', [IO.Path]::DirectorySeparatorChar))) }
