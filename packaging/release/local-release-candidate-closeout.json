@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/7a63f9b12964c4af",
-  "SourceIdentity": "sha256:7a63f9b12964c4af30850a6d0d99461e3b05e459ff49ce0ab235c6ed9af96449",
+  "CandidateId": "local-closeout/sha256/bdf1c7231a8e871d",
+  "SourceIdentity": "sha256:bdf1c7231a8e871ddafd8aead314da44d75c7a26033c7c5e9d839c15563e2bb6",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1818,
-    "Sha256": "7a63f9b12964c4af30850a6d0d99461e3b05e459ff49ce0ab235c6ed9af96449",
+    "FileCount": 1823,
+    "Sha256": "bdf1c7231a8e871ddafd8aead314da44d75c7a26033c7c5e9d839c15563e2bb6",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -857,9 +857,19 @@
       "Length": 1929
     },
     {
+      "Path": "compatibility/upstream-map-catalog.json",
+      "Sha256": "42c34bcbef588fc9c6a05026bc1471b35ae9376cd9c56d7f0998bb38a59dbe2d",
+      "Length": 54578
+    },
+    {
+      "Path": "compatibility/upstream-map-catalog.schema.json",
+      "Sha256": "57eb8f9c8cb9dbd4bd117657b2c9571679dcc6acfc6587803e3fd4178551c6cd",
+      "Length": 5582
+    },
+    {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "29b57175e9181004d169ece6d8d80c43ae4dafc69f83f8d8bd366cb6b8239b13",
-      "Length": 7552
+      "Sha256": "f3c3db07be0be846ac33d79919bcc13439d3c47cad3b9d082d07224c32dcdfe7",
+      "Length": 8167
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -1152,6 +1162,11 @@
       "Length": 5893
     },
     {
+      "Path": "docs/articles/upstream-map-toolchain.md",
+      "Sha256": "c82b04e450c547ada72dea5281efec00bf963d5980e9e67bc698b131de5ebcc7",
+      "Length": 1390
+    },
+    {
       "Path": "docs/articles/v501-modern-api-preview-guide.md",
       "Sha256": "25ba6f256b4d6f5e7e21dfae492e8659977b2829e613f66ad6e271561dd818a9",
       "Length": 7496
@@ -1233,8 +1248,8 @@
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "5090db0fdabf62a7f3ed6d80958cd0ee1d8bbb7285f342b5c1e47882d9e753ee",
-      "Length": 16456
+      "Sha256": "2c00b6520f4f011d10b5780c6650ea1a743ab713ee68ae0ba3b389ad6e3ab224",
+      "Length": 16538
     },
     {
       "Path": "nuget/logo.jpg",
@@ -1738,8 +1753,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "c59e2ded1601f8c719908b34e0631c91197ae584fc1a25cb93481e6c3bd34ede",
-      "Length": 71079
+      "Sha256": "b799b54b137d74d4cda89f4d67d8bcae763268a7fc1424db799e32b76f27cfa4",
+      "Length": 71332
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1750,6 +1765,11 @@
       "Path": "scripts/New-RuntimeInputArtifact.ps1",
       "Sha256": "a143a1a53b6a271a34d45134c8a14579975fba7af74b6ed6c91b5d7e9666b1b3",
       "Length": 22025
+    },
+    {
+      "Path": "scripts/New-UpstreamMapCatalog.ps1",
+      "Sha256": "cf11843bb76092b248fee20afe0112c40a9f92351639a21eea11ba311b0e8988",
+      "Length": 7742
     },
     {
       "Path": "scripts/Test-ApiAbiBaselineContract.ps1",
@@ -2023,8 +2043,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "015e323a04a703474d94d3567d018255e9318162db7ade1172d07bd08b5c33a5",
-      "Length": 68681
+      "Sha256": "b94f22a6f1b3f8fa0150e1d2d0cbab81a6d46584c381086d6f9a1d2c78622dad",
+      "Length": 68934
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -2033,7 +2053,7 @@
     },
     {
       "Path": "scripts/Test-ReleaseChangeControlRecord.ps1",
-      "Sha256": "b4a775e27d5c825e38a4be67d552d95bd238afcd0e058b0005c744a28fa0ea37",
+      "Sha256": "563cd1671b990bc748e545f2876732587f9b3da5bfe2a5765f68da741cb8a41d",
       "Length": 45784
     },
     {
@@ -2105,6 +2125,11 @@
       "Path": "scripts/Test-TypedMatTargetFrameworks.ps1",
       "Sha256": "0a9423257988080d1d4321fdbae3a268e161ef185bdcce1107f99def79751319",
       "Length": 1284
+    },
+    {
+      "Path": "scripts/Test-UpstreamMapCatalog.ps1",
+      "Sha256": "39421cb44ecc593bf2c25dafe633fa49023b04b6299f7ab3d32ca0ae8924b675",
+      "Length": 14716
     },
     {
       "Path": "scripts/Test-V501ChangeLedger.ps1",
@@ -2629,7 +2654,7 @@
   ],
   "LocalValidation": {
     "Status": "locally-validated",
-    "InvariantGuardCount": 90,
+    "InvariantGuardCount": 91,
     "RequiredChecks": [
       "actionlint-1.7.12",
       "api-abi-baseline",
