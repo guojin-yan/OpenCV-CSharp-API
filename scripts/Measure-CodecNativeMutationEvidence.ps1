@@ -189,6 +189,7 @@ function Invoke-NativeMutationFramework {
         failureClass = $failureClass
         exitCode = $exitCode
         passed = $testPassed
+        nativeSmokeEnabled = $true
         durationMilliseconds = [int64]$stopwatch.ElapsedMilliseconds
         fixtureCount = [int]@($manifest.fixtures).Count
         baselineProcessTreeWorkingSetBytes = $baselineWorkingSet
