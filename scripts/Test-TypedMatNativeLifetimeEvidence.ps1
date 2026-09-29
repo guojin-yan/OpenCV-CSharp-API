@@ -25,7 +25,8 @@ if ([int]$evidence.runtime.nativeModuleFiles -ne 17) { throw 'Typed Mat lifetime
 foreach ($hash in @($evidence.runtime.wrapperLoaderSha256,$evidence.runtime.opencvCoreSha256,$evidence.runtime.opencvImgProcSha256,$evidence.runtime.opencvImgCodecsSha256)) { if ([string]$hash -notmatch '^[0-9a-f]{64}$') { throw 'Typed Mat lifetime runtime module hash is malformed.' } }
 if ([string]$evidence.test.class -cne 'JYPPX.OpenCvSharp.Tests.Core.MatViewTests' -or [bool]$evidence.test.nativeSmokeEnabled -ne $true) { throw 'Typed Mat lifetime test identity drifted.' }
 $rows = @($evidence.test.targetFrameworks | Sort-Object framework)
-if (($rows | ForEach-Object { [string]$_.framework } -join '|') -cne 'net10.0|net8.0') { throw 'Typed Mat lifetime framework set drifted.' }
+$frameworkSet = (@($rows | ForEach-Object { [string]$_.framework }) -join '|')
+if ($frameworkSet -cne 'net10.0|net8.0') { throw 'Typed Mat lifetime framework set drifted.' }
 foreach ($row in $rows) {
     foreach ($field in @('total','executed','passed')) { if ([int]$row.$field -ne 9) { throw "Typed Mat lifetime pass count drifted for $($row.framework): $field=$($row.$field)" } }
     foreach ($field in @('failed','skipped','error','timeout','aborted')) { if ([int]$row.$field -ne 0) { throw "Typed Mat lifetime negative count for $($row.framework): $field=$($row.$field)" } }
