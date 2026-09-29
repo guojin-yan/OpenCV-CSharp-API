@@ -4,46 +4,74 @@
   "title": "Typed Mat native lifetime evidence",
   "type": "object",
   "additionalProperties": false,
-  "required": [ "$schema", "schemaVersion", "status", "runner", "runtime", "test", "limitations" ],
+  "required": [ "$schema", "schemaVersion", "status", "sourceCommit", "runner", "runtime", "test", "limitations" ],
   "properties": {
     "$schema": { "const": "typed-mat-native-lifetime-evidence.schema.json" },
-    "schemaVersion": { "const": 1 },
+    "schemaVersion": { "const": 2 },
     "status": { "const": "verified" },
+    "sourceCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
     "runner": {
       "type": "object", "additionalProperties": false,
-      "required": [ "os", "dotnetSdk", "architecture", "nativeRuntimeArtifact", "nativeRuntimeArtifactSha256", "runtimePackage", "runtimePackageSha256", "producerCommit" ],
+      "required": [ "os", "dotnetSdk", "architecture", "configuration", "nativeRuntimePackage", "nativeRuntimePackageSha256", "nativePayload" ],
       "properties": {
-        "os": { "type": "string" }, "dotnetSdk": { "type": "string" }, "architecture": { "const": "x64" },
-        "nativeRuntimeArtifact": { "type": "string" }, "nativeRuntimeArtifactSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
-        "runtimePackage": { "type": "string" }, "runtimePackageSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
-        "producerCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" }
+        "os": { "type": "string", "minLength": 1 },
+        "dotnetSdk": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+" },
+        "architecture": { "const": "x64" },
+        "configuration": { "const": "Release" },
+        "nativeRuntimePackage": { "type": "string", "minLength": 1 },
+        "nativeRuntimePackageSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "nativePayload": {
+          "type": "array", "minItems": 18, "maxItems": 18,
+          "items": {
+            "type": "object", "additionalProperties": false,
+            "required": [ "name", "bytes", "sha256" ],
+            "properties": {
+              "name": { "type": "string", "minLength": 1 },
+              "bytes": { "type": "integer", "minimum": 1 },
+              "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+            }
+          }
+        }
       }
     },
     "runtime": {
       "type": "object", "additionalProperties": false,
       "required": [ "openCvVersion", "nativeAbiVersion", "nativeModuleFiles", "wrapperLoaderSha256", "opencvCoreSha256", "opencvImgProcSha256", "opencvImgCodecsSha256" ],
       "properties": {
-        "openCvVersion": { "const": "5.0.0" }, "nativeAbiVersion": { "const": 1 }, "nativeModuleFiles": { "const": 17 },
-        "wrapperLoaderSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }, "opencvCoreSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
-        "opencvImgProcSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }, "opencvImgCodecsSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+        "openCvVersion": { "const": "5.0.0" },
+        "nativeAbiVersion": { "const": 1 },
+        "nativeModuleFiles": { "const": 17 },
+        "wrapperLoaderSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "opencvCoreSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "opencvImgProcSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "opencvImgCodecsSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
       }
     },
     "test": {
       "type": "object", "additionalProperties": false,
       "required": [ "class", "filter", "nativeSmokeEnabled", "targetFrameworks", "verifiedCases" ],
       "properties": {
-        "class": { "const": "JYPPX.OpenCvSharp.Tests.Core.MatViewTests" }, "filter": { "type": "string" }, "nativeSmokeEnabled": { "const": true },
+        "class": { "const": "JYPPX.OpenCvSharp.Tests.Core.MatViewTests" },
+        "filter": { "type": "string", "minLength": 1 },
+        "nativeSmokeEnabled": { "const": true },
         "targetFrameworks": {
-          "type": "array", "minItems": 2,
+          "type": "array", "minItems": 2, "maxItems": 2,
           "items": {
             "type": "object", "additionalProperties": false,
-            "required": [ "framework", "passed", "failed", "skipped" ],
-            "properties": { "framework": { "enum": [ "net8.0", "net10.0" ] }, "passed": { "const": 9 }, "failed": { "const": 0 }, "skipped": { "const": 0 } }
+            "required": [ "framework", "total", "executed", "passed", "failed", "skipped", "error", "timeout", "aborted", "testAssemblySha256", "apiAssemblySha256" ],
+            "properties": {
+              "framework": { "enum": [ "net8.0", "net10.0" ] },
+              "total": { "const": 9 }, "executed": { "const": 9 }, "passed": { "const": 9 },
+              "failed": { "const": 0 }, "skipped": { "const": 0 }, "error": { "const": 0 },
+              "timeout": { "const": 0 }, "aborted": { "const": 0 },
+              "testAssemblySha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+              "apiAssemblySha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+            }
           }
         },
-        "verifiedCases": { "type": "array", "minItems": 7, "items": { "type": "string" } }
+        "verifiedCases": { "type": "array", "minItems": 7, "items": { "type": "string", "minLength": 1 } }
       }
     },
-    "limitations": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+    "limitations": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
   }
 }

@@ -10,6 +10,6 @@ Run it with a factual native runtime directory:
 dotnet run --project .\tools\TypedMatBenchmark\TypedMatBenchmark.csproj -c Release -p:OpenCvNativeRuntimeDir=C:\path\to\native-runtime
 ```
 
-The harness emits `measured` JSON only when the native runtime is verified. Without it, the guard emits `skipped` and never creates synthetic performance data. Results are runner-specific regression evidence and do not stabilize the public MatView contract by themselves.
+The harness emits `measured` JSON only when the native runtime is verified. Without it, the guard emits `skipped` and never creates synthetic performance data. Native owner/lifetime execution is separately reproducible with [`Measure-TypedMatNativeLifetime.ps1`](../../scripts/Measure-TypedMatNativeLifetime.ps1); its TRX-backed evidence requires nine of nine `MatViewTests` cases on both net8.0 and net10.0 and binds the exact full runtime package plus all 18 native payload hashes. Results are runner-specific regression evidence and do not stabilize the public MatView contract by themselves.
 
-只有在 native runtime 验证成功时，harness 才输出 `measured` JSON。没有 runtime 时输出 `skipped`，不会生成合成性能数据。结果是 runner-specific 回归证据，不能单独将 MatView 晋升为稳定 public contract。
+只有在 native runtime 验证成功时，harness 才输出 `measured` JSON。没有 runtime 时输出 `skipped`，不会生成合成性能数据。native owner/lifetime 执行由 [`Measure-TypedMatNativeLifetime.ps1`](../../scripts/Measure-TypedMatNativeLifetime.ps1) 单独重复验证；其基于 TRX 的证据要求 net8.0 和 net10.0 各 9/9 个 `MatViewTests` 通过，并绑定准确的 full runtime 包和全部 18 个 native payload hash。结果是 runner-specific 回归证据，不能单独将 MatView 晋升为稳定 public contract。

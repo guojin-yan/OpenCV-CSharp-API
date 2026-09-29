@@ -356,6 +356,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Typed Mat native lifetime evidence"
+        Script = Join-Path $repo "scripts/Test-TypedMatNativeLifetimeEvidence.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Async video owner contract"
         Script = Join-Path $repo "scripts/Test-AsyncVideoOwnerContract.ps1"
         Arguments = @("-RepositoryRoot", $repo)

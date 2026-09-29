@@ -527,6 +527,8 @@ function Get-Record {
         "scripts/New-PerformanceRegressionBaseline.ps1",
         "scripts/Test-PerformanceRegressionBaseline.ps1",
         "scripts/Test-TypedMatTargetFrameworks.ps1",
+        "scripts/Measure-TypedMatNativeLifetime.ps1",
+        "scripts/Test-TypedMatNativeLifetimeEvidence.ps1",
         "scripts/Test-AsyncVideoOwnerContract.ps1",
         "scripts/Test-DnnDiagnosticsContract.ps1",
         "scripts/Test-ImageFormatPolicy.ps1",
