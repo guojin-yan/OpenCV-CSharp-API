@@ -531,6 +531,8 @@ function Get-Record {
         "scripts/Measure-ImagePreflightFuzz.ps1",
         "scripts/Test-ImagePreflightFuzzEvidence.ps1",
         "scripts/Test-NativeAotSmoke.ps1",
+        "scripts/Measure-NativeAotSmokeEvidence.ps1",
+        "scripts/Test-NativeAotSmokeEvidence.ps1",
         "scripts/Test-NativeAotTrimWarningLedger.ps1",
         "scripts/Test-PerformanceBenchmarkEvidence.ps1",
         "scripts/Test-VideoDnnBenchmarkEvidence.ps1",
@@ -985,7 +987,7 @@ function Get-Record {
         EvidenceReferences = $evidence
         LocalValidation = [ordered]@{
             Status = "locally-validated"
-            InvariantGuardCount = 86
+            InvariantGuardCount = 87
             RequiredChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
             SdkPolicy = ".NET 10 (any installed feature band)"
             PublicationAllowed = $false

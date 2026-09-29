@@ -4,11 +4,23 @@
   "title": "NativeAOT trim single-file smoke evidence",
   "type": "object",
   "additionalProperties": false,
-  "required": [ "$schema", "schemaVersion", "status", "runtimeIdentifier", "targetFramework", "sdk", "configuration", "publishAot", "publishTrimmed", "trimMode", "publishSingleFile", "nativeRuntimeArtifact", "nativeRuntimeArtifactSha256", "nativeRuntimePackageSha256", "managedPackageVersion", "openCvVersion", "nativeAbiVersion", "publishedFileCount", "nativePayloadFileCount", "nativeSmoke", "encodedBytes", "limitations" ],
+  "required": [ "$schema", "schemaVersion", "status", "sourceCommit", "runner", "runtimeIdentifier", "targetFramework", "sdk", "configuration", "publishAot", "publishTrimmed", "trimMode", "publishSingleFile", "nativeRuntimeArtifact", "nativeRuntimeArtifactSha256", "nativeRuntimePackage", "nativeRuntimePackageSha256", "managedAssemblySha256", "managedPackageVersion", "openCvVersion", "nativeAbiVersion", "publishedFileCount", "nativePayloadFileCount", "nativeSmoke", "encodedBytes", "dnnCpuAvailable", "dnnTargetCount", "nativePayload", "limitations" ],
   "properties": {
     "$schema": { "const": "native-aot-smoke-evidence.schema.json" },
     "schemaVersion": { "const": 1 },
     "status": { "const": "verified" },
+    "sourceCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "runner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "os", "architecture", "dotnet", "configuration" ],
+      "properties": {
+        "os": { "type": "string", "minLength": 1 },
+        "architecture": { "const": "x64" },
+        "dotnet": { "type": "string", "pattern": "^10\\.0\\.\\d+$" },
+        "configuration": { "const": "Release" }
+      }
+    },
     "runtimeIdentifier": { "const": "win-x64" },
     "targetFramework": { "const": "net10.0" },
     "sdk": { "type": "string" },
@@ -19,7 +31,9 @@
     "publishSingleFile": { "const": true },
     "nativeRuntimeArtifact": { "type": "string" },
     "nativeRuntimeArtifactSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "nativeRuntimePackage": { "const": "jyppx.opencv.runtime.win-x64.5.0.0.nupkg" },
     "nativeRuntimePackageSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "managedAssemblySha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
     "managedPackageVersion": { "const": "5.0.0" },
     "openCvVersion": { "const": "5.0.0" },
     "nativeAbiVersion": { "const": 1 },
@@ -27,6 +41,22 @@
     "nativePayloadFileCount": { "type": "integer", "minimum": 1 },
     "nativeSmoke": { "const": "verified" },
     "encodedBytes": { "type": "integer", "minimum": 1 },
+    "dnnCpuAvailable": { "const": true },
+    "dnnTargetCount": { "type": "integer", "minimum": 1 },
+    "nativePayload": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [ "name", "bytes", "sha256" ],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "bytes": { "type": "integer", "minimum": 1 },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+        }
+      }
+    },
     "limitations": { "type": "array", "minItems": 1, "items": { "type": "string" } }
   }
 }

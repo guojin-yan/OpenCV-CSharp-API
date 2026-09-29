@@ -81,6 +81,16 @@ try {
                         })
                 }
             }
+            elseif ($text -match '(?i)\bwarning\b|警告') {
+                $key = "$Phase|UNCLASS|$($text.Trim())"
+                if ($warningKeys.Add($key)) {
+                    [void]$warningRecords.Add([ordered]@{
+                            phase = $Phase
+                            code = 'UNCLASS'
+                            message = $text.Trim()
+                        })
+                }
+            }
         }
     }
 
@@ -128,7 +138,18 @@ try {
         throw 'AOT smoke output unexpectedly contained native runtime payload without explicit runtime input.'
     }
 
-    $process = Start-Process -FilePath $executable -WorkingDirectory $publishRoot -Wait -PassThru -NoNewWindow
+    $stdoutPath = Join-Path $publishRoot 'AotSmoke.stdout.log'
+    $stderrPath = Join-Path $publishRoot 'AotSmoke.stderr.log'
+    $process = Start-Process -FilePath $executable -WorkingDirectory $publishRoot -PassThru -NoNewWindow -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
+    if (-not $process.WaitForExit($TimeoutSeconds * 1000)) {
+        $process.Kill($true)
+        $process.WaitForExit()
+        throw "AOT smoke executable exceeded its $TimeoutSeconds second timeout."
+    }
+    $smokeOutput = if (Test-Path -LiteralPath $stdoutPath -PathType Leaf) { @(Get-Content -LiteralPath $stdoutPath) } else { @() }
+    $smokeError = if (Test-Path -LiteralPath $stderrPath -PathType Leaf) { @(Get-Content -LiteralPath $stderrPath) } else { @() }
+    $smokeOutput | ForEach-Object { Write-Host ([string]$_) }
+    $smokeError | ForEach-Object { [Console]::Error.WriteLine([string]$_) }
     if ($process.ExitCode -ne 0) { throw "AOT smoke executable failed with exit code $($process.ExitCode)." }
 
     $ledgerPath = Resolve-OptionalOutputPath -Path $WarningLedgerPath
