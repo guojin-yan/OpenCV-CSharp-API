@@ -2,11 +2,13 @@ param(
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [Parameter(Mandatory)][string]$MiniNativeRuntimeDir,
     [Parameter(Mandatory)][string]$MiniRuntimePackagePath,
-    [string]$OutputPath = 'packaging/runtime/runtime-headless-candidate-evidence.json'
+    [string]$OutputPath = 'packaging/runtime/runtime-headless-candidate-evidence.json',
+    [int]$TimeoutSeconds = 60
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+if ($TimeoutSeconds -lt 10 -or $TimeoutSeconds -gt 600) { throw 'TimeoutSeconds must be between 10 and 600.' }
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 if (-not [Runtime.InteropServices.RuntimeInformation]::IsOSPlatform([Runtime.InteropServices.OSPlatform]::Windows) -or [Runtime.InteropServices.RuntimeInformation]::OSArchitecture -ne [Runtime.InteropServices.Architecture]::X64) { throw 'Headless candidate evidence requires Windows x64.' }
 $status = @(& git -C $repo status --porcelain 2>$null)
@@ -31,31 +33,62 @@ $savedEnvironment = @{}
 foreach ($name in $environmentNames) { $savedEnvironment[$name] = [Environment]::GetEnvironmentVariable($name, 'Process') }
 $temporaryRoot = Join-Path ([IO.Path]::GetTempPath()) ('opencv-headless-candidate-' + [Guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Force -Path $temporaryRoot | Out-Null
+
+function Invoke-HeadlessFramework {
+    param([Parameter(Mandatory)][string]$Framework)
+    $buildArguments = @('build', $project, '-c', 'Release', '-f', $Framework, '--no-restore', ('-p:OpenCvNativeRuntimeDir=' + $miniRuntime))
+    & $dotnet.Source @buildArguments | Out-Host
+    if ($LASTEXITCODE -ne 0) { throw "Headless candidate build failed for $Framework with exit code $LASTEXITCODE." }
+    $trxPath = Join-Path $temporaryRoot ("Headless-$Framework.trx")
+    $startInfo = [Diagnostics.ProcessStartInfo]::new()
+    $startInfo.FileName = $dotnet.Source
+    $startInfo.WorkingDirectory = $repo
+    $startInfo.UseShellExecute = $false
+    $startInfo.RedirectStandardOutput = $true
+    $startInfo.RedirectStandardError = $true
+    foreach ($argument in @('test', $project, '-c', 'Release', '-f', $Framework, '--no-restore', '--no-build', '--filter', 'FullyQualifiedName~HeadlessRuntimeCandidateTests', ('-p:OpenCvNativeRuntimeDir=' + $miniRuntime), '--logger', ('trx;LogFileName=' + $trxPath))) { [void]$startInfo.ArgumentList.Add($argument) }
+    foreach ($name in $environmentNames) { [void]$startInfo.Environment.Remove($name) }
+    $startInfo.Environment['OPENCV_CSHARP_NATIVE_SMOKE'] = '1'
+    $startInfo.Environment['OPENCV_CSHARP_HEADLESS_SMOKE'] = '1'
+    $process = [Diagnostics.Process]::new()
+    $process.StartInfo = $startInfo
+    if (-not $process.Start()) { throw "Could not start headless candidate test process for $Framework." }
+    $stdoutTask = $process.StandardOutput.ReadToEndAsync()
+    $stderrTask = $process.StandardError.ReadToEndAsync()
+    $stopwatch = [Diagnostics.Stopwatch]::StartNew()
+    $timedOut = $false
+    while (-not $process.HasExited) {
+        if ($stopwatch.Elapsed.TotalSeconds -ge $TimeoutSeconds) {
+            $timedOut = $true
+            try { $process.Kill($true) } catch { }
+            break
+        }
+        Start-Sleep -Milliseconds 100
+    }
+    try { $process.WaitForExit() } catch { }
+    $stopwatch.Stop()
+    $stdout = $stdoutTask.GetAwaiter().GetResult()
+    $stderr = $stderrTask.GetAwaiter().GetResult()
+    $exitCode = if ($timedOut) { -1 } else { [int]$process.ExitCode }
+    $process.Dispose()
+    $failureClass = if ($timedOut) { 'hang' } elseif ($exitCode -eq 0) { 'clean' } else { 'test-failure' }
+    [xml]$trx = Get-Content -LiteralPath $trxPath -Raw
+    $counters = $trx.TestRun.ResultSummary.Counters
+    if ($null -eq $counters -or [int]$counters.total -ne 1 -or [int]$counters.executed -ne 1 -or [int]$counters.passed -ne 1 -or [int]$counters.failed -ne 0 -or [int]$counters.notExecuted -ne 0) { throw "Headless mini candidate counters drifted for $Framework." }
+    $testResult = @($trx.TestRun.Results.UnitTestResult | Select-Object -First 1)
+    $testOutput = if ($testResult.Count -eq 1 -and $null -ne $testResult[0].Output) { [string]$testResult[0].Output.StdOut } else { '' }
+    [ordered]@{
+        row = [ordered]@{ targetFramework = $Framework; total = [int]$counters.total; executed = [int]$counters.executed; passed = [int]$counters.passed; failed = [int]$counters.failed; skipped = [int]$counters.notExecuted; timedOut = $timedOut; failureClass = $failureClass; durationMilliseconds = [int64]$stopwatch.ElapsedMilliseconds }
+        output = $testOutput
+    }
+}
+
 try {
     foreach ($framework in @('net8.0','net10.0')) {
-        $trxPath = Join-Path $temporaryRoot ("Headless-$framework.trx")
-        $env:OPENCV_CSHARP_NATIVE_SMOKE = '1'
-        $env:OPENCV_CSHARP_HEADLESS_SMOKE = '1'
-        $env:DISPLAY = $null
-        $env:WAYLAND_DISPLAY = $null
-        $env:LD_LIBRARY_PATH = $null
-        $env:OPENCV_CSHARP_OPENCV_RUNTIME_ROOT = $null
-        $consoleLines = @(& $dotnet.Source test $project -c Release -f $framework --no-restore --filter 'FullyQualifiedName~HeadlessRuntimeCandidateTests' ("-p:OpenCvNativeRuntimeDir=" + $miniRuntime) --logger ("trx;LogFileName=" + $trxPath) 2>&1)
-        $consoleLines | ForEach-Object { Write-Host ([string]$_) }
-        if ($LASTEXITCODE -ne 0) { throw "Headless mini candidate tests failed for $framework with exit code $LASTEXITCODE." }
-        foreach ($line in $consoleLines) {
-            $text = [string]$line
-            if ($text -match '^HEADLESS_VIDEOIO_BACKENDS=(.*)$') { $videoioBackends.Add($Matches[1]) }
-            if ($text -match '^HEADLESS_VIDEOIO_CAMERA_BACKENDS=(.*)$') { $videoioCameraBackends.Add($Matches[1]) }
-        }
-        [xml]$trx = Get-Content -LiteralPath $trxPath -Raw
-        $counters = $trx.TestRun.ResultSummary.Counters
-        if ($null -eq $counters -or [int]$counters.total -ne 1 -or [int]$counters.executed -ne 1 -or [int]$counters.passed -ne 1 -or [int]$counters.failed -ne 0 -or [int]$counters.notExecuted -ne 0) { throw "Headless mini candidate counters drifted for $framework." }
-        $testResult = @($trx.TestRun.Results.UnitTestResult | Select-Object -First 1)
-        $testOutput = if ($testResult.Count -eq 1 -and $null -ne $testResult[0].Output) { [string]$testResult[0].Output.StdOut } else { '' }
-        if ($testOutput -match '(?m)^HEADLESS_VIDEOIO_BACKENDS=(.*)$') { $videoioBackends.Add($Matches[1].Trim()) }
-        if ($testOutput -match '(?m)^HEADLESS_VIDEOIO_CAMERA_BACKENDS=(.*)$') { $videoioCameraBackends.Add($Matches[1].Trim()) }
-        $results.Add([ordered]@{ targetFramework = $framework; total = [int]$counters.total; executed = [int]$counters.executed; passed = [int]$counters.passed; failed = [int]$counters.failed; skipped = [int]$counters.notExecuted })
+        $run = Invoke-HeadlessFramework -Framework $framework
+        $results.Add($run.row)
+        if ($run.output -match '(?m)^HEADLESS_VIDEOIO_BACKENDS=(.*)$') { $videoioBackends.Add($Matches[1].Trim()) }
+        if ($run.output -match '(?m)^HEADLESS_VIDEOIO_CAMERA_BACKENDS=(.*)$') { $videoioCameraBackends.Add($Matches[1].Trim()) }
     }
 }
 finally {
@@ -72,6 +105,7 @@ $evidence = [ordered]@{
     candidateProfile = 'mini-headless-candidate'
     candidatePackageIdentityAllowed = $false
     runner = [ordered]@{ os = [Runtime.InteropServices.RuntimeInformation]::OSDescription; architecture = 'x64'; dotnet = ((& $dotnet.Source --version 2>$null) | Select-Object -First 1).Trim(); configuration = 'Release' }
+    timeoutSeconds = $TimeoutSeconds
     runtimePackage = [ordered]@{ packageFileName = [IO.Path]::GetFileName($miniPackage); packageSha256 = $packageHash; nativeDllCount = 7; payload = $payload }
     environment = [ordered]@{ displayUnset = $true; waylandDisplayUnset = $true; ldLibraryPathUnset = $true; runtimeRootUnset = $true }
     frameworks = @($results)

@@ -4,7 +4,7 @@
   "title": "Headless runtime candidate negative smoke evidence",
   "type": "object",
   "additionalProperties": false,
-  "required": [ "$schema", "schemaVersion", "status", "sourceCommit", "candidateProfile", "candidatePackageIdentityAllowed", "runner", "runtimePackage", "environment", "frameworks", "videoio", "verifiedCases", "limitations" ],
+  "required": [ "$schema", "schemaVersion", "status", "sourceCommit", "candidateProfile", "candidatePackageIdentityAllowed", "runner", "timeoutSeconds", "runtimePackage", "environment", "frameworks", "videoio", "verifiedCases", "limitations" ],
   "properties": {
     "$schema": { "const": "runtime-headless-candidate-evidence.schema.json" },
     "schemaVersion": { "const": 1 },
@@ -12,6 +12,7 @@
     "sourceCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
     "candidateProfile": { "const": "mini-headless-candidate" },
     "candidatePackageIdentityAllowed": { "const": false },
+    "timeoutSeconds": { "type": "integer", "minimum": 10, "maximum": 600 },
     "runner": {
       "type": "object",
       "additionalProperties": false,
@@ -47,10 +48,24 @@
     },
     "frameworks": {
       "type": "array",
-      "const": [
-        { "targetFramework": "net8.0", "total": 1, "executed": 1, "passed": 1, "failed": 0, "skipped": 0 },
-        { "targetFramework": "net10.0", "total": 1, "executed": 1, "passed": 1, "failed": 0, "skipped": 0 }
-      ]
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [ "targetFramework", "total", "executed", "passed", "failed", "skipped", "timedOut", "failureClass", "durationMilliseconds" ],
+        "properties": {
+          "targetFramework": { "enum": [ "net8.0", "net10.0" ] },
+          "total": { "const": 1 },
+          "executed": { "const": 1 },
+          "passed": { "const": 1 },
+          "failed": { "const": 0 },
+          "skipped": { "const": 0 },
+          "timedOut": { "const": false },
+          "failureClass": { "const": "clean" },
+          "durationMilliseconds": { "type": "integer", "minimum": 0 }
+        }
+      }
     },
     "videoio": {
       "type": "object",
