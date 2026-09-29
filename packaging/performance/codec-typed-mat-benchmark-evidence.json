@@ -7,15 +7,15 @@
     "architecture": "x64",
     "dotnet": "10.0.401",
     "configuration": "Release",
-    "sourceCommit": "c45a03ad3833716e944c4521884ee0a49c566abd",
+    "sourceCommit": "d927d30002f94c69ade8a604f8ac1bb533b5fbd5",
     "managedAssemblies": [
       {
         "targetFramework": "net8.0",
-        "sha256": "86076f5b5e17dacf094cd4631ee666ed329c63a06c1e3fb16de77ea36a782ad0"
+        "sha256": "76c517050d1fb08da28a5f2eb7542d3309e0968bbfc88be56d83ed423a633ada"
       },
       {
         "targetFramework": "net10.0",
-        "sha256": "88a3dc04a8b7ec860dd2002d20d2b13426f1577a328439381048dd2ec0989a34"
+        "sha256": "f4f1e3730fd8d492217e42149280bd2c9faa1f87c9d7bdfd8c059e5ee58c759f"
       }
     ],
     "nativeRuntimePackage": "jyppx.opencv.runtime.win-x64.5.0.0.nupkg",
@@ -128,17 +128,17 @@
     "encodeByteArray": {
       "managedAllocatedBytes": 37640,
       "encodedBytes": 320,
-      "elapsedTicks": 28883
+      "elapsedTicks": 71415
     },
     "encodeBufferWriter": {
       "managedAllocatedBytes": 40840,
       "encodedBytes": 320,
-      "elapsedTicks": 28289
+      "elapsedTicks": 66585
     },
     "encodeBufferWriterReused": {
       "managedAllocatedBytes": 3240,
       "encodedBytes": 320,
-      "elapsedTicks": 30957,
+      "elapsedTicks": 68689,
       "getSpanCalls": 100,
       "advanceCalls": 100,
       "writerCapacity": 4096,
@@ -148,19 +148,19 @@
       "managedAllocatedBytes": 7240,
       "decodedBytes": 12288,
       "checksum": 156672000,
-      "elapsedTicks": 88697
+      "elapsedTicks": 60861
     },
     "decodeSpanWithPreflight": {
       "managedAllocatedBytes": 60840,
       "decodedBytes": 12288,
       "checksum": 156672000,
-      "elapsedTicks": 61714
+      "elapsedTicks": 49230
     },
     "decodeStreamWithPreflight": {
       "managedAllocatedBytes": 8296040,
       "decodedBytes": 12288,
       "checksum": 156672000,
-      "elapsedTicks": 85159
+      "elapsedTicks": 73007
     }
   },
   "typedMat": [
@@ -173,17 +173,17 @@
       "inputSha256": "70986737435b5f89e119558ba7d29e5bb8768dd18c16beaaaa09298bf586b275",
       "rowAccessor": {
         "managedAllocatedBytes": 40,
-        "elapsedTicks": 12315,
+        "elapsedTicks": 9696,
         "checksum": 10077200
       },
       "matView": {
         "managedAllocatedBytes": 10440,
-        "elapsedTicks": 78562,
+        "elapsedTicks": 75509,
         "checksum": 10077200
       },
       "readOnlyMatView": {
         "managedAllocatedBytes": 12840,
-        "elapsedTicks": 75356,
+        "elapsedTicks": 78576,
         "checksum": 10077200
       }
     },
@@ -196,17 +196,17 @@
       "inputSha256": "70986737435b5f89e119558ba7d29e5bb8768dd18c16beaaaa09298bf586b275",
       "rowAccessor": {
         "managedAllocatedBytes": 40,
-        "elapsedTicks": 10863,
+        "elapsedTicks": 10317,
         "checksum": 10077200
       },
       "matView": {
         "managedAllocatedBytes": 10440,
-        "elapsedTicks": 62606,
+        "elapsedTicks": 57251,
         "checksum": 10077200
       },
       "readOnlyMatView": {
         "managedAllocatedBytes": 12840,
-        "elapsedTicks": 88253,
+        "elapsedTicks": 59453,
         "checksum": 10077200
       }
     }
