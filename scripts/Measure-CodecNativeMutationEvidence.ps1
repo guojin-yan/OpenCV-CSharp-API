@@ -107,6 +107,9 @@ function Invoke-NativeMutationFramework {
         [Parameter(Mandatory)][string]$RuntimePath,
         [Parameter(Mandatory)][string]$ResultsDirectory
     )
+    $buildArguments = @('build', $project, '-c', 'Release', '-f', $Framework, '--no-restore', ('-p:OpenCvNativeRuntimeDir=' + $RuntimePath))
+    & $dotnet.Source @buildArguments | Out-Host
+    if ($LASTEXITCODE -ne 0) { throw "Native codec mutation build failed for $Profile/$Framework with exit code $LASTEXITCODE." }
     $startInfo = [Diagnostics.ProcessStartInfo]::new()
     $startInfo.FileName = $dotnet.Source
     $startInfo.WorkingDirectory = $repo
@@ -114,7 +117,7 @@ function Invoke-NativeMutationFramework {
     $startInfo.RedirectStandardOutput = $true
     $startInfo.RedirectStandardError = $true
     foreach ($argument in @(
-            'test', $project, '-c', 'Release', '-f', $Framework, '--no-restore',
+            'test', $project, '-c', 'Release', '-f', $Framework, '--no-restore', '--no-build',
             '--filter', 'FullyQualifiedName~ImDecodeDeterministicMutationCorpusStaysWithinNativeBoundary',
             ('-p:OpenCvNativeRuntimeDir=' + $RuntimePath), '--logger', ('trx;LogFileName=NativeMutation-' + $Profile + '-' + $Framework + '.trx'),
             '--results-directory', $ResultsDirectory, '--verbosity', 'minimal')) {
