@@ -51,6 +51,10 @@ try {
         [xml]$trx = Get-Content -LiteralPath $trxPath -Raw
         $counters = $trx.TestRun.ResultSummary.Counters
         if ($null -eq $counters -or [int]$counters.total -ne 1 -or [int]$counters.executed -ne 1 -or [int]$counters.passed -ne 1 -or [int]$counters.failed -ne 0 -or [int]$counters.notExecuted -ne 0) { throw "Headless mini candidate counters drifted for $framework." }
+        $testResult = @($trx.TestRun.Results.UnitTestResult | Select-Object -First 1)
+        $testOutput = if ($testResult.Count -eq 1 -and $null -ne $testResult[0].Output) { [string]$testResult[0].Output.StdOut } else { '' }
+        if ($testOutput -match '(?m)^HEADLESS_VIDEOIO_BACKENDS=(.*)$') { $videoioBackends.Add($Matches[1].Trim()) }
+        if ($testOutput -match '(?m)^HEADLESS_VIDEOIO_CAMERA_BACKENDS=(.*)$') { $videoioCameraBackends.Add($Matches[1].Trim()) }
         $results.Add([ordered]@{ targetFramework = $framework; total = [int]$counters.total; executed = [int]$counters.executed; passed = [int]$counters.passed; failed = [int]$counters.failed; skipped = [int]$counters.notExecuted })
     }
 }
