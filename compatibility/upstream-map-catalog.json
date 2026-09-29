@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 15,
+  "moduleCount": 16,
   "maps": [
     {
       "id": "calib3d",
@@ -1190,6 +1190,202 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "5f95301454159c3f7cbfc50e0707f7f52a9c47bc57c7e165c2421e2978cc50cc",
         "familyInventorySha256": "3a4871a3a766d58bb378eda9be161efeb2e9ed288fabc7c0ad178a1960540676",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "ximgproc",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/XImgProcUpstreamMap",
+      "extractorScript": "tools/XImgProcUpstreamMap/extract_ximgproc.py",
+      "generationScript": "scripts/Generate-XImgProcUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-XImgProcUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/ximgproc.hpp contrib public header closure across 26 parser-emitted XImgProc headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc.hpp",
+          "sha256": "8271392f21eabf56ce89faaaf1a93b7113c6b671955f0e77902c2e8efb70c5c7"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/brightedges.hpp",
+            "sha256": "298434f38dc179f2d52015c615b224396925f2f99790b918d3c0cb95a963512e",
+            "startOrdinal": 0,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/color_match.hpp",
+            "sha256": "724929e4e2f09ddc9098197bd7b6495005b7c538bbac40189103fab943c708be",
+            "startOrdinal": 0,
+            "declarationCount": 6
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/deriche_filter.hpp",
+            "sha256": "00c717702f3c5bdc91e93dbfd036d4f740443bc356ee462394f019601f130a8e",
+            "startOrdinal": 6,
+            "declarationCount": 2
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/disparity_filter.hpp",
+            "sha256": "fee6a52b1dd930809027dcab7dec552e2e80113fb60e06445474e48ab81b9231",
+            "startOrdinal": 8,
+            "declarationCount": 20
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/edge_drawing.hpp",
+            "sha256": "1f6b627c3e9f3a308c210fefc9ab968d05297e607f0d6a8e7a741740bd444f1e",
+            "startOrdinal": 28,
+            "declarationCount": 15
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/edge_filter.hpp",
+            "sha256": "6abf61c4c4798fffc939d42c1dc77b6ce01f002f5596d996c08430d1ac0a9146",
+            "startOrdinal": 43,
+            "declarationCount": 27
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/edgeboxes.hpp",
+            "sha256": "7ce02b969ec1a3f4adca5d8124795b5da395cca4433ab39a781929cbaa06f288",
+            "startOrdinal": 70,
+            "declarationCount": 27
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/edgepreserving_filter.hpp",
+            "sha256": "7c050328a2534dd507cdce06abd5fd68c844a96bbe46dc8745bc3b2b6688c5a7",
+            "startOrdinal": 97,
+            "declarationCount": 1
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/estimated_covariance.hpp",
+            "sha256": "126eee3143567287c133c87fa901a3b31ec242e39d0a0d600fe5e7792b583fac",
+            "startOrdinal": 98,
+            "declarationCount": 1
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/fast_hough_transform.hpp",
+            "sha256": "b70ffac357af762cd8012e40de286b6df42c19390ed3ed35ed7cb9a4f35db27b",
+            "startOrdinal": 99,
+            "declarationCount": 5
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/fast_line_detector.hpp",
+            "sha256": "059aef6fa96d9c72c1351ba02e72bf4522b2540874e20a8b12e7b4326ac426d2",
+            "startOrdinal": 104,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/find_ellipses.hpp",
+            "sha256": "c042c2946abf978685fc155c6b84965ea52e75c7bc8df641cf7dba8fcd047965",
+            "startOrdinal": 108,
+            "declarationCount": 1
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/fourier_descriptors.hpp",
+            "sha256": "71401bf9c73bfa49b673cd1c55465f16c8b8b89afd9190ed1ff82dddd14fe769",
+            "startOrdinal": 109,
+            "declarationCount": 10
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/lsc.hpp",
+            "sha256": "99a86fcdabba3c18637168438ada2e64c44cd4e0cc2f5ab6ee651ac38324b7be",
+            "startOrdinal": 119,
+            "declarationCount": 7
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/paillou_filter.hpp",
+            "sha256": "39ca45703a7bd0faeeb0d8c8f5988a4fadd95a84e07413d4e2b1bfb9d0275359",
+            "startOrdinal": 126,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/peilin.hpp",
+            "sha256": "3e2820906e9844fe83845b45e740680de261efc3100218dc8878a8df83f20432",
+            "startOrdinal": 126,
+            "declarationCount": 1
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/radon_transform.hpp",
+            "sha256": "39125fd07605fb92e0a66a808190275486cea2a9e793de62b4141eb9d20386fd",
+            "startOrdinal": 127,
+            "declarationCount": 1
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/ridgefilter.hpp",
+            "sha256": "98d7e2fd8e76b4d62b2e612a03516c7b09c7f18d732955aa99b5d1ac3cc6a724",
+            "startOrdinal": 128,
+            "declarationCount": 3
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/run_length_morphology.hpp",
+            "sha256": "04753bbcd68da5450b63deb244dcfe00a2b78c0cc8b64579787b5f163112656f",
+            "startOrdinal": 131,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/scansegment.hpp",
+            "sha256": "5ce725a0e560f70bfba00d8da534bef7f14652040e1a40e673241c9567d249f6",
+            "startOrdinal": 131,
+            "declarationCount": 6
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/seeds.hpp",
+            "sha256": "f5c52c82f76069fdb025a88769faab6e6db96f8cb79a13c57ec375f40c13a4ce",
+            "startOrdinal": 137,
+            "declarationCount": 6
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/segmentation.hpp",
+            "sha256": "ce2c98297ae51360590191ec826f4f63ce654cacc017756dbd51aec183603b75",
+            "startOrdinal": 143,
+            "declarationCount": 42
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/slic.hpp",
+            "sha256": "e081f71f73e6c6a9c86e486bcfbb4d9ecdca0a51e3b885c097580ffbcd1a6e03",
+            "startOrdinal": 185,
+            "declarationCount": 8
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/sparse_match_interpolator.hpp",
+            "sha256": "efb3e3905cc39d79a438d8f4ecc8b33217e9482ed9abb66322a51a6300a7f003",
+            "startOrdinal": 193,
+            "declarationCount": 46
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/structured_edge_detection.hpp",
+            "sha256": "4d4b773245a020f9ba350a53629edd16ecfa923504ea7c82e5eae92b7186c0b1",
+            "startOrdinal": 239,
+            "declarationCount": 8
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/weighted_median_filter.hpp",
+            "sha256": "7ed2cc0bc4e2a37cbcc2ebf38b458fedc07cd9d9040981d0e107dfafc3e00106",
+            "startOrdinal": 247,
+            "declarationCount": 2
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/ximgproc-upstream-raw.json",
+        "classifications": "compatibility/ximgproc-upstream-classifications.json",
+        "mapping": "compatibility/ximgproc-upstream-map.txt",
+        "summary": "compatibility/ximgproc-upstream-summary.json",
+        "familyInventory": "compatibility/ximgproc-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 249,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "3ff4c561d2ea50b155c35ca8678b54ac1c0839c123dff8d889b204eb440311d8",
+        "familyInventorySha256": "f420634500533c2b3cfca72a8a609ecd7d3c74391ae6da3ed2b5ced6445246ed",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

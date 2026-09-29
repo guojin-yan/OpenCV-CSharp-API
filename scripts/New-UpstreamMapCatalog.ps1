@@ -22,7 +22,8 @@ $definitions = @(
     [pscustomobject]@{ Id = 'tracking'; Tool = 'Tracking'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'video'; Tool = 'Video'; Repository = 'opencv' },
     [pscustomobject]@{ Id = 'videoio'; Tool = 'VideoIO'; Repository = 'opencv' },
-    [pscustomobject]@{ Id = 'xphoto'; Tool = 'XPhoto'; Repository = 'opencv_contrib' }
+    [pscustomobject]@{ Id = 'xphoto'; Tool = 'XPhoto'; Repository = 'opencv_contrib' },
+    [pscustomobject]@{ Id = 'ximgproc'; Tool = 'XImgProc'; Repository = 'opencv_contrib' }
 )
 
 function Get-HeaderRows {
