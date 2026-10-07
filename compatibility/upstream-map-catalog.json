@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 22,
+  "moduleCount": 23,
   "maps": [
     {
       "id": "calib3d",
@@ -1800,6 +1800,52 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "b2d5a5c034c4ee393797ecce430d1b5e9237ff633d49344be2232ab31c002023",
         "familyInventorySha256": "6cf1ed27e9ca6b6bbe11d29078051295c2d42f5a0fcb924e218d76573d2297b3",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "freetype",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/FreetypeUpstreamMap",
+      "extractorScript": "tools/FreetypeUpstreamMap/extract_freetype.py",
+      "generationScript": "scripts/Generate-FreetypeUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-FreetypeUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/freetype.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/freetype/include/opencv2/freetype.hpp",
+          "sha256": "76d36138fe022c62342e4ee965b291fab7bd51cdebb43031f09b3db9ed33124e"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/freetype/include/opencv2/freetype.hpp",
+            "sha256": "76d36138fe022c62342e4ee965b291fab7bd51cdebb43031f09b3db9ed33124e",
+            "startOrdinal": 0,
+            "declarationCount": 7
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/freetype-upstream-raw.json",
+        "classifications": "compatibility/freetype-upstream-classifications.json",
+        "mapping": "compatibility/freetype-upstream-map.txt",
+        "summary": "compatibility/freetype-upstream-summary.json",
+        "familyInventory": "compatibility/freetype-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 7,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "dc0ed6274f60bf39a86fff6ef8b43dfe4bb008e59184bf58d8df84a86f1d1c13",
+        "familyInventorySha256": "ec8c423ea4aa639990aea1d144c0d051e340d21a761e794855782188fcf676c1",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

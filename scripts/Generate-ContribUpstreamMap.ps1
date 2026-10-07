@@ -1,5 +1,5 @@
 param(
-    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor')][string]$Module,
+    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype')][string]$Module,
     [Parameter(Mandatory)][string]$DisplayName,
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [switch]$Check
@@ -87,6 +87,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
 }
 
 function GetManaged([string]$Owner, [string]$Name, [string]$Identity) {
+    if ($Module -eq 'freetype') { return @() }
     $typeName = GetManagedType $Owner $Name
     if ($Module -eq 'quality') {
         if ($Name -in @('clear','empty','getQualityMap') -or ($Name -eq 'compute' -and $Identity -match '\((?:Mat img|Mat cmp)\)')) { $typeName = 'QualityBase' }
@@ -123,7 +124,9 @@ function GetNative([object]$Parts, [string]$Identity) {
     $owner = [string]$Parts.Owner
     $name = [string]$Parts.Name
     $result = @()
-    if ($Module -eq 'bgsegm') {
+    if ($Module -eq 'freetype') {
+        return @()
+    } elseif ($Module -eq 'bgsegm') {
         if ($name -eq 'apply' -and $owner -match '^BackgroundSubtractor(MOG|GMG|CNT)$') {
             if ($Identity -match 'knownForegroundMask') { $result = @('jyppx_ocv_bgsegm_background_subtractor_apply_with_known_foreground') } else { $result = @('jyppx_ocv_bgsegm_background_subtractor_apply') }
         } elseif ($name -eq 'getBackgroundImage' -and $owner -match '^BackgroundSubtractor(MOG|GMG|CNT)$') {
@@ -321,6 +324,7 @@ foreach ($decl in @($raw.declarations)) {
         $native = @(GetNative $parts ([string]$decl.identity))
         if ($managed.Count -gt 0 -and $native.Count -gt 0) { $classification = 'implemented'; $reason = "Explicit $DisplayName declaration-to-symbol mapping and exact managed baseline evidence are present." }
         else { $classification = 'intentionally-omitted'; $reason = if ($native.Count -eq 0) { "No native $DisplayName wrapper entrypoint is mapped for this parser declaration in the current ABI." } else { "A native $DisplayName entrypoint exists, but no exact matching managed member is present in the current baseline." } }
+        if ($Module -eq 'freetype') { $reason = 'The contrib FreeType2 surface depends on external FreeType/Harfbuzz and has no native wrapper entrypoint or managed API in the current package.' }
         if ($Module -eq 'quality' -and [string]$decl.identity -match 'cv\.quality\.QualityBRISQUE\.(?:create|compute).*model_file_path') { $reason += ' BRISQUE operation requires caller-supplied model and range files; the repository bundles neither asset.' }
         if ($Module -eq 'quality' -and [string]$decl.identity -match 'Ptr_ml_SVM') { $reason += ' The upstream overload takes an ML::SVM object and range Mat; the current wrapper exposes the path-based overload only.' }
         if ($Module -eq 'face' -and [string]$decl.identity -match 'Facemark\.(?:fit|loadModel)|createFacemark(?:LBF|AAM|Kazemi)') { $reason += ' Facemark fitting requires caller-selected compatible landmark model data; the repository bundles no model asset.' }
@@ -332,6 +336,7 @@ foreach ($decl in @($raw.declarations)) {
 $externalDataDependencies = switch ($Module) {
     'face' { @('Facemark LBF fitting needs a caller-selected compatible landmark model loaded with Facemark.LoadModel; no model data is bundled.') }
     'quality' { @('QualityBRISQUE needs caller-selected SVM model and range files; no model data is bundled. Other quality metrics use caller-provided reference and comparison Mats.') }
+    'freetype' { @('The upstream FreeType2 module requires system FreeType2 and HarfBuzz development/runtime libraries; neither dependency is bundled by this repository.') }
     default { @() }
 }
 $classification = [ordered]@{ schemaVersion = 1; upstreamOpenCvVersion = '5.0.0'; claimedSlice = "opencv2/$Module.hpp contrib public header closure from parser-emitted headers"; reviewStatus = 'reviewed'; limitation = "The map records parser identities and exact $DisplayName wrapper evidence; it does not claim repository-wide contrib parity or external module availability."; externalDataDependencies = @($externalDataDependencies); declarations = @($rows) }
@@ -341,7 +346,7 @@ $mappingText = $builder.ToString().Replace("`r`n", "`n"); $implemented = @($rows
 $guide = switch ($Module) { 'face' {'docs/articles/face-guide.md'} 'quality' {'docs/articles/quality-guide.md'} 'img_hash' {'docs/articles/img-hash-guide.md'} 'line_descriptor' {'docs/articles/line-descriptor-guide.md'} default { "docs/articles/$Module-upstream-parity-guide.md" } }
 $family = [ordered]@{ schemaVersion = 1; upstreamOpenCvVersion = '5.0.0'; status = 'implemented-verified'; managedPublicTypeAdditionCount = 0; managedPublicMemberAdditionCount = 0; families = @([ordered]@{ id = "$Module-wrapper-surface"; rationale = "Current $DisplayName managed/native wrapper declarations with exact parser-backed callable evidence."; declarations = @($implemented | ForEach-Object { [ordered]@{ ordinal = $_.ordinal; upstreamIdentity = $_.identity; upstreamClassification = $_.classification; nativeEntrypoints = $_.nativeEntrypoints; managedMembers = $_.managedMembers; focusedTest = "tests/OpenCvSharp.Tests/$DisplayName/$DisplayName`Tests.cs"; nativeSmoke = 'src/OpenCvSharp.Native/tests/native_smoke.cpp'; sample = 'samples/ConsoleSamples/Program.cs'; guide = $guide } }) }) }
 $classificationJson = (($classification | ConvertTo-Json -Depth 20) + [Environment]::NewLine); $familyJson = (($family | ConvertTo-Json -Depth 20) + [Environment]::NewLine); $mapHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($mappingText))).ToLowerInvariant(); $familyHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($familyJson))).ToLowerInvariant()
-$summary = [ordered]@{ schemaVersion = 1; generator = "tools/$DisplayName`UpstreamMap"; upstreamOpenCvVersion = '5.0.0'; claimedSlice = $classification.claimedSlice; rawExtractionPath = "compatibility/$Module-upstream-raw.json"; classificationPath = "compatibility/$Module-upstream-classifications.json"; mappingPath = "compatibility/$Module-upstream-map.txt"; headerSha256 = [string]$raw.headerSha256; parserSha256 = [string]$raw.parserSha256; mappingSha256 = $mapHash; declarationCount = [int]$raw.declarationCount; enumCount = [int](@($raw.declarations | Where-Object kind -eq enum).Count); classCount = [int](@($raw.declarations | Where-Object kind -eq class).Count); callableCount = [int](@($raw.declarations | Where-Object kind -eq callable).Count); classificationCounts = [ordered]@{ implemented = [int]$implemented.Count; 'intentionally-omitted' = [int]$omitted.Count; missing = 0; 'non-callable-metadata' = [int]$metadata.Count; unsupported = 0; 'upstream-conditional' = 0 }; nativeEvidenceCount = @($rows.nativeEntrypoints | Where-Object { $_ } | Sort-Object -Unique).Count; managedEvidenceCount = @($rows.managedMembers | Where-Object { $_ } | Sort-Object -Unique).Count; negativeFixtureCount = 12; externalDataDependencyCount = @($externalDataDependencies).Count; familyInventoryPath = "compatibility/$Module-implemented-families.json"; familyInventorySha256 = $familyHash; selectedFamilyCount = 1; selectedDeclarationCount = $implemented.Count; managedPublicTypeAdditionCount = 0; managedPublicMemberAdditionCount = 0; repositoryWideUpstreamParityClaimed = $false }; $summaryJson = (($summary | ConvertTo-Json -Depth 20) + [Environment]::NewLine)
+$summary = [ordered]@{ schemaVersion = 1; generator = "tools/$DisplayName`UpstreamMap"; upstreamOpenCvVersion = '5.0.0'; claimedSlice = $classification.claimedSlice; rawExtractionPath = "compatibility/$Module-upstream-raw.json"; classificationPath = "compatibility/$Module-upstream-classifications.json"; mappingPath = "compatibility/$Module-upstream-map.txt"; headerSha256 = [string]$raw.headerSha256; parserSha256 = [string]$raw.parserSha256; mappingSha256 = $mapHash; declarationCount = [int]$raw.declarationCount; enumCount = [int](@($raw.declarations | Where-Object kind -eq enum).Count); classCount = [int](@($raw.declarations | Where-Object kind -eq class).Count); callableCount = [int](@($raw.declarations | Where-Object kind -eq callable).Count); classificationCounts = [ordered]@{ implemented = [int]$implemented.Count; 'intentionally-omitted' = [int]$omitted.Count; missing = 0; 'non-callable-metadata' = [int]$metadata.Count; unsupported = 0; 'upstream-conditional' = 0 }; nativeEvidenceCount = @($rows | ForEach-Object { @($_.nativeEntrypoints) } | Where-Object { $_ } | Sort-Object -Unique).Count; managedEvidenceCount = @($rows | ForEach-Object { @($_.managedMembers) } | Where-Object { $_ } | Sort-Object -Unique).Count; negativeFixtureCount = 12; externalDataDependencyCount = @($externalDataDependencies).Count; familyInventoryPath = "compatibility/$Module-implemented-families.json"; familyInventorySha256 = $familyHash; selectedFamilyCount = 1; selectedDeclarationCount = $implemented.Count; managedPublicTypeAdditionCount = 0; managedPublicMemberAdditionCount = 0; repositoryWideUpstreamParityClaimed = $false }; $summaryJson = (($summary | ConvertTo-Json -Depth 20) + [Environment]::NewLine)
 foreach ($target in @(@{ Path = $classificationPath; Text = $classificationJson }, @{ Path = (Join-Path $repo "compatibility/$Module-upstream-map.txt"); Text = $mappingText }, @{ Path = $summaryPath; Text = $summaryJson }, @{ Path = $familyPath; Text = $familyJson })) {
     if ($Check) {
         if (-not (Test-Path -LiteralPath $target.Path -PathType Leaf)) { throw "Contrib map generated artifact missing: $($target.Path)" }
