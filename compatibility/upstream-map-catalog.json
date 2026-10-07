@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 27,
+  "moduleCount": 28,
   "maps": [
     {
       "id": "calib3d",
@@ -2048,6 +2048,58 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "7aeda7db027538149c59c2b7150f9c47c5fbb703e2defa774764d3436f03d5c6",
         "familyInventorySha256": "4bdd5f2973fce5fae44be49e186e59dcd46af354c2eb82664d0c0a7708294bdd",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "phase_unwrapping",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/PhaseUnwrappingUpstreamMap",
+      "extractorScript": "tools/PhaseUnwrappingUpstreamMap/extract_phase_unwrapping.py",
+      "generationScript": "scripts/Generate-PhaseUnwrappingUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-PhaseUnwrappingUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/phase_unwrapping.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/phase_unwrapping/include/opencv2/phase_unwrapping.hpp",
+          "sha256": "6c2d5e3c996f0489b3a5c8949a3b837eccdfbc9821ce70a7d5185eecf8c334fa"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/phase_unwrapping/include/opencv2/phase_unwrapping/histogramphaseunwrapping.hpp",
+            "sha256": "38980fba5a37b36ccc5ff0064ff3649e9ca13cb974a6cd8b1eb2d30b9a48128a",
+            "startOrdinal": 0,
+            "declarationCount": 5
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/phase_unwrapping/include/opencv2/phase_unwrapping/phase_unwrapping.hpp",
+            "sha256": "d9db5f9f4ec7a6a82f99a75e9f4bfa22b68e7c471703f3c9ec1899ed391746cc",
+            "startOrdinal": 5,
+            "declarationCount": 2
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/phase_unwrapping-upstream-raw.json",
+        "classifications": "compatibility/phase_unwrapping-upstream-classifications.json",
+        "mapping": "compatibility/phase_unwrapping-upstream-map.txt",
+        "summary": "compatibility/phase_unwrapping-upstream-summary.json",
+        "familyInventory": "compatibility/phase_unwrapping-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 7,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "a103466ec5669b4b8858b1cd59b66bca5f9907c891f788b22f0f49c64ff70ead",
+        "familyInventorySha256": "bab2846d5d7af57a13b1753caef4be22a071035e71ecc0b1bc91c81470d221c5",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

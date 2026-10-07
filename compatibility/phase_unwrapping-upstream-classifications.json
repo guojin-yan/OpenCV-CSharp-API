@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/phase_unwrapping.hpp contrib public header closure from parser-emitted headers",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact PhaseUnwrapping wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.phase_unwrapping.HistogramPhaseUnwrapping",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHASE_UNWRAPPING=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "class cv.phase_unwrapping.HistogramPhaseUnwrapping.Params",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHASE_UNWRAPPING=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.phase_unwrapping.HistogramPhaseUnwrapping.Params.Params()->",
+      "classification": "intentionally-omitted",
+      "reason": "The upstream default Params constructor is represented by HistogramPhaseUnwrappingParams.Default and an explicit managed value constructor; value initialization has no native callable ABI.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHASE_UNWRAPPING=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.phase_unwrapping.HistogramPhaseUnwrapping.create(HistogramPhaseUnwrapping_Params parameters=HistogramPhaseUnwrapping::Params()[/C,/Ref])->Ptr<HistogramPhaseUnwrapping>",
+      "classification": "implemented",
+      "reason": "Explicit PhaseUnwrapping declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHASE_UNWRAPPING=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_phase_unwrapping_histogram_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PhaseUnwrapping.HistogramPhaseUnwrapping|method|public;static|JYPPX.OpenCvSharp.PhaseUnwrapping.HistogramPhaseUnwrapping Create(JYPPX.OpenCvSharp.PhaseUnwrapping.HistogramPhaseUnwrappingParams parameters)"
+      ]
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.phase_unwrapping.HistogramPhaseUnwrapping.getInverseReliabilityMap(Mat reliabilityMap[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit PhaseUnwrapping declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHASE_UNWRAPPING=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_phase_unwrapping_histogram_get_inverse_reliability_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PhaseUnwrapping.HistogramPhaseUnwrapping|method|public;instance|System.Void GetInverseReliabilityMap(JYPPX.OpenCvSharp.Core.Mat reliabilityMap)"
+      ]
+    },
+    {
+      "ordinal": 5,
+      "identity": "class cv.phase_unwrapping.PhaseUnwrapping",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHASE_UNWRAPPING=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.phase_unwrapping.PhaseUnwrapping.unwrapPhaseMap(Mat wrappedPhaseMap;Mat unwrappedPhaseMap[/O];Mat shadowMask=Mat())->void",
+      "classification": "implemented",
+      "reason": "Explicit PhaseUnwrapping declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHASE_UNWRAPPING=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_phase_unwrapping_unwrap_phase_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PhaseUnwrapping.PhaseUnwrappingObject|method|public;instance|System.Void UnwrapPhaseMap(JYPPX.OpenCvSharp.Core.Mat wrappedPhaseMap,JYPPX.OpenCvSharp.Core.Mat unwrappedPhaseMap,JYPPX.OpenCvSharp.Core.Mat? shadowMask=null)"
+      ]
+    }
+  ]
+}

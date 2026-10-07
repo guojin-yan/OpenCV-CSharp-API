@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 0,
+  "managedPublicMemberAdditionCount": 0,
+  "families": [
+    {
+      "id": "phase_unwrapping-wrapper-surface",
+      "rationale": "Current PhaseUnwrapping managed/native wrapper declarations with exact parser-backed callable evidence.",
+      "declarations": [
+        {
+          "ordinal": 3,
+          "upstreamIdentity": "cv.phase_unwrapping.HistogramPhaseUnwrapping.create(HistogramPhaseUnwrapping_Params parameters=HistogramPhaseUnwrapping::Params()[/C,/Ref])->Ptr<HistogramPhaseUnwrapping>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_phase_unwrapping_histogram_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.PhaseUnwrapping.HistogramPhaseUnwrapping|method|public;static|JYPPX.OpenCvSharp.PhaseUnwrapping.HistogramPhaseUnwrapping Create(JYPPX.OpenCvSharp.PhaseUnwrapping.HistogramPhaseUnwrappingParams parameters)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/PhaseUnwrapping/PhaseUnwrappingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/phase-unwrapping-guide.md"
+        },
+        {
+          "ordinal": 4,
+          "upstreamIdentity": "cv.phase_unwrapping.HistogramPhaseUnwrapping.getInverseReliabilityMap(Mat reliabilityMap[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_phase_unwrapping_histogram_get_inverse_reliability_map"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.PhaseUnwrapping.HistogramPhaseUnwrapping|method|public;instance|System.Void GetInverseReliabilityMap(JYPPX.OpenCvSharp.Core.Mat reliabilityMap)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/PhaseUnwrapping/PhaseUnwrappingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/phase-unwrapping-guide.md"
+        },
+        {
+          "ordinal": 6,
+          "upstreamIdentity": "cv.phase_unwrapping.PhaseUnwrapping.unwrapPhaseMap(Mat wrappedPhaseMap;Mat unwrappedPhaseMap[/O];Mat shadowMask=Mat())->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_phase_unwrapping_unwrap_phase_map"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.PhaseUnwrapping.PhaseUnwrappingObject|method|public;instance|System.Void UnwrapPhaseMap(JYPPX.OpenCvSharp.Core.Mat wrappedPhaseMap,JYPPX.OpenCvSharp.Core.Mat unwrappedPhaseMap,JYPPX.OpenCvSharp.Core.Mat? shadowMask=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/PhaseUnwrapping/PhaseUnwrappingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/phase-unwrapping-guide.md"
+        }
+      ]
+    }
+  ]
+}

@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/0f8354f934687bf1",
-  "SourceIdentity": "sha256:0f8354f934687bf1473cdf3f40d3dfb2a803d35696a91bfce1d5a9dc822e5eb3",
+  "CandidateId": "local-closeout/sha256/aa83b086483ba696",
+  "SourceIdentity": "sha256:aa83b086483ba6962911c0f29efbad3083c6cde3f45cb906ef886365d3410714",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1959,
-    "Sha256": "0f8354f934687bf1473cdf3f40d3dfb2a803d35696a91bfce1d5a9dc822e5eb3",
+    "FileCount": 1969,
+    "Sha256": "aa83b086483ba6962911c0f29efbad3083c6cde3f45cb906ef886365d3410714",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -1007,6 +1007,31 @@
       "Length": 1430
     },
     {
+      "Path": "compatibility/phase_unwrapping-implemented-families.json",
+      "Sha256": "991d07f8c9a27e88c86ab031c03b098936c868cf9f6b1354fff278ad91ef3024",
+      "Length": 3199
+    },
+    {
+      "Path": "compatibility/phase_unwrapping-upstream-classifications.json",
+      "Sha256": "150ee99b6b5b0d363a9baffc166c4d239422ba0ee7b1114b3ea7c3e148b13571",
+      "Length": 4498
+    },
+    {
+      "Path": "compatibility/phase_unwrapping-upstream-map.txt",
+      "Sha256": "a103466ec5669b4b8858b1cd59b66bca5f9907c891f788b22f0f49c64ff70ead",
+      "Length": 3252
+    },
+    {
+      "Path": "compatibility/phase_unwrapping-upstream-raw.json",
+      "Sha256": "4886b24529d6775fe0b251348ec33fdd880e4b39cd13d1d9f70a0cb236264400",
+      "Length": 8992
+    },
+    {
+      "Path": "compatibility/phase_unwrapping-upstream-summary.json",
+      "Sha256": "f7827c5a90a57c5210b3ee7d79a9b0cc6cfe28692d6832dcb5316b85367ba629",
+      "Length": 1475
+    },
+    {
       "Path": "compatibility/photo-implemented-families.json",
       "Sha256": "288f7348dad940daae9a9557513adb0f2e46b7444f30acc92206802c94eec7be",
       "Length": 60359
@@ -1133,18 +1158,18 @@
     },
     {
       "Path": "compatibility/upstream-map-catalog.json",
-      "Sha256": "9bc43b0e4c9216ba8bad65d3d1d501870a1751df841add69cb43acd0f67d6d59",
-      "Length": 99139
+      "Sha256": "c438ef1c1099edbb7ab000b1c991531a5b106532bb3f8ee1e99fbb9c63d36f3f",
+      "Length": 101728
     },
     {
       "Path": "compatibility/upstream-map-catalog.schema.json",
-      "Sha256": "84f061ee7a051b3c617bd5fb0dc8c88baafaee13a4f432e10548335f6591353f",
-      "Length": 5745
+      "Sha256": "818e80026d8a09e4e93921e3c6d123c6d0c8b72ebccd1ed22f75053a7b6578ef",
+      "Length": 5765
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "04f6f5b2e3baed464987fc4cd967cf40ead93fd906b1a6a4139480b42db272e8",
-      "Length": 20858
+      "Sha256": "bae10cf80374fbca214ac491d0b7b89bd535660c7acd147e4a9e3c60f19d2d61",
+      "Length": 22771
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -1427,6 +1452,11 @@
       "Length": 3264
     },
     {
+      "Path": "docs/articles/phase-unwrapping-guide.md",
+      "Sha256": "f0e94b764cee0b498a6db10f2210d6e7161fc13352ddd5b4c77811b2b023b3e6",
+      "Length": 2552
+    },
+    {
       "Path": "docs/articles/photo-ccm-guide.md",
       "Sha256": "225cd075ac85937c91c4b54b4a9330c78887af2888e0fb4128d1147191c77a27",
       "Length": 6980
@@ -1528,8 +1558,8 @@
     },
     {
       "Path": "docs/articles/upstream-map-toolchain.md",
-      "Sha256": "2b65dcdd303bf9fc0fd5fe24ba469659ac0491ace9952196fca8de4430845a74",
-      "Length": 2321
+      "Sha256": "201026dd83b4bf1980ef46bf785ed36f6b83970e3a205eb939e14cc1bf1bd62b",
+      "Length": 2629
     },
     {
       "Path": "docs/articles/v501-modern-api-preview-guide.md",
@@ -1983,8 +2013,8 @@
     },
     {
       "Path": "scripts/Generate-ContribUpstreamMap.ps1",
-      "Sha256": "a6945931fa23761ebc7589e3e7321c5a3587b8320203f535b5793c32f892b5f9",
-      "Length": 44267
+      "Sha256": "1a1d1f81f7b47fe22ac49682666c150906bd228b7b1a4be61a947f865614800b",
+      "Length": 46314
     },
     {
       "Path": "scripts/Generate-CoreUpstreamMap.ps1",
@@ -2070,6 +2100,11 @@
       "Path": "scripts/Generate-OptFlowUpstreamMap.ps1",
       "Sha256": "b8f04008c19039cf9d23a22df08a00abf16ac5724cefc5a38555cbfc11ea6f73",
       "Length": 300
+    },
+    {
+      "Path": "scripts/Generate-PhaseUnwrappingUpstreamMap.ps1",
+      "Sha256": "2f0ce04c4381c61137ed37299be7b0178cc593115235737a0653e88bd3499483",
+      "Length": 362
     },
     {
       "Path": "scripts/Generate-PhotoUpstreamMap.ps1",
@@ -2198,8 +2233,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "002220a4f57ed5b4e5fda68c0708e578060b91befbe534f3525718e6ad61b9c4",
-      "Length": 80041
+      "Sha256": "06815401435b6d028c496cd05a5fa01cb2d0c6fd02db61de46c1bcd8c0eda50f",
+      "Length": 81248
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -2213,8 +2248,8 @@
     },
     {
       "Path": "scripts/New-UpstreamMapCatalog.ps1",
-      "Sha256": "bc41758f16a6c9a2a00a9c12ff028f8ab5599fdd98a6e103543e3dea03fe82e3",
-      "Length": 8978
+      "Sha256": "4e4b8f4eb0b27838ea8375d096669a2cca925b94913f396ca97e874a0b0765d0",
+      "Length": 9085
     },
     {
       "Path": "scripts/Test-AlphaMatUpstreamMap.ps1",
@@ -2522,6 +2557,11 @@
       "Length": 7205
     },
     {
+      "Path": "scripts/Test-PhaseUnwrappingUpstreamMap.ps1",
+      "Sha256": "b7a26f5dab5edfb8598b03c9d85baa82c1743a6f88a4dec6c777d5b408f2f572",
+      "Length": 5000
+    },
+    {
       "Path": "scripts/Test-PhotoUpstreamMap.ps1",
       "Sha256": "2cf1f9cfcc2afe24d3f68d1455cf167b37ad481064858a5e412ddcb74a0b0831",
       "Length": 2126
@@ -2543,8 +2583,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "90e2394c667bc1bbcf4b93e952e7f2830c21c16ac9f4b2ae1f97e1a24c600d9e",
-      "Length": 77643
+      "Sha256": "afa955f946c86e985a56bd89ed9eaa91fa9771a2db7b0abc37077430fd742558",
+      "Length": 78850
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -2628,8 +2668,8 @@
     },
     {
       "Path": "scripts/Test-UpstreamMapCatalog.ps1",
-      "Sha256": "7e8a7db4ebdb754c3ad25e89319e70430384e9289361febcb32e74a38426ea26",
-      "Length": 14866
+      "Sha256": "d427e6f9623db82c6aebf4511d115409d881a2852e3f57121d9653abbcf7eb02",
+      "Length": 14885
     },
     {
       "Path": "scripts/Test-V501ChangeLedger.ps1",
@@ -2710,6 +2750,16 @@
       "Path": "src/OpenCvSharp.Native/src/imgproc.cpp",
       "Sha256": "6c87d0df024891a5b0a3601e735e4ce32670a530d25a7351b748cb0a5da9e832",
       "Length": 293344
+    },
+    {
+      "Path": "src/OpenCvSharp.Native/src/phase_unwrapping/phase_unwrapping.cpp",
+      "Sha256": "448474861a891cf64cca512a249f75b89c6d35270e56cbc6a6602dda96964f9e",
+      "Length": 5862
+    },
+    {
+      "Path": "src/OpenCvSharp.Native/src/phase_unwrapping/phase_unwrapping_handles.h",
+      "Sha256": "717592311ec4f4a561638b7d5c60ee1ce79121e8c3bc8248ddfb2289207efead",
+      "Length": 456
     },
     {
       "Path": "src/OpenCvSharp.Native/src/stitching/stitching.cpp",
@@ -2857,6 +2907,26 @@
       "Length": 37539
     },
     {
+      "Path": "src/OpenCvSharp/PhaseUnwrapping/HistogramPhaseUnwrapping.cs",
+      "Sha256": "b8102234d124a110fa41d1e94c412383af4ddb787a08aafad3490c610c982a2d",
+      "Length": 3207
+    },
+    {
+      "Path": "src/OpenCvSharp/PhaseUnwrapping/HistogramPhaseUnwrappingParams.cs",
+      "Sha256": "80583f976850ba23fc8840076cd3d8e07132512273a1933b3f9dd426c88fed55",
+      "Length": 5082
+    },
+    {
+      "Path": "src/OpenCvSharp/PhaseUnwrapping/PhaseUnwrappingCv2.cs",
+      "Sha256": "35dcfb1c24808f1e01a316e988ecbff57b05204794bb7e8b4b8237e9600048b9",
+      "Length": 927
+    },
+    {
+      "Path": "src/OpenCvSharp/PhaseUnwrapping/PhaseUnwrappingObject.cs",
+      "Sha256": "bf7db36a8a10dffede9218fa66d33a991ef759ed848d1c3212c8ae4a878e3790",
+      "Length": 4303
+    },
+    {
       "Path": "src/OpenCvSharp/Plot/Plot2d.cs",
       "Sha256": "968c42c878e988b61ae7c8e6101c234bc2906cc48e03db0214c8291851f8c21b",
       "Length": 8769
@@ -2965,6 +3035,11 @@
       "Path": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
       "Sha256": "749999d797ec5b51e0aec62e41310b8dd5158dc0a61b71de7f10d43243b096f0",
       "Length": 11046
+    },
+    {
+      "Path": "tests/OpenCvSharp.Tests/PhaseUnwrapping/PhaseUnwrappingTests.cs",
+      "Sha256": "7c220c4628a5890bdb1a1eeba5d5e352acf697275f3e0baf8047f226c7b96d0f",
+      "Length": 9637
     },
     {
       "Path": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
@@ -3292,6 +3367,21 @@
       "Length": 154
     },
     {
+      "Path": "tools/PhaseUnwrappingUpstreamMap/PhaseUnwrappingUpstreamMap.csproj",
+      "Sha256": "b0655fe2e4b91db06fc9f4da7c1a91df7f87b7204830ea583c7e622398f5f38f",
+      "Length": 241
+    },
+    {
+      "Path": "tools/PhaseUnwrappingUpstreamMap/Program.cs",
+      "Sha256": "d74778e7e6fd290b274e9363ccbcc581e28d927ce5ef03a87f898ed138babaff",
+      "Length": 120
+    },
+    {
+      "Path": "tools/PhaseUnwrappingUpstreamMap/extract_phase_unwrapping.py",
+      "Sha256": "bcac9fffbc2b0f193011abb8690fc422cae16ee35237f595a016bc59fdd2a92d",
+      "Length": 239
+    },
+    {
       "Path": "tools/PhotoUpstreamMap/PhotoUpstreamMap.csproj",
       "Sha256": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
       "Length": 238
@@ -3413,8 +3503,8 @@
     },
     {
       "Path": "tools/XImgProcUpstreamMap/extract_ximgproc.py",
-      "Sha256": "c78e0ecafa294ad0ab65774033f0fdd4c7fd3163b5ab2d0cd9877a1deac16536",
-      "Length": 5358
+      "Sha256": "4ddf5ac4386bd3f50f4d295e783aef173bc4e67a533a86f4d4a58b37380b82d2",
+      "Length": 5417
     },
     {
       "Path": "tools/XPhotoUpstreamMap/Program.cs",

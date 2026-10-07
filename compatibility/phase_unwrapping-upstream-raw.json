@@ -1,0 +1,214 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/PhaseUnwrappingUpstreamMap/extract_phase_unwrapping.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/phase_unwrapping/include/opencv2/phase_unwrapping.hpp",
+  "headerSha256": "6c2d5e3c996f0489b3a5c8949a3b837eccdfbc9821ce70a7d5185eecf8c334fa",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/phase_unwrapping/include/opencv2/phase_unwrapping/histogramphaseunwrapping.hpp",
+      "sha256": "38980fba5a37b36ccc5ff0064ff3649e9ca13cb974a6cd8b1eb2d30b9a48128a",
+      "startOrdinal": 0,
+      "declarationCount": 5
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/phase_unwrapping/include/opencv2/phase_unwrapping/phase_unwrapping.hpp",
+      "sha256": "d9db5f9f4ec7a6a82f99a75e9f4bfa22b68e7c471703f3c9ec1899ed391746cc",
+      "startOrdinal": 5,
+      "declarationCount": 2
+    }
+  ],
+  "declarationCount": 7,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/phase_unwrapping/include/opencv2/phase_unwrapping/histogramphaseunwrapping.hpp",
+      "kind": "class",
+      "name": "cv.phase_unwrapping.HistogramPhaseUnwrapping",
+      "identity": "class cv.phase_unwrapping.HistogramPhaseUnwrapping",
+      "returnType": ": cv::phase_unwrapping::PhaseUnwrapping",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::phase_unwrapping::PhaseUnwrapping",
+      "documentation": "@brief Class implementing two-dimensional phase unwrapping based on @cite histogramUnwrapping\n     * This algorithm belongs to the quality-guided phase unwrapping methods.\n     * First, it computes a reliability map from second differences between a pixel and its eight neighbours.\n     * Reliability values lie between 0 and 16*pi*pi. Then, this reliability map is used to compute\n     * the reliabilities of \"edges\". An edge is an entity defined by two pixels that are connected\n     * horizontally or vertically. Its reliability is found by adding the the reliabilities of the\n     * two pixels connected through it. Edges are sorted in a histogram based on their reliability values.\n     * This histogram is then used to unwrap pixels, starting from the highest quality pixel.\n\n     * The wrapped phase map and the unwrapped result are stored in CV_32FC1 Mat."
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/phase_unwrapping/include/opencv2/phase_unwrapping/histogramphaseunwrapping.hpp",
+      "kind": "class",
+      "name": "cv.phase_unwrapping.HistogramPhaseUnwrapping.Params",
+      "identity": "class cv.phase_unwrapping.HistogramPhaseUnwrapping.Params",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "width",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "height",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "histThresh",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "nbrOfSmallBins",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "nbrOfLargeBins",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Parameters of phaseUnwrapping constructor.\n\n     * @param width Phase map width.\n     * @param height Phase map height.\n     * @param histThresh Bins in the histogram are not of equal size. Default value is 3*pi*pi. The one before \"histThresh\" value are smaller.\n     * @param nbrOfSmallBins Number of bins between 0 and \"histThresh\". Default value is 10.\n     * @param nbrOfLargeBins Number of bins between \"histThresh\" and 32*pi*pi (highest edge reliability value). Default value is 5."
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/phase_unwrapping/include/opencv2/phase_unwrapping/histogramphaseunwrapping.hpp",
+      "kind": "callable",
+      "name": "cv.phase_unwrapping.HistogramPhaseUnwrapping.Params.Params",
+      "identity": "cv.phase_unwrapping.HistogramPhaseUnwrapping.Params.Params()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/phase_unwrapping/include/opencv2/phase_unwrapping/histogramphaseunwrapping.hpp",
+      "kind": "callable",
+      "name": "cv.phase_unwrapping.HistogramPhaseUnwrapping.create",
+      "identity": "cv.phase_unwrapping.HistogramPhaseUnwrapping.create(HistogramPhaseUnwrapping_Params parameters=HistogramPhaseUnwrapping::Params()[/C,/Ref])->Ptr<HistogramPhaseUnwrapping>",
+      "returnType": "Ptr<HistogramPhaseUnwrapping>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "HistogramPhaseUnwrapping_Params",
+          "name": "parameters",
+          "default": "HistogramPhaseUnwrapping::Params()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Constructor\n\n     * @param parameters HistogramPhaseUnwrapping parameters HistogramPhaseUnwrapping::Params: width,height of the phase map and histogram characteristics."
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/phase_unwrapping/include/opencv2/phase_unwrapping/histogramphaseunwrapping.hpp",
+      "kind": "callable",
+      "name": "cv.phase_unwrapping.HistogramPhaseUnwrapping.getInverseReliabilityMap",
+      "identity": "cv.phase_unwrapping.HistogramPhaseUnwrapping.getInverseReliabilityMap(Mat reliabilityMap[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "reliabilityMap",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Get the reliability map computed from the wrapped phase map.\n\n     * @param reliabilityMap Image where the reliability map is stored."
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/phase_unwrapping/include/opencv2/phase_unwrapping/phase_unwrapping.hpp",
+      "kind": "class",
+      "name": "cv.phase_unwrapping.PhaseUnwrapping",
+      "identity": "class cv.phase_unwrapping.PhaseUnwrapping",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Abstract base class for phase unwrapping."
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/phase_unwrapping/include/opencv2/phase_unwrapping/phase_unwrapping.hpp",
+      "kind": "callable",
+      "name": "cv.phase_unwrapping.PhaseUnwrapping.unwrapPhaseMap",
+      "identity": "cv.phase_unwrapping.PhaseUnwrapping.unwrapPhaseMap(Mat wrappedPhaseMap;Mat unwrappedPhaseMap[/O];Mat shadowMask=Mat())->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "wrappedPhaseMap",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "unwrappedPhaseMap",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "shadowMask",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Unwraps a 2D phase map.\n\n     * @param wrappedPhaseMap The wrapped phase map of type CV_32FC1 that needs to be unwrapped.\n     * @param unwrappedPhaseMap The unwrapped phase map.\n     * @param shadowMask Optional CV_8UC1 mask image used when some pixels do not hold any phase information in the wrapped phase map."
+    }
+  ]
+}
