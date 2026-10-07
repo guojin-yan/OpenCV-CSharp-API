@@ -1,0 +1,389 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/img_hash.hpp contrib public header closure from parser-emitted headers",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact ImgHash wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.img_hash.AverageHash",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.img_hash.AverageHash.create()->Ptr<AverageHash>",
+      "classification": "implemented",
+      "reason": "Explicit ImgHash declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_img_hash_average_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.AverageHash|method|public;static|JYPPX.OpenCvSharp.ImgHash.AverageHash Create()"
+      ]
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.img_hash.averageHash(Mat inputArr;Mat outputArr[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit ImgHash declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_img_hash_average_compute_static"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat AverageHash(JYPPX.OpenCvSharp.Core.Mat input)",
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashCv2|method|public;static|System.Void AverageHash(JYPPX.OpenCvSharp.Core.Mat input,JYPPX.OpenCvSharp.Core.Mat output)"
+      ]
+    },
+    {
+      "ordinal": 3,
+      "identity": "enum cv.img_hash.BlockMeanHashMode[const cv.img_hash.BLOCK_MEAN_HASH_MODE_0=0;const cv.img_hash.BLOCK_MEAN_HASH_MODE_1=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "class cv.img_hash.BlockMeanHash",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.img_hash.BlockMeanHash.setMode(int mode)->void",
+      "classification": "implemented",
+      "reason": "Explicit ImgHash declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_img_hash_block_mean_set_mode"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.BlockMeanHash|method|public;instance|System.Void SetMode(JYPPX.OpenCvSharp.ImgHash.BlockMeanHashMode mode)"
+      ]
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.img_hash.BlockMeanHash.getMean()->std::vector<double>",
+      "classification": "implemented",
+      "reason": "Explicit ImgHash declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_img_hash_block_mean_get_mean_count",
+        "jyppx_ocv_img_hash_block_mean_get_mean_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.BlockMeanHash|method|public;instance|System.Double[] GetMean()"
+      ]
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.img_hash.BlockMeanHash.create(int mode=BLOCK_MEAN_HASH_MODE_0)->Ptr<BlockMeanHash>",
+      "classification": "implemented",
+      "reason": "Explicit ImgHash declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_img_hash_block_mean_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.BlockMeanHash|method|public;static|JYPPX.OpenCvSharp.ImgHash.BlockMeanHash Create(JYPPX.OpenCvSharp.ImgHash.BlockMeanHashMode mode=Mode0)"
+      ]
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.img_hash.blockMeanHash(Mat inputArr;Mat outputArr[/O];int mode=BLOCK_MEAN_HASH_MODE_0)->void",
+      "classification": "implemented",
+      "reason": "Explicit ImgHash declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_img_hash_block_mean_compute_static"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat BlockMeanHash(JYPPX.OpenCvSharp.Core.Mat input,JYPPX.OpenCvSharp.ImgHash.BlockMeanHashMode mode=Mode0)",
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashCv2|method|public;static|System.Void BlockMeanHash(JYPPX.OpenCvSharp.Core.Mat input,JYPPX.OpenCvSharp.Core.Mat output,JYPPX.OpenCvSharp.ImgHash.BlockMeanHashMode mode=Mode0)"
+      ]
+    },
+    {
+      "ordinal": 9,
+      "identity": "class cv.img_hash.ColorMomentHash",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.img_hash.ColorMomentHash.create()->Ptr<ColorMomentHash>",
+      "classification": "implemented",
+      "reason": "Explicit ImgHash declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_img_hash_color_moment_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.ColorMomentHash|method|public;static|JYPPX.OpenCvSharp.ImgHash.ColorMomentHash Create()"
+      ]
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.img_hash.colorMomentHash(Mat inputArr;Mat outputArr[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit ImgHash declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_img_hash_color_moment_compute_static"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat ColorMomentHash(JYPPX.OpenCvSharp.Core.Mat input)",
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashCv2|method|public;static|System.Void ColorMomentHash(JYPPX.OpenCvSharp.Core.Mat input,JYPPX.OpenCvSharp.Core.Mat output)"
+      ]
+    },
+    {
+      "ordinal": 12,
+      "identity": "class cv.img_hash.ImgHashBase",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.img_hash.ImgHashBase.compute(Mat inputArr;Mat outputArr[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit ImgHash declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_img_hash_compute"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashBase|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Compute(JYPPX.OpenCvSharp.Core.Mat input)",
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashBase|method|public;instance|System.Void Compute(JYPPX.OpenCvSharp.Core.Mat input,JYPPX.OpenCvSharp.Core.Mat output)"
+      ]
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.img_hash.ImgHashBase.compare(Mat hashOne;Mat hashTwo)->double",
+      "classification": "implemented",
+      "reason": "Explicit ImgHash declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_img_hash_compare"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashBase|method|public;instance|System.Double Compare(JYPPX.OpenCvSharp.Core.Mat hashOne,JYPPX.OpenCvSharp.Core.Mat hashTwo)"
+      ]
+    },
+    {
+      "ordinal": 15,
+      "identity": "class cv.img_hash.MarrHildrethHash",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.img_hash.MarrHildrethHash.getAlpha()->float",
+      "classification": "implemented",
+      "reason": "Explicit ImgHash declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_img_hash_marr_hildreth_get"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.MarrHildrethHash|property|instance;get:public|System.Single Alpha"
+      ]
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.img_hash.MarrHildrethHash.getScale()->float",
+      "classification": "implemented",
+      "reason": "Explicit ImgHash declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_img_hash_marr_hildreth_get"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.MarrHildrethHash|property|instance;get:public|System.Single Scale"
+      ]
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.img_hash.MarrHildrethHash.setKernelParam(float alpha;float scale)->void",
+      "classification": "implemented",
+      "reason": "Explicit ImgHash declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_img_hash_marr_hildreth_set_kernel_param"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.MarrHildrethHash|method|public;instance|System.Void SetKernelParam(System.Single alpha,System.Single scale)"
+      ]
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.img_hash.MarrHildrethHash.create(float alpha=2.0f;float scale=1.0f)->Ptr<MarrHildrethHash>",
+      "classification": "implemented",
+      "reason": "Explicit ImgHash declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_img_hash_marr_hildreth_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.MarrHildrethHash|method|public;static|JYPPX.OpenCvSharp.ImgHash.MarrHildrethHash Create(System.Single alpha=2,System.Single scale=1)"
+      ]
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.img_hash.marrHildrethHash(Mat inputArr;Mat outputArr[/O];float alpha=2.0f;float scale=1.0f)->void",
+      "classification": "implemented",
+      "reason": "Explicit ImgHash declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_img_hash_marr_hildreth_compute_static"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat MarrHildrethHash(JYPPX.OpenCvSharp.Core.Mat input,System.Single alpha=2,System.Single scale=1)",
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashCv2|method|public;static|System.Void MarrHildrethHash(JYPPX.OpenCvSharp.Core.Mat input,JYPPX.OpenCvSharp.Core.Mat output,System.Single alpha=2,System.Single scale=1)"
+      ]
+    },
+    {
+      "ordinal": 21,
+      "identity": "class cv.img_hash.PHash",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.img_hash.PHash.create()->Ptr<PHash>",
+      "classification": "implemented",
+      "reason": "Explicit ImgHash declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_img_hash_phash_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.PHash|method|public;static|JYPPX.OpenCvSharp.ImgHash.PHash Create()"
+      ]
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.img_hash.pHash(Mat inputArr;Mat outputArr[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit ImgHash declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_img_hash_phash_compute_static"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat PHash(JYPPX.OpenCvSharp.Core.Mat input)",
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashCv2|method|public;static|System.Void PHash(JYPPX.OpenCvSharp.Core.Mat input,JYPPX.OpenCvSharp.Core.Mat output)"
+      ]
+    },
+    {
+      "ordinal": 24,
+      "identity": "class cv.img_hash.RadialVarianceHash",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.img_hash.RadialVarianceHash.create(double sigma=1;int numOfAngleLine=180)->Ptr<RadialVarianceHash>",
+      "classification": "implemented",
+      "reason": "Explicit ImgHash declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_img_hash_radial_variance_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.RadialVarianceHash|method|public;static|JYPPX.OpenCvSharp.ImgHash.RadialVarianceHash Create(System.Double sigma=1,System.Int32 numOfAngleLine=180)"
+      ]
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.img_hash.RadialVarianceHash.getNumOfAngleLine()->int",
+      "classification": "implemented",
+      "reason": "Explicit ImgHash declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_img_hash_radial_variance_get"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.RadialVarianceHash|property|instance;get:public;set:public|System.Int32 NumOfAngleLine"
+      ]
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.img_hash.RadialVarianceHash.getSigma()->double",
+      "classification": "implemented",
+      "reason": "Explicit ImgHash declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_img_hash_radial_variance_get"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.RadialVarianceHash|property|instance;get:public;set:public|System.Double Sigma"
+      ]
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.img_hash.RadialVarianceHash.setNumOfAngleLine(int value)->void",
+      "classification": "implemented",
+      "reason": "Explicit ImgHash declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_img_hash_radial_variance_set_num_of_angle_line"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.RadialVarianceHash|property|instance;get:public;set:public|System.Int32 NumOfAngleLine"
+      ]
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.img_hash.RadialVarianceHash.setSigma(double value)->void",
+      "classification": "implemented",
+      "reason": "Explicit ImgHash declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_img_hash_radial_variance_set_sigma"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.RadialVarianceHash|property|instance;get:public;set:public|System.Double Sigma"
+      ]
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.img_hash.radialVarianceHash(Mat inputArr;Mat outputArr[/O];double sigma=1;int numOfAngleLine=180)->void",
+      "classification": "implemented",
+      "reason": "Explicit ImgHash declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_IMG_HASH=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_img_hash_radial_variance_compute_static"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat RadialVarianceHash(JYPPX.OpenCvSharp.Core.Mat input,System.Double sigma=1,System.Int32 numOfAngleLine=180)",
+        "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashCv2|method|public;static|System.Void RadialVarianceHash(JYPPX.OpenCvSharp.Core.Mat input,JYPPX.OpenCvSharp.Core.Mat output,System.Double sigma=1,System.Int32 numOfAngleLine=180)"
+      ]
+    }
+  ]
+}

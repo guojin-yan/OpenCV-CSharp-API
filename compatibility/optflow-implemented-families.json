@@ -7,7 +7,7 @@
   "families": [
     {
       "id": "optflow-wrapper-surface",
-      "rationale": "Current OptFlow managed/native wrapper declarations with parser-backed evidence.",
+      "rationale": "Current OptFlow managed/native wrapper declarations with exact parser-backed callable evidence.",
       "declarations": [
         {
           "ordinal": 0,
@@ -59,7 +59,8 @@
           "upstreamIdentity": "cv.motempl.segmentMotion(Mat mhi;Mat segmask[/O];vector_Rect boundingRects[/O,/Ref];double timestamp;double segThresh)->void",
           "upstreamClassification": "implemented",
           "nativeEntrypoints": [
-            "jyppx_ocv_motempl_segment_motion_count"
+            "jyppx_ocv_motempl_segment_motion_count",
+            "jyppx_ocv_motempl_segment_motion_fill"
           ],
           "managedMembers": [
             "MEMBER|JYPPX.OpenCvSharp.OptFlow.OptFlowCv2|method|public;static|JYPPX.OpenCvSharp.Core.Rect[] SegmentMotion(JYPPX.OpenCvSharp.Core.Mat mhi,JYPPX.OpenCvSharp.Core.Mat segmask,System.Double timestamp,System.Double segThresh)"
@@ -74,10 +75,430 @@
           "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.setUseMEstimator(bool val)->void",
           "upstreamClassification": "implemented",
           "nativeEntrypoints": [
-            "jyppx_ocv_motempl_calc_global_orientation"
+            "jyppx_ocv_optflow_rlof_parameter_set_use_m_estimator"
           ],
           "managedMembers": [
             "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|method|public;instance|System.Void SetUseMEstimator(System.Boolean value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 12,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.setSolverType(SolverType val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|JYPPX.OpenCvSharp.OptFlow.OptFlowSolverType SolverType"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 13,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.getSolverType()->SolverType",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|JYPPX.OpenCvSharp.OptFlow.OptFlowSolverType SolverType"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 14,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.setSupportRegionType(SupportRegionType val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|JYPPX.OpenCvSharp.OptFlow.OptFlowSupportRegionType SupportRegionType"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 15,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.getSupportRegionType()->SupportRegionType",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|JYPPX.OpenCvSharp.OptFlow.OptFlowSupportRegionType SupportRegionType"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 16,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.setNormSigma0(float val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_set_float"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Single NormSigma0"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 17,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.getNormSigma0()->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_get_float"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Single NormSigma0"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 18,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.setNormSigma1(float val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_set_float"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Single NormSigma1"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 19,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.getNormSigma1()->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_get_float"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Single NormSigma1"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 20,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.setSmallWinSize(int val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Int32 SmallWinSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 21,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.getSmallWinSize()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Int32 SmallWinSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 22,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.setLargeWinSize(int val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Int32 LargeWinSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 23,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.getLargeWinSize()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Int32 LargeWinSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 24,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.setCrossSegmentationThreshold(int val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Int32 CrossSegmentationThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 25,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.getCrossSegmentationThreshold()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Int32 CrossSegmentationThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 26,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.setMaxLevel(int val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Int32 MaxLevel"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 27,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.getMaxLevel()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Int32 MaxLevel"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 28,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.setUseInitialFlow(bool val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Boolean UseInitialFlow"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 29,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.getUseInitialFlow()->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Boolean UseInitialFlow"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 30,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.setUseIlluminationModel(bool val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Boolean UseIlluminationModel"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 31,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.getUseIlluminationModel()->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Boolean UseIlluminationModel"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 32,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.setUseGlobalMotionPrior(bool val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Boolean UseGlobalMotionPrior"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 33,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.getUseGlobalMotionPrior()->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Boolean UseGlobalMotionPrior"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 34,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.setMaxIteration(int val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Int32 MaxIteration"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 35,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.getMaxIteration()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Int32 MaxIteration"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 36,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.setMinEigenValue(float val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_set_float"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Single MinEigenValue"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 37,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.getMinEigenValue()->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_get_float"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Single MinEigenValue"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 38,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.setGlobalMotionRansacThreshold(float val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_set_float"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Single GlobalMotionRansacThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 39,
+          "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.getGlobalMotionRansacThreshold()->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_rlof_parameter_get_float"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Single GlobalMotionRansacThreshold"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -89,7 +510,7 @@
           "upstreamIdentity": "cv.optflow.RLOFOpticalFlowParameter.create()->Ptr<RLOFOpticalFlowParameter>",
           "upstreamClassification": "implemented",
           "nativeEntrypoints": [
-            "jyppx_ocv_motempl_calc_global_orientation"
+            "jyppx_ocv_optflow_rlof_parameter_create"
           ],
           "managedMembers": [
             "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|method|public;static|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter Create()"
@@ -104,7 +525,7 @@
           "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.setRLOFOpticalFlowParameter(Ptr_RLOFOpticalFlowParameter val)->void",
           "upstreamClassification": "implemented",
           "nativeEntrypoints": [
-            "jyppx_ocv_motempl_calc_global_orientation"
+            "jyppx_ocv_optflow_dense_rlof_set_parameter"
           ],
           "managedMembers": [
             "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|method|public;instance|System.Void SetRLOFOpticalFlowParameter(JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter parameter)"
@@ -119,10 +540,370 @@
           "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.getRLOFOpticalFlowParameter()->Ptr<RLOFOpticalFlowParameter>",
           "upstreamClassification": "implemented",
           "nativeEntrypoints": [
-            "jyppx_ocv_motempl_calc_global_orientation"
+            "jyppx_ocv_optflow_dense_rlof_get_parameter"
           ],
           "managedMembers": [
             "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|method|public;instance|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter GetRLOFOpticalFlowParameter()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 44,
+          "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.setForwardBackward(float val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_dense_rlof_set_float"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Single ForwardBackward"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 45,
+          "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.getForwardBackward()->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_dense_rlof_get_float"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Single ForwardBackward"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 46,
+          "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.getGridStep()->Size",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_dense_rlof_get_grid_step"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.Size GridStep"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 47,
+          "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.setGridStep(Size val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_dense_rlof_set_grid_step"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.Size GridStep"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 48,
+          "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.setInterpolation(InterpolationType val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_dense_rlof_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|JYPPX.OpenCvSharp.OptFlow.OptFlowInterpolationType Interpolation"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 49,
+          "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.getInterpolation()->InterpolationType",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_dense_rlof_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|JYPPX.OpenCvSharp.OptFlow.OptFlowInterpolationType Interpolation"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 50,
+          "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.getEPICK()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_dense_rlof_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Int32 EPICK"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 51,
+          "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.setEPICK(int val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_dense_rlof_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Int32 EPICK"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 52,
+          "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.getEPICSigma()->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_dense_rlof_get_float"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Single EPICSigma"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 53,
+          "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.setEPICSigma(float val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_dense_rlof_set_float"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Single EPICSigma"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 54,
+          "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.getEPICLambda()->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_dense_rlof_get_float"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Single EPICLambda"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 55,
+          "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.setEPICLambda(float val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_dense_rlof_set_float"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Single EPICLambda"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 56,
+          "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.getFgsLambda()->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_dense_rlof_get_float"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Single FgsLambda"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 57,
+          "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.setFgsLambda(float val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_dense_rlof_set_float"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Single FgsLambda"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 58,
+          "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.getFgsSigma()->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_dense_rlof_get_float"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Single FgsSigma"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 59,
+          "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.setFgsSigma(float val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_dense_rlof_set_float"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Single FgsSigma"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 60,
+          "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.setUsePostProc(bool val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_dense_rlof_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Boolean UsePostProc"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 61,
+          "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.getUsePostProc()->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_dense_rlof_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Boolean UsePostProc"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 62,
+          "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.setUseVariationalRefinement(bool val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_dense_rlof_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Boolean UseVariationalRefinement"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 63,
+          "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.getUseVariationalRefinement()->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_dense_rlof_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Boolean UseVariationalRefinement"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 64,
+          "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.setRICSPSize(int val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_dense_rlof_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Int32 RICSPSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 65,
+          "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.getRICSPSize()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_dense_rlof_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Int32 RICSPSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 66,
+          "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.setRICSLICType(int val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_dense_rlof_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Int32 RICSLICType"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 67,
+          "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.getRICSLICType()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_dense_rlof_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Int32 RICSLICType"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -134,7 +915,7 @@
           "upstreamIdentity": "cv.optflow.DenseRLOFOpticalFlow.create(Ptr_RLOFOpticalFlowParameter rlofParam=Ptr<RLOFOpticalFlowParameter>();float forwardBackwardThreshold=1.f;Size gridStep=Size(6, 6);InterpolationType interp_type=InterpolationType::INTERP_EPIC;int epicK=128;float epicSigma=0.05f;float epicLambda=999.0f;int ricSPSize=15;int ricSLICType=100;bool use_post_proc=true;float fgsLambda=500.0f;float fgsSigma=1.5f;bool use_variational_refinement=false)->Ptr<DenseRLOFOpticalFlow>",
           "upstreamClassification": "implemented",
           "nativeEntrypoints": [
-            "jyppx_ocv_motempl_calc_global_orientation"
+            "jyppx_ocv_optflow_dense_rlof_create"
           ],
           "managedMembers": [
             "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|method|public;static|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow Create(JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter? parameter=null,System.Single forwardBackwardThreshold=1,JYPPX.OpenCvSharp.Core.Size? gridStep=null,JYPPX.OpenCvSharp.OptFlow.OptFlowInterpolationType interpolation=Epic,System.Int32 epicK=128,System.Single epicSigma=0.05,System.Single epicLambda=999,System.Int32 ricSpSize=15,System.Int32 ricSlicType=100,System.Boolean usePostProc=true,System.Single fgsLambda=500,System.Single fgsSigma=1.5,System.Boolean useVariationalRefinement=false)"
@@ -149,7 +930,7 @@
           "upstreamIdentity": "cv.optflow.SparseRLOFOpticalFlow.setRLOFOpticalFlowParameter(Ptr_RLOFOpticalFlowParameter val)->void",
           "upstreamClassification": "implemented",
           "nativeEntrypoints": [
-            "jyppx_ocv_motempl_calc_global_orientation"
+            "jyppx_ocv_optflow_sparse_rlof_set_parameter"
           ],
           "managedMembers": [
             "MEMBER|JYPPX.OpenCvSharp.OptFlow.SparseRLOFOpticalFlow|method|public;instance|System.Void SetRLOFOpticalFlowParameter(JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter parameter)"
@@ -164,10 +945,40 @@
           "upstreamIdentity": "cv.optflow.SparseRLOFOpticalFlow.getRLOFOpticalFlowParameter()->Ptr<RLOFOpticalFlowParameter>",
           "upstreamClassification": "implemented",
           "nativeEntrypoints": [
-            "jyppx_ocv_motempl_calc_global_orientation"
+            "jyppx_ocv_optflow_sparse_rlof_get_parameter"
           ],
           "managedMembers": [
             "MEMBER|JYPPX.OpenCvSharp.OptFlow.SparseRLOFOpticalFlow|method|public;instance|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter GetRLOFOpticalFlowParameter()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 72,
+          "upstreamIdentity": "cv.optflow.SparseRLOFOpticalFlow.setForwardBackward(float val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_sparse_rlof_set_forward_backward"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.SparseRLOFOpticalFlow|property|instance;get:public;set:public|System.Single ForwardBackward"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 73,
+          "upstreamIdentity": "cv.optflow.SparseRLOFOpticalFlow.getForwardBackward()->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_sparse_rlof_get_forward_backward"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.SparseRLOFOpticalFlow|property|instance;get:public;set:public|System.Single ForwardBackward"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -179,7 +990,7 @@
           "upstreamIdentity": "cv.optflow.SparseRLOFOpticalFlow.create(Ptr_RLOFOpticalFlowParameter rlofParam=Ptr<RLOFOpticalFlowParameter>();float forwardBackwardThreshold=1.f)->Ptr<SparseRLOFOpticalFlow>",
           "upstreamClassification": "implemented",
           "nativeEntrypoints": [
-            "jyppx_ocv_motempl_calc_global_orientation"
+            "jyppx_ocv_optflow_sparse_rlof_create"
           ],
           "managedMembers": [
             "MEMBER|JYPPX.OpenCvSharp.OptFlow.SparseRLOFOpticalFlow|method|public;static|JYPPX.OpenCvSharp.OptFlow.SparseRLOFOpticalFlow Create(JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter? parameter=null,System.Single forwardBackwardThreshold=1)"
@@ -194,7 +1005,7 @@
           "upstreamIdentity": "cv.optflow.calcOpticalFlowDenseRLOF(Mat I0;Mat I1;Mat flow[/IO];Ptr_RLOFOpticalFlowParameter rlofParam=Ptr<RLOFOpticalFlowParameter>();float forwardBackwardThreshold=0;Size gridStep=Size(6, 6);InterpolationType interp_type=InterpolationType::INTERP_EPIC;int epicK=128;float epicSigma=0.05f;float epicLambda=100.f;int ricSPSize=15;int ricSLICType=100;bool use_post_proc=true;float fgsLambda=500.0f;float fgsSigma=1.5f;bool use_variational_refinement=false)->void",
           "upstreamClassification": "implemented",
           "nativeEntrypoints": [
-            "jyppx_ocv_motempl_calc_global_orientation"
+            "jyppx_ocv_optflow_calc_optical_flow_dense_rlof"
           ],
           "managedMembers": [
             "MEMBER|JYPPX.OpenCvSharp.OptFlow.OptFlowCv2|method|public;static|System.Void CalcOpticalFlowDenseRLOF(JYPPX.OpenCvSharp.Core.Mat i0,JYPPX.OpenCvSharp.Core.Mat i1,JYPPX.OpenCvSharp.Core.Mat flow,JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter? parameter=null,System.Single forwardBackwardThreshold=0,JYPPX.OpenCvSharp.Core.Size? gridStep=null,JYPPX.OpenCvSharp.OptFlow.OptFlowInterpolationType interpolation=Epic,System.Int32 epicK=128,System.Single epicSigma=0.05,System.Single epicLambda=100,System.Int32 ricSpSize=15,System.Int32 ricSlicType=100,System.Boolean usePostProc=true,System.Single fgsLambda=500,System.Single fgsSigma=1.5,System.Boolean useVariationalRefinement=false)"
@@ -209,10 +1020,40 @@
           "upstreamIdentity": "cv.optflow.calcOpticalFlowSparseRLOF(Mat prevImg;Mat nextImg;Mat prevPts;Mat nextPts[/IO];Mat status[/O];Mat err[/O];Ptr_RLOFOpticalFlowParameter rlofParam=Ptr<RLOFOpticalFlowParameter>();float forwardBackwardThreshold=0)->void",
           "upstreamClassification": "implemented",
           "nativeEntrypoints": [
-            "jyppx_ocv_motempl_calc_global_orientation"
+            "jyppx_ocv_optflow_calc_optical_flow_sparse_rlof"
           ],
           "managedMembers": [
             "MEMBER|JYPPX.OpenCvSharp.OptFlow.OptFlowCv2|method|public;static|System.Void CalcOpticalFlowSparseRLOF(JYPPX.OpenCvSharp.Core.Mat prevImg,JYPPX.OpenCvSharp.Core.Mat nextImg,JYPPX.OpenCvSharp.Core.Mat prevPts,JYPPX.OpenCvSharp.Core.Mat nextPts,JYPPX.OpenCvSharp.Core.Mat status,JYPPX.OpenCvSharp.Core.Mat err,JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter? parameter=null,System.Single forwardBackwardThreshold=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 77,
+          "upstreamIdentity": "cv.optflow.createOptFlow_DenseRLOF()->Ptr<DenseOpticalFlow>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_dense_rlof_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|method|public;static|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow Create(JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter? parameter=null,System.Single forwardBackwardThreshold=1,JYPPX.OpenCvSharp.Core.Size? gridStep=null,JYPPX.OpenCvSharp.OptFlow.OptFlowInterpolationType interpolation=Epic,System.Int32 epicK=128,System.Single epicSigma=0.05,System.Single epicLambda=999,System.Int32 ricSpSize=15,System.Int32 ricSlicType=100,System.Boolean usePostProc=true,System.Single fgsLambda=500,System.Single fgsSigma=1.5,System.Boolean useVariationalRefinement=false)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/optflow-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 78,
+          "upstreamIdentity": "cv.optflow.createOptFlow_SparseRLOF()->Ptr<SparseOpticalFlow>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_optflow_sparse_rlof_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.OptFlow.SparseRLOFOpticalFlow|method|public;static|JYPPX.OpenCvSharp.OptFlow.SparseRLOFOpticalFlow Create(JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter? parameter=null,System.Single forwardBackwardThreshold=1)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/OptFlow/OptFlowTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",

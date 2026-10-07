@@ -1,0 +1,624 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 0,
+  "managedPublicMemberAdditionCount": 0,
+  "families": [
+    {
+      "id": "face-wrapper-surface",
+      "rationale": "Current Face managed/native wrapper declarations with exact parser-backed callable evidence.",
+      "declarations": [
+        {
+          "ordinal": 1,
+          "upstreamIdentity": "cv.face.BIF.getNumBands()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_bif_get_num_bands"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.BIF|property|instance;get:public|System.Int32 NumBands"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 2,
+          "upstreamIdentity": "cv.face.BIF.getNumRotations()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_bif_get_num_rotations"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.BIF|property|instance;get:public|System.Int32 NumRotations"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 3,
+          "upstreamIdentity": "cv.face.BIF.compute(Mat image;Mat features[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_bif_compute"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.BIF|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Compute(JYPPX.OpenCvSharp.Core.Mat image)",
+            "MEMBER|JYPPX.OpenCvSharp.Face.BIF|method|public;instance|System.Void Compute(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat features)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 4,
+          "upstreamIdentity": "cv.face.BIF.create(int num_bands=8;int num_rotations=12)->Ptr<BIF>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_bif_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.BIF|method|public;static|JYPPX.OpenCvSharp.Face.BIF Create(System.Int32 numBands=8,System.Int32 numRotations=12)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 7,
+          "upstreamIdentity": "cv.face.Facemark.loadModel(String model)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_facemark_load_model"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.Facemark|method|public;instance|System.Void LoadModel(System.String modelPath)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 8,
+          "upstreamIdentity": "cv.face.Facemark.fit(Mat image;Mat faces;vector_Mat landmarks[/O])->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_facemark_fit",
+            "jyppx_ocv_face_facemark_fit_landmarks_count",
+            "jyppx_ocv_face_facemark_fit_landmarks_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.Facemark|method|public;instance|JYPPX.OpenCvSharp.Face.FacemarkFitResult Fit(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Rect[] faces)",
+            "MEMBER|JYPPX.OpenCvSharp.Face.Facemark|method|public;instance|System.Boolean Fit(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Rect[] faces,out JYPPX.OpenCvSharp.Core.Point2f[][] landmarks)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 10,
+          "upstreamIdentity": "cv.face.createFacemarkLBF()->Ptr<Facemark>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_facemark_lbf_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.FacemarkLBF|method|public;static|JYPPX.OpenCvSharp.Face.FacemarkLBF Create()",
+            "MEMBER|JYPPX.OpenCvSharp.Face.FacemarkLBF|method|public;static|JYPPX.OpenCvSharp.Face.FacemarkLBF Create(JYPPX.OpenCvSharp.Face.FacemarkLBFParams parameters)",
+            "MEMBER|JYPPX.OpenCvSharp.Face.FacemarkLBF|method|public;static|JYPPX.OpenCvSharp.Face.FacemarkLBF Create(System.Int32 nLandmarks,System.Int32 initialShapeCount,System.Int32 stageCount,System.Int32 treeCount,System.Int32 treeDepth,System.Double shapeOffset=0,System.Double baggingOverlap=0.4,System.Boolean verbose=false)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 23,
+          "upstreamIdentity": "cv.face.BasicFaceRecognizer.getNumComponents()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_basic_get_num_components"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.BasicFaceRecognizer|property|instance;get:public;set:public|System.Int32 NumComponents"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 24,
+          "upstreamIdentity": "cv.face.BasicFaceRecognizer.setNumComponents(int val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_basic_set_num_components"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.BasicFaceRecognizer|property|instance;get:public;set:public|System.Int32 NumComponents"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 25,
+          "upstreamIdentity": "cv.face.BasicFaceRecognizer.getThreshold()->double",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_recognizer_get_threshold"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.FaceRecognizer|property|instance;get:public;set:public|System.Double Threshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 26,
+          "upstreamIdentity": "cv.face.BasicFaceRecognizer.setThreshold(double val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_recognizer_set_threshold"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.FaceRecognizer|property|instance;get:public;set:public|System.Double Threshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 27,
+          "upstreamIdentity": "cv.face.BasicFaceRecognizer.getProjections()->std::vector<cv::Mat>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_basic_get_projections_count",
+            "jyppx_ocv_face_basic_get_projections_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.BasicFaceRecognizer|method|public;instance|JYPPX.OpenCvSharp.Core.Mat[] GetProjections()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 28,
+          "upstreamIdentity": "cv.face.BasicFaceRecognizer.getLabels()->cv::Mat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_basic_get_labels"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.BasicFaceRecognizer|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetLabels()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 29,
+          "upstreamIdentity": "cv.face.BasicFaceRecognizer.getEigenValues()->cv::Mat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_basic_get_eigen_values"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.BasicFaceRecognizer|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetEigenValues()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 30,
+          "upstreamIdentity": "cv.face.BasicFaceRecognizer.getEigenVectors()->cv::Mat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_basic_get_eigen_vectors"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.BasicFaceRecognizer|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetEigenVectors()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 31,
+          "upstreamIdentity": "cv.face.BasicFaceRecognizer.getMean()->cv::Mat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_basic_get_mean"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.BasicFaceRecognizer|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetMean()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 33,
+          "upstreamIdentity": "cv.face.EigenFaceRecognizer.create(int num_components=0;double threshold=DBL_MAX)->Ptr<EigenFaceRecognizer>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_eigen_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.EigenFaceRecognizer|method|public;static|JYPPX.OpenCvSharp.Face.EigenFaceRecognizer Create(System.Int32 numComponents=0,System.Double threshold=1.7976931348623157E+308)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 35,
+          "upstreamIdentity": "cv.face.FisherFaceRecognizer.create(int num_components=0;double threshold=DBL_MAX)->Ptr<FisherFaceRecognizer>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_fisher_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.FisherFaceRecognizer|method|public;static|JYPPX.OpenCvSharp.Face.FisherFaceRecognizer Create(System.Int32 numComponents=0,System.Double threshold=1.7976931348623157E+308)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 37,
+          "upstreamIdentity": "cv.face.LBPHFaceRecognizer.getGridX()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_lbph_get_grid_x"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.LBPHFaceRecognizer|property|instance;get:public;set:public|System.Int32 GridX"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 38,
+          "upstreamIdentity": "cv.face.LBPHFaceRecognizer.setGridX(int val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_lbph_set_grid_x"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.LBPHFaceRecognizer|property|instance;get:public;set:public|System.Int32 GridX"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 39,
+          "upstreamIdentity": "cv.face.LBPHFaceRecognizer.getGridY()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_lbph_get_grid_y"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.LBPHFaceRecognizer|property|instance;get:public;set:public|System.Int32 GridY"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 40,
+          "upstreamIdentity": "cv.face.LBPHFaceRecognizer.setGridY(int val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_lbph_set_grid_y"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.LBPHFaceRecognizer|property|instance;get:public;set:public|System.Int32 GridY"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 41,
+          "upstreamIdentity": "cv.face.LBPHFaceRecognizer.getRadius()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_lbph_get_radius"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.LBPHFaceRecognizer|property|instance;get:public;set:public|System.Int32 Radius"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 42,
+          "upstreamIdentity": "cv.face.LBPHFaceRecognizer.setRadius(int val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_lbph_set_radius"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.LBPHFaceRecognizer|property|instance;get:public;set:public|System.Int32 Radius"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 43,
+          "upstreamIdentity": "cv.face.LBPHFaceRecognizer.getNeighbors()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_lbph_get_neighbors"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.LBPHFaceRecognizer|property|instance;get:public;set:public|System.Int32 Neighbors"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 44,
+          "upstreamIdentity": "cv.face.LBPHFaceRecognizer.setNeighbors(int val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_lbph_set_neighbors"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.LBPHFaceRecognizer|property|instance;get:public;set:public|System.Int32 Neighbors"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 45,
+          "upstreamIdentity": "cv.face.LBPHFaceRecognizer.getThreshold()->double",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_recognizer_get_threshold"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.FaceRecognizer|property|instance;get:public;set:public|System.Double Threshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 46,
+          "upstreamIdentity": "cv.face.LBPHFaceRecognizer.setThreshold(double val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_recognizer_set_threshold"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.FaceRecognizer|property|instance;get:public;set:public|System.Double Threshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 47,
+          "upstreamIdentity": "cv.face.LBPHFaceRecognizer.getHistograms()->std::vector<cv::Mat>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_lbph_get_histograms_count",
+            "jyppx_ocv_face_lbph_get_histograms_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.LBPHFaceRecognizer|method|public;instance|JYPPX.OpenCvSharp.Core.Mat[] GetHistograms()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 48,
+          "upstreamIdentity": "cv.face.LBPHFaceRecognizer.getLabels()->cv::Mat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_lbph_get_labels"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.LBPHFaceRecognizer|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetLabels()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 49,
+          "upstreamIdentity": "cv.face.LBPHFaceRecognizer.create(int radius=1;int neighbors=8;int grid_x=8;int grid_y=8;double threshold=DBL_MAX)->Ptr<LBPHFaceRecognizer>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_lbph_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.LBPHFaceRecognizer|method|public;static|JYPPX.OpenCvSharp.Face.LBPHFaceRecognizer Create(System.Int32 radius=1,System.Int32 neighbors=8,System.Int32 gridX=8,System.Int32 gridY=8,System.Double threshold=1.7976931348623157E+308)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 51,
+          "upstreamIdentity": "cv.face.MACE.salt(String passphrase[/C,/Ref])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_mace_salt"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.MACE|method|public;instance|System.Void Salt(System.String passphrase)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 52,
+          "upstreamIdentity": "cv.face.MACE.train(vector_Mat images)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_mace_train"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.MACE|method|public;instance|System.Void Train(params JYPPX.OpenCvSharp.Core.Mat[] images)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 53,
+          "upstreamIdentity": "cv.face.MACE.same(Mat query)->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_mace_same"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.MACE|method|public;instance|System.Boolean Same(JYPPX.OpenCvSharp.Core.Mat query)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 54,
+          "upstreamIdentity": "cv.face.MACE.load(String filename[/C,/Ref,/PATH];String objname=String()[/C,/Ref])->cv::Ptr<MACE>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_mace_load"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.MACE|method|public;static|JYPPX.OpenCvSharp.Face.MACE Load(System.String filename,System.String objname=\"\")"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 55,
+          "upstreamIdentity": "cv.face.MACE.create(int IMGSIZE=64)->cv::Ptr<MACE>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_mace_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.MACE|method|public;static|JYPPX.OpenCvSharp.Face.MACE Create(System.Int32 imageSize=64)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 58,
+          "upstreamIdentity": "cv.face.StandardCollector.getMinLabel()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_standard_collector_get_min_label"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.StandardCollector|property|instance;get:public|System.Int32 MinLabel"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 59,
+          "upstreamIdentity": "cv.face.StandardCollector.getMinDist()->double",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_standard_collector_get_min_dist"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.StandardCollector|property|instance;get:public|System.Double MinDist"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 60,
+          "upstreamIdentity": "cv.face.StandardCollector.getResults(bool sorted=false)->std::vector< std::pair<int, double> >",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_standard_collector_get_results_count",
+            "jyppx_ocv_face_standard_collector_get_results_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.StandardCollector|method|public;instance|JYPPX.OpenCvSharp.Face.FacePredictionResult[] GetResults(System.Boolean sorted=false)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        },
+        {
+          "ordinal": 61,
+          "upstreamIdentity": "cv.face.StandardCollector.create(double threshold=DBL_MAX)->Ptr<StandardCollector>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_face_standard_collector_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Face.StandardCollector|method|public;static|JYPPX.OpenCvSharp.Face.StandardCollector Create(System.Double threshold=1.7976931348623157E+308)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Face/FaceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/face-guide.md"
+        }
+      ]
+    }
+  ]
+}

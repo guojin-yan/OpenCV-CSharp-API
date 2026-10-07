@@ -1,0 +1,368 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 0,
+  "managedPublicMemberAdditionCount": 0,
+  "families": [
+    {
+      "id": "img_hash-wrapper-surface",
+      "rationale": "Current ImgHash managed/native wrapper declarations with exact parser-backed callable evidence.",
+      "declarations": [
+        {
+          "ordinal": 1,
+          "upstreamIdentity": "cv.img_hash.AverageHash.create()->Ptr<AverageHash>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_img_hash_average_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.AverageHash|method|public;static|JYPPX.OpenCvSharp.ImgHash.AverageHash Create()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgHash/ImgHashTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/img-hash-guide.md"
+        },
+        {
+          "ordinal": 2,
+          "upstreamIdentity": "cv.img_hash.averageHash(Mat inputArr;Mat outputArr[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_img_hash_average_compute_static"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat AverageHash(JYPPX.OpenCvSharp.Core.Mat input)",
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashCv2|method|public;static|System.Void AverageHash(JYPPX.OpenCvSharp.Core.Mat input,JYPPX.OpenCvSharp.Core.Mat output)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgHash/ImgHashTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/img-hash-guide.md"
+        },
+        {
+          "ordinal": 5,
+          "upstreamIdentity": "cv.img_hash.BlockMeanHash.setMode(int mode)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_img_hash_block_mean_set_mode"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.BlockMeanHash|method|public;instance|System.Void SetMode(JYPPX.OpenCvSharp.ImgHash.BlockMeanHashMode mode)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgHash/ImgHashTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/img-hash-guide.md"
+        },
+        {
+          "ordinal": 6,
+          "upstreamIdentity": "cv.img_hash.BlockMeanHash.getMean()->std::vector<double>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_img_hash_block_mean_get_mean_count",
+            "jyppx_ocv_img_hash_block_mean_get_mean_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.BlockMeanHash|method|public;instance|System.Double[] GetMean()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgHash/ImgHashTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/img-hash-guide.md"
+        },
+        {
+          "ordinal": 7,
+          "upstreamIdentity": "cv.img_hash.BlockMeanHash.create(int mode=BLOCK_MEAN_HASH_MODE_0)->Ptr<BlockMeanHash>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_img_hash_block_mean_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.BlockMeanHash|method|public;static|JYPPX.OpenCvSharp.ImgHash.BlockMeanHash Create(JYPPX.OpenCvSharp.ImgHash.BlockMeanHashMode mode=Mode0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgHash/ImgHashTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/img-hash-guide.md"
+        },
+        {
+          "ordinal": 8,
+          "upstreamIdentity": "cv.img_hash.blockMeanHash(Mat inputArr;Mat outputArr[/O];int mode=BLOCK_MEAN_HASH_MODE_0)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_img_hash_block_mean_compute_static"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat BlockMeanHash(JYPPX.OpenCvSharp.Core.Mat input,JYPPX.OpenCvSharp.ImgHash.BlockMeanHashMode mode=Mode0)",
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashCv2|method|public;static|System.Void BlockMeanHash(JYPPX.OpenCvSharp.Core.Mat input,JYPPX.OpenCvSharp.Core.Mat output,JYPPX.OpenCvSharp.ImgHash.BlockMeanHashMode mode=Mode0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgHash/ImgHashTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/img-hash-guide.md"
+        },
+        {
+          "ordinal": 10,
+          "upstreamIdentity": "cv.img_hash.ColorMomentHash.create()->Ptr<ColorMomentHash>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_img_hash_color_moment_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.ColorMomentHash|method|public;static|JYPPX.OpenCvSharp.ImgHash.ColorMomentHash Create()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgHash/ImgHashTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/img-hash-guide.md"
+        },
+        {
+          "ordinal": 11,
+          "upstreamIdentity": "cv.img_hash.colorMomentHash(Mat inputArr;Mat outputArr[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_img_hash_color_moment_compute_static"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat ColorMomentHash(JYPPX.OpenCvSharp.Core.Mat input)",
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashCv2|method|public;static|System.Void ColorMomentHash(JYPPX.OpenCvSharp.Core.Mat input,JYPPX.OpenCvSharp.Core.Mat output)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgHash/ImgHashTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/img-hash-guide.md"
+        },
+        {
+          "ordinal": 13,
+          "upstreamIdentity": "cv.img_hash.ImgHashBase.compute(Mat inputArr;Mat outputArr[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_img_hash_compute"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashBase|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Compute(JYPPX.OpenCvSharp.Core.Mat input)",
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashBase|method|public;instance|System.Void Compute(JYPPX.OpenCvSharp.Core.Mat input,JYPPX.OpenCvSharp.Core.Mat output)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgHash/ImgHashTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/img-hash-guide.md"
+        },
+        {
+          "ordinal": 14,
+          "upstreamIdentity": "cv.img_hash.ImgHashBase.compare(Mat hashOne;Mat hashTwo)->double",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_img_hash_compare"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashBase|method|public;instance|System.Double Compare(JYPPX.OpenCvSharp.Core.Mat hashOne,JYPPX.OpenCvSharp.Core.Mat hashTwo)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgHash/ImgHashTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/img-hash-guide.md"
+        },
+        {
+          "ordinal": 16,
+          "upstreamIdentity": "cv.img_hash.MarrHildrethHash.getAlpha()->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_img_hash_marr_hildreth_get"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.MarrHildrethHash|property|instance;get:public|System.Single Alpha"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgHash/ImgHashTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/img-hash-guide.md"
+        },
+        {
+          "ordinal": 17,
+          "upstreamIdentity": "cv.img_hash.MarrHildrethHash.getScale()->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_img_hash_marr_hildreth_get"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.MarrHildrethHash|property|instance;get:public|System.Single Scale"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgHash/ImgHashTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/img-hash-guide.md"
+        },
+        {
+          "ordinal": 18,
+          "upstreamIdentity": "cv.img_hash.MarrHildrethHash.setKernelParam(float alpha;float scale)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_img_hash_marr_hildreth_set_kernel_param"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.MarrHildrethHash|method|public;instance|System.Void SetKernelParam(System.Single alpha,System.Single scale)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgHash/ImgHashTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/img-hash-guide.md"
+        },
+        {
+          "ordinal": 19,
+          "upstreamIdentity": "cv.img_hash.MarrHildrethHash.create(float alpha=2.0f;float scale=1.0f)->Ptr<MarrHildrethHash>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_img_hash_marr_hildreth_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.MarrHildrethHash|method|public;static|JYPPX.OpenCvSharp.ImgHash.MarrHildrethHash Create(System.Single alpha=2,System.Single scale=1)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgHash/ImgHashTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/img-hash-guide.md"
+        },
+        {
+          "ordinal": 20,
+          "upstreamIdentity": "cv.img_hash.marrHildrethHash(Mat inputArr;Mat outputArr[/O];float alpha=2.0f;float scale=1.0f)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_img_hash_marr_hildreth_compute_static"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat MarrHildrethHash(JYPPX.OpenCvSharp.Core.Mat input,System.Single alpha=2,System.Single scale=1)",
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashCv2|method|public;static|System.Void MarrHildrethHash(JYPPX.OpenCvSharp.Core.Mat input,JYPPX.OpenCvSharp.Core.Mat output,System.Single alpha=2,System.Single scale=1)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgHash/ImgHashTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/img-hash-guide.md"
+        },
+        {
+          "ordinal": 22,
+          "upstreamIdentity": "cv.img_hash.PHash.create()->Ptr<PHash>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_img_hash_phash_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.PHash|method|public;static|JYPPX.OpenCvSharp.ImgHash.PHash Create()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgHash/ImgHashTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/img-hash-guide.md"
+        },
+        {
+          "ordinal": 23,
+          "upstreamIdentity": "cv.img_hash.pHash(Mat inputArr;Mat outputArr[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_img_hash_phash_compute_static"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat PHash(JYPPX.OpenCvSharp.Core.Mat input)",
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashCv2|method|public;static|System.Void PHash(JYPPX.OpenCvSharp.Core.Mat input,JYPPX.OpenCvSharp.Core.Mat output)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgHash/ImgHashTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/img-hash-guide.md"
+        },
+        {
+          "ordinal": 25,
+          "upstreamIdentity": "cv.img_hash.RadialVarianceHash.create(double sigma=1;int numOfAngleLine=180)->Ptr<RadialVarianceHash>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_img_hash_radial_variance_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.RadialVarianceHash|method|public;static|JYPPX.OpenCvSharp.ImgHash.RadialVarianceHash Create(System.Double sigma=1,System.Int32 numOfAngleLine=180)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgHash/ImgHashTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/img-hash-guide.md"
+        },
+        {
+          "ordinal": 26,
+          "upstreamIdentity": "cv.img_hash.RadialVarianceHash.getNumOfAngleLine()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_img_hash_radial_variance_get"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.RadialVarianceHash|property|instance;get:public;set:public|System.Int32 NumOfAngleLine"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgHash/ImgHashTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/img-hash-guide.md"
+        },
+        {
+          "ordinal": 27,
+          "upstreamIdentity": "cv.img_hash.RadialVarianceHash.getSigma()->double",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_img_hash_radial_variance_get"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.RadialVarianceHash|property|instance;get:public;set:public|System.Double Sigma"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgHash/ImgHashTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/img-hash-guide.md"
+        },
+        {
+          "ordinal": 28,
+          "upstreamIdentity": "cv.img_hash.RadialVarianceHash.setNumOfAngleLine(int value)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_img_hash_radial_variance_set_num_of_angle_line"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.RadialVarianceHash|property|instance;get:public;set:public|System.Int32 NumOfAngleLine"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgHash/ImgHashTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/img-hash-guide.md"
+        },
+        {
+          "ordinal": 29,
+          "upstreamIdentity": "cv.img_hash.RadialVarianceHash.setSigma(double value)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_img_hash_radial_variance_set_sigma"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.RadialVarianceHash|property|instance;get:public;set:public|System.Double Sigma"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgHash/ImgHashTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/img-hash-guide.md"
+        },
+        {
+          "ordinal": 30,
+          "upstreamIdentity": "cv.img_hash.radialVarianceHash(Mat inputArr;Mat outputArr[/O];double sigma=1;int numOfAngleLine=180)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_img_hash_radial_variance_compute_static"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat RadialVarianceHash(JYPPX.OpenCvSharp.Core.Mat input,System.Double sigma=1,System.Int32 numOfAngleLine=180)",
+            "MEMBER|JYPPX.OpenCvSharp.ImgHash.ImgHashCv2|method|public;static|System.Void RadialVarianceHash(JYPPX.OpenCvSharp.Core.Mat input,JYPPX.OpenCvSharp.Core.Mat output,System.Double sigma=1,System.Int32 numOfAngleLine=180)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgHash/ImgHashTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/img-hash-guide.md"
+        }
+      ]
+    }
+  ]
+}

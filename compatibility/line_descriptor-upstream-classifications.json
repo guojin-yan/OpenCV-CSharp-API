@@ -1,0 +1,392 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/line_descriptor.hpp contrib public header closure from parser-emitted headers",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact LineDescriptor wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.line_descriptor.KeyLine",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.line_descriptor.KeyLine.getStartPoint()->Point2f",
+      "classification": "intentionally-omitted",
+      "reason": "The managed KeyLine value exposes this accessor as a property; it has no separate native wrapper entrypoint and is not counted as native-backed implementation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.KeyLine|property|instance;get:public|JYPPX.OpenCvSharp.Core.Point2f StartPoint"
+      ]
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.line_descriptor.KeyLine.getEndPoint()->Point2f",
+      "classification": "intentionally-omitted",
+      "reason": "The managed KeyLine value exposes this accessor as a property; it has no separate native wrapper entrypoint and is not counted as native-backed implementation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.KeyLine|property|instance;get:public|JYPPX.OpenCvSharp.Core.Point2f EndPoint"
+      ]
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.line_descriptor.KeyLine.getStartPointInOctave()->Point2f",
+      "classification": "intentionally-omitted",
+      "reason": "The managed KeyLine value exposes this accessor as a property; it has no separate native wrapper entrypoint and is not counted as native-backed implementation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.KeyLine|property|instance;get:public|JYPPX.OpenCvSharp.Core.Point2f StartPointInOctave"
+      ]
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.line_descriptor.KeyLine.getEndPointInOctave()->Point2f",
+      "classification": "intentionally-omitted",
+      "reason": "The managed KeyLine value exposes this accessor as a property; it has no separate native wrapper entrypoint and is not counted as native-backed implementation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.KeyLine|property|instance;get:public|JYPPX.OpenCvSharp.Core.Point2f EndPointInOctave"
+      ]
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.line_descriptor.KeyLine.KeyLine()->",
+      "classification": "intentionally-omitted",
+      "reason": "No native LineDescriptor wrapper entrypoint is mapped for this parser declaration in the current ABI.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "class cv.line_descriptor.BinaryDescriptor",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.line_descriptor.BinaryDescriptor.createBinaryDescriptor()->Ptr<BinaryDescriptor>",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_binary_descriptor_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|method|public;static|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor Create()",
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|method|public;static|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor Create(JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptorParameters parameters)",
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|method|public;static|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor Create(System.Int32 numOfOctaves=1,System.Int32 widthOfBand=7,System.Int32 reductionRatio=2,System.Int32 ksize=5)"
+      ]
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.line_descriptor.BinaryDescriptor.getNumOfOctaves()->int",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_binary_descriptor_get_num_of_octaves"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|property|instance;get:public;set:public|System.Int32 NumOfOctaves"
+      ]
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.line_descriptor.BinaryDescriptor.setNumOfOctaves(int octaves)->void",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_binary_descriptor_set_num_of_octaves"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|property|instance;get:public;set:public|System.Int32 NumOfOctaves"
+      ]
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.line_descriptor.BinaryDescriptor.getWidthOfBand()->int",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_binary_descriptor_get_width_of_band"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|property|instance;get:public;set:public|System.Int32 WidthOfBand"
+      ]
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.line_descriptor.BinaryDescriptor.setWidthOfBand(int width)->void",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_binary_descriptor_set_width_of_band"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|property|instance;get:public;set:public|System.Int32 WidthOfBand"
+      ]
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.line_descriptor.BinaryDescriptor.getReductionRatio()->int",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_binary_descriptor_get_reduction_ratio"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|property|instance;get:public;set:public|System.Int32 ReductionRatio"
+      ]
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.line_descriptor.BinaryDescriptor.setReductionRatio(int rRatio)->void",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_binary_descriptor_set_reduction_ratio"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|property|instance;get:public;set:public|System.Int32 ReductionRatio"
+      ]
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.line_descriptor.BinaryDescriptor.detect(Mat image[/C,/Ref];vector_KeyLine keypoints[/O,/Ref];Mat mask=Mat()[/C,/Ref])->void",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_binary_descriptor_detect_count",
+        "jyppx_ocv_line_descriptor_binary_descriptor_detect_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|method|public;instance|JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] Detect(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.line_descriptor.BinaryDescriptor.compute(Mat image[/C,/Ref];vector_KeyLine keylines[/IO,/Ref];Mat descriptors[/O,/Ref];bool returnFloatDescr=false)->void",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_binary_descriptor_compute"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Compute(JYPPX.OpenCvSharp.Core.Mat image,ref JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] keylines,System.Boolean returnFloatDescriptor=false)",
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|method|public;instance|JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] Compute(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] keylines,JYPPX.OpenCvSharp.Core.Mat descriptors,System.Boolean returnFloatDescriptor=false)",
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|method|public;instance|JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] Compute(JYPPX.OpenCvSharp.Core.Mat image,System.ReadOnlySpan<JYPPX.OpenCvSharp.LineDescriptor.KeyLine> keylines,JYPPX.OpenCvSharp.Core.Mat descriptors,System.Boolean returnFloatDescriptor=false)",
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|method|public;instance|System.Void Compute(JYPPX.OpenCvSharp.Core.Mat image,ref JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] keylines,JYPPX.OpenCvSharp.Core.Mat descriptors,System.Boolean returnFloatDescriptor=false)"
+      ]
+    },
+    {
+      "ordinal": 16,
+      "identity": "class cv.line_descriptor.LSDParam",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.line_descriptor.LSDParam.LSDParam()->",
+      "classification": "intentionally-omitted",
+      "reason": "No native LineDescriptor wrapper entrypoint is mapped for this parser declaration in the current ABI.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 18,
+      "identity": "class cv.line_descriptor.LSDDetector",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.line_descriptor.LSDDetector.LSDDetector()->",
+      "classification": "intentionally-omitted",
+      "reason": "No native LineDescriptor wrapper entrypoint is mapped for this parser declaration in the current ABI.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.line_descriptor.LSDDetector.LSDDetector(LSDParam _params)->",
+      "classification": "intentionally-omitted",
+      "reason": "No native LineDescriptor wrapper entrypoint is mapped for this parser declaration in the current ABI.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.line_descriptor.LSDDetector.createLSDDetector()->Ptr<LSDDetector>",
+      "classification": "intentionally-omitted",
+      "reason": "No native LineDescriptor wrapper entrypoint is mapped for this parser declaration in the current ABI.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.line_descriptor.LSDDetector.createLSDDetector(LSDParam params)->Ptr<LSDDetector>",
+      "classification": "intentionally-omitted",
+      "reason": "No native LineDescriptor wrapper entrypoint is mapped for this parser declaration in the current ABI.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.line_descriptor.LSDDetector.detect(Mat image[/C,/Ref];vector_KeyLine keypoints[/O,/Ref];int scale;int numOctaves;Mat mask=Mat()[/C,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "No native LineDescriptor wrapper entrypoint is mapped for this parser declaration in the current ABI.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.line_descriptor.LSDDetector.detect(vector_Mat images[/C,/Ref];vector_vector_KeyLine keylines[/Ref];int scale;int numOctaves;vector_Mat masks=std::vector<Mat>()[/C,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "No native LineDescriptor wrapper entrypoint is mapped for this parser declaration in the current ABI.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 25,
+      "identity": "class cv.line_descriptor.BinaryDescriptorMatcher",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.line_descriptor.BinaryDescriptorMatcher.match(Mat queryDescriptors[/C,/Ref];Mat trainDescriptors[/C,/Ref];vector_DMatch matches[/O,/Ref];Mat mask=Mat()[/C,/Ref])->void",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_binary_descriptor_matcher_match_count",
+        "jyppx_ocv_line_descriptor_binary_descriptor_matcher_match_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptorMatcher|method|public;instance|JYPPX.OpenCvSharp.Features2D.DMatch[] Match(JYPPX.OpenCvSharp.Core.Mat queryDescriptors,JYPPX.OpenCvSharp.Core.Mat trainDescriptors,JYPPX.OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.line_descriptor.BinaryDescriptorMatcher.match(Mat queryDescriptors[/C,/Ref];vector_DMatch matches[/O,/Ref];vector_Mat masks=std::vector<Mat>()[/C,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "No native LineDescriptor wrapper entrypoint is mapped for this parser declaration in the current ABI.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.line_descriptor.BinaryDescriptorMatcher.knnMatch(Mat queryDescriptors[/C,/Ref];Mat trainDescriptors[/C,/Ref];vector_vector_DMatch matches[/O,/Ref];int k;Mat mask=Mat()[/C,/Ref];bool compactResult=false)->void",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_binary_descriptor_matcher_knn_match_count",
+        "jyppx_ocv_line_descriptor_binary_descriptor_matcher_knn_match_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptorMatcher|method|public;instance|JYPPX.OpenCvSharp.Features2D.DMatch[][] KnnMatch(JYPPX.OpenCvSharp.Core.Mat queryDescriptors,JYPPX.OpenCvSharp.Core.Mat trainDescriptors,System.Int32 k,JYPPX.OpenCvSharp.Core.Mat? mask=null,System.Boolean compactResult=false)"
+      ]
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.line_descriptor.BinaryDescriptorMatcher.knnMatch(Mat queryDescriptors[/C,/Ref];vector_vector_DMatch matches[/Ref];int k;vector_Mat masks=std::vector<Mat>()[/C,/Ref];bool compactResult=false)->void",
+      "classification": "intentionally-omitted",
+      "reason": "No native LineDescriptor wrapper entrypoint is mapped for this parser declaration in the current ABI.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.line_descriptor.BinaryDescriptorMatcher.BinaryDescriptorMatcher()->",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_binary_descriptor_matcher_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptorMatcher|method|public;static|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptorMatcher Create()"
+      ]
+    },
+    {
+      "ordinal": 31,
+      "identity": "class cv.line_descriptor.DrawLinesMatchesFlags",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.line_descriptor.drawLineMatches(Mat img1[/C,/Ref];vector_KeyLine keylines1[/C,/Ref];Mat img2[/C,/Ref];vector_KeyLine keylines2[/C,/Ref];vector_DMatch matches1to2[/C,/Ref];Mat outImg[/O,/Ref];Scalar matchColor=Scalar::all( -1 )[/C,/Ref];Scalar singleLineColor=Scalar::all( -1 )[/C,/Ref];vector_char matchesMask=std::vector<char>()[/C,/Ref];int flags=DrawLinesMatchesFlags::DEFAULT)->void",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_draw_line_matches"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.LineDescriptorCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat DrawLineMatches(JYPPX.OpenCvSharp.Core.Mat image1,JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] keylines1,JYPPX.OpenCvSharp.Core.Mat image2,JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] keylines2,JYPPX.OpenCvSharp.Features2D.DMatch[] matches,JYPPX.OpenCvSharp.Core.Scalar matchColor,JYPPX.OpenCvSharp.Core.Scalar singleLineColor,JYPPX.OpenCvSharp.LineDescriptor.DrawLinesMatchesFlags flags=Default)",
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.LineDescriptorCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat DrawLineMatches(JYPPX.OpenCvSharp.Core.Mat image1,JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] keylines1,JYPPX.OpenCvSharp.Core.Mat image2,JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] keylines2,JYPPX.OpenCvSharp.Features2D.DMatch[] matches,JYPPX.OpenCvSharp.LineDescriptor.DrawLinesMatchesFlags flags=Default)",
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.LineDescriptorCv2|method|public;static|System.Void DrawLineMatches(JYPPX.OpenCvSharp.Core.Mat image1,JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] keylines1,JYPPX.OpenCvSharp.Core.Mat image2,JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] keylines2,JYPPX.OpenCvSharp.Features2D.DMatch[] matches,JYPPX.OpenCvSharp.Core.Mat outImage,JYPPX.OpenCvSharp.Core.Scalar matchColor,JYPPX.OpenCvSharp.Core.Scalar singleLineColor,JYPPX.OpenCvSharp.LineDescriptor.DrawLinesMatchesFlags flags=Default)"
+      ]
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.line_descriptor.drawKeylines(Mat image[/C,/Ref];vector_KeyLine keylines[/C,/Ref];Mat outImage[/O,/Ref];Scalar color=Scalar::all( -1 )[/C,/Ref];int flags=DrawLinesMatchesFlags::DEFAULT)->void",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_draw_keylines"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.LineDescriptorCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat DrawKeylines(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] keylines,JYPPX.OpenCvSharp.Core.Scalar color,JYPPX.OpenCvSharp.LineDescriptor.DrawLinesMatchesFlags flags=Default)",
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.LineDescriptorCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat DrawKeylines(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] keylines,JYPPX.OpenCvSharp.LineDescriptor.DrawLinesMatchesFlags flags=Default)",
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.LineDescriptorCv2|method|public;static|System.Void DrawKeylines(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] keylines,JYPPX.OpenCvSharp.Core.Mat outImage,JYPPX.OpenCvSharp.Core.Scalar color,JYPPX.OpenCvSharp.LineDescriptor.DrawLinesMatchesFlags flags=Default)"
+      ]
+    }
+  ]
+}

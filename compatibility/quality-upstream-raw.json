@@ -1,0 +1,845 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/QualityUpstreamMap/extract_quality.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality.hpp",
+  "headerSha256": "ab5aadbea65f20e926484b0c47c5e87c48ec019664c3cf5874abd14a88773a83",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/quality_utils.hpp",
+      "sha256": "233e0ddbe02b936c4f9cbae20002b711f292814f4948e5b39a583397538c4584",
+      "startOrdinal": 0,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitybase.hpp",
+      "sha256": "d36d584e453d78b11f01ee71fe3103ac5370f902ed0576aa837167aec25c1a31",
+      "startOrdinal": 0,
+      "declarationCount": 5
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitybrisque.hpp",
+      "sha256": "ae7dd64b9028fb5a0cc46c05a67962fa5d395575bc31389eead8898d025236ca",
+      "startOrdinal": 5,
+      "declarationCount": 6
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitygmsd.hpp",
+      "sha256": "d95de800a9eea3a18b19d33e6290cd3365f2f17072564c9239f12209b0dcdd5a",
+      "startOrdinal": 11,
+      "declarationCount": 6
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitymse.hpp",
+      "sha256": "dfb587d64b30c096ae74885c1dab06d46a77d2ffd4486d04e42962aff82445f9",
+      "startOrdinal": 17,
+      "declarationCount": 6
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitypsnr.hpp",
+      "sha256": "058b8e3ebe8c9e18250a0a6042bea3a58cf6ec84f8b35b09856e35f6a787bb7c",
+      "startOrdinal": 23,
+      "declarationCount": 8
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualityssim.hpp",
+      "sha256": "14a92b51b056a0ade06c5ee52f91284e130dc140a56e1ea00b7d071e9b1d64be",
+      "startOrdinal": 31,
+      "declarationCount": 6
+    }
+  ],
+  "declarationCount": 37,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitybase.hpp",
+      "kind": "class",
+      "name": "cv.quality.QualityBase",
+      "identity": "class cv.quality.QualityBase",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "********************************** Quality Base Class ***********************************"
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitybase.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityBase.compute",
+      "identity": "cv.quality.QualityBase.compute(Mat img)->cv::Scalar",
+      "returnType": "cv::Scalar",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Compute quality score per channel with the per-channel score in each element of the resulting cv::Scalar.  See specific algorithm for interpreting result scores\n    @param img comparison image, or image to evalute for no-reference quality algorithms"
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitybase.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityBase.getQualityMap",
+      "identity": "cv.quality.QualityBase.getQualityMap(Mat dst[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns output quality map that was generated during computation, if supported by the algorithm"
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitybase.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityBase.clear",
+      "identity": "cv.quality.QualityBase.clear()->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Implements Algorithm::clear()"
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitybase.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityBase.empty",
+      "identity": "cv.quality.QualityBase.empty()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Implements Algorithm::empty()"
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitybrisque.hpp",
+      "kind": "class",
+      "name": "cv.quality.QualityBRISQUE",
+      "identity": "class cv.quality.QualityBRISQUE",
+      "returnType": ": cv::quality::QualityBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::quality::QualityBase",
+      "documentation": "@brief BRISQUE (Blind/Referenceless Image Spatial Quality Evaluator) is a No Reference Image Quality Assessment (NR-IQA) algorithm.\n\nBRISQUE computes a score based on extracting Natural Scene Statistics (https://en.wikipedia.org/wiki/Scene_statistics)\nand calculating feature vectors. See Mittal et al. @cite Mittal2 for original paper and original implementation @cite Mittal2_software .\n\nA trained model is provided in the /samples/ directory and is trained on the LIVE-R2 database @cite Sheikh as in the original implementation.\nWhen evaluated against the TID2008 database @cite Ponomarenko , the SROCC is -0.8424 versus the SROCC of -0.8354 in the original implementation.\nC++ code for the BRISQUE LIVE-R2 trainer and TID2008 evaluator are also provided in the /samples/ directory."
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitybrisque.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityBRISQUE.compute",
+      "identity": "cv.quality.QualityBRISQUE.compute(Mat img)->cv::Scalar",
+      "returnType": "cv::Scalar",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes BRISQUE quality score for input image\n    @param img Image for which to compute quality\n    @returns cv::Scalar with the score in the first element.  The score ranges from 0 (best quality) to 100 (worst quality)"
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitybrisque.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityBRISQUE.create",
+      "identity": "cv.quality.QualityBRISQUE.create(String model_file_path[/C,/Ref];String range_file_path[/C,/Ref])->Ptr<QualityBRISQUE>",
+      "returnType": "Ptr<QualityBRISQUE>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "model_file_path",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "range_file_path",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Create an object which calculates quality\n    @param model_file_path cv::String which contains a path to the BRISQUE model data, eg. /path/to/brisque_model_live.yml\n    @param range_file_path cv::String which contains a path to the BRISQUE range data, eg. /path/to/brisque_range_live.yml"
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitybrisque.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityBRISQUE.create",
+      "identity": "cv.quality.QualityBRISQUE.create(Ptr_ml_SVM model[/C,/Ref];Mat range[/C,/Ref])->Ptr<QualityBRISQUE>",
+      "returnType": "Ptr<QualityBRISQUE>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Ptr_ml_SVM",
+          "name": "model",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "range",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Create an object which calculates quality\n    @param model cv::Ptr<cv::ml::SVM> which contains a loaded BRISQUE model\n    @param range cv::Mat which contains BRISQUE range data"
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitybrisque.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityBRISQUE.compute",
+      "identity": "cv.quality.QualityBRISQUE.compute(Mat img;String model_file_path[/C,/Ref];String range_file_path[/C,/Ref])->cv::Scalar",
+      "returnType": "cv::Scalar",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "String",
+          "name": "model_file_path",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "range_file_path",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief static method for computing quality\n    @param img image for which to compute quality\n    @param model_file_path cv::String which contains a path to the BRISQUE model data, eg. /path/to/brisque_model_live.yml\n    @param range_file_path cv::String which contains a path to the BRISQUE range data, eg. /path/to/brisque_range_live.yml\n    @returns cv::Scalar with the score in the first element.  The score ranges from 0 (best quality) to 100 (worst quality)"
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitybrisque.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityBRISQUE.computeFeatures",
+      "identity": "cv.quality.QualityBRISQUE.computeFeatures(Mat img;Mat features[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "features",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief static method for computing image features used by the BRISQUE algorithm\n    @param img image (BGR(A) or grayscale) for which to compute features\n    @param features output row vector of features to cv::Mat or cv::UMat"
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitygmsd.hpp",
+      "kind": "class",
+      "name": "cv.quality.QualityGMSD",
+      "identity": "class cv.quality.QualityGMSD",
+      "returnType": ": cv::quality::QualityBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::quality::QualityBase",
+      "documentation": "@brief Full reference GMSD algorithm\nhttp://www4.comp.polyu.edu.hk/~cslzhang/IQA/GMSD/GMSD.htm"
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitygmsd.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityGMSD.compute",
+      "identity": "cv.quality.QualityGMSD.compute(Mat cmp)->cv::Scalar",
+      "returnType": "cv::Scalar",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "cmp",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Compute GMSD\n    @param cmp comparison image\n    @returns cv::Scalar with per-channel quality value.  Values range from 0 (worst) to 1 (best)"
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitygmsd.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityGMSD.empty",
+      "identity": "cv.quality.QualityGMSD.empty()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Implements Algorithm::empty()"
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitygmsd.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityGMSD.clear",
+      "identity": "cv.quality.QualityGMSD.clear()->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Implements Algorithm::clear()"
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitygmsd.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityGMSD.create",
+      "identity": "cv.quality.QualityGMSD.create(Mat ref)->Ptr<QualityGMSD>",
+      "returnType": "Ptr<QualityGMSD>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "ref",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Create an object which calculates image quality\n    @param ref reference image"
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitygmsd.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityGMSD.compute",
+      "identity": "cv.quality.QualityGMSD.compute(Mat ref;Mat cmp;Mat qualityMap[/O])->cv::Scalar",
+      "returnType": "cv::Scalar",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "ref",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "cmp",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "qualityMap",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief static method for computing quality\n    @param ref reference image\n    @param cmp comparison image\n    @param qualityMap output quality map, or cv::noArray()\n    @returns cv::Scalar with per-channel quality value.  Values range from 0 (worst) to 1 (best)"
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitymse.hpp",
+      "kind": "class",
+      "name": "cv.quality.QualityMSE",
+      "identity": "class cv.quality.QualityMSE",
+      "returnType": ": cv::quality::QualityBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::quality::QualityBase",
+      "documentation": "@brief Full reference mean square error algorithm  https://en.wikipedia.org/wiki/Mean_squared_error"
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitymse.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityMSE.compute",
+      "identity": "cv.quality.QualityMSE.compute(vector_Mat cmpImgs)->cv::Scalar",
+      "returnType": "cv::Scalar",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "cmpImgs",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes MSE for reference images supplied in class constructor and provided comparison images\n    @param cmpImgs Comparison image(s)\n    @returns cv::Scalar with per-channel quality values.  Values range from 0 (best) to potentially max float (worst)"
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitymse.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityMSE.empty",
+      "identity": "cv.quality.QualityMSE.empty()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Implements Algorithm::empty()"
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitymse.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityMSE.clear",
+      "identity": "cv.quality.QualityMSE.clear()->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Implements Algorithm::clear()"
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitymse.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityMSE.create",
+      "identity": "cv.quality.QualityMSE.create(Mat ref)->Ptr<QualityMSE>",
+      "returnType": "Ptr<QualityMSE>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "ref",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Create an object which calculates quality\n    @param ref input image to use as the reference for comparison"
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitymse.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityMSE.compute",
+      "identity": "cv.quality.QualityMSE.compute(Mat ref;Mat cmp;Mat qualityMap[/O])->cv::Scalar",
+      "returnType": "cv::Scalar",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "ref",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "cmp",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "qualityMap",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief static method for computing quality\n    @param ref reference image\n    @param cmp comparison image=\n    @param qualityMap output quality map, or cv::noArray()\n    @returns cv::Scalar with per-channel quality values.  Values range from 0 (best) to max float (worst)"
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitypsnr.hpp",
+      "kind": "class",
+      "name": "cv.quality.QualityPSNR",
+      "identity": "class cv.quality.QualityPSNR",
+      "returnType": ": cv::quality::QualityBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::quality::QualityBase",
+      "documentation": "@brief Full reference peak signal to noise ratio (PSNR) algorithm  https://en.wikipedia.org/wiki/Peak_signal-to-noise_ratio"
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitypsnr.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityPSNR.create",
+      "identity": "cv.quality.QualityPSNR.create(Mat ref;double maxPixelValue=QualityPSNR::MAX_PIXEL_VALUE_DEFAULT)->Ptr<QualityPSNR>",
+      "returnType": "Ptr<QualityPSNR>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "ref",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "maxPixelValue",
+          "default": "QualityPSNR::MAX_PIXEL_VALUE_DEFAULT",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Create an object which calculates quality\n    @param ref input image to use as the source for comparison\n    @param maxPixelValue maximum per-channel value for any individual pixel; eg 255 for uint8 image"
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitypsnr.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityPSNR.compute",
+      "identity": "cv.quality.QualityPSNR.compute(Mat cmp)->cv::Scalar",
+      "returnType": "cv::Scalar",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "cmp",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Compute the PSNR\n    @param cmp Comparison image\n    @returns Per-channel PSNR value, or std::numeric_limits<double>::infinity() if the MSE between the two images == 0"
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitypsnr.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityPSNR.empty",
+      "identity": "cv.quality.QualityPSNR.empty()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Implements Algorithm::empty()"
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitypsnr.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityPSNR.clear",
+      "identity": "cv.quality.QualityPSNR.clear()->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Implements Algorithm::clear()"
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitypsnr.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityPSNR.compute",
+      "identity": "cv.quality.QualityPSNR.compute(Mat ref;Mat cmp;Mat qualityMap[/O];double maxPixelValue=QualityPSNR::MAX_PIXEL_VALUE_DEFAULT)->cv::Scalar",
+      "returnType": "cv::Scalar",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "ref",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "cmp",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "qualityMap",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "maxPixelValue",
+          "default": "QualityPSNR::MAX_PIXEL_VALUE_DEFAULT",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief static method for computing quality\n    @param ref reference image\n    @param cmp comparison image\n    @param qualityMap output quality map, or cv::noArray()\n    @param maxPixelValue maximum per-channel value for any individual pixel; eg 255 for uint8 image\n    @returns PSNR value, or std::numeric_limits<double>::infinity() if the MSE between the two images == 0"
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitypsnr.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityPSNR.getMaxPixelValue",
+      "identity": "cv.quality.QualityPSNR.getMaxPixelValue()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief return the maximum pixel value used for PSNR computation"
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualitypsnr.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualityPSNR.setMaxPixelValue",
+      "identity": "cv.quality.QualityPSNR.setMaxPixelValue(double val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief sets the maximum pixel value used for PSNR computation\n    @param val Maximum pixel value"
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualityssim.hpp",
+      "kind": "class",
+      "name": "cv.quality.QualitySSIM",
+      "identity": "class cv.quality.QualitySSIM",
+      "returnType": ": cv::quality::QualityBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::quality::QualityBase",
+      "documentation": "@brief Full reference structural similarity algorithm  https://en.wikipedia.org/wiki/Structural_similarity"
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualityssim.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualitySSIM.compute",
+      "identity": "cv.quality.QualitySSIM.compute(Mat cmp)->cv::Scalar",
+      "returnType": "cv::Scalar",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "cmp",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes SSIM\n    @param cmp Comparison image\n    @returns cv::Scalar with per-channel quality values.  Values range from 0 (worst) to 1 (best)"
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualityssim.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualitySSIM.empty",
+      "identity": "cv.quality.QualitySSIM.empty()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Implements Algorithm::empty()"
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualityssim.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualitySSIM.clear",
+      "identity": "cv.quality.QualitySSIM.clear()->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Implements Algorithm::clear()"
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualityssim.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualitySSIM.create",
+      "identity": "cv.quality.QualitySSIM.create(Mat ref)->Ptr<QualitySSIM>",
+      "returnType": "Ptr<QualitySSIM>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "ref",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Create an object which calculates quality\n    @param ref input image to use as the reference image for comparison"
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/quality/include/opencv2/quality/qualityssim.hpp",
+      "kind": "callable",
+      "name": "cv.quality.QualitySSIM.compute",
+      "identity": "cv.quality.QualitySSIM.compute(Mat ref;Mat cmp;Mat qualityMap[/O])->cv::Scalar",
+      "returnType": "cv::Scalar",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "ref",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "cmp",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "qualityMap",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief static method for computing quality\n    @param ref reference image\n    @param cmp comparison image\n    @param qualityMap output quality map, or cv::noArray()\n    @returns cv::Scalar with per-channel quality values.  Values range from 0 (worst) to 1 (best)"
+    }
+  ]
+}

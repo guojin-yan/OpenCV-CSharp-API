@@ -1,0 +1,452 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 0,
+  "managedPublicMemberAdditionCount": 0,
+  "families": [
+    {
+      "id": "quality-wrapper-surface",
+      "rationale": "Current Quality managed/native wrapper declarations with exact parser-backed callable evidence.",
+      "declarations": [
+        {
+          "ordinal": 1,
+          "upstreamIdentity": "cv.quality.QualityBase.compute(Mat img)->cv::Scalar",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_compute"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|method|public;instance|JYPPX.OpenCvSharp.Core.Scalar Compute(JYPPX.OpenCvSharp.Core.Mat comparison)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 2,
+          "upstreamIdentity": "cv.quality.QualityBase.getQualityMap(Mat dst[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_get_quality_map"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetQualityMap()",
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|method|public;instance|System.Void GetQualityMap(JYPPX.OpenCvSharp.Core.Mat qualityMap)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 3,
+          "upstreamIdentity": "cv.quality.QualityBase.clear()->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_clear"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|method|public;instance|System.Void Clear()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 4,
+          "upstreamIdentity": "cv.quality.QualityBase.empty()->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_empty"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|property|instance;get:public|System.Boolean Empty"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 6,
+          "upstreamIdentity": "cv.quality.QualityBRISQUE.compute(Mat img)->cv::Scalar",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_compute"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|method|public;instance|JYPPX.OpenCvSharp.Core.Scalar Compute(JYPPX.OpenCvSharp.Core.Mat comparison)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 7,
+          "upstreamIdentity": "cv.quality.QualityBRISQUE.create(String model_file_path[/C,/Ref];String range_file_path[/C,/Ref])->Ptr<QualityBRISQUE>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_brisque_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBRISQUE|method|public;static|JYPPX.OpenCvSharp.Quality.QualityBRISQUE Create(System.String modelFilePath,System.String rangeFilePath)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 9,
+          "upstreamIdentity": "cv.quality.QualityBRISQUE.compute(Mat img;String model_file_path[/C,/Ref];String range_file_path[/C,/Ref])->cv::Scalar",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_brisque_compute_static"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBRISQUE|method|public;static|JYPPX.OpenCvSharp.Core.Scalar Compute(JYPPX.OpenCvSharp.Core.Mat image,System.String modelFilePath,System.String rangeFilePath)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 10,
+          "upstreamIdentity": "cv.quality.QualityBRISQUE.computeFeatures(Mat img;Mat features[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_brisque_compute_features"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBRISQUE|method|public;static|JYPPX.OpenCvSharp.Core.Mat ComputeFeatures(JYPPX.OpenCvSharp.Core.Mat image)",
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBRISQUE|method|public;static|System.Void ComputeFeatures(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat features)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 12,
+          "upstreamIdentity": "cv.quality.QualityGMSD.compute(Mat cmp)->cv::Scalar",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_compute"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|method|public;instance|JYPPX.OpenCvSharp.Core.Scalar Compute(JYPPX.OpenCvSharp.Core.Mat comparison)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 13,
+          "upstreamIdentity": "cv.quality.QualityGMSD.empty()->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_empty"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|property|instance;get:public|System.Boolean Empty"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 14,
+          "upstreamIdentity": "cv.quality.QualityGMSD.clear()->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_clear"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|method|public;instance|System.Void Clear()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 15,
+          "upstreamIdentity": "cv.quality.QualityGMSD.create(Mat ref)->Ptr<QualityGMSD>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_gmsd_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityGMSD|method|public;static|JYPPX.OpenCvSharp.Quality.QualityGMSD Create(JYPPX.OpenCvSharp.Core.Mat reference)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 16,
+          "upstreamIdentity": "cv.quality.QualityGMSD.compute(Mat ref;Mat cmp;Mat qualityMap[/O])->cv::Scalar",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_gmsd_compute_static"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityGMSD|method|public;static|JYPPX.OpenCvSharp.Core.Scalar Compute(JYPPX.OpenCvSharp.Core.Mat reference,JYPPX.OpenCvSharp.Core.Mat comparison,JYPPX.OpenCvSharp.Core.Mat? qualityMap=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 19,
+          "upstreamIdentity": "cv.quality.QualityMSE.empty()->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_empty"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|property|instance;get:public|System.Boolean Empty"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 20,
+          "upstreamIdentity": "cv.quality.QualityMSE.clear()->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_clear"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|method|public;instance|System.Void Clear()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 21,
+          "upstreamIdentity": "cv.quality.QualityMSE.create(Mat ref)->Ptr<QualityMSE>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_mse_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityMSE|method|public;static|JYPPX.OpenCvSharp.Quality.QualityMSE Create(JYPPX.OpenCvSharp.Core.Mat reference)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 22,
+          "upstreamIdentity": "cv.quality.QualityMSE.compute(Mat ref;Mat cmp;Mat qualityMap[/O])->cv::Scalar",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_mse_compute_static"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityMSE|method|public;static|JYPPX.OpenCvSharp.Core.Scalar Compute(JYPPX.OpenCvSharp.Core.Mat reference,JYPPX.OpenCvSharp.Core.Mat comparison,JYPPX.OpenCvSharp.Core.Mat? qualityMap=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 24,
+          "upstreamIdentity": "cv.quality.QualityPSNR.create(Mat ref;double maxPixelValue=QualityPSNR::MAX_PIXEL_VALUE_DEFAULT)->Ptr<QualityPSNR>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_psnr_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityPSNR|method|public;static|JYPPX.OpenCvSharp.Quality.QualityPSNR Create(JYPPX.OpenCvSharp.Core.Mat reference,System.Double maxPixelValue=255)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 25,
+          "upstreamIdentity": "cv.quality.QualityPSNR.compute(Mat cmp)->cv::Scalar",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_compute"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|method|public;instance|JYPPX.OpenCvSharp.Core.Scalar Compute(JYPPX.OpenCvSharp.Core.Mat comparison)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 26,
+          "upstreamIdentity": "cv.quality.QualityPSNR.empty()->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_empty"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|property|instance;get:public|System.Boolean Empty"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 27,
+          "upstreamIdentity": "cv.quality.QualityPSNR.clear()->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_clear"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|method|public;instance|System.Void Clear()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 28,
+          "upstreamIdentity": "cv.quality.QualityPSNR.compute(Mat ref;Mat cmp;Mat qualityMap[/O];double maxPixelValue=QualityPSNR::MAX_PIXEL_VALUE_DEFAULT)->cv::Scalar",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_psnr_compute_static"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityPSNR|method|public;static|JYPPX.OpenCvSharp.Core.Scalar Compute(JYPPX.OpenCvSharp.Core.Mat reference,JYPPX.OpenCvSharp.Core.Mat comparison,JYPPX.OpenCvSharp.Core.Mat? qualityMap=null,System.Double maxPixelValue=255)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 29,
+          "upstreamIdentity": "cv.quality.QualityPSNR.getMaxPixelValue()->double",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_psnr_get_max_pixel_value"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityPSNR|property|instance;get:public;set:public|System.Double MaxPixelValue"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 30,
+          "upstreamIdentity": "cv.quality.QualityPSNR.setMaxPixelValue(double val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_psnr_set_max_pixel_value"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityPSNR|property|instance;get:public;set:public|System.Double MaxPixelValue"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 32,
+          "upstreamIdentity": "cv.quality.QualitySSIM.compute(Mat cmp)->cv::Scalar",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_compute"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|method|public;instance|JYPPX.OpenCvSharp.Core.Scalar Compute(JYPPX.OpenCvSharp.Core.Mat comparison)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 33,
+          "upstreamIdentity": "cv.quality.QualitySSIM.empty()->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_empty"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|property|instance;get:public|System.Boolean Empty"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 34,
+          "upstreamIdentity": "cv.quality.QualitySSIM.clear()->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_clear"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|method|public;instance|System.Void Clear()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 35,
+          "upstreamIdentity": "cv.quality.QualitySSIM.create(Mat ref)->Ptr<QualitySSIM>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_ssim_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualitySSIM|method|public;static|JYPPX.OpenCvSharp.Quality.QualitySSIM Create(JYPPX.OpenCvSharp.Core.Mat reference)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        },
+        {
+          "ordinal": 36,
+          "upstreamIdentity": "cv.quality.QualitySSIM.compute(Mat ref;Mat cmp;Mat qualityMap[/O])->cv::Scalar",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_quality_ssim_compute_static"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Quality.QualitySSIM|method|public;static|JYPPX.OpenCvSharp.Core.Scalar Compute(JYPPX.OpenCvSharp.Core.Mat reference,JYPPX.OpenCvSharp.Core.Mat comparison,JYPPX.OpenCvSharp.Core.Mat? qualityMap=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Quality/QualityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/quality-guide.md"
+        }
+      ]
+    }
+  ]
+}

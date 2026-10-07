@@ -25,7 +25,11 @@ $definitions = @(
     [pscustomobject]@{ Id = 'xphoto'; Tool = 'XPhoto'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'ximgproc'; Tool = 'XImgProc'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'optflow'; Tool = 'OptFlow'; Repository = 'opencv_contrib' },
-    [pscustomobject]@{ Id = 'bgsegm'; Tool = 'BgSegm'; Repository = 'opencv_contrib' }
+    [pscustomobject]@{ Id = 'bgsegm'; Tool = 'BgSegm'; Repository = 'opencv_contrib' },
+    [pscustomobject]@{ Id = 'face'; Tool = 'Face'; Repository = 'opencv_contrib' },
+    [pscustomobject]@{ Id = 'quality'; Tool = 'Quality'; Repository = 'opencv_contrib' },
+    [pscustomobject]@{ Id = 'img_hash'; Tool = 'ImgHash'; Repository = 'opencv_contrib' },
+    [pscustomobject]@{ Id = 'line_descriptor'; Tool = 'LineDescriptor'; Repository = 'opencv_contrib' }
 )
 
 function Get-HeaderRows {
@@ -122,7 +126,7 @@ $catalog = [ordered]@{
     moduleCount = $mapRows.Count
     maps = @($mapRows)
     limitations = @(
-        'The catalog centralizes source/header scope, classification policy, artifact bindings, generator commands, and semantic guard commands for the existing parser-backed map set.',
+        'The catalog centralizes source/header scope, classification policy, artifact bindings, generator commands, and semantic guard commands for the parser-backed map set, including the staged contrib batches.',
         'Each module retains its specialized extraction and semantic implementation; catalog orchestration does not assert repository-wide OpenCV parity.',
         'Additional contrib modules are introduced only as explicit catalog rows after their source scope and classification evidence are reviewed.'
     )

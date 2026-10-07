@@ -1,0 +1,739 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/face.hpp contrib public header closure from parser-emitted headers",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact Face wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [
+    "Facemark LBF fitting needs a caller-selected compatible landmark model loaded with Facemark.LoadModel; no model data is bundled."
+  ],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.face.BIF",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.face.BIF.getNumBands()->int",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_bif_get_num_bands"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.BIF|property|instance;get:public|System.Int32 NumBands"
+      ]
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.face.BIF.getNumRotations()->int",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_bif_get_num_rotations"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.BIF|property|instance;get:public|System.Int32 NumRotations"
+      ]
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.face.BIF.compute(Mat image;Mat features[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_bif_compute"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.BIF|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Compute(JYPPX.OpenCvSharp.Core.Mat image)",
+        "MEMBER|JYPPX.OpenCvSharp.Face.BIF|method|public;instance|System.Void Compute(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat features)"
+      ]
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.face.BIF.create(int num_bands=8;int num_rotations=12)->Ptr<BIF>",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_bif_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.BIF|method|public;static|JYPPX.OpenCvSharp.Face.BIF Create(System.Int32 numBands=8,System.Int32 numRotations=12)"
+      ]
+    },
+    {
+      "ordinal": 5,
+      "identity": "class cv.face.FacemarkKazemi",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "class cv.face.Facemark",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.face.Facemark.loadModel(String model)->void",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present. Facemark fitting requires caller-selected compatible landmark model data; the repository bundles no model asset.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_facemark_load_model"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.Facemark|method|public;instance|System.Void LoadModel(System.String modelPath)"
+      ]
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.face.Facemark.fit(Mat image;Mat faces;vector_Mat landmarks[/O])->bool",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present. Facemark fitting requires caller-selected compatible landmark model data; the repository bundles no model asset.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_facemark_fit",
+        "jyppx_ocv_face_facemark_fit_landmarks_count",
+        "jyppx_ocv_face_facemark_fit_landmarks_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.Facemark|method|public;instance|JYPPX.OpenCvSharp.Face.FacemarkFitResult Fit(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Rect[] faces)",
+        "MEMBER|JYPPX.OpenCvSharp.Face.Facemark|method|public;instance|System.Boolean Fit(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Rect[] faces,out JYPPX.OpenCvSharp.Core.Point2f[][] landmarks)"
+      ]
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.face.createFacemarkAAM()->Ptr<Facemark>",
+      "classification": "intentionally-omitted",
+      "reason": "No native Face wrapper entrypoint is mapped for this parser declaration in the current ABI. Facemark fitting requires caller-selected compatible landmark model data; the repository bundles no model asset.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.face.createFacemarkLBF()->Ptr<Facemark>",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present. Facemark fitting requires caller-selected compatible landmark model data; the repository bundles no model asset.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_facemark_lbf_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.FacemarkLBF|method|public;static|JYPPX.OpenCvSharp.Face.FacemarkLBF Create()",
+        "MEMBER|JYPPX.OpenCvSharp.Face.FacemarkLBF|method|public;static|JYPPX.OpenCvSharp.Face.FacemarkLBF Create(JYPPX.OpenCvSharp.Face.FacemarkLBFParams parameters)",
+        "MEMBER|JYPPX.OpenCvSharp.Face.FacemarkLBF|method|public;static|JYPPX.OpenCvSharp.Face.FacemarkLBF Create(System.Int32 nLandmarks,System.Int32 initialShapeCount,System.Int32 stageCount,System.Int32 treeCount,System.Int32 treeDepth,System.Double shapeOffset=0,System.Double baggingOverlap=0.4,System.Boolean verbose=false)"
+      ]
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.face.createFacemarkKazemi()->Ptr<Facemark>",
+      "classification": "intentionally-omitted",
+      "reason": "No native Face wrapper entrypoint is mapped for this parser declaration in the current ABI. Facemark fitting requires caller-selected compatible landmark model data; the repository bundles no model asset.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.face.getFacesHAAR(Mat image;Mat faces[/O];String face_cascade_name[/C,/Ref])->bool",
+      "classification": "intentionally-omitted",
+      "reason": "No native Face wrapper entrypoint is mapped for this parser declaration in the current ABI.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.face.loadDatasetList(String imageList;String annotationList;vector_String images[/Ref];vector_String annotations[/Ref])->bool",
+      "classification": "intentionally-omitted",
+      "reason": "No native Face wrapper entrypoint is mapped for this parser declaration in the current ABI.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.face.loadTrainingData(String filename[/PATH];vector_String images[/Ref];Mat facePoints[/O];char delim=' ';float offset=0.0f)->bool",
+      "classification": "intentionally-omitted",
+      "reason": "No native Face wrapper entrypoint is mapped for this parser declaration in the current ABI.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.face.loadTrainingData(String imageList;String groundTruth;vector_String images[/Ref];Mat facePoints[/O];float offset=0.0f)->bool",
+      "classification": "intentionally-omitted",
+      "reason": "No native Face wrapper entrypoint is mapped for this parser declaration in the current ABI.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.face.loadTrainingData(vector_String filename[/PATH];vector_vector_Point2f trainlandmarks[/Ref];vector_String trainimages[/Ref])->bool",
+      "classification": "intentionally-omitted",
+      "reason": "No native Face wrapper entrypoint is mapped for this parser declaration in the current ABI.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.face.loadFacePoints(String filename[/PATH];Mat points[/O];float offset=0.0f)->bool",
+      "classification": "intentionally-omitted",
+      "reason": "No native Face wrapper entrypoint is mapped for this parser declaration in the current ABI.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.face.drawFacemarks(Mat image[/IO];Mat points;Scalar color=Scalar(255,0,0))->void",
+      "classification": "intentionally-omitted",
+      "reason": "No native Face wrapper entrypoint is mapped for this parser declaration in the current ABI.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 19,
+      "identity": "class cv.face.FacemarkTrain",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 20,
+      "identity": "class cv.face.FacemarkAAM",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 21,
+      "identity": "class cv.face.FacemarkLBF",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 22,
+      "identity": "class cv.face.BasicFaceRecognizer",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.face.BasicFaceRecognizer.getNumComponents()->int",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_basic_get_num_components"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.BasicFaceRecognizer|property|instance;get:public;set:public|System.Int32 NumComponents"
+      ]
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.face.BasicFaceRecognizer.setNumComponents(int val)->void",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_basic_set_num_components"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.BasicFaceRecognizer|property|instance;get:public;set:public|System.Int32 NumComponents"
+      ]
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.face.BasicFaceRecognizer.getThreshold()->double",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_recognizer_get_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.FaceRecognizer|property|instance;get:public;set:public|System.Double Threshold"
+      ]
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.face.BasicFaceRecognizer.setThreshold(double val)->void",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_recognizer_set_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.FaceRecognizer|property|instance;get:public;set:public|System.Double Threshold"
+      ]
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.face.BasicFaceRecognizer.getProjections()->std::vector<cv::Mat>",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_basic_get_projections_count",
+        "jyppx_ocv_face_basic_get_projections_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.BasicFaceRecognizer|method|public;instance|JYPPX.OpenCvSharp.Core.Mat[] GetProjections()"
+      ]
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.face.BasicFaceRecognizer.getLabels()->cv::Mat",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_basic_get_labels"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.BasicFaceRecognizer|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetLabels()"
+      ]
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.face.BasicFaceRecognizer.getEigenValues()->cv::Mat",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_basic_get_eigen_values"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.BasicFaceRecognizer|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetEigenValues()"
+      ]
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.face.BasicFaceRecognizer.getEigenVectors()->cv::Mat",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_basic_get_eigen_vectors"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.BasicFaceRecognizer|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetEigenVectors()"
+      ]
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.face.BasicFaceRecognizer.getMean()->cv::Mat",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_basic_get_mean"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.BasicFaceRecognizer|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetMean()"
+      ]
+    },
+    {
+      "ordinal": 32,
+      "identity": "class cv.face.EigenFaceRecognizer",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.face.EigenFaceRecognizer.create(int num_components=0;double threshold=DBL_MAX)->Ptr<EigenFaceRecognizer>",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_eigen_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.EigenFaceRecognizer|method|public;static|JYPPX.OpenCvSharp.Face.EigenFaceRecognizer Create(System.Int32 numComponents=0,System.Double threshold=1.7976931348623157E+308)"
+      ]
+    },
+    {
+      "ordinal": 34,
+      "identity": "class cv.face.FisherFaceRecognizer",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.face.FisherFaceRecognizer.create(int num_components=0;double threshold=DBL_MAX)->Ptr<FisherFaceRecognizer>",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_fisher_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.FisherFaceRecognizer|method|public;static|JYPPX.OpenCvSharp.Face.FisherFaceRecognizer Create(System.Int32 numComponents=0,System.Double threshold=1.7976931348623157E+308)"
+      ]
+    },
+    {
+      "ordinal": 36,
+      "identity": "class cv.face.LBPHFaceRecognizer",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.face.LBPHFaceRecognizer.getGridX()->int",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_lbph_get_grid_x"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.LBPHFaceRecognizer|property|instance;get:public;set:public|System.Int32 GridX"
+      ]
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.face.LBPHFaceRecognizer.setGridX(int val)->void",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_lbph_set_grid_x"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.LBPHFaceRecognizer|property|instance;get:public;set:public|System.Int32 GridX"
+      ]
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.face.LBPHFaceRecognizer.getGridY()->int",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_lbph_get_grid_y"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.LBPHFaceRecognizer|property|instance;get:public;set:public|System.Int32 GridY"
+      ]
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.face.LBPHFaceRecognizer.setGridY(int val)->void",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_lbph_set_grid_y"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.LBPHFaceRecognizer|property|instance;get:public;set:public|System.Int32 GridY"
+      ]
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.face.LBPHFaceRecognizer.getRadius()->int",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_lbph_get_radius"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.LBPHFaceRecognizer|property|instance;get:public;set:public|System.Int32 Radius"
+      ]
+    },
+    {
+      "ordinal": 42,
+      "identity": "cv.face.LBPHFaceRecognizer.setRadius(int val)->void",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_lbph_set_radius"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.LBPHFaceRecognizer|property|instance;get:public;set:public|System.Int32 Radius"
+      ]
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.face.LBPHFaceRecognizer.getNeighbors()->int",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_lbph_get_neighbors"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.LBPHFaceRecognizer|property|instance;get:public;set:public|System.Int32 Neighbors"
+      ]
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.face.LBPHFaceRecognizer.setNeighbors(int val)->void",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_lbph_set_neighbors"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.LBPHFaceRecognizer|property|instance;get:public;set:public|System.Int32 Neighbors"
+      ]
+    },
+    {
+      "ordinal": 45,
+      "identity": "cv.face.LBPHFaceRecognizer.getThreshold()->double",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_recognizer_get_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.FaceRecognizer|property|instance;get:public;set:public|System.Double Threshold"
+      ]
+    },
+    {
+      "ordinal": 46,
+      "identity": "cv.face.LBPHFaceRecognizer.setThreshold(double val)->void",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_recognizer_set_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.FaceRecognizer|property|instance;get:public;set:public|System.Double Threshold"
+      ]
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.face.LBPHFaceRecognizer.getHistograms()->std::vector<cv::Mat>",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_lbph_get_histograms_count",
+        "jyppx_ocv_face_lbph_get_histograms_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.LBPHFaceRecognizer|method|public;instance|JYPPX.OpenCvSharp.Core.Mat[] GetHistograms()"
+      ]
+    },
+    {
+      "ordinal": 48,
+      "identity": "cv.face.LBPHFaceRecognizer.getLabels()->cv::Mat",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_lbph_get_labels"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.LBPHFaceRecognizer|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetLabels()"
+      ]
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.face.LBPHFaceRecognizer.create(int radius=1;int neighbors=8;int grid_x=8;int grid_y=8;double threshold=DBL_MAX)->Ptr<LBPHFaceRecognizer>",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_lbph_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.LBPHFaceRecognizer|method|public;static|JYPPX.OpenCvSharp.Face.LBPHFaceRecognizer Create(System.Int32 radius=1,System.Int32 neighbors=8,System.Int32 gridX=8,System.Int32 gridY=8,System.Double threshold=1.7976931348623157E+308)"
+      ]
+    },
+    {
+      "ordinal": 50,
+      "identity": "class cv.face.MACE",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 51,
+      "identity": "cv.face.MACE.salt(String passphrase[/C,/Ref])->void",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_mace_salt"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.MACE|method|public;instance|System.Void Salt(System.String passphrase)"
+      ]
+    },
+    {
+      "ordinal": 52,
+      "identity": "cv.face.MACE.train(vector_Mat images)->void",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_mace_train"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.MACE|method|public;instance|System.Void Train(params JYPPX.OpenCvSharp.Core.Mat[] images)"
+      ]
+    },
+    {
+      "ordinal": 53,
+      "identity": "cv.face.MACE.same(Mat query)->bool",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_mace_same"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.MACE|method|public;instance|System.Boolean Same(JYPPX.OpenCvSharp.Core.Mat query)"
+      ]
+    },
+    {
+      "ordinal": 54,
+      "identity": "cv.face.MACE.load(String filename[/C,/Ref,/PATH];String objname=String()[/C,/Ref])->cv::Ptr<MACE>",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_mace_load"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.MACE|method|public;static|JYPPX.OpenCvSharp.Face.MACE Load(System.String filename,System.String objname=\"\")"
+      ]
+    },
+    {
+      "ordinal": 55,
+      "identity": "cv.face.MACE.create(int IMGSIZE=64)->cv::Ptr<MACE>",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_mace_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.MACE|method|public;static|JYPPX.OpenCvSharp.Face.MACE Create(System.Int32 imageSize=64)"
+      ]
+    },
+    {
+      "ordinal": 56,
+      "identity": "class cv.face.PredictCollector",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 57,
+      "identity": "class cv.face.StandardCollector",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 58,
+      "identity": "cv.face.StandardCollector.getMinLabel()->int",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_standard_collector_get_min_label"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.StandardCollector|property|instance;get:public|System.Int32 MinLabel"
+      ]
+    },
+    {
+      "ordinal": 59,
+      "identity": "cv.face.StandardCollector.getMinDist()->double",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_standard_collector_get_min_dist"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.StandardCollector|property|instance;get:public|System.Double MinDist"
+      ]
+    },
+    {
+      "ordinal": 60,
+      "identity": "cv.face.StandardCollector.getResults(bool sorted=false)->std::vector< std::pair<int, double> >",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_standard_collector_get_results_count",
+        "jyppx_ocv_face_standard_collector_get_results_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.StandardCollector|method|public;instance|JYPPX.OpenCvSharp.Face.FacePredictionResult[] GetResults(System.Boolean sorted=false)"
+      ]
+    },
+    {
+      "ordinal": 61,
+      "identity": "cv.face.StandardCollector.create(double threshold=DBL_MAX)->Ptr<StandardCollector>",
+      "classification": "implemented",
+      "reason": "Explicit Face declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FACE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_standard_collector_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Face.StandardCollector|method|public;static|JYPPX.OpenCvSharp.Face.StandardCollector Create(System.Double threshold=1.7976931348623157E+308)"
+      ]
+    }
+  ]
+}

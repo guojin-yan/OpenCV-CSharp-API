@@ -3,13 +3,14 @@
   "upstreamOpenCvVersion": "5.0.0",
   "claimedSlice": "opencv2/optflow.hpp contrib public header closure from parser-emitted headers",
   "reviewStatus": "reviewed",
-  "limitation": "The map records parser identities and current OptFlow wrapper evidence; it does not claim repository-wide contrib parity.",
+  "limitation": "The map records parser identities and exact OptFlow wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [],
   "declarations": [
     {
       "ordinal": 0,
       "identity": "cv.motempl.updateMotionHistory(Mat silhouette;Mat mhi[/IO];double timestamp;double duration)->void",
       "classification": "implemented",
-      "reason": "Explicit OptFlow managed baseline evidence and module-scoped native manifest evidence are present.",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
       "nativeEntrypoints": [
         "jyppx_ocv_motempl_update_motion_history"
@@ -22,7 +23,7 @@
       "ordinal": 1,
       "identity": "cv.motempl.calcMotionGradient(Mat mhi;Mat mask[/O];Mat orientation[/O];double delta1;double delta2;int apertureSize=3)->void",
       "classification": "implemented",
-      "reason": "Explicit OptFlow managed baseline evidence and module-scoped native manifest evidence are present.",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
       "nativeEntrypoints": [
         "jyppx_ocv_motempl_calc_motion_gradient"
@@ -35,7 +36,7 @@
       "ordinal": 2,
       "identity": "cv.motempl.calcGlobalOrientation(Mat orientation;Mat mask;Mat mhi;double timestamp;double duration)->double",
       "classification": "implemented",
-      "reason": "Explicit OptFlow managed baseline evidence and module-scoped native manifest evidence are present.",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
       "nativeEntrypoints": [
         "jyppx_ocv_motempl_calc_global_orientation"
@@ -48,10 +49,11 @@
       "ordinal": 3,
       "identity": "cv.motempl.segmentMotion(Mat mhi;Mat segmask[/O];vector_Rect boundingRects[/O,/Ref];double timestamp;double segThresh)->void",
       "classification": "implemented",
-      "reason": "Explicit OptFlow managed baseline evidence and module-scoped native manifest evidence are present.",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
       "nativeEntrypoints": [
-        "jyppx_ocv_motempl_segment_motion_count"
+        "jyppx_ocv_motempl_segment_motion_count",
+        "jyppx_ocv_motempl_segment_motion_fill"
       ],
       "managedMembers": [
         "MEMBER|JYPPX.OpenCvSharp.OptFlow.OptFlowCv2|method|public;static|JYPPX.OpenCvSharp.Core.Rect[] SegmentMotion(JYPPX.OpenCvSharp.Core.Mat mhi,JYPPX.OpenCvSharp.Core.Mat segmask,System.Double timestamp,System.Double segThresh)"
@@ -79,7 +81,7 @@
       "ordinal": 6,
       "identity": "cv.optflow.createOptFlow_PCAFlow()->Ptr<DenseOpticalFlow>",
       "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "reason": "No native OptFlow wrapper entrypoint is mapped for this parser declaration in the current ABI.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
       "nativeEntrypoints": [],
       "managedMembers": []
@@ -124,10 +126,10 @@
       "ordinal": 11,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.setUseMEstimator(bool val)->void",
       "classification": "implemented",
-      "reason": "Explicit OptFlow managed baseline evidence and module-scoped native manifest evidence are present.",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
       "nativeEntrypoints": [
-        "jyppx_ocv_motempl_calc_global_orientation"
+        "jyppx_ocv_optflow_rlof_parameter_set_use_m_estimator"
       ],
       "managedMembers": [
         "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|method|public;instance|System.Void SetUseMEstimator(System.Boolean value)"
@@ -136,263 +138,375 @@
     {
       "ordinal": 12,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.setSolverType(SolverType val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|JYPPX.OpenCvSharp.OptFlow.OptFlowSolverType SolverType"
+      ]
     },
     {
       "ordinal": 13,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.getSolverType()->SolverType",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|JYPPX.OpenCvSharp.OptFlow.OptFlowSolverType SolverType"
+      ]
     },
     {
       "ordinal": 14,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.setSupportRegionType(SupportRegionType val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|JYPPX.OpenCvSharp.OptFlow.OptFlowSupportRegionType SupportRegionType"
+      ]
     },
     {
       "ordinal": 15,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.getSupportRegionType()->SupportRegionType",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|JYPPX.OpenCvSharp.OptFlow.OptFlowSupportRegionType SupportRegionType"
+      ]
     },
     {
       "ordinal": 16,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.setNormSigma0(float val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_set_float"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Single NormSigma0"
+      ]
     },
     {
       "ordinal": 17,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.getNormSigma0()->float",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_get_float"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Single NormSigma0"
+      ]
     },
     {
       "ordinal": 18,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.setNormSigma1(float val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_set_float"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Single NormSigma1"
+      ]
     },
     {
       "ordinal": 19,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.getNormSigma1()->float",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_get_float"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Single NormSigma1"
+      ]
     },
     {
       "ordinal": 20,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.setSmallWinSize(int val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Int32 SmallWinSize"
+      ]
     },
     {
       "ordinal": 21,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.getSmallWinSize()->int",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Int32 SmallWinSize"
+      ]
     },
     {
       "ordinal": 22,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.setLargeWinSize(int val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Int32 LargeWinSize"
+      ]
     },
     {
       "ordinal": 23,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.getLargeWinSize()->int",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Int32 LargeWinSize"
+      ]
     },
     {
       "ordinal": 24,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.setCrossSegmentationThreshold(int val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Int32 CrossSegmentationThreshold"
+      ]
     },
     {
       "ordinal": 25,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.getCrossSegmentationThreshold()->int",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Int32 CrossSegmentationThreshold"
+      ]
     },
     {
       "ordinal": 26,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.setMaxLevel(int val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Int32 MaxLevel"
+      ]
     },
     {
       "ordinal": 27,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.getMaxLevel()->int",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Int32 MaxLevel"
+      ]
     },
     {
       "ordinal": 28,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.setUseInitialFlow(bool val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Boolean UseInitialFlow"
+      ]
     },
     {
       "ordinal": 29,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.getUseInitialFlow()->bool",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Boolean UseInitialFlow"
+      ]
     },
     {
       "ordinal": 30,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.setUseIlluminationModel(bool val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Boolean UseIlluminationModel"
+      ]
     },
     {
       "ordinal": 31,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.getUseIlluminationModel()->bool",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Boolean UseIlluminationModel"
+      ]
     },
     {
       "ordinal": 32,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.setUseGlobalMotionPrior(bool val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Boolean UseGlobalMotionPrior"
+      ]
     },
     {
       "ordinal": 33,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.getUseGlobalMotionPrior()->bool",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Boolean UseGlobalMotionPrior"
+      ]
     },
     {
       "ordinal": 34,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.setMaxIteration(int val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Int32 MaxIteration"
+      ]
     },
     {
       "ordinal": 35,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.getMaxIteration()->int",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Int32 MaxIteration"
+      ]
     },
     {
       "ordinal": 36,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.setMinEigenValue(float val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_set_float"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Single MinEigenValue"
+      ]
     },
     {
       "ordinal": 37,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.getMinEigenValue()->float",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_get_float"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Single MinEigenValue"
+      ]
     },
     {
       "ordinal": 38,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.setGlobalMotionRansacThreshold(float val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_set_float"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Single GlobalMotionRansacThreshold"
+      ]
     },
     {
       "ordinal": 39,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.getGlobalMotionRansacThreshold()->float",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_rlof_parameter_get_float"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|property|instance;get:public;set:public|System.Single GlobalMotionRansacThreshold"
+      ]
     },
     {
       "ordinal": 40,
       "identity": "cv.optflow.RLOFOpticalFlowParameter.create()->Ptr<RLOFOpticalFlowParameter>",
       "classification": "implemented",
-      "reason": "Explicit OptFlow managed baseline evidence and module-scoped native manifest evidence are present.",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
       "nativeEntrypoints": [
-        "jyppx_ocv_motempl_calc_global_orientation"
+        "jyppx_ocv_optflow_rlof_parameter_create"
       ],
       "managedMembers": [
         "MEMBER|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|method|public;static|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter Create()"
@@ -411,10 +525,10 @@
       "ordinal": 42,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.setRLOFOpticalFlowParameter(Ptr_RLOFOpticalFlowParameter val)->void",
       "classification": "implemented",
-      "reason": "Explicit OptFlow managed baseline evidence and module-scoped native manifest evidence are present.",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
       "nativeEntrypoints": [
-        "jyppx_ocv_motempl_calc_global_orientation"
+        "jyppx_ocv_optflow_dense_rlof_set_parameter"
       ],
       "managedMembers": [
         "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|method|public;instance|System.Void SetRLOFOpticalFlowParameter(JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter parameter)"
@@ -424,10 +538,10 @@
       "ordinal": 43,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.getRLOFOpticalFlowParameter()->Ptr<RLOFOpticalFlowParameter>",
       "classification": "implemented",
-      "reason": "Explicit OptFlow managed baseline evidence and module-scoped native manifest evidence are present.",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
       "nativeEntrypoints": [
-        "jyppx_ocv_motempl_calc_global_orientation"
+        "jyppx_ocv_optflow_dense_rlof_get_parameter"
       ],
       "managedMembers": [
         "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|method|public;instance|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter GetRLOFOpticalFlowParameter()"
@@ -436,227 +550,323 @@
     {
       "ordinal": 44,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.setForwardBackward(float val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_dense_rlof_set_float"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Single ForwardBackward"
+      ]
     },
     {
       "ordinal": 45,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.getForwardBackward()->float",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_dense_rlof_get_float"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Single ForwardBackward"
+      ]
     },
     {
       "ordinal": 46,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.getGridStep()->Size",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_dense_rlof_get_grid_step"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.Size GridStep"
+      ]
     },
     {
       "ordinal": 47,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.setGridStep(Size val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_dense_rlof_set_grid_step"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.Size GridStep"
+      ]
     },
     {
       "ordinal": 48,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.setInterpolation(InterpolationType val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_dense_rlof_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|JYPPX.OpenCvSharp.OptFlow.OptFlowInterpolationType Interpolation"
+      ]
     },
     {
       "ordinal": 49,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.getInterpolation()->InterpolationType",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_dense_rlof_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|JYPPX.OpenCvSharp.OptFlow.OptFlowInterpolationType Interpolation"
+      ]
     },
     {
       "ordinal": 50,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.getEPICK()->int",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_dense_rlof_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Int32 EPICK"
+      ]
     },
     {
       "ordinal": 51,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.setEPICK(int val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_dense_rlof_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Int32 EPICK"
+      ]
     },
     {
       "ordinal": 52,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.getEPICSigma()->float",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_dense_rlof_get_float"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Single EPICSigma"
+      ]
     },
     {
       "ordinal": 53,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.setEPICSigma(float val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_dense_rlof_set_float"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Single EPICSigma"
+      ]
     },
     {
       "ordinal": 54,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.getEPICLambda()->float",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_dense_rlof_get_float"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Single EPICLambda"
+      ]
     },
     {
       "ordinal": 55,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.setEPICLambda(float val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_dense_rlof_set_float"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Single EPICLambda"
+      ]
     },
     {
       "ordinal": 56,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.getFgsLambda()->float",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_dense_rlof_get_float"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Single FgsLambda"
+      ]
     },
     {
       "ordinal": 57,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.setFgsLambda(float val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_dense_rlof_set_float"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Single FgsLambda"
+      ]
     },
     {
       "ordinal": 58,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.getFgsSigma()->float",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_dense_rlof_get_float"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Single FgsSigma"
+      ]
     },
     {
       "ordinal": 59,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.setFgsSigma(float val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_dense_rlof_set_float"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Single FgsSigma"
+      ]
     },
     {
       "ordinal": 60,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.setUsePostProc(bool val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_dense_rlof_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Boolean UsePostProc"
+      ]
     },
     {
       "ordinal": 61,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.getUsePostProc()->bool",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_dense_rlof_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Boolean UsePostProc"
+      ]
     },
     {
       "ordinal": 62,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.setUseVariationalRefinement(bool val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_dense_rlof_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Boolean UseVariationalRefinement"
+      ]
     },
     {
       "ordinal": 63,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.getUseVariationalRefinement()->bool",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_dense_rlof_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Boolean UseVariationalRefinement"
+      ]
     },
     {
       "ordinal": 64,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.setRICSPSize(int val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_dense_rlof_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Int32 RICSPSize"
+      ]
     },
     {
       "ordinal": 65,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.getRICSPSize()->int",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_dense_rlof_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Int32 RICSPSize"
+      ]
     },
     {
       "ordinal": 66,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.setRICSLICType(int val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_dense_rlof_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Int32 RICSLICType"
+      ]
     },
     {
       "ordinal": 67,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.getRICSLICType()->int",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_dense_rlof_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|property|instance;get:public;set:public|System.Int32 RICSLICType"
+      ]
     },
     {
       "ordinal": 68,
       "identity": "cv.optflow.DenseRLOFOpticalFlow.create(Ptr_RLOFOpticalFlowParameter rlofParam=Ptr<RLOFOpticalFlowParameter>();float forwardBackwardThreshold=1.f;Size gridStep=Size(6, 6);InterpolationType interp_type=InterpolationType::INTERP_EPIC;int epicK=128;float epicSigma=0.05f;float epicLambda=999.0f;int ricSPSize=15;int ricSLICType=100;bool use_post_proc=true;float fgsLambda=500.0f;float fgsSigma=1.5f;bool use_variational_refinement=false)->Ptr<DenseRLOFOpticalFlow>",
       "classification": "implemented",
-      "reason": "Explicit OptFlow managed baseline evidence and module-scoped native manifest evidence are present.",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
       "nativeEntrypoints": [
-        "jyppx_ocv_motempl_calc_global_orientation"
+        "jyppx_ocv_optflow_dense_rlof_create"
       ],
       "managedMembers": [
         "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|method|public;static|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow Create(JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter? parameter=null,System.Single forwardBackwardThreshold=1,JYPPX.OpenCvSharp.Core.Size? gridStep=null,JYPPX.OpenCvSharp.OptFlow.OptFlowInterpolationType interpolation=Epic,System.Int32 epicK=128,System.Single epicSigma=0.05,System.Single epicLambda=999,System.Int32 ricSpSize=15,System.Int32 ricSlicType=100,System.Boolean usePostProc=true,System.Single fgsLambda=500,System.Single fgsSigma=1.5,System.Boolean useVariationalRefinement=false)"
@@ -675,10 +885,10 @@
       "ordinal": 70,
       "identity": "cv.optflow.SparseRLOFOpticalFlow.setRLOFOpticalFlowParameter(Ptr_RLOFOpticalFlowParameter val)->void",
       "classification": "implemented",
-      "reason": "Explicit OptFlow managed baseline evidence and module-scoped native manifest evidence are present.",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
       "nativeEntrypoints": [
-        "jyppx_ocv_motempl_calc_global_orientation"
+        "jyppx_ocv_optflow_sparse_rlof_set_parameter"
       ],
       "managedMembers": [
         "MEMBER|JYPPX.OpenCvSharp.OptFlow.SparseRLOFOpticalFlow|method|public;instance|System.Void SetRLOFOpticalFlowParameter(JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter parameter)"
@@ -688,10 +898,10 @@
       "ordinal": 71,
       "identity": "cv.optflow.SparseRLOFOpticalFlow.getRLOFOpticalFlowParameter()->Ptr<RLOFOpticalFlowParameter>",
       "classification": "implemented",
-      "reason": "Explicit OptFlow managed baseline evidence and module-scoped native manifest evidence are present.",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
       "nativeEntrypoints": [
-        "jyppx_ocv_motempl_calc_global_orientation"
+        "jyppx_ocv_optflow_sparse_rlof_get_parameter"
       ],
       "managedMembers": [
         "MEMBER|JYPPX.OpenCvSharp.OptFlow.SparseRLOFOpticalFlow|method|public;instance|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter GetRLOFOpticalFlowParameter()"
@@ -700,29 +910,37 @@
     {
       "ordinal": 72,
       "identity": "cv.optflow.SparseRLOFOpticalFlow.setForwardBackward(float val)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_sparse_rlof_set_forward_backward"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.SparseRLOFOpticalFlow|property|instance;get:public;set:public|System.Single ForwardBackward"
+      ]
     },
     {
       "ordinal": 73,
       "identity": "cv.optflow.SparseRLOFOpticalFlow.getForwardBackward()->float",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_sparse_rlof_get_forward_backward"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.SparseRLOFOpticalFlow|property|instance;get:public;set:public|System.Single ForwardBackward"
+      ]
     },
     {
       "ordinal": 74,
       "identity": "cv.optflow.SparseRLOFOpticalFlow.create(Ptr_RLOFOpticalFlowParameter rlofParam=Ptr<RLOFOpticalFlowParameter>();float forwardBackwardThreshold=1.f)->Ptr<SparseRLOFOpticalFlow>",
       "classification": "implemented",
-      "reason": "Explicit OptFlow managed baseline evidence and module-scoped native manifest evidence are present.",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
       "nativeEntrypoints": [
-        "jyppx_ocv_motempl_calc_global_orientation"
+        "jyppx_ocv_optflow_sparse_rlof_create"
       ],
       "managedMembers": [
         "MEMBER|JYPPX.OpenCvSharp.OptFlow.SparseRLOFOpticalFlow|method|public;static|JYPPX.OpenCvSharp.OptFlow.SparseRLOFOpticalFlow Create(JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter? parameter=null,System.Single forwardBackwardThreshold=1)"
@@ -732,10 +950,10 @@
       "ordinal": 75,
       "identity": "cv.optflow.calcOpticalFlowDenseRLOF(Mat I0;Mat I1;Mat flow[/IO];Ptr_RLOFOpticalFlowParameter rlofParam=Ptr<RLOFOpticalFlowParameter>();float forwardBackwardThreshold=0;Size gridStep=Size(6, 6);InterpolationType interp_type=InterpolationType::INTERP_EPIC;int epicK=128;float epicSigma=0.05f;float epicLambda=100.f;int ricSPSize=15;int ricSLICType=100;bool use_post_proc=true;float fgsLambda=500.0f;float fgsSigma=1.5f;bool use_variational_refinement=false)->void",
       "classification": "implemented",
-      "reason": "Explicit OptFlow managed baseline evidence and module-scoped native manifest evidence are present.",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
       "nativeEntrypoints": [
-        "jyppx_ocv_motempl_calc_global_orientation"
+        "jyppx_ocv_optflow_calc_optical_flow_dense_rlof"
       ],
       "managedMembers": [
         "MEMBER|JYPPX.OpenCvSharp.OptFlow.OptFlowCv2|method|public;static|System.Void CalcOpticalFlowDenseRLOF(JYPPX.OpenCvSharp.Core.Mat i0,JYPPX.OpenCvSharp.Core.Mat i1,JYPPX.OpenCvSharp.Core.Mat flow,JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter? parameter=null,System.Single forwardBackwardThreshold=0,JYPPX.OpenCvSharp.Core.Size? gridStep=null,JYPPX.OpenCvSharp.OptFlow.OptFlowInterpolationType interpolation=Epic,System.Int32 epicK=128,System.Single epicSigma=0.05,System.Single epicLambda=100,System.Int32 ricSpSize=15,System.Int32 ricSlicType=100,System.Boolean usePostProc=true,System.Single fgsLambda=500,System.Single fgsSigma=1.5,System.Boolean useVariationalRefinement=false)"
@@ -745,10 +963,10 @@
       "ordinal": 76,
       "identity": "cv.optflow.calcOpticalFlowSparseRLOF(Mat prevImg;Mat nextImg;Mat prevPts;Mat nextPts[/IO];Mat status[/O];Mat err[/O];Ptr_RLOFOpticalFlowParameter rlofParam=Ptr<RLOFOpticalFlowParameter>();float forwardBackwardThreshold=0)->void",
       "classification": "implemented",
-      "reason": "Explicit OptFlow managed baseline evidence and module-scoped native manifest evidence are present.",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
       "nativeEntrypoints": [
-        "jyppx_ocv_motempl_calc_global_orientation"
+        "jyppx_ocv_optflow_calc_optical_flow_sparse_rlof"
       ],
       "managedMembers": [
         "MEMBER|JYPPX.OpenCvSharp.OptFlow.OptFlowCv2|method|public;static|System.Void CalcOpticalFlowSparseRLOF(JYPPX.OpenCvSharp.Core.Mat prevImg,JYPPX.OpenCvSharp.Core.Mat nextImg,JYPPX.OpenCvSharp.Core.Mat prevPts,JYPPX.OpenCvSharp.Core.Mat nextPts,JYPPX.OpenCvSharp.Core.Mat status,JYPPX.OpenCvSharp.Core.Mat err,JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter? parameter=null,System.Single forwardBackwardThreshold=0)"
@@ -757,20 +975,28 @@
     {
       "ordinal": 77,
       "identity": "cv.optflow.createOptFlow_DenseRLOF()->Ptr<DenseOpticalFlow>",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_dense_rlof_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|method|public;static|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow Create(JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter? parameter=null,System.Single forwardBackwardThreshold=1,JYPPX.OpenCvSharp.Core.Size? gridStep=null,JYPPX.OpenCvSharp.OptFlow.OptFlowInterpolationType interpolation=Epic,System.Int32 epicK=128,System.Single epicSigma=0.05,System.Single epicLambda=999,System.Int32 ricSpSize=15,System.Int32 ricSlicType=100,System.Boolean usePostProc=true,System.Single fgsLambda=500,System.Single fgsSigma=1.5,System.Boolean useVariationalRefinement=false)"
+      ]
     },
     {
       "ordinal": 78,
       "identity": "cv.optflow.createOptFlow_SparseRLOF()->Ptr<SparseOpticalFlow>",
-      "classification": "intentionally-omitted",
-      "reason": "No matching managed OptFlow member is present in the current baseline.",
+      "classification": "implemented",
+      "reason": "Explicit OptFlow declaration-to-symbol mapping and exact managed baseline evidence are present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_optflow_sparse_rlof_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.OptFlow.SparseRLOFOpticalFlow|method|public;static|JYPPX.OpenCvSharp.OptFlow.SparseRLOFOpticalFlow Create(JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter? parameter=null,System.Single forwardBackwardThreshold=1)"
+      ]
     },
     {
       "ordinal": 79,

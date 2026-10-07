@@ -1,0 +1,10 @@
+param([string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')))
+Set-StrictMode -Version Latest;$ErrorActionPreference='Stop'
+$repo=(Resolve-Path -LiteralPath $RepositoryRoot).Path
+& (Join-Path $PSScriptRoot 'Generate-ImgHashUpstreamMap.ps1') -RepositoryRoot $repo -Check
+$summary=Get-Content (Join-Path $repo 'compatibility/img_hash-upstream-summary.json') -Raw|ConvertFrom-Json
+$map=Get-Content (Join-Path $repo 'compatibility/img_hash-upstream-classifications.json') -Raw|ConvertFrom-Json
+$manifest=@(Get-Content (Join-Path $repo 'src/OpenCvSharp.Native/generated/native_abi_manifest.txt')|ForEach-Object {($_ -split '\|')[0]})
+if([int]$summary.declarationCount -ne 31 -or [int]$summary.callableCount -ne 23 -or [int]$summary.classificationCounts.implemented -ne 23 -or [int]$summary.classificationCounts.'intentionally-omitted' -ne 0 -or [int]$summary.classificationCounts.missing -ne 0){throw 'ImgHash upstream map partition drifted.'}
+foreach($expected in @(@{identity='cv.img_hash.BlockMeanHash.getMean(';native=@('jyppx_ocv_img_hash_block_mean_get_mean_count','jyppx_ocv_img_hash_block_mean_get_mean_fill')},@{identity='cv.img_hash.RadialVarianceHash.setNumOfAngleLine(';native=@('jyppx_ocv_img_hash_radial_variance_set_num_of_angle_line')},@{identity='cv.img_hash.ImgHashBase.compare(';native=@('jyppx_ocv_img_hash_compare')})){$rows=@($map.declarations|Where-Object {$_.identity.StartsWith($expected.identity)});if($rows.Count -ne 1 -or $rows[0].classification -ne 'implemented' -or @($rows[0].managedMembers).Count -eq 0){throw "ImgHash declaration evidence drifted: $($expected.identity)"};foreach($entry in $expected.native){if(@($rows[0].nativeEntrypoints) -notcontains $entry -or $manifest -notcontains $entry){throw "ImgHash ABI evidence is missing: $entry"}}}
+Write-Host "IMG_HASH_UPSTREAM_MAP_CONTRACT_OK declarations=$($summary.declarationCount) callables=$($summary.callableCount) implemented=$($summary.classificationCounts.implemented) omitted=0 missing=0 sha256=$($summary.mappingSha256)"

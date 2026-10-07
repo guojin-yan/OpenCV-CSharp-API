@@ -1,0 +1,1406 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/FaceUpstreamMap/extract_face.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face.hpp",
+  "headerSha256": "46cf9fa849676be217a77c81546b26ee46f51cf2dafe3e9d5603f1e549803369",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/bif.hpp",
+      "sha256": "bcd03f638743f97d4f50f7fb6edf29be408b4eafcb5da34efb92548666a8b44c",
+      "startOrdinal": 0,
+      "declarationCount": 5
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/face_alignment.hpp",
+      "sha256": "52d461ffddf74eadd2230fb056752950ed3831c24871f565cb3db29027d021bc",
+      "startOrdinal": 5,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facemark.hpp",
+      "sha256": "fb5acfdc605643c17a885c6bf2567ff3496c8682796f4acb2bfcc76c3e011998",
+      "startOrdinal": 6,
+      "declarationCount": 6
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facemark_train.hpp",
+      "sha256": "c97c11d2e037c2533ab98cd3a1322bcdfb4c8ea64d2c59224429313b33579c55",
+      "startOrdinal": 12,
+      "declarationCount": 8
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facemarkAAM.hpp",
+      "sha256": "c5b8efae55da64e7448104a20f84a0c48156df988170fd2ccccde7c8c5faa3b8",
+      "startOrdinal": 20,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facemarkLBF.hpp",
+      "sha256": "4457c2c846037c73a1f52d91eb32f8689f1ff49b16dbe14da606539737a14e46",
+      "startOrdinal": 21,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "sha256": "812187f68b5e1a7c6239149611a3dcb86b962d5c724e5978c6c3d5c06733d065",
+      "startOrdinal": 22,
+      "declarationCount": 28
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/mace.hpp",
+      "sha256": "03f86ab5f0637564f6e2d5435540fbc005d83343e26426ef89178dcf8395c768",
+      "startOrdinal": 50,
+      "declarationCount": 6
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/predict_collector.hpp",
+      "sha256": "ed2fad0381d625bb2bdfd3a9cbc49f8668119ae7ccb4a2ea48a5780b1f285413",
+      "startOrdinal": 56,
+      "declarationCount": 6
+    }
+  ],
+  "declarationCount": 62,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/bif.hpp",
+      "kind": "class",
+      "name": "cv.face.BIF",
+      "identity": "class cv.face.BIF",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "Implementation of bio-inspired features (BIF) from the paper:\n *  Guo, Guodong, et al. \"Human age estimation using bio-inspired features.\"\n *  Computer Vision and Pattern Recognition, 2009. CVPR 2009."
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/bif.hpp",
+      "kind": "callable",
+      "name": "cv.face.BIF.getNumBands",
+      "identity": "cv.face.BIF.getNumBands()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@returns The number of filter bands used for computing BIF."
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/bif.hpp",
+      "kind": "callable",
+      "name": "cv.face.BIF.getNumRotations",
+      "identity": "cv.face.BIF.getNumRotations()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@returns The number of image rotations."
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/bif.hpp",
+      "kind": "callable",
+      "name": "cv.face.BIF.compute",
+      "identity": "cv.face.BIF.compute(Mat image;Mat features[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "features",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Computes features sby input image.\n     *  @param image Input image (CV_32FC1).\n     *  @param features Feature vector (CV_32FC1)."
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/bif.hpp",
+      "kind": "callable",
+      "name": "cv.face.BIF.create",
+      "identity": "cv.face.BIF.create(int num_bands=8;int num_rotations=12)->Ptr<BIF>",
+      "returnType": "Ptr<BIF>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "num_bands",
+          "default": "8",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "num_rotations",
+          "default": "12",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @param num_bands The number of filter bands (<=8) used for computing BIF.\n     * @param num_rotations The number of image rotations for computing BIF.\n     * @returns Object for computing BIF."
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/face_alignment.hpp",
+      "kind": "class",
+      "name": "cv.face.FacemarkKazemi",
+      "identity": "class cv.face.FacemarkKazemi",
+      "returnType": ": cv::face::Facemark",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::face::Facemark",
+      "documentation": ""
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facemark.hpp",
+      "kind": "class",
+      "name": "cv.face.Facemark",
+      "identity": "class cv.face.Facemark",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Abstract base class for all facemark models\n\nTo utilize this API in your program, please take a look at the @ref tutorial_table_of_content_facemark\n### Description\n\nFacemark is a base class which provides universal access to any specific facemark algorithm.\nTherefore, the users should declare a desired algorithm before they can use it in their application.\n\nHere is an example on how to declare a facemark algorithm:\n@code\n// Using Facemark in your code:\nPtr<Facemark> facemark = createFacemarkLBF();\n@endcode\n\nThe typical pipeline for facemark detection is as follows:\n- Load the trained model using Facemark::loadModel.\n- Perform the fitting on an image via Facemark::fit."
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facemark.hpp",
+      "kind": "callable",
+      "name": "cv.face.Facemark.loadModel",
+      "identity": "cv.face.Facemark.loadModel(String model)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "model",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief A function to load the trained model before the fitting process.\n    @param model A string represent the filename of a trained model.\n\n    <B>Example of usage</B>\n    @code\n    facemark->loadModel(\"../data/lbf.model\");\n    @endcode"
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facemark.hpp",
+      "kind": "callable",
+      "name": "cv.face.Facemark.fit",
+      "identity": "cv.face.Facemark.fit(Mat image;Mat faces;vector_Mat landmarks[/O])->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "faces",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Mat",
+          "name": "landmarks",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Detect facial landmarks from an image.\n    @param image Input image.\n    @param faces Output of the function which represent region of interest of the detected faces.\n    Each face is stored in cv::Rect container.\n    @param landmarks The detected landmark points for each faces.\n\n    <B>Example of usage</B>\n    @code\n    Mat image = imread(\"image.jpg\");\n    std::vector<Rect> faces;\n    std::vector<std::vector<Point2f> > landmarks;\n    facemark->fit(image, faces, landmarks);\n    @endcode"
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facemark.hpp",
+      "kind": "callable",
+      "name": "cv.face.createFacemarkAAM",
+      "identity": "cv.face.createFacemarkAAM()->Ptr<Facemark>",
+      "returnType": "Ptr<Facemark>",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facemark.hpp",
+      "kind": "callable",
+      "name": "cv.face.createFacemarkLBF",
+      "identity": "cv.face.createFacemarkLBF()->Ptr<Facemark>",
+      "returnType": "Ptr<Facemark>",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facemark.hpp",
+      "kind": "callable",
+      "name": "cv.face.createFacemarkKazemi",
+      "identity": "cv.face.createFacemarkKazemi()->Ptr<Facemark>",
+      "returnType": "Ptr<Facemark>",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facemark_train.hpp",
+      "kind": "callable",
+      "name": "cv.face.getFacesHAAR",
+      "identity": "cv.face.getFacesHAAR(Mat image;Mat faces[/O];String face_cascade_name[/C,/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "faces",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "face_cascade_name",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Default face detector\nThis function is mainly utilized by the implementation of a Facemark Algorithm.\nEnd users are advised to use function Facemark::getFaces which can be manually defined\nand circumvented to the algorithm by Facemark::setFaceDetector.\n\n@param image The input image to be processed.\n@param faces Output of the function which represent region of interest of the detected faces.\nEach face is stored in cv::Rect container.\n@param params detector parameters\n\n<B>Example of usage</B>\n@code\nstd::vector<cv::Rect> faces;\nCParams params(\"haarcascade_frontalface_alt.xml\");\ncv::face::getFaces(frame, faces, &params);\nfor(int j=0;j<faces.size();j++){\n    cv::rectangle(frame, faces[j], cv::Scalar(255,0,255));\n}\ncv::imshow(\"detection\", frame);\n@endcode"
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facemark_train.hpp",
+      "kind": "callable",
+      "name": "cv.face.loadDatasetList",
+      "identity": "cv.face.loadDatasetList(String imageList;String annotationList;vector_String images[/Ref];vector_String annotations[/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "imageList",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "String",
+          "name": "annotationList",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_String",
+          "name": "images",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_String",
+          "name": "annotations",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief A utility to load list of paths to training image and annotation file.\n@param imageList The specified file contains paths to the training images.\n@param annotationList The specified file contains paths to the training annotations.\n@param images The loaded paths of training images.\n@param annotations The loaded paths of annotation files.\n\nExample of usage:\n@code\nString imageFiles = \"images_path.txt\";\nString ptsFiles = \"annotations_path.txt\";\nstd::vector<String> images_train;\nstd::vector<String> landmarks_train;\nloadDatasetList(imageFiles,ptsFiles,images_train,landmarks_train);\n@endcode"
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facemark_train.hpp",
+      "kind": "callable",
+      "name": "cv.face.loadTrainingData",
+      "identity": "cv.face.loadTrainingData(String filename[/PATH];vector_String images[/Ref];Mat facePoints[/O];char delim=' ';float offset=0.0f)->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/PATH"
+          ]
+        },
+        {
+          "type": "vector_String",
+          "name": "images",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "facePoints",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "char",
+          "name": "delim",
+          "default": "' '",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "offset",
+          "default": "0.0f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief A utility to load facial landmark dataset from a single file.\n\n@param filename The filename of a file that contains the dataset information.\nEach line contains the filename of an image followed by\npairs of x and y values of facial landmarks points separated by a space.\nExample\n@code\n/home/user/ibug/image_003_1.jpg 336.820955 240.864510 334.238298 260.922709 335.266918 ...\n/home/user/ibug/image_005_1.jpg 376.158428 230.845712 376.736984 254.924635 383.265403 ...\n@endcode\n@param images A vector where each element represent the filename of image in the dataset.\nImages are not loaded by default to save the memory.\n@param facePoints The loaded landmark points for all training data.\n@param delim Delimiter between each element, the default value is a whitespace.\n@param offset An offset value to adjust the loaded points.\n\n<B>Example of usage</B>\n@code\ncv::String imageFiles = \"../data/images_train.txt\";\ncv::String ptsFiles = \"../data/points_train.txt\";\nstd::vector<String> images;\nstd::vector<std::vector<Point2f> > facePoints;\nloadTrainingData(imageFiles, ptsFiles, images, facePoints, 0.0f);\n@endcode"
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facemark_train.hpp",
+      "kind": "callable",
+      "name": "cv.face.loadTrainingData",
+      "identity": "cv.face.loadTrainingData(String imageList;String groundTruth;vector_String images[/Ref];Mat facePoints[/O];float offset=0.0f)->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "imageList",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "String",
+          "name": "groundTruth",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_String",
+          "name": "images",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "facePoints",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "offset",
+          "default": "0.0f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief A utility to load facial landmark information from the dataset.\n\n@param imageList A file contains the list of image filenames in the training dataset.\n@param groundTruth A file contains the list of filenames\nwhere the landmarks points information are stored.\nThe content in each file should follow the standard format (see face::loadFacePoints).\n@param images A vector where each element represent the filename of image in the dataset.\nImages are not loaded by default to save the memory.\n@param facePoints The loaded landmark points for all training data.\n@param offset An offset value to adjust the loaded points.\n\n<B>Example of usage</B>\n@code\ncv::String imageFiles = \"../data/images_train.txt\";\ncv::String ptsFiles = \"../data/points_train.txt\";\nstd::vector<String> images;\nstd::vector<std::vector<Point2f> > facePoints;\nloadTrainingData(imageFiles, ptsFiles, images, facePoints, 0.0f);\n@endcode\n\nexample of content in the images_train.txt\n@code\n/home/user/ibug/image_003_1.jpg\n/home/user/ibug/image_004_1.jpg\n/home/user/ibug/image_005_1.jpg\n/home/user/ibug/image_006.jpg\n@endcode\n\nexample of content in the points_train.txt\n@code\n/home/user/ibug/image_003_1.pts\n/home/user/ibug/image_004_1.pts\n/home/user/ibug/image_005_1.pts\n/home/user/ibug/image_006.pts\n@endcode"
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facemark_train.hpp",
+      "kind": "callable",
+      "name": "cv.face.loadTrainingData",
+      "identity": "cv.face.loadTrainingData(vector_String filename[/PATH];vector_vector_Point2f trainlandmarks[/Ref];vector_String trainimages[/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/PATH"
+          ]
+        },
+        {
+          "type": "vector_vector_Point2f",
+          "name": "trainlandmarks",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_String",
+          "name": "trainimages",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief This function extracts the data for training from .txt files which contains the corresponding image name and landmarks.\n*The first file in each file should give the path of the image whose\n*landmarks are being described in the file. Then in the subsequent\n*lines there should be coordinates of the landmarks in the image\n*i.e each line should be of the form x,y\n*where x represents the x coordinate of the landmark and y represents\n*the y coordinate of the landmark.\n*\n*For reference you can see the files as provided in the\n*<a href=\"http://www.ifp.illinois.edu/~vuongle2/helen/\">HELEN dataset</a>\n*\n* @param filename A vector of type cv::String containing name of the .txt files.\n* @param trainlandmarks A vector of type cv::Point2f that would store shape or landmarks of all images.\n* @param trainimages A vector of type cv::String which stores the name of images whose landmarks are tracked\n* @returns A boolean value. It returns true when it reads the data successfully and false otherwise"
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facemark_train.hpp",
+      "kind": "callable",
+      "name": "cv.face.loadFacePoints",
+      "identity": "cv.face.loadFacePoints(String filename[/PATH];Mat points[/O];float offset=0.0f)->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/PATH"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "points",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "offset",
+          "default": "0.0f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief A utility to load facial landmark information from a given file.\n\n@param filename The filename of file contains the facial landmarks data.\n@param points The loaded facial landmark points.\n@param offset An offset value to adjust the loaded points.\n\n<B>Example of usage</B>\n@code\nstd::vector<Point2f> points;\nface::loadFacePoints(\"filename.txt\", points, 0.0f);\n@endcode\n\nThe annotation file should follow the default format which is\n@code\nversion: 1\nn_points:  68\n{\n212.716603 499.771793\n230.232816 566.290071\n...\n}\n@endcode\nwhere n_points is the number of points considered\nand each point is represented as its position in x and y."
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facemark_train.hpp",
+      "kind": "callable",
+      "name": "cv.face.drawFacemarks",
+      "identity": "cv.face.drawFacemarks(Mat image[/IO];Mat points;Scalar color=Scalar(255,0,0))->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "points",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "color",
+          "default": "Scalar(255,0,0)",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Utility to draw the detected facial landmark points\n\n@param image The input image to be processed.\n@param points Contains the data of points which will be drawn.\n@param color The color of points in BGR format represented by cv::Scalar.\n\n<B>Example of usage</B>\n@code\nstd::vector<Rect> faces;\nstd::vector<std::vector<Point2f> > landmarks;\nfacemark->getFaces(img, faces);\nfacemark->fit(img, faces, landmarks);\nfor(int j=0;j<rects.size();j++){\n    face::drawFacemarks(frame, landmarks[j], Scalar(0,0,255));\n}\n@endcode"
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facemark_train.hpp",
+      "kind": "class",
+      "name": "cv.face.FacemarkTrain",
+      "identity": "class cv.face.FacemarkTrain",
+      "returnType": ": cv::face::Facemark",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::face::Facemark",
+      "documentation": "@brief Abstract base class for trainable facemark models\n\nTo utilize this API in your program, please take a look at the @ref tutorial_table_of_content_facemark\n### Description\n\nThe AAM and LBF facemark models in OpenCV are derived from the abstract base class FacemarkTrain, which\nprovides a unified access to those facemark algorithms in OpenCV.\n\nHere is an example on how to declare facemark algorithm:\n@code\n// Using Facemark in your code:\nPtr<Facemark> facemark = FacemarkLBF::create();\n@endcode\n\n\nThe typical pipeline for facemark detection is listed as follows:\n- (Non-mandatory) Set a user defined face detection using FacemarkTrain::setFaceDetector.\n  The facemark algorithms are designed to fit the facial points into a face.\n  Therefore, the face information should be provided to the facemark algorithm.\n  Some algorithms might provides a default face recognition function.\n  However, the users might prefer to use their own face detector to obtains the best possible detection result.\n- (Non-mandatory) Training the model for a specific algorithm using FacemarkTrain::training.\n  In this case, the model should be automatically saved by the algorithm.\n  If the user already have a trained model, then this part can be omitted.\n- Load the trained model using Facemark::loadModel.\n- Perform the fitting via the Facemark::fit."
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facemarkAAM.hpp",
+      "kind": "class",
+      "name": "cv.face.FacemarkAAM",
+      "identity": "class cv.face.FacemarkAAM",
+      "returnType": ": cv::face::FacemarkTrain",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::face::FacemarkTrain",
+      "documentation": ""
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facemarkLBF.hpp",
+      "kind": "class",
+      "name": "cv.face.FacemarkLBF",
+      "identity": "class cv.face.FacemarkLBF",
+      "returnType": ": cv::face::FacemarkTrain",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::face::FacemarkTrain",
+      "documentation": ""
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "class",
+      "name": "cv.face.BasicFaceRecognizer",
+      "identity": "class cv.face.BasicFaceRecognizer",
+      "returnType": ": cv::face::FaceRecognizer",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::face::FaceRecognizer",
+      "documentation": ""
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "callable",
+      "name": "cv.face.BasicFaceRecognizer.getNumComponents",
+      "identity": "cv.face.BasicFaceRecognizer.getNumComponents()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setNumComponents"
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "callable",
+      "name": "cv.face.BasicFaceRecognizer.setNumComponents",
+      "identity": "cv.face.BasicFaceRecognizer.setNumComponents(int val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getNumComponents @see getNumComponents"
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "callable",
+      "name": "cv.face.BasicFaceRecognizer.getThreshold",
+      "identity": "cv.face.BasicFaceRecognizer.getThreshold()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setThreshold"
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "callable",
+      "name": "cv.face.BasicFaceRecognizer.setThreshold",
+      "identity": "cv.face.BasicFaceRecognizer.setThreshold(double val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getThreshold @see getThreshold"
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "callable",
+      "name": "cv.face.BasicFaceRecognizer.getProjections",
+      "identity": "cv.face.BasicFaceRecognizer.getProjections()->std::vector<cv::Mat>",
+      "returnType": "std::vector<cv::Mat>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "callable",
+      "name": "cv.face.BasicFaceRecognizer.getLabels",
+      "identity": "cv.face.BasicFaceRecognizer.getLabels()->cv::Mat",
+      "returnType": "cv::Mat",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "callable",
+      "name": "cv.face.BasicFaceRecognizer.getEigenValues",
+      "identity": "cv.face.BasicFaceRecognizer.getEigenValues()->cv::Mat",
+      "returnType": "cv::Mat",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "callable",
+      "name": "cv.face.BasicFaceRecognizer.getEigenVectors",
+      "identity": "cv.face.BasicFaceRecognizer.getEigenVectors()->cv::Mat",
+      "returnType": "cv::Mat",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "callable",
+      "name": "cv.face.BasicFaceRecognizer.getMean",
+      "identity": "cv.face.BasicFaceRecognizer.getMean()->cv::Mat",
+      "returnType": "cv::Mat",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "class",
+      "name": "cv.face.EigenFaceRecognizer",
+      "identity": "class cv.face.EigenFaceRecognizer",
+      "returnType": ": cv::face::BasicFaceRecognizer",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::face::BasicFaceRecognizer",
+      "documentation": ""
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "callable",
+      "name": "cv.face.EigenFaceRecognizer.create",
+      "identity": "cv.face.EigenFaceRecognizer.create(int num_components=0;double threshold=DBL_MAX)->Ptr<EigenFaceRecognizer>",
+      "returnType": "Ptr<EigenFaceRecognizer>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "num_components",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "threshold",
+          "default": "DBL_MAX",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@param num_components The number of components (read: Eigenfaces) kept for this Principal\n    Component Analysis. As a hint: There's no rule how many components (read: Eigenfaces) should be\n    kept for good reconstruction capabilities. It is based on your input data, so experiment with the\n    number. Keeping 80 components should almost always be sufficient.\n    @param threshold The threshold applied in the prediction.\n\n    ### Notes:\n\n    -   Training and prediction must be done on grayscale images, use cvtColor to convert between the\n        color spaces.\n    -   **THE EIGENFACES METHOD MAKES THE ASSUMPTION, THAT THE TRAINING AND TEST IMAGES ARE OF EQUAL\n        SIZE.** (caps-lock, because I got so many mails asking for this). You have to make sure your\n        input data has the correct shape, else a meaningful exception is thrown. Use resize to resize\n        the images.\n    -   This model does not support updating.\n\n    ### Model internal data:\n\n    -   num_components see EigenFaceRecognizer::create.\n    -   threshold see EigenFaceRecognizer::create.\n    -   eigenvalues The eigenvalues for this Principal Component Analysis (ordered descending).\n    -   eigenvectors The eigenvectors for this Principal Component Analysis (ordered by their\n        eigenvalue).\n    -   mean The sample mean calculated from the training data.\n    -   projections The projections of the training data.\n    -   labels The threshold applied in the prediction. If the distance to the nearest neighbor is\n        larger than the threshold, this method returns -1."
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "class",
+      "name": "cv.face.FisherFaceRecognizer",
+      "identity": "class cv.face.FisherFaceRecognizer",
+      "returnType": ": cv::face::BasicFaceRecognizer",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::face::BasicFaceRecognizer",
+      "documentation": ""
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "callable",
+      "name": "cv.face.FisherFaceRecognizer.create",
+      "identity": "cv.face.FisherFaceRecognizer.create(int num_components=0;double threshold=DBL_MAX)->Ptr<FisherFaceRecognizer>",
+      "returnType": "Ptr<FisherFaceRecognizer>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "num_components",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "threshold",
+          "default": "DBL_MAX",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@param num_components The number of components (read: Fisherfaces) kept for this Linear\n    Discriminant Analysis with the Fisherfaces criterion. It's useful to keep all components, that\n    means the number of your classes c (read: subjects, persons you want to recognize). If you leave\n    this at the default (0) or set it to a value less-equal 0 or greater (c-1), it will be set to the\n    correct number (c-1) automatically.\n    @param threshold The threshold applied in the prediction. If the distance to the nearest neighbor\n    is larger than the threshold, this method returns -1.\n\n    ### Notes:\n\n    -   Training and prediction must be done on grayscale images, use cvtColor to convert between the\n        color spaces.\n    -   **THE FISHERFACES METHOD MAKES THE ASSUMPTION, THAT THE TRAINING AND TEST IMAGES ARE OF EQUAL\n        SIZE.** (caps-lock, because I got so many mails asking for this). You have to make sure your\n        input data has the correct shape, else a meaningful exception is thrown. Use resize to resize\n        the images.\n    -   This model does not support updating.\n\n    ### Model internal data:\n\n    -   num_components see FisherFaceRecognizer::create.\n    -   threshold see FisherFaceRecognizer::create.\n    -   eigenvalues The eigenvalues for this Linear Discriminant Analysis (ordered descending).\n    -   eigenvectors The eigenvectors for this Linear Discriminant Analysis (ordered by their\n        eigenvalue).\n    -   mean The sample mean calculated from the training data.\n    -   projections The projections of the training data.\n    -   labels The labels corresponding to the projections."
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "class",
+      "name": "cv.face.LBPHFaceRecognizer",
+      "identity": "class cv.face.LBPHFaceRecognizer",
+      "returnType": ": cv::face::FaceRecognizer",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::face::FaceRecognizer",
+      "documentation": ""
+    },
+    {
+      "ordinal": 37,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "callable",
+      "name": "cv.face.LBPHFaceRecognizer.getGridX",
+      "identity": "cv.face.LBPHFaceRecognizer.getGridX()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setGridX"
+    },
+    {
+      "ordinal": 38,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "callable",
+      "name": "cv.face.LBPHFaceRecognizer.setGridX",
+      "identity": "cv.face.LBPHFaceRecognizer.setGridX(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getGridX @see getGridX"
+    },
+    {
+      "ordinal": 39,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "callable",
+      "name": "cv.face.LBPHFaceRecognizer.getGridY",
+      "identity": "cv.face.LBPHFaceRecognizer.getGridY()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setGridY"
+    },
+    {
+      "ordinal": 40,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "callable",
+      "name": "cv.face.LBPHFaceRecognizer.setGridY",
+      "identity": "cv.face.LBPHFaceRecognizer.setGridY(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getGridY @see getGridY"
+    },
+    {
+      "ordinal": 41,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "callable",
+      "name": "cv.face.LBPHFaceRecognizer.getRadius",
+      "identity": "cv.face.LBPHFaceRecognizer.getRadius()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setRadius"
+    },
+    {
+      "ordinal": 42,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "callable",
+      "name": "cv.face.LBPHFaceRecognizer.setRadius",
+      "identity": "cv.face.LBPHFaceRecognizer.setRadius(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getRadius @see getRadius"
+    },
+    {
+      "ordinal": 43,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "callable",
+      "name": "cv.face.LBPHFaceRecognizer.getNeighbors",
+      "identity": "cv.face.LBPHFaceRecognizer.getNeighbors()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setNeighbors"
+    },
+    {
+      "ordinal": 44,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "callable",
+      "name": "cv.face.LBPHFaceRecognizer.setNeighbors",
+      "identity": "cv.face.LBPHFaceRecognizer.setNeighbors(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getNeighbors @see getNeighbors"
+    },
+    {
+      "ordinal": 45,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "callable",
+      "name": "cv.face.LBPHFaceRecognizer.getThreshold",
+      "identity": "cv.face.LBPHFaceRecognizer.getThreshold()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setThreshold"
+    },
+    {
+      "ordinal": 46,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "callable",
+      "name": "cv.face.LBPHFaceRecognizer.setThreshold",
+      "identity": "cv.face.LBPHFaceRecognizer.setThreshold(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getThreshold @see getThreshold"
+    },
+    {
+      "ordinal": 47,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "callable",
+      "name": "cv.face.LBPHFaceRecognizer.getHistograms",
+      "identity": "cv.face.LBPHFaceRecognizer.getHistograms()->std::vector<cv::Mat>",
+      "returnType": "std::vector<cv::Mat>",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 48,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "callable",
+      "name": "cv.face.LBPHFaceRecognizer.getLabels",
+      "identity": "cv.face.LBPHFaceRecognizer.getLabels()->cv::Mat",
+      "returnType": "cv::Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 49,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/facerec.hpp",
+      "kind": "callable",
+      "name": "cv.face.LBPHFaceRecognizer.create",
+      "identity": "cv.face.LBPHFaceRecognizer.create(int radius=1;int neighbors=8;int grid_x=8;int grid_y=8;double threshold=DBL_MAX)->Ptr<LBPHFaceRecognizer>",
+      "returnType": "Ptr<LBPHFaceRecognizer>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "radius",
+          "default": "1",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "neighbors",
+          "default": "8",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "grid_x",
+          "default": "8",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "grid_y",
+          "default": "8",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "threshold",
+          "default": "DBL_MAX",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@param radius The radius used for building the Circular Local Binary Pattern. The greater the\n    radius, the smoother the image but more spatial information you can get.\n    @param neighbors The number of sample points to build a Circular Local Binary Pattern from. An\n    appropriate value is to use `8` sample points. Keep in mind: the more sample points you include,\n    the higher the computational cost.\n    @param grid_x The number of cells in the horizontal direction, 8 is a common value used in\n    publications. The more cells, the finer the grid, the higher the dimensionality of the resulting\n    feature vector.\n    @param grid_y The number of cells in the vertical direction, 8 is a common value used in\n    publications. The more cells, the finer the grid, the higher the dimensionality of the resulting\n    feature vector.\n    @param threshold The threshold applied in the prediction. If the distance to the nearest neighbor\n    is larger than the threshold, this method returns -1.\n\n    ### Notes:\n\n    -   The Circular Local Binary Patterns (used in training and prediction) expect the data given as\n        grayscale images, use cvtColor to convert between the color spaces.\n    -   This model supports updating.\n\n    ### Model internal data:\n\n    -   radius see LBPHFaceRecognizer::create.\n    -   neighbors see LBPHFaceRecognizer::create.\n    -   grid_x see LLBPHFaceRecognizer::create.\n    -   grid_y see LBPHFaceRecognizer::create.\n    -   threshold see LBPHFaceRecognizer::create.\n    -   histograms Local Binary Patterns Histograms calculated from the given training data (empty if\n        none was given).\n    -   labels Labels corresponding to the calculated Local Binary Patterns Histograms."
+    },
+    {
+      "ordinal": 50,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/mace.hpp",
+      "kind": "class",
+      "name": "cv.face.MACE",
+      "identity": "class cv.face.MACE",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Minimum Average Correlation Energy Filter\n    useful for authentication with (cancellable) biometrical features.\n    (does not need many positives to train (10-50), and no negatives at all, also robust to noise/salting)\n\n    see also: @cite Savvides04\n\n    this implementation is largely based on: https://code.google.com/archive/p/pam-face-authentication (GSOC 2009)\n\n    use it like:\n    @code\n\n    Ptr<face::MACE> mace = face::MACE::create(64);\n\n    vector<Mat> pos_images = ...\n    mace->train(pos_images);\n\n    Mat query = ...\n    bool same = mace->same(query);\n\n    @endcode\n\n    you can also use two-factor authentication, with an additional passphrase:\n\n    @code\n    String owners_passphrase = \"ilikehotdogs\";\n    Ptr<face::MACE> mace = face::MACE::create(64);\n    mace->salt(owners_passphrase);\n    vector<Mat> pos_images = ...\n    mace->train(pos_images);\n\n    // now, users have to give a valid passphrase, along with the image:\n    Mat query = ...\n    cout << \"enter passphrase: \";\n    string pass;\n    getline(cin, pass);\n    mace->salt(pass);\n    bool same = mace->same(query);\n    @endcode\n\n    save/load your model:\n    @code\n    Ptr<face::MACE> mace = face::MACE::create(64);\n    mace->train(pos_images);\n    mace->save(\"my_mace.xml\");\n\n    // later:\n    Ptr<MACE> reloaded = MACE::load(\"my_mace.xml\");\n    reloaded->same(some_image);\n    @endcode"
+    },
+    {
+      "ordinal": 51,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/mace.hpp",
+      "kind": "callable",
+      "name": "cv.face.MACE.salt",
+      "identity": "cv.face.MACE.salt(String passphrase[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "passphrase",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief optionally encrypt images with random convolution\n    @param passphrase a crc64 random seed will get generated from this"
+    },
+    {
+      "ordinal": 52,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/mace.hpp",
+      "kind": "callable",
+      "name": "cv.face.MACE.train",
+      "identity": "cv.face.MACE.train(vector_Mat images)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "images",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief train it on positive features\n       compute the mace filter: `h = D(-1) * X * (X(+) * D(-1) * X)(-1) * C`\n       also calculate a minimal threshold for this class, the smallest self-similarity from the train images\n    @param images  a vector<Mat> with the train images"
+    },
+    {
+      "ordinal": 53,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/mace.hpp",
+      "kind": "callable",
+      "name": "cv.face.MACE.same",
+      "identity": "cv.face.MACE.same(Mat query)->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "query",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief correlate query img and threshold to min class value\n    @param query  a Mat with query image"
+    },
+    {
+      "ordinal": 54,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/mace.hpp",
+      "kind": "callable",
+      "name": "cv.face.MACE.load",
+      "identity": "cv.face.MACE.load(String filename[/C,/Ref,/PATH];String objname=String()[/C,/Ref])->cv::Ptr<MACE>",
+      "returnType": "cv::Ptr<MACE>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "objname",
+          "default": "String()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief constructor\n    @param filename  build a new MACE instance from a pre-serialized FileStorage\n    @param objname (optional) top-level node in the FileStorage"
+    },
+    {
+      "ordinal": 55,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/mace.hpp",
+      "kind": "callable",
+      "name": "cv.face.MACE.create",
+      "identity": "cv.face.MACE.create(int IMGSIZE=64)->cv::Ptr<MACE>",
+      "returnType": "cv::Ptr<MACE>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "IMGSIZE",
+          "default": "64",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief constructor\n    @param IMGSIZE  images will get resized to this (should be an even number)"
+    },
+    {
+      "ordinal": 56,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/predict_collector.hpp",
+      "kind": "class",
+      "name": "cv.face.PredictCollector",
+      "identity": "class cv.face.PredictCollector",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Abstract base class for all strategies of prediction result handling"
+    },
+    {
+      "ordinal": 57,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/predict_collector.hpp",
+      "kind": "class",
+      "name": "cv.face.StandardCollector",
+      "identity": "class cv.face.StandardCollector",
+      "returnType": ": cv::face::PredictCollector",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::face::PredictCollector",
+      "documentation": "@brief Default predict collector\n\nTrace minimal distance with treshhold checking (that is default behavior for most predict logic)"
+    },
+    {
+      "ordinal": 58,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/predict_collector.hpp",
+      "kind": "callable",
+      "name": "cv.face.StandardCollector.getMinLabel",
+      "identity": "cv.face.StandardCollector.getMinLabel()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns label with minimal distance"
+    },
+    {
+      "ordinal": 59,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/predict_collector.hpp",
+      "kind": "callable",
+      "name": "cv.face.StandardCollector.getMinDist",
+      "identity": "cv.face.StandardCollector.getMinDist()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns minimal distance value"
+    },
+    {
+      "ordinal": 60,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/predict_collector.hpp",
+      "kind": "callable",
+      "name": "cv.face.StandardCollector.getResults",
+      "identity": "cv.face.StandardCollector.getResults(bool sorted=false)->std::vector< std::pair<int, double> >",
+      "returnType": "std::vector< std::pair<int, double> >",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "sorted",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Return results as vector\n    @param sorted If set, results will be sorted by distance\n    Each values is a pair of label and distance."
+    },
+    {
+      "ordinal": 61,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/face/include/opencv2/face/predict_collector.hpp",
+      "kind": "callable",
+      "name": "cv.face.StandardCollector.create",
+      "identity": "cv.face.StandardCollector.create(double threshold=DBL_MAX)->Ptr<StandardCollector>",
+      "returnType": "Ptr<StandardCollector>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "threshold",
+          "default": "DBL_MAX",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Static constructor\n    @param threshold set threshold"
+    }
+  ]
+}

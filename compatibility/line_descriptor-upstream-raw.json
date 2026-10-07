@@ -1,0 +1,1149 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/LineDescriptorUpstreamMap/extract_line_descriptor.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor.hpp",
+  "headerSha256": "caf8c46e9d9911f2b5dda828f0062f3652dd45d41d89c4ce8d726772899730cc",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "sha256": "4b39a54497bfa256c007ea6ac53e61cb3ab3e299685daf4c00e153b23f881c97",
+      "startOrdinal": 0,
+      "declarationCount": 34
+    }
+  ],
+  "declarationCount": 34,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "class",
+      "name": "cv.line_descriptor.KeyLine",
+      "identity": "class cv.line_descriptor.KeyLine",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "angle",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "class_id",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "octave",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Point2f",
+          "name": "pt",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "response",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "size",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "startPointX",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "startPointY",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "endPointX",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "endPointY",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "sPointInOctaveX",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "sPointInOctaveY",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "ePointInOctaveX",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "ePointInOctaveY",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "lineLength",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "numOfPixels",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief A class to represent a line\n\nAs aformentioned, it is been necessary to design a class that fully stores the information needed to\ncharacterize completely a line and plot it on image it was extracted from, when required.\n\n*KeyLine* class has been created for such goal; it is mainly inspired to Feature2d's KeyPoint class,\nsince KeyLine shares some of *KeyPoint*'s fields, even if a part of them assumes a different\nmeaning, when speaking about lines. In particular:\n\n-   the *class_id* field is used to gather lines extracted from different octaves which refer to\n    same line inside original image (such lines and the one they represent in original image share\n    the same *class_id* value)\n-   the *angle* field represents line's slope with respect to (positive) X axis\n-   the *pt* field represents line's midpoint\n-   the *response* field is computed as the ratio between the line's length and maximum between\n    image's width and height\n-   the *size* field is the area of the smallest rectangle containing line\n\nApart from fields inspired to KeyPoint class, KeyLines stores information about extremes of line in\noriginal image and in octave it was extracted from, about line's length and number of pixels it\ncovers."
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.KeyLine.getStartPoint",
+      "identity": "cv.line_descriptor.KeyLine.getStartPoint()->Point2f",
+      "returnType": "Point2f",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Returns the start point of the line in the original image"
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.KeyLine.getEndPoint",
+      "identity": "cv.line_descriptor.KeyLine.getEndPoint()->Point2f",
+      "returnType": "Point2f",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Returns the end point of the line in the original image"
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.KeyLine.getStartPointInOctave",
+      "identity": "cv.line_descriptor.KeyLine.getStartPointInOctave()->Point2f",
+      "returnType": "Point2f",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Returns the start point of the line in the octave it was extracted from"
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.KeyLine.getEndPointInOctave",
+      "identity": "cv.line_descriptor.KeyLine.getEndPointInOctave()->Point2f",
+      "returnType": "Point2f",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Returns the end point of the line in the octave it was extracted from"
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.KeyLine.KeyLine",
+      "identity": "cv.line_descriptor.KeyLine.KeyLine()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "constructor"
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "class",
+      "name": "cv.line_descriptor.BinaryDescriptor",
+      "identity": "class cv.line_descriptor.BinaryDescriptor",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Class implements both functionalities for detection of lines and computation of their\nbinary descriptor.\n\nClass' interface is mainly based on the ones of classical detectors and extractors, such as\nFeature2d's @ref features_main and @ref features_match. Retrieved information about lines is\nstored in line_descriptor::KeyLine objects."
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.BinaryDescriptor.createBinaryDescriptor",
+      "identity": "cv.line_descriptor.BinaryDescriptor.createBinaryDescriptor()->Ptr<BinaryDescriptor>",
+      "returnType": "Ptr<BinaryDescriptor>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Create a BinaryDescriptor object with default parameters (or with the ones provided)\n  and return a smart pointer to it"
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.BinaryDescriptor.getNumOfOctaves",
+      "identity": "cv.line_descriptor.BinaryDescriptor.getNumOfOctaves()->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Get current number of octaves"
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.BinaryDescriptor.setNumOfOctaves",
+      "identity": "cv.line_descriptor.BinaryDescriptor.setNumOfOctaves(int octaves)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "octaves",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Set number of octaves\n    @param octaves number of octaves"
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.BinaryDescriptor.getWidthOfBand",
+      "identity": "cv.line_descriptor.BinaryDescriptor.getWidthOfBand()->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Get current width of bands"
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.BinaryDescriptor.setWidthOfBand",
+      "identity": "cv.line_descriptor.BinaryDescriptor.setWidthOfBand(int width)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "width",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Set width of bands\n    @param width width of bands"
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.BinaryDescriptor.getReductionRatio",
+      "identity": "cv.line_descriptor.BinaryDescriptor.getReductionRatio()->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Get current reduction ratio (used in Gaussian pyramids)"
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.BinaryDescriptor.setReductionRatio",
+      "identity": "cv.line_descriptor.BinaryDescriptor.setReductionRatio(int rRatio)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "rRatio",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Set reduction ratio (used in Gaussian pyramids)\n    @param rRatio reduction ratio"
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.BinaryDescriptor.detect",
+      "identity": "cv.line_descriptor.BinaryDescriptor.detect(Mat image[/C,/Ref];vector_KeyLine keypoints[/O,/Ref];Mat mask=Mat()[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_KeyLine",
+          "name": "keypoints",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Requires line detection\n\n    @param image input image\n    @param keypoints vector that will store extracted lines for one or more images\n    @param mask mask matrix to detect only KeyLines of interest"
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.BinaryDescriptor.compute",
+      "identity": "cv.line_descriptor.BinaryDescriptor.compute(Mat image[/C,/Ref];vector_KeyLine keylines[/IO,/Ref];Mat descriptors[/O,/Ref];bool returnFloatDescr=false)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_KeyLine",
+          "name": "keylines",
+          "default": "",
+          "modifiers": [
+            "/IO",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "descriptors",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "returnFloatDescr",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Requires descriptors computation\n\n    @param image input image\n    @param keylines vector containing lines for which descriptors must be computed\n    @param descriptors\n    @param returnFloatDescr flag (when set to true, original non-binary descriptors are returned)"
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "class",
+      "name": "cv.line_descriptor.LSDParam",
+      "identity": "class cv.line_descriptor.LSDParam",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "scale",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "sigma_scale",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "quant",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "ang_th",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "log_eps",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "density_th",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "n_bins",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Lines extraction methodology\n----------------------------\n\nThe lines extraction methodology described in the following is mainly based on @cite EDL . The\nextraction starts with a Gaussian pyramid generated from an original image, downsampled N-1 times,\nblurred N times, to obtain N layers (one for each octave), with layer 0 corresponding to input\nimage. Then, from each layer (octave) in the pyramid, lines are extracted using LSD algorithm.\n\nDifferently from EDLine lines extractor used in original article, LSD furnishes information only\nabout lines extremes; thus, additional information regarding slope and equation of line are computed\nvia analytic methods. The number of pixels is obtained using *LineIterator*. Extracted lines are\nreturned in the form of KeyLine objects, but since extraction is based on a method different from\nthe one used in *BinaryDescriptor* class, data associated to a line's extremes in original image and\nin octave it was extracted from, coincide. KeyLine's field *class_id* is used as an index to\nindicate the order of extraction of a line inside a single octave."
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.LSDParam.LSDParam",
+      "identity": "cv.line_descriptor.LSDParam.LSDParam()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "class",
+      "name": "cv.line_descriptor.LSDDetector",
+      "identity": "class cv.line_descriptor.LSDDetector",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": ""
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.LSDDetector.LSDDetector",
+      "identity": "cv.line_descriptor.LSDDetector.LSDDetector()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.LSDDetector.LSDDetector",
+      "identity": "cv.line_descriptor.LSDDetector.LSDDetector(LSDParam _params)->",
+      "returnType": "",
+      "modifiers": [
+        "=LSDDetectorWithParams"
+      ],
+      "arguments": [
+        {
+          "type": "LSDParam",
+          "name": "_params",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.LSDDetector.createLSDDetector",
+      "identity": "cv.line_descriptor.LSDDetector.createLSDDetector()->Ptr<LSDDetector>",
+      "returnType": "Ptr<LSDDetector>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates ad LSDDetector object, using smart pointers."
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.LSDDetector.createLSDDetector",
+      "identity": "cv.line_descriptor.LSDDetector.createLSDDetector(LSDParam params)->Ptr<LSDDetector>",
+      "returnType": "Ptr<LSDDetector>",
+      "modifiers": [
+        "=createLSDDetectorWithParams",
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "LSDParam",
+          "name": "params",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.LSDDetector.detect",
+      "identity": "cv.line_descriptor.LSDDetector.detect(Mat image[/C,/Ref];vector_KeyLine keypoints[/O,/Ref];int scale;int numOctaves;Mat mask=Mat()[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_KeyLine",
+          "name": "keypoints",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "scale",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "numOctaves",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Detect lines inside an image.\n\n@param image input image\n@param keypoints vector that will store extracted lines for one or more images\n@param scale scale factor used in pyramids generation\n@param numOctaves number of octaves inside pyramid\n@param mask mask matrix to detect only KeyLines of interest"
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.LSDDetector.detect",
+      "identity": "cv.line_descriptor.LSDDetector.detect(vector_Mat images[/C,/Ref];vector_vector_KeyLine keylines[/Ref];int scale;int numOctaves;vector_Mat masks=std::vector<Mat>()[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "images",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_vector_KeyLine",
+          "name": "keylines",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "scale",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "numOctaves",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Mat",
+          "name": "masks",
+          "default": "std::vector<Mat>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload\n@param images input images\n@param keylines set of vectors that will store extracted lines for one or more images\n@param scale scale factor used in pyramids generation\n@param numOctaves number of octaves inside pyramid\n@param masks vector of mask matrices to detect only KeyLines of interest from each input image"
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "class",
+      "name": "cv.line_descriptor.BinaryDescriptorMatcher",
+      "identity": "class cv.line_descriptor.BinaryDescriptorMatcher",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief furnishes all functionalities for querying a dataset provided by user or internal to\nclass (that user must, anyway, populate) on the model of @ref features_match\n\n\nOnce descriptors have been extracted from an image (both they represent lines and points), it\nbecomes interesting to be able to match a descriptor with another one extracted from a different\nimage and representing the same line or point, seen from a differente perspective or on a different\nscale. In reaching such goal, the main headache is designing an efficient search algorithm to\nassociate a query descriptor to one extracted from a dataset. In the following, a matching modality\nbased on *Multi-Index Hashing (MiHashing)* will be described.\n\nMulti-Index Hashing\n-------------------\n\nThe theory described in this section is based on @cite MIH . Given a dataset populated with binary\ncodes, each code is indexed *m* times into *m* different hash tables, according to *m* substrings it\nhas been divided into. Thus, given a query code, all the entries close to it at least in one\nsubstring are returned by search as *neighbor candidates*. Returned entries are then checked for\nvalidity by verifying that their full codes are not distant (in Hamming space) more than *r* bits\nfrom query code. In details, each binary code **h** composed of *b* bits is divided into *m*\ndisjoint substrings \\f$\\mathbf{h}^{(1)}, ..., \\mathbf{h}^{(m)}\\f$, each with length\n\\f$\\lfloor b/m \\rfloor\\f$ or \\f$\\lceil b/m \\rceil\\f$ bits. Formally, when two codes **h** and **g** differ\nby at the most *r* bits, in at the least one of their *m* substrings they differ by at the most\n\\f$\\lfloor r/m \\rfloor\\f$ bits. In particular, when \\f$||\\mathbf{h}-\\mathbf{g}||_H \\le r\\f$ (where \\f$||.||_H\\f$\nis the Hamming norm), there must exist a substring *k* (with \\f$1 \\le k \\le m\\f$) such that\n\n\\f[||\\mathbf{h}^{(k)} - \\mathbf{g}^{(k)}||_H \\le \\left\\lfloor \\frac{r}{m} \\right\\rfloor .\\f]\n\nThat means that if Hamming distance between each of the *m* substring is strictly greater than\n\\f$\\lfloor r/m \\rfloor\\f$, then \\f$||\\mathbf{h}-\\mathbf{g}||_H\\f$ must be larger that *r* and that is a\ncontradiction. If the codes in dataset are divided into *m* substrings, then *m* tables will be\nbuilt. Given a query **q** with substrings \\f$\\{\\mathbf{q}^{(i)}\\}^m_{i=1}\\f$, *i*-th hash table is\nsearched for entries distant at the most \\f$\\lfloor r/m \\rfloor\\f$ from \\f$\\mathbf{q}^{(i)}\\f$ and a set of\ncandidates \\f$\\mathcal{N}_i(\\mathbf{q})\\f$ is obtained. The union of sets\n\\f$\\mathcal{N}(\\mathbf{q}) = \\bigcup_i \\mathcal{N}_i(\\mathbf{q})\\f$ is a superset of the *r*-neighbors\nof **q**. Then, last step of algorithm is computing the Hamming distance between **q** and each\nelement in \\f$\\mathcal{N}(\\mathbf{q})\\f$, deleting the codes that are distant more that *r* from **q**."
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.BinaryDescriptorMatcher.match",
+      "identity": "cv.line_descriptor.BinaryDescriptorMatcher.match(Mat queryDescriptors[/C,/Ref];Mat trainDescriptors[/C,/Ref];vector_DMatch matches[/O,/Ref];Mat mask=Mat()[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "queryDescriptors",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "trainDescriptors",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_DMatch",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief For every input query descriptor, retrieve the best matching one from a dataset provided from user\nor from the one internal to class\n\n@param queryDescriptors query descriptors\n@param trainDescriptors dataset of descriptors furnished by user\n@param matches vector to host retrieved matches\n@param mask mask to select which input descriptors must be matched to one in dataset"
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.BinaryDescriptorMatcher.match",
+      "identity": "cv.line_descriptor.BinaryDescriptorMatcher.match(Mat queryDescriptors[/C,/Ref];vector_DMatch matches[/O,/Ref];vector_Mat masks=std::vector<Mat>()[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "=matchQuery"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "queryDescriptors",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_DMatch",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Mat",
+          "name": "masks",
+          "default": "std::vector<Mat>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload\n@param queryDescriptors query descriptors\n@param matches vector to host retrieved matches\n@param masks vector of masks to select which input descriptors must be matched to one in dataset\n(the *i*-th mask in vector indicates whether each input query can be matched with descriptors in\ndataset relative to *i*-th image)"
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.BinaryDescriptorMatcher.knnMatch",
+      "identity": "cv.line_descriptor.BinaryDescriptorMatcher.knnMatch(Mat queryDescriptors[/C,/Ref];Mat trainDescriptors[/C,/Ref];vector_vector_DMatch matches[/O,/Ref];int k;Mat mask=Mat()[/C,/Ref];bool compactResult=false)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "queryDescriptors",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "trainDescriptors",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_vector_DMatch",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "k",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "compactResult",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief For every input query descriptor, retrieve the best *k* matching ones from a dataset provided from\nuser or from the one internal to class\n\n@param queryDescriptors query descriptors\n@param trainDescriptors dataset of descriptors furnished by user\n@param matches vector to host retrieved matches\n@param k number of the closest descriptors to be returned for every input query\n@param mask mask to select which input descriptors must be matched to ones in dataset\n@param compactResult flag to obtain a compact result (if true, a vector that doesn't contain any\nmatches for a given query is not inserted in final result)"
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.BinaryDescriptorMatcher.knnMatch",
+      "identity": "cv.line_descriptor.BinaryDescriptorMatcher.knnMatch(Mat queryDescriptors[/C,/Ref];vector_vector_DMatch matches[/Ref];int k;vector_Mat masks=std::vector<Mat>()[/C,/Ref];bool compactResult=false)->void",
+      "returnType": "void",
+      "modifiers": [
+        "=knnMatchQuery"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "queryDescriptors",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_vector_DMatch",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "k",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Mat",
+          "name": "masks",
+          "default": "std::vector<Mat>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "compactResult",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload\n@param queryDescriptors query descriptors\n@param matches vector to host retrieved matches\n@param k number of the closest descriptors to be returned for every input query\n@param masks vector of masks to select which input descriptors must be matched to ones in dataset\n(the *i*-th mask in vector indicates whether each input query can be matched with descriptors in\ndataset relative to *i*-th image)\n@param compactResult flag to obtain a compact result (if true, a vector that doesn't contain any\nmatches for a given query is not inserted in final result)"
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.BinaryDescriptorMatcher.BinaryDescriptorMatcher",
+      "identity": "cv.line_descriptor.BinaryDescriptorMatcher.BinaryDescriptorMatcher()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Constructor.\n\nThe BinaryDescriptorMatcher constructed is able to store and manage 256-bits long entries."
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "class",
+      "name": "cv.line_descriptor.DrawLinesMatchesFlags",
+      "identity": "class cv.line_descriptor.DrawLinesMatchesFlags",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "struct for drawing options"
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.drawLineMatches",
+      "identity": "cv.line_descriptor.drawLineMatches(Mat img1[/C,/Ref];vector_KeyLine keylines1[/C,/Ref];Mat img2[/C,/Ref];vector_KeyLine keylines2[/C,/Ref];vector_DMatch matches1to2[/C,/Ref];Mat outImg[/O,/Ref];Scalar matchColor=Scalar::all( -1 )[/C,/Ref];Scalar singleLineColor=Scalar::all( -1 )[/C,/Ref];vector_char matchesMask=std::vector<char>()[/C,/Ref];int flags=DrawLinesMatchesFlags::DEFAULT)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img1",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_KeyLine",
+          "name": "keylines1",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "img2",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_KeyLine",
+          "name": "keylines2",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_DMatch",
+          "name": "matches1to2",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "outImg",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Scalar",
+          "name": "matchColor",
+          "default": "Scalar::all( -1 )",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Scalar",
+          "name": "singleLineColor",
+          "default": "Scalar::all( -1 )",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_char",
+          "name": "matchesMask",
+          "default": "std::vector<char>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "DrawLinesMatchesFlags::DEFAULT",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Draws the found matches of keylines from two images.\n\n@param img1 first image\n@param keylines1 keylines extracted from first image\n@param img2 second image\n@param keylines2 keylines extracted from second image\n@param matches1to2 vector of matches\n@param outImg output matrix to draw on\n@param matchColor drawing color for matches (chosen randomly in case of default value)\n@param singleLineColor drawing color for keylines (chosen randomly in case of default value)\n@param matchesMask mask to indicate which matches must be drawn\n@param flags drawing flags, see DrawLinesMatchesFlags\n\n@note If both *matchColor* and *singleLineColor* are set to their default values, function draws\nmatched lines and line connecting them with same color"
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/line_descriptor/include/opencv2/line_descriptor/descriptor.hpp",
+      "kind": "callable",
+      "name": "cv.line_descriptor.drawKeylines",
+      "identity": "cv.line_descriptor.drawKeylines(Mat image[/C,/Ref];vector_KeyLine keylines[/C,/Ref];Mat outImage[/O,/Ref];Scalar color=Scalar::all( -1 )[/C,/Ref];int flags=DrawLinesMatchesFlags::DEFAULT)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_KeyLine",
+          "name": "keylines",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "outImage",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Scalar",
+          "name": "color",
+          "default": "Scalar::all( -1 )",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "DrawLinesMatchesFlags::DEFAULT",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Draws keylines.\n\n@param image input image\n@param keylines keylines to be drawn\n@param outImage output image to draw on\n@param color color of lines to be drawn (if set to defaul value, color is chosen randomly)\n@param flags drawing flags"
+    }
+  ]
+}

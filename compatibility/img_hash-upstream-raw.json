@@ -1,0 +1,713 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/ImgHashUpstreamMap/extract_img_hash.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash.hpp",
+  "headerSha256": "7270be2e3470e73a143239a6480f96dea737987a9f7fa79458d95bc80f4c7f25",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/average_hash.hpp",
+      "sha256": "162ba43fce6d97e551784ed5b14b8a1e43d52d6e7b02522eb8f66971eb82ee95",
+      "startOrdinal": 0,
+      "declarationCount": 3
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/block_mean_hash.hpp",
+      "sha256": "2a4c61a3d14dc1647ee3c8a451666b1f1881413e7a15eb43c1abb4da9aa68ad7",
+      "startOrdinal": 3,
+      "declarationCount": 6
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/color_moment_hash.hpp",
+      "sha256": "516124d3336726f6ee09be305ef12f6c4a99850720e0f2be4953ee1ebc726ea2",
+      "startOrdinal": 9,
+      "declarationCount": 3
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/img_hash_base.hpp",
+      "sha256": "4573f1cb9599d7de9fcf926f067452e5100b7bd44162954ca68d7085dbee0afe",
+      "startOrdinal": 12,
+      "declarationCount": 3
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/marr_hildreth_hash.hpp",
+      "sha256": "f62b9b983ed051831bc8959f61c87c4bcbf72e5e80d9eeefe07dbc3b14ce31a4",
+      "startOrdinal": 15,
+      "declarationCount": 6
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/phash.hpp",
+      "sha256": "0cd1239ed75d0397abea1442ab24bd7e6de2e36819a5b08d285c73b5391355d9",
+      "startOrdinal": 21,
+      "declarationCount": 3
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/radial_variance_hash.hpp",
+      "sha256": "5427b08d86315137c27dc8aee34e77ae5a970bc3d5f611fdff9e10d51dca1f7e",
+      "startOrdinal": 24,
+      "declarationCount": 7
+    }
+  ],
+  "declarationCount": 31,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/average_hash.hpp",
+      "kind": "class",
+      "name": "cv.img_hash.AverageHash",
+      "identity": "class cv.img_hash.AverageHash",
+      "returnType": ": cv::img_hash::ImgHashBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::img_hash::ImgHashBase",
+      "documentation": "@brief Computes average hash value of the input image\n\nThis is a fast image hashing algorithm, but only work on simple case. For more details, please\nrefer to @cite lookslikeit"
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/average_hash.hpp",
+      "kind": "callable",
+      "name": "cv.img_hash.AverageHash.create",
+      "identity": "cv.img_hash.AverageHash.create()->Ptr<AverageHash>",
+      "returnType": "Ptr<AverageHash>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/average_hash.hpp",
+      "kind": "callable",
+      "name": "cv.img_hash.averageHash",
+      "identity": "cv.img_hash.averageHash(Mat inputArr;Mat outputArr[/O])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "inputArr",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "outputArr",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Calculates img_hash::AverageHash in one call\n@param inputArr input image want to compute hash value, type should be CV_8UC4, CV_8UC3 or CV_8UC1.\n@param outputArr Hash value of input, it will contain 16 hex decimal number, return type is CV_8U"
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/block_mean_hash.hpp",
+      "kind": "enum",
+      "name": "cv.img_hash.BlockMeanHashMode",
+      "identity": "enum cv.img_hash.BlockMeanHashMode[const cv.img_hash.BLOCK_MEAN_HASH_MODE_0=0;const cv.img_hash.BLOCK_MEAN_HASH_MODE_1=1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.img_hash.BLOCK_MEAN_HASH_MODE_0",
+          "value": "0"
+        },
+        {
+          "name": "const cv.img_hash.BLOCK_MEAN_HASH_MODE_1",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/block_mean_hash.hpp",
+      "kind": "class",
+      "name": "cv.img_hash.BlockMeanHash",
+      "identity": "class cv.img_hash.BlockMeanHash",
+      "returnType": ": cv::img_hash::ImgHashBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::img_hash::ImgHashBase",
+      "documentation": "@brief Image hash based on block mean.\n\nSee @cite zauner2010implementation for details."
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/block_mean_hash.hpp",
+      "kind": "callable",
+      "name": "cv.img_hash.BlockMeanHash.setMode",
+      "identity": "cv.img_hash.BlockMeanHash.setMode(int mode)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "mode",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Create BlockMeanHash object\n        @param mode the mode"
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/block_mean_hash.hpp",
+      "kind": "callable",
+      "name": "cv.img_hash.BlockMeanHash.getMean",
+      "identity": "cv.img_hash.BlockMeanHash.getMean()->std::vector<double>",
+      "returnType": "std::vector<double>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/block_mean_hash.hpp",
+      "kind": "callable",
+      "name": "cv.img_hash.BlockMeanHash.create",
+      "identity": "cv.img_hash.BlockMeanHash.create(int mode=BLOCK_MEAN_HASH_MODE_0)->Ptr<BlockMeanHash>",
+      "returnType": "Ptr<BlockMeanHash>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "mode",
+          "default": "BLOCK_MEAN_HASH_MODE_0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/block_mean_hash.hpp",
+      "kind": "callable",
+      "name": "cv.img_hash.blockMeanHash",
+      "identity": "cv.img_hash.blockMeanHash(Mat inputArr;Mat outputArr[/O];int mode=BLOCK_MEAN_HASH_MODE_0)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "inputArr",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "outputArr",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "mode",
+          "default": "BLOCK_MEAN_HASH_MODE_0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes block mean hash of the input image\n    @param inputArr input image want to compute hash value, type should be CV_8UC4, CV_8UC3 or CV_8UC1.\n    @param outputArr Hash value of input, it will contain 16 hex decimal number, return type is CV_8U\n    @param mode the mode"
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/color_moment_hash.hpp",
+      "kind": "class",
+      "name": "cv.img_hash.ColorMomentHash",
+      "identity": "class cv.img_hash.ColorMomentHash",
+      "returnType": ": cv::img_hash::ImgHashBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::img_hash::ImgHashBase",
+      "documentation": "@brief Image hash based on color moments.\n\nSee @cite tang2012perceptual for details."
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/color_moment_hash.hpp",
+      "kind": "callable",
+      "name": "cv.img_hash.ColorMomentHash.create",
+      "identity": "cv.img_hash.ColorMomentHash.create()->Ptr<ColorMomentHash>",
+      "returnType": "Ptr<ColorMomentHash>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/color_moment_hash.hpp",
+      "kind": "callable",
+      "name": "cv.img_hash.colorMomentHash",
+      "identity": "cv.img_hash.colorMomentHash(Mat inputArr;Mat outputArr[/O])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "inputArr",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "outputArr",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes color moment hash of the input, the algorithm\n    is come from the paper \"Perceptual  Hashing  for  Color  Images\n    Using  Invariant Moments\"\n    @param inputArr input image want to compute hash value,\n    type should be CV_8UC4, CV_8UC3 or CV_8UC1.\n    @param outputArr 42 hash values with type CV_64F(double)"
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/img_hash_base.hpp",
+      "kind": "class",
+      "name": "cv.img_hash.ImgHashBase",
+      "identity": "class cv.img_hash.ImgHashBase",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief The base class for image hash algorithms"
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/img_hash_base.hpp",
+      "kind": "callable",
+      "name": "cv.img_hash.ImgHashBase.compute",
+      "identity": "cv.img_hash.ImgHashBase.compute(Mat inputArr;Mat outputArr[/O])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "inputArr",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "outputArr",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes hash of the input image\n        @param inputArr input image want to compute hash value\n        @param outputArr hash of the image"
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/img_hash_base.hpp",
+      "kind": "callable",
+      "name": "cv.img_hash.ImgHashBase.compare",
+      "identity": "cv.img_hash.ImgHashBase.compare(Mat hashOne;Mat hashTwo)->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "hashOne",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "hashTwo",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Compare the hash value between inOne and inTwo\n        @param hashOne Hash value one\n        @param hashTwo Hash value two\n        @return value indicate similarity between inOne and inTwo, the meaning\n        of the value vary from algorithms to algorithms"
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/marr_hildreth_hash.hpp",
+      "kind": "class",
+      "name": "cv.img_hash.MarrHildrethHash",
+      "identity": "class cv.img_hash.MarrHildrethHash",
+      "returnType": ": cv::img_hash::ImgHashBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::img_hash::ImgHashBase",
+      "documentation": "@brief Marr-Hildreth Operator Based Hash, slowest but more discriminative.\n\nSee @cite zauner2010implementation for details."
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/marr_hildreth_hash.hpp",
+      "kind": "callable",
+      "name": "cv.img_hash.MarrHildrethHash.getAlpha",
+      "identity": "cv.img_hash.MarrHildrethHash.getAlpha()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief self explain"
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/marr_hildreth_hash.hpp",
+      "kind": "callable",
+      "name": "cv.img_hash.MarrHildrethHash.getScale",
+      "identity": "cv.img_hash.MarrHildrethHash.getScale()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief self explain"
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/marr_hildreth_hash.hpp",
+      "kind": "callable",
+      "name": "cv.img_hash.MarrHildrethHash.setKernelParam",
+      "identity": "cv.img_hash.MarrHildrethHash.setKernelParam(float alpha;float scale)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "alpha",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "scale",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Set Mh kernel parameters\n        @param alpha int scale factor for marr wavelet (default=2).\n        @param scale int level of scale factor (default = 1)"
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/marr_hildreth_hash.hpp",
+      "kind": "callable",
+      "name": "cv.img_hash.MarrHildrethHash.create",
+      "identity": "cv.img_hash.MarrHildrethHash.create(float alpha=2.0f;float scale=1.0f)->Ptr<MarrHildrethHash>",
+      "returnType": "Ptr<MarrHildrethHash>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "alpha",
+          "default": "2.0f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "scale",
+          "default": "1.0f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@param alpha int scale factor for marr wavelet (default=2).\n        @param scale int level of scale factor (default = 1)"
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/marr_hildreth_hash.hpp",
+      "kind": "callable",
+      "name": "cv.img_hash.marrHildrethHash",
+      "identity": "cv.img_hash.marrHildrethHash(Mat inputArr;Mat outputArr[/O];float alpha=2.0f;float scale=1.0f)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "inputArr",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "outputArr",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "alpha",
+          "default": "2.0f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "scale",
+          "default": "1.0f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes average hash value of the input image\n    @param inputArr input image want to compute hash value,\n    type should be CV_8UC4, CV_8UC3, CV_8UC1.\n    @param outputArr Hash value of input, it will contain 16 hex\n    decimal number, return type is CV_8U\n    @param alpha int scale factor for marr wavelet (default=2).\n    @param scale int level of scale factor (default = 1)"
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/phash.hpp",
+      "kind": "class",
+      "name": "cv.img_hash.PHash",
+      "identity": "class cv.img_hash.PHash",
+      "returnType": ": cv::img_hash::ImgHashBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::img_hash::ImgHashBase",
+      "documentation": "@brief pHash\n\nSlower than average_hash, but tolerant of minor modifications\n\nThis algorithm can combat more variation than averageHash, for more details please refer to @cite lookslikeit"
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/phash.hpp",
+      "kind": "callable",
+      "name": "cv.img_hash.PHash.create",
+      "identity": "cv.img_hash.PHash.create()->Ptr<PHash>",
+      "returnType": "Ptr<PHash>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/phash.hpp",
+      "kind": "callable",
+      "name": "cv.img_hash.pHash",
+      "identity": "cv.img_hash.pHash(Mat inputArr;Mat outputArr[/O])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "inputArr",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "outputArr",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes pHash value of the input image\n    @param inputArr input image want to compute hash value,\n     type should be CV_8UC4, CV_8UC3, CV_8UC1.\n    @param outputArr Hash value of input, it will contain 8 uchar value"
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/radial_variance_hash.hpp",
+      "kind": "class",
+      "name": "cv.img_hash.RadialVarianceHash",
+      "identity": "class cv.img_hash.RadialVarianceHash",
+      "returnType": ": cv::img_hash::ImgHashBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::img_hash::ImgHashBase",
+      "documentation": "@brief Image hash based on Radon transform.\n\nSee @cite tang2012perceptual for details."
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/radial_variance_hash.hpp",
+      "kind": "callable",
+      "name": "cv.img_hash.RadialVarianceHash.create",
+      "identity": "cv.img_hash.RadialVarianceHash.create(double sigma=1;int numOfAngleLine=180)->Ptr<RadialVarianceHash>",
+      "returnType": "Ptr<RadialVarianceHash>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "sigma",
+          "default": "1",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "numOfAngleLine",
+          "default": "180",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/radial_variance_hash.hpp",
+      "kind": "callable",
+      "name": "cv.img_hash.RadialVarianceHash.getNumOfAngleLine",
+      "identity": "cv.img_hash.RadialVarianceHash.getNumOfAngleLine()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/radial_variance_hash.hpp",
+      "kind": "callable",
+      "name": "cv.img_hash.RadialVarianceHash.getSigma",
+      "identity": "cv.img_hash.RadialVarianceHash.getSigma()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/radial_variance_hash.hpp",
+      "kind": "callable",
+      "name": "cv.img_hash.RadialVarianceHash.setNumOfAngleLine",
+      "identity": "cv.img_hash.RadialVarianceHash.setNumOfAngleLine(int value)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "value",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/radial_variance_hash.hpp",
+      "kind": "callable",
+      "name": "cv.img_hash.RadialVarianceHash.setSigma",
+      "identity": "cv.img_hash.RadialVarianceHash.setSigma(double value)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "value",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/img_hash/include/opencv2/img_hash/radial_variance_hash.hpp",
+      "kind": "callable",
+      "name": "cv.img_hash.radialVarianceHash",
+      "identity": "cv.img_hash.radialVarianceHash(Mat inputArr;Mat outputArr[/O];double sigma=1;int numOfAngleLine=180)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "inputArr",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "outputArr",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "sigma",
+          "default": "1",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "numOfAngleLine",
+          "default": "180",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes radial variance hash of the input image\n    @param inputArr input image want to compute hash value,\n    type should be CV_8UC4, CV_8UC3, CV_8UC1.\n    @param outputArr Hash value of input\n    @param sigma Gaussian kernel standard deviation\n    @param numOfAngleLine The number of angles to consider"
+    }
+  ]
+}
