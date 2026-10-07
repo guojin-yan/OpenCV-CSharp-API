@@ -131,14 +131,8 @@
         "jyppx_ocv_ximgproc_disparity_filter_filter"
       ],
       "managedMembers": [
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityFilter|constructor|protected;instance|.ctor()",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityFilter|method|protected;instance;virtual|System.Void Dispose(System.Boolean disposing)",
         "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityFilter|method|public;instance;abstract|System.Void Filter(JYPPX.OpenCvSharp.Core.Mat disparityMapLeft,JYPPX.OpenCvSharp.Core.Mat leftView,JYPPX.OpenCvSharp.Core.Mat filteredDisparityMap,JYPPX.OpenCvSharp.Core.Mat? disparityMapRight=null,JYPPX.OpenCvSharp.Core.Rect? roi=null,JYPPX.OpenCvSharp.Core.Mat? rightView=null)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityFilter|method|public;instance;sealed-override|System.Void Dispose()",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityFilter|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Filter(JYPPX.OpenCvSharp.Core.Mat disparityMapLeft,JYPPX.OpenCvSharp.Core.Mat leftView,JYPPX.OpenCvSharp.Core.Mat? disparityMapRight=null,JYPPX.OpenCvSharp.Core.Rect? roi=null,JYPPX.OpenCvSharp.Core.Mat? rightView=null)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityFilter|property|instance;get:public|System.Boolean IsDisposed",
-        "TYPE|class|public;abstract|JYPPX.OpenCvSharp.XImgProc.DisparityFilter|base=|interfaces=System.IDisposable",
-        "TYPE|class|public;sealed|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|base=JYPPX.OpenCvSharp.XImgProc.DisparityFilter|interfaces=System.IDisposable"
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityFilter|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Filter(JYPPX.OpenCvSharp.Core.Mat disparityMapLeft,JYPPX.OpenCvSharp.Core.Mat leftView,JYPPX.OpenCvSharp.Core.Mat? disparityMapRight=null,JYPPX.OpenCvSharp.Core.Rect? roi=null,JYPPX.OpenCvSharp.Core.Mat? rightView=null)"
       ]
     },
     {
@@ -241,7 +235,10 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetConfidenceMap()",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|method|public;instance|System.Void GetConfidenceMap(JYPPX.OpenCvSharp.Core.Mat confidenceMap)"
+      ]
     },
     {
       "ordinal": 20,
@@ -264,8 +261,7 @@
       "managedMembers": [
         "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter CreateDisparityWLSFilter(JYPPX.OpenCvSharp.Calib3D.StereoBM matcherLeft)",
         "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter CreateDisparityWLSFilter(JYPPX.OpenCvSharp.Calib3D.StereoMatcher matcherLeft)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter CreateDisparityWLSFilter(JYPPX.OpenCvSharp.Calib3D.StereoSGBM matcherLeft)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter CreateDisparityWLSFilterGeneric(System.Boolean useConfidence=false)"
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter CreateDisparityWLSFilter(JYPPX.OpenCvSharp.Calib3D.StereoSGBM matcherLeft)"
       ]
     },
     {
@@ -328,13 +324,16 @@
     {
       "ordinal": 27,
       "identity": "cv.ximgproc.getDisparityVis(Mat src;Mat dst[/O];double scale=1.0)->void",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_get_disparity_vis"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat GetDisparityVis(JYPPX.OpenCvSharp.Core.Mat src,System.Double scale=1)",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void GetDisparityVis(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Double scale=1)"
+      ]
     },
     {
       "ordinal": 28,
@@ -406,24 +405,30 @@
     {
       "ordinal": 35,
       "identity": "cv.ximgproc.EdgeDrawing.getEdgeImage(Mat dst[/O])->void",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_drawing_get_edge_image"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetEdgeImage()",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|System.Void GetEdgeImage(JYPPX.OpenCvSharp.Core.Mat dst)"
+      ]
     },
     {
       "ordinal": 36,
       "identity": "cv.ximgproc.EdgeDrawing.getGradientImage(Mat dst[/O])->void",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_drawing_get_gradient_image"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetGradientImage()",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|System.Void GetGradientImage(JYPPX.OpenCvSharp.Core.Mat dst)"
+      ]
     },
     {
       "ordinal": 37,
@@ -432,7 +437,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|JYPPX.OpenCvSharp.Core.Point[][] GetSegments()"
+      ]
     },
     {
       "ordinal": 38,
@@ -441,7 +448,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|System.Int32[] GetSegmentIndicesOfLines()"
+      ]
     },
     {
       "ordinal": 39,
@@ -564,12 +573,8 @@
         "jyppx_ocv_ximgproc_guided_filter_filter"
       ],
       "managedMembers": [
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.GuidedFilter|method|public;instance;sealed-override|System.Void Dispose()",
         "MEMBER|JYPPX.OpenCvSharp.XImgProc.GuidedFilter|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Filter(JYPPX.OpenCvSharp.Core.Mat src,System.Int32 dDepth=-1)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.GuidedFilter|method|public;instance|System.Void Filter(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 dDepth=-1)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.GuidedFilter|method|public;static|JYPPX.OpenCvSharp.XImgProc.GuidedFilter Create(JYPPX.OpenCvSharp.Core.Mat guide,System.Int32 radius,System.Double eps,System.Double scale=1)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.GuidedFilter|property|instance;get:public|System.Boolean IsDisposed",
-        "TYPE|class|public;sealed|JYPPX.OpenCvSharp.XImgProc.GuidedFilter|base=|interfaces=System.IDisposable"
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.GuidedFilter|method|public;instance|System.Void Filter(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 dDepth=-1)"
       ]
     },
     {
@@ -592,7 +597,6 @@
       "nativeEntrypoints": [],
       "managedMembers": [
         "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat GuidedFilter(JYPPX.OpenCvSharp.Core.Mat guide,JYPPX.OpenCvSharp.Core.Mat src,System.Int32 radius,System.Double eps,System.Int32 dDepth=-1,System.Double scale=1)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.GuidedFilter CreateGuidedFilter(JYPPX.OpenCvSharp.Core.Mat guide,System.Int32 radius,System.Double eps,System.Double scale=1)",
         "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void GuidedFilter(JYPPX.OpenCvSharp.Core.Mat guide,JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 radius,System.Double eps,System.Int32 dDepth=-1,System.Double scale=1)"
       ]
     },
@@ -716,12 +720,8 @@
         "jyppx_ocv_ximgproc_fast_bilateral_solver_filter_filter"
       ],
       "managedMembers": [
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastBilateralSolverFilter|method|public;instance;sealed-override|System.Void Dispose()",
         "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastBilateralSolverFilter|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Filter(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat confidence)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastBilateralSolverFilter|method|public;instance|System.Void Filter(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat confidence,JYPPX.OpenCvSharp.Core.Mat dst)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastBilateralSolverFilter|method|public;static|JYPPX.OpenCvSharp.XImgProc.FastBilateralSolverFilter Create(JYPPX.OpenCvSharp.Core.Mat guide,System.Double sigmaSpatial,System.Double sigmaLuma,System.Double sigmaChroma,System.Double lambda=128,System.Int32 numIter=25,System.Double maxTol=1E-05)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastBilateralSolverFilter|property|instance;get:public|System.Boolean IsDisposed",
-        "TYPE|class|public;sealed|JYPPX.OpenCvSharp.XImgProc.FastBilateralSolverFilter|base=|interfaces=System.IDisposable"
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastBilateralSolverFilter|method|public;instance|System.Void Filter(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat confidence,JYPPX.OpenCvSharp.Core.Mat dst)"
       ]
     },
     {
@@ -744,7 +744,6 @@
       "nativeEntrypoints": [],
       "managedMembers": [
         "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat FastBilateralSolverFilter(JYPPX.OpenCvSharp.Core.Mat guide,JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat confidence,System.Double sigmaSpatial=8,System.Double sigmaLuma=8,System.Double sigmaChroma=8,System.Double lambda=128,System.Int32 numIter=25,System.Double maxTol=1E-05)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.FastBilateralSolverFilter CreateFastBilateralSolverFilter(JYPPX.OpenCvSharp.Core.Mat guide,System.Double sigmaSpatial,System.Double sigmaLuma,System.Double sigmaChroma,System.Double lambda=128,System.Int32 numIter=25,System.Double maxTol=1E-05)",
         "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void FastBilateralSolverFilter(JYPPX.OpenCvSharp.Core.Mat guide,JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat confidence,JYPPX.OpenCvSharp.Core.Mat dst,System.Double sigmaSpatial=8,System.Double sigmaLuma=8,System.Double sigmaChroma=8,System.Double lambda=128,System.Int32 numIter=25,System.Double maxTol=1E-05)"
       ]
     },
@@ -767,12 +766,8 @@
         "jyppx_ocv_ximgproc_fast_global_smoother_filter_filter"
       ],
       "managedMembers": [
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastGlobalSmootherFilter|method|public;instance;sealed-override|System.Void Dispose()",
         "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastGlobalSmootherFilter|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Filter(JYPPX.OpenCvSharp.Core.Mat src)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastGlobalSmootherFilter|method|public;instance|System.Void Filter(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastGlobalSmootherFilter|method|public;static|JYPPX.OpenCvSharp.XImgProc.FastGlobalSmootherFilter Create(JYPPX.OpenCvSharp.Core.Mat guide,System.Double lambda,System.Double sigmaColor,System.Double lambdaAttenuation=0.25,System.Int32 numIter=3)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastGlobalSmootherFilter|property|instance;get:public|System.Boolean IsDisposed",
-        "TYPE|class|public;sealed|JYPPX.OpenCvSharp.XImgProc.FastGlobalSmootherFilter|base=|interfaces=System.IDisposable"
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastGlobalSmootherFilter|method|public;instance|System.Void Filter(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
       ]
     },
     {
@@ -795,7 +790,6 @@
       "nativeEntrypoints": [],
       "managedMembers": [
         "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat FastGlobalSmootherFilter(JYPPX.OpenCvSharp.Core.Mat guide,JYPPX.OpenCvSharp.Core.Mat src,System.Double lambda,System.Double sigmaColor,System.Double lambdaAttenuation=0.25,System.Int32 numIter=3)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.FastGlobalSmootherFilter CreateFastGlobalSmootherFilter(JYPPX.OpenCvSharp.Core.Mat guide,System.Double lambda,System.Double sigmaColor,System.Double lambdaAttenuation=0.25,System.Int32 numIter=3)",
         "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void FastGlobalSmootherFilter(JYPPX.OpenCvSharp.Core.Mat guide,JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Double lambda,System.Double sigmaColor,System.Double lambdaAttenuation=0.25,System.Int32 numIter=3)"
       ]
     },
@@ -829,7 +823,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|method|public;instance|JYPPX.OpenCvSharp.XImgProc.EdgeBox[] GetBoundingBoxes(JYPPX.OpenCvSharp.Core.Mat edgeMap,JYPPX.OpenCvSharp.Core.Mat orientationMap)"
+      ]
     },
     {
       "ordinal": 72,
@@ -1251,14 +1247,8 @@
         "jyppx_ocv_ximgproc_fast_line_detector_detect"
       ],
       "managedMembers": [
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastLineDetector|method|public;instance;sealed-override|System.Void Dispose()",
         "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastLineDetector|method|public;instance|JYPPX.OpenCvSharp.ImgProc.LineSegment[] Detect(JYPPX.OpenCvSharp.Core.Mat image)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastLineDetector|method|public;instance|System.Void Detect(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat lines)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastLineDetector|method|public;instance|System.Void DrawSegments(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat lines,System.Boolean drawArrow=false,JYPPX.OpenCvSharp.Core.Scalar? lineColor=null,System.Int32 lineThickness=1)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastLineDetector|method|public;instance|System.Void DrawSegments(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.ImgProc.LineSegment[] lines,System.Boolean drawArrow=false,JYPPX.OpenCvSharp.Core.Scalar? lineColor=null,System.Int32 lineThickness=1)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastLineDetector|method|public;static|JYPPX.OpenCvSharp.XImgProc.FastLineDetector Create(System.Int32 lengthThreshold=10,System.Single distanceThreshold=1.4142135,System.Double cannyTh1=50,System.Double cannyTh2=50,System.Int32 cannyApertureSize=3,System.Boolean doMerge=false)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastLineDetector|property|instance;get:public|System.Boolean IsDisposed",
-        "TYPE|class|public;sealed|JYPPX.OpenCvSharp.XImgProc.FastLineDetector|base=|interfaces=System.IDisposable"
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastLineDetector|method|public;instance|System.Void Detect(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat lines)"
       ]
     },
     {
@@ -1455,7 +1445,10 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelLSC|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetLabels()",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelLSC|method|public;instance|System.Void GetLabels(JYPPX.OpenCvSharp.Core.Mat labels)"
+      ]
     },
     {
       "ordinal": 123,
@@ -1464,7 +1457,10 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelLSC|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetLabelContourMask(System.Boolean thickLine=true)",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelLSC|method|public;instance|System.Void GetLabelContourMask(JYPPX.OpenCvSharp.Core.Mat image,System.Boolean thickLine=true)"
+      ]
     },
     {
       "ordinal": 124,
@@ -1540,7 +1536,10 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RidgeDetectionFilter|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetRidgeFilteredImage(JYPPX.OpenCvSharp.Core.Mat src)",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RidgeDetectionFilter|method|public;instance|System.Void GetRidgeFilteredImage(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ]
     },
     {
       "ordinal": 131,
@@ -1578,24 +1577,30 @@
     {
       "ordinal": 134,
       "identity": "cv.ximgproc.ScanSegment.getLabels(Mat labels_out[/O])->void",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_scan_segment_get_labels"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.ScanSegment|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetLabels()",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.ScanSegment|method|public;instance|System.Void GetLabels(JYPPX.OpenCvSharp.Core.Mat labels)"
+      ]
     },
     {
       "ordinal": 135,
       "identity": "cv.ximgproc.ScanSegment.getLabelContourMask(Mat image[/O];bool thick_line=false)->void",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_scan_segment_get_label_contour_mask"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.ScanSegment|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetLabelContourMask(System.Boolean thickLine=true)",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.ScanSegment|method|public;instance|System.Void GetLabelContourMask(JYPPX.OpenCvSharp.Core.Mat image,System.Boolean thickLine=true)"
+      ]
     },
     {
       "ordinal": 136,
@@ -1646,7 +1651,10 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSEEDS|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetLabels()",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSEEDS|method|public;instance|System.Void GetLabels(JYPPX.OpenCvSharp.Core.Mat labels)"
+      ]
     },
     {
       "ordinal": 141,
@@ -1655,7 +1663,10 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSEEDS|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetLabelContourMask(System.Boolean thickLine=false)",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSEEDS|method|public;instance|System.Void GetLabelContourMask(JYPPX.OpenCvSharp.Core.Mat image,System.Boolean thickLine=false)"
+      ]
     },
     {
       "ordinal": 142,
@@ -2119,7 +2130,10 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSLIC|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetLabels()",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSLIC|method|public;instance|System.Void GetLabels(JYPPX.OpenCvSharp.Core.Mat labels)"
+      ]
     },
     {
       "ordinal": 190,
@@ -2128,7 +2142,10 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSLIC|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetLabelContourMask(System.Boolean thickLine=true)",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSLIC|method|public;instance|System.Void GetLabelContourMask(JYPPX.OpenCvSharp.Core.Mat image,System.Boolean thickLine=true)"
+      ]
     },
     {
       "ordinal": 191,
@@ -2189,13 +2206,15 @@
     {
       "ordinal": 196,
       "identity": "cv.ximgproc.EdgeAwareInterpolator.setCostMap(Mat _costMap[/C,/Ref])->void",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_aware_interpolator_set_cost_map"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|method|public;instance|System.Void SetCostMap(JYPPX.OpenCvSharp.Core.Mat costMap)"
+      ]
     },
     {
       "ordinal": 197,
@@ -2394,7 +2413,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|method|public;instance|System.Void SetCostMap(JYPPX.OpenCvSharp.Core.Mat costMap)"
+      ]
     },
     {
       "ordinal": 214,

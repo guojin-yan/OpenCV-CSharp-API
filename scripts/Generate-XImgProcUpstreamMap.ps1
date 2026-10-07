@@ -38,6 +38,14 @@ function Get-NativeEvidence([string]$Owner, [string]$Name) {
 }
 function Get-ManagedEvidence([string]$Owner, [string]$Name) {
     $target = ConvertTo-Pascal $Name
+    $typeName = if ([string]::IsNullOrWhiteSpace($Owner)) { 'XImgProcCv2' } else { $Owner }
+    $methodMarker = " $target("
+    $methodEvidence = @($managedEntries | Where-Object {
+        $_.Contains("XImgProc.$typeName|method|", [StringComparison]::Ordinal) -and
+        $_.Contains($methodMarker, [StringComparison]::Ordinal)
+    } | Sort-Object -Unique)
+    if ($methodEvidence.Count -gt 0) { return $methodEvidence }
+
     $accessor = [regex]::Match($Name, '^(?:get|set)(?<property>[A-Z][A-Za-z0-9_]*)$')
     if ($accessor.Success) {
         $propertyName = $accessor.Groups['property'].Value
@@ -63,7 +71,6 @@ function Get-ManagedEvidence([string]$Owner, [string]$Name) {
         } | Sort-Object -Unique)
     }
 
-    $typeName = if ([string]::IsNullOrWhiteSpace($Owner)) { 'XImgProcCv2' } else { $Owner }
     @($managedEntries | Where-Object { $_.Contains("XImgProc.$typeName|", [StringComparison]::Ordinal) -and $_.Contains($target, [StringComparison]::OrdinalIgnoreCase) } | Sort-Object -Unique)
 }
 
