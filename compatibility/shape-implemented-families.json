@@ -1,0 +1,321 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 0,
+  "managedPublicMemberAdditionCount": 0,
+  "families": [
+    {
+      "id": "shape-wrapper-surface",
+      "rationale": "Current Shape managed/native wrapper declarations with exact parser-backed callable evidence.",
+      "declarations": [
+        {
+          "ordinal": 1,
+          "upstreamIdentity": "cv.HistogramCostExtractor.buildCostMatrix(Mat descriptors1;Mat descriptors2;Mat costMatrix[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_shape_histogram_cost_extractor_build_cost_matrix"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Shape.HistogramCostExtractor|method|public;instance|System.Void BuildCostMatrix(JYPPX.OpenCvSharp.Core.Mat descriptors1,JYPPX.OpenCvSharp.Core.Mat descriptors2,JYPPX.OpenCvSharp.Core.Mat costMatrix)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Shape/ShapeTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/shape-guide.md"
+        },
+        {
+          "ordinal": 2,
+          "upstreamIdentity": "cv.HistogramCostExtractor.setNDummies(int nDummies)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_shape_histogram_cost_extractor_set_n_dummies"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Shape.HistogramCostExtractor|property|instance;get:public;set:public|System.Int32 NDummies"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Shape/ShapeTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/shape-guide.md"
+        },
+        {
+          "ordinal": 3,
+          "upstreamIdentity": "cv.HistogramCostExtractor.getNDummies()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_shape_histogram_cost_extractor_get_n_dummies"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Shape.HistogramCostExtractor|property|instance;get:public;set:public|System.Int32 NDummies"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Shape/ShapeTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/shape-guide.md"
+        },
+        {
+          "ordinal": 4,
+          "upstreamIdentity": "cv.HistogramCostExtractor.setDefaultCost(float defaultCost)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_shape_histogram_cost_extractor_set_default_cost"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Shape.HistogramCostExtractor|property|instance;get:public;set:public|System.Single DefaultCost"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Shape/ShapeTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/shape-guide.md"
+        },
+        {
+          "ordinal": 5,
+          "upstreamIdentity": "cv.HistogramCostExtractor.getDefaultCost()->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_shape_histogram_cost_extractor_get_default_cost"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Shape.HistogramCostExtractor|property|instance;get:public;set:public|System.Single DefaultCost"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Shape/ShapeTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/shape-guide.md"
+        },
+        {
+          "ordinal": 7,
+          "upstreamIdentity": "cv.NormHistogramCostExtractor.setNormFlag(int flag)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_shape_histogram_cost_extractor_set_norm_flag"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Shape.NormHistogramCostExtractorBase|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.NormTypes NormFlag"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Shape/ShapeTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/shape-guide.md"
+        },
+        {
+          "ordinal": 8,
+          "upstreamIdentity": "cv.NormHistogramCostExtractor.getNormFlag()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_shape_histogram_cost_extractor_get_norm_flag"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Shape.NormHistogramCostExtractorBase|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.NormTypes NormFlag"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Shape/ShapeTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/shape-guide.md"
+        },
+        {
+          "ordinal": 9,
+          "upstreamIdentity": "cv.createNormHistogramCostExtractor(int flag=DIST_L2;int nDummies=25;float defaultCost=0.2f)->Ptr<HistogramCostExtractor>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_shape_norm_histogram_cost_extractor_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Shape.NormHistogramCostExtractor|method|public;static|JYPPX.OpenCvSharp.Shape.NormHistogramCostExtractor Create(JYPPX.OpenCvSharp.Core.NormTypes flag=L2,System.Int32 nDummies=25,System.Single defaultCost=0.2)",
+            "MEMBER|JYPPX.OpenCvSharp.Shape.ShapeCv2|method|public;static|JYPPX.OpenCvSharp.Shape.NormHistogramCostExtractor CreateNormHistogramCostExtractor(JYPPX.OpenCvSharp.Core.NormTypes flag=L2,System.Int32 nDummies=25,System.Single defaultCost=0.2)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Shape/ShapeTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/shape-guide.md"
+        },
+        {
+          "ordinal": 11,
+          "upstreamIdentity": "cv.EMDHistogramCostExtractor.setNormFlag(int flag)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_shape_histogram_cost_extractor_set_norm_flag"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Shape.NormHistogramCostExtractorBase|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.NormTypes NormFlag"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Shape/ShapeTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/shape-guide.md"
+        },
+        {
+          "ordinal": 12,
+          "upstreamIdentity": "cv.EMDHistogramCostExtractor.getNormFlag()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_shape_histogram_cost_extractor_get_norm_flag"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Shape.NormHistogramCostExtractorBase|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.NormTypes NormFlag"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Shape/ShapeTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/shape-guide.md"
+        },
+        {
+          "ordinal": 13,
+          "upstreamIdentity": "cv.createEMDHistogramCostExtractor(int flag=DIST_L2;int nDummies=25;float defaultCost=0.2f)->Ptr<HistogramCostExtractor>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_shape_emd_histogram_cost_extractor_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Shape.EMDHistogramCostExtractor|method|public;static|JYPPX.OpenCvSharp.Shape.EMDHistogramCostExtractor Create(JYPPX.OpenCvSharp.Core.NormTypes flag=L2,System.Int32 nDummies=25,System.Single defaultCost=0.2)",
+            "MEMBER|JYPPX.OpenCvSharp.Shape.ShapeCv2|method|public;static|JYPPX.OpenCvSharp.Shape.EMDHistogramCostExtractor CreateEMDHistogramCostExtractor(JYPPX.OpenCvSharp.Core.NormTypes flag=L2,System.Int32 nDummies=25,System.Single defaultCost=0.2)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Shape/ShapeTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/shape-guide.md"
+        },
+        {
+          "ordinal": 15,
+          "upstreamIdentity": "cv.createChiHistogramCostExtractor(int nDummies=25;float defaultCost=0.2f)->Ptr<HistogramCostExtractor>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_shape_chi_histogram_cost_extractor_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Shape.ChiHistogramCostExtractor|method|public;static|JYPPX.OpenCvSharp.Shape.ChiHistogramCostExtractor Create(System.Int32 nDummies=25,System.Single defaultCost=0.2)",
+            "MEMBER|JYPPX.OpenCvSharp.Shape.ShapeCv2|method|public;static|JYPPX.OpenCvSharp.Shape.ChiHistogramCostExtractor CreateChiHistogramCostExtractor(System.Int32 nDummies=25,System.Single defaultCost=0.2)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Shape/ShapeTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/shape-guide.md"
+        },
+        {
+          "ordinal": 17,
+          "upstreamIdentity": "cv.createEMDL1HistogramCostExtractor(int nDummies=25;float defaultCost=0.2f)->Ptr<HistogramCostExtractor>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_shape_emd_l1_histogram_cost_extractor_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Shape.EMDL1HistogramCostExtractor|method|public;static|JYPPX.OpenCvSharp.Shape.EMDL1HistogramCostExtractor Create(System.Int32 nDummies=25,System.Single defaultCost=0.2)",
+            "MEMBER|JYPPX.OpenCvSharp.Shape.ShapeCv2|method|public;static|JYPPX.OpenCvSharp.Shape.EMDL1HistogramCostExtractor CreateEMDL1HistogramCostExtractor(System.Int32 nDummies=25,System.Single defaultCost=0.2)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Shape/ShapeTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/shape-guide.md"
+        },
+        {
+          "ordinal": 19,
+          "upstreamIdentity": "cv.ShapeDistanceExtractor.computeDistance(Mat contour1;Mat contour2)->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_shape_distance_extractor_compute_distance"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Shape.ShapeDistanceExtractor|method|public;instance|System.Single ComputeDistance(JYPPX.OpenCvSharp.Core.Mat contour1,JYPPX.OpenCvSharp.Core.Mat contour2)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Shape/ShapeTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/shape-guide.md"
+        },
+        {
+          "ordinal": 47,
+          "upstreamIdentity": "cv.createShapeContextDistanceExtractor(int nAngularBins=12;int nRadialBins=4;float innerRadius=0.2f;float outerRadius=2;int iterations=3;Ptr_HistogramCostExtractor comparer=createChiHistogramCostExtractor()[/C,/Ref];Ptr_ShapeTransformer transformer=createThinPlateSplineShapeTransformer()[/C,/Ref])->Ptr<ShapeContextDistanceExtractor>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_shape_context_distance_extractor_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Shape.ShapeContextDistanceExtractor|method|public;static|JYPPX.OpenCvSharp.Shape.ShapeContextDistanceExtractor Create(System.Int32 angularBins=12,System.Int32 radialBins=4,System.Single innerRadius=0.2,System.Single outerRadius=2,System.Int32 iterations=3)",
+            "MEMBER|JYPPX.OpenCvSharp.Shape.ShapeCv2|method|public;static|JYPPX.OpenCvSharp.Shape.ShapeContextDistanceExtractor CreateShapeContextDistanceExtractor(System.Int32 angularBins=12,System.Int32 radialBins=4,System.Single innerRadius=0.2,System.Single outerRadius=2,System.Int32 iterations=3)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Shape/ShapeTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/shape-guide.md"
+        },
+        {
+          "ordinal": 49,
+          "upstreamIdentity": "cv.HausdorffDistanceExtractor.setDistanceFlag(int distanceFlag)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_shape_hausdorff_distance_extractor_set_distance_flag"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Shape.HausdorffDistanceExtractor|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.NormTypes DistanceFlag"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Shape/ShapeTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/shape-guide.md"
+        },
+        {
+          "ordinal": 50,
+          "upstreamIdentity": "cv.HausdorffDistanceExtractor.getDistanceFlag()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_shape_hausdorff_distance_extractor_get_distance_flag"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Shape.HausdorffDistanceExtractor|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.NormTypes DistanceFlag"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Shape/ShapeTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/shape-guide.md"
+        },
+        {
+          "ordinal": 51,
+          "upstreamIdentity": "cv.HausdorffDistanceExtractor.setRankProportion(float rankProportion)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_shape_hausdorff_distance_extractor_set_rank_proportion"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Shape.HausdorffDistanceExtractor|property|instance;get:public;set:public|System.Single RankProportion"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Shape/ShapeTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/shape-guide.md"
+        },
+        {
+          "ordinal": 52,
+          "upstreamIdentity": "cv.HausdorffDistanceExtractor.getRankProportion()->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_shape_hausdorff_distance_extractor_get_rank_proportion"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Shape.HausdorffDistanceExtractor|property|instance;get:public;set:public|System.Single RankProportion"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Shape/ShapeTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/shape-guide.md"
+        },
+        {
+          "ordinal": 53,
+          "upstreamIdentity": "cv.createHausdorffDistanceExtractor(int distanceFlag=cv::NORM_L2;float rankProp=0.6f)->Ptr<HausdorffDistanceExtractor>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_shape_hausdorff_distance_extractor_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Shape.HausdorffDistanceExtractor|method|public;static|JYPPX.OpenCvSharp.Shape.HausdorffDistanceExtractor Create(JYPPX.OpenCvSharp.Core.NormTypes distanceFlag=L2,System.Single rankProportion=0.6)",
+            "MEMBER|JYPPX.OpenCvSharp.Shape.ShapeCv2|method|public;static|JYPPX.OpenCvSharp.Shape.HausdorffDistanceExtractor CreateHausdorffDistanceExtractor(JYPPX.OpenCvSharp.Core.NormTypes distanceFlag=L2,System.Single rankProportion=0.6)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Shape/ShapeTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/shape-guide.md"
+        }
+      ]
+    }
+  ]
+}

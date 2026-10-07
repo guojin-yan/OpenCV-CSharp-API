@@ -1,0 +1,1487 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/ShapeUpstreamMap/extract_shape.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape.hpp",
+  "headerSha256": "d4c7286a626a7db3518f9b5c163f65713dc0e68b4e39b6a4623287c01de5f85f",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/emdL1.hpp",
+      "sha256": "842fa1cd1876c66619fdd7b87c2856a0745baa5bf54c627fbebe6901b3e16a81",
+      "startOrdinal": 0,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/hist_cost.hpp",
+      "sha256": "20112c3808d3f5ea07891519da2f27db1f0418739305b82e20cb57dbfec0cf52",
+      "startOrdinal": 0,
+      "declarationCount": 18
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape.hpp",
+      "sha256": "0132dcd4c9879db8f721e1944b0158449173460f2692d6288bd135445fa33677",
+      "startOrdinal": 18,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "sha256": "f5b7dbcb2a3040bcff4a90a8e27eee700bff24621943a783a3c00ef7668ee640",
+      "startOrdinal": 18,
+      "declarationCount": 36
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_transformer.hpp",
+      "sha256": "20420c9c3a28b3810ccc6e370e9de4a87cb2574495645647607a1347926b5f23",
+      "startOrdinal": 54,
+      "declarationCount": 12
+    }
+  ],
+  "declarationCount": 66,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/hist_cost.hpp",
+      "kind": "class",
+      "name": "cv.HistogramCostExtractor",
+      "identity": "class cv.HistogramCostExtractor",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Abstract base class for histogram cost algorithms."
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/hist_cost.hpp",
+      "kind": "callable",
+      "name": "cv.HistogramCostExtractor.buildCostMatrix",
+      "identity": "cv.HistogramCostExtractor.buildCostMatrix(Mat descriptors1;Mat descriptors2;Mat costMatrix[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "descriptors1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "descriptors2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "costMatrix",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/hist_cost.hpp",
+      "kind": "callable",
+      "name": "cv.HistogramCostExtractor.setNDummies",
+      "identity": "cv.HistogramCostExtractor.setNDummies(int nDummies)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nDummies",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/hist_cost.hpp",
+      "kind": "callable",
+      "name": "cv.HistogramCostExtractor.getNDummies",
+      "identity": "cv.HistogramCostExtractor.getNDummies()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/hist_cost.hpp",
+      "kind": "callable",
+      "name": "cv.HistogramCostExtractor.setDefaultCost",
+      "identity": "cv.HistogramCostExtractor.setDefaultCost(float defaultCost)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "defaultCost",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/hist_cost.hpp",
+      "kind": "callable",
+      "name": "cv.HistogramCostExtractor.getDefaultCost",
+      "identity": "cv.HistogramCostExtractor.getDefaultCost()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/hist_cost.hpp",
+      "kind": "class",
+      "name": "cv.NormHistogramCostExtractor",
+      "identity": "class cv.NormHistogramCostExtractor",
+      "returnType": ": cv::HistogramCostExtractor",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::HistogramCostExtractor",
+      "documentation": "@brief A norm based cost extraction. :"
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/hist_cost.hpp",
+      "kind": "callable",
+      "name": "cv.NormHistogramCostExtractor.setNormFlag",
+      "identity": "cv.NormHistogramCostExtractor.setNormFlag(int flag)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "flag",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/hist_cost.hpp",
+      "kind": "callable",
+      "name": "cv.NormHistogramCostExtractor.getNormFlag",
+      "identity": "cv.NormHistogramCostExtractor.getNormFlag()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/hist_cost.hpp",
+      "kind": "callable",
+      "name": "cv.createNormHistogramCostExtractor",
+      "identity": "cv.createNormHistogramCostExtractor(int flag=DIST_L2;int nDummies=25;float defaultCost=0.2f)->Ptr<HistogramCostExtractor>",
+      "returnType": "Ptr<HistogramCostExtractor>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "flag",
+          "default": "DIST_L2",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "nDummies",
+          "default": "25",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "defaultCost",
+          "default": "0.2f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/hist_cost.hpp",
+      "kind": "class",
+      "name": "cv.EMDHistogramCostExtractor",
+      "identity": "class cv.EMDHistogramCostExtractor",
+      "returnType": ": cv::HistogramCostExtractor",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::HistogramCostExtractor",
+      "documentation": "@brief An EMD based cost extraction. :"
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/hist_cost.hpp",
+      "kind": "callable",
+      "name": "cv.EMDHistogramCostExtractor.setNormFlag",
+      "identity": "cv.EMDHistogramCostExtractor.setNormFlag(int flag)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "flag",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/hist_cost.hpp",
+      "kind": "callable",
+      "name": "cv.EMDHistogramCostExtractor.getNormFlag",
+      "identity": "cv.EMDHistogramCostExtractor.getNormFlag()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/hist_cost.hpp",
+      "kind": "callable",
+      "name": "cv.createEMDHistogramCostExtractor",
+      "identity": "cv.createEMDHistogramCostExtractor(int flag=DIST_L2;int nDummies=25;float defaultCost=0.2f)->Ptr<HistogramCostExtractor>",
+      "returnType": "Ptr<HistogramCostExtractor>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "flag",
+          "default": "DIST_L2",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "nDummies",
+          "default": "25",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "defaultCost",
+          "default": "0.2f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/hist_cost.hpp",
+      "kind": "class",
+      "name": "cv.ChiHistogramCostExtractor",
+      "identity": "class cv.ChiHistogramCostExtractor",
+      "returnType": ": cv::HistogramCostExtractor",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::HistogramCostExtractor",
+      "documentation": "@brief An Chi based cost extraction. :"
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/hist_cost.hpp",
+      "kind": "callable",
+      "name": "cv.createChiHistogramCostExtractor",
+      "identity": "cv.createChiHistogramCostExtractor(int nDummies=25;float defaultCost=0.2f)->Ptr<HistogramCostExtractor>",
+      "returnType": "Ptr<HistogramCostExtractor>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nDummies",
+          "default": "25",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "defaultCost",
+          "default": "0.2f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/hist_cost.hpp",
+      "kind": "class",
+      "name": "cv.EMDL1HistogramCostExtractor",
+      "identity": "class cv.EMDL1HistogramCostExtractor",
+      "returnType": ": cv::HistogramCostExtractor",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::HistogramCostExtractor",
+      "documentation": "@brief An EMD-L1 based cost extraction. :"
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/hist_cost.hpp",
+      "kind": "callable",
+      "name": "cv.createEMDL1HistogramCostExtractor",
+      "identity": "cv.createEMDL1HistogramCostExtractor(int nDummies=25;float defaultCost=0.2f)->Ptr<HistogramCostExtractor>",
+      "returnType": "Ptr<HistogramCostExtractor>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nDummies",
+          "default": "25",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "defaultCost",
+          "default": "0.2f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "class",
+      "name": "cv.ShapeDistanceExtractor",
+      "identity": "class cv.ShapeDistanceExtractor",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Abstract base class for shape distance algorithms."
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeDistanceExtractor.computeDistance",
+      "identity": "cv.ShapeDistanceExtractor.computeDistance(Mat contour1;Mat contour2)->float",
+      "returnType": "float",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "contour1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "contour2",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Compute the shape distance between two shapes defined by its contours.\n\n    @param contour1 Contour defining first shape.\n    @param contour2 Contour defining second shape."
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "class",
+      "name": "cv.ShapeContextDistanceExtractor",
+      "identity": "class cv.ShapeContextDistanceExtractor",
+      "returnType": ": cv::ShapeDistanceExtractor",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::ShapeDistanceExtractor",
+      "documentation": "@brief Implementation of the Shape Context descriptor and matching algorithm\n\nproposed by Belongie et al. in \"Shape Matching and Object Recognition Using Shape Contexts\" (PAMI\n2002). This implementation is packaged in a generic scheme, in order to allow you the\nimplementation of the common variations of the original pipeline."
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.setAngularBins",
+      "identity": "cv.ShapeContextDistanceExtractor.setAngularBins(int nAngularBins)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nAngularBins",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Establish the number of angular bins for the Shape Context Descriptor used in the shape matching\n    pipeline.\n\n    @param nAngularBins The number of angular bins in the shape context descriptor."
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.getAngularBins",
+      "identity": "cv.ShapeContextDistanceExtractor.getAngularBins()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.setRadialBins",
+      "identity": "cv.ShapeContextDistanceExtractor.setRadialBins(int nRadialBins)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nRadialBins",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Establish the number of radial bins for the Shape Context Descriptor used in the shape matching\n    pipeline.\n\n    @param nRadialBins The number of radial bins in the shape context descriptor."
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.getRadialBins",
+      "identity": "cv.ShapeContextDistanceExtractor.getRadialBins()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.setInnerRadius",
+      "identity": "cv.ShapeContextDistanceExtractor.setInnerRadius(float innerRadius)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "innerRadius",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Set the inner radius of the shape context descriptor.\n\n    @param innerRadius The value of the inner radius."
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.getInnerRadius",
+      "identity": "cv.ShapeContextDistanceExtractor.getInnerRadius()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.setOuterRadius",
+      "identity": "cv.ShapeContextDistanceExtractor.setOuterRadius(float outerRadius)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "outerRadius",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Set the outer radius of the shape context descriptor.\n\n    @param outerRadius The value of the outer radius."
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.getOuterRadius",
+      "identity": "cv.ShapeContextDistanceExtractor.getOuterRadius()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.setRotationInvariant",
+      "identity": "cv.ShapeContextDistanceExtractor.setRotationInvariant(bool rotationInvariant)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "rotationInvariant",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.getRotationInvariant",
+      "identity": "cv.ShapeContextDistanceExtractor.getRotationInvariant()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.setShapeContextWeight",
+      "identity": "cv.ShapeContextDistanceExtractor.setShapeContextWeight(float shapeContextWeight)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "shapeContextWeight",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Set the weight of the shape context distance in the final value of the shape distance. The shape\n    context distance between two shapes is defined as the symmetric sum of shape context matching costs\n    over best matching points. The final value of the shape distance is a user-defined linear\n    combination of the shape context distance, an image appearance distance, and a bending energy.\n\n    @param shapeContextWeight The weight of the shape context distance in the final distance value."
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.getShapeContextWeight",
+      "identity": "cv.ShapeContextDistanceExtractor.getShapeContextWeight()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.setImageAppearanceWeight",
+      "identity": "cv.ShapeContextDistanceExtractor.setImageAppearanceWeight(float imageAppearanceWeight)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "imageAppearanceWeight",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Set the weight of the Image Appearance cost in the final value of the shape distance. The image\n    appearance cost is defined as the sum of squared brightness differences in Gaussian windows around\n    corresponding image points. The final value of the shape distance is a user-defined linear\n    combination of the shape context distance, an image appearance distance, and a bending energy. If\n    this value is set to a number different from 0, is mandatory to set the images that correspond to\n    each shape.\n\n    @param imageAppearanceWeight The weight of the appearance cost in the final distance value."
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.getImageAppearanceWeight",
+      "identity": "cv.ShapeContextDistanceExtractor.getImageAppearanceWeight()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.setBendingEnergyWeight",
+      "identity": "cv.ShapeContextDistanceExtractor.setBendingEnergyWeight(float bendingEnergyWeight)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "bendingEnergyWeight",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Set the weight of the Bending Energy in the final value of the shape distance. The bending energy\n    definition depends on what transformation is being used to align the shapes. The final value of the\n    shape distance is a user-defined linear combination of the shape context distance, an image\n    appearance distance, and a bending energy.\n\n    @param bendingEnergyWeight The weight of the Bending Energy in the final distance value."
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.getBendingEnergyWeight",
+      "identity": "cv.ShapeContextDistanceExtractor.getBendingEnergyWeight()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 37,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.setImages",
+      "identity": "cv.ShapeContextDistanceExtractor.setImages(Mat image1;Mat image2)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "image2",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Set the images that correspond to each shape. This images are used in the calculation of the Image\n    Appearance cost.\n\n    @param image1 Image corresponding to the shape defined by contours1.\n    @param image2 Image corresponding to the shape defined by contours2."
+    },
+    {
+      "ordinal": 38,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.getImages",
+      "identity": "cv.ShapeContextDistanceExtractor.getImages(Mat image1[/O];Mat image2[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image1",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "image2",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 39,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.setIterations",
+      "identity": "cv.ShapeContextDistanceExtractor.setIterations(int iterations)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "iterations",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 40,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.getIterations",
+      "identity": "cv.ShapeContextDistanceExtractor.getIterations()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 41,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.setCostExtractor",
+      "identity": "cv.ShapeContextDistanceExtractor.setCostExtractor(Ptr_HistogramCostExtractor comparer)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Ptr_HistogramCostExtractor",
+          "name": "comparer",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Set the algorithm used for building the shape context descriptor cost matrix.\n\n    @param comparer Smart pointer to a HistogramCostExtractor, an algorithm that defines the cost\n    matrix between descriptors."
+    },
+    {
+      "ordinal": 42,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.getCostExtractor",
+      "identity": "cv.ShapeContextDistanceExtractor.getCostExtractor()->Ptr<HistogramCostExtractor>",
+      "returnType": "Ptr<HistogramCostExtractor>",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 43,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.setStdDev",
+      "identity": "cv.ShapeContextDistanceExtractor.setStdDev(float sigma)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "sigma",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Set the value of the standard deviation for the Gaussian window for the image appearance cost.\n\n    @param sigma Standard Deviation."
+    },
+    {
+      "ordinal": 44,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.getStdDev",
+      "identity": "cv.ShapeContextDistanceExtractor.getStdDev()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 45,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.setTransformAlgorithm",
+      "identity": "cv.ShapeContextDistanceExtractor.setTransformAlgorithm(Ptr_ShapeTransformer transformer)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Ptr_ShapeTransformer",
+          "name": "transformer",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Set the algorithm used for aligning the shapes.\n\n    @param transformer Smart pointer to a ShapeTransformer, an algorithm that defines the aligning\n    transformation."
+    },
+    {
+      "ordinal": 46,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeContextDistanceExtractor.getTransformAlgorithm",
+      "identity": "cv.ShapeContextDistanceExtractor.getTransformAlgorithm()->Ptr<ShapeTransformer>",
+      "returnType": "Ptr<ShapeTransformer>",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 47,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.createShapeContextDistanceExtractor",
+      "identity": "cv.createShapeContextDistanceExtractor(int nAngularBins=12;int nRadialBins=4;float innerRadius=0.2f;float outerRadius=2;int iterations=3;Ptr_HistogramCostExtractor comparer=createChiHistogramCostExtractor()[/C,/Ref];Ptr_ShapeTransformer transformer=createThinPlateSplineShapeTransformer()[/C,/Ref])->Ptr<ShapeContextDistanceExtractor>",
+      "returnType": "Ptr<ShapeContextDistanceExtractor>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nAngularBins",
+          "default": "12",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "nRadialBins",
+          "default": "4",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "innerRadius",
+          "default": "0.2f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "outerRadius",
+          "default": "2",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "iterations",
+          "default": "3",
+          "modifiers": []
+        },
+        {
+          "type": "Ptr_HistogramCostExtractor",
+          "name": "comparer",
+          "default": "createChiHistogramCostExtractor()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Ptr_ShapeTransformer",
+          "name": "transformer",
+          "default": "createThinPlateSplineShapeTransformer()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 48,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "class",
+      "name": "cv.HausdorffDistanceExtractor",
+      "identity": "class cv.HausdorffDistanceExtractor",
+      "returnType": ": cv::ShapeDistanceExtractor",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::ShapeDistanceExtractor",
+      "documentation": "@brief A simple Hausdorff distance measure between shapes defined by contours\n\naccording to the paper \"Comparing Images using the Hausdorff distance.\" by D.P. Huttenlocher, G.A.\nKlanderman, and W.J. Rucklidge. (PAMI 1993). :"
+    },
+    {
+      "ordinal": 49,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.HausdorffDistanceExtractor.setDistanceFlag",
+      "identity": "cv.HausdorffDistanceExtractor.setDistanceFlag(int distanceFlag)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "distanceFlag",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Set the norm used to compute the Hausdorff value between two shapes. It can be L1 or L2 norm.\n\n    @param distanceFlag Flag indicating which norm is used to compute the Hausdorff distance\n    (NORM_L1, NORM_L2)."
+    },
+    {
+      "ordinal": 50,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.HausdorffDistanceExtractor.getDistanceFlag",
+      "identity": "cv.HausdorffDistanceExtractor.getDistanceFlag()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 51,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.HausdorffDistanceExtractor.setRankProportion",
+      "identity": "cv.HausdorffDistanceExtractor.setRankProportion(float rankProportion)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "rankProportion",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief This method sets the rank proportion (or fractional value) that establish the Kth ranked value of\n    the partial Hausdorff distance. Experimentally had been shown that 0.6 is a good value to compare\n    shapes.\n\n    @param rankProportion fractional value (between 0 and 1)."
+    },
+    {
+      "ordinal": 52,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.HausdorffDistanceExtractor.getRankProportion",
+      "identity": "cv.HausdorffDistanceExtractor.getRankProportion()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 53,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_distance.hpp",
+      "kind": "callable",
+      "name": "cv.createHausdorffDistanceExtractor",
+      "identity": "cv.createHausdorffDistanceExtractor(int distanceFlag=cv::NORM_L2;float rankProp=0.6f)->Ptr<HausdorffDistanceExtractor>",
+      "returnType": "Ptr<HausdorffDistanceExtractor>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "distanceFlag",
+          "default": "cv::NORM_L2",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "rankProp",
+          "default": "0.6f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 54,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_transformer.hpp",
+      "kind": "class",
+      "name": "cv.ShapeTransformer",
+      "identity": "class cv.ShapeTransformer",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Abstract base class for shape transformation algorithms."
+    },
+    {
+      "ordinal": 55,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_transformer.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeTransformer.estimateTransformation",
+      "identity": "cv.ShapeTransformer.estimateTransformation(Mat transformingShape;Mat targetShape;vector_DMatch matches[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "transformingShape",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "targetShape",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_DMatch",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Estimate the transformation parameters of the current transformer algorithm, based on point matches.\n\n    @param transformingShape Contour defining first shape.\n    @param targetShape Contour defining second shape (Target).\n    @param matches Standard vector of Matches between points."
+    },
+    {
+      "ordinal": 56,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_transformer.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeTransformer.applyTransformation",
+      "identity": "cv.ShapeTransformer.applyTransformation(Mat input;Mat output=Mat()[/O])->float",
+      "returnType": "float",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "input",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "output",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Apply a transformation, given a pre-estimated transformation parameters.\n\n    @param input Contour (set of points) to apply the transformation.\n    @param output Output contour."
+    },
+    {
+      "ordinal": 57,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_transformer.hpp",
+      "kind": "callable",
+      "name": "cv.ShapeTransformer.warpImage",
+      "identity": "cv.ShapeTransformer.warpImage(Mat transformingImage;Mat output[/O];int flags=INTER_LINEAR;int borderMode=BORDER_CONSTANT;Scalar borderValue=Scalar()[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "transformingImage",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "output",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "INTER_LINEAR",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "borderMode",
+          "default": "BORDER_CONSTANT",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "borderValue",
+          "default": "Scalar()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Apply a transformation, given a pre-estimated transformation parameters, to an Image.\n\n    @param transformingImage Input image.\n    @param output Output image.\n    @param flags Image interpolation method.\n    @param borderMode border style.\n    @param borderValue border value."
+    },
+    {
+      "ordinal": 58,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_transformer.hpp",
+      "kind": "class",
+      "name": "cv.ThinPlateSplineShapeTransformer",
+      "identity": "class cv.ThinPlateSplineShapeTransformer",
+      "returnType": ": cv::ShapeTransformer",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::ShapeTransformer",
+      "documentation": "@brief Definition of the transformation\n\noccupied in the paper \"Principal Warps: Thin-Plate Splines and Decomposition of Deformations\", by\nF.L. Bookstein (PAMI 1989). :"
+    },
+    {
+      "ordinal": 59,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_transformer.hpp",
+      "kind": "callable",
+      "name": "cv.ThinPlateSplineShapeTransformer.setRegularizationParameter",
+      "identity": "cv.ThinPlateSplineShapeTransformer.setRegularizationParameter(double beta)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "beta",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Set the regularization parameter for relaxing the exact interpolation requirements of the TPS\n    algorithm.\n\n    @param beta value of the regularization parameter."
+    },
+    {
+      "ordinal": 60,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_transformer.hpp",
+      "kind": "callable",
+      "name": "cv.ThinPlateSplineShapeTransformer.getRegularizationParameter",
+      "identity": "cv.ThinPlateSplineShapeTransformer.getRegularizationParameter()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 61,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_transformer.hpp",
+      "kind": "callable",
+      "name": "cv.createThinPlateSplineShapeTransformer",
+      "identity": "cv.createThinPlateSplineShapeTransformer(double regularizationParameter=0)->Ptr<ThinPlateSplineShapeTransformer>",
+      "returnType": "Ptr<ThinPlateSplineShapeTransformer>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "regularizationParameter",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Complete constructor"
+    },
+    {
+      "ordinal": 62,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_transformer.hpp",
+      "kind": "class",
+      "name": "cv.AffineTransformer",
+      "identity": "class cv.AffineTransformer",
+      "returnType": ": cv::ShapeTransformer",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::ShapeTransformer",
+      "documentation": "@brief Wrapper class for the OpenCV Affine Transformation algorithm. :"
+    },
+    {
+      "ordinal": 63,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_transformer.hpp",
+      "kind": "callable",
+      "name": "cv.AffineTransformer.setFullAffine",
+      "identity": "cv.AffineTransformer.setFullAffine(bool fullAffine)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "fullAffine",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 64,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_transformer.hpp",
+      "kind": "callable",
+      "name": "cv.AffineTransformer.getFullAffine",
+      "identity": "cv.AffineTransformer.getFullAffine()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 65,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/shape/include/opencv2/shape/shape_transformer.hpp",
+      "kind": "callable",
+      "name": "cv.createAffineTransformer",
+      "identity": "cv.createAffineTransformer(bool fullAffine)->Ptr<AffineTransformer>",
+      "returnType": "Ptr<AffineTransformer>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "fullAffine",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Complete constructor"
+    }
+  ]
+}

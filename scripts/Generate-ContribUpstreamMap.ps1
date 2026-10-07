@@ -1,5 +1,5 @@
 param(
-    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid')][string]$Module,
+    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape')][string]$Module,
     [Parameter(Mandatory)][string]$DisplayName,
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [switch]$Check
@@ -33,6 +33,8 @@ function GetParts([string]$Identity) {
         '^cv\.(?<namespace>optflow|motempl)\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     } elseif ($Module -eq 'fuzzy') {
         '^cv\.ft\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
+    } elseif ($Module -eq 'shape') {
+        '^cv\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     } else {
         '^cv\.' + $Module + '\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     }
@@ -52,7 +54,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
         }
         return $Owner
     }
-    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs','fuzzy','rapid')) {
+    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape')) {
         if ($Module -eq 'face') {
             if ([string]::IsNullOrWhiteSpace($Owner)) {
                 switch ($Name) {
@@ -77,6 +79,17 @@ function GetManagedType([string]$Owner, [string]$Name) {
                 'hfs' { 'HfsCv2' }
                 'fuzzy' { 'FuzzyCv2' }
                 'rapid' { 'RapidCv2' }
+                'shape' {
+                    switch -Regex ($Name) {
+                        '^createNormHistogramCostExtractor$' { 'NormHistogramCostExtractor' }
+                        '^createEMDHistogramCostExtractor$' { 'EMDHistogramCostExtractor' }
+                        '^createChiHistogramCostExtractor$' { 'ChiHistogramCostExtractor' }
+                        '^createEMDL1HistogramCostExtractor$' { 'EMDL1HistogramCostExtractor' }
+                        '^createShapeContextDistanceExtractor$' { 'ShapeContextDistanceExtractor' }
+                        '^createHausdorffDistanceExtractor$' { 'HausdorffDistanceExtractor' }
+                        default { 'ShapeCv2' }
+                    }
+                }
             }
             return [string]$managedType
         }
@@ -173,6 +186,32 @@ function GetManaged([string]$Owner, [string]$Name, [string]$Identity) {
         }
         return @()
     }
+    if ($Module -eq 'shape') {
+        if ($Owner -eq 'HistogramCostExtractor' -and $Name -eq 'buildCostMatrix') {
+            return @($managedEntries | Where-Object { $_ -match 'JYPPX\.OpenCvSharp\.Shape\.HistogramCostExtractor\|method\|public;instance\|System\.Void BuildCostMatrix\(JYPPX\.OpenCvSharp\.Core\.Mat descriptors1,JYPPX\.OpenCvSharp\.Core\.Mat descriptors2,JYPPX\.OpenCvSharp\.Core\.Mat costMatrix\)' } | Sort-Object -Unique)
+        }
+        if ($Owner -in @('NormHistogramCostExtractor','EMDHistogramCostExtractor') -and $Name -in @('setNormFlag','getNormFlag')) {
+            return @($managedEntries | Where-Object { $_ -match 'JYPPX\.OpenCvSharp\.Shape\.NormHistogramCostExtractorBase\|property\|[^|]*\|JYPPX\.OpenCvSharp\.Core\.NormTypes NormFlag$' } | Sort-Object -Unique)
+        }
+        if ([string]::IsNullOrWhiteSpace($Owner)) {
+            $factory = switch ($Name) {
+                'createNormHistogramCostExtractor' { 'CreateNormHistogramCostExtractor' }
+                'createEMDHistogramCostExtractor' { 'CreateEMDHistogramCostExtractor' }
+                'createChiHistogramCostExtractor' { 'CreateChiHistogramCostExtractor' }
+                'createEMDL1HistogramCostExtractor' { 'CreateEMDL1HistogramCostExtractor' }
+                'createShapeContextDistanceExtractor' { 'CreateShapeContextDistanceExtractor' }
+                'createHausdorffDistanceExtractor' { 'CreateHausdorffDistanceExtractor' }
+                default { '' }
+            }
+            if (-not [string]::IsNullOrWhiteSpace([string]$factory)) {
+                $targetType = GetManagedType $Owner $Name
+                $classMarker = "JYPPX.OpenCvSharp.Shape.$targetType|"
+                $classFactory = @($managedEntries | Where-Object { $_.Contains($classMarker, [StringComparison]::Ordinal) -and $_ -match '\|method\|public;static\|[^|]*\bCreate\(' })
+                $facade = @($managedEntries | Where-Object { $_ -match ('JYPPX\.OpenCvSharp\.Shape\.ShapeCv2\|method\|public;static\|[^|]*\b' + [regex]::Escape([string]$factory) + '\(') })
+                return @($classFactory + $facade | Sort-Object -Unique)
+            }
+        }
+    }
     if ($Module -eq 'bioinspired' -and $Name -eq 'create') {
         $factory = switch ($Owner) {
             'Retina' { 'CreateRetina' }
@@ -266,6 +305,43 @@ function GetNative([object]$Parts, [string]$Identity) {
             default { '' }
         }
         if (-not [string]::IsNullOrWhiteSpace([string]$symbol)) { $result = @("jyppx_ocv_rapid_$symbol") }
+    } elseif ($Module -eq 'shape') {
+        if ($owner -eq 'HistogramCostExtractor') {
+            $result = switch ($name) {
+                'buildCostMatrix' { @('jyppx_ocv_shape_histogram_cost_extractor_build_cost_matrix') }
+                'setNDummies' { @('jyppx_ocv_shape_histogram_cost_extractor_set_n_dummies') }
+                'getNDummies' { @('jyppx_ocv_shape_histogram_cost_extractor_get_n_dummies') }
+                'setDefaultCost' { @('jyppx_ocv_shape_histogram_cost_extractor_set_default_cost') }
+                'getDefaultCost' { @('jyppx_ocv_shape_histogram_cost_extractor_get_default_cost') }
+                default { @() }
+            }
+        } elseif ($owner -in @('NormHistogramCostExtractor','EMDHistogramCostExtractor')) {
+            $result = switch ($name) {
+                'setNormFlag' { @('jyppx_ocv_shape_histogram_cost_extractor_set_norm_flag') }
+                'getNormFlag' { @('jyppx_ocv_shape_histogram_cost_extractor_get_norm_flag') }
+                default { @() }
+            }
+        } elseif ($owner -eq 'ShapeDistanceExtractor' -and $name -eq 'computeDistance') {
+            $result = @('jyppx_ocv_shape_distance_extractor_compute_distance')
+        } elseif ($owner -eq 'HausdorffDistanceExtractor') {
+            $result = switch ($name) {
+                'setDistanceFlag' { @('jyppx_ocv_shape_hausdorff_distance_extractor_set_distance_flag') }
+                'getDistanceFlag' { @('jyppx_ocv_shape_hausdorff_distance_extractor_get_distance_flag') }
+                'setRankProportion' { @('jyppx_ocv_shape_hausdorff_distance_extractor_set_rank_proportion') }
+                'getRankProportion' { @('jyppx_ocv_shape_hausdorff_distance_extractor_get_rank_proportion') }
+                default { @() }
+            }
+        } elseif ([string]::IsNullOrWhiteSpace($owner)) {
+            $result = switch ($name) {
+                'createNormHistogramCostExtractor' { @('jyppx_ocv_shape_norm_histogram_cost_extractor_create') }
+                'createEMDHistogramCostExtractor' { @('jyppx_ocv_shape_emd_histogram_cost_extractor_create') }
+                'createChiHistogramCostExtractor' { @('jyppx_ocv_shape_chi_histogram_cost_extractor_create') }
+                'createEMDL1HistogramCostExtractor' { @('jyppx_ocv_shape_emd_l1_histogram_cost_extractor_create') }
+                'createShapeContextDistanceExtractor' { @('jyppx_ocv_shape_context_distance_extractor_create') }
+                'createHausdorffDistanceExtractor' { @('jyppx_ocv_shape_hausdorff_distance_extractor_create') }
+                default { @() }
+            }
+        }
     } elseif ($Module -eq 'fuzzy') {
         $symbol = switch ($name) {
             'FT02D_components' { 'ft02d_components' }
@@ -593,6 +669,7 @@ foreach ($decl in @($raw.declarations)) {
         if ($managed.Count -gt 0 -and $native.Count -gt 0) { $classification = 'implemented'; $reason = "Explicit $DisplayName declaration-to-symbol mapping and exact managed baseline evidence are present." }
         else { $classification = 'intentionally-omitted'; $reason = if ($native.Count -eq 0) { "No native $DisplayName wrapper entrypoint is mapped for this parser declaration in the current ABI." } else { "A native $DisplayName entrypoint exists, but no exact matching managed member is present in the current baseline." } }
         if ($Module -eq 'freetype') { $reason = 'The contrib FreeType2 surface depends on external FreeType/Harfbuzz and has no native wrapper entrypoint or managed API in the current package.' }
+        if ($Module -eq 'shape') { $reason = 'The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.' }
         if ($Module -eq 'rapid' -and [string]$decl.identity -match '^cv\.rapid\.GOSTracker\.create\(') { $reason = 'GOSTracker is present in the pinned upstream header but the current managed/native wrapper exposes only Rapid and OLSTracker; this optional tracker remains deliberately omitted until its behavior, ABI, and ownership contract are separately reviewed.' }
         if ($Module -eq 'phase_unwrapping' -and [string]$decl.identity -match 'HistogramPhaseUnwrapping\.Params\.Params\(') { $reason = 'The upstream default Params constructor is represented by HistogramPhaseUnwrappingParams.Default and an explicit managed value constructor; value initialization has no native callable ABI.' }
         if ($Module -eq 'intensity_transform' -and [string]$decl.identity -match '\.BIMEF\(') { $reason += ' BIMEF runtime execution additionally requires an OpenCV build with EIGEN support.' }
@@ -615,7 +692,7 @@ $classification = [ordered]@{ schemaVersion = 1; upstreamOpenCvVersion = '5.0.0'
 $builder = [Text.StringBuilder]::new(); [void]$builder.AppendLine("# Generated by scripts/Generate-ContribUpstreamMap.ps1 -Module $Module. Do not edit."); [void]$builder.AppendLine('schema-version=1'); [void]$builder.AppendLine('upstream-opencv-version=5.0.0'); [void]$builder.AppendLine("claimed-slice=$($classification.claimedSlice)"); [void]$builder.AppendLine("header-sha256=$($raw.headerSha256)"); [void]$builder.AppendLine("parser-sha256=$($raw.parserSha256)"); [void]$builder.AppendLine("declaration-count=$($raw.declarationCount)"); [void]$builder.AppendLine('repository-wide-upstream-parity-claimed=false'); [void]$builder.AppendLine(''); [void]$builder.AppendLine('ordinal|classification|identity|native-entrypoints|managed-members|build-condition|reason')
 foreach ($row in $rows) { $nativeText = if (@($row.nativeEntrypoints).Count) { @($row.nativeEntrypoints) -join ';' } else { '-' }; $managedText = if (@($row.managedMembers).Count) { @($row.managedMembers) -join ';' } else { '-' }; [void]$builder.AppendLine("$($row.ordinal)|$($row.classification)|$($row.identity)|$nativeText|$managedText|$($row.buildCondition)|$($row.reason)") }
 $mappingText = $builder.ToString().Replace("`r`n", "`n"); $implemented = @($rows | Where-Object classification -eq 'implemented'); $omitted = @($rows | Where-Object classification -eq 'intentionally-omitted'); $metadata = @($rows | Where-Object classification -eq 'non-callable-metadata')
-$guide = switch ($Module) { 'face' {'docs/articles/face-guide.md'} 'quality' {'docs/articles/quality-guide.md'} 'img_hash' {'docs/articles/img-hash-guide.md'} 'line_descriptor' {'docs/articles/line-descriptor-guide.md'} 'intensity_transform' {'docs/articles/intensity-transform-guide.md'} 'plot' {'docs/articles/plot-guide.md'} 'bioinspired' {'docs/articles/bioinspired-guide.md'} 'phase_unwrapping' {'docs/articles/phase-unwrapping-guide.md'} 'hfs' {'docs/articles/hfs-guide.md'} 'fuzzy' {'docs/articles/fuzzy-guide.md'} 'rapid' {'docs/articles/rapid-guide.md'} default { "docs/articles/$Module-upstream-parity-guide.md" } }
+$guide = switch ($Module) { 'face' {'docs/articles/face-guide.md'} 'quality' {'docs/articles/quality-guide.md'} 'img_hash' {'docs/articles/img-hash-guide.md'} 'line_descriptor' {'docs/articles/line-descriptor-guide.md'} 'intensity_transform' {'docs/articles/intensity-transform-guide.md'} 'plot' {'docs/articles/plot-guide.md'} 'bioinspired' {'docs/articles/bioinspired-guide.md'} 'phase_unwrapping' {'docs/articles/phase-unwrapping-guide.md'} 'hfs' {'docs/articles/hfs-guide.md'} 'fuzzy' {'docs/articles/fuzzy-guide.md'} 'rapid' {'docs/articles/rapid-guide.md'} 'shape' {'docs/articles/shape-guide.md'} default { "docs/articles/$Module-upstream-parity-guide.md" } }
 $family = [ordered]@{ schemaVersion = 1; upstreamOpenCvVersion = '5.0.0'; status = 'implemented-verified'; managedPublicTypeAdditionCount = 0; managedPublicMemberAdditionCount = 0; families = @([ordered]@{ id = "$Module-wrapper-surface"; rationale = "Current $DisplayName managed/native wrapper declarations with exact parser-backed callable evidence."; declarations = @($implemented | ForEach-Object { [ordered]@{ ordinal = $_.ordinal; upstreamIdentity = $_.identity; upstreamClassification = $_.classification; nativeEntrypoints = $_.nativeEntrypoints; managedMembers = $_.managedMembers; focusedTest = "tests/OpenCvSharp.Tests/$DisplayName/$DisplayName`Tests.cs"; nativeSmoke = 'src/OpenCvSharp.Native/tests/native_smoke.cpp'; sample = 'samples/ConsoleSamples/Program.cs'; guide = $guide } }) }) }
 $classificationJson = (($classification | ConvertTo-Json -Depth 20) + [Environment]::NewLine); $familyJson = (($family | ConvertTo-Json -Depth 20) + [Environment]::NewLine); $mapHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($mappingText))).ToLowerInvariant(); $familyHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($familyJson))).ToLowerInvariant()
 $summary = [ordered]@{ schemaVersion = 1; generator = "tools/$DisplayName`UpstreamMap"; upstreamOpenCvVersion = '5.0.0'; claimedSlice = $classification.claimedSlice; rawExtractionPath = "compatibility/$Module-upstream-raw.json"; classificationPath = "compatibility/$Module-upstream-classifications.json"; mappingPath = "compatibility/$Module-upstream-map.txt"; headerSha256 = [string]$raw.headerSha256; parserSha256 = [string]$raw.parserSha256; mappingSha256 = $mapHash; declarationCount = [int]$raw.declarationCount; enumCount = [int](@($raw.declarations | Where-Object kind -eq enum).Count); classCount = [int](@($raw.declarations | Where-Object kind -eq class).Count); callableCount = [int](@($raw.declarations | Where-Object kind -eq callable).Count); classificationCounts = [ordered]@{ implemented = [int]$implemented.Count; 'intentionally-omitted' = [int]$omitted.Count; missing = 0; 'non-callable-metadata' = [int]$metadata.Count; unsupported = 0; 'upstream-conditional' = 0 }; nativeEvidenceCount = @($rows | ForEach-Object { @($_.nativeEntrypoints) } | Where-Object { $_ } | Sort-Object -Unique).Count; managedEvidenceCount = @($rows | ForEach-Object { @($_.managedMembers) } | Where-Object { $_ } | Sort-Object -Unique).Count; negativeFixtureCount = 12; externalDataDependencyCount = @($externalDataDependencies).Count; familyInventoryPath = "compatibility/$Module-implemented-families.json"; familyInventorySha256 = $familyHash; selectedFamilyCount = 1; selectedDeclarationCount = $implemented.Count; managedPublicTypeAdditionCount = 0; managedPublicMemberAdditionCount = 0; repositoryWideUpstreamParityClaimed = $false }; $summaryJson = (($summary | ConvertTo-Json -Depth 20) + [Environment]::NewLine)

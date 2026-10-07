@@ -1,0 +1,690 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/shape.hpp contrib public header closure from parser-emitted headers",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact Shape wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.HistogramCostExtractor",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.HistogramCostExtractor.buildCostMatrix(Mat descriptors1;Mat descriptors2;Mat costMatrix[/O])->void",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_histogram_cost_extractor_build_cost_matrix"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.HistogramCostExtractor|method|public;instance|System.Void BuildCostMatrix(JYPPX.OpenCvSharp.Core.Mat descriptors1,JYPPX.OpenCvSharp.Core.Mat descriptors2,JYPPX.OpenCvSharp.Core.Mat costMatrix)"
+      ]
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.HistogramCostExtractor.setNDummies(int nDummies)->void",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_histogram_cost_extractor_set_n_dummies"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.HistogramCostExtractor|property|instance;get:public;set:public|System.Int32 NDummies"
+      ]
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.HistogramCostExtractor.getNDummies()->int",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_histogram_cost_extractor_get_n_dummies"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.HistogramCostExtractor|property|instance;get:public;set:public|System.Int32 NDummies"
+      ]
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.HistogramCostExtractor.setDefaultCost(float defaultCost)->void",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_histogram_cost_extractor_set_default_cost"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.HistogramCostExtractor|property|instance;get:public;set:public|System.Single DefaultCost"
+      ]
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.HistogramCostExtractor.getDefaultCost()->float",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_histogram_cost_extractor_get_default_cost"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.HistogramCostExtractor|property|instance;get:public;set:public|System.Single DefaultCost"
+      ]
+    },
+    {
+      "ordinal": 6,
+      "identity": "class cv.NormHistogramCostExtractor",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.NormHistogramCostExtractor.setNormFlag(int flag)->void",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_histogram_cost_extractor_set_norm_flag"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.NormHistogramCostExtractorBase|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.NormTypes NormFlag"
+      ]
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.NormHistogramCostExtractor.getNormFlag()->int",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_histogram_cost_extractor_get_norm_flag"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.NormHistogramCostExtractorBase|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.NormTypes NormFlag"
+      ]
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.createNormHistogramCostExtractor(int flag=DIST_L2;int nDummies=25;float defaultCost=0.2f)->Ptr<HistogramCostExtractor>",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_norm_histogram_cost_extractor_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.NormHistogramCostExtractor|method|public;static|JYPPX.OpenCvSharp.Shape.NormHistogramCostExtractor Create(JYPPX.OpenCvSharp.Core.NormTypes flag=L2,System.Int32 nDummies=25,System.Single defaultCost=0.2)",
+        "MEMBER|JYPPX.OpenCvSharp.Shape.ShapeCv2|method|public;static|JYPPX.OpenCvSharp.Shape.NormHistogramCostExtractor CreateNormHistogramCostExtractor(JYPPX.OpenCvSharp.Core.NormTypes flag=L2,System.Int32 nDummies=25,System.Single defaultCost=0.2)"
+      ]
+    },
+    {
+      "ordinal": 10,
+      "identity": "class cv.EMDHistogramCostExtractor",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.EMDHistogramCostExtractor.setNormFlag(int flag)->void",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_histogram_cost_extractor_set_norm_flag"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.NormHistogramCostExtractorBase|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.NormTypes NormFlag"
+      ]
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.EMDHistogramCostExtractor.getNormFlag()->int",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_histogram_cost_extractor_get_norm_flag"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.NormHistogramCostExtractorBase|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.NormTypes NormFlag"
+      ]
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.createEMDHistogramCostExtractor(int flag=DIST_L2;int nDummies=25;float defaultCost=0.2f)->Ptr<HistogramCostExtractor>",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_emd_histogram_cost_extractor_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.EMDHistogramCostExtractor|method|public;static|JYPPX.OpenCvSharp.Shape.EMDHistogramCostExtractor Create(JYPPX.OpenCvSharp.Core.NormTypes flag=L2,System.Int32 nDummies=25,System.Single defaultCost=0.2)",
+        "MEMBER|JYPPX.OpenCvSharp.Shape.ShapeCv2|method|public;static|JYPPX.OpenCvSharp.Shape.EMDHistogramCostExtractor CreateEMDHistogramCostExtractor(JYPPX.OpenCvSharp.Core.NormTypes flag=L2,System.Int32 nDummies=25,System.Single defaultCost=0.2)"
+      ]
+    },
+    {
+      "ordinal": 14,
+      "identity": "class cv.ChiHistogramCostExtractor",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.createChiHistogramCostExtractor(int nDummies=25;float defaultCost=0.2f)->Ptr<HistogramCostExtractor>",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_chi_histogram_cost_extractor_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.ChiHistogramCostExtractor|method|public;static|JYPPX.OpenCvSharp.Shape.ChiHistogramCostExtractor Create(System.Int32 nDummies=25,System.Single defaultCost=0.2)",
+        "MEMBER|JYPPX.OpenCvSharp.Shape.ShapeCv2|method|public;static|JYPPX.OpenCvSharp.Shape.ChiHistogramCostExtractor CreateChiHistogramCostExtractor(System.Int32 nDummies=25,System.Single defaultCost=0.2)"
+      ]
+    },
+    {
+      "ordinal": 16,
+      "identity": "class cv.EMDL1HistogramCostExtractor",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.createEMDL1HistogramCostExtractor(int nDummies=25;float defaultCost=0.2f)->Ptr<HistogramCostExtractor>",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_emd_l1_histogram_cost_extractor_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.EMDL1HistogramCostExtractor|method|public;static|JYPPX.OpenCvSharp.Shape.EMDL1HistogramCostExtractor Create(System.Int32 nDummies=25,System.Single defaultCost=0.2)",
+        "MEMBER|JYPPX.OpenCvSharp.Shape.ShapeCv2|method|public;static|JYPPX.OpenCvSharp.Shape.EMDL1HistogramCostExtractor CreateEMDL1HistogramCostExtractor(System.Int32 nDummies=25,System.Single defaultCost=0.2)"
+      ]
+    },
+    {
+      "ordinal": 18,
+      "identity": "class cv.ShapeDistanceExtractor",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.ShapeDistanceExtractor.computeDistance(Mat contour1;Mat contour2)->float",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_distance_extractor_compute_distance"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.ShapeDistanceExtractor|method|public;instance|System.Single ComputeDistance(JYPPX.OpenCvSharp.Core.Mat contour1,JYPPX.OpenCvSharp.Core.Mat contour2)"
+      ]
+    },
+    {
+      "ordinal": 20,
+      "identity": "class cv.ShapeContextDistanceExtractor",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.ShapeContextDistanceExtractor.setAngularBins(int nAngularBins)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.ShapeContextDistanceExtractor.getAngularBins()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.ShapeContextDistanceExtractor.setRadialBins(int nRadialBins)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.ShapeContextDistanceExtractor.getRadialBins()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.ShapeContextDistanceExtractor.setInnerRadius(float innerRadius)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.ShapeContextDistanceExtractor.getInnerRadius()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.ShapeContextDistanceExtractor.setOuterRadius(float outerRadius)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.ShapeContextDistanceExtractor.getOuterRadius()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.ShapeContextDistanceExtractor.setRotationInvariant(bool rotationInvariant)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.ShapeContextDistanceExtractor.getRotationInvariant()->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.ShapeContextDistanceExtractor.setShapeContextWeight(float shapeContextWeight)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.ShapeContextDistanceExtractor.getShapeContextWeight()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.ShapeContextDistanceExtractor.setImageAppearanceWeight(float imageAppearanceWeight)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.ShapeContextDistanceExtractor.getImageAppearanceWeight()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.ShapeContextDistanceExtractor.setBendingEnergyWeight(float bendingEnergyWeight)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.ShapeContextDistanceExtractor.getBendingEnergyWeight()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.ShapeContextDistanceExtractor.setImages(Mat image1;Mat image2)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.ShapeContextDistanceExtractor.getImages(Mat image1[/O];Mat image2[/O])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.ShapeContextDistanceExtractor.setIterations(int iterations)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.ShapeContextDistanceExtractor.getIterations()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.ShapeContextDistanceExtractor.setCostExtractor(Ptr_HistogramCostExtractor comparer)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 42,
+      "identity": "cv.ShapeContextDistanceExtractor.getCostExtractor()->Ptr<HistogramCostExtractor>",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.ShapeContextDistanceExtractor.setStdDev(float sigma)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.ShapeContextDistanceExtractor.getStdDev()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 45,
+      "identity": "cv.ShapeContextDistanceExtractor.setTransformAlgorithm(Ptr_ShapeTransformer transformer)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 46,
+      "identity": "cv.ShapeContextDistanceExtractor.getTransformAlgorithm()->Ptr<ShapeTransformer>",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.createShapeContextDistanceExtractor(int nAngularBins=12;int nRadialBins=4;float innerRadius=0.2f;float outerRadius=2;int iterations=3;Ptr_HistogramCostExtractor comparer=createChiHistogramCostExtractor()[/C,/Ref];Ptr_ShapeTransformer transformer=createThinPlateSplineShapeTransformer()[/C,/Ref])->Ptr<ShapeContextDistanceExtractor>",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_context_distance_extractor_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.ShapeContextDistanceExtractor|method|public;static|JYPPX.OpenCvSharp.Shape.ShapeContextDistanceExtractor Create(System.Int32 angularBins=12,System.Int32 radialBins=4,System.Single innerRadius=0.2,System.Single outerRadius=2,System.Int32 iterations=3)",
+        "MEMBER|JYPPX.OpenCvSharp.Shape.ShapeCv2|method|public;static|JYPPX.OpenCvSharp.Shape.ShapeContextDistanceExtractor CreateShapeContextDistanceExtractor(System.Int32 angularBins=12,System.Int32 radialBins=4,System.Single innerRadius=0.2,System.Single outerRadius=2,System.Int32 iterations=3)"
+      ]
+    },
+    {
+      "ordinal": 48,
+      "identity": "class cv.HausdorffDistanceExtractor",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.HausdorffDistanceExtractor.setDistanceFlag(int distanceFlag)->void",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_hausdorff_distance_extractor_set_distance_flag"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.HausdorffDistanceExtractor|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.NormTypes DistanceFlag"
+      ]
+    },
+    {
+      "ordinal": 50,
+      "identity": "cv.HausdorffDistanceExtractor.getDistanceFlag()->int",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_hausdorff_distance_extractor_get_distance_flag"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.HausdorffDistanceExtractor|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.NormTypes DistanceFlag"
+      ]
+    },
+    {
+      "ordinal": 51,
+      "identity": "cv.HausdorffDistanceExtractor.setRankProportion(float rankProportion)->void",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_hausdorff_distance_extractor_set_rank_proportion"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.HausdorffDistanceExtractor|property|instance;get:public;set:public|System.Single RankProportion"
+      ]
+    },
+    {
+      "ordinal": 52,
+      "identity": "cv.HausdorffDistanceExtractor.getRankProportion()->float",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_hausdorff_distance_extractor_get_rank_proportion"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.HausdorffDistanceExtractor|property|instance;get:public;set:public|System.Single RankProportion"
+      ]
+    },
+    {
+      "ordinal": 53,
+      "identity": "cv.createHausdorffDistanceExtractor(int distanceFlag=cv::NORM_L2;float rankProp=0.6f)->Ptr<HausdorffDistanceExtractor>",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_hausdorff_distance_extractor_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.HausdorffDistanceExtractor|method|public;static|JYPPX.OpenCvSharp.Shape.HausdorffDistanceExtractor Create(JYPPX.OpenCvSharp.Core.NormTypes distanceFlag=L2,System.Single rankProportion=0.6)",
+        "MEMBER|JYPPX.OpenCvSharp.Shape.ShapeCv2|method|public;static|JYPPX.OpenCvSharp.Shape.HausdorffDistanceExtractor CreateHausdorffDistanceExtractor(JYPPX.OpenCvSharp.Core.NormTypes distanceFlag=L2,System.Single rankProportion=0.6)"
+      ]
+    },
+    {
+      "ordinal": 54,
+      "identity": "class cv.ShapeTransformer",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 55,
+      "identity": "cv.ShapeTransformer.estimateTransformation(Mat transformingShape;Mat targetShape;vector_DMatch matches[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 56,
+      "identity": "cv.ShapeTransformer.applyTransformation(Mat input;Mat output=Mat()[/O])->float",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 57,
+      "identity": "cv.ShapeTransformer.warpImage(Mat transformingImage;Mat output[/O];int flags=INTER_LINEAR;int borderMode=BORDER_CONSTANT;Scalar borderValue=Scalar()[/C,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 58,
+      "identity": "class cv.ThinPlateSplineShapeTransformer",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 59,
+      "identity": "cv.ThinPlateSplineShapeTransformer.setRegularizationParameter(double beta)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 60,
+      "identity": "cv.ThinPlateSplineShapeTransformer.getRegularizationParameter()->double",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 61,
+      "identity": "cv.createThinPlateSplineShapeTransformer(double regularizationParameter=0)->Ptr<ThinPlateSplineShapeTransformer>",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 62,
+      "identity": "class cv.AffineTransformer",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 63,
+      "identity": "cv.AffineTransformer.setFullAffine(bool fullAffine)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 64,
+      "identity": "cv.AffineTransformer.getFullAffine()->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 65,
+      "identity": "cv.createAffineTransformer(bool fullAffine)->Ptr<AffineTransformer>",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}

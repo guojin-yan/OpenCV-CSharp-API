@@ -1,6 +1,6 @@
 # Upstream Map Toolchain
 
-The upstream map catalog centralizes the source scope, parser identity, classification policy, output files, and semantic check command for 31 parser-backed maps. Its schema is [`upstream-map-catalog.schema.json`](../../compatibility/upstream-map-catalog.schema.json), and the checked catalog is [`upstream-map-catalog.json`](../../compatibility/upstream-map-catalog.json).
+The upstream map catalog centralizes the source scope, parser identity, classification policy, output files, and semantic check command for 32 parser-backed maps. Its schema is [`upstream-map-catalog.schema.json`](../../compatibility/upstream-map-catalog.schema.json), and the checked catalog is [`upstream-map-catalog.json`](../../compatibility/upstream-map-catalog.json).
 
 Regenerate the catalog after an intentional map-surface update:
 
@@ -22,4 +22,6 @@ Fuzzy maps all 16 callable declarations in the pinned `opencv2/fuzzy.hpp` closur
 
 Rapid maps the pinned `opencv2/rapid.hpp` closure's 12 existing callable wrappers to 12 exact native ABI symbols and managed members. The upstream `GOSTracker.create` factory is recorded as an intentional omission because the current wrapper exposes only the basic Rapid and OLS trackers; tracker-release ABI remains wrapper-only and outside parser callable scope.
 
-`MAP-002..004` are represented in the catalog. MAP-005 incrementally adds remaining contrib modules after each module's exact headers, optional dependency boundaries, source-review exclusions, and classification rules have been reviewed; nine MAP-005 modules currently have zero unexplained missing declarations.
+Shape maps the pinned `opencv2/shape.hpp` parser closure's 20 callable declarations to 18 distinct native ABI symbols and 19 managed members. Both Norm and EMD norm-flag declarations bind to the shared managed base property and native accessors; unwrapped ShapeContext configuration and ShapeTransformer APIs remain explicit omissions. The `emd_l1` helper and two native handle-release exports remain outside this parser closure.
+
+`MAP-002..004` are represented in the catalog. MAP-005 incrementally adds remaining contrib modules after each module's exact headers, optional dependency boundaries, source-review exclusions, and classification rules have been reviewed; ten MAP-005 modules currently have zero unexplained missing declarations.
