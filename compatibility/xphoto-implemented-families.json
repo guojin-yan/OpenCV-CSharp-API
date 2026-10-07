@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "upstreamOpenCvVersion": "5.0.0",
   "status": "implemented-verified",
-  "managedPublicTypeAdditionCount": 4,
-  "managedPublicMemberAdditionCount": 31,
+  "managedPublicTypeAdditionCount": 5,
+  "managedPublicMemberAdditionCount": 33,
   "families": [
     {
       "id": "xphoto-wrapper-surface",
@@ -55,6 +55,22 @@
           "managedMembers": [
             "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat DctDenoising(JYPPX.OpenCvSharp.Core.Mat src,System.Double sigma,System.Int32 psize=16)",
             "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|System.Void DctDenoising(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Double sigma,System.Int32 psize=16)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XPhoto/XPhotoTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xphoto-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 6,
+          "upstreamIdentity": "cv.xphoto.inpaint(Mat src[/C,/Ref];Mat mask[/C,/Ref];Mat dst[/Ref];int algorithmType[/C])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_xphoto_inpaint"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat Inpaint(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat mask,JYPPX.OpenCvSharp.XPhoto.InpaintTypes algorithmType)",
+            "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|System.Void Inpaint(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat mask,JYPPX.OpenCvSharp.Core.Mat dst,JYPPX.OpenCvSharp.XPhoto.InpaintTypes algorithmType)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XPhoto/XPhotoTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",

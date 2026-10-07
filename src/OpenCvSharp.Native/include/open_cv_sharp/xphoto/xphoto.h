@@ -116,3 +116,9 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_xphoto_oil_painting(
     int dyn_ratio,
     int code,
     int use_code);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_xphoto_inpaint(
+    const jyppx_ocv_mat* src,
+    const jyppx_ocv_mat* mask,
+    jyppx_ocv_mat* dst,
+    int algorithm_type);

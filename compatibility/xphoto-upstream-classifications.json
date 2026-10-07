@@ -81,11 +81,16 @@
     {
       "ordinal": 6,
       "identity": "cv.xphoto.inpaint(Mat src[/C,/Ref];Mat mask[/C,/Ref];Mat dst[/Ref];int algorithmType[/C])->void",
-      "classification": "intentionally-omitted",
-      "reason": "No native XPhoto wrapper entrypoint is mapped for this parser declaration in the current ABI.",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_inpaint"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat Inpaint(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat mask,JYPPX.OpenCvSharp.XPhoto.InpaintTypes algorithmType)",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|System.Void Inpaint(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat mask,JYPPX.OpenCvSharp.Core.Mat dst,JYPPX.OpenCvSharp.XPhoto.InpaintTypes algorithmType)"
+      ]
     },
     {
       "ordinal": 7,

@@ -2,8 +2,8 @@
 schema-version=1
 assembly=JYPPX.OpenCV.CSharp.API
 target-framework=net8.0
-type-count=646
-member-count=6994
+type-count=647
+member-count=7000
 namespace-count=41
 nullable-shape=included
 
@@ -533,6 +533,7 @@ TYPE|enum|public|JYPPX.OpenCvSharp.XImgProc.WeightedMedianFilterWeightType|base=
 TYPE|enum|public|JYPPX.OpenCvSharp.XObjDetect.CascadeClassifierFlags|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|JYPPX.OpenCvSharp.XObjDetect.HOGDescriptorHistogramNormType|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|JYPPX.OpenCvSharp.XPhoto.Bm3dSteps|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
+TYPE|enum|public|JYPPX.OpenCvSharp.XPhoto.InpaintTypes|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|JYPPX.OpenCvSharp.XPhoto.TransformTypes|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|JYPPX.OpenCvSharp.XStereo.CensusTransformType|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|JYPPX.OpenCvSharp.XStereo.StereoBinaryBMPreFilterType|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
@@ -7495,6 +7496,10 @@ MEMBER|JYPPX.OpenCvSharp.XPhoto.GrayworldWB|constructor|public;instance|.ctor()
 MEMBER|JYPPX.OpenCvSharp.XPhoto.GrayworldWB|method|protected;instance;override|System.Void ValidateBalanceWhiteSource(JYPPX.OpenCvSharp.Core.Mat src)
 MEMBER|JYPPX.OpenCvSharp.XPhoto.GrayworldWB|method|public;static|JYPPX.OpenCvSharp.XPhoto.GrayworldWB Create()
 MEMBER|JYPPX.OpenCvSharp.XPhoto.GrayworldWB|property|instance;get:public;set:public|System.Single SaturationThreshold
+MEMBER|JYPPX.OpenCvSharp.XPhoto.InpaintTypes|field|public;const|JYPPX.OpenCvSharp.XPhoto.InpaintTypes FsrBest=1
+MEMBER|JYPPX.OpenCvSharp.XPhoto.InpaintTypes|field|public;const|JYPPX.OpenCvSharp.XPhoto.InpaintTypes FsrFast=2
+MEMBER|JYPPX.OpenCvSharp.XPhoto.InpaintTypes|field|public;const|JYPPX.OpenCvSharp.XPhoto.InpaintTypes Shiftmap=0
+MEMBER|JYPPX.OpenCvSharp.XPhoto.InpaintTypes|field|public;instance|System.Int32 value__
 MEMBER|JYPPX.OpenCvSharp.XPhoto.LearningBasedWB|constructor|public;instance|.ctor(System.String? modelPath=null)
 MEMBER|JYPPX.OpenCvSharp.XPhoto.LearningBasedWB|method|protected;instance;override|System.Void ValidateBalanceWhiteSource(JYPPX.OpenCvSharp.Core.Mat src)
 MEMBER|JYPPX.OpenCvSharp.XPhoto.LearningBasedWB|method|public;instance|JYPPX.OpenCvSharp.Core.Mat ExtractSimpleFeatures(JYPPX.OpenCvSharp.Core.Mat src)
@@ -7523,6 +7528,7 @@ MEMBER|JYPPX.OpenCvSharp.XPhoto.WhiteBalancer|property|instance;get:public|Syste
 MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat ApplyChannelGains(JYPPX.OpenCvSharp.Core.Mat src,System.Single gainB,System.Single gainG,System.Single gainR)
 MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat Bm3dDenoising(JYPPX.OpenCvSharp.Core.Mat src,System.Single h=1,System.Int32 templateWindowSize=4,System.Int32 searchWindowSize=16,System.Int32 blockMatchingStep1=2500,System.Int32 blockMatchingStep2=400,System.Int32 groupSize=8,System.Int32 slidingStep=1,System.Single beta=2,JYPPX.OpenCvSharp.Core.NormTypes normType=L2,JYPPX.OpenCvSharp.XPhoto.Bm3dSteps step=StepAll,JYPPX.OpenCvSharp.XPhoto.TransformTypes transformType=Haar)
 MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat DctDenoising(JYPPX.OpenCvSharp.Core.Mat src,System.Double sigma,System.Int32 psize=16)
+MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat Inpaint(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat mask,JYPPX.OpenCvSharp.XPhoto.InpaintTypes algorithmType)
 MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat OilPainting(JYPPX.OpenCvSharp.Core.Mat src,System.Int32 size,System.Int32 dynRatio)
 MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|JYPPX.OpenCvSharp.XPhoto.GrayworldWB CreateGrayworldWB()
 MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|JYPPX.OpenCvSharp.XPhoto.LearningBasedWB CreateLearningBasedWB(System.String? modelPath=null)
@@ -7531,6 +7537,7 @@ MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|System.Void Apply
 MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|System.Void Bm3dDenoising(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Single h=1,System.Int32 templateWindowSize=4,System.Int32 searchWindowSize=16,System.Int32 blockMatchingStep1=2500,System.Int32 blockMatchingStep2=400,System.Int32 groupSize=8,System.Int32 slidingStep=1,System.Single beta=2,JYPPX.OpenCvSharp.Core.NormTypes normType=L2,JYPPX.OpenCvSharp.XPhoto.Bm3dSteps step=StepAll,JYPPX.OpenCvSharp.XPhoto.TransformTypes transformType=Haar)
 MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|System.Void Bm3dDenoising(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dstStep1,JYPPX.OpenCvSharp.Core.Mat dstStep2,System.Single h=1,System.Int32 templateWindowSize=4,System.Int32 searchWindowSize=16,System.Int32 blockMatchingStep1=2500,System.Int32 blockMatchingStep2=400,System.Int32 groupSize=8,System.Int32 slidingStep=1,System.Single beta=2,JYPPX.OpenCvSharp.Core.NormTypes normType=L2,JYPPX.OpenCvSharp.XPhoto.Bm3dSteps step=StepAll,JYPPX.OpenCvSharp.XPhoto.TransformTypes transformType=Haar)
 MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|System.Void DctDenoising(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Double sigma,System.Int32 psize=16)
+MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|System.Void Inpaint(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat mask,JYPPX.OpenCvSharp.Core.Mat dst,JYPPX.OpenCvSharp.XPhoto.InpaintTypes algorithmType)
 MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|System.Void OilPainting(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 size,System.Int32 dynRatio)
 MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|System.Void OilPainting(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 size,System.Int32 dynRatio,JYPPX.OpenCvSharp.ImgProc.ColorConversionCodes code)
 MEMBER|JYPPX.OpenCvSharp.XStereo.CensusTransformType|field|public;const|JYPPX.OpenCvSharp.XStereo.CensusTransformType CenterSymmetric=2

@@ -40,6 +40,7 @@ function Get-NativeEvidence([string]$Owner, [string]$Name) {
         switch ($Name) {
             'bm3dDenoising' { return @('jyppx_ocv_xphoto_bm3d_denoising','jyppx_ocv_xphoto_bm3d_denoising_steps') }
             'dctDenoising' { return @('jyppx_ocv_xphoto_dct_denoising') }
+            'inpaint' { return @('jyppx_ocv_xphoto_inpaint') }
             'oilPainting' { return @('jyppx_ocv_xphoto_oil_painting') }
             'applyChannelGains' { return @('jyppx_ocv_xphoto_apply_channel_gains') }
             'createSimpleWB' { return @('jyppx_ocv_xphoto_simple_wb_create') }
@@ -122,8 +123,8 @@ $family = [ordered]@{
     schemaVersion = 1
     upstreamOpenCvVersion = '5.0.0'
     status = 'implemented-verified'
-    managedPublicTypeAdditionCount = 4
-    managedPublicMemberAdditionCount = 31
+    managedPublicTypeAdditionCount = 5
+    managedPublicMemberAdditionCount = 33
     families = @([ordered]@{
             id = 'xphoto-wrapper-surface'
             rationale = 'Current XPhoto managed/native wrapper declarations with parser-backed callable evidence.'
@@ -158,8 +159,8 @@ $summary = [ordered]@{
     familyInventorySha256 = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($familyJson))).ToLowerInvariant()
     selectedFamilyCount = 1
     selectedDeclarationCount = $implementedRows.Count
-    managedPublicTypeAdditionCount = 4
-    managedPublicMemberAdditionCount = 31
+    managedPublicTypeAdditionCount = 5
+    managedPublicMemberAdditionCount = 33
     repositoryWideUpstreamParityClaimed = $false
 }
 $summaryJson = (($summary | ConvertTo-Json -Depth 16) + [Environment]::NewLine)

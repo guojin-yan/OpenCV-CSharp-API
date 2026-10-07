@@ -14,6 +14,9 @@ namespace JYPPX.OpenCvSharp.Tests.XPhoto
             Assert.Equal(0, (int)Bm3dSteps.StepAll);
             Assert.Equal(1, (int)Bm3dSteps.Step1);
             Assert.Equal(2, (int)Bm3dSteps.Step2);
+            Assert.Equal(0, (int)InpaintTypes.Shiftmap);
+            Assert.Equal(1, (int)InpaintTypes.FsrBest);
+            Assert.Equal(2, (int)InpaintTypes.FsrFast);
         }
 
         [Fact]
@@ -27,6 +30,57 @@ namespace JYPPX.OpenCvSharp.Tests.XPhoto
             Assert.Throws<ArgumentNullException>(() => XPhotoCv2.Bm3dDenoising(null!));
             Assert.Throws<ArgumentNullException>(() => XPhotoCv2.OilPainting(null!, null!, 3, 8));
             Assert.Throws<ArgumentNullException>(() => XPhotoCv2.OilPainting(null!, 3, 8));
+            Assert.Throws<ArgumentNullException>(() => XPhotoCv2.Inpaint(null!, null!, null!, InpaintTypes.Shiftmap));
+            Assert.Throws<ArgumentNullException>(() => XPhotoCv2.Inpaint(null!, null!, InpaintTypes.Shiftmap));
+        }
+
+        [Fact]
+        public void InpaintRejectsInvalidInputsBeforeNativeCall()
+        {
+            using (var empty = new Mat())
+            using (var src = new Mat(8, 8, MatType.CV_8UC1, new Scalar(127)))
+            using (var mask = new Mat(8, 8, MatType.CV_8UC1, new Scalar(255)))
+            using (var emptyMask = new Mat())
+            using (var colorMask = new Mat(8, 8, MatType.CV_8UC3, new Scalar(255, 255, 255)))
+            using (var wrongSizeMask = new Mat(7, 8, MatType.CV_8UC1, new Scalar(255)))
+            using (var fourChannel = new Mat(8, 8, MatType.CV_8UC4, new Scalar(10, 20, 30, 40)))
+            using (var signedSource = new Mat(8, 8, MatType.CV_16SC1, new Scalar(10)))
+            using (var unsupportedShiftmapDepth = new Mat(8, 8, MatType.CV_16FC1, new Scalar(10)))
+            using (var dst = new Mat())
+            {
+                ArgumentException emptySourceException = Assert.Throws<ArgumentException>(() =>
+                    XPhotoCv2.Inpaint(empty, mask, dst, InpaintTypes.Shiftmap));
+                Assert.Equal("src", emptySourceException.ParamName);
+
+                ArgumentException emptyMaskException = Assert.Throws<ArgumentException>(() =>
+                    XPhotoCv2.Inpaint(src, emptyMask, dst, InpaintTypes.Shiftmap));
+                Assert.Equal("mask", emptyMaskException.ParamName);
+
+                ArgumentException maskTypeException = Assert.Throws<ArgumentException>(() =>
+                    XPhotoCv2.Inpaint(src, colorMask, dst, InpaintTypes.Shiftmap));
+                Assert.Equal("mask", maskTypeException.ParamName);
+
+                ArgumentException maskSizeException = Assert.Throws<ArgumentException>(() =>
+                    XPhotoCv2.Inpaint(src, wrongSizeMask, dst, InpaintTypes.Shiftmap));
+                Assert.Equal("mask", maskSizeException.ParamName);
+
+                ArgumentException channelsException = Assert.Throws<ArgumentException>(() =>
+                    XPhotoCv2.Inpaint(fourChannel, mask, dst, InpaintTypes.FsrFast));
+                Assert.Equal("src", channelsException.ParamName);
+
+                ArgumentException depthException = Assert.Throws<ArgumentException>(() =>
+                    XPhotoCv2.Inpaint(signedSource, mask, dst, InpaintTypes.FsrFast));
+                Assert.Equal("src", depthException.ParamName);
+
+                ArgumentException shiftmapDepthException = Assert.Throws<ArgumentException>(() =>
+                    XPhotoCv2.Inpaint(unsupportedShiftmapDepth, mask, dst, InpaintTypes.Shiftmap));
+                Assert.Equal("src", shiftmapDepthException.ParamName);
+
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    XPhotoCv2.Inpaint(src, mask, dst, (InpaintTypes)99));
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    XPhotoCv2.Inpaint(src, mask, (InpaintTypes)99));
+            }
         }
 
         [Fact]
@@ -448,6 +502,22 @@ namespace JYPPX.OpenCvSharp.Tests.XPhoto
 
                 XPhotoCv2.DctDenoising(gray, dst, 1.0, 4);
                 Assert.False(dst.Empty);
+            }
+
+            using (var image = new Mat(128, 128, MatType.CV_8UC1, new Scalar(127)))
+            using (var mask = new Mat(128, 128, MatType.CV_8UC1, new Scalar(255)))
+            {
+                using (var hole = mask.SubMat(new Rect(48, 48, 32, 32)))
+                {
+                    hole.SetTo(new Scalar(0));
+                }
+
+                using (var dst = XPhotoCv2.Inpaint(image, mask, InpaintTypes.FsrFast))
+                {
+                    Assert.False(dst.Empty);
+                    Assert.Equal(image.Size, dst.Size);
+                    Assert.Equal(image.Type, dst.Type);
+                }
             }
         }
 

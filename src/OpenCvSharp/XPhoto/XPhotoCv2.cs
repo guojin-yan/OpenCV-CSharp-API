@@ -96,6 +96,49 @@ namespace JYPPX.OpenCvSharp.XPhoto
         }
 
         /// <summary>
+        /// Reconstructs missing image areas using an xphoto inpainting algorithm.
+        /// 使用 xphoto 图像修复算法重建图像缺失区域。
+        /// </summary>
+        /// <param name="src">The source image. 源图像。</param>
+        /// <param name="mask">A CV_8UC1 mask where non-zero pixels are valid and zero pixels are reconstructed. CV_8UC1 掩码，非零像素表示有效区域，零像素表示待修复区域。</param>
+        /// <param name="dst">The destination image. 目标图像。</param>
+        /// <param name="algorithmType">The inpainting algorithm. 图像修复算法。</param>
+        public static void Inpaint(Mat src, Mat mask, Mat dst, InpaintTypes algorithmType)
+        {
+            ValidateNotNull(src, nameof(src));
+            ValidateNotNull(mask, nameof(mask));
+            ValidateNotNull(dst, nameof(dst));
+            ValidateInpaintInputs(src, mask, algorithmType);
+            NativeException.ThrowIfError(NativeMethods.XPhotoInpaint(src.NativeHandle, mask.NativeHandle, dst.NativeHandle, (int)algorithmType));
+        }
+
+        /// <summary>
+        /// Reconstructs missing image areas and returns a new image.
+        /// 重建图像缺失区域并返回新图像。
+        /// </summary>
+        /// <param name="src">The source image. 源图像。</param>
+        /// <param name="mask">A CV_8UC1 mask where non-zero pixels are valid and zero pixels are reconstructed. CV_8UC1 掩码，非零像素表示有效区域，零像素表示待修复区域。</param>
+        /// <param name="algorithmType">The inpainting algorithm. 图像修复算法。</param>
+        /// <returns>The reconstructed image. 重建后的图像。</returns>
+        public static Mat Inpaint(Mat src, Mat mask, InpaintTypes algorithmType)
+        {
+            ValidateNotNull(src, nameof(src));
+            ValidateNotNull(mask, nameof(mask));
+            ValidateInpaintInputs(src, mask, algorithmType);
+            var dst = new Mat();
+            try
+            {
+                Inpaint(src, mask, dst, algorithmType);
+                return dst;
+            }
+            catch
+            {
+                dst.Dispose();
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Denoises an image using BM3D single-output mode.
         /// 使用 BM3D 单输出模式对图像去噪。
         /// </summary>
@@ -340,6 +383,65 @@ namespace JYPPX.OpenCvSharp.XPhoto
             if (src.Channels != 1 && src.Channels != 3)
             {
                 throw new ArgumentException("DCT denoising requires a single-channel or three-channel source image.", nameof(src));
+            }
+        }
+
+        private static void ValidateInpaintInputs(Mat src, Mat mask, InpaintTypes algorithmType)
+        {
+            if (algorithmType != InpaintTypes.Shiftmap &&
+                algorithmType != InpaintTypes.FsrBest &&
+                algorithmType != InpaintTypes.FsrFast)
+            {
+                throw new ArgumentOutOfRangeException(nameof(algorithmType), "Inpainting algorithm must be Shiftmap, FsrBest, or FsrFast.");
+            }
+
+            if (src.Empty)
+            {
+                throw new ArgumentException("Inpainting source image must not be empty.", nameof(src));
+            }
+
+            if (mask.Empty)
+            {
+                throw new ArgumentException("Inpainting mask must not be empty.", nameof(mask));
+            }
+
+            if (mask.Type != MatType.CV_8UC1)
+            {
+                throw new ArgumentException("Inpainting mask must be CV_8UC1.", nameof(mask));
+            }
+
+            if (src.Width != mask.Width || src.Height != mask.Height)
+            {
+                throw new ArgumentException("Inpainting source image and mask must have the same dimensions.", nameof(mask));
+            }
+
+            if (algorithmType == InpaintTypes.Shiftmap)
+            {
+                if (src.Channels < 1 || src.Channels > 4)
+                {
+                    throw new ArgumentException("Shiftmap inpainting requires one to four source channels.", nameof(src));
+                }
+
+                if (src.Depth != MatType.CV_8U && src.Depth != MatType.CV_8S &&
+                    src.Depth != MatType.CV_16U && src.Depth != MatType.CV_16S &&
+                    src.Depth != MatType.CV_32S && src.Depth != MatType.CV_32F &&
+                    src.Depth != MatType.CV_64F)
+                {
+                    throw new ArgumentException("Shiftmap inpainting requires CV_8U, CV_8S, CV_16U, CV_16S, CV_32S, CV_32F, or CV_64F source depth.", nameof(src));
+                }
+
+                return;
+            }
+
+            if (src.Channels != 1 && src.Channels != 3)
+            {
+                throw new ArgumentException("FSR inpainting requires a single-channel or three-channel source image.", nameof(src));
+            }
+
+            if (src.Depth != MatType.CV_8U && src.Depth != MatType.CV_16U &&
+                src.Depth != MatType.CV_32F && src.Depth != MatType.CV_64F)
+            {
+                throw new ArgumentException("FSR inpainting requires CV_8U, CV_16U, CV_32F, or CV_64F source depth.", nameof(src));
             }
         }
 

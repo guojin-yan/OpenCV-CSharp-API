@@ -675,4 +675,35 @@ int jyppx_ocv_xphoto_oil_painting(const jyppx_ocv_mat* src, jyppx_ocv_mat* dst, 
     }
 }
 
+int jyppx_ocv_xphoto_inpaint(const jyppx_ocv_mat* src, const jyppx_ocv_mat* mask, jyppx_ocv_mat* dst, int algorithm_type)
+{
+    constexpr const char* api_name = "jyppx_ocv_xphoto_inpaint";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_mat(api_name, src, "src");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, mask, "mask");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, dst, "dst");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_XPHOTO)
+        cv::xphoto::inpaint(
+            opencv_csharp_native::mat_value(src),
+            opencv_csharp_native::mat_value(mask),
+            opencv_csharp_native::mat_value(dst),
+            algorithm_type);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)algorithm_type;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
 

@@ -15,6 +15,7 @@
 #include "open_cv_sharp/stitching/stitching.h"
 #include "open_cv_sharp/tracking/tracking.h"
 #include "open_cv_sharp/video/video.h"
+#include "open_cv_sharp/xphoto/xphoto.h"
 #endif
 #include "open_cv_sharp/error.h"
 #include "open_cv_sharp/imgcodecs.h"
@@ -5264,6 +5265,12 @@ int main()
         }
 
 #if !defined(OPENCV_CSHARP_RUNTIME_PROFILE_MINI)
+        if (jyppx_ocv_xphoto_inpaint(nullptr, nullptr, nullptr, 0) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT)
+        {
+            jyppx_ocv_mat_release(mat);
+            return 970;
+        }
+
         int calib3d_smoke_status = run_calib3d_upstream_parity_smoke();
         if (calib3d_smoke_status != 0)
         {

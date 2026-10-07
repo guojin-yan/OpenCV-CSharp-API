@@ -62,6 +62,9 @@ namespace JYPPX.OpenCvSharp.Internal.Interop
 
         [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_xphoto_oil_painting")]
         internal static partial int XPhotoOilPainting(IntPtr src, IntPtr dst, int size, int dynRatio, int code, int useCode);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_xphoto_inpaint")]
+        internal static partial int XPhotoInpaint(IntPtr src, IntPtr mask, IntPtr dst, int algorithmType);
     }
 }
 #endif
