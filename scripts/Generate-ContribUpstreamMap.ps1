@@ -1,5 +1,5 @@
 param(
-    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype')][string]$Module,
+    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat')][string]$Module,
     [Parameter(Mandatory)][string]$DisplayName,
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [switch]$Check
@@ -50,7 +50,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
         }
         return $Owner
     }
-    if ($Module -in @('face','quality','img_hash','line_descriptor')) {
+    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat')) {
         if ($Module -eq 'face') {
             if ([string]::IsNullOrWhiteSpace($Owner)) {
                 switch ($Name) {
@@ -68,6 +68,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
                 'quality' { 'QualityCv2' }
                 'img_hash' { 'ImgHashCv2' }
                 'line_descriptor' { 'LineDescriptorCv2' }
+                'alphamat' { 'AlphaMatCv2' }
             }
             return [string]$managedType
         }
@@ -124,7 +125,9 @@ function GetNative([object]$Parts, [string]$Identity) {
     $owner = [string]$Parts.Owner
     $name = [string]$Parts.Name
     $result = @()
-    if ($Module -eq 'freetype') {
+    if ($Module -eq 'alphamat') {
+        if ([string]::IsNullOrWhiteSpace($owner) -and $name -eq 'infoFlow') { $result = @('jyppx_ocv_alphamat_info_flow') }
+    } elseif ($Module -eq 'freetype') {
         return @()
     } elseif ($Module -eq 'bgsegm') {
         if ($name -eq 'apply' -and $owner -match '^BackgroundSubtractor(MOG|GMG|CNT)$') {

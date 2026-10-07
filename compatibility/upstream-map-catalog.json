@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 23,
+  "moduleCount": 24,
   "maps": [
     {
       "id": "calib3d",
@@ -1846,6 +1846,52 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "dc0ed6274f60bf39a86fff6ef8b43dfe4bb008e59184bf58d8df84a86f1d1c13",
         "familyInventorySha256": "ec8c423ea4aa639990aea1d144c0d051e340d21a761e794855782188fcf676c1",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "alphamat",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/AlphaMatUpstreamMap",
+      "extractorScript": "tools/AlphaMatUpstreamMap/extract_alphamat.py",
+      "generationScript": "scripts/Generate-AlphaMatUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-AlphaMatUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/alphamat.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/alphamat/include/opencv2/alphamat.hpp",
+          "sha256": "34bdb75bccf58ec1ddea508204f74f920978ad575fcf9013f076a9eec9fc818e"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/alphamat/include/opencv2/alphamat.hpp",
+            "sha256": "34bdb75bccf58ec1ddea508204f74f920978ad575fcf9013f076a9eec9fc818e",
+            "startOrdinal": 0,
+            "declarationCount": 1
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/alphamat-upstream-raw.json",
+        "classifications": "compatibility/alphamat-upstream-classifications.json",
+        "mapping": "compatibility/alphamat-upstream-map.txt",
+        "summary": "compatibility/alphamat-upstream-summary.json",
+        "familyInventory": "compatibility/alphamat-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 1,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "fde1993eecf4d280eabbdbd00e1f9c1f9731b74e32c5d498c4763280c12454cf",
+        "familyInventorySha256": "5ed8210a62c11bb89671bfa8508f0cd22e7a845b561dc665eb5c2dd28bf779c0",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

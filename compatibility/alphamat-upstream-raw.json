@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/AlphaMatUpstreamMap/extract_alphamat.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/alphamat/include/opencv2/alphamat.hpp",
+  "headerSha256": "34bdb75bccf58ec1ddea508204f74f920978ad575fcf9013f076a9eec9fc818e",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/alphamat/include/opencv2/alphamat.hpp",
+      "sha256": "34bdb75bccf58ec1ddea508204f74f920978ad575fcf9013f076a9eec9fc818e",
+      "startOrdinal": 0,
+      "declarationCount": 1
+    }
+  ],
+  "declarationCount": 1,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/alphamat/include/opencv2/alphamat.hpp",
+      "kind": "callable",
+      "name": "cv.alphamat.infoFlow",
+      "identity": "cv.alphamat.infoFlow(Mat image;Mat tmap;Mat result[/O])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "tmap",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "result",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Compute alpha matte of an object in an image\n * @param image Input RGB image\n * @param tmap Input greyscale trimap image\n * @param result Output alpha matte image\n *\n * The function infoFlow performs alpha matting on a RGB image using a greyscale trimap image, and outputs a greyscale alpha matte image. The output alpha matte can be used to softly extract the foreground object from a background image. Examples can be found in the samples directory.\n *"
+    }
+  ]
+}

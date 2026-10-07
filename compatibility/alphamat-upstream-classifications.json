@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/alphamat.hpp contrib public header closure from parser-emitted headers",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact AlphaMat wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "cv.alphamat.infoFlow(Mat image;Mat tmap;Mat result[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit AlphaMat declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ALPHAMAT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_alphamat_info_flow"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.AlphaMat.AlphaMatCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat InfoFlow(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat trimap)",
+        "MEMBER|JYPPX.OpenCvSharp.AlphaMat.AlphaMatCv2|method|public;static|System.Void InfoFlow(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat trimap,JYPPX.OpenCvSharp.Core.Mat result)"
+      ]
+    }
+  ]
+}

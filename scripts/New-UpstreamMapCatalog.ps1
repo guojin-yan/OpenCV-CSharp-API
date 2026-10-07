@@ -30,7 +30,8 @@ $definitions = @(
     [pscustomobject]@{ Id = 'quality'; Tool = 'Quality'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'img_hash'; Tool = 'ImgHash'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'line_descriptor'; Tool = 'LineDescriptor'; Repository = 'opencv_contrib' },
-    [pscustomobject]@{ Id = 'freetype'; Tool = 'Freetype'; Repository = 'opencv_contrib' }
+    [pscustomobject]@{ Id = 'freetype'; Tool = 'Freetype'; Repository = 'opencv_contrib' },
+    [pscustomobject]@{ Id = 'alphamat'; Tool = 'AlphaMat'; Repository = 'opencv_contrib' }
 )
 
 function Get-HeaderRows {

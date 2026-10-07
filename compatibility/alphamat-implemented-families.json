@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 0,
+  "managedPublicMemberAdditionCount": 0,
+  "families": [
+    {
+      "id": "alphamat-wrapper-surface",
+      "rationale": "Current AlphaMat managed/native wrapper declarations with exact parser-backed callable evidence.",
+      "declarations": [
+        {
+          "ordinal": 0,
+          "upstreamIdentity": "cv.alphamat.infoFlow(Mat image;Mat tmap;Mat result[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_alphamat_info_flow"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.AlphaMat.AlphaMatCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat InfoFlow(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat trimap)",
+            "MEMBER|JYPPX.OpenCvSharp.AlphaMat.AlphaMatCv2|method|public;static|System.Void InfoFlow(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat trimap,JYPPX.OpenCvSharp.Core.Mat result)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/AlphaMat/AlphaMatTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/alphamat-upstream-parity-guide.md"
+        }
+      ]
+    }
+  ]
+}
