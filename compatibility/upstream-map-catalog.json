@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 26,
+  "moduleCount": 27,
   "maps": [
     {
       "id": "calib3d",
@@ -1984,6 +1984,70 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "1ba5125f474dffe62981bfc2b0302aafa382a5954e25efe51805b0e578851b92",
         "familyInventorySha256": "37c63245e82e684f514165e7787a73c16385e7f25b488a84a1ddb002dba5b782",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "bioinspired",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/BioInspiredUpstreamMap",
+      "extractorScript": "tools/BioInspiredUpstreamMap/extract_bioinspired.py",
+      "generationScript": "scripts/Generate-BioInspiredUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-BioInspiredUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/bioinspired.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired.hpp",
+          "sha256": "ba6fa34925cc29aa5e30e872e94ca2c75ae291bfdcd4e04cbf4138d6e4d823a3"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/bioinspired.hpp",
+            "sha256": "7339752dc301f556b5d922d2ac5ee1afc68f3f756194820b449fc07c298b3843",
+            "startOrdinal": 0,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retina.hpp",
+            "sha256": "e1a142a09db3207ef78b71cd935734fd70e616fca13ed5754f148228583781da",
+            "startOrdinal": 0,
+            "declarationCount": 23
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retinafasttonemapping.hpp",
+            "sha256": "96e415c5d825f7df371885d3649f1e1ef0c678ed967fe7badef2a06f23bb31ee",
+            "startOrdinal": 23,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/transientareassegmentationmodule.hpp",
+            "sha256": "bb009b2b08f49b522ca5838b806f30560f0776215322b605dfaa6ad288c20d35",
+            "startOrdinal": 27,
+            "declarationCount": 9
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/bioinspired-upstream-raw.json",
+        "classifications": "compatibility/bioinspired-upstream-classifications.json",
+        "mapping": "compatibility/bioinspired-upstream-map.txt",
+        "summary": "compatibility/bioinspired-upstream-summary.json",
+        "familyInventory": "compatibility/bioinspired-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 36,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "7aeda7db027538149c59c2b7150f9c47c5fbb703e2defa774764d3436f03d5c6",
+        "familyInventorySha256": "4bdd5f2973fce5fae44be49e186e59dcd46af354c2eb82664d0c0a7708294bdd",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

@@ -1,0 +1,464 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/bioinspired.hpp contrib public header closure from parser-emitted headers",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact BioInspired wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "enum cv.bioinspired.<unnamed>[const cv.bioinspired.RETINA_COLOR_RANDOM=0;const cv.bioinspired.RETINA_COLOR_DIAGONAL=1;const cv.bioinspired.RETINA_COLOR_BAYER=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "class cv.bioinspired.Retina",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.bioinspired.Retina.getInputSize()->Size",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_retina_get_input_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|property|instance;get:public|JYPPX.OpenCvSharp.Core.Size InputSize"
+      ]
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.bioinspired.Retina.getOutputSize()->Size",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_retina_get_output_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|property|instance;get:public|JYPPX.OpenCvSharp.Core.Size OutputSize"
+      ]
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.bioinspired.Retina.setup(String retinaParameterFile=\"\";bool applyDefaultSetupOnFailure=true[/C])->void",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_retina_setup"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void Setup(System.String? retinaParameterFile=null,System.Boolean applyDefaultSetupOnFailure=true)"
+      ]
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.bioinspired.Retina.printSetup()->String",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_retina_print_setup_fill",
+        "jyppx_ocv_bioinspired_retina_print_setup_length"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.String PrintSetup()"
+      ]
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.bioinspired.Retina.write(String fs)->void",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_retina_write"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void Write(System.String path)"
+      ]
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.bioinspired.Retina.setupOPLandIPLParvoChannel(bool colorMode=true[/C];bool normaliseOutput=true[/C];float photoreceptorsLocalAdaptationSensitivity=0.7f[/C];float photoreceptorsTemporalConstant=0.5f[/C];float photoreceptorsSpatialConstant=0.53f[/C];float horizontalCellsGain=0.f[/C];float HcellsTemporalConstant=1.f[/C];float HcellsSpatialConstant=7.f[/C];float ganglionCellsSensitivity=0.7f[/C])->void",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_retina_setup_parvo"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void Setup(JYPPX.OpenCvSharp.BioInspired.RetinaParvoParameters parameters)"
+      ]
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.bioinspired.Retina.setupIPLMagnoChannel(bool normaliseOutput=true[/C];float parasolCells_beta=0.f[/C];float parasolCells_tau=0.f[/C];float parasolCells_k=7.f[/C];float amacrinCellsTemporalCutFrequency=1.2f[/C];float V0CompressionParameter=0.95f[/C];float localAdaptintegration_tau=0.f[/C];float localAdaptintegration_k=7.f[/C])->void",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_retina_setup_magno"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void Setup(JYPPX.OpenCvSharp.BioInspired.RetinaMagnoParameters parameters)"
+      ]
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.bioinspired.Retina.run(Mat inputImage)->void",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_retina_run"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void Run(JYPPX.OpenCvSharp.Core.Mat input)"
+      ]
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.bioinspired.Retina.applyFastToneMapping(Mat inputImage;Mat outputToneMappedImage[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_retina_apply_fast_tone_mapping"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void ApplyFastToneMapping(JYPPX.OpenCvSharp.Core.Mat input,JYPPX.OpenCvSharp.Core.Mat output)"
+      ]
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.bioinspired.Retina.getParvo(Mat retinaOutput_parvo[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_retina_get_parvo"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void GetParvo(JYPPX.OpenCvSharp.Core.Mat output)"
+      ]
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.bioinspired.Retina.getParvoRAW(Mat retinaOutput_parvo[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_retina_get_parvo_raw"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void GetParvoRaw(JYPPX.OpenCvSharp.Core.Mat output)"
+      ]
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.bioinspired.Retina.getMagno(Mat retinaOutput_magno[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_retina_get_magno"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void GetMagno(JYPPX.OpenCvSharp.Core.Mat output)"
+      ]
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.bioinspired.Retina.getMagnoRAW(Mat retinaOutput_magno[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_retina_get_magno_raw"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void GetMagnoRaw(JYPPX.OpenCvSharp.Core.Mat output)"
+      ]
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.bioinspired.Retina.getMagnoRAW()->Mat",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_retina_get_magno_raw"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetMagnoRaw()"
+      ]
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.bioinspired.Retina.getParvoRAW()->Mat",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_retina_get_parvo_raw"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetParvoRaw()"
+      ]
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.bioinspired.Retina.setColorSaturation(bool saturateColors=true[/C];float colorSaturationValue=4.0f[/C])->void",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_retina_set_color_saturation"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void SetColorSaturation(System.Boolean saturateColors,System.Single colorSaturationValue)"
+      ]
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.bioinspired.Retina.clearBuffers()->void",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_retina_clear_buffers"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void ClearBuffers()"
+      ]
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.bioinspired.Retina.activateMovingContoursProcessing(bool activate[/C])->void",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_retina_activate_moving_contours_processing"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void ActivateMovingContoursProcessing(System.Boolean activate)"
+      ]
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.bioinspired.Retina.activateContoursProcessing(bool activate[/C])->void",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_retina_activate_contours_processing"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void ActivateContoursProcessing(System.Boolean activate)"
+      ]
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.bioinspired.Retina.create(Size inputSize)->Ptr<Retina>",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_retina_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.BioInspiredCv2|method|public;static|JYPPX.OpenCvSharp.BioInspired.Retina CreateRetina(JYPPX.OpenCvSharp.Core.Size inputSize,System.Boolean colorMode=true,JYPPX.OpenCvSharp.BioInspired.RetinaColorSamplingMethod colorSamplingMethod=Bayer,System.Boolean useRetinaLogSampling=false,System.Single reductionFactor=1,System.Single samplingStrength=10)"
+      ]
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.bioinspired.Retina.create(Size inputSize;bool colorMode[/C];int colorSamplingMethod=RETINA_COLOR_BAYER;bool useRetinaLogSampling=false[/C];float reductionFactor=1.0f[/C];float samplingStrength=10.0f[/C])->Ptr<Retina>",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_retina_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.BioInspiredCv2|method|public;static|JYPPX.OpenCvSharp.BioInspired.Retina CreateRetina(JYPPX.OpenCvSharp.Core.Size inputSize,System.Boolean colorMode=true,JYPPX.OpenCvSharp.BioInspired.RetinaColorSamplingMethod colorSamplingMethod=Bayer,System.Boolean useRetinaLogSampling=false,System.Single reductionFactor=1,System.Single samplingStrength=10)"
+      ]
+    },
+    {
+      "ordinal": 23,
+      "identity": "class cv.bioinspired.RetinaFastToneMapping",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.bioinspired.RetinaFastToneMapping.applyFastToneMapping(Mat inputImage;Mat outputToneMappedImage[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_retina_fast_tone_mapping_apply"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.RetinaFastToneMapping|method|public;instance|System.Void Apply(JYPPX.OpenCvSharp.Core.Mat input,JYPPX.OpenCvSharp.Core.Mat output)"
+      ]
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.bioinspired.RetinaFastToneMapping.setup(float photoreceptorsNeighborhoodRadius=3.f[/C];float ganglioncellsNeighborhoodRadius=1.f[/C];float meanLuminanceModulatorK=1.f[/C])->void",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_retina_fast_tone_mapping_setup"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.RetinaFastToneMapping|method|public;instance|System.Void Setup(System.Single photoreceptorsNeighborhoodRadius=3,System.Single ganglionCellsNeighborhoodRadius=1,System.Single meanLuminanceModulatorK=1)"
+      ]
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.bioinspired.RetinaFastToneMapping.create(Size inputSize)->Ptr<RetinaFastToneMapping>",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_retina_fast_tone_mapping_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.BioInspiredCv2|method|public;static|JYPPX.OpenCvSharp.BioInspired.RetinaFastToneMapping CreateRetinaFastToneMapping(JYPPX.OpenCvSharp.Core.Size inputSize)"
+      ]
+    },
+    {
+      "ordinal": 27,
+      "identity": "class cv.bioinspired.TransientAreasSegmentationModule",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.bioinspired.TransientAreasSegmentationModule.getSize()->Size",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_transient_areas_get_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.TransientAreasSegmentationModule|property|instance;get:public|JYPPX.OpenCvSharp.Core.Size Size"
+      ]
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.bioinspired.TransientAreasSegmentationModule.setup(String segmentationParameterFile=\"\";bool applyDefaultSetupOnFailure=true[/C])->void",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_transient_areas_setup"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.TransientAreasSegmentationModule|method|public;instance|System.Void Setup(System.String? segmentationParameterFile=null,System.Boolean applyDefaultSetupOnFailure=true)"
+      ]
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.bioinspired.TransientAreasSegmentationModule.printSetup()->String",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_transient_areas_print_setup_fill",
+        "jyppx_ocv_bioinspired_transient_areas_print_setup_length"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.TransientAreasSegmentationModule|method|public;instance|System.String PrintSetup()"
+      ]
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.bioinspired.TransientAreasSegmentationModule.write(String fs)->void",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_transient_areas_write"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.TransientAreasSegmentationModule|method|public;instance|System.Void Write(System.String path)"
+      ]
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.bioinspired.TransientAreasSegmentationModule.run(Mat inputToSegment;int channelIndex=0[/C])->void",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_transient_areas_run"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.TransientAreasSegmentationModule|method|public;instance|System.Void Run(JYPPX.OpenCvSharp.Core.Mat input,System.Int32 channelIndex=0)"
+      ]
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.bioinspired.TransientAreasSegmentationModule.getSegmentationPicture(Mat transientAreas[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_transient_areas_get_segmentation_picture"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.TransientAreasSegmentationModule|method|public;instance|System.Void GetSegmentationPicture(JYPPX.OpenCvSharp.Core.Mat output)"
+      ]
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.bioinspired.TransientAreasSegmentationModule.clearAllBuffers()->void",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_transient_areas_clear_all_buffers"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.TransientAreasSegmentationModule|method|public;instance|System.Void ClearAllBuffers()"
+      ]
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.bioinspired.TransientAreasSegmentationModule.create(Size inputSize)->Ptr<TransientAreasSegmentationModule>",
+      "classification": "implemented",
+      "reason": "Explicit BioInspired declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BIOINSPIRED=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bioinspired_transient_areas_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BioInspired.BioInspiredCv2|method|public;static|JYPPX.OpenCvSharp.BioInspired.TransientAreasSegmentationModule CreateTransientAreasSegmentationModule(JYPPX.OpenCvSharp.Core.Size inputSize)"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,994 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/BioInspiredUpstreamMap/extract_bioinspired.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired.hpp",
+  "headerSha256": "ba6fa34925cc29aa5e30e872e94ca2c75ae291bfdcd4e04cbf4138d6e4d823a3",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/bioinspired.hpp",
+      "sha256": "7339752dc301f556b5d922d2ac5ee1afc68f3f756194820b449fc07c298b3843",
+      "startOrdinal": 0,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retina.hpp",
+      "sha256": "e1a142a09db3207ef78b71cd935734fd70e616fca13ed5754f148228583781da",
+      "startOrdinal": 0,
+      "declarationCount": 23
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retinafasttonemapping.hpp",
+      "sha256": "96e415c5d825f7df371885d3649f1e1ef0c678ed967fe7badef2a06f23bb31ee",
+      "startOrdinal": 23,
+      "declarationCount": 4
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/transientareassegmentationmodule.hpp",
+      "sha256": "bb009b2b08f49b522ca5838b806f30560f0776215322b605dfaa6ad288c20d35",
+      "startOrdinal": 27,
+      "declarationCount": 9
+    }
+  ],
+  "declarationCount": 36,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retina.hpp",
+      "kind": "enum",
+      "name": "cv.bioinspired.<unnamed>",
+      "identity": "enum cv.bioinspired.<unnamed>[const cv.bioinspired.RETINA_COLOR_RANDOM=0;const cv.bioinspired.RETINA_COLOR_DIAGONAL=1;const cv.bioinspired.RETINA_COLOR_BAYER=2]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.bioinspired.RETINA_COLOR_RANDOM",
+          "value": "0"
+        },
+        {
+          "name": "const cv.bioinspired.RETINA_COLOR_DIAGONAL",
+          "value": "1"
+        },
+        {
+          "name": "const cv.bioinspired.RETINA_COLOR_BAYER",
+          "value": "2"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retina.hpp",
+      "kind": "class",
+      "name": "cv.bioinspired.Retina",
+      "identity": "class cv.bioinspired.Retina",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief class which allows the Gipsa/Listic Labs model to be used with OpenCV.\n\nThis retina model allows spatio-temporal image processing (applied on still images, video sequences).\nAs a summary, these are the retina model properties:\n- It applies a spectral whithening (mid-frequency details enhancement)\n- high frequency spatio-temporal noise reduction\n- low frequency luminance to be reduced (luminance range compression)\n- local logarithmic luminance compression allows details to be enhanced in low light conditions\n\nUSE : this model can be used basically for spatio-temporal video effects but also for :\n     _using the getParvo method output matrix : texture analysiswith enhanced signal to noise ratio and enhanced details robust against input images luminance ranges\n     _using the getMagno method output matrix : motion analysis also with the previously cited properties\n\nfor more information, reer to the following papers :\nBenoit A., Caplier A., Durette B., Herault, J., \"USING HUMAN VISUAL SYSTEM MODELING FOR BIO-INSPIRED LOW LEVEL IMAGE PROCESSING\", Elsevier, Computer Vision and Image Understanding 114 (2010), pp. 758-773, DOI: http://dx.doi.org/10.1016/j.cviu.2010.01.011\nVision: Images, Signals and Neural Networks: Models of Neural Processing in Visual Perception (Progress in Neural Processing),By: Jeanny Herault, ISBN: 9814273686. WAPI (Tower ID): 113266891.\n\nThe retina filter includes the research contributions of phd/research collegues from which code has been redrawn by the author :\ntake a look at the retinacolor.hpp module to discover Brice Chaix de Lavarene color mosaicing/demosaicing and the reference paper:\nB. Chaix de Lavarene, D. Alleysson, B. Durette, J. Herault (2007). \"Efficient demosaicing through recursive filtering\", IEEE International Conference on Image Processing ICIP 2007\ntake a look at imagelogpolprojection.hpp to discover retina spatial log sampling which originates from Barthelemy Durette phd with Jeanny Herault. A Retina / V1 cortex projection is also proposed and originates from Jeanny's discussions.\nmore informations in the above cited Jeanny Heraults's book."
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retina.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.Retina.getInputSize",
+      "identity": "cv.bioinspired.Retina.getInputSize()->Size",
+      "returnType": "Size",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Retreive retina input buffer size\n    @return the retina input buffer size"
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retina.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.Retina.getOutputSize",
+      "identity": "cv.bioinspired.Retina.getOutputSize()->Size",
+      "returnType": "Size",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Retreive retina output buffer size that can be different from the input if a spatial log\n    transformation is applied\n    @return the retina output buffer size"
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retina.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.Retina.setup",
+      "identity": "cv.bioinspired.Retina.setup(String retinaParameterFile=\"\";bool applyDefaultSetupOnFailure=true[/C])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "retinaParameterFile",
+          "default": "\"\"",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "applyDefaultSetupOnFailure",
+          "default": "true",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Try to open an XML retina parameters file to adjust current retina instance setup\n\n    - if the xml file does not exist, then default setup is applied\n    - warning, Exceptions are thrown if read XML file is not valid\n    @param retinaParameterFile the parameters filename\n    @param applyDefaultSetupOnFailure set to true if an error must be thrown on error\n\n    You can retrieve the current parameters structure using the method Retina::getParameters and update\n    it before running method Retina::setup."
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retina.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.Retina.printSetup",
+      "identity": "cv.bioinspired.Retina.printSetup()->String",
+      "returnType": "String",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Outputs a string showing the used parameters setup\n    @return a string which contains formated parameters information"
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retina.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.Retina.write",
+      "identity": "cv.bioinspired.Retina.write(String fs)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "fs",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Write xml/yml formated parameters information\n    @param fs the filename of the xml file that will be open and writen with formatted parameters\n    information"
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retina.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.Retina.setupOPLandIPLParvoChannel",
+      "identity": "cv.bioinspired.Retina.setupOPLandIPLParvoChannel(bool colorMode=true[/C];bool normaliseOutput=true[/C];float photoreceptorsLocalAdaptationSensitivity=0.7f[/C];float photoreceptorsTemporalConstant=0.5f[/C];float photoreceptorsSpatialConstant=0.53f[/C];float horizontalCellsGain=0.f[/C];float HcellsTemporalConstant=1.f[/C];float HcellsSpatialConstant=7.f[/C];float ganglionCellsSensitivity=0.7f[/C])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "colorMode",
+          "default": "true",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "normaliseOutput",
+          "default": "true",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "photoreceptorsLocalAdaptationSensitivity",
+          "default": "0.7f",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "photoreceptorsTemporalConstant",
+          "default": "0.5f",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "photoreceptorsSpatialConstant",
+          "default": "0.53f",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "horizontalCellsGain",
+          "default": "0.f",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "HcellsTemporalConstant",
+          "default": "1.f",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "HcellsSpatialConstant",
+          "default": "7.f",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "ganglionCellsSensitivity",
+          "default": "0.7f",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Setup the OPL and IPL parvo channels (see biologocal model)\n\n    OPL is referred as Outer Plexiform Layer of the retina, it allows the spatio-temporal filtering\n    which withens the spectrum and reduces spatio-temporal noise while attenuating global luminance\n    (low frequency energy) IPL parvo is the OPL next processing stage, it refers to a part of the\n    Inner Plexiform layer of the retina, it allows high contours sensitivity in foveal vision. See\n    reference papers for more informations.\n    for more informations, please have a look at the paper Benoit A., Caplier A., Durette B., Herault, J., \"USING HUMAN VISUAL SYSTEM MODELING FOR BIO-INSPIRED LOW LEVEL IMAGE PROCESSING\", Elsevier, Computer Vision and Image Understanding 114 (2010), pp. 758-773, DOI: http://dx.doi.org/10.1016/j.cviu.2010.01.011\n    @param colorMode specifies if (true) color is processed of not (false) to then processing gray\n    level image\n    @param normaliseOutput specifies if (true) output is rescaled between 0 and 255 of not (false)\n    @param photoreceptorsLocalAdaptationSensitivity the photoreceptors sensitivity renage is 0-1\n    (more log compression effect when value increases)\n    @param photoreceptorsTemporalConstant the time constant of the first order low pass filter of\n    the photoreceptors, use it to cut high temporal frequencies (noise or fast motion), unit is\n    frames, typical value is 1 frame\n    @param photoreceptorsSpatialConstant the spatial constant of the first order low pass filter of\n    the photoreceptors, use it to cut high spatial frequencies (noise or thick contours), unit is\n    pixels, typical value is 1 pixel\n    @param horizontalCellsGain gain of the horizontal cells network, if 0, then the mean value of\n    the output is zero, if the parameter is near 1, then, the luminance is not filtered and is\n    still reachable at the output, typicall value is 0\n    @param HcellsTemporalConstant the time constant of the first order low pass filter of the\n    horizontal cells, use it to cut low temporal frequencies (local luminance variations), unit is\n    frames, typical value is 1 frame, as the photoreceptors\n    @param HcellsSpatialConstant the spatial constant of the first order low pass filter of the\n    horizontal cells, use it to cut low spatial frequencies (local luminance), unit is pixels,\n    typical value is 5 pixel, this value is also used for local contrast computing when computing\n    the local contrast adaptation at the ganglion cells level (Inner Plexiform Layer parvocellular\n    channel model)\n    @param ganglionCellsSensitivity the compression strengh of the ganglion cells local adaptation\n    output, set a value between 0.6 and 1 for best results, a high value increases more the low\n    value sensitivity... and the output saturates faster, recommended value: 0.7"
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retina.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.Retina.setupIPLMagnoChannel",
+      "identity": "cv.bioinspired.Retina.setupIPLMagnoChannel(bool normaliseOutput=true[/C];float parasolCells_beta=0.f[/C];float parasolCells_tau=0.f[/C];float parasolCells_k=7.f[/C];float amacrinCellsTemporalCutFrequency=1.2f[/C];float V0CompressionParameter=0.95f[/C];float localAdaptintegration_tau=0.f[/C];float localAdaptintegration_k=7.f[/C])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "normaliseOutput",
+          "default": "true",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "parasolCells_beta",
+          "default": "0.f",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "parasolCells_tau",
+          "default": "0.f",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "parasolCells_k",
+          "default": "7.f",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "amacrinCellsTemporalCutFrequency",
+          "default": "1.2f",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "V0CompressionParameter",
+          "default": "0.95f",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "localAdaptintegration_tau",
+          "default": "0.f",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "localAdaptintegration_k",
+          "default": "7.f",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Set parameters values for the Inner Plexiform Layer (IPL) magnocellular channel\n\n    this channel processes signals output from OPL processing stage in peripheral vision, it allows\n    motion information enhancement. It is decorrelated from the details channel. See reference\n    papers for more details.\n\n    @param normaliseOutput specifies if (true) output is rescaled between 0 and 255 of not (false)\n    @param parasolCells_beta the low pass filter gain used for local contrast adaptation at the\n    IPL level of the retina (for ganglion cells local adaptation), typical value is 0\n    @param parasolCells_tau the low pass filter time constant used for local contrast adaptation\n    at the IPL level of the retina (for ganglion cells local adaptation), unit is frame, typical\n    value is 0 (immediate response)\n    @param parasolCells_k the low pass filter spatial constant used for local contrast adaptation\n    at the IPL level of the retina (for ganglion cells local adaptation), unit is pixels, typical\n    value is 5\n    @param amacrinCellsTemporalCutFrequency the time constant of the first order high pass fiter of\n    the magnocellular way (motion information channel), unit is frames, typical value is 1.2\n    @param V0CompressionParameter the compression strengh of the ganglion cells local adaptation\n    output, set a value between 0.6 and 1 for best results, a high value increases more the low\n    value sensitivity... and the output saturates faster, recommended value: 0.95\n    @param localAdaptintegration_tau specifies the temporal constant of the low pas filter\n    involved in the computation of the local \"motion mean\" for the local adaptation computation\n    @param localAdaptintegration_k specifies the spatial constant of the low pas filter involved\n    in the computation of the local \"motion mean\" for the local adaptation computation"
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retina.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.Retina.run",
+      "identity": "cv.bioinspired.Retina.run(Mat inputImage)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "inputImage",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Method which allows retina to be applied on an input image,\n\n    after run, encapsulated retina module is ready to deliver its outputs using dedicated\n    acccessors, see getParvo and getMagno methods\n    @param inputImage the input Mat image to be processed, can be gray level or BGR coded in any\n    format (from 8bit to 16bits)"
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retina.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.Retina.applyFastToneMapping",
+      "identity": "cv.bioinspired.Retina.applyFastToneMapping(Mat inputImage;Mat outputToneMappedImage[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "inputImage",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "outputToneMappedImage",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Method which processes an image in the aim to correct its luminance correct\n    backlight problems, enhance details in shadows.\n\n    This method is designed to perform High Dynamic Range image tone mapping (compress \\>8bit/pixel\n    images to 8bit/pixel). This is a simplified version of the Retina Parvocellular model\n    (simplified version of the run/getParvo methods call) since it does not include the\n    spatio-temporal filter modelling the Outer Plexiform Layer of the retina that performs spectral\n    whitening and many other stuff. However, it works great for tone mapping and in a faster way.\n\n    Check the demos and experiments section to see examples and the way to perform tone mapping\n    using the original retina model and the method.\n\n    @param inputImage the input image to process (should be coded in float format : CV_32F,\n    CV_32FC1, CV_32F_C3, CV_32F_C4, the 4th channel won't be considered).\n    @param outputToneMappedImage the output 8bit/channel tone mapped image (CV_8U or CV_8UC3 format)."
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retina.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.Retina.getParvo",
+      "identity": "cv.bioinspired.Retina.getParvo(Mat retinaOutput_parvo[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "retinaOutput_parvo",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Accessor of the details channel of the retina (models foveal vision).\n\n    Warning, getParvoRAW methods return buffers that are not rescaled within range [0;255] while\n    the non RAW method allows a normalized matrix to be retrieved.\n\n    @param retinaOutput_parvo the output buffer (reallocated if necessary), format can be :\n    -   a Mat, this output is rescaled for standard 8bits image processing use in OpenCV\n    -   RAW methods actually return a 1D matrix (encoding is R1, R2, ... Rn, G1, G2, ..., Gn, B1,\n    B2, ...Bn), this output is the original retina filter model output, without any\n    quantification or rescaling.\n    @see getParvoRAW"
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retina.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.Retina.getParvoRAW",
+      "identity": "cv.bioinspired.Retina.getParvoRAW(Mat retinaOutput_parvo[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "retinaOutput_parvo",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Accessor of the details channel of the retina (models foveal vision).\n    @see getParvo"
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retina.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.Retina.getMagno",
+      "identity": "cv.bioinspired.Retina.getMagno(Mat retinaOutput_magno[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "retinaOutput_magno",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Accessor of the motion channel of the retina (models peripheral vision).\n\n    Warning, getMagnoRAW methods return buffers that are not rescaled within range [0;255] while\n    the non RAW method allows a normalized matrix to be retrieved.\n    @param retinaOutput_magno the output buffer (reallocated if necessary), format can be :\n    -   a Mat, this output is rescaled for standard 8bits image processing use in OpenCV\n    -   RAW methods actually return a 1D matrix (encoding is M1, M2,... Mn), this output is the\n    original retina filter model output, without any quantification or rescaling.\n    @see getMagnoRAW"
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retina.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.Retina.getMagnoRAW",
+      "identity": "cv.bioinspired.Retina.getMagnoRAW(Mat retinaOutput_magno[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "retinaOutput_magno",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Accessor of the motion channel of the retina (models peripheral vision).\n    @see getMagno"
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retina.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.Retina.getMagnoRAW",
+      "identity": "cv.bioinspired.Retina.getMagnoRAW()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retina.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.Retina.getParvoRAW",
+      "identity": "cv.bioinspired.Retina.getParvoRAW()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retina.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.Retina.setColorSaturation",
+      "identity": "cv.bioinspired.Retina.setColorSaturation(bool saturateColors=true[/C];float colorSaturationValue=4.0f[/C])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "saturateColors",
+          "default": "true",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "colorSaturationValue",
+          "default": "4.0f",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Activate color saturation as the final step of the color demultiplexing process -\\> this\n    saturation is a sigmoide function applied to each channel of the demultiplexed image.\n    @param saturateColors boolean that activates color saturation (if true) or desactivate (if false)\n    @param colorSaturationValue the saturation factor : a simple factor applied on the chrominance\n    buffers"
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retina.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.Retina.clearBuffers",
+      "identity": "cv.bioinspired.Retina.clearBuffers()->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Clears all retina buffers\n\n    (equivalent to opening the eyes after a long period of eye close ;o) whatchout the temporal\n    transition occuring just after this method call."
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retina.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.Retina.activateMovingContoursProcessing",
+      "identity": "cv.bioinspired.Retina.activateMovingContoursProcessing(bool activate[/C])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "activate",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Activate/desactivate the Magnocellular pathway processing (motion information extraction), by\n    default, it is activated\n    @param activate true if Magnocellular output should be activated, false if not... if activated,\n    the Magnocellular output can be retrieved using the **getMagno** methods"
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retina.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.Retina.activateContoursProcessing",
+      "identity": "cv.bioinspired.Retina.activateContoursProcessing(bool activate[/C])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "activate",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Activate/desactivate the Parvocellular pathway processing (contours information extraction), by\n    default, it is activated\n    @param activate true if Parvocellular (contours information extraction) output should be\n    activated, false if not... if activated, the Parvocellular output can be retrieved using the\n    Retina::getParvo methods"
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retina.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.Retina.create",
+      "identity": "cv.bioinspired.Retina.create(Size inputSize)->Ptr<Retina>",
+      "returnType": "Ptr<Retina>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "inputSize",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retina.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.Retina.create",
+      "identity": "cv.bioinspired.Retina.create(Size inputSize;bool colorMode[/C];int colorSamplingMethod=RETINA_COLOR_BAYER;bool useRetinaLogSampling=false[/C];float reductionFactor=1.0f[/C];float samplingStrength=10.0f[/C])->Ptr<Retina>",
+      "returnType": "Ptr<Retina>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "inputSize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "colorMode",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "colorSamplingMethod",
+          "default": "RETINA_COLOR_BAYER",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "useRetinaLogSampling",
+          "default": "false",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "reductionFactor",
+          "default": "1.0f",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "samplingStrength",
+          "default": "10.0f",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Constructors from standardized interfaces : retreive a smart pointer to a Retina instance\n\n    @param inputSize the input frame size\n    @param colorMode the chosen processing mode : with or without color processing\n    @param colorSamplingMethod specifies which kind of color sampling will be used :\n    -   cv::bioinspired::RETINA_COLOR_RANDOM: each pixel position is either R, G or B in a random choice\n    -   cv::bioinspired::RETINA_COLOR_DIAGONAL: color sampling is RGBRGBRGB..., line 2 BRGBRGBRG..., line 3, GBRGBRGBR...\n    -   cv::bioinspired::RETINA_COLOR_BAYER: standard bayer sampling\n    @param useRetinaLogSampling activate retina log sampling, if true, the 2 following parameters can\n    be used\n    @param reductionFactor only usefull if param useRetinaLogSampling=true, specifies the reduction\n    factor of the output frame (as the center (fovea) is high resolution and corners can be\n    underscaled, then a reduction of the output is allowed without precision leak\n    @param samplingStrength only usefull if param useRetinaLogSampling=true, specifies the strength of\n    the log scale that is applied"
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retinafasttonemapping.hpp",
+      "kind": "class",
+      "name": "cv.bioinspired.RetinaFastToneMapping",
+      "identity": "class cv.bioinspired.RetinaFastToneMapping",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief  a wrapper class which allows the tone mapping algorithm of Meylan&al(2007) to be used with OpenCV.\n\nThis algorithm is already implemented in thre Retina class (retina::applyFastToneMapping) but used it does not require all the retina model to be allocated. This allows a light memory use for low memory devices (smartphones, etc.\nAs a summary, these are the model properties:\n- 2 stages of local luminance adaptation with a different local neighborhood for each.\n- first stage models the retina photorecetors local luminance adaptation\n- second stage models th ganglion cells local information adaptation\n- compared to the initial publication, this class uses spatio-temporal low pass filters instead of spatial only filters.\n  this can help noise robustness and temporal stability for video sequence use cases.\n\nfor more information, read to the following papers :\nMeylan L., Alleysson D., and Susstrunk S., A Model of Retinal Local Adaptation for the Tone Mapping of Color Filter Array Images, Journal of Optical Society of America, A, Vol. 24, N 9, September, 1st, 2007, pp. 2807-2816Benoit A., Caplier A., Durette B., Herault, J., \"USING HUMAN VISUAL SYSTEM MODELING FOR BIO-INSPIRED LOW LEVEL IMAGE PROCESSING\", Elsevier, Computer Vision and Image Understanding 114 (2010), pp. 758-773, DOI: http://dx.doi.org/10.1016/j.cviu.2010.01.011\nregarding spatio-temporal filter and the bigger retina model :\nVision: Images, Signals and Neural Networks: Models of Neural Processing in Visual Perception (Progress in Neural Processing),By: Jeanny Herault, ISBN: 9814273686. WAPI (Tower ID): 113266891."
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retinafasttonemapping.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.RetinaFastToneMapping.applyFastToneMapping",
+      "identity": "cv.bioinspired.RetinaFastToneMapping.applyFastToneMapping(Mat inputImage;Mat outputToneMappedImage[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "inputImage",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "outputToneMappedImage",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief applies a luminance correction (initially High Dynamic Range (HDR) tone mapping)\n\n    using only the 2 local adaptation stages of the retina parvocellular channel : photoreceptors\n    level and ganlion cells level. Spatio temporal filtering is applied but limited to temporal\n    smoothing and eventually high frequencies attenuation. This is a lighter method than the one\n    available using the regular retina::run method. It is then faster but it does not include\n    complete temporal filtering nor retina spectral whitening. Then, it can have a more limited\n    effect on images with a very high dynamic range. This is an adptation of the original still\n    image HDR tone mapping algorithm of David Alleyson, Sabine Susstruck and Laurence Meylan's\n    work, please cite: -> Meylan L., Alleysson D., and Susstrunk S., A Model of Retinal Local\n    Adaptation for the Tone Mapping of Color Filter Array Images, Journal of Optical Society of\n    America, A, Vol. 24, N 9, September, 1st, 2007, pp. 2807-2816\n\n    @param inputImage the input image to process RGB or gray levels\n    @param outputToneMappedImage the output tone mapped image"
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retinafasttonemapping.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.RetinaFastToneMapping.setup",
+      "identity": "cv.bioinspired.RetinaFastToneMapping.setup(float photoreceptorsNeighborhoodRadius=3.f[/C];float ganglioncellsNeighborhoodRadius=1.f[/C];float meanLuminanceModulatorK=1.f[/C])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "photoreceptorsNeighborhoodRadius",
+          "default": "3.f",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "ganglioncellsNeighborhoodRadius",
+          "default": "1.f",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "meanLuminanceModulatorK",
+          "default": "1.f",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief updates tone mapping behaviors by adjusing the local luminance computation area\n\n    @param photoreceptorsNeighborhoodRadius the first stage local adaptation area\n    @param ganglioncellsNeighborhoodRadius the second stage local adaptation area\n    @param meanLuminanceModulatorK the factor applied to modulate the meanLuminance information\n    (default is 1, see reference paper)"
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/retinafasttonemapping.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.RetinaFastToneMapping.create",
+      "identity": "cv.bioinspired.RetinaFastToneMapping.create(Size inputSize)->Ptr<RetinaFastToneMapping>",
+      "returnType": "Ptr<RetinaFastToneMapping>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "inputSize",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/transientareassegmentationmodule.hpp",
+      "kind": "class",
+      "name": "cv.bioinspired.TransientAreasSegmentationModule",
+      "identity": "class cv.bioinspired.TransientAreasSegmentationModule",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief class which provides a transient/moving areas segmentation module\n\nperform a locally adapted segmentation by using the retina magno input data Based on Alexandre\nBENOIT thesis: \"Le syst\u00e8me visuel humain au secours de la vision par ordinateur\"\n\n3 spatio temporal filters are used:\n- a first one which filters the noise and local variations of the input motion energy\n- a second (more powerfull low pass spatial filter) which gives the neighborhood motion energy the\nsegmentation consists in the comparison of these both outputs, if the local motion energy is higher\nto the neighborhood otion energy, then the area is considered as moving and is segmented\n- a stronger third low pass filter helps decision by providing a smooth information about the\n\"motion context\" in a wider area"
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/transientareassegmentationmodule.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.TransientAreasSegmentationModule.getSize",
+      "identity": "cv.bioinspired.TransientAreasSegmentationModule.getSize()->Size",
+      "returnType": "Size",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief return the sze of the manage input and output images"
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/transientareassegmentationmodule.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.TransientAreasSegmentationModule.setup",
+      "identity": "cv.bioinspired.TransientAreasSegmentationModule.setup(String segmentationParameterFile=\"\";bool applyDefaultSetupOnFailure=true[/C])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "segmentationParameterFile",
+          "default": "\"\"",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "applyDefaultSetupOnFailure",
+          "default": "true",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief try to open an XML segmentation parameters file to adjust current segmentation instance setup\n\n    - if the xml file does not exist, then default setup is applied\n    - warning, Exceptions are thrown if read XML file is not valid\n    @param segmentationParameterFile : the parameters filename\n    @param applyDefaultSetupOnFailure : set to true if an error must be thrown on error"
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/transientareassegmentationmodule.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.TransientAreasSegmentationModule.printSetup",
+      "identity": "cv.bioinspired.TransientAreasSegmentationModule.printSetup()->String",
+      "returnType": "String",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief parameters setup display method\n    @return a string which contains formatted parameters information"
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/transientareassegmentationmodule.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.TransientAreasSegmentationModule.write",
+      "identity": "cv.bioinspired.TransientAreasSegmentationModule.write(String fs)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "fs",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief write xml/yml formated parameters information\n    @param fs : the filename of the xml file that will be open and writen with formatted parameters information"
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/transientareassegmentationmodule.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.TransientAreasSegmentationModule.run",
+      "identity": "cv.bioinspired.TransientAreasSegmentationModule.run(Mat inputToSegment;int channelIndex=0[/C])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "inputToSegment",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "channelIndex",
+          "default": "0",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief main processing method, get result using methods getSegmentationPicture()\n    @param inputToSegment : the image to process, it must match the instance buffer size !\n    @param channelIndex : the channel to process in case of multichannel images"
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/transientareassegmentationmodule.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.TransientAreasSegmentationModule.getSegmentationPicture",
+      "identity": "cv.bioinspired.TransientAreasSegmentationModule.getSegmentationPicture(Mat transientAreas[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "transientAreas",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief access function\n    return the last segmentation result: a boolean picture which is resampled between 0 and 255 for a display purpose"
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/transientareassegmentationmodule.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.TransientAreasSegmentationModule.clearAllBuffers",
+      "identity": "cv.bioinspired.TransientAreasSegmentationModule.clearAllBuffers()->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief cleans all the buffers of the instance"
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/bioinspired/include/opencv2/bioinspired/transientareassegmentationmodule.hpp",
+      "kind": "callable",
+      "name": "cv.bioinspired.TransientAreasSegmentationModule.create",
+      "identity": "cv.bioinspired.TransientAreasSegmentationModule.create(Size inputSize)->Ptr<TransientAreasSegmentationModule>",
+      "returnType": "Ptr<TransientAreasSegmentationModule>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "inputSize",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief allocator\n    @param inputSize : size of the images input to segment (output will be the same size)"
+    }
+  ]
+}

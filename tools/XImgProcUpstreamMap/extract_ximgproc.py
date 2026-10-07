@@ -64,7 +64,7 @@ def main():
     output = Path(args.output).resolve()
     parser_path = root / "modules/python/src2/hdr_parser.py"
     module = args.module
-    if module not in {"ximgproc", "optflow", "bgsegm", "face", "quality", "img_hash", "line_descriptor", "freetype", "alphamat", "intensity_transform", "plot"}:
+    if module not in {"ximgproc", "optflow", "bgsegm", "face", "quality", "img_hash", "line_descriptor", "freetype", "alphamat", "intensity_transform", "plot", "bioinspired"}:
         raise RuntimeError("Unsupported contrib extraction module: " + module)
     contrib_include = root.parent.parent / f"opencv-source/opencv_contrib-5.0.0/modules/{module}/include/opencv2"
     contrib_root = contrib_include / module
@@ -87,7 +87,7 @@ def main():
     if len(identities) != len(set(identities)):
         duplicates = sorted(item for item in set(identities) if identities.count(item) > 1)
         raise RuntimeError("XImgProc parser closure contains duplicate identities: " + ", ".join(duplicates))
-    title = {"ximgproc": "XImgProc", "optflow": "OptFlow", "bgsegm": "BgSegm", "face": "Face", "quality": "Quality", "img_hash": "ImgHash", "line_descriptor": "LineDescriptor", "freetype": "Freetype", "alphamat": "AlphaMat", "intensity_transform": "IntensityTransform", "plot": "Plot"}[module]
+    title = {"ximgproc": "XImgProc", "optflow": "OptFlow", "bgsegm": "BgSegm", "face": "Face", "quality": "Quality", "img_hash": "ImgHash", "line_descriptor": "LineDescriptor", "freetype": "Freetype", "alphamat": "AlphaMat", "intensity_transform": "IntensityTransform", "plot": "Plot", "bioinspired": "BioInspired"}[module]
     result = {"schemaVersion": 1, "generator": f"tools/{title}UpstreamMap/extract_{module}.py", "upstreamOpenCvVersion": "5.0.0", "headerPath": rel(umbrella, workspace), "headerSha256": sha256(umbrella), "parserPath": rel(parser_path, workspace), "parserSha256": sha256(parser_path), "preprocessorDefinitions": definitions, "sourceHeaders": source_headers, "declarationCount": len(declarations), "declarations": declarations}
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, ensure_ascii=True, indent=2) + "\n", encoding="utf-8", newline="\n")

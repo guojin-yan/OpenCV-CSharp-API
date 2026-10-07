@@ -33,7 +33,8 @@ $definitions = @(
     [pscustomobject]@{ Id = 'freetype'; Tool = 'Freetype'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'alphamat'; Tool = 'AlphaMat'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'intensity_transform'; Tool = 'IntensityTransform'; Repository = 'opencv_contrib' },
-    [pscustomobject]@{ Id = 'plot'; Tool = 'Plot'; Repository = 'opencv_contrib' }
+    [pscustomobject]@{ Id = 'plot'; Tool = 'Plot'; Repository = 'opencv_contrib' },
+    [pscustomobject]@{ Id = 'bioinspired'; Tool = 'BioInspired'; Repository = 'opencv_contrib' }
 )
 
 function Get-HeaderRows {

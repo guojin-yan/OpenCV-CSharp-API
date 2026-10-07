@@ -1,5 +1,5 @@
 param(
-    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot')][string]$Module,
+    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired')][string]$Module,
     [Parameter(Mandatory)][string]$DisplayName,
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [switch]$Check
@@ -50,7 +50,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
         }
         return $Owner
     }
-    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform')) {
+    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired')) {
         if ($Module -eq 'face') {
             if ([string]::IsNullOrWhiteSpace($Owner)) {
                 switch ($Name) {
@@ -70,6 +70,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
                 'line_descriptor' { 'LineDescriptorCv2' }
                 'alphamat' { 'AlphaMatCv2' }
                 'intensity_transform' { 'IntensityTransformCv2' }
+                'bioinspired' { 'BioInspiredCv2' }
             }
             return [string]$managedType
         }
@@ -91,6 +92,18 @@ function GetManagedType([string]$Owner, [string]$Name) {
 function GetManaged([string]$Owner, [string]$Name, [string]$Identity) {
     if ($Module -eq 'freetype') { return @() }
     $typeName = GetManagedType $Owner $Name
+    if ($Module -eq 'bioinspired' -and $Name -eq 'create') {
+        $factory = switch ($Owner) {
+            'Retina' { 'CreateRetina' }
+            'RetinaFastToneMapping' { 'CreateRetinaFastToneMapping' }
+            'TransientAreasSegmentationModule' { 'CreateTransientAreasSegmentationModule' }
+            default { '' }
+        }
+        if ($factory) {
+            $factoryType = 'JYPPX.OpenCvSharp.BioInspired.BioInspiredCv2|'
+            return @($managedEntries | Where-Object { $_.Contains($factoryType, [StringComparison]::Ordinal) -and $_ -match ('\|method\|[^|]*\|[^|]*\b' + [regex]::Escape($factory) + '\(') } | Sort-Object -Unique)
+        }
+    }
     if ($Module -eq 'quality') {
         if ($Name -in @('clear','empty','getQualityMap') -or ($Name -eq 'compute' -and $Identity -match '\((?:Mat img|Mat cmp)\)')) { $typeName = 'QualityBase' }
         if ($Name -eq 'compute' -and $Identity -match 'vector_Mat cmpImgs') { return @() }
@@ -115,7 +128,21 @@ function GetManaged([string]$Owner, [string]$Name, [string]$Identity) {
         if ($propertyRows.Count -gt 0) { return $propertyRows }
     }
     $escapedMethod = [regex]::Escape((ToPascal $Name))
-    if ($Module -eq 'plot') {
+    if ($Module -eq 'bioinspired') {
+        $managedMethodName = if ($Owner -eq 'RetinaFastToneMapping' -and $Name -eq 'applyFastToneMapping') { 'Apply' } elseif ($Name -in @('setupOPLandIPLParvoChannel','setupIPLMagnoChannel')) { 'Setup' } else { ToPascal $Name }
+        $managedMethodPattern = [regex]::Escape($managedMethodName)
+        $methodRows = @($typeEntries | Where-Object { $_ -match "\|method\|[^|]*\|[^|]*\b$managedMethodPattern\(" } | Sort-Object -Unique)
+        if ($Name -in @('setup','setupOPLandIPLParvoChannel','setupIPLMagnoChannel')) {
+            if ($Identity -match '\bString ') { return @($methodRows | Where-Object { $_ -match 'Setup\(System\.String' }) }
+            if ($Identity -match 'OPLandIPLParvoChannel') { return @($methodRows | Where-Object { $_ -match 'Setup\(JYPPX\.OpenCvSharp\.BioInspired\.RetinaParvoParameters' }) }
+            if ($Identity -match 'IPLMagnoChannel') { return @($methodRows | Where-Object { $_ -match 'Setup\(JYPPX\.OpenCvSharp\.BioInspired\.RetinaMagnoParameters' }) }
+        }
+        if ($Name -in @('applyFastToneMapping','getParvo','getParvoRAW','getMagno','getMagnoRAW','getSegmentationPicture')) {
+            $takesOutput = $Identity -match '\[/O\]'
+            return @($methodRows | Where-Object { ([string]$_ -match ',JYPPX\.OpenCvSharp\.Core\.Mat output\)' -or [string]$_ -match '\(JYPPX\.OpenCvSharp\.Core\.Mat output\)') -eq $takesOutput })
+        }
+        return $methodRows
+    } elseif ($Module -eq 'plot') {
         $methodRows = @($typeEntries | Where-Object { $_ -match "\|method\|[^|]*\|[^|]*\b$escapedMethod\(" } | Sort-Object -Unique)
         if ($Name -eq 'create') {
             if ($Identity -match 'Mat dataY') { return @($methodRows | Where-Object { $_ -match '\bCreate\([^)]*dataX[^)]*dataY' }) }
@@ -141,7 +168,51 @@ function GetNative([object]$Parts, [string]$Identity) {
     $owner = [string]$Parts.Owner
     $name = [string]$Parts.Name
     $result = @()
-    if ($Module -eq 'plot') {
+    if ($Module -eq 'bioinspired') {
+        switch ($owner) {
+            'Retina' {
+                switch ($name) {
+                    'getInputSize' { $result = @('jyppx_ocv_bioinspired_retina_get_input_size') }
+                    'getOutputSize' { $result = @('jyppx_ocv_bioinspired_retina_get_output_size') }
+                    'setup' { $result = @('jyppx_ocv_bioinspired_retina_setup') }
+                    'printSetup' { $result = @('jyppx_ocv_bioinspired_retina_print_setup_length','jyppx_ocv_bioinspired_retina_print_setup_fill') }
+                    'write' { $result = @('jyppx_ocv_bioinspired_retina_write') }
+                    'setupOPLandIPLParvoChannel' { $result = @('jyppx_ocv_bioinspired_retina_setup_parvo') }
+                    'setupIPLMagnoChannel' { $result = @('jyppx_ocv_bioinspired_retina_setup_magno') }
+                    'run' { $result = @('jyppx_ocv_bioinspired_retina_run') }
+                    'applyFastToneMapping' { $result = @('jyppx_ocv_bioinspired_retina_apply_fast_tone_mapping') }
+                    'getParvo' { $result = @('jyppx_ocv_bioinspired_retina_get_parvo') }
+                    'getParvoRAW' { $result = @('jyppx_ocv_bioinspired_retina_get_parvo_raw') }
+                    'getMagno' { $result = @('jyppx_ocv_bioinspired_retina_get_magno') }
+                    'getMagnoRAW' { $result = @('jyppx_ocv_bioinspired_retina_get_magno_raw') }
+                    'setColorSaturation' { $result = @('jyppx_ocv_bioinspired_retina_set_color_saturation') }
+                    'clearBuffers' { $result = @('jyppx_ocv_bioinspired_retina_clear_buffers') }
+                    'activateMovingContoursProcessing' { $result = @('jyppx_ocv_bioinspired_retina_activate_moving_contours_processing') }
+                    'activateContoursProcessing' { $result = @('jyppx_ocv_bioinspired_retina_activate_contours_processing') }
+                    'create' { $result = @('jyppx_ocv_bioinspired_retina_create') }
+                }
+            }
+            'RetinaFastToneMapping' {
+                switch ($name) {
+                    'applyFastToneMapping' { $result = @('jyppx_ocv_bioinspired_retina_fast_tone_mapping_apply') }
+                    'setup' { $result = @('jyppx_ocv_bioinspired_retina_fast_tone_mapping_setup') }
+                    'create' { $result = @('jyppx_ocv_bioinspired_retina_fast_tone_mapping_create') }
+                }
+            }
+            'TransientAreasSegmentationModule' {
+                switch ($name) {
+                    'getSize' { $result = @('jyppx_ocv_bioinspired_transient_areas_get_size') }
+                    'setup' { $result = @('jyppx_ocv_bioinspired_transient_areas_setup') }
+                    'printSetup' { $result = @('jyppx_ocv_bioinspired_transient_areas_print_setup_length','jyppx_ocv_bioinspired_transient_areas_print_setup_fill') }
+                    'write' { $result = @('jyppx_ocv_bioinspired_transient_areas_write') }
+                    'run' { $result = @('jyppx_ocv_bioinspired_transient_areas_run') }
+                    'getSegmentationPicture' { $result = @('jyppx_ocv_bioinspired_transient_areas_get_segmentation_picture') }
+                    'clearAllBuffers' { $result = @('jyppx_ocv_bioinspired_transient_areas_clear_all_buffers') }
+                    'create' { $result = @('jyppx_ocv_bioinspired_transient_areas_create') }
+                }
+            }
+        }
+    } elseif ($Module -eq 'plot') {
         if ($owner -eq 'Plot2d') {
             if ($name -eq 'create') {
                 if ($Identity -match 'Mat dataY') { $result = @('jyppx_ocv_plot_2d_create_xy') }
@@ -408,7 +479,7 @@ $classification = [ordered]@{ schemaVersion = 1; upstreamOpenCvVersion = '5.0.0'
 $builder = [Text.StringBuilder]::new(); [void]$builder.AppendLine("# Generated by scripts/Generate-ContribUpstreamMap.ps1 -Module $Module. Do not edit."); [void]$builder.AppendLine('schema-version=1'); [void]$builder.AppendLine('upstream-opencv-version=5.0.0'); [void]$builder.AppendLine("claimed-slice=$($classification.claimedSlice)"); [void]$builder.AppendLine("header-sha256=$($raw.headerSha256)"); [void]$builder.AppendLine("parser-sha256=$($raw.parserSha256)"); [void]$builder.AppendLine("declaration-count=$($raw.declarationCount)"); [void]$builder.AppendLine('repository-wide-upstream-parity-claimed=false'); [void]$builder.AppendLine(''); [void]$builder.AppendLine('ordinal|classification|identity|native-entrypoints|managed-members|build-condition|reason')
 foreach ($row in $rows) { $nativeText = if (@($row.nativeEntrypoints).Count) { @($row.nativeEntrypoints) -join ';' } else { '-' }; $managedText = if (@($row.managedMembers).Count) { @($row.managedMembers) -join ';' } else { '-' }; [void]$builder.AppendLine("$($row.ordinal)|$($row.classification)|$($row.identity)|$nativeText|$managedText|$($row.buildCondition)|$($row.reason)") }
 $mappingText = $builder.ToString().Replace("`r`n", "`n"); $implemented = @($rows | Where-Object classification -eq 'implemented'); $omitted = @($rows | Where-Object classification -eq 'intentionally-omitted'); $metadata = @($rows | Where-Object classification -eq 'non-callable-metadata')
-$guide = switch ($Module) { 'face' {'docs/articles/face-guide.md'} 'quality' {'docs/articles/quality-guide.md'} 'img_hash' {'docs/articles/img-hash-guide.md'} 'line_descriptor' {'docs/articles/line-descriptor-guide.md'} 'intensity_transform' {'docs/articles/intensity-transform-guide.md'} 'plot' {'docs/articles/plot-guide.md'} default { "docs/articles/$Module-upstream-parity-guide.md" } }
+$guide = switch ($Module) { 'face' {'docs/articles/face-guide.md'} 'quality' {'docs/articles/quality-guide.md'} 'img_hash' {'docs/articles/img-hash-guide.md'} 'line_descriptor' {'docs/articles/line-descriptor-guide.md'} 'intensity_transform' {'docs/articles/intensity-transform-guide.md'} 'plot' {'docs/articles/plot-guide.md'} 'bioinspired' {'docs/articles/bioinspired-guide.md'} default { "docs/articles/$Module-upstream-parity-guide.md" } }
 $family = [ordered]@{ schemaVersion = 1; upstreamOpenCvVersion = '5.0.0'; status = 'implemented-verified'; managedPublicTypeAdditionCount = 0; managedPublicMemberAdditionCount = 0; families = @([ordered]@{ id = "$Module-wrapper-surface"; rationale = "Current $DisplayName managed/native wrapper declarations with exact parser-backed callable evidence."; declarations = @($implemented | ForEach-Object { [ordered]@{ ordinal = $_.ordinal; upstreamIdentity = $_.identity; upstreamClassification = $_.classification; nativeEntrypoints = $_.nativeEntrypoints; managedMembers = $_.managedMembers; focusedTest = "tests/OpenCvSharp.Tests/$DisplayName/$DisplayName`Tests.cs"; nativeSmoke = 'src/OpenCvSharp.Native/tests/native_smoke.cpp'; sample = 'samples/ConsoleSamples/Program.cs'; guide = $guide } }) }) }
 $classificationJson = (($classification | ConvertTo-Json -Depth 20) + [Environment]::NewLine); $familyJson = (($family | ConvertTo-Json -Depth 20) + [Environment]::NewLine); $mapHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($mappingText))).ToLowerInvariant(); $familyHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($familyJson))).ToLowerInvariant()
 $summary = [ordered]@{ schemaVersion = 1; generator = "tools/$DisplayName`UpstreamMap"; upstreamOpenCvVersion = '5.0.0'; claimedSlice = $classification.claimedSlice; rawExtractionPath = "compatibility/$Module-upstream-raw.json"; classificationPath = "compatibility/$Module-upstream-classifications.json"; mappingPath = "compatibility/$Module-upstream-map.txt"; headerSha256 = [string]$raw.headerSha256; parserSha256 = [string]$raw.parserSha256; mappingSha256 = $mapHash; declarationCount = [int]$raw.declarationCount; enumCount = [int](@($raw.declarations | Where-Object kind -eq enum).Count); classCount = [int](@($raw.declarations | Where-Object kind -eq class).Count); callableCount = [int](@($raw.declarations | Where-Object kind -eq callable).Count); classificationCounts = [ordered]@{ implemented = [int]$implemented.Count; 'intentionally-omitted' = [int]$omitted.Count; missing = 0; 'non-callable-metadata' = [int]$metadata.Count; unsupported = 0; 'upstream-conditional' = 0 }; nativeEvidenceCount = @($rows | ForEach-Object { @($_.nativeEntrypoints) } | Where-Object { $_ } | Sort-Object -Unique).Count; managedEvidenceCount = @($rows | ForEach-Object { @($_.managedMembers) } | Where-Object { $_ } | Sort-Object -Unique).Count; negativeFixtureCount = 12; externalDataDependencyCount = @($externalDataDependencies).Count; familyInventoryPath = "compatibility/$Module-implemented-families.json"; familyInventorySha256 = $familyHash; selectedFamilyCount = 1; selectedDeclarationCount = $implemented.Count; managedPublicTypeAdditionCount = 0; managedPublicMemberAdditionCount = 0; repositoryWideUpstreamParityClaimed = $false }; $summaryJson = (($summary | ConvertTo-Json -Depth 20) + [Environment]::NewLine)

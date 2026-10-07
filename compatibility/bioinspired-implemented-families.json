@@ -1,0 +1,497 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 0,
+  "managedPublicMemberAdditionCount": 0,
+  "families": [
+    {
+      "id": "bioinspired-wrapper-surface",
+      "rationale": "Current BioInspired managed/native wrapper declarations with exact parser-backed callable evidence.",
+      "declarations": [
+        {
+          "ordinal": 2,
+          "upstreamIdentity": "cv.bioinspired.Retina.getInputSize()->Size",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_retina_get_input_size"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|property|instance;get:public|JYPPX.OpenCvSharp.Core.Size InputSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 3,
+          "upstreamIdentity": "cv.bioinspired.Retina.getOutputSize()->Size",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_retina_get_output_size"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|property|instance;get:public|JYPPX.OpenCvSharp.Core.Size OutputSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 4,
+          "upstreamIdentity": "cv.bioinspired.Retina.setup(String retinaParameterFile=\"\";bool applyDefaultSetupOnFailure=true[/C])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_retina_setup"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void Setup(System.String? retinaParameterFile=null,System.Boolean applyDefaultSetupOnFailure=true)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 5,
+          "upstreamIdentity": "cv.bioinspired.Retina.printSetup()->String",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_retina_print_setup_fill",
+            "jyppx_ocv_bioinspired_retina_print_setup_length"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.String PrintSetup()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 6,
+          "upstreamIdentity": "cv.bioinspired.Retina.write(String fs)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_retina_write"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void Write(System.String path)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 7,
+          "upstreamIdentity": "cv.bioinspired.Retina.setupOPLandIPLParvoChannel(bool colorMode=true[/C];bool normaliseOutput=true[/C];float photoreceptorsLocalAdaptationSensitivity=0.7f[/C];float photoreceptorsTemporalConstant=0.5f[/C];float photoreceptorsSpatialConstant=0.53f[/C];float horizontalCellsGain=0.f[/C];float HcellsTemporalConstant=1.f[/C];float HcellsSpatialConstant=7.f[/C];float ganglionCellsSensitivity=0.7f[/C])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_retina_setup_parvo"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void Setup(JYPPX.OpenCvSharp.BioInspired.RetinaParvoParameters parameters)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 8,
+          "upstreamIdentity": "cv.bioinspired.Retina.setupIPLMagnoChannel(bool normaliseOutput=true[/C];float parasolCells_beta=0.f[/C];float parasolCells_tau=0.f[/C];float parasolCells_k=7.f[/C];float amacrinCellsTemporalCutFrequency=1.2f[/C];float V0CompressionParameter=0.95f[/C];float localAdaptintegration_tau=0.f[/C];float localAdaptintegration_k=7.f[/C])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_retina_setup_magno"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void Setup(JYPPX.OpenCvSharp.BioInspired.RetinaMagnoParameters parameters)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 9,
+          "upstreamIdentity": "cv.bioinspired.Retina.run(Mat inputImage)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_retina_run"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void Run(JYPPX.OpenCvSharp.Core.Mat input)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 10,
+          "upstreamIdentity": "cv.bioinspired.Retina.applyFastToneMapping(Mat inputImage;Mat outputToneMappedImage[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_retina_apply_fast_tone_mapping"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void ApplyFastToneMapping(JYPPX.OpenCvSharp.Core.Mat input,JYPPX.OpenCvSharp.Core.Mat output)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 11,
+          "upstreamIdentity": "cv.bioinspired.Retina.getParvo(Mat retinaOutput_parvo[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_retina_get_parvo"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void GetParvo(JYPPX.OpenCvSharp.Core.Mat output)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 12,
+          "upstreamIdentity": "cv.bioinspired.Retina.getParvoRAW(Mat retinaOutput_parvo[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_retina_get_parvo_raw"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void GetParvoRaw(JYPPX.OpenCvSharp.Core.Mat output)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 13,
+          "upstreamIdentity": "cv.bioinspired.Retina.getMagno(Mat retinaOutput_magno[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_retina_get_magno"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void GetMagno(JYPPX.OpenCvSharp.Core.Mat output)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 14,
+          "upstreamIdentity": "cv.bioinspired.Retina.getMagnoRAW(Mat retinaOutput_magno[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_retina_get_magno_raw"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void GetMagnoRaw(JYPPX.OpenCvSharp.Core.Mat output)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 15,
+          "upstreamIdentity": "cv.bioinspired.Retina.getMagnoRAW()->Mat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_retina_get_magno_raw"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetMagnoRaw()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 16,
+          "upstreamIdentity": "cv.bioinspired.Retina.getParvoRAW()->Mat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_retina_get_parvo_raw"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetParvoRaw()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 17,
+          "upstreamIdentity": "cv.bioinspired.Retina.setColorSaturation(bool saturateColors=true[/C];float colorSaturationValue=4.0f[/C])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_retina_set_color_saturation"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void SetColorSaturation(System.Boolean saturateColors,System.Single colorSaturationValue)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 18,
+          "upstreamIdentity": "cv.bioinspired.Retina.clearBuffers()->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_retina_clear_buffers"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void ClearBuffers()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 19,
+          "upstreamIdentity": "cv.bioinspired.Retina.activateMovingContoursProcessing(bool activate[/C])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_retina_activate_moving_contours_processing"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void ActivateMovingContoursProcessing(System.Boolean activate)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 20,
+          "upstreamIdentity": "cv.bioinspired.Retina.activateContoursProcessing(bool activate[/C])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_retina_activate_contours_processing"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.Retina|method|public;instance|System.Void ActivateContoursProcessing(System.Boolean activate)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 21,
+          "upstreamIdentity": "cv.bioinspired.Retina.create(Size inputSize)->Ptr<Retina>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_retina_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.BioInspiredCv2|method|public;static|JYPPX.OpenCvSharp.BioInspired.Retina CreateRetina(JYPPX.OpenCvSharp.Core.Size inputSize,System.Boolean colorMode=true,JYPPX.OpenCvSharp.BioInspired.RetinaColorSamplingMethod colorSamplingMethod=Bayer,System.Boolean useRetinaLogSampling=false,System.Single reductionFactor=1,System.Single samplingStrength=10)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 22,
+          "upstreamIdentity": "cv.bioinspired.Retina.create(Size inputSize;bool colorMode[/C];int colorSamplingMethod=RETINA_COLOR_BAYER;bool useRetinaLogSampling=false[/C];float reductionFactor=1.0f[/C];float samplingStrength=10.0f[/C])->Ptr<Retina>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_retina_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.BioInspiredCv2|method|public;static|JYPPX.OpenCvSharp.BioInspired.Retina CreateRetina(JYPPX.OpenCvSharp.Core.Size inputSize,System.Boolean colorMode=true,JYPPX.OpenCvSharp.BioInspired.RetinaColorSamplingMethod colorSamplingMethod=Bayer,System.Boolean useRetinaLogSampling=false,System.Single reductionFactor=1,System.Single samplingStrength=10)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 24,
+          "upstreamIdentity": "cv.bioinspired.RetinaFastToneMapping.applyFastToneMapping(Mat inputImage;Mat outputToneMappedImage[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_retina_fast_tone_mapping_apply"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.RetinaFastToneMapping|method|public;instance|System.Void Apply(JYPPX.OpenCvSharp.Core.Mat input,JYPPX.OpenCvSharp.Core.Mat output)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 25,
+          "upstreamIdentity": "cv.bioinspired.RetinaFastToneMapping.setup(float photoreceptorsNeighborhoodRadius=3.f[/C];float ganglioncellsNeighborhoodRadius=1.f[/C];float meanLuminanceModulatorK=1.f[/C])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_retina_fast_tone_mapping_setup"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.RetinaFastToneMapping|method|public;instance|System.Void Setup(System.Single photoreceptorsNeighborhoodRadius=3,System.Single ganglionCellsNeighborhoodRadius=1,System.Single meanLuminanceModulatorK=1)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 26,
+          "upstreamIdentity": "cv.bioinspired.RetinaFastToneMapping.create(Size inputSize)->Ptr<RetinaFastToneMapping>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_retina_fast_tone_mapping_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.BioInspiredCv2|method|public;static|JYPPX.OpenCvSharp.BioInspired.RetinaFastToneMapping CreateRetinaFastToneMapping(JYPPX.OpenCvSharp.Core.Size inputSize)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 28,
+          "upstreamIdentity": "cv.bioinspired.TransientAreasSegmentationModule.getSize()->Size",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_transient_areas_get_size"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.TransientAreasSegmentationModule|property|instance;get:public|JYPPX.OpenCvSharp.Core.Size Size"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 29,
+          "upstreamIdentity": "cv.bioinspired.TransientAreasSegmentationModule.setup(String segmentationParameterFile=\"\";bool applyDefaultSetupOnFailure=true[/C])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_transient_areas_setup"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.TransientAreasSegmentationModule|method|public;instance|System.Void Setup(System.String? segmentationParameterFile=null,System.Boolean applyDefaultSetupOnFailure=true)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 30,
+          "upstreamIdentity": "cv.bioinspired.TransientAreasSegmentationModule.printSetup()->String",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_transient_areas_print_setup_fill",
+            "jyppx_ocv_bioinspired_transient_areas_print_setup_length"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.TransientAreasSegmentationModule|method|public;instance|System.String PrintSetup()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 31,
+          "upstreamIdentity": "cv.bioinspired.TransientAreasSegmentationModule.write(String fs)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_transient_areas_write"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.TransientAreasSegmentationModule|method|public;instance|System.Void Write(System.String path)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 32,
+          "upstreamIdentity": "cv.bioinspired.TransientAreasSegmentationModule.run(Mat inputToSegment;int channelIndex=0[/C])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_transient_areas_run"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.TransientAreasSegmentationModule|method|public;instance|System.Void Run(JYPPX.OpenCvSharp.Core.Mat input,System.Int32 channelIndex=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 33,
+          "upstreamIdentity": "cv.bioinspired.TransientAreasSegmentationModule.getSegmentationPicture(Mat transientAreas[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_transient_areas_get_segmentation_picture"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.TransientAreasSegmentationModule|method|public;instance|System.Void GetSegmentationPicture(JYPPX.OpenCvSharp.Core.Mat output)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 34,
+          "upstreamIdentity": "cv.bioinspired.TransientAreasSegmentationModule.clearAllBuffers()->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_transient_areas_clear_all_buffers"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.TransientAreasSegmentationModule|method|public;instance|System.Void ClearAllBuffers()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        },
+        {
+          "ordinal": 35,
+          "upstreamIdentity": "cv.bioinspired.TransientAreasSegmentationModule.create(Size inputSize)->Ptr<TransientAreasSegmentationModule>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_bioinspired_transient_areas_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.BioInspired.BioInspiredCv2|method|public;static|JYPPX.OpenCvSharp.BioInspired.TransientAreasSegmentationModule CreateTransientAreasSegmentationModule(JYPPX.OpenCvSharp.Core.Size inputSize)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/bioinspired-guide.md"
+        }
+      ]
+    }
+  ]
+}

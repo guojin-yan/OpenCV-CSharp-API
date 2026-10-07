@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/0cf43fb285402fa8",
-  "SourceIdentity": "sha256:0cf43fb285402fa898c06ccb661ae383dc34877cbe0652b09f56c017d9b14a2c",
+  "CandidateId": "local-closeout/sha256/0f8354f934687bf1",
+  "SourceIdentity": "sha256:0f8354f934687bf1473cdf3f40d3dfb2a803d35696a91bfce1d5a9dc822e5eb3",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1949,
-    "Sha256": "0cf43fb285402fa898c06ccb661ae383dc34877cbe0652b09f56c017d9b14a2c",
+    "FileCount": 1959,
+    "Sha256": "0f8354f934687bf1473cdf3f40d3dfb2a803d35696a91bfce1d5a9dc822e5eb3",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -572,6 +572,31 @@
       "Length": 1422
     },
     {
+      "Path": "compatibility/bioinspired-implemented-families.json",
+      "Sha256": "211e892dbdb036af1123a8767abea756ddf67f0609f3c2318709dd939c1d59a2",
+      "Length": 26826
+    },
+    {
+      "Path": "compatibility/bioinspired-upstream-classifications.json",
+      "Sha256": "fe0204e70903a748d1d73e30f2c1a75e67b61c2b20a3e5b6c5130a7bb6c23d9a",
+      "Length": 23839
+    },
+    {
+      "Path": "compatibility/bioinspired-upstream-map.txt",
+      "Sha256": "7aeda7db027538149c59c2b7150f9c47c5fbb703e2defa774764d3436f03d5c6",
+      "Length": 16274
+    },
+    {
+      "Path": "compatibility/bioinspired-upstream-raw.json",
+      "Sha256": "24b3f9bc0867e4fb1bf268493d76f93716801db9b4f9962637d05ee9ec93dbab",
+      "Length": 48414
+    },
+    {
+      "Path": "compatibility/bioinspired-upstream-summary.json",
+      "Sha256": "fd0bf1a4ac0124032b1d5b7e9e4f7cf27594f34db608e2cea863bd80e3f7cb34",
+      "Length": 1452
+    },
+    {
       "Path": "compatibility/calib3d-implemented-families.json",
       "Sha256": "c3d9b4906208dd23f8c6cfc614cb4494a7bf23491d5dfb4836a7a734a815130d",
       "Length": 244192
@@ -1108,18 +1133,18 @@
     },
     {
       "Path": "compatibility/upstream-map-catalog.json",
-      "Sha256": "c82cf7257575b38d7e56667e5ff5ad70598d5fd27e44b92bff9419efee39e704",
-      "Length": 96020
+      "Sha256": "9bc43b0e4c9216ba8bad65d3d1d501870a1751df841add69cb43acd0f67d6d59",
+      "Length": 99139
     },
     {
       "Path": "compatibility/upstream-map-catalog.schema.json",
-      "Sha256": "28c4b7196bf241493fbe864b6d568e0d0ac0076620e3da95c2a9c87d3fd0dc68",
-      "Length": 5730
+      "Sha256": "84f061ee7a051b3c617bd5fb0dc8c88baafaee13a4f432e10548335f6591353f",
+      "Length": 5745
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "adfcf6f4ce23578e422ad900ad0e5acc045211d4bc7a2e51c779fbec8aea4ac8",
-      "Length": 18743
+      "Sha256": "04f6f5b2e3baed464987fc4cd967cf40ead93fd906b1a6a4139480b42db272e8",
+      "Length": 20858
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -1240,6 +1265,11 @@
       "Path": "docs/articles/async-video-owner-adr.md",
       "Sha256": "9148f4fe3873cea18c70025ca1ff47ca9f969249435ca321852ee9e382e21356",
       "Length": 3177
+    },
+    {
+      "Path": "docs/articles/bioinspired-guide.md",
+      "Sha256": "18d9a35ca658a31de28b0d4778d35c002ab0f235d2c7a6d13f445b68ba0ca868",
+      "Length": 3355
     },
     {
       "Path": "docs/articles/calib3d-upstream-parity-guide.md",
@@ -1498,8 +1528,8 @@
     },
     {
       "Path": "docs/articles/upstream-map-toolchain.md",
-      "Sha256": "140d979d8b951a82f81cc38f5ca5dc1cdd39e0e4ddcbb7030e1ae8f7dcdba652",
-      "Length": 2096
+      "Sha256": "2b65dcdd303bf9fc0fd5fe24ba469659ac0491ace9952196fca8de4430845a74",
+      "Length": 2321
     },
     {
       "Path": "docs/articles/v501-modern-api-preview-guide.md",
@@ -1942,14 +1972,19 @@
       "Length": 298
     },
     {
+      "Path": "scripts/Generate-BioInspiredUpstreamMap.ps1",
+      "Sha256": "f7a3d41fab285d4c7b7a357a409ef540b0c606fa93e70515901bd2c8f7cdf06a",
+      "Length": 353
+    },
+    {
       "Path": "scripts/Generate-Calib3DUpstreamMap.ps1",
       "Sha256": "7d5c9162b94c4351e5e60988295ec27e853e4b836946691aa482cfe1d523670d",
       "Length": 3613
     },
     {
       "Path": "scripts/Generate-ContribUpstreamMap.ps1",
-      "Sha256": "7e0d3f6084162ff5c16004cbe8823b2a03b27fdd71d558afea2de83111764c64",
-      "Length": 38601
+      "Sha256": "a6945931fa23761ebc7589e3e7321c5a3587b8320203f535b5793c32f892b5f9",
+      "Length": 44267
     },
     {
       "Path": "scripts/Generate-CoreUpstreamMap.ps1",
@@ -2163,8 +2198,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "7e0007edfe0538cc7f9c3d9b45085604afe502f7a801b8e49c4c618118efe149",
-      "Length": 78570
+      "Sha256": "002220a4f57ed5b4e5fda68c0708e578060b91befbe534f3525718e6ad61b9c4",
+      "Length": 80041
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -2178,8 +2213,8 @@
     },
     {
       "Path": "scripts/New-UpstreamMapCatalog.ps1",
-      "Sha256": "fbca16a9fef54d5175af125d6c7b26956e07cdf04a1ceed5dd5e03b10bc70662",
-      "Length": 8880
+      "Sha256": "bc41758f16a6c9a2a00a9c12ff028f8ab5599fdd98a6e103543e3dea03fe82e3",
+      "Length": 8978
     },
     {
       "Path": "scripts/Test-AlphaMatUpstreamMap.ps1",
@@ -2200,6 +2235,11 @@
       "Path": "scripts/Test-BgSegmUpstreamMap.ps1",
       "Sha256": "dc0e00f3151e1e38b054944223b58b48be6b459e9355af281a8504887274fd6f",
       "Length": 3159
+    },
+    {
+      "Path": "scripts/Test-BioInspiredUpstreamMap.ps1",
+      "Sha256": "c4b922f3ecf7b1606147759d34ef5863043c963d61a50fd1c2d070e77b145328",
+      "Length": 11008
     },
     {
       "Path": "scripts/Test-Calib3DUpstreamMap.ps1",
@@ -2503,8 +2543,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "35ed93ea5495223832dbe13ba80ac7022d042dc526dc9aaf5041f0250173cd52",
-      "Length": 76172
+      "Sha256": "90e2394c667bc1bbcf4b93e952e7f2830c21c16ac9f4b2ae1f97e1a24c600d9e",
+      "Length": 77643
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -2588,8 +2628,8 @@
     },
     {
       "Path": "scripts/Test-UpstreamMapCatalog.ps1",
-      "Sha256": "a26a85ffdedb73298b610c5efab3102b425cdc3f06515a5fdf8ff422cac6e80b",
-      "Length": 14852
+      "Sha256": "7e8a7db4ebdb754c3ad25e89319e70430384e9289361febcb32e74a38426ea26",
+      "Length": 14866
     },
     {
       "Path": "scripts/Test-V501ChangeLedger.ps1",
@@ -2652,6 +2692,16 @@
       "Length": 30818
     },
     {
+      "Path": "src/OpenCvSharp.Native/src/bioinspired/bioinspired.cpp",
+      "Sha256": "773946d0f6401a7b6cb1d2013fee128d433644fec9e94c632a1280a6b2624ac9",
+      "Length": 46029
+    },
+    {
+      "Path": "src/OpenCvSharp.Native/src/bioinspired/bioinspired_handles.h",
+      "Sha256": "a9cc4d21009634e2df97c9f6f28014d637b88e83665162384c2bd59eeaedcb0d",
+      "Length": 904
+    },
+    {
       "Path": "src/OpenCvSharp.Native/src/highgui/highgui.cpp",
       "Sha256": "f7063958a4cafc713a9307553fc2608e5db6e12b01a9b1882d9df4ea3988b99d",
       "Length": 38416
@@ -2675,6 +2725,56 @@
       "Path": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
       "Sha256": "589d339a979b1628e939ff5ffaacfeb26a9073d4225d81580ea7b5b1635321a0",
       "Length": 310116
+    },
+    {
+      "Path": "src/OpenCvSharp/BioInspired/BioInspiredCv2.cs",
+      "Sha256": "0468feb15945e8ec40b1b7e3159230033fd4dfc1652eaa5ff20df799f9176115",
+      "Length": 3592
+    },
+    {
+      "Path": "src/OpenCvSharp/BioInspired/BioInspiredStringConvert.cs",
+      "Sha256": "b47d78562135ad170e0e25d73884ec0c3a2a7d891dc6656d75ff5cf66fe1a9de",
+      "Length": 778
+    },
+    {
+      "Path": "src/OpenCvSharp/BioInspired/Retina.cs",
+      "Sha256": "674510d86a11d67ec283c2365a45b00acbf038b2f6c87e33968f8a94c0290f7f",
+      "Length": 10638
+    },
+    {
+      "Path": "src/OpenCvSharp/BioInspired/RetinaColorSamplingMethod.cs",
+      "Sha256": "a54e097036efc970c6b55b16c23280b84853d23741bca6dc9a5cfaaac6bce637",
+      "Length": 572
+    },
+    {
+      "Path": "src/OpenCvSharp/BioInspired/RetinaFastToneMapping.cs",
+      "Sha256": "1fde92ea8dac7fe33221a096b2014d98fb4fa20925b574b13fccb63dd2583a52",
+      "Length": 3259
+    },
+    {
+      "Path": "src/OpenCvSharp/BioInspired/RetinaMagnoParameters.cs",
+      "Sha256": "e8024470f26d18e1af5e23842b1383fcf23ed6a5bf5d734ff06cf02f25c21eca",
+      "Length": 6912
+    },
+    {
+      "Path": "src/OpenCvSharp/BioInspired/RetinaParameters.cs",
+      "Sha256": "d09532376c0a38cde79a98e9c7346a5364f8e4d4263c5af31042ba9ddf4eb9e8",
+      "Length": 2541
+    },
+    {
+      "Path": "src/OpenCvSharp/BioInspired/RetinaParvoParameters.cs",
+      "Sha256": "bf32ae6d7bb25279cfd6b031b1f9ec8f89e3123e42c1f371f8d9083c59a8ad23",
+      "Length": 7972
+    },
+    {
+      "Path": "src/OpenCvSharp/BioInspired/SegmentationParameters.cs",
+      "Sha256": "425e51ede6308f3b9016b25bc8acf0a632b98256036404e605405799c302793f",
+      "Length": 7506
+    },
+    {
+      "Path": "src/OpenCvSharp/BioInspired/TransientAreasSegmentationModule.cs",
+      "Sha256": "ed9c9f543ef3e88f84f9afcbc581b5f7305b6aee5f2b108b70f0553b1bf0991b",
+      "Length": 5898
     },
     {
       "Path": "src/OpenCvSharp/HighGui/Cv2.cs",
@@ -2837,6 +2937,11 @@
       "Length": 20232
     },
     {
+      "Path": "tests/OpenCvSharp.Tests/BioInspired/BioInspiredTests.cs",
+      "Sha256": "07afe9f34f6c3c5d8e8b05829f169100ff7d88606c92f1be6d1532aa5c1b6dd3",
+      "Length": 20000
+    },
+    {
       "Path": "tests/OpenCvSharp.Tests/Core/CodecBufferLeaseTests.cs",
       "Sha256": "8624b65e676283fd284b91f3a3056dfe1cb74b3811836a9fca88502db32e253e",
       "Length": 5289
@@ -2915,6 +3020,21 @@
       "Path": "tools/BgSegmUpstreamMap/extract_bgsegm.py",
       "Sha256": "74191ab8f29e2dede877b589d102734b0807a9338428f72bb13eb20fe52d6013",
       "Length": 153
+    },
+    {
+      "Path": "tools/BioInspiredUpstreamMap/BioInspiredUpstreamMap.csproj",
+      "Sha256": "b0655fe2e4b91db06fc9f4da7c1a91df7f87b7204830ea583c7e622398f5f38f",
+      "Length": 241
+    },
+    {
+      "Path": "tools/BioInspiredUpstreamMap/Program.cs",
+      "Sha256": "c95d7f5099edd8e6b83e3d9e88014c309bfe12814d46e649bb92422070f5baf3",
+      "Length": 112
+    },
+    {
+      "Path": "tools/BioInspiredUpstreamMap/extract_bioinspired.py",
+      "Sha256": "ec590523320648fb08c614e17ef0279db0c725d097abb16da3f91e2bc407fe78",
+      "Length": 234
     },
     {
       "Path": "tools/Calib3DUpstreamMap/Calib3DUpstreamMap.csproj",
@@ -3293,8 +3413,8 @@
     },
     {
       "Path": "tools/XImgProcUpstreamMap/extract_ximgproc.py",
-      "Sha256": "eb3acacfeb3fb423f401fe1b5151b9911af09822641d0447cfbf7255075c6349",
-      "Length": 5313
+      "Sha256": "c78e0ecafa294ad0ab65774033f0fdd4c7fd3163b5ab2d0cd9877a1deac16536",
+      "Length": 5358
     },
     {
       "Path": "tools/XPhotoUpstreamMap/Program.cs",
