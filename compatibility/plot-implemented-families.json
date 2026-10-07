@@ -1,0 +1,316 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 0,
+  "managedPublicMemberAdditionCount": 0,
+  "families": [
+    {
+      "id": "plot-wrapper-surface",
+      "rationale": "Current Plot managed/native wrapper declarations with exact parser-backed callable evidence.",
+      "declarations": [
+        {
+          "ordinal": 1,
+          "upstreamIdentity": "cv.plot.Plot2d.setMinX(double _plotMinX)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_plot_2d_set_min_x"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetMinX(System.Double value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Plot/PlotTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/plot-guide.md"
+        },
+        {
+          "ordinal": 2,
+          "upstreamIdentity": "cv.plot.Plot2d.setMinY(double _plotMinY)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_plot_2d_set_min_y"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetMinY(System.Double value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Plot/PlotTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/plot-guide.md"
+        },
+        {
+          "ordinal": 3,
+          "upstreamIdentity": "cv.plot.Plot2d.setMaxX(double _plotMaxX)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_plot_2d_set_max_x"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetMaxX(System.Double value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Plot/PlotTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/plot-guide.md"
+        },
+        {
+          "ordinal": 4,
+          "upstreamIdentity": "cv.plot.Plot2d.setMaxY(double _plotMaxY)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_plot_2d_set_max_y"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetMaxY(System.Double value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Plot/PlotTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/plot-guide.md"
+        },
+        {
+          "ordinal": 5,
+          "upstreamIdentity": "cv.plot.Plot2d.setPlotLineWidth(int _plotLineWidth)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_plot_2d_set_plot_line_width"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetPlotLineWidth(System.Int32 value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Plot/PlotTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/plot-guide.md"
+        },
+        {
+          "ordinal": 6,
+          "upstreamIdentity": "cv.plot.Plot2d.setNeedPlotLine(bool _needPlotLine)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_plot_2d_set_need_plot_line"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetNeedPlotLine(System.Boolean value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Plot/PlotTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/plot-guide.md"
+        },
+        {
+          "ordinal": 7,
+          "upstreamIdentity": "cv.plot.Plot2d.setPlotLineColor(Scalar _plotLineColor)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_plot_2d_set_plot_line_color"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetPlotLineColor(JYPPX.OpenCvSharp.Core.Scalar value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Plot/PlotTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/plot-guide.md"
+        },
+        {
+          "ordinal": 8,
+          "upstreamIdentity": "cv.plot.Plot2d.setPlotBackgroundColor(Scalar _plotBackgroundColor)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_plot_2d_set_plot_background_color"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetPlotBackgroundColor(JYPPX.OpenCvSharp.Core.Scalar value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Plot/PlotTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/plot-guide.md"
+        },
+        {
+          "ordinal": 9,
+          "upstreamIdentity": "cv.plot.Plot2d.setPlotAxisColor(Scalar _plotAxisColor)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_plot_2d_set_plot_axis_color"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetPlotAxisColor(JYPPX.OpenCvSharp.Core.Scalar value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Plot/PlotTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/plot-guide.md"
+        },
+        {
+          "ordinal": 10,
+          "upstreamIdentity": "cv.plot.Plot2d.setPlotGridColor(Scalar _plotGridColor)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_plot_2d_set_plot_grid_color"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetPlotGridColor(JYPPX.OpenCvSharp.Core.Scalar value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Plot/PlotTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/plot-guide.md"
+        },
+        {
+          "ordinal": 11,
+          "upstreamIdentity": "cv.plot.Plot2d.setPlotTextColor(Scalar _plotTextColor)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_plot_2d_set_plot_text_color"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetPlotTextColor(JYPPX.OpenCvSharp.Core.Scalar value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Plot/PlotTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/plot-guide.md"
+        },
+        {
+          "ordinal": 12,
+          "upstreamIdentity": "cv.plot.Plot2d.setPlotSize(int _plotSizeWidth;int _plotSizeHeight)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_plot_2d_set_plot_size"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetPlotSize(System.Int32 width,System.Int32 height)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Plot/PlotTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/plot-guide.md"
+        },
+        {
+          "ordinal": 13,
+          "upstreamIdentity": "cv.plot.Plot2d.setShowGrid(bool needShowGrid)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_plot_2d_set_show_grid"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetShowGrid(System.Boolean value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Plot/PlotTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/plot-guide.md"
+        },
+        {
+          "ordinal": 14,
+          "upstreamIdentity": "cv.plot.Plot2d.setShowText(bool needShowText)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_plot_2d_set_show_text"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetShowText(System.Boolean value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Plot/PlotTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/plot-guide.md"
+        },
+        {
+          "ordinal": 15,
+          "upstreamIdentity": "cv.plot.Plot2d.setGridLinesNumber(int gridLinesNumber)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_plot_2d_set_grid_lines_number"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetGridLinesNumber(System.Int32 value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Plot/PlotTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/plot-guide.md"
+        },
+        {
+          "ordinal": 16,
+          "upstreamIdentity": "cv.plot.Plot2d.setInvertOrientation(bool _invertOrientation)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_plot_2d_set_invert_orientation"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetInvertOrientation(System.Boolean value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Plot/PlotTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/plot-guide.md"
+        },
+        {
+          "ordinal": 17,
+          "upstreamIdentity": "cv.plot.Plot2d.setPointIdxToPrint(int pointIdx)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_plot_2d_set_point_idx_to_print"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetPointIdxToPrint(System.Int32 value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Plot/PlotTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/plot-guide.md"
+        },
+        {
+          "ordinal": 18,
+          "upstreamIdentity": "cv.plot.Plot2d.render(Mat _plotResult[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_plot_2d_render"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Render()",
+            "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|System.Void Render(JYPPX.OpenCvSharp.Core.Mat result)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Plot/PlotTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/plot-guide.md"
+        },
+        {
+          "ordinal": 19,
+          "upstreamIdentity": "cv.plot.Plot2d.create(Mat data)->Ptr<Plot2d>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_plot_2d_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;static|JYPPX.OpenCvSharp.Plot.Plot2d Create(JYPPX.OpenCvSharp.Core.Mat data)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Plot/PlotTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/plot-guide.md"
+        },
+        {
+          "ordinal": 20,
+          "upstreamIdentity": "cv.plot.Plot2d.create(Mat dataX;Mat dataY)->Ptr<Plot2d>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_plot_2d_create_xy"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;static|JYPPX.OpenCvSharp.Plot.Plot2d Create(JYPPX.OpenCvSharp.Core.Mat dataX,JYPPX.OpenCvSharp.Core.Mat dataY)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Plot/PlotTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/plot-guide.md"
+        }
+      ]
+    }
+  ]
+}

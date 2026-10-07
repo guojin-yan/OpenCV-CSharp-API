@@ -22,17 +22,17 @@
         "unexplainedMissingAllowed": { "const": false }
       }
     },
-    "moduleCount": { "const": 25 },
+    "moduleCount": { "const": 26 },
     "maps": {
       "type": "array",
-      "minItems": 25,
-      "maxItems": 25,
+      "minItems": 26,
+      "maxItems": 26,
       "items": {
         "type": "object",
         "additionalProperties": false,
         "required": [ "id", "repository", "generatorProject", "extractorScript", "generationScript", "semanticGuard", "scope", "artifacts", "evidenceContract" ],
         "properties": {
-          "id": { "enum": [ "calib3d", "core", "dnn", "features", "highgui", "imgcodecs", "imgproc", "ml", "objdetect", "photo", "stitching", "tracking", "video", "videoio", "xphoto", "ximgproc", "optflow", "bgsegm", "face", "quality", "img_hash", "line_descriptor", "freetype", "alphamat", "intensity_transform" ] },
+          "id": { "enum": [ "calib3d", "core", "dnn", "features", "highgui", "imgcodecs", "imgproc", "ml", "objdetect", "photo", "stitching", "tracking", "video", "videoio", "xphoto", "ximgproc", "optflow", "bgsegm", "face", "quality", "img_hash", "line_descriptor", "freetype", "alphamat", "intensity_transform", "plot" ] },
           "repository": { "enum": [ "opencv", "opencv_contrib" ] },
           "generatorProject": { "type": "string", "pattern": "^tools/[A-Za-z0-9]+UpstreamMap$" },
           "extractorScript": { "$ref": "#/$defs/repositoryPath" },

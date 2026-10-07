@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 25,
+  "moduleCount": 26,
   "maps": [
     {
       "id": "calib3d",
@@ -1938,6 +1938,52 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "5c2dcb127044d11bb01fca210e53570eae1d760fb1cac59411ca91267f514465",
         "familyInventorySha256": "c6297fb086332a477a8f8c42b465bd80bed7a0663b2401b5f6f0b2725338b050",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "plot",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/PlotUpstreamMap",
+      "extractorScript": "tools/PlotUpstreamMap/extract_plot.py",
+      "generationScript": "scripts/Generate-PlotUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-PlotUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/plot.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/plot/include/opencv2/plot.hpp",
+          "sha256": "9f92ce9db5adc36070cbdd43264c49622e1812f40d6f5eb59f0ef2bb87e8ffaf"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/plot/include/opencv2/plot.hpp",
+            "sha256": "9f92ce9db5adc36070cbdd43264c49622e1812f40d6f5eb59f0ef2bb87e8ffaf",
+            "startOrdinal": 0,
+            "declarationCount": 21
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/plot-upstream-raw.json",
+        "classifications": "compatibility/plot-upstream-classifications.json",
+        "mapping": "compatibility/plot-upstream-map.txt",
+        "summary": "compatibility/plot-upstream-summary.json",
+        "familyInventory": "compatibility/plot-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 21,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "1ba5125f474dffe62981bfc2b0302aafa382a5954e25efe51805b0e578851b92",
+        "familyInventorySha256": "37c63245e82e684f514165e7787a73c16385e7f25b488a84a1ddb002dba5b782",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

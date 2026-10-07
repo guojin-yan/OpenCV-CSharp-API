@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/c53e35786c0caf69",
-  "SourceIdentity": "sha256:c53e35786c0caf6941ab459dd27c9be0da5f4274c7644ed5a1037a349c7ca2e9",
+  "CandidateId": "local-closeout/sha256/0cf43fb285402fa8",
+  "SourceIdentity": "sha256:0cf43fb285402fa898c06ccb661ae383dc34877cbe0652b09f56c017d9b14a2c",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1939,
-    "Sha256": "c53e35786c0caf6941ab459dd27c9be0da5f4274c7644ed5a1037a349c7ca2e9",
+    "FileCount": 1949,
+    "Sha256": "0cf43fb285402fa898c06ccb661ae383dc34877cbe0652b09f56c017d9b14a2c",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -1007,6 +1007,31 @@
       "Length": 1697
     },
     {
+      "Path": "compatibility/plot-implemented-families.json",
+      "Sha256": "dd75c2523513885383b447c403052aed628bc31ebaf282783e743a9119f5f7dd",
+      "Length": 14884
+    },
+    {
+      "Path": "compatibility/plot-upstream-classifications.json",
+      "Sha256": "49bfd410fc82844569711a7b4be633c5f7e5e13400e56e2351ed08b63ad11223",
+      "Length": 12469
+    },
+    {
+      "Path": "compatibility/plot-upstream-map.txt",
+      "Sha256": "1ba5125f474dffe62981bfc2b0302aafa382a5954e25efe51805b0e578851b92",
+      "Length": 8060
+    },
+    {
+      "Path": "compatibility/plot-upstream-raw.json",
+      "Sha256": "021bccd644b73e3821b38fec5786ef1fbc48349093ffa1f1b964e82d0539ff63",
+      "Length": 14760
+    },
+    {
+      "Path": "compatibility/plot-upstream-summary.json",
+      "Sha256": "0a51cdcb022626bfd6cec27cb28d55e7426a22386478d32d1a0f2a32b160d191",
+      "Length": 1410
+    },
+    {
       "Path": "compatibility/quality-implemented-families.json",
       "Sha256": "7f98dc34d522b2852fbc2087145d88e70840d4117ae1c356fb535a27f60b0400",
       "Length": 22083
@@ -1083,18 +1108,18 @@
     },
     {
       "Path": "compatibility/upstream-map-catalog.json",
-      "Sha256": "df44e6169215d1441c8328770e123a52b33cc0cac44b3246e704bb9f551733e9",
-      "Length": 93959
+      "Sha256": "c82cf7257575b38d7e56667e5ff5ad70598d5fd27e44b92bff9419efee39e704",
+      "Length": 96020
     },
     {
       "Path": "compatibility/upstream-map-catalog.schema.json",
-      "Sha256": "43017f947c33fd1a5c209706deabf1178ccdd78ba2340022807e887d5a141284",
-      "Length": 5722
+      "Sha256": "28c4b7196bf241493fbe864b6d568e0d0ac0076620e3da95c2a9c87d3fd0dc68",
+      "Length": 5730
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "5dacd9ea0f80961059ccb322b60af3317522583de9eb6299377fa1fbf795a752",
-      "Length": 17543
+      "Sha256": "adfcf6f4ce23578e422ad900ad0e5acc045211d4bc7a2e51c779fbec8aea4ac8",
+      "Length": 18743
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -1392,6 +1417,11 @@
       "Length": 4243
     },
     {
+      "Path": "docs/articles/plot-guide.md",
+      "Sha256": "38d277dc7b02763ea786979031a95cee70208c1e74c14a0a577297f5f621c2d3",
+      "Length": 2627
+    },
+    {
       "Path": "docs/articles/point-set-marshalling-guide.md",
       "Sha256": "dd59f489c8fde267b232f4f63dc3ee875e2869a55a2cc1844f835f69ec321d82",
       "Length": 4559
@@ -1468,8 +1498,8 @@
     },
     {
       "Path": "docs/articles/upstream-map-toolchain.md",
-      "Sha256": "bb0262a4d0b52d6ee4d1e340b6ba034146e5c560b60a4ea4a8866e780f564205",
-      "Length": 1856
+      "Sha256": "140d979d8b951a82f81cc38f5ca5dc1cdd39e0e4ddcbb7030e1ae8f7dcdba652",
+      "Length": 2096
     },
     {
       "Path": "docs/articles/v501-modern-api-preview-guide.md",
@@ -1918,8 +1948,8 @@
     },
     {
       "Path": "scripts/Generate-ContribUpstreamMap.ps1",
-      "Sha256": "f831a91950661df5292164fc3303eeb23885c105e9ff335aa6b0eb26442d6ebf",
-      "Length": 36486
+      "Sha256": "7e0d3f6084162ff5c16004cbe8823b2a03b27fdd71d558afea2de83111764c64",
+      "Length": 38601
     },
     {
       "Path": "scripts/Generate-CoreUpstreamMap.ps1",
@@ -2010,6 +2040,11 @@
       "Path": "scripts/Generate-PhotoUpstreamMap.ps1",
       "Sha256": "ca68b037b35026e81b36ab25362707310419afb4b7044f0991372aef2507a4ef",
       "Length": 2897
+    },
+    {
+      "Path": "scripts/Generate-PlotUpstreamMap.ps1",
+      "Sha256": "215eebf271aa7a4b3d79bba9c5b58ccc15c1b99e15c27ac27486d5bf0bff932c",
+      "Length": 339
     },
     {
       "Path": "scripts/Generate-QualityUpstreamMap.ps1",
@@ -2128,8 +2163,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "32ace6f40f24f90adcfc77b7759ebf3780651a69af6827bf02413e55b413b2f8",
-      "Length": 77942
+      "Sha256": "7e0007edfe0538cc7f9c3d9b45085604afe502f7a801b8e49c4c618118efe149",
+      "Length": 78570
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -2143,8 +2178,8 @@
     },
     {
       "Path": "scripts/New-UpstreamMapCatalog.ps1",
-      "Sha256": "65a607085540cd8c06e959e373056720c1dc541cb7f6bacaa40294bd9401619b",
-      "Length": 8796
+      "Sha256": "fbca16a9fef54d5175af125d6c7b26956e07cdf04a1ceed5dd5e03b10bc70662",
+      "Length": 8880
     },
     {
       "Path": "scripts/Test-AlphaMatUpstreamMap.ps1",
@@ -2457,14 +2492,19 @@
       "Length": 2636
     },
     {
+      "Path": "scripts/Test-PlotUpstreamMap.ps1",
+      "Sha256": "2eaaae1ad406c6668dc1da65e7b5f3653fb331c8c1f9ccf5060ec96f86bb006e",
+      "Length": 5007
+    },
+    {
       "Path": "scripts/Test-QualityUpstreamMap.ps1",
       "Sha256": "bec968da1acbd731d4dfb5737e0e5c5490bbdf3d035bee013312bc0df999119a",
       "Length": 3012
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "87b14d2e6f2b826c942e6ac62ac90d050d7e1bf38f1fa64c2f92263b93abc438",
-      "Length": 75544
+      "Sha256": "35ed93ea5495223832dbe13ba80ac7022d042dc526dc9aaf5041f0250173cd52",
+      "Length": 76172
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -2548,8 +2588,8 @@
     },
     {
       "Path": "scripts/Test-UpstreamMapCatalog.ps1",
-      "Sha256": "8759773bee78aee2e3932dcc1b51c6eb6648c32bf24a8d30f7b60a4f74a10440",
-      "Length": 14845
+      "Sha256": "a26a85ffdedb73298b610c5efab3102b425cdc3f06515a5fdf8ff422cac6e80b",
+      "Length": 14852
     },
     {
       "Path": "scripts/Test-V501ChangeLedger.ps1",
@@ -2715,6 +2755,16 @@
       "Path": "src/OpenCvSharp/Internal/Interop/NativeMethods.Stitching.LibraryImport.cs",
       "Sha256": "4c8473b0c632ea20ab36eebf5880271cb8ba86d68e02d2ce44d10f789680bc6c",
       "Length": 37539
+    },
+    {
+      "Path": "src/OpenCvSharp/Plot/Plot2d.cs",
+      "Sha256": "968c42c878e988b61ae7c8e6101c234bc2906cc48e03db0214c8291851f8c21b",
+      "Length": 8769
+    },
+    {
+      "Path": "src/OpenCvSharp/Plot/PlotCv2.cs",
+      "Sha256": "82922f7b4e1e2b2429edb956b22ef564ef4ad443dfb5640050c95ece6034bc72",
+      "Length": 812
     },
     {
       "Path": "src/OpenCvSharp/Properties/InternalsVisibleTo.cs",
@@ -3137,6 +3187,21 @@
       "Length": 6200
     },
     {
+      "Path": "tools/PlotUpstreamMap/PlotUpstreamMap.csproj",
+      "Sha256": "b0655fe2e4b91db06fc9f4da7c1a91df7f87b7204830ea583c7e622398f5f38f",
+      "Length": 241
+    },
+    {
+      "Path": "tools/PlotUpstreamMap/Program.cs",
+      "Sha256": "db3d1e312dc13ff041fbff7fd95705c528294c61de83268602df74c20f0580c0",
+      "Length": 98
+    },
+    {
+      "Path": "tools/PlotUpstreamMap/extract_plot.py",
+      "Sha256": "e4dfee4c2a4f9deab49bd17c709885497574987a97c2193db439b82c31ed979d",
+      "Length": 227
+    },
+    {
       "Path": "tools/QualityUpstreamMap/Program.cs",
       "Sha256": "fb11430360ed02603e96c9507ae2afd8fe29eb295eeab2e7eda0b4a72951f16e",
       "Length": 104
@@ -3228,8 +3293,8 @@
     },
     {
       "Path": "tools/XImgProcUpstreamMap/extract_ximgproc.py",
-      "Sha256": "a6b10d16ab0792266eb46c09eae3f54c08e5dce736f4c6352d8839260827ea04",
-      "Length": 5289
+      "Sha256": "eb3acacfeb3fb423f401fe1b5151b9911af09822641d0447cfbf7255075c6349",
+      "Length": 5313
     },
     {
       "Path": "tools/XPhotoUpstreamMap/Program.cs",

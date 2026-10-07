@@ -1,0 +1,511 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/PlotUpstreamMap/extract_plot.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/plot/include/opencv2/plot.hpp",
+  "headerSha256": "9f92ce9db5adc36070cbdd43264c49622e1812f40d6f5eb59f0ef2bb87e8ffaf",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/plot/include/opencv2/plot.hpp",
+      "sha256": "9f92ce9db5adc36070cbdd43264c49622e1812f40d6f5eb59f0ef2bb87e8ffaf",
+      "startOrdinal": 0,
+      "declarationCount": 21
+    }
+  ],
+  "declarationCount": 21,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/plot/include/opencv2/plot.hpp",
+      "kind": "class",
+      "name": "cv.plot.Plot2d",
+      "identity": "class cv.plot.Plot2d",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@defgroup plot Plot function for Mat data"
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/plot/include/opencv2/plot.hpp",
+      "kind": "callable",
+      "name": "cv.plot.Plot2d.setMinX",
+      "identity": "cv.plot.Plot2d.setMinX(double _plotMinX)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "_plotMinX",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/plot/include/opencv2/plot.hpp",
+      "kind": "callable",
+      "name": "cv.plot.Plot2d.setMinY",
+      "identity": "cv.plot.Plot2d.setMinY(double _plotMinY)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "_plotMinY",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/plot/include/opencv2/plot.hpp",
+      "kind": "callable",
+      "name": "cv.plot.Plot2d.setMaxX",
+      "identity": "cv.plot.Plot2d.setMaxX(double _plotMaxX)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "_plotMaxX",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/plot/include/opencv2/plot.hpp",
+      "kind": "callable",
+      "name": "cv.plot.Plot2d.setMaxY",
+      "identity": "cv.plot.Plot2d.setMaxY(double _plotMaxY)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "_plotMaxY",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/plot/include/opencv2/plot.hpp",
+      "kind": "callable",
+      "name": "cv.plot.Plot2d.setPlotLineWidth",
+      "identity": "cv.plot.Plot2d.setPlotLineWidth(int _plotLineWidth)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "_plotLineWidth",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/plot/include/opencv2/plot.hpp",
+      "kind": "callable",
+      "name": "cv.plot.Plot2d.setNeedPlotLine",
+      "identity": "cv.plot.Plot2d.setNeedPlotLine(bool _needPlotLine)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "_needPlotLine",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Switches data visualization mode\n             *\n             * @param _needPlotLine if true then neighbour plot points will be connected by lines.\n             * In other case data will be plotted as a set of standalone points."
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/plot/include/opencv2/plot.hpp",
+      "kind": "callable",
+      "name": "cv.plot.Plot2d.setPlotLineColor",
+      "identity": "cv.plot.Plot2d.setPlotLineColor(Scalar _plotLineColor)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Scalar",
+          "name": "_plotLineColor",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/plot/include/opencv2/plot.hpp",
+      "kind": "callable",
+      "name": "cv.plot.Plot2d.setPlotBackgroundColor",
+      "identity": "cv.plot.Plot2d.setPlotBackgroundColor(Scalar _plotBackgroundColor)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Scalar",
+          "name": "_plotBackgroundColor",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/plot/include/opencv2/plot.hpp",
+      "kind": "callable",
+      "name": "cv.plot.Plot2d.setPlotAxisColor",
+      "identity": "cv.plot.Plot2d.setPlotAxisColor(Scalar _plotAxisColor)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Scalar",
+          "name": "_plotAxisColor",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/plot/include/opencv2/plot.hpp",
+      "kind": "callable",
+      "name": "cv.plot.Plot2d.setPlotGridColor",
+      "identity": "cv.plot.Plot2d.setPlotGridColor(Scalar _plotGridColor)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Scalar",
+          "name": "_plotGridColor",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/plot/include/opencv2/plot.hpp",
+      "kind": "callable",
+      "name": "cv.plot.Plot2d.setPlotTextColor",
+      "identity": "cv.plot.Plot2d.setPlotTextColor(Scalar _plotTextColor)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Scalar",
+          "name": "_plotTextColor",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/plot/include/opencv2/plot.hpp",
+      "kind": "callable",
+      "name": "cv.plot.Plot2d.setPlotSize",
+      "identity": "cv.plot.Plot2d.setPlotSize(int _plotSizeWidth;int _plotSizeHeight)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "_plotSizeWidth",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "_plotSizeHeight",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/plot/include/opencv2/plot.hpp",
+      "kind": "callable",
+      "name": "cv.plot.Plot2d.setShowGrid",
+      "identity": "cv.plot.Plot2d.setShowGrid(bool needShowGrid)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "needShowGrid",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/plot/include/opencv2/plot.hpp",
+      "kind": "callable",
+      "name": "cv.plot.Plot2d.setShowText",
+      "identity": "cv.plot.Plot2d.setShowText(bool needShowText)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "needShowText",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/plot/include/opencv2/plot.hpp",
+      "kind": "callable",
+      "name": "cv.plot.Plot2d.setGridLinesNumber",
+      "identity": "cv.plot.Plot2d.setGridLinesNumber(int gridLinesNumber)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "gridLinesNumber",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/plot/include/opencv2/plot.hpp",
+      "kind": "callable",
+      "name": "cv.plot.Plot2d.setInvertOrientation",
+      "identity": "cv.plot.Plot2d.setInvertOrientation(bool _invertOrientation)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "_invertOrientation",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/plot/include/opencv2/plot.hpp",
+      "kind": "callable",
+      "name": "cv.plot.Plot2d.setPointIdxToPrint",
+      "identity": "cv.plot.Plot2d.setPointIdxToPrint(int pointIdx)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "pointIdx",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Sets the index of a point which coordinates will be printed on the top left corner of the plot (if ShowText flag is true).\n             *\n             * @param pointIdx index of the required point in data array."
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/plot/include/opencv2/plot.hpp",
+      "kind": "callable",
+      "name": "cv.plot.Plot2d.render",
+      "identity": "cv.plot.Plot2d.render(Mat _plotResult[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "_plotResult",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/plot/include/opencv2/plot.hpp",
+      "kind": "callable",
+      "name": "cv.plot.Plot2d.create",
+      "identity": "cv.plot.Plot2d.create(Mat data)->Ptr<Plot2d>",
+      "returnType": "Ptr<Plot2d>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "data",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Creates Plot2d object\n             *\n             * @param data \\f$1xN\\f$ or \\f$Nx1\\f$ matrix containing \\f$Y\\f$ values of points to plot. \\f$X\\f$ values\n             * will be equal to indexes of correspondind elements in data matrix."
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/plot/include/opencv2/plot.hpp",
+      "kind": "callable",
+      "name": "cv.plot.Plot2d.create",
+      "identity": "cv.plot.Plot2d.create(Mat dataX;Mat dataY)->Ptr<Plot2d>",
+      "returnType": "Ptr<Plot2d>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "dataX",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dataY",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Creates Plot2d object\n             *\n             * @param dataX \\f$1xN\\f$ or \\f$Nx1\\f$ matrix \\f$X\\f$ values of points to plot.\n             * @param dataY \\f$1xN\\f$ or \\f$Nx1\\f$ matrix containing \\f$Y\\f$ values of points to plot."
+    }
+  ]
+}

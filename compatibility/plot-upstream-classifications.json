@@ -1,0 +1,280 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/plot.hpp contrib public header closure from parser-emitted headers",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact Plot wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.plot.Plot2d",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PLOT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.plot.Plot2d.setMinX(double _plotMinX)->void",
+      "classification": "implemented",
+      "reason": "Explicit Plot declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PLOT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_plot_2d_set_min_x"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetMinX(System.Double value)"
+      ]
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.plot.Plot2d.setMinY(double _plotMinY)->void",
+      "classification": "implemented",
+      "reason": "Explicit Plot declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PLOT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_plot_2d_set_min_y"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetMinY(System.Double value)"
+      ]
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.plot.Plot2d.setMaxX(double _plotMaxX)->void",
+      "classification": "implemented",
+      "reason": "Explicit Plot declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PLOT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_plot_2d_set_max_x"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetMaxX(System.Double value)"
+      ]
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.plot.Plot2d.setMaxY(double _plotMaxY)->void",
+      "classification": "implemented",
+      "reason": "Explicit Plot declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PLOT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_plot_2d_set_max_y"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetMaxY(System.Double value)"
+      ]
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.plot.Plot2d.setPlotLineWidth(int _plotLineWidth)->void",
+      "classification": "implemented",
+      "reason": "Explicit Plot declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PLOT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_plot_2d_set_plot_line_width"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetPlotLineWidth(System.Int32 value)"
+      ]
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.plot.Plot2d.setNeedPlotLine(bool _needPlotLine)->void",
+      "classification": "implemented",
+      "reason": "Explicit Plot declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PLOT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_plot_2d_set_need_plot_line"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetNeedPlotLine(System.Boolean value)"
+      ]
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.plot.Plot2d.setPlotLineColor(Scalar _plotLineColor)->void",
+      "classification": "implemented",
+      "reason": "Explicit Plot declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PLOT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_plot_2d_set_plot_line_color"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetPlotLineColor(JYPPX.OpenCvSharp.Core.Scalar value)"
+      ]
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.plot.Plot2d.setPlotBackgroundColor(Scalar _plotBackgroundColor)->void",
+      "classification": "implemented",
+      "reason": "Explicit Plot declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PLOT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_plot_2d_set_plot_background_color"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetPlotBackgroundColor(JYPPX.OpenCvSharp.Core.Scalar value)"
+      ]
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.plot.Plot2d.setPlotAxisColor(Scalar _plotAxisColor)->void",
+      "classification": "implemented",
+      "reason": "Explicit Plot declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PLOT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_plot_2d_set_plot_axis_color"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetPlotAxisColor(JYPPX.OpenCvSharp.Core.Scalar value)"
+      ]
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.plot.Plot2d.setPlotGridColor(Scalar _plotGridColor)->void",
+      "classification": "implemented",
+      "reason": "Explicit Plot declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PLOT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_plot_2d_set_plot_grid_color"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetPlotGridColor(JYPPX.OpenCvSharp.Core.Scalar value)"
+      ]
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.plot.Plot2d.setPlotTextColor(Scalar _plotTextColor)->void",
+      "classification": "implemented",
+      "reason": "Explicit Plot declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PLOT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_plot_2d_set_plot_text_color"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetPlotTextColor(JYPPX.OpenCvSharp.Core.Scalar value)"
+      ]
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.plot.Plot2d.setPlotSize(int _plotSizeWidth;int _plotSizeHeight)->void",
+      "classification": "implemented",
+      "reason": "Explicit Plot declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PLOT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_plot_2d_set_plot_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetPlotSize(System.Int32 width,System.Int32 height)"
+      ]
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.plot.Plot2d.setShowGrid(bool needShowGrid)->void",
+      "classification": "implemented",
+      "reason": "Explicit Plot declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PLOT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_plot_2d_set_show_grid"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetShowGrid(System.Boolean value)"
+      ]
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.plot.Plot2d.setShowText(bool needShowText)->void",
+      "classification": "implemented",
+      "reason": "Explicit Plot declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PLOT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_plot_2d_set_show_text"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetShowText(System.Boolean value)"
+      ]
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.plot.Plot2d.setGridLinesNumber(int gridLinesNumber)->void",
+      "classification": "implemented",
+      "reason": "Explicit Plot declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PLOT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_plot_2d_set_grid_lines_number"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetGridLinesNumber(System.Int32 value)"
+      ]
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.plot.Plot2d.setInvertOrientation(bool _invertOrientation)->void",
+      "classification": "implemented",
+      "reason": "Explicit Plot declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PLOT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_plot_2d_set_invert_orientation"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetInvertOrientation(System.Boolean value)"
+      ]
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.plot.Plot2d.setPointIdxToPrint(int pointIdx)->void",
+      "classification": "implemented",
+      "reason": "Explicit Plot declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PLOT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_plot_2d_set_point_idx_to_print"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Plot.Plot2d SetPointIdxToPrint(System.Int32 value)"
+      ]
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.plot.Plot2d.render(Mat _plotResult[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit Plot declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PLOT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_plot_2d_render"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Render()",
+        "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;instance|System.Void Render(JYPPX.OpenCvSharp.Core.Mat result)"
+      ]
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.plot.Plot2d.create(Mat data)->Ptr<Plot2d>",
+      "classification": "implemented",
+      "reason": "Explicit Plot declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PLOT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_plot_2d_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;static|JYPPX.OpenCvSharp.Plot.Plot2d Create(JYPPX.OpenCvSharp.Core.Mat data)"
+      ]
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.plot.Plot2d.create(Mat dataX;Mat dataY)->Ptr<Plot2d>",
+      "classification": "implemented",
+      "reason": "Explicit Plot declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PLOT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_plot_2d_create_xy"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Plot.Plot2d|method|public;static|JYPPX.OpenCvSharp.Plot.Plot2d Create(JYPPX.OpenCvSharp.Core.Mat dataX,JYPPX.OpenCvSharp.Core.Mat dataY)"
+      ]
+    }
+  ]
+}
