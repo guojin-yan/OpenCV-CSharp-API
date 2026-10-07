@@ -1,0 +1,440 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/HfsUpstreamMap/extract_hfs.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/hfs/include/opencv2/hfs.hpp",
+  "headerSha256": "0983f33226f7fb912be7ca43c747ee676b4fb197a7a70e7866a35996e41be899",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/hfs/include/opencv2/hfs.hpp",
+      "sha256": "0983f33226f7fb912be7ca43c747ee676b4fb197a7a70e7866a35996e41be899",
+      "startOrdinal": 0,
+      "declarationCount": 18
+    }
+  ],
+  "declarationCount": 18,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hfs/include/opencv2/hfs.hpp",
+      "kind": "class",
+      "name": "cv.hfs.HfsSegment",
+      "identity": "class cv.hfs.HfsSegment",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@defgroup hfs Hierarchical Feature Selection for Efficient Image Segmentation\n\nThe opencv hfs module contains an efficient algorithm to segment an image.\nThis module is implemented based on the paper Hierarchical Feature Selection for Efficient\nImage Segmentation, ECCV 2016. The original project was developed by\nYun Liu(https://github.com/yun-liu/hfs).\n\n\nIntroduction to Hierarchical Feature Selection\n----------------------------------------------\n\n\nThis algorithm is executed in 3 stages:\n\nIn the first stage, the algorithm uses SLIC (simple linear iterative clustering) algorithm\nto obtain the superpixel of the input image.\n\nIn the second stage, the algorithm view each superpixel as a node in the graph.\nIt will calculate a feature vector for each edge of the graph. It then calculates a weight\nfor each edge based on the feature vector and trained SVM parameters. After obtaining\nweight for each edge, it will exploit  EGB (Efficient Graph-based Image Segmentation)\nalgorithm to merge some nodes in the graph thus obtaining a coarser segmentation\nAfter these operations, a post process will be executed to merge regions that are smaller\nthen a specific number of pixels into their nearby region.\n\nIn the third stage, the algorithm exploits the similar mechanism to further merge\nthe small regions obtained in the second stage into even coarser segmentation.\n\nAfter these three stages, we can obtain the final segmentation of the image.\nFor further details about the algorithm, please refer to the original paper:\nHierarchical Feature Selection for Efficient Image Segmentation, ECCV 2016"
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hfs/include/opencv2/hfs.hpp",
+      "kind": "callable",
+      "name": "cv.hfs.HfsSegment.setSegEgbThresholdI",
+      "identity": "cv.hfs.HfsSegment.setSegEgbThresholdI(float c)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "c",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief: set and get the parameter segEgbThresholdI.\n* This parameter is used in the second stage mentioned above.\n* It is a constant used to threshold weights of the edge when merging\n* adjacent nodes when applying EGB algorithm. The segmentation result\n* tends to have more regions remained if this value is large and vice versa."
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hfs/include/opencv2/hfs.hpp",
+      "kind": "callable",
+      "name": "cv.hfs.HfsSegment.getSegEgbThresholdI",
+      "identity": "cv.hfs.HfsSegment.getSegEgbThresholdI()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hfs/include/opencv2/hfs.hpp",
+      "kind": "callable",
+      "name": "cv.hfs.HfsSegment.setMinRegionSizeI",
+      "identity": "cv.hfs.HfsSegment.setMinRegionSizeI(int n)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "n",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief: set and get the parameter minRegionSizeI.\n* This parameter is used in the second stage\n* mentioned above. After the EGB segmentation, regions that have fewer\n* pixels then this parameter will be merged into it's adjacent region."
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hfs/include/opencv2/hfs.hpp",
+      "kind": "callable",
+      "name": "cv.hfs.HfsSegment.getMinRegionSizeI",
+      "identity": "cv.hfs.HfsSegment.getMinRegionSizeI()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hfs/include/opencv2/hfs.hpp",
+      "kind": "callable",
+      "name": "cv.hfs.HfsSegment.setSegEgbThresholdII",
+      "identity": "cv.hfs.HfsSegment.setSegEgbThresholdII(float c)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "c",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief: set and get the parameter segEgbThresholdII.\n* This parameter is used in the third stage\n* mentioned above. It serves the same purpose as segEgbThresholdI.\n* The segmentation result tends to have more regions remained if\n* this value is large and vice versa."
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hfs/include/opencv2/hfs.hpp",
+      "kind": "callable",
+      "name": "cv.hfs.HfsSegment.getSegEgbThresholdII",
+      "identity": "cv.hfs.HfsSegment.getSegEgbThresholdII()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hfs/include/opencv2/hfs.hpp",
+      "kind": "callable",
+      "name": "cv.hfs.HfsSegment.setMinRegionSizeII",
+      "identity": "cv.hfs.HfsSegment.setMinRegionSizeII(int n)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "n",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief: set and get the parameter minRegionSizeII.\n* This parameter is used in the third stage\n* mentioned above. It serves the same purpose as minRegionSizeI"
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hfs/include/opencv2/hfs.hpp",
+      "kind": "callable",
+      "name": "cv.hfs.HfsSegment.getMinRegionSizeII",
+      "identity": "cv.hfs.HfsSegment.getMinRegionSizeII()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hfs/include/opencv2/hfs.hpp",
+      "kind": "callable",
+      "name": "cv.hfs.HfsSegment.setSpatialWeight",
+      "identity": "cv.hfs.HfsSegment.setSpatialWeight(float w)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "w",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief: set and get the parameter spatialWeight.\n* This parameter is used in the first stage\n* mentioned above(the SLIC stage). It describes how important is the role\n* of position when calculating the distance between each pixel and it's\n* center. The exact formula to calculate the distance is\n* \\f$colorDistance + spatialWeight \\times spatialDistance\\f$.\n* The segmentation result tends to have more local consistency\n* if this value is larger."
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hfs/include/opencv2/hfs.hpp",
+      "kind": "callable",
+      "name": "cv.hfs.HfsSegment.getSpatialWeight",
+      "identity": "cv.hfs.HfsSegment.getSpatialWeight()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hfs/include/opencv2/hfs.hpp",
+      "kind": "callable",
+      "name": "cv.hfs.HfsSegment.setSlicSpixelSize",
+      "identity": "cv.hfs.HfsSegment.setSlicSpixelSize(int n)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "n",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief: set and get the parameter slicSpixelSize.\n* This parameter is used in the first stage mentioned\n* above(the SLIC stage). It describes the size of each\n* superpixel when initializing SLIC. Every superpixel\n* approximately has \\f$slicSpixelSize \\times slicSpixelSize\\f$\n* pixels in the beginning."
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hfs/include/opencv2/hfs.hpp",
+      "kind": "callable",
+      "name": "cv.hfs.HfsSegment.getSlicSpixelSize",
+      "identity": "cv.hfs.HfsSegment.getSlicSpixelSize()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hfs/include/opencv2/hfs.hpp",
+      "kind": "callable",
+      "name": "cv.hfs.HfsSegment.setNumSlicIter",
+      "identity": "cv.hfs.HfsSegment.setNumSlicIter(int n)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "n",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief: set and get the parameter numSlicIter.\n* This parameter is used in the first stage. It\n* describes how many iteration to perform when executing SLIC."
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hfs/include/opencv2/hfs.hpp",
+      "kind": "callable",
+      "name": "cv.hfs.HfsSegment.getNumSlicIter",
+      "identity": "cv.hfs.HfsSegment.getNumSlicIter()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hfs/include/opencv2/hfs.hpp",
+      "kind": "callable",
+      "name": "cv.hfs.HfsSegment.performSegmentGpu",
+      "identity": "cv.hfs.HfsSegment.performSegmentGpu(Mat src;bool ifDraw=true)->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "ifDraw",
+          "default": "true",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief do segmentation gpu\n* @param src: the input image\n* @param ifDraw: if draw the image in the returned Mat. if this parameter is false,\n* then the content of the returned Mat is a matrix of index, describing the region\n* each pixel belongs to. And it's data type is CV_16U. If this parameter is true,\n* then the returned Mat is a segmented picture, and color of each region is the\n* average color of all pixels in that region. And it's data type is the same as\n* the input image"
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hfs/include/opencv2/hfs.hpp",
+      "kind": "callable",
+      "name": "cv.hfs.HfsSegment.performSegmentCpu",
+      "identity": "cv.hfs.HfsSegment.performSegmentCpu(Mat src;bool ifDraw=true)->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "ifDraw",
+          "default": "true",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief do segmentation with cpu\n* This method is only implemented for reference.\n* It is highly NOT recommanded to use it."
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hfs/include/opencv2/hfs.hpp",
+      "kind": "callable",
+      "name": "cv.hfs.HfsSegment.create",
+      "identity": "cv.hfs.HfsSegment.create(int height;int width;float segEgbThresholdI=0.08f;int minRegionSizeI=100;float segEgbThresholdII=0.28f;int minRegionSizeII=200;float spatialWeight=0.6f;int slicSpixelSize=8;int numSlicIter=5)->Ptr<HfsSegment>",
+      "returnType": "Ptr<HfsSegment>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "height",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "segEgbThresholdI",
+          "default": "0.08f",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "minRegionSizeI",
+          "default": "100",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "segEgbThresholdII",
+          "default": "0.28f",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "minRegionSizeII",
+          "default": "200",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "spatialWeight",
+          "default": "0.6f",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "slicSpixelSize",
+          "default": "8",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "numSlicIter",
+          "default": "5",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief: create a hfs object\n* @param height: the height of the input image\n* @param width: the width of the input image\n* @param segEgbThresholdI: parameter segEgbThresholdI\n* @param minRegionSizeI: parameter minRegionSizeI\n* @param segEgbThresholdII: parameter segEgbThresholdII\n* @param minRegionSizeII: parameter minRegionSizeII\n* @param spatialWeight: parameter spatialWeight\n* @param slicSpixelSize: parameter slicSpixelSize\n* @param numSlicIter: parameter numSlicIter"
+    }
+  ]
+}

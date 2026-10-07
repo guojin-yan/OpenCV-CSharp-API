@@ -1,0 +1,270 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 0,
+  "managedPublicMemberAdditionCount": 0,
+  "families": [
+    {
+      "id": "hfs-wrapper-surface",
+      "rationale": "Current Hfs managed/native wrapper declarations with exact parser-backed callable evidence.",
+      "declarations": [
+        {
+          "ordinal": 1,
+          "upstreamIdentity": "cv.hfs.HfsSegment.setSegEgbThresholdI(float c)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hfs_segment_set_float_property"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Single SegEgbThresholdI"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Hfs/HfsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/hfs-guide.md"
+        },
+        {
+          "ordinal": 2,
+          "upstreamIdentity": "cv.hfs.HfsSegment.getSegEgbThresholdI()->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hfs_segment_get_float_property"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Single SegEgbThresholdI"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Hfs/HfsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/hfs-guide.md"
+        },
+        {
+          "ordinal": 3,
+          "upstreamIdentity": "cv.hfs.HfsSegment.setMinRegionSizeI(int n)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hfs_segment_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Int32 MinRegionSizeI"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Hfs/HfsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/hfs-guide.md"
+        },
+        {
+          "ordinal": 4,
+          "upstreamIdentity": "cv.hfs.HfsSegment.getMinRegionSizeI()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hfs_segment_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Int32 MinRegionSizeI"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Hfs/HfsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/hfs-guide.md"
+        },
+        {
+          "ordinal": 5,
+          "upstreamIdentity": "cv.hfs.HfsSegment.setSegEgbThresholdII(float c)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hfs_segment_set_float_property"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Single SegEgbThresholdII"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Hfs/HfsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/hfs-guide.md"
+        },
+        {
+          "ordinal": 6,
+          "upstreamIdentity": "cv.hfs.HfsSegment.getSegEgbThresholdII()->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hfs_segment_get_float_property"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Single SegEgbThresholdII"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Hfs/HfsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/hfs-guide.md"
+        },
+        {
+          "ordinal": 7,
+          "upstreamIdentity": "cv.hfs.HfsSegment.setMinRegionSizeII(int n)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hfs_segment_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Int32 MinRegionSizeII"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Hfs/HfsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/hfs-guide.md"
+        },
+        {
+          "ordinal": 8,
+          "upstreamIdentity": "cv.hfs.HfsSegment.getMinRegionSizeII()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hfs_segment_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Int32 MinRegionSizeII"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Hfs/HfsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/hfs-guide.md"
+        },
+        {
+          "ordinal": 9,
+          "upstreamIdentity": "cv.hfs.HfsSegment.setSpatialWeight(float w)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hfs_segment_set_float_property"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Single SpatialWeight"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Hfs/HfsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/hfs-guide.md"
+        },
+        {
+          "ordinal": 10,
+          "upstreamIdentity": "cv.hfs.HfsSegment.getSpatialWeight()->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hfs_segment_get_float_property"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Single SpatialWeight"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Hfs/HfsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/hfs-guide.md"
+        },
+        {
+          "ordinal": 11,
+          "upstreamIdentity": "cv.hfs.HfsSegment.setSlicSpixelSize(int n)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hfs_segment_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Int32 SlicSpixelSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Hfs/HfsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/hfs-guide.md"
+        },
+        {
+          "ordinal": 12,
+          "upstreamIdentity": "cv.hfs.HfsSegment.getSlicSpixelSize()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hfs_segment_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Int32 SlicSpixelSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Hfs/HfsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/hfs-guide.md"
+        },
+        {
+          "ordinal": 13,
+          "upstreamIdentity": "cv.hfs.HfsSegment.setNumSlicIter(int n)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hfs_segment_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Int32 NumSlicIter"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Hfs/HfsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/hfs-guide.md"
+        },
+        {
+          "ordinal": 14,
+          "upstreamIdentity": "cv.hfs.HfsSegment.getNumSlicIter()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hfs_segment_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Int32 NumSlicIter"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Hfs/HfsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/hfs-guide.md"
+        },
+        {
+          "ordinal": 15,
+          "upstreamIdentity": "cv.hfs.HfsSegment.performSegmentGpu(Mat src;bool ifDraw=true)->Mat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hfs_segment_perform_segment_gpu"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|method|public;instance|JYPPX.OpenCvSharp.Core.Mat PerformSegmentGpu(JYPPX.OpenCvSharp.Core.Mat src,System.Boolean draw=true)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Hfs/HfsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/hfs-guide.md"
+        },
+        {
+          "ordinal": 16,
+          "upstreamIdentity": "cv.hfs.HfsSegment.performSegmentCpu(Mat src;bool ifDraw=true)->Mat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hfs_segment_perform_segment_cpu"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|method|public;instance|JYPPX.OpenCvSharp.Core.Mat PerformSegmentCpu(JYPPX.OpenCvSharp.Core.Mat src,System.Boolean draw=true)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Hfs/HfsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/hfs-guide.md"
+        },
+        {
+          "ordinal": 17,
+          "upstreamIdentity": "cv.hfs.HfsSegment.create(int height;int width;float segEgbThresholdI=0.08f;int minRegionSizeI=100;float segEgbThresholdII=0.28f;int minRegionSizeII=200;float spatialWeight=0.6f;int slicSpixelSize=8;int numSlicIter=5)->Ptr<HfsSegment>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hfs_segment_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|method|public;static|JYPPX.OpenCvSharp.Hfs.HfsSegment Create(JYPPX.OpenCvSharp.Hfs.HfsSegmentParams parameters)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Hfs/HfsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/hfs-guide.md"
+        }
+      ]
+    }
+  ]
+}

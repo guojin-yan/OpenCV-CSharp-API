@@ -1,0 +1,240 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/hfs.hpp contrib public header closure from parser-emitted headers",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact Hfs wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.hfs.HfsSegment",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_HFS=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.hfs.HfsSegment.setSegEgbThresholdI(float c)->void",
+      "classification": "implemented",
+      "reason": "Explicit Hfs declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_HFS=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hfs_segment_set_float_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Single SegEgbThresholdI"
+      ]
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.hfs.HfsSegment.getSegEgbThresholdI()->float",
+      "classification": "implemented",
+      "reason": "Explicit Hfs declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_HFS=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hfs_segment_get_float_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Single SegEgbThresholdI"
+      ]
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.hfs.HfsSegment.setMinRegionSizeI(int n)->void",
+      "classification": "implemented",
+      "reason": "Explicit Hfs declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_HFS=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hfs_segment_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Int32 MinRegionSizeI"
+      ]
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.hfs.HfsSegment.getMinRegionSizeI()->int",
+      "classification": "implemented",
+      "reason": "Explicit Hfs declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_HFS=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hfs_segment_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Int32 MinRegionSizeI"
+      ]
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.hfs.HfsSegment.setSegEgbThresholdII(float c)->void",
+      "classification": "implemented",
+      "reason": "Explicit Hfs declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_HFS=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hfs_segment_set_float_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Single SegEgbThresholdII"
+      ]
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.hfs.HfsSegment.getSegEgbThresholdII()->float",
+      "classification": "implemented",
+      "reason": "Explicit Hfs declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_HFS=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hfs_segment_get_float_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Single SegEgbThresholdII"
+      ]
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.hfs.HfsSegment.setMinRegionSizeII(int n)->void",
+      "classification": "implemented",
+      "reason": "Explicit Hfs declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_HFS=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hfs_segment_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Int32 MinRegionSizeII"
+      ]
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.hfs.HfsSegment.getMinRegionSizeII()->int",
+      "classification": "implemented",
+      "reason": "Explicit Hfs declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_HFS=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hfs_segment_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Int32 MinRegionSizeII"
+      ]
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.hfs.HfsSegment.setSpatialWeight(float w)->void",
+      "classification": "implemented",
+      "reason": "Explicit Hfs declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_HFS=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hfs_segment_set_float_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Single SpatialWeight"
+      ]
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.hfs.HfsSegment.getSpatialWeight()->float",
+      "classification": "implemented",
+      "reason": "Explicit Hfs declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_HFS=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hfs_segment_get_float_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Single SpatialWeight"
+      ]
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.hfs.HfsSegment.setSlicSpixelSize(int n)->void",
+      "classification": "implemented",
+      "reason": "Explicit Hfs declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_HFS=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hfs_segment_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Int32 SlicSpixelSize"
+      ]
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.hfs.HfsSegment.getSlicSpixelSize()->int",
+      "classification": "implemented",
+      "reason": "Explicit Hfs declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_HFS=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hfs_segment_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Int32 SlicSpixelSize"
+      ]
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.hfs.HfsSegment.setNumSlicIter(int n)->void",
+      "classification": "implemented",
+      "reason": "Explicit Hfs declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_HFS=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hfs_segment_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Int32 NumSlicIter"
+      ]
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.hfs.HfsSegment.getNumSlicIter()->int",
+      "classification": "implemented",
+      "reason": "Explicit Hfs declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_HFS=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hfs_segment_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|property|instance;get:public;set:public|System.Int32 NumSlicIter"
+      ]
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.hfs.HfsSegment.performSegmentGpu(Mat src;bool ifDraw=true)->Mat",
+      "classification": "implemented",
+      "reason": "Explicit Hfs declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_HFS=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hfs_segment_perform_segment_gpu"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|method|public;instance|JYPPX.OpenCvSharp.Core.Mat PerformSegmentGpu(JYPPX.OpenCvSharp.Core.Mat src,System.Boolean draw=true)"
+      ]
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.hfs.HfsSegment.performSegmentCpu(Mat src;bool ifDraw=true)->Mat",
+      "classification": "implemented",
+      "reason": "Explicit Hfs declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_HFS=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hfs_segment_perform_segment_cpu"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|method|public;instance|JYPPX.OpenCvSharp.Core.Mat PerformSegmentCpu(JYPPX.OpenCvSharp.Core.Mat src,System.Boolean draw=true)"
+      ]
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.hfs.HfsSegment.create(int height;int width;float segEgbThresholdI=0.08f;int minRegionSizeI=100;float segEgbThresholdII=0.28f;int minRegionSizeII=200;float spatialWeight=0.6f;int slicSpixelSize=8;int numSlicIter=5)->Ptr<HfsSegment>",
+      "classification": "implemented",
+      "reason": "Explicit Hfs declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_HFS=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hfs_segment_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Hfs.HfsSegment|method|public;static|JYPPX.OpenCvSharp.Hfs.HfsSegment Create(JYPPX.OpenCvSharp.Hfs.HfsSegmentParams parameters)"
+      ]
+    }
+  ]
+}
