@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 24,
+  "moduleCount": 25,
   "maps": [
     {
       "id": "calib3d",
@@ -1892,6 +1892,52 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "fde1993eecf4d280eabbdbd00e1f9c1f9731b74e32c5d498c4763280c12454cf",
         "familyInventorySha256": "5ed8210a62c11bb89671bfa8508f0cd22e7a845b561dc665eb5c2dd28bf779c0",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "intensity_transform",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/IntensityTransformUpstreamMap",
+      "extractorScript": "tools/IntensityTransformUpstreamMap/extract_intensity_transform.py",
+      "generationScript": "scripts/Generate-IntensityTransformUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-IntensityTransformUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/intensity_transform.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/intensity_transform/include/opencv2/intensity_transform.hpp",
+          "sha256": "6d26afb5f6abc4dcfb1bbadd2d4b4b598b61e2dc24a97a143c60364963821f6a"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/intensity_transform/include/opencv2/intensity_transform.hpp",
+            "sha256": "6d26afb5f6abc4dcfb1bbadd2d4b4b598b61e2dc24a97a143c60364963821f6a",
+            "startOrdinal": 0,
+            "declarationCount": 6
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/intensity_transform-upstream-raw.json",
+        "classifications": "compatibility/intensity_transform-upstream-classifications.json",
+        "mapping": "compatibility/intensity_transform-upstream-map.txt",
+        "summary": "compatibility/intensity_transform-upstream-summary.json",
+        "familyInventory": "compatibility/intensity_transform-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 6,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "5c2dcb127044d11bb01fca210e53570eae1d760fb1cac59411ca91267f514465",
+        "familyInventorySha256": "c6297fb086332a477a8f8c42b465bd80bed7a0663b2401b5f6f0b2725338b050",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

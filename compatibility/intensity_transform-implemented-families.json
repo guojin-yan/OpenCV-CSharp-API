@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 0,
+  "managedPublicMemberAdditionCount": 0,
+  "families": [
+    {
+      "id": "intensity_transform-wrapper-surface",
+      "rationale": "Current IntensityTransform managed/native wrapper declarations with exact parser-backed callable evidence.",
+      "declarations": [
+        {
+          "ordinal": 0,
+          "upstreamIdentity": "cv.intensity_transform.logTransform(Mat input[/C];Mat output[/Ref])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_intensity_transform_log"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.IntensityTransform.IntensityTransformCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat LogTransform(JYPPX.OpenCvSharp.Core.Mat src)",
+            "MEMBER|JYPPX.OpenCvSharp.IntensityTransform.IntensityTransformCv2|method|public;static|System.Void LogTransform(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/IntensityTransform/IntensityTransformTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/intensity-transform-guide.md"
+        },
+        {
+          "ordinal": 1,
+          "upstreamIdentity": "cv.intensity_transform.gammaCorrection(Mat input[/C];Mat output[/Ref];float gamma[/C])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_intensity_transform_gamma_correction"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.IntensityTransform.IntensityTransformCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat GammaCorrection(JYPPX.OpenCvSharp.Core.Mat src,System.Single gamma)",
+            "MEMBER|JYPPX.OpenCvSharp.IntensityTransform.IntensityTransformCv2|method|public;static|System.Void GammaCorrection(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Single gamma)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/IntensityTransform/IntensityTransformTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/intensity-transform-guide.md"
+        },
+        {
+          "ordinal": 2,
+          "upstreamIdentity": "cv.intensity_transform.autoscaling(Mat input[/C];Mat output[/Ref])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_intensity_transform_autoscaling"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.IntensityTransform.IntensityTransformCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat Autoscaling(JYPPX.OpenCvSharp.Core.Mat src)",
+            "MEMBER|JYPPX.OpenCvSharp.IntensityTransform.IntensityTransformCv2|method|public;static|System.Void Autoscaling(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/IntensityTransform/IntensityTransformTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/intensity-transform-guide.md"
+        },
+        {
+          "ordinal": 3,
+          "upstreamIdentity": "cv.intensity_transform.contrastStretching(Mat input[/C];Mat output[/Ref];int r1[/C];int s1[/C];int r2[/C];int s2[/C])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_intensity_transform_contrast_stretching"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.IntensityTransform.IntensityTransformCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat ContrastStretching(JYPPX.OpenCvSharp.Core.Mat src,System.Int32 r1,System.Int32 s1,System.Int32 r2,System.Int32 s2)",
+            "MEMBER|JYPPX.OpenCvSharp.IntensityTransform.IntensityTransformCv2|method|public;static|System.Void ContrastStretching(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 r1,System.Int32 s1,System.Int32 r2,System.Int32 s2)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/IntensityTransform/IntensityTransformTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/intensity-transform-guide.md"
+        },
+        {
+          "ordinal": 4,
+          "upstreamIdentity": "cv.intensity_transform.BIMEF(Mat input;Mat output[/O];float mu=0.5f;float a=-0.3293f;float b=1.1258f)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_intensity_transform_bimef"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.IntensityTransform.IntensityTransformCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat Bimef(JYPPX.OpenCvSharp.Core.Mat src,System.Single mu=0.5,System.Single a=-0.3293,System.Single b=1.1258)",
+            "MEMBER|JYPPX.OpenCvSharp.IntensityTransform.IntensityTransformCv2|method|public;static|System.Void Bimef(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Single mu=0.5,System.Single a=-0.3293,System.Single b=1.1258)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/IntensityTransform/IntensityTransformTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/intensity-transform-guide.md"
+        },
+        {
+          "ordinal": 5,
+          "upstreamIdentity": "cv.intensity_transform.BIMEF(Mat input;Mat output[/O];float k;float mu;float a;float b)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_intensity_transform_bimef_with_k"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.IntensityTransform.IntensityTransformCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat Bimef(JYPPX.OpenCvSharp.Core.Mat src,System.Single k,System.Single mu,System.Single a,System.Single b)",
+            "MEMBER|JYPPX.OpenCvSharp.IntensityTransform.IntensityTransformCv2|method|public;static|System.Void Bimef(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Single k,System.Single mu,System.Single a,System.Single b)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/IntensityTransform/IntensityTransformTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/intensity-transform-guide.md"
+        }
+      ]
+    }
+  ]
+}
