@@ -1,6 +1,6 @@
 # Upstream Map Toolchain
 
-The upstream map catalog centralizes the source scope, parser identity, classification policy, output files, and semantic check command for 30 parser-backed maps. Its schema is [`upstream-map-catalog.schema.json`](../../compatibility/upstream-map-catalog.schema.json), and the checked catalog is [`upstream-map-catalog.json`](../../compatibility/upstream-map-catalog.json).
+The upstream map catalog centralizes the source scope, parser identity, classification policy, output files, and semantic check command for 31 parser-backed maps. Its schema is [`upstream-map-catalog.schema.json`](../../compatibility/upstream-map-catalog.schema.json), and the checked catalog is [`upstream-map-catalog.json`](../../compatibility/upstream-map-catalog.json).
 
 Regenerate the catalog after an intentional map-surface update:
 
@@ -20,4 +20,6 @@ HFS maps all 17 callable declarations in the pinned `opencv2/hfs.hpp` parser clo
 
 Fuzzy maps all 16 callable declarations in the pinned `opencv2/fuzzy.hpp` closure (four parser-emitted public headers) to 16 exact native ABI symbols and output-oriented managed members; its two enum declarations retain their pinned values. The module is optional at runtime, and the existing focused tests remain the behavioral boundary rather than a claim of image-quality parity.
 
-`MAP-002..004` are represented in the catalog. MAP-005 incrementally adds remaining contrib modules after each module's exact headers, optional dependency boundaries, source-review exclusions, and classification rules have been reviewed.
+Rapid maps the pinned `opencv2/rapid.hpp` closure's 12 existing callable wrappers to 12 exact native ABI symbols and managed members. The upstream `GOSTracker.create` factory is recorded as an intentional omission because the current wrapper exposes only the basic Rapid and OLS trackers; tracker-release ABI remains wrapper-only and outside parser callable scope.
+
+`MAP-002..004` are represented in the catalog. MAP-005 incrementally adds remaining contrib modules after each module's exact headers, optional dependency boundaries, source-review exclusions, and classification rules have been reviewed; nine MAP-005 modules currently have zero unexplained missing declarations.

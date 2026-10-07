@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/rapid.hpp contrib public header closure from parser-emitted headers",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact Rapid wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "cv.rapid.drawCorrespondencies(Mat bundle[/IO];Mat cols;Mat colors=Mat())->void",
+      "classification": "implemented",
+      "reason": "Explicit Rapid declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_RAPID=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rapid_draw_correspondencies"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Rapid.RapidCv2|method|public;static|System.Void DrawCorrespondencies(JYPPX.OpenCvSharp.Core.Mat bundle,JYPPX.OpenCvSharp.Core.Mat cols,JYPPX.OpenCvSharp.Core.Mat? colors=null)"
+      ]
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.rapid.drawSearchLines(Mat img[/IO];Mat locations;Scalar color[/C,/Ref])->void",
+      "classification": "implemented",
+      "reason": "Explicit Rapid declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_RAPID=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rapid_draw_search_lines"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Rapid.RapidCv2|method|public;static|System.Void DrawSearchLines(JYPPX.OpenCvSharp.Core.Mat img,JYPPX.OpenCvSharp.Core.Mat locations,JYPPX.OpenCvSharp.Core.Scalar color)"
+      ]
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.rapid.drawWireframe(Mat img[/IO];Mat pts2d;Mat tris;Scalar color[/C,/Ref];int type=LINE_8;bool cullBackface=false)->void",
+      "classification": "implemented",
+      "reason": "Explicit Rapid declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_RAPID=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rapid_draw_wireframe"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Rapid.RapidCv2|method|public;static|System.Void DrawWireframe(JYPPX.OpenCvSharp.Core.Mat img,JYPPX.OpenCvSharp.Core.Mat pts2d,JYPPX.OpenCvSharp.Core.Mat tris,JYPPX.OpenCvSharp.Core.Scalar color,JYPPX.OpenCvSharp.ImgProc.LineTypes lineType=Line8,System.Boolean cullBackface=false)"
+      ]
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.rapid.extractControlPoints(int num;int len;Mat pts3d;Mat rvec;Mat tvec;Mat K;Size imsize[/C,/Ref];Mat tris;Mat ctl2d[/O];Mat ctl3d[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit Rapid declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_RAPID=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rapid_extract_control_points"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Rapid.RapidCv2|method|public;static|System.Void ExtractControlPoints(System.Int32 num,System.Int32 len,JYPPX.OpenCvSharp.Core.Mat pts3d,JYPPX.OpenCvSharp.Core.Mat rvec,JYPPX.OpenCvSharp.Core.Mat tvec,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Size imageSize,JYPPX.OpenCvSharp.Core.Mat tris,JYPPX.OpenCvSharp.Core.Mat ctl2d,JYPPX.OpenCvSharp.Core.Mat ctl3d)"
+      ]
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.rapid.extractLineBundle(int len;Mat ctl2d;Mat img;Mat bundle[/O];Mat srcLocations[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit Rapid declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_RAPID=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rapid_extract_line_bundle"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Rapid.RapidCv2|method|public;static|System.Void ExtractLineBundle(System.Int32 len,JYPPX.OpenCvSharp.Core.Mat ctl2d,JYPPX.OpenCvSharp.Core.Mat img,JYPPX.OpenCvSharp.Core.Mat bundle,JYPPX.OpenCvSharp.Core.Mat srcLocations)"
+      ]
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.rapid.findCorrespondencies(Mat bundle;Mat cols[/O];Mat response=Mat()[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit Rapid declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_RAPID=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rapid_find_correspondencies"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Rapid.RapidCv2|method|public;static|System.Void FindCorrespondencies(JYPPX.OpenCvSharp.Core.Mat bundle,JYPPX.OpenCvSharp.Core.Mat cols,JYPPX.OpenCvSharp.Core.Mat? response=null)"
+      ]
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.rapid.convertCorrespondencies(Mat cols;Mat srcLocations;Mat pts2d[/O];Mat pts3d=Mat()[/IO];Mat mask=Mat())->void",
+      "classification": "implemented",
+      "reason": "Explicit Rapid declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_RAPID=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rapid_convert_correspondencies"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Rapid.RapidCv2|method|public;static|System.Void ConvertCorrespondencies(JYPPX.OpenCvSharp.Core.Mat cols,JYPPX.OpenCvSharp.Core.Mat srcLocations,JYPPX.OpenCvSharp.Core.Mat pts2d,JYPPX.OpenCvSharp.Core.Mat? pts3d=null,JYPPX.OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.rapid.rapid(Mat img;int num;int len;Mat pts3d;Mat tris;Mat K;Mat rvec[/IO];Mat tvec[/IO];double* rmsd=0[/O])->float",
+      "classification": "implemented",
+      "reason": "Explicit Rapid declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_RAPID=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rapid_run"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Rapid.RapidCv2|method|public;static|JYPPX.OpenCvSharp.Rapid.RapidResult Run(JYPPX.OpenCvSharp.Core.Mat img,System.Int32 num,System.Int32 len,JYPPX.OpenCvSharp.Core.Mat pts3d,JYPPX.OpenCvSharp.Core.Mat tris,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat rvec,JYPPX.OpenCvSharp.Core.Mat tvec,System.Boolean computeRmsd=false)"
+      ]
+    },
+    {
+      "ordinal": 8,
+      "identity": "class cv.rapid.Tracker",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_RAPID=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.rapid.Tracker.compute(Mat img;int num;int len;Mat K;Mat rvec[/IO];Mat tvec[/IO];TermCriteria termcrit=TermCriteria(TermCriteria::MAX_ITER | TermCriteria::EPS, 5, 1.5)[/C,/Ref])->float",
+      "classification": "implemented",
+      "reason": "Explicit Rapid declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_RAPID=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rapid_tracker_compute"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Rapid.RapidTracker|method|public;instance|System.Single Compute(JYPPX.OpenCvSharp.Core.Mat img,System.Int32 num,System.Int32 len,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat rvec,JYPPX.OpenCvSharp.Core.Mat tvec,JYPPX.OpenCvSharp.Core.TermCriteria? termCriteria=null)"
+      ]
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.rapid.Tracker.clearState()->void",
+      "classification": "implemented",
+      "reason": "Explicit Rapid declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_RAPID=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rapid_tracker_clear_state"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Rapid.RapidTracker|method|public;instance|System.Void ClearState()"
+      ]
+    },
+    {
+      "ordinal": 11,
+      "identity": "class cv.rapid.Rapid",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_RAPID=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.rapid.Rapid.create(Mat pts3d;Mat tris)->Ptr<Rapid>",
+      "classification": "implemented",
+      "reason": "Explicit Rapid declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_RAPID=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rapid_tracker_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Rapid.RapidSilhouetteTracker|method|public;static|JYPPX.OpenCvSharp.Rapid.RapidSilhouetteTracker Create(JYPPX.OpenCvSharp.Core.Mat pts3d,JYPPX.OpenCvSharp.Core.Mat tris)"
+      ]
+    },
+    {
+      "ordinal": 13,
+      "identity": "class cv.rapid.OLSTracker",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_RAPID=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.rapid.OLSTracker.create(Mat pts3d;Mat tris;int histBins=8;uchar sobelThesh=10)->Ptr<OLSTracker>",
+      "classification": "implemented",
+      "reason": "Explicit Rapid declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_RAPID=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rapid_ols_tracker_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Rapid.OlsTracker|method|public;static|JYPPX.OpenCvSharp.Rapid.OlsTracker Create(JYPPX.OpenCvSharp.Core.Mat pts3d,JYPPX.OpenCvSharp.Core.Mat tris,System.Int32 histBins=8,System.Byte sobelThresh=10)"
+      ]
+    },
+    {
+      "ordinal": 15,
+      "identity": "class cv.rapid.GOSTracker",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_RAPID=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.rapid.GOSTracker.create(Mat pts3d;Mat tris;int histBins=4;uchar sobelThesh=10)->Ptr<OLSTracker>",
+      "classification": "intentionally-omitted",
+      "reason": "GOSTracker is present in the pinned upstream header but the current managed/native wrapper exposes only Rapid and OLSTracker; this optional tracker remains deliberately omitted until its behavior, ABI, and ownership contract are separately reviewed.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_RAPID=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}

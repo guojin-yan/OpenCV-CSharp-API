@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/2ce49ca0fb826cfe",
-  "SourceIdentity": "sha256:2ce49ca0fb826cfe6349603b98f5c516226975e22c1002a3d2006250ac88cf49",
+  "CandidateId": "local-closeout/sha256/d4d291931a7bc288",
+  "SourceIdentity": "sha256:d4d291931a7bc28831ee9283126f315661e3ca6fb9fac7448f417673f23342c3",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1989,
-    "Sha256": "2ce49ca0fb826cfe6349603b98f5c516226975e22c1002a3d2006250ac88cf49",
+    "FileCount": 1999,
+    "Sha256": "d4d291931a7bc28831ee9283126f315661e3ca6fb9fac7448f417673f23342c3",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -1157,6 +1157,31 @@
       "Length": 1428
     },
     {
+      "Path": "compatibility/rapid-implemented-families.json",
+      "Sha256": "97117b788655e11d731070e1e1da9c3c9ff5f4909ef06ea4d8394cb1b2f8ce7d",
+      "Length": 11040
+    },
+    {
+      "Path": "compatibility/rapid-upstream-classifications.json",
+      "Sha256": "0891d1dabb17c1c6d34f03460b39cfea190e5a6b2e9826cbcd6d7702d36a018d",
+      "Length": 11450
+    },
+    {
+      "Path": "compatibility/rapid-upstream-map.txt",
+      "Sha256": "b8e7a376bda91134262b2728c08eb03d3ee3b825d2a26fe46986b2dae47c508e",
+      "Length": 8072
+    },
+    {
+      "Path": "compatibility/rapid-upstream-raw.json",
+      "Sha256": "6691d54a43bdc0137797e3453b969464ff9b6dca55e5130954f5f198b3dea136",
+      "Length": 20845
+    },
+    {
+      "Path": "compatibility/rapid-upstream-summary.json",
+      "Sha256": "225f2fc016a0dafce2d6ad7c550142862a21f270ac1324af8f5b4c179629a2e4",
+      "Length": 1416
+    },
+    {
       "Path": "compatibility/stitching-implemented-families.json",
       "Sha256": "5277b0aeafc696562994ea80347c017094d7a8d5b58716844078f4aab8514f83",
       "Length": 113863
@@ -1208,18 +1233,18 @@
     },
     {
       "Path": "compatibility/upstream-map-catalog.json",
-      "Sha256": "4e251e9b6c58c5580dc0b1a893dfafb1fc3fca64b17b794d1902f5968b57185a",
-      "Length": 106731
+      "Sha256": "feb6a570113b5000e00f5c0e035ea1eebd64d1ea805dde5f219884ac511410b6",
+      "Length": 108808
     },
     {
       "Path": "compatibility/upstream-map-catalog.schema.json",
-      "Sha256": "ec4347cff55041c229d1ae4d7e1953d1ab3944aba0c7c2d691152d538eac668b",
-      "Length": 5781
+      "Sha256": "d71cb49d7264e3ea28bc319d090a1b8a72da4a38d5e7d77f66f94bf081777757",
+      "Length": 5790
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "024425ac91712e8c084f7e4e27e131a02a72dca69960d5a2ca374404e1b9b407",
-      "Length": 26261
+      "Sha256": "5fdbbb2b10a128b9c81fde14ded85c2864165eafd4bd27738c1cd128507191a9",
+      "Length": 28112
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -1552,6 +1577,11 @@
       "Length": 2119
     },
     {
+      "Path": "docs/articles/rapid-guide.md",
+      "Sha256": "d49f2928c769ce7c96685c2061386757bccd21387abf965fd5984f997a9f5681",
+      "Length": 4130
+    },
+    {
       "Path": "docs/articles/release-candidate-closeout.md",
       "Sha256": "e35f6ab6eb36ccdc2f860d9b6889ffd72ba953e9c39abbd2a5b4194a78c55317",
       "Length": 11830
@@ -1618,8 +1648,8 @@
     },
     {
       "Path": "docs/articles/upstream-map-toolchain.md",
-      "Sha256": "865f4417359da7f2f0a1bfdcdf817681e533f02f8cc8090fee7bec114e566f0d",
-      "Length": 3367
+      "Sha256": "0eb8b31b2a0f92921212ab10bdd3cfb7f0ce0b4ab90982088f763b8ff72c0493",
+      "Length": 3808
     },
     {
       "Path": "docs/articles/v501-modern-api-preview-guide.md",
@@ -2073,8 +2103,8 @@
     },
     {
       "Path": "scripts/Generate-ContribUpstreamMap.ps1",
-      "Sha256": "b190449a4a53016adc34cb04d742df8527043001596876df17fdfd1cb1e2d976",
-      "Length": 51239
+      "Sha256": "a13a9e68ced31e2654b4e7a7fb9bf1b12921cdd8cbeba732f6e8d927f3087e1f",
+      "Length": 54033
     },
     {
       "Path": "scripts/Generate-CoreUpstreamMap.ps1",
@@ -2192,6 +2222,11 @@
       "Length": 300
     },
     {
+      "Path": "scripts/Generate-RapidUpstreamMap.ps1",
+      "Sha256": "fa6f01376f929fe975da72441d66d8af39d40424a620bb84d55725987d40a706",
+      "Length": 341
+    },
+    {
       "Path": "scripts/Generate-StitchingUpstreamMap.ps1",
       "Sha256": "a2eeeb7220835fd2b906473887102aa09a124af3859ff600c304affc9353dab6",
       "Length": 2941
@@ -2303,8 +2338,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "dff43017509640d4425d249b23d01e507dc4ee9c41d17c808656315a053a919e",
-      "Length": 83412
+      "Sha256": "bafb401e0571240e11c022bd985b1c05b25280fe07f2ab4645c3b75d0d6238d5",
+      "Length": 84613
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -2318,8 +2353,8 @@
     },
     {
       "Path": "scripts/New-UpstreamMapCatalog.ps1",
-      "Sha256": "544979b4469e15ee2dd2270c61e2af043456bb4f40422a40307871ac8a13f8f0",
-      "Length": 9253
+      "Sha256": "2bcfac207b8ad17e1f92f786be19deb3d69a93b791615392bd504a3370db8558",
+      "Length": 9339
     },
     {
       "Path": "scripts/Test-AlphaMatUpstreamMap.ps1",
@@ -2662,9 +2697,14 @@
       "Length": 3012
     },
     {
+      "Path": "scripts/Test-RapidUpstreamMap.ps1",
+      "Sha256": "45fd1b0f455cf48af9c5c2ffe41ad531a32fa15e30e2db23f0ff3982ed0f6224",
+      "Length": 5483
+    },
+    {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "083ed754406db1e0524112432225db667ab5949453a9534feb318f5115eb7d62",
-      "Length": 81014
+      "Sha256": "424dffebf16edd45d55c010aa3c0584440f43bd7748c766f250b5f0f063c9d99",
+      "Length": 82215
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -2748,8 +2788,8 @@
     },
     {
       "Path": "scripts/Test-UpstreamMapCatalog.ps1",
-      "Sha256": "290cab3452fcc593278e6c2e5fcfc38e5f4907892080d2960244d26d14deb864",
-      "Length": 14899
+      "Sha256": "11d939a750e6b24cab0999ec4ba3f777ed0f05ed1078f2c914c4d16a1cdb50b8",
+      "Length": 14907
     },
     {
       "Path": "scripts/Test-V501ChangeLedger.ps1",
@@ -2817,6 +2857,11 @@
       "Length": 5272
     },
     {
+      "Path": "src/OpenCvSharp.Native/include/open_cv_sharp/rapid/rapid.h",
+      "Sha256": "7ac0f81c3afdae06748e4ced87106f57c4c7146cb7895c2ddc54d627035ec73f",
+      "Length": 3216
+    },
+    {
       "Path": "src/OpenCvSharp.Native/include/open_cv_sharp/stitching/stitching.h",
       "Sha256": "86a9b622ff35376aabda18792fb770195ff35bbe3cca0df7aa73bf299bad0e12",
       "Length": 30818
@@ -2865,6 +2910,16 @@
       "Path": "src/OpenCvSharp.Native/src/phase_unwrapping/phase_unwrapping_handles.h",
       "Sha256": "717592311ec4f4a561638b7d5c60ee1ce79121e8c3bc8248ddfb2289207efead",
       "Length": 456
+    },
+    {
+      "Path": "src/OpenCvSharp.Native/src/rapid/rapid.cpp",
+      "Sha256": "050a70b642a9793c53878fb04a8d7a58d0611b723c4e1f4608ae23ae5c2d640a",
+      "Length": 19708
+    },
+    {
+      "Path": "src/OpenCvSharp.Native/src/rapid/rapid_handles.h",
+      "Sha256": "4c867d859fe1bfd8cf85450054af321ad48cf93af00a42edc3d14d429b6e0a2a",
+      "Length": 322
     },
     {
       "Path": "src/OpenCvSharp.Native/src/stitching/stitching.cpp",
@@ -3057,6 +3112,16 @@
       "Length": 7608
     },
     {
+      "Path": "src/OpenCvSharp/Internal/Interop/NativeMethods.Rapid.DllImport.cs",
+      "Sha256": "40fa403554ce495c09c321376a25415442c968432a0c10e606acf19aba35a754",
+      "Length": 3494
+    },
+    {
+      "Path": "src/OpenCvSharp/Internal/Interop/NativeMethods.Rapid.LibraryImport.cs",
+      "Sha256": "5498cfd3ad9f892fab8755901dd178404b5525b35a101b1c9db2d5e52a45082b",
+      "Length": 3558
+    },
+    {
       "Path": "src/OpenCvSharp/Internal/Interop/NativeMethods.Stitching.DllImport.cs",
       "Sha256": "c749f23b3825e4efbbed2e864ba46c3313338e77496acce3b75eab9eb0032921",
       "Length": 36850
@@ -3100,6 +3165,31 @@
       "Path": "src/OpenCvSharp/Properties/InternalsVisibleTo.cs",
       "Sha256": "076f7f4e7f819e1c24ba32a8907fbc7a8211ee19a8bd87a3f47484fbbfc49678",
       "Length": 92
+    },
+    {
+      "Path": "src/OpenCvSharp/Rapid/OlsTracker.cs",
+      "Sha256": "2a30180006dfdc9a50b61cd751299bbe02b21d6c77056c6d815ab3e5c9eca179",
+      "Length": 1312
+    },
+    {
+      "Path": "src/OpenCvSharp/Rapid/RapidCv2.cs",
+      "Sha256": "a9b55d46281811a9d642f6d9b11266a2c6e010dcedcd4f7cc0dcf9f02f0e7a90",
+      "Length": 11453
+    },
+    {
+      "Path": "src/OpenCvSharp/Rapid/RapidResult.cs",
+      "Sha256": "d4218facfe2ea6cd353b907c70065543e4e14d48b9e2a06ee21ff1a93bd09a8f",
+      "Length": 2623
+    },
+    {
+      "Path": "src/OpenCvSharp/Rapid/RapidSilhouetteTracker.cs",
+      "Sha256": "cdbd7865faff43d79732ae8f8fe40aeada8715fc8b6d62397c9b39b7f1c7335c",
+      "Length": 1190
+    },
+    {
+      "Path": "src/OpenCvSharp/Rapid/RapidTracker.cs",
+      "Sha256": "e335ab14f5b4832e54b314e8425b96db1f382aa1d17fef337b594efa547b1e0b",
+      "Length": 2976
     },
     {
       "Path": "src/OpenCvSharp/Stitching/AffineBestOf2NearestMatcher.cs",
@@ -3210,6 +3300,11 @@
       "Path": "tests/OpenCvSharp.Tests/PhaseUnwrapping/PhaseUnwrappingTests.cs",
       "Sha256": "7c220c4628a5890bdb1a1eeba5d5e352acf697275f3e0baf8047f226c7b96d0f",
       "Length": 9637
+    },
+    {
+      "Path": "tests/OpenCvSharp.Tests/Rapid/RapidTests.cs",
+      "Sha256": "90480523ed841073d97b353fd1fd15a4eef449d1ef3df38b7cbbe432b482a2b5",
+      "Length": 18010
     },
     {
       "Path": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
@@ -3627,6 +3722,21 @@
       "Length": 230
     },
     {
+      "Path": "tools/RapidUpstreamMap/Program.cs",
+      "Sha256": "c3dc6d4ad4f7271b1ac34f8b6c427b1a03c36f18fcdb2d056ca7ac79450768dc",
+      "Length": 100
+    },
+    {
+      "Path": "tools/RapidUpstreamMap/RapidUpstreamMap.csproj",
+      "Sha256": "b0655fe2e4b91db06fc9f4da7c1a91df7f87b7204830ea583c7e622398f5f38f",
+      "Length": 241
+    },
+    {
+      "Path": "tools/RapidUpstreamMap/extract_rapid.py",
+      "Sha256": "5e611c189acf8bdcd565c234c5f4484767370a9407f98ce13bf457e5a0513ce4",
+      "Length": 228
+    },
+    {
       "Path": "tools/ScenarioBenchmark/Program.cs",
       "Sha256": "10260a6bc009aa1076a1b78848a67dc592ec88225ff1a78aa2ffd042863159c6",
       "Length": 12697
@@ -3703,8 +3813,8 @@
     },
     {
       "Path": "tools/XImgProcUpstreamMap/extract_ximgproc.py",
-      "Sha256": "8001d642bf74e4a7058a0bb06dc89dcfff8509186b9bc795e059d4357d097ff4",
-      "Length": 5465
+      "Sha256": "bfa1b15e058ff4026a50f8f29a51381cbe497d3b2e61c3d7072524a027c67726",
+      "Length": 5492
     },
     {
       "Path": "tools/XPhotoUpstreamMap/Program.cs",

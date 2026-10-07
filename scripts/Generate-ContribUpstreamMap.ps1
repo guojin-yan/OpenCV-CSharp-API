@@ -1,5 +1,5 @@
 param(
-    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy')][string]$Module,
+    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid')][string]$Module,
     [Parameter(Mandatory)][string]$DisplayName,
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [switch]$Check
@@ -52,7 +52,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
         }
         return $Owner
     }
-    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs','fuzzy')) {
+    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs','fuzzy','rapid')) {
         if ($Module -eq 'face') {
             if ([string]::IsNullOrWhiteSpace($Owner)) {
                 switch ($Name) {
@@ -76,8 +76,15 @@ function GetManagedType([string]$Owner, [string]$Name) {
                 'phase_unwrapping' { 'PhaseUnwrappingCv2' }
                 'hfs' { 'HfsCv2' }
                 'fuzzy' { 'FuzzyCv2' }
+                'rapid' { 'RapidCv2' }
             }
             return [string]$managedType
+        }
+        if ($Module -eq 'rapid') {
+            if ($Owner -eq 'Tracker') { return 'RapidTracker' }
+            if ($Owner -eq 'Rapid') { return 'RapidSilhouetteTracker' }
+            if ($Owner -eq 'OLSTracker') { return 'OlsTracker' }
+            return $Owner
         }
         return $Owner
     }
@@ -145,6 +152,26 @@ function GetManaged([string]$Owner, [string]$Name, [string]$Identity) {
             return @($rows | Where-Object { $_ -match '\(JYPPX\.OpenCvSharp\.Fuzzy\.FuzzyFunctionType functionType,System\.Int32 radius,JYPPX\.OpenCvSharp\.Core\.Mat kernel,System\.Int32 channels\)$' })
         }
         return $rows
+    }
+    if ($Module -eq 'rapid') {
+        $managedType = GetManagedType $Owner $Name
+        $typeMarker = "JYPPX.OpenCvSharp.Rapid.$managedType|"
+        $typeEntries = @($managedEntries | Where-Object { $_.Contains($typeMarker, [StringComparison]::Ordinal) })
+        if ([string]::IsNullOrWhiteSpace($Owner)) {
+            $managedMethod = switch ($Name) {
+                'rapid' { 'Run' }
+                default { ToPascal $Name }
+            }
+            return @($typeEntries | Where-Object { $_ -match ("\|method\|public;static\|[^|]*\b" + [regex]::Escape($managedMethod) + '\(') } | Sort-Object -Unique)
+        }
+        if ($Owner -eq 'Tracker') {
+            $managedMethod = ToPascal $Name
+            return @($managedEntries | Where-Object { $_ -match ("JYPPX\.OpenCvSharp\.Rapid\.RapidTracker\|method\|public;instance\|[^|]*\b" + [regex]::Escape($managedMethod) + '\(') } | Sort-Object -Unique)
+        }
+        if ($Name -eq 'create' -and $Owner -in @('Rapid','OLSTracker')) {
+            return @($typeEntries | Where-Object { $_ -match '\|method\|public;static\|[^|]*\bCreate\(' } | Sort-Object -Unique)
+        }
+        return @()
     }
     if ($Module -eq 'bioinspired' -and $Name -eq 'create') {
         $factory = switch ($Owner) {
@@ -222,7 +249,24 @@ function GetNative([object]$Parts, [string]$Identity) {
     $owner = [string]$Parts.Owner
     $name = [string]$Parts.Name
     $result = @()
-    if ($Module -eq 'fuzzy') {
+    if ($Module -eq 'rapid') {
+        $symbol = switch ("$owner.$name") {
+            '.drawCorrespondencies' { 'draw_correspondencies' }
+            '.drawSearchLines' { 'draw_search_lines' }
+            '.drawWireframe' { 'draw_wireframe' }
+            '.extractControlPoints' { 'extract_control_points' }
+            '.extractLineBundle' { 'extract_line_bundle' }
+            '.findCorrespondencies' { 'find_correspondencies' }
+            '.convertCorrespondencies' { 'convert_correspondencies' }
+            '.rapid' { 'run' }
+            'Tracker.compute' { 'tracker_compute' }
+            'Tracker.clearState' { 'tracker_clear_state' }
+            'Rapid.create' { 'tracker_create' }
+            'OLSTracker.create' { 'ols_tracker_create' }
+            default { '' }
+        }
+        if (-not [string]::IsNullOrWhiteSpace([string]$symbol)) { $result = @("jyppx_ocv_rapid_$symbol") }
+    } elseif ($Module -eq 'fuzzy') {
         $symbol = switch ($name) {
             'FT02D_components' { 'ft02d_components' }
             'FT02D_inverseFT' { 'ft02d_inverse_ft' }
@@ -549,6 +593,7 @@ foreach ($decl in @($raw.declarations)) {
         if ($managed.Count -gt 0 -and $native.Count -gt 0) { $classification = 'implemented'; $reason = "Explicit $DisplayName declaration-to-symbol mapping and exact managed baseline evidence are present." }
         else { $classification = 'intentionally-omitted'; $reason = if ($native.Count -eq 0) { "No native $DisplayName wrapper entrypoint is mapped for this parser declaration in the current ABI." } else { "A native $DisplayName entrypoint exists, but no exact matching managed member is present in the current baseline." } }
         if ($Module -eq 'freetype') { $reason = 'The contrib FreeType2 surface depends on external FreeType/Harfbuzz and has no native wrapper entrypoint or managed API in the current package.' }
+        if ($Module -eq 'rapid' -and [string]$decl.identity -match '^cv\.rapid\.GOSTracker\.create\(') { $reason = 'GOSTracker is present in the pinned upstream header but the current managed/native wrapper exposes only Rapid and OLSTracker; this optional tracker remains deliberately omitted until its behavior, ABI, and ownership contract are separately reviewed.' }
         if ($Module -eq 'phase_unwrapping' -and [string]$decl.identity -match 'HistogramPhaseUnwrapping\.Params\.Params\(') { $reason = 'The upstream default Params constructor is represented by HistogramPhaseUnwrappingParams.Default and an explicit managed value constructor; value initialization has no native callable ABI.' }
         if ($Module -eq 'intensity_transform' -and [string]$decl.identity -match '\.BIMEF\(') { $reason += ' BIMEF runtime execution additionally requires an OpenCV build with EIGEN support.' }
         if ($Module -eq 'quality' -and [string]$decl.identity -match 'cv\.quality\.QualityBRISQUE\.(?:create|compute).*model_file_path') { $reason += ' BRISQUE operation requires caller-supplied model and range files; the repository bundles neither asset.' }
@@ -570,7 +615,7 @@ $classification = [ordered]@{ schemaVersion = 1; upstreamOpenCvVersion = '5.0.0'
 $builder = [Text.StringBuilder]::new(); [void]$builder.AppendLine("# Generated by scripts/Generate-ContribUpstreamMap.ps1 -Module $Module. Do not edit."); [void]$builder.AppendLine('schema-version=1'); [void]$builder.AppendLine('upstream-opencv-version=5.0.0'); [void]$builder.AppendLine("claimed-slice=$($classification.claimedSlice)"); [void]$builder.AppendLine("header-sha256=$($raw.headerSha256)"); [void]$builder.AppendLine("parser-sha256=$($raw.parserSha256)"); [void]$builder.AppendLine("declaration-count=$($raw.declarationCount)"); [void]$builder.AppendLine('repository-wide-upstream-parity-claimed=false'); [void]$builder.AppendLine(''); [void]$builder.AppendLine('ordinal|classification|identity|native-entrypoints|managed-members|build-condition|reason')
 foreach ($row in $rows) { $nativeText = if (@($row.nativeEntrypoints).Count) { @($row.nativeEntrypoints) -join ';' } else { '-' }; $managedText = if (@($row.managedMembers).Count) { @($row.managedMembers) -join ';' } else { '-' }; [void]$builder.AppendLine("$($row.ordinal)|$($row.classification)|$($row.identity)|$nativeText|$managedText|$($row.buildCondition)|$($row.reason)") }
 $mappingText = $builder.ToString().Replace("`r`n", "`n"); $implemented = @($rows | Where-Object classification -eq 'implemented'); $omitted = @($rows | Where-Object classification -eq 'intentionally-omitted'); $metadata = @($rows | Where-Object classification -eq 'non-callable-metadata')
-$guide = switch ($Module) { 'face' {'docs/articles/face-guide.md'} 'quality' {'docs/articles/quality-guide.md'} 'img_hash' {'docs/articles/img-hash-guide.md'} 'line_descriptor' {'docs/articles/line-descriptor-guide.md'} 'intensity_transform' {'docs/articles/intensity-transform-guide.md'} 'plot' {'docs/articles/plot-guide.md'} 'bioinspired' {'docs/articles/bioinspired-guide.md'} 'phase_unwrapping' {'docs/articles/phase-unwrapping-guide.md'} 'hfs' {'docs/articles/hfs-guide.md'} 'fuzzy' {'docs/articles/fuzzy-guide.md'} default { "docs/articles/$Module-upstream-parity-guide.md" } }
+$guide = switch ($Module) { 'face' {'docs/articles/face-guide.md'} 'quality' {'docs/articles/quality-guide.md'} 'img_hash' {'docs/articles/img-hash-guide.md'} 'line_descriptor' {'docs/articles/line-descriptor-guide.md'} 'intensity_transform' {'docs/articles/intensity-transform-guide.md'} 'plot' {'docs/articles/plot-guide.md'} 'bioinspired' {'docs/articles/bioinspired-guide.md'} 'phase_unwrapping' {'docs/articles/phase-unwrapping-guide.md'} 'hfs' {'docs/articles/hfs-guide.md'} 'fuzzy' {'docs/articles/fuzzy-guide.md'} 'rapid' {'docs/articles/rapid-guide.md'} default { "docs/articles/$Module-upstream-parity-guide.md" } }
 $family = [ordered]@{ schemaVersion = 1; upstreamOpenCvVersion = '5.0.0'; status = 'implemented-verified'; managedPublicTypeAdditionCount = 0; managedPublicMemberAdditionCount = 0; families = @([ordered]@{ id = "$Module-wrapper-surface"; rationale = "Current $DisplayName managed/native wrapper declarations with exact parser-backed callable evidence."; declarations = @($implemented | ForEach-Object { [ordered]@{ ordinal = $_.ordinal; upstreamIdentity = $_.identity; upstreamClassification = $_.classification; nativeEntrypoints = $_.nativeEntrypoints; managedMembers = $_.managedMembers; focusedTest = "tests/OpenCvSharp.Tests/$DisplayName/$DisplayName`Tests.cs"; nativeSmoke = 'src/OpenCvSharp.Native/tests/native_smoke.cpp'; sample = 'samples/ConsoleSamples/Program.cs'; guide = $guide } }) }) }
 $classificationJson = (($classification | ConvertTo-Json -Depth 20) + [Environment]::NewLine); $familyJson = (($family | ConvertTo-Json -Depth 20) + [Environment]::NewLine); $mapHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($mappingText))).ToLowerInvariant(); $familyHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($familyJson))).ToLowerInvariant()
 $summary = [ordered]@{ schemaVersion = 1; generator = "tools/$DisplayName`UpstreamMap"; upstreamOpenCvVersion = '5.0.0'; claimedSlice = $classification.claimedSlice; rawExtractionPath = "compatibility/$Module-upstream-raw.json"; classificationPath = "compatibility/$Module-upstream-classifications.json"; mappingPath = "compatibility/$Module-upstream-map.txt"; headerSha256 = [string]$raw.headerSha256; parserSha256 = [string]$raw.parserSha256; mappingSha256 = $mapHash; declarationCount = [int]$raw.declarationCount; enumCount = [int](@($raw.declarations | Where-Object kind -eq enum).Count); classCount = [int](@($raw.declarations | Where-Object kind -eq class).Count); callableCount = [int](@($raw.declarations | Where-Object kind -eq callable).Count); classificationCounts = [ordered]@{ implemented = [int]$implemented.Count; 'intentionally-omitted' = [int]$omitted.Count; missing = 0; 'non-callable-metadata' = [int]$metadata.Count; unsupported = 0; 'upstream-conditional' = 0 }; nativeEvidenceCount = @($rows | ForEach-Object { @($_.nativeEntrypoints) } | Where-Object { $_ } | Sort-Object -Unique).Count; managedEvidenceCount = @($rows | ForEach-Object { @($_.managedMembers) } | Where-Object { $_ } | Sort-Object -Unique).Count; negativeFixtureCount = 12; externalDataDependencyCount = @($externalDataDependencies).Count; familyInventoryPath = "compatibility/$Module-implemented-families.json"; familyInventorySha256 = $familyHash; selectedFamilyCount = 1; selectedDeclarationCount = $implemented.Count; managedPublicTypeAdditionCount = 0; managedPublicMemberAdditionCount = 0; repositoryWideUpstreamParityClaimed = $false }; $summaryJson = (($summary | ConvertTo-Json -Depth 20) + [Environment]::NewLine)

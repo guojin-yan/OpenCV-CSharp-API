@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 30,
+  "moduleCount": 31,
   "maps": [
     {
       "id": "calib3d",
@@ -2210,6 +2210,52 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "659ae4aadea20bfa86991a51db72c1c7d5346730270f246089a78deba29b53c8",
         "familyInventorySha256": "dcb01eb2b503f7e70821a751b1173bb257ac0f1ae6daa748167c86fa28c58648",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "rapid",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/RapidUpstreamMap",
+      "extractorScript": "tools/RapidUpstreamMap/extract_rapid.py",
+      "generationScript": "scripts/Generate-RapidUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-RapidUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/rapid.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/rapid/include/opencv2/rapid.hpp",
+          "sha256": "d24295a9c5358c5179cc2c4812943ee64cf56698166408f5cb266e7161eaa04e"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/rapid/include/opencv2/rapid.hpp",
+            "sha256": "d24295a9c5358c5179cc2c4812943ee64cf56698166408f5cb266e7161eaa04e",
+            "startOrdinal": 0,
+            "declarationCount": 17
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/rapid-upstream-raw.json",
+        "classifications": "compatibility/rapid-upstream-classifications.json",
+        "mapping": "compatibility/rapid-upstream-map.txt",
+        "summary": "compatibility/rapid-upstream-summary.json",
+        "familyInventory": "compatibility/rapid-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 17,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "b8e7a376bda91134262b2728c08eb03d3ee3b825d2a26fe46986b2dae47c508e",
+        "familyInventorySha256": "12d3aa480bfb2397efbc3a8b3d021e306ecddc60ae9c7fd5c480ae2cc457839f",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

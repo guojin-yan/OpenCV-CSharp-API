@@ -1,0 +1,195 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 0,
+  "managedPublicMemberAdditionCount": 0,
+  "families": [
+    {
+      "id": "rapid-wrapper-surface",
+      "rationale": "Current Rapid managed/native wrapper declarations with exact parser-backed callable evidence.",
+      "declarations": [
+        {
+          "ordinal": 0,
+          "upstreamIdentity": "cv.rapid.drawCorrespondencies(Mat bundle[/IO];Mat cols;Mat colors=Mat())->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_rapid_draw_correspondencies"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Rapid.RapidCv2|method|public;static|System.Void DrawCorrespondencies(JYPPX.OpenCvSharp.Core.Mat bundle,JYPPX.OpenCvSharp.Core.Mat cols,JYPPX.OpenCvSharp.Core.Mat? colors=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Rapid/RapidTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/rapid-guide.md"
+        },
+        {
+          "ordinal": 1,
+          "upstreamIdentity": "cv.rapid.drawSearchLines(Mat img[/IO];Mat locations;Scalar color[/C,/Ref])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_rapid_draw_search_lines"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Rapid.RapidCv2|method|public;static|System.Void DrawSearchLines(JYPPX.OpenCvSharp.Core.Mat img,JYPPX.OpenCvSharp.Core.Mat locations,JYPPX.OpenCvSharp.Core.Scalar color)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Rapid/RapidTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/rapid-guide.md"
+        },
+        {
+          "ordinal": 2,
+          "upstreamIdentity": "cv.rapid.drawWireframe(Mat img[/IO];Mat pts2d;Mat tris;Scalar color[/C,/Ref];int type=LINE_8;bool cullBackface=false)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_rapid_draw_wireframe"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Rapid.RapidCv2|method|public;static|System.Void DrawWireframe(JYPPX.OpenCvSharp.Core.Mat img,JYPPX.OpenCvSharp.Core.Mat pts2d,JYPPX.OpenCvSharp.Core.Mat tris,JYPPX.OpenCvSharp.Core.Scalar color,JYPPX.OpenCvSharp.ImgProc.LineTypes lineType=Line8,System.Boolean cullBackface=false)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Rapid/RapidTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/rapid-guide.md"
+        },
+        {
+          "ordinal": 3,
+          "upstreamIdentity": "cv.rapid.extractControlPoints(int num;int len;Mat pts3d;Mat rvec;Mat tvec;Mat K;Size imsize[/C,/Ref];Mat tris;Mat ctl2d[/O];Mat ctl3d[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_rapid_extract_control_points"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Rapid.RapidCv2|method|public;static|System.Void ExtractControlPoints(System.Int32 num,System.Int32 len,JYPPX.OpenCvSharp.Core.Mat pts3d,JYPPX.OpenCvSharp.Core.Mat rvec,JYPPX.OpenCvSharp.Core.Mat tvec,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Size imageSize,JYPPX.OpenCvSharp.Core.Mat tris,JYPPX.OpenCvSharp.Core.Mat ctl2d,JYPPX.OpenCvSharp.Core.Mat ctl3d)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Rapid/RapidTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/rapid-guide.md"
+        },
+        {
+          "ordinal": 4,
+          "upstreamIdentity": "cv.rapid.extractLineBundle(int len;Mat ctl2d;Mat img;Mat bundle[/O];Mat srcLocations[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_rapid_extract_line_bundle"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Rapid.RapidCv2|method|public;static|System.Void ExtractLineBundle(System.Int32 len,JYPPX.OpenCvSharp.Core.Mat ctl2d,JYPPX.OpenCvSharp.Core.Mat img,JYPPX.OpenCvSharp.Core.Mat bundle,JYPPX.OpenCvSharp.Core.Mat srcLocations)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Rapid/RapidTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/rapid-guide.md"
+        },
+        {
+          "ordinal": 5,
+          "upstreamIdentity": "cv.rapid.findCorrespondencies(Mat bundle;Mat cols[/O];Mat response=Mat()[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_rapid_find_correspondencies"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Rapid.RapidCv2|method|public;static|System.Void FindCorrespondencies(JYPPX.OpenCvSharp.Core.Mat bundle,JYPPX.OpenCvSharp.Core.Mat cols,JYPPX.OpenCvSharp.Core.Mat? response=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Rapid/RapidTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/rapid-guide.md"
+        },
+        {
+          "ordinal": 6,
+          "upstreamIdentity": "cv.rapid.convertCorrespondencies(Mat cols;Mat srcLocations;Mat pts2d[/O];Mat pts3d=Mat()[/IO];Mat mask=Mat())->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_rapid_convert_correspondencies"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Rapid.RapidCv2|method|public;static|System.Void ConvertCorrespondencies(JYPPX.OpenCvSharp.Core.Mat cols,JYPPX.OpenCvSharp.Core.Mat srcLocations,JYPPX.OpenCvSharp.Core.Mat pts2d,JYPPX.OpenCvSharp.Core.Mat? pts3d=null,JYPPX.OpenCvSharp.Core.Mat? mask=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Rapid/RapidTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/rapid-guide.md"
+        },
+        {
+          "ordinal": 7,
+          "upstreamIdentity": "cv.rapid.rapid(Mat img;int num;int len;Mat pts3d;Mat tris;Mat K;Mat rvec[/IO];Mat tvec[/IO];double* rmsd=0[/O])->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_rapid_run"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Rapid.RapidCv2|method|public;static|JYPPX.OpenCvSharp.Rapid.RapidResult Run(JYPPX.OpenCvSharp.Core.Mat img,System.Int32 num,System.Int32 len,JYPPX.OpenCvSharp.Core.Mat pts3d,JYPPX.OpenCvSharp.Core.Mat tris,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat rvec,JYPPX.OpenCvSharp.Core.Mat tvec,System.Boolean computeRmsd=false)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Rapid/RapidTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/rapid-guide.md"
+        },
+        {
+          "ordinal": 9,
+          "upstreamIdentity": "cv.rapid.Tracker.compute(Mat img;int num;int len;Mat K;Mat rvec[/IO];Mat tvec[/IO];TermCriteria termcrit=TermCriteria(TermCriteria::MAX_ITER | TermCriteria::EPS, 5, 1.5)[/C,/Ref])->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_rapid_tracker_compute"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Rapid.RapidTracker|method|public;instance|System.Single Compute(JYPPX.OpenCvSharp.Core.Mat img,System.Int32 num,System.Int32 len,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat rvec,JYPPX.OpenCvSharp.Core.Mat tvec,JYPPX.OpenCvSharp.Core.TermCriteria? termCriteria=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Rapid/RapidTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/rapid-guide.md"
+        },
+        {
+          "ordinal": 10,
+          "upstreamIdentity": "cv.rapid.Tracker.clearState()->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_rapid_tracker_clear_state"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Rapid.RapidTracker|method|public;instance|System.Void ClearState()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Rapid/RapidTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/rapid-guide.md"
+        },
+        {
+          "ordinal": 12,
+          "upstreamIdentity": "cv.rapid.Rapid.create(Mat pts3d;Mat tris)->Ptr<Rapid>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_rapid_tracker_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Rapid.RapidSilhouetteTracker|method|public;static|JYPPX.OpenCvSharp.Rapid.RapidSilhouetteTracker Create(JYPPX.OpenCvSharp.Core.Mat pts3d,JYPPX.OpenCvSharp.Core.Mat tris)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Rapid/RapidTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/rapid-guide.md"
+        },
+        {
+          "ordinal": 14,
+          "upstreamIdentity": "cv.rapid.OLSTracker.create(Mat pts3d;Mat tris;int histBins=8;uchar sobelThesh=10)->Ptr<OLSTracker>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_rapid_ols_tracker_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Rapid.OlsTracker|method|public;static|JYPPX.OpenCvSharp.Rapid.OlsTracker Create(JYPPX.OpenCvSharp.Core.Mat pts3d,JYPPX.OpenCvSharp.Core.Mat tris,System.Int32 histBins=8,System.Byte sobelThresh=10)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Rapid/RapidTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/rapid-guide.md"
+        }
+      ]
+    }
+  ]
+}

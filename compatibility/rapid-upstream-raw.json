@@ -1,0 +1,681 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/RapidUpstreamMap/extract_rapid.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/rapid/include/opencv2/rapid.hpp",
+  "headerSha256": "d24295a9c5358c5179cc2c4812943ee64cf56698166408f5cb266e7161eaa04e",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/rapid/include/opencv2/rapid.hpp",
+      "sha256": "d24295a9c5358c5179cc2c4812943ee64cf56698166408f5cb266e7161eaa04e",
+      "startOrdinal": 0,
+      "declarationCount": 17
+    }
+  ],
+  "declarationCount": 17,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rapid/include/opencv2/rapid.hpp",
+      "kind": "callable",
+      "name": "cv.rapid.drawCorrespondencies",
+      "identity": "cv.rapid.drawCorrespondencies(Mat bundle[/IO];Mat cols;Mat colors=Mat())->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "bundle",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "cols",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "colors",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* Debug draw markers of matched correspondences onto a lineBundle\n * @param bundle the lineBundle\n * @param cols column coordinates in the line bundle\n * @param colors colors for the markers. Defaults to white."
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rapid/include/opencv2/rapid.hpp",
+      "kind": "callable",
+      "name": "cv.rapid.drawSearchLines",
+      "identity": "cv.rapid.drawSearchLines(Mat img[/IO];Mat locations;Scalar color[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "locations",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "color",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* Debug draw search lines onto an image\n * @param img the output image\n * @param locations the source locations of a line bundle\n * @param color the line color"
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rapid/include/opencv2/rapid.hpp",
+      "kind": "callable",
+      "name": "cv.rapid.drawWireframe",
+      "identity": "cv.rapid.drawWireframe(Mat img[/IO];Mat pts2d;Mat tris;Scalar color[/C,/Ref];int type=LINE_8;bool cullBackface=false)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "pts2d",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "tris",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "color",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "type",
+          "default": "LINE_8",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "cullBackface",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* Draw a wireframe of a triangle mesh\n * @param img the output image\n * @param pts2d the 2d points obtained by @ref projectPoints\n * @param tris triangle face connectivity\n * @param color line color\n * @param type line type. See @ref LineTypes.\n * @param cullBackface enable back-face culling based on CCW order"
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rapid/include/opencv2/rapid.hpp",
+      "kind": "callable",
+      "name": "cv.rapid.extractControlPoints",
+      "identity": "cv.rapid.extractControlPoints(int num;int len;Mat pts3d;Mat rvec;Mat tvec;Mat K;Size imsize[/C,/Ref];Mat tris;Mat ctl2d[/O];Mat ctl3d[/O])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "num",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "len",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "pts3d",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "rvec",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "tvec",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "imsize",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "tris",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "ctl2d",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "ctl3d",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* Extract control points from the projected silhouette of a mesh\n *\n * see @cite drummond2002real Sec 2.1, Step b\n * @param num number of control points\n * @param len search radius (used to restrict the ROI)\n * @param pts3d the 3D points of the mesh\n * @param rvec rotation between mesh and camera\n * @param tvec translation between mesh and camera\n * @param K camera intrinsic\n * @param imsize size of the video frame\n * @param tris triangle face connectivity\n * @param ctl2d the 2D locations of the control points\n * @param ctl3d matching 3D points of the mesh"
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rapid/include/opencv2/rapid.hpp",
+      "kind": "callable",
+      "name": "cv.rapid.extractLineBundle",
+      "identity": "cv.rapid.extractLineBundle(int len;Mat ctl2d;Mat img;Mat bundle[/O];Mat srcLocations[/O])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "len",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "ctl2d",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "bundle",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "srcLocations",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* Extract the line bundle from an image\n * @param len the search radius. The bundle will have `2*len + 1` columns.\n * @param ctl2d the search lines will be centered at this points and orthogonal to the contour defined by\n * them. The bundle will have as many rows.\n * @param img the image to read the pixel intensities values from\n * @param bundle line bundle image with size `ctl2d.rows() x (2 * len + 1)` and the same type as @p img\n * @param srcLocations the source pixel locations of @p bundle in @p img as CV_16SC2"
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rapid/include/opencv2/rapid.hpp",
+      "kind": "callable",
+      "name": "cv.rapid.findCorrespondencies",
+      "identity": "cv.rapid.findCorrespondencies(Mat bundle;Mat cols[/O];Mat response=Mat()[/O])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "bundle",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "cols",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "response",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* Find corresponding image locations by searching for a maximal sobel edge along the search line (a single\n * row in the bundle)\n * @param bundle the line bundle\n * @param cols correspondence-position per line in line-bundle-space\n * @param response the sobel response for the selected point"
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rapid/include/opencv2/rapid.hpp",
+      "kind": "callable",
+      "name": "cv.rapid.convertCorrespondencies",
+      "identity": "cv.rapid.convertCorrespondencies(Mat cols;Mat srcLocations;Mat pts2d[/O];Mat pts3d=Mat()[/IO];Mat mask=Mat())->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "cols",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "srcLocations",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "pts2d",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "pts3d",
+          "default": "Mat()",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* Collect corresponding 2d and 3d points based on correspondencies and mask\n * @param cols correspondence-position per line in line-bundle-space\n * @param srcLocations the source image location\n * @param pts2d 2d points\n * @param pts3d 3d points\n * @param mask mask containing non-zero values for the elements to be retained"
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rapid/include/opencv2/rapid.hpp",
+      "kind": "callable",
+      "name": "cv.rapid.rapid",
+      "identity": "cv.rapid.rapid(Mat img;int num;int len;Mat pts3d;Mat tris;Mat K;Mat rvec[/IO];Mat tvec[/IO];double* rmsd=0[/O])->float",
+      "returnType": "float",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "num",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "len",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "pts3d",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "tris",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "rvec",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "tvec",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "double*",
+          "name": "rmsd",
+          "default": "0",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* High level function to execute a single rapid @cite harris1990rapid iteration\n *\n * 1. @ref extractControlPoints\n * 2. @ref extractLineBundle\n * 3. @ref findCorrespondencies\n * 4. @ref convertCorrespondencies\n * 5. @ref solvePnPRefineLM\n *\n * @param img the video frame\n * @param num number of search lines\n * @param len search line radius\n * @param pts3d the 3D points of the mesh\n * @param tris triangle face connectivity\n * @param K camera matrix\n * @param rvec rotation between mesh and camera. Input values are used as an initial solution.\n * @param tvec translation between mesh and camera. Input values are used as an initial solution.\n * @param rmsd the 2d reprojection difference\n * @return ratio of search lines that could be extracted and matched"
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rapid/include/opencv2/rapid.hpp",
+      "kind": "class",
+      "name": "cv.rapid.Tracker",
+      "identity": "class cv.rapid.Tracker",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": ""
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rapid/include/opencv2/rapid.hpp",
+      "kind": "callable",
+      "name": "cv.rapid.Tracker.compute",
+      "identity": "cv.rapid.Tracker.compute(Mat img;int num;int len;Mat K;Mat rvec[/IO];Mat tvec[/IO];TermCriteria termcrit=TermCriteria(TermCriteria::MAX_ITER | TermCriteria::EPS, 5, 1.5)[/C,/Ref])->float",
+      "returnType": "float",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "num",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "len",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "rvec",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "tvec",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "TermCriteria",
+          "name": "termcrit",
+          "default": "TermCriteria(TermCriteria::MAX_ITER | TermCriteria::EPS, 5, 1.5)",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rapid/include/opencv2/rapid.hpp",
+      "kind": "callable",
+      "name": "cv.rapid.Tracker.clearState",
+      "identity": "cv.rapid.Tracker.clearState()->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rapid/include/opencv2/rapid.hpp",
+      "kind": "class",
+      "name": "cv.rapid.Rapid",
+      "identity": "class cv.rapid.Rapid",
+      "returnType": ": cv::rapid::Tracker",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::rapid::Tracker",
+      "documentation": ""
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rapid/include/opencv2/rapid.hpp",
+      "kind": "callable",
+      "name": "cv.rapid.Rapid.create",
+      "identity": "cv.rapid.Rapid.create(Mat pts3d;Mat tris)->Ptr<Rapid>",
+      "returnType": "Ptr<Rapid>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "pts3d",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "tris",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rapid/include/opencv2/rapid.hpp",
+      "kind": "class",
+      "name": "cv.rapid.OLSTracker",
+      "identity": "class cv.rapid.OLSTracker",
+      "returnType": ": cv::rapid::Tracker",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::rapid::Tracker",
+      "documentation": "implements \"Optimal local searching for fast and robust textureless 3D object tracking in highly\n * cluttered backgrounds\" @cite seo2013optimal"
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rapid/include/opencv2/rapid.hpp",
+      "kind": "callable",
+      "name": "cv.rapid.OLSTracker.create",
+      "identity": "cv.rapid.OLSTracker.create(Mat pts3d;Mat tris;int histBins=8;uchar sobelThesh=10)->Ptr<OLSTracker>",
+      "returnType": "Ptr<OLSTracker>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "pts3d",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "tris",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "histBins",
+          "default": "8",
+          "modifiers": []
+        },
+        {
+          "type": "uchar",
+          "name": "sobelThesh",
+          "default": "10",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rapid/include/opencv2/rapid.hpp",
+      "kind": "class",
+      "name": "cv.rapid.GOSTracker",
+      "identity": "class cv.rapid.GOSTracker",
+      "returnType": ": cv::rapid::Tracker",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::rapid::Tracker",
+      "documentation": "implements \"Global optimal searching for textureless 3D object tracking\" @cite wang2015global"
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rapid/include/opencv2/rapid.hpp",
+      "kind": "callable",
+      "name": "cv.rapid.GOSTracker.create",
+      "identity": "cv.rapid.GOSTracker.create(Mat pts3d;Mat tris;int histBins=4;uchar sobelThesh=10)->Ptr<OLSTracker>",
+      "returnType": "Ptr<OLSTracker>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "pts3d",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "tris",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "histBins",
+          "default": "4",
+          "modifiers": []
+        },
+        {
+          "type": "uchar",
+          "name": "sobelThesh",
+          "default": "10",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    }
+  ]
+}
