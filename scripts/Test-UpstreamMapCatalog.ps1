@@ -10,7 +10,7 @@ foreach ($path in @($catalogPath,$schemaPath)) { if (-not (Test-Path -LiteralPat
 if (-not (Test-Json -LiteralPath $catalogPath -SchemaFile $schemaPath -ErrorAction Stop)) { throw 'Upstream map catalog failed JSON Schema validation.' }
 $catalog = Get-Content -LiteralPath $catalogPath -Raw | ConvertFrom-Json
 $pwsh = Get-Command pwsh -ErrorAction Stop
-$expectedIds = @('calib3d','core','dnn','features','highgui','imgcodecs','imgproc','ml','objdetect','photo','stitching','tracking','video','videoio','xphoto','ximgproc','optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs')
+$expectedIds = @('calib3d','core','dnn','features','highgui','imgcodecs','imgproc','ml','objdetect','photo','stitching','tracking','video','videoio','xphoto','ximgproc','optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy')
 $maps = @($catalog.maps)
 if ($maps.Count -ne $expectedIds.Count) { throw 'Upstream map catalog module count drifted.' }
 if ((@($maps | ForEach-Object { [string]$_.id }) -join '|') -cne ($expectedIds -join '|')) { throw 'Upstream map catalog IDs or stable ordering drifted.' }

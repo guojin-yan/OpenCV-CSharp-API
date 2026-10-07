@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 29,
+  "moduleCount": 30,
   "maps": [
     {
       "id": "calib3d",
@@ -2146,6 +2146,70 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "d2d3555615cacf3048b4f581933fff1aabdc89780830d2eeb17d57d75a932c31",
         "familyInventorySha256": "5a92eedebd1526140d47d9de22eeda2a036a7934483c8c25be8404293604df51",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "fuzzy",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/FuzzyUpstreamMap",
+      "extractorScript": "tools/FuzzyUpstreamMap/extract_fuzzy.py",
+      "generationScript": "scripts/Generate-FuzzyUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-FuzzyUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/fuzzy.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy.hpp",
+          "sha256": "2e24377f433d0a37b5001e63e84a07b4d8341040d0103c10da2254eb7d2172e6"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/fuzzy_F0_math.hpp",
+            "sha256": "525498274dd99a0036b6dcb0b03b1d7706f8fd7e116ef4d9c053e5be3da28a1d",
+            "startOrdinal": 0,
+            "declarationCount": 6
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/fuzzy_F1_math.hpp",
+            "sha256": "7c3e85432367b85fc0afecdb9656e12e0f3ba83381e7d17be53b51ca6f4971d7",
+            "startOrdinal": 6,
+            "declarationCount": 6
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/fuzzy_image.hpp",
+            "sha256": "433a8140bfe322888a50e49e215539497a090b9984763ae81a01f62525532f4b",
+            "startOrdinal": 12,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/types.hpp",
+            "sha256": "f64aa5e5a4436f9d3ddab7e52dbfaa764fe2eb69fc8548ede9cd0d2867c5c0c9",
+            "startOrdinal": 16,
+            "declarationCount": 2
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/fuzzy-upstream-raw.json",
+        "classifications": "compatibility/fuzzy-upstream-classifications.json",
+        "mapping": "compatibility/fuzzy-upstream-map.txt",
+        "summary": "compatibility/fuzzy-upstream-summary.json",
+        "familyInventory": "compatibility/fuzzy-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 18,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "659ae4aadea20bfa86991a51db72c1c7d5346730270f246089a78deba29b53c8",
+        "familyInventorySha256": "dcb01eb2b503f7e70821a751b1173bb257ac0f1ae6daa748167c86fa28c58648",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

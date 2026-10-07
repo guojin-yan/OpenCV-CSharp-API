@@ -1,5 +1,5 @@
 param(
-    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs')][string]$Module,
+    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy')][string]$Module,
     [Parameter(Mandatory)][string]$DisplayName,
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [switch]$Check
@@ -31,6 +31,8 @@ function ToPascal([string]$Value) {
 function GetParts([string]$Identity) {
     $pattern = if ($Module -eq 'optflow') {
         '^cv\.(?<namespace>optflow|motempl)\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
+    } elseif ($Module -eq 'fuzzy') {
+        '^cv\.ft\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     } else {
         '^cv\.' + $Module + '\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     }
@@ -50,7 +52,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
         }
         return $Owner
     }
-    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs')) {
+    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs','fuzzy')) {
         if ($Module -eq 'face') {
             if ([string]::IsNullOrWhiteSpace($Owner)) {
                 switch ($Name) {
@@ -73,6 +75,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
                 'bioinspired' { 'BioInspiredCv2' }
                 'phase_unwrapping' { 'PhaseUnwrappingCv2' }
                 'hfs' { 'HfsCv2' }
+                'fuzzy' { 'FuzzyCv2' }
             }
             return [string]$managedType
         }
@@ -113,6 +116,35 @@ function GetManaged([string]$Owner, [string]$Name, [string]$Identity) {
             $managedMethod = ToPascal $Name
             return @($managedEntries | Where-Object { $_ -match ('JYPPX\.OpenCvSharp\.Hfs\.HfsSegment\|method\|[^|]*\|JYPPX\.OpenCvSharp\.Core\.Mat ' + [regex]::Escape($managedMethod) + '\(JYPPX\.OpenCvSharp\.Core\.Mat src,System\.Boolean draw=true\)') })
         }
+    }
+    if ($Module -eq 'fuzzy') {
+        $managedMethod = switch ($Name) {
+            'FT02D_components' { 'FT02DComponents' }
+            'FT02D_inverseFT' { 'FT02DInverseFT' }
+            'FT02D_process' { 'FT02DProcess' }
+            'FT02D_iteration' { 'FT02DIteration' }
+            'FT02D_FL_process' { 'FT02DFLProcess' }
+            'FT02D_FL_process_float' { 'FT02DFLProcessFloat' }
+            'FT12D_components' { 'FT12DComponents' }
+            'FT12D_polynomial' { 'FT12DPolynomial' }
+            'FT12D_createPolynomMatrixVertical' { 'FT12DCreatePolynomMatrixVertical' }
+            'FT12D_createPolynomMatrixHorizontal' { 'FT12DCreatePolynomMatrixHorizontal' }
+            'FT12D_process' { 'FT12DProcess' }
+            'FT12D_inverseFT' { 'FT12DInverseFT' }
+            'createKernel' { 'CreateKernel' }
+            'inpaint' { 'Inpaint' }
+            'filter' { 'Filter' }
+            default { '' }
+        }
+        if ([string]::IsNullOrWhiteSpace([string]$managedMethod)) { return @() }
+        $returnType = if ($Name -eq 'FT02D_iteration') { 'System\.Int32' } else { 'System\.Void' }
+        $methodPattern = [regex]::Escape([string]$managedMethod)
+        $rows = @($managedEntries | Where-Object { $_ -match "JYPPX\.OpenCvSharp\.Fuzzy\.FuzzyCv2\|method\|public;static\|$returnType $methodPattern\(" })
+        if ($Name -eq 'createKernel') {
+            if ($Identity -match '^cv\.ft\.createKernel\(Mat A;Mat B;') { return @($rows | Where-Object { $_ -match '\(JYPPX\.OpenCvSharp\.Core\.Mat functionX,JYPPX\.OpenCvSharp\.Core\.Mat functionY,JYPPX\.OpenCvSharp\.Core\.Mat kernel,System\.Int32 channels\)$' }) }
+            return @($rows | Where-Object { $_ -match '\(JYPPX\.OpenCvSharp\.Fuzzy\.FuzzyFunctionType functionType,System\.Int32 radius,JYPPX\.OpenCvSharp\.Core\.Mat kernel,System\.Int32 channels\)$' })
+        }
+        return $rows
     }
     if ($Module -eq 'bioinspired' -and $Name -eq 'create') {
         $factory = switch ($Owner) {
@@ -190,7 +222,27 @@ function GetNative([object]$Parts, [string]$Identity) {
     $owner = [string]$Parts.Owner
     $name = [string]$Parts.Name
     $result = @()
-    if ($Module -eq 'hfs') {
+    if ($Module -eq 'fuzzy') {
+        $symbol = switch ($name) {
+            'FT02D_components' { 'ft02d_components' }
+            'FT02D_inverseFT' { 'ft02d_inverse_ft' }
+            'FT02D_process' { 'ft02d_process' }
+            'FT02D_iteration' { 'ft02d_iteration' }
+            'FT02D_FL_process' { 'ft02d_fl_process' }
+            'FT02D_FL_process_float' { 'ft02d_fl_process_float' }
+            'FT12D_components' { 'ft12d_components' }
+            'FT12D_polynomial' { 'ft12d_polynomial' }
+            'FT12D_createPolynomMatrixVertical' { 'ft12d_create_polynom_matrix_vertical' }
+            'FT12D_createPolynomMatrixHorizontal' { 'ft12d_create_polynom_matrix_horizontal' }
+            'FT12D_process' { 'ft12d_process' }
+            'FT12D_inverseFT' { 'ft12d_inverse_ft' }
+            'createKernel' { if ($Identity -match '^cv\.ft\.createKernel\(Mat A;Mat B;') { 'create_kernel_from_functions' } else { 'create_kernel' } }
+            'inpaint' { 'inpaint' }
+            'filter' { 'filter' }
+            default { '' }
+        }
+        if (-not [string]::IsNullOrWhiteSpace([string]$symbol)) { $result = @("jyppx_ocv_fuzzy_$symbol") }
+    } elseif ($Module -eq 'hfs') {
         if ($owner -eq 'HfsSegment' -and $name -eq 'create') { $result = @('jyppx_ocv_hfs_segment_create') }
         elseif ($owner -eq 'HfsSegment' -and $name -in @('performSegmentCpu','performSegmentGpu')) {
             $operation = if ($name -eq 'performSegmentCpu') { 'cpu' } else { 'gpu' }
@@ -518,7 +570,7 @@ $classification = [ordered]@{ schemaVersion = 1; upstreamOpenCvVersion = '5.0.0'
 $builder = [Text.StringBuilder]::new(); [void]$builder.AppendLine("# Generated by scripts/Generate-ContribUpstreamMap.ps1 -Module $Module. Do not edit."); [void]$builder.AppendLine('schema-version=1'); [void]$builder.AppendLine('upstream-opencv-version=5.0.0'); [void]$builder.AppendLine("claimed-slice=$($classification.claimedSlice)"); [void]$builder.AppendLine("header-sha256=$($raw.headerSha256)"); [void]$builder.AppendLine("parser-sha256=$($raw.parserSha256)"); [void]$builder.AppendLine("declaration-count=$($raw.declarationCount)"); [void]$builder.AppendLine('repository-wide-upstream-parity-claimed=false'); [void]$builder.AppendLine(''); [void]$builder.AppendLine('ordinal|classification|identity|native-entrypoints|managed-members|build-condition|reason')
 foreach ($row in $rows) { $nativeText = if (@($row.nativeEntrypoints).Count) { @($row.nativeEntrypoints) -join ';' } else { '-' }; $managedText = if (@($row.managedMembers).Count) { @($row.managedMembers) -join ';' } else { '-' }; [void]$builder.AppendLine("$($row.ordinal)|$($row.classification)|$($row.identity)|$nativeText|$managedText|$($row.buildCondition)|$($row.reason)") }
 $mappingText = $builder.ToString().Replace("`r`n", "`n"); $implemented = @($rows | Where-Object classification -eq 'implemented'); $omitted = @($rows | Where-Object classification -eq 'intentionally-omitted'); $metadata = @($rows | Where-Object classification -eq 'non-callable-metadata')
-$guide = switch ($Module) { 'face' {'docs/articles/face-guide.md'} 'quality' {'docs/articles/quality-guide.md'} 'img_hash' {'docs/articles/img-hash-guide.md'} 'line_descriptor' {'docs/articles/line-descriptor-guide.md'} 'intensity_transform' {'docs/articles/intensity-transform-guide.md'} 'plot' {'docs/articles/plot-guide.md'} 'bioinspired' {'docs/articles/bioinspired-guide.md'} 'phase_unwrapping' {'docs/articles/phase-unwrapping-guide.md'} 'hfs' {'docs/articles/hfs-guide.md'} default { "docs/articles/$Module-upstream-parity-guide.md" } }
+$guide = switch ($Module) { 'face' {'docs/articles/face-guide.md'} 'quality' {'docs/articles/quality-guide.md'} 'img_hash' {'docs/articles/img-hash-guide.md'} 'line_descriptor' {'docs/articles/line-descriptor-guide.md'} 'intensity_transform' {'docs/articles/intensity-transform-guide.md'} 'plot' {'docs/articles/plot-guide.md'} 'bioinspired' {'docs/articles/bioinspired-guide.md'} 'phase_unwrapping' {'docs/articles/phase-unwrapping-guide.md'} 'hfs' {'docs/articles/hfs-guide.md'} 'fuzzy' {'docs/articles/fuzzy-guide.md'} default { "docs/articles/$Module-upstream-parity-guide.md" } }
 $family = [ordered]@{ schemaVersion = 1; upstreamOpenCvVersion = '5.0.0'; status = 'implemented-verified'; managedPublicTypeAdditionCount = 0; managedPublicMemberAdditionCount = 0; families = @([ordered]@{ id = "$Module-wrapper-surface"; rationale = "Current $DisplayName managed/native wrapper declarations with exact parser-backed callable evidence."; declarations = @($implemented | ForEach-Object { [ordered]@{ ordinal = $_.ordinal; upstreamIdentity = $_.identity; upstreamClassification = $_.classification; nativeEntrypoints = $_.nativeEntrypoints; managedMembers = $_.managedMembers; focusedTest = "tests/OpenCvSharp.Tests/$DisplayName/$DisplayName`Tests.cs"; nativeSmoke = 'src/OpenCvSharp.Native/tests/native_smoke.cpp'; sample = 'samples/ConsoleSamples/Program.cs'; guide = $guide } }) }) }
 $classificationJson = (($classification | ConvertTo-Json -Depth 20) + [Environment]::NewLine); $familyJson = (($family | ConvertTo-Json -Depth 20) + [Environment]::NewLine); $mapHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($mappingText))).ToLowerInvariant(); $familyHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($familyJson))).ToLowerInvariant()
 $summary = [ordered]@{ schemaVersion = 1; generator = "tools/$DisplayName`UpstreamMap"; upstreamOpenCvVersion = '5.0.0'; claimedSlice = $classification.claimedSlice; rawExtractionPath = "compatibility/$Module-upstream-raw.json"; classificationPath = "compatibility/$Module-upstream-classifications.json"; mappingPath = "compatibility/$Module-upstream-map.txt"; headerSha256 = [string]$raw.headerSha256; parserSha256 = [string]$raw.parserSha256; mappingSha256 = $mapHash; declarationCount = [int]$raw.declarationCount; enumCount = [int](@($raw.declarations | Where-Object kind -eq enum).Count); classCount = [int](@($raw.declarations | Where-Object kind -eq class).Count); callableCount = [int](@($raw.declarations | Where-Object kind -eq callable).Count); classificationCounts = [ordered]@{ implemented = [int]$implemented.Count; 'intentionally-omitted' = [int]$omitted.Count; missing = 0; 'non-callable-metadata' = [int]$metadata.Count; unsupported = 0; 'upstream-conditional' = 0 }; nativeEvidenceCount = @($rows | ForEach-Object { @($_.nativeEntrypoints) } | Where-Object { $_ } | Sort-Object -Unique).Count; managedEvidenceCount = @($rows | ForEach-Object { @($_.managedMembers) } | Where-Object { $_ } | Sort-Object -Unique).Count; negativeFixtureCount = 12; externalDataDependencyCount = @($externalDataDependencies).Count; familyInventoryPath = "compatibility/$Module-implemented-families.json"; familyInventorySha256 = $familyHash; selectedFamilyCount = 1; selectedDeclarationCount = $implemented.Count; managedPublicTypeAdditionCount = 0; managedPublicMemberAdditionCount = 0; repositoryWideUpstreamParityClaimed = $false }; $summaryJson = (($summary | ConvertTo-Json -Depth 20) + [Environment]::NewLine)

@@ -1,0 +1,772 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/FuzzyUpstreamMap/extract_fuzzy.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy.hpp",
+  "headerSha256": "2e24377f433d0a37b5001e63e84a07b4d8341040d0103c10da2254eb7d2172e6",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/fuzzy_F0_math.hpp",
+      "sha256": "525498274dd99a0036b6dcb0b03b1d7706f8fd7e116ef4d9c053e5be3da28a1d",
+      "startOrdinal": 0,
+      "declarationCount": 6
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/fuzzy_F1_math.hpp",
+      "sha256": "7c3e85432367b85fc0afecdb9656e12e0f3ba83381e7d17be53b51ca6f4971d7",
+      "startOrdinal": 6,
+      "declarationCount": 6
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/fuzzy_image.hpp",
+      "sha256": "433a8140bfe322888a50e49e215539497a090b9984763ae81a01f62525532f4b",
+      "startOrdinal": 12,
+      "declarationCount": 4
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/types.hpp",
+      "sha256": "f64aa5e5a4436f9d3ddab7e52dbfaa764fe2eb69fc8548ede9cd0d2867c5c0c9",
+      "startOrdinal": 16,
+      "declarationCount": 2
+    }
+  ],
+  "declarationCount": 18,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/fuzzy_F0_math.hpp",
+      "kind": "callable",
+      "name": "cv.ft.FT02D_components",
+      "identity": "cv.ft.FT02D_components(Mat matrix;Mat kernel;Mat components[/O];Mat mask=Mat())->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "matrix",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "kernel",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "components",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes components of the array using direct \\f$F^0\\f$-transform.\n    @param matrix Input array.\n    @param kernel Kernel used for processing. Function `ft::createKernel` can be used.\n    @param components Output 32-bit float array for the components.\n    @param mask Mask can be used for unwanted area marking.\n\n    The function computes components using predefined kernel and mask."
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/fuzzy_F0_math.hpp",
+      "kind": "callable",
+      "name": "cv.ft.FT02D_inverseFT",
+      "identity": "cv.ft.FT02D_inverseFT(Mat components;Mat kernel;Mat output[/O];int width;int height)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "components",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "kernel",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "output",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "height",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes inverse \\f$F^0\\f$-transfrom.\n    @param components Input 32-bit float single channel array for the components.\n    @param kernel Kernel used for processing. Function `ft::createKernel` can be used.\n    @param output Output 32-bit float array.\n    @param width Width of the output array.\n    @param height Height of the output array.\n\n    Computation of inverse F-transform."
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/fuzzy_F0_math.hpp",
+      "kind": "callable",
+      "name": "cv.ft.FT02D_process",
+      "identity": "cv.ft.FT02D_process(Mat matrix;Mat kernel;Mat output[/O];Mat mask=Mat())->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "matrix",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "kernel",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "output",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes \\f$F^0\\f$-transfrom and inverse \\f$F^0\\f$-transfrom at once.\n    @param matrix Input matrix.\n    @param kernel Kernel used for processing. Function `ft::createKernel` can be used.\n    @param output Output 32-bit float array.\n    @param mask Mask used for unwanted area marking.\n\n    This function computes F-transfrom and inverse F-transfotm in one step. It is fully sufficient and optimized for `cv::Mat`."
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/fuzzy_F0_math.hpp",
+      "kind": "callable",
+      "name": "cv.ft.FT02D_iteration",
+      "identity": "cv.ft.FT02D_iteration(Mat matrix;Mat kernel;Mat output[/O];Mat mask;Mat maskOutput[/O];bool firstStop)->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "matrix",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "kernel",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "output",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "maskOutput",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "firstStop",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes \\f$F^0\\f$-transfrom and inverse \\f$F^0\\f$-transfrom at once and return state.\n    @param matrix Input matrix.\n    @param kernel Kernel used for processing. Function `ft::createKernel` can be used.\n    @param output Output 32-bit float array.\n    @param mask Mask used for unwanted area marking.\n    @param maskOutput Mask after one iteration.\n    @param firstStop If **true** function returns -1 when first problem appears. In case of `false` the process is completed and summation of all problems returned.\n\n    This function computes iteration of F-transfrom and inverse F-transfotm and handle image and mask change. The function is used in `ft::inpaint` function."
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/fuzzy_F0_math.hpp",
+      "kind": "callable",
+      "name": "cv.ft.FT02D_FL_process",
+      "identity": "cv.ft.FT02D_FL_process(Mat matrix;int radius[/C];Mat output[/O])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "matrix",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "radius",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "output",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sligtly less accurate version of \\f$F^0\\f$-transfrom computation optimized for higher speed. The methods counts with linear basic function.\n    @param matrix Input 3 channels matrix.\n    @param radius Radius of the `ft::LINEAR` basic function.\n    @param output Output array.\n\n    This function computes F-transfrom and inverse F-transfotm using linear basic function in one step. It is ~10 times faster than `ft::FT02D_process` method."
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/fuzzy_F0_math.hpp",
+      "kind": "callable",
+      "name": "cv.ft.FT02D_FL_process_float",
+      "identity": "cv.ft.FT02D_FL_process_float(Mat matrix;int radius[/C];Mat output[/O])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "matrix",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "radius",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "output",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sligtly less accurate version of \\f$F^0\\f$-transfrom computation optimized for higher speed. The methods counts with linear basic function.\n    @param matrix Input 3 channels matrix.\n    @param radius Radius of the `ft::LINEAR` basic function.\n    @param output Output array.\n\n    This function computes F-transfrom and inverse F-transfotm using linear basic function in one step. It is ~9 times faster then `ft::FT02D_process` method and more accurate than `ft::FT02D_FL_process` method."
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/fuzzy_F1_math.hpp",
+      "kind": "callable",
+      "name": "cv.ft.FT12D_components",
+      "identity": "cv.ft.FT12D_components(Mat matrix;Mat kernel;Mat components[/O])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "matrix",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "kernel",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "components",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes components of the array using direct \\f$F^1\\f$-transform.\n    @param matrix Input array.\n    @param kernel Kernel used for processing. Function `ft::createKernel` can be used.\n    @param components Output 32-bit float array for the components.\n\n    The function computes linear components using predefined kernel."
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/fuzzy_F1_math.hpp",
+      "kind": "callable",
+      "name": "cv.ft.FT12D_polynomial",
+      "identity": "cv.ft.FT12D_polynomial(Mat matrix;Mat kernel;Mat c00[/O];Mat c10[/O];Mat c01[/O];Mat components[/O];Mat mask=Mat())->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "matrix",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "kernel",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "c00",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "c10",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "c01",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "components",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes elements of \\f$F^1\\f$-transform components.\n    @param matrix Input array.\n    @param kernel Kernel used for processing. Function `ft::createKernel` can be used.\n    @param c00 Elements represent average color.\n    @param c10 Elements represent average vertical gradient.\n    @param c01 Elements represent average horizontal gradient.\n    @param components Output 32-bit float array for the components.\n    @param mask Mask can be used for unwanted area marking.\n\n    The function computes components and its elements using predefined kernel and mask."
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/fuzzy_F1_math.hpp",
+      "kind": "callable",
+      "name": "cv.ft.FT12D_createPolynomMatrixVertical",
+      "identity": "cv.ft.FT12D_createPolynomMatrixVertical(int radius;Mat matrix[/O];int chn[/C])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "radius",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "matrix",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "chn",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates vertical matrix for \\f$F^1\\f$-transform computation.\n    @param radius Radius of the basic function.\n    @param matrix The vertical matrix.\n    @param chn Number of channels.\n\n    The function creates helper vertical matrix for \\f$F^1\\f$-transfrom processing. It is used for gradient computation."
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/fuzzy_F1_math.hpp",
+      "kind": "callable",
+      "name": "cv.ft.FT12D_createPolynomMatrixHorizontal",
+      "identity": "cv.ft.FT12D_createPolynomMatrixHorizontal(int radius;Mat matrix[/O];int chn[/C])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "radius",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "matrix",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "chn",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates horizontal matrix for \\f$F^1\\f$-transform computation.\n    @param radius Radius of the basic function.\n    @param matrix The horizontal matrix.\n    @param chn Number of channels.\n\n    The function creates helper horizontal matrix for \\f$F^1\\f$-transfrom processing. It is used for gradient computation."
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/fuzzy_F1_math.hpp",
+      "kind": "callable",
+      "name": "cv.ft.FT12D_process",
+      "identity": "cv.ft.FT12D_process(Mat matrix;Mat kernel;Mat output[/O];Mat mask=Mat())->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "matrix",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "kernel",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "output",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes \\f$F^1\\f$-transfrom and inverse \\f$F^1\\f$-transfrom at once.\n    @param matrix Input matrix.\n    @param kernel Kernel used for processing. Function `ft::createKernel` can be used.\n    @param output Output 32-bit float array.\n    @param mask Mask used for unwanted area marking.\n\n    This function computes \\f$F^1\\f$-transfrom and inverse \\f$F^1\\f$-transfotm in one step. It is fully sufficient and optimized for `cv::Mat`.\n\n    @note\n        F-transform technique of first degreee is described in paper @cite Vlas:FT."
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/fuzzy_F1_math.hpp",
+      "kind": "callable",
+      "name": "cv.ft.FT12D_inverseFT",
+      "identity": "cv.ft.FT12D_inverseFT(Mat components;Mat kernel;Mat output[/O];int width;int height)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "components",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "kernel",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "output",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "height",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes inverse \\f$F^1\\f$-transfrom.\n    @param components Input 32-bit float single channel array for the components.\n    @param kernel Kernel used for processing. The same kernel as for components computation must be used.\n    @param output Output 32-bit float array.\n    @param width Width of the output array.\n    @param height Height of the output array.\n\n    Computation of inverse \\f$F^1\\f$-transform."
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/fuzzy_image.hpp",
+      "kind": "callable",
+      "name": "cv.ft.createKernel",
+      "identity": "cv.ft.createKernel(Mat A;Mat B;Mat kernel[/O];int chn[/C])->void",
+      "returnType": "void",
+      "modifiers": [
+        "=createKernel1"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "A",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "B",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "kernel",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "chn",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates kernel from basic functions.\n    @param A Basic function used in axis **x**.\n    @param B Basic function used in axis **y**.\n    @param kernel Final 32-bit kernel derived from **A** and **B**.\n    @param chn Number of kernel channels.\n\n    The function creates kernel usable for latter fuzzy image processing."
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/fuzzy_image.hpp",
+      "kind": "callable",
+      "name": "cv.ft.createKernel",
+      "identity": "cv.ft.createKernel(int function;int radius;Mat kernel[/O];int chn[/C])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "function",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "radius",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "kernel",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "chn",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates kernel from general functions.\n    @param function Function type could be one of the following:\n        -   **LINEAR** Linear basic function.\n    @param radius Radius of the basic function.\n    @param kernel Final 32-bit kernel.\n    @param chn Number of kernel channels.\n\n    The function creates kernel from predefined functions."
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/fuzzy_image.hpp",
+      "kind": "callable",
+      "name": "cv.ft.inpaint",
+      "identity": "cv.ft.inpaint(Mat image;Mat mask;Mat output[/O];int radius;int function;int algorithm)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "output",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "radius",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "function",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "algorithm",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Image inpainting\n    @param image Input image.\n    @param mask Mask used for unwanted area marking.\n    @param output Output 32-bit image.\n    @param radius Radius of the basic function.\n    @param function Function type could be one of the following:\n        -   `ft::LINEAR` Linear basic function.\n    @param algorithm Algorithm could be one of the following:\n        -   `ft::ONE_STEP` One step algorithm.\n        -   `ft::MULTI_STEP` This algorithm automaticaly increases radius of the basic function.\n        -   `ft::ITERATIVE` Iterative algorithm running in more steps using partial computations.\n\n    This function provides inpainting technique based on the fuzzy mathematic.\n\n    @note\n        The algorithms are described in paper @cite Perf:rec."
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/fuzzy_image.hpp",
+      "kind": "callable",
+      "name": "cv.ft.filter",
+      "identity": "cv.ft.filter(Mat image;Mat kernel;Mat output[/O])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "kernel",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "output",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Image filtering\n    @param image Input image.\n    @param kernel Final 32-bit kernel.\n    @param output Output 32-bit image.\n\n    Filtering of the input image by means of F-transform."
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/types.hpp",
+      "kind": "enum",
+      "name": "cv.ft.<unnamed>",
+      "identity": "enum cv.ft.<unnamed>[const cv.ft.LINEAR=1;const cv.ft.SINUS=2]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ft.LINEAR",
+          "value": "1"
+        },
+        {
+          "name": "const cv.ft.SINUS",
+          "value": "2"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/fuzzy/include/opencv2/fuzzy/types.hpp",
+      "kind": "enum",
+      "name": "cv.ft.<unnamed>",
+      "identity": "enum cv.ft.<unnamed>[const cv.ft.ONE_STEP=1;const cv.ft.MULTI_STEP=2;const cv.ft.ITERATIVE=3]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ft.ONE_STEP",
+          "value": "1"
+        },
+        {
+          "name": "const cv.ft.MULTI_STEP",
+          "value": "2"
+        },
+        {
+          "name": "const cv.ft.ITERATIVE",
+          "value": "3"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    }
+  ]
+}

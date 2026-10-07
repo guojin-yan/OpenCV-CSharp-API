@@ -1,0 +1,255 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 0,
+  "managedPublicMemberAdditionCount": 0,
+  "families": [
+    {
+      "id": "fuzzy-wrapper-surface",
+      "rationale": "Current Fuzzy managed/native wrapper declarations with exact parser-backed callable evidence.",
+      "declarations": [
+        {
+          "ordinal": 0,
+          "upstreamIdentity": "cv.ft.FT02D_components(Mat matrix;Mat kernel;Mat components[/O];Mat mask=Mat())->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_fuzzy_ft02d_components"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void FT02DComponents(JYPPX.OpenCvSharp.Core.Mat matrix,JYPPX.OpenCvSharp.Core.Mat kernel,JYPPX.OpenCvSharp.Core.Mat components,JYPPX.OpenCvSharp.Core.Mat? mask=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Fuzzy/FuzzyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/fuzzy-guide.md"
+        },
+        {
+          "ordinal": 1,
+          "upstreamIdentity": "cv.ft.FT02D_inverseFT(Mat components;Mat kernel;Mat output[/O];int width;int height)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_fuzzy_ft02d_inverse_ft"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void FT02DInverseFT(JYPPX.OpenCvSharp.Core.Mat components,JYPPX.OpenCvSharp.Core.Mat kernel,JYPPX.OpenCvSharp.Core.Mat output,System.Int32 width,System.Int32 height)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Fuzzy/FuzzyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/fuzzy-guide.md"
+        },
+        {
+          "ordinal": 2,
+          "upstreamIdentity": "cv.ft.FT02D_process(Mat matrix;Mat kernel;Mat output[/O];Mat mask=Mat())->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_fuzzy_ft02d_process"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void FT02DProcess(JYPPX.OpenCvSharp.Core.Mat matrix,JYPPX.OpenCvSharp.Core.Mat kernel,JYPPX.OpenCvSharp.Core.Mat output,JYPPX.OpenCvSharp.Core.Mat? mask=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Fuzzy/FuzzyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/fuzzy-guide.md"
+        },
+        {
+          "ordinal": 3,
+          "upstreamIdentity": "cv.ft.FT02D_iteration(Mat matrix;Mat kernel;Mat output[/O];Mat mask;Mat maskOutput[/O];bool firstStop)->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_fuzzy_ft02d_iteration"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Int32 FT02DIteration(JYPPX.OpenCvSharp.Core.Mat matrix,JYPPX.OpenCvSharp.Core.Mat kernel,JYPPX.OpenCvSharp.Core.Mat output,JYPPX.OpenCvSharp.Core.Mat mask,JYPPX.OpenCvSharp.Core.Mat? maskOutput=null,System.Boolean firstStop=true)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Fuzzy/FuzzyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/fuzzy-guide.md"
+        },
+        {
+          "ordinal": 4,
+          "upstreamIdentity": "cv.ft.FT02D_FL_process(Mat matrix;int radius[/C];Mat output[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_fuzzy_ft02d_fl_process"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void FT02DFLProcess(JYPPX.OpenCvSharp.Core.Mat matrix,System.Int32 radius,JYPPX.OpenCvSharp.Core.Mat output)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Fuzzy/FuzzyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/fuzzy-guide.md"
+        },
+        {
+          "ordinal": 5,
+          "upstreamIdentity": "cv.ft.FT02D_FL_process_float(Mat matrix;int radius[/C];Mat output[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_fuzzy_ft02d_fl_process_float"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void FT02DFLProcessFloat(JYPPX.OpenCvSharp.Core.Mat matrix,System.Int32 radius,JYPPX.OpenCvSharp.Core.Mat output)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Fuzzy/FuzzyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/fuzzy-guide.md"
+        },
+        {
+          "ordinal": 6,
+          "upstreamIdentity": "cv.ft.FT12D_components(Mat matrix;Mat kernel;Mat components[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_fuzzy_ft12d_components"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void FT12DComponents(JYPPX.OpenCvSharp.Core.Mat matrix,JYPPX.OpenCvSharp.Core.Mat kernel,JYPPX.OpenCvSharp.Core.Mat components)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Fuzzy/FuzzyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/fuzzy-guide.md"
+        },
+        {
+          "ordinal": 7,
+          "upstreamIdentity": "cv.ft.FT12D_polynomial(Mat matrix;Mat kernel;Mat c00[/O];Mat c10[/O];Mat c01[/O];Mat components[/O];Mat mask=Mat())->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_fuzzy_ft12d_polynomial"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void FT12DPolynomial(JYPPX.OpenCvSharp.Core.Mat matrix,JYPPX.OpenCvSharp.Core.Mat kernel,JYPPX.OpenCvSharp.Core.Mat c00,JYPPX.OpenCvSharp.Core.Mat c10,JYPPX.OpenCvSharp.Core.Mat c01,JYPPX.OpenCvSharp.Core.Mat components,JYPPX.OpenCvSharp.Core.Mat? mask=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Fuzzy/FuzzyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/fuzzy-guide.md"
+        },
+        {
+          "ordinal": 8,
+          "upstreamIdentity": "cv.ft.FT12D_createPolynomMatrixVertical(int radius;Mat matrix[/O];int chn[/C])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_fuzzy_ft12d_create_polynom_matrix_vertical"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void FT12DCreatePolynomMatrixVertical(System.Int32 radius,JYPPX.OpenCvSharp.Core.Mat matrix,System.Int32 channels)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Fuzzy/FuzzyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/fuzzy-guide.md"
+        },
+        {
+          "ordinal": 9,
+          "upstreamIdentity": "cv.ft.FT12D_createPolynomMatrixHorizontal(int radius;Mat matrix[/O];int chn[/C])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_fuzzy_ft12d_create_polynom_matrix_horizontal"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void FT12DCreatePolynomMatrixHorizontal(System.Int32 radius,JYPPX.OpenCvSharp.Core.Mat matrix,System.Int32 channels)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Fuzzy/FuzzyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/fuzzy-guide.md"
+        },
+        {
+          "ordinal": 10,
+          "upstreamIdentity": "cv.ft.FT12D_process(Mat matrix;Mat kernel;Mat output[/O];Mat mask=Mat())->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_fuzzy_ft12d_process"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void FT12DProcess(JYPPX.OpenCvSharp.Core.Mat matrix,JYPPX.OpenCvSharp.Core.Mat kernel,JYPPX.OpenCvSharp.Core.Mat output,JYPPX.OpenCvSharp.Core.Mat? mask=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Fuzzy/FuzzyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/fuzzy-guide.md"
+        },
+        {
+          "ordinal": 11,
+          "upstreamIdentity": "cv.ft.FT12D_inverseFT(Mat components;Mat kernel;Mat output[/O];int width;int height)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_fuzzy_ft12d_inverse_ft"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void FT12DInverseFT(JYPPX.OpenCvSharp.Core.Mat components,JYPPX.OpenCvSharp.Core.Mat kernel,JYPPX.OpenCvSharp.Core.Mat output,System.Int32 width,System.Int32 height)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Fuzzy/FuzzyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/fuzzy-guide.md"
+        },
+        {
+          "ordinal": 12,
+          "upstreamIdentity": "cv.ft.createKernel(Mat A;Mat B;Mat kernel[/O];int chn[/C])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_fuzzy_create_kernel_from_functions"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void CreateKernel(JYPPX.OpenCvSharp.Core.Mat functionX,JYPPX.OpenCvSharp.Core.Mat functionY,JYPPX.OpenCvSharp.Core.Mat kernel,System.Int32 channels)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Fuzzy/FuzzyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/fuzzy-guide.md"
+        },
+        {
+          "ordinal": 13,
+          "upstreamIdentity": "cv.ft.createKernel(int function;int radius;Mat kernel[/O];int chn[/C])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_fuzzy_create_kernel"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void CreateKernel(JYPPX.OpenCvSharp.Fuzzy.FuzzyFunctionType functionType,System.Int32 radius,JYPPX.OpenCvSharp.Core.Mat kernel,System.Int32 channels)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Fuzzy/FuzzyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/fuzzy-guide.md"
+        },
+        {
+          "ordinal": 14,
+          "upstreamIdentity": "cv.ft.inpaint(Mat image;Mat mask;Mat output[/O];int radius;int function;int algorithm)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_fuzzy_inpaint"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void Inpaint(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat mask,JYPPX.OpenCvSharp.Core.Mat output,System.Int32 radius,JYPPX.OpenCvSharp.Fuzzy.FuzzyFunctionType functionType,JYPPX.OpenCvSharp.Fuzzy.FuzzyInpaintAlgorithm algorithm)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Fuzzy/FuzzyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/fuzzy-guide.md"
+        },
+        {
+          "ordinal": 15,
+          "upstreamIdentity": "cv.ft.filter(Mat image;Mat kernel;Mat output[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_fuzzy_filter"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void Filter(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat kernel,JYPPX.OpenCvSharp.Core.Mat output)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Fuzzy/FuzzyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/fuzzy-guide.md"
+        }
+      ]
+    }
+  ]
+}

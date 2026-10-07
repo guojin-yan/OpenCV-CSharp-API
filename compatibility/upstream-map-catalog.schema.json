@@ -22,17 +22,17 @@
         "unexplainedMissingAllowed": { "const": false }
       }
     },
-    "moduleCount": { "const": 29 },
+    "moduleCount": { "const": 30 },
     "maps": {
       "type": "array",
-      "minItems": 29,
-      "maxItems": 29,
+      "minItems": 30,
+      "maxItems": 30,
       "items": {
         "type": "object",
         "additionalProperties": false,
         "required": [ "id", "repository", "generatorProject", "extractorScript", "generationScript", "semanticGuard", "scope", "artifacts", "evidenceContract" ],
         "properties": {
-          "id": { "enum": [ "calib3d", "core", "dnn", "features", "highgui", "imgcodecs", "imgproc", "ml", "objdetect", "photo", "stitching", "tracking", "video", "videoio", "xphoto", "ximgproc", "optflow", "bgsegm", "face", "quality", "img_hash", "line_descriptor", "freetype", "alphamat", "intensity_transform", "plot", "bioinspired", "phase_unwrapping", "hfs" ] },
+          "id": { "enum": [ "calib3d", "core", "dnn", "features", "highgui", "imgcodecs", "imgproc", "ml", "objdetect", "photo", "stitching", "tracking", "video", "videoio", "xphoto", "ximgproc", "optflow", "bgsegm", "face", "quality", "img_hash", "line_descriptor", "freetype", "alphamat", "intensity_transform", "plot", "bioinspired", "phase_unwrapping", "hfs", "fuzzy" ] },
           "repository": { "enum": [ "opencv", "opencv_contrib" ] },
           "generatorProject": { "type": "string", "pattern": "^tools/[A-Za-z0-9]+UpstreamMap$" },
           "extractorScript": { "$ref": "#/$defs/repositoryPath" },

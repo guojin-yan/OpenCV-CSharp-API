@@ -1,0 +1,236 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/fuzzy.hpp contrib public header closure from parser-emitted headers",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact Fuzzy wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "cv.ft.FT02D_components(Mat matrix;Mat kernel;Mat components[/O];Mat mask=Mat())->void",
+      "classification": "implemented",
+      "reason": "Explicit Fuzzy declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FUZZY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_fuzzy_ft02d_components"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void FT02DComponents(JYPPX.OpenCvSharp.Core.Mat matrix,JYPPX.OpenCvSharp.Core.Mat kernel,JYPPX.OpenCvSharp.Core.Mat components,JYPPX.OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.ft.FT02D_inverseFT(Mat components;Mat kernel;Mat output[/O];int width;int height)->void",
+      "classification": "implemented",
+      "reason": "Explicit Fuzzy declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FUZZY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_fuzzy_ft02d_inverse_ft"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void FT02DInverseFT(JYPPX.OpenCvSharp.Core.Mat components,JYPPX.OpenCvSharp.Core.Mat kernel,JYPPX.OpenCvSharp.Core.Mat output,System.Int32 width,System.Int32 height)"
+      ]
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.ft.FT02D_process(Mat matrix;Mat kernel;Mat output[/O];Mat mask=Mat())->void",
+      "classification": "implemented",
+      "reason": "Explicit Fuzzy declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FUZZY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_fuzzy_ft02d_process"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void FT02DProcess(JYPPX.OpenCvSharp.Core.Mat matrix,JYPPX.OpenCvSharp.Core.Mat kernel,JYPPX.OpenCvSharp.Core.Mat output,JYPPX.OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.ft.FT02D_iteration(Mat matrix;Mat kernel;Mat output[/O];Mat mask;Mat maskOutput[/O];bool firstStop)->int",
+      "classification": "implemented",
+      "reason": "Explicit Fuzzy declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FUZZY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_fuzzy_ft02d_iteration"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Int32 FT02DIteration(JYPPX.OpenCvSharp.Core.Mat matrix,JYPPX.OpenCvSharp.Core.Mat kernel,JYPPX.OpenCvSharp.Core.Mat output,JYPPX.OpenCvSharp.Core.Mat mask,JYPPX.OpenCvSharp.Core.Mat? maskOutput=null,System.Boolean firstStop=true)"
+      ]
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.ft.FT02D_FL_process(Mat matrix;int radius[/C];Mat output[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit Fuzzy declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FUZZY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_fuzzy_ft02d_fl_process"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void FT02DFLProcess(JYPPX.OpenCvSharp.Core.Mat matrix,System.Int32 radius,JYPPX.OpenCvSharp.Core.Mat output)"
+      ]
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.ft.FT02D_FL_process_float(Mat matrix;int radius[/C];Mat output[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit Fuzzy declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FUZZY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_fuzzy_ft02d_fl_process_float"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void FT02DFLProcessFloat(JYPPX.OpenCvSharp.Core.Mat matrix,System.Int32 radius,JYPPX.OpenCvSharp.Core.Mat output)"
+      ]
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.ft.FT12D_components(Mat matrix;Mat kernel;Mat components[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit Fuzzy declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FUZZY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_fuzzy_ft12d_components"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void FT12DComponents(JYPPX.OpenCvSharp.Core.Mat matrix,JYPPX.OpenCvSharp.Core.Mat kernel,JYPPX.OpenCvSharp.Core.Mat components)"
+      ]
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.ft.FT12D_polynomial(Mat matrix;Mat kernel;Mat c00[/O];Mat c10[/O];Mat c01[/O];Mat components[/O];Mat mask=Mat())->void",
+      "classification": "implemented",
+      "reason": "Explicit Fuzzy declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FUZZY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_fuzzy_ft12d_polynomial"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void FT12DPolynomial(JYPPX.OpenCvSharp.Core.Mat matrix,JYPPX.OpenCvSharp.Core.Mat kernel,JYPPX.OpenCvSharp.Core.Mat c00,JYPPX.OpenCvSharp.Core.Mat c10,JYPPX.OpenCvSharp.Core.Mat c01,JYPPX.OpenCvSharp.Core.Mat components,JYPPX.OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.ft.FT12D_createPolynomMatrixVertical(int radius;Mat matrix[/O];int chn[/C])->void",
+      "classification": "implemented",
+      "reason": "Explicit Fuzzy declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FUZZY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_fuzzy_ft12d_create_polynom_matrix_vertical"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void FT12DCreatePolynomMatrixVertical(System.Int32 radius,JYPPX.OpenCvSharp.Core.Mat matrix,System.Int32 channels)"
+      ]
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.ft.FT12D_createPolynomMatrixHorizontal(int radius;Mat matrix[/O];int chn[/C])->void",
+      "classification": "implemented",
+      "reason": "Explicit Fuzzy declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FUZZY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_fuzzy_ft12d_create_polynom_matrix_horizontal"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void FT12DCreatePolynomMatrixHorizontal(System.Int32 radius,JYPPX.OpenCvSharp.Core.Mat matrix,System.Int32 channels)"
+      ]
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.ft.FT12D_process(Mat matrix;Mat kernel;Mat output[/O];Mat mask=Mat())->void",
+      "classification": "implemented",
+      "reason": "Explicit Fuzzy declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FUZZY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_fuzzy_ft12d_process"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void FT12DProcess(JYPPX.OpenCvSharp.Core.Mat matrix,JYPPX.OpenCvSharp.Core.Mat kernel,JYPPX.OpenCvSharp.Core.Mat output,JYPPX.OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.ft.FT12D_inverseFT(Mat components;Mat kernel;Mat output[/O];int width;int height)->void",
+      "classification": "implemented",
+      "reason": "Explicit Fuzzy declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FUZZY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_fuzzy_ft12d_inverse_ft"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void FT12DInverseFT(JYPPX.OpenCvSharp.Core.Mat components,JYPPX.OpenCvSharp.Core.Mat kernel,JYPPX.OpenCvSharp.Core.Mat output,System.Int32 width,System.Int32 height)"
+      ]
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.ft.createKernel(Mat A;Mat B;Mat kernel[/O];int chn[/C])->void",
+      "classification": "implemented",
+      "reason": "Explicit Fuzzy declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FUZZY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_fuzzy_create_kernel_from_functions"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void CreateKernel(JYPPX.OpenCvSharp.Core.Mat functionX,JYPPX.OpenCvSharp.Core.Mat functionY,JYPPX.OpenCvSharp.Core.Mat kernel,System.Int32 channels)"
+      ]
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.ft.createKernel(int function;int radius;Mat kernel[/O];int chn[/C])->void",
+      "classification": "implemented",
+      "reason": "Explicit Fuzzy declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FUZZY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_fuzzy_create_kernel"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void CreateKernel(JYPPX.OpenCvSharp.Fuzzy.FuzzyFunctionType functionType,System.Int32 radius,JYPPX.OpenCvSharp.Core.Mat kernel,System.Int32 channels)"
+      ]
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.ft.inpaint(Mat image;Mat mask;Mat output[/O];int radius;int function;int algorithm)->void",
+      "classification": "implemented",
+      "reason": "Explicit Fuzzy declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FUZZY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_fuzzy_inpaint"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void Inpaint(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat mask,JYPPX.OpenCvSharp.Core.Mat output,System.Int32 radius,JYPPX.OpenCvSharp.Fuzzy.FuzzyFunctionType functionType,JYPPX.OpenCvSharp.Fuzzy.FuzzyInpaintAlgorithm algorithm)"
+      ]
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.ft.filter(Mat image;Mat kernel;Mat output[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit Fuzzy declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FUZZY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_fuzzy_filter"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Fuzzy.FuzzyCv2|method|public;static|System.Void Filter(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat kernel,JYPPX.OpenCvSharp.Core.Mat output)"
+      ]
+    },
+    {
+      "ordinal": 16,
+      "identity": "enum cv.ft.<unnamed>[const cv.ft.LINEAR=1;const cv.ft.SINUS=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FUZZY=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 17,
+      "identity": "enum cv.ft.<unnamed>[const cv.ft.ONE_STEP=1;const cv.ft.MULTI_STEP=2;const cv.ft.ITERATIVE=3]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FUZZY=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}

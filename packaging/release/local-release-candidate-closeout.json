@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/6cdf0a0505af74bd",
-  "SourceIdentity": "sha256:6cdf0a0505af74bda1c1d6892ef375bce7c2350eafc070a0a9ec660bb7c90e1c",
+  "CandidateId": "local-closeout/sha256/2ce49ca0fb826cfe",
+  "SourceIdentity": "sha256:2ce49ca0fb826cfe6349603b98f5c516226975e22c1002a3d2006250ac88cf49",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1979,
-    "Sha256": "6cdf0a0505af74bda1c1d6892ef375bce7c2350eafc070a0a9ec660bb7c90e1c",
+    "FileCount": 1989,
+    "Sha256": "2ce49ca0fb826cfe6349603b98f5c516226975e22c1002a3d2006250ac88cf49",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -752,6 +752,31 @@
       "Length": 1428
     },
     {
+      "Path": "compatibility/fuzzy-implemented-families.json",
+      "Sha256": "b68a14ca125d787858df3104894cad6217f6b7c6adf6e6d3b708251a57911ecd",
+      "Length": 13914
+    },
+    {
+      "Path": "compatibility/fuzzy-upstream-classifications.json",
+      "Sha256": "28093d968379de83755acd8d7954de507a57aee0fc83ce0a8cfea6034f671133",
+      "Length": 12534
+    },
+    {
+      "Path": "compatibility/fuzzy-upstream-map.txt",
+      "Sha256": "659ae4aadea20bfa86991a51db72c1c7d5346730270f246089a78deba29b53c8",
+      "Length": 8825
+    },
+    {
+      "Path": "compatibility/fuzzy-upstream-raw.json",
+      "Sha256": "bdc93a34f8202dbd996ceab17ce9a2fa1647c4cf2442275ee951865440a5d572",
+      "Length": 26874
+    },
+    {
+      "Path": "compatibility/fuzzy-upstream-summary.json",
+      "Sha256": "e95fedaaa832b1451deaef58f2cbd34eac9ccb61416d876a3ce5030595eb8151",
+      "Length": 1416
+    },
+    {
       "Path": "compatibility/hfs-implemented-families.json",
       "Sha256": "2b9bfd521b985cd0681773851099fd95f78c52bc2cd6b481f7b60b842ccd440c",
       "Length": 12482
@@ -1183,18 +1208,18 @@
     },
     {
       "Path": "compatibility/upstream-map-catalog.json",
-      "Sha256": "ebef5e7d7538d7299b58e8f7ed8211b51fb6ed36471990975288e06024242d5c",
-      "Length": 103773
+      "Sha256": "4e251e9b6c58c5580dc0b1a893dfafb1fc3fca64b17b794d1902f5968b57185a",
+      "Length": 106731
     },
     {
       "Path": "compatibility/upstream-map-catalog.schema.json",
-      "Sha256": "3e6e492dc6842201fba49b3c6d12f6d56f2e095e03780d9f58d442b3b45c77d0",
-      "Length": 5772
+      "Sha256": "ec4347cff55041c229d1ae4d7e1953d1ab3944aba0c7c2d691152d538eac668b",
+      "Length": 5781
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "5825de6e7841e4c1bee2a41b77837ad00901142832fb4cd9da8b9b1aa0bfc56b",
-      "Length": 24537
+      "Sha256": "024425ac91712e8c084f7e4e27e131a02a72dca69960d5a2ca374404e1b9b407",
+      "Length": 26261
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -1390,6 +1415,11 @@
       "Path": "docs/articles/features-upstream-parity-guide.md",
       "Sha256": "309043ac4ad1d80ffa585cbdb23659d831d6160d995370668a908c0fb9cd5757",
       "Length": 4172
+    },
+    {
+      "Path": "docs/articles/fuzzy-guide.md",
+      "Sha256": "6acbcd6e592c2c00508a3b35d0b5d8f005d4ec39661f079517d9d6ed114207ba",
+      "Length": 2898
     },
     {
       "Path": "docs/articles/generic-linux-musl-feasibility-adr.md",
@@ -1588,8 +1618,8 @@
     },
     {
       "Path": "docs/articles/upstream-map-toolchain.md",
-      "Sha256": "c0f7e42f67824c9fe8666ca411b13093cb309c7dc13d90d0c02b6b7f04636587",
-      "Length": 2971
+      "Sha256": "865f4417359da7f2f0a1bfdcdf817681e533f02f8cc8090fee7bec114e566f0d",
+      "Length": 3367
     },
     {
       "Path": "docs/articles/v501-modern-api-preview-guide.md",
@@ -2043,8 +2073,8 @@
     },
     {
       "Path": "scripts/Generate-ContribUpstreamMap.ps1",
-      "Sha256": "2dd5ca7b85ba8e3e98f380c27a2bebda505f8205451c3dd68bb265dcaaa4f609",
-      "Length": 48003
+      "Sha256": "b190449a4a53016adc34cb04d742df8527043001596876df17fdfd1cb1e2d976",
+      "Length": 51239
     },
     {
       "Path": "scripts/Generate-CoreUpstreamMap.ps1",
@@ -2070,6 +2100,11 @@
       "Path": "scripts/Generate-FreetypeUpstreamMap.ps1",
       "Sha256": "065060709ea65663d0143b0b31e92832f0ccffa76d4fbc86a256390a3191e21c",
       "Length": 302
+    },
+    {
+      "Path": "scripts/Generate-FuzzyUpstreamMap.ps1",
+      "Sha256": "3d62f2755063193f5fb35c232eb2b2f1425669cd610d1e18364fe3ad3d8b07a9",
+      "Length": 341
     },
     {
       "Path": "scripts/Generate-HfsUpstreamMap.ps1",
@@ -2268,8 +2303,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "cc50f110862235af1d25abe35e832fae35c6f91f1c1a6d0945c2326eb5407dd7",
-      "Length": 82362
+      "Sha256": "dff43017509640d4425d249b23d01e507dc4ee9c41d17c808656315a053a919e",
+      "Length": 83412
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -2283,8 +2318,8 @@
     },
     {
       "Path": "scripts/New-UpstreamMapCatalog.ps1",
-      "Sha256": "40d357cc4aa480f47e3b8f436e5a77eea344d992ecb3e1a1c11a42835256db3e",
-      "Length": 9167
+      "Sha256": "544979b4469e15ee2dd2270c61e2af043456bb4f40422a40307871ac8a13f8f0",
+      "Length": 9253
     },
     {
       "Path": "scripts/Test-AlphaMatUpstreamMap.ps1",
@@ -2375,6 +2410,11 @@
       "Path": "scripts/Test-FreetypeUpstreamMap.ps1",
       "Sha256": "147bf4949da1a41e16ae98830b4d3c0be2a615efbaa1e4e549e0c45e002b32cb",
       "Length": 2555
+    },
+    {
+      "Path": "scripts/Test-FuzzyUpstreamMap.ps1",
+      "Sha256": "c257cb02b8216aa94afce3114117fcc22024e43b0caf4683f8a992e979eb4aa8",
+      "Length": 7273
     },
     {
       "Path": "scripts/Test-GenericLinuxArm64PreviewMatrix.ps1",
@@ -2623,8 +2663,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "637a6f047f9e0c9dad9b7930ee156ba209e47b303811bbcf8acd463334b41999",
-      "Length": 79964
+      "Sha256": "083ed754406db1e0524112432225db667ab5949453a9534feb318f5115eb7d62",
+      "Length": 81014
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -2708,8 +2748,8 @@
     },
     {
       "Path": "scripts/Test-UpstreamMapCatalog.ps1",
-      "Sha256": "c052f0ab16fa521246ab21aca091c16d0d624b04689540583fb24c87581141e5",
-      "Length": 14891
+      "Sha256": "290cab3452fcc593278e6c2e5fcfc38e5f4907892080d2960244d26d14deb864",
+      "Length": 14899
     },
     {
       "Path": "scripts/Test-V501ChangeLedger.ps1",
@@ -2762,6 +2802,11 @@
       "Length": 28740
     },
     {
+      "Path": "src/OpenCvSharp.Native/include/open_cv_sharp/fuzzy/fuzzy.h",
+      "Sha256": "d8394a0dd26366a33c7ce85e896c4ab10ef87449e5289089d64eb6ac2873b044",
+      "Length": 3283
+    },
+    {
       "Path": "src/OpenCvSharp.Native/include/open_cv_sharp/hfs/hfs.h",
       "Sha256": "5a39f7f72279976e14678b10bbe7c9581638e067daed90e41529852b386a6ea8",
       "Length": 1678
@@ -2785,6 +2830,11 @@
       "Path": "src/OpenCvSharp.Native/src/bioinspired/bioinspired_handles.h",
       "Sha256": "a9cc4d21009634e2df97c9f6f28014d637b88e83665162384c2bd59eeaedcb0d",
       "Length": 904
+    },
+    {
+      "Path": "src/OpenCvSharp.Native/src/fuzzy/fuzzy.cpp",
+      "Sha256": "c3b9158d99890023ad5f0a44cfa1ec1c46b0b6aed4efd5f73dd57018e6e085ea",
+      "Length": 18426
     },
     {
       "Path": "src/OpenCvSharp.Native/src/hfs/hfs.cpp",
@@ -2882,6 +2932,21 @@
       "Length": 5898
     },
     {
+      "Path": "src/OpenCvSharp/Fuzzy/FuzzyCv2.cs",
+      "Sha256": "4fd08b04d4724ff505c6cf4b13cb860c47aeabc571e9c940e90c776e628228fe",
+      "Length": 23645
+    },
+    {
+      "Path": "src/OpenCvSharp/Fuzzy/FuzzyFunctionType.cs",
+      "Sha256": "b1806240effeed35c16997c26229b9ee78405284f797fd5aa6b0cc1435d7d89f",
+      "Length": 380
+    },
+    {
+      "Path": "src/OpenCvSharp/Fuzzy/FuzzyInpaintAlgorithm.cs",
+      "Sha256": "9a167c80f2a64d1b9bfe0488efbb5711d17cac46140e627d64650e8e788a451e",
+      "Length": 480
+    },
+    {
       "Path": "src/OpenCvSharp/Hfs/HfsCv2.cs",
       "Sha256": "ff14c17da53077e82159d042f0b3217fa40a1283e9d869e69de8c1f5f4368af4",
       "Length": 772
@@ -2960,6 +3025,16 @@
       "Path": "src/OpenCvSharp/Internal/Interop/NativeMatchesInfoHandle.cs",
       "Sha256": "068662d2225d7d2f9d437279b4e4e3c320a6f76aa47cf3317aadb00c8442d278",
       "Length": 939
+    },
+    {
+      "Path": "src/OpenCvSharp/Internal/Interop/NativeMethods.Fuzzy.DllImport.cs",
+      "Sha256": "1331c366f14b133408f2688e5b6da667966f17be099268609200a786bd1abadd",
+      "Length": 3927
+    },
+    {
+      "Path": "src/OpenCvSharp/Internal/Interop/NativeMethods.Fuzzy.LibraryImport.cs",
+      "Sha256": "08cf11d9078f3a2e5296480ff40208e200337c1f704bc8806f4c9999736855e6",
+      "Length": 4006
     },
     {
       "Path": "src/OpenCvSharp/Internal/Interop/NativeMethods.Hfs.DllImport.cs",
@@ -3100,6 +3175,11 @@
       "Path": "tests/OpenCvSharp.Tests/Core/CodecBufferLeaseTests.cs",
       "Sha256": "8624b65e676283fd284b91f3a3056dfe1cb74b3811836a9fca88502db32e253e",
       "Length": 5289
+    },
+    {
+      "Path": "tests/OpenCvSharp.Tests/Fuzzy/FuzzyTests.cs",
+      "Sha256": "ddff5bd02286b462a29621ca686b0cfea51b0d22fd9bd135e8fea7b69465c7c2",
+      "Length": 22493
     },
     {
       "Path": "tests/OpenCvSharp.Tests/Hfs/HfsTests.cs",
@@ -3300,6 +3380,21 @@
       "Path": "tools/FreetypeUpstreamMap/extract_freetype.py",
       "Sha256": "b7959c933100d2e449b50eec105be0571061a736fc722f7baec3cb481cb654d4",
       "Length": 231
+    },
+    {
+      "Path": "tools/FuzzyUpstreamMap/FuzzyUpstreamMap.csproj",
+      "Sha256": "727d0721f11212e08035cc59275b0226c0092f3ea92492d621c3d25879ef974f",
+      "Length": 273
+    },
+    {
+      "Path": "tools/FuzzyUpstreamMap/Program.cs",
+      "Sha256": "1b9740738ba3470652b39117248ca3e9525f4b5ab39bf74d2a3289254d9bd7cc",
+      "Length": 100
+    },
+    {
+      "Path": "tools/FuzzyUpstreamMap/extract_fuzzy.py",
+      "Sha256": "475b44407fbe262058115a6d7073c2b85aca528286e7f22b45a74fcf02771390",
+      "Length": 228
     },
     {
       "Path": "tools/HfsUpstreamMap/HfsUpstreamMap.csproj",
@@ -3608,8 +3703,8 @@
     },
     {
       "Path": "tools/XImgProcUpstreamMap/extract_ximgproc.py",
-      "Sha256": "5d957341966300e0db27becb5a8c249ed2a0f7476d2d0a276b3a18b92bb52c36",
-      "Length": 5438
+      "Sha256": "8001d642bf74e4a7058a0bb06dc89dcfff8509186b9bc795e059d4357d097ff4",
+      "Length": 5465
     },
     {
       "Path": "tools/XPhotoUpstreamMap/Program.cs",

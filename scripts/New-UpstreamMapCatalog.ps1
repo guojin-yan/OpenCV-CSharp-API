@@ -36,7 +36,8 @@ $definitions = @(
     [pscustomobject]@{ Id = 'plot'; Tool = 'Plot'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'bioinspired'; Tool = 'BioInspired'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'phase_unwrapping'; Tool = 'PhaseUnwrapping'; Repository = 'opencv_contrib' },
-    [pscustomobject]@{ Id = 'hfs'; Tool = 'Hfs'; Repository = 'opencv_contrib' }
+    [pscustomobject]@{ Id = 'hfs'; Tool = 'Hfs'; Repository = 'opencv_contrib' },
+    [pscustomobject]@{ Id = 'fuzzy'; Tool = 'Fuzzy'; Repository = 'opencv_contrib' }
 )
 
 function Get-HeaderRows {
