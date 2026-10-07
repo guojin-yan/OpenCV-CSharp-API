@@ -39,6 +39,90 @@ namespace JYPPX.OpenCvSharp.Tests.XImgProc
         }
 
         [Fact]
+        public void QuaternionImageOperationsMatchOpenCvResults()
+        {
+            using (var bgr = new Mat(1, 1, MatType.CV_8UC3))
+            {
+                bgr.SetValue(0, 0, new Vec3b(30, 20, 10));
+                using (var quaternionImage = XImgProcCv2.CreateQuaternionImage(bgr))
+                {
+                    Assert.Equal(MatType.CV_64FC4, quaternionImage.Type);
+                    Assert.Equal(new Vec4d(0, 10, 20, 30), quaternionImage.GetValue<Vec4d>(0, 0));
+                }
+            }
+
+            using (var quaternion = new Mat(1, 1, MatType.CV_64FC4))
+            {
+                quaternion.SetValue(0, 0, new Vec4d(1, 2, 3, 4));
+                using (var conjugate = XImgProcCv2.QConj(quaternion))
+                    Assert.Equal(new Vec4d(1, -2, -3, -4), conjugate.GetValue<Vec4d>(0, 0));
+
+                quaternion.SetValue(0, 0, new Vec4d(1, 2, 2, 4));
+                using (var unitary = XImgProcCv2.QUnitary(quaternion))
+                {
+                    Vec4d value = unitary.GetValue<Vec4d>(0, 0);
+                    Assert.Equal(0.2, value.V0, 12);
+                    Assert.Equal(0.4, value.V1, 12);
+                    Assert.Equal(0.4, value.V2, 12);
+                    Assert.Equal(0.8, value.V3, 12);
+                }
+
+                using (var second = new Mat(1, 1, MatType.CV_64FC4))
+                {
+                    quaternion.SetValue(0, 0, new Vec4d(1, 2, 3, 4));
+                    second.SetValue(0, 0, new Vec4d(5, 6, 7, 8));
+                    using (var product = XImgProcCv2.QMultiply(quaternion, second))
+                        Assert.Equal(new Vec4d(-60, 12, 30, 24), product.GetValue<Vec4d>(0, 0));
+                }
+            }
+
+            using (var source = new Mat(2, 2, MatType.CV_64FC4))
+            {
+                source.SetValue(0, 0, new Vec4d(1, 2, 3, 4));
+                source.SetValue(0, 1, new Vec4d(2, 1, 0, -1));
+                source.SetValue(1, 0, new Vec4d(-2, 0.5, 1, 3));
+                source.SetValue(1, 1, new Vec4d(0, 1, -1, 2));
+                using (var transformed = XImgProcCv2.QDft(source))
+                using (var restored = XImgProcCv2.QDft(transformed, DftFlags.Inverse))
+                {
+                    for (int row = 0; row < source.Rows; row++)
+                    {
+                        for (int col = 0; col < source.Cols; col++)
+                        {
+                            Vec4d expected = source.GetValue<Vec4d>(row, col);
+                            Vec4d actual = restored.GetValue<Vec4d>(row, col);
+                            for (int channel = 0; channel < 4; channel++)
+                                Assert.Equal(expected[channel], actual[channel], 9);
+                        }
+                    }
+                }
+            }
+        }
+
+        [Fact]
+        public void QuaternionImageOperationsValidateManagedArguments()
+        {
+            using (var valid = new Mat(2, 2, MatType.CV_64FC4))
+            using (var wrongChannels = new Mat(2, 2, MatType.CV_64FC3))
+            using (var wrongDepth = new Mat(2, 2, MatType.CV_32FC4))
+            using (var mismatchedSize = new Mat(3, 2, MatType.CV_64FC4))
+            using (var nonOptimalSize = new Mat(7, 2, MatType.CV_64FC4))
+            using (var color = new Mat(2, 2, MatType.CV_8UC3))
+            using (var gray = new Mat(2, 2, MatType.CV_8UC1))
+            using (var destination = new Mat())
+            {
+                Assert.Throws<ArgumentNullException>(() => XImgProcCv2.CreateQuaternionImage(null!, destination));
+                Assert.Throws<ArgumentException>(() => XImgProcCv2.CreateQuaternionImage(gray));
+                Assert.Throws<ArgumentNullException>(() => XImgProcCv2.QConj(null!, destination));
+                Assert.Throws<ArgumentException>(() => XImgProcCv2.QConj(wrongChannels));
+                Assert.Throws<ArgumentException>(() => XImgProcCv2.QUnitary(wrongDepth));
+                Assert.Throws<ArgumentException>(() => XImgProcCv2.QMultiply(valid, mismatchedSize));
+                Assert.Throws<ArgumentOutOfRangeException>(() => XImgProcCv2.QDft(valid, destination, DftFlags.Scale));
+                Assert.Throws<ArgumentException>(() => XImgProcCv2.QDft(nonOptimalSize));
+            }
+        }
+
+        [Fact]
         public void StaticFunctionsValidateManagedArguments()
         {
             using (var mat = new Mat())

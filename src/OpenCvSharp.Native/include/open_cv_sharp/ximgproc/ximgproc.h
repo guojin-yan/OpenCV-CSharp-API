@@ -85,6 +85,29 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ximgproc_ni_black_thresho
     int binarization_method,
     double r);
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ximgproc_create_quaternion_image(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ximgproc_qconj(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ximgproc_qunitary(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ximgproc_qmultiply(
+    const jyppx_ocv_mat* src1,
+    const jyppx_ocv_mat* src2,
+    jyppx_ocv_mat* dst);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ximgproc_qdft(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    int flags,
+    int side_left);
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ximgproc_thinning(
     const jyppx_ocv_mat* src,
     jyppx_ocv_mat* dst,

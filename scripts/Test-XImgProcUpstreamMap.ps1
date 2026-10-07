@@ -10,7 +10,12 @@ $raw = Get-Content (Join-Path $repo 'compatibility/ximgproc-upstream-raw.json') 
 $classes = Get-Content (Join-Path $repo 'compatibility/ximgproc-upstream-classifications.json') -Raw | ConvertFrom-Json
 $summary = Get-Content (Join-Path $repo 'compatibility/ximgproc-upstream-summary.json') -Raw | ConvertFrom-Json
 if ([int]$raw.declarationCount -ne 249 -or @($classes.declarations).Count -ne 249) { throw 'XImgProc declaration closure drifted.' }
-if ([int]$summary.classificationCounts.missing -ne 0 -or [int]$summary.classificationCounts.implemented -le 0) { throw 'XImgProc callable partition drifted.' }
+if ([int]$summary.classificationCounts.missing -ne 0 -or [int]$summary.classificationCounts.implemented -ne 71 -or [int]$summary.classificationCounts.'intentionally-omitted' -ne 141) { throw 'XImgProc callable partition drifted.' }
+$reviewedOrdinals = [int[]](@(41) + (72..95) + @(111,113,151,184) + (197..204))
+$reviewedRows = @($classes.declarations | Where-Object { [int]$_.ordinal -in $reviewedOrdinals })
+if ($reviewedRows.Count -ne 37 -or @($reviewedRows | Where-Object classification -ne 'implemented').Count -ne 0) { throw 'XImgProc existing property/factory evidence review drifted.' }
+$quaternionRows = @($classes.declarations | Where-Object { [int]$_.ordinal -in @(0,1,2,3,4) })
+if ($quaternionRows.Count -ne 5 -or @($quaternionRows | Where-Object { $_.classification -ne 'implemented' -or @($_.nativeEntrypoints).Count -ne 1 -or @($_.managedMembers).Count -lt 2 }).Count -ne 0) { throw 'XImgProc quaternion callable coverage drifted.' }
 $native = @(Get-Content (Join-Path $repo 'src/OpenCvSharp.Native/generated/native_abi_manifest.txt') | Where-Object { $_ -match '^jyppx_ocv_ximgproc_' } | ForEach-Object { ($_ -split '\|')[0] })
 $managed = @(Get-Content (Join-Path $repo 'compatibility/managed-public-api.txt') | Where-Object { $_ -match 'JYPPX\.OpenCvSharp\.XImgProc' })
 foreach ($row in @($classes.declarations)) {

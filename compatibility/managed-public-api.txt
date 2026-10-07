@@ -3,7 +3,7 @@ schema-version=1
 assembly=JYPPX.OpenCV.CSharp.API
 target-framework=net8.0
 type-count=647
-member-count=7000
+member-count=7010
 namespace-count=41
 nullable-shape=included
 
@@ -7336,6 +7336,7 @@ MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvS
 MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat BilateralTextureFilter(JYPPX.OpenCvSharp.Core.Mat src,System.Int32 fr=3,System.Int32 numIter=1,System.Double sigmaAlpha=-1,System.Double sigmaAvg=-1)
 MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat ContourSampling(JYPPX.OpenCvSharp.Core.Mat src,System.Int32 nbElt)
 MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat CovarianceEstimation(JYPPX.OpenCvSharp.Core.Mat src,System.Int32 windowRows,System.Int32 windowCols)
+MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat CreateQuaternionImage(JYPPX.OpenCvSharp.Core.Mat src)
 MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat DtFilter(JYPPX.OpenCvSharp.Core.Mat guide,JYPPX.OpenCvSharp.Core.Mat src,System.Double sigmaSpatial,System.Double sigmaColor,JYPPX.OpenCvSharp.XImgProc.DomainTransformFilterMode mode=NormalizedConvolution,System.Int32 numIters=3)
 MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat EdgePreservingFilter(JYPPX.OpenCvSharp.Core.Mat src,System.Int32 d,System.Double threshold)
 MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat FastBilateralSolverFilter(JYPPX.OpenCvSharp.Core.Mat guide,JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat confidence,System.Double sigmaSpatial=8,System.Double sigmaLuma=8,System.Double sigmaChroma=8,System.Double lambda=128,System.Int32 numIter=25,System.Double maxTol=1E-05)
@@ -7352,6 +7353,10 @@ MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvS
 MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat L0Smooth(JYPPX.OpenCvSharp.Core.Mat src,System.Double lambda=0.02,System.Double kappa=2)
 MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat NiBlackThreshold(JYPPX.OpenCvSharp.Core.Mat src,System.Double maxValue,JYPPX.OpenCvSharp.ImgProc.ThresholdTypes type,System.Int32 blockSize,System.Double k,JYPPX.OpenCvSharp.XImgProc.LocalBinarizationMethods binarizationMethod=NiBlack,System.Double r=128)
 MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat PeiLinNormalization(JYPPX.OpenCvSharp.Core.Mat src)
+MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat QConj(JYPPX.OpenCvSharp.Core.Mat src)
+MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat QDft(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.DftFlags flags=None,System.Boolean sideLeft=true)
+MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat QMultiply(JYPPX.OpenCvSharp.Core.Mat src1,JYPPX.OpenCvSharp.Core.Mat src2)
+MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat QUnitary(JYPPX.OpenCvSharp.Core.Mat src)
 MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat RollingGuidanceFilter(JYPPX.OpenCvSharp.Core.Mat src,System.Int32 d=-1,System.Double sigmaColor=25,System.Double sigmaSpace=3,System.Int32 numOfIter=4,JYPPX.OpenCvSharp.ImgProc.BorderTypes borderType=Default)
 MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat Thinning(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.XImgProc.ThinningTypes thinningType=ZhangSuen)
 MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat TransformFD(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat transform,System.Boolean fdContour=true)
@@ -7389,6 +7394,7 @@ MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void A
 MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void BilateralTextureFilter(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 fr=3,System.Int32 numIter=1,System.Double sigmaAlpha=-1,System.Double sigmaAvg=-1)
 MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void ContourSampling(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 nbElt)
 MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void CovarianceEstimation(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 windowRows,System.Int32 windowCols)
+MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void CreateQuaternionImage(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)
 MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void DtFilter(JYPPX.OpenCvSharp.Core.Mat guide,JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Double sigmaSpatial,System.Double sigmaColor,JYPPX.OpenCvSharp.XImgProc.DomainTransformFilterMode mode=NormalizedConvolution,System.Int32 numIters=3)
 MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void EdgePreservingFilter(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 d,System.Double threshold)
 MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void FastBilateralSolverFilter(JYPPX.OpenCvSharp.Core.Mat guide,JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat confidence,JYPPX.OpenCvSharp.Core.Mat dst,System.Double sigmaSpatial=8,System.Double sigmaLuma=8,System.Double sigmaChroma=8,System.Double lambda=128,System.Int32 numIter=25,System.Double maxTol=1E-05)
@@ -7405,6 +7411,10 @@ MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void J
 MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void L0Smooth(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Double lambda=0.02,System.Double kappa=2)
 MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void NiBlackThreshold(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Double maxValue,JYPPX.OpenCvSharp.ImgProc.ThresholdTypes type,System.Int32 blockSize,System.Double k,JYPPX.OpenCvSharp.XImgProc.LocalBinarizationMethods binarizationMethod=NiBlack,System.Double r=128)
 MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void PeiLinNormalization(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)
+MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void QConj(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)
+MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void QDft(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,JYPPX.OpenCvSharp.Core.DftFlags flags=None,System.Boolean sideLeft=true)
+MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void QMultiply(JYPPX.OpenCvSharp.Core.Mat src1,JYPPX.OpenCvSharp.Core.Mat src2,JYPPX.OpenCvSharp.Core.Mat dst)
+MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void QUnitary(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)
 MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void RollingGuidanceFilter(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 d=-1,System.Double sigmaColor=25,System.Double sigmaSpace=3,System.Int32 numOfIter=4,JYPPX.OpenCvSharp.ImgProc.BorderTypes borderType=Default)
 MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void Thinning(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,JYPPX.OpenCvSharp.XImgProc.ThinningTypes thinningType=ZhangSuen)
 MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void TransformFD(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat transform,JYPPX.OpenCvSharp.Core.Mat dst,System.Boolean fdContour=true)

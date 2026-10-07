@@ -23,6 +23,9 @@
 #include "open_cv_sharp/status.h"
 #include "open_cv_sharp/videoio/videoio.h"
 #include "open_cv_sharp/version.h"
+#if !defined(OPENCV_CSHARP_RUNTIME_PROFILE_MINI)
+#include "open_cv_sharp/ximgproc/ximgproc.h"
+#endif
 
 #include <cmath>
 #include <cstdint>
@@ -157,6 +160,22 @@ namespace
         jyppx_ocv_video_capture_release_handle(capture);
         return 0;
     }
+
+#if !defined(OPENCV_CSHARP_RUNTIME_PROFILE_MINI)
+    int run_ximgproc_quaternion_boundary_smoke()
+    {
+        auto* fake_mat = reinterpret_cast<jyppx_ocv_mat*>(static_cast<std::uintptr_t>(1));
+        if (jyppx_ocv_ximgproc_create_quaternion_image(nullptr, fake_mat) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT ||
+            jyppx_ocv_ximgproc_qconj(nullptr, fake_mat) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT ||
+            jyppx_ocv_ximgproc_qunitary(nullptr, fake_mat) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT ||
+            jyppx_ocv_ximgproc_qmultiply(nullptr, fake_mat, fake_mat) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT ||
+            jyppx_ocv_ximgproc_qdft(nullptr, fake_mat, 0, 1) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT)
+        {
+            return 980;
+        }
+        return 0;
+    }
+#endif
 
     struct NativeMatHandle
     {
@@ -5475,6 +5494,12 @@ int main()
         }
 
 #if !defined(OPENCV_CSHARP_RUNTIME_PROFILE_MINI)
+        int ximgproc_quaternion_status = run_ximgproc_quaternion_boundary_smoke();
+        if (ximgproc_quaternion_status != 0)
+        {
+            return ximgproc_quaternion_status;
+        }
+
         int video_optical_flow_status = run_video_optical_flow_object_smoke();
         if (video_optical_flow_status != 0)
         {

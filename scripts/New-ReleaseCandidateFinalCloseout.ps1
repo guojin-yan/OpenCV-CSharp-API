@@ -901,7 +901,7 @@ function Get-Record {
             NativeFull = [ordered]@{
                 Path = "src/OpenCvSharp.Native/generated/native_abi_manifest.txt"
                 Sha256 = (Get-FileHash -LiteralPath (Join-Path $repo "src/OpenCvSharp.Native/generated/native_abi_manifest.txt") -Algorithm SHA256).Hash.ToLowerInvariant()
-                FunctionCount = 2664
+                FunctionCount = 2669
             }
             NativeMini = [ordered]@{
                 Path = "src/OpenCvSharp.Native/generated/native_abi_mini_manifest.txt"

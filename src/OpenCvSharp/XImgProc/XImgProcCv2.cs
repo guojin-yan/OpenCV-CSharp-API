@@ -12,6 +12,96 @@ namespace JYPPX.OpenCvSharp.XImgProc
     /// </summary>
     public static class XImgProcCv2
     {
+        /// <summary>Converts a three-channel image to a four-channel quaternion image. 将三通道图像转换为四通道四元数图像。</summary>
+        public static void CreateQuaternionImage(Mat src, Mat dst)
+        {
+            ValidateNotNull(src, nameof(src));
+            ValidateNotNull(dst, nameof(dst));
+            ValidateQuaternionImageSource(src);
+            NativeException.ThrowIfError(NativeMethods.XImgProcCreateQuaternionImage(src.NativeHandle, dst.NativeHandle));
+        }
+
+        /// <summary>Converts a three-channel image to a quaternion image and returns a new matrix. 转换为四元数图像并返回新矩阵。</summary>
+        public static Mat CreateQuaternionImage(Mat src)
+        {
+            return CreateOutput(dst => CreateQuaternionImage(src, dst));
+        }
+
+        /// <summary>Computes the conjugate of each quaternion. 计算每个四元数的共轭。</summary>
+        public static void QConj(Mat src, Mat dst)
+        {
+            ValidateNotNull(src, nameof(src));
+            ValidateNotNull(dst, nameof(dst));
+            ValidateQuaternionSource(src, allow32F: true);
+            NativeException.ThrowIfError(NativeMethods.XImgProcQConj(src.NativeHandle, dst.NativeHandle));
+        }
+
+        /// <summary>Computes quaternion conjugates and returns a new matrix. 计算四元数共轭并返回新矩阵。</summary>
+        public static Mat QConj(Mat src)
+        {
+            return CreateOutput(dst => QConj(src, dst));
+        }
+
+        /// <summary>Normalizes each quaternion to unit modulus. 将每个四元数归一化为单位模。</summary>
+        public static void QUnitary(Mat src, Mat dst)
+        {
+            ValidateNotNull(src, nameof(src));
+            ValidateNotNull(dst, nameof(dst));
+            ValidateQuaternionSource(src, allow32F: false);
+            NativeException.ThrowIfError(NativeMethods.XImgProcQUnitary(src.NativeHandle, dst.NativeHandle));
+        }
+
+        /// <summary>Normalizes quaternions and returns a new matrix. 归一化四元数并返回新矩阵。</summary>
+        public static Mat QUnitary(Mat src)
+        {
+            return CreateOutput(dst => QUnitary(src, dst));
+        }
+
+        /// <summary>Multiplies quaternion matrices element by element. 对四元数矩阵逐元素相乘。</summary>
+        public static void QMultiply(Mat src1, Mat src2, Mat dst)
+        {
+            ValidateNotNull(src1, nameof(src1));
+            ValidateNotNull(src2, nameof(src2));
+            ValidateNotNull(dst, nameof(dst));
+            ValidateQuaternionSource(src1, allow32F: false);
+            ValidateQuaternionSource(src2, allow32F: false);
+            bool sameSize = src1.Rows == src2.Rows && src1.Cols == src2.Cols;
+            bool firstIsScalar = src1.Rows == 1 && src1.Cols == 1;
+            bool secondIsScalar = src2.Rows == 1 && src2.Cols == 1;
+            if (!sameSize && !firstIsScalar && !secondIsScalar)
+                throw new ArgumentException("Quaternion matrices must have matching sizes or one operand must be 1x1.", nameof(src2));
+            NativeException.ThrowIfError(NativeMethods.XImgProcQMultiply(src1.NativeHandle, src2.NativeHandle, dst.NativeHandle));
+        }
+
+        /// <summary>Multiplies quaternion matrices and returns a new matrix. 相乘并返回新矩阵。</summary>
+        public static Mat QMultiply(Mat src1, Mat src2)
+        {
+            return CreateOutput(dst => QMultiply(src1, src2, dst));
+        }
+
+        /// <summary>Performs a forward or inverse quaternion DFT. 执行正向或逆向四元数 DFT。</summary>
+        public static void QDft(Mat src, Mat dst, DftFlags flags = DftFlags.None, bool sideLeft = true)
+        {
+            ValidateNotNull(src, nameof(src));
+            ValidateNotNull(dst, nameof(dst));
+            ValidateQuaternionSource(src, allow32F: false);
+            if (flags != DftFlags.None && flags != DftFlags.Inverse)
+            {
+                throw new ArgumentOutOfRangeException(nameof(flags), "Quaternion DFT supports only None or Inverse flags.");
+            }
+            if (Core.Cv2.GetOptimalDftSize(src.Rows) != src.Rows || Core.Cv2.GetOptimalDftSize(src.Cols) != src.Cols)
+            {
+                throw new ArgumentException("Quaternion DFT dimensions must already be optimal DFT sizes.", nameof(src));
+            }
+            NativeException.ThrowIfError(NativeMethods.XImgProcQDft(src.NativeHandle, dst.NativeHandle, (int)flags, sideLeft ? 1 : 0));
+        }
+
+        /// <summary>Performs quaternion DFT and returns a new matrix. 执行四元数 DFT 并返回新矩阵。</summary>
+        public static Mat QDft(Mat src, DftFlags flags = DftFlags.None, bool sideLeft = true)
+        {
+            return CreateOutput(dst => QDft(src, dst, flags, sideLeft));
+        }
+
         /// <summary>Runs local NiBlack-family thresholding. 执行 NiBlack 系列局部阈值。</summary>
         public static void NiBlackThreshold(Mat src, Mat dst, double maxValue, ThresholdTypes type, int blockSize, double k, LocalBinarizationMethods binarizationMethod = LocalBinarizationMethods.NiBlack, double r = 128.0)
         {
@@ -1370,6 +1460,26 @@ namespace JYPPX.OpenCvSharp.XImgProc
             {
                 dst.Dispose();
                 throw;
+            }
+        }
+
+        private static void ValidateQuaternionImageSource(Mat src)
+        {
+            if (src.Empty || src.Dims != 2 || src.Channels != 3 ||
+                (MatType.Depth(src.Type) != MatType.CV_8U && MatType.Depth(src.Type) != MatType.CV_32F && MatType.Depth(src.Type) != MatType.CV_64F))
+            {
+                throw new ArgumentException("Quaternion image source must be a non-empty 2D three-channel CV_8U, CV_32F, or CV_64F Mat.", nameof(src));
+            }
+        }
+
+        private static void ValidateQuaternionSource(Mat src, bool allow32F)
+        {
+            int depth = MatType.Depth(src.Type);
+            if (src.Empty || src.Dims != 2 || src.Channels != 4 ||
+                (depth != MatType.CV_64F && !(allow32F && depth == MatType.CV_32F)))
+            {
+                string depths = allow32F ? "CV_32F or CV_64F" : "CV_64F";
+                throw new ArgumentException($"Quaternion source must be a non-empty 2D four-channel {depths} Mat.", nameof(src));
             }
         }
     }

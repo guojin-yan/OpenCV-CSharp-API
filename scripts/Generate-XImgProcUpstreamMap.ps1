@@ -37,8 +37,33 @@ function Get-NativeEvidence([string]$Owner, [string]$Name) {
     @($nativeEntries | Where-Object { $_ -ceq $expected })
 }
 function Get-ManagedEvidence([string]$Owner, [string]$Name) {
-    $typeName = if ([string]::IsNullOrWhiteSpace($Owner)) { 'XImgProcCv2' } else { $Owner }
     $target = ConvertTo-Pascal $Name
+    $accessor = [regex]::Match($Name, '^(?:get|set)(?<property>[A-Z][A-Za-z0-9_]*)$')
+    if ($accessor.Success) {
+        $propertyName = $accessor.Groups['property'].Value
+        return @($managedEntries | Where-Object {
+            $_.Contains("XImgProc.$Owner|property|", [StringComparison]::Ordinal) -and
+            $_.EndsWith(" $propertyName", [StringComparison]::OrdinalIgnoreCase)
+        } | Sort-Object -Unique)
+    }
+
+    if ($Name -ceq 'setParams' -and $Owner -ceq 'EdgeDrawing') {
+        return @($managedEntries | Where-Object {
+            $_.Contains('XImgProc.EdgeDrawing|property|', [StringComparison]::Ordinal) -and
+            $_.EndsWith(' Params', [StringComparison]::Ordinal)
+        } | Sort-Object -Unique)
+    }
+
+    if ($Owner -ceq 'segmentation' -and $Name -match '^create(?<type>[A-Z][A-Za-z0-9_]*)$') {
+        $managedType = $Matches.type
+        $factory = "Create$managedType"
+        return @($managedEntries | Where-Object {
+            ($_.Contains("XImgProc.$managedType|method|public;static|", [StringComparison]::Ordinal) -and $_.Contains(" $target(", [StringComparison]::Ordinal)) -or
+            ($_.Contains('XImgProc.XImgProcCv2|method|public;static|', [StringComparison]::Ordinal) -and $_.Contains(" $factory(", [StringComparison]::Ordinal))
+        } | Sort-Object -Unique)
+    }
+
+    $typeName = if ([string]::IsNullOrWhiteSpace($Owner)) { 'XImgProcCv2' } else { $Owner }
     @($managedEntries | Where-Object { $_.Contains("XImgProc.$typeName|", [StringComparison]::Ordinal) -and $_.Contains($target, [StringComparison]::OrdinalIgnoreCase) } | Sort-Object -Unique)
 }
 
@@ -85,12 +110,12 @@ $mappingText = $builder.ToString().Replace("`r`n", "`n")
 $implementedRows = @($rows | Where-Object { [string]$_.classification -ceq 'implemented' })
 $omittedRows = @($rows | Where-Object { [string]$_.classification -ceq 'intentionally-omitted' })
 $metadataRows = @($rows | Where-Object { [string]$_.classification -ceq 'non-callable-metadata' })
-$family = [ordered]@{ schemaVersion = 1; upstreamOpenCvVersion = '5.0.0'; status = 'implemented-verified'; managedPublicTypeAdditionCount = 28; managedPublicMemberAdditionCount = 206; families = @([ordered]@{ id = 'ximgproc-wrapper-surface'; rationale = 'Current XImgProc managed/native wrapper declarations with parser-backed callable evidence.'; declarations = @($implementedRows | ForEach-Object { [ordered]@{ ordinal = $_.ordinal; upstreamIdentity = $_.identity; upstreamClassification = $_.classification; nativeEntrypoints = $_.nativeEntrypoints; managedMembers = $_.managedMembers; focusedTest = 'tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs'; nativeSmoke = 'src/OpenCvSharp.Native/tests/native_smoke.cpp'; sample = 'samples/ConsoleSamples/Program.cs'; guide = 'docs/articles/ximgproc-upstream-parity-guide.md' } }) }) }
+$family = [ordered]@{ schemaVersion = 1; upstreamOpenCvVersion = '5.0.0'; status = 'implemented-verified'; managedPublicTypeAdditionCount = 28; managedPublicMemberAdditionCount = 216; families = @([ordered]@{ id = 'ximgproc-wrapper-surface'; rationale = 'Current XImgProc managed/native wrapper declarations with parser-backed callable evidence.'; declarations = @($implementedRows | ForEach-Object { [ordered]@{ ordinal = $_.ordinal; upstreamIdentity = $_.identity; upstreamClassification = $_.classification; nativeEntrypoints = $_.nativeEntrypoints; managedMembers = $_.managedMembers; focusedTest = 'tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs'; nativeSmoke = 'src/OpenCvSharp.Native/tests/native_smoke.cpp'; sample = 'samples/ConsoleSamples/Program.cs'; guide = 'docs/articles/ximgproc-upstream-parity-guide.md' } }) }) }
 $classificationJson = (($classification | ConvertTo-Json -Depth 20) + [Environment]::NewLine)
 $familyJson = (($family | ConvertTo-Json -Depth 20) + [Environment]::NewLine)
 $mappingHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($mappingText))).ToLowerInvariant()
 $familyHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($familyJson))).ToLowerInvariant()
-$summary = [ordered]@{ schemaVersion = 1; generator = 'tools/XImgProcUpstreamMap'; upstreamOpenCvVersion = '5.0.0'; claimedSlice = $classification.claimedSlice; rawExtractionPath = 'compatibility/ximgproc-upstream-raw.json'; classificationPath = 'compatibility/ximgproc-upstream-classifications.json'; mappingPath = 'compatibility/ximgproc-upstream-map.txt'; headerSha256 = [string]$raw.headerSha256; parserSha256 = [string]$raw.parserSha256; mappingSha256 = $mappingHash; declarationCount = [int]$raw.declarationCount; enumCount = [int](@($raw.declarations | Where-Object kind -eq 'enum').Count); classCount = [int](@($raw.declarations | Where-Object kind -eq 'class').Count); callableCount = [int](@($raw.declarations | Where-Object kind -eq 'callable').Count); classificationCounts = [ordered]@{ implemented = [int]$implementedRows.Count; 'intentionally-omitted' = [int]$omittedRows.Count; missing = 0; 'non-callable-metadata' = [int]$metadataRows.Count; unsupported = 0; 'upstream-conditional' = 0 }; nativeEvidenceCount = @($rows.nativeEntrypoints | Where-Object { $_ } | Sort-Object -Unique).Count; managedEvidenceCount = @($rows.managedMembers | Where-Object { $_ } | Sort-Object -Unique).Count; negativeFixtureCount = 15; familyInventoryPath = 'compatibility/ximgproc-implemented-families.json'; familyInventorySha256 = $familyHash; selectedFamilyCount = 1; selectedDeclarationCount = $implementedRows.Count; managedPublicTypeAdditionCount = 28; managedPublicMemberAdditionCount = 206; repositoryWideUpstreamParityClaimed = $false }
+$summary = [ordered]@{ schemaVersion = 1; generator = 'tools/XImgProcUpstreamMap'; upstreamOpenCvVersion = '5.0.0'; claimedSlice = $classification.claimedSlice; rawExtractionPath = 'compatibility/ximgproc-upstream-raw.json'; classificationPath = 'compatibility/ximgproc-upstream-classifications.json'; mappingPath = 'compatibility/ximgproc-upstream-map.txt'; headerSha256 = [string]$raw.headerSha256; parserSha256 = [string]$raw.parserSha256; mappingSha256 = $mappingHash; declarationCount = [int]$raw.declarationCount; enumCount = [int](@($raw.declarations | Where-Object kind -eq 'enum').Count); classCount = [int](@($raw.declarations | Where-Object kind -eq 'class').Count); callableCount = [int](@($raw.declarations | Where-Object kind -eq 'callable').Count); classificationCounts = [ordered]@{ implemented = [int]$implementedRows.Count; 'intentionally-omitted' = [int]$omittedRows.Count; missing = 0; 'non-callable-metadata' = [int]$metadataRows.Count; unsupported = 0; 'upstream-conditional' = 0 }; nativeEvidenceCount = @($rows.nativeEntrypoints | Where-Object { $_ } | Sort-Object -Unique).Count; managedEvidenceCount = @($rows.managedMembers | Where-Object { $_ } | Sort-Object -Unique).Count; negativeFixtureCount = 15; familyInventoryPath = 'compatibility/ximgproc-implemented-families.json'; familyInventorySha256 = $familyHash; selectedFamilyCount = 1; selectedDeclarationCount = $implementedRows.Count; managedPublicTypeAdditionCount = 28; managedPublicMemberAdditionCount = 216; repositoryWideUpstreamParityClaimed = $false }
 $summaryJson = (($summary | ConvertTo-Json -Depth 20) + [Environment]::NewLine)
 foreach ($target in @(@{ Path = (Join-Path $repo 'compatibility/ximgproc-upstream-classifications.json'); Text = $classificationJson },@{ Path = (Join-Path $repo 'compatibility/ximgproc-upstream-map.txt'); Text = $mappingText },@{ Path = (Join-Path $repo 'compatibility/ximgproc-upstream-summary.json'); Text = $summaryJson },@{ Path = (Join-Path $repo 'compatibility/ximgproc-implemented-families.json'); Text = $familyJson })) { if ($Check) { if (-not (Test-Path -LiteralPath $target.Path -PathType Leaf)) { throw "XImgProc generated artifact is stale: $($target.Path)" }; $current = (Get-Content -LiteralPath $target.Path -Raw) -replace "`r`n", "`n"; $expected = [string]$target.Text; if ([IO.Path]::GetExtension($target.Path) -eq '.json') { $current = (($current | ConvertFrom-Json | ConvertTo-Json -Depth 20) + [Environment]::NewLine); $expected = (($expected | ConvertFrom-Json | ConvertTo-Json -Depth 20) + [Environment]::NewLine) }; if ($current -ne $expected) { throw "XImgProc generated artifact is stale: $($target.Path)" } } else { [IO.File]::WriteAllText($target.Path, $target.Text, [Text.UTF8Encoding]::new($false)) } }
 Write-Host "XIMGPROC_UPSTREAM_MAP_OK declarations=$($summary.declarationCount) callable=$($summary.callableCount) implemented=$($summary.classificationCounts.implemented) missing=0 omitted=$($summary.classificationCounts.'intentionally-omitted') fixtures=15 sha256=$mappingHash mode=$(if($Check){'check'}else{'write'})"

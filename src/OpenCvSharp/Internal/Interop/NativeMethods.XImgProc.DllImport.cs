@@ -9,6 +9,21 @@ namespace JYPPX.OpenCvSharp.Internal.Interop
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ximgproc_ni_black_threshold")]
         internal static extern int XImgProcNiBlackThreshold(IntPtr src, IntPtr dst, double maxValue, int type, int blockSize, double k, int binarizationMethod, double r);
 
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ximgproc_create_quaternion_image")]
+        internal static extern int XImgProcCreateQuaternionImage(IntPtr src, IntPtr dst);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ximgproc_qconj")]
+        internal static extern int XImgProcQConj(IntPtr src, IntPtr dst);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ximgproc_qunitary")]
+        internal static extern int XImgProcQUnitary(IntPtr src, IntPtr dst);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ximgproc_qmultiply")]
+        internal static extern int XImgProcQMultiply(IntPtr src1, IntPtr src2, IntPtr dst);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ximgproc_qdft")]
+        internal static extern int XImgProcQDft(IntPtr src, IntPtr dst, int flags, int sideLeft);
+
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ximgproc_thinning")]
         internal static extern int XImgProcThinning(IntPtr src, IntPtr dst, int thinningType);
 

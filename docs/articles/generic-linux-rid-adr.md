@@ -22,7 +22,7 @@ The .NET RID catalog distinguishes portable RIDs from distro-specific RIDs and w
 
 - Exact host or container userspace, architecture, libc, compiler, assembler, CMake, and .NET SDK identity.
 - ELF export/dependency audit for the wrapper and every shipped OpenCV module, including the measured glibc symbol floor.
-- Full and Mini ABI/module/payload contracts, with the current 2664-function Full and 527-function Mini wrapper baselines intact.
+- Full and Mini ABI/module/payload contracts, with the current 2669-function Full and 527-function Mini wrapper baselines intact.
 - Same-run managed/runtime package hashes and an independent consumer that restores only those packages.
 - Native loader and representative core/imgproc/imgcodecs/videoio smoke without `LD_LIBRARY_PATH`, producer `PATH`, or runtime-root overrides.
 - Dependency closure for glibc, libstdc++, codecs, and optional modules, plus deterministic provenance and rollback records.

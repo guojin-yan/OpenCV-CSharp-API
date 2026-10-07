@@ -276,6 +276,139 @@ namespace
 #endif
 }
 
+int jyppx_ocv_ximgproc_create_quaternion_image(const jyppx_ocv_mat* src, jyppx_ocv_mat* dst)
+{
+    constexpr const char* api_name = "jyppx_ocv_ximgproc_create_quaternion_image";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_mat(api_name, src, "src");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, dst, "dst");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_XIMGPROC)
+        const cv::Mat& input = opencv_csharp_native::mat_value(src);
+        if (input.dims != 2 || input.channels() != 3 ||
+            (input.depth() != CV_8U && input.depth() != CV_32F && input.depth() != CV_64F))
+            return opencv_csharp_native::set_invalid_argument(api_name, "src");
+        cv::ximgproc::createQuaternionImage(input, opencv_csharp_native::mat_value(dst));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_ximgproc_qconj(const jyppx_ocv_mat* src, jyppx_ocv_mat* dst)
+{
+    constexpr const char* api_name = "jyppx_ocv_ximgproc_qconj";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_mat(api_name, src, "src");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, dst, "dst");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_XIMGPROC)
+        const cv::Mat& input = opencv_csharp_native::mat_value(src);
+        if (input.dims != 2 || input.channels() != 4 || (input.depth() != CV_32F && input.depth() != CV_64F))
+            return opencv_csharp_native::set_invalid_argument(api_name, "src");
+        cv::ximgproc::qconj(input, opencv_csharp_native::mat_value(dst));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_ximgproc_qunitary(const jyppx_ocv_mat* src, jyppx_ocv_mat* dst)
+{
+    constexpr const char* api_name = "jyppx_ocv_ximgproc_qunitary";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_mat(api_name, src, "src");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, dst, "dst");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_XIMGPROC)
+        const cv::Mat& input = opencv_csharp_native::mat_value(src);
+        if (input.dims != 2 || input.type() != CV_64FC4)
+            return opencv_csharp_native::set_invalid_argument(api_name, "src");
+        cv::ximgproc::qunitary(input, opencv_csharp_native::mat_value(dst));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_ximgproc_qmultiply(const jyppx_ocv_mat* src1, const jyppx_ocv_mat* src2, jyppx_ocv_mat* dst)
+{
+    constexpr const char* api_name = "jyppx_ocv_ximgproc_qmultiply";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_mat(api_name, src1, "src1");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, src2, "src2");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, dst, "dst");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_XIMGPROC)
+        const cv::Mat& first = opencv_csharp_native::mat_value(src1);
+        const cv::Mat& second = opencv_csharp_native::mat_value(src2);
+        if (first.dims != 2 || first.type() != CV_64FC4)
+            return opencv_csharp_native::set_invalid_argument(api_name, "src1");
+        if (second.dims != 2 || second.type() != CV_64FC4)
+            return opencv_csharp_native::set_invalid_argument(api_name, "src2");
+        const bool same_size = first.size() == second.size();
+        const bool first_scalar = first.rows == 1 && first.cols == 1;
+        const bool second_scalar = second.rows == 1 && second.cols == 1;
+        if (!same_size && !first_scalar && !second_scalar)
+            return opencv_csharp_native::set_invalid_argument(api_name, "src2");
+        cv::ximgproc::qmultiply(first, second, opencv_csharp_native::mat_value(dst));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_ximgproc_qdft(const jyppx_ocv_mat* src, jyppx_ocv_mat* dst, int flags, int side_left)
+{
+    constexpr const char* api_name = "jyppx_ocv_ximgproc_qdft";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_mat(api_name, src, "src");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, dst, "dst");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_XIMGPROC)
+        const cv::Mat& input = opencv_csharp_native::mat_value(src);
+        if (input.dims != 2 || input.type() != CV_64FC4)
+            return opencv_csharp_native::set_invalid_argument(api_name, "src");
+        if (flags != cv::DFT_INVERSE && flags != 0)
+            return opencv_csharp_native::set_invalid_argument(api_name, "flags");
+        if (side_left != 0 && side_left != 1)
+            return opencv_csharp_native::set_invalid_argument(api_name, "side_left");
+        if (cv::getOptimalDFTSize(input.rows) != input.rows || cv::getOptimalDFTSize(input.cols) != input.cols)
+            return opencv_csharp_native::set_invalid_argument(api_name, "src");
+        cv::ximgproc::qdft(input, opencv_csharp_native::mat_value(dst), flags, side_left != 0);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)flags; (void)side_left;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
 int jyppx_ocv_ximgproc_ni_black_threshold(
     const jyppx_ocv_mat* src,
     jyppx_ocv_mat* dst,

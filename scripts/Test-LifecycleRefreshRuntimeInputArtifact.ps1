@@ -48,7 +48,7 @@ $evidence = Get-Content -LiteralPath $evidencePath -Raw | ConvertFrom-Json
 $expectedImage = [string]$ridRow.producer.containerImage
 $expectedDigest = [string]$ridRow.producer.containerRepoDigest
 $expectedSourceCount = if ($RuntimeProfile -ceq 'full') { 49 } else { 9 }
-$expectedAbiCount = if ($RuntimeProfile -ceq 'full') { 2664 } else { 527 }
+$expectedAbiCount = if ($RuntimeProfile -ceq 'full') { 2669 } else { 527 }
 $expectedRuntimeFileCount = if ($RuntimeProfile -ceq 'full') { 51 } else { 18 }
 $expectedModuleCount = @($profileRow.modules).Count
 

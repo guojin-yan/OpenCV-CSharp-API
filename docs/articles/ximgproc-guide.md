@@ -15,6 +15,7 @@
 - Edge/proposal objects: `EdgeDrawing`, `EdgeDrawingParams`, `EdgeDrawingEllipse`, `EdgeBoxes`, and `EdgeBox`.
 - Filter utilities: `RidgeDetectionFilter`, Deriche gradients, and Paillou gradients.
 - Fourier utilities: `FourierDescriptor`, `TransformFD`, `ContourSampling`, and `ContourFitting`.
+- Quaternion color/Fourier helpers: `CreateQuaternionImage`, `QConj`, `QUnitary`, `QMultiply`, and `QDft`, each with output-matrix and returned-matrix overloads.
 - Run-length morphology: `XImgProcRlCv2` threshold, structuring element, dilate, erode, morphology, paint, feasibility, and `Point3i` run creation.
 - Segmentation and proposals: `ScanSegment`, `GraphSegmentation`, Selective Search strategies, and Selective Search rectangle proposals.
 - Covariance helper: `CovarianceEstimation` for complex-valued matrices.
@@ -29,6 +30,7 @@
 - Edge/proposal 对象：`EdgeDrawing`、`EdgeDrawingParams`、`EdgeDrawingEllipse`、`EdgeBoxes` 和 `EdgeBox`。
 - 滤波工具：`RidgeDetectionFilter`、Deriche 梯度和 Paillou 梯度。
 - Fourier 工具：`FourierDescriptor`、`TransformFD`、`ContourSampling` 和 `ContourFitting`。
+- 四元数颜色/Fourier helper：`CreateQuaternionImage`、`QConj`、`QUnitary`、`QMultiply` 和 `QDft`，均提供目标矩阵和返回新矩阵两种形式。
 - Run-length morphology：`XImgProcRlCv2` threshold、structuring element、dilate、erode、morphology、paint、可行性检查和 `Point3i` run 创建。
 - 分割与候选框：`ScanSegment`、`GraphSegmentation`、Selective Search strategy 和 Selective Search 矩形 proposal。
 - 协方差 helper：面向复数矩阵的 `CovarianceEstimation`。
@@ -56,7 +58,7 @@ The same DLL can also be used by related OptFlow algorithms, but `JYPPX.OpenCvSh
 
 ## Input Notes / 输入说明
 
-XImgProc algorithms are sensitive to image depth, channel count, and parameter scale. Thinning expects a binary-style image. Superpixel results vary with image content and region parameters. Disparity maps commonly use `CV_16SC1` values scaled by 16. Sparse interpolation writes dense flow, commonly `CV_32FC2`. Fourier descriptor helpers expect valid contour matrices and conservative descriptor sizes. Run-length morphology stores RLE runs in `Mat` values and `CreateRLEImage` uses flat `Point3i` run triples. `ScanSegment` expects a Lab `CV_8UC3` image matching its creation size. Covariance estimation expects complex-valued input. `FastLineDetector`, `EdgeDrawing`, `EdgeBoxes`, and Selective Search can validly return zero detections or proposals for tiny or low-contrast images.
+XImgProc algorithms are sensitive to image depth, channel count, and parameter scale. Quaternion image creation accepts 2D three-channel CV_8U/CV_32F/CV_64F images; quaternion math uses four-channel CV_64F except `QConj`, which also accepts CV_32F. `QMultiply` allows equal matrix sizes or a 1×1 operand, and `QDft` requires dimensions that are already optimal DFT sizes. Thinning expects a binary-style image. Superpixel results vary with image content and region parameters. Disparity maps commonly use `CV_16SC1` values scaled by 16. Sparse interpolation writes dense flow, commonly `CV_32FC2`. Fourier descriptor helpers expect valid contour matrices and conservative descriptor sizes. Run-length morphology stores RLE runs in `Mat` values and `CreateRLEImage` uses flat `Point3i` run triples. `ScanSegment` expects a Lab `CV_8UC3` image matching its creation size. Covariance estimation expects complex-valued input. `FastLineDetector`, `EdgeDrawing`, `EdgeBoxes`, and Selective Search can validly return zero detections or proposals for tiny or low-contrast images.
 
 XImgProc 算法对图像位深、通道数和参数尺度敏感。Thinning 期望二值图风格输入。超像素结果会随图像内容和 region 参数变化。Disparity map 常见类型为 `CV_16SC1`，数值按 16 缩放。稀疏插值输出 dense flow，常见类型为 `CV_32FC2`。Fourier descriptor helper 期望有效轮廓矩阵和保守的 descriptor 尺寸。run-length morphology 将 RLE run 存放在 `Mat` 中，`CreateRLEImage` 使用平铺 `Point3i` run 三元组。`ScanSegment` 期望尺寸匹配创建参数的 Lab `CV_8UC3` 图像。covariance estimation 期望复数输入。`FastLineDetector`、`EdgeDrawing`、`EdgeBoxes` 和 Selective Search 对 tiny 或低对比图像返回零个检测结果或 proposal 也是合法结果。
 

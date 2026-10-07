@@ -34,7 +34,7 @@ $miniSources = @(Get-SourceList -VariableName 'OPENCV_CSHARP_MINI_NATIVE_SOURCES
 $fullOnlySources = @(Get-SourceList -VariableName 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES')
 $sources = if ($RuntimeProfile -ceq 'mini') { $miniSources } else { @($miniSources + $fullOnlySources) }
 $expectedSourceCount = if ($RuntimeProfile -ceq 'mini') { 9 } else { 49 }
-$expectedAbiFunctionCount = if ($RuntimeProfile -ceq 'mini') { 527 } else { 2664 }
+$expectedAbiFunctionCount = if ($RuntimeProfile -ceq 'mini') { 527 } else { 2669 }
 $abiManifestRelativePath = if ($RuntimeProfile -ceq 'mini') {
     'src/OpenCvSharp.Native/generated/native_abi_mini_manifest.txt'
 }

@@ -8,47 +8,72 @@
     {
       "ordinal": 0,
       "identity": "cv.ximgproc.createQuaternionImage(Mat img;Mat qimg[/O])->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_create_quaternion_image"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat CreateQuaternionImage(JYPPX.OpenCvSharp.Core.Mat src)",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void CreateQuaternionImage(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ]
     },
     {
       "ordinal": 1,
       "identity": "cv.ximgproc.qconj(Mat qimg;Mat qcimg[/O])->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_qconj"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat QConj(JYPPX.OpenCvSharp.Core.Mat src)",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void QConj(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ]
     },
     {
       "ordinal": 2,
       "identity": "cv.ximgproc.qunitary(Mat qimg;Mat qnimg[/O])->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_qunitary"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat QUnitary(JYPPX.OpenCvSharp.Core.Mat src)",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void QUnitary(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ]
     },
     {
       "ordinal": 3,
       "identity": "cv.ximgproc.qmultiply(Mat src1;Mat src2;Mat dst[/O])->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_qmultiply"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat QMultiply(JYPPX.OpenCvSharp.Core.Mat src1,JYPPX.OpenCvSharp.Core.Mat src2)",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void QMultiply(JYPPX.OpenCvSharp.Core.Mat src1,JYPPX.OpenCvSharp.Core.Mat src2,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ]
     },
     {
       "ordinal": 4,
       "identity": "cv.ximgproc.qdft(Mat img;Mat qimg[/O];int flags;bool sideLeft)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_qdft"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat QDft(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.DftFlags flags=None,System.Boolean sideLeft=true)",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void QDft(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,JYPPX.OpenCvSharp.Core.DftFlags flags=None,System.Boolean sideLeft=true)"
+      ]
     },
     {
       "ordinal": 5,
@@ -132,7 +157,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public;set:public|System.Double Lambda"
+      ]
     },
     {
       "ordinal": 12,
@@ -141,7 +168,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public;set:public|System.Double Lambda"
+      ]
     },
     {
       "ordinal": 13,
@@ -150,7 +179,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public;set:public|System.Double SigmaColor"
+      ]
     },
     {
       "ordinal": 14,
@@ -159,7 +190,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public;set:public|System.Double SigmaColor"
+      ]
     },
     {
       "ordinal": 15,
@@ -186,7 +219,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public;set:public|System.Int32 DepthDiscontinuityRadius"
+      ]
     },
     {
       "ordinal": 18,
@@ -195,7 +230,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public;set:public|System.Int32 DepthDiscontinuityRadius"
+      ]
     },
     {
       "ordinal": 19,
@@ -204,10 +241,7 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": [
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetConfidenceMap()",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|method|public;instance|System.Void GetConfidenceMap(JYPPX.OpenCvSharp.Core.Mat confidenceMap)"
-      ]
+      "managedMembers": []
     },
     {
       "ordinal": 20,
@@ -216,7 +250,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public|JYPPX.OpenCvSharp.Core.Rect ROI"
+      ]
     },
     {
       "ordinal": 21,
@@ -292,16 +328,13 @@
     {
       "ordinal": 27,
       "identity": "cv.ximgproc.getDisparityVis(Mat src;Mat dst[/O];double scale=1.0)->void",
-      "classification": "implemented",
-      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "classification": "intentionally-omitted",
+      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_get_disparity_vis"
       ],
-      "managedMembers": [
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat GetDisparityVis(JYPPX.OpenCvSharp.Core.Mat src,System.Double scale=1)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void GetDisparityVis(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Double scale=1)"
-      ]
+      "managedMembers": []
     },
     {
       "ordinal": 28,
@@ -373,30 +406,24 @@
     {
       "ordinal": 35,
       "identity": "cv.ximgproc.EdgeDrawing.getEdgeImage(Mat dst[/O])->void",
-      "classification": "implemented",
-      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "classification": "intentionally-omitted",
+      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_drawing_get_edge_image"
       ],
-      "managedMembers": [
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetEdgeImage()",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|System.Void GetEdgeImage(JYPPX.OpenCvSharp.Core.Mat dst)"
-      ]
+      "managedMembers": []
     },
     {
       "ordinal": 36,
       "identity": "cv.ximgproc.EdgeDrawing.getGradientImage(Mat dst[/O])->void",
-      "classification": "implemented",
-      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "classification": "intentionally-omitted",
+      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_drawing_get_gradient_image"
       ],
-      "managedMembers": [
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetGradientImage()",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|System.Void GetGradientImage(JYPPX.OpenCvSharp.Core.Mat dst)"
-      ]
+      "managedMembers": []
     },
     {
       "ordinal": 37,
@@ -405,9 +432,7 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": [
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|JYPPX.OpenCvSharp.Core.Point[][] GetSegments()"
-      ]
+      "managedMembers": []
     },
     {
       "ordinal": 38,
@@ -416,9 +441,7 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": [
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|System.Int32[] GetSegmentIndicesOfLines()"
-      ]
+      "managedMembers": []
     },
     {
       "ordinal": 39,
@@ -451,13 +474,15 @@
     {
       "ordinal": 41,
       "identity": "cv.ximgproc.EdgeDrawing.setParams(EdgeDrawing_Params parameters[/C,/Ref])->void",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_drawing_set_params"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|property|instance;get:public;set:public|JYPPX.OpenCvSharp.XImgProc.EdgeDrawingParams Params"
+      ]
     },
     {
       "ordinal": 42,
@@ -804,273 +829,319 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": [
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|method|public;instance|JYPPX.OpenCvSharp.XImgProc.EdgeBox[] GetBoundingBoxes(JYPPX.OpenCvSharp.Core.Mat edgeMap,JYPPX.OpenCvSharp.Core.Mat orientationMap)"
-      ]
+      "managedMembers": []
     },
     {
       "ordinal": 72,
       "identity": "cv.ximgproc.EdgeBoxes.getAlpha()->float",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_boxes_get_alpha"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single Alpha"
+      ]
     },
     {
       "ordinal": 73,
       "identity": "cv.ximgproc.EdgeBoxes.setAlpha(float value)->void",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_boxes_set_alpha"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single Alpha"
+      ]
     },
     {
       "ordinal": 74,
       "identity": "cv.ximgproc.EdgeBoxes.getBeta()->float",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_boxes_get_beta"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single Beta"
+      ]
     },
     {
       "ordinal": 75,
       "identity": "cv.ximgproc.EdgeBoxes.setBeta(float value)->void",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_boxes_set_beta"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single Beta"
+      ]
     },
     {
       "ordinal": 76,
       "identity": "cv.ximgproc.EdgeBoxes.getEta()->float",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_boxes_get_eta"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single Eta"
+      ]
     },
     {
       "ordinal": 77,
       "identity": "cv.ximgproc.EdgeBoxes.setEta(float value)->void",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_boxes_set_eta"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single Eta"
+      ]
     },
     {
       "ordinal": 78,
       "identity": "cv.ximgproc.EdgeBoxes.getMinScore()->float",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_boxes_get_min_score"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single MinScore"
+      ]
     },
     {
       "ordinal": 79,
       "identity": "cv.ximgproc.EdgeBoxes.setMinScore(float value)->void",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_boxes_set_min_score"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single MinScore"
+      ]
     },
     {
       "ordinal": 80,
       "identity": "cv.ximgproc.EdgeBoxes.getMaxBoxes()->int",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_boxes_get_max_boxes"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Int32 MaxBoxes"
+      ]
     },
     {
       "ordinal": 81,
       "identity": "cv.ximgproc.EdgeBoxes.setMaxBoxes(int value)->void",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_boxes_set_max_boxes"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Int32 MaxBoxes"
+      ]
     },
     {
       "ordinal": 82,
       "identity": "cv.ximgproc.EdgeBoxes.getEdgeMinMag()->float",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_boxes_get_edge_min_mag"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single EdgeMinMag"
+      ]
     },
     {
       "ordinal": 83,
       "identity": "cv.ximgproc.EdgeBoxes.setEdgeMinMag(float value)->void",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_boxes_set_edge_min_mag"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single EdgeMinMag"
+      ]
     },
     {
       "ordinal": 84,
       "identity": "cv.ximgproc.EdgeBoxes.getEdgeMergeThr()->float",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_boxes_get_edge_merge_thr"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single EdgeMergeThr"
+      ]
     },
     {
       "ordinal": 85,
       "identity": "cv.ximgproc.EdgeBoxes.setEdgeMergeThr(float value)->void",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_boxes_set_edge_merge_thr"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single EdgeMergeThr"
+      ]
     },
     {
       "ordinal": 86,
       "identity": "cv.ximgproc.EdgeBoxes.getClusterMinMag()->float",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_boxes_get_cluster_min_mag"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single ClusterMinMag"
+      ]
     },
     {
       "ordinal": 87,
       "identity": "cv.ximgproc.EdgeBoxes.setClusterMinMag(float value)->void",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_boxes_set_cluster_min_mag"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single ClusterMinMag"
+      ]
     },
     {
       "ordinal": 88,
       "identity": "cv.ximgproc.EdgeBoxes.getMaxAspectRatio()->float",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_boxes_get_max_aspect_ratio"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single MaxAspectRatio"
+      ]
     },
     {
       "ordinal": 89,
       "identity": "cv.ximgproc.EdgeBoxes.setMaxAspectRatio(float value)->void",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_boxes_set_max_aspect_ratio"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single MaxAspectRatio"
+      ]
     },
     {
       "ordinal": 90,
       "identity": "cv.ximgproc.EdgeBoxes.getMinBoxArea()->float",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_boxes_get_min_box_area"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single MinBoxArea"
+      ]
     },
     {
       "ordinal": 91,
       "identity": "cv.ximgproc.EdgeBoxes.setMinBoxArea(float value)->void",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_boxes_set_min_box_area"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single MinBoxArea"
+      ]
     },
     {
       "ordinal": 92,
       "identity": "cv.ximgproc.EdgeBoxes.getGamma()->float",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_boxes_get_gamma"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single Gamma"
+      ]
     },
     {
       "ordinal": 93,
       "identity": "cv.ximgproc.EdgeBoxes.setGamma(float value)->void",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_boxes_set_gamma"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single Gamma"
+      ]
     },
     {
       "ordinal": 94,
       "identity": "cv.ximgproc.EdgeBoxes.getKappa()->float",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_boxes_get_kappa"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single Kappa"
+      ]
     },
     {
       "ordinal": 95,
       "identity": "cv.ximgproc.EdgeBoxes.setKappa(float value)->void",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_boxes_set_kappa"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single Kappa"
+      ]
     },
     {
       "ordinal": 96,
@@ -1250,13 +1321,15 @@
     {
       "ordinal": 111,
       "identity": "cv.ximgproc.ContourFitting.setCtrSize(int n)->void",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_contour_fitting_set_ctr_size"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.ContourFitting|property|instance;get:public;set:public|System.Int32 CtrSize"
+      ]
     },
     {
       "ordinal": 112,
@@ -1265,18 +1338,22 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.ContourFitting|property|instance;get:public;set:public|System.Int32 FDSize"
+      ]
     },
     {
       "ordinal": 113,
       "identity": "cv.ximgproc.ContourFitting.getCtrSize()->int",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_contour_fitting_get_ctr_size"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.ContourFitting|property|instance;get:public;set:public|System.Int32 CtrSize"
+      ]
     },
     {
       "ordinal": 114,
@@ -1285,7 +1362,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.ContourFitting|property|instance;get:public;set:public|System.Int32 FDSize"
+      ]
     },
     {
       "ordinal": 115,
@@ -1354,7 +1433,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelLSC|property|instance;get:public|System.Int32 NumberOfSuperpixels"
+      ]
     },
     {
       "ordinal": 121,
@@ -1374,10 +1455,7 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": [
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelLSC|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetLabels()",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelLSC|method|public;instance|System.Void GetLabels(JYPPX.OpenCvSharp.Core.Mat labels)"
-      ]
+      "managedMembers": []
     },
     {
       "ordinal": 123,
@@ -1386,10 +1464,7 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": [
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelLSC|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetLabelContourMask(System.Boolean thickLine=true)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelLSC|method|public;instance|System.Void GetLabelContourMask(JYPPX.OpenCvSharp.Core.Mat image,System.Boolean thickLine=true)"
-      ]
+      "managedMembers": []
     },
     {
       "ordinal": 124,
@@ -1465,10 +1540,7 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": [
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RidgeDetectionFilter|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetRidgeFilteredImage(JYPPX.OpenCvSharp.Core.Mat src)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RidgeDetectionFilter|method|public;instance|System.Void GetRidgeFilteredImage(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
-      ]
+      "managedMembers": []
     },
     {
       "ordinal": 131,
@@ -1486,7 +1558,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.ScanSegment|property|instance;get:public|System.Int32 NumberOfSuperpixels"
+      ]
     },
     {
       "ordinal": 133,
@@ -1504,30 +1578,24 @@
     {
       "ordinal": 134,
       "identity": "cv.ximgproc.ScanSegment.getLabels(Mat labels_out[/O])->void",
-      "classification": "implemented",
-      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "classification": "intentionally-omitted",
+      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_scan_segment_get_labels"
       ],
-      "managedMembers": [
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.ScanSegment|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetLabels()",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.ScanSegment|method|public;instance|System.Void GetLabels(JYPPX.OpenCvSharp.Core.Mat labels)"
-      ]
+      "managedMembers": []
     },
     {
       "ordinal": 135,
       "identity": "cv.ximgproc.ScanSegment.getLabelContourMask(Mat image[/O];bool thick_line=false)->void",
-      "classification": "implemented",
-      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "classification": "intentionally-omitted",
+      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_scan_segment_get_label_contour_mask"
       ],
-      "managedMembers": [
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.ScanSegment|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetLabelContourMask(System.Boolean thickLine=true)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.ScanSegment|method|public;instance|System.Void GetLabelContourMask(JYPPX.OpenCvSharp.Core.Mat image,System.Boolean thickLine=true)"
-      ]
+      "managedMembers": []
     },
     {
       "ordinal": 136,
@@ -1556,7 +1624,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSEEDS|property|instance;get:public|System.Int32 NumberOfSuperpixels"
+      ]
     },
     {
       "ordinal": 139,
@@ -1576,10 +1646,7 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": [
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSEEDS|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetLabels()",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSEEDS|method|public;instance|System.Void GetLabels(JYPPX.OpenCvSharp.Core.Mat labels)"
-      ]
+      "managedMembers": []
     },
     {
       "ordinal": 141,
@@ -1588,10 +1655,7 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": [
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSEEDS|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetLabelContourMask(System.Boolean thickLine=false)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSEEDS|method|public;instance|System.Void GetLabelContourMask(JYPPX.OpenCvSharp.Core.Mat image,System.Boolean thickLine=false)"
-      ]
+      "managedMembers": []
     },
     {
       "ordinal": 142,
@@ -1679,13 +1743,15 @@
     {
       "ordinal": 151,
       "identity": "cv.ximgproc.segmentation.createGraphSegmentation(double sigma=0.5;float k=300;int min_size=100)->Ptr<GraphSegmentation>",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_graph_segmentation_create"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.GraphSegmentation CreateGraphSegmentation(System.Double sigma=0.5,System.Single k=300,System.Int32 minSize=100)"
+      ]
     },
     {
       "ordinal": 152,
@@ -1739,7 +1805,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy CreateSelectiveSearchSegmentationStrategyColor()"
+      ]
     },
     {
       "ordinal": 158,
@@ -1757,7 +1825,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy CreateSelectiveSearchSegmentationStrategySize()"
+      ]
     },
     {
       "ordinal": 160,
@@ -1775,7 +1845,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy CreateSelectiveSearchSegmentationStrategyTexture()"
+      ]
     },
     {
       "ordinal": 162,
@@ -1793,7 +1865,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy CreateSelectiveSearchSegmentationStrategyFill()"
+      ]
     },
     {
       "ordinal": 164,
@@ -1829,7 +1903,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategyMultiple CreateSelectiveSearchSegmentationStrategyMultiple()"
+      ]
     },
     {
       "ordinal": 168,
@@ -1838,7 +1914,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategyMultiple CreateSelectiveSearchSegmentationStrategyMultiple()"
+      ]
     },
     {
       "ordinal": 169,
@@ -1847,7 +1925,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategyMultiple CreateSelectiveSearchSegmentationStrategyMultiple()"
+      ]
     },
     {
       "ordinal": 170,
@@ -1856,7 +1936,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategyMultiple CreateSelectiveSearchSegmentationStrategyMultiple()"
+      ]
     },
     {
       "ordinal": 171,
@@ -1865,7 +1947,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategyMultiple CreateSelectiveSearchSegmentationStrategyMultiple()"
+      ]
     },
     {
       "ordinal": 172,
@@ -1978,13 +2062,15 @@
     {
       "ordinal": 184,
       "identity": "cv.ximgproc.segmentation.createSelectiveSearchSegmentation()->Ptr<SelectiveSearchSegmentation>",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_selective_search_segmentation_create"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation CreateSelectiveSearchSegmentation()"
+      ]
     },
     {
       "ordinal": 185,
@@ -2011,7 +2097,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSLIC|property|instance;get:public|System.Int32 NumberOfSuperpixels"
+      ]
     },
     {
       "ordinal": 188,
@@ -2031,10 +2119,7 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": [
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSLIC|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetLabels()",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSLIC|method|public;instance|System.Void GetLabels(JYPPX.OpenCvSharp.Core.Mat labels)"
-      ]
+      "managedMembers": []
     },
     {
       "ordinal": 190,
@@ -2043,10 +2128,7 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": [
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSLIC|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetLabelContourMask(System.Boolean thickLine=true)",
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSLIC|method|public;instance|System.Void GetLabelContourMask(JYPPX.OpenCvSharp.Core.Mat image,System.Boolean thickLine=true)"
-      ]
+      "managedMembers": []
     },
     {
       "ordinal": 191,
@@ -2107,103 +2189,117 @@
     {
       "ordinal": 196,
       "identity": "cv.ximgproc.EdgeAwareInterpolator.setCostMap(Mat _costMap[/C,/Ref])->void",
-      "classification": "implemented",
-      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "classification": "intentionally-omitted",
+      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_aware_interpolator_set_cost_map"
       ],
-      "managedMembers": [
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|method|public;instance|System.Void SetCostMap(JYPPX.OpenCvSharp.Core.Mat costMap)"
-      ]
+      "managedMembers": []
     },
     {
       "ordinal": 197,
       "identity": "cv.ximgproc.EdgeAwareInterpolator.setK(int _k)->void",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_aware_interpolator_set_k"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Int32 K"
+      ]
     },
     {
       "ordinal": 198,
       "identity": "cv.ximgproc.EdgeAwareInterpolator.getK()->int",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_aware_interpolator_get_k"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Int32 K"
+      ]
     },
     {
       "ordinal": 199,
       "identity": "cv.ximgproc.EdgeAwareInterpolator.setSigma(float _sigma)->void",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_aware_interpolator_set_sigma"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Single Sigma"
+      ]
     },
     {
       "ordinal": 200,
       "identity": "cv.ximgproc.EdgeAwareInterpolator.getSigma()->float",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_aware_interpolator_get_sigma"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Single Sigma"
+      ]
     },
     {
       "ordinal": 201,
       "identity": "cv.ximgproc.EdgeAwareInterpolator.setLambda(float _lambda)->void",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_aware_interpolator_set_lambda"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Single Lambda"
+      ]
     },
     {
       "ordinal": 202,
       "identity": "cv.ximgproc.EdgeAwareInterpolator.getLambda()->float",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_aware_interpolator_get_lambda"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Single Lambda"
+      ]
     },
     {
       "ordinal": 203,
       "identity": "cv.ximgproc.EdgeAwareInterpolator.setUsePostProcessing(bool _use_post_proc)->void",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_aware_interpolator_set_use_post_processing"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Boolean UsePostProcessing"
+      ]
     },
     {
       "ordinal": 204,
       "identity": "cv.ximgproc.EdgeAwareInterpolator.getUsePostProcessing()->bool",
-      "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_edge_aware_interpolator_get_use_post_processing"
       ],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Boolean UsePostProcessing"
+      ]
     },
     {
       "ordinal": 205,
@@ -2212,7 +2308,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Single FGSLambda"
+      ]
     },
     {
       "ordinal": 206,
@@ -2221,7 +2319,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Single FGSLambda"
+      ]
     },
     {
       "ordinal": 207,
@@ -2230,7 +2330,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Single FGSSigma"
+      ]
     },
     {
       "ordinal": 208,
@@ -2239,7 +2341,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Single FGSSigma"
+      ]
     },
     {
       "ordinal": 209,
@@ -2268,7 +2372,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Int32 K"
+      ]
     },
     {
       "ordinal": 212,
@@ -2277,7 +2383,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Int32 K"
+      ]
     },
     {
       "ordinal": 213,
@@ -2286,9 +2394,7 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": [
-        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|method|public;instance|System.Void SetCostMap(JYPPX.OpenCvSharp.Core.Mat costMap)"
-      ]
+      "managedMembers": []
     },
     {
       "ordinal": 214,
@@ -2297,7 +2403,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Int32 SuperpixelSize"
+      ]
     },
     {
       "ordinal": 215,
@@ -2306,7 +2414,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Int32 SuperpixelSize"
+      ]
     },
     {
       "ordinal": 216,
@@ -2333,7 +2443,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single SuperpixelRuler"
+      ]
     },
     {
       "ordinal": 219,
@@ -2342,7 +2454,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single SuperpixelRuler"
+      ]
     },
     {
       "ordinal": 220,
@@ -2351,7 +2465,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|JYPPX.OpenCvSharp.XImgProc.SLICType SuperpixelMode"
+      ]
     },
     {
       "ordinal": 221,
@@ -2360,7 +2476,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|JYPPX.OpenCvSharp.XImgProc.SLICType SuperpixelMode"
+      ]
     },
     {
       "ordinal": 222,
@@ -2369,7 +2487,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single Alpha"
+      ]
     },
     {
       "ordinal": 223,
@@ -2378,7 +2498,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single Alpha"
+      ]
     },
     {
       "ordinal": 224,
@@ -2387,7 +2509,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Int32 ModelIter"
+      ]
     },
     {
       "ordinal": 225,
@@ -2396,7 +2520,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Int32 ModelIter"
+      ]
     },
     {
       "ordinal": 226,
@@ -2405,7 +2531,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Boolean RefineModels"
+      ]
     },
     {
       "ordinal": 227,
@@ -2414,7 +2542,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Boolean RefineModels"
+      ]
     },
     {
       "ordinal": 228,
@@ -2423,7 +2553,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single MaxFlow"
+      ]
     },
     {
       "ordinal": 229,
@@ -2432,7 +2564,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single MaxFlow"
+      ]
     },
     {
       "ordinal": 230,
@@ -2441,7 +2575,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Boolean UseVariationalRefinement"
+      ]
     },
     {
       "ordinal": 231,
@@ -2450,7 +2586,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Boolean UseVariationalRefinement"
+      ]
     },
     {
       "ordinal": 232,
@@ -2459,7 +2597,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Boolean UseGlobalSmootherFilter"
+      ]
     },
     {
       "ordinal": 233,
@@ -2468,7 +2608,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Boolean UseGlobalSmootherFilter"
+      ]
     },
     {
       "ordinal": 234,
@@ -2477,7 +2619,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single FGSLambda"
+      ]
     },
     {
       "ordinal": 235,
@@ -2486,7 +2630,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single FGSLambda"
+      ]
     },
     {
       "ordinal": 236,
@@ -2495,7 +2641,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single FGSSigma"
+      ]
     },
     {
       "ordinal": 237,
@@ -2504,7 +2652,9 @@
       "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
-      "managedMembers": []
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single FGSSigma"
+      ]
     },
     {
       "ordinal": 238,
