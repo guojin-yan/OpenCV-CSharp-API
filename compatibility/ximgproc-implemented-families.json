@@ -17,7 +17,6 @@
             "jyppx_ocv_ximgproc_create_quaternion_image"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat CreateQuaternionImage(JYPPX.OpenCvSharp.Core.Mat src)",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void CreateQuaternionImage(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
@@ -97,7 +96,6 @@
             "jyppx_ocv_ximgproc_gradient_deriche_y"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat GradientDericheY(JYPPX.OpenCvSharp.Core.Mat src,System.Double alpha,System.Double omega)",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void GradientDericheY(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Double alpha,System.Double omega)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
@@ -113,7 +111,6 @@
             "jyppx_ocv_ximgproc_gradient_deriche_x"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat GradientDericheX(JYPPX.OpenCvSharp.Core.Mat src,System.Double alpha,System.Double omega)",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void GradientDericheX(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Double alpha,System.Double omega)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
@@ -129,8 +126,195 @@
             "jyppx_ocv_ximgproc_disparity_filter_filter"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityFilter|method|public;instance;abstract|System.Void Filter(JYPPX.OpenCvSharp.Core.Mat disparityMapLeft,JYPPX.OpenCvSharp.Core.Mat leftView,JYPPX.OpenCvSharp.Core.Mat filteredDisparityMap,JYPPX.OpenCvSharp.Core.Mat? disparityMapRight=null,JYPPX.OpenCvSharp.Core.Rect? roi=null,JYPPX.OpenCvSharp.Core.Mat? rightView=null)",
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityFilter|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Filter(JYPPX.OpenCvSharp.Core.Mat disparityMapLeft,JYPPX.OpenCvSharp.Core.Mat leftView,JYPPX.OpenCvSharp.Core.Mat? disparityMapRight=null,JYPPX.OpenCvSharp.Core.Rect? roi=null,JYPPX.OpenCvSharp.Core.Mat? rightView=null)"
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityFilter|method|public;instance;abstract|System.Void Filter(JYPPX.OpenCvSharp.Core.Mat disparityMapLeft,JYPPX.OpenCvSharp.Core.Mat leftView,JYPPX.OpenCvSharp.Core.Mat filteredDisparityMap,JYPPX.OpenCvSharp.Core.Mat? disparityMapRight=null,JYPPX.OpenCvSharp.Core.Rect? roi=null,JYPPX.OpenCvSharp.Core.Mat? rightView=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 11,
+          "upstreamIdentity": "cv.ximgproc.DisparityWLSFilter.getLambda()->double",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_disparity_wls_filter_get_lambda"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public;set:public|System.Double Lambda"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 12,
+          "upstreamIdentity": "cv.ximgproc.DisparityWLSFilter.setLambda(double _lambda)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_disparity_wls_filter_set_lambda"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public;set:public|System.Double Lambda"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 13,
+          "upstreamIdentity": "cv.ximgproc.DisparityWLSFilter.getSigmaColor()->double",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_disparity_wls_filter_get_sigma_color"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public;set:public|System.Double SigmaColor"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 14,
+          "upstreamIdentity": "cv.ximgproc.DisparityWLSFilter.setSigmaColor(double _sigma_color)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_disparity_wls_filter_set_sigma_color"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public;set:public|System.Double SigmaColor"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 17,
+          "upstreamIdentity": "cv.ximgproc.DisparityWLSFilter.getDepthDiscontinuityRadius()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_disparity_wls_filter_get_depth_discontinuity_radius"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public;set:public|System.Int32 DepthDiscontinuityRadius"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 18,
+          "upstreamIdentity": "cv.ximgproc.DisparityWLSFilter.setDepthDiscontinuityRadius(int _disc_radius)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_disparity_wls_filter_set_depth_discontinuity_radius"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public;set:public|System.Int32 DepthDiscontinuityRadius"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 19,
+          "upstreamIdentity": "cv.ximgproc.DisparityWLSFilter.getConfidenceMap()->Mat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_disparity_wls_filter_get_confidence_map"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetConfidenceMap()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 20,
+          "upstreamIdentity": "cv.ximgproc.DisparityWLSFilter.getROI()->Rect",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_disparity_wls_filter_get_roi"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public|JYPPX.OpenCvSharp.Core.Rect ROI"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 21,
+          "upstreamIdentity": "cv.ximgproc.createDisparityWLSFilter(Ptr_StereoMatcher matcher_left)->Ptr<DisparityWLSFilter>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_disparity_wls_filter_create_from_stereo_bm",
+            "jyppx_ocv_ximgproc_disparity_wls_filter_create_from_stereo_matcher",
+            "jyppx_ocv_ximgproc_disparity_wls_filter_create_from_stereo_sgbm"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter CreateDisparityWLSFilter(JYPPX.OpenCvSharp.Calib3D.StereoBM matcherLeft)",
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter CreateDisparityWLSFilter(JYPPX.OpenCvSharp.Calib3D.StereoMatcher matcherLeft)",
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter CreateDisparityWLSFilter(JYPPX.OpenCvSharp.Calib3D.StereoSGBM matcherLeft)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 22,
+          "upstreamIdentity": "cv.ximgproc.createRightMatcher(Ptr_StereoMatcher matcher_left)->Ptr<StereoMatcher>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_create_right_matcher_from_stereo_bm",
+            "jyppx_ocv_ximgproc_create_right_matcher_from_stereo_matcher",
+            "jyppx_ocv_ximgproc_create_right_matcher_from_stereo_sgbm"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Calib3D.StereoMatcher CreateRightMatcher(JYPPX.OpenCvSharp.Calib3D.StereoBM matcherLeft)",
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Calib3D.StereoMatcher CreateRightMatcher(JYPPX.OpenCvSharp.Calib3D.StereoMatcher matcherLeft)",
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Calib3D.StereoMatcher CreateRightMatcher(JYPPX.OpenCvSharp.Calib3D.StereoSGBM matcherLeft)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 23,
+          "upstreamIdentity": "cv.ximgproc.createDisparityWLSFilterGeneric(bool use_confidence)->Ptr<DisparityWLSFilter>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_disparity_wls_filter_create_generic"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter CreateDisparityWLSFilterGeneric(System.Boolean useConfidence=false)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 25,
+          "upstreamIdentity": "cv.ximgproc.computeMSE(Mat GT;Mat src;Rect ROI)->double",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_compute_mse"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Double ComputeMSE(JYPPX.OpenCvSharp.Core.Mat gt,JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Rect roi)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -160,7 +344,6 @@
             "jyppx_ocv_ximgproc_get_disparity_vis"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat GetDisparityVis(JYPPX.OpenCvSharp.Core.Mat src,System.Double scale=1)",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void GetDisparityVis(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Double scale=1)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
@@ -191,7 +374,6 @@
             "jyppx_ocv_ximgproc_edge_drawing_get_edge_image"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetEdgeImage()",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|System.Void GetEdgeImage(JYPPX.OpenCvSharp.Core.Mat dst)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
@@ -207,8 +389,39 @@
             "jyppx_ocv_ximgproc_edge_drawing_get_gradient_image"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetGradientImage()",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|System.Void GetGradientImage(JYPPX.OpenCvSharp.Core.Mat dst)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 37,
+          "upstreamIdentity": "cv.ximgproc.EdgeDrawing.getSegments()->std::vector<std::vector<Point> >",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_edge_drawing_get_segments_count",
+            "jyppx_ocv_ximgproc_edge_drawing_get_segments_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|JYPPX.OpenCvSharp.Core.Point[][] GetSegments()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 38,
+          "upstreamIdentity": "cv.ximgproc.EdgeDrawing.getSegmentIndicesOfLines()->std::vector<int>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_edge_drawing_get_segment_indices_of_lines_count",
+            "jyppx_ocv_ximgproc_edge_drawing_get_segment_indices_of_lines_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|System.Int32[] GetSegmentIndicesOfLines()"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -223,7 +436,6 @@
             "jyppx_ocv_ximgproc_edge_drawing_detect_lines"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|JYPPX.OpenCvSharp.ImgProc.LineSegment[] DetectLines()",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|System.Void DetectLines(JYPPX.OpenCvSharp.Core.Mat lines)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
@@ -239,7 +451,6 @@
             "jyppx_ocv_ximgproc_edge_drawing_detect_ellipses"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|JYPPX.OpenCvSharp.XImgProc.EdgeDrawingEllipse[] DetectEllipses()",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|System.Void DetectEllipses(JYPPX.OpenCvSharp.Core.Mat ellipses)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
@@ -263,6 +474,21 @@
           "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
         },
         {
+          "ordinal": 42,
+          "upstreamIdentity": "cv.ximgproc.createEdgeDrawing()->Ptr<EdgeDrawing>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_edge_drawing_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing CreateEdgeDrawing()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
           "ordinal": 47,
           "upstreamIdentity": "cv.ximgproc.dtFilter(Mat guide;Mat src;Mat dst[/O];double sigmaSpatial;double sigmaColor;int mode=DTF_NC;int numIters=3)->void",
           "upstreamClassification": "implemented",
@@ -270,7 +496,6 @@
             "jyppx_ocv_ximgproc_dt_filter"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat DtFilter(JYPPX.OpenCvSharp.Core.Mat guide,JYPPX.OpenCvSharp.Core.Mat src,System.Double sigmaSpatial,System.Double sigmaColor,JYPPX.OpenCvSharp.XImgProc.DomainTransformFilterMode mode=NormalizedConvolution,System.Int32 numIters=3)",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void DtFilter(JYPPX.OpenCvSharp.Core.Mat guide,JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Double sigmaSpatial,System.Double sigmaColor,JYPPX.OpenCvSharp.XImgProc.DomainTransformFilterMode mode=NormalizedConvolution,System.Int32 numIters=3)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
@@ -286,8 +511,37 @@
             "jyppx_ocv_ximgproc_guided_filter_filter"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.GuidedFilter|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Filter(JYPPX.OpenCvSharp.Core.Mat src,System.Int32 dDepth=-1)",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.GuidedFilter|method|public;instance|System.Void Filter(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 dDepth=-1)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 50,
+          "upstreamIdentity": "cv.ximgproc.createGuidedFilter(Mat guide;int radius;double eps;double scale=1.0)->Ptr<GuidedFilter>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_guided_filter_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.GuidedFilter CreateGuidedFilter(JYPPX.OpenCvSharp.Core.Mat guide,System.Int32 radius,System.Double eps,System.Double scale=1)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 51,
+          "upstreamIdentity": "cv.ximgproc.guidedFilter(Mat guide;Mat src;Mat dst[/O];int radius;double eps;int dDepth=-1;double scale=1.0)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_guided_filter_run"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void GuidedFilter(JYPPX.OpenCvSharp.Core.Mat guide,JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 radius,System.Double eps,System.Int32 dDepth=-1,System.Double scale=1)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -302,7 +556,6 @@
             "jyppx_ocv_ximgproc_am_filter"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat AmFilter(JYPPX.OpenCvSharp.Core.Mat joint,JYPPX.OpenCvSharp.Core.Mat src,System.Double sigmaS,System.Double sigmaR,System.Boolean adjustOutliers=false)",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void AmFilter(JYPPX.OpenCvSharp.Core.Mat joint,JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Double sigmaS,System.Double sigmaR,System.Boolean adjustOutliers=false)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
@@ -318,7 +571,6 @@
             "jyppx_ocv_ximgproc_joint_bilateral_filter"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat JointBilateralFilter(JYPPX.OpenCvSharp.Core.Mat joint,JYPPX.OpenCvSharp.Core.Mat src,System.Int32 d,System.Double sigmaColor,System.Double sigmaSpace,JYPPX.OpenCvSharp.ImgProc.BorderTypes borderType=Default)",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void JointBilateralFilter(JYPPX.OpenCvSharp.Core.Mat joint,JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 d,System.Double sigmaColor,System.Double sigmaSpace,JYPPX.OpenCvSharp.ImgProc.BorderTypes borderType=Default)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
@@ -334,7 +586,6 @@
             "jyppx_ocv_ximgproc_bilateral_texture_filter"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat BilateralTextureFilter(JYPPX.OpenCvSharp.Core.Mat src,System.Int32 fr=3,System.Int32 numIter=1,System.Double sigmaAlpha=-1,System.Double sigmaAvg=-1)",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void BilateralTextureFilter(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 fr=3,System.Int32 numIter=1,System.Double sigmaAlpha=-1,System.Double sigmaAvg=-1)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
@@ -350,7 +601,6 @@
             "jyppx_ocv_ximgproc_rolling_guidance_filter"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat RollingGuidanceFilter(JYPPX.OpenCvSharp.Core.Mat src,System.Int32 d=-1,System.Double sigmaColor=25,System.Double sigmaSpace=3,System.Int32 numOfIter=4,JYPPX.OpenCvSharp.ImgProc.BorderTypes borderType=Default)",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void RollingGuidanceFilter(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 d=-1,System.Double sigmaColor=25,System.Double sigmaSpace=3,System.Int32 numOfIter=4,JYPPX.OpenCvSharp.ImgProc.BorderTypes borderType=Default)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
@@ -366,8 +616,37 @@
             "jyppx_ocv_ximgproc_fast_bilateral_solver_filter_filter"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastBilateralSolverFilter|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Filter(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat confidence)",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastBilateralSolverFilter|method|public;instance|System.Void Filter(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat confidence,JYPPX.OpenCvSharp.Core.Mat dst)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 63,
+          "upstreamIdentity": "cv.ximgproc.createFastBilateralSolverFilter(Mat guide;double sigma_spatial;double sigma_luma;double sigma_chroma;double lambda=128.0;int num_iter=25;double max_tol=1e-5)->Ptr<FastBilateralSolverFilter>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_fast_bilateral_solver_filter_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.FastBilateralSolverFilter CreateFastBilateralSolverFilter(JYPPX.OpenCvSharp.Core.Mat guide,System.Double sigmaSpatial,System.Double sigmaLuma,System.Double sigmaChroma,System.Double lambda=128,System.Int32 numIter=25,System.Double maxTol=1E-05)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 64,
+          "upstreamIdentity": "cv.ximgproc.fastBilateralSolverFilter(Mat guide;Mat src;Mat confidence;Mat dst[/O];double sigma_spatial=8;double sigma_luma=8;double sigma_chroma=8;double lambda=128.0;int num_iter=25;double max_tol=1e-5)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_fast_bilateral_solver_filter_run"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void FastBilateralSolverFilter(JYPPX.OpenCvSharp.Core.Mat guide,JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat confidence,JYPPX.OpenCvSharp.Core.Mat dst,System.Double sigmaSpatial=8,System.Double sigmaLuma=8,System.Double sigmaChroma=8,System.Double lambda=128,System.Int32 numIter=25,System.Double maxTol=1E-05)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -382,8 +661,37 @@
             "jyppx_ocv_ximgproc_fast_global_smoother_filter_filter"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastGlobalSmootherFilter|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Filter(JYPPX.OpenCvSharp.Core.Mat src)",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastGlobalSmootherFilter|method|public;instance|System.Void Filter(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 67,
+          "upstreamIdentity": "cv.ximgproc.createFastGlobalSmootherFilter(Mat guide;double lambda;double sigma_color;double lambda_attenuation=0.25;int num_iter=3)->Ptr<FastGlobalSmootherFilter>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_fast_global_smoother_filter_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.FastGlobalSmootherFilter CreateFastGlobalSmootherFilter(JYPPX.OpenCvSharp.Core.Mat guide,System.Double lambda,System.Double sigmaColor,System.Double lambdaAttenuation=0.25,System.Int32 numIter=3)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 68,
+          "upstreamIdentity": "cv.ximgproc.fastGlobalSmootherFilter(Mat guide;Mat src;Mat dst[/O];double lambda;double sigma_color;double lambda_attenuation=0.25;int num_iter=3)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_fast_global_smoother_filter_run"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void FastGlobalSmootherFilter(JYPPX.OpenCvSharp.Core.Mat guide,JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Double lambda,System.Double sigmaColor,System.Double lambdaAttenuation=0.25,System.Int32 numIter=3)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -398,8 +706,23 @@
             "jyppx_ocv_ximgproc_l0_smooth"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat L0Smooth(JYPPX.OpenCvSharp.Core.Mat src,System.Double lambda=0.02,System.Double kappa=2)",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void L0Smooth(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Double lambda=0.02,System.Double kappa=2)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 71,
+          "upstreamIdentity": "cv.ximgproc.EdgeBoxes.getBoundingBoxes(Mat edge_map;Mat orientation_map;vector_Rect boxes[/O,/Ref];Mat scores=Mat()[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_edge_boxes_get_bounding_boxes_count",
+            "jyppx_ocv_ximgproc_edge_boxes_get_bounding_boxes_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|method|public;instance|JYPPX.OpenCvSharp.XImgProc.EdgeBox[] GetBoundingBoxes(JYPPX.OpenCvSharp.Core.Mat edgeMap,JYPPX.OpenCvSharp.Core.Mat orientationMap)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -767,6 +1090,21 @@
           "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
         },
         {
+          "ordinal": 96,
+          "upstreamIdentity": "cv.ximgproc.createEdgeBoxes(float alpha=0.65f;float beta=0.75f;float eta=1;float minScore=0.01f;int maxBoxes=10000;float edgeMinMag=0.1f;float edgeMergeThr=0.5f;float clusterMinMag=0.5f;float maxAspectRatio=3;float minBoxArea=1000;float gamma=2;float kappa=1.5f)->Ptr<EdgeBoxes>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_edge_boxes_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes CreateEdgeBoxes(System.Single alpha=0.65,System.Single beta=0.75,System.Single eta=1,System.Single minScore=0.01,System.Int32 maxBoxes=10000,System.Single edgeMinMag=0.1,System.Single edgeMergeThr=0.5,System.Single clusterMinMag=0.5,System.Single maxAspectRatio=3,System.Single minBoxArea=1000,System.Single gamma=2,System.Single kappa=1.5)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
           "ordinal": 97,
           "upstreamIdentity": "cv.ximgproc.edgePreservingFilter(Mat src;Mat dst[/O];int d;double threshold)->void",
           "upstreamClassification": "implemented",
@@ -774,7 +1112,6 @@
             "jyppx_ocv_ximgproc_edge_preserving_filter"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat EdgePreservingFilter(JYPPX.OpenCvSharp.Core.Mat src,System.Int32 d,System.Double threshold)",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void EdgePreservingFilter(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 d,System.Double threshold)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
@@ -790,7 +1127,6 @@
             "jyppx_ocv_ximgproc_covariance_estimation"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat CovarianceEstimation(JYPPX.OpenCvSharp.Core.Mat src,System.Int32 windowRows,System.Int32 windowCols)",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void CovarianceEstimation(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 windowRows,System.Int32 windowCols)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
@@ -806,8 +1142,22 @@
             "jyppx_ocv_ximgproc_fast_hough_transform"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat FastHoughTransform(JYPPX.OpenCvSharp.Core.Mat src,System.Int32 dstMatDepth,JYPPX.OpenCvSharp.XImgProc.AngleRangeOption angleRange=Aro315To135,JYPPX.OpenCvSharp.XImgProc.HoughOp op=Add,JYPPX.OpenCvSharp.XImgProc.HoughDeskewOption makeSkew=Deskew)",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void FastHoughTransform(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 dstMatDepth,JYPPX.OpenCvSharp.XImgProc.AngleRangeOption angleRange=Aro315To135,JYPPX.OpenCvSharp.XImgProc.HoughOp op=Add,JYPPX.OpenCvSharp.XImgProc.HoughDeskewOption makeSkew=Deskew)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 103,
+          "upstreamIdentity": "cv.ximgproc.HoughPoint2Line(Point houghPoint[/C,/Ref];Mat srcImgInfo;int angleRange=ARO_315_135;int makeSkew=HDO_DESKEW;int rules=RO_IGNORE_BORDERS)->Vec4i",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_hough_point_to_line"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.ImgProc.LineSegment HoughPointToLine(System.Int32 houghX,System.Int32 houghY,JYPPX.OpenCvSharp.Core.Mat srcImgInfo,JYPPX.OpenCvSharp.XImgProc.AngleRangeOption angleRange=Aro315To135,JYPPX.OpenCvSharp.XImgProc.HoughDeskewOption makeSkew=Deskew,JYPPX.OpenCvSharp.XImgProc.RulesOption rules=IgnoreBorders)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -822,7 +1172,6 @@
             "jyppx_ocv_ximgproc_fast_line_detector_detect"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastLineDetector|method|public;instance|JYPPX.OpenCvSharp.ImgProc.LineSegment[] Detect(JYPPX.OpenCvSharp.Core.Mat image)",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastLineDetector|method|public;instance|System.Void Detect(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat lines)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
@@ -840,6 +1189,21 @@
           "managedMembers": [
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastLineDetector|method|public;instance|System.Void DrawSegments(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat lines,System.Boolean drawArrow=false,JYPPX.OpenCvSharp.Core.Scalar? lineColor=null,System.Int32 lineThickness=1)",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastLineDetector|method|public;instance|System.Void DrawSegments(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.ImgProc.LineSegment[] lines,System.Boolean drawArrow=false,JYPPX.OpenCvSharp.Core.Scalar? lineColor=null,System.Int32 lineThickness=1)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 107,
+          "upstreamIdentity": "cv.ximgproc.createFastLineDetector(int length_threshold=10;float distance_threshold=1.414213562f;double canny_th1=50.0;double canny_th2=50.0;int canny_aperture_size=3;bool do_merge=false)->Ptr<FastLineDetector>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_fast_line_detector_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.FastLineDetector CreateFastLineDetector(System.Int32 lengthThreshold=10,System.Single distanceThreshold=1.4142135,System.Double cannyTh1=50,System.Double cannyTh2=50,System.Int32 cannyApertureSize=3,System.Boolean doMerge=false)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -878,6 +1242,21 @@
           "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
         },
         {
+          "ordinal": 112,
+          "upstreamIdentity": "cv.ximgproc.ContourFitting.setFDSize(int n)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_contour_fitting_set_fd_size"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.ContourFitting|property|instance;get:public;set:public|System.Int32 FDSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
           "ordinal": 113,
           "upstreamIdentity": "cv.ximgproc.ContourFitting.getCtrSize()->int",
           "upstreamClassification": "implemented",
@@ -893,6 +1272,21 @@
           "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
         },
         {
+          "ordinal": 114,
+          "upstreamIdentity": "cv.ximgproc.ContourFitting.getFDSize()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_contour_fitting_get_fd_size"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.ContourFitting|property|instance;get:public;set:public|System.Int32 FDSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
           "ordinal": 115,
           "upstreamIdentity": "cv.ximgproc.fourierDescriptor(Mat src;Mat dst[/O];int nbElt=-1;int nbFD=-1)->void",
           "upstreamClassification": "implemented",
@@ -900,8 +1294,22 @@
             "jyppx_ocv_ximgproc_fourier_descriptor"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat FourierDescriptor(JYPPX.OpenCvSharp.Core.Mat src,System.Int32 nbElt=-1,System.Int32 nbFD=-1)",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void FourierDescriptor(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 nbElt=-1,System.Int32 nbFD=-1)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 116,
+          "upstreamIdentity": "cv.ximgproc.transformFD(Mat src;Mat t;Mat dst[/O];bool fdContour=true)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_transform_fd"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void TransformFD(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat transform,JYPPX.OpenCvSharp.Core.Mat dst,System.Boolean fdContour=true)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -916,8 +1324,112 @@
             "jyppx_ocv_ximgproc_contour_sampling"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat ContourSampling(JYPPX.OpenCvSharp.Core.Mat src,System.Int32 nbElt)",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void ContourSampling(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 nbElt)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 118,
+          "upstreamIdentity": "cv.ximgproc.createContourFitting(int ctr=1024;int fd=16)->Ptr<ContourFitting>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_contour_fitting_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.ContourFitting CreateContourFitting(System.Int32 ctr=1024,System.Int32 fd=16)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 120,
+          "upstreamIdentity": "cv.ximgproc.SuperpixelLSC.getNumberOfSuperpixels()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_superpixel_lsc_get_number"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelLSC|property|instance;get:public|System.Int32 NumberOfSuperpixels"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 121,
+          "upstreamIdentity": "cv.ximgproc.SuperpixelLSC.iterate(int num_iterations=10)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_superpixel_lsc_iterate"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelLSC|method|public;instance|System.Void Iterate(System.Int32 numIterations=10)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 122,
+          "upstreamIdentity": "cv.ximgproc.SuperpixelLSC.getLabels(Mat labels_out[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_superpixel_lsc_get_labels"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelLSC|method|public;instance|System.Void GetLabels(JYPPX.OpenCvSharp.Core.Mat labels)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 123,
+          "upstreamIdentity": "cv.ximgproc.SuperpixelLSC.getLabelContourMask(Mat image[/O];bool thick_line=true)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_superpixel_lsc_get_label_contour_mask"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelLSC|method|public;instance|System.Void GetLabelContourMask(JYPPX.OpenCvSharp.Core.Mat image,System.Boolean thickLine=true)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 124,
+          "upstreamIdentity": "cv.ximgproc.SuperpixelLSC.enforceLabelConnectivity(int min_element_size=25)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_superpixel_lsc_enforce_label_connectivity"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelLSC|method|public;instance|System.Void EnforceLabelConnectivity(System.Int32 minElementSize=25)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 125,
+          "upstreamIdentity": "cv.ximgproc.createSuperpixelLSC(Mat image;int region_size=10;float ratio=0.075f)->Ptr<SuperpixelLSC>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_superpixel_lsc_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SuperpixelLSC CreateSuperpixelLSC(JYPPX.OpenCvSharp.Core.Mat image,System.Int32 regionSize=10,System.Single ratio=0.075)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -932,7 +1444,6 @@
             "jyppx_ocv_ximgproc_pei_lin_normalization"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat PeiLinNormalization(JYPPX.OpenCvSharp.Core.Mat src)",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void PeiLinNormalization(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
@@ -949,6 +1460,36 @@
           ],
           "managedMembers": [
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.RidgeDetectionFilter|method|public;static|JYPPX.OpenCvSharp.XImgProc.RidgeDetectionFilter Create(System.Int32 ddepth=5,System.Int32 dx=1,System.Int32 dy=1,System.Int32 ksize=3,System.Int32 outDtype=0,System.Double scale=1,System.Double delta=0,JYPPX.OpenCvSharp.ImgProc.BorderTypes borderType=Default)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 130,
+          "upstreamIdentity": "cv.ximgproc.RidgeDetectionFilter.getRidgeFilteredImage(Mat _img;Mat out[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ridge_detection_filter_get_image"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RidgeDetectionFilter|method|public;instance|System.Void GetRidgeFilteredImage(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 132,
+          "upstreamIdentity": "cv.ximgproc.ScanSegment.getNumberOfSuperpixels()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_scan_segment_get_number"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.ScanSegment|property|instance;get:public|System.Int32 NumberOfSuperpixels"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -978,7 +1519,6 @@
             "jyppx_ocv_ximgproc_scan_segment_get_labels"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.ScanSegment|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetLabels()",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.ScanSegment|method|public;instance|System.Void GetLabels(JYPPX.OpenCvSharp.Core.Mat labels)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
@@ -994,8 +1534,97 @@
             "jyppx_ocv_ximgproc_scan_segment_get_label_contour_mask"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.ScanSegment|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetLabelContourMask(System.Boolean thickLine=true)",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.ScanSegment|method|public;instance|System.Void GetLabelContourMask(JYPPX.OpenCvSharp.Core.Mat image,System.Boolean thickLine=true)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 136,
+          "upstreamIdentity": "cv.ximgproc.createScanSegment(int image_width;int image_height;int num_superpixels;int slices=8;bool merge_small=true)->cv::Ptr<ScanSegment>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_scan_segment_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.ScanSegment CreateScanSegment(System.Int32 imageWidth,System.Int32 imageHeight,System.Int32 numSuperpixels,System.Int32 slices=8,System.Boolean mergeSmall=true)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 138,
+          "upstreamIdentity": "cv.ximgproc.SuperpixelSEEDS.getNumberOfSuperpixels()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_superpixel_seeds_get_number"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSEEDS|property|instance;get:public|System.Int32 NumberOfSuperpixels"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 139,
+          "upstreamIdentity": "cv.ximgproc.SuperpixelSEEDS.iterate(Mat img;int num_iterations=4)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_superpixel_seeds_iterate"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSEEDS|method|public;instance|System.Void Iterate(JYPPX.OpenCvSharp.Core.Mat image,System.Int32 numIterations=4)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 140,
+          "upstreamIdentity": "cv.ximgproc.SuperpixelSEEDS.getLabels(Mat labels_out[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_superpixel_seeds_get_labels"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSEEDS|method|public;instance|System.Void GetLabels(JYPPX.OpenCvSharp.Core.Mat labels)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 141,
+          "upstreamIdentity": "cv.ximgproc.SuperpixelSEEDS.getLabelContourMask(Mat image[/O];bool thick_line=false)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_superpixel_seeds_get_label_contour_mask"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSEEDS|method|public;instance|System.Void GetLabelContourMask(JYPPX.OpenCvSharp.Core.Mat image,System.Boolean thickLine=false)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 142,
+          "upstreamIdentity": "cv.ximgproc.createSuperpixelSEEDS(int image_width;int image_height;int image_channels;int num_superpixels;int num_levels;int prior=2;int histogram_bins=5;bool double_step=false)->Ptr<SuperpixelSEEDS>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_superpixel_seeds_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SuperpixelSEEDS CreateSuperpixelSEEDS(System.Int32 imageWidth,System.Int32 imageHeight,System.Int32 imageChannels,System.Int32 numSuperpixels,System.Int32 numLevels,System.Int32 prior=2,System.Int32 histogramBins=5,System.Boolean doubleStep=false)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -1018,6 +1647,81 @@
           "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
         },
         {
+          "ordinal": 157,
+          "upstreamIdentity": "cv.ximgproc.segmentation.createSelectiveSearchSegmentationStrategyColor()->Ptr<SelectiveSearchSegmentationStrategyColor>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_selective_search_strategy_create_color"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy CreateSelectiveSearchSegmentationStrategyColor()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 159,
+          "upstreamIdentity": "cv.ximgproc.segmentation.createSelectiveSearchSegmentationStrategySize()->Ptr<SelectiveSearchSegmentationStrategySize>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_selective_search_strategy_create_size"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy CreateSelectiveSearchSegmentationStrategySize()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 161,
+          "upstreamIdentity": "cv.ximgproc.segmentation.createSelectiveSearchSegmentationStrategyTexture()->Ptr<SelectiveSearchSegmentationStrategyTexture>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_selective_search_strategy_create_texture"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy CreateSelectiveSearchSegmentationStrategyTexture()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 163,
+          "upstreamIdentity": "cv.ximgproc.segmentation.createSelectiveSearchSegmentationStrategyFill()->Ptr<SelectiveSearchSegmentationStrategyFill>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_selective_search_strategy_create_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy CreateSelectiveSearchSegmentationStrategyFill()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 167,
+          "upstreamIdentity": "cv.ximgproc.segmentation.createSelectiveSearchSegmentationStrategyMultiple()->Ptr<SelectiveSearchSegmentationStrategyMultiple>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_selective_search_strategy_create_multiple"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategyMultiple CreateSelectiveSearchSegmentationStrategyMultiple()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
           "ordinal": 184,
           "upstreamIdentity": "cv.ximgproc.segmentation.createSelectiveSearchSegmentation()->Ptr<SelectiveSearchSegmentation>",
           "upstreamClassification": "implemented",
@@ -1033,6 +1737,96 @@
           "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
         },
         {
+          "ordinal": 187,
+          "upstreamIdentity": "cv.ximgproc.SuperpixelSLIC.getNumberOfSuperpixels()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_superpixel_slic_get_number"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSLIC|property|instance;get:public|System.Int32 NumberOfSuperpixels"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 188,
+          "upstreamIdentity": "cv.ximgproc.SuperpixelSLIC.iterate(int num_iterations=10)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_superpixel_slic_iterate"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSLIC|method|public;instance|System.Void Iterate(System.Int32 numIterations=10)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 189,
+          "upstreamIdentity": "cv.ximgproc.SuperpixelSLIC.getLabels(Mat labels_out[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_superpixel_slic_get_labels"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSLIC|method|public;instance|System.Void GetLabels(JYPPX.OpenCvSharp.Core.Mat labels)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 190,
+          "upstreamIdentity": "cv.ximgproc.SuperpixelSLIC.getLabelContourMask(Mat image[/O];bool thick_line=true)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_superpixel_slic_get_label_contour_mask"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSLIC|method|public;instance|System.Void GetLabelContourMask(JYPPX.OpenCvSharp.Core.Mat image,System.Boolean thickLine=true)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 191,
+          "upstreamIdentity": "cv.ximgproc.SuperpixelSLIC.enforceLabelConnectivity(int min_element_size=25)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_superpixel_slic_enforce_label_connectivity"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSLIC|method|public;instance|System.Void EnforceLabelConnectivity(System.Int32 minElementSize=25)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 192,
+          "upstreamIdentity": "cv.ximgproc.createSuperpixelSLIC(Mat image;int algorithm=SLICO;int region_size=10;float ruler=10.0f)->Ptr<SuperpixelSLIC>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_superpixel_slic_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SuperpixelSLIC CreateSuperpixelSLIC(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.XImgProc.SLICType algorithm=SLICO,System.Int32 regionSize=10,System.Single ruler=10)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
           "ordinal": 194,
           "upstreamIdentity": "cv.ximgproc.SparseMatchInterpolator.interpolate(Mat from_image;Mat from_points;Mat to_image;Mat to_points;Mat dense_flow[/O])->void",
           "upstreamClassification": "implemented",
@@ -1041,8 +1835,6 @@
           ],
           "managedMembers": [
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.SparseMatchInterpolator|method|public;instance;abstract|System.Void Interpolate(JYPPX.OpenCvSharp.Core.Mat fromImage,JYPPX.OpenCvSharp.Core.Mat fromPoints,JYPPX.OpenCvSharp.Core.Mat toImage,JYPPX.OpenCvSharp.Core.Mat toPoints,JYPPX.OpenCvSharp.Core.Mat denseFlow)",
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SparseMatchInterpolator|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Interpolate(JYPPX.OpenCvSharp.Core.Mat fromImage,JYPPX.OpenCvSharp.Core.Mat fromPoints,JYPPX.OpenCvSharp.Core.Mat toImage,JYPPX.OpenCvSharp.Core.Mat toPoints)",
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SparseMatchInterpolator|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Interpolate(JYPPX.OpenCvSharp.Core.Mat fromImage,JYPPX.OpenCvSharp.Core.Point2f[] fromPoints,JYPPX.OpenCvSharp.Core.Mat toImage,JYPPX.OpenCvSharp.Core.Point2f[] toPoints)",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.SparseMatchInterpolator|method|public;instance|System.Void Interpolate(JYPPX.OpenCvSharp.Core.Mat fromImage,JYPPX.OpenCvSharp.Core.Point2f[] fromPoints,JYPPX.OpenCvSharp.Core.Mat toImage,JYPPX.OpenCvSharp.Core.Point2f[] toPoints,JYPPX.OpenCvSharp.Core.Mat denseFlow)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
@@ -1186,6 +1978,501 @@
           "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
         },
         {
+          "ordinal": 205,
+          "upstreamIdentity": "cv.ximgproc.EdgeAwareInterpolator.setFGSLambda(float _lambda)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_edge_aware_interpolator_set_fgs_lambda"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Single FGSLambda"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 206,
+          "upstreamIdentity": "cv.ximgproc.EdgeAwareInterpolator.getFGSLambda()->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_edge_aware_interpolator_get_fgs_lambda"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Single FGSLambda"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 207,
+          "upstreamIdentity": "cv.ximgproc.EdgeAwareInterpolator.setFGSSigma(float _sigma)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_edge_aware_interpolator_set_fgs_sigma"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Single FGSSigma"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 208,
+          "upstreamIdentity": "cv.ximgproc.EdgeAwareInterpolator.getFGSSigma()->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_edge_aware_interpolator_get_fgs_sigma"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Single FGSSigma"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 209,
+          "upstreamIdentity": "cv.ximgproc.createEdgeAwareInterpolator()->Ptr<EdgeAwareInterpolator>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_edge_aware_interpolator_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator CreateEdgeAwareInterpolator()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 211,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.setK(int k=32)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_set_k"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Int32 K"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 212,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.getK()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_get_k"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Int32 K"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 213,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.setCostMap(Mat costMap[/C,/Ref])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_set_cost_map"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|method|public;instance|System.Void SetCostMap(JYPPX.OpenCvSharp.Core.Mat costMap)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 214,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.setSuperpixelSize(int spSize=15)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_set_superpixel_size"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Int32 SuperpixelSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 215,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.getSuperpixelSize()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_get_superpixel_size"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Int32 SuperpixelSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 216,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.setSuperpixelNNCnt(int spNN=150)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_set_superpixel_nn_count"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Int32 SuperpixelNNCount"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 217,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.getSuperpixelNNCnt()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_get_superpixel_nn_count"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Int32 SuperpixelNNCount"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 218,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.setSuperpixelRuler(float ruler=15.f)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_set_superpixel_ruler"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single SuperpixelRuler"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 219,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.getSuperpixelRuler()->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_get_superpixel_ruler"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single SuperpixelRuler"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 220,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.setSuperpixelMode(int mode=100)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_set_superpixel_mode"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|JYPPX.OpenCvSharp.XImgProc.SLICType SuperpixelMode"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 221,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.getSuperpixelMode()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_get_superpixel_mode"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|JYPPX.OpenCvSharp.XImgProc.SLICType SuperpixelMode"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 222,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.setAlpha(float alpha=0.7f)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_set_alpha"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single Alpha"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 223,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.getAlpha()->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_get_alpha"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single Alpha"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 224,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.setModelIter(int modelIter=4)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_set_model_iter"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Int32 ModelIter"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 225,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.getModelIter()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_get_model_iter"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Int32 ModelIter"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 226,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.setRefineModels(bool refineModles=true)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_set_refine_models"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Boolean RefineModels"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 227,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.getRefineModels()->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_get_refine_models"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Boolean RefineModels"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 228,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.setMaxFlow(float maxFlow=250.f)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_set_max_flow"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single MaxFlow"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 229,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.getMaxFlow()->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_get_max_flow"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single MaxFlow"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 230,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.setUseVariationalRefinement(bool use_variational_refinement=false)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_set_use_variational_refinement"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Boolean UseVariationalRefinement"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 231,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.getUseVariationalRefinement()->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_get_use_variational_refinement"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Boolean UseVariationalRefinement"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 232,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.setUseGlobalSmootherFilter(bool use_FGS=true)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_set_use_global_smoother_filter"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Boolean UseGlobalSmootherFilter"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 233,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.getUseGlobalSmootherFilter()->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_get_use_global_smoother_filter"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Boolean UseGlobalSmootherFilter"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 234,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.setFGSLambda(float lambda=500.f)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_set_fgs_lambda"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single FGSLambda"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 235,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.getFGSLambda()->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_get_fgs_lambda"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single FGSLambda"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 236,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.setFGSSigma(float sigma=1.5f)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_set_fgs_sigma"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single FGSSigma"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 237,
+          "upstreamIdentity": "cv.ximgproc.RICInterpolator.getFGSSigma()->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_get_fgs_sigma"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single FGSSigma"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 238,
+          "upstreamIdentity": "cv.ximgproc.createRICInterpolator()->Ptr<RICInterpolator>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_ric_interpolator_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.RICInterpolator CreateRICInterpolator()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
           "ordinal": 248,
           "upstreamIdentity": "cv.ximgproc.weightedMedianFilter(Mat joint;Mat src;Mat dst[/O];int r;double sigma=25.5;int weightType=WMF_EXP;Mat mask=Mat())->void",
           "upstreamClassification": "implemented",
@@ -1193,7 +2480,6 @@
             "jyppx_ocv_ximgproc_weighted_median_filter"
           ],
           "managedMembers": [
-            "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat WeightedMedianFilter(JYPPX.OpenCvSharp.Core.Mat joint,JYPPX.OpenCvSharp.Core.Mat src,System.Int32 r,System.Double sigma=25.5,JYPPX.OpenCvSharp.XImgProc.WeightedMedianFilterWeightType weightType=Exp,JYPPX.OpenCvSharp.Core.Mat? mask=null)",
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void WeightedMedianFilter(JYPPX.OpenCvSharp.Core.Mat joint,JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 r,System.Double sigma=25.5,JYPPX.OpenCvSharp.XImgProc.WeightedMedianFilterWeightType weightType=Exp,JYPPX.OpenCvSharp.Core.Mat? mask=null)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",

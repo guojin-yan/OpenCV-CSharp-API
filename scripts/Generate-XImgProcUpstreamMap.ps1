@@ -19,7 +19,11 @@ $raw = Get-Content -LiteralPath $rawPath -Raw | ConvertFrom-Json
 $nativeEntries = @(Get-Content -LiteralPath $nativeManifestPath | Where-Object { $_ -match '^jyppx_ocv_ximgproc_' } | ForEach-Object { ($_ -split '\|')[0] } | Sort-Object -Unique)
 $managedEntries = @(Get-Content -LiteralPath $managedBaselinePath | Where-Object { $_ -match 'JYPPX\.OpenCvSharp\.XImgProc' })
 
-function ConvertTo-Snake([string]$Value) { return ([regex]::Replace($Value, '(?<!^)([A-Z])', '_$1')).ToLowerInvariant() }
+function ConvertTo-Snake([string]$Value) {
+    $snake = [regex]::Replace($Value, '([A-Z]+)([A-Z][a-z])', '$1_$2')
+    $snake = [regex]::Replace($snake, '([a-z0-9])([A-Z])', '$1_$2')
+    return $snake.ToLowerInvariant()
+}
 function ConvertTo-Pascal([string]$Value) { if ($Value.Length -eq 0) { return $Value }; return $Value.Substring(0,1).ToUpperInvariant() + $Value.Substring(1) }
 function Get-Parts([string]$Identity) {
     $match = [regex]::Match($Identity, '^cv\.ximgproc\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\(')
@@ -27,32 +31,102 @@ function Get-Parts([string]$Identity) {
     [pscustomobject]@{ Owner = [string]$match.Groups['owner'].Value; Name = [string]$match.Groups['name'].Value }
 }
 function Get-NativeEvidence([string]$Owner, [string]$Name) {
-    $expected = if ([string]::IsNullOrWhiteSpace($Owner)) {
-        "jyppx_ocv_ximgproc_$(ConvertTo-Snake $Name)"
-    } elseif ($Name -match '^create(?<type>.+)$') {
-        "jyppx_ocv_ximgproc_$(ConvertTo-Snake $Matches.type)_create"
+    $expected = [System.Collections.Generic.List[string]]::new()
+    if ([string]::IsNullOrWhiteSpace($Owner) -and $Name -ceq 'createDisparityWLSFilter') {
+        foreach ($kind in @('bm','sgbm','matcher')) { $expected.Add("jyppx_ocv_ximgproc_disparity_wls_filter_create_from_stereo_$kind") }
+    } elseif ([string]::IsNullOrWhiteSpace($Owner) -and $Name -ceq 'createRightMatcher') {
+        foreach ($kind in @('bm','sgbm','matcher')) { $expected.Add("jyppx_ocv_ximgproc_create_right_matcher_from_stereo_$kind") }
+    } elseif ([string]::IsNullOrWhiteSpace($Owner) -and $Name -ceq 'createDisparityWLSFilterGeneric') {
+        $expected.Add('jyppx_ocv_ximgproc_disparity_wls_filter_create_generic')
+    } elseif ([string]::IsNullOrWhiteSpace($Owner) -and $Name -ceq 'guidedFilter') {
+        $expected.Add('jyppx_ocv_ximgproc_guided_filter_run')
+    } elseif ([string]::IsNullOrWhiteSpace($Owner) -and $Name -ceq 'fastBilateralSolverFilter') {
+        $expected.Add('jyppx_ocv_ximgproc_fast_bilateral_solver_filter_run')
+    } elseif ([string]::IsNullOrWhiteSpace($Owner) -and $Name -ceq 'fastGlobalSmootherFilter') {
+        $expected.Add('jyppx_ocv_ximgproc_fast_global_smoother_filter_run')
+    } elseif ($Owner -ceq 'RidgeDetectionFilter' -and $Name -ceq 'getRidgeFilteredImage') {
+        $expected.Add('jyppx_ocv_ximgproc_ridge_detection_filter_get_image')
+    } elseif ($Owner -in @('SuperpixelLSC','SuperpixelSEEDS','SuperpixelSLIC','ScanSegment') -and $Name -ceq 'getNumberOfSuperpixels') {
+        $expected.Add("jyppx_ocv_ximgproc_$(ConvertTo-Snake $Owner)_get_number")
+    } elseif ($Owner -ceq 'RICInterpolator' -and $Name -match '^(?<operation>get|set)SuperpixelNNCnt$') {
+        $expected.Add("jyppx_ocv_ximgproc_ric_interpolator_$($Matches.operation)_superpixel_nn_count")
+    } elseif ($Owner -ceq 'EdgeDrawing' -and $Name -ceq 'getSegments') {
+        $expected.Add('jyppx_ocv_ximgproc_edge_drawing_get_segments_count')
+        $expected.Add('jyppx_ocv_ximgproc_edge_drawing_get_segments_fill')
+    } elseif ($Owner -ceq 'EdgeDrawing' -and $Name -ceq 'getSegmentIndicesOfLines') {
+        $expected.Add('jyppx_ocv_ximgproc_edge_drawing_get_segment_indices_of_lines_count')
+        $expected.Add('jyppx_ocv_ximgproc_edge_drawing_get_segment_indices_of_lines_fill')
+    } elseif ($Owner -ceq 'EdgeBoxes' -and $Name -ceq 'getBoundingBoxes') {
+        $expected.Add('jyppx_ocv_ximgproc_edge_boxes_get_bounding_boxes_count')
+        $expected.Add('jyppx_ocv_ximgproc_edge_boxes_get_bounding_boxes_fill')
+    } elseif ([string]::IsNullOrWhiteSpace($Owner) -and $Name -ceq 'HoughPoint2Line') {
+        $expected.Add('jyppx_ocv_ximgproc_hough_point_to_line')
+    } elseif ([string]::IsNullOrWhiteSpace($Owner)) {
+        $expected.Add("jyppx_ocv_ximgproc_$(ConvertTo-Snake $Name)")
+        if ($Name -match '^create(?<type>[A-Z].+)$') {
+            $expected.Add("jyppx_ocv_ximgproc_$(ConvertTo-Snake $Matches.type)_create")
+        }
+    } elseif ($Owner -ceq 'segmentation' -and $Name -match '^createSelectiveSearchSegmentationStrategy(?<strategy>Color|Size|Texture|Fill|Multiple)$') {
+        $strategyName = $Matches.strategy
+        $suffix = if ($strategyName -ceq 'Multiple') { 'multiple' } else { $strategyName.ToLowerInvariant() }
+        $expected.Add("jyppx_ocv_ximgproc_selective_search_strategy_create_$suffix")
+    } elseif ($Name -match '^create(?<type>[A-Z].+)$') {
+        $expected.Add("jyppx_ocv_ximgproc_$(ConvertTo-Snake $Matches.type)_create")
     } else {
-        "jyppx_ocv_ximgproc_$(ConvertTo-Snake $Owner)_$(ConvertTo-Snake $Name)"
+        $expected.Add("jyppx_ocv_ximgproc_$(ConvertTo-Snake $Owner)_$(ConvertTo-Snake $Name)")
     }
-    @($nativeEntries | Where-Object { $_ -ceq $expected })
+    @($nativeEntries | Where-Object { $expected -ccontains $_ })
 }
-function Get-ManagedEvidence([string]$Owner, [string]$Name) {
+function Get-DeclaredParameterCount([string]$Identity) {
+    $match = [regex]::Match($Identity, '^[^(]*\((?<parameters>.*)\)->')
+    if (-not $match.Success -or [string]::IsNullOrWhiteSpace($match.Groups['parameters'].Value)) { return 0 }
+    return @($match.Groups['parameters'].Value -split ';').Count
+}
+function Test-ManagedMethodArity([string]$Entry, [string]$MethodName, [int]$ParameterCount) {
+    $match = [regex]::Match($Entry, "\s$([regex]::Escape($MethodName))\((?<parameters>.*)\)$")
+    if (-not $match.Success) { return $false }
+    $parameters = [string]$match.Groups['parameters'].Value
+    $managedCount = if ([string]::IsNullOrWhiteSpace($parameters)) { 0 } else { @($parameters -split ',').Count }
+    return $managedCount -eq $ParameterCount
+}
+function Get-ManagedEvidence([string]$Owner, [string]$Name, [string]$Identity) {
     $target = ConvertTo-Pascal $Name
+    $parameterCount = Get-DeclaredParameterCount $Identity
     $typeName = if ([string]::IsNullOrWhiteSpace($Owner)) { 'XImgProcCv2' } else { $Owner }
     $methodMarker = " $target("
     $methodEvidence = @($managedEntries | Where-Object {
         $_.Contains("XImgProc.$typeName|method|", [StringComparison]::Ordinal) -and
-        $_.Contains($methodMarker, [StringComparison]::Ordinal)
+        $_.Contains($methodMarker, [StringComparison]::OrdinalIgnoreCase) -and
+        (Test-ManagedMethodArity -Entry $_ -MethodName $target -ParameterCount $parameterCount)
     } | Sort-Object -Unique)
     if ($methodEvidence.Count -gt 0) { return $methodEvidence }
 
+    if ([string]::IsNullOrWhiteSpace($Owner) -and $Name -ceq 'HoughPoint2Line') {
+        return @($managedEntries | Where-Object {
+            $_.Contains('XImgProc.XImgProcCv2|method|public;static|', [StringComparison]::Ordinal) -and
+            $_.Contains(' HoughPointToLine(', [StringComparison]::Ordinal)
+        } | Sort-Object -Unique)
+    }
+    if ($Owner -ceq 'EdgeBoxes' -and $Name -ceq 'getBoundingBoxes') {
+        return @($managedEntries | Where-Object {
+            $_.Contains('XImgProc.EdgeBoxes|method|public;instance|', [StringComparison]::Ordinal) -and
+            $_.Contains('XImgProc.EdgeBox[] GetBoundingBoxes(JYPPX.OpenCvSharp.Core.Mat edgeMap,JYPPX.OpenCvSharp.Core.Mat orientationMap)', [StringComparison]::Ordinal)
+        } | Sort-Object -Unique)
+    }
+
     $accessor = [regex]::Match($Name, '^(?:get|set)(?<property>[A-Z][A-Za-z0-9_]*)$')
     if ($accessor.Success) {
-        $propertyName = $accessor.Groups['property'].Value
-        return @($managedEntries | Where-Object {
-            $_.Contains("XImgProc.$Owner|property|", [StringComparison]::Ordinal) -and
-            $_.EndsWith(" $propertyName", [StringComparison]::OrdinalIgnoreCase)
-        } | Sort-Object -Unique)
+        $propertyNames = [System.Collections.Generic.List[string]]::new()
+        $propertyNames.Add($accessor.Groups['property'].Value)
+        if ($propertyNames[0] -ceq 'SuperpixelNNCnt') { $propertyNames.Add('SuperpixelNNCount') }
+        foreach ($propertyName in $propertyNames) {
+            $propertyEvidence = @($managedEntries | Where-Object {
+                $_.Contains("XImgProc.$Owner|property|", [StringComparison]::Ordinal) -and
+                $_.EndsWith(" $propertyName", [StringComparison]::OrdinalIgnoreCase)
+            } | Sort-Object -Unique)
+            if ($propertyEvidence.Count -gt 0) { return $propertyEvidence }
+        }
+        return @()
     }
 
     if ($Name -ceq 'setParams' -and $Owner -ceq 'EdgeDrawing') {
@@ -66,8 +140,8 @@ function Get-ManagedEvidence([string]$Owner, [string]$Name) {
         $managedType = $Matches.type
         $factory = "Create$managedType"
         return @($managedEntries | Where-Object {
-            ($_.Contains("XImgProc.$managedType|method|public;static|", [StringComparison]::Ordinal) -and $_.Contains(" $target(", [StringComparison]::Ordinal)) -or
-            ($_.Contains('XImgProc.XImgProcCv2|method|public;static|', [StringComparison]::Ordinal) -and $_.Contains(" $factory(", [StringComparison]::Ordinal))
+            ($_.Contains("XImgProc.$managedType|method|public;static|", [StringComparison]::Ordinal) -and $_.Contains(" $target(", [StringComparison]::Ordinal) -and (Test-ManagedMethodArity -Entry $_ -MethodName $target -ParameterCount $parameterCount)) -or
+            ($_.Contains('XImgProc.XImgProcCv2|method|public;static|', [StringComparison]::Ordinal) -and $_.Contains(" $factory(", [StringComparison]::Ordinal) -and (Test-ManagedMethodArity -Entry $_ -MethodName $factory -ParameterCount $parameterCount))
         } | Sort-Object -Unique)
     }
 
@@ -84,7 +158,7 @@ foreach ($declaration in @($raw.declarations)) {
         $parts = Get-Parts -Identity ([string]$declaration.identity)
         if ($null -eq $parts) { throw "Could not split XImgProc declaration identity at ordinal $($declaration.ordinal)." }
         $native = @(Get-NativeEvidence -Owner ([string]$parts.Owner) -Name ([string]$parts.Name))
-        $managed = @(Get-ManagedEvidence -Owner ([string]$parts.Owner) -Name ([string]$parts.Name))
+        $managed = @(Get-ManagedEvidence -Owner ([string]$parts.Owner) -Name ([string]$parts.Name) -Identity ([string]$declaration.identity))
         if ($native.Count -gt 0 -and $managed.Count -gt 0) {
             $classification = 'implemented'
             $reason = 'Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.'
