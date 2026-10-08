@@ -162,6 +162,18 @@ foreach ($declaration in @($raw.declarations)) {
         if ($native.Count -gt 0 -and $managed.Count -gt 0) {
             $classification = 'implemented'
             $reason = 'Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.'
+        } elseif ($parts.Owner -ceq 'RFFeatureGetter' -and $parts.Name -ceq 'getFeatures') {
+            $classification = 'intentionally-omitted'
+            $reason = 'RFFeatureGetter is the optional training/custom feature provider for the model-backed StructuredEdgeDetection family; the current ABI/API has no native or managed wrapper for this family, and model provenance/lifetime is not part of the release surface.'
+        } elseif ([string]::IsNullOrWhiteSpace($parts.Owner) -and $parts.Name -ceq 'createRFFeatureGetter') {
+            $classification = 'intentionally-omitted'
+            $reason = 'RFFeatureGetter is the optional training/custom feature provider for the model-backed StructuredEdgeDetection family; the current ABI/API has no native or managed factory, and model provenance/lifetime is not part of the release surface.'
+        } elseif ($parts.Owner -ceq 'StructuredEdgeDetection' -and $parts.Name -in @('detectEdges','computeOrientation','edgesNms')) {
+            $classification = 'intentionally-omitted'
+            $reason = 'StructuredEdgeDetection is model-file dependent and takes an optional RFFeatureGetter; the current ABI/API has no native or managed wrapper, no model asset/provenance evidence, and no default runtime smoke. Keep this family omitted until its model-backed wrapper boundary is explicitly defined.'
+        } elseif ([string]::IsNullOrWhiteSpace($parts.Owner) -and $parts.Name -ceq 'createStructuredEdgeDetection') {
+            $classification = 'intentionally-omitted'
+            $reason = 'StructuredEdgeDetection is model-file dependent and takes an optional RFFeatureGetter; the current ABI/API has no native or managed factory, no model asset/provenance evidence, and no default runtime smoke. Keep this family omitted until its model-backed wrapper boundary is explicitly defined.'
         } else {
             $classification = 'intentionally-omitted'
             $reason = if ($native.Count -eq 0) { 'No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.' } else { 'Native XImgProc entrypoint is present, but no matching managed baseline member is present.' }

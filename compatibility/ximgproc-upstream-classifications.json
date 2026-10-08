@@ -2847,7 +2847,7 @@
       "ordinal": 240,
       "identity": "cv.ximgproc.RFFeatureGetter.getFeatures(Mat src[/C,/Ref];Mat features[/Ref];int gnrmRad[/C];int gsmthRad[/C];int shrink[/C];int outNum[/C];int gradNum[/C])->void",
       "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "reason": "RFFeatureGetter is the optional training/custom feature provider for the model-backed StructuredEdgeDetection family; the current ABI/API has no native or managed wrapper for this family, and model provenance/lifetime is not part of the release surface.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
       "managedMembers": []
@@ -2856,7 +2856,7 @@
       "ordinal": 241,
       "identity": "cv.ximgproc.createRFFeatureGetter()->Ptr<RFFeatureGetter>",
       "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "reason": "RFFeatureGetter is the optional training/custom feature provider for the model-backed StructuredEdgeDetection family; the current ABI/API has no native or managed factory, and model provenance/lifetime is not part of the release surface.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
       "managedMembers": []
@@ -2874,7 +2874,7 @@
       "ordinal": 243,
       "identity": "cv.ximgproc.StructuredEdgeDetection.detectEdges(Mat src;Mat dst[/O])->void",
       "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "reason": "StructuredEdgeDetection is model-file dependent and takes an optional RFFeatureGetter; the current ABI/API has no native or managed wrapper, no model asset/provenance evidence, and no default runtime smoke. Keep this family omitted until its model-backed wrapper boundary is explicitly defined.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
       "managedMembers": []
@@ -2883,7 +2883,7 @@
       "ordinal": 244,
       "identity": "cv.ximgproc.StructuredEdgeDetection.computeOrientation(Mat src;Mat dst[/O])->void",
       "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "reason": "StructuredEdgeDetection is model-file dependent and takes an optional RFFeatureGetter; the current ABI/API has no native or managed wrapper, no model asset/provenance evidence, and no default runtime smoke. Keep this family omitted until its model-backed wrapper boundary is explicitly defined.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
       "managedMembers": []
@@ -2892,7 +2892,7 @@
       "ordinal": 245,
       "identity": "cv.ximgproc.StructuredEdgeDetection.edgesNms(Mat edge_image;Mat orientation_image;Mat dst[/O];int r=2;int s=0;float m=1;bool isParallel=true)->void",
       "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "reason": "StructuredEdgeDetection is model-file dependent and takes an optional RFFeatureGetter; the current ABI/API has no native or managed wrapper, no model asset/provenance evidence, and no default runtime smoke. Keep this family omitted until its model-backed wrapper boundary is explicitly defined.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
       "managedMembers": []
@@ -2901,7 +2901,7 @@
       "ordinal": 246,
       "identity": "cv.ximgproc.createStructuredEdgeDetection(String model[/C,/Ref];Ptr_RFFeatureGetter howToGetFeatures=Ptr<RFFeatureGetter>()[/C])->Ptr<StructuredEdgeDetection>",
       "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "reason": "StructuredEdgeDetection is model-file dependent and takes an optional RFFeatureGetter; the current ABI/API has no native or managed factory, no model asset/provenance evidence, and no default runtime smoke. Keep this family omitted until its model-backed wrapper boundary is explicitly defined.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
       "managedMembers": []
