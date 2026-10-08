@@ -195,20 +195,28 @@
     {
       "ordinal": 15,
       "identity": "cv.ximgproc.DisparityWLSFilter.getLRCthresh()->int",
-      "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_disparity_wls_filter_get_lrc_thresh"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public;set:public|System.Int32 LrcThreshold"
+      ]
     },
     {
       "ordinal": 16,
       "identity": "cv.ximgproc.DisparityWLSFilter.setLRCthresh(int _LRC_thresh)->void",
-      "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_disparity_wls_filter_set_lrc_thresh"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public;set:public|System.Int32 LrcThreshold"
+      ]
     },
     {
       "ordinal": 17,

@@ -194,6 +194,36 @@
           "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
         },
         {
+          "ordinal": 15,
+          "upstreamIdentity": "cv.ximgproc.DisparityWLSFilter.getLRCthresh()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_disparity_wls_filter_get_lrc_thresh"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public;set:public|System.Int32 LrcThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 16,
+          "upstreamIdentity": "cv.ximgproc.DisparityWLSFilter.setLRCthresh(int _LRC_thresh)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_disparity_wls_filter_set_lrc_thresh"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public;set:public|System.Int32 LrcThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
           "ordinal": 17,
           "upstreamIdentity": "cv.ximgproc.DisparityWLSFilter.getDepthDiscontinuityRadius()->int",
           "upstreamClassification": "implemented",

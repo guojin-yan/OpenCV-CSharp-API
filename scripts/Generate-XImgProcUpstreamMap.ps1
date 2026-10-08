@@ -70,6 +70,8 @@ function Get-NativeEvidence([string]$Owner, [string]$Name) {
         $expected.Add("jyppx_ocv_ximgproc_$(ConvertTo-Snake $Owner)_get_number")
     } elseif ($Owner -ceq 'RICInterpolator' -and $Name -match '^(?<operation>get|set)SuperpixelNNCnt$') {
         $expected.Add("jyppx_ocv_ximgproc_ric_interpolator_$($Matches.operation)_superpixel_nn_count")
+    } elseif ($Owner -ceq 'DisparityWLSFilter' -and $Name -match '^(?<operation>get|set)LRCthresh$') {
+        $expected.Add("jyppx_ocv_ximgproc_disparity_wls_filter_$($Matches.operation)_lrc_thresh")
     } elseif ($Owner -ceq 'EdgeDrawing' -and $Name -ceq 'getSegments') {
         $expected.Add('jyppx_ocv_ximgproc_edge_drawing_get_segments_count')
         $expected.Add('jyppx_ocv_ximgproc_edge_drawing_get_segments_fill')
@@ -147,6 +149,7 @@ function Get-ManagedEvidence([string]$Owner, [string]$Name, [string]$Identity) {
         $propertyNames = [System.Collections.Generic.List[string]]::new()
         $propertyNames.Add($accessor.Groups['property'].Value)
         if ($propertyNames[0] -ceq 'SuperpixelNNCnt') { $propertyNames.Add('SuperpixelNNCount') }
+        if ($Owner -ceq 'DisparityWLSFilter' -and $propertyNames[0] -ceq 'LRCthresh') { $propertyNames.Add('LrcThreshold') }
         foreach ($propertyName in $propertyNames) {
             $propertyEvidence = @($managedEntries | Where-Object {
                 $_.Contains("XImgProc.$typeName|property|", [StringComparison]::Ordinal) -and
