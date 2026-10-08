@@ -6,6 +6,8 @@ Quaternion operations follow the upstream input contract: image creation accepts
 
 The remaining unwrapped utility rows are intentional omissions with explicit boundaries: `colorMatchTemplate` requires three-channel inputs and a CV_64F result map around an internal DFT path; `readGT` is a filesystem-backed disparity-test helper; `findEllipses` returns variable-length six-float ellipse records; and `RadonTransform` has input-type- and crop-dependent output dimensions. None currently has a native ABI entrypoint, managed output adapter, or deterministic runtime smoke contract. The four upstream one-to-four `createSelectiveSearchSegmentationStrategyMultiple` overloads are also retained as omissions: they share one native create symbol, while the managed API intentionally composes the zero-argument `CreateMultiple()` factory with `AddStrategy(strategy, weight)`.
 
+The complete 23-row omission set is now evidence-reviewed: the four utilities and four selective-search overloads above, six model-backed `RFFeatureGetter`/`StructuredEdgeDetection` rows, six stateful `DTFilter`/`AdaptiveManifoldFilter` rows, and three `EdgeDrawing.Params` file-serialization rows. Each remains classified only when its native factory/handle, ownership or model provenance, output adapter, and deterministic smoke boundary are absent from the current API; the semantic guard asserts the exact ordinal, identity, and reason for every row.
+
 Run the scoped extraction and check:
 
 ```powershell
