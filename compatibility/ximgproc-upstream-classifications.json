@@ -2046,7 +2046,7 @@
       "ordinal": 168,
       "identity": "cv.ximgproc.segmentation.createSelectiveSearchSegmentationStrategyMultiple(Ptr_SelectiveSearchSegmentationStrategy s1)->Ptr<SelectiveSearchSegmentationStrategyMultiple>",
       "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "reason": "The upstream one-to-four strategy factory overloads share one native create ABI, while the managed surface intentionally exposes the compositional zero-argument CreateMultiple() plus AddStrategy(strategy, weight) API; preserve the exact upstream overload identities as omissions until dedicated overload semantics and ownership are required.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_selective_search_strategy_create_multiple"
@@ -2057,7 +2057,7 @@
       "ordinal": 169,
       "identity": "cv.ximgproc.segmentation.createSelectiveSearchSegmentationStrategyMultiple(Ptr_SelectiveSearchSegmentationStrategy s1;Ptr_SelectiveSearchSegmentationStrategy s2)->Ptr<SelectiveSearchSegmentationStrategyMultiple>",
       "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "reason": "The upstream one-to-four strategy factory overloads share one native create ABI, while the managed surface intentionally exposes the compositional zero-argument CreateMultiple() plus AddStrategy(strategy, weight) API; preserve the exact upstream overload identities as omissions until dedicated overload semantics and ownership are required.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_selective_search_strategy_create_multiple"
@@ -2068,7 +2068,7 @@
       "ordinal": 170,
       "identity": "cv.ximgproc.segmentation.createSelectiveSearchSegmentationStrategyMultiple(Ptr_SelectiveSearchSegmentationStrategy s1;Ptr_SelectiveSearchSegmentationStrategy s2;Ptr_SelectiveSearchSegmentationStrategy s3)->Ptr<SelectiveSearchSegmentationStrategyMultiple>",
       "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "reason": "The upstream one-to-four strategy factory overloads share one native create ABI, while the managed surface intentionally exposes the compositional zero-argument CreateMultiple() plus AddStrategy(strategy, weight) API; preserve the exact upstream overload identities as omissions until dedicated overload semantics and ownership are required.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_selective_search_strategy_create_multiple"
@@ -2079,7 +2079,7 @@
       "ordinal": 171,
       "identity": "cv.ximgproc.segmentation.createSelectiveSearchSegmentationStrategyMultiple(Ptr_SelectiveSearchSegmentationStrategy s1;Ptr_SelectiveSearchSegmentationStrategy s2;Ptr_SelectiveSearchSegmentationStrategy s3;Ptr_SelectiveSearchSegmentationStrategy s4)->Ptr<SelectiveSearchSegmentationStrategyMultiple>",
       "classification": "intentionally-omitted",
-      "reason": "Native XImgProc entrypoint is present, but no matching managed baseline member is present.",
+      "reason": "The upstream one-to-four strategy factory overloads share one native create ABI, while the managed surface intentionally exposes the compositional zero-argument CreateMultiple() plus AddStrategy(strategy, weight) API; preserve the exact upstream overload identities as omissions until dedicated overload semantics and ownership are required.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [
         "jyppx_ocv_ximgproc_selective_search_strategy_create_multiple"

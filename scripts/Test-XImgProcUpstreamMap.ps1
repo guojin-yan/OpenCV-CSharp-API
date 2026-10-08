@@ -110,7 +110,7 @@ foreach ($expected in $segmentationBindings) {
     }
 }
 $selectiveSearchMultipleOverloads = @($classes.declarations | Where-Object { [int]$_.ordinal -in @(168,169,170,171) })
-if ($selectiveSearchMultipleOverloads.Count -ne 4 -or @($selectiveSearchMultipleOverloads | Where-Object { $_.classification -ne 'intentionally-omitted' -or @($_.nativeEntrypoints).Count -ne 1 -or $_.nativeEntrypoints[0] -cne 'jyppx_ocv_ximgproc_selective_search_strategy_create_multiple' -or @($_.managedMembers).Count -ne 0 }).Count -ne 0) { throw 'XImgProc unexposed Selective Search factory overloads drifted.' }
+if ($selectiveSearchMultipleOverloads.Count -ne 4 -or @($selectiveSearchMultipleOverloads | Where-Object { $_.classification -ne 'intentionally-omitted' -or @($_.nativeEntrypoints).Count -ne 1 -or $_.nativeEntrypoints[0] -cne 'jyppx_ocv_ximgproc_selective_search_strategy_create_multiple' -or @($_.managedMembers).Count -ne 0 -or [string]$_.reason -notmatch 'one-to-four|compositional|zero-argument|CreateMultiple|AddStrategy|ownership' }).Count -ne 0) { throw 'XImgProc unexposed Selective Search factory overloads drifted.' }
 $structuredEdgeOrdinals = @(240,241,243,244,245,246)
 $structuredEdgeRows = @($classes.declarations | Where-Object { [int]$_.ordinal -in $structuredEdgeOrdinals })
 if ($structuredEdgeRows.Count -ne $structuredEdgeOrdinals.Count -or

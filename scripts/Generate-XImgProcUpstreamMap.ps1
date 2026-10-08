@@ -235,6 +235,9 @@ foreach ($declaration in @($raw.declarations)) {
         } elseif ([string]::IsNullOrWhiteSpace($parts.Owner) -and $parts.Name -ceq 'RadonTransform') {
             $classification = 'intentionally-omitted'
             $reason = 'RadonTransform produces type- and geometry-dependent output dimensions (including CV_32S/CV_64F selection and crop-dependent sizing); the current ABI/API has no native wrapper or managed output contract for this legacy uppercase operation.'
+        } elseif ($parts.Owner -ceq 'segmentation' -and $parts.Name -ceq 'createSelectiveSearchSegmentationStrategyMultiple') {
+            $classification = 'intentionally-omitted'
+            $reason = 'The upstream one-to-four strategy factory overloads share one native create ABI, while the managed surface intentionally exposes the compositional zero-argument CreateMultiple() plus AddStrategy(strategy, weight) API; preserve the exact upstream overload identities as omissions until dedicated overload semantics and ownership are required.'
         } else {
             $classification = 'intentionally-omitted'
             $reason = if ($native.Count -eq 0) { 'No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.' } else { 'Native XImgProc entrypoint is present, but no matching managed baseline member is present.' }
