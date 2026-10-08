@@ -21,6 +21,29 @@ if ($inpaint.Count -ne 1 -or [string]$inpaint[0].classification -cne 'implemente
     @($inpaint[0].managedMembers).Count -ne 2 -or @($inpaint[0].managedMembers | Where-Object { $_ -match '\|method\|public;static\|.* Inpaint\(' }).Count -ne 2) {
     throw 'XPhoto inpaint must remain bound to its exact native entrypoint and both managed overloads.'
 }
+$durandRows = @($classes.declarations | Where-Object { [int]$_.ordinal -ge 10 -and [int]$_.ordinal -le 18 })
+$expectedDurandIdentities = @(
+    'cv.xphoto.TonemapDurand.getSaturation()->float',
+    'cv.xphoto.TonemapDurand.setSaturation(float saturation)->void',
+    'cv.xphoto.TonemapDurand.getContrast()->float',
+    'cv.xphoto.TonemapDurand.setContrast(float contrast)->void',
+    'cv.xphoto.TonemapDurand.getSigmaSpace()->float',
+    'cv.xphoto.TonemapDurand.setSigmaSpace(float sigma_space)->void',
+    'cv.xphoto.TonemapDurand.getSigmaColor()->float',
+    'cv.xphoto.TonemapDurand.setSigmaColor(float sigma_color)->void',
+    'cv.xphoto.createTonemapDurand(float gamma=1.0f;float contrast=4.0f;float saturation=1.0f;float sigma_color=2.0f;float sigma_space=2.0f)->Ptr<TonemapDurand>'
+)
+$actualDurandIdentities = @($durandRows | ForEach-Object { [string]$_.identity })
+$durandRawFactory = @($raw.declarations | Where-Object { [int]$_.ordinal -eq 18 })
+if ($durandRows.Count -ne 9 -or $actualDurandIdentities.Count -ne $expectedDurandIdentities.Count -or
+    @($actualDurandIdentities | Sort-Object -Unique).Count -ne 9 -or
+    @($actualDurandIdentities | Where-Object { $expectedDurandIdentities -cnotcontains $_ }).Count -ne 0 -or
+    @($expectedDurandIdentities | Where-Object { $actualDurandIdentities -cnotcontains $_ }).Count -ne 0 -or
+    @($durandRows | Where-Object { $_.classification -cne 'intentionally-omitted' -or @($_.nativeEntrypoints).Count -ne 0 -or @($_.managedMembers).Count -ne 0 }).Count -ne 0 -or
+    @($durandRows | Where-Object { -not ([string]$_.reason -match 'OPENCV_ENABLE_NONFREE') }).Count -ne 0 -or
+    $durandRawFactory.Count -ne 1 -or [string]$durandRawFactory[0].documentation -notmatch 'OPENCV_ENABLE_NONFREE') {
+    throw 'XPhoto TonemapDurand nonfree-gated omission review drifted.'
+}
 $nativeManifest = @(Get-Content (Join-Path $repo 'src/OpenCvSharp.Native/generated/native_abi_manifest.txt') | Where-Object { $_ -match '^jyppx_ocv_xphoto_' } | ForEach-Object { ($_ -split '\|')[0] })
 $managed = @(Get-Content (Join-Path $repo 'compatibility/managed-public-api.txt') | Where-Object { $_ -match 'JYPPX\.OpenCvSharp\.XPhoto' })
 foreach ($row in @($classes.declarations)) {

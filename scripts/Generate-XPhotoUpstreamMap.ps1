@@ -77,6 +77,12 @@ foreach ($declaration in @($raw.declarations)) {
         if ($managed.Count -gt 0 -and $native.Count -gt 0) {
             $classification = 'implemented'
             $reason = 'Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.'
+        } elseif ($owner -eq 'TonemapDurand' -and $name -match '^(get|set)(Saturation|Contrast|SigmaSpace|SigmaColor)$') {
+            $classification = 'intentionally-omitted'
+            $reason = 'TonemapDurand accessors have no native wrapper entrypoint or managed XPhoto member in the current ABI/API; retain them with the factory omission until the upstream OPENCV_ENABLE_NONFREE build and release boundary is explicitly decided.'
+        } elseif ([string]::IsNullOrWhiteSpace($owner) -and $name -eq 'createTonemapDurand') {
+            $classification = 'intentionally-omitted'
+            $reason = 'Upstream documentation requires OPENCV_ENABLE_NONFREE to use TonemapDurand; no native wrapper entrypoint or managed XPhoto factory exists in the current ABI/API, so this declaration remains omitted pending an explicit nonfree build and release decision.'
         } else {
             $classification = 'intentionally-omitted'
             $reason = if ($native.Count -eq 0) { 'No native XPhoto wrapper entrypoint is mapped for this parser declaration in the current ABI.' } else { 'A native XPhoto entrypoint exists, but no matching managed member is present in the current managed baseline.' }
