@@ -1,18 +1,24 @@
 # XImgProc Filter Utilities Guide / XImgProc 滤波工具指南
 
-`JYPPX.OpenCvSharp.XImgProc` includes the model-free ridge and recursive gradient utilities from OpenCV contrib `ximgproc`.
+`JYPPX.OpenCvSharp.XImgProc` includes the model-free ridge, recursive gradient, and one-shot domain/adaptive-manifold filter utilities from OpenCV contrib `ximgproc`.
 
-`JYPPX.OpenCvSharp.XImgProc` 已包含 OpenCV contrib `ximgproc` 中不依赖模型文件的 ridge 与递归梯度工具。
+`JYPPX.OpenCvSharp.XImgProc` 已包含 OpenCV contrib `ximgproc` 中不依赖模型文件的 ridge、递归梯度，以及一次性 domain/adaptive-manifold 滤波工具。
 
 ## Scope / 范围
 
 - `RidgeDetectionFilter`: opaque native object with `Create` and `GetRidgeFilteredImage`.
 - `XImgProcCv2.GradientDericheX` and `GradientDericheY`.
 - `XImgProcCv2.GradientPaillouX` and `GradientPaillouY`.
+- `XImgProcCv2.DtFilter` and `XImgProcCv2.AmFilter` provide the one-shot Domain Transform and Adaptive Manifold paths.
 
 - `RidgeDetectionFilter`：opaque native 对象，包含 `Create` 和 `GetRidgeFilteredImage`。
 - `XImgProcCv2.GradientDericheX` 与 `GradientDericheY`。
 - `XImgProcCv2.GradientPaillouX` 与 `GradientPaillouY`。
+- `XImgProcCv2.DtFilter` 与 `XImgProcCv2.AmFilter` 提供一次性 Domain Transform 与 Adaptive Manifold 路径。
+
+The upstream `DTFilter` and `AdaptiveManifoldFilter` stateful object variants remain intentional omissions. They would require a separate native object handle, ownership, and lifetime contract for initialized reusable state; the current wrapper deliberately exposes the one-shot calls and does not claim stateful-object parity.
+
+上游 `DTFilter` 与 `AdaptiveManifoldFilter` 有状态对象变体仍是有意省略项。它们需要独立的 native 对象句柄、所有权和已初始化可复用状态的生命周期契约；当前包装明确提供一次性调用，不宣称有状态对象 parity。
 
 ## Input Notes / 输入说明
 

@@ -552,7 +552,7 @@
       "ordinal": 45,
       "identity": "cv.ximgproc.DTFilter.filter(Mat src;Mat dst[/O];int dDepth=-1)->void",
       "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "reason": "DTFilter is the stateful Domain Transform object variant; the managed/native surface intentionally exposes the one-shot DtFilter path with focused argument and native smoke evidence, but has no dedicated object handle, ownership, or lifetime contract for reusing initialized state.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
       "managedMembers": []
@@ -561,7 +561,7 @@
       "ordinal": 46,
       "identity": "cv.ximgproc.createDTFilter(Mat guide;double sigmaSpatial;double sigmaColor;int mode=DTF_NC;int numIters=3)->Ptr<DTFilter>",
       "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "reason": "DTFilter is the stateful Domain Transform object variant; the managed/native surface intentionally exposes the one-shot DtFilter path with focused argument and native smoke evidence, but has no dedicated object factory, ownership, or lifetime contract for reusing initialized state.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
       "managedMembers": []
@@ -640,7 +640,7 @@
       "ordinal": 53,
       "identity": "cv.ximgproc.AdaptiveManifoldFilter.filter(Mat src;Mat dst[/O];Mat joint=Mat())->void",
       "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "reason": "AdaptiveManifoldFilter is the stateful Adaptive Manifold object variant; the managed/native surface intentionally exposes the one-shot AmFilter path with focused argument and native smoke evidence, but has no dedicated object handle, ownership, or lifetime contract for reusing initialized state.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
       "managedMembers": []
@@ -649,7 +649,7 @@
       "ordinal": 54,
       "identity": "cv.ximgproc.AdaptiveManifoldFilter.collectGarbage()->void",
       "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "reason": "AdaptiveManifoldFilter is the stateful Adaptive Manifold object variant; the managed/native surface intentionally exposes the one-shot AmFilter path with focused argument and native smoke evidence, but has no dedicated object handle, ownership, or lifetime contract for reusing initialized state.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
       "managedMembers": []
@@ -658,7 +658,7 @@
       "ordinal": 55,
       "identity": "cv.ximgproc.AdaptiveManifoldFilter.create()->Ptr<AdaptiveManifoldFilter>",
       "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "reason": "AdaptiveManifoldFilter is the stateful Adaptive Manifold object variant; the managed/native surface intentionally exposes the one-shot AmFilter path with focused argument and native smoke evidence, but has no dedicated object handle, ownership, or lifetime contract for reusing initialized state.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
       "managedMembers": []
@@ -667,7 +667,7 @@
       "ordinal": 56,
       "identity": "cv.ximgproc.createAMFilter(double sigma_s;double sigma_r;bool adjust_outliers=false)->Ptr<AdaptiveManifoldFilter>",
       "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "reason": "AdaptiveManifoldFilter is the stateful Adaptive Manifold object variant; the managed/native surface intentionally exposes the one-shot AmFilter path with focused argument and native smoke evidence, but has no dedicated object factory, ownership, or lifetime contract for reusing initialized state.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
       "managedMembers": []

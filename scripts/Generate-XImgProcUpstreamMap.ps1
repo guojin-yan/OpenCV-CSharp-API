@@ -174,6 +174,18 @@ foreach ($declaration in @($raw.declarations)) {
         } elseif ([string]::IsNullOrWhiteSpace($parts.Owner) -and $parts.Name -ceq 'createStructuredEdgeDetection') {
             $classification = 'intentionally-omitted'
             $reason = 'StructuredEdgeDetection is model-file dependent and takes an optional RFFeatureGetter; the current ABI/API has no native or managed factory, no model asset/provenance evidence, and no default runtime smoke. Keep this family omitted until its model-backed wrapper boundary is explicitly defined.'
+        } elseif ($parts.Owner -ceq 'DTFilter' -and $parts.Name -ceq 'filter') {
+            $classification = 'intentionally-omitted'
+            $reason = 'DTFilter is the stateful Domain Transform object variant; the managed/native surface intentionally exposes the one-shot DtFilter path with focused argument and native smoke evidence, but has no dedicated object handle, ownership, or lifetime contract for reusing initialized state.'
+        } elseif ([string]::IsNullOrWhiteSpace($parts.Owner) -and $parts.Name -ceq 'createDTFilter') {
+            $classification = 'intentionally-omitted'
+            $reason = 'DTFilter is the stateful Domain Transform object variant; the managed/native surface intentionally exposes the one-shot DtFilter path with focused argument and native smoke evidence, but has no dedicated object factory, ownership, or lifetime contract for reusing initialized state.'
+        } elseif ($parts.Owner -ceq 'AdaptiveManifoldFilter' -and $parts.Name -in @('filter','collectGarbage','create')) {
+            $classification = 'intentionally-omitted'
+            $reason = 'AdaptiveManifoldFilter is the stateful Adaptive Manifold object variant; the managed/native surface intentionally exposes the one-shot AmFilter path with focused argument and native smoke evidence, but has no dedicated object handle, ownership, or lifetime contract for reusing initialized state.'
+        } elseif ([string]::IsNullOrWhiteSpace($parts.Owner) -and $parts.Name -ceq 'createAMFilter') {
+            $classification = 'intentionally-omitted'
+            $reason = 'AdaptiveManifoldFilter is the stateful Adaptive Manifold object variant; the managed/native surface intentionally exposes the one-shot AmFilter path with focused argument and native smoke evidence, but has no dedicated object factory, ownership, or lifetime contract for reusing initialized state.'
         } else {
             $classification = 'intentionally-omitted'
             $reason = if ($native.Count -eq 0) { 'No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.' } else { 'Native XImgProc entrypoint is present, but no matching managed baseline member is present.' }
