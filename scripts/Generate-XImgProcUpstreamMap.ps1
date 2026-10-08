@@ -44,6 +44,26 @@ function Get-NativeEvidence([string]$Owner, [string]$Name) {
         $expected.Add('jyppx_ocv_ximgproc_fast_bilateral_solver_filter_run')
     } elseif ([string]::IsNullOrWhiteSpace($Owner) -and $Name -ceq 'fastGlobalSmootherFilter') {
         $expected.Add('jyppx_ocv_ximgproc_fast_global_smoother_filter_run')
+    } elseif ($Owner -ceq 'segmentation.GraphSegmentation') {
+        $expected.Add("jyppx_ocv_ximgproc_graph_segmentation_$(ConvertTo-Snake $Name)")
+    } elseif ($Owner -ceq 'segmentation.SelectiveSearchSegmentation') {
+        switch ($Name) {
+            'switchToSelectiveSearchFast' { $expected.Add('jyppx_ocv_ximgproc_selective_search_segmentation_switch_to_fast') }
+            'switchToSelectiveSearchQuality' { $expected.Add('jyppx_ocv_ximgproc_selective_search_segmentation_switch_to_quality') }
+            'process' {
+                $expected.Add('jyppx_ocv_ximgproc_selective_search_segmentation_process_count')
+                $expected.Add('jyppx_ocv_ximgproc_selective_search_segmentation_process_fill')
+            }
+            default { $expected.Add("jyppx_ocv_ximgproc_selective_search_segmentation_$(ConvertTo-Snake $Name)") }
+        }
+    } elseif ($Owner -ceq 'segmentation.SelectiveSearchSegmentationStrategy') {
+        $expected.Add("jyppx_ocv_ximgproc_selective_search_strategy_$(ConvertTo-Snake $Name)")
+    } elseif ($Owner -ceq 'segmentation.SelectiveSearchSegmentationStrategyMultiple') {
+        switch ($Name) {
+            'addStrategy' { $expected.Add('jyppx_ocv_ximgproc_selective_search_strategy_multiple_add') }
+            'clearStrategies' { $expected.Add('jyppx_ocv_ximgproc_selective_search_strategy_multiple_clear') }
+            default { $expected.Add("jyppx_ocv_ximgproc_selective_search_strategy_multiple_$(ConvertTo-Snake $Name)") }
+        }
     } elseif ($Owner -ceq 'RidgeDetectionFilter' -and $Name -ceq 'getRidgeFilteredImage') {
         $expected.Add('jyppx_ocv_ximgproc_ridge_detection_filter_get_image')
     } elseif ($Owner -in @('SuperpixelLSC','SuperpixelSEEDS','SuperpixelSLIC','ScanSegment') -and $Name -ceq 'getNumberOfSuperpixels') {
@@ -92,7 +112,15 @@ function Test-ManagedMethodArity([string]$Entry, [string]$MethodName, [int]$Para
 function Get-ManagedEvidence([string]$Owner, [string]$Name, [string]$Identity) {
     $target = ConvertTo-Pascal $Name
     $parameterCount = Get-DeclaredParameterCount $Identity
-    $typeName = if ([string]::IsNullOrWhiteSpace($Owner)) { 'XImgProcCv2' } else { $Owner }
+    $typeName = if ([string]::IsNullOrWhiteSpace($Owner)) { 'XImgProcCv2' } elseif ($Owner.StartsWith('segmentation.', [StringComparison]::Ordinal)) { $Owner.Substring('segmentation.'.Length) } else { $Owner }
+    if ($Owner -ceq 'segmentation.SelectiveSearchSegmentation' -and $Name -ceq 'switchToSelectiveSearchFast') { $target = 'SwitchToSelectiveSearchFast' }
+    if ($Owner -ceq 'segmentation.SelectiveSearchSegmentation' -and $Name -ceq 'switchToSelectiveSearchQuality') { $target = 'SwitchToSelectiveSearchQuality' }
+    if ($Owner -ceq 'segmentation.SelectiveSearchSegmentation' -and $Name -ceq 'process') {
+        return @($managedEntries | Where-Object {
+            $_.Contains("XImgProc.$typeName|method|public;instance|", [StringComparison]::Ordinal) -and
+            $_.Contains('.Core.Rect[] Process()', [StringComparison]::Ordinal)
+        } | Sort-Object -Unique)
+    }
     $methodMarker = " $target("
     $methodEvidence = @($managedEntries | Where-Object {
         $_.Contains("XImgProc.$typeName|method|", [StringComparison]::Ordinal) -and
@@ -121,7 +149,7 @@ function Get-ManagedEvidence([string]$Owner, [string]$Name, [string]$Identity) {
         if ($propertyNames[0] -ceq 'SuperpixelNNCnt') { $propertyNames.Add('SuperpixelNNCount') }
         foreach ($propertyName in $propertyNames) {
             $propertyEvidence = @($managedEntries | Where-Object {
-                $_.Contains("XImgProc.$Owner|property|", [StringComparison]::Ordinal) -and
+                $_.Contains("XImgProc.$typeName|property|", [StringComparison]::Ordinal) -and
                 $_.EndsWith(" $propertyName", [StringComparison]::OrdinalIgnoreCase)
             } | Sort-Object -Unique)
             if ($propertyEvidence.Count -gt 0) { return $propertyEvidence }

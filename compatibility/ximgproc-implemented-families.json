@@ -1632,6 +1632,111 @@
           "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
         },
         {
+          "ordinal": 144,
+          "upstreamIdentity": "cv.ximgproc.segmentation.GraphSegmentation.processImage(Mat src;Mat dst[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_graph_segmentation_process_image"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.GraphSegmentation|method|public;instance|System.Void ProcessImage(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 145,
+          "upstreamIdentity": "cv.ximgproc.segmentation.GraphSegmentation.setSigma(double sigma)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_graph_segmentation_set_sigma"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.GraphSegmentation|property|instance;get:public;set:public|System.Double Sigma"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 146,
+          "upstreamIdentity": "cv.ximgproc.segmentation.GraphSegmentation.getSigma()->double",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_graph_segmentation_get_sigma"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.GraphSegmentation|property|instance;get:public;set:public|System.Double Sigma"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 147,
+          "upstreamIdentity": "cv.ximgproc.segmentation.GraphSegmentation.setK(float k)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_graph_segmentation_set_k"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.GraphSegmentation|property|instance;get:public;set:public|System.Single K"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 148,
+          "upstreamIdentity": "cv.ximgproc.segmentation.GraphSegmentation.getK()->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_graph_segmentation_get_k"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.GraphSegmentation|property|instance;get:public;set:public|System.Single K"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 149,
+          "upstreamIdentity": "cv.ximgproc.segmentation.GraphSegmentation.setMinSize(int min_size)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_graph_segmentation_set_min_size"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.GraphSegmentation|property|instance;get:public;set:public|System.Int32 MinSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 150,
+          "upstreamIdentity": "cv.ximgproc.segmentation.GraphSegmentation.getMinSize()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_graph_segmentation_get_min_size"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.GraphSegmentation|property|instance;get:public;set:public|System.Int32 MinSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
           "ordinal": 151,
           "upstreamIdentity": "cv.ximgproc.segmentation.createGraphSegmentation(double sigma=0.5;float k=300;int min_size=100)->Ptr<GraphSegmentation>",
           "upstreamClassification": "implemented",
@@ -1640,6 +1745,51 @@
           ],
           "managedMembers": [
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.GraphSegmentation CreateGraphSegmentation(System.Double sigma=0.5,System.Single k=300,System.Int32 minSize=100)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 153,
+          "upstreamIdentity": "cv.ximgproc.segmentation.SelectiveSearchSegmentationStrategy.setImage(Mat img;Mat regions;Mat sizes;int image_id=-1)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_selective_search_strategy_set_image"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy|method|public;instance|System.Void SetImage(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat regions,JYPPX.OpenCvSharp.Core.Mat sizes,System.Int32 imageId=-1)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 154,
+          "upstreamIdentity": "cv.ximgproc.segmentation.SelectiveSearchSegmentationStrategy.get(int r1;int r2)->float",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_selective_search_strategy_get"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy|method|public;instance|System.Single Get(System.Int32 r1,System.Int32 r2)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 155,
+          "upstreamIdentity": "cv.ximgproc.segmentation.SelectiveSearchSegmentationStrategy.merge(int r1;int r2)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_selective_search_strategy_merge"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy|method|public;instance|System.Void Merge(System.Int32 r1,System.Int32 r2)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -1707,6 +1857,36 @@
           "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
         },
         {
+          "ordinal": 165,
+          "upstreamIdentity": "cv.ximgproc.segmentation.SelectiveSearchSegmentationStrategyMultiple.addStrategy(Ptr_SelectiveSearchSegmentationStrategy g;float weight)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_selective_search_strategy_multiple_add"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategyMultiple|method|public;instance|System.Void AddStrategy(JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy strategy,System.Single weight)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 166,
+          "upstreamIdentity": "cv.ximgproc.segmentation.SelectiveSearchSegmentationStrategyMultiple.clearStrategies()->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_selective_search_strategy_multiple_clear"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategyMultiple|method|public;instance|System.Void ClearStrategies()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
           "ordinal": 167,
           "upstreamIdentity": "cv.ximgproc.segmentation.createSelectiveSearchSegmentationStrategyMultiple()->Ptr<SelectiveSearchSegmentationStrategyMultiple>",
           "upstreamClassification": "implemented",
@@ -1715,6 +1895,172 @@
           ],
           "managedMembers": [
             "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategyMultiple CreateSelectiveSearchSegmentationStrategyMultiple()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 173,
+          "upstreamIdentity": "cv.ximgproc.segmentation.SelectiveSearchSegmentation.setBaseImage(Mat img)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_selective_search_segmentation_set_base_image"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void SetBaseImage(JYPPX.OpenCvSharp.Core.Mat image)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 174,
+          "upstreamIdentity": "cv.ximgproc.segmentation.SelectiveSearchSegmentation.switchToSingleStrategy(int k=200;float sigma=0.8f)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_selective_search_segmentation_switch_to_single_strategy"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void SwitchToSingleStrategy(System.Int32 k=200,System.Single sigma=0.8)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 175,
+          "upstreamIdentity": "cv.ximgproc.segmentation.SelectiveSearchSegmentation.switchToSelectiveSearchFast(int base_k=150;int inc_k=150;float sigma=0.8f)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_selective_search_segmentation_switch_to_fast"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void SwitchToSelectiveSearchFast(System.Int32 baseK=150,System.Int32 incK=150,System.Single sigma=0.8)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 176,
+          "upstreamIdentity": "cv.ximgproc.segmentation.SelectiveSearchSegmentation.switchToSelectiveSearchQuality(int base_k=150;int inc_k=150;float sigma=0.8f)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_selective_search_segmentation_switch_to_quality"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void SwitchToSelectiveSearchQuality(System.Int32 baseK=150,System.Int32 incK=150,System.Single sigma=0.8)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 177,
+          "upstreamIdentity": "cv.ximgproc.segmentation.SelectiveSearchSegmentation.addImage(Mat img)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_selective_search_segmentation_add_image"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void AddImage(JYPPX.OpenCvSharp.Core.Mat image)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 178,
+          "upstreamIdentity": "cv.ximgproc.segmentation.SelectiveSearchSegmentation.clearImages()->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_selective_search_segmentation_clear_images"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void ClearImages()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 179,
+          "upstreamIdentity": "cv.ximgproc.segmentation.SelectiveSearchSegmentation.addGraphSegmentation(Ptr_GraphSegmentation g)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_selective_search_segmentation_add_graph_segmentation"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void AddGraphSegmentation(JYPPX.OpenCvSharp.XImgProc.GraphSegmentation graphSegmentation)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 180,
+          "upstreamIdentity": "cv.ximgproc.segmentation.SelectiveSearchSegmentation.clearGraphSegmentations()->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_selective_search_segmentation_clear_graph_segmentations"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void ClearGraphSegmentations()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 181,
+          "upstreamIdentity": "cv.ximgproc.segmentation.SelectiveSearchSegmentation.addStrategy(Ptr_SelectiveSearchSegmentationStrategy s)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_selective_search_segmentation_add_strategy"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void AddStrategy(JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy strategy)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 182,
+          "upstreamIdentity": "cv.ximgproc.segmentation.SelectiveSearchSegmentation.clearStrategies()->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_selective_search_segmentation_clear_strategies"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void ClearStrategies()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ximgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 183,
+          "upstreamIdentity": "cv.ximgproc.segmentation.SelectiveSearchSegmentation.process(vector_Rect rects[/O,/Ref])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ximgproc_selective_search_segmentation_process_count",
+            "jyppx_ocv_ximgproc_selective_search_segmentation_process_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|JYPPX.OpenCvSharp.Core.Rect[] Process()"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/XImgProc/XImgProcTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",

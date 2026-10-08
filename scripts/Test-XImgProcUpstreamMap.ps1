@@ -10,7 +10,7 @@ $raw = Get-Content (Join-Path $repo 'compatibility/ximgproc-upstream-raw.json') 
 $classes = Get-Content (Join-Path $repo 'compatibility/ximgproc-upstream-classifications.json') -Raw | ConvertFrom-Json
 $summary = Get-Content (Join-Path $repo 'compatibility/ximgproc-upstream-summary.json') -Raw | ConvertFrom-Json
 if ([int]$raw.declarationCount -ne 249 -or @($classes.declarations).Count -ne 249) { throw 'XImgProc declaration closure drifted.' }
-if ([int]$summary.classificationCounts.missing -ne 0 -or [int]$summary.classificationCounts.implemented -ne 164 -or [int]$summary.classificationCounts.'intentionally-omitted' -ne 48) { throw 'XImgProc callable partition drifted.' }
+if ([int]$summary.classificationCounts.missing -ne 0 -or [int]$summary.classificationCounts.implemented -ne 187 -or [int]$summary.classificationCounts.'intentionally-omitted' -ne 25) { throw 'XImgProc callable partition drifted.' }
 $reviewedOrdinals = [int[]](@(41) + (72..95) + @(111,113,151,184) + (197..204))
 $reviewedRows = @($classes.declarations | Where-Object { [int]$_.ordinal -in $reviewedOrdinals })
 if ($reviewedRows.Count -ne 37 -or @($reviewedRows | Where-Object classification -ne 'implemented').Count -ne 0) { throw 'XImgProc existing property/factory evidence review drifted.' }
@@ -57,6 +57,42 @@ foreach ($expected in $methodAccessorEvidence) {
     $nativeMatches = @($actualNative).Count -eq @($expectedNative).Count -and @($actualNative | Where-Object { $expectedNative -cnotcontains [string]$_ }).Count -eq 0
     if ($row.Count -ne 1 -or [string]$row[0].classification -ne 'implemented' -or -not $nativeMatches -or @($row[0].managedMembers | Where-Object { $expected.Managed -ccontains [string]$_ }).Count -ne $expected.Managed.Count) {
         throw "XImgProc method/accessor evidence drifted at ordinal $($expected.Ordinal)."
+    }
+}
+$segmentationBindings = @(
+    [pscustomobject]@{ Ordinal = 144; Native = @('jyppx_ocv_ximgproc_graph_segmentation_process_image'); ManagedMarker = 'MEMBER|JYPPX.OpenCvSharp.XImgProc.GraphSegmentation|method|public;instance|System.Void ProcessImage(' },
+    [pscustomobject]@{ Ordinal = 145; Native = @('jyppx_ocv_ximgproc_graph_segmentation_set_sigma'); ManagedMarker = 'MEMBER|JYPPX.OpenCvSharp.XImgProc.GraphSegmentation|property|instance;get:public;set:public|System.Double Sigma' },
+    [pscustomobject]@{ Ordinal = 146; Native = @('jyppx_ocv_ximgproc_graph_segmentation_get_sigma'); ManagedMarker = 'MEMBER|JYPPX.OpenCvSharp.XImgProc.GraphSegmentation|property|instance;get:public;set:public|System.Double Sigma' },
+    [pscustomobject]@{ Ordinal = 147; Native = @('jyppx_ocv_ximgproc_graph_segmentation_set_k'); ManagedMarker = 'MEMBER|JYPPX.OpenCvSharp.XImgProc.GraphSegmentation|property|instance;get:public;set:public|System.Single K' },
+    [pscustomobject]@{ Ordinal = 148; Native = @('jyppx_ocv_ximgproc_graph_segmentation_get_k'); ManagedMarker = 'MEMBER|JYPPX.OpenCvSharp.XImgProc.GraphSegmentation|property|instance;get:public;set:public|System.Single K' },
+    [pscustomobject]@{ Ordinal = 149; Native = @('jyppx_ocv_ximgproc_graph_segmentation_set_min_size'); ManagedMarker = 'MEMBER|JYPPX.OpenCvSharp.XImgProc.GraphSegmentation|property|instance;get:public;set:public|System.Int32 MinSize' },
+    [pscustomobject]@{ Ordinal = 150; Native = @('jyppx_ocv_ximgproc_graph_segmentation_get_min_size'); ManagedMarker = 'MEMBER|JYPPX.OpenCvSharp.XImgProc.GraphSegmentation|property|instance;get:public;set:public|System.Int32 MinSize' },
+    [pscustomobject]@{ Ordinal = 153; Native = @('jyppx_ocv_ximgproc_selective_search_strategy_set_image'); ManagedMarker = 'MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy|method|public;instance|System.Void SetImage(' },
+    [pscustomobject]@{ Ordinal = 154; Native = @('jyppx_ocv_ximgproc_selective_search_strategy_get'); ManagedMarker = 'MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy|method|public;instance|System.Single Get(' },
+    [pscustomobject]@{ Ordinal = 155; Native = @('jyppx_ocv_ximgproc_selective_search_strategy_merge'); ManagedMarker = 'MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy|method|public;instance|System.Void Merge(' },
+    [pscustomobject]@{ Ordinal = 165; Native = @('jyppx_ocv_ximgproc_selective_search_strategy_multiple_add'); ManagedMarker = 'MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategyMultiple|method|public;instance|System.Void AddStrategy(' },
+    [pscustomobject]@{ Ordinal = 166; Native = @('jyppx_ocv_ximgproc_selective_search_strategy_multiple_clear'); ManagedMarker = 'MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategyMultiple|method|public;instance|System.Void ClearStrategies()' },
+    [pscustomobject]@{ Ordinal = 173; Native = @('jyppx_ocv_ximgproc_selective_search_segmentation_set_base_image'); ManagedMarker = 'MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void SetBaseImage(' },
+    [pscustomobject]@{ Ordinal = 174; Native = @('jyppx_ocv_ximgproc_selective_search_segmentation_switch_to_single_strategy'); ManagedMarker = 'MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void SwitchToSingleStrategy(' },
+    [pscustomobject]@{ Ordinal = 175; Native = @('jyppx_ocv_ximgproc_selective_search_segmentation_switch_to_fast'); ManagedMarker = 'MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void SwitchToSelectiveSearchFast(' },
+    [pscustomobject]@{ Ordinal = 176; Native = @('jyppx_ocv_ximgproc_selective_search_segmentation_switch_to_quality'); ManagedMarker = 'MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void SwitchToSelectiveSearchQuality(' },
+    [pscustomobject]@{ Ordinal = 177; Native = @('jyppx_ocv_ximgproc_selective_search_segmentation_add_image'); ManagedMarker = 'MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void AddImage(' },
+    [pscustomobject]@{ Ordinal = 178; Native = @('jyppx_ocv_ximgproc_selective_search_segmentation_clear_images'); ManagedMarker = 'MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void ClearImages()' },
+    [pscustomobject]@{ Ordinal = 179; Native = @('jyppx_ocv_ximgproc_selective_search_segmentation_add_graph_segmentation'); ManagedMarker = 'MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void AddGraphSegmentation(' },
+    [pscustomobject]@{ Ordinal = 180; Native = @('jyppx_ocv_ximgproc_selective_search_segmentation_clear_graph_segmentations'); ManagedMarker = 'MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void ClearGraphSegmentations()' },
+    [pscustomobject]@{ Ordinal = 181; Native = @('jyppx_ocv_ximgproc_selective_search_segmentation_add_strategy'); ManagedMarker = 'MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void AddStrategy(' },
+    [pscustomobject]@{ Ordinal = 182; Native = @('jyppx_ocv_ximgproc_selective_search_segmentation_clear_strategies'); ManagedMarker = 'MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void ClearStrategies()' },
+    [pscustomobject]@{ Ordinal = 183; Native = @('jyppx_ocv_ximgproc_selective_search_segmentation_process_count','jyppx_ocv_ximgproc_selective_search_segmentation_process_fill'); ManagedMarker = 'MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|JYPPX.OpenCvSharp.Core.Rect[] Process()' }
+)
+foreach ($expected in $segmentationBindings) {
+    $row = @($classes.declarations | Where-Object { [int]$_.ordinal -eq $expected.Ordinal })
+    if ($row.Count -ne 1) { throw "XImgProc segmentation binding row is missing or duplicated: $($expected.Ordinal)." }
+    $actualNative = @($row[0].nativeEntrypoints | Sort-Object -Unique)
+    $expectedNative = @($expected.Native | Sort-Object -Unique)
+    $nativeMatches = $actualNative.Count -eq $expectedNative.Count -and @($actualNative | Where-Object { $expectedNative -cnotcontains [string]$_ }).Count -eq 0
+    $managedMatches = @($row[0].managedMembers | Where-Object { ([string]$_).Contains([string]$expected.ManagedMarker, [StringComparison]::Ordinal) }).Count -eq 1
+    if ($row[0].classification -ne 'implemented' -or -not $nativeMatches -or -not $managedMatches) {
+        throw "XImgProc segmentation native/managed evidence drifted at ordinal $($expected.Ordinal)."
     }
 }
 $selectiveSearchMultipleOverloads = @($classes.declarations | Where-Object { [int]$_.ordinal -in @(168,169,170,171) })
