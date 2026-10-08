@@ -81,7 +81,7 @@
       "ordinal": 6,
       "identity": "cv.optflow.createOptFlow_PCAFlow()->Ptr<DenseOpticalFlow>",
       "classification": "intentionally-omitted",
-      "reason": "No native OptFlow wrapper entrypoint is mapped for this parser declaration in the current ABI.",
+      "reason": "PCAFlow is an optional dense optical-flow factory distinct from the wrapped RLOF and DualTVL1 families; the current ABI/API has no PCAFlow native factory, opaque handle, ownership/lifetime contract, or deterministic runtime smoke, so this declaration remains intentionally omitted.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OPTFLOW=1",
       "nativeEntrypoints": [],
       "managedMembers": []
