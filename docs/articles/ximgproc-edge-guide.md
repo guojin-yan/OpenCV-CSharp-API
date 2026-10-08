@@ -28,6 +28,10 @@
 
 `StructuredEdgeDetection` 需要调用方提供模型文件，不属于默认 smoke 路径。
 
+The upstream `EdgeDrawing.Params` constructor is represented by the managed `EdgeDrawingParams` value type and `EdgeDrawing.Params` native get/set transport. Its `read(FileNode)` and `write(FileStorage)` serialization methods remain intentional omissions because the current ABI/API does not define managed ownership or file-I/O boundaries for `FileNode` and `FileStorage`; direct parameter value and property round-trip are covered instead.
+
+上游 `EdgeDrawing.Params` 构造函数由 managed `EdgeDrawingParams` 值类型和 `EdgeDrawing.Params` native get/set transport 表示。其 `read(FileNode)` 与 `write(FileStorage)` 序列化方法仍是有意省略项，因为当前 ABI/API 没有定义 `FileNode`、`FileStorage` 的 managed 所有权或文件 IO 边界；当前覆盖的是参数值与属性的直接 round-trip。
+
 ## Example / 示例
 
 ```csharp

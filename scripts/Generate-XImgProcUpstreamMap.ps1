@@ -186,6 +186,12 @@ foreach ($declaration in @($raw.declarations)) {
         } elseif ([string]::IsNullOrWhiteSpace($parts.Owner) -and $parts.Name -ceq 'createAMFilter') {
             $classification = 'intentionally-omitted'
             $reason = 'AdaptiveManifoldFilter is the stateful Adaptive Manifold object variant; the managed/native surface intentionally exposes the one-shot AmFilter path with focused argument and native smoke evidence, but has no dedicated object factory, ownership, or lifetime contract for reusing initialized state.'
+        } elseif ($parts.Owner -ceq 'EdgeDrawing.Params' -and $parts.Name -ceq 'Params') {
+            $classification = 'intentionally-omitted'
+            $reason = 'The upstream EdgeDrawing.Params constructor is represented by the managed EdgeDrawingParams value type and the EdgeDrawing native get/set parameter transport; no separate native constructor entrypoint crosses the current ABI.'
+        } elseif ($parts.Owner -ceq 'EdgeDrawing.Params' -and $parts.Name -in @('read','write')) {
+            $classification = 'intentionally-omitted'
+            $reason = 'EdgeDrawing.Params read/write uses OpenCV FileNode/FileStorage serialization; the current ABI/API has no managed FileNode/FileStorage ownership or file-IO contract, while direct EdgeDrawingParams value/property round-trip is covered.'
         } else {
             $classification = 'intentionally-omitted'
             $reason = if ($native.Count -eq 0) { 'No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.' } else { 'Native XImgProc entrypoint is present, but no matching managed baseline member is present.' }

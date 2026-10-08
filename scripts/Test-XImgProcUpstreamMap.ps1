@@ -75,6 +75,13 @@ if ($statefulFilterRows.Count -ne $statefulFilterOrdinals.Count -or
     (Get-Content (Join-Path $repo 'docs/articles/ximgproc-filter-utilities-guide.md') -Raw) -notmatch 'stateful.*one-shot') {
     throw 'XImgProc stateful filter omission review drifted.'
 }
+$edgeDrawingParamsOrdinals = @(31,32,33)
+$edgeDrawingParamsRows = @($classes.declarations | Where-Object { [int]$_.ordinal -in $edgeDrawingParamsOrdinals })
+if ($edgeDrawingParamsRows.Count -ne $edgeDrawingParamsOrdinals.Count -or
+    @($edgeDrawingParamsRows | Where-Object { $_.classification -ne 'intentionally-omitted' -or @($_.nativeEntrypoints).Count -ne 0 -or @($_.managedMembers).Count -ne 0 -or [string]$_.reason -notmatch 'EdgeDrawingParams|FileNode|FileStorage|ABI|round-trip' }).Count -ne 0 -or
+    (Get-Content (Join-Path $repo 'docs/articles/ximgproc-edge-guide.md') -Raw) -notmatch 'FileNode.*FileStorage|FileStorage.*FileNode') {
+    throw 'XImgProc EdgeDrawing.Params omission review drifted.'
+}
 $native = @(Get-Content (Join-Path $repo 'src/OpenCvSharp.Native/generated/native_abi_manifest.txt') | Where-Object { $_ -match '^jyppx_ocv_ximgproc_' } | ForEach-Object { ($_ -split '\|')[0] })
 $managed = @(Get-Content (Join-Path $repo 'compatibility/managed-public-api.txt') | Where-Object { $_ -match 'JYPPX\.OpenCvSharp\.XImgProc' })
 foreach ($row in @($classes.declarations)) {

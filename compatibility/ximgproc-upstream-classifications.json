@@ -388,7 +388,7 @@
       "ordinal": 31,
       "identity": "cv.ximgproc.EdgeDrawing.Params.Params()->",
       "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "reason": "The upstream EdgeDrawing.Params constructor is represented by the managed EdgeDrawingParams value type and the EdgeDrawing native get/set parameter transport; no separate native constructor entrypoint crosses the current ABI.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
       "managedMembers": []
@@ -397,7 +397,7 @@
       "ordinal": 32,
       "identity": "cv.ximgproc.EdgeDrawing.Params.read(FileNode fn[/C,/Ref])->void",
       "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "reason": "EdgeDrawing.Params read/write uses OpenCV FileNode/FileStorage serialization; the current ABI/API has no managed FileNode/FileStorage ownership or file-IO contract, while direct EdgeDrawingParams value/property round-trip is covered.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
       "managedMembers": []
@@ -406,7 +406,7 @@
       "ordinal": 33,
       "identity": "cv.ximgproc.EdgeDrawing.Params.write(FileStorage fs[/Ref])->void",
       "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "reason": "EdgeDrawing.Params read/write uses OpenCV FileNode/FileStorage serialization; the current ABI/API has no managed FileNode/FileStorage ownership or file-IO contract, while direct EdgeDrawingParams value/property round-trip is covered.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
       "managedMembers": []
