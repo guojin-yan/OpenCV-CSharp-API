@@ -78,7 +78,7 @@
       "ordinal": 5,
       "identity": "cv.ximgproc.colorMatchTemplate(Mat img;Mat templ;Mat result[/O])->void",
       "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "reason": "colorMatchTemplate is a specialized three-channel color-template/DFT operation whose CV_64F result map has no current native ABI or managed output adapter; keep it omitted until its image-format validation and numerical smoke boundary are explicitly defined.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
       "managedMembers": []
@@ -321,7 +321,7 @@
       "ordinal": 24,
       "identity": "cv.ximgproc.readGT(String src_path;Mat dst[/O])->int",
       "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "reason": "readGT is an upstream disparity-test helper that reads a filesystem path and decodes format-specific ground-truth data; the current ABI/API has no file-IO helper contract or model/test-asset provenance boundary.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
       "managedMembers": []
@@ -1321,7 +1321,7 @@
       "ordinal": 108,
       "identity": "cv.ximgproc.findEllipses(Mat image;Mat ellipses[/O];float scoreThreshold=0.7f;float reliabilityThreshold=0.5f;float centerDistanceThreshold=0.05f)->void",
       "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "reason": "findEllipses returns a variable-length ellipse vector encoded by upstream as six-float records; the current ABI/API has no native output-buffer adapter or managed ellipse-record surface and no deterministic smoke contract.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
       "managedMembers": []
@@ -1557,7 +1557,7 @@
       "ordinal": 127,
       "identity": "cv.ximgproc.RadonTransform(Mat src;Mat dst[/O];double theta=1;double start_angle=0;double end_angle=180;bool crop=false;bool norm=false)->void",
       "classification": "intentionally-omitted",
-      "reason": "No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.",
+      "reason": "RadonTransform produces type- and geometry-dependent output dimensions (including CV_32S/CV_64F selection and crop-dependent sizing); the current ABI/API has no native wrapper or managed output contract for this legacy uppercase operation.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
       "nativeEntrypoints": [],
       "managedMembers": []

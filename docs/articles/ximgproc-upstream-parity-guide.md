@@ -4,6 +4,8 @@ The XImgProc map covers the 26 OpenCV contrib 5.0.0 public headers included by `
 
 Quaternion operations follow the upstream input contract: image creation accepts non-empty 2D three-channel CV_8U/CV_32F/CV_64F input; conjugation accepts four-channel CV_32F or CV_64F; normalization, multiplication, and DFT require four-channel CV_64F. Multiplication permits equal matrix sizes or a 1×1 operand. Quaternion DFT requires optimal DFT dimensions and accepts only `DftFlags.None` or `DftFlags.Inverse`.
 
+The remaining unwrapped utility rows are intentional omissions with explicit boundaries: `colorMatchTemplate` requires three-channel inputs and a CV_64F result map around an internal DFT path; `readGT` is a filesystem-backed disparity-test helper; `findEllipses` returns variable-length six-float ellipse records; and `RadonTransform` has input-type- and crop-dependent output dimensions. None currently has a native ABI entrypoint, managed output adapter, or deterministic runtime smoke contract.
+
 Run the scoped extraction and check:
 
 ```powershell

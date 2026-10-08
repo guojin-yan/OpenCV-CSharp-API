@@ -16,6 +16,18 @@ $reviewedRows = @($classes.declarations | Where-Object { [int]$_.ordinal -in $re
 if ($reviewedRows.Count -ne 37 -or @($reviewedRows | Where-Object classification -ne 'implemented').Count -ne 0) { throw 'XImgProc existing property/factory evidence review drifted.' }
 $quaternionRows = @($classes.declarations | Where-Object { [int]$_.ordinal -in @(0,1,2,3,4) })
 if ($quaternionRows.Count -ne 5 -or @($quaternionRows | Where-Object { $_.classification -ne 'implemented' -or @($_.nativeEntrypoints).Count -ne 1 -or @($_.managedMembers).Count -lt 1 }).Count -ne 0) { throw 'XImgProc quaternion callable coverage drifted.' }
+$unwrappedUtilityRows = @(
+    [pscustomobject]@{ Ordinal = 5; Reason = 'three-channel color-template/DFT|CV_64F result|image-format validation|numerical smoke' },
+    [pscustomobject]@{ Ordinal = 24; Reason = 'filesystem path|file-IO helper|ground-truth|provenance' },
+    [pscustomobject]@{ Ordinal = 108; Reason = 'variable-length ellipse|six-float|output-buffer|deterministic smoke' },
+    [pscustomobject]@{ Ordinal = 127; Reason = 'type- and geometry-dependent|CV_32S|CV_64F|output contract' }
+)
+foreach ($expected in $unwrappedUtilityRows) {
+    $row = @($classes.declarations | Where-Object { [int]$_.ordinal -eq $expected.Ordinal })
+    if ($row.Count -ne 1 -or $row[0].classification -ne 'intentionally-omitted' -or @($row[0].nativeEntrypoints).Count -ne 0 -or @($row[0].managedMembers).Count -ne 0 -or ([string]$row[0].reason -notmatch $expected.Reason)) {
+        throw "XImgProc unwrapped utility omission review drifted at ordinal $($expected.Ordinal)."
+    }
+}
 $methodAccessorEvidence = @(
     [pscustomobject]@{ Ordinal = 27; Native = @('jyppx_ocv_ximgproc_get_disparity_vis'); Managed = @('MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void GetDisparityVis(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Double scale=1)') },
     [pscustomobject]@{ Ordinal = 15; Native = @('jyppx_ocv_ximgproc_disparity_wls_filter_get_lrc_thresh'); Managed = @('MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public;set:public|System.Int32 LrcThreshold') },

@@ -223,6 +223,18 @@ foreach ($declaration in @($raw.declarations)) {
         } elseif ($parts.Owner -ceq 'EdgeDrawing.Params' -and $parts.Name -in @('read','write')) {
             $classification = 'intentionally-omitted'
             $reason = 'EdgeDrawing.Params read/write uses OpenCV FileNode/FileStorage serialization; the current ABI/API has no managed FileNode/FileStorage ownership or file-IO contract, while direct EdgeDrawingParams value/property round-trip is covered.'
+        } elseif ([string]::IsNullOrWhiteSpace($parts.Owner) -and $parts.Name -ceq 'colorMatchTemplate') {
+            $classification = 'intentionally-omitted'
+            $reason = 'colorMatchTemplate is a specialized three-channel color-template/DFT operation whose CV_64F result map has no current native ABI or managed output adapter; keep it omitted until its image-format validation and numerical smoke boundary are explicitly defined.'
+        } elseif ([string]::IsNullOrWhiteSpace($parts.Owner) -and $parts.Name -ceq 'readGT') {
+            $classification = 'intentionally-omitted'
+            $reason = 'readGT is an upstream disparity-test helper that reads a filesystem path and decodes format-specific ground-truth data; the current ABI/API has no file-IO helper contract or model/test-asset provenance boundary.'
+        } elseif ([string]::IsNullOrWhiteSpace($parts.Owner) -and $parts.Name -ceq 'findEllipses') {
+            $classification = 'intentionally-omitted'
+            $reason = 'findEllipses returns a variable-length ellipse vector encoded by upstream as six-float records; the current ABI/API has no native output-buffer adapter or managed ellipse-record surface and no deterministic smoke contract.'
+        } elseif ([string]::IsNullOrWhiteSpace($parts.Owner) -and $parts.Name -ceq 'RadonTransform') {
+            $classification = 'intentionally-omitted'
+            $reason = 'RadonTransform produces type- and geometry-dependent output dimensions (including CV_32S/CV_64F selection and crop-dependent sizing); the current ABI/API has no native wrapper or managed output contract for this legacy uppercase operation.'
         } else {
             $classification = 'intentionally-omitted'
             $reason = if ($native.Count -eq 0) { 'No matching XImgProc native wrapper entrypoint is present in the current ABI manifest.' } else { 'Native XImgProc entrypoint is present, but no matching managed baseline member is present.' }
