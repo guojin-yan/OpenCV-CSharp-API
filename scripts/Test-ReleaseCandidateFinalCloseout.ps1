@@ -558,6 +558,7 @@ function Get-ExpectedEvidencePaths {
         "src/OpenCvSharp/Internal/Interop/NativeFeaturesMatcherHandle.cs",
         "src/OpenCvSharp/Internal/Interop/NativeHighGuiCallbackRegistrationHandle.cs",
         "src/OpenCvSharp/Internal/CodecBufferLease.cs",
+        "scripts/Test-CodecBufferLeasePrototype.ps1",
         "src/OpenCvSharp/Properties/InternalsVisibleTo.cs",
         "src/OpenCvSharp/Internal/Interop/NativeMethods.HighGui.DllImport.cs",
         "src/OpenCvSharp/Internal/Interop/NativeMethods.HighGui.LibraryImport.cs",

@@ -426,6 +426,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Codec buffer lease prototype boundary"
+        Script = Join-Path $repo "scripts/Test-CodecBufferLeasePrototype.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "API/ABI baseline contract"
         Script = Join-Path $repo "scripts/Test-ApiAbiBaselineContract.ps1"
         Arguments = @("-RepositoryRoot", $repo)
