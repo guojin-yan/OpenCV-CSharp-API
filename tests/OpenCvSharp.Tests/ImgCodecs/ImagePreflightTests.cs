@@ -224,7 +224,7 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         [Fact]
         public void IdentifyReadsPamAndPfmEncodedDepthAndChannels()
         {
-            byte[] pamBytes = Encoding.ASCII.GetBytes("P7\nWIDTH 2\nHEIGHT 3\nDEPTH 4\nMAXVAL 255\nTUPLTYPE RGB_ALPHA\nENDHDR\n");
+            byte[] pamBytes = CreatePam(2, 3, 4, 255);
             ImageIdentifyResult pam = ImgCodecsCv2.Identify(pamBytes);
             Assert.True(pam.IsSizeKnown);
             Assert.True(pam.IsFrameCountKnown);
@@ -264,6 +264,22 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             Assert.False(invalidScale.IsSizeKnown);
             Assert.False(invalidScale.IsFrameCountKnown);
             Assert.False(invalidScale.IsPixelFormatKnown);
+
+            byte[] pamComplete = CreatePam(2, 3, 4, 255);
+            ImageIdentifyResult pamTruncated = ImgCodecsCv2.Identify(SubArray(pamComplete, pamComplete.Length - 1));
+            Assert.True(pamTruncated.IsSizeKnown);
+            Assert.True(pamTruncated.IsPixelFormatKnown);
+            Assert.False(pamTruncated.IsFrameCountKnown);
+            Assert.False(pamTruncated.IsCumulativePixelCountKnown);
+
+            byte[] pamTrailing = new byte[pamComplete.Length + 1];
+            Array.Copy(pamComplete, pamTrailing, pamComplete.Length);
+            pamTrailing[pamTrailing.Length - 1] = 0x7F;
+            ImageIdentifyResult pamWithTrailingByte = ImgCodecsCv2.Identify(pamTrailing);
+            Assert.True(pamWithTrailingByte.IsSizeKnown);
+            Assert.True(pamWithTrailingByte.IsPixelFormatKnown);
+            Assert.False(pamWithTrailingByte.IsFrameCountKnown);
+            Assert.False(pamWithTrailingByte.IsCumulativePixelCountKnown);
 
             byte[] complete = CreatePfm("PF", 2, 3, -1.0);
             ImageIdentifyResult truncated = ImgCodecsCv2.Identify(SubArray(complete, complete.Length - 1));
@@ -940,7 +956,7 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
                 new { Name = "apng", Bytes = CreateApng(3) },
                 new { Name = "webp", Bytes = CreateAnimatedWebp(4) },
                 new { Name = "bmp", Bytes = CreateBmpFixture(24, 0) },
-                new { Name = "pam", Bytes = Encoding.ASCII.GetBytes("P7\nWIDTH 2\nHEIGHT 3\nDEPTH 4\nMAXVAL 255\nENDHDR\n") },
+                new { Name = "pam", Bytes = CreatePam(2, 3, 4, 255) },
                 new { Name = "pfm", Bytes = CreatePfm("PF", 2, 3, -1.0) },
                 new { Name = "sunraster", Bytes = CreateSunRaster(24) },
                 new { Name = "hdr", Bytes = CreateRadianceHdr(8, 2, true) },
@@ -1753,6 +1769,19 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             byte[] header = Encoding.ASCII.GetBytes(
                 magic + "\n" + width + " " + height + "\n" +
                 scale.ToString(System.Globalization.CultureInfo.InvariantCulture) + "\n");
+            byte[] result = new byte[checked(header.Length + (int)payloadLength)];
+            Array.Copy(header, result, header.Length);
+            return result;
+        }
+
+        private static byte[] CreatePam(int width, int height, int depth, int maxValue)
+        {
+            int bytesPerSample = maxValue <= 255 ? 1 : 2;
+            long payloadLength = checked((long)width * height * depth * bytesPerSample);
+            Assert.InRange(payloadLength, 0, int.MaxValue);
+            byte[] header = Encoding.ASCII.GetBytes(
+                "P7\nWIDTH " + width + "\nHEIGHT " + height + "\nDEPTH " + depth +
+                "\nMAXVAL " + maxValue + "\nTUPLTYPE RGB_ALPHA\nENDHDR\n");
             byte[] result = new byte[checked(header.Length + (int)payloadLength)];
             Array.Copy(header, result, header.Length);
             return result;

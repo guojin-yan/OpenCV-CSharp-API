@@ -1146,7 +1146,7 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             if (kind == 7)
             {
                 bool found = TryReadPamHeader(data, ref offset, out width, out height, out pixelFacts);
-                frameKnown = found;
+                frameKnown = found && IsPamPayloadComplete(data, offset, width, height, pixelFacts.Channels, pixelFacts.BitDepth);
                 return found;
             }
 
@@ -1375,6 +1375,22 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             try
             {
                 long expectedBytes = checked((long)width * height * channels * 4);
+                return expectedBytes <= int.MaxValue && expectedBytes == data.Length - payloadOffset;
+            }
+            catch (OverflowException)
+            {
+                return false;
+            }
+        }
+
+        private static bool IsPamPayloadComplete(byte[] data, int payloadOffset, int width, int height, int channels, int bitDepth)
+        {
+            if (payloadOffset < 0 || payloadOffset > data.Length || width <= 0 || height <= 0 || channels <= 0 || bitDepth <= 0) return false;
+            int bytesPerSample = bitDepth <= 8 ? 1 : bitDepth == 16 ? 2 : 0;
+            if (bytesPerSample == 0) return false;
+            try
+            {
+                long expectedBytes = checked((long)width * height * channels * bytesPerSample);
                 return expectedBytes <= int.MaxValue && expectedBytes == data.Length - payloadOffset;
             }
             catch (OverflowException)
