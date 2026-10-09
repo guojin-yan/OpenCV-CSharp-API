@@ -232,12 +232,16 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             Assert.Equal(8, pam.BitDepth);
             Assert.Equal(4, pam.ChannelCount);
 
-            ImageIdentifyResult pfm = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("PF\n2 3\n-1.0\n"));
+            ImageIdentifyResult pfm = ImgCodecsCv2.Identify(CreatePfm("PF", 2, 3, -1.0));
+            Assert.True(pfm.IsSizeKnown);
+            Assert.True(pfm.IsFrameCountKnown);
             Assert.True(pfm.IsPixelFormatKnown);
             Assert.Equal(32, pfm.BitDepth);
             Assert.Equal(3, pfm.ChannelCount);
 
-            ImageIdentifyResult pf = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("Pf\n2 3\n1.0\n"));
+            ImageIdentifyResult pf = ImgCodecsCv2.Identify(CreatePfm("Pf", 2, 3, 1.0));
+            Assert.True(pf.IsSizeKnown);
+            Assert.True(pf.IsFrameCountKnown);
             Assert.True(pf.IsPixelFormatKnown);
             Assert.Equal(32, pf.BitDepth);
             Assert.Equal(1, pf.ChannelCount);
@@ -260,12 +264,35 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             Assert.False(invalidScale.IsSizeKnown);
             Assert.False(invalidScale.IsFrameCountKnown);
             Assert.False(invalidScale.IsPixelFormatKnown);
+
+            byte[] complete = CreatePfm("PF", 2, 3, -1.0);
+            ImageIdentifyResult truncated = ImgCodecsCv2.Identify(SubArray(complete, complete.Length - 1));
+            Assert.True(truncated.IsSizeKnown);
+            Assert.True(truncated.IsPixelFormatKnown);
+            Assert.False(truncated.IsFrameCountKnown);
+            Assert.False(truncated.IsCumulativePixelCountKnown);
+
+            byte[] trailing = new byte[complete.Length + 1];
+            Array.Copy(complete, trailing, complete.Length);
+            trailing[trailing.Length - 1] = 0x7F;
+            ImageIdentifyResult withTrailingByte = ImgCodecsCv2.Identify(trailing);
+            Assert.True(withTrailingByte.IsSizeKnown);
+            Assert.True(withTrailingByte.IsPixelFormatKnown);
+            Assert.False(withTrailingByte.IsFrameCountKnown);
+            Assert.False(withTrailingByte.IsCumulativePixelCountKnown);
+
+            ImageIdentifyResult overflowingGeometry = ImgCodecsCv2.Identify(
+                Encoding.ASCII.GetBytes("PF\n2147483647 2147483647\n-1.0\n"));
+            Assert.True(overflowingGeometry.IsSizeKnown);
+            Assert.True(overflowingGeometry.IsPixelFormatKnown);
+            Assert.False(overflowingGeometry.IsFrameCountKnown);
+            Assert.False(overflowingGeometry.IsCumulativePixelCountKnown);
         }
 
         [Fact]
         public void DecodeOptionsRejectKnownPfmPixelFormatLimitsBeforeNativeCall()
         {
-            byte[] pfm = Encoding.ASCII.GetBytes("PF\n2 3\n-1.0\n");
+            byte[] pfm = CreatePfm("PF", 2, 3, -1.0);
 
             Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(pfm,
                 new ImageDecodeOptions(4096, 100, 100, 10000, 1, true, true,
@@ -914,6 +941,7 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
                 new { Name = "webp", Bytes = CreateAnimatedWebp(4) },
                 new { Name = "bmp", Bytes = CreateBmpFixture(24, 0) },
                 new { Name = "pam", Bytes = Encoding.ASCII.GetBytes("P7\nWIDTH 2\nHEIGHT 3\nDEPTH 4\nMAXVAL 255\nENDHDR\n") },
+                new { Name = "pfm", Bytes = CreatePfm("PF", 2, 3, -1.0) },
                 new { Name = "sunraster", Bytes = CreateSunRaster(24) },
                 new { Name = "hdr", Bytes = CreateRadianceHdr(8, 2, true) },
                 new { Name = "tiff", Bytes = CreateTiff(false, 2) },
@@ -1715,6 +1743,26 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         {
             return Encoding.ASCII.GetByteCount(
                 "#?RADIANCE\nFORMAT=32-bit_rle_rgbe\n\n-Y " + height + " +X " + width + "\n");
+        }
+
+        private static byte[] CreatePfm(string magic, int width, int height, double scale)
+        {
+            int channels = magic == "PF" ? 3 : 1;
+            long payloadLength = checked((long)width * height * channels * 4);
+            Assert.InRange(payloadLength, 0, int.MaxValue);
+            byte[] header = Encoding.ASCII.GetBytes(
+                magic + "\n" + width + " " + height + "\n" +
+                scale.ToString(System.Globalization.CultureInfo.InvariantCulture) + "\n");
+            byte[] result = new byte[checked(header.Length + (int)payloadLength)];
+            Array.Copy(header, result, header.Length);
+            return result;
+        }
+
+        private static byte[] SubArray(byte[] source, int length)
+        {
+            byte[] result = new byte[length];
+            Array.Copy(source, result, length);
+            return result;
         }
 
         private static byte[] CreateOpenExrHeader(int width, int height, int channelCount, int pixelType, int secondPixelType = -1)

@@ -300,8 +300,9 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                 int width;
                 int height;
                 PixelFacts pixelFacts;
-                bool found = TryReadPnmHeader(data, out width, out height, out pixelFacts);
-                return Result("pnm", width, height, found, 1, found, data.Length, default(MetadataFacts), pixelFacts);
+                bool frameKnown;
+                bool found = TryReadPnmHeader(data, out width, out height, out pixelFacts, out frameKnown);
+                return Result("pnm", width, height, found, 1, found && frameKnown, data.Length, default(MetadataFacts), pixelFacts);
             }
 
             return Result("unknown", 0, 0, false, 0, false, data.Length);
@@ -1130,18 +1131,24 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             return false;
         }
 
-        private static bool TryReadPnmHeader(byte[] data, out int width, out int height, out PixelFacts pixelFacts)
+        private static bool TryReadPnmHeader(byte[] data, out int width, out int height, out PixelFacts pixelFacts, out bool frameKnown)
         {
             width = 0;
             height = 0;
             pixelFacts = new PixelFacts();
+            frameKnown = false;
             if (data.Length < 3 || data[0] != (byte)'P' ||
                 !((data[1] >= (byte)'1' && data[1] <= (byte)'7') || data[1] == (byte)'F' || data[1] == (byte)'f') ||
                 !IsPnmWhitespace(data[2])) return false;
 
             int kind = data[1] >= (byte)'1' && data[1] <= (byte)'7' ? data[1] - (byte)'0' : data[1] == (byte)'F' ? 8 : 9;
             int offset = 2;
-            if (kind == 7) return TryReadPamHeader(data, ref offset, out width, out height, out pixelFacts);
+            if (kind == 7)
+            {
+                bool found = TryReadPamHeader(data, ref offset, out width, out height, out pixelFacts);
+                frameKnown = found;
+                return found;
+            }
 
             int maxValue;
             if (!TryReadPnmInteger(data, ref offset, out width) || !TryReadPnmInteger(data, ref offset, out height) ||
@@ -1149,7 +1156,8 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
 
             if (kind == 8 || kind == 9)
             {
-                if (!TryReadPfmScale(data, ref offset))
+                int payloadOffset;
+                if (!TryReadPfmScale(data, ref offset, out payloadOffset))
                 {
                     width = 0;
                     height = 0;
@@ -1159,6 +1167,7 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                 pixelFacts.BitDepthKnown = true;
                 pixelFacts.Channels = kind == 8 ? 3 : 1;
                 pixelFacts.ChannelsKnown = true;
+                frameKnown = IsPfmPayloadComplete(data, payloadOffset, width, height, pixelFacts.Channels);
                 return true;
             }
 
@@ -1169,6 +1178,7 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                 pixelFacts.BitDepthKnown = true;
                 pixelFacts.Channels = 1;
                 pixelFacts.ChannelsKnown = true;
+                frameKnown = true;
                 return true;
             }
 
@@ -1189,6 +1199,7 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             pixelFacts.BitDepthKnown = true;
             pixelFacts.Channels = kind == 3 || kind == 6 ? 3 : 1;
             pixelFacts.ChannelsKnown = true;
+            frameKnown = true;
             return true;
         }
 
@@ -1275,8 +1286,9 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             return false;
         }
 
-        private static bool TryReadPfmScale(byte[] data, ref int offset)
+        private static bool TryReadPfmScale(byte[] data, ref int offset, out int payloadOffset)
         {
+            payloadOffset = 0;
             while (offset < data.Length && (IsPnmWhitespace(data[offset]) || data[offset] == (byte)'#'))
             {
                 if (data[offset] == (byte)'#')
@@ -1323,7 +1335,52 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             string token = System.Text.Encoding.ASCII.GetString(data, start, offset - start);
             double scale;
             if (!double.TryParse(token, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out scale)) return false;
-            return scale != 0 && !double.IsNaN(scale) && !double.IsInfinity(scale);
+            if (scale == 0 || double.IsNaN(scale) || double.IsInfinity(scale)) return false;
+
+            // The scale token terminates the text header. Consume its line ending,
+            // but do not skip arbitrary bytes because the binary payload may start
+            // with any value, including whitespace.
+            int delimiter = offset;
+            while (delimiter < data.Length && (data[delimiter] == 32 || data[delimiter] == 9 || data[delimiter] == 11 || data[delimiter] == 12))
+            {
+                ++delimiter;
+            }
+            if (delimiter >= data.Length) return false;
+            if (data[delimiter] == (byte)'#')
+            {
+                while (delimiter < data.Length && data[delimiter] != 10) ++delimiter;
+                if (delimiter >= data.Length) return false;
+            }
+            if (data[delimiter] == 13)
+            {
+                ++delimiter;
+                if (delimiter < data.Length && data[delimiter] == 10) ++delimiter;
+            }
+            else if (data[delimiter] == 10)
+            {
+                ++delimiter;
+            }
+            else
+            {
+                return false;
+            }
+            payloadOffset = delimiter;
+            offset = delimiter;
+            return true;
+        }
+
+        private static bool IsPfmPayloadComplete(byte[] data, int payloadOffset, int width, int height, int channels)
+        {
+            if (payloadOffset < 0 || payloadOffset > data.Length || width <= 0 || height <= 0 || channels <= 0) return false;
+            try
+            {
+                long expectedBytes = checked((long)width * height * channels * 4);
+                return expectedBytes <= int.MaxValue && expectedBytes == data.Length - payloadOffset;
+            }
+            catch (OverflowException)
+            {
+                return false;
+            }
         }
 
         private static bool TryReadPnmIntegerBounded(byte[] data, ref int offset, int end, out int value)
