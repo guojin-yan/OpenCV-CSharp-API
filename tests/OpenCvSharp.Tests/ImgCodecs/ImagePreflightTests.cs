@@ -625,6 +625,13 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             byte[] wrongFileSize = CreateBmpFixture(24, 0);
             WriteBmp32(wrongFileSize, 2, wrongFileSize.Length - 1);
             Assert.False(ImgCodecsCv2.Identify(wrongFileSize).IsFrameCountKnown);
+
+            byte[] overflowingGeometry = CreateBmpFixture(32, 0);
+            WriteBmp32(overflowingGeometry, 18, int.MaxValue);
+            WriteBmp32(overflowingGeometry, 22, int.MaxValue);
+            ImageIdentifyResult overflowResult = ImgCodecsCv2.Identify(overflowingGeometry);
+            Assert.False(overflowResult.IsFrameCountKnown);
+            Assert.False(overflowResult.IsPixelFormatKnown);
         }
 
         [Fact]
