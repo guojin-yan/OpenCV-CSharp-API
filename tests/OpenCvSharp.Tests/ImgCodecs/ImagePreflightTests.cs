@@ -607,8 +607,24 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             Assert.False(truncatedResult.IsPixelFormatKnown);
 
             ImageIdentifyResult compressed = ImgCodecsCv2.Identify(CreateBmpFixture(8, 1));
-            Assert.True(compressed.IsFrameCountKnown);
+            Assert.False(compressed.IsFrameCountKnown);
             Assert.False(compressed.IsPixelFormatKnown);
+        }
+
+        [Fact]
+        public void IdentifyRequiresExactBmpUncompressedPayloadBoundary()
+        {
+            byte[] trailing = CreateBmpFixture(24, 0);
+            Array.Resize(ref trailing, trailing.Length + 1);
+            Assert.False(ImgCodecsCv2.Identify(trailing).IsFrameCountKnown);
+
+            byte[] wrongRowPayload = CreateBmpFixture(24, 0);
+            WriteBmp32(wrongRowPayload, 22, 4);
+            Assert.False(ImgCodecsCv2.Identify(wrongRowPayload).IsFrameCountKnown);
+
+            byte[] wrongFileSize = CreateBmpFixture(24, 0);
+            WriteBmp32(wrongFileSize, 2, wrongFileSize.Length - 1);
+            Assert.False(ImgCodecsCv2.Identify(wrongFileSize).IsFrameCountKnown);
         }
 
         [Fact]

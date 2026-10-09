@@ -36,9 +36,9 @@ ImageIdentifyResult 区分未知格式、未知尺寸和已证明的单帧头部
 
 `Identify(Stream, ImageDecodeOptions)` 会从流的当前位置读取并应用同一准入策略。它最多读取 `MaxInputBytes + 1` 字节；对于可 seek 流，即使验证失败也会恢复原位置；对于不可 seek 流则会消费输入。这是有意设计为完整输入预检，而非增量解码器：需要保留不可 seek 源的调用方必须自行提供可重放的缓冲边界。
 
-For structurally complete GIF, APNG, and animated WebP containers, `FrameCount` is counted from the parsed frame/image records. APNG sequence numbers, declared frame count, WebP animation chunks, GIF image descriptors/extensions, and the final container terminator must all be consistent; truncation, trailing bytes, or an incomplete frame leave `IsFrameCountKnown` false. JPEG is treated as a known single frame only when a valid EOI marker terminates the input. Static PNG/WebP/GIF inputs report one frame when their single-image boundary is proven.
+For structurally complete GIF, APNG, and animated WebP containers, `FrameCount` is counted from the parsed frame/image records. APNG sequence numbers, declared frame count, WebP animation chunks, GIF image descriptors/extensions, and the final container terminator must all be consistent; truncation, trailing bytes, or an incomplete frame leave `IsFrameCountKnown` false. JPEG is treated as a known single frame only when a valid EOI marker terminates the input. Static PNG/WebP/GIF inputs report one frame when their single-image boundary is proven. BMP reports one frame only for an exact, uncompressed BI_RGB payload whose checked row stride and pixel-data end match the file size; truncated, trailing, compressed, or arithmetic-overflow cases remain unknown.
 
-对于结构完整的 GIF、APNG 和动画 WebP 容器，`FrameCount` 根据已解析的帧/图像记录统计。APNG 序列号与声明帧数、WebP 动画块、GIF 图像描述符/扩展块以及容器结束标记必须一致；截断、尾部多余字节或未完成帧都会使 `IsFrameCountKnown` 保持为 false。JPEG 只有在合法 EOI 标记位于输入末尾时才报告已知单帧。能够证明单图边界的静态 PNG/WebP/GIF 报告一帧。
+对于结构完整的 GIF、APNG 和动画 WebP 容器，`FrameCount` 根据已解析的帧/图像记录统计。APNG 序列号与声明帧数、WebP 动画块、GIF 图像描述符/扩展块以及容器结束标记必须一致；截断、尾部多余字节或未完成帧都会使 `IsFrameCountKnown` 保持为 false。JPEG 只有在合法 EOI 标记位于输入末尾时才报告已知单帧。能够证明单图边界的静态 PNG/WebP/GIF 报告一帧。BMP 只有在输入长度精确匹配、压缩方式为 BI_RGB 且 checked 行 stride 与像素数据末尾都能对齐到文件大小时才报告单帧；截断、尾部字节、压缩输入或算术溢出保持未知。
 
 ## Decode With A Budget / 带预算解码
 

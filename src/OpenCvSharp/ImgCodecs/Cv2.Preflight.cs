@@ -614,22 +614,54 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
         private static bool IsBmpHeaderComplete(byte[] data)
         {
             if (data.Length < 26 || data[0] != (byte)'B' || data[1] != (byte)'M') return false;
-            int dibSize = ReadSignedLe32(data, 14);
+
+            uint fileSize = ReadUnsignedLe32(data, 2);
+            uint pixelOffset = ReadUnsignedLe32(data, 10);
+            uint dibSize = ReadUnsignedLe32(data, 14);
             long dibEnd;
+            long width;
+            long height;
+            int bitCount;
+            int compression;
             if (dibSize == 12)
             {
+                if (data.Length < 26 || ReadLe16(data, 22) != 1) return false;
+                width = ReadLe16(data, 18);
+                height = ReadLe16(data, 20);
+                bitCount = ReadLe16(data, 24);
+                compression = 0;
                 dibEnd = 26;
             }
             else
             {
-                if (dibSize < 40) return false;
+                if (dibSize < 40 || dibSize > int.MaxValue) return false;
                 dibEnd = 14L + dibSize;
-                if (dibEnd > data.Length) return false;
+                if (dibEnd > data.Length || data.Length < 34 || ReadLe16(data, 26) != 1) return false;
+                width = ReadSignedLe32(data, 18);
+                long signedHeight = ReadSignedLe32(data, 22);
+                height = signedHeight == int.MinValue ? (long)int.MaxValue + 1 : Math.Abs(signedHeight);
+                bitCount = ReadLe16(data, 28);
+                compression = ReadSignedLe32(data, 30);
             }
 
-            int fileSize = ReadSignedLe32(data, 2);
-            int pixelOffset = ReadSignedLe32(data, 10);
-            return fileSize > pixelOffset && pixelOffset >= dibEnd && fileSize <= data.Length;
+            if (width <= 0 || height <= 0 || bitCount <= 0 || compression != 0 ||
+                fileSize != (uint)data.Length || pixelOffset < (ulong)dibEnd || pixelOffset >= fileSize)
+            {
+                return false;
+            }
+
+            try
+            {
+                long rowBits = checked(width * bitCount);
+                long rowStride = checked(((rowBits + 31) / 32) * 4);
+                long payloadBytes = checked(rowStride * height);
+                long pixelEnd = checked((long)pixelOffset + payloadBytes);
+                return pixelEnd == fileSize;
+            }
+            catch (OverflowException)
+            {
+                return false;
+            }
         }
 
         private static bool TryReadSunRasterHeader(byte[] data, out int width, out int height, out bool frameKnown, out PixelFacts pixelFacts)
@@ -992,6 +1024,11 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
         private static int ReadLe16(byte[] data, int offset)
         {
             return data[offset] | (data[offset + 1] << 8);
+        }
+
+        private static uint ReadUnsignedLe32(byte[] data, int offset)
+        {
+            return (uint)(data[offset] | (data[offset + 1] << 8) | (data[offset + 2] << 16) | (data[offset + 3] << 24));
         }
 
         private static int ReadSignedLe32(byte[] data, int offset)
