@@ -1171,14 +1171,34 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                 return true;
             }
 
-            if (kind == 1 || kind == 4)
+            if (kind == 1)
             {
                 if (!HasPnmTokenSeparator(data, offset)) return false;
                 pixelFacts.BitDepth = 1;
                 pixelFacts.BitDepthKnown = true;
                 pixelFacts.Channels = 1;
                 pixelFacts.ChannelsKnown = true;
-                frameKnown = true;
+                long asciiSampleCount;
+                try
+                {
+                    asciiSampleCount = checked((long)width * height);
+                }
+                catch (OverflowException)
+                {
+                    asciiSampleCount = long.MaxValue;
+                }
+                frameKnown = TryReadPnmAsciiPayload(data, offset, asciiSampleCount, 1);
+                return true;
+            }
+
+            if (kind == 4)
+            {
+                if (!HasPnmTokenSeparator(data, offset)) return false;
+                pixelFacts.BitDepth = 1;
+                pixelFacts.BitDepthKnown = true;
+                pixelFacts.Channels = 1;
+                pixelFacts.ChannelsKnown = true;
+                frameKnown = IsPnmBinaryPayloadComplete(data, offset, width, height, 1, 1, true);
                 return true;
             }
 
@@ -1199,7 +1219,24 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             pixelFacts.BitDepthKnown = true;
             pixelFacts.Channels = kind == 3 || kind == 6 ? 3 : 1;
             pixelFacts.ChannelsKnown = true;
-            frameKnown = true;
+            int channels = pixelFacts.Channels;
+            long sampleCount;
+            try
+            {
+                sampleCount = checked((long)width * height * channels);
+            }
+            catch (OverflowException)
+            {
+                sampleCount = long.MaxValue;
+            }
+            if (kind == 2 || kind == 3)
+            {
+                frameKnown = TryReadPnmAsciiPayload(data, offset, sampleCount, maxValue);
+            }
+            else
+            {
+                frameKnown = IsPnmBinaryPayloadComplete(data, offset, width, height, channels, maxValue <= 255 ? 1 : 2, false);
+            }
             return true;
         }
 
@@ -1397,6 +1434,72 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             {
                 return false;
             }
+        }
+
+        private static bool TryReadPnmAsciiPayload(byte[] data, int offset, long sampleCount, int maxValue)
+        {
+            if (offset < 0 || offset > data.Length || sampleCount <= 0 || maxValue <= 0) return false;
+            long samplesRead = 0;
+            while (samplesRead < sampleCount)
+            {
+                int sample;
+                if (!TryReadPnmInteger(data, ref offset, out sample) || sample < 0 || sample > maxValue) return false;
+                ++samplesRead;
+            }
+            return HasOnlyPnmWhitespaceAndComments(data, offset);
+        }
+
+        private static bool IsPnmBinaryPayloadComplete(byte[] data, int headerOffset, int width, int height, int channels, int bytesPerSample, bool packedBits)
+        {
+            int payloadOffset;
+            if (!TryConsumePnmBinaryDelimiter(data, headerOffset, out payloadOffset) || width <= 0 || height <= 0 || channels <= 0 || bytesPerSample <= 0) return false;
+            try
+            {
+                long expectedBytes = packedBits
+                    ? checked(((long)width + 7) / 8 * height)
+                    : checked((long)width * height * channels * bytesPerSample);
+                return expectedBytes <= int.MaxValue && expectedBytes == data.Length - payloadOffset;
+            }
+            catch (OverflowException)
+            {
+                return false;
+            }
+        }
+
+        private static bool TryConsumePnmBinaryDelimiter(byte[] data, int offset, out int payloadOffset)
+        {
+            payloadOffset = 0;
+            if (offset < 0 || offset >= data.Length || !HasPnmTokenSeparator(data, offset)) return false;
+            int delimiter = offset;
+            if (data[delimiter] == (byte)'#')
+            {
+                while (delimiter < data.Length && data[delimiter] != 10) ++delimiter;
+                if (delimiter >= data.Length) return false;
+                ++delimiter;
+            }
+            else
+            {
+                if (!IsPnmWhitespace(data[delimiter])) return false;
+                byte whitespace = data[delimiter++];
+                if (whitespace == 13 && delimiter < data.Length && data[delimiter] == 10) ++delimiter;
+            }
+            payloadOffset = delimiter;
+            return true;
+        }
+
+        private static bool HasOnlyPnmWhitespaceAndComments(byte[] data, int offset)
+        {
+            while (offset < data.Length)
+            {
+                if (IsPnmWhitespace(data[offset]))
+                {
+                    ++offset;
+                    continue;
+                }
+                if (data[offset] != (byte)'#') return false;
+                while (offset < data.Length && data[offset] != 10) ++offset;
+            }
+            return true;
         }
 
         private static bool TryReadPnmIntegerBounded(byte[] data, ref int offset, int end, out int value)

@@ -188,37 +188,54 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         [Fact]
         public void IdentifyReadsPnmEncodedDepthAndChannels()
         {
-            ImageIdentifyResult pbm = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P1\n2 3\n"));
+            ImageIdentifyResult pbm = ImgCodecsCv2.Identify(CreatePnmAscii("P1", 2, 3, 1));
             Assert.True(pbm.IsSizeKnown);
             Assert.True(pbm.IsFrameCountKnown);
             Assert.True(pbm.IsPixelFormatKnown);
             Assert.Equal(1, pbm.BitDepth);
             Assert.Equal(1, pbm.ChannelCount);
 
-            ImageIdentifyResult pbmBinary = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P4\n2 3\n"));
+            ImageIdentifyResult pbmBinary = ImgCodecsCv2.Identify(CreatePnmBinary("P4", 9, 2, 1));
+            Assert.True(pbmBinary.IsFrameCountKnown);
             Assert.True(pbmBinary.IsPixelFormatKnown);
             Assert.Equal(1, pbmBinary.BitDepth);
             Assert.Equal(1, pbmBinary.ChannelCount);
 
-            ImageIdentifyResult pgmAscii = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P2\n4 2\n15\n"));
+            ImageIdentifyResult pgmAscii = ImgCodecsCv2.Identify(CreatePnmAscii("P2", 4, 2, 15));
+            Assert.True(pgmAscii.IsFrameCountKnown);
             Assert.True(pgmAscii.IsPixelFormatKnown);
             Assert.Equal(8, pgmAscii.BitDepth);
             Assert.Equal(1, pgmAscii.ChannelCount);
 
-            ImageIdentifyResult pgm = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P5\n# dimensions\n4 2\n255\n"));
+            ImageIdentifyResult pgm = ImgCodecsCv2.Identify(CreatePnmBinary("P5", 4, 2, 255, true));
+            Assert.True(pgm.IsFrameCountKnown);
             Assert.True(pgm.IsPixelFormatKnown);
             Assert.Equal(8, pgm.BitDepth);
             Assert.Equal(1, pgm.ChannelCount);
 
-            ImageIdentifyResult ppmAscii = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P3\n4 2\n255\n"));
+            ImageIdentifyResult ppmAscii = ImgCodecsCv2.Identify(CreatePnmAscii("P3", 4, 2, 255));
+            Assert.True(ppmAscii.IsFrameCountKnown);
             Assert.True(ppmAscii.IsPixelFormatKnown);
             Assert.Equal(8, ppmAscii.BitDepth);
             Assert.Equal(3, ppmAscii.ChannelCount);
 
-            ImageIdentifyResult ppm = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P6\n4 2\n65535\n"));
+            ImageIdentifyResult ppm = ImgCodecsCv2.Identify(CreatePnmBinary("P6", 4, 2, 65535));
+            Assert.True(ppm.IsFrameCountKnown);
             Assert.True(ppm.IsPixelFormatKnown);
             Assert.Equal(16, ppm.BitDepth);
             Assert.Equal(3, ppm.ChannelCount);
+
+            ImageIdentifyResult pgm16 = ImgCodecsCv2.Identify(CreatePnmBinary("P5", 2, 2, 256));
+            Assert.True(pgm16.IsFrameCountKnown);
+            Assert.Equal(16, pgm16.BitDepth);
+
+            byte[] whitespaceHeader = Encoding.ASCII.GetBytes("P5\n3 1\n255 ");
+            byte[] whitespacePayload = new byte[whitespaceHeader.Length + 3];
+            Array.Copy(whitespaceHeader, whitespacePayload, whitespaceHeader.Length);
+            whitespacePayload[whitespaceHeader.Length] = 10;
+            whitespacePayload[whitespaceHeader.Length + 1] = 32;
+            whitespacePayload[whitespaceHeader.Length + 2] = 255;
+            Assert.True(ImgCodecsCv2.Identify(whitespacePayload).IsFrameCountKnown);
         }
 
         [Fact]
@@ -743,12 +760,45 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             Assert.False(truncatedPbmSeparator.IsSizeKnown);
             Assert.False(truncatedPbmSeparator.IsFrameCountKnown);
             Assert.False(truncatedPbmSeparator.IsPixelFormatKnown);
+
+            ImageIdentifyResult truncatedAsciiPayload = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P1\n2 2\n0 1 0"));
+            Assert.True(truncatedAsciiPayload.IsSizeKnown);
+            Assert.True(truncatedAsciiPayload.IsPixelFormatKnown);
+            Assert.False(truncatedAsciiPayload.IsFrameCountKnown);
+
+            ImageIdentifyResult extraAsciiSample = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P2\n1 1\n3\n2 1"));
+            Assert.True(extraAsciiSample.IsSizeKnown);
+            Assert.True(extraAsciiSample.IsPixelFormatKnown);
+            Assert.False(extraAsciiSample.IsFrameCountKnown);
+
+            byte[] completePnm = CreatePnmBinary("P6", 4, 2, 255);
+            ImageIdentifyResult truncatedPayload = ImgCodecsCv2.Identify(SubArray(completePnm, completePnm.Length - 1));
+            Assert.True(truncatedPayload.IsSizeKnown);
+            Assert.True(truncatedPayload.IsPixelFormatKnown);
+            Assert.False(truncatedPayload.IsFrameCountKnown);
+            Assert.False(truncatedPayload.IsCumulativePixelCountKnown);
+
+            byte[] trailingPayload = new byte[completePnm.Length + 1];
+            Array.Copy(completePnm, trailingPayload, completePnm.Length);
+            trailingPayload[trailingPayload.Length - 1] = 0x7F;
+            ImageIdentifyResult withTrailingByte = ImgCodecsCv2.Identify(trailingPayload);
+            Assert.True(withTrailingByte.IsSizeKnown);
+            Assert.True(withTrailingByte.IsPixelFormatKnown);
+            Assert.False(withTrailingByte.IsFrameCountKnown);
+            Assert.False(withTrailingByte.IsCumulativePixelCountKnown);
+
+            ImageIdentifyResult overflowingGeometry = ImgCodecsCv2.Identify(
+                Encoding.ASCII.GetBytes("P6\n2147483647 2147483647\n255\n"));
+            Assert.True(overflowingGeometry.IsSizeKnown);
+            Assert.True(overflowingGeometry.IsPixelFormatKnown);
+            Assert.False(overflowingGeometry.IsFrameCountKnown);
+            Assert.False(overflowingGeometry.IsCumulativePixelCountKnown);
         }
 
         [Fact]
         public void DecodeOptionsRejectKnownPnmPixelFormatLimitsBeforeNativeCall()
         {
-            byte[] pnm = Encoding.ASCII.GetBytes("P6\n4 2\n65535\n");
+            byte[] pnm = CreatePnmBinary("P6", 4, 2, 65535);
 
             Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(pnm,
                 new ImageDecodeOptions(1024, 100, 100, 10000, 1, true, true,
@@ -957,6 +1007,7 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
                 new { Name = "webp", Bytes = CreateAnimatedWebp(4) },
                 new { Name = "bmp", Bytes = CreateBmpFixture(24, 0) },
                 new { Name = "pam", Bytes = CreatePam(2, 3, 4, 255) },
+                new { Name = "pnm", Bytes = CreatePnmBinary("P6", 4, 2, 255) },
                 new { Name = "pfm", Bytes = CreatePfm("PF", 2, 3, -1.0) },
                 new { Name = "sunraster", Bytes = CreateSunRaster(24) },
                 new { Name = "hdr", Bytes = CreateRadianceHdr(8, 2, true) },
@@ -1784,6 +1835,38 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
                 "\nMAXVAL " + maxValue + "\nTUPLTYPE RGB_ALPHA\nENDHDR\n");
             byte[] result = new byte[checked(header.Length + (int)payloadLength)];
             Array.Copy(header, result, header.Length);
+            return result;
+        }
+
+        private static byte[] CreatePnmAscii(string magic, int width, int height, int maxValue)
+        {
+            int channels = magic == "P3" ? 3 : 1;
+            if (magic == "P1") maxValue = 1;
+            long sampleCount = checked((long)width * height * channels);
+            Assert.InRange(sampleCount, 1, int.MaxValue);
+            var builder = new StringBuilder();
+            builder.Append(magic).Append('\n').Append(width).Append(' ').Append(height).Append('\n');
+            if (magic != "P1") builder.Append(maxValue).Append('\n');
+            for (int index = 0; index < (int)sampleCount; ++index)
+            {
+                builder.Append(index % (maxValue + 1)).Append(index + 1 == sampleCount ? '\n' : ' ');
+            }
+            return Encoding.ASCII.GetBytes(builder.ToString());
+        }
+
+        private static byte[] CreatePnmBinary(string magic, int width, int height, int maxValue, bool includeComment = false)
+        {
+            int channels = magic == "P6" ? 3 : 1;
+            int bytesPerSample = magic == "P4" ? 0 : maxValue <= 255 ? 1 : 2;
+            long payloadLength = magic == "P4"
+                ? checked(((long)width + 7) / 8 * height)
+                : checked((long)width * height * channels * bytesPerSample);
+            Assert.InRange(payloadLength, 0, int.MaxValue);
+            string header = magic + "\n" + (includeComment ? "# dimensions\n" : string.Empty) +
+                width + " " + height + "\n" + (magic == "P4" ? string.Empty : maxValue + "\n");
+            byte[] headerBytes = Encoding.ASCII.GetBytes(header);
+            byte[] result = new byte[checked(headerBytes.Length + (int)payloadLength)];
+            Array.Copy(headerBytes, result, headerBytes.Length);
             return result;
         }
 

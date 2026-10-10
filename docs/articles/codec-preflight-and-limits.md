@@ -114,6 +114,10 @@ For PAM, the header proves dimensions, encoded depth, and channel count independ
 
 对于 PAM，头部可以独立证明尺寸、编码位深和通道数；只有在 checked 的 `width * height * depth * bytesPerSample` 计算精确覆盖到输入末尾时，才报告已知单帧。截断或带尾部字节的 PAM payload 会使帧数和累计像素事实保持未知。
 
+For PNM P1–P6, encoded depth and channels remain header facts, while frame and cumulative-pixel facts require exact payload accounting: ASCII variants must contain exactly the checked number of samples with no non-comment trailing data; P4 must match packed row bytes; P5/P6 must match checked 8- or 16-bit sample bytes. Truncation, trailing bytes, and geometry overflow remain unknown.
+
+对于 PNM P1–P6，编码位深和通道数仍属于头部事实；只有在 payload 精确满足 checked 样本数时，才报告帧数和累计像素：ASCII 格式必须恰好包含所需样本且不能有非注释尾部数据，P4 必须匹配位打包行字节数，P5/P6 必须匹配 checked 的 8/16-bit 样本字节数。截断、尾部字节和 geometry 溢出保持未知。
+
 `MaxBitDepth` and `MaxChannels` reject only known encoded facts. Set `RejectUnknownPixelFormat` when the admission boundary must fail closed. `MaxCumulativePixels` first uses a format parser's proven cumulative frame/page pixel count (including heterogeneous classic TIFF and BigTIFF pages); otherwise it multiplies the proven width-times-height by the proven frame/page count with checked arithmetic. It is an admission budget, not a peak native allocation guarantee. If no complete cumulative fact can be proven, the budget check remains non-blocking unless a separate strict policy rejects the unknown dimensions or frame count.
 
 `MaxBitDepth` 和 `MaxChannels` 只拒绝已知的编码事实；需要失败关闭时设置 `RejectUnknownPixelFormat`。`MaxCumulativePixels` 会优先使用格式解析器已证明的帧/页累计像素数（包括页尺寸不一致的经典 TIFF 与 BigTIFF）；否则使用 checked 算术将已证明的宽高像素数乘以已证明的帧/页数。它是输入准入预算，不是 native 峰值分配保证。如果无法证明完整累计事实，预算检查不会单独阻断输入，除非另有严格策略拒绝未知尺寸或帧数。
