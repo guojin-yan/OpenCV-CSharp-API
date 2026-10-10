@@ -126,6 +126,29 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         }
 
         [Fact]
+        public void IdentifyReadsAvifContainerHeaderFactsWithoutClaimingFrames()
+        {
+            byte[] avif = CreateAvifHeader(640, 480, 10, 3);
+            ImageIdentifyResult result = ImgCodecsCv2.Identify(avif);
+
+            Assert.Equal("avif", result.Format);
+            Assert.True(result.IsFormatKnown);
+            Assert.True(result.IsSizeKnown);
+            Assert.Equal(640, result.Width);
+            Assert.Equal(480, result.Height);
+            Assert.True(result.IsPixelFormatKnown);
+            Assert.Equal(10, result.BitDepth);
+            Assert.Equal(3, result.ChannelCount);
+            Assert.False(result.IsFrameCountKnown);
+
+            Assert.False(ImgCodecsCv2.Identify(SubArray(avif, avif.Length - 1)).IsSizeKnown);
+            byte[] trailing = new byte[avif.Length + 1];
+            Array.Copy(avif, trailing, avif.Length);
+            trailing[trailing.Length - 1] = 0xFF;
+            Assert.False(ImgCodecsCv2.Identify(trailing).IsSizeKnown);
+        }
+
+        [Fact]
         public void IdentifyReadsPngEncodedDepthAndChannels()
         {
             byte[] png = CreateCompletePng(2, 3, 16, 6);
@@ -1741,6 +1764,56 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             webp[8] = (byte)'W'; webp[9] = (byte)'E'; webp[10] = (byte)'B'; webp[11] = (byte)'P';
             WriteWebpChunk(webp, 12, imageType, payload);
             return webp;
+        }
+
+        private static byte[] CreateAvifHeader(int width, int height, int bitDepth, int channels)
+        {
+            byte[] fileTypePayload = new byte[]
+            {
+                (byte)'a', (byte)'v', (byte)'i', (byte)'f',
+                0, 0, 0, 0,
+                (byte)'m', (byte)'i', (byte)'f', (byte)'1'
+            };
+            byte[] ispePayload = new byte[12];
+            WriteBe32(ispePayload, 0, 0);
+            WriteBe32(ispePayload, 4, (uint)width);
+            WriteBe32(ispePayload, 8, (uint)height);
+            byte[] pixiPayload = new byte[5 + channels];
+            pixiPayload[4] = (byte)channels;
+            for (int index = 0; index < channels; ++index) pixiPayload[5 + index] = (byte)bitDepth;
+
+            byte[] ipco = ConcatenateAvifBoxes(
+                CreateAvifBox("ispe", ispePayload),
+                CreateAvifBox("pixi", pixiPayload));
+            byte[] iprp = CreateAvifBox("iprp", CreateAvifBox("ipco", ipco));
+            byte[] metaPayload = ConcatenateAvifBoxes(new byte[4], iprp);
+            return ConcatenateAvifBoxes(
+                CreateAvifBox("ftyp", fileTypePayload),
+                CreateAvifBox("meta", metaPayload),
+                CreateAvifBox("mdat", new byte[] { 1, 2, 3, 4 }));
+        }
+
+        private static byte[] CreateAvifBox(string type, byte[] payload)
+        {
+            byte[] box = new byte[8 + payload.Length];
+            WriteBe32(box, 0, (uint)box.Length);
+            for (int index = 0; index < 4; ++index) box[4 + index] = (byte)type[index];
+            Array.Copy(payload, 0, box, 8, payload.Length);
+            return box;
+        }
+
+        private static byte[] ConcatenateAvifBoxes(params byte[][] parts)
+        {
+            int length = 0;
+            for (int index = 0; index < parts.Length; ++index) length += parts[index].Length;
+            byte[] result = new byte[length];
+            int offset = 0;
+            for (int index = 0; index < parts.Length; ++index)
+            {
+                Array.Copy(parts[index], 0, result, offset, parts[index].Length);
+                offset += parts[index].Length;
+            }
+            return result;
         }
 
         private static byte[] CreateBmpFixture(int bitCount, int compression)

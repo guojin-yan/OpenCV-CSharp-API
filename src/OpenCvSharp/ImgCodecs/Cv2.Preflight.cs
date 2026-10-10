@@ -220,6 +220,16 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                     ReadMetadataFacts(data, "webp"), pixelFacts);
             }
 
+            if (IsAvifSignature(data))
+            {
+                int width;
+                int height;
+                PixelFacts pixelFacts;
+                bool headerKnown = TryReadAvifHeader(data, out width, out height, out pixelFacts);
+                return Result("avif", width, height, headerKnown, 0, false, data.Length,
+                    default(MetadataFacts), pixelFacts);
+            }
+
             if (data.Length >= 2 && data[0] == (byte)'B' && data[1] == (byte)'M')
             {
                 long signedWidth = data.Length >= 22 ? ReadSignedLe32(data, 18) : 0;
