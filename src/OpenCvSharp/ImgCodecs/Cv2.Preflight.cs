@@ -729,15 +729,57 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
 
                 long declaredPayload = payloadLength;
                 if (type == 0 && declaredPayload == 0) declaredPayload = expectedRawPayload;
-                if (declaredPayload <= 0 || declaredPayload != expectedRawPayload && (type == 0 || type == 1 || type == 3)) return true;
+                if (declaredPayload <= 0) return true;
                 long payloadEnd = checked(payloadOffset + declaredPayload);
-                frameKnown = payloadEnd == data.Length;
+                if (payloadEnd != data.Length) return true;
+                if (type == 2)
+                {
+                    if (depth != 8) return true;
+                    long rowBits = checked((long)width * depth);
+                    long rowBytes = checked(((rowBits + 15) / 16) * 2);
+                    long expectedDecodedBytes = checked(rowBytes * height);
+                    frameKnown = expectedDecodedBytes <= int.MaxValue &&
+                        IsSunRasterRlePayloadComplete(data, (int)payloadOffset, data.Length, expectedDecodedBytes);
+                }
+                else
+                {
+                    frameKnown = declaredPayload == expectedRawPayload;
+                }
             }
             catch (OverflowException)
             {
                 frameKnown = false;
             }
             return true;
+        }
+
+        private static bool IsSunRasterRlePayloadComplete(byte[] data, int offset, int end, long expectedDecodedBytes)
+        {
+            if (offset < 0 || offset > end || end > data.Length || expectedDecodedBytes <= 0) return false;
+            long decodedBytes = 0;
+            while (decodedBytes < expectedDecodedBytes)
+            {
+                if (offset >= end) return false;
+                byte value = data[offset++];
+                if (value != 0x80)
+                {
+                    ++decodedBytes;
+                    continue;
+                }
+
+                if (offset >= end) return false;
+                int runLength = data[offset++];
+                if (runLength == 0)
+                {
+                    ++decodedBytes;
+                    continue;
+                }
+                if (offset >= end) return false;
+                ++offset;
+                decodedBytes = checked(decodedBytes + runLength + 1L);
+                if (decodedBytes > expectedDecodedBytes) return false;
+            }
+            return decodedBytes == expectedDecodedBytes && offset == end;
         }
 
         private static bool TryReadRadianceHdrHeader(byte[] data, out int width, out int height, out int pixelDataOffset, out PixelFacts pixelFacts)

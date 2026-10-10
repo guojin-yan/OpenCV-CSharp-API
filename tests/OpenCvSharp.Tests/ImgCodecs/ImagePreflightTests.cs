@@ -393,6 +393,21 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             WriteBe32(oldRaster, 20, 0);
             Assert.True(ImgCodecsCv2.Identify(oldRaster).IsFrameCountKnown);
 
+            byte[] rle = CreateSunRaster(8);
+            Array.Resize(ref rle, 35);
+            WriteBe32(rle, 16, 3);
+            WriteBe32(rle, 20, 2);
+            rle[32] = 0x80;
+            rle[33] = 5;
+            rle[34] = 0;
+            ImageIdentifyResult completeRle = ImgCodecsCv2.Identify(rle);
+            Assert.True(completeRle.IsPixelFormatKnown);
+            Assert.True(completeRle.IsFrameCountKnown);
+
+            byte[] malformedRle = (byte[])rle.Clone();
+            malformedRle[33] = 4;
+            Assert.False(ImgCodecsCv2.Identify(malformedRle).IsFrameCountKnown);
+
             byte[] truncatedMap = CreateSunRaster(24);
             WriteBe32(truncatedMap, 24, 1);
             WriteBe32(truncatedMap, 28, 3);
