@@ -359,7 +359,39 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             ImageIdentifyResult oversized = ImgCodecsCv2.Identify(raster);
             Assert.True(oversized.IsSizeKnown);
             Assert.False(oversized.IsFrameCountKnown);
-            Assert.False(oversized.IsPixelFormatKnown);
+            Assert.True(oversized.IsPixelFormatKnown);
+            Assert.Equal(8, oversized.BitDepth);
+            Assert.Equal(3, oversized.ChannelCount);
+
+            byte[] complete = CreateSunRaster(24);
+            ImageIdentifyResult truncatedPayload = ImgCodecsCv2.Identify(SubArray(complete, complete.Length - 1));
+            Assert.True(truncatedPayload.IsSizeKnown);
+            Assert.True(truncatedPayload.IsPixelFormatKnown);
+            Assert.Equal(8, truncatedPayload.BitDepth);
+            Assert.Equal(3, truncatedPayload.ChannelCount);
+            Assert.False(truncatedPayload.IsFrameCountKnown);
+            Assert.False(truncatedPayload.IsCumulativePixelCountKnown);
+
+            byte[] trailingPayload = new byte[complete.Length + 1];
+            Array.Copy(complete, trailingPayload, complete.Length);
+            trailingPayload[trailingPayload.Length - 1] = 0x7F;
+            ImageIdentifyResult withTrailingByte = ImgCodecsCv2.Identify(trailingPayload);
+            Assert.True(withTrailingByte.IsSizeKnown);
+            Assert.True(withTrailingByte.IsPixelFormatKnown);
+            Assert.False(withTrailingByte.IsFrameCountKnown);
+            Assert.False(withTrailingByte.IsCumulativePixelCountKnown);
+
+            byte[] declaredShort = (byte[])complete.Clone();
+            WriteBe32(declaredShort, 16, 17);
+            ImageIdentifyResult withShortDeclaration = ImgCodecsCv2.Identify(declaredShort);
+            Assert.True(withShortDeclaration.IsSizeKnown);
+            Assert.True(withShortDeclaration.IsPixelFormatKnown);
+            Assert.False(withShortDeclaration.IsFrameCountKnown);
+
+            byte[] oldRaster = (byte[])complete.Clone();
+            WriteBe32(oldRaster, 16, 0);
+            WriteBe32(oldRaster, 20, 0);
+            Assert.True(ImgCodecsCv2.Identify(oldRaster).IsFrameCountKnown);
 
             byte[] truncatedMap = CreateSunRaster(24);
             WriteBe32(truncatedMap, 24, 1);

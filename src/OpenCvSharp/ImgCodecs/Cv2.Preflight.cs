@@ -687,10 +687,7 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
 
             width = (int)unsignedWidth;
             height = (int)unsignedHeight;
-            long payloadEnd = 32L + mapLength + payloadLength;
             bool mapKnown = mapType <= 2 && (mapType != 0 || mapLength == 0) && (mapType != 1 || mapLength % 3 == 0);
-            frameKnown = payloadLength > 0 && payloadEnd <= data.Length && type <= 3 && mapKnown;
-            if (!frameKnown) return true;
 
             switch (depth)
             {
@@ -713,6 +710,32 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                     pixelFacts.Channels = 4;
                     pixelFacts.ChannelsKnown = true;
                     break;
+            }
+
+            if (!mapKnown || type > 3) return true;
+            try
+            {
+                long payloadOffset = checked(32L + mapLength);
+                if (payloadOffset > data.Length) return true;
+
+                long expectedRawPayload = 0;
+                if (type == 0 || type == 1 || type == 3)
+                {
+                    if (depth != 1 && depth != 8 && depth != 24 && depth != 32) return true;
+                    long rowBits = checked((long)width * depth);
+                    long rowBytes = checked(((rowBits + 15) / 16) * 2);
+                    expectedRawPayload = checked(rowBytes * height);
+                }
+
+                long declaredPayload = payloadLength;
+                if (type == 0 && declaredPayload == 0) declaredPayload = expectedRawPayload;
+                if (declaredPayload <= 0 || declaredPayload != expectedRawPayload && (type == 0 || type == 1 || type == 3)) return true;
+                long payloadEnd = checked(payloadOffset + declaredPayload);
+                frameKnown = payloadEnd == data.Length;
+            }
+            catch (OverflowException)
+            {
+                frameKnown = false;
             }
             return true;
         }

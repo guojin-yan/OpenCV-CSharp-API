@@ -118,6 +118,10 @@ For PNM P1–P6, encoded depth and channels remain header facts, while frame and
 
 对于 PNM P1–P6，编码位深和通道数仍属于头部事实；只有在 payload 精确满足 checked 样本数时，才报告帧数和累计像素：ASCII 格式必须恰好包含所需样本且不能有非注释尾部数据，P4 必须匹配位打包行字节数，P5/P6 必须匹配 checked 的 8/16-bit 样本字节数。截断、尾部字节和 geometry 溢出保持未知。
 
+For Sun Raster, dimensions and supported depth/channel facts come from the header independently of frame completeness. Raw/old/RGB payloads must match the checked 16-bit-padded row length; the declared colormap and payload ranges must end exactly at the input boundary. Old raw files with a zero payload length use the checked computed row length. Truncation, trailing bytes, invalid colormap ranges, and unsupported raw depth keep frame and cumulative-pixel facts unknown.
+
+对于 Sun Raster，尺寸以及支持的位深/通道事实独立来自头部；raw/old/RGB payload 必须匹配 checked 的 16-bit 对齐行长度，色表和 payload 的声明范围必须精确结束于输入边界。payload 长度为零的 old raw 文件使用 checked 计算出的行长度。截断、尾部字节、无效色表范围和不支持的 raw 深度会使帧数及累计像素事实保持未知。
+
 `MaxBitDepth` and `MaxChannels` reject only known encoded facts. Set `RejectUnknownPixelFormat` when the admission boundary must fail closed. `MaxCumulativePixels` first uses a format parser's proven cumulative frame/page pixel count (including heterogeneous classic TIFF and BigTIFF pages); otherwise it multiplies the proven width-times-height by the proven frame/page count with checked arithmetic. It is an admission budget, not a peak native allocation guarantee. If no complete cumulative fact can be proven, the budget check remains non-blocking unless a separate strict policy rejects the unknown dimensions or frame count.
 
 `MaxBitDepth` 和 `MaxChannels` 只拒绝已知的编码事实；需要失败关闭时设置 `RejectUnknownPixelFormat`。`MaxCumulativePixels` 会优先使用格式解析器已证明的帧/页累计像素数（包括页尺寸不一致的经典 TIFF 与 BigTIFF）；否则使用 checked 算术将已证明的宽高像素数乘以已证明的帧/页数。它是输入准入预算，不是 native 峰值分配保证。如果无法证明完整累计事实，预算检查不会单独阻断输入，除非另有严格策略拒绝未知尺寸或帧数。
