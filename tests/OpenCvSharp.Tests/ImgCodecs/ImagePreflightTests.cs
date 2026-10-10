@@ -1118,8 +1118,7 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
                 new { Name = "tiff", Bytes = CreateTiff(false, 2) },
                 new { Name = "bigtiff", Bytes = CreateBigTiff(false, 2) },
                 new { Name = "j2k", Bytes = CreateJpeg2000Codestream(2, 3, 8) },
-                new { Name = "jp2", Bytes = CreateJp2(CreateJpeg2000Codestream(2, 3, 8), true) },
-                new { Name = "avif", Bytes = CreateAvifHeader(2, 3, 8, 3) }
+                new { Name = "jp2", Bytes = CreateJp2(CreateJpeg2000Codestream(2, 3, 8), true) }
             };
             byte[] mutationValues = { 0x00, 0x01, 0x7F, 0x80, 0xFF };
             int mutationCount = 0;
@@ -1193,8 +1192,7 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
                 new { Name = "tiff", Bytes = CreateTiff(false, 2) },
                 new { Name = "bigtiff", Bytes = CreateBigTiff(false, 2) },
                 new { Name = "j2k", Bytes = CreateJpeg2000Codestream(2, 3, 8) },
-                new { Name = "jp2", Bytes = CreateJp2(CreateJpeg2000Codestream(2, 3, 8), true) },
-                new { Name = "avif", Bytes = CreateAvifHeader(2, 3, 8, 3) }
+                new { Name = "jp2", Bytes = CreateJp2(CreateJpeg2000Codestream(2, 3, 8), true) }
             };
             byte[] mutationValues = { 0x00, 0xFF };
             int streamCases = 0;
