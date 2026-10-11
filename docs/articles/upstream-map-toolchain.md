@@ -1,6 +1,6 @@
 # Upstream Map Toolchain
 
-The upstream map catalog centralizes the source scope, parser identity, classification policy, output files, and semantic check command for 34 parser-backed maps. Its schema is [`upstream-map-catalog.schema.json`](../../compatibility/upstream-map-catalog.schema.json), and the checked catalog is [`upstream-map-catalog.json`](../../compatibility/upstream-map-catalog.json).
+The upstream map catalog centralizes the source scope, parser identity, classification policy, output files, and semantic check command for 35 parser-backed maps. Its schema is [`upstream-map-catalog.schema.json`](../../compatibility/upstream-map-catalog.schema.json), and the checked catalog is [`upstream-map-catalog.json`](../../compatibility/upstream-map-catalog.json).
 
 Regenerate the catalog after an intentional map-surface update:
 
@@ -28,4 +28,6 @@ StructuredLight maps the pinned `opencv2/structured_light.hpp` closure's 14 call
 
 Saliency maps the pinned `opencv2/saliency.hpp` closure's 31 callable declarations and eight class metadata declarations to 27 distinct native ABI symbols and 21 managed members. The two omitted declarations are `StaticSaliencySpectralResidual.read/write`, which remain outside the current wrapper's persistence contract. `ObjectnessBING` preserves the path and parameter surface, but real objectness proposals require caller-supplied BING training data; the default tests intentionally do not download or bundle that external model data. See [`saliency-guide.md`](saliency-guide.md) and [`saliency-objectness-guide.md`](saliency-objectness-guide.md).
 
-`MAP-002..004` are represented in the catalog. MAP-005 incrementally adds remaining contrib modules after each module's exact headers, optional dependency boundaries, source-review exclusions, and classification rules have been reviewed; twelve MAP-005 modules currently have zero unexplained missing declarations.
+SurfaceMatching maps the pinned `opencv2/surface_matching.hpp` closure's 23 callable declarations and four class metadata declarations to six distinct native ABI symbols and five managed members. The seven implemented callables cover the ICP and PPF3DDetector handle surfaces; the remaining 16 callables are explicit omissions for Pose3D mutators, PLY/point-cloud utilities, and the unwrapped vector-pose ICP overload because the current wrapper has no corresponding ownership or deterministic smoke contract.
+
+`MAP-002..004` are represented in the catalog. MAP-005 incrementally adds remaining contrib modules after each module's exact headers, optional dependency boundaries, source-review exclusions, and classification rules have been reviewed; thirteen MAP-005 modules currently have zero unexplained missing declarations.

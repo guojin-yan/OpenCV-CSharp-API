@@ -1,5 +1,5 @@
 param(
-    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency')][string]$Module,
+    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching')][string]$Module,
     [Parameter(Mandatory)][string]$DisplayName,
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [switch]$Check
@@ -39,6 +39,8 @@ function GetParts([string]$Identity) {
         '^cv\.structured_light\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     } elseif ($Module -eq 'saliency') {
         '^cv\.saliency\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
+    } elseif ($Module -eq 'surface_matching') {
+        '^cv\.ppf_match_3d\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     } else {
         '^cv\.' + $Module + '\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     }
@@ -58,7 +60,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
         }
         return $Owner
     }
-    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency')) {
+    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching')) {
         if ($Module -eq 'face') {
             if ([string]::IsNullOrWhiteSpace($Owner)) {
                 switch ($Name) {
@@ -96,6 +98,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
                 }
                 'structured_light' { return $Owner }
                 'saliency' { return $Owner }
+                'surface_matching' { return $Owner }
             }
             return [string]$managedType
         }
@@ -173,6 +176,19 @@ function GetManaged([string]$Owner, [string]$Name, [string]$Identity) {
             'ObjectnessBING.setNSS' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public;set:public\|System\.Int32 NSS$' } | Sort-Object -Unique) }
             'ObjectnessBING.getW' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public;set:public\|System\.Int32 W$' } | Sort-Object -Unique) }
             'ObjectnessBING.setW' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public;set:public\|System\.Int32 W$' } | Sort-Object -Unique) }
+            default { return @() }
+        }
+    }
+    if ($Module -eq 'surface_matching') {
+        switch ("$Owner.$Name") {
+            'ICP.ICP' { return @($managedEntries | Where-Object { $_ -match 'JYPPX\.OpenCvSharp\.SurfaceMatching\.Icp\|method\|public;static\|.*\bCreate\(' } | Sort-Object -Unique) }
+            'ICP.registerModelToScene' {
+                if ($Identity -match 'double residual') { return @($managedEntries | Where-Object { $_ -match 'JYPPX\.OpenCvSharp\.SurfaceMatching\.Icp\|method\|public;instance\|.*\bRegisterModelToScene\(JYPPX\.OpenCvSharp\.Core\.Mat srcPc,JYPPX\.OpenCvSharp\.Core\.Mat dstPc\)$' } | Sort-Object -Unique) }
+                return @()
+            }
+            'PPF3DDetector.PPF3DDetector' { return @($managedEntries | Where-Object { $_ -match 'JYPPX\.OpenCvSharp\.SurfaceMatching\.Ppf3DDetector\|method\|public;static\|.*\bCreate\(' } | Sort-Object -Unique) }
+            'PPF3DDetector.trainModel' { return @($managedEntries | Where-Object { $_ -match 'JYPPX\.OpenCvSharp\.SurfaceMatching\.Ppf3DDetector\|method\|public;instance\|System\.Void TrainModel\(JYPPX\.OpenCvSharp\.Core\.Mat model\)$' } | Sort-Object -Unique) }
+            'PPF3DDetector.match' { return @($managedEntries | Where-Object { $_ -match 'JYPPX\.OpenCvSharp\.SurfaceMatching\.Ppf3DDetector\|method\|public;instance\|.*\bMatch\(JYPPX\.OpenCvSharp\.Core\.Mat scene,System\.Double relativeSceneSampleStep=0\.2,System\.Double relativeSceneDistance=0\.03\)$' } | Sort-Object -Unique) }
             default { return @() }
         }
     }
@@ -411,6 +427,15 @@ function GetNative([object]$Parts, [string]$Identity) {
             'ObjectnessBING.setNSS' { @('jyppx_ocv_saliency_objectness_bing_set_nss') }
             'ObjectnessBING.getW' { @('jyppx_ocv_saliency_objectness_bing_get_w') }
             'ObjectnessBING.setW' { @('jyppx_ocv_saliency_objectness_bing_set_w') }
+            default { @() }
+        }
+    } elseif ($Module -eq 'surface_matching') {
+        $result = switch ("$owner.$name") {
+            'ICP.ICP' { @('jyppx_ocv_surface_matching_icp_create') }
+            'ICP.registerModelToScene' { if ($Identity -match 'double residual') { @('jyppx_ocv_surface_matching_icp_register_model_to_scene') } else { @() } }
+            'PPF3DDetector.PPF3DDetector' { @('jyppx_ocv_surface_matching_ppf_3d_detector_create') }
+            'PPF3DDetector.trainModel' { @('jyppx_ocv_surface_matching_ppf_3d_detector_train_model') }
+            'PPF3DDetector.match' { @('jyppx_ocv_surface_matching_ppf_3d_detector_match_count','jyppx_ocv_surface_matching_ppf_3d_detector_match_fill') }
             default { @() }
         }
     } elseif ($Module -eq 'shape') {
@@ -779,6 +804,7 @@ foreach ($decl in @($raw.declarations)) {
         if ($Module -eq 'freetype') { $reason = 'The contrib FreeType2 surface depends on external FreeType/Harfbuzz and has no native wrapper entrypoint or managed API in the current package.' }
         if ($Module -eq 'shape') { $reason = 'The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.' }
         if ($Module -eq 'saliency' -and [string]$decl.identity -match 'StaticSaliencySpectralResidual\.(?:read|write)\(') { $reason = 'The upstream persistence helpers use FileNode/FileStorage ownership and serialization contracts that are outside the current managed/native Saliency wrapper; they remain intentionally omitted.' }
+        if ($Module -eq 'surface_matching' -and [string]$decl.identity -match '^cv\.ppf_match_3d\.(?:Pose3D\.|loadPLYSimple|writePLY|writePLYVisibleNormals|samplePCByQuantization|transformPCPose|getRandomPose|addNoisePC|computeNormalsPC3d)') { $reason = 'The current SurfaceMatching wrapper intentionally scopes evidence to ICP and PPF3DDetector opaque handles; Pose3D mutators and point-cloud file/utility helpers remain outside the managed/native ownership and deterministic smoke contract.' }
         if ($Module -eq 'rapid' -and [string]$decl.identity -match '^cv\.rapid\.GOSTracker\.create\(') { $reason = 'GOSTracker is present in the pinned upstream header but the current managed/native wrapper exposes only Rapid and OLSTracker; this optional tracker remains deliberately omitted until its behavior, ABI, and ownership contract are separately reviewed.' }
         if ($Module -eq 'phase_unwrapping' -and [string]$decl.identity -match 'HistogramPhaseUnwrapping\.Params\.Params\(') { $reason = 'The upstream default Params constructor is represented by HistogramPhaseUnwrappingParams.Default and an explicit managed value constructor; value initialization has no native callable ABI.' }
         if ($Module -eq 'optflow' -and [string]$decl.identity -match '^cv\.optflow\.createOptFlow_PCAFlow\(') { $reason = 'PCAFlow is an optional dense optical-flow factory distinct from the wrapped RLOF and DualTVL1 families; the current ABI/API has no PCAFlow native factory, opaque handle, ownership/lifetime contract, or deterministic runtime smoke, so this declaration remains intentionally omitted.' }

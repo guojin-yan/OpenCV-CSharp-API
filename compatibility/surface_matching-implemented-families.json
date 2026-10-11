@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 0,
+  "managedPublicMemberAdditionCount": 0,
+  "families": [
+    {
+      "id": "surface_matching-wrapper-surface",
+      "rationale": "Current SurfaceMatching managed/native wrapper declarations with exact parser-backed callable evidence.",
+      "declarations": [
+        {
+          "ordinal": 1,
+          "upstreamIdentity": "cv.ppf_match_3d.ICP.ICP()->",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_surface_matching_icp_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.SurfaceMatching.Icp|method|public;static|JYPPX.OpenCvSharp.SurfaceMatching.Icp Create(System.Int32 iterations=250,System.Single tolerance=0.005,System.Single rejectionScale=2.5,System.Int32 numLevels=6,JYPPX.OpenCvSharp.SurfaceMatching.IcpSamplingType sampleType=Uniform,System.Int32 numMaxCorr=1)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/SurfaceMatching/SurfaceMatchingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/surface_matching-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 2,
+          "upstreamIdentity": "cv.ppf_match_3d.ICP.ICP(int iterations[/C];float tolerence=0.05f[/C];float rejectionScale=2.5f[/C];int numLevels=6[/C];int sampleType=ICP::ICP_SAMPLING_TYPE_UNIFORM[/C];int numMaxCorr=1[/C])->",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_surface_matching_icp_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.SurfaceMatching.Icp|method|public;static|JYPPX.OpenCvSharp.SurfaceMatching.Icp Create(System.Int32 iterations=250,System.Single tolerance=0.005,System.Single rejectionScale=2.5,System.Int32 numLevels=6,JYPPX.OpenCvSharp.SurfaceMatching.IcpSamplingType sampleType=Uniform,System.Int32 numMaxCorr=1)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/SurfaceMatching/SurfaceMatchingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/surface_matching-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 3,
+          "upstreamIdentity": "cv.ppf_match_3d.ICP.registerModelToScene(Mat srcPC[/C,/Ref];Mat dstPC[/C,/Ref];double residual[/O,/Ref];Matx44d pose[/O,/Ref])->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_surface_matching_icp_register_model_to_scene"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.SurfaceMatching.Icp|method|public;instance|JYPPX.OpenCvSharp.SurfaceMatching.IcpRegistrationResult RegisterModelToScene(JYPPX.OpenCvSharp.Core.Mat srcPc,JYPPX.OpenCvSharp.Core.Mat dstPc)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/SurfaceMatching/SurfaceMatchingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/surface_matching-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 23,
+          "upstreamIdentity": "cv.ppf_match_3d.PPF3DDetector.PPF3DDetector()->",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_surface_matching_ppf_3d_detector_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.SurfaceMatching.Ppf3DDetector|method|public;static|JYPPX.OpenCvSharp.SurfaceMatching.Ppf3DDetector Create(System.Double relativeSamplingStep=0.05,System.Double relativeDistanceStep=0.05,System.Double numAngles=30)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/SurfaceMatching/SurfaceMatchingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/surface_matching-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 24,
+          "upstreamIdentity": "cv.ppf_match_3d.PPF3DDetector.PPF3DDetector(double relativeSamplingStep[/C];double relativeDistanceStep=0.05[/C];double numAngles=30[/C])->",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_surface_matching_ppf_3d_detector_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.SurfaceMatching.Ppf3DDetector|method|public;static|JYPPX.OpenCvSharp.SurfaceMatching.Ppf3DDetector Create(System.Double relativeSamplingStep=0.05,System.Double relativeDistanceStep=0.05,System.Double numAngles=30)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/SurfaceMatching/SurfaceMatchingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/surface_matching-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 25,
+          "upstreamIdentity": "cv.ppf_match_3d.PPF3DDetector.trainModel(Mat Model[/C,/Ref])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_surface_matching_ppf_3d_detector_train_model"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.SurfaceMatching.Ppf3DDetector|method|public;instance|System.Void TrainModel(JYPPX.OpenCvSharp.Core.Mat model)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/SurfaceMatching/SurfaceMatchingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/surface_matching-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 26,
+          "upstreamIdentity": "cv.ppf_match_3d.PPF3DDetector.match(Mat scene[/C,/Ref];vector_Pose3DPtr results[/O,/Ref];double relativeSceneSampleStep=1.0/5.0[/C];double relativeSceneDistance=0.03[/C])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_surface_matching_ppf_3d_detector_match_count",
+            "jyppx_ocv_surface_matching_ppf_3d_detector_match_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.SurfaceMatching.Ppf3DDetector|method|public;instance|JYPPX.OpenCvSharp.SurfaceMatching.Pose3DResult[] Match(JYPPX.OpenCvSharp.Core.Mat scene,System.Double relativeSceneSampleStep=0.2,System.Double relativeSceneDistance=0.03)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/SurfaceMatching/SurfaceMatchingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/surface_matching-upstream-parity-guide.md"
+        }
+      ]
+    }
+  ]
+}

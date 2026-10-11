@@ -1,0 +1,878 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/SurfaceMatchingUpstreamMap/extract_surface_matching.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching.hpp",
+  "headerSha256": "b4e9f36ab9066a03f0103e33e6702f3c6ae2b6797ea73b3147b3958ab86f8103",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/icp.hpp",
+      "sha256": "fb8b49d8425561cd9c8acf8ecb19efb8b81d211c05c59c7a4c57884ff3191f85",
+      "startOrdinal": 0,
+      "declarationCount": 5
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/pose_3d.hpp",
+      "sha256": "1ed5a016005f55f4fb80fbef46387d685e0d2b5bbe8d8dbf818f241517869c00",
+      "startOrdinal": 5,
+      "declarationCount": 9
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/ppf_helpers.hpp",
+      "sha256": "bbf3c5e1c5c105e7991fa62ec3b1876f61de78063b020df9da4ab0f95f5ae819",
+      "startOrdinal": 14,
+      "declarationCount": 8
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/ppf_match_3d.hpp",
+      "sha256": "07e0d714c32f35089d63bda9f24883ff9275e811026fd46253ab756b9b7aee3f",
+      "startOrdinal": 22,
+      "declarationCount": 5
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/t_hash_int.hpp",
+      "sha256": "0ed2ed342f3eabbb22e565195040dabecfed7ebeefb7fc4c7b07fe8fc11c1594",
+      "startOrdinal": 27,
+      "declarationCount": 0
+    }
+  ],
+  "declarationCount": 27,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/icp.hpp",
+      "kind": "class",
+      "name": "cv.ppf_match_3d.ICP",
+      "identity": "class cv.ppf_match_3d.ICP",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief This class implements a very efficient and robust variant of the iterative closest point (ICP) algorithm.\n* The task is to register a 3D model (or point cloud) against a set of noisy target data. The variants are put together\n* by myself after certain tests. The task is to be able to match partial, noisy point clouds in cluttered scenes, quickly.\n* You will find that my emphasis is on the performance, while retaining the accuracy.\n* This implementation is based on Tolga Birdal's MATLAB implementation in here:\n* http://www.mathworks.com/matlabcentral/fileexchange/47152-icp-registration-using-efficient-variants-and-multi-resolution-scheme\n* The main contributions come from:\n* 1. Picky ICP:\n* http://www5.informatik.uni-erlangen.de/Forschung/Publikationen/2003/Zinsser03-ARI.pdf\n* 2. Efficient variants of the ICP Algorithm:\n* http://docs.happycoders.org/orgadoc/graphics/imaging/fasticp_paper.pdf\n* 3. Geometrically Stable Sampling for the ICP Algorithm: https://graphics.stanford.edu/papers/stabicp/stabicp.pdf\n* 4. Multi-resolution registration:\n* http://www.cvl.iis.u-tokyo.ac.jp/~oishi/Papers/Alignment/Jost_MultiResolutionICP_3DIM03.pdf\n* 5. Linearization of Point-to-Plane metric by Kok Lim Low:\n* https://www.comp.nus.edu.sg/~lowkl/publications/lowk_point-to-plane_icp_techrep.pdf"
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/icp.hpp",
+      "kind": "callable",
+      "name": "cv.ppf_match_3d.ICP.ICP",
+      "identity": "cv.ppf_match_3d.ICP.ICP()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/icp.hpp",
+      "kind": "callable",
+      "name": "cv.ppf_match_3d.ICP.ICP",
+      "identity": "cv.ppf_match_3d.ICP.ICP(int iterations[/C];float tolerence=0.05f[/C];float rejectionScale=2.5f[/C];int numLevels=6[/C];int sampleType=ICP::ICP_SAMPLING_TYPE_UNIFORM[/C];int numMaxCorr=1[/C])->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "iterations",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "tolerence",
+          "default": "0.05f",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "rejectionScale",
+          "default": "2.5f",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "numLevels",
+          "default": "6",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "sampleType",
+          "default": "ICP::ICP_SAMPLING_TYPE_UNIFORM",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "numMaxCorr",
+          "default": "1",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "*  \\brief ICP constructor with default arguments.\n     *  @param [in] iterations\n     *  @param [in] tolerence Controls the accuracy of registration at each iteration of ICP.\n     *  @param [in] rejectionScale Robust outlier rejection is applied for robustness. This value\n            actually corresponds to the standard deviation coefficient. Points with\n            rejectionScale * &sigma are ignored during registration.\n     *  @param [in] numLevels Number of pyramid levels to proceed. Deep pyramids increase speed but\n            decrease accuracy. Too coarse pyramids might have computational overhead on top of the\n            inaccurate registrtaion. This parameter should be chosen to optimize a balance. Typical\n            values range from 4 to 10.\n     *  @param [in] sampleType Currently this parameter is ignored and only uniform sampling is\n            applied. Leave it as 0.\n     *  @param [in] numMaxCorr Currently this parameter is ignored and only PickyICP is applied. Leave it as 1."
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/icp.hpp",
+      "kind": "callable",
+      "name": "cv.ppf_match_3d.ICP.registerModelToScene",
+      "identity": "cv.ppf_match_3d.ICP.registerModelToScene(Mat srcPC[/C,/Ref];Mat dstPC[/C,/Ref];double residual[/O,/Ref];Matx44d pose[/O,/Ref])->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "srcPC",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "dstPC",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "residual",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Matx44d",
+          "name": "pose",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "*  \\brief Perform registration\n     *\n     *  @param [in] srcPC The input point cloud for the model. Expected to have the normals (Nx6). Currently,\n     *  CV_32F is the only supported data type.\n     *  @param [in] dstPC The input point cloud for the scene. It is assumed that the model is registered on the scene. Scene remains static. Expected to have the normals (Nx6). Currently, CV_32F is the only supported data type.\n     *  @param [out] residual The output registration error.\n     *  @param [out] pose Transformation between srcPC and dstPC.\n     *  \\return On successful termination, the function returns 0.\n     *\n     *  \\details It is assumed that the model is registered on the scene. Scene remains static, while the model transforms. The output poses transform the models onto the scene. Because of the point to plane minimization, the scene is expected to have the normals available. Expected to have the normals (Nx6)."
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/icp.hpp",
+      "kind": "callable",
+      "name": "cv.ppf_match_3d.ICP.registerModelToScene",
+      "identity": "cv.ppf_match_3d.ICP.registerModelToScene(Mat srcPC[/C,/Ref];Mat dstPC[/C,/Ref];vector_Pose3DPtr poses[/IO,/Ref])->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "srcPC",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "dstPC",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Pose3DPtr",
+          "name": "poses",
+          "default": "",
+          "modifiers": [
+            "/IO",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "*  \\brief Perform registration with multiple initial poses\n     *\n     *  @param [in] srcPC The input point cloud for the model. Expected to have the normals (Nx6). Currently,\n     *  CV_32F is the only supported data type.\n     *  @param [in] dstPC The input point cloud for the scene. Currently, CV_32F is the only supported data type.\n     *  @param [in,out] poses Input poses to start with but also list output of poses.\n     *  \\return On successful termination, the function returns 0.\n     *\n     *  \\details It is assumed that the model is registered on the scene. Scene remains static, while the model transforms. The output poses transform the models onto the scene. Because of the point to plane minimization, the scene is expected to have the normals available. Expected to have the normals (Nx6)."
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/pose_3d.hpp",
+      "kind": "class",
+      "name": "cv.ppf_match_3d.Pose3D",
+      "identity": "class cv.ppf_match_3d.Pose3D",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "alpha",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "residual",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "size_t",
+          "name": "modelIndex",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "size_t",
+          "name": "numVotes",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Matx44d",
+          "name": "pose",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "angle",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Vec3d",
+          "name": "t",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Vec4d",
+          "name": "q",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Class, allowing the storage of a pose. The data structure stores both\n* the quaternions and the matrix forms. It supports IO functionality together with\n* various helper methods to work with poses\n*"
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/pose_3d.hpp",
+      "kind": "callable",
+      "name": "cv.ppf_match_3d.Pose3D.Pose3D",
+      "identity": "cv.ppf_match_3d.Pose3D.Pose3D()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/pose_3d.hpp",
+      "kind": "callable",
+      "name": "cv.ppf_match_3d.Pose3D.Pose3D",
+      "identity": "cv.ppf_match_3d.Pose3D.Pose3D(double Alpha;size_t ModelIndex=0;size_t NumVotes=0)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "Alpha",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "size_t",
+          "name": "ModelIndex",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "size_t",
+          "name": "NumVotes",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/pose_3d.hpp",
+      "kind": "callable",
+      "name": "cv.ppf_match_3d.Pose3D.updatePose",
+      "identity": "cv.ppf_match_3d.Pose3D.updatePose(Matx44d NewPose[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Matx44d",
+          "name": "NewPose",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "*  \\brief Updates the pose with the new one\n   *  \\param [in] NewPose New pose to overwrite"
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/pose_3d.hpp",
+      "kind": "callable",
+      "name": "cv.ppf_match_3d.Pose3D.updatePose",
+      "identity": "cv.ppf_match_3d.Pose3D.updatePose(Matx33d NewR[/Ref];Vec3d NewT[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Matx33d",
+          "name": "NewR",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Vec3d",
+          "name": "NewT",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "*  \\brief Updates the pose with the new one"
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/pose_3d.hpp",
+      "kind": "callable",
+      "name": "cv.ppf_match_3d.Pose3D.updatePoseQuat",
+      "identity": "cv.ppf_match_3d.Pose3D.updatePoseQuat(Vec4d Q[/Ref];Vec3d NewT[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Vec4d",
+          "name": "Q",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Vec3d",
+          "name": "NewT",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "*  \\brief Updates the pose with the new one, but this time using quaternions to represent rotation"
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/pose_3d.hpp",
+      "kind": "callable",
+      "name": "cv.ppf_match_3d.Pose3D.appendPose",
+      "identity": "cv.ppf_match_3d.Pose3D.appendPose(Matx44d IncrementalPose[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Matx44d",
+          "name": "IncrementalPose",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "*  \\brief Left multiplies the existing pose in order to update the transformation\n   *  \\param [in] IncrementalPose New pose to apply"
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/pose_3d.hpp",
+      "kind": "callable",
+      "name": "cv.ppf_match_3d.Pose3D.printPose",
+      "identity": "cv.ppf_match_3d.Pose3D.printPose()->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/pose_3d.hpp",
+      "kind": "class",
+      "name": "cv.ppf_match_3d.PoseCluster3D",
+      "identity": "class cv.ppf_match_3d.PoseCluster3D",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief When multiple poses (see Pose3D) are grouped together (contribute to the same transformation)\n* pose clusters occur. This class is a general container for such groups of poses. It is possible to store,\n* load and perform IO on these poses."
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/ppf_helpers.hpp",
+      "kind": "callable",
+      "name": "cv.ppf_match_3d.loadPLYSimple",
+      "identity": "cv.ppf_match_3d.loadPLYSimple(c_string fileName[/C,/PATH];int withNormals=0)->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "c_string",
+          "name": "fileName",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "withNormals",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "*  @brief Load a PLY file\n *  @param [in] fileName The PLY model to read\n *  @param [in] withNormals Flag wheather the input PLY contains normal information,\n *  and whether it should be loaded or not\n *  @return Returns the matrix on successful load"
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/ppf_helpers.hpp",
+      "kind": "callable",
+      "name": "cv.ppf_match_3d.writePLY",
+      "identity": "cv.ppf_match_3d.writePLY(Mat PC;c_string fileName[/C,/PATH])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "PC",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "c_string",
+          "name": "fileName",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/PATH"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "*  @brief Write a point cloud to PLY file\n *  @param [in] PC Input point cloud\n *  @param [in] fileName The PLY model file to write"
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/ppf_helpers.hpp",
+      "kind": "callable",
+      "name": "cv.ppf_match_3d.writePLYVisibleNormals",
+      "identity": "cv.ppf_match_3d.writePLYVisibleNormals(Mat PC;c_string fileName[/C,/PATH])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "PC",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "c_string",
+          "name": "fileName",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/PATH"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "*  @brief Used for debbuging pruposes, writes a point cloud to a PLY file with the tip\n*  of the normal vectors as visible red points\n*  @param [in] PC Input point cloud\n*  @param [in] fileName The PLY model file to write"
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/ppf_helpers.hpp",
+      "kind": "callable",
+      "name": "cv.ppf_match_3d.samplePCByQuantization",
+      "identity": "cv.ppf_match_3d.samplePCByQuantization(Mat pc;Vec2f xrange[/Ref];Vec2f yrange[/Ref];Vec2f zrange[/Ref];float sample_step_relative;int weightByCenter=0)->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "pc",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Vec2f",
+          "name": "xrange",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Vec2f",
+          "name": "yrange",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Vec2f",
+          "name": "zrange",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "sample_step_relative",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "weightByCenter",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "*  Sample a point cloud using uniform steps\n *  @param [in] pc Input point cloud\n *  @param [in] xrange X components (min and max) of the bounding box of the model\n *  @param [in] yrange Y components (min and max) of the bounding box of the model\n *  @param [in] zrange Z components (min and max) of the bounding box of the model\n *  @param [in] sample_step_relative The point cloud is sampled such that all points\n *  have a certain minimum distance. This minimum distance is determined relatively using\n *  the parameter sample_step_relative.\n *  @param [in] weightByCenter The contribution of the quantized data points can be weighted\n *  by the distance to the origin. This parameter enables/disables the use of weighting.\n *  @return Sampled point cloud"
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/ppf_helpers.hpp",
+      "kind": "callable",
+      "name": "cv.ppf_match_3d.transformPCPose",
+      "identity": "cv.ppf_match_3d.transformPCPose(Mat pc;Matx44d Pose[/C,/Ref])->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "pc",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Matx44d",
+          "name": "Pose",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "*  Transforms the point cloud with a given a homogeneous 4x4 pose matrix (in double precision)\n *  @param [in] pc Input point cloud (CV_32F family). Point clouds with 3 or 6 elements per\n *  row are expected. In the case where the normals are provided, they are also rotated to be\n *  compatible with the entire transformation\n *  @param [in] Pose 4x4 pose matrix, but linearized in row-major form.\n *  @return Transformed point cloud"
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/ppf_helpers.hpp",
+      "kind": "callable",
+      "name": "cv.ppf_match_3d.getRandomPose",
+      "identity": "cv.ppf_match_3d.getRandomPose(Matx44d Pose[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Matx44d",
+          "name": "Pose",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "*  Generate a random 4x4 pose matrix\n *  @param [out] Pose The random pose"
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/ppf_helpers.hpp",
+      "kind": "callable",
+      "name": "cv.ppf_match_3d.addNoisePC",
+      "identity": "cv.ppf_match_3d.addNoisePC(Mat pc;double scale)->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "pc",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "scale",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "*  Adds a uniform noise in the given scale to the input point cloud\n *  @param [in] pc Input point cloud (CV_32F family).\n *  @param [in] scale Input scale of the noise. The larger the scale, the more noisy the output"
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/ppf_helpers.hpp",
+      "kind": "callable",
+      "name": "cv.ppf_match_3d.computeNormalsPC3d",
+      "identity": "cv.ppf_match_3d.computeNormalsPC3d(Mat PC[/C,/Ref];Mat PCNormals[/O,/Ref];int NumNeighbors[/C];bool FlipViewpoint[/C];Vec3f viewpoint[/C,/Ref])->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "PC",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "PCNormals",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "NumNeighbors",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "FlipViewpoint",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "Vec3f",
+          "name": "viewpoint",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "*  @brief Compute the normals of an arbitrary point cloud\n *  computeNormalsPC3d uses a plane fitting approach to smoothly compute\n *  local normals. Normals are obtained through the eigenvector of the covariance\n *  matrix, corresponding to the smallest eigen value.\n *  If PCNormals is provided to be an Nx6 matrix, then no new allocation\n *  is made, instead the existing memory is overwritten.\n *  @param [in] PC Input point cloud to compute the normals for.\n *  @param [out] PCNormals Output point cloud\n *  @param [in] NumNeighbors Number of neighbors to take into account in a local region\n *  @param [in] FlipViewpoint Should normals be flipped to a viewing direction?\n *  @param [in] viewpoint\n *  @return Returns 0 on success"
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/ppf_match_3d.hpp",
+      "kind": "class",
+      "name": "cv.ppf_match_3d.PPF3DDetector",
+      "identity": "class cv.ppf_match_3d.PPF3DDetector",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Class, allowing the load and matching 3D models.\n  * Typical Use:\n  * @code\n  * // Train a model\n  * ppf_match_3d::PPF3DDetector detector(0.05, 0.05);\n  * detector.trainModel(pc);\n  * // Search the model in a given scene\n  * vector<Pose3DPtr> results;\n  * detector.match(pcTest, results, 1.0/5.0,0.05);\n  * @endcode"
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/ppf_match_3d.hpp",
+      "kind": "callable",
+      "name": "cv.ppf_match_3d.PPF3DDetector.PPF3DDetector",
+      "identity": "cv.ppf_match_3d.PPF3DDetector.PPF3DDetector()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Empty constructor. Sets default arguments"
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/ppf_match_3d.hpp",
+      "kind": "callable",
+      "name": "cv.ppf_match_3d.PPF3DDetector.PPF3DDetector",
+      "identity": "cv.ppf_match_3d.PPF3DDetector.PPF3DDetector(double relativeSamplingStep[/C];double relativeDistanceStep=0.05[/C];double numAngles=30[/C])->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "relativeSamplingStep",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "relativeDistanceStep",
+          "default": "0.05",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "numAngles",
+          "default": "30",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* Constructor with arguments\n    * @param [in] relativeSamplingStep Sampling distance relative to the object's diameter. Models are first sampled uniformly in order to improve efficiency. Decreasing this value leads to a denser model, and a more accurate pose estimation but the larger the model, the slower the training. Increasing the value leads to a less accurate pose computation but a smaller model and faster model generation and matching. Beware of the memory consumption when using small values.\n    * @param [in] relativeDistanceStep The discretization distance of the point pair distance relative to the model's diameter. This value has a direct impact on the hashtable. Using small values would lead to too fine discretization, and thus ambiguity in the bins of hashtable. Too large values would lead to no discrimination over the feature vectors and different point pair features would be assigned to the same bin. This argument defaults to the value of RelativeSamplingStep. For noisy scenes, the value can be increased to improve the robustness of the matching against noisy points.\n    * @param [in] numAngles Set the discretization of the point pair orientation as the number of subdivisions of the angle. This value is the equivalent of RelativeDistanceStep for the orientations. Increasing the value increases the precision of the matching but decreases the robustness against incorrect normal directions. Decreasing the value decreases the precision of the matching but increases the robustness against incorrect normal directions. For very noisy scenes where the normal directions can not be computed accurately, the value can be set to 25 or 20."
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/ppf_match_3d.hpp",
+      "kind": "callable",
+      "name": "cv.ppf_match_3d.PPF3DDetector.trainModel",
+      "identity": "cv.ppf_match_3d.PPF3DDetector.trainModel(Mat Model[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "Model",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "*  \\brief Trains a new model.\n    *\n    *  @param [in] Model The input point cloud with normals (Nx6)\n    *\n    *  \\details Uses the parameters set in the constructor to downsample and learn a new model. When the model is learnt, the instance gets ready for calling \"match\"."
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/ppf_match_3d.hpp",
+      "kind": "callable",
+      "name": "cv.ppf_match_3d.PPF3DDetector.match",
+      "identity": "cv.ppf_match_3d.PPF3DDetector.match(Mat scene[/C,/Ref];vector_Pose3DPtr results[/O,/Ref];double relativeSceneSampleStep=1.0/5.0[/C];double relativeSceneDistance=0.03[/C])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "scene",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Pose3DPtr",
+          "name": "results",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "relativeSceneSampleStep",
+          "default": "1.0/5.0",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "relativeSceneDistance",
+          "default": "0.03",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "*  \\brief Matches a trained model across a provided scene.\n    *\n    *  @param [in] scene Point cloud for the scene\n    *  @param [out] results List of output poses\n    *  @param [in] relativeSceneSampleStep The ratio of scene points to be used for the matching after sampling with relativeSceneDistance. For example, if this value is set to 1.0/5.0, every 5th point from the scene is used for pose estimation. This parameter allows an easy trade-off between speed and accuracy of the matching. Increasing the value leads to less points being used and in turn to a faster but less accurate pose computation. Decreasing the value has the inverse effect.\n    *  @param [in] relativeSceneDistance Set the distance threshold relative to the diameter of the model. This parameter is equivalent to relativeSamplingStep in the training stage. This parameter acts like a prior sampling with the relativeSceneSampleStep parameter."
+    }
+  ]
+}

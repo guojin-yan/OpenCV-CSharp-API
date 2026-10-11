@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 34,
+  "moduleCount": 35,
   "maps": [
     {
       "id": "calib3d",
@@ -2436,6 +2436,76 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "f62159164ca0283249ea8170654589cc9ae07e1c6b3e0737ddd6439ecfbbe2f9",
         "familyInventorySha256": "31833b7dad77a94b41c2dd0e767aeb6cfc90fb3a56c1a3b776dc34de3b46b860",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "surface_matching",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/SurfaceMatchingUpstreamMap",
+      "extractorScript": "tools/SurfaceMatchingUpstreamMap/extract_surface_matching.py",
+      "generationScript": "scripts/Generate-SurfaceMatchingUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-SurfaceMatchingUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/surface_matching.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching.hpp",
+          "sha256": "b4e9f36ab9066a03f0103e33e6702f3c6ae2b6797ea73b3147b3958ab86f8103"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/icp.hpp",
+            "sha256": "fb8b49d8425561cd9c8acf8ecb19efb8b81d211c05c59c7a4c57884ff3191f85",
+            "startOrdinal": 0,
+            "declarationCount": 5
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/pose_3d.hpp",
+            "sha256": "1ed5a016005f55f4fb80fbef46387d685e0d2b5bbe8d8dbf818f241517869c00",
+            "startOrdinal": 5,
+            "declarationCount": 9
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/ppf_helpers.hpp",
+            "sha256": "bbf3c5e1c5c105e7991fa62ec3b1876f61de78063b020df9da4ab0f95f5ae819",
+            "startOrdinal": 14,
+            "declarationCount": 8
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/ppf_match_3d.hpp",
+            "sha256": "07e0d714c32f35089d63bda9f24883ff9275e811026fd46253ab756b9b7aee3f",
+            "startOrdinal": 22,
+            "declarationCount": 5
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/surface_matching/include/opencv2/surface_matching/t_hash_int.hpp",
+            "sha256": "0ed2ed342f3eabbb22e565195040dabecfed7ebeefb7fc4c7b07fe8fc11c1594",
+            "startOrdinal": 27,
+            "declarationCount": 0
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/surface_matching-upstream-raw.json",
+        "classifications": "compatibility/surface_matching-upstream-classifications.json",
+        "mapping": "compatibility/surface_matching-upstream-map.txt",
+        "summary": "compatibility/surface_matching-upstream-summary.json",
+        "familyInventory": "compatibility/surface_matching-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 27,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "2f7f088ed4de9c554f46a79a7e08bb5deb5b11dbfd3e9480a6b5ff9ba2e7cbd2",
+        "familyInventorySha256": "6f39e6e0ea604c6b0a38b1c2b674f025fa5552f7e9830ec583dabea991861a40",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false
