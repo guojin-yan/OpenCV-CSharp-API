@@ -127,6 +127,8 @@ function Get-Record {
     $dnnSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/dnn-upstream-summary.json") -Raw | ConvertFrom-Json
     $dnnSuperresRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/dnn_superres-upstream-raw.json") -Raw | ConvertFrom-Json
     $dnnSuperresSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/dnn_superres-upstream-summary.json") -Raw | ConvertFrom-Json
+    $wechatQRCodeRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/wechat_qrcode-upstream-raw.json") -Raw | ConvertFrom-Json
+    $wechatQRCodeSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/wechat_qrcode-upstream-summary.json") -Raw | ConvertFrom-Json
     $featuresSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/features-upstream-summary.json") -Raw | ConvertFrom-Json
     $highGuiSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/highgui-upstream-summary.json") -Raw | ConvertFrom-Json
     $objDetectSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/objdetect-upstream-summary.json") -Raw | ConvertFrom-Json
@@ -175,6 +177,11 @@ function Get-Record {
         "compatibility/dnn_superres-upstream-map.txt",
         "compatibility/dnn_superres-upstream-raw.json",
         "compatibility/dnn_superres-upstream-summary.json",
+        "compatibility/wechat_qrcode-implemented-families.json",
+        "compatibility/wechat_qrcode-upstream-classifications.json",
+        "compatibility/wechat_qrcode-upstream-map.txt",
+        "compatibility/wechat_qrcode-upstream-raw.json",
+        "compatibility/wechat_qrcode-upstream-summary.json",
         "compatibility/features-implemented-families.json",
         "compatibility/features-source-reviewed-extensions.json",
         "compatibility/features-upstream-classifications.json",
@@ -514,6 +521,7 @@ function Get-Record {
         "scripts/Generate-CoreUpstreamMap.ps1",
         "scripts/Generate-DnnUpstreamMap.ps1",
         "scripts/Generate-DnnSuperresUpstreamMap.ps1",
+        "scripts/Generate-WechatQRCodeUpstreamMap.ps1",
         "scripts/Generate-FeaturesUpstreamMap.ps1",
         "scripts/Generate-HighGuiUpstreamMap.ps1",
         "scripts/Generate-ImgProcUpstreamMap.ps1",
@@ -567,6 +575,7 @@ function Get-Record {
         "scripts/Test-CoreUpstreamMap.ps1",
         "scripts/Test-DnnUpstreamMap.ps1",
         "scripts/Test-DnnSuperresUpstreamMap.ps1",
+        "scripts/Test-WechatQRCodeUpstreamMap.ps1",
         "scripts/Test-FeaturesUpstreamMap.ps1",
         "scripts/Test-HighGuiUpstreamMap.ps1",
         "scripts/Test-ImgProcUpstreamMap.ps1",
@@ -728,6 +737,9 @@ function Get-Record {
         "tools/DnnSuperresUpstreamMap/DnnSuperresUpstreamMap.csproj",
         "tools/DnnSuperresUpstreamMap/Program.cs",
         "tools/DnnSuperresUpstreamMap/extract_dnn_superres.py",
+        "tools/WechatQRCodeUpstreamMap/WechatQRCodeUpstreamMap.csproj",
+        "tools/WechatQRCodeUpstreamMap/Program.cs",
+        "tools/WechatQRCodeUpstreamMap/extract_wechat_qrcode.py",
         "tools/FeaturesUpstreamMap/FeaturesUpstreamMap.csproj",
         "tools/FeaturesUpstreamMap/Program.cs",
         "tools/FeaturesUpstreamMap/extract_features.py",
@@ -838,6 +850,7 @@ function Get-Record {
         "tools/XObjDetectUpstreamMap/Program.cs",
         "tools/XObjDetectUpstreamMap/extract_xobjdetect.py",
         "docs/articles/dnn-superres-upstream-parity-guide.md",
+        "docs/articles/wechat-qrcode-upstream-parity-guide.md",
         "tools/CodecBenchmark/CodecBenchmark.csproj",
         "tools/CodecBenchmark/Program.cs",
         "scripts/Measure-CodecTypedMatBenchmark.ps1",
@@ -1143,6 +1156,29 @@ function Get-Record {
                 ManagedPublicMemberAdditionCount = [int]$dnnSuperresSummary.managedPublicMemberAdditionCount
                 NativeEntrypointAdditionCount = [int]$dnnSuperresSummary.nativeEvidenceCount
                 RepositoryWideParityClaimed = [bool]$dnnSuperresSummary.repositoryWideUpstreamParityClaimed
+            }
+            WechatQRCodeUpstreamMap = [ordered]@{
+                Path = "compatibility/wechat_qrcode-upstream-map.txt"
+                SummaryPath = "compatibility/wechat_qrcode-upstream-summary.json"
+                ClassificationPath = "compatibility/wechat_qrcode-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/wechat_qrcode-implemented-families.json"
+                RawExtractionPath = "compatibility/wechat_qrcode-upstream-raw.json"
+                Sha256 = $wechatQRCodeSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/wechat_qrcode-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$wechatQRCodeSummary.declarationCount
+                CallableCount = [int]$wechatQRCodeSummary.callableCount
+                ImplementedCount = [int]$wechatQRCodeSummary.classificationCounts.implemented
+                MissingCount = [int]$wechatQRCodeSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$wechatQRCodeSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$wechatQRCodeSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$wechatQRCodeSummary.classificationCounts.'upstream-conditional'
+                SourceHeaderCount = @($wechatQRCodeRaw.sourceHeaders).Count
+                SelectedFamilyCount = [int]$wechatQRCodeSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$wechatQRCodeSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$wechatQRCodeSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$wechatQRCodeSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$wechatQRCodeSummary.nativeEvidenceCount
+                RepositoryWideParityClaimed = [bool]$wechatQRCodeSummary.repositoryWideUpstreamParityClaimed
             }
             FeaturesUpstreamMap = [ordered]@{
                 Path = "compatibility/features-upstream-map.txt"

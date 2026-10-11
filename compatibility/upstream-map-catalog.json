@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 40,
+  "moduleCount": 41,
   "maps": [
     {
       "id": "calib3d",
@@ -2808,6 +2808,52 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "e95d33dbf2f2b35b5fdbb0aced3d926b9940d9cd843b02f2ebe0149839c161ab",
         "familyInventorySha256": "bee8ee3de8ff1aa02dd5eac693e07e87eaf8b0fe1bc3366ccfb2d1c022ce4202",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "wechat_qrcode",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/WechatQRCodeUpstreamMap",
+      "extractorScript": "tools/WechatQRCodeUpstreamMap/extract_wechat_qrcode.py",
+      "generationScript": "scripts/Generate-WechatQRCodeUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-WechatQRCodeUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/wechat_qrcode.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/wechat_qrcode/include/opencv2/wechat_qrcode.hpp",
+          "sha256": "b1a52f70575fb39a47ad36c9820040abcb53ee6ff677313e68cbd62b85c111ea"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/wechat_qrcode/include/opencv2/wechat_qrcode.hpp",
+            "sha256": "b1a52f70575fb39a47ad36c9820040abcb53ee6ff677313e68cbd62b85c111ea",
+            "startOrdinal": 0,
+            "declarationCount": 5
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/wechat_qrcode-upstream-raw.json",
+        "classifications": "compatibility/wechat_qrcode-upstream-classifications.json",
+        "mapping": "compatibility/wechat_qrcode-upstream-map.txt",
+        "summary": "compatibility/wechat_qrcode-upstream-summary.json",
+        "familyInventory": "compatibility/wechat_qrcode-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 5,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "64a6a4fca4b75318a4cdf72784548c302872728033045be09068fd2f5957920c",
+        "familyInventorySha256": "81a4c222a776d07820780e51d9b89df185a088a7f37e6f2735201cf4603cb5ab",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

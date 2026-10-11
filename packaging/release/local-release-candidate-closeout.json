@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/98df4c1c70ce5c63",
-  "SourceIdentity": "sha256:98df4c1c70ce5c6336370bff872c7054dfc9ecfb7ef0afcecddb3fa9b83cd96e",
+  "CandidateId": "local-closeout/sha256/095f1ff840dd082a",
+  "SourceIdentity": "sha256:095f1ff840dd082ab841e4c6cbff95314f1e9bb8e1d77fd4d6f5601ea48bda64",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 2093,
-    "Sha256": "98df4c1c70ce5c6336370bff872c7054dfc9ecfb7ef0afcecddb3fa9b83cd96e",
+    "FileCount": 2104,
+    "Sha256": "095f1ff840dd082ab841e4c6cbff95314f1e9bb8e1d77fd4d6f5601ea48bda64",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -246,6 +246,29 @@
       "ImplementedCount": 0,
       "MissingCount": 0,
       "IntentionallyOmittedCount": 9,
+      "UnsupportedCount": 0,
+      "UpstreamConditionalCount": 0,
+      "SourceHeaderCount": 1,
+      "SelectedFamilyCount": 1,
+      "SelectedDeclarationCount": 0,
+      "ManagedPublicTypeAdditionCount": 0,
+      "ManagedPublicMemberAdditionCount": 0,
+      "NativeEntrypointAdditionCount": 0,
+      "RepositoryWideParityClaimed": false
+    },
+    "WechatQRCodeUpstreamMap": {
+      "Path": "compatibility/wechat_qrcode-upstream-map.txt",
+      "SummaryPath": "compatibility/wechat_qrcode-upstream-summary.json",
+      "ClassificationPath": "compatibility/wechat_qrcode-upstream-classifications.json",
+      "FamilyInventoryPath": "compatibility/wechat_qrcode-implemented-families.json",
+      "RawExtractionPath": "compatibility/wechat_qrcode-upstream-raw.json",
+      "Sha256": "64a6a4fca4b75318a4cdf72784548c302872728033045be09068fd2f5957920c",
+      "RawSha256": "fe5944e26c121bcd8df8faebfa3203fbf912071132e3ee34868f97a11eb8e96d",
+      "DeclarationCount": 5,
+      "CallableCount": 4,
+      "ImplementedCount": 0,
+      "MissingCount": 0,
+      "IntentionallyOmittedCount": 4,
       "UnsupportedCount": 0,
       "UpstreamConditionalCount": 0,
       "SourceHeaderCount": 1,
@@ -1546,18 +1569,18 @@
     },
     {
       "Path": "compatibility/upstream-map-catalog.json",
-      "Sha256": "85278d09ae89d86d3ab3ab81849eb87d3696ea5114c378135361e1116fd44443",
-      "Length": 135096
+      "Sha256": "cd7ee18aa9b81981e366faf95ad4a3bd5bf4ecf505e7aa4728cfef5226171a24",
+      "Length": 137295
     },
     {
       "Path": "compatibility/upstream-map-catalog.schema.json",
-      "Sha256": "a9e53482bd50c2592f39f0359f70b2a12654c0aa22094c01b3a740cc4dffea99",
-      "Length": 5910
+      "Sha256": "3aaffaf74c0dee11cf61ff90e3d21d03c581ea4a0e9f754e80e0d2a5708a62fc",
+      "Length": 5927
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "63f46bcabffdb26a62e1267bd7da0d5e4f010fc61c8db1735cacce2b86a0207f",
-      "Length": 49798
+      "Sha256": "594afd11e85b53462959b73693adeade3757e85c77fe4376b9d4b26fc25202f9",
+      "Length": 51298
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -1618,6 +1641,31 @@
       "Path": "compatibility/videoio-upstream-summary.json",
       "Sha256": "cfcce8f8d8c32fa8b86e32df4672dba75c6e0811c25d3bc34688d107c3e40311",
       "Length": 1382
+    },
+    {
+      "Path": "compatibility/wechat_qrcode-implemented-families.json",
+      "Sha256": "22d5ae583f96c334fff2d8427cf8f250456ec6d3130bbaf802a414991fc28bf4",
+      "Length": 403
+    },
+    {
+      "Path": "compatibility/wechat_qrcode-upstream-classifications.json",
+      "Sha256": "d1c798b107b5bb4617d3d57adea0f6e8f332e4fe25ac293d23960537e296f1bc",
+      "Length": 3444
+    },
+    {
+      "Path": "compatibility/wechat_qrcode-upstream-map.txt",
+      "Sha256": "64a6a4fca4b75318a4cdf72784548c302872728033045be09068fd2f5957920c",
+      "Length": 2515
+    },
+    {
+      "Path": "compatibility/wechat_qrcode-upstream-raw.json",
+      "Sha256": "fe5944e26c121bcd8df8faebfa3203fbf912071132e3ee34868f97a11eb8e96d",
+      "Length": 5789
+    },
+    {
+      "Path": "compatibility/wechat_qrcode-upstream-summary.json",
+      "Sha256": "d1efe63f780a706b2683aa48f84c3d08f630c44ede85690de1f0ea271e486a55",
+      "Length": 1457
     },
     {
       "Path": "compatibility/ximgproc-implemented-families.json",
@@ -2046,8 +2094,8 @@
     },
     {
       "Path": "docs/articles/upstream-map-toolchain.md",
-      "Sha256": "4e6f5ef674901bcef3c4e2e0ca703bc578f6e2f0367b61324034009c26808873",
-      "Length": 9451
+      "Sha256": "c9e3eadcbc290d1f11b5761922b481aec8b2b737bf756746d7d456af55189b49",
+      "Length": 10049
     },
     {
       "Path": "docs/articles/v501-modern-api-preview-guide.md",
@@ -2068,6 +2116,11 @@
       "Path": "docs/articles/videoio-upstream-parity-guide.md",
       "Sha256": "3bf71be7c1c7d0cd61430e677b6421d2084fa26a6176302e01e1e181b701f1a2",
       "Length": 4555
+    },
+    {
+      "Path": "docs/articles/wechat-qrcode-upstream-parity-guide.md",
+      "Sha256": "a0b3c6192cdd277d95210d5e419a6d6a088e52379de1ab33a846ebe0e74aabed",
+      "Length": 1837
     },
     {
       "Path": "docs/articles/ximgproc-upstream-parity-guide.md",
@@ -2146,8 +2199,8 @@
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "890f0060e086382e79a5f61cbad34d84983228c462acd9ce9e3275a3b7f688ff",
-      "Length": 16949
+      "Sha256": "51881eea02f5dd1085a8a3a5e1a03fee23a8b583d8b0567bae66cd20294bb0e0",
+      "Length": 17048
     },
     {
       "Path": "nuget/logo.jpg",
@@ -2506,8 +2559,8 @@
     },
     {
       "Path": "scripts/Generate-ContribUpstreamMap.ps1",
-      "Sha256": "37b414a56f69249d1dde7c68e4092b811c45f224e5dda3d27728a48cf7c39edf",
-      "Length": 106209
+      "Sha256": "9e82b2f047c3141a267a83142bd1ea3f442ac324cd24a6eb45403597a5838186",
+      "Length": 106907
     },
     {
       "Path": "scripts/Generate-CoreUpstreamMap.ps1",
@@ -2680,6 +2733,11 @@
       "Length": 2897
     },
     {
+      "Path": "scripts/Generate-WechatQRCodeUpstreamMap.ps1",
+      "Sha256": "50d0000a19a67ba7d3b8bd93a2d8459bbeb79fddab8840ee2addda4155a7437b",
+      "Length": 311
+    },
+    {
       "Path": "scripts/Generate-XImgProcUpstreamMap.ps1",
       "Sha256": "937e2b6033ea0c8c2515d22fcf1130412e9cd7ff7862494137202358242a8c5f",
       "Length": 27480
@@ -2711,8 +2769,8 @@
     },
     {
       "Path": "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
-      "Sha256": "5e28bc576c470c5af2e269a77b011f4d78add66b9e3e2fed9a94338b643471d1",
-      "Length": 5274
+      "Sha256": "7193ae0ea3bd41a6d2efb2895213431ca0dbdcb44fe088bf7f1acb072d0d329a",
+      "Length": 5306
     },
     {
       "Path": "scripts/Invoke-LifecycleRefreshContainerProducer.ps1",
@@ -2791,8 +2849,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "97bc43a90cf0634fdc2bd602e45135d0516235310341814dd218a9369ba4868f",
-      "Length": 104429
+      "Sha256": "bd49531590824bb9ca67077ba31ca4d57876d73dde6c550ab0f4159b7772fcc4",
+      "Length": 107423
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -2806,8 +2864,8 @@
     },
     {
       "Path": "scripts/New-UpstreamMapCatalog.ps1",
-      "Sha256": "51e4dba95e9b3cf72667f36394c4efd0734214110d032e59d71789fc09b4e78f",
-      "Length": 10176
+      "Sha256": "e70393eb51375d4b75d6ee739c8b10f891131478474ff337211bbab0c929d7df",
+      "Length": 10277
     },
     {
       "Path": "scripts/Test-AlphaMatUpstreamMap.ps1",
@@ -3176,8 +3234,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "10d20affe27591837d8ac34ad53b17b62f67ce766a24706b1731937c8eac8522",
-      "Length": 95956
+      "Sha256": "53d29b2c89e2f206980cc46961149bee17012df73c0dd9111291360f8dcac6e1",
+      "Length": 97991
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -3281,8 +3339,8 @@
     },
     {
       "Path": "scripts/Test-UpstreamMapCatalog.ps1",
-      "Sha256": "ed4fd58a0cb9be7c8bf0940050d74273ce753772fc5c45dfd936bbb5ac955917",
-      "Length": 15018
+      "Sha256": "550856cf6e2d658f7bb8bf8c4c68d28544295f4bf4945102ed13796adf7502be",
+      "Length": 15034
     },
     {
       "Path": "scripts/Test-V501ChangeLedger.ps1",
@@ -3308,6 +3366,11 @@
       "Path": "scripts/Test-VideoUpstreamMap.ps1",
       "Sha256": "081963cfba9ab5c62a237c18ed8d48e65e8a858e88cb36da5618f79bf7aa3f5d",
       "Length": 2125
+    },
+    {
+      "Path": "scripts/Test-WechatQRCodeUpstreamMap.ps1",
+      "Sha256": "c75b3fdb74b1b77afc243be960828fcba680b3862dcf261103d914407fe3a7a5",
+      "Length": 3760
     },
     {
       "Path": "scripts/Test-WorkflowInvariantCoverage.ps1",
@@ -4485,6 +4548,21 @@
       "Length": 6442
     },
     {
+      "Path": "tools/WechatQRCodeUpstreamMap/Program.cs",
+      "Sha256": "be536928610dfc4387b0276b230ee6faa3b51d5a06c0280773d66d0f35775867",
+      "Length": 115
+    },
+    {
+      "Path": "tools/WechatQRCodeUpstreamMap/WechatQRCodeUpstreamMap.csproj",
+      "Sha256": "727d0721f11212e08035cc59275b0226c0092f3ea92492d621c3d25879ef974f",
+      "Length": 273
+    },
+    {
+      "Path": "tools/WechatQRCodeUpstreamMap/extract_wechat_qrcode.py",
+      "Sha256": "364c284c72a632f87451e8cc54d8c214a851cee183b8765e40120eae0f61cf64",
+      "Length": 236
+    },
+    {
       "Path": "tools/XImgProcUpstreamMap/Program.cs",
       "Sha256": "a76f0d011d3617e34c1b97b7f121fbe221a995609752ff9fedda1ef09f031376",
       "Length": 106
@@ -4496,8 +4574,8 @@
     },
     {
       "Path": "tools/XImgProcUpstreamMap/extract_ximgproc.py",
-      "Sha256": "7ad4be1cc6963b342ec9f959aea2e663f9c9e07366d238743ab4c30971f16ea4",
-      "Length": 5913
+      "Sha256": "4dacdea3a1139e5b1c51efe1e128d2b06da5b09d64adecfd75f091870b2de48e",
+      "Length": 5963
     },
     {
       "Path": "tools/XObjDetectUpstreamMap/Program.cs",

@@ -47,7 +47,8 @@ $definitions = @(
     [pscustomobject]@{ Id = 'reg'; Tool = 'Reg'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'xstereo'; Tool = 'XStereo'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'ptcloud'; Tool = 'PtCloud'; Repository = 'opencv' },
-    [pscustomobject]@{ Id = 'xobjdetect'; Tool = 'XObjDetect'; Repository = 'opencv_contrib' }
+    [pscustomobject]@{ Id = 'xobjdetect'; Tool = 'XObjDetect'; Repository = 'opencv_contrib' },
+    [pscustomobject]@{ Id = 'wechat_qrcode'; Tool = 'WechatQRCode'; Repository = 'opencv_contrib' }
 )
 
 function Get-HeaderRows {

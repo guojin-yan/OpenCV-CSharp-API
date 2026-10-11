@@ -17,6 +17,7 @@ $rawNames += @("structured_light")
 $rawNames += @("saliency")
 $rawNames += @("surface_matching")
 $rawNames += @("reg")
+$rawNames += @("wechat_qrcode")
 $maximumDownloadAttempts = 4
 $required = [System.Collections.Generic.Dictionary[string, string]]::new([StringComparer]::Ordinal)
 

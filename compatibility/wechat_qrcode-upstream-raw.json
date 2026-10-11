@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/WechatQRCodeUpstreamMap/extract_wechat_qrcode.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/wechat_qrcode/include/opencv2/wechat_qrcode.hpp",
+  "headerSha256": "b1a52f70575fb39a47ad36c9820040abcb53ee6ff677313e68cbd62b85c111ea",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/wechat_qrcode/include/opencv2/wechat_qrcode.hpp",
+      "sha256": "b1a52f70575fb39a47ad36c9820040abcb53ee6ff677313e68cbd62b85c111ea",
+      "startOrdinal": 0,
+      "declarationCount": 5
+    }
+  ],
+  "declarationCount": 5,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/wechat_qrcode/include/opencv2/wechat_qrcode.hpp",
+      "kind": "class",
+      "name": "cv.wechat_qrcode.WeChatQRCode",
+      "identity": "class cv.wechat_qrcode.WeChatQRCode",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief  WeChat QRCode includes two CNN-based models:\n * A object detection model and a super resolution model.\n * Object detection model is applied to detect QRCode with the bounding box.\n * super resolution model is applied to zoom in QRCode when it is small.\n *"
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/wechat_qrcode/include/opencv2/wechat_qrcode.hpp",
+      "kind": "callable",
+      "name": "cv.wechat_qrcode.WeChatQRCode.WeChatQRCode",
+      "identity": "cv.wechat_qrcode.WeChatQRCode.WeChatQRCode(string detector_model_path=\"\"[/C,/Ref];string super_resolution_model_path=\"\"[/C,/Ref])->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "string",
+          "name": "detector_model_path",
+          "default": "\"\"",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "string",
+          "name": "super_resolution_model_path",
+          "default": "\"\"",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Initialize the WeChatQRCode.\n     * It includes two CNN-based models in ONNX format:\n     * a detector model and a super resolution model.\n     *\n     * @param detector_model_path onnx model file path for the detector\n     * @param super_resolution_model_path onnx model file path for the super resolution model"
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/wechat_qrcode/include/opencv2/wechat_qrcode.hpp",
+      "kind": "callable",
+      "name": "cv.wechat_qrcode.WeChatQRCode.detectAndDecode",
+      "identity": "cv.wechat_qrcode.WeChatQRCode.detectAndDecode(Mat img;vector_Mat points=vector_Mat()[/O])->std::vector<std::string>",
+      "returnType": "std::vector<std::string>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Mat",
+          "name": "points",
+          "default": "vector_Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief  Both detects and decodes QR code.\n     * To simplify the usage, there is a only API: detectAndDecode\n     *\n     * @param img supports grayscale or color (BGR) image.\n     * @param points optional output array of vertices of the found QR code quadrangle. Will be\n     * empty if not found.\n     * @return list of decoded string."
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/wechat_qrcode/include/opencv2/wechat_qrcode.hpp",
+      "kind": "callable",
+      "name": "cv.wechat_qrcode.WeChatQRCode.setScaleFactor",
+      "identity": "cv.wechat_qrcode.WeChatQRCode.setScaleFactor(float _scalingFactor)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "_scalingFactor",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief set scale factor\n    * QR code detector use neural network to detect QR.\n    * Before running the neural network, the input image is pre-processed by scaling.\n    * By default, the input image is scaled to an image with an area of 160000 pixels.\n    * The scale factor allows to use custom scale the input image:\n    * width = scaleFactor*width\n    * height = scaleFactor*width\n    *\n    * scaleFactor valuse must be > 0 and <= 1, otherwise the scaleFactor value is set to -1\n    * and use default scaled to an image with an area of 160000 pixels."
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/wechat_qrcode/include/opencv2/wechat_qrcode.hpp",
+      "kind": "callable",
+      "name": "cv.wechat_qrcode.WeChatQRCode.getScaleFactor",
+      "identity": "cv.wechat_qrcode.WeChatQRCode.getScaleFactor()->float",
+      "returnType": "float",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    }
+  ]
+}

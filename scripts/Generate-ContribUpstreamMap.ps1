@@ -1,5 +1,5 @@
 param(
-    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect','dnn_superres')][string]$Module,
+    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect','dnn_superres','wechat_qrcode')][string]$Module,
     [Parameter(Mandatory)][string]$DisplayName,
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [switch]$Check
@@ -68,7 +68,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
         }
         return $Owner
     }
-    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect','dnn_superres')) {
+    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect','dnn_superres','wechat_qrcode')) {
         if ($Module -eq 'face') {
             if ([string]::IsNullOrWhiteSpace($Owner)) {
                 switch ($Name) {
@@ -112,6 +112,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
                 'ptcloud' { return $Owner }
                 'xobjdetect' { return $Owner }
                 'dnn_superres' { return $Owner }
+                'wechat_qrcode' { return $Owner }
             }
             return [string]$managedType
         }
@@ -312,6 +313,9 @@ function GetManaged([string]$Owner, [string]$Name, [string]$Identity) {
         return @($typeEntries | Where-Object { $_ -match "\|method\|[^|]*\|[^|]*\b$([regex]::Escape($methodName))\(" } | Sort-Object -Unique)
     }
     if ($Module -eq 'dnn_superres') {
+        return @()
+    }
+    if ($Module -eq 'wechat_qrcode') {
         return @()
     }
     $typeName = GetManagedType $Owner $Name
@@ -1042,6 +1046,7 @@ foreach ($decl in @($raw.declarations)) {
         if ($Module -eq 'ptcloud' -and [string]$decl.identity -match '^cv\.RgbdNormals\.(?:RgbdNormals|apply|cache|getRows|setRows|getCols|setCols|getWindowSize|setWindowSize|getDepth|getK|setK|getMethod)') { $reason = 'RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.' }
         if ($Module -eq 'xobjdetect' -and $classification -eq 'implemented' -and [string]$decl.identity -match '^cv\.(?:CascadeClassifier|HOGDescriptor)\.') { $reason = 'The current XObjDetect wrapper covers this declaration through opaque handles, count/fill transport, and property transport; optional NOT_LINKED behavior remains part of the native boundary.' }
         if ($Module -eq 'dnn_superres' -and $classification -eq 'intentionally-omitted') { $reason = 'The DNN Super Resolution contrib surface is model-driven and has no native DnnSuperres wrapper entrypoint or managed public owner in the current package; model provenance, backend/target policy, and output ownership remain outside this scoped map.' }
+        if ($Module -eq 'wechat_qrcode' -and $classification -eq 'intentionally-omitted') { $reason = 'The WeChat QRCode contrib surface is model-driven and has no native WeChatQRCode wrapper entrypoint or managed public owner in the current package; caller-supplied detector/super-resolution models, backend policy, and decoded-string ownership remain outside this scoped map.' }
         if ($Module -eq 'rapid' -and [string]$decl.identity -match '^cv\.rapid\.GOSTracker\.create\(') { $reason = 'GOSTracker is present in the pinned upstream header but the current managed/native wrapper exposes only Rapid and OLSTracker; this optional tracker remains deliberately omitted until its behavior, ABI, and ownership contract are separately reviewed.' }
         if ($Module -eq 'phase_unwrapping' -and [string]$decl.identity -match 'HistogramPhaseUnwrapping\.Params\.Params\(') { $reason = 'The upstream default Params constructor is represented by HistogramPhaseUnwrappingParams.Default and an explicit managed value constructor; value initialization has no native callable ABI.' }
         if ($Module -eq 'optflow' -and [string]$decl.identity -match '^cv\.optflow\.createOptFlow_PCAFlow\(') { $reason = 'PCAFlow is an optional dense optical-flow factory distinct from the wrapped RLOF and DualTVL1 families; the current ABI/API has no PCAFlow native factory, opaque handle, ownership/lifetime contract, or deterministic runtime smoke, so this declaration remains intentionally omitted.' }
@@ -1059,6 +1064,7 @@ $externalDataDependencies = switch ($Module) {
     'face' { @('Facemark LBF fitting needs a caller-selected compatible landmark model loaded with Facemark.LoadModel; no model data is bundled.') }
     'quality' { @('QualityBRISQUE needs caller-selected SVM model and range files; no model data is bundled. Other quality metrics use caller-provided reference and comparison Mats.') }
     'dnn_superres' { @('DNN Super Resolution requires caller-selected compatible model data and backend/target policy; no model asset or managed/native wrapper is bundled.') }
+    'wechat_qrcode' { @('WeChat QRCode requires caller-selected detector and super-resolution ONNX model files; no model assets or managed/native wrapper are bundled.') }
     'freetype' { @('The upstream FreeType2 module requires system FreeType2 and HarfBuzz development/runtime libraries; neither dependency is bundled by this repository.') }
     'intensity_transform' { @('BIMEF runtime execution requires OpenCV built with EIGEN support; a module runtime without EIGEN may report that the operation is unavailable.') }
     'saliency' { @('ObjectnessBING requires caller-supplied training/model data through SetTrainingPath; the repository bundles no model asset and therefore does not claim deterministic objectness model execution.') }
