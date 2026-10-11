@@ -1,5 +1,5 @@
 param(
-    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg')][string]$Module,
+    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo')][string]$Module,
     [Parameter(Mandatory)][string]$DisplayName,
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [switch]$Check
@@ -43,6 +43,8 @@ function GetParts([string]$Identity) {
         '^cv\.ppf_match_3d\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     } elseif ($Module -eq 'reg') {
         '^cv\.reg\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
+    } elseif ($Module -eq 'xstereo') {
+        '^cv\.stereo\.(?:(?<owner>.+)\.)?(?<name>operator <|[A-Za-z][A-Za-z0-9_]*)\('
     } else {
         '^cv\.' + $Module + '\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     }
@@ -62,7 +64,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
         }
         return $Owner
     }
-    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg')) {
+    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo')) {
         if ($Module -eq 'face') {
             if ([string]::IsNullOrWhiteSpace($Owner)) {
                 switch ($Name) {
@@ -102,6 +104,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
                 'saliency' { return $Owner }
                 'surface_matching' { return $Owner }
                 'reg' { return $Owner }
+                'xstereo' { return $Owner }
             }
             return [string]$managedType
         }
@@ -248,6 +251,15 @@ function GetManaged([string]$Owner, [string]$Name, [string]$Identity) {
             'MapShift.scale' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMap\|method\|public;instance\|System\.Void Scale\(System\.Double factor\)$' }
             'MapShift.getShift' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.MapShift\|method\|public;instance\|System\.Void GetShift\(out System\.Double shiftX,out System\.Double shiftY\)$' }
             default { return @() }
+        }
+    }
+    if ($Module -eq 'xstereo') {
+        $typeMarker = "JYPPX.OpenCvSharp.XStereo.$Owner|"
+        $typeEntries = @($managedEntries | Where-Object { $_.Contains($typeMarker, [StringComparison]::Ordinal) })
+        switch ("$Owner.$Name") {
+            'QuasiDenseStereo.create' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;static\|[^|]*\bCreate\(' } | Sort-Object -Unique) }
+            'QuasiDenseStereo.getDisparity' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;instance\|.*\bGetDisparity\(' } | Sort-Object -Unique) }
+            default { return @($typeEntries | Where-Object { $_ -match '\|method\|public;instance\|[^|]*\b' + [regex]::Escape((ToPascal $Name)) + '\(' } | Sort-Object -Unique) }
         }
     }
     $typeName = GetManagedType $Owner $Name
@@ -543,6 +555,18 @@ function GetNative([object]$Parts, [string]$Identity) {
             'MapShift.compose' { @('jyppx_ocv_reg_map_compose') }
             'MapShift.scale' { @('jyppx_ocv_reg_map_scale') }
             'MapShift.getShift' { @('jyppx_ocv_reg_map_shift_get') }
+            default { @() }
+        }
+    } elseif ($Module -eq 'xstereo') {
+        $result = switch ("$owner.$name") {
+            'QuasiDenseStereo.create' { @('jyppx_ocv_xstereo_quasi_dense_create') }
+            'QuasiDenseStereo.loadParameters' { @('jyppx_ocv_xstereo_quasi_dense_load_parameters') }
+            'QuasiDenseStereo.saveParameters' { @('jyppx_ocv_xstereo_quasi_dense_save_parameters') }
+            'QuasiDenseStereo.getSparseMatches' { @('jyppx_ocv_xstereo_quasi_dense_get_sparse_matches_count','jyppx_ocv_xstereo_quasi_dense_get_sparse_matches_fill') }
+            'QuasiDenseStereo.getDenseMatches' { @('jyppx_ocv_xstereo_quasi_dense_get_dense_matches_count','jyppx_ocv_xstereo_quasi_dense_get_dense_matches_fill') }
+            'QuasiDenseStereo.process' { @('jyppx_ocv_xstereo_quasi_dense_process') }
+            'QuasiDenseStereo.getMatch' { @('jyppx_ocv_xstereo_quasi_dense_get_match') }
+            'QuasiDenseStereo.getDisparity' { @('jyppx_ocv_xstereo_quasi_dense_get_disparity') }
             default { @() }
         }
     } elseif ($Module -eq 'shape') {
@@ -913,6 +937,7 @@ foreach ($decl in @($raw.declarations)) {
         if ($Module -eq 'saliency' -and [string]$decl.identity -match 'StaticSaliencySpectralResidual\.(?:read|write)\(') { $reason = 'The upstream persistence helpers use FileNode/FileStorage ownership and serialization contracts that are outside the current managed/native Saliency wrapper; they remain intentionally omitted.' }
         if ($Module -eq 'surface_matching' -and [string]$decl.identity -match '^cv\.ppf_match_3d\.(?:Pose3D\.|loadPLYSimple|writePLY|writePLYVisibleNormals|samplePCByQuantization|transformPCPose|getRandomPose|addNoisePC|computeNormalsPC3d)') { $reason = 'The current SurfaceMatching wrapper intentionally scopes evidence to ICP and PPF3DDetector opaque handles; Pose3D mutators and point-cloud file/utility helpers remain outside the managed/native ownership and deterministic smoke contract.' }
         if ($Module -eq 'reg' -and [string]$decl.identity -match '^cv\.reg\.MapTypeCaster\.') { $reason = 'MapTypeCaster conversion helpers are outside the current managed Reg wrapper; typed map handles are selected by the existing factory and ownership contract.' }
+        if ($Module -eq 'xstereo' -and [string]$decl.identity -match '^cv\.stereo\.MatchQuasiDense\.(?:MatchQuasiDense|operator <)') { $reason = 'MatchQuasiDense value construction and comparison are represented by the managed value type; the current native ABI exposes these records only through QuasiDenseStereo count/fill transport, not standalone callable entrypoints.' }
         if ($Module -eq 'rapid' -and [string]$decl.identity -match '^cv\.rapid\.GOSTracker\.create\(') { $reason = 'GOSTracker is present in the pinned upstream header but the current managed/native wrapper exposes only Rapid and OLSTracker; this optional tracker remains deliberately omitted until its behavior, ABI, and ownership contract are separately reviewed.' }
         if ($Module -eq 'phase_unwrapping' -and [string]$decl.identity -match 'HistogramPhaseUnwrapping\.Params\.Params\(') { $reason = 'The upstream default Params constructor is represented by HistogramPhaseUnwrappingParams.Default and an explicit managed value constructor; value initialization has no native callable ABI.' }
         if ($Module -eq 'optflow' -and [string]$decl.identity -match '^cv\.optflow\.createOptFlow_PCAFlow\(') { $reason = 'PCAFlow is an optional dense optical-flow factory distinct from the wrapped RLOF and DualTVL1 families; the current ABI/API has no PCAFlow native factory, opaque handle, ownership/lifetime contract, or deterministic runtime smoke, so this declaration remains intentionally omitted.' }

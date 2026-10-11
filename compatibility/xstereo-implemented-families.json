@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 0,
+  "managedPublicMemberAdditionCount": 0,
+  "families": [
+    {
+      "id": "xstereo-wrapper-surface",
+      "rationale": "Current XStereo managed/native wrapper declarations with exact parser-backed callable evidence.",
+      "declarations": [
+        {
+          "ordinal": 6,
+          "upstreamIdentity": "cv.stereo.QuasiDenseStereo.loadParameters(String filepath[/PATH])->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_xstereo_quasi_dense_load_parameters"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;instance|System.Int32 LoadParameters(System.String parameterFilePath)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XStereo/XStereoTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xstereo-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 7,
+          "upstreamIdentity": "cv.stereo.QuasiDenseStereo.saveParameters(String filepath[/PATH])->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_xstereo_quasi_dense_save_parameters"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;instance|System.Int32 SaveParameters(System.String parameterFilePath)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XStereo/XStereoTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xstereo-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 8,
+          "upstreamIdentity": "cv.stereo.QuasiDenseStereo.getSparseMatches(vector_MatchQuasiDense sMatches[/O,/Ref])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_xstereo_quasi_dense_get_sparse_matches_count",
+            "jyppx_ocv_xstereo_quasi_dense_get_sparse_matches_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;instance|JYPPX.OpenCvSharp.XStereo.MatchQuasiDense[] GetSparseMatches()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XStereo/XStereoTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xstereo-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 9,
+          "upstreamIdentity": "cv.stereo.QuasiDenseStereo.getDenseMatches(vector_MatchQuasiDense denseMatches[/O,/Ref])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_xstereo_quasi_dense_get_dense_matches_count",
+            "jyppx_ocv_xstereo_quasi_dense_get_dense_matches_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;instance|JYPPX.OpenCvSharp.XStereo.MatchQuasiDense[] GetDenseMatches()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XStereo/XStereoTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xstereo-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 10,
+          "upstreamIdentity": "cv.stereo.QuasiDenseStereo.process(Mat imgLeft[/C,/Ref];Mat imgRight[/C,/Ref])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_xstereo_quasi_dense_process"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;instance|System.Void Process(JYPPX.OpenCvSharp.Core.Mat left,JYPPX.OpenCvSharp.Core.Mat right)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XStereo/XStereoTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xstereo-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 11,
+          "upstreamIdentity": "cv.stereo.QuasiDenseStereo.getMatch(int x[/C];int y[/C])->cv::Point2f",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_xstereo_quasi_dense_get_match"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;instance|JYPPX.OpenCvSharp.Core.Point2f GetMatch(System.Int32 x,System.Int32 y)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XStereo/XStereoTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xstereo-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 12,
+          "upstreamIdentity": "cv.stereo.QuasiDenseStereo.getDisparity()->cv::Mat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_xstereo_quasi_dense_get_disparity"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetDisparity()",
+            "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;instance|System.Void GetDisparity(JYPPX.OpenCvSharp.Core.Mat disparity)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XStereo/XStereoTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xstereo-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 13,
+          "upstreamIdentity": "cv.stereo.QuasiDenseStereo.create(Size monoImgSize;String paramFilepath=cv::String())->cv::Ptr<QuasiDenseStereo>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_xstereo_quasi_dense_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;static|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo Create(JYPPX.OpenCvSharp.Core.Size monoImageSize,System.String? parameterFilePath=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XStereo/XStereoTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xstereo-upstream-parity-guide.md"
+        }
+      ]
+    }
+  ]
+}

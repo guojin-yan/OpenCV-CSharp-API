@@ -136,6 +136,8 @@ function Get-Record {
     $surfaceMatchingSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/surface_matching-upstream-summary.json") -Raw | ConvertFrom-Json
     $regRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/reg-upstream-raw.json") -Raw | ConvertFrom-Json
     $regSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/reg-upstream-summary.json") -Raw | ConvertFrom-Json
+    $xstereoRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/xstereo-upstream-raw.json") -Raw | ConvertFrom-Json
+    $xstereoSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/xstereo-upstream-summary.json") -Raw | ConvertFrom-Json
     $evidencePaths = @(
         ".github/workflows/pack.yml",
         ".github/workflows/publish-nuget.yml",
@@ -335,6 +337,11 @@ function Get-Record {
         "compatibility/reg-upstream-map.txt",
         "compatibility/reg-upstream-raw.json",
         "compatibility/reg-upstream-summary.json",
+        "compatibility/xstereo-implemented-families.json",
+        "compatibility/xstereo-upstream-classifications.json",
+        "compatibility/xstereo-upstream-map.txt",
+        "compatibility/xstereo-upstream-raw.json",
+        "compatibility/xstereo-upstream-summary.json",
         "compatibility/v5.0.1-change-ledger.json",
         "compatibility/v5.0.1-change-ledger.schema.json",
         "docs/articles/api-abi-compatibility-policy.md",
@@ -794,6 +801,9 @@ function Get-Record {
         "tools/RegUpstreamMap/RegUpstreamMap.csproj",
         "tools/RegUpstreamMap/Program.cs",
         "tools/RegUpstreamMap/extract_reg.py",
+        "tools/XStereoUpstreamMap/XStereoUpstreamMap.csproj",
+        "tools/XStereoUpstreamMap/Program.cs",
+        "tools/XStereoUpstreamMap/extract_xstereo.py",
         "tools/CodecBenchmark/CodecBenchmark.csproj",
         "tools/CodecBenchmark/Program.cs",
         "scripts/Measure-CodecTypedMatBenchmark.ps1",
@@ -875,6 +885,8 @@ function Get-Record {
         "scripts/Test-SurfaceMatchingUpstreamMap.ps1",
         "scripts/Generate-RegUpstreamMap.ps1",
         "scripts/Test-RegUpstreamMap.ps1",
+        "scripts/Generate-XStereoUpstreamMap.ps1",
+        "scripts/Test-XStereoUpstreamMap.ps1",
         "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
         "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
         "tools/TypedMatBenchmark/Program.cs",
@@ -1350,6 +1362,29 @@ function Get-Record {
                 ManagedPublicMemberAdditionCount = [int]$regSummary.managedPublicMemberAdditionCount
                 NativeEntrypointAdditionCount = [int]$regSummary.nativeEvidenceCount
                 RepositoryWideParityClaimed = [bool]$regSummary.repositoryWideUpstreamParityClaimed
+            }
+            XStereoUpstreamMap = [ordered]@{
+                Path = "compatibility/xstereo-upstream-map.txt"
+                SummaryPath = "compatibility/xstereo-upstream-summary.json"
+                ClassificationPath = "compatibility/xstereo-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/xstereo-implemented-families.json"
+                RawExtractionPath = "compatibility/xstereo-upstream-raw.json"
+                Sha256 = $xstereoSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/xstereo-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$xstereoSummary.declarationCount
+                CallableCount = [int]$xstereoSummary.callableCount
+                ImplementedCount = [int]$xstereoSummary.classificationCounts.implemented
+                MissingCount = [int]$xstereoSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$xstereoSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$xstereoSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$xstereoSummary.classificationCounts.'upstream-conditional'
+                SourceHeaderCount = @($xstereoRaw.sourceHeaders).Count
+                SelectedFamilyCount = [int]$xstereoSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$xstereoSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$xstereoSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$xstereoSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$xstereoSummary.nativeEvidenceCount
+                RepositoryWideParityClaimed = [bool]$xstereoSummary.repositoryWideUpstreamParityClaimed
             }
             GapInventoryPath = "compatibility/api-gap-inventory.json"
             GapInventoryStatus = $gapInventory.status

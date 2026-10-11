@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/xstereo.hpp contrib public header closure from parser-emitted headers",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact XStereo wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "enum cv.stereo.<unnamed>[const cv.stereo.CV_DENSE_CENSUS=0;const cv.stereo.CV_SPARSE_CENSUS=1;const cv.stereo.CV_CS_CENSUS=2;const cv.stereo.CV_MODIFIED_CS_CENSUS=3;const cv.stereo.CV_MODIFIED_CENSUS_TRANSFORM=4;const cv.stereo.CV_MEAN_VARIATION=5;const cv.stereo.CV_STAR_KERNEL=6]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XSTEREO=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "class cv.stereo.MatchQuasiDense",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XSTEREO=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.stereo.MatchQuasiDense.MatchQuasiDense()->",
+      "classification": "intentionally-omitted",
+      "reason": "MatchQuasiDense value construction and comparison are represented by the managed value type; the current native ABI exposes these records only through QuasiDenseStereo count/fill transport, not standalone callable entrypoints.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XSTEREO=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.stereo.MatchQuasiDense.operator <(MatchQuasiDense rhs[/C,/Ref])->bool",
+      "classification": "intentionally-omitted",
+      "reason": "MatchQuasiDense value construction and comparison are represented by the managed value type; the current native ABI exposes these records only through QuasiDenseStereo count/fill transport, not standalone callable entrypoints.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XSTEREO=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "class cv.stereo.PropagationParameters",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XSTEREO=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "class cv.stereo.QuasiDenseStereo",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XSTEREO=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.stereo.QuasiDenseStereo.loadParameters(String filepath[/PATH])->int",
+      "classification": "implemented",
+      "reason": "Explicit XStereo declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XSTEREO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xstereo_quasi_dense_load_parameters"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;instance|System.Int32 LoadParameters(System.String parameterFilePath)"
+      ]
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.stereo.QuasiDenseStereo.saveParameters(String filepath[/PATH])->int",
+      "classification": "implemented",
+      "reason": "Explicit XStereo declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XSTEREO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xstereo_quasi_dense_save_parameters"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;instance|System.Int32 SaveParameters(System.String parameterFilePath)"
+      ]
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.stereo.QuasiDenseStereo.getSparseMatches(vector_MatchQuasiDense sMatches[/O,/Ref])->void",
+      "classification": "implemented",
+      "reason": "Explicit XStereo declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XSTEREO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xstereo_quasi_dense_get_sparse_matches_count",
+        "jyppx_ocv_xstereo_quasi_dense_get_sparse_matches_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;instance|JYPPX.OpenCvSharp.XStereo.MatchQuasiDense[] GetSparseMatches()"
+      ]
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.stereo.QuasiDenseStereo.getDenseMatches(vector_MatchQuasiDense denseMatches[/O,/Ref])->void",
+      "classification": "implemented",
+      "reason": "Explicit XStereo declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XSTEREO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xstereo_quasi_dense_get_dense_matches_count",
+        "jyppx_ocv_xstereo_quasi_dense_get_dense_matches_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;instance|JYPPX.OpenCvSharp.XStereo.MatchQuasiDense[] GetDenseMatches()"
+      ]
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.stereo.QuasiDenseStereo.process(Mat imgLeft[/C,/Ref];Mat imgRight[/C,/Ref])->void",
+      "classification": "implemented",
+      "reason": "Explicit XStereo declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XSTEREO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xstereo_quasi_dense_process"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;instance|System.Void Process(JYPPX.OpenCvSharp.Core.Mat left,JYPPX.OpenCvSharp.Core.Mat right)"
+      ]
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.stereo.QuasiDenseStereo.getMatch(int x[/C];int y[/C])->cv::Point2f",
+      "classification": "implemented",
+      "reason": "Explicit XStereo declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XSTEREO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xstereo_quasi_dense_get_match"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;instance|JYPPX.OpenCvSharp.Core.Point2f GetMatch(System.Int32 x,System.Int32 y)"
+      ]
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.stereo.QuasiDenseStereo.getDisparity()->cv::Mat",
+      "classification": "implemented",
+      "reason": "Explicit XStereo declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XSTEREO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xstereo_quasi_dense_get_disparity"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetDisparity()",
+        "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;instance|System.Void GetDisparity(JYPPX.OpenCvSharp.Core.Mat disparity)"
+      ]
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.stereo.QuasiDenseStereo.create(Size monoImgSize;String paramFilepath=cv::String())->cv::Ptr<QuasiDenseStereo>",
+      "classification": "implemented",
+      "reason": "Explicit XStereo declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XSTEREO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xstereo_quasi_dense_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;static|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo Create(JYPPX.OpenCvSharp.Core.Size monoImageSize,System.String? parameterFilePath=null)"
+      ]
+    }
+  ]
+}

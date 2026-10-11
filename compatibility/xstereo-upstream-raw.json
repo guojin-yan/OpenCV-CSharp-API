@@ -1,0 +1,525 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/XStereoUpstreamMap/extract_xstereo.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/xstereo/include/opencv2/xstereo.hpp",
+  "headerSha256": "2ac54437426313afa3ea8ed451ea59d77c20f9b62618406e7989a3514c0dde91",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/xstereo/include/opencv2/xstereo/descriptor.hpp",
+      "sha256": "b15c8cc2028d93efe1497929d4ff7022403f611cf49297c0d425c6dd25984a18",
+      "startOrdinal": 0,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/xstereo/include/opencv2/xstereo/quasi_dense_stereo.hpp",
+      "sha256": "bdcbb5ec3b09e395e31d34ad55ebf23eb14d21d26492e60db7a5af1c11ab1dee",
+      "startOrdinal": 1,
+      "declarationCount": 13
+    }
+  ],
+  "declarationCount": 14,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xstereo/include/opencv2/xstereo/descriptor.hpp",
+      "kind": "enum",
+      "name": "cv.stereo.<unnamed>",
+      "identity": "enum cv.stereo.<unnamed>[const cv.stereo.CV_DENSE_CENSUS=0;const cv.stereo.CV_SPARSE_CENSUS=1;const cv.stereo.CV_CS_CENSUS=2;const cv.stereo.CV_MODIFIED_CS_CENSUS=3;const cv.stereo.CV_MODIFIED_CENSUS_TRANSFORM=4;const cv.stereo.CV_MEAN_VARIATION=5;const cv.stereo.CV_STAR_KERNEL=6]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.stereo.CV_DENSE_CENSUS",
+          "value": "0"
+        },
+        {
+          "name": "const cv.stereo.CV_SPARSE_CENSUS",
+          "value": "1"
+        },
+        {
+          "name": "const cv.stereo.CV_CS_CENSUS",
+          "value": "2"
+        },
+        {
+          "name": "const cv.stereo.CV_MODIFIED_CS_CENSUS",
+          "value": "3"
+        },
+        {
+          "name": "const cv.stereo.CV_MODIFIED_CENSUS_TRANSFORM",
+          "value": "4"
+        },
+        {
+          "name": "const cv.stereo.CV_MEAN_VARIATION",
+          "value": "5"
+        },
+        {
+          "name": "const cv.stereo.CV_STAR_KERNEL",
+          "value": "6"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xstereo/include/opencv2/xstereo/quasi_dense_stereo.hpp",
+      "kind": "class",
+      "name": "cv.stereo.MatchQuasiDense",
+      "identity": "class cv.stereo.MatchQuasiDense",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [
+        {
+          "type": "Point2i",
+          "name": "p0",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Point2i",
+          "name": "p1",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "corr",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "\\addtogroup xstereo\n *  @{"
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xstereo/include/opencv2/xstereo/quasi_dense_stereo.hpp",
+      "kind": "callable",
+      "name": "cv.stereo.MatchQuasiDense.MatchQuasiDense",
+      "identity": "cv.stereo.MatchQuasiDense.MatchQuasiDense()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xstereo/include/opencv2/xstereo/quasi_dense_stereo.hpp",
+      "kind": "callable",
+      "name": "cv.stereo.MatchQuasiDense.operator <",
+      "identity": "cv.stereo.MatchQuasiDense.operator <(MatchQuasiDense rhs[/C,/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "=apply",
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "MatchQuasiDense",
+          "name": "rhs",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xstereo/include/opencv2/xstereo/quasi_dense_stereo.hpp",
+      "kind": "class",
+      "name": "cv.stereo.PropagationParameters",
+      "identity": "class cv.stereo.PropagationParameters",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "corrWinSizeX",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "corrWinSizeY",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "borderX",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "borderY",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "correlationThreshold",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "textrureThreshold",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "neighborhoodSize",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "disparityGradient",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "lkTemplateSize",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "lkPyrLvl",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "lkTermParam1",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "lkTermParam2",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "gftQualityThres",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "gftMinSeperationDist",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "gftMaxNumFeatures",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xstereo/include/opencv2/xstereo/quasi_dense_stereo.hpp",
+      "kind": "class",
+      "name": "cv.stereo.QuasiDenseStereo",
+      "identity": "class cv.stereo.QuasiDenseStereo",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "PropagationParameters",
+          "name": "Param",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Class containing the methods needed for Quasi Dense Stereo computation.\n *\n * This module contains the code to perform quasi dense stereo matching.\n * The method initially starts with a sparse 3D reconstruction based on feature matching across a\n * stereo image pair and subsequently propagates the structure into neighboring image regions.\n * To obtain initial seed correspondences, the algorithm locates Shi and Tomashi features in the\n * left image of the stereo pair and then tracks them using pyramidal Lucas-Kanade in the right image.\n * To densify the sparse correspondences, the algorithm computes the zero-mean normalized\n * cross-correlation (ZNCC) in small patches around every seed pair and uses it as a quality metric\n * for each match. In this code, we introduce a custom structure to store the location and ZNCC value\n * of correspondences called \"Match\". Seed Matches are stored in a priority queue sorted according to\n * their ZNCC value, allowing for the best quality Match to be readily available. The algorithm pops\n * Matches and uses them to extract new matches around them. This is done by considering a small\n * neighboring area around each Seed and retrieving correspondences above a certain texture threshold\n * that are not previously computed. New matches are stored in the seed priority queue and used as seeds.\n * The propagation process ends when no additional matches can be retrieved.\n *\n *\n * @sa This code represents the work presented in @cite Stoyanov2010.\n * If this code is useful for your work please cite @cite Stoyanov2010.\n *\n * Also the original growing scheme idea is described in @cite Lhuillier2000\n *"
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xstereo/include/opencv2/xstereo/quasi_dense_stereo.hpp",
+      "kind": "callable",
+      "name": "cv.stereo.QuasiDenseStereo.loadParameters",
+      "identity": "cv.stereo.QuasiDenseStereo.loadParameters(String filepath[/PATH])->int",
+      "returnType": "int",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filepath",
+          "default": "",
+          "modifiers": [
+            "/PATH"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Load a file containing the configuration parameters of the class.\n     * @param[in] filepath The location of the .YAML file containing the configuration parameters.\n     * @note default value is an empty string in which case the default parameters will be loaded.\n     * @retval 1: If the path is not empty and the program loaded the parameters successfully.\n     * @retval 0: If the path is empty and the program loaded default parameters.\n     * @retval -1: If the file location is not valid or the program could not open the file and\n     * loaded default parameters from defaults.hpp.\n     * @note The method is automatically called in the constructor and configures the class.\n     * @note Loading different parameters will have an effect on the output. This is useful for tuning\n     * in case of video processing.\n     * @sa loadParameters"
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xstereo/include/opencv2/xstereo/quasi_dense_stereo.hpp",
+      "kind": "callable",
+      "name": "cv.stereo.QuasiDenseStereo.saveParameters",
+      "identity": "cv.stereo.QuasiDenseStereo.saveParameters(String filepath[/PATH])->int",
+      "returnType": "int",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filepath",
+          "default": "",
+          "modifiers": [
+            "/PATH"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Save a file containing all the configuration parameters the class is currently set to.\n     * @param[in] filepath The location to store the parameters file.\n     * @note Calling this method with no arguments will result in storing class parameters to a file\n     * names \"qds_parameters.yaml\" in the root project folder.\n     * @note This method can be used to generate a template file for tuning the class.\n     * @sa loadParameters"
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xstereo/include/opencv2/xstereo/quasi_dense_stereo.hpp",
+      "kind": "callable",
+      "name": "cv.stereo.QuasiDenseStereo.getSparseMatches",
+      "identity": "cv.stereo.QuasiDenseStereo.getSparseMatches(vector_MatchQuasiDense sMatches[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_MatchQuasiDense",
+          "name": "sMatches",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Get The sparse corresponding points.\n     * @param[out] sMatches A vector containing all sparse correspondences.\n     * @note The method clears the sMatches vector.\n     * @note The returned Match elements inside the sMatches vector, do not use corr member."
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xstereo/include/opencv2/xstereo/quasi_dense_stereo.hpp",
+      "kind": "callable",
+      "name": "cv.stereo.QuasiDenseStereo.getDenseMatches",
+      "identity": "cv.stereo.QuasiDenseStereo.getDenseMatches(vector_MatchQuasiDense denseMatches[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_MatchQuasiDense",
+          "name": "denseMatches",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Get The dense corresponding points.\n     * @param[out] denseMatches A vector containing all dense matches.\n     * @note The method clears the denseMatches vector.\n     * @note The returned Match elements inside the sMatches vector, do not use corr member."
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xstereo/include/opencv2/xstereo/quasi_dense_stereo.hpp",
+      "kind": "callable",
+      "name": "cv.stereo.QuasiDenseStereo.process",
+      "identity": "cv.stereo.QuasiDenseStereo.process(Mat imgLeft[/C,/Ref];Mat imgRight[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "imgLeft",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "imgRight",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Main process of the algorithm. This method computes the sparse seeds and then densifies them.\n     *\n     * Initially input images are converted to gray-scale and then the sparseMatching method\n     * is called to obtain the sparse stereo. Finally quasiDenseMatching is called to densify the corresponding\n     * points.\n     * @param[in] imgLeft The left Channel of a stereo image pair.\n     * @param[in] imgRight The right Channel of a stereo image pair.\n     * @note If input images are in color, the method assumes that are BGR and converts them to grayscale.\n     * @sa sparseMatching\n     * @sa quasiDenseMatching"
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xstereo/include/opencv2/xstereo/quasi_dense_stereo.hpp",
+      "kind": "callable",
+      "name": "cv.stereo.QuasiDenseStereo.getMatch",
+      "identity": "cv.stereo.QuasiDenseStereo.getMatch(int x[/C];int y[/C])->cv::Point2f",
+      "returnType": "cv::Point2f",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "x",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "y",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Specify pixel coordinates in the left image and get its corresponding location in the right image.\n     * @param[in] x The x pixel coordinate in the left image channel.\n     * @param[in] y The y pixel coordinate in the left image channel.\n     * @retval cv::Point(x, y) The location of the corresponding pixel in the right image.\n     * @retval cv::Point(0, 0) (NO_MATCH)  if no match is found in the right image for the specified pixel location in the left image.\n     * @note This method should be always called after process, otherwise the matches will not be correct."
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xstereo/include/opencv2/xstereo/quasi_dense_stereo.hpp",
+      "kind": "callable",
+      "name": "cv.stereo.QuasiDenseStereo.getDisparity",
+      "identity": "cv.stereo.QuasiDenseStereo.getDisparity()->cv::Mat",
+      "returnType": "cv::Mat",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Compute and return the disparity map based on the correspondences found in the \"process\" method.\n     * @note Default level is 50\n     * @return cv::Mat containing a the disparity image in grayscale.\n     * @sa computeDisparity\n     * @sa quantizeDisparity"
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xstereo/include/opencv2/xstereo/quasi_dense_stereo.hpp",
+      "kind": "callable",
+      "name": "cv.stereo.QuasiDenseStereo.create",
+      "identity": "cv.stereo.QuasiDenseStereo.create(Size monoImgSize;String paramFilepath=cv::String())->cv::Ptr<QuasiDenseStereo>",
+      "returnType": "cv::Ptr<QuasiDenseStereo>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "monoImgSize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "String",
+          "name": "paramFilepath",
+          "default": "cv::String()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    }
+  ]
+}

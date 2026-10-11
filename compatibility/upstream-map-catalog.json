@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 36,
+  "moduleCount": 37,
   "maps": [
     {
       "id": "calib3d",
@@ -2612,6 +2612,58 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "1dd55da90fd1d92c14ba492db33fbd727e97141180d1e4caff1a62f4ccec855f",
         "familyInventorySha256": "e740d9c241d0b109cec0c74223bb7d1d7b63d25050a5b8015fdc902b43cbd928",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "xstereo",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/XStereoUpstreamMap",
+      "extractorScript": "tools/XStereoUpstreamMap/extract_xstereo.py",
+      "generationScript": "scripts/Generate-XStereoUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-XStereoUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/xstereo.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/xstereo/include/opencv2/xstereo.hpp",
+          "sha256": "2ac54437426313afa3ea8ed451ea59d77c20f9b62618406e7989a3514c0dde91"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/xstereo/include/opencv2/xstereo/descriptor.hpp",
+            "sha256": "b15c8cc2028d93efe1497929d4ff7022403f611cf49297c0d425c6dd25984a18",
+            "startOrdinal": 0,
+            "declarationCount": 1
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/xstereo/include/opencv2/xstereo/quasi_dense_stereo.hpp",
+            "sha256": "bdcbb5ec3b09e395e31d34ad55ebf23eb14d21d26492e60db7a5af1c11ab1dee",
+            "startOrdinal": 1,
+            "declarationCount": 13
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/xstereo-upstream-raw.json",
+        "classifications": "compatibility/xstereo-upstream-classifications.json",
+        "mapping": "compatibility/xstereo-upstream-map.txt",
+        "summary": "compatibility/xstereo-upstream-summary.json",
+        "familyInventory": "compatibility/xstereo-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 14,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "5878d163e02c9a20c65df5745e145184b8340ca1cd8fe95fe06a7dc3c28673a7",
+        "familyInventorySha256": "f98bbc19bb6b308c0cdd7b745b36b2c723e367bd8f6874dcf67ba6735040f403",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false
