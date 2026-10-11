@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 37,
+  "moduleCount": 38,
   "maps": [
     {
       "id": "calib3d",
@@ -2664,6 +2664,58 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "5878d163e02c9a20c65df5745e145184b8340ca1cd8fe95fe06a7dc3c28673a7",
         "familyInventorySha256": "f98bbc19bb6b308c0cdd7b745b36b2c723e367bd8f6874dcf67ba6735040f403",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "ptcloud",
+      "repository": "opencv",
+      "generatorProject": "tools/PtCloudUpstreamMap",
+      "extractorScript": "tools/PtCloudUpstreamMap/extract_ptcloud.py",
+      "generationScript": "scripts/Generate-PtCloudUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-PtCloudUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/ptcloud/depth.hpp selected parser-backed depth/RGB-D wrapper slice; ptcloud umbrella volume/odometry headers are explicitly excluded",
+        "primaryHeader": {
+          "path": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud.hpp",
+          "sha256": "90d13a8e7c263286209d2e7fa6b82dea9db36cf89ede65d099289d6fe7a91799"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud/depth.hpp",
+            "sha256": "b46d17fff063b0015333738bc001ff792a7ac4173550ecf9ea90f16d1674e540",
+            "startOrdinal": 0,
+            "declarationCount": 22
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": [
+          {
+            "path": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud.hpp",
+            "sha256": "90d13a8e7c263286209d2e7fa6b82dea9db36cf89ede65d099289d6fe7a91799",
+            "reason": "Umbrella includes volume/odometry headers outside the selected depth/RGB-D wrapper slice."
+          }
+        ]
+      },
+      "artifacts": {
+        "raw": "compatibility/ptcloud-upstream-raw.json",
+        "classifications": "compatibility/ptcloud-upstream-classifications.json",
+        "mapping": "compatibility/ptcloud-upstream-map.txt",
+        "summary": "compatibility/ptcloud-upstream-summary.json",
+        "familyInventory": "compatibility/ptcloud-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 22,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "ad6cb09f4de25b611e255fa5fa61b02ceea19cb8ac4d8aec34b1923452d0bc4c",
+        "familyInventorySha256": "8dea541e83442aad099484d009b208bbf3df95e8fbf607b11be0cf5f735f3bbe",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

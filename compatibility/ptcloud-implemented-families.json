@@ -1,0 +1,305 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 0,
+  "managedPublicMemberAdditionCount": 0,
+  "families": [
+    {
+      "id": "ptcloud-wrapper-surface",
+      "rationale": "Current PtCloud managed/native wrapper declarations with exact parser-backed callable evidence.",
+      "declarations": [
+        {
+          "ordinal": 2,
+          "upstreamIdentity": "cv.RgbdNormals.create(int rows=0;int cols=0;int depth=0;Mat K=Mat();int window_size=5;float diff_threshold=50.f;RgbdNormals_RgbdNormalsMethod method=RgbdNormals::RgbdNormalsMethod::RGBD_NORMALS_METHOD_FALS)->Ptr<RgbdNormals>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_rgbd_normals_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|method|public;static|JYPPX.OpenCvSharp.PtCloud.RgbdNormals Create(System.Int32 rows=0,System.Int32 cols=0,System.Int32 depth=0,JYPPX.OpenCvSharp.Core.Mat? cameraMatrix=null,System.Int32 windowSize=5,System.Single diffThreshold=50,JYPPX.OpenCvSharp.PtCloud.RgbdNormalsMethod method=Fals)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/PtCloud/PtCloudTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ptcloud-guide.md"
+        },
+        {
+          "ordinal": 3,
+          "upstreamIdentity": "cv.RgbdNormals.apply(Mat points;Mat normals[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_rgbd_normals_apply"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Apply(JYPPX.OpenCvSharp.Core.Mat points)",
+            "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|method|public;instance|System.Void Apply(JYPPX.OpenCvSharp.Core.Mat points,JYPPX.OpenCvSharp.Core.Mat normals)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/PtCloud/PtCloudTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ptcloud-guide.md"
+        },
+        {
+          "ordinal": 4,
+          "upstreamIdentity": "cv.RgbdNormals.cache()->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_rgbd_normals_cache"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|method|public;instance|System.Void Cache()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/PtCloud/PtCloudTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ptcloud-guide.md"
+        },
+        {
+          "ordinal": 5,
+          "upstreamIdentity": "cv.RgbdNormals.getRows()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_rgbd_normals_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|property|instance;get:public;set:public|System.Int32 Rows"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/PtCloud/PtCloudTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ptcloud-guide.md"
+        },
+        {
+          "ordinal": 6,
+          "upstreamIdentity": "cv.RgbdNormals.setRows(int val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_rgbd_normals_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|property|instance;get:public;set:public|System.Int32 Rows"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/PtCloud/PtCloudTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ptcloud-guide.md"
+        },
+        {
+          "ordinal": 7,
+          "upstreamIdentity": "cv.RgbdNormals.getCols()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_rgbd_normals_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|property|instance;get:public;set:public|System.Int32 Cols"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/PtCloud/PtCloudTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ptcloud-guide.md"
+        },
+        {
+          "ordinal": 8,
+          "upstreamIdentity": "cv.RgbdNormals.setCols(int val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_rgbd_normals_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|property|instance;get:public;set:public|System.Int32 Cols"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/PtCloud/PtCloudTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ptcloud-guide.md"
+        },
+        {
+          "ordinal": 9,
+          "upstreamIdentity": "cv.RgbdNormals.getWindowSize()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_rgbd_normals_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|property|instance;get:public;set:public|System.Int32 WindowSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/PtCloud/PtCloudTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ptcloud-guide.md"
+        },
+        {
+          "ordinal": 10,
+          "upstreamIdentity": "cv.RgbdNormals.setWindowSize(int val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_rgbd_normals_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|property|instance;get:public;set:public|System.Int32 WindowSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/PtCloud/PtCloudTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ptcloud-guide.md"
+        },
+        {
+          "ordinal": 11,
+          "upstreamIdentity": "cv.RgbdNormals.getDepth()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_rgbd_normals_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|property|instance;get:public|System.Int32 Depth"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/PtCloud/PtCloudTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ptcloud-guide.md"
+        },
+        {
+          "ordinal": 12,
+          "upstreamIdentity": "cv.RgbdNormals.getK(Mat val[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_rgbd_normals_get_k"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetK()",
+            "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|method|public;instance|System.Void GetK(JYPPX.OpenCvSharp.Core.Mat cameraMatrix)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/PtCloud/PtCloudTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ptcloud-guide.md"
+        },
+        {
+          "ordinal": 13,
+          "upstreamIdentity": "cv.RgbdNormals.setK(Mat val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_rgbd_normals_set_k"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|method|public;instance|System.Void SetK(JYPPX.OpenCvSharp.Core.Mat cameraMatrix)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/PtCloud/PtCloudTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ptcloud-guide.md"
+        },
+        {
+          "ordinal": 14,
+          "upstreamIdentity": "cv.RgbdNormals.getMethod()->RgbdNormals::RgbdNormalsMethod",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_rgbd_normals_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|property|instance;get:public|JYPPX.OpenCvSharp.PtCloud.RgbdNormalsMethod Method"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/PtCloud/PtCloudTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ptcloud-guide.md"
+        },
+        {
+          "ordinal": 15,
+          "upstreamIdentity": "cv.registerDepth(Mat unregisteredCameraMatrix;Mat registeredCameraMatrix;Mat registeredDistCoeffs;Mat Rt;Mat unregisteredDepth;Size outputImagePlaneSize[/C,/Ref];Mat registeredDepth[/O];bool depthDilation=false)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ptcloud_register_depth"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|System.Void RegisterDepth(JYPPX.OpenCvSharp.Core.Mat unregisteredCameraMatrix,JYPPX.OpenCvSharp.Core.Mat registeredCameraMatrix,JYPPX.OpenCvSharp.Core.Mat registeredDistCoeffs,JYPPX.OpenCvSharp.Core.Mat rt,JYPPX.OpenCvSharp.Core.Mat unregisteredDepth,JYPPX.OpenCvSharp.Core.Size outputImagePlaneSize,JYPPX.OpenCvSharp.Core.Mat registeredDepth,System.Boolean depthDilation=false)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/PtCloud/PtCloudTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ptcloud-guide.md"
+        },
+        {
+          "ordinal": 16,
+          "upstreamIdentity": "cv.depthTo3dSparse(Mat depth;Mat in_K;Mat in_points;Mat points3d[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ptcloud_depth_to_3d_sparse"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat DepthTo3dSparse(JYPPX.OpenCvSharp.Core.Mat depth,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat points)",
+            "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|System.Void DepthTo3dSparse(JYPPX.OpenCvSharp.Core.Mat depth,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat points,JYPPX.OpenCvSharp.Core.Mat points3d)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/PtCloud/PtCloudTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ptcloud-guide.md"
+        },
+        {
+          "ordinal": 17,
+          "upstreamIdentity": "cv.depthTo3d(Mat depth;Mat K;Mat points3d[/O];Mat mask=Mat())->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ptcloud_depth_to_3d"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat DepthTo3d(JYPPX.OpenCvSharp.Core.Mat depth,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat? mask=null)",
+            "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|System.Void DepthTo3d(JYPPX.OpenCvSharp.Core.Mat depth,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat points3d,JYPPX.OpenCvSharp.Core.Mat? mask=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/PtCloud/PtCloudTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ptcloud-guide.md"
+        },
+        {
+          "ordinal": 18,
+          "upstreamIdentity": "cv.rescaleDepth(Mat in;int type;Mat out[/O];double depth_factor=1000.0)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ptcloud_rescale_depth"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat RescaleDepth(JYPPX.OpenCvSharp.Core.Mat src,System.Int32 type=5,System.Double depthFactor=1000)",
+            "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|System.Void RescaleDepth(JYPPX.OpenCvSharp.Core.Mat src,System.Int32 type,JYPPX.OpenCvSharp.Core.Mat dst,System.Double depthFactor=1000)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/PtCloud/PtCloudTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ptcloud-guide.md"
+        },
+        {
+          "ordinal": 19,
+          "upstreamIdentity": "cv.warpFrame(Mat depth;Mat image;Mat mask;Mat Rt;Mat cameraMatrix;Mat warpedDepth=Mat()[/O];Mat warpedImage=Mat()[/O];Mat warpedMask=Mat()[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ptcloud_warp_frame"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|System.Void WarpFrame(JYPPX.OpenCvSharp.Core.Mat depth,JYPPX.OpenCvSharp.Core.Mat? image,JYPPX.OpenCvSharp.Core.Mat? mask,JYPPX.OpenCvSharp.Core.Mat rt,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat? warpedDepth=null,JYPPX.OpenCvSharp.Core.Mat? warpedImage=null,JYPPX.OpenCvSharp.Core.Mat? warpedMask=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/PtCloud/PtCloudTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ptcloud-guide.md"
+        },
+        {
+          "ordinal": 21,
+          "upstreamIdentity": "cv.findPlanes(Mat points3d;Mat normals;Mat mask[/O];Mat plane_coefficients[/O];int block_size=40;int min_size=40*40;double threshold=0.01;double sensor_error_a=0;double sensor_error_b=0;double sensor_error_c=0;RgbdPlaneMethod method=RGBD_PLANE_METHOD_DEFAULT)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ptcloud_find_planes"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|System.Void FindPlanes(JYPPX.OpenCvSharp.Core.Mat points3d,JYPPX.OpenCvSharp.Core.Mat? normals,JYPPX.OpenCvSharp.Core.Mat mask,JYPPX.OpenCvSharp.Core.Mat planeCoefficients,System.Int32 blockSize=40,System.Int32 minSize=1600,System.Double threshold=0.01,System.Double sensorErrorA=0,System.Double sensorErrorB=0,System.Double sensorErrorC=0,JYPPX.OpenCvSharp.PtCloud.RgbdPlaneMethod method=Default)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/PtCloud/PtCloudTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ptcloud-guide.md"
+        }
+      ]
+    }
+  ]
+}

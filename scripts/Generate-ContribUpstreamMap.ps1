@@ -1,5 +1,5 @@
 param(
-    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo')][string]$Module,
+    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud')][string]$Module,
     [Parameter(Mandatory)][string]$DisplayName,
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [switch]$Check
@@ -19,7 +19,7 @@ foreach ($path in @($rawPath, $nativePath, $managedPath)) {
 }
 $raw = Get-Content $rawPath -Raw | ConvertFrom-Json
 $nativeEntries = @(Get-Content $nativePath |
-    Where-Object { $_ -match "^jyppx_ocv_${Module}_" -or ($Module -eq 'optflow' -and $_ -match '^jyppx_ocv_motempl_') } |
+    Where-Object { $_ -match "^jyppx_ocv_${Module}_" -or ($Module -eq 'optflow' -and $_ -match '^jyppx_ocv_motempl_') -or ($Module -eq 'ptcloud' -and $_ -match '^jyppx_ocv_rgbd_normals_') } |
     ForEach-Object { ($_ -split '\|')[0] } | Sort-Object -Unique)
 $managedEntries = @(Get-Content $managedPath | Where-Object { $_ -match "JYPPX\.OpenCvSharp\.$DisplayName" })
 
@@ -45,6 +45,8 @@ function GetParts([string]$Identity) {
         '^cv\.reg\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     } elseif ($Module -eq 'xstereo') {
         '^cv\.stereo\.(?:(?<owner>.+)\.)?(?<name>operator <|[A-Za-z][A-Za-z0-9_]*)\('
+    } elseif ($Module -eq 'ptcloud') {
+        '^cv\.(?:(?<owner>[A-Za-z][A-Za-z0-9_]*)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     } else {
         '^cv\.' + $Module + '\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     }
@@ -64,7 +66,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
         }
         return $Owner
     }
-    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo')) {
+    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud')) {
         if ($Module -eq 'face') {
             if ([string]::IsNullOrWhiteSpace($Owner)) {
                 switch ($Name) {
@@ -105,6 +107,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
                 'surface_matching' { return $Owner }
                 'reg' { return $Owner }
                 'xstereo' { return $Owner }
+                'ptcloud' { return $Owner }
             }
             return [string]$managedType
         }
@@ -260,6 +263,30 @@ function GetManaged([string]$Owner, [string]$Name, [string]$Identity) {
             'QuasiDenseStereo.create' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;static\|[^|]*\bCreate\(' } | Sort-Object -Unique) }
             'QuasiDenseStereo.getDisparity' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;instance\|.*\bGetDisparity\(' } | Sort-Object -Unique) }
             default { return @($typeEntries | Where-Object { $_ -match '\|method\|public;instance\|[^|]*\b' + [regex]::Escape((ToPascal $Name)) + '\(' } | Sort-Object -Unique) }
+        }
+    }
+    if ($Module -eq 'ptcloud') {
+        $typeName = if ([string]::IsNullOrWhiteSpace($Owner)) { 'PtCloudCv2' } else { 'RgbdNormals' }
+        $typeMarker = "JYPPX.OpenCvSharp.PtCloud.$typeName|"
+        $typeEntries = @($managedEntries | Where-Object { $_.Contains($typeMarker, [StringComparison]::Ordinal) })
+        switch ("$Owner.$Name") {
+            'RgbdNormals.create' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;static\|[^|]*\bCreate\(' } | Sort-Object -Unique) }
+            'RgbdNormals.apply' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;instance\|[^|]*\bApply\(' } | Sort-Object -Unique) }
+            'RgbdNormals.cache' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;instance\|[^|]*\bCache\(' } | Sort-Object -Unique) }
+            'RgbdNormals.getK' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;instance\|[^|]*\bGetK\(' } | Sort-Object -Unique) }
+            'RgbdNormals.getRows' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public;set:public\|System\.Int32 Rows$' } | Sort-Object -Unique) }
+            'RgbdNormals.setRows' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public;set:public\|System\.Int32 Rows$' } | Sort-Object -Unique) }
+            'RgbdNormals.getCols' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public;set:public\|System\.Int32 Cols$' } | Sort-Object -Unique) }
+            'RgbdNormals.setCols' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public;set:public\|System\.Int32 Cols$' } | Sort-Object -Unique) }
+            'RgbdNormals.getWindowSize' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public;set:public\|System\.Int32 WindowSize$' } | Sort-Object -Unique) }
+            'RgbdNormals.setWindowSize' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public;set:public\|System\.Int32 WindowSize$' } | Sort-Object -Unique) }
+            'RgbdNormals.getDepth' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public\|System\.Int32 Depth$' } | Sort-Object -Unique) }
+            'RgbdNormals.getMethod' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public\|JYPPX\.OpenCvSharp\.PtCloud\.RgbdNormalsMethod Method$' } | Sort-Object -Unique) }
+            'RgbdNormals.setK' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;instance\|System\.Void SetK\(' } | Sort-Object -Unique) }
+            default {
+                $methodName = ToPascal $Name
+                return @($typeEntries | Where-Object { $_ -match ('\|method\|public;static\|[^|]*\b' + [regex]::Escape($methodName) + '\(') } | Sort-Object -Unique)
+            }
         }
     }
     $typeName = GetManagedType $Owner $Name
@@ -568,6 +595,33 @@ function GetNative([object]$Parts, [string]$Identity) {
             'QuasiDenseStereo.getMatch' { @('jyppx_ocv_xstereo_quasi_dense_get_match') }
             'QuasiDenseStereo.getDisparity' { @('jyppx_ocv_xstereo_quasi_dense_get_disparity') }
             default { @() }
+        }
+    } elseif ($Module -eq 'ptcloud') {
+        switch ("$owner.$name") {
+            'RgbdNormals.create' { @('jyppx_ocv_rgbd_normals_create') }
+            'RgbdNormals.apply' { @('jyppx_ocv_rgbd_normals_apply') }
+            'RgbdNormals.cache' { @('jyppx_ocv_rgbd_normals_cache') }
+            'RgbdNormals.getRows' { @('jyppx_ocv_rgbd_normals_get_int_property') }
+            'RgbdNormals.setRows' { @('jyppx_ocv_rgbd_normals_set_int_property') }
+            'RgbdNormals.getCols' { @('jyppx_ocv_rgbd_normals_get_int_property') }
+            'RgbdNormals.setCols' { @('jyppx_ocv_rgbd_normals_set_int_property') }
+            'RgbdNormals.getWindowSize' { @('jyppx_ocv_rgbd_normals_get_int_property') }
+            'RgbdNormals.setWindowSize' { @('jyppx_ocv_rgbd_normals_set_int_property') }
+            'RgbdNormals.getDepth' { @('jyppx_ocv_rgbd_normals_get_int_property') }
+            'RgbdNormals.getMethod' { @('jyppx_ocv_rgbd_normals_get_int_property') }
+            'RgbdNormals.getK' { @('jyppx_ocv_rgbd_normals_get_k') }
+            'RgbdNormals.setK' { @('jyppx_ocv_rgbd_normals_set_k') }
+            default {
+                switch ($name) {
+                    'registerDepth' { @('jyppx_ocv_ptcloud_register_depth') }
+                    'depthTo3dSparse' { @('jyppx_ocv_ptcloud_depth_to_3d_sparse') }
+                    'depthTo3d' { @('jyppx_ocv_ptcloud_depth_to_3d') }
+                    'rescaleDepth' { @('jyppx_ocv_ptcloud_rescale_depth') }
+                    'warpFrame' { @('jyppx_ocv_ptcloud_warp_frame') }
+                    'findPlanes' { @('jyppx_ocv_ptcloud_find_planes') }
+                    default { @() }
+                }
+            }
         }
     } elseif ($Module -eq 'shape') {
         if ($owner -eq 'HistogramCostExtractor') {
@@ -938,6 +992,7 @@ foreach ($decl in @($raw.declarations)) {
         if ($Module -eq 'surface_matching' -and [string]$decl.identity -match '^cv\.ppf_match_3d\.(?:Pose3D\.|loadPLYSimple|writePLY|writePLYVisibleNormals|samplePCByQuantization|transformPCPose|getRandomPose|addNoisePC|computeNormalsPC3d)') { $reason = 'The current SurfaceMatching wrapper intentionally scopes evidence to ICP and PPF3DDetector opaque handles; Pose3D mutators and point-cloud file/utility helpers remain outside the managed/native ownership and deterministic smoke contract.' }
         if ($Module -eq 'reg' -and [string]$decl.identity -match '^cv\.reg\.MapTypeCaster\.') { $reason = 'MapTypeCaster conversion helpers are outside the current managed Reg wrapper; typed map handles are selected by the existing factory and ownership contract.' }
         if ($Module -eq 'xstereo' -and [string]$decl.identity -match '^cv\.stereo\.MatchQuasiDense\.(?:MatchQuasiDense|operator <)') { $reason = 'MatchQuasiDense value construction and comparison are represented by the managed value type; the current native ABI exposes these records only through QuasiDenseStereo count/fill transport, not standalone callable entrypoints.' }
+        if ($Module -eq 'ptcloud' -and [string]$decl.identity -match '^cv\.RgbdNormals\.(?:RgbdNormals|apply|cache|getRows|setRows|getCols|setCols|getWindowSize|setWindowSize|getDepth|getK|setK|getMethod)') { $reason = 'RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.' }
         if ($Module -eq 'rapid' -and [string]$decl.identity -match '^cv\.rapid\.GOSTracker\.create\(') { $reason = 'GOSTracker is present in the pinned upstream header but the current managed/native wrapper exposes only Rapid and OLSTracker; this optional tracker remains deliberately omitted until its behavior, ABI, and ownership contract are separately reviewed.' }
         if ($Module -eq 'phase_unwrapping' -and [string]$decl.identity -match 'HistogramPhaseUnwrapping\.Params\.Params\(') { $reason = 'The upstream default Params constructor is represented by HistogramPhaseUnwrappingParams.Default and an explicit managed value constructor; value initialization has no native callable ABI.' }
         if ($Module -eq 'optflow' -and [string]$decl.identity -match '^cv\.optflow\.createOptFlow_PCAFlow\(') { $reason = 'PCAFlow is an optional dense optical-flow factory distinct from the wrapped RLOF and DualTVL1 families; the current ABI/API has no PCAFlow native factory, opaque handle, ownership/lifetime contract, or deterministic runtime smoke, so this declaration remains intentionally omitted.' }
@@ -959,12 +1014,12 @@ $externalDataDependencies = switch ($Module) {
     'saliency' { @('ObjectnessBING requires caller-supplied training/model data through SetTrainingPath; the repository bundles no model asset and therefore does not claim deterministic objectness model execution.') }
     default { @() }
 }
-$claimedSlice = if ($Module -eq 'reg') { 'opencv2/reg/*.hpp contrib public header closure from parser-emitted headers' } else { "opencv2/$Module.hpp contrib public header closure from parser-emitted headers" }
+$claimedSlice = if ($Module -eq 'reg') { 'opencv2/reg/*.hpp contrib public header closure from parser-emitted headers' } elseif ($Module -eq 'ptcloud') { 'opencv2/ptcloud/depth.hpp selected parser-backed depth/RGB-D wrapper slice; ptcloud umbrella volume/odometry headers are explicitly excluded' } else { "opencv2/$Module.hpp contrib public header closure from parser-emitted headers" }
 $classification = [ordered]@{ schemaVersion = 1; upstreamOpenCvVersion = '5.0.0'; claimedSlice = $claimedSlice; reviewStatus = 'reviewed'; limitation = "The map records parser identities and exact $DisplayName wrapper evidence; it does not claim repository-wide contrib parity or external module availability."; externalDataDependencies = @($externalDataDependencies); declarations = @($rows) }
 $builder = [Text.StringBuilder]::new(); [void]$builder.AppendLine("# Generated by scripts/Generate-ContribUpstreamMap.ps1 -Module $Module. Do not edit."); [void]$builder.AppendLine('schema-version=1'); [void]$builder.AppendLine('upstream-opencv-version=5.0.0'); [void]$builder.AppendLine("claimed-slice=$($classification.claimedSlice)"); [void]$builder.AppendLine("header-sha256=$($raw.headerSha256)"); [void]$builder.AppendLine("parser-sha256=$($raw.parserSha256)"); [void]$builder.AppendLine("declaration-count=$($raw.declarationCount)"); [void]$builder.AppendLine('repository-wide-upstream-parity-claimed=false'); [void]$builder.AppendLine(''); [void]$builder.AppendLine('ordinal|classification|identity|native-entrypoints|managed-members|build-condition|reason')
 foreach ($row in $rows) { $nativeText = if (@($row.nativeEntrypoints).Count) { @($row.nativeEntrypoints) -join ';' } else { '-' }; $managedText = if (@($row.managedMembers).Count) { @($row.managedMembers) -join ';' } else { '-' }; [void]$builder.AppendLine("$($row.ordinal)|$($row.classification)|$($row.identity)|$nativeText|$managedText|$($row.buildCondition)|$($row.reason)") }
 $mappingText = $builder.ToString().Replace("`r`n", "`n"); $implemented = @($rows | Where-Object classification -eq 'implemented'); $omitted = @($rows | Where-Object classification -eq 'intentionally-omitted'); $metadata = @($rows | Where-Object classification -eq 'non-callable-metadata')
-$guide = switch ($Module) { 'face' {'docs/articles/face-guide.md'} 'quality' {'docs/articles/quality-guide.md'} 'img_hash' {'docs/articles/img-hash-guide.md'} 'line_descriptor' {'docs/articles/line-descriptor-guide.md'} 'intensity_transform' {'docs/articles/intensity-transform-guide.md'} 'plot' {'docs/articles/plot-guide.md'} 'bioinspired' {'docs/articles/bioinspired-guide.md'} 'phase_unwrapping' {'docs/articles/phase-unwrapping-guide.md'} 'hfs' {'docs/articles/hfs-guide.md'} 'fuzzy' {'docs/articles/fuzzy-guide.md'} 'rapid' {'docs/articles/rapid-guide.md'} 'shape' {'docs/articles/shape-guide.md'} 'reg' {'docs/articles/reg-guide.md'} default { "docs/articles/$Module-upstream-parity-guide.md" } }
+$guide = switch ($Module) { 'face' {'docs/articles/face-guide.md'} 'quality' {'docs/articles/quality-guide.md'} 'img_hash' {'docs/articles/img-hash-guide.md'} 'line_descriptor' {'docs/articles/line-descriptor-guide.md'} 'intensity_transform' {'docs/articles/intensity-transform-guide.md'} 'plot' {'docs/articles/plot-guide.md'} 'bioinspired' {'docs/articles/bioinspired-guide.md'} 'phase_unwrapping' {'docs/articles/phase-unwrapping-guide.md'} 'hfs' {'docs/articles/hfs-guide.md'} 'fuzzy' {'docs/articles/fuzzy-guide.md'} 'rapid' {'docs/articles/rapid-guide.md'} 'shape' {'docs/articles/shape-guide.md'} 'reg' {'docs/articles/reg-guide.md'} 'ptcloud' {'docs/articles/ptcloud-guide.md'} default { "docs/articles/$Module-upstream-parity-guide.md" } }
 $family = [ordered]@{ schemaVersion = 1; upstreamOpenCvVersion = '5.0.0'; status = 'implemented-verified'; managedPublicTypeAdditionCount = 0; managedPublicMemberAdditionCount = 0; families = @([ordered]@{ id = "$Module-wrapper-surface"; rationale = "Current $DisplayName managed/native wrapper declarations with exact parser-backed callable evidence."; declarations = @($implemented | ForEach-Object { [ordered]@{ ordinal = $_.ordinal; upstreamIdentity = $_.identity; upstreamClassification = $_.classification; nativeEntrypoints = $_.nativeEntrypoints; managedMembers = $_.managedMembers; focusedTest = "tests/OpenCvSharp.Tests/$DisplayName/$DisplayName`Tests.cs"; nativeSmoke = 'src/OpenCvSharp.Native/tests/native_smoke.cpp'; sample = 'samples/ConsoleSamples/Program.cs'; guide = $guide } }) }) }
 $classificationJson = (($classification | ConvertTo-Json -Depth 20) + [Environment]::NewLine); $familyJson = (($family | ConvertTo-Json -Depth 20) + [Environment]::NewLine); $mapHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($mappingText))).ToLowerInvariant(); $familyHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($familyJson))).ToLowerInvariant()
 $summary = [ordered]@{ schemaVersion = 1; generator = "tools/$DisplayName`UpstreamMap"; upstreamOpenCvVersion = '5.0.0'; claimedSlice = $classification.claimedSlice; rawExtractionPath = "compatibility/$Module-upstream-raw.json"; classificationPath = "compatibility/$Module-upstream-classifications.json"; mappingPath = "compatibility/$Module-upstream-map.txt"; headerSha256 = [string]$raw.headerSha256; parserSha256 = [string]$raw.parserSha256; mappingSha256 = $mapHash; declarationCount = [int]$raw.declarationCount; enumCount = [int](@($raw.declarations | Where-Object kind -eq enum).Count); classCount = [int](@($raw.declarations | Where-Object kind -eq class).Count); callableCount = [int](@($raw.declarations | Where-Object kind -eq callable).Count); classificationCounts = [ordered]@{ implemented = [int]$implemented.Count; 'intentionally-omitted' = [int]$omitted.Count; missing = 0; 'non-callable-metadata' = [int]$metadata.Count; unsupported = 0; 'upstream-conditional' = 0 }; nativeEvidenceCount = @($rows | ForEach-Object { @($_.nativeEntrypoints) } | Where-Object { $_ } | Sort-Object -Unique).Count; managedEvidenceCount = @($rows | ForEach-Object { @($_.managedMembers) } | Where-Object { $_ } | Sort-Object -Unique).Count; negativeFixtureCount = 12; externalDataDependencyCount = @($externalDataDependencies).Count; familyInventoryPath = "compatibility/$Module-implemented-families.json"; familyInventorySha256 = $familyHash; selectedFamilyCount = 1; selectedDeclarationCount = $implemented.Count; managedPublicTypeAdditionCount = 0; managedPublicMemberAdditionCount = 0; repositoryWideUpstreamParityClaimed = $false }; $summaryJson = (($summary | ConvertTo-Json -Depth 20) + [Environment]::NewLine)

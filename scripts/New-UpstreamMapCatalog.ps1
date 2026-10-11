@@ -44,7 +44,8 @@ $definitions = @(
     [pscustomobject]@{ Id = 'saliency'; Tool = 'Saliency'; Repository = 'opencv_contrib' }
     [pscustomobject]@{ Id = 'surface_matching'; Tool = 'SurfaceMatching'; Repository = 'opencv_contrib' }
     [pscustomobject]@{ Id = 'reg'; Tool = 'Reg'; Repository = 'opencv_contrib' },
-    [pscustomobject]@{ Id = 'xstereo'; Tool = 'XStereo'; Repository = 'opencv_contrib' }
+    [pscustomobject]@{ Id = 'xstereo'; Tool = 'XStereo'; Repository = 'opencv_contrib' },
+    [pscustomobject]@{ Id = 'ptcloud'; Tool = 'PtCloud'; Repository = 'opencv' }
 )
 
 function Get-HeaderRows {

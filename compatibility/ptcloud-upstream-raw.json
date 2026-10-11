@@ -1,0 +1,744 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/PtCloudUpstreamMap/extract_ptcloud.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud.hpp",
+  "headerSha256": "90d13a8e7c263286209d2e7fa6b82dea9db36cf89ede65d099289d6fe7a91799",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud/depth.hpp",
+      "sha256": "b46d17fff063b0015333738bc001ff792a7ac4173550ecf9ea90f16d1674e540",
+      "startOrdinal": 0,
+      "declarationCount": 22
+    }
+  ],
+  "compatibilityHeaders": [],
+  "excludedPublicHeaders": [
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud.hpp",
+      "sha256": "90d13a8e7c263286209d2e7fa6b82dea9db36cf89ede65d099289d6fe7a91799",
+      "reason": "Umbrella includes volume/odometry headers outside the selected depth/RGB-D wrapper slice."
+    }
+  ],
+  "declarationCount": 22,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud/depth.hpp",
+      "kind": "class",
+      "name": "cv.RgbdNormals",
+      "identity": "class cv.RgbdNormals",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Object that can compute the normals in an image.\n * It is an object as it can cache data for speed efficiency\n * The implemented methods are either:\n * - FALS (the fastest) and SRI from\n * ``Fast and Accurate Computation of Surface Normals from Range Images``\n * by H. Badino, D. Huber, Y. Park and T. Kanade\n * - the normals with bilateral filtering on a depth image from\n * ``Gradient Response Maps for Real-Time Detection of Texture-Less Objects``\n * by S. Hinterstoisser, C. Cagniart, S. Ilic, P. Sturm, N. Navab, P. Fua, and V. Lepetit"
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud/depth.hpp",
+      "kind": "enum",
+      "name": "cv.RgbdNormals.RgbdNormalsMethod",
+      "identity": "enum cv.RgbdNormals.RgbdNormalsMethod[const cv.RgbdNormals.RGBD_NORMALS_METHOD_FALS=0;const cv.RgbdNormals.RGBD_NORMALS_METHOD_LINEMOD=1;const cv.RgbdNormals.RGBD_NORMALS_METHOD_SRI=2;const cv.RgbdNormals.RGBD_NORMALS_METHOD_CROSS_PRODUCT=3]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.RgbdNormals.RGBD_NORMALS_METHOD_FALS",
+          "value": "0"
+        },
+        {
+          "name": "const cv.RgbdNormals.RGBD_NORMALS_METHOD_LINEMOD",
+          "value": "1"
+        },
+        {
+          "name": "const cv.RgbdNormals.RGBD_NORMALS_METHOD_SRI",
+          "value": "2"
+        },
+        {
+          "name": "const cv.RgbdNormals.RGBD_NORMALS_METHOD_CROSS_PRODUCT",
+          "value": "3"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud/depth.hpp",
+      "kind": "callable",
+      "name": "cv.RgbdNormals.create",
+      "identity": "cv.RgbdNormals.create(int rows=0;int cols=0;int depth=0;Mat K=Mat();int window_size=5;float diff_threshold=50.f;RgbdNormals_RgbdNormalsMethod method=RgbdNormals::RgbdNormalsMethod::RGBD_NORMALS_METHOD_FALS)->Ptr<RgbdNormals>",
+      "returnType": "Ptr<RgbdNormals>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "rows",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "cols",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "depth",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "K",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "window_size",
+          "default": "5",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "diff_threshold",
+          "default": "50.f",
+          "modifiers": []
+        },
+        {
+          "type": "RgbdNormals_RgbdNormalsMethod",
+          "name": "method",
+          "default": "RgbdNormals::RgbdNormalsMethod::RGBD_NORMALS_METHOD_FALS",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Creates new RgbdNormals object\n     * @param rows the number of rows of the depth image normals will be computed on\n     * @param cols the number of cols of the depth image normals will be computed on\n     * @param depth the depth of the normals (only CV_32F or CV_64F)\n     * @param K the calibration matrix to use\n     * @param window_size the window size to compute the normals: can only be 1,3,5 or 7\n     * @param diff_threshold threshold in depth difference, used in LINEMOD algirithm\n     * @param method one of the methods to use: RGBD_NORMALS_METHOD_SRI, RGBD_NORMALS_METHOD_FALS"
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud/depth.hpp",
+      "kind": "callable",
+      "name": "cv.RgbdNormals.apply",
+      "identity": "cv.RgbdNormals.apply(Mat points;Mat normals[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "points",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "normals",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Given a set of 3d points in a depth image, compute the normals at each point.\n     * @param points a rows x cols x 3 matrix of CV_32F/CV64F or a rows x cols x 1 CV_U16S\n     * @param normals a rows x cols x 3 matrix"
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud/depth.hpp",
+      "kind": "callable",
+      "name": "cv.RgbdNormals.cache",
+      "identity": "cv.RgbdNormals.cache()->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Prepares cached data required for calculation\n    * If not called by user, called automatically at first calculation"
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud/depth.hpp",
+      "kind": "callable",
+      "name": "cv.RgbdNormals.getRows",
+      "identity": "cv.RgbdNormals.getRows()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud/depth.hpp",
+      "kind": "callable",
+      "name": "cv.RgbdNormals.setRows",
+      "identity": "cv.RgbdNormals.setRows(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud/depth.hpp",
+      "kind": "callable",
+      "name": "cv.RgbdNormals.getCols",
+      "identity": "cv.RgbdNormals.getCols()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud/depth.hpp",
+      "kind": "callable",
+      "name": "cv.RgbdNormals.setCols",
+      "identity": "cv.RgbdNormals.setCols(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud/depth.hpp",
+      "kind": "callable",
+      "name": "cv.RgbdNormals.getWindowSize",
+      "identity": "cv.RgbdNormals.getWindowSize()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud/depth.hpp",
+      "kind": "callable",
+      "name": "cv.RgbdNormals.setWindowSize",
+      "identity": "cv.RgbdNormals.setWindowSize(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud/depth.hpp",
+      "kind": "callable",
+      "name": "cv.RgbdNormals.getDepth",
+      "identity": "cv.RgbdNormals.getDepth()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud/depth.hpp",
+      "kind": "callable",
+      "name": "cv.RgbdNormals.getK",
+      "identity": "cv.RgbdNormals.getK(Mat val[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "val",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud/depth.hpp",
+      "kind": "callable",
+      "name": "cv.RgbdNormals.setK",
+      "identity": "cv.RgbdNormals.setK(Mat val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud/depth.hpp",
+      "kind": "callable",
+      "name": "cv.RgbdNormals.getMethod",
+      "identity": "cv.RgbdNormals.getMethod()->RgbdNormals::RgbdNormalsMethod",
+      "returnType": "RgbdNormals::RgbdNormalsMethod",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud/depth.hpp",
+      "kind": "callable",
+      "name": "cv.registerDepth",
+      "identity": "cv.registerDepth(Mat unregisteredCameraMatrix;Mat registeredCameraMatrix;Mat registeredDistCoeffs;Mat Rt;Mat unregisteredDepth;Size outputImagePlaneSize[/C,/Ref];Mat registeredDepth[/O];bool depthDilation=false)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "unregisteredCameraMatrix",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "registeredCameraMatrix",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "registeredDistCoeffs",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "Rt",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "unregisteredDepth",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "outputImagePlaneSize",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "registeredDepth",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "depthDilation",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Registers depth data to an external camera\n * Registration is performed by creating a depth cloud, transforming the cloud by\n * the rigid body transformation between the cameras, and then projecting the\n * transformed points into the RGB camera.\n *\n * uv_rgb = K_rgb * [R | t] * z * inv(K_ir) * uv_ir\n *\n * Currently does not check for negative depth values.\n *\n * @param unregisteredCameraMatrix the camera matrix of the depth camera\n * @param registeredCameraMatrix the camera matrix of the external camera\n * @param registeredDistCoeffs the distortion coefficients of the external camera\n * @param Rt the rigid body transform between the cameras. Transforms points from depth camera frame to external camera frame.\n * @param unregisteredDepth the input depth data\n * @param outputImagePlaneSize the image plane dimensions of the external camera (width, height)\n * @param registeredDepth the result of transforming the depth into the external camera\n * @param depthDilation whether or not the depth is dilated to avoid holes and occlusion errors (optional)"
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud/depth.hpp",
+      "kind": "callable",
+      "name": "cv.depthTo3dSparse",
+      "identity": "cv.depthTo3dSparse(Mat depth;Mat in_K;Mat in_points;Mat points3d[/O])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "depth",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "in_K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "in_points",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "points3d",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @param depth the depth image\n * @param in_K\n * @param in_points the list of xy coordinates\n * @param points3d the resulting 3d points (point is represented by 4 chanels value [x, y, z, 0])"
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud/depth.hpp",
+      "kind": "callable",
+      "name": "cv.depthTo3d",
+      "identity": "cv.depthTo3d(Mat depth;Mat K;Mat points3d[/O];Mat mask=Mat())->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "depth",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "points3d",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Converts a depth image to 3d points. If the mask is empty then the resulting array has the same dimensions as `depth`,\n * otherwise it is 1d vector containing mask-enabled values only.\n * The coordinate system is x pointing left, y down and z away from the camera\n * @param depth the depth image (if given as short int CV_U, it is assumed to be the depth in millimeters\n *              (as done with the Microsoft Kinect), otherwise, if given as CV_32F or CV_64F, it is assumed in meters)\n * @param K The calibration matrix\n * @param points3d the resulting 3d points (point is represented by 4 channels value [x, y, z, 0]). They are of the same depth as `depth` if it is CV_32F or CV_64F, and the\n *        depth of `K` if `depth` is of depth CV_16U or CV_16S\n * @param mask the mask of the points to consider (can be empty)"
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud/depth.hpp",
+      "kind": "callable",
+      "name": "cv.rescaleDepth",
+      "identity": "cv.rescaleDepth(Mat in;int type;Mat out[/O];double depth_factor=1000.0)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "in",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "type",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "out",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "depth_factor",
+          "default": "1000.0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "If the input image is of type CV_16UC1 (like the Kinect one), the image is converted to floats, divided\n * by depth_factor to get a depth in meters, and the values 0 are converted to std::numeric_limits<float>::quiet_NaN()\n * Otherwise, the image is simply converted to floats\n * @param in the depth image (if given as short int CV_U, it is assumed to be the depth in millimeters\n *              (as done with the Microsoft Kinect), it is assumed in meters)\n * @param type the desired output depth (CV_32F or CV_64F)\n * @param out The rescaled float depth image\n * @param depth_factor (optional) factor by which depth is converted to distance (by default = 1000.0 for Kinect sensor)"
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud/depth.hpp",
+      "kind": "callable",
+      "name": "cv.warpFrame",
+      "identity": "cv.warpFrame(Mat depth;Mat image;Mat mask;Mat Rt;Mat cameraMatrix;Mat warpedDepth=Mat()[/O];Mat warpedImage=Mat()[/O];Mat warpedMask=Mat()[/O])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "depth",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "Rt",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "cameraMatrix",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "warpedDepth",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "warpedImage",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "warpedMask",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Warps depth or RGB-D image by reprojecting it in 3d, applying Rt transformation\n * and then projecting it back onto the image plane.\n * This function can be used to visualize the results of the Odometry algorithm.\n * @param depth Depth data, should be 1-channel CV_16U, CV_16S, CV_32F or CV_64F\n * @param image RGB image (optional), should be 1-, 3- or 4-channel CV_8U\n * @param mask Mask of used pixels (optional), should be CV_8UC1, CV_8SC1 or CV_BoolC1\n * @param Rt Rotation+translation matrix (3x4 or 4x4) to be applied to depth points\n * @param cameraMatrix Camera intrinsics matrix (3x3)\n * @param warpedDepth The warped depth data (optional)\n * @param warpedImage The warped RGB image (optional)\n * @param warpedMask The mask of valid pixels in warped image (optional)"
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud/depth.hpp",
+      "kind": "enum",
+      "name": "cv.RgbdPlaneMethod",
+      "identity": "enum cv.RgbdPlaneMethod[const cv.RGBD_PLANE_METHOD_DEFAULT=0]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.RGBD_PLANE_METHOD_DEFAULT",
+          "value": "0"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/ptcloud/include/opencv2/ptcloud/depth.hpp",
+      "kind": "callable",
+      "name": "cv.findPlanes",
+      "identity": "cv.findPlanes(Mat points3d;Mat normals;Mat mask[/O];Mat plane_coefficients[/O];int block_size=40;int min_size=40*40;double threshold=0.01;double sensor_error_a=0;double sensor_error_b=0;double sensor_error_c=0;RgbdPlaneMethod method=RGBD_PLANE_METHOD_DEFAULT)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "points3d",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "normals",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "plane_coefficients",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "block_size",
+          "default": "40",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "min_size",
+          "default": "40*40",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "threshold",
+          "default": "0.01",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "sensor_error_a",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "sensor_error_b",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "sensor_error_c",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "RgbdPlaneMethod",
+          "name": "method",
+          "default": "RGBD_PLANE_METHOD_DEFAULT",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Find the planes in a depth image\n * @param points3d the 3d points organized like the depth image: rows x cols with 3 channels\n * @param normals the normals for every point in the depth image; optional, can be empty\n * @param mask An image where each pixel is labeled with the plane it belongs to\n *        and 255 if it does not belong to any plane\n * @param plane_coefficients the coefficients of the corresponding planes (a,b,c,d) such that ax+by+cz+d=0, norm(a,b,c)=1\n *        and c < 0 (so that the normal points towards the camera)\n * @param block_size The size of the blocks to look at for a stable MSE\n * @param min_size The minimum size of a cluster to be considered a plane\n * @param threshold The maximum distance of a point from a plane to belong to it (in meters)\n * @param sensor_error_a coefficient of the sensor error. 0 by default, use 0.0075 for a Kinect\n * @param sensor_error_b coefficient of the sensor error. 0 by default\n * @param sensor_error_c coefficient of the sensor error. 0 by default\n * @param method The method to use to compute the planes."
+    }
+  ]
+}

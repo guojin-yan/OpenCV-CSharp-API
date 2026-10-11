@@ -1,0 +1,289 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/ptcloud/depth.hpp selected parser-backed depth/RGB-D wrapper slice; ptcloud umbrella volume/odometry headers are explicitly excluded",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact PtCloud wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.RgbdNormals",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "enum cv.RgbdNormals.RgbdNormalsMethod[const cv.RgbdNormals.RGBD_NORMALS_METHOD_FALS=0;const cv.RgbdNormals.RGBD_NORMALS_METHOD_LINEMOD=1;const cv.RgbdNormals.RGBD_NORMALS_METHOD_SRI=2;const cv.RgbdNormals.RGBD_NORMALS_METHOD_CROSS_PRODUCT=3]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.RgbdNormals.create(int rows=0;int cols=0;int depth=0;Mat K=Mat();int window_size=5;float diff_threshold=50.f;RgbdNormals_RgbdNormalsMethod method=RgbdNormals::RgbdNormalsMethod::RGBD_NORMALS_METHOD_FALS)->Ptr<RgbdNormals>",
+      "classification": "implemented",
+      "reason": "Explicit PtCloud declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|method|public;static|JYPPX.OpenCvSharp.PtCloud.RgbdNormals Create(System.Int32 rows=0,System.Int32 cols=0,System.Int32 depth=0,JYPPX.OpenCvSharp.Core.Mat? cameraMatrix=null,System.Int32 windowSize=5,System.Single diffThreshold=50,JYPPX.OpenCvSharp.PtCloud.RgbdNormalsMethod method=Fals)"
+      ]
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.RgbdNormals.apply(Mat points;Mat normals[/O])->void",
+      "classification": "implemented",
+      "reason": "RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_apply"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Apply(JYPPX.OpenCvSharp.Core.Mat points)",
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|method|public;instance|System.Void Apply(JYPPX.OpenCvSharp.Core.Mat points,JYPPX.OpenCvSharp.Core.Mat normals)"
+      ]
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.RgbdNormals.cache()->void",
+      "classification": "implemented",
+      "reason": "RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_cache"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|method|public;instance|System.Void Cache()"
+      ]
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.RgbdNormals.getRows()->int",
+      "classification": "implemented",
+      "reason": "RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|property|instance;get:public;set:public|System.Int32 Rows"
+      ]
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.RgbdNormals.setRows(int val)->void",
+      "classification": "implemented",
+      "reason": "RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|property|instance;get:public;set:public|System.Int32 Rows"
+      ]
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.RgbdNormals.getCols()->int",
+      "classification": "implemented",
+      "reason": "RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|property|instance;get:public;set:public|System.Int32 Cols"
+      ]
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.RgbdNormals.setCols(int val)->void",
+      "classification": "implemented",
+      "reason": "RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|property|instance;get:public;set:public|System.Int32 Cols"
+      ]
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.RgbdNormals.getWindowSize()->int",
+      "classification": "implemented",
+      "reason": "RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|property|instance;get:public;set:public|System.Int32 WindowSize"
+      ]
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.RgbdNormals.setWindowSize(int val)->void",
+      "classification": "implemented",
+      "reason": "RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|property|instance;get:public;set:public|System.Int32 WindowSize"
+      ]
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.RgbdNormals.getDepth()->int",
+      "classification": "implemented",
+      "reason": "RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|property|instance;get:public|System.Int32 Depth"
+      ]
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.RgbdNormals.getK(Mat val[/O])->void",
+      "classification": "implemented",
+      "reason": "RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_get_k"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetK()",
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|method|public;instance|System.Void GetK(JYPPX.OpenCvSharp.Core.Mat cameraMatrix)"
+      ]
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.RgbdNormals.setK(Mat val)->void",
+      "classification": "implemented",
+      "reason": "RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_set_k"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|method|public;instance|System.Void SetK(JYPPX.OpenCvSharp.Core.Mat cameraMatrix)"
+      ]
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.RgbdNormals.getMethod()->RgbdNormals::RgbdNormalsMethod",
+      "classification": "implemented",
+      "reason": "RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|property|instance;get:public|JYPPX.OpenCvSharp.PtCloud.RgbdNormalsMethod Method"
+      ]
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.registerDepth(Mat unregisteredCameraMatrix;Mat registeredCameraMatrix;Mat registeredDistCoeffs;Mat Rt;Mat unregisteredDepth;Size outputImagePlaneSize[/C,/Ref];Mat registeredDepth[/O];bool depthDilation=false)->void",
+      "classification": "implemented",
+      "reason": "Explicit PtCloud declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ptcloud_register_depth"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|System.Void RegisterDepth(JYPPX.OpenCvSharp.Core.Mat unregisteredCameraMatrix,JYPPX.OpenCvSharp.Core.Mat registeredCameraMatrix,JYPPX.OpenCvSharp.Core.Mat registeredDistCoeffs,JYPPX.OpenCvSharp.Core.Mat rt,JYPPX.OpenCvSharp.Core.Mat unregisteredDepth,JYPPX.OpenCvSharp.Core.Size outputImagePlaneSize,JYPPX.OpenCvSharp.Core.Mat registeredDepth,System.Boolean depthDilation=false)"
+      ]
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.depthTo3dSparse(Mat depth;Mat in_K;Mat in_points;Mat points3d[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit PtCloud declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ptcloud_depth_to_3d_sparse"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat DepthTo3dSparse(JYPPX.OpenCvSharp.Core.Mat depth,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat points)",
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|System.Void DepthTo3dSparse(JYPPX.OpenCvSharp.Core.Mat depth,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat points,JYPPX.OpenCvSharp.Core.Mat points3d)"
+      ]
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.depthTo3d(Mat depth;Mat K;Mat points3d[/O];Mat mask=Mat())->void",
+      "classification": "implemented",
+      "reason": "Explicit PtCloud declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ptcloud_depth_to_3d"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat DepthTo3d(JYPPX.OpenCvSharp.Core.Mat depth,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat? mask=null)",
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|System.Void DepthTo3d(JYPPX.OpenCvSharp.Core.Mat depth,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat points3d,JYPPX.OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.rescaleDepth(Mat in;int type;Mat out[/O];double depth_factor=1000.0)->void",
+      "classification": "implemented",
+      "reason": "Explicit PtCloud declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ptcloud_rescale_depth"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat RescaleDepth(JYPPX.OpenCvSharp.Core.Mat src,System.Int32 type=5,System.Double depthFactor=1000)",
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|System.Void RescaleDepth(JYPPX.OpenCvSharp.Core.Mat src,System.Int32 type,JYPPX.OpenCvSharp.Core.Mat dst,System.Double depthFactor=1000)"
+      ]
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.warpFrame(Mat depth;Mat image;Mat mask;Mat Rt;Mat cameraMatrix;Mat warpedDepth=Mat()[/O];Mat warpedImage=Mat()[/O];Mat warpedMask=Mat()[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit PtCloud declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ptcloud_warp_frame"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|System.Void WarpFrame(JYPPX.OpenCvSharp.Core.Mat depth,JYPPX.OpenCvSharp.Core.Mat? image,JYPPX.OpenCvSharp.Core.Mat? mask,JYPPX.OpenCvSharp.Core.Mat rt,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat? warpedDepth=null,JYPPX.OpenCvSharp.Core.Mat? warpedImage=null,JYPPX.OpenCvSharp.Core.Mat? warpedMask=null)"
+      ]
+    },
+    {
+      "ordinal": 20,
+      "identity": "enum cv.RgbdPlaneMethod[const cv.RGBD_PLANE_METHOD_DEFAULT=0]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.findPlanes(Mat points3d;Mat normals;Mat mask[/O];Mat plane_coefficients[/O];int block_size=40;int min_size=40*40;double threshold=0.01;double sensor_error_a=0;double sensor_error_b=0;double sensor_error_c=0;RgbdPlaneMethod method=RGBD_PLANE_METHOD_DEFAULT)->void",
+      "classification": "implemented",
+      "reason": "Explicit PtCloud declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ptcloud_find_planes"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|System.Void FindPlanes(JYPPX.OpenCvSharp.Core.Mat points3d,JYPPX.OpenCvSharp.Core.Mat? normals,JYPPX.OpenCvSharp.Core.Mat mask,JYPPX.OpenCvSharp.Core.Mat planeCoefficients,System.Int32 blockSize=40,System.Int32 minSize=1600,System.Double threshold=0.01,System.Double sensorErrorA=0,System.Double sensorErrorB=0,System.Double sensorErrorC=0,JYPPX.OpenCvSharp.PtCloud.RgbdPlaneMethod method=Default)"
+      ]
+    }
+  ]
+}

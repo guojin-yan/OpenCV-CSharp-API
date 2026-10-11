@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/989c6e79d6e4011a",
-  "SourceIdentity": "sha256:989c6e79d6e4011afc278972e8069a4b8809bf16b63025b7432fcae9a00eb829",
+  "CandidateId": "local-closeout/sha256/bd9d77963455c3af",
+  "SourceIdentity": "sha256:bd9d77963455c3af95abdb8527d8af8a3a7f559c51d7cb56e28bbc84f5afa97c",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 2062,
-    "Sha256": "989c6e79d6e4011afc278972e8069a4b8809bf16b63025b7432fcae9a00eb829",
+    "FileCount": 2072,
+    "Sha256": "bd9d77963455c3af95abdb8527d8af8a3a7f559c51d7cb56e28bbc84f5afa97c",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -534,6 +534,30 @@
       "ManagedPublicTypeAdditionCount": 0,
       "ManagedPublicMemberAdditionCount": 0,
       "NativeEntrypointAdditionCount": 10,
+      "RepositoryWideParityClaimed": false
+    },
+    "PtCloudUpstreamMap": {
+      "Path": "compatibility/ptcloud-upstream-map.txt",
+      "SummaryPath": "compatibility/ptcloud-upstream-summary.json",
+      "ClassificationPath": "compatibility/ptcloud-upstream-classifications.json",
+      "FamilyInventoryPath": "compatibility/ptcloud-implemented-families.json",
+      "RawExtractionPath": "compatibility/ptcloud-upstream-raw.json",
+      "Sha256": "ad6cb09f4de25b611e255fa5fa61b02ceea19cb8ac4d8aec34b1923452d0bc4c",
+      "RawSha256": "b78962d8c81eb4e0a03eb072684e4e5f0a1b8e7aea2d800d1c59f66de6c85e93",
+      "DeclarationCount": 22,
+      "CallableCount": 19,
+      "ImplementedCount": 19,
+      "MissingCount": 0,
+      "IntentionallyOmittedCount": 0,
+      "UnsupportedCount": 0,
+      "UpstreamConditionalCount": 0,
+      "SourceHeaderCount": 1,
+      "ExcludedPublicHeaderCount": 1,
+      "SelectedFamilyCount": 1,
+      "SelectedDeclarationCount": 19,
+      "ManagedPublicTypeAdditionCount": 0,
+      "ManagedPublicMemberAdditionCount": 0,
+      "NativeEntrypointAdditionCount": 13,
       "RepositoryWideParityClaimed": false
     },
     "GapInventoryPath": "compatibility/api-gap-inventory.json",
@@ -1200,6 +1224,31 @@
       "Length": 1410
     },
     {
+      "Path": "compatibility/ptcloud-implemented-families.json",
+      "Sha256": "730e0dae69298b865de36f54a36bd0d0b428467ceddfc7d59bbe566b6fc77e9d",
+      "Length": 16786
+    },
+    {
+      "Path": "compatibility/ptcloud-upstream-classifications.json",
+      "Sha256": "a4b685bd154fab4d3dbc6518fcb27e8f828e02882b40a12dd6aad4286fdc6597",
+      "Length": 16541
+    },
+    {
+      "Path": "compatibility/ptcloud-upstream-map.txt",
+      "Sha256": "ad6cb09f4de25b611e255fa5fa61b02ceea19cb8ac4d8aec34b1923452d0bc4c",
+      "Length": 11947
+    },
+    {
+      "Path": "compatibility/ptcloud-upstream-raw.json",
+      "Sha256": "b78962d8c81eb4e0a03eb072684e4e5f0a1b8e7aea2d800d1c59f66de6c85e93",
+      "Length": 26027
+    },
+    {
+      "Path": "compatibility/ptcloud-upstream-summary.json",
+      "Sha256": "73aecaa850a722091a3f22fffea4606d14297fcebcc56b3dbdde42b6fd608adc",
+      "Length": 1491
+    },
+    {
       "Path": "compatibility/quality-implemented-families.json",
       "Sha256": "7f98dc34d522b2852fbc2087145d88e70840d4117ae1c356fb535a27f60b0400",
       "Length": 22083
@@ -1426,18 +1475,18 @@
     },
     {
       "Path": "compatibility/upstream-map-catalog.json",
-      "Sha256": "dfbb50aa6d4f54ecc98405ec61535eb99a8b4c9366589e4053450cdab0c50156",
-      "Length": 128269
+      "Sha256": "0dbd516be9276ec893cbe9cea111db3ed6db8f5229ddc6e7f3a1d9655835bc11",
+      "Length": 130754
     },
     {
       "Path": "compatibility/upstream-map-catalog.schema.json",
-      "Sha256": "d6ef665c4a196c1ac2451f9b148e6f002a030de5fef92178b8538be6387d0cc6",
-      "Length": 5869
+      "Sha256": "6df8b4cc48166e9675cdf8cc9739b8a12dbf170f148146b9ca9d2bf8fbdc3104",
+      "Length": 5880
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "931f1d8f20c0747b667a2cb2d28b2b2db046018d9ea76dc7aea2ba6fe6a67441",
-      "Length": 45247
+      "Sha256": "ef679dcbe378e0a85f4665f2268acdfe9bea0be81e7240a6e44784751e9ef337",
+      "Length": 46483
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -1896,8 +1945,8 @@
     },
     {
       "Path": "docs/articles/upstream-map-toolchain.md",
-      "Sha256": "e4faff8555b3849464387ba432717b59c1a2d37f8e57872342230452249dc0e5",
-      "Length": 7245
+      "Sha256": "4451e71a205b09be4d77927ddc0a04f2028566668e3bde518092c8c4da3d6692",
+      "Length": 7741
     },
     {
       "Path": "docs/articles/v501-modern-api-preview-guide.md",
@@ -2351,8 +2400,8 @@
     },
     {
       "Path": "scripts/Generate-ContribUpstreamMap.ps1",
-      "Sha256": "a2403f099abd9a4d599d7edae70efd2d2ec47cab3ac456c72ae08c6c021515e9",
-      "Length": 94597
+      "Sha256": "7a76f3b4fa2ad237e09b922b7a9bfff31d9b2cf78e5066f8b898b0b279c3f24b",
+      "Length": 100014
     },
     {
       "Path": "scripts/Generate-CoreUpstreamMap.ps1",
@@ -2463,6 +2512,11 @@
       "Path": "scripts/Generate-PlotUpstreamMap.ps1",
       "Sha256": "215eebf271aa7a4b3d79bba9c5b58ccc15c1b99e15c27ac27486d5bf0bff932c",
       "Length": 339
+    },
+    {
+      "Path": "scripts/Generate-PtCloudUpstreamMap.ps1",
+      "Sha256": "a883ecd8ab077f3f835f65ee8b9133735793c9768b93a2a1dd61ba97e0c8ab1e",
+      "Length": 1670
     },
     {
       "Path": "scripts/Generate-QualityUpstreamMap.ps1",
@@ -2621,8 +2675,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "6249a9ab884c3e8a4c1b74b5f60f861de7fbecf3e1551411f40a51fd23d60b2b",
-      "Length": 95775
+      "Sha256": "609000d8a6db77d052ac61e798cb3bc39435afb26aafb196f6c54602e394a699",
+      "Length": 98589
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -2636,8 +2690,8 @@
     },
     {
       "Path": "scripts/New-UpstreamMapCatalog.ps1",
-      "Sha256": "9a34eb2bbc9f135fc299ed32f5abfdb9f5646a73fba398500f82ceefc72eef4c",
-      "Length": 9899
+      "Sha256": "66bfdcc2bf60f43f4b3f743483f9a8c93e80ec7c4a6f188948f0d240c59e4e27",
+      "Length": 9981
     },
     {
       "Path": "scripts/Test-AlphaMatUpstreamMap.ps1",
@@ -2980,6 +3034,11 @@
       "Length": 5007
     },
     {
+      "Path": "scripts/Test-PtCloudUpstreamMap.ps1",
+      "Sha256": "e2f21bba1c9b34805731c64c7a9d280fca653f565a306c9c9074d92fcf62e882",
+      "Length": 3029
+    },
+    {
       "Path": "scripts/Test-QualityUpstreamMap.ps1",
       "Sha256": "bec968da1acbd731d4dfb5737e0e5c5490bbdf3d035bee013312bc0df999119a",
       "Length": 3012
@@ -2996,8 +3055,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "202d4db778c9ba2a8237ec1cf6af89510ceb2284e604dcff57668ddaefd62a48",
-      "Length": 90722
+      "Sha256": "ef3a43bc2e25dd1da8af396c2eb92875f7e9ed70d8bd758084f59151e55d0a1d",
+      "Length": 92313
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -3101,8 +3160,8 @@
     },
     {
       "Path": "scripts/Test-UpstreamMapCatalog.ps1",
-      "Sha256": "fe4702000533f36f647411546c81be0fc14fae2e1293b25793fc66e65caaba16",
-      "Length": 14980
+      "Sha256": "6ac032a727bd820a518a61968400d4c8dc861f59acec834da9220434f5b3649c",
+      "Length": 14990
     },
     {
       "Path": "scripts/Test-V501ChangeLedger.ps1",
@@ -4100,6 +4159,21 @@
       "Length": 227
     },
     {
+      "Path": "tools/PtCloudUpstreamMap/Program.cs",
+      "Sha256": "622df4586eb3009bd63020463da220eef8c0491445a6fcc2ad12b50cd00cf7e8",
+      "Length": 104
+    },
+    {
+      "Path": "tools/PtCloudUpstreamMap/PtCloudUpstreamMap.csproj",
+      "Sha256": "b0655fe2e4b91db06fc9f4da7c1a91df7f87b7204830ea583c7e622398f5f38f",
+      "Length": 241
+    },
+    {
+      "Path": "tools/PtCloudUpstreamMap/extract_ptcloud.py",
+      "Sha256": "456b534e4d0665ce4ff72d31fc9e14123aedca7653776c34da6b7adeabeb5527",
+      "Length": 5055
+    },
+    {
       "Path": "tools/QualityUpstreamMap/Program.cs",
       "Sha256": "fb11430360ed02603e96c9507ae2afd8fe29eb295eeab2e7eda0b4a72951f16e",
       "Length": 104
@@ -4317,7 +4391,7 @@
   ],
   "LocalValidation": {
     "Status": "locally-validated",
-    "InvariantGuardCount": 91,
+    "InvariantGuardCount": 105,
     "RequiredChecks": [
       "actionlint-1.7.12",
       "api-abi-baseline",

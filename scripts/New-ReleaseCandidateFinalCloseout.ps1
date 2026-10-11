@@ -138,6 +138,8 @@ function Get-Record {
     $regSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/reg-upstream-summary.json") -Raw | ConvertFrom-Json
     $xstereoRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/xstereo-upstream-raw.json") -Raw | ConvertFrom-Json
     $xstereoSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/xstereo-upstream-summary.json") -Raw | ConvertFrom-Json
+    $ptcloudRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/ptcloud-upstream-raw.json") -Raw | ConvertFrom-Json
+    $ptcloudSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/ptcloud-upstream-summary.json") -Raw | ConvertFrom-Json
     $evidencePaths = @(
         ".github/workflows/pack.yml",
         ".github/workflows/publish-nuget.yml",
@@ -342,6 +344,11 @@ function Get-Record {
         "compatibility/xstereo-upstream-map.txt",
         "compatibility/xstereo-upstream-raw.json",
         "compatibility/xstereo-upstream-summary.json",
+        "compatibility/ptcloud-implemented-families.json",
+        "compatibility/ptcloud-upstream-classifications.json",
+        "compatibility/ptcloud-upstream-map.txt",
+        "compatibility/ptcloud-upstream-raw.json",
+        "compatibility/ptcloud-upstream-summary.json",
         "compatibility/v5.0.1-change-ledger.json",
         "compatibility/v5.0.1-change-ledger.schema.json",
         "docs/articles/api-abi-compatibility-policy.md",
@@ -804,6 +811,9 @@ function Get-Record {
         "tools/XStereoUpstreamMap/XStereoUpstreamMap.csproj",
         "tools/XStereoUpstreamMap/Program.cs",
         "tools/XStereoUpstreamMap/extract_xstereo.py",
+        "tools/PtCloudUpstreamMap/PtCloudUpstreamMap.csproj",
+        "tools/PtCloudUpstreamMap/Program.cs",
+        "tools/PtCloudUpstreamMap/extract_ptcloud.py",
         "tools/CodecBenchmark/CodecBenchmark.csproj",
         "tools/CodecBenchmark/Program.cs",
         "scripts/Measure-CodecTypedMatBenchmark.ps1",
@@ -887,6 +897,8 @@ function Get-Record {
         "scripts/Test-RegUpstreamMap.ps1",
         "scripts/Generate-XStereoUpstreamMap.ps1",
         "scripts/Test-XStereoUpstreamMap.ps1",
+        "scripts/Generate-PtCloudUpstreamMap.ps1",
+        "scripts/Test-PtCloudUpstreamMap.ps1",
         "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
         "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
         "tools/TypedMatBenchmark/Program.cs",
@@ -1386,6 +1398,30 @@ function Get-Record {
                 NativeEntrypointAdditionCount = [int]$xstereoSummary.nativeEvidenceCount
                 RepositoryWideParityClaimed = [bool]$xstereoSummary.repositoryWideUpstreamParityClaimed
             }
+            PtCloudUpstreamMap = [ordered]@{
+                Path = "compatibility/ptcloud-upstream-map.txt"
+                SummaryPath = "compatibility/ptcloud-upstream-summary.json"
+                ClassificationPath = "compatibility/ptcloud-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/ptcloud-implemented-families.json"
+                RawExtractionPath = "compatibility/ptcloud-upstream-raw.json"
+                Sha256 = $ptcloudSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/ptcloud-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$ptcloudSummary.declarationCount
+                CallableCount = [int]$ptcloudSummary.callableCount
+                ImplementedCount = [int]$ptcloudSummary.classificationCounts.implemented
+                MissingCount = [int]$ptcloudSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$ptcloudSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$ptcloudSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$ptcloudSummary.classificationCounts.'upstream-conditional'
+                SourceHeaderCount = @($ptcloudRaw.sourceHeaders).Count
+                ExcludedPublicHeaderCount = @($ptcloudRaw.excludedPublicHeaders).Count
+                SelectedFamilyCount = [int]$ptcloudSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$ptcloudSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$ptcloudSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$ptcloudSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$ptcloudSummary.nativeEvidenceCount
+                RepositoryWideParityClaimed = [bool]$ptcloudSummary.repositoryWideUpstreamParityClaimed
+            }
             GapInventoryPath = "compatibility/api-gap-inventory.json"
             GapInventoryStatus = $gapInventory.status
             UpstreamParityMeasured = [bool]$gapInventory.measurements.upstreamCppParityMeasured
@@ -1396,7 +1432,7 @@ function Get-Record {
         EvidenceReferences = $evidence
         LocalValidation = [ordered]@{
             Status = "locally-validated"
-            InvariantGuardCount = 91
+            InvariantGuardCount = 105
             RequiredChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
             SdkPolicy = ".NET 10 (any installed feature band)"
             PublicationAllowed = $false
