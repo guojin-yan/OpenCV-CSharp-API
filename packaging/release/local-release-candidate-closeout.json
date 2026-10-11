@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/7731a3d841286ce2",
-  "SourceIdentity": "sha256:7731a3d841286ce2e444095cd45539f1f8f5a84126bcf3a685194f941369f2ae",
+  "CandidateId": "local-closeout/sha256/989c6e79d6e4011a",
+  "SourceIdentity": "sha256:989c6e79d6e4011afc278972e8069a4b8809bf16b63025b7432fcae9a00eb829",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 2052,
-    "Sha256": "7731a3d841286ce2e444095cd45539f1f8f5a84126bcf3a685194f941369f2ae",
+    "FileCount": 2062,
+    "Sha256": "989c6e79d6e4011afc278972e8069a4b8809bf16b63025b7432fcae9a00eb829",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -511,6 +511,29 @@
       "ManagedPublicTypeAdditionCount": 0,
       "ManagedPublicMemberAdditionCount": 0,
       "NativeEntrypointAdditionCount": 20,
+      "RepositoryWideParityClaimed": false
+    },
+    "XStereoUpstreamMap": {
+      "Path": "compatibility/xstereo-upstream-map.txt",
+      "SummaryPath": "compatibility/xstereo-upstream-summary.json",
+      "ClassificationPath": "compatibility/xstereo-upstream-classifications.json",
+      "FamilyInventoryPath": "compatibility/xstereo-implemented-families.json",
+      "RawExtractionPath": "compatibility/xstereo-upstream-raw.json",
+      "Sha256": "5878d163e02c9a20c65df5745e145184b8340ca1cd8fe95fe06a7dc3c28673a7",
+      "RawSha256": "28f446b1a27823ecc2943debfa2d4779fbf54fd254b129b6add77e98dedc51e6",
+      "DeclarationCount": 14,
+      "CallableCount": 10,
+      "ImplementedCount": 8,
+      "MissingCount": 0,
+      "IntentionallyOmittedCount": 2,
+      "UnsupportedCount": 0,
+      "UpstreamConditionalCount": 0,
+      "SourceHeaderCount": 2,
+      "SelectedFamilyCount": 1,
+      "SelectedDeclarationCount": 8,
+      "ManagedPublicTypeAdditionCount": 0,
+      "ManagedPublicMemberAdditionCount": 0,
+      "NativeEntrypointAdditionCount": 10,
       "RepositoryWideParityClaimed": false
     },
     "GapInventoryPath": "compatibility/api-gap-inventory.json",
@@ -1403,18 +1426,18 @@
     },
     {
       "Path": "compatibility/upstream-map-catalog.json",
-      "Sha256": "7c18b857b13529ca34b671c85029d22f4bcec143f24ce501df43fe19606b2fae",
-      "Length": 125848
+      "Sha256": "dfbb50aa6d4f54ecc98405ec61535eb99a8b4c9366589e4053450cdab0c50156",
+      "Length": 128269
     },
     {
       "Path": "compatibility/upstream-map-catalog.schema.json",
-      "Sha256": "822b501198237222f3c493949347641225d8a4e0108ad380c0ad1dc18497e16e",
-      "Length": 5858
+      "Sha256": "d6ef665c4a196c1ac2451f9b148e6f002a030de5fef92178b8538be6387d0cc6",
+      "Length": 5869
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "bd170efdeea15729206601b5fb200f179b080545039fe1e8ed15a50b7f2bdab3",
-      "Length": 43186
+      "Sha256": "931f1d8f20c0747b667a2cb2d28b2b2db046018d9ea76dc7aea2ba6fe6a67441",
+      "Length": 45247
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -1525,6 +1548,31 @@
       "Path": "compatibility/xphoto-upstream-summary.json",
       "Sha256": "77b5a74bdb5a86147c9265efbbc7f1203de9345fd2cae11e35ed08a9b86261ef",
       "Length": 1400
+    },
+    {
+      "Path": "compatibility/xstereo-implemented-families.json",
+      "Sha256": "ddc3ae1855975d8cc220856dd1253c2e19879a3122c871c6fb87080ad0b95764",
+      "Length": 7025
+    },
+    {
+      "Path": "compatibility/xstereo-upstream-classifications.json",
+      "Sha256": "c040c01483dc4f0274f2921e1278792c45cb53bf03a2ce16d48713dbb51758f2",
+      "Length": 8604
+    },
+    {
+      "Path": "compatibility/xstereo-upstream-map.txt",
+      "Sha256": "5878d163e02c9a20c65df5745e145184b8340ca1cd8fe95fe06a7dc3c28673a7",
+      "Length": 5882
+    },
+    {
+      "Path": "compatibility/xstereo-upstream-raw.json",
+      "Sha256": "28f446b1a27823ecc2943debfa2d4779fbf54fd254b129b6add77e98dedc51e6",
+      "Length": 19150
+    },
+    {
+      "Path": "compatibility/xstereo-upstream-summary.json",
+      "Sha256": "7e64e025f1fc70272a2f6ab075ece1b3ea1a08362c36f1223d5ece7c24e87bba",
+      "Length": 1425
     },
     {
       "Path": "docs/articles/api-abi-compatibility-policy.md",
@@ -1848,8 +1896,8 @@
     },
     {
       "Path": "docs/articles/upstream-map-toolchain.md",
-      "Sha256": "977a32eeb9618886b4b75eaf617c8dce57eea0716a0141357d96b04f2aa2565f",
-      "Length": 6501
+      "Sha256": "e4faff8555b3849464387ba432717b59c1a2d37f8e57872342230452249dc0e5",
+      "Length": 7245
     },
     {
       "Path": "docs/articles/v501-modern-api-preview-guide.md",
@@ -2303,8 +2351,8 @@
     },
     {
       "Path": "scripts/Generate-ContribUpstreamMap.ps1",
-      "Sha256": "d791175442c7d4ebdbeb2cc8a43c786a8a4e3a0f5ecc8a2f587051580703433d",
-      "Length": 92257
+      "Sha256": "a2403f099abd9a4d599d7edae70efd2d2ec47cab3ac456c72ae08c6c021515e9",
+      "Length": 94597
     },
     {
       "Path": "scripts/Generate-CoreUpstreamMap.ps1",
@@ -2477,6 +2525,11 @@
       "Length": 13878
     },
     {
+      "Path": "scripts/Generate-XStereoUpstreamMap.ps1",
+      "Sha256": "7292865b40bb1a28a8555ee218f9440246eb9b8f849b014a511f5554245a9dd2",
+      "Length": 345
+    },
+    {
       "Path": "scripts/Get-NativeRuntimeProfileEvidence.ps1",
       "Sha256": "aca767bb1fac5ce929aba6bf57d97ad5cfe80d6528142863c188541e76c624e0",
       "Length": 3083
@@ -2568,8 +2621,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "417d962fa25a64efadf3084c21eceef8b295935ea79fb41b3c09f1eb17611637",
-      "Length": 93049
+      "Sha256": "6249a9ab884c3e8a4c1b74b5f60f861de7fbecf3e1551411f40a51fd23d60b2b",
+      "Length": 95775
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -2583,8 +2636,8 @@
     },
     {
       "Path": "scripts/New-UpstreamMapCatalog.ps1",
-      "Sha256": "d477703a7f89977ed7d57e19fb98f135daa671d42817f7442e9cd55ccc092a62",
-      "Length": 9809
+      "Sha256": "9a34eb2bbc9f135fc299ed32f5abfdb9f5646a73fba398500f82ceefc72eef4c",
+      "Length": 9899
     },
     {
       "Path": "scripts/Test-AlphaMatUpstreamMap.ps1",
@@ -2943,8 +2996,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "c2cb48340ae64978df0eec119b42daed9362c0c9178370ad4959ed474175b129",
-      "Length": 89213
+      "Sha256": "202d4db778c9ba2a8237ec1cf6af89510ceb2284e604dcff57668ddaefd62a48",
+      "Length": 90722
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -3048,8 +3101,8 @@
     },
     {
       "Path": "scripts/Test-UpstreamMapCatalog.ps1",
-      "Sha256": "b290954c0cb79c2180cd5e08761ff1854224342b12ab99202844880615391e79",
-      "Length": 14970
+      "Sha256": "fe4702000533f36f647411546c81be0fc14fae2e1293b25793fc66e65caaba16",
+      "Length": 14980
     },
     {
       "Path": "scripts/Test-V501ChangeLedger.ps1",
@@ -3090,6 +3143,11 @@
       "Path": "scripts/Test-XPhotoUpstreamMap.ps1",
       "Sha256": "3c46d886607d440e2acab915b38c540d76431bfbd01410bf6116772e6514b755",
       "Length": 5268
+    },
+    {
+      "Path": "scripts/Test-XStereoUpstreamMap.ps1",
+      "Sha256": "50d76ae186c8fd0f1543561a73cbf90483978a8a929c3d82c16fabede9773e02",
+      "Length": 2695
     },
     {
       "Path": "src/OpenCvSharp.Native/generated/native_abi_manifest.txt",
@@ -4223,8 +4281,8 @@
     },
     {
       "Path": "tools/XImgProcUpstreamMap/extract_ximgproc.py",
-      "Sha256": "023f36e879478c780cd78fe924785cc26f1db0e69cc6f75508d3a454f0b96978",
-      "Length": 5747
+      "Sha256": "469be0462c44e4196331fb7d6591ac5e481b670ba26ee3c9d954aba60862ad03",
+      "Length": 5780
     },
     {
       "Path": "tools/XPhotoUpstreamMap/Program.cs",
@@ -4240,6 +4298,21 @@
       "Path": "tools/XPhotoUpstreamMap/extract_xphoto.py",
       "Sha256": "23aef534cca8f7287e31abc251899a660a9947aa2ae0b29488712971f99ab960",
       "Length": 4800
+    },
+    {
+      "Path": "tools/XStereoUpstreamMap/Program.cs",
+      "Sha256": "ab449aece42b25807141805defb3fc2dc8743efd900a3e32f0f2035cfa5c641c",
+      "Length": 104
+    },
+    {
+      "Path": "tools/XStereoUpstreamMap/XStereoUpstreamMap.csproj",
+      "Sha256": "b0655fe2e4b91db06fc9f4da7c1a91df7f87b7204830ea583c7e622398f5f38f",
+      "Length": 241
+    },
+    {
+      "Path": "tools/XStereoUpstreamMap/extract_xstereo.py",
+      "Sha256": "3038703cca065db06ffe5c5ad46826e2cfea9278c3c999fa0f817d01b82bd9a0",
+      "Length": 318
     }
   ],
   "LocalValidation": {
