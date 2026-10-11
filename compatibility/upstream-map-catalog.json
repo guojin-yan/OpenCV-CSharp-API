@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 41,
+  "moduleCount": 42,
   "maps": [
     {
       "id": "calib3d",
@@ -194,6 +194,52 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "cfaaed815e4c7f0173739f17fdb8b13fc5f995cee7c26542b52640a9fefcb1f1",
         "familyInventorySha256": "7dc858e9e6d6953ac6c264d7d38baf3ea5b44bb2b5353af8002e2ee0692880f5",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "cnn_3dobj",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/Cnn3DObjUpstreamMap",
+      "extractorScript": "tools/Cnn3DObjUpstreamMap/extract_cnn_3dobj.py",
+      "generationScript": "scripts/Generate-Cnn3DObjUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-Cnn3DObjUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/cnn_3dobj.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/cnn_3dobj/include/opencv2/cnn_3dobj.hpp",
+          "sha256": "60d8dd5c8c454c62efb23728a504b411f9acd419155ef3d1bd547f9134cd854e"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cnn_3dobj/include/opencv2/cnn_3dobj.hpp",
+            "sha256": "60d8dd5c8c454c62efb23728a504b411f9acd419155ef3d1bd547f9134cd854e",
+            "startOrdinal": 0,
+            "declarationCount": 7
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/cnn_3dobj-upstream-raw.json",
+        "classifications": "compatibility/cnn_3dobj-upstream-classifications.json",
+        "mapping": "compatibility/cnn_3dobj-upstream-map.txt",
+        "summary": "compatibility/cnn_3dobj-upstream-summary.json",
+        "familyInventory": "compatibility/cnn_3dobj-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 7,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "7f764a01806a9e8c730a2f0966e5b8156aeaa77d525191d87f1da04d1b7f170e",
+        "familyInventorySha256": "e30aa38aa9d059528bcc8c2dcfef4bab961fef6c7b40f00d27fb6be7a0f652fa",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

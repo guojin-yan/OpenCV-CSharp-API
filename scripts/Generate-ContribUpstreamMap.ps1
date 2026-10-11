@@ -1,5 +1,5 @@
 param(
-    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect','dnn_superres','wechat_qrcode')][string]$Module,
+    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect','dnn_superres','wechat_qrcode','cnn_3dobj')][string]$Module,
     [Parameter(Mandatory)][string]$DisplayName,
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [switch]$Check
@@ -138,7 +138,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
 }
 
 function GetManaged([string]$Owner, [string]$Name, [string]$Identity) {
-    if ($Module -eq 'freetype') { return @() }
+    if ($Module -in @('freetype','cnn_3dobj')) { return @() }
     if ($Module -eq 'structured_light') {
         $typeMarker = "JYPPX.OpenCvSharp.StructuredLight.$Owner|"
         $typeEntries = @($managedEntries | Where-Object { $_.Contains($typeMarker, [StringComparison]::Ordinal) })
@@ -1047,6 +1047,7 @@ foreach ($decl in @($raw.declarations)) {
         if ($Module -eq 'xobjdetect' -and $classification -eq 'implemented' -and [string]$decl.identity -match '^cv\.(?:CascadeClassifier|HOGDescriptor)\.') { $reason = 'The current XObjDetect wrapper covers this declaration through opaque handles, count/fill transport, and property transport; optional NOT_LINKED behavior remains part of the native boundary.' }
         if ($Module -eq 'dnn_superres' -and $classification -eq 'intentionally-omitted') { $reason = 'The DNN Super Resolution contrib surface is model-driven and has no native DnnSuperres wrapper entrypoint or managed public owner in the current package; model provenance, backend/target policy, and output ownership remain outside this scoped map.' }
         if ($Module -eq 'wechat_qrcode' -and $classification -eq 'intentionally-omitted') { $reason = 'The WeChat QRCode contrib surface is model-driven and has no native WeChatQRCode wrapper entrypoint or managed public owner in the current package; caller-supplied detector/super-resolution models, backend policy, and decoded-string ownership remain outside this scoped map.' }
+        if ($Module -eq 'cnn_3dobj' -and $classification -eq 'intentionally-omitted') { $reason = 'The cnn_3dobj contrib surface depends on an external Caffe triplet build and caller-supplied network/model files; the current package has no native Cnn3DObj wrapper entrypoint or managed public owner, so model provenance, device policy, and output ownership remain outside this scoped map.' }
         if ($Module -eq 'rapid' -and [string]$decl.identity -match '^cv\.rapid\.GOSTracker\.create\(') { $reason = 'GOSTracker is present in the pinned upstream header but the current managed/native wrapper exposes only Rapid and OLSTracker; this optional tracker remains deliberately omitted until its behavior, ABI, and ownership contract are separately reviewed.' }
         if ($Module -eq 'phase_unwrapping' -and [string]$decl.identity -match 'HistogramPhaseUnwrapping\.Params\.Params\(') { $reason = 'The upstream default Params constructor is represented by HistogramPhaseUnwrappingParams.Default and an explicit managed value constructor; value initialization has no native callable ABI.' }
         if ($Module -eq 'optflow' -and [string]$decl.identity -match '^cv\.optflow\.createOptFlow_PCAFlow\(') { $reason = 'PCAFlow is an optional dense optical-flow factory distinct from the wrapped RLOF and DualTVL1 families; the current ABI/API has no PCAFlow native factory, opaque handle, ownership/lifetime contract, or deterministic runtime smoke, so this declaration remains intentionally omitted.' }
@@ -1065,6 +1066,7 @@ $externalDataDependencies = switch ($Module) {
     'quality' { @('QualityBRISQUE needs caller-selected SVM model and range files; no model data is bundled. Other quality metrics use caller-provided reference and comparison Mats.') }
     'dnn_superres' { @('DNN Super Resolution requires caller-selected compatible model data and backend/target policy; no model asset or managed/native wrapper is bundled.') }
     'wechat_qrcode' { @('WeChat QRCode requires caller-selected detector and super-resolution ONNX model files; no model assets or managed/native wrapper are bundled.') }
+    'cnn_3dobj' { @('cnn_3dobj requires an external Caffe triplet build plus caller-selected network, mean, and model files; no Caffe runtime or model assets, and no managed/native wrapper, are bundled.') }
     'freetype' { @('The upstream FreeType2 module requires system FreeType2 and HarfBuzz development/runtime libraries; neither dependency is bundled by this repository.') }
     'intensity_transform' { @('BIMEF runtime execution requires OpenCV built with EIGEN support; a module runtime without EIGEN may report that the operation is unavailable.') }
     'saliency' { @('ObjectnessBING requires caller-supplied training/model data through SetTrainingPath; the repository bundles no model asset and therefore does not claim deterministic objectness model execution.') }

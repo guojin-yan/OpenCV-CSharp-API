@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/cnn_3dobj.hpp contrib public header closure from parser-emitted headers",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact Cnn3DObj wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [
+    "cnn_3dobj requires an external Caffe triplet build plus caller-selected network, mean, and model files; no Caffe runtime or model assets, and no managed/native wrapper, are bundled."
+  ],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.cnn_3dobj.icoSphere",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CNN_3DOBJ=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.cnn_3dobj.icoSphere.getCenter(Mat cloud)->cv::Point3d",
+      "classification": "intentionally-omitted",
+      "reason": "The cnn_3dobj contrib surface depends on an external Caffe triplet build and caller-supplied network/model files; the current package has no native Cnn3DObj wrapper entrypoint or managed public owner, so model provenance, device policy, and output ownership remain outside this scoped map.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CNN_3DOBJ=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.cnn_3dobj.icoSphere.getRadius(Mat cloud;Point3d center)->float",
+      "classification": "intentionally-omitted",
+      "reason": "The cnn_3dobj contrib surface depends on an external Caffe triplet build and caller-supplied network/model files; the current package has no native Cnn3DObj wrapper entrypoint or managed public owner, so model provenance, device policy, and output ownership remain outside this scoped map.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CNN_3DOBJ=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.cnn_3dobj.icoSphere.swapEndian(int val)->int",
+      "classification": "intentionally-omitted",
+      "reason": "The cnn_3dobj contrib surface depends on an external Caffe triplet build and caller-supplied network/model files; the current package has no native Cnn3DObj wrapper entrypoint or managed public owner, so model provenance, device policy, and output ownership remain outside this scoped map.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CNN_3DOBJ=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.cnn_3dobj.icoSphere.createHeader(int num_item;int rows;int cols;c_string headerPath[/C])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The cnn_3dobj contrib surface depends on an external Caffe triplet build and caller-supplied network/model files; the current package has no native Cnn3DObj wrapper entrypoint or managed public owner, so model provenance, device policy, and output ownership remain outside this scoped map.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CNN_3DOBJ=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.cnn_3dobj.icoSphere.writeBinaryfile(String filenameImg;c_string binaryPath[/C];c_string headerPath[/C];int num_item;int label_class;int x;int y;int z;int isrgb)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The cnn_3dobj contrib surface depends on an external Caffe triplet build and caller-supplied network/model files; the current package has no native Cnn3DObj wrapper entrypoint or managed public owner, so model provenance, device policy, and output ownership remain outside this scoped map.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CNN_3DOBJ=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "class cv.cnn_3dobj.descriptorExtractor",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CNN_3DOBJ=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}

@@ -10,6 +10,7 @@ $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $definitions = @(
     [pscustomobject]@{ Id = 'calib3d'; Tool = 'Calib3D'; Repository = 'opencv' },
     [pscustomobject]@{ Id = 'core'; Tool = 'Core'; Repository = 'opencv' },
+    [pscustomobject]@{ Id = 'cnn_3dobj'; Tool = 'Cnn3DObj'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'dnn'; Tool = 'Dnn'; Repository = 'opencv' },
     [pscustomobject]@{ Id = 'dnn_superres'; Tool = 'DnnSuperres'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'features'; Tool = 'Features'; Repository = 'opencv' },

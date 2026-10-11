@@ -1,0 +1,236 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/Cnn3DObjUpstreamMap/extract_cnn_3dobj.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/cnn_3dobj/include/opencv2/cnn_3dobj.hpp",
+  "headerSha256": "60d8dd5c8c454c62efb23728a504b411f9acd419155ef3d1bd547f9134cd854e",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cnn_3dobj/include/opencv2/cnn_3dobj.hpp",
+      "sha256": "60d8dd5c8c454c62efb23728a504b411f9acd419155ef3d1bd547f9134cd854e",
+      "startOrdinal": 0,
+      "declarationCount": 7
+    }
+  ],
+  "declarationCount": 7,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cnn_3dobj/include/opencv2/cnn_3dobj.hpp",
+      "kind": "class",
+      "name": "cv.cnn_3dobj.icoSphere",
+      "identity": "class cv.cnn_3dobj.icoSphere",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "********************************** Data Generation Class ***********************************"
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cnn_3dobj/include/opencv2/cnn_3dobj.hpp",
+      "kind": "callable",
+      "name": "cv.cnn_3dobj.icoSphere.getCenter",
+      "identity": "cv.cnn_3dobj.icoSphere.getCenter(Mat cloud)->cv::Point3d",
+      "returnType": "cv::Point3d",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "cloud",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Get the center of points on surface in .ply model.\n        @param cloud Point cloud used for computing the center point."
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cnn_3dobj/include/opencv2/cnn_3dobj.hpp",
+      "kind": "callable",
+      "name": "cv.cnn_3dobj.icoSphere.getRadius",
+      "identity": "cv.cnn_3dobj.icoSphere.getRadius(Mat cloud;Point3d center)->float",
+      "returnType": "float",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "cloud",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Point3d",
+          "name": "center",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Get the proper camera radius from the view point to the center of model.\n        @param cloud Point cloud used for computing the center point.\n        @param center center point of the point cloud."
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cnn_3dobj/include/opencv2/cnn_3dobj.hpp",
+      "kind": "callable",
+      "name": "cv.cnn_3dobj.icoSphere.swapEndian",
+      "identity": "cv.cnn_3dobj.icoSphere.swapEndian(int val)->int",
+      "returnType": "int",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Suit the position of bytes in 4 byte data structure for particular system."
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cnn_3dobj/include/opencv2/cnn_3dobj.hpp",
+      "kind": "callable",
+      "name": "cv.cnn_3dobj.icoSphere.createHeader",
+      "identity": "cv.cnn_3dobj.icoSphere.createHeader(int num_item;int rows;int cols;c_string headerPath[/C])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "num_item",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "rows",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "cols",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "c_string",
+          "name": "headerPath",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Create header in binary files collecting the image data and label.\n        @param num_item Number of items.\n        @param rows Rows of a single sample image.\n        @param cols Columns of a single sample image.\n        @param headerPath Path where the header will be stored."
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cnn_3dobj/include/opencv2/cnn_3dobj.hpp",
+      "kind": "callable",
+      "name": "cv.cnn_3dobj.icoSphere.writeBinaryfile",
+      "identity": "cv.cnn_3dobj.icoSphere.writeBinaryfile(String filenameImg;c_string binaryPath[/C];c_string headerPath[/C];int num_item;int label_class;int x;int y;int z;int isrgb)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filenameImg",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "c_string",
+          "name": "binaryPath",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "c_string",
+          "name": "headerPath",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "num_item",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "label_class",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "x",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "y",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "z",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "isrgb",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Write binary files used for training in other open source project including Caffe.\n        @param filenameImg Path which including a set of images.\n        @param binaryPath Path which will output a binary file.\n        @param headerPath Path which header belongs to.\n        @param num_item Number of samples.\n        @param label_class Class label of the sample.\n        @param x Pose label of X.\n        @param y Pose label of Y.\n        @param z Pose label of Z.\n        @param isrgb Option for choice of using RGB images or not."
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cnn_3dobj/include/opencv2/cnn_3dobj.hpp",
+      "kind": "class",
+      "name": "cv.cnn_3dobj.descriptorExtractor",
+      "identity": "class cv.cnn_3dobj.descriptorExtractor",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "********************************** Feature Extraction Class ***********************************"
+    }
+  ]
+}

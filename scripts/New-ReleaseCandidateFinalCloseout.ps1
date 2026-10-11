@@ -129,6 +129,8 @@ function Get-Record {
     $dnnSuperresSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/dnn_superres-upstream-summary.json") -Raw | ConvertFrom-Json
     $wechatQRCodeRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/wechat_qrcode-upstream-raw.json") -Raw | ConvertFrom-Json
     $wechatQRCodeSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/wechat_qrcode-upstream-summary.json") -Raw | ConvertFrom-Json
+    $cnn3DObjRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/cnn_3dobj-upstream-raw.json") -Raw | ConvertFrom-Json
+    $cnn3DObjSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/cnn_3dobj-upstream-summary.json") -Raw | ConvertFrom-Json
     $featuresSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/features-upstream-summary.json") -Raw | ConvertFrom-Json
     $highGuiSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/highgui-upstream-summary.json") -Raw | ConvertFrom-Json
     $objDetectSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/objdetect-upstream-summary.json") -Raw | ConvertFrom-Json
@@ -182,6 +184,11 @@ function Get-Record {
         "compatibility/wechat_qrcode-upstream-map.txt",
         "compatibility/wechat_qrcode-upstream-raw.json",
         "compatibility/wechat_qrcode-upstream-summary.json",
+        "compatibility/cnn_3dobj-implemented-families.json",
+        "compatibility/cnn_3dobj-upstream-classifications.json",
+        "compatibility/cnn_3dobj-upstream-map.txt",
+        "compatibility/cnn_3dobj-upstream-raw.json",
+        "compatibility/cnn_3dobj-upstream-summary.json",
         "compatibility/features-implemented-families.json",
         "compatibility/features-source-reviewed-extensions.json",
         "compatibility/features-upstream-classifications.json",
@@ -522,6 +529,7 @@ function Get-Record {
         "scripts/Generate-DnnUpstreamMap.ps1",
         "scripts/Generate-DnnSuperresUpstreamMap.ps1",
         "scripts/Generate-WechatQRCodeUpstreamMap.ps1",
+        "scripts/Generate-Cnn3DObjUpstreamMap.ps1",
         "scripts/Generate-FeaturesUpstreamMap.ps1",
         "scripts/Generate-HighGuiUpstreamMap.ps1",
         "scripts/Generate-ImgProcUpstreamMap.ps1",
@@ -576,6 +584,7 @@ function Get-Record {
         "scripts/Test-DnnUpstreamMap.ps1",
         "scripts/Test-DnnSuperresUpstreamMap.ps1",
         "scripts/Test-WechatQRCodeUpstreamMap.ps1",
+        "scripts/Test-Cnn3DObjUpstreamMap.ps1",
         "scripts/Test-FeaturesUpstreamMap.ps1",
         "scripts/Test-HighGuiUpstreamMap.ps1",
         "scripts/Test-ImgProcUpstreamMap.ps1",
@@ -740,6 +749,9 @@ function Get-Record {
         "tools/WechatQRCodeUpstreamMap/WechatQRCodeUpstreamMap.csproj",
         "tools/WechatQRCodeUpstreamMap/Program.cs",
         "tools/WechatQRCodeUpstreamMap/extract_wechat_qrcode.py",
+        "tools/Cnn3DObjUpstreamMap/Cnn3DObjUpstreamMap.csproj",
+        "tools/Cnn3DObjUpstreamMap/Program.cs",
+        "tools/Cnn3DObjUpstreamMap/extract_cnn_3dobj.py",
         "tools/FeaturesUpstreamMap/FeaturesUpstreamMap.csproj",
         "tools/FeaturesUpstreamMap/Program.cs",
         "tools/FeaturesUpstreamMap/extract_features.py",
@@ -851,6 +863,7 @@ function Get-Record {
         "tools/XObjDetectUpstreamMap/extract_xobjdetect.py",
         "docs/articles/dnn-superres-upstream-parity-guide.md",
         "docs/articles/wechat-qrcode-upstream-parity-guide.md",
+        "docs/articles/cnn-3dobj-upstream-parity-guide.md",
         "tools/CodecBenchmark/CodecBenchmark.csproj",
         "tools/CodecBenchmark/Program.cs",
         "scripts/Measure-CodecTypedMatBenchmark.ps1",
@@ -1179,6 +1192,29 @@ function Get-Record {
                 ManagedPublicMemberAdditionCount = [int]$wechatQRCodeSummary.managedPublicMemberAdditionCount
                 NativeEntrypointAdditionCount = [int]$wechatQRCodeSummary.nativeEvidenceCount
                 RepositoryWideParityClaimed = [bool]$wechatQRCodeSummary.repositoryWideUpstreamParityClaimed
+            }
+            Cnn3DObjUpstreamMap = [ordered]@{
+                Path = "compatibility/cnn_3dobj-upstream-map.txt"
+                SummaryPath = "compatibility/cnn_3dobj-upstream-summary.json"
+                ClassificationPath = "compatibility/cnn_3dobj-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/cnn_3dobj-implemented-families.json"
+                RawExtractionPath = "compatibility/cnn_3dobj-upstream-raw.json"
+                Sha256 = $cnn3DObjSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/cnn_3dobj-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$cnn3DObjSummary.declarationCount
+                CallableCount = [int]$cnn3DObjSummary.callableCount
+                ImplementedCount = [int]$cnn3DObjSummary.classificationCounts.implemented
+                MissingCount = [int]$cnn3DObjSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$cnn3DObjSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$cnn3DObjSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$cnn3DObjSummary.classificationCounts.'upstream-conditional'
+                SourceHeaderCount = @($cnn3DObjRaw.sourceHeaders).Count
+                SelectedFamilyCount = [int]$cnn3DObjSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$cnn3DObjSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$cnn3DObjSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$cnn3DObjSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$cnn3DObjSummary.nativeEvidenceCount
+                RepositoryWideParityClaimed = [bool]$cnn3DObjSummary.repositoryWideUpstreamParityClaimed
             }
             FeaturesUpstreamMap = [ordered]@{
                 Path = "compatibility/features-upstream-map.txt"

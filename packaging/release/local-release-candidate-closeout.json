@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/095f1ff840dd082a",
-  "SourceIdentity": "sha256:095f1ff840dd082ab841e4c6cbff95314f1e9bb8e1d77fd4d6f5601ea48bda64",
+  "CandidateId": "local-closeout/sha256/27ee9b60342ab944",
+  "SourceIdentity": "sha256:27ee9b60342ab94445c6c0fc5a94087de197f912a07dc659db23c199c9b51997",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 2104,
-    "Sha256": "095f1ff840dd082ab841e4c6cbff95314f1e9bb8e1d77fd4d6f5601ea48bda64",
+    "FileCount": 2115,
+    "Sha256": "27ee9b60342ab94445c6c0fc5a94087de197f912a07dc659db23c199c9b51997",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -269,6 +269,29 @@
       "ImplementedCount": 0,
       "MissingCount": 0,
       "IntentionallyOmittedCount": 4,
+      "UnsupportedCount": 0,
+      "UpstreamConditionalCount": 0,
+      "SourceHeaderCount": 1,
+      "SelectedFamilyCount": 1,
+      "SelectedDeclarationCount": 0,
+      "ManagedPublicTypeAdditionCount": 0,
+      "ManagedPublicMemberAdditionCount": 0,
+      "NativeEntrypointAdditionCount": 0,
+      "RepositoryWideParityClaimed": false
+    },
+    "Cnn3DObjUpstreamMap": {
+      "Path": "compatibility/cnn_3dobj-upstream-map.txt",
+      "SummaryPath": "compatibility/cnn_3dobj-upstream-summary.json",
+      "ClassificationPath": "compatibility/cnn_3dobj-upstream-classifications.json",
+      "FamilyInventoryPath": "compatibility/cnn_3dobj-implemented-families.json",
+      "RawExtractionPath": "compatibility/cnn_3dobj-upstream-raw.json",
+      "Sha256": "7f764a01806a9e8c730a2f0966e5b8156aeaa77d525191d87f1da04d1b7f170e",
+      "RawSha256": "258b3e41e82846ce1ed069b1d8a35a8dc6c74fabd3a5f1947354ee7501b4e06d",
+      "DeclarationCount": 7,
+      "CallableCount": 5,
+      "ImplementedCount": 0,
+      "MissingCount": 0,
+      "IntentionallyOmittedCount": 5,
       "UnsupportedCount": 0,
       "UpstreamConditionalCount": 0,
       "SourceHeaderCount": 1,
@@ -781,6 +804,31 @@
       "Path": "compatibility/calib3d-upstream-summary.json",
       "Sha256": "3d93304a0836df97b7dfb6f525ba8f503237721d81a985cffa640c8f445a79f7",
       "Length": 1586
+    },
+    {
+      "Path": "compatibility/cnn_3dobj-implemented-families.json",
+      "Sha256": "e969ba753ae0c3bf2982011e8d8a9efd38076a5bcdc31f7026c5896540f1af39",
+      "Length": 395
+    },
+    {
+      "Path": "compatibility/cnn_3dobj-upstream-classifications.json",
+      "Sha256": "0804461ec418550de72cd4bd5aa96e677280ba42de7a36478302f630d0c1d5fe",
+      "Length": 4494
+    },
+    {
+      "Path": "compatibility/cnn_3dobj-upstream-map.txt",
+      "Sha256": "7f764a01806a9e8c730a2f0966e5b8156aeaa77d525191d87f1da04d1b7f170e",
+      "Length": 3171
+    },
+    {
+      "Path": "compatibility/cnn_3dobj-upstream-raw.json",
+      "Sha256": "258b3e41e82846ce1ed069b1d8a35a8dc6c74fabd3a5f1947354ee7501b4e06d",
+      "Length": 7954
+    },
+    {
+      "Path": "compatibility/cnn_3dobj-upstream-summary.json",
+      "Sha256": "5e152e04a2012cc2a6de000d8ab975ab19d4f775b90c6f0594c43df36fa9d57f",
+      "Length": 1433
     },
     {
       "Path": "compatibility/core-implemented-families.json",
@@ -1569,18 +1617,18 @@
     },
     {
       "Path": "compatibility/upstream-map-catalog.json",
-      "Sha256": "cd7ee18aa9b81981e366faf95ad4a3bd5bf4ecf505e7aa4728cfef5226171a24",
-      "Length": 137295
+      "Sha256": "ca913ff75ade36772c62775456934f23b681f41d34d0d31f29ed08ae4eb57e9b",
+      "Length": 139430
     },
     {
       "Path": "compatibility/upstream-map-catalog.schema.json",
-      "Sha256": "3aaffaf74c0dee11cf61ff90e3d21d03c581ea4a0e9f754e80e0d2a5708a62fc",
-      "Length": 5927
+      "Sha256": "57571d00e69cf348a389494c7b957a83b1c835508615d4d431e4cc1895216e71",
+      "Length": 5940
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "594afd11e85b53462959b73693adeade3757e85c77fe4376b9d4b26fc25202f9",
-      "Length": 51298
+      "Sha256": "449773d86a2eda72b847dd3d949066348517bc892c3604f6df75048b7970412d",
+      "Length": 52733
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -1786,6 +1834,11 @@
       "Path": "docs/articles/calib3d-upstream-parity-guide.md",
       "Sha256": "0c2b9b831b882b4f58acfe8761613d0c69c1abd77e37be5dec4a1691a1e14e05",
       "Length": 4062
+    },
+    {
+      "Path": "docs/articles/cnn-3dobj-upstream-parity-guide.md",
+      "Sha256": "3777bf4b2701ace517ba3654e6049b0b9379c086475464fbc73404b80ff2a76e",
+      "Length": 2016
     },
     {
       "Path": "docs/articles/codec-benchmark-baseline.md",
@@ -2094,8 +2147,8 @@
     },
     {
       "Path": "docs/articles/upstream-map-toolchain.md",
-      "Sha256": "c9e3eadcbc290d1f11b5761922b481aec8b2b737bf756746d7d456af55189b49",
-      "Length": 10049
+      "Sha256": "ecbc94f9960afc5f17c4cc2b260ab6909272fb01c0ee1354f0a0b57ec0cd31cb",
+      "Length": 10509
     },
     {
       "Path": "docs/articles/v501-modern-api-preview-guide.md",
@@ -2199,8 +2252,8 @@
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "51881eea02f5dd1085a8a3a5e1a03fee23a8b583d8b0567bae66cd20294bb0e0",
-      "Length": 17048
+      "Sha256": "45e3d767c552bff62a0b9b9ceecda093ca6955ba7688d20a0f9ef6b640b0804e",
+      "Length": 17138
     },
     {
       "Path": "nuget/logo.jpg",
@@ -2558,9 +2611,14 @@
       "Length": 3613
     },
     {
+      "Path": "scripts/Generate-Cnn3DObjUpstreamMap.ps1",
+      "Sha256": "6996c8ad32376d9ada4831ccb3e3958be556fbc3cdf4521ef33f8224bc0e0f3d",
+      "Length": 303
+    },
+    {
       "Path": "scripts/Generate-ContribUpstreamMap.ps1",
-      "Sha256": "9e82b2f047c3141a267a83142bd1ea3f442ac324cd24a6eb45403597a5838186",
-      "Length": 106907
+      "Sha256": "b3938fa1197151639fd4b6aa7fd46eece4125239e0dd3242f0b0fd23f9cf0573",
+      "Length": 107533
     },
     {
       "Path": "scripts/Generate-CoreUpstreamMap.ps1",
@@ -2769,8 +2827,8 @@
     },
     {
       "Path": "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
-      "Sha256": "7193ae0ea3bd41a6d2efb2895213431ca0dbdcb44fe088bf7f1acb072d0d329a",
-      "Length": 5306
+      "Sha256": "7363a762ac758a301d3bc033cf2eba2d93da4d2307ba064f6ecd7d83825c6d02",
+      "Length": 5334
     },
     {
       "Path": "scripts/Invoke-LifecycleRefreshContainerProducer.ps1",
@@ -2849,8 +2907,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "bd49531590824bb9ca67077ba31ca4d57876d73dde6c550ab0f4159b7772fcc4",
-      "Length": 107423
+      "Sha256": "afee2a8c5c5fb663e93d93f2ceb3010219f7df6b51f2106f775850d8bde94ac8",
+      "Length": 110261
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -2864,8 +2922,8 @@
     },
     {
       "Path": "scripts/New-UpstreamMapCatalog.ps1",
-      "Sha256": "e70393eb51375d4b75d6ee739c8b10f891131478474ff337211bbab0c929d7df",
-      "Length": 10277
+      "Sha256": "d9d853b1d5b6b7d9d3d6b56e751e135713729cf1e2bd7f66aee9651ea14b5183",
+      "Length": 10370
     },
     {
       "Path": "scripts/Test-AlphaMatUpstreamMap.ps1",
@@ -2906,6 +2964,11 @@
       "Path": "scripts/Test-CapabilityProfileEvidence.ps1",
       "Sha256": "a2cdbddd3c09ee1f7d4e5812477707c8a9f0283f95e3c517265813914596964a",
       "Length": 8771
+    },
+    {
+      "Path": "scripts/Test-Cnn3DObjUpstreamMap.ps1",
+      "Sha256": "c7accdf1614923df42a2d0aaf849f1b959ec79bdf18370a5f27180d29552ba34",
+      "Length": 3693
     },
     {
       "Path": "scripts/Test-CodecBenchmarkHarness.ps1",
@@ -3234,8 +3297,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "53d29b2c89e2f206980cc46961149bee17012df73c0dd9111291360f8dcac6e1",
-      "Length": 97991
+      "Sha256": "06901ef412edfbbc1cc0b2ef5c62616b3de54f01e1a7121104cfd79680ea686d",
+      "Length": 99909
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -3339,8 +3402,8 @@
     },
     {
       "Path": "scripts/Test-UpstreamMapCatalog.ps1",
-      "Sha256": "550856cf6e2d658f7bb8bf8c4c68d28544295f4bf4945102ed13796adf7502be",
-      "Length": 15034
+      "Sha256": "bd833d47dc55daaac0750248844ca439cc6314aabdfb41d548d3d643200efac2",
+      "Length": 15046
     },
     {
       "Path": "scripts/Test-V501ChangeLedger.ps1",
@@ -4033,6 +4096,21 @@
       "Length": 5852
     },
     {
+      "Path": "tools/Cnn3DObjUpstreamMap/Cnn3DObjUpstreamMap.csproj",
+      "Sha256": "727d0721f11212e08035cc59275b0226c0092f3ea92492d621c3d25879ef974f",
+      "Length": 273
+    },
+    {
+      "Path": "tools/Cnn3DObjUpstreamMap/Program.cs",
+      "Sha256": "9df96b0470aa4a386586595d32f62b09eb12b33ca7b227482e9b375ebd7467c6",
+      "Length": 106
+    },
+    {
+      "Path": "tools/Cnn3DObjUpstreamMap/extract_cnn_3dobj.py",
+      "Sha256": "778913c7853e36f1be8dd6a6d4080c55cce65e17ded828fb83c77b4f7bb94b28",
+      "Length": 232
+    },
+    {
       "Path": "tools/CodecBenchmark/CodecBenchmark.csproj",
       "Sha256": "1c57c6eba303597503d76243abb25cfd5df570fc9527c6d5d70e67e5d32f245d",
       "Length": 899
@@ -4574,8 +4652,8 @@
     },
     {
       "Path": "tools/XImgProcUpstreamMap/extract_ximgproc.py",
-      "Sha256": "4dacdea3a1139e5b1c51efe1e128d2b06da5b09d64adecfd75f091870b2de48e",
-      "Length": 5963
+      "Sha256": "4fd266ccb577f37b5e32f8687af6d4f474b4c7f8a4de80fcab13595821ba30a9",
+      "Length": 6001
     },
     {
       "Path": "tools/XObjDetectUpstreamMap/Program.cs",
