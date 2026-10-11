@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 38,
+  "moduleCount": 39,
   "maps": [
     {
       "id": "calib3d",
@@ -2716,6 +2716,52 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "ad6cb09f4de25b611e255fa5fa61b02ceea19cb8ac4d8aec34b1923452d0bc4c",
         "familyInventorySha256": "8dea541e83442aad099484d009b208bbf3df95e8fbf607b11be0cf5f735f3bbe",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "xobjdetect",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/XObjDetectUpstreamMap",
+      "extractorScript": "tools/XObjDetectUpstreamMap/extract_xobjdetect.py",
+      "generationScript": "scripts/Generate-XObjDetectUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-XObjDetectUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/xobjdetect.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+          "sha256": "94fa253853c1c3121c3daf064cadb0d9e8507681bdfb3de03af5714e2edd25c5"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+            "sha256": "94fa253853c1c3121c3daf064cadb0d9e8507681bdfb3de03af5714e2edd25c5",
+            "startOrdinal": 0,
+            "declarationCount": 34
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/xobjdetect-upstream-raw.json",
+        "classifications": "compatibility/xobjdetect-upstream-classifications.json",
+        "mapping": "compatibility/xobjdetect-upstream-map.txt",
+        "summary": "compatibility/xobjdetect-upstream-summary.json",
+        "familyInventory": "compatibility/xobjdetect-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 34,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "e95d33dbf2f2b35b5fdbb0aced3d926b9940d9cd843b02f2ebe0149839c161ab",
+        "familyInventorySha256": "bee8ee3de8ff1aa02dd5eac693e07e87eaf8b0fe1bc3366ccfb2d1c022ce4202",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

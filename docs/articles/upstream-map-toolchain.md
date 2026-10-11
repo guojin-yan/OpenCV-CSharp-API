@@ -1,6 +1,6 @@
 # Upstream Map Toolchain
 
-The upstream map catalog centralizes the source scope, parser identity, classification policy, output files, and semantic check command for 38 parser-backed maps. Its schema is [`upstream-map-catalog.schema.json`](../../compatibility/upstream-map-catalog.schema.json), and the checked catalog is [`upstream-map-catalog.json`](../../compatibility/upstream-map-catalog.json).
+The upstream map catalog centralizes the source scope, parser identity, classification policy, output files, and semantic check command for 39 parser-backed maps. Its schema is [`upstream-map-catalog.schema.json`](../../compatibility/upstream-map-catalog.schema.json), and the checked catalog is [`upstream-map-catalog.json`](../../compatibility/upstream-map-catalog.json).
 
 Regenerate the catalog after an intentional map-surface update:
 
@@ -34,6 +34,8 @@ Reg maps the pinned `opencv2/reg/*.hpp` public-header closure's 63 declarations 
 
 PtCloud maps the selected `opencv2/ptcloud/depth.hpp` slice from the OpenCV 5.0.0 core module: 22 declarations (19 callables, one class, and two enums), with all 19 callables implemented and bound to 13 distinct native evidence rows and 21 managed evidence rows. The `ptcloud.hpp` umbrella's volume and odometry headers are explicitly excluded from this slice, so the map does not infer parity for those APIs.
 
+XObjDetect maps the OpenCV 5.0.0 contrib `opencv2/xobjdetect.hpp` closure: 34 declarations (27 callables, three classes, and four enums), with 20 implemented callables, seven intentional omissions, and zero missing. The implemented rows bind CascadeClassifier and HOGDescriptor wrappers to 27 distinct native ABI evidence rows and 21 managed evidence rows; cascade/HOG model files remain caller-supplied, and the map does not claim repository-wide contrib parity.
+
 XStereo maps the pinned `opencv2/xstereo.hpp` parser-emitted closure across `descriptor.hpp` and `quasi_dense_stereo.hpp`: 14 declarations (10 callables and four enum/class metadata rows), with eight implemented callables and two intentional omissions. The implemented rows bind the QuasiDenseStereo factory, parameter persistence, match count/fill transport, processing, point lookup, and disparity output to ten native entrypoints and nine managed members. The value-type constructor/comparison rows remain omitted because the ABI transports MatchQuasiDense records only through the opaque stereo handle; the umbrella header's BinaryBM/BinarySGBM and census declarations are outside this parser-emitted scope and are not inferred as missing.
 
-`MAP-001` includes the core PtCloud slice alongside the established core maps, while `MAP-002..004` are represented in the catalog. MAP-005 incrementally adds remaining contrib modules after each module's exact headers, optional dependency boundaries, source-review exclusions, and classification rules have been reviewed; fifteen MAP-005 modules currently have zero unexplained missing declarations.
+`MAP-001` includes the core PtCloud slice alongside the established core maps, while `MAP-002..004` are represented in the catalog. MAP-005 incrementally adds remaining contrib modules after each module's exact headers, optional dependency boundaries, source-review exclusions, and classification rules have been reviewed; sixteen MAP-005 modules currently have zero unexplained missing declarations.

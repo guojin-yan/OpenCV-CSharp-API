@@ -140,6 +140,8 @@ function Get-Record {
     $xstereoSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/xstereo-upstream-summary.json") -Raw | ConvertFrom-Json
     $ptcloudRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/ptcloud-upstream-raw.json") -Raw | ConvertFrom-Json
     $ptcloudSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/ptcloud-upstream-summary.json") -Raw | ConvertFrom-Json
+    $xobjdetectRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/xobjdetect-upstream-raw.json") -Raw | ConvertFrom-Json
+    $xobjdetectSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/xobjdetect-upstream-summary.json") -Raw | ConvertFrom-Json
     $evidencePaths = @(
         ".github/workflows/pack.yml",
         ".github/workflows/publish-nuget.yml",
@@ -349,6 +351,11 @@ function Get-Record {
         "compatibility/ptcloud-upstream-map.txt",
         "compatibility/ptcloud-upstream-raw.json",
         "compatibility/ptcloud-upstream-summary.json",
+        "compatibility/xobjdetect-implemented-families.json",
+        "compatibility/xobjdetect-upstream-classifications.json",
+        "compatibility/xobjdetect-upstream-map.txt",
+        "compatibility/xobjdetect-upstream-raw.json",
+        "compatibility/xobjdetect-upstream-summary.json",
         "compatibility/v5.0.1-change-ledger.json",
         "compatibility/v5.0.1-change-ledger.schema.json",
         "docs/articles/api-abi-compatibility-policy.md",
@@ -373,6 +380,7 @@ function Get-Record {
         "docs/articles/saliency-objectness-guide.md",
         "docs/articles/surface-matching-guide.md",
         "docs/articles/reg-guide.md",
+        "docs/articles/xobjdetect-guide.md",
         "docs/articles/calib3d-upstream-parity-guide.md",
         "docs/articles/core-upstream-parity-guide.md",
         "docs/articles/dnn-structured-parity-guide.md",
@@ -814,6 +822,9 @@ function Get-Record {
         "tools/PtCloudUpstreamMap/PtCloudUpstreamMap.csproj",
         "tools/PtCloudUpstreamMap/Program.cs",
         "tools/PtCloudUpstreamMap/extract_ptcloud.py",
+        "tools/XObjDetectUpstreamMap/XObjDetectUpstreamMap.csproj",
+        "tools/XObjDetectUpstreamMap/Program.cs",
+        "tools/XObjDetectUpstreamMap/extract_xobjdetect.py",
         "tools/CodecBenchmark/CodecBenchmark.csproj",
         "tools/CodecBenchmark/Program.cs",
         "scripts/Measure-CodecTypedMatBenchmark.ps1",
@@ -899,6 +910,8 @@ function Get-Record {
         "scripts/Test-XStereoUpstreamMap.ps1",
         "scripts/Generate-PtCloudUpstreamMap.ps1",
         "scripts/Test-PtCloudUpstreamMap.ps1",
+        "scripts/Generate-XObjDetectUpstreamMap.ps1",
+        "scripts/Test-XObjDetectUpstreamMap.ps1",
         "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
         "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
         "tools/TypedMatBenchmark/Program.cs",
@@ -1421,6 +1434,29 @@ function Get-Record {
                 ManagedPublicMemberAdditionCount = [int]$ptcloudSummary.managedPublicMemberAdditionCount
                 NativeEntrypointAdditionCount = [int]$ptcloudSummary.nativeEvidenceCount
                 RepositoryWideParityClaimed = [bool]$ptcloudSummary.repositoryWideUpstreamParityClaimed
+            }
+            XObjDetectUpstreamMap = [ordered]@{
+                Path = "compatibility/xobjdetect-upstream-map.txt"
+                SummaryPath = "compatibility/xobjdetect-upstream-summary.json"
+                ClassificationPath = "compatibility/xobjdetect-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/xobjdetect-implemented-families.json"
+                RawExtractionPath = "compatibility/xobjdetect-upstream-raw.json"
+                Sha256 = $xobjdetectSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/xobjdetect-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$xobjdetectSummary.declarationCount
+                CallableCount = [int]$xobjdetectSummary.callableCount
+                ImplementedCount = [int]$xobjdetectSummary.classificationCounts.implemented
+                MissingCount = [int]$xobjdetectSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$xobjdetectSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$xobjdetectSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$xobjdetectSummary.classificationCounts.'upstream-conditional'
+                SourceHeaderCount = @($xobjdetectRaw.sourceHeaders).Count
+                SelectedFamilyCount = [int]$xobjdetectSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$xobjdetectSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$xobjdetectSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$xobjdetectSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$xobjdetectSummary.nativeEvidenceCount
+                RepositoryWideParityClaimed = [bool]$xobjdetectSummary.repositoryWideUpstreamParityClaimed
             }
             GapInventoryPath = "compatibility/api-gap-inventory.json"
             GapInventoryStatus = $gapInventory.status

@@ -1,0 +1,1195 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/XObjDetectUpstreamMap/extract_xobjdetect.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+  "headerSha256": "94fa253853c1c3121c3daf064cadb0d9e8507681bdfb3de03af5714e2edd25c5",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "sha256": "94fa253853c1c3121c3daf064cadb0d9e8507681bdfb3de03af5714e2edd25c5",
+      "startOrdinal": 0,
+      "declarationCount": 34
+    }
+  ],
+  "declarationCount": 34,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.groupRectangles",
+      "identity": "cv.groupRectangles(vector_Rect rectList[/IO,/Ref];vector_int weights[/O,/Ref];int groupThreshold;double eps=0.2)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Rect",
+          "name": "rectList",
+          "default": "",
+          "modifiers": [
+            "/IO",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_int",
+          "name": "weights",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "groupThreshold",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "eps",
+          "default": "0.2",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "enum",
+      "name": "cv.<unnamed>",
+      "identity": "enum cv.<unnamed>[const cv.CASCADE_DO_CANNY_PRUNING=1;const cv.CASCADE_SCALE_IMAGE=2;const cv.CASCADE_FIND_BIGGEST_OBJECT=4;const cv.CASCADE_DO_ROUGH_SEARCH=8]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.CASCADE_DO_CANNY_PRUNING",
+          "value": "1"
+        },
+        {
+          "name": "const cv.CASCADE_SCALE_IMAGE",
+          "value": "2"
+        },
+        {
+          "name": "const cv.CASCADE_FIND_BIGGEST_OBJECT",
+          "value": "4"
+        },
+        {
+          "name": "const cv.CASCADE_DO_ROUGH_SEARCH",
+          "value": "8"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "class",
+      "name": "cv.BaseCascadeClassifier",
+      "identity": "class cv.BaseCascadeClassifier",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": ""
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "class",
+      "name": "cv.CascadeClassifier",
+      "identity": "class cv.CascadeClassifier",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Cascade classifier class for object detection."
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.CascadeClassifier.CascadeClassifier",
+      "identity": "cv.CascadeClassifier.CascadeClassifier()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.CascadeClassifier.CascadeClassifier",
+      "identity": "cv.CascadeClassifier.CascadeClassifier(String filename[/C,/Ref,/PATH])->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Loads a classifier from a file.\n\n    @param filename Name of the file from which the classifier is loaded."
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.CascadeClassifier.empty",
+      "identity": "cv.CascadeClassifier.empty()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Checks whether the classifier has been loaded."
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.CascadeClassifier.load",
+      "identity": "cv.CascadeClassifier.load(String filename[/C,/Ref,/PATH])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Loads a classifier from a file.\n\n    @param filename Name of the file from which the classifier is loaded. The file may contain an old\n    HAAR classifier trained by the haartraining application or a new cascade classifier trained by the\n    traincascade application."
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.CascadeClassifier.read",
+      "identity": "cv.CascadeClassifier.read(FileNode node[/C,/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "FileNode",
+          "name": "node",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Reads a classifier from a FileStorage node.\n\n    @note The file may contain a new cascade classifier (trained by the traincascade application) only."
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.CascadeClassifier.detectMultiScale",
+      "identity": "cv.CascadeClassifier.detectMultiScale(Mat image;vector_Rect objects[/O,/Ref];double scaleFactor=1.1;int minNeighbors=3;int flags=0;Size minSize=Size();Size maxSize=Size())->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Rect",
+          "name": "objects",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "scaleFactor",
+          "default": "1.1",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "minNeighbors",
+          "default": "3",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "minSize",
+          "default": "Size()",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "maxSize",
+          "default": "Size()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Detects objects of different sizes in the input image. The detected objects are returned as a list\n    of rectangles.\n\n    @param image Matrix of the type CV_8U containing an image where objects are detected.\n    @param objects Vector of rectangles where each rectangle contains the detected object, the\n    rectangles may be partially outside the original image.\n    @param scaleFactor Parameter specifying how much the image size is reduced at each image scale.\n    @param minNeighbors Parameter specifying how many neighbors each candidate rectangle should have\n    to retain it.\n    @param flags Parameter with the same meaning for an old cascade as in the function\n    cvHaarDetectObjects. It is not used for a new cascade.\n    @param minSize Minimum possible object size. Objects smaller than that are ignored.\n    @param maxSize Maximum possible object size. Objects larger than that are ignored. If `maxSize == minSize` model is evaluated on single scale."
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.CascadeClassifier.detectMultiScale",
+      "identity": "cv.CascadeClassifier.detectMultiScale(Mat image;vector_Rect objects[/O,/Ref];vector_int numDetections[/O,/Ref];double scaleFactor=1.1;int minNeighbors=3;int flags=0;Size minSize=Size();Size maxSize=Size())->void",
+      "returnType": "void",
+      "modifiers": [
+        "=detectMultiScale2"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Rect",
+          "name": "objects",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_int",
+          "name": "numDetections",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "scaleFactor",
+          "default": "1.1",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "minNeighbors",
+          "default": "3",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "minSize",
+          "default": "Size()",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "maxSize",
+          "default": "Size()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload\n    @param image Matrix of the type CV_8U containing an image where objects are detected.\n    @param objects Vector of rectangles where each rectangle contains the detected object, the\n    rectangles may be partially outside the original image.\n    @param numDetections Vector of detection numbers for the corresponding objects. An object's number\n    of detections is the number of neighboring positively classified rectangles that were joined\n    together to form the object.\n    @param scaleFactor Parameter specifying how much the image size is reduced at each image scale.\n    @param minNeighbors Parameter specifying how many neighbors each candidate rectangle should have\n    to retain it.\n    @param flags Parameter with the same meaning for an old cascade as in the function\n    cvHaarDetectObjects. It is not used for a new cascade.\n    @param minSize Minimum possible object size. Objects smaller than that are ignored.\n    @param maxSize Maximum possible object size. Objects larger than that are ignored. If `maxSize == minSize` model is evaluated on single scale."
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.CascadeClassifier.detectMultiScale",
+      "identity": "cv.CascadeClassifier.detectMultiScale(Mat image;vector_Rect objects[/O,/Ref];vector_int rejectLevels[/O,/Ref];vector_double levelWeights[/O,/Ref];double scaleFactor=1.1;int minNeighbors=3;int flags=0;Size minSize=Size();Size maxSize=Size();bool outputRejectLevels=false)->void",
+      "returnType": "void",
+      "modifiers": [
+        "=detectMultiScale3"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Rect",
+          "name": "objects",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_int",
+          "name": "rejectLevels",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_double",
+          "name": "levelWeights",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "scaleFactor",
+          "default": "1.1",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "minNeighbors",
+          "default": "3",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "minSize",
+          "default": "Size()",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "maxSize",
+          "default": "Size()",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "outputRejectLevels",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload\n    This function allows you to retrieve the final stage decision certainty of classification.\n    For this, one needs to set `outputRejectLevels` on true and provide the `rejectLevels` and `levelWeights` parameter.\n    For each resulting detection, `levelWeights` will then contain the certainty of classification at the final stage.\n    This value can then be used to separate strong from weaker classifications.\n\n    A code sample on how to use it efficiently can be found below:\n    @code\n    Mat img;\n    vector<double> weights;\n    vector<int> levels;\n    vector<Rect> detections;\n    CascadeClassifier model(\"/path/to/your/model.xml\");\n    model.detectMultiScale(img, detections, levels, weights, 1.1, 3, 0, Size(), Size(), true);\n    cerr << \"Detection \" << detections[0] << \" with weight \" << weights[0] << endl;\n    @endcode"
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.CascadeClassifier.isOldFormatCascade",
+      "identity": "cv.CascadeClassifier.isOldFormatCascade()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.CascadeClassifier.getOriginalWindowSize",
+      "identity": "cv.CascadeClassifier.getOriginalWindowSize()->Size",
+      "returnType": "Size",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.CascadeClassifier.getFeatureType",
+      "identity": "cv.CascadeClassifier.getFeatureType()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.CascadeClassifier.convert",
+      "identity": "cv.CascadeClassifier.convert(String oldcascade[/C,/Ref];String newcascade[/C,/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "oldcascade",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "newcascade",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "class",
+      "name": "cv.HOGDescriptor",
+      "identity": "class cv.HOGDescriptor",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "winSize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "blockSize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "blockStride",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "cellSize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "nbins",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "derivAperture",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "winSigma",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "HOGDescriptor_HistogramNormType",
+          "name": "histogramNormType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "L2HysThreshold",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "gammaCorrection",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_float",
+          "name": "svmDetector",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "nlevels",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "signedGradient",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Implementation of HOG (Histogram of Oriented Gradients) descriptor and object detector.\n\nthe HOG descriptor algorithm introduced by Navneet Dalal and Bill Triggs @cite Dalal2005 .\n\nuseful links:\n\nhttps://hal.inria.fr/inria-00548512/document/\n\nhttps://en.wikipedia.org/wiki/Histogram_of_oriented_gradients\n\nhttps://software.intel.com/en-us/ipp-dev-reference-histogram-of-oriented-gradients-hog-descriptor\n\nhttp://www.learnopencv.com/histogram-of-oriented-gradients\n\nhttp://www.learnopencv.com/handwritten-digits-classification-an-opencv-c-python-tutorial"
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "enum",
+      "name": "cv.HOGDescriptor.HistogramNormType",
+      "identity": "enum cv.HOGDescriptor.HistogramNormType[const cv.HOGDescriptor.L2Hys=0]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.HOGDescriptor.L2Hys",
+          "value": "0"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "enum",
+      "name": "cv.HOGDescriptor.<unnamed>",
+      "identity": "enum cv.HOGDescriptor.<unnamed>[const cv.HOGDescriptor.DEFAULT_NLEVELS=64]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.HOGDescriptor.DEFAULT_NLEVELS",
+          "value": "64"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "enum",
+      "name": "cv.HOGDescriptor.DescriptorStorageFormat",
+      "identity": "enum cv.HOGDescriptor.DescriptorStorageFormat[const cv.HOGDescriptor.DESCR_FORMAT_COL_BY_COL=0;const cv.HOGDescriptor.DESCR_FORMAT_ROW_BY_ROW=1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.HOGDescriptor.DESCR_FORMAT_COL_BY_COL",
+          "value": "0"
+        },
+        {
+          "name": "const cv.HOGDescriptor.DESCR_FORMAT_ROW_BY_ROW",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.HOGDescriptor.HOGDescriptor",
+      "identity": "cv.HOGDescriptor.HOGDescriptor(Size _winSize=Size(64, 128);Size _blockSize=Size(16, 16);Size _blockStride=Size(8, 8);Size _cellSize=Size(8, 8);int _nbins=9;int _derivAperture=1;double _winSigma=-1;HOGDescriptor_HistogramNormType _histogramNormType=HOGDescriptor::L2Hys;double _L2HysThreshold=0.2;bool _gammaCorrection=true;int _nlevels=HOGDescriptor::DEFAULT_NLEVELS;bool _signedGradient=false)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "_winSize",
+          "default": "Size(64, 128)",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "_blockSize",
+          "default": "Size(16, 16)",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "_blockStride",
+          "default": "Size(8, 8)",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "_cellSize",
+          "default": "Size(8, 8)",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "_nbins",
+          "default": "9",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "_derivAperture",
+          "default": "1",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "_winSigma",
+          "default": "-1",
+          "modifiers": []
+        },
+        {
+          "type": "HOGDescriptor_HistogramNormType",
+          "name": "_histogramNormType",
+          "default": "HOGDescriptor::L2Hys",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "_L2HysThreshold",
+          "default": "0.2",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "_gammaCorrection",
+          "default": "true",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "_nlevels",
+          "default": "HOGDescriptor::DEFAULT_NLEVELS",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "_signedGradient",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates the HOG descriptor and detector with default parameters.\n\n    @param _winSize sets winSize with given value.\n    @param _blockSize sets blockSize with given value.\n    @param _blockStride sets blockStride with given value.\n    @param _cellSize sets cellSize with given value.\n    @param _nbins sets nbins with given value.\n    @param _derivAperture sets derivAperture with given value.\n    @param _winSigma sets winSigma with given value.\n    @param _histogramNormType sets histogramNormType with given value.\n    @param _L2HysThreshold sets L2HysThreshold with given value.\n    @param _gammaCorrection sets gammaCorrection with given value.\n    @param _nlevels sets nlevels with given value.\n    @param _signedGradient sets signedGradient with given value."
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.HOGDescriptor.HOGDescriptor",
+      "identity": "cv.HOGDescriptor.HOGDescriptor(String filename[/C,/Ref,/PATH])->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload\n\n    Creates the HOG descriptor and detector and loads HOGDescriptor parameters and coefficients for the linear SVM classifier from a file.\n    @param filename The file name containing HOGDescriptor properties and coefficients for the linear SVM classifier."
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.HOGDescriptor.getDescriptorSize",
+      "identity": "cv.HOGDescriptor.getDescriptorSize()->size_t",
+      "returnType": "size_t",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the number of coefficients required for the classification."
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.HOGDescriptor.checkDetectorSize",
+      "identity": "cv.HOGDescriptor.checkDetectorSize()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Checks if detector size equal to descriptor size."
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.HOGDescriptor.getWinSigma",
+      "identity": "cv.HOGDescriptor.getWinSigma()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns winSigma value"
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.HOGDescriptor.setSVMDetector",
+      "identity": "cv.HOGDescriptor.setSVMDetector(Mat svmdetector)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "svmdetector",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets coefficients for the linear SVM classifier.\n    @param svmdetector coefficients for the linear SVM classifier."
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.HOGDescriptor.load",
+      "identity": "cv.HOGDescriptor.load(String filename[/C,/Ref,/PATH];String objname=String()[/C,/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "objname",
+          "default": "String()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief loads HOGDescriptor parameters and coefficients for the linear SVM classifier from a file\n    @param filename Name of the file to read.\n    @param objname The optional name of the node to read (if empty, the first top-level node will be used)."
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.HOGDescriptor.save",
+      "identity": "cv.HOGDescriptor.save(String filename[/C,/Ref,/PATH];String objname=String()[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "objname",
+          "default": "String()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief saves HOGDescriptor parameters and coefficients for the linear SVM classifier to a file\n    @param filename File name\n    @param objname Object name"
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.HOGDescriptor.compute",
+      "identity": "cv.HOGDescriptor.compute(Mat img;vector_float descriptors[/O,/Ref];Size winStride=Size();Size padding=Size();vector_Point locations=std::vector<Point>()[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_float",
+          "name": "descriptors",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Size",
+          "name": "winStride",
+          "default": "Size()",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "padding",
+          "default": "Size()",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Point",
+          "name": "locations",
+          "default": "std::vector<Point>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes HOG descriptors of given image.\n    @param img Matrix of the type CV_8U containing an image where HOG features will be calculated.\n    @param descriptors Matrix of the type CV_32F\n    @param winStride Window stride. It must be a multiple of block stride.\n    @param padding Padding\n    @param locations Vector of Point"
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.HOGDescriptor.detect",
+      "identity": "cv.HOGDescriptor.detect(Mat img;vector_Point foundLocations[/O,/Ref];vector_double weights[/O,/Ref];double hitThreshold=0;Size winStride=Size();Size padding=Size();vector_Point searchLocations=std::vector<Point>()[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Point",
+          "name": "foundLocations",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_double",
+          "name": "weights",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "hitThreshold",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "winStride",
+          "default": "Size()",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "padding",
+          "default": "Size()",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Point",
+          "name": "searchLocations",
+          "default": "std::vector<Point>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Performs object detection without a multi-scale window.\n    @param img Matrix of the type CV_8U or CV_8UC3 containing an image where objects are detected.\n    @param foundLocations Vector of point where each point contains left-top corner point of detected object boundaries.\n    @param weights Vector that will contain confidence values for each detected object.\n    @param hitThreshold Threshold for the distance between features and SVM classifying plane.\n    Usually it is 0 and should be specified in the detector coefficients (as the last free coefficient).\n    But if the free coefficient is omitted (which is allowed), you can specify it manually here.\n    @param winStride Window stride. It must be a multiple of block stride.\n    @param padding Padding\n    @param searchLocations Vector of Point includes set of requested locations to be evaluated."
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.HOGDescriptor.detectMultiScale",
+      "identity": "cv.HOGDescriptor.detectMultiScale(Mat img;vector_Rect foundLocations[/O,/Ref];vector_double foundWeights[/O,/Ref];double hitThreshold=0;Size winStride=Size();Size padding=Size();double scale=1.05;double groupThreshold=2.0;bool useMeanshiftGrouping=false)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Rect",
+          "name": "foundLocations",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_double",
+          "name": "foundWeights",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "hitThreshold",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "winStride",
+          "default": "Size()",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "padding",
+          "default": "Size()",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "scale",
+          "default": "1.05",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "groupThreshold",
+          "default": "2.0",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "useMeanshiftGrouping",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Detects objects of different sizes in the input image. The detected objects are returned as a list\n    of rectangles.\n    @param img Matrix of the type CV_8U or CV_8UC3 containing an image where objects are detected.\n    @param foundLocations Vector of rectangles where each rectangle contains the detected object.\n    @param foundWeights Vector that will contain confidence values for each detected object.\n    @param hitThreshold Threshold for the distance between features and SVM classifying plane.\n    Usually it is 0 and should be specified in the detector coefficients (as the last free coefficient).\n    But if the free coefficient is omitted (which is allowed), you can specify it manually here.\n    @param winStride Window stride. It must be a multiple of block stride.\n    @param padding Padding\n    @param scale Coefficient of the detection window increase.\n    @param groupThreshold Coefficient to regulate the similarity threshold. When detected, some objects can be covered\n    by many rectangles. 0 means not to perform grouping.\n    @param useMeanshiftGrouping indicates grouping algorithm"
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.HOGDescriptor.computeGradient",
+      "identity": "cv.HOGDescriptor.computeGradient(Mat img;Mat grad[/IO];Mat angleOfs[/IO];Size paddingTL=Size();Size paddingBR=Size())->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "grad",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "angleOfs",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Size",
+          "name": "paddingTL",
+          "default": "Size()",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "paddingBR",
+          "default": "Size()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief  Computes gradients and quantized gradient orientations.\n    @param img Matrix contains the image to be computed\n    @param grad Matrix of type CV_32FC2 contains computed gradients\n    @param angleOfs Matrix of type CV_8UC2 contains quantized gradient orientations\n    @param paddingTL Padding from top-left\n    @param paddingBR Padding from bottom-right"
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.HOGDescriptor.getDefaultPeopleDetector",
+      "identity": "cv.HOGDescriptor.getDefaultPeopleDetector()->std::vector<float>",
+      "returnType": "std::vector<float>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns coefficients of the classifier trained for people detection (for 64x128 windows)."
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.HOGDescriptor.getDaimlerPeopleDetector",
+      "identity": "cv.HOGDescriptor.getDaimlerPeopleDetector()->std::vector<float>",
+      "returnType": "std::vector<float>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns coefficients of the classifier trained for people detection (for 48x96 windows)."
+    }
+  ]
+}

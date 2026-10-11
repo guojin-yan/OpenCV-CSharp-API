@@ -1,0 +1,323 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 0,
+  "managedPublicMemberAdditionCount": 0,
+  "families": [
+    {
+      "id": "xobjdetect-wrapper-surface",
+      "rationale": "Current XObjDetect managed/native wrapper declarations with exact parser-backed callable evidence.",
+      "declarations": [
+        {
+          "ordinal": 4,
+          "upstreamIdentity": "cv.CascadeClassifier.CascadeClassifier()->",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_cascade_classifier_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XObjDetect.CascadeClassifier|constructor|public;instance|.ctor()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XObjDetect/XObjDetectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xobjdetect-guide.md"
+        },
+        {
+          "ordinal": 5,
+          "upstreamIdentity": "cv.CascadeClassifier.CascadeClassifier(String filename[/C,/Ref,/PATH])->",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_cascade_classifier_create_from_file"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XObjDetect.CascadeClassifier|constructor|public;instance|.ctor(System.String filename)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XObjDetect/XObjDetectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xobjdetect-guide.md"
+        },
+        {
+          "ordinal": 6,
+          "upstreamIdentity": "cv.CascadeClassifier.empty()->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_cascade_classifier_empty"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XObjDetect.CascadeClassifier|property|instance;get:public|System.Boolean Empty"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XObjDetect/XObjDetectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xobjdetect-guide.md"
+        },
+        {
+          "ordinal": 7,
+          "upstreamIdentity": "cv.CascadeClassifier.load(String filename[/C,/Ref,/PATH])->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_cascade_classifier_load"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XObjDetect.CascadeClassifier|method|public;instance|System.Boolean Load(System.String filename)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XObjDetect/XObjDetectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xobjdetect-guide.md"
+        },
+        {
+          "ordinal": 9,
+          "upstreamIdentity": "cv.CascadeClassifier.detectMultiScale(Mat image;vector_Rect objects[/O,/Ref];double scaleFactor=1.1;int minNeighbors=3;int flags=0;Size minSize=Size();Size maxSize=Size())->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_cascade_classifier_detect_multi_scale_count",
+            "jyppx_ocv_cascade_classifier_detect_multi_scale_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XObjDetect.CascadeClassifier|method|public;instance|JYPPX.OpenCvSharp.Core.Rect[] DetectMultiScale(JYPPX.OpenCvSharp.Core.Mat image,System.Double scaleFactor=1.1,System.Int32 minNeighbors=3,JYPPX.OpenCvSharp.XObjDetect.CascadeClassifierFlags flags=None,JYPPX.OpenCvSharp.Core.Size minSize=null,JYPPX.OpenCvSharp.Core.Size maxSize=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XObjDetect/XObjDetectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xobjdetect-guide.md"
+        },
+        {
+          "ordinal": 10,
+          "upstreamIdentity": "cv.CascadeClassifier.detectMultiScale(Mat image;vector_Rect objects[/O,/Ref];vector_int numDetections[/O,/Ref];double scaleFactor=1.1;int minNeighbors=3;int flags=0;Size minSize=Size();Size maxSize=Size())->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_cascade_classifier_detect_multi_scale2_count",
+            "jyppx_ocv_cascade_classifier_detect_multi_scale2_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XObjDetect.CascadeClassifier|method|public;instance|JYPPX.OpenCvSharp.XObjDetect.CascadeDetectionResult DetectMultiScale2(JYPPX.OpenCvSharp.Core.Mat image,System.Double scaleFactor=1.1,System.Int32 minNeighbors=3,JYPPX.OpenCvSharp.XObjDetect.CascadeClassifierFlags flags=None,JYPPX.OpenCvSharp.Core.Size minSize=null,JYPPX.OpenCvSharp.Core.Size maxSize=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XObjDetect/XObjDetectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xobjdetect-guide.md"
+        },
+        {
+          "ordinal": 11,
+          "upstreamIdentity": "cv.CascadeClassifier.detectMultiScale(Mat image;vector_Rect objects[/O,/Ref];vector_int rejectLevels[/O,/Ref];vector_double levelWeights[/O,/Ref];double scaleFactor=1.1;int minNeighbors=3;int flags=0;Size minSize=Size();Size maxSize=Size();bool outputRejectLevels=false)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_cascade_classifier_detect_multi_scale3_count",
+            "jyppx_ocv_cascade_classifier_detect_multi_scale3_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XObjDetect.CascadeClassifier|method|public;instance|JYPPX.OpenCvSharp.XObjDetect.CascadeDetectionResult DetectMultiScale3(JYPPX.OpenCvSharp.Core.Mat image,System.Double scaleFactor=1.1,System.Int32 minNeighbors=3,JYPPX.OpenCvSharp.XObjDetect.CascadeClassifierFlags flags=None,JYPPX.OpenCvSharp.Core.Size minSize=null,JYPPX.OpenCvSharp.Core.Size maxSize=null,System.Boolean outputRejectLevels=false)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XObjDetect/XObjDetectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xobjdetect-guide.md"
+        },
+        {
+          "ordinal": 12,
+          "upstreamIdentity": "cv.CascadeClassifier.isOldFormatCascade()->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_cascade_classifier_is_old_format_cascade"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XObjDetect.CascadeClassifier|method|public;instance|System.Boolean IsOldFormatCascade()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XObjDetect/XObjDetectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xobjdetect-guide.md"
+        },
+        {
+          "ordinal": 13,
+          "upstreamIdentity": "cv.CascadeClassifier.getOriginalWindowSize()->Size",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_cascade_classifier_get_original_window_size"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XObjDetect.CascadeClassifier|method|public;instance|JYPPX.OpenCvSharp.Core.Size GetOriginalWindowSize()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XObjDetect/XObjDetectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xobjdetect-guide.md"
+        },
+        {
+          "ordinal": 14,
+          "upstreamIdentity": "cv.CascadeClassifier.getFeatureType()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_cascade_classifier_get_feature_type"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XObjDetect.CascadeClassifier|method|public;instance|System.Int32 GetFeatureType()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XObjDetect/XObjDetectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xobjdetect-guide.md"
+        },
+        {
+          "ordinal": 20,
+          "upstreamIdentity": "cv.HOGDescriptor.HOGDescriptor(Size _winSize=Size(64, 128);Size _blockSize=Size(16, 16);Size _blockStride=Size(8, 8);Size _cellSize=Size(8, 8);int _nbins=9;int _derivAperture=1;double _winSigma=-1;HOGDescriptor_HistogramNormType _histogramNormType=HOGDescriptor::L2Hys;double _L2HysThreshold=0.2;bool _gammaCorrection=true;int _nlevels=HOGDescriptor::DEFAULT_NLEVELS;bool _signedGradient=false)->",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hog_descriptor_create_with_params"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XObjDetect.HOGDescriptor|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.Core.Size winSize,JYPPX.OpenCvSharp.Core.Size blockSize,JYPPX.OpenCvSharp.Core.Size blockStride,JYPPX.OpenCvSharp.Core.Size cellSize,System.Int32 nbins,System.Int32 derivAperture=1,System.Double winSigma=-1,JYPPX.OpenCvSharp.XObjDetect.HOGDescriptorHistogramNormType histogramNormType=L2Hys,System.Double l2HysThreshold=0.2,System.Boolean gammaCorrection=true,System.Int32 nlevels=64,System.Boolean signedGradient=false)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XObjDetect/XObjDetectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xobjdetect-guide.md"
+        },
+        {
+          "ordinal": 21,
+          "upstreamIdentity": "cv.HOGDescriptor.HOGDescriptor(String filename[/C,/Ref,/PATH])->",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hog_descriptor_create_from_file"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XObjDetect.HOGDescriptor|constructor|public;instance|.ctor(System.String filename)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XObjDetect/XObjDetectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xobjdetect-guide.md"
+        },
+        {
+          "ordinal": 22,
+          "upstreamIdentity": "cv.HOGDescriptor.getDescriptorSize()->size_t",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hog_descriptor_get_descriptor_size"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XObjDetect.HOGDescriptor|method|public;instance|System.UIntPtr GetDescriptorSize()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XObjDetect/XObjDetectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xobjdetect-guide.md"
+        },
+        {
+          "ordinal": 23,
+          "upstreamIdentity": "cv.HOGDescriptor.checkDetectorSize()->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hog_descriptor_check_detector_size"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XObjDetect.HOGDescriptor|method|public;instance|System.Boolean CheckDetectorSize()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XObjDetect/XObjDetectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xobjdetect-guide.md"
+        },
+        {
+          "ordinal": 24,
+          "upstreamIdentity": "cv.HOGDescriptor.getWinSigma()->double",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hog_descriptor_get_win_sigma"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XObjDetect.HOGDescriptor|method|public;instance|System.Double GetWinSigma()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XObjDetect/XObjDetectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xobjdetect-guide.md"
+        },
+        {
+          "ordinal": 25,
+          "upstreamIdentity": "cv.HOGDescriptor.setSVMDetector(Mat svmdetector)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hog_descriptor_set_svm_detector"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XObjDetect.HOGDescriptor|method|public;instance|System.Void SetSVMDetector(System.ReadOnlySpan<System.Single> values)",
+            "MEMBER|JYPPX.OpenCvSharp.XObjDetect.HOGDescriptor|method|public;instance|System.Void SetSVMDetector(System.Single[] values)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XObjDetect/XObjDetectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xobjdetect-guide.md"
+        },
+        {
+          "ordinal": 29,
+          "upstreamIdentity": "cv.HOGDescriptor.detect(Mat img;vector_Point foundLocations[/O,/Ref];vector_double weights[/O,/Ref];double hitThreshold=0;Size winStride=Size();Size padding=Size();vector_Point searchLocations=std::vector<Point>()[/C,/Ref])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hog_descriptor_detect_count",
+            "jyppx_ocv_hog_descriptor_detect_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XObjDetect.HOGDescriptor|method|public;instance|JYPPX.OpenCvSharp.XObjDetect.HOGDetectionResult Detect(JYPPX.OpenCvSharp.Core.Mat image,System.Double hitThreshold=0,JYPPX.OpenCvSharp.Core.Size winStride=null,JYPPX.OpenCvSharp.Core.Size padding=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XObjDetect/XObjDetectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xobjdetect-guide.md"
+        },
+        {
+          "ordinal": 30,
+          "upstreamIdentity": "cv.HOGDescriptor.detectMultiScale(Mat img;vector_Rect foundLocations[/O,/Ref];vector_double foundWeights[/O,/Ref];double hitThreshold=0;Size winStride=Size();Size padding=Size();double scale=1.05;double groupThreshold=2.0;bool useMeanshiftGrouping=false)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hog_descriptor_detect_multi_scale_count",
+            "jyppx_ocv_hog_descriptor_detect_multi_scale_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XObjDetect.HOGDescriptor|method|public;instance|JYPPX.OpenCvSharp.XObjDetect.HOGDetectionResult DetectMultiScale(JYPPX.OpenCvSharp.Core.Mat image,System.Double hitThreshold=0,JYPPX.OpenCvSharp.Core.Size winStride=null,JYPPX.OpenCvSharp.Core.Size padding=null,System.Double scale=1.05,System.Double groupThreshold=2,System.Boolean useMeanshiftGrouping=false)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XObjDetect/XObjDetectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xobjdetect-guide.md"
+        },
+        {
+          "ordinal": 32,
+          "upstreamIdentity": "cv.HOGDescriptor.getDefaultPeopleDetector()->std::vector<float>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hog_descriptor_get_default_people_detector_count",
+            "jyppx_ocv_hog_descriptor_get_default_people_detector_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XObjDetect.HOGDescriptor|method|public;static|System.Single[] GetDefaultPeopleDetector()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XObjDetect/XObjDetectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xobjdetect-guide.md"
+        },
+        {
+          "ordinal": 33,
+          "upstreamIdentity": "cv.HOGDescriptor.getDaimlerPeopleDetector()->std::vector<float>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_hog_descriptor_get_daimler_people_detector_count",
+            "jyppx_ocv_hog_descriptor_get_daimler_people_detector_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.XObjDetect.HOGDescriptor|method|public;static|System.Single[] GetDaimlerPeopleDetector()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/XObjDetect/XObjDetectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/xobjdetect-guide.md"
+        }
+      ]
+    }
+  ]
+}

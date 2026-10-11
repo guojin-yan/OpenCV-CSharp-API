@@ -275,6 +275,11 @@ function Get-ExpectedEvidencePaths {
         "compatibility/ptcloud-upstream-map.txt",
         "compatibility/ptcloud-upstream-raw.json",
         "compatibility/ptcloud-upstream-summary.json",
+        "compatibility/xobjdetect-implemented-families.json",
+        "compatibility/xobjdetect-upstream-classifications.json",
+        "compatibility/xobjdetect-upstream-map.txt",
+        "compatibility/xobjdetect-upstream-raw.json",
+        "compatibility/xobjdetect-upstream-summary.json",
         "compatibility/v5.0.1-change-ledger.json",
         "compatibility/v5.0.1-change-ledger.schema.json",
         "docs/articles/api-abi-compatibility-policy.md",
@@ -299,6 +304,7 @@ function Get-ExpectedEvidencePaths {
         "docs/articles/saliency-objectness-guide.md",
         "docs/articles/surface-matching-guide.md",
         "docs/articles/reg-guide.md",
+        "docs/articles/xobjdetect-guide.md",
         "docs/articles/calib3d-upstream-parity-guide.md",
         "docs/articles/core-upstream-parity-guide.md",
         "docs/articles/dnn-structured-parity-guide.md",
@@ -740,6 +746,9 @@ function Get-ExpectedEvidencePaths {
         "tools/PtCloudUpstreamMap/PtCloudUpstreamMap.csproj",
         "tools/PtCloudUpstreamMap/Program.cs",
         "tools/PtCloudUpstreamMap/extract_ptcloud.py",
+        "tools/XObjDetectUpstreamMap/XObjDetectUpstreamMap.csproj",
+        "tools/XObjDetectUpstreamMap/Program.cs",
+        "tools/XObjDetectUpstreamMap/extract_xobjdetect.py",
         "tools/CodecBenchmark/CodecBenchmark.csproj",
         "tools/CodecBenchmark/Program.cs",
         "scripts/Measure-CodecTypedMatBenchmark.ps1",
@@ -825,6 +834,8 @@ function Get-ExpectedEvidencePaths {
         "scripts/Test-XStereoUpstreamMap.ps1",
         "scripts/Generate-PtCloudUpstreamMap.ps1",
         "scripts/Test-PtCloudUpstreamMap.ps1",
+        "scripts/Generate-XObjDetectUpstreamMap.ps1",
+        "scripts/Test-XObjDetectUpstreamMap.ps1",
         "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
         "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
         "tools/TypedMatBenchmark/Program.cs",
@@ -950,6 +961,7 @@ function Test-Record {
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.RegUpstreamMap.Sha256 -eq "1dd55da90fd1d92c14ba492db33fbd727e97141180d1e4caff1a62f4ccec855f" -and $Record.ApiAbiBaseline.RegUpstreamMap.RawSha256 -eq "5b13f257cb33678389d15ea51f7650657be27e973fce347bda357bb3d016faf6" -and $Record.ApiAbiBaseline.RegUpstreamMap.DeclarationCount -eq 63 -and $Record.ApiAbiBaseline.RegUpstreamMap.CallableCount -eq 51 -and $Record.ApiAbiBaseline.RegUpstreamMap.ImplementedCount -eq 48 -and $Record.ApiAbiBaseline.RegUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.RegUpstreamMap.IntentionallyOmittedCount -eq 3 -and $Record.ApiAbiBaseline.RegUpstreamMap.UnsupportedCount -eq 0 -and $Record.ApiAbiBaseline.RegUpstreamMap.UpstreamConditionalCount -eq 0 -and $Record.ApiAbiBaseline.RegUpstreamMap.SourceHeaderCount -eq 11 -and $Record.ApiAbiBaseline.RegUpstreamMap.SelectedFamilyCount -eq 1 -and $Record.ApiAbiBaseline.RegUpstreamMap.SelectedDeclarationCount -eq 48 -and $Record.ApiAbiBaseline.RegUpstreamMap.ManagedPublicTypeAdditionCount -eq 0 -and $Record.ApiAbiBaseline.RegUpstreamMap.ManagedPublicMemberAdditionCount -eq 0 -and $Record.ApiAbiBaseline.RegUpstreamMap.NativeEntrypointAdditionCount -eq 20 -and -not [bool]$Record.ApiAbiBaseline.RegUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout Reg upstream-map evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.XStereoUpstreamMap.Sha256 -eq "5878d163e02c9a20c65df5745e145184b8340ca1cd8fe95fe06a7dc3c28673a7" -and $Record.ApiAbiBaseline.XStereoUpstreamMap.DeclarationCount -eq 14 -and $Record.ApiAbiBaseline.XStereoUpstreamMap.CallableCount -eq 10 -and $Record.ApiAbiBaseline.XStereoUpstreamMap.ImplementedCount -eq 8 -and $Record.ApiAbiBaseline.XStereoUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.XStereoUpstreamMap.IntentionallyOmittedCount -eq 2 -and $Record.ApiAbiBaseline.XStereoUpstreamMap.SourceHeaderCount -eq 2 -and $Record.ApiAbiBaseline.XStereoUpstreamMap.SelectedFamilyCount -eq 1 -and $Record.ApiAbiBaseline.XStereoUpstreamMap.SelectedDeclarationCount -eq 8 -and $Record.ApiAbiBaseline.XStereoUpstreamMap.NativeEntrypointAdditionCount -eq 10 -and -not [bool]$Record.ApiAbiBaseline.XStereoUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout XStereo upstream-map evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.PtCloudUpstreamMap.Sha256 -eq "ad6cb09f4de25b611e255fa5fa61b02ceea19cb8ac4d8aec34b1923452d0bc4c" -and $Record.ApiAbiBaseline.PtCloudUpstreamMap.DeclarationCount -eq 22 -and $Record.ApiAbiBaseline.PtCloudUpstreamMap.CallableCount -eq 19 -and $Record.ApiAbiBaseline.PtCloudUpstreamMap.ImplementedCount -eq 19 -and $Record.ApiAbiBaseline.PtCloudUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.PtCloudUpstreamMap.IntentionallyOmittedCount -eq 0 -and $Record.ApiAbiBaseline.PtCloudUpstreamMap.SourceHeaderCount -eq 1 -and $Record.ApiAbiBaseline.PtCloudUpstreamMap.ExcludedPublicHeaderCount -eq 1 -and $Record.ApiAbiBaseline.PtCloudUpstreamMap.SelectedFamilyCount -eq 1 -and $Record.ApiAbiBaseline.PtCloudUpstreamMap.SelectedDeclarationCount -eq 19 -and $Record.ApiAbiBaseline.PtCloudUpstreamMap.NativeEntrypointAdditionCount -eq 13 -and -not [bool]$Record.ApiAbiBaseline.PtCloudUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout PtCloud upstream-map evidence drifted"
+    Assert-True -List $List -Condition ($Record.ApiAbiBaseline.XObjDetectUpstreamMap.Sha256 -eq "e95d33dbf2f2b35b5fdbb0aced3d926b9940d9cd843b02f2ebe0149839c161ab" -and $Record.ApiAbiBaseline.XObjDetectUpstreamMap.DeclarationCount -eq 34 -and $Record.ApiAbiBaseline.XObjDetectUpstreamMap.CallableCount -eq 27 -and $Record.ApiAbiBaseline.XObjDetectUpstreamMap.ImplementedCount -eq 20 -and $Record.ApiAbiBaseline.XObjDetectUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.XObjDetectUpstreamMap.IntentionallyOmittedCount -eq 7 -and $Record.ApiAbiBaseline.XObjDetectUpstreamMap.SourceHeaderCount -eq 1 -and $Record.ApiAbiBaseline.XObjDetectUpstreamMap.SelectedFamilyCount -eq 1 -and $Record.ApiAbiBaseline.XObjDetectUpstreamMap.SelectedDeclarationCount -eq 20 -and $Record.ApiAbiBaseline.XObjDetectUpstreamMap.NativeEntrypointAdditionCount -eq 27 -and -not [bool]$Record.ApiAbiBaseline.XObjDetectUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout XObjDetect upstream-map evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.GapInventoryStatus -eq "baseline-established-native-managed-parity-measured" -and -not [bool]$Record.ApiAbiBaseline.UpstreamParityMeasured -and [bool]$Record.ApiAbiBaseline.NativeToManagedParityMeasured -and $Record.ApiAbiBaseline.ImplementedSpanFamilyStatus -eq "implemented-verified") -Issue "Final closeout measured parity distinction or Span family status drifted"
 
     $expectedEvidence = @(Get-ExpectedEvidencePaths)
