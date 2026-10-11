@@ -1,0 +1,1358 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/RegUpstreamMap/extract_reg.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/map.hpp",
+  "headerSha256": "978369540ed1537aa026708212435623dd36191925e65bb03ae23fd1236ec4a4",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/map.hpp",
+      "sha256": "978369540ed1537aa026708212435623dd36191925e65bb03ae23fd1236ec4a4",
+      "startOrdinal": 0,
+      "declarationCount": 6
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapaffine.hpp",
+      "sha256": "bcf9bfb03212834b810d28b4deb8d17381f89a0e85539a0a5b0c476540103a35",
+      "startOrdinal": 6,
+      "declarationCount": 9
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapper.hpp",
+      "sha256": "8ee5202439589cce9413a1e91d18a6bfb75ce051d719169697c3f2fa36ad7608",
+      "startOrdinal": 15,
+      "declarationCount": 3
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradaffine.hpp",
+      "sha256": "f594b75ef7efc032456957aa664276f580c3d912c29443b2826a02ba157ae085",
+      "startOrdinal": 18,
+      "declarationCount": 4
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradeuclid.hpp",
+      "sha256": "6a05ac627beddf5c6b62e5d65232895d9db539805b1c55d60606d3bdd54d459e",
+      "startOrdinal": 22,
+      "declarationCount": 4
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradproj.hpp",
+      "sha256": "3bbfef273c4e07f8e50125f2fc2356f8fedf395a9625c557022e8d209bce6eb6",
+      "startOrdinal": 26,
+      "declarationCount": 4
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradshift.hpp",
+      "sha256": "e885936df19e9dd827486acdaec0411d4f3f26058a1d4c51d29c19f6ae72fed1",
+      "startOrdinal": 30,
+      "declarationCount": 4
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradsimilar.hpp",
+      "sha256": "6aa855f8f7daf7ed17154eb6a5de2ee75d7edb7e480712b65490db171fb1bf63",
+      "startOrdinal": 34,
+      "declarationCount": 4
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapperpyramid.hpp",
+      "sha256": "411367dfa86891752627261edff3a8e6121a7c3b9ef338965d82b317572ea8fa",
+      "startOrdinal": 38,
+      "declarationCount": 8
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapprojec.hpp",
+      "sha256": "66e5c0d1f57ea2aea65792a1fa50aeb8ee02b96a0f422a7d4561b7cc21ba41d3",
+      "startOrdinal": 46,
+      "declarationCount": 9
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapshift.hpp",
+      "sha256": "2bc0f93a654d557e96f8c45a948ece75796c6ca0a7b45ff4bab39da55ded882f",
+      "startOrdinal": 55,
+      "declarationCount": 8
+    }
+  ],
+  "declarationCount": 63,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/map.hpp",
+      "kind": "class",
+      "name": "cv.reg.Map",
+      "identity": "class cv.reg.Map",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Base class for modelling a Map between two images.\n\nThe class is only used to define the common interface for any possible map."
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/map.hpp",
+      "kind": "callable",
+      "name": "cv.reg.Map.warp",
+      "identity": "cv.reg.Map.warp(Mat img1;Mat img2[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "img2",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/map.hpp",
+      "kind": "callable",
+      "name": "cv.reg.Map.inverseWarp",
+      "identity": "cv.reg.Map.inverseWarp(Mat img1;Mat img2[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "img2",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/map.hpp",
+      "kind": "callable",
+      "name": "cv.reg.Map.inverseMap",
+      "identity": "cv.reg.Map.inverseMap()->cv::Ptr<Map>",
+      "returnType": "cv::Ptr<Map>",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/map.hpp",
+      "kind": "callable",
+      "name": "cv.reg.Map.compose",
+      "identity": "cv.reg.Map.compose(Ptr_Map map)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Ptr_Map",
+          "name": "map",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/map.hpp",
+      "kind": "callable",
+      "name": "cv.reg.Map.scale",
+      "identity": "cv.reg.Map.scale(double factor)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "factor",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapaffine.hpp",
+      "kind": "class",
+      "name": "cv.reg.MapAffine",
+      "identity": "class cv.reg.MapAffine",
+      "returnType": ": cv::reg::Map",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::reg::Map",
+      "documentation": ""
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapaffine.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapAffine.MapAffine",
+      "identity": "cv.reg.MapAffine.MapAffine()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapaffine.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapAffine.MapAffine",
+      "identity": "cv.reg.MapAffine.MapAffine(Mat linTr;Mat shift)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "linTr",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "shift",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapaffine.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapAffine.inverseWarp",
+      "identity": "cv.reg.MapAffine.inverseWarp(Mat img1;Mat img2[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "img2",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapaffine.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapAffine.inverseMap",
+      "identity": "cv.reg.MapAffine.inverseMap()->cv::Ptr<Map>",
+      "returnType": "cv::Ptr<Map>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapaffine.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapAffine.compose",
+      "identity": "cv.reg.MapAffine.compose(Ptr_Map map)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr_Map",
+          "name": "map",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapaffine.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapAffine.scale",
+      "identity": "cv.reg.MapAffine.scale(double factor)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "factor",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapaffine.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapAffine.getLinTr",
+      "identity": "cv.reg.MapAffine.getLinTr(Mat linTr[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "linTr",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapaffine.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapAffine.getShift",
+      "identity": "cv.reg.MapAffine.getShift(Mat shift[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "shift",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapper.hpp",
+      "kind": "class",
+      "name": "cv.reg.Mapper",
+      "identity": "class cv.reg.Mapper",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Base class for modelling an algorithm for calculating a map\n\nThe class is only used to define the common interface for any possible mapping algorithm."
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapper.hpp",
+      "kind": "callable",
+      "name": "cv.reg.Mapper.calculate",
+      "identity": "cv.reg.Mapper.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr<Map>())->cv::Ptr<Map>",
+      "returnType": "cv::Ptr<Map>",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "img2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Ptr_Map",
+          "name": "init",
+          "default": "cv::Ptr<Map>()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapper.hpp",
+      "kind": "callable",
+      "name": "cv.reg.Mapper.getMap",
+      "identity": "cv.reg.Mapper.getMap()->cv::Ptr<Map>",
+      "returnType": "cv::Ptr<Map>",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradaffine.hpp",
+      "kind": "class",
+      "name": "cv.reg.MapperGradAffine",
+      "identity": "class cv.reg.MapperGradAffine",
+      "returnType": ": cv::reg::Mapper",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::reg::Mapper",
+      "documentation": ""
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradaffine.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapperGradAffine.MapperGradAffine",
+      "identity": "cv.reg.MapperGradAffine.MapperGradAffine()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradaffine.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapperGradAffine.calculate",
+      "identity": "cv.reg.MapperGradAffine.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr<Map>())->cv::Ptr<Map>",
+      "returnType": "cv::Ptr<Map>",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "img2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Ptr_Map",
+          "name": "init",
+          "default": "cv::Ptr<Map>()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradaffine.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapperGradAffine.getMap",
+      "identity": "cv.reg.MapperGradAffine.getMap()->cv::Ptr<Map>",
+      "returnType": "cv::Ptr<Map>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradeuclid.hpp",
+      "kind": "class",
+      "name": "cv.reg.MapperGradEuclid",
+      "identity": "class cv.reg.MapperGradEuclid",
+      "returnType": ": cv::reg::Mapper",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::reg::Mapper",
+      "documentation": ""
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradeuclid.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapperGradEuclid.MapperGradEuclid",
+      "identity": "cv.reg.MapperGradEuclid.MapperGradEuclid()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradeuclid.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapperGradEuclid.calculate",
+      "identity": "cv.reg.MapperGradEuclid.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr<Map>())->cv::Ptr<Map>",
+      "returnType": "cv::Ptr<Map>",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "img2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Ptr_Map",
+          "name": "init",
+          "default": "cv::Ptr<Map>()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradeuclid.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapperGradEuclid.getMap",
+      "identity": "cv.reg.MapperGradEuclid.getMap()->cv::Ptr<Map>",
+      "returnType": "cv::Ptr<Map>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradproj.hpp",
+      "kind": "class",
+      "name": "cv.reg.MapperGradProj",
+      "identity": "class cv.reg.MapperGradProj",
+      "returnType": ": cv::reg::Mapper",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::reg::Mapper",
+      "documentation": ""
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradproj.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapperGradProj.MapperGradProj",
+      "identity": "cv.reg.MapperGradProj.MapperGradProj()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradproj.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapperGradProj.calculate",
+      "identity": "cv.reg.MapperGradProj.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr<Map>())->cv::Ptr<Map>",
+      "returnType": "cv::Ptr<Map>",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "img2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Ptr_Map",
+          "name": "init",
+          "default": "cv::Ptr<Map>()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradproj.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapperGradProj.getMap",
+      "identity": "cv.reg.MapperGradProj.getMap()->cv::Ptr<Map>",
+      "returnType": "cv::Ptr<Map>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradshift.hpp",
+      "kind": "class",
+      "name": "cv.reg.MapperGradShift",
+      "identity": "class cv.reg.MapperGradShift",
+      "returnType": ": cv::reg::Mapper",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::reg::Mapper",
+      "documentation": ""
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradshift.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapperGradShift.MapperGradShift",
+      "identity": "cv.reg.MapperGradShift.MapperGradShift()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradshift.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapperGradShift.calculate",
+      "identity": "cv.reg.MapperGradShift.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr<Map>())->cv::Ptr<Map>",
+      "returnType": "cv::Ptr<Map>",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "img2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Ptr_Map",
+          "name": "init",
+          "default": "cv::Ptr<Map>()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradshift.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapperGradShift.getMap",
+      "identity": "cv.reg.MapperGradShift.getMap()->cv::Ptr<Map>",
+      "returnType": "cv::Ptr<Map>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradsimilar.hpp",
+      "kind": "class",
+      "name": "cv.reg.MapperGradSimilar",
+      "identity": "class cv.reg.MapperGradSimilar",
+      "returnType": ": cv::reg::Mapper",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::reg::Mapper",
+      "documentation": ""
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradsimilar.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapperGradSimilar.MapperGradSimilar",
+      "identity": "cv.reg.MapperGradSimilar.MapperGradSimilar()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradsimilar.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapperGradSimilar.calculate",
+      "identity": "cv.reg.MapperGradSimilar.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr<Map>())->cv::Ptr<Map>",
+      "returnType": "cv::Ptr<Map>",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "img2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Ptr_Map",
+          "name": "init",
+          "default": "cv::Ptr<Map>()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 37,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradsimilar.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapperGradSimilar.getMap",
+      "identity": "cv.reg.MapperGradSimilar.getMap()->cv::Ptr<Map>",
+      "returnType": "cv::Ptr<Map>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 38,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapperpyramid.hpp",
+      "kind": "class",
+      "name": "cv.reg.MapperPyramid",
+      "identity": "class cv.reg.MapperPyramid",
+      "returnType": ": cv::reg::Mapper",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "numLev_",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "numIterPerScale_",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": ": cv::reg::Mapper",
+      "documentation": ""
+    },
+    {
+      "ordinal": 39,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapperpyramid.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapperPyramid.MapperPyramid",
+      "identity": "cv.reg.MapperPyramid.MapperPyramid(Ptr_Mapper baseMapper)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr_Mapper",
+          "name": "baseMapper",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 40,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapperpyramid.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapperPyramid.calculate",
+      "identity": "cv.reg.MapperPyramid.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr<Map>())->cv::Ptr<Map>",
+      "returnType": "cv::Ptr<Map>",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "img2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Ptr_Map",
+          "name": "init",
+          "default": "cv::Ptr<Map>()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 41,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapperpyramid.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapperPyramid.getMap",
+      "identity": "cv.reg.MapperPyramid.getMap()->cv::Ptr<Map>",
+      "returnType": "cv::Ptr<Map>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 42,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapperpyramid.hpp",
+      "kind": "class",
+      "name": "cv.reg.MapTypeCaster",
+      "identity": "class cv.reg.MapTypeCaster",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 43,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapperpyramid.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapTypeCaster.toAffine",
+      "identity": "cv.reg.MapTypeCaster.toAffine(Ptr_Map sourceMap)->Ptr<MapAffine>",
+      "returnType": "Ptr<MapAffine>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Ptr_Map",
+          "name": "sourceMap",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 44,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapperpyramid.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapTypeCaster.toShift",
+      "identity": "cv.reg.MapTypeCaster.toShift(Ptr_Map sourceMap)->Ptr<MapShift>",
+      "returnType": "Ptr<MapShift>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Ptr_Map",
+          "name": "sourceMap",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 45,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapperpyramid.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapTypeCaster.toProjec",
+      "identity": "cv.reg.MapTypeCaster.toProjec(Ptr_Map sourceMap)->Ptr<MapProjec>",
+      "returnType": "Ptr<MapProjec>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Ptr_Map",
+          "name": "sourceMap",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 46,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapprojec.hpp",
+      "kind": "class",
+      "name": "cv.reg.MapProjec",
+      "identity": "class cv.reg.MapProjec",
+      "returnType": ": cv::reg::Map",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::reg::Map",
+      "documentation": ""
+    },
+    {
+      "ordinal": 47,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapprojec.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapProjec.MapProjec",
+      "identity": "cv.reg.MapProjec.MapProjec()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 48,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapprojec.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapProjec.MapProjec",
+      "identity": "cv.reg.MapProjec.MapProjec(Mat projTr)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "projTr",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 49,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapprojec.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapProjec.inverseWarp",
+      "identity": "cv.reg.MapProjec.inverseWarp(Mat img1;Mat img2[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "img2",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 50,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapprojec.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapProjec.inverseMap",
+      "identity": "cv.reg.MapProjec.inverseMap()->cv::Ptr<Map>",
+      "returnType": "cv::Ptr<Map>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 51,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapprojec.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapProjec.compose",
+      "identity": "cv.reg.MapProjec.compose(Ptr_Map map)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr_Map",
+          "name": "map",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 52,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapprojec.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapProjec.scale",
+      "identity": "cv.reg.MapProjec.scale(double factor)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "factor",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 53,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapprojec.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapProjec.getProjTr",
+      "identity": "cv.reg.MapProjec.getProjTr(Mat projTr[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "projTr",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 54,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapprojec.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapProjec.normalize",
+      "identity": "cv.reg.MapProjec.normalize()->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 55,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapshift.hpp",
+      "kind": "class",
+      "name": "cv.reg.MapShift",
+      "identity": "class cv.reg.MapShift",
+      "returnType": ": cv::reg::Map",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::reg::Map",
+      "documentation": ""
+    },
+    {
+      "ordinal": 56,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapshift.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapShift.MapShift",
+      "identity": "cv.reg.MapShift.MapShift()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 57,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapshift.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapShift.MapShift",
+      "identity": "cv.reg.MapShift.MapShift(Mat shift)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "shift",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 58,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapshift.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapShift.inverseWarp",
+      "identity": "cv.reg.MapShift.inverseWarp(Mat img1;Mat img2[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "img2",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 59,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapshift.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapShift.inverseMap",
+      "identity": "cv.reg.MapShift.inverseMap()->cv::Ptr<Map>",
+      "returnType": "cv::Ptr<Map>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 60,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapshift.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapShift.compose",
+      "identity": "cv.reg.MapShift.compose(Ptr_Map map)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr_Map",
+          "name": "map",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 61,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapshift.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapShift.scale",
+      "identity": "cv.reg.MapShift.scale(double factor)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "factor",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 62,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapshift.hpp",
+      "kind": "callable",
+      "name": "cv.reg.MapShift.getShift",
+      "identity": "cv.reg.MapShift.getShift(Mat shift[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "shift",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    }
+  ]
+}

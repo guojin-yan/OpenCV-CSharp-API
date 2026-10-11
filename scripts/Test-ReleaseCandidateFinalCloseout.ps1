@@ -260,6 +260,11 @@ function Get-ExpectedEvidencePaths {
         "compatibility/surface_matching-upstream-map.txt",
         "compatibility/surface_matching-upstream-raw.json",
         "compatibility/surface_matching-upstream-summary.json",
+        "compatibility/reg-implemented-families.json",
+        "compatibility/reg-upstream-classifications.json",
+        "compatibility/reg-upstream-map.txt",
+        "compatibility/reg-upstream-raw.json",
+        "compatibility/reg-upstream-summary.json",
         "compatibility/v5.0.1-change-ledger.json",
         "compatibility/v5.0.1-change-ledger.schema.json",
         "docs/articles/api-abi-compatibility-policy.md",
@@ -283,6 +288,7 @@ function Get-ExpectedEvidencePaths {
         "docs/articles/saliency-guide.md",
         "docs/articles/saliency-objectness-guide.md",
         "docs/articles/surface-matching-guide.md",
+        "docs/articles/reg-guide.md",
         "docs/articles/calib3d-upstream-parity-guide.md",
         "docs/articles/core-upstream-parity-guide.md",
         "docs/articles/dnn-structured-parity-guide.md",
@@ -715,6 +721,9 @@ function Get-ExpectedEvidencePaths {
         "tools/SurfaceMatchingUpstreamMap/SurfaceMatchingUpstreamMap.csproj",
         "tools/SurfaceMatchingUpstreamMap/Program.cs",
         "tools/SurfaceMatchingUpstreamMap/extract_surface_matching.py",
+        "tools/RegUpstreamMap/RegUpstreamMap.csproj",
+        "tools/RegUpstreamMap/Program.cs",
+        "tools/RegUpstreamMap/extract_reg.py",
         "tools/CodecBenchmark/CodecBenchmark.csproj",
         "tools/CodecBenchmark/Program.cs",
         "scripts/Measure-CodecTypedMatBenchmark.ps1",
@@ -794,6 +803,8 @@ function Get-ExpectedEvidencePaths {
         "scripts/Test-SaliencyUpstreamMap.ps1",
         "scripts/Generate-SurfaceMatchingUpstreamMap.ps1",
         "scripts/Test-SurfaceMatchingUpstreamMap.ps1",
+        "scripts/Generate-RegUpstreamMap.ps1",
+        "scripts/Test-RegUpstreamMap.ps1",
         "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
         "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
         "tools/TypedMatBenchmark/Program.cs",
@@ -916,6 +927,7 @@ function Test-Record {
     Assert-True -List $List -Condition $stitchingEvidenceMatches -Issue "Final closeout Stitching upstream-map evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.VideoUpstreamMap.Sha256 -eq "3b0c00ec0f05ed3cf27b28f56a7679abf2f351d384d0c88910a03bb39d8627f0" -and $Record.ApiAbiBaseline.VideoUpstreamMap.RawSha256 -eq "67921346dfbe6f8f2d6a1c850cb88b34bf6eb46a89c4aa6c788ff893f74596af" -and $Record.ApiAbiBaseline.VideoUpstreamMap.DeclarationCount -eq 168 -and $Record.ApiAbiBaseline.VideoUpstreamMap.CallableCount -eq 145 -and $Record.ApiAbiBaseline.VideoUpstreamMap.ImplementedCount -eq 138 -and $Record.ApiAbiBaseline.VideoUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.VideoUpstreamMap.IntentionallyOmittedCount -eq 7 -and $Record.ApiAbiBaseline.VideoUpstreamMap.UnsupportedCount -eq 0 -and $Record.ApiAbiBaseline.VideoUpstreamMap.UpstreamConditionalCount -eq 0 -and $Record.ApiAbiBaseline.VideoUpstreamMap.CompatibilityHeaderCount -eq 2 -and $Record.ApiAbiBaseline.VideoUpstreamMap.ExcludedPublicHeaderCount -eq 2 -and $Record.ApiAbiBaseline.VideoUpstreamMap.SourceHeaderCount -eq 2 -and $Record.ApiAbiBaseline.VideoUpstreamMap.SelectedFamilyCount -eq 3 -and $Record.ApiAbiBaseline.VideoUpstreamMap.SelectedDeclarationCount -eq 83 -and $Record.ApiAbiBaseline.VideoUpstreamMap.ManagedPublicTypeAdditionCount -eq 13 -and $Record.ApiAbiBaseline.VideoUpstreamMap.ManagedPublicMemberAdditionCount -eq 110 -and $Record.ApiAbiBaseline.VideoUpstreamMap.NativeEntrypointAdditionCount -eq 45 -and -not [bool]$Record.ApiAbiBaseline.VideoUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout Video upstream-map evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.SurfaceMatchingUpstreamMap.Sha256 -eq "2f7f088ed4de9c554f46a79a7e08bb5deb5b11dbfd3e9480a6b5ff9ba2e7cbd2" -and $Record.ApiAbiBaseline.SurfaceMatchingUpstreamMap.RawSha256 -eq "96b62399b1af18fa485faeb452a177651b094e62dee03ec208823c0eec12603f" -and $Record.ApiAbiBaseline.SurfaceMatchingUpstreamMap.DeclarationCount -eq 27 -and $Record.ApiAbiBaseline.SurfaceMatchingUpstreamMap.CallableCount -eq 23 -and $Record.ApiAbiBaseline.SurfaceMatchingUpstreamMap.ImplementedCount -eq 7 -and $Record.ApiAbiBaseline.SurfaceMatchingUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.SurfaceMatchingUpstreamMap.IntentionallyOmittedCount -eq 16 -and $Record.ApiAbiBaseline.SurfaceMatchingUpstreamMap.UnsupportedCount -eq 0 -and $Record.ApiAbiBaseline.SurfaceMatchingUpstreamMap.UpstreamConditionalCount -eq 0 -and $Record.ApiAbiBaseline.SurfaceMatchingUpstreamMap.SelectedFamilyCount -eq 1 -and $Record.ApiAbiBaseline.SurfaceMatchingUpstreamMap.SelectedDeclarationCount -eq 7 -and $Record.ApiAbiBaseline.SurfaceMatchingUpstreamMap.ManagedPublicTypeAdditionCount -eq 0 -and $Record.ApiAbiBaseline.SurfaceMatchingUpstreamMap.ManagedPublicMemberAdditionCount -eq 0 -and $Record.ApiAbiBaseline.SurfaceMatchingUpstreamMap.NativeEntrypointAdditionCount -eq 6 -and -not [bool]$Record.ApiAbiBaseline.SurfaceMatchingUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout Surface Matching upstream-map evidence drifted"
+    Assert-True -List $List -Condition ($Record.ApiAbiBaseline.RegUpstreamMap.Sha256 -eq "1dd55da90fd1d92c14ba492db33fbd727e97141180d1e4caff1a62f4ccec855f" -and $Record.ApiAbiBaseline.RegUpstreamMap.RawSha256 -eq "5b13f257cb33678389d15ea51f7650657be27e973fce347bda357bb3d016faf6" -and $Record.ApiAbiBaseline.RegUpstreamMap.DeclarationCount -eq 63 -and $Record.ApiAbiBaseline.RegUpstreamMap.CallableCount -eq 51 -and $Record.ApiAbiBaseline.RegUpstreamMap.ImplementedCount -eq 48 -and $Record.ApiAbiBaseline.RegUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.RegUpstreamMap.IntentionallyOmittedCount -eq 3 -and $Record.ApiAbiBaseline.RegUpstreamMap.UnsupportedCount -eq 0 -and $Record.ApiAbiBaseline.RegUpstreamMap.UpstreamConditionalCount -eq 0 -and $Record.ApiAbiBaseline.RegUpstreamMap.SourceHeaderCount -eq 11 -and $Record.ApiAbiBaseline.RegUpstreamMap.SelectedFamilyCount -eq 1 -and $Record.ApiAbiBaseline.RegUpstreamMap.SelectedDeclarationCount -eq 48 -and $Record.ApiAbiBaseline.RegUpstreamMap.ManagedPublicTypeAdditionCount -eq 0 -and $Record.ApiAbiBaseline.RegUpstreamMap.ManagedPublicMemberAdditionCount -eq 0 -and $Record.ApiAbiBaseline.RegUpstreamMap.NativeEntrypointAdditionCount -eq 20 -and -not [bool]$Record.ApiAbiBaseline.RegUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout Reg upstream-map evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.GapInventoryStatus -eq "baseline-established-native-managed-parity-measured" -and -not [bool]$Record.ApiAbiBaseline.UpstreamParityMeasured -and [bool]$Record.ApiAbiBaseline.NativeToManagedParityMeasured -and $Record.ApiAbiBaseline.ImplementedSpanFamilyStatus -eq "implemented-verified") -Issue "Final closeout measured parity distinction or Span family status drifted"
 
     $expectedEvidence = @(Get-ExpectedEvidencePaths)

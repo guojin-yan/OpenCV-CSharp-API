@@ -1,5 +1,5 @@
 param(
-    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching')][string]$Module,
+    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg')][string]$Module,
     [Parameter(Mandatory)][string]$DisplayName,
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [switch]$Check
@@ -41,6 +41,8 @@ function GetParts([string]$Identity) {
         '^cv\.saliency\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     } elseif ($Module -eq 'surface_matching') {
         '^cv\.ppf_match_3d\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
+    } elseif ($Module -eq 'reg') {
+        '^cv\.reg\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     } else {
         '^cv\.' + $Module + '\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     }
@@ -60,7 +62,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
         }
         return $Owner
     }
-    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching')) {
+    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg')) {
         if ($Module -eq 'face') {
             if ([string]::IsNullOrWhiteSpace($Owner)) {
                 switch ($Name) {
@@ -99,6 +101,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
                 'structured_light' { return $Owner }
                 'saliency' { return $Owner }
                 'surface_matching' { return $Owner }
+                'reg' { return $Owner }
             }
             return [string]$managedType
         }
@@ -189,6 +192,61 @@ function GetManaged([string]$Owner, [string]$Name, [string]$Identity) {
             'PPF3DDetector.PPF3DDetector' { return @($managedEntries | Where-Object { $_ -match 'JYPPX\.OpenCvSharp\.SurfaceMatching\.Ppf3DDetector\|method\|public;static\|.*\bCreate\(' } | Sort-Object -Unique) }
             'PPF3DDetector.trainModel' { return @($managedEntries | Where-Object { $_ -match 'JYPPX\.OpenCvSharp\.SurfaceMatching\.Ppf3DDetector\|method\|public;instance\|System\.Void TrainModel\(JYPPX\.OpenCvSharp\.Core\.Mat model\)$' } | Sort-Object -Unique) }
             'PPF3DDetector.match' { return @($managedEntries | Where-Object { $_ -match 'JYPPX\.OpenCvSharp\.SurfaceMatching\.Ppf3DDetector\|method\|public;instance\|.*\bMatch\(JYPPX\.OpenCvSharp\.Core\.Mat scene,System\.Double relativeSceneSampleStep=0\.2,System\.Double relativeSceneDistance=0\.03\)$' } | Sort-Object -Unique) }
+            default { return @() }
+        }
+    }
+    if ($Module -eq 'reg') {
+        $regEntries = @($managedEntries | Where-Object { $_ -match '^TYPE\|(?:class|struct)\|public(?:;sealed)?\|JYPPX\.OpenCvSharp\.Reg\.' -or $_ -match '^MEMBER\|JYPPX\.OpenCvSharp\.Reg\|' })
+        $regMethod = {
+            param([string]$pattern)
+            return @($managedEntries | Where-Object { $_ -match $pattern } | Sort-Object -Unique)
+        }
+        switch ("$Owner.$Name") {
+            'Map.warp' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMap\|method\|public;instance\|System\.Void Warp\(JYPPX\.OpenCvSharp\.Core\.Mat src,JYPPX\.OpenCvSharp\.Core\.Mat dst\)$' }
+            'Map.inverseWarp' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMap\|method\|public;instance\|System\.Void InverseWarp\(JYPPX\.OpenCvSharp\.Core\.Mat src,JYPPX\.OpenCvSharp\.Core\.Mat dst\)$' }
+            'Map.inverseMap' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMap\|method\|public;instance\|JYPPX\.OpenCvSharp\.Reg\.RegMap InverseMap\(\)$' }
+            'Map.compose' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMap\|method\|public;instance\|System\.Void Compose\(JYPPX\.OpenCvSharp\.Reg\.RegMap other\)$' }
+            'Map.scale' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMap\|method\|public;instance\|System\.Void Scale\(System\.Double factor\)$' }
+            'MapAffine.MapAffine' { if ($Identity -match '\(\)->$') { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.MapAffine\|constructor\|public;instance\|\.ctor\(\)$' }; return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.MapAffine\|constructor\|public;instance\|\.ctor\(JYPPX\.OpenCvSharp\.Reg\.AffineTransform2D transform\)$' }
+            'MapAffine.inverseWarp' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMap\|method\|public;instance\|System\.Void InverseWarp\(JYPPX\.OpenCvSharp\.Core\.Mat src,JYPPX\.OpenCvSharp\.Core\.Mat dst\)$' }
+            'MapAffine.inverseMap' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMap\|method\|public;instance\|JYPPX\.OpenCvSharp\.Reg\.RegMap InverseMap\(\)$' }
+            'MapAffine.compose' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMap\|method\|public;instance\|System\.Void Compose\(JYPPX\.OpenCvSharp\.Reg\.RegMap other\)$' }
+            'MapAffine.scale' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMap\|method\|public;instance\|System\.Void Scale\(System\.Double factor\)$' }
+            'MapAffine.getLinTr' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.MapAffine\|property\|instance;get:public\|JYPPX\.OpenCvSharp\.Reg\.AffineTransform2D Transform$' }
+            'MapAffine.getShift' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.MapAffine\|property\|instance;get:public\|JYPPX\.OpenCvSharp\.Reg\.AffineTransform2D Transform$' }
+            'Mapper.calculate' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMapper\|method\|public;instance\|JYPPX\.OpenCvSharp\.Reg\.RegMap Calculate\(JYPPX\.OpenCvSharp\.Core\.Mat img1,JYPPX\.OpenCvSharp\.Core\.Mat img2,JYPPX\.OpenCvSharp\.Reg\.RegMap\? init=null\)$' }
+            'Mapper.getMap' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMapper\|method\|public;instance\|JYPPX\.OpenCvSharp\.Reg\.RegMap GetMap\(\)$' }
+            'MapperGradAffine.MapperGradAffine' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.MapperGradAffine\|constructor\|public;instance\|\.ctor\(\)$' }
+            'MapperGradAffine.calculate' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMapper\|method\|public;instance\|JYPPX\.OpenCvSharp\.Reg\.RegMap Calculate\(JYPPX\.OpenCvSharp\.Core\.Mat img1,JYPPX\.OpenCvSharp\.Core\.Mat img2,JYPPX\.OpenCvSharp\.Reg\.RegMap\? init=null\)$' }
+            'MapperGradAffine.getMap' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMapper\|method\|public;instance\|JYPPX\.OpenCvSharp\.Reg\.RegMap GetMap\(\)$' }
+            'MapperGradEuclid.MapperGradEuclid' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.MapperGradEuclid\|constructor\|public;instance\|\.ctor\(\)$' }
+            'MapperGradEuclid.calculate' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMapper\|method\|public;instance\|JYPPX\.OpenCvSharp\.Reg\.RegMap Calculate\(JYPPX\.OpenCvSharp\.Core\.Mat img1,JYPPX\.OpenCvSharp\.Core\.Mat img2,JYPPX\.OpenCvSharp\.Reg\.RegMap\? init=null\)$' }
+            'MapperGradEuclid.getMap' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMapper\|method\|public;instance\|JYPPX\.OpenCvSharp\.Reg\.RegMap GetMap\(\)$' }
+            'MapperGradProj.MapperGradProj' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.MapperGradProj\|constructor\|public;instance\|\.ctor\(\)$' }
+            'MapperGradProj.calculate' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMapper\|method\|public;instance\|JYPPX\.OpenCvSharp\.Reg\.RegMap Calculate\(JYPPX\.OpenCvSharp\.Core\.Mat img1,JYPPX\.OpenCvSharp\.Core\.Mat img2,JYPPX\.OpenCvSharp\.Reg\.RegMap\? init=null\)$' }
+            'MapperGradProj.getMap' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMapper\|method\|public;instance\|JYPPX\.OpenCvSharp\.Reg\.RegMap GetMap\(\)$' }
+            'MapperGradShift.MapperGradShift' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.MapperGradShift\|constructor\|public;instance\|\.ctor\(\)$' }
+            'MapperGradShift.calculate' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMapper\|method\|public;instance\|JYPPX\.OpenCvSharp\.Reg\.RegMap Calculate\(JYPPX\.OpenCvSharp\.Core\.Mat img1,JYPPX\.OpenCvSharp\.Core\.Mat img2,JYPPX\.OpenCvSharp\.Reg\.RegMap\? init=null\)$' }
+            'MapperGradShift.getMap' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMapper\|method\|public;instance\|JYPPX\.OpenCvSharp\.Reg\.RegMap GetMap\(\)$' }
+            'MapperGradSimilar.MapperGradSimilar' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.MapperGradSimilar\|constructor\|public;instance\|\.ctor\(\)$' }
+            'MapperGradSimilar.calculate' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMapper\|method\|public;instance\|JYPPX\.OpenCvSharp\.Reg\.RegMap Calculate\(JYPPX\.OpenCvSharp\.Core\.Mat img1,JYPPX\.OpenCvSharp\.Core\.Mat img2,JYPPX\.OpenCvSharp\.Reg\.RegMap\? init=null\)$' }
+            'MapperGradSimilar.getMap' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMapper\|method\|public;instance\|JYPPX\.OpenCvSharp\.Reg\.RegMap GetMap\(\)$' }
+            'MapperPyramid.MapperPyramid' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.MapperPyramid\|constructor\|public;instance\|\.ctor\(JYPPX\.OpenCvSharp\.Reg\.RegMapper baseMapper\)$' }
+            'MapperPyramid.calculate' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMapper\|method\|public;instance\|JYPPX\.OpenCvSharp\.Reg\.RegMap Calculate\(JYPPX\.OpenCvSharp\.Core\.Mat img1,JYPPX\.OpenCvSharp\.Core\.Mat img2,JYPPX\.OpenCvSharp\.Reg\.RegMap\? init=null\)$' }
+            'MapperPyramid.getMap' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMapper\|method\|public;instance\|JYPPX\.OpenCvSharp\.Reg\.RegMap GetMap\(\)$' }
+            'MapProjec.MapProjec' { if ($Identity -match '\(\)->$') { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.MapProjec\|constructor\|public;instance\|\.ctor\(\)$' }; return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.MapProjec\|constructor\|public;instance\|\.ctor\(JYPPX\.OpenCvSharp\.Reg\.ProjectiveTransform2D transform\)$' }
+            'MapProjec.inverseWarp' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMap\|method\|public;instance\|System\.Void InverseWarp\(JYPPX\.OpenCvSharp\.Core\.Mat src,JYPPX\.OpenCvSharp\.Core\.Mat dst\)$' }
+            'MapProjec.inverseMap' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMap\|method\|public;instance\|JYPPX\.OpenCvSharp\.Reg\.RegMap InverseMap\(\)$' }
+            'MapProjec.compose' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMap\|method\|public;instance\|System\.Void Compose\(JYPPX\.OpenCvSharp\.Reg\.RegMap other\)$' }
+            'MapProjec.scale' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMap\|method\|public;instance\|System\.Void Scale\(System\.Double factor\)$' }
+            'MapProjec.getProjTr' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.MapProjec\|property\|instance;get:public\|JYPPX\.OpenCvSharp\.Reg\.ProjectiveTransform2D Transform$' }
+            'MapProjec.normalize' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.MapProjec\|method\|public;instance\|System\.Void Normalize\(\)$' }
+            'MapShift.MapShift' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.MapShift\|constructor\|public;instance\|\.ctor\(System\.Double shiftX=0,System\.Double shiftY=0\)$' }
+            'MapShift.inverseWarp' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMap\|method\|public;instance\|System\.Void InverseWarp\(JYPPX\.OpenCvSharp\.Core\.Mat src,JYPPX\.OpenCvSharp\.Core\.Mat dst\)$' }
+            'MapShift.inverseMap' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMap\|method\|public;instance\|JYPPX\.OpenCvSharp\.Reg\.RegMap InverseMap\(\)$' }
+            'MapShift.compose' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMap\|method\|public;instance\|System\.Void Compose\(JYPPX\.OpenCvSharp\.Reg\.RegMap other\)$' }
+            'MapShift.scale' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.RegMap\|method\|public;instance\|System\.Void Scale\(System\.Double factor\)$' }
+            'MapShift.getShift' { return & $regMethod 'JYPPX\.OpenCvSharp\.Reg\.MapShift\|method\|public;instance\|System\.Void GetShift\(out System\.Double shiftX,out System\.Double shiftY\)$' }
             default { return @() }
         }
     }
@@ -436,6 +494,55 @@ function GetNative([object]$Parts, [string]$Identity) {
             'PPF3DDetector.PPF3DDetector' { @('jyppx_ocv_surface_matching_ppf_3d_detector_create') }
             'PPF3DDetector.trainModel' { @('jyppx_ocv_surface_matching_ppf_3d_detector_train_model') }
             'PPF3DDetector.match' { @('jyppx_ocv_surface_matching_ppf_3d_detector_match_count','jyppx_ocv_surface_matching_ppf_3d_detector_match_fill') }
+            default { @() }
+        }
+    } elseif ($Module -eq 'reg') {
+        $result = switch ("$owner.$name") {
+            'Map.warp' { @('jyppx_ocv_reg_map_warp') }
+            'Map.inverseWarp' { @('jyppx_ocv_reg_map_inverse_warp') }
+            'Map.inverseMap' { @('jyppx_ocv_reg_map_inverse_map') }
+            'Map.compose' { @('jyppx_ocv_reg_map_compose') }
+            'Map.scale' { @('jyppx_ocv_reg_map_scale') }
+            'MapAffine.MapAffine' { @('jyppx_ocv_reg_map_affine_create') }
+            'MapAffine.inverseWarp' { @('jyppx_ocv_reg_map_inverse_warp') }
+            'MapAffine.inverseMap' { @('jyppx_ocv_reg_map_inverse_map') }
+            'MapAffine.compose' { @('jyppx_ocv_reg_map_compose') }
+            'MapAffine.scale' { @('jyppx_ocv_reg_map_scale') }
+            'MapAffine.getLinTr' { @('jyppx_ocv_reg_map_affine_get') }
+            'MapAffine.getShift' { @('jyppx_ocv_reg_map_affine_get') }
+            'Mapper.calculate' { @('jyppx_ocv_reg_mapper_calculate') }
+            'Mapper.getMap' { @('jyppx_ocv_reg_mapper_get_map') }
+            'MapperGradAffine.MapperGradAffine' { @('jyppx_ocv_reg_mapper_grad_affine_create') }
+            'MapperGradAffine.calculate' { @('jyppx_ocv_reg_mapper_calculate') }
+            'MapperGradAffine.getMap' { @('jyppx_ocv_reg_mapper_get_map') }
+            'MapperGradEuclid.MapperGradEuclid' { @('jyppx_ocv_reg_mapper_grad_euclid_create') }
+            'MapperGradEuclid.calculate' { @('jyppx_ocv_reg_mapper_calculate') }
+            'MapperGradEuclid.getMap' { @('jyppx_ocv_reg_mapper_get_map') }
+            'MapperGradProj.MapperGradProj' { @('jyppx_ocv_reg_mapper_grad_proj_create') }
+            'MapperGradProj.calculate' { @('jyppx_ocv_reg_mapper_calculate') }
+            'MapperGradProj.getMap' { @('jyppx_ocv_reg_mapper_get_map') }
+            'MapperGradShift.MapperGradShift' { @('jyppx_ocv_reg_mapper_grad_shift_create') }
+            'MapperGradShift.calculate' { @('jyppx_ocv_reg_mapper_calculate') }
+            'MapperGradShift.getMap' { @('jyppx_ocv_reg_mapper_get_map') }
+            'MapperGradSimilar.MapperGradSimilar' { @('jyppx_ocv_reg_mapper_grad_similar_create') }
+            'MapperGradSimilar.calculate' { @('jyppx_ocv_reg_mapper_calculate') }
+            'MapperGradSimilar.getMap' { @('jyppx_ocv_reg_mapper_get_map') }
+            'MapperPyramid.MapperPyramid' { @('jyppx_ocv_reg_mapper_pyramid_create') }
+            'MapperPyramid.calculate' { @('jyppx_ocv_reg_mapper_calculate') }
+            'MapperPyramid.getMap' { @('jyppx_ocv_reg_mapper_get_map') }
+            'MapProjec.MapProjec' { @('jyppx_ocv_reg_map_projec_create') }
+            'MapProjec.inverseWarp' { @('jyppx_ocv_reg_map_inverse_warp') }
+            'MapProjec.inverseMap' { @('jyppx_ocv_reg_map_inverse_map') }
+            'MapProjec.compose' { @('jyppx_ocv_reg_map_compose') }
+            'MapProjec.scale' { @('jyppx_ocv_reg_map_scale') }
+            'MapProjec.getProjTr' { @('jyppx_ocv_reg_map_projec_get') }
+            'MapProjec.normalize' { @('jyppx_ocv_reg_map_projec_normalize') }
+            'MapShift.MapShift' { @('jyppx_ocv_reg_map_shift_create') }
+            'MapShift.inverseWarp' { @('jyppx_ocv_reg_map_inverse_warp') }
+            'MapShift.inverseMap' { @('jyppx_ocv_reg_map_inverse_map') }
+            'MapShift.compose' { @('jyppx_ocv_reg_map_compose') }
+            'MapShift.scale' { @('jyppx_ocv_reg_map_scale') }
+            'MapShift.getShift' { @('jyppx_ocv_reg_map_shift_get') }
             default { @() }
         }
     } elseif ($Module -eq 'shape') {
@@ -805,6 +912,7 @@ foreach ($decl in @($raw.declarations)) {
         if ($Module -eq 'shape') { $reason = 'The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.' }
         if ($Module -eq 'saliency' -and [string]$decl.identity -match 'StaticSaliencySpectralResidual\.(?:read|write)\(') { $reason = 'The upstream persistence helpers use FileNode/FileStorage ownership and serialization contracts that are outside the current managed/native Saliency wrapper; they remain intentionally omitted.' }
         if ($Module -eq 'surface_matching' -and [string]$decl.identity -match '^cv\.ppf_match_3d\.(?:Pose3D\.|loadPLYSimple|writePLY|writePLYVisibleNormals|samplePCByQuantization|transformPCPose|getRandomPose|addNoisePC|computeNormalsPC3d)') { $reason = 'The current SurfaceMatching wrapper intentionally scopes evidence to ICP and PPF3DDetector opaque handles; Pose3D mutators and point-cloud file/utility helpers remain outside the managed/native ownership and deterministic smoke contract.' }
+        if ($Module -eq 'reg' -and [string]$decl.identity -match '^cv\.reg\.MapTypeCaster\.') { $reason = 'MapTypeCaster conversion helpers are outside the current managed Reg wrapper; typed map handles are selected by the existing factory and ownership contract.' }
         if ($Module -eq 'rapid' -and [string]$decl.identity -match '^cv\.rapid\.GOSTracker\.create\(') { $reason = 'GOSTracker is present in the pinned upstream header but the current managed/native wrapper exposes only Rapid and OLSTracker; this optional tracker remains deliberately omitted until its behavior, ABI, and ownership contract are separately reviewed.' }
         if ($Module -eq 'phase_unwrapping' -and [string]$decl.identity -match 'HistogramPhaseUnwrapping\.Params\.Params\(') { $reason = 'The upstream default Params constructor is represented by HistogramPhaseUnwrappingParams.Default and an explicit managed value constructor; value initialization has no native callable ABI.' }
         if ($Module -eq 'optflow' -and [string]$decl.identity -match '^cv\.optflow\.createOptFlow_PCAFlow\(') { $reason = 'PCAFlow is an optional dense optical-flow factory distinct from the wrapped RLOF and DualTVL1 families; the current ABI/API has no PCAFlow native factory, opaque handle, ownership/lifetime contract, or deterministic runtime smoke, so this declaration remains intentionally omitted.' }
@@ -826,11 +934,12 @@ $externalDataDependencies = switch ($Module) {
     'saliency' { @('ObjectnessBING requires caller-supplied training/model data through SetTrainingPath; the repository bundles no model asset and therefore does not claim deterministic objectness model execution.') }
     default { @() }
 }
-$classification = [ordered]@{ schemaVersion = 1; upstreamOpenCvVersion = '5.0.0'; claimedSlice = "opencv2/$Module.hpp contrib public header closure from parser-emitted headers"; reviewStatus = 'reviewed'; limitation = "The map records parser identities and exact $DisplayName wrapper evidence; it does not claim repository-wide contrib parity or external module availability."; externalDataDependencies = @($externalDataDependencies); declarations = @($rows) }
+$claimedSlice = if ($Module -eq 'reg') { 'opencv2/reg/*.hpp contrib public header closure from parser-emitted headers' } else { "opencv2/$Module.hpp contrib public header closure from parser-emitted headers" }
+$classification = [ordered]@{ schemaVersion = 1; upstreamOpenCvVersion = '5.0.0'; claimedSlice = $claimedSlice; reviewStatus = 'reviewed'; limitation = "The map records parser identities and exact $DisplayName wrapper evidence; it does not claim repository-wide contrib parity or external module availability."; externalDataDependencies = @($externalDataDependencies); declarations = @($rows) }
 $builder = [Text.StringBuilder]::new(); [void]$builder.AppendLine("# Generated by scripts/Generate-ContribUpstreamMap.ps1 -Module $Module. Do not edit."); [void]$builder.AppendLine('schema-version=1'); [void]$builder.AppendLine('upstream-opencv-version=5.0.0'); [void]$builder.AppendLine("claimed-slice=$($classification.claimedSlice)"); [void]$builder.AppendLine("header-sha256=$($raw.headerSha256)"); [void]$builder.AppendLine("parser-sha256=$($raw.parserSha256)"); [void]$builder.AppendLine("declaration-count=$($raw.declarationCount)"); [void]$builder.AppendLine('repository-wide-upstream-parity-claimed=false'); [void]$builder.AppendLine(''); [void]$builder.AppendLine('ordinal|classification|identity|native-entrypoints|managed-members|build-condition|reason')
 foreach ($row in $rows) { $nativeText = if (@($row.nativeEntrypoints).Count) { @($row.nativeEntrypoints) -join ';' } else { '-' }; $managedText = if (@($row.managedMembers).Count) { @($row.managedMembers) -join ';' } else { '-' }; [void]$builder.AppendLine("$($row.ordinal)|$($row.classification)|$($row.identity)|$nativeText|$managedText|$($row.buildCondition)|$($row.reason)") }
 $mappingText = $builder.ToString().Replace("`r`n", "`n"); $implemented = @($rows | Where-Object classification -eq 'implemented'); $omitted = @($rows | Where-Object classification -eq 'intentionally-omitted'); $metadata = @($rows | Where-Object classification -eq 'non-callable-metadata')
-$guide = switch ($Module) { 'face' {'docs/articles/face-guide.md'} 'quality' {'docs/articles/quality-guide.md'} 'img_hash' {'docs/articles/img-hash-guide.md'} 'line_descriptor' {'docs/articles/line-descriptor-guide.md'} 'intensity_transform' {'docs/articles/intensity-transform-guide.md'} 'plot' {'docs/articles/plot-guide.md'} 'bioinspired' {'docs/articles/bioinspired-guide.md'} 'phase_unwrapping' {'docs/articles/phase-unwrapping-guide.md'} 'hfs' {'docs/articles/hfs-guide.md'} 'fuzzy' {'docs/articles/fuzzy-guide.md'} 'rapid' {'docs/articles/rapid-guide.md'} 'shape' {'docs/articles/shape-guide.md'} default { "docs/articles/$Module-upstream-parity-guide.md" } }
+$guide = switch ($Module) { 'face' {'docs/articles/face-guide.md'} 'quality' {'docs/articles/quality-guide.md'} 'img_hash' {'docs/articles/img-hash-guide.md'} 'line_descriptor' {'docs/articles/line-descriptor-guide.md'} 'intensity_transform' {'docs/articles/intensity-transform-guide.md'} 'plot' {'docs/articles/plot-guide.md'} 'bioinspired' {'docs/articles/bioinspired-guide.md'} 'phase_unwrapping' {'docs/articles/phase-unwrapping-guide.md'} 'hfs' {'docs/articles/hfs-guide.md'} 'fuzzy' {'docs/articles/fuzzy-guide.md'} 'rapid' {'docs/articles/rapid-guide.md'} 'shape' {'docs/articles/shape-guide.md'} 'reg' {'docs/articles/reg-guide.md'} default { "docs/articles/$Module-upstream-parity-guide.md" } }
 $family = [ordered]@{ schemaVersion = 1; upstreamOpenCvVersion = '5.0.0'; status = 'implemented-verified'; managedPublicTypeAdditionCount = 0; managedPublicMemberAdditionCount = 0; families = @([ordered]@{ id = "$Module-wrapper-surface"; rationale = "Current $DisplayName managed/native wrapper declarations with exact parser-backed callable evidence."; declarations = @($implemented | ForEach-Object { [ordered]@{ ordinal = $_.ordinal; upstreamIdentity = $_.identity; upstreamClassification = $_.classification; nativeEntrypoints = $_.nativeEntrypoints; managedMembers = $_.managedMembers; focusedTest = "tests/OpenCvSharp.Tests/$DisplayName/$DisplayName`Tests.cs"; nativeSmoke = 'src/OpenCvSharp.Native/tests/native_smoke.cpp'; sample = 'samples/ConsoleSamples/Program.cs'; guide = $guide } }) }) }
 $classificationJson = (($classification | ConvertTo-Json -Depth 20) + [Environment]::NewLine); $familyJson = (($family | ConvertTo-Json -Depth 20) + [Environment]::NewLine); $mapHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($mappingText))).ToLowerInvariant(); $familyHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($familyJson))).ToLowerInvariant()
 $summary = [ordered]@{ schemaVersion = 1; generator = "tools/$DisplayName`UpstreamMap"; upstreamOpenCvVersion = '5.0.0'; claimedSlice = $classification.claimedSlice; rawExtractionPath = "compatibility/$Module-upstream-raw.json"; classificationPath = "compatibility/$Module-upstream-classifications.json"; mappingPath = "compatibility/$Module-upstream-map.txt"; headerSha256 = [string]$raw.headerSha256; parserSha256 = [string]$raw.parserSha256; mappingSha256 = $mapHash; declarationCount = [int]$raw.declarationCount; enumCount = [int](@($raw.declarations | Where-Object kind -eq enum).Count); classCount = [int](@($raw.declarations | Where-Object kind -eq class).Count); callableCount = [int](@($raw.declarations | Where-Object kind -eq callable).Count); classificationCounts = [ordered]@{ implemented = [int]$implemented.Count; 'intentionally-omitted' = [int]$omitted.Count; missing = 0; 'non-callable-metadata' = [int]$metadata.Count; unsupported = 0; 'upstream-conditional' = 0 }; nativeEvidenceCount = @($rows | ForEach-Object { @($_.nativeEntrypoints) } | Where-Object { $_ } | Sort-Object -Unique).Count; managedEvidenceCount = @($rows | ForEach-Object { @($_.managedMembers) } | Where-Object { $_ } | Sort-Object -Unique).Count; negativeFixtureCount = 12; externalDataDependencyCount = @($externalDataDependencies).Count; familyInventoryPath = "compatibility/$Module-implemented-families.json"; familyInventorySha256 = $familyHash; selectedFamilyCount = 1; selectedDeclarationCount = $implemented.Count; managedPublicTypeAdditionCount = 0; managedPublicMemberAdditionCount = 0; repositoryWideUpstreamParityClaimed = $false }; $summaryJson = (($summary | ConvertTo-Json -Depth 20) + [Environment]::NewLine)

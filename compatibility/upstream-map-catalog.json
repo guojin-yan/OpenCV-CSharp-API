@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 35,
+  "moduleCount": 36,
   "maps": [
     {
       "id": "calib3d",
@@ -2506,6 +2506,112 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "2f7f088ed4de9c554f46a79a7e08bb5deb5b11dbfd3e9480a6b5ff9ba2e7cbd2",
         "familyInventorySha256": "6f39e6e0ea604c6b0a38b1c2b674f025fa5552f7e9830ec583dabea991861a40",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "reg",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/RegUpstreamMap",
+      "extractorScript": "tools/RegUpstreamMap/extract_reg.py",
+      "generationScript": "scripts/Generate-RegUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-RegUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/reg/*.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/map.hpp",
+          "sha256": "978369540ed1537aa026708212435623dd36191925e65bb03ae23fd1236ec4a4"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/map.hpp",
+            "sha256": "978369540ed1537aa026708212435623dd36191925e65bb03ae23fd1236ec4a4",
+            "startOrdinal": 0,
+            "declarationCount": 6
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapaffine.hpp",
+            "sha256": "bcf9bfb03212834b810d28b4deb8d17381f89a0e85539a0a5b0c476540103a35",
+            "startOrdinal": 6,
+            "declarationCount": 9
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapper.hpp",
+            "sha256": "8ee5202439589cce9413a1e91d18a6bfb75ce051d719169697c3f2fa36ad7608",
+            "startOrdinal": 15,
+            "declarationCount": 3
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradaffine.hpp",
+            "sha256": "f594b75ef7efc032456957aa664276f580c3d912c29443b2826a02ba157ae085",
+            "startOrdinal": 18,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradeuclid.hpp",
+            "sha256": "6a05ac627beddf5c6b62e5d65232895d9db539805b1c55d60606d3bdd54d459e",
+            "startOrdinal": 22,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradproj.hpp",
+            "sha256": "3bbfef273c4e07f8e50125f2fc2356f8fedf395a9625c557022e8d209bce6eb6",
+            "startOrdinal": 26,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradshift.hpp",
+            "sha256": "e885936df19e9dd827486acdaec0411d4f3f26058a1d4c51d29c19f6ae72fed1",
+            "startOrdinal": 30,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mappergradsimilar.hpp",
+            "sha256": "6aa855f8f7daf7ed17154eb6a5de2ee75d7edb7e480712b65490db171fb1bf63",
+            "startOrdinal": 34,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapperpyramid.hpp",
+            "sha256": "411367dfa86891752627261edff3a8e6121a7c3b9ef338965d82b317572ea8fa",
+            "startOrdinal": 38,
+            "declarationCount": 8
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapprojec.hpp",
+            "sha256": "66e5c0d1f57ea2aea65792a1fa50aeb8ee02b96a0f422a7d4561b7cc21ba41d3",
+            "startOrdinal": 46,
+            "declarationCount": 9
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/reg/include/opencv2/reg/mapshift.hpp",
+            "sha256": "2bc0f93a654d557e96f8c45a948ece75796c6ca0a7b45ff4bab39da55ded882f",
+            "startOrdinal": 55,
+            "declarationCount": 8
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/reg-upstream-raw.json",
+        "classifications": "compatibility/reg-upstream-classifications.json",
+        "mapping": "compatibility/reg-upstream-map.txt",
+        "summary": "compatibility/reg-upstream-summary.json",
+        "familyInventory": "compatibility/reg-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 63,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "1dd55da90fd1d92c14ba492db33fbd727e97141180d1e4caff1a62f4ccec855f",
+        "familyInventorySha256": "e740d9c241d0b109cec0c74223bb7d1d7b63d25050a5b8015fdc902b43cbd928",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

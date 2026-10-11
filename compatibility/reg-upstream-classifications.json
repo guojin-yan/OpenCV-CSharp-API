@@ -1,0 +1,769 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/reg/*.hpp contrib public header closure from parser-emitted headers",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact Reg wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.reg.Map",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.reg.Map.warp(Mat img1;Mat img2[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_warp"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Warp(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.reg.Map.inverseWarp(Mat img1;Mat img2[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_inverse_warp"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void InverseWarp(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.reg.Map.inverseMap()->cv::Ptr<Map>",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_inverse_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap InverseMap()"
+      ]
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.reg.Map.compose(Ptr_Map map)->void",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_compose"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Compose(JYPPX.OpenCvSharp.Reg.RegMap other)"
+      ]
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.reg.Map.scale(double factor)->void",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_scale"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Scale(System.Double factor)"
+      ]
+    },
+    {
+      "ordinal": 6,
+      "identity": "class cv.reg.MapAffine",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.reg.MapAffine.MapAffine()->",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_affine_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapAffine|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.reg.MapAffine.MapAffine(Mat linTr;Mat shift)->",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_affine_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapAffine|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.Reg.AffineTransform2D transform)"
+      ]
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.reg.MapAffine.inverseWarp(Mat img1;Mat img2[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_inverse_warp"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void InverseWarp(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.reg.MapAffine.inverseMap()->cv::Ptr<Map>",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_inverse_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap InverseMap()"
+      ]
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.reg.MapAffine.compose(Ptr_Map map)->void",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_compose"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Compose(JYPPX.OpenCvSharp.Reg.RegMap other)"
+      ]
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.reg.MapAffine.scale(double factor)->void",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_scale"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Scale(System.Double factor)"
+      ]
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.reg.MapAffine.getLinTr(Mat linTr[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_affine_get"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapAffine|property|instance;get:public|JYPPX.OpenCvSharp.Reg.AffineTransform2D Transform"
+      ]
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.reg.MapAffine.getShift(Mat shift[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_affine_get"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapAffine|property|instance;get:public|JYPPX.OpenCvSharp.Reg.AffineTransform2D Transform"
+      ]
+    },
+    {
+      "ordinal": 15,
+      "identity": "class cv.reg.Mapper",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.reg.Mapper.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr<Map>())->cv::Ptr<Map>",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_calculate"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap Calculate(JYPPX.OpenCvSharp.Core.Mat img1,JYPPX.OpenCvSharp.Core.Mat img2,JYPPX.OpenCvSharp.Reg.RegMap? init=null)"
+      ]
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.reg.Mapper.getMap()->cv::Ptr<Map>",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_get_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap GetMap()"
+      ]
+    },
+    {
+      "ordinal": 18,
+      "identity": "class cv.reg.MapperGradAffine",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.reg.MapperGradAffine.MapperGradAffine()->",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_grad_affine_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapperGradAffine|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.reg.MapperGradAffine.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr<Map>())->cv::Ptr<Map>",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_calculate"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap Calculate(JYPPX.OpenCvSharp.Core.Mat img1,JYPPX.OpenCvSharp.Core.Mat img2,JYPPX.OpenCvSharp.Reg.RegMap? init=null)"
+      ]
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.reg.MapperGradAffine.getMap()->cv::Ptr<Map>",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_get_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap GetMap()"
+      ]
+    },
+    {
+      "ordinal": 22,
+      "identity": "class cv.reg.MapperGradEuclid",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.reg.MapperGradEuclid.MapperGradEuclid()->",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_grad_euclid_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapperGradEuclid|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.reg.MapperGradEuclid.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr<Map>())->cv::Ptr<Map>",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_calculate"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap Calculate(JYPPX.OpenCvSharp.Core.Mat img1,JYPPX.OpenCvSharp.Core.Mat img2,JYPPX.OpenCvSharp.Reg.RegMap? init=null)"
+      ]
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.reg.MapperGradEuclid.getMap()->cv::Ptr<Map>",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_get_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap GetMap()"
+      ]
+    },
+    {
+      "ordinal": 26,
+      "identity": "class cv.reg.MapperGradProj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.reg.MapperGradProj.MapperGradProj()->",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_grad_proj_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapperGradProj|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.reg.MapperGradProj.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr<Map>())->cv::Ptr<Map>",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_calculate"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap Calculate(JYPPX.OpenCvSharp.Core.Mat img1,JYPPX.OpenCvSharp.Core.Mat img2,JYPPX.OpenCvSharp.Reg.RegMap? init=null)"
+      ]
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.reg.MapperGradProj.getMap()->cv::Ptr<Map>",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_get_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap GetMap()"
+      ]
+    },
+    {
+      "ordinal": 30,
+      "identity": "class cv.reg.MapperGradShift",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.reg.MapperGradShift.MapperGradShift()->",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_grad_shift_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapperGradShift|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.reg.MapperGradShift.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr<Map>())->cv::Ptr<Map>",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_calculate"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap Calculate(JYPPX.OpenCvSharp.Core.Mat img1,JYPPX.OpenCvSharp.Core.Mat img2,JYPPX.OpenCvSharp.Reg.RegMap? init=null)"
+      ]
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.reg.MapperGradShift.getMap()->cv::Ptr<Map>",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_get_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap GetMap()"
+      ]
+    },
+    {
+      "ordinal": 34,
+      "identity": "class cv.reg.MapperGradSimilar",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.reg.MapperGradSimilar.MapperGradSimilar()->",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_grad_similar_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapperGradSimilar|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.reg.MapperGradSimilar.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr<Map>())->cv::Ptr<Map>",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_calculate"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap Calculate(JYPPX.OpenCvSharp.Core.Mat img1,JYPPX.OpenCvSharp.Core.Mat img2,JYPPX.OpenCvSharp.Reg.RegMap? init=null)"
+      ]
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.reg.MapperGradSimilar.getMap()->cv::Ptr<Map>",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_get_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap GetMap()"
+      ]
+    },
+    {
+      "ordinal": 38,
+      "identity": "class cv.reg.MapperPyramid",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.reg.MapperPyramid.MapperPyramid(Ptr_Mapper baseMapper)->",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_pyramid_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapperPyramid|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.Reg.RegMapper baseMapper)"
+      ]
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.reg.MapperPyramid.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr<Map>())->cv::Ptr<Map>",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_calculate"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap Calculate(JYPPX.OpenCvSharp.Core.Mat img1,JYPPX.OpenCvSharp.Core.Mat img2,JYPPX.OpenCvSharp.Reg.RegMap? init=null)"
+      ]
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.reg.MapperPyramid.getMap()->cv::Ptr<Map>",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_get_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap GetMap()"
+      ]
+    },
+    {
+      "ordinal": 42,
+      "identity": "class cv.reg.MapTypeCaster",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.reg.MapTypeCaster.toAffine(Ptr_Map sourceMap)->Ptr<MapAffine>",
+      "classification": "intentionally-omitted",
+      "reason": "MapTypeCaster conversion helpers are outside the current managed Reg wrapper; typed map handles are selected by the existing factory and ownership contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.reg.MapTypeCaster.toShift(Ptr_Map sourceMap)->Ptr<MapShift>",
+      "classification": "intentionally-omitted",
+      "reason": "MapTypeCaster conversion helpers are outside the current managed Reg wrapper; typed map handles are selected by the existing factory and ownership contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 45,
+      "identity": "cv.reg.MapTypeCaster.toProjec(Ptr_Map sourceMap)->Ptr<MapProjec>",
+      "classification": "intentionally-omitted",
+      "reason": "MapTypeCaster conversion helpers are outside the current managed Reg wrapper; typed map handles are selected by the existing factory and ownership contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 46,
+      "identity": "class cv.reg.MapProjec",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.reg.MapProjec.MapProjec()->",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_projec_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapProjec|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 48,
+      "identity": "cv.reg.MapProjec.MapProjec(Mat projTr)->",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_projec_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapProjec|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.Reg.ProjectiveTransform2D transform)"
+      ]
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.reg.MapProjec.inverseWarp(Mat img1;Mat img2[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_inverse_warp"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void InverseWarp(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 50,
+      "identity": "cv.reg.MapProjec.inverseMap()->cv::Ptr<Map>",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_inverse_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap InverseMap()"
+      ]
+    },
+    {
+      "ordinal": 51,
+      "identity": "cv.reg.MapProjec.compose(Ptr_Map map)->void",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_compose"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Compose(JYPPX.OpenCvSharp.Reg.RegMap other)"
+      ]
+    },
+    {
+      "ordinal": 52,
+      "identity": "cv.reg.MapProjec.scale(double factor)->void",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_scale"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Scale(System.Double factor)"
+      ]
+    },
+    {
+      "ordinal": 53,
+      "identity": "cv.reg.MapProjec.getProjTr(Mat projTr[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_projec_get"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapProjec|property|instance;get:public|JYPPX.OpenCvSharp.Reg.ProjectiveTransform2D Transform"
+      ]
+    },
+    {
+      "ordinal": 54,
+      "identity": "cv.reg.MapProjec.normalize()->void",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_projec_normalize"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapProjec|method|public;instance|System.Void Normalize()"
+      ]
+    },
+    {
+      "ordinal": 55,
+      "identity": "class cv.reg.MapShift",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 56,
+      "identity": "cv.reg.MapShift.MapShift()->",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_shift_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapShift|constructor|public;instance|.ctor(System.Double shiftX=0,System.Double shiftY=0)"
+      ]
+    },
+    {
+      "ordinal": 57,
+      "identity": "cv.reg.MapShift.MapShift(Mat shift)->",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_shift_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapShift|constructor|public;instance|.ctor(System.Double shiftX=0,System.Double shiftY=0)"
+      ]
+    },
+    {
+      "ordinal": 58,
+      "identity": "cv.reg.MapShift.inverseWarp(Mat img1;Mat img2[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_inverse_warp"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void InverseWarp(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 59,
+      "identity": "cv.reg.MapShift.inverseMap()->cv::Ptr<Map>",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_inverse_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap InverseMap()"
+      ]
+    },
+    {
+      "ordinal": 60,
+      "identity": "cv.reg.MapShift.compose(Ptr_Map map)->void",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_compose"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Compose(JYPPX.OpenCvSharp.Reg.RegMap other)"
+      ]
+    },
+    {
+      "ordinal": 61,
+      "identity": "cv.reg.MapShift.scale(double factor)->void",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_scale"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Scale(System.Double factor)"
+      ]
+    },
+    {
+      "ordinal": 62,
+      "identity": "cv.reg.MapShift.getShift(Mat shift[/O])->void",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_shift_get"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapShift|method|public;instance|System.Void GetShift(out System.Double shiftX,out System.Double shiftY)"
+      ]
+    }
+  ]
+}

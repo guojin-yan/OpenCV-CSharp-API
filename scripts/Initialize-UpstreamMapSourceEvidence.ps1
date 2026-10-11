@@ -16,6 +16,7 @@ $rawNames = @("imgproc", "imgcodecs", "videoio", "calib3d", "core", "dnn", "feat
 $rawNames += @("structured_light")
 $rawNames += @("saliency")
 $rawNames += @("surface_matching")
+$rawNames += @("reg")
 $maximumDownloadAttempts = 4
 $required = [System.Collections.Generic.Dictionary[string, string]]::new([StringComparer]::Ordinal)
 

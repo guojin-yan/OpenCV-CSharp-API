@@ -1,0 +1,735 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 0,
+  "managedPublicMemberAdditionCount": 0,
+  "families": [
+    {
+      "id": "reg-wrapper-surface",
+      "rationale": "Current Reg managed/native wrapper declarations with exact parser-backed callable evidence.",
+      "declarations": [
+        {
+          "ordinal": 1,
+          "upstreamIdentity": "cv.reg.Map.warp(Mat img1;Mat img2[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_warp"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Warp(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 2,
+          "upstreamIdentity": "cv.reg.Map.inverseWarp(Mat img1;Mat img2[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_inverse_warp"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void InverseWarp(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 3,
+          "upstreamIdentity": "cv.reg.Map.inverseMap()->cv::Ptr<Map>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_inverse_map"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap InverseMap()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 4,
+          "upstreamIdentity": "cv.reg.Map.compose(Ptr_Map map)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_compose"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Compose(JYPPX.OpenCvSharp.Reg.RegMap other)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 5,
+          "upstreamIdentity": "cv.reg.Map.scale(double factor)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_scale"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Scale(System.Double factor)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 7,
+          "upstreamIdentity": "cv.reg.MapAffine.MapAffine()->",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_affine_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.MapAffine|constructor|public;instance|.ctor()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 8,
+          "upstreamIdentity": "cv.reg.MapAffine.MapAffine(Mat linTr;Mat shift)->",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_affine_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.MapAffine|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.Reg.AffineTransform2D transform)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 9,
+          "upstreamIdentity": "cv.reg.MapAffine.inverseWarp(Mat img1;Mat img2[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_inverse_warp"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void InverseWarp(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 10,
+          "upstreamIdentity": "cv.reg.MapAffine.inverseMap()->cv::Ptr<Map>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_inverse_map"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap InverseMap()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 11,
+          "upstreamIdentity": "cv.reg.MapAffine.compose(Ptr_Map map)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_compose"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Compose(JYPPX.OpenCvSharp.Reg.RegMap other)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 12,
+          "upstreamIdentity": "cv.reg.MapAffine.scale(double factor)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_scale"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Scale(System.Double factor)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 13,
+          "upstreamIdentity": "cv.reg.MapAffine.getLinTr(Mat linTr[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_affine_get"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.MapAffine|property|instance;get:public|JYPPX.OpenCvSharp.Reg.AffineTransform2D Transform"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 14,
+          "upstreamIdentity": "cv.reg.MapAffine.getShift(Mat shift[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_affine_get"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.MapAffine|property|instance;get:public|JYPPX.OpenCvSharp.Reg.AffineTransform2D Transform"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 16,
+          "upstreamIdentity": "cv.reg.Mapper.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr<Map>())->cv::Ptr<Map>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_mapper_calculate"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap Calculate(JYPPX.OpenCvSharp.Core.Mat img1,JYPPX.OpenCvSharp.Core.Mat img2,JYPPX.OpenCvSharp.Reg.RegMap? init=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 17,
+          "upstreamIdentity": "cv.reg.Mapper.getMap()->cv::Ptr<Map>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_mapper_get_map"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap GetMap()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 19,
+          "upstreamIdentity": "cv.reg.MapperGradAffine.MapperGradAffine()->",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_mapper_grad_affine_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.MapperGradAffine|constructor|public;instance|.ctor()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 20,
+          "upstreamIdentity": "cv.reg.MapperGradAffine.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr<Map>())->cv::Ptr<Map>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_mapper_calculate"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap Calculate(JYPPX.OpenCvSharp.Core.Mat img1,JYPPX.OpenCvSharp.Core.Mat img2,JYPPX.OpenCvSharp.Reg.RegMap? init=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 21,
+          "upstreamIdentity": "cv.reg.MapperGradAffine.getMap()->cv::Ptr<Map>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_mapper_get_map"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap GetMap()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 23,
+          "upstreamIdentity": "cv.reg.MapperGradEuclid.MapperGradEuclid()->",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_mapper_grad_euclid_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.MapperGradEuclid|constructor|public;instance|.ctor()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 24,
+          "upstreamIdentity": "cv.reg.MapperGradEuclid.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr<Map>())->cv::Ptr<Map>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_mapper_calculate"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap Calculate(JYPPX.OpenCvSharp.Core.Mat img1,JYPPX.OpenCvSharp.Core.Mat img2,JYPPX.OpenCvSharp.Reg.RegMap? init=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 25,
+          "upstreamIdentity": "cv.reg.MapperGradEuclid.getMap()->cv::Ptr<Map>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_mapper_get_map"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap GetMap()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 27,
+          "upstreamIdentity": "cv.reg.MapperGradProj.MapperGradProj()->",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_mapper_grad_proj_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.MapperGradProj|constructor|public;instance|.ctor()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 28,
+          "upstreamIdentity": "cv.reg.MapperGradProj.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr<Map>())->cv::Ptr<Map>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_mapper_calculate"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap Calculate(JYPPX.OpenCvSharp.Core.Mat img1,JYPPX.OpenCvSharp.Core.Mat img2,JYPPX.OpenCvSharp.Reg.RegMap? init=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 29,
+          "upstreamIdentity": "cv.reg.MapperGradProj.getMap()->cv::Ptr<Map>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_mapper_get_map"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap GetMap()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 31,
+          "upstreamIdentity": "cv.reg.MapperGradShift.MapperGradShift()->",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_mapper_grad_shift_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.MapperGradShift|constructor|public;instance|.ctor()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 32,
+          "upstreamIdentity": "cv.reg.MapperGradShift.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr<Map>())->cv::Ptr<Map>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_mapper_calculate"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap Calculate(JYPPX.OpenCvSharp.Core.Mat img1,JYPPX.OpenCvSharp.Core.Mat img2,JYPPX.OpenCvSharp.Reg.RegMap? init=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 33,
+          "upstreamIdentity": "cv.reg.MapperGradShift.getMap()->cv::Ptr<Map>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_mapper_get_map"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap GetMap()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 35,
+          "upstreamIdentity": "cv.reg.MapperGradSimilar.MapperGradSimilar()->",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_mapper_grad_similar_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.MapperGradSimilar|constructor|public;instance|.ctor()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 36,
+          "upstreamIdentity": "cv.reg.MapperGradSimilar.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr<Map>())->cv::Ptr<Map>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_mapper_calculate"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap Calculate(JYPPX.OpenCvSharp.Core.Mat img1,JYPPX.OpenCvSharp.Core.Mat img2,JYPPX.OpenCvSharp.Reg.RegMap? init=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 37,
+          "upstreamIdentity": "cv.reg.MapperGradSimilar.getMap()->cv::Ptr<Map>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_mapper_get_map"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap GetMap()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 39,
+          "upstreamIdentity": "cv.reg.MapperPyramid.MapperPyramid(Ptr_Mapper baseMapper)->",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_mapper_pyramid_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.MapperPyramid|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.Reg.RegMapper baseMapper)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 40,
+          "upstreamIdentity": "cv.reg.MapperPyramid.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr<Map>())->cv::Ptr<Map>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_mapper_calculate"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap Calculate(JYPPX.OpenCvSharp.Core.Mat img1,JYPPX.OpenCvSharp.Core.Mat img2,JYPPX.OpenCvSharp.Reg.RegMap? init=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 41,
+          "upstreamIdentity": "cv.reg.MapperPyramid.getMap()->cv::Ptr<Map>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_mapper_get_map"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap GetMap()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 47,
+          "upstreamIdentity": "cv.reg.MapProjec.MapProjec()->",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_projec_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.MapProjec|constructor|public;instance|.ctor()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 48,
+          "upstreamIdentity": "cv.reg.MapProjec.MapProjec(Mat projTr)->",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_projec_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.MapProjec|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.Reg.ProjectiveTransform2D transform)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 49,
+          "upstreamIdentity": "cv.reg.MapProjec.inverseWarp(Mat img1;Mat img2[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_inverse_warp"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void InverseWarp(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 50,
+          "upstreamIdentity": "cv.reg.MapProjec.inverseMap()->cv::Ptr<Map>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_inverse_map"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap InverseMap()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 51,
+          "upstreamIdentity": "cv.reg.MapProjec.compose(Ptr_Map map)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_compose"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Compose(JYPPX.OpenCvSharp.Reg.RegMap other)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 52,
+          "upstreamIdentity": "cv.reg.MapProjec.scale(double factor)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_scale"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Scale(System.Double factor)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 53,
+          "upstreamIdentity": "cv.reg.MapProjec.getProjTr(Mat projTr[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_projec_get"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.MapProjec|property|instance;get:public|JYPPX.OpenCvSharp.Reg.ProjectiveTransform2D Transform"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 54,
+          "upstreamIdentity": "cv.reg.MapProjec.normalize()->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_projec_normalize"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.MapProjec|method|public;instance|System.Void Normalize()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 56,
+          "upstreamIdentity": "cv.reg.MapShift.MapShift()->",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_shift_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.MapShift|constructor|public;instance|.ctor(System.Double shiftX=0,System.Double shiftY=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 57,
+          "upstreamIdentity": "cv.reg.MapShift.MapShift(Mat shift)->",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_shift_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.MapShift|constructor|public;instance|.ctor(System.Double shiftX=0,System.Double shiftY=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 58,
+          "upstreamIdentity": "cv.reg.MapShift.inverseWarp(Mat img1;Mat img2[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_inverse_warp"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void InverseWarp(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 59,
+          "upstreamIdentity": "cv.reg.MapShift.inverseMap()->cv::Ptr<Map>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_inverse_map"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap InverseMap()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 60,
+          "upstreamIdentity": "cv.reg.MapShift.compose(Ptr_Map map)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_compose"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Compose(JYPPX.OpenCvSharp.Reg.RegMap other)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 61,
+          "upstreamIdentity": "cv.reg.MapShift.scale(double factor)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_scale"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Scale(System.Double factor)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        },
+        {
+          "ordinal": 62,
+          "upstreamIdentity": "cv.reg.MapShift.getShift(Mat shift[/O])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_reg_map_shift_get"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Reg.MapShift|method|public;instance|System.Void GetShift(out System.Double shiftX,out System.Double shiftY)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Reg/RegTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/reg-guide.md"
+        }
+      ]
+    }
+  ]
+}

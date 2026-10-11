@@ -134,6 +134,8 @@ function Get-Record {
     $stitchingSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/stitching-upstream-summary.json") -Raw | ConvertFrom-Json
     $videoSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/video-upstream-summary.json") -Raw | ConvertFrom-Json
     $surfaceMatchingSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/surface_matching-upstream-summary.json") -Raw | ConvertFrom-Json
+    $regRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/reg-upstream-raw.json") -Raw | ConvertFrom-Json
+    $regSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/reg-upstream-summary.json") -Raw | ConvertFrom-Json
     $evidencePaths = @(
         ".github/workflows/pack.yml",
         ".github/workflows/publish-nuget.yml",
@@ -328,6 +330,11 @@ function Get-Record {
         "compatibility/surface_matching-upstream-map.txt",
         "compatibility/surface_matching-upstream-raw.json",
         "compatibility/surface_matching-upstream-summary.json",
+        "compatibility/reg-implemented-families.json",
+        "compatibility/reg-upstream-classifications.json",
+        "compatibility/reg-upstream-map.txt",
+        "compatibility/reg-upstream-raw.json",
+        "compatibility/reg-upstream-summary.json",
         "compatibility/v5.0.1-change-ledger.json",
         "compatibility/v5.0.1-change-ledger.schema.json",
         "docs/articles/api-abi-compatibility-policy.md",
@@ -351,6 +358,7 @@ function Get-Record {
         "docs/articles/saliency-guide.md",
         "docs/articles/saliency-objectness-guide.md",
         "docs/articles/surface-matching-guide.md",
+        "docs/articles/reg-guide.md",
         "docs/articles/calib3d-upstream-parity-guide.md",
         "docs/articles/core-upstream-parity-guide.md",
         "docs/articles/dnn-structured-parity-guide.md",
@@ -783,6 +791,9 @@ function Get-Record {
         "tools/SurfaceMatchingUpstreamMap/SurfaceMatchingUpstreamMap.csproj",
         "tools/SurfaceMatchingUpstreamMap/Program.cs",
         "tools/SurfaceMatchingUpstreamMap/extract_surface_matching.py",
+        "tools/RegUpstreamMap/RegUpstreamMap.csproj",
+        "tools/RegUpstreamMap/Program.cs",
+        "tools/RegUpstreamMap/extract_reg.py",
         "tools/CodecBenchmark/CodecBenchmark.csproj",
         "tools/CodecBenchmark/Program.cs",
         "scripts/Measure-CodecTypedMatBenchmark.ps1",
@@ -862,6 +873,8 @@ function Get-Record {
         "scripts/Test-SaliencyUpstreamMap.ps1",
         "scripts/Generate-SurfaceMatchingUpstreamMap.ps1",
         "scripts/Test-SurfaceMatchingUpstreamMap.ps1",
+        "scripts/Generate-RegUpstreamMap.ps1",
+        "scripts/Test-RegUpstreamMap.ps1",
         "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
         "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
         "tools/TypedMatBenchmark/Program.cs",
@@ -1314,6 +1327,29 @@ function Get-Record {
                 ManagedPublicMemberAdditionCount = [int]$surfaceMatchingSummary.managedPublicMemberAdditionCount
                 NativeEntrypointAdditionCount = [int]$surfaceMatchingSummary.nativeEvidenceCount
                 RepositoryWideParityClaimed = [bool]$surfaceMatchingSummary.repositoryWideUpstreamParityClaimed
+            }
+            RegUpstreamMap = [ordered]@{
+                Path = "compatibility/reg-upstream-map.txt"
+                SummaryPath = "compatibility/reg-upstream-summary.json"
+                ClassificationPath = "compatibility/reg-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/reg-implemented-families.json"
+                RawExtractionPath = "compatibility/reg-upstream-raw.json"
+                Sha256 = $regSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/reg-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$regSummary.declarationCount
+                CallableCount = [int]$regSummary.callableCount
+                ImplementedCount = [int]$regSummary.classificationCounts.implemented
+                MissingCount = [int]$regSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$regSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$regSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$regSummary.classificationCounts.'upstream-conditional'
+                SourceHeaderCount = @($regRaw.sourceHeaders).Count
+                SelectedFamilyCount = [int]$regSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$regSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$regSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$regSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$regSummary.nativeEvidenceCount
+                RepositoryWideParityClaimed = [bool]$regSummary.repositoryWideUpstreamParityClaimed
             }
             GapInventoryPath = "compatibility/api-gap-inventory.json"
             GapInventoryStatus = $gapInventory.status
