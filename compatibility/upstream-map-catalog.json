@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 32,
+  "moduleCount": 33,
   "maps": [
     {
       "id": "calib3d",
@@ -2326,6 +2326,64 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "b018151b7b42aef0441c4487dbbc69410157878d0a457a2a1e1e262a7ca72943",
         "familyInventorySha256": "ce6fe16b7ad0fd65a9f08354ee0f420b4825ace639f3a3b14538172d3158e87f",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "structured_light",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/StructuredLightUpstreamMap",
+      "extractorScript": "tools/StructuredLightUpstreamMap/extract_structured_light.py",
+      "generationScript": "scripts/Generate-StructuredLightUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-StructuredLightUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/structured_light.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light.hpp",
+          "sha256": "13279ebf29a58f49f324553fdad6ff720c1a7e7ced331e56cf9f422403d3af99"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/graycodepattern.hpp",
+            "sha256": "b883f1c0fc2e29531bb3244b9031807055fc27f6041a135beb9bed56ea8b5917",
+            "startOrdinal": 0,
+            "declarationCount": 7
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/sinusoidalpattern.hpp",
+            "sha256": "c65639f8d4dde6a7382d4ccf6b865c304a47d15f56a3bcdcef44b02f23e6192d",
+            "startOrdinal": 7,
+            "declarationCount": 9
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/structured_light.hpp",
+            "sha256": "5a8be515e6084ddb17f7a4e9c56de9b0e0b429b12742cc4de27387b03ecf05cd",
+            "startOrdinal": 16,
+            "declarationCount": 4
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/structured_light-upstream-raw.json",
+        "classifications": "compatibility/structured_light-upstream-classifications.json",
+        "mapping": "compatibility/structured_light-upstream-map.txt",
+        "summary": "compatibility/structured_light-upstream-summary.json",
+        "familyInventory": "compatibility/structured_light-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 20,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "09bbe1954da3e5f342e553e6d4091211b13e04fa503074194ae75df8b6e531be",
+        "familyInventorySha256": "6f465a47bd10fb824d0f1f1770b49026bbb02eb2d59a786fee0d458520c7122d",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

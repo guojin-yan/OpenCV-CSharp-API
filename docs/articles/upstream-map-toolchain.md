@@ -1,6 +1,6 @@
 # Upstream Map Toolchain
 
-The upstream map catalog centralizes the source scope, parser identity, classification policy, output files, and semantic check command for 32 parser-backed maps. Its schema is [`upstream-map-catalog.schema.json`](../../compatibility/upstream-map-catalog.schema.json), and the checked catalog is [`upstream-map-catalog.json`](../../compatibility/upstream-map-catalog.json).
+The upstream map catalog centralizes the source scope, parser identity, classification policy, output files, and semantic check command for 33 parser-backed maps. Its schema is [`upstream-map-catalog.schema.json`](../../compatibility/upstream-map-catalog.schema.json), and the checked catalog is [`upstream-map-catalog.json`](../../compatibility/upstream-map-catalog.json).
 
 Regenerate the catalog after an intentional map-surface update:
 
@@ -24,4 +24,6 @@ Rapid maps the pinned `opencv2/rapid.hpp` closure's 12 existing callable wrapper
 
 Shape maps the pinned `opencv2/shape.hpp` parser closure's 20 callable declarations to 18 distinct native ABI symbols and 19 managed members. Both Norm and EMD norm-flag declarations bind to the shared managed base property and native accessors; unwrapped ShapeContext configuration and ShapeTransformer APIs remain explicit omissions. The `emd_l1` helper and two native handle-release exports remain outside this parser closure.
 
-`MAP-002..004` are represented in the catalog. MAP-005 incrementally adds remaining contrib modules after each module's exact headers, optional dependency boundaries, source-review exclusions, and classification rules have been reviewed; ten MAP-005 modules currently have zero unexplained missing declarations.
+StructuredLight maps the pinned `opencv2/structured_light.hpp` closure's 14 callable declarations to 12 distinct native ABI symbols and 11 managed members. Gray-code creation, thresholds, shadow-mask images, projector-pixel lookup, sinusoidal creation/phase helpers, and bounded pattern generation are bound to the existing opaque-handle ABI. The upstream Params constructor, projector-camera matching helper, and decode operation remain explicit omissions because the current wrapper has no separate callable ABI or ownership/shape contract for them.
+
+`MAP-002..004` are represented in the catalog. MAP-005 incrementally adds remaining contrib modules after each module's exact headers, optional dependency boundaries, source-review exclusions, and classification rules have been reviewed; eleven MAP-005 modules currently have zero unexplained missing declarations.

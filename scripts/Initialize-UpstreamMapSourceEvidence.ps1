@@ -13,6 +13,7 @@ $openCvContribCommit = "755e50675d97db9b7d449d8bd6b09888646f6c6e"
 $sourcePrefix = "opencv-source/opencv-5.0.0/"
 $contribSourcePrefix = "opencv-source/opencv_contrib-5.0.0/"
 $rawNames = @("imgproc", "imgcodecs", "videoio", "calib3d", "core", "dnn", "features", "highgui", "objdetect", "photo", "video") + @("ml", "tracking", "stitching")
+$rawNames += @("structured_light")
 $maximumDownloadAttempts = 4
 $required = [System.Collections.Generic.Dictionary[string, string]]::new([StringComparer]::Ordinal)
 

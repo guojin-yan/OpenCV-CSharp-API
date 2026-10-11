@@ -1,0 +1,235 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/structured_light.hpp contrib public header closure from parser-emitted headers",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact StructuredLight wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.structured_light.GrayCodePattern",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.structured_light.GrayCodePattern.create(int width;int height)->Ptr<GrayCodePattern>",
+      "classification": "implemented",
+      "reason": "Explicit StructuredLight declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_structured_light_gray_code_pattern_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.StructuredLight.GrayCodePattern|method|public;static|JYPPX.OpenCvSharp.StructuredLight.GrayCodePattern Create(System.Int32 width,System.Int32 height)"
+      ]
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.structured_light.GrayCodePattern.getNumberOfPatternImages()->size_t",
+      "classification": "implemented",
+      "reason": "Explicit StructuredLight declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_structured_light_gray_code_pattern_get_number_of_pattern_images"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.StructuredLight.GrayCodePattern|property|instance;get:public|System.Int32 NumberOfPatternImages"
+      ]
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.structured_light.GrayCodePattern.setWhiteThreshold(size_t value)->void",
+      "classification": "implemented",
+      "reason": "Explicit StructuredLight declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_structured_light_gray_code_pattern_set_white_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.StructuredLight.GrayCodePattern|method|public;instance|System.Void SetWhiteThreshold(System.Int32 value)"
+      ]
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.structured_light.GrayCodePattern.setBlackThreshold(size_t value)->void",
+      "classification": "implemented",
+      "reason": "Explicit StructuredLight declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_structured_light_gray_code_pattern_set_black_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.StructuredLight.GrayCodePattern|method|public;instance|System.Void SetBlackThreshold(System.Int32 value)"
+      ]
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.structured_light.GrayCodePattern.getImagesForShadowMasks(Mat blackImage[/IO];Mat whiteImage[/IO])->void",
+      "classification": "implemented",
+      "reason": "Explicit StructuredLight declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_structured_light_gray_code_pattern_get_images_for_shadow_masks"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.StructuredLight.GrayCodePattern|method|public;instance|System.Void GetImagesForShadowMasks(JYPPX.OpenCvSharp.Core.Mat blackImage,JYPPX.OpenCvSharp.Core.Mat whiteImage)"
+      ]
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.structured_light.GrayCodePattern.getProjPixel(vector_Mat patternImages;int x;int y;Point projPix[/O,/Ref])->bool",
+      "classification": "implemented",
+      "reason": "Explicit StructuredLight declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_structured_light_gray_code_pattern_get_proj_pixel"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.StructuredLight.GrayCodePattern|method|public;instance|System.Boolean GetProjPixel(JYPPX.OpenCvSharp.Core.Mat[] patternImages,System.Int32 x,System.Int32 y,out JYPPX.OpenCvSharp.Core.Point projectorPixel)"
+      ]
+    },
+    {
+      "ordinal": 7,
+      "identity": "enum cv.structured_light.<unnamed>[const cv.structured_light.FTP=0;const cv.structured_light.PSP=1;const cv.structured_light.FAPS=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 8,
+      "identity": "class cv.structured_light.SinusoidalPattern",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 9,
+      "identity": "class cv.structured_light.SinusoidalPattern.Params",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.structured_light.SinusoidalPattern.Params.Params()->",
+      "classification": "intentionally-omitted",
+      "reason": "No native StructuredLight wrapper entrypoint is mapped for this parser declaration in the current ABI.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.structured_light.SinusoidalPattern.create(Ptr_SinusoidalPattern_Params parameters=makePtr<SinusoidalPattern::Params>())->Ptr<SinusoidalPattern>",
+      "classification": "implemented",
+      "reason": "Explicit StructuredLight declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_structured_light_sinusoidal_pattern_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.StructuredLight.SinusoidalPattern|method|public;static|JYPPX.OpenCvSharp.StructuredLight.SinusoidalPattern Create(JYPPX.OpenCvSharp.StructuredLight.SinusoidalPatternParams parameters)"
+      ]
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.structured_light.SinusoidalPattern.computePhaseMap(vector_Mat patternImages;Mat wrappedPhaseMap[/O];Mat shadowMask=Mat()[/O];Mat fundamental=Mat())->void",
+      "classification": "implemented",
+      "reason": "Explicit StructuredLight declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_structured_light_sinusoidal_pattern_compute_phase_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.StructuredLight.SinusoidalPattern|method|public;instance|System.Void ComputePhaseMap(JYPPX.OpenCvSharp.Core.Mat[] patternImages,JYPPX.OpenCvSharp.Core.Mat wrappedPhaseMap,JYPPX.OpenCvSharp.Core.Mat shadowMask,JYPPX.OpenCvSharp.Core.Mat? fundamental=null)"
+      ]
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.structured_light.SinusoidalPattern.unwrapPhaseMap(Mat wrappedPhaseMap;Mat unwrappedPhaseMap[/O];Size camSize;Mat shadowMask=Mat())->void",
+      "classification": "implemented",
+      "reason": "Explicit StructuredLight declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_structured_light_sinusoidal_pattern_unwrap_phase_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.StructuredLight.SinusoidalPattern|method|public;instance|System.Void UnwrapPhaseMap(JYPPX.OpenCvSharp.Core.Mat wrappedPhaseMap,JYPPX.OpenCvSharp.Core.Mat unwrappedPhaseMap,JYPPX.OpenCvSharp.Core.Size cameraSize,JYPPX.OpenCvSharp.Core.Mat? shadowMask=null)"
+      ]
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.structured_light.SinusoidalPattern.findProCamMatches(Mat projUnwrappedPhaseMap;Mat camUnwrappedPhaseMap;vector_Mat matches[/O])->void",
+      "classification": "intentionally-omitted",
+      "reason": "No native StructuredLight wrapper entrypoint is mapped for this parser declaration in the current ABI.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.structured_light.SinusoidalPattern.computeDataModulationTerm(vector_Mat patternImages;Mat dataModulationTerm[/O];Mat shadowMask)->void",
+      "classification": "implemented",
+      "reason": "Explicit StructuredLight declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_structured_light_sinusoidal_pattern_compute_data_modulation_term"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.StructuredLight.SinusoidalPattern|method|public;instance|System.Void ComputeDataModulationTerm(JYPPX.OpenCvSharp.Core.Mat[] patternImages,JYPPX.OpenCvSharp.Core.Mat dataModulationTerm,JYPPX.OpenCvSharp.Core.Mat shadowMask)"
+      ]
+    },
+    {
+      "ordinal": 16,
+      "identity": "enum cv.structured_light.<unnamed>[const cv.structured_light.DECODE_3D_UNDERWORLD=0]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 17,
+      "identity": "class cv.structured_light.StructuredLightPattern",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.structured_light.StructuredLightPattern.generate(vector_Mat patternImages[/O])->bool",
+      "classification": "implemented",
+      "reason": "Explicit StructuredLight declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_structured_light_pattern_generate_count",
+        "jyppx_ocv_structured_light_pattern_generate_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.StructuredLight.StructuredLightPattern|method|public;instance|JYPPX.OpenCvSharp.Core.Mat[] Generate()"
+      ]
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.structured_light.StructuredLightPattern.decode(vector_vector_Mat patternImages[/C,/Ref];Mat disparityMap[/O];vector_Mat blackImages=vector_Mat();vector_Mat whiteImages=vector_Mat();int flags=DECODE_3D_UNDERWORLD)->bool",
+      "classification": "intentionally-omitted",
+      "reason": "No native StructuredLight wrapper entrypoint is mapped for this parser declaration in the current ABI.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}

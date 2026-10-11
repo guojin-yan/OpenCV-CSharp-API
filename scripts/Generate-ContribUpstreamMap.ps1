@@ -1,5 +1,5 @@
 param(
-    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape')][string]$Module,
+    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light')][string]$Module,
     [Parameter(Mandatory)][string]$DisplayName,
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [switch]$Check
@@ -35,6 +35,8 @@ function GetParts([string]$Identity) {
         '^cv\.ft\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     } elseif ($Module -eq 'shape') {
         '^cv\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
+    } elseif ($Module -eq 'structured_light') {
+        '^cv\.structured_light\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     } else {
         '^cv\.' + $Module + '\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     }
@@ -54,7 +56,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
         }
         return $Owner
     }
-    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape')) {
+    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light')) {
         if ($Module -eq 'face') {
             if ([string]::IsNullOrWhiteSpace($Owner)) {
                 switch ($Name) {
@@ -90,6 +92,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
                         default { 'ShapeCv2' }
                     }
                 }
+                'structured_light' { return $Owner }
             }
             return [string]$managedType
         }
@@ -116,6 +119,24 @@ function GetManagedType([string]$Owner, [string]$Name) {
 
 function GetManaged([string]$Owner, [string]$Name, [string]$Identity) {
     if ($Module -eq 'freetype') { return @() }
+    if ($Module -eq 'structured_light') {
+        $typeMarker = "JYPPX.OpenCvSharp.StructuredLight.$Owner|"
+        $typeEntries = @($managedEntries | Where-Object { $_.Contains($typeMarker, [StringComparison]::Ordinal) })
+        switch ("$Owner.$Name") {
+            'GrayCodePattern.create' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;static\|[^|]*\bCreate\(System\.Int32 width,System\.Int32 height\)' } | Sort-Object -Unique) }
+            'GrayCodePattern.getNumberOfPatternImages' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public\|System\.Int32 NumberOfPatternImages$' } | Sort-Object -Unique) }
+            'GrayCodePattern.setWhiteThreshold' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;instance\|System\.Void SetWhiteThreshold\(System\.Int32 value\)' } | Sort-Object -Unique) }
+            'GrayCodePattern.setBlackThreshold' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;instance\|System\.Void SetBlackThreshold\(System\.Int32 value\)' } | Sort-Object -Unique) }
+            'GrayCodePattern.getImagesForShadowMasks' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;instance\|System\.Void GetImagesForShadowMasks\(JYPPX\.OpenCvSharp\.Core\.Mat blackImage,JYPPX\.OpenCvSharp\.Core\.Mat whiteImage\)' } | Sort-Object -Unique) }
+            'GrayCodePattern.getProjPixel' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;instance\|System\.Boolean GetProjPixel\(JYPPX\.OpenCvSharp\.Core\.Mat\[\] patternImages,System\.Int32 x,System\.Int32 y,out JYPPX\.OpenCvSharp\.Core\.Point projectorPixel\)' } | Sort-Object -Unique) }
+            'SinusoidalPattern.create' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;static\|[^|]*\bCreate\(JYPPX\.OpenCvSharp\.StructuredLight\.SinusoidalPatternParams parameters\)' } | Sort-Object -Unique) }
+            'SinusoidalPattern.computePhaseMap' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;instance\|System\.Void ComputePhaseMap\(JYPPX\.OpenCvSharp\.Core\.Mat\[\] patternImages,JYPPX\.OpenCvSharp\.Core\.Mat wrappedPhaseMap,JYPPX\.OpenCvSharp\.Core\.Mat shadowMask,JYPPX\.OpenCvSharp\.Core\.Mat\? fundamental=null\)' } | Sort-Object -Unique) }
+            'SinusoidalPattern.unwrapPhaseMap' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;instance\|System\.Void UnwrapPhaseMap\(JYPPX\.OpenCvSharp\.Core\.Mat wrappedPhaseMap,JYPPX\.OpenCvSharp\.Core\.Mat unwrappedPhaseMap,JYPPX\.OpenCvSharp\.Core\.Size cameraSize,JYPPX\.OpenCvSharp\.Core\.Mat\? shadowMask=null\)' } | Sort-Object -Unique) }
+            'SinusoidalPattern.computeDataModulationTerm' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;instance\|System\.Void ComputeDataModulationTerm\(JYPPX\.OpenCvSharp\.Core\.Mat\[\] patternImages,JYPPX\.OpenCvSharp\.Core\.Mat dataModulationTerm,JYPPX\.OpenCvSharp\.Core\.Mat shadowMask\)' } | Sort-Object -Unique) }
+            'StructuredLightPattern.generate' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;instance\|JYPPX\.OpenCvSharp\.Core\.Mat\[\] Generate\(\)' } | Sort-Object -Unique) }
+            default { return @() }
+        }
+    }
     $typeName = GetManagedType $Owner $Name
     if ($Module -eq 'phase_unwrapping') {
         if ($Owner -eq 'HistogramPhaseUnwrapping' -and $Name -eq 'create') {
@@ -305,6 +326,21 @@ function GetNative([object]$Parts, [string]$Identity) {
             default { '' }
         }
         if (-not [string]::IsNullOrWhiteSpace([string]$symbol)) { $result = @("jyppx_ocv_rapid_$symbol") }
+    } elseif ($Module -eq 'structured_light') {
+        $result = switch ("$owner.$name") {
+            'GrayCodePattern.create' { @('jyppx_ocv_structured_light_gray_code_pattern_create') }
+            'GrayCodePattern.getNumberOfPatternImages' { @('jyppx_ocv_structured_light_gray_code_pattern_get_number_of_pattern_images') }
+            'GrayCodePattern.setWhiteThreshold' { @('jyppx_ocv_structured_light_gray_code_pattern_set_white_threshold') }
+            'GrayCodePattern.setBlackThreshold' { @('jyppx_ocv_structured_light_gray_code_pattern_set_black_threshold') }
+            'GrayCodePattern.getImagesForShadowMasks' { @('jyppx_ocv_structured_light_gray_code_pattern_get_images_for_shadow_masks') }
+            'GrayCodePattern.getProjPixel' { @('jyppx_ocv_structured_light_gray_code_pattern_get_proj_pixel') }
+            'SinusoidalPattern.create' { @('jyppx_ocv_structured_light_sinusoidal_pattern_create') }
+            'SinusoidalPattern.computePhaseMap' { @('jyppx_ocv_structured_light_sinusoidal_pattern_compute_phase_map') }
+            'SinusoidalPattern.unwrapPhaseMap' { @('jyppx_ocv_structured_light_sinusoidal_pattern_unwrap_phase_map') }
+            'SinusoidalPattern.computeDataModulationTerm' { @('jyppx_ocv_structured_light_sinusoidal_pattern_compute_data_modulation_term') }
+            'StructuredLightPattern.generate' { @('jyppx_ocv_structured_light_pattern_generate_count','jyppx_ocv_structured_light_pattern_generate_fill') }
+            default { @() }
+        }
     } elseif ($Module -eq 'shape') {
         if ($owner -eq 'HistogramCostExtractor') {
             $result = switch ($name) {

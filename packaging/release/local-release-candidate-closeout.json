@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/4bbfc30b7b29b8e9",
-  "SourceIdentity": "sha256:4bbfc30b7b29b8e924e1713faaff3d06d73967094158fec6a5d20e6655e7d77e",
+  "CandidateId": "local-closeout/sha256/ba3bc248eb3c48b5",
+  "SourceIdentity": "sha256:ba3bc248eb3c48b58c8cb8357e56235737ed25aba3eb8abf407e3fe57e488957",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 2012,
-    "Sha256": "4bbfc30b7b29b8e924e1713faaff3d06d73967094158fec6a5d20e6655e7d77e",
+    "FileCount": 2022,
+    "Sha256": "ba3bc248eb3c48b58c8cb8357e56235737ed25aba3eb8abf407e3fe57e488957",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -1232,6 +1232,31 @@
       "Length": 3287
     },
     {
+      "Path": "compatibility/structured_light-implemented-families.json",
+      "Sha256": "c42d302cd9afb5a930c2bea3f7e15a1d48103237ba75222e4e42f1a33c30b2f0",
+      "Length": 10507
+    },
+    {
+      "Path": "compatibility/structured_light-upstream-classifications.json",
+      "Sha256": "3ae8cf508f19521cd74aed0541b0dcc2209b02b99f8e5b4c7142d547242f6506",
+      "Length": 12727
+    },
+    {
+      "Path": "compatibility/structured_light-upstream-map.txt",
+      "Sha256": "09bbe1954da3e5f342e553e6d4091211b13e04fa503074194ae75df8b6e531be",
+      "Length": 8840
+    },
+    {
+      "Path": "compatibility/structured_light-upstream-raw.json",
+      "Sha256": "fbef1ad53fbf897f3eccaaf75fed683a70d716f17f34a904a244b909872cb767",
+      "Length": 26159
+    },
+    {
+      "Path": "compatibility/structured_light-upstream-summary.json",
+      "Sha256": "c9d286f34d032875058ae50f9fe44c7967fdc3893628ee2dc2cb764919fb0c96",
+      "Length": 1481
+    },
+    {
       "Path": "compatibility/tracking-implemented-families.json",
       "Sha256": "d16dc81fe3f468b6d09e864db659842b765eb2082efe8a458d62131d18a14af5",
       "Length": 7530
@@ -1258,18 +1283,18 @@
     },
     {
       "Path": "compatibility/upstream-map-catalog.json",
-      "Sha256": "0563866d571a2c3106426a6114de2b46b65a34fb08f46dac9af3e41bb1293eea",
-      "Length": 112057
+      "Sha256": "4807822ab3806778897bfe7d9ddded6e2e9c19429e53381ceb15822972bd16bf",
+      "Length": 114957
     },
     {
       "Path": "compatibility/upstream-map-catalog.schema.json",
-      "Sha256": "8c730b4f0f8543a5b83a5998d1441c5cf41075d890fbe5b7cb6295f54ba77231",
-      "Length": 5799
+      "Sha256": "d8b1d0767123b9c79e749e62b8b1a11711965b30a5c4ec0d0c369de360129229",
+      "Length": 5819
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "4b915887e2357ab8f0b1606a75540c8bcf4122f07b871d56f6e33007c3ead01a",
-      "Length": 34670
+      "Sha256": "253297f01c45a1c65ef44fcf4f93fb77c05ce4211ab53bee99a490729512890b",
+      "Length": 37192
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -1627,6 +1652,11 @@
       "Length": 19537
     },
     {
+      "Path": "docs/articles/structured-light-guide.md",
+      "Sha256": "8c86b1665da44ed6f141ef7ed76396f85797241180aba969c2a163e3e95f6876",
+      "Length": 3530
+    },
+    {
       "Path": "docs/articles/support-lifecycle-policy.md",
       "Sha256": "89c752c03cbc61f585c15e6bb3d365a7812360f526994b04aab15df9de7d389d",
       "Length": 6478
@@ -1678,8 +1708,8 @@
     },
     {
       "Path": "docs/articles/upstream-map-toolchain.md",
-      "Sha256": "84a35b6ca07d64d8edd54a9c72fa4b6f7c13da69849c0a0320df721defefc0e5",
-      "Length": 4238
+      "Sha256": "e4d5489e69be39ea1cc3000922a0323ebe7d514a02a570b9fa4fc6e7de0a6959",
+      "Length": 4794
     },
     {
       "Path": "docs/articles/v501-modern-api-preview-guide.md",
@@ -2133,8 +2163,8 @@
     },
     {
       "Path": "scripts/Generate-ContribUpstreamMap.ps1",
-      "Sha256": "59a556e2309a041da997545798dc947afd5f1c2d06cd105a8b112ce192038e68",
-      "Length": 60841
+      "Sha256": "10fc226831fbcd2b725665150d437dc7154e2e7a31163b79539e0f2de6bb5d98",
+      "Length": 65807
     },
     {
       "Path": "scripts/Generate-CoreUpstreamMap.ps1",
@@ -2267,6 +2297,11 @@
       "Length": 2941
     },
     {
+      "Path": "scripts/Generate-StructuredLightUpstreamMap.ps1",
+      "Sha256": "244548f7304e268ad42b43611cd03f4ab903dca237e6ab018eaf5ed4b08adec8",
+      "Length": 366
+    },
+    {
       "Path": "scripts/Generate-TrackingUpstreamMap.ps1",
       "Sha256": "c80010519cb97102d32a3e3065da0deff3e2f4aeaeae1f27b1daf27369ee52c2",
       "Length": 3106
@@ -2295,6 +2330,11 @@
       "Path": "scripts/Get-SampleModelAssets.ps1",
       "Sha256": "76857593666525b74ca24342b0c5863a311684263f4ed231541ccc4924d1049b",
       "Length": 4877
+    },
+    {
+      "Path": "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
+      "Sha256": "50b35b76d71a9afdb4149ed481a6f1c5cfe57fa22338da1d8f1b970da7e84685",
+      "Length": 5190
     },
     {
       "Path": "scripts/Invoke-LifecycleRefreshContainerProducer.ps1",
@@ -2373,8 +2413,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "2df397437ae0ed131fa59f6e91c72da79839df8cf96b5eb7ab5a619d7517e360",
-      "Length": 86163
+      "Sha256": "d5c4f7012173aa885723c83c49ac6088a53d7808984d730cbb18f4194f9e5caf",
+      "Length": 86916
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -2388,8 +2428,8 @@
     },
     {
       "Path": "scripts/New-UpstreamMapCatalog.ps1",
-      "Sha256": "f8bc1b4552365a7273f01e59335ff7be4a6d630ed4481293289ea392d29340a8",
-      "Length": 9425
+      "Sha256": "ad75efe45c0907c94ba169b8e5d6d735a0033ea6a99a49601c60b535669ae41d",
+      "Length": 9531
     },
     {
       "Path": "scripts/Test-AlphaMatUpstreamMap.ps1",
@@ -2743,8 +2783,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "a702ed049d77043345e06d3182d3d7c278c0d2f8d6562e3c8476982d04239aa2",
-      "Length": 83765
+      "Sha256": "896bc2afc4186de2aa17f97c74fb738b408d1dec7664a11dd2814b918d329e73",
+      "Length": 84518
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -2807,6 +2847,11 @@
       "Length": 20042
     },
     {
+      "Path": "scripts/Test-StructuredLightUpstreamMap.ps1",
+      "Sha256": "61e2c2ea871cec2d1c7f9fa1dc69f3060eccf30fb08d38dee8211e1754f185b4",
+      "Length": 6991
+    },
+    {
       "Path": "scripts/Test-TrackingUpstreamMap.ps1",
       "Sha256": "2e5b8d58c464295f815c41d0c7fb8a58e6b4541ca463a49d7bc6bbb98a2bb293",
       "Length": 2283
@@ -2833,8 +2878,8 @@
     },
     {
       "Path": "scripts/Test-UpstreamMapCatalog.ps1",
-      "Sha256": "2bebd6f0ff3641541da8d731118d3a29387241e4b27793ddf349b4419d5487df",
-      "Length": 14915
+      "Sha256": "e1ab5d3c4e79ee6b5e1227a7883c24f48351a88b8322b524db9536b1645d9b7f",
+      "Length": 14934
     },
     {
       "Path": "scripts/Test-V501ChangeLedger.ps1",
@@ -3897,6 +3942,21 @@
       "Length": 7032
     },
     {
+      "Path": "tools/StructuredLightUpstreamMap/Program.cs",
+      "Sha256": "b1063ef6b2d87c7bc83dac7f35e048a74e2edeaab96618d76299fd930fd4437e",
+      "Length": 120
+    },
+    {
+      "Path": "tools/StructuredLightUpstreamMap/StructuredLightUpstreamMap.csproj",
+      "Sha256": "b0655fe2e4b91db06fc9f4da7c1a91df7f87b7204830ea583c7e622398f5f38f",
+      "Length": 241
+    },
+    {
+      "Path": "tools/StructuredLightUpstreamMap/extract_structured_light.py",
+      "Sha256": "df358048e8f5043bcb6e6ecacb74d69fc9008518801f15ba40fb2fc7d354f06c",
+      "Length": 262
+    },
+    {
       "Path": "tools/TrackingUpstreamMap/Program.cs",
       "Sha256": "8e95ba16f0814eb0be774cb1832260858d36941eb8acc4fce09342208bb2d7c4",
       "Length": 38986
@@ -3948,8 +4008,8 @@
     },
     {
       "Path": "tools/XImgProcUpstreamMap/extract_ximgproc.py",
-      "Sha256": "61296032725d53769ed33c3ed8688cc6f8267c82727942a4f47ffeea66785b06",
-      "Length": 5519
+      "Sha256": "91a7109e15b138d16437bc9391809ccec6d7aa5f68511408d304c99072d9232c",
+      "Length": 5578
     },
     {
       "Path": "tools/XPhotoUpstreamMap/Program.cs",

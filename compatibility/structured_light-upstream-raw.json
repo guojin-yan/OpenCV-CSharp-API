@@ -1,0 +1,644 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/StructuredLightUpstreamMap/extract_structured_light.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light.hpp",
+  "headerSha256": "13279ebf29a58f49f324553fdad6ff720c1a7e7ced331e56cf9f422403d3af99",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/graycodepattern.hpp",
+      "sha256": "b883f1c0fc2e29531bb3244b9031807055fc27f6041a135beb9bed56ea8b5917",
+      "startOrdinal": 0,
+      "declarationCount": 7
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/sinusoidalpattern.hpp",
+      "sha256": "c65639f8d4dde6a7382d4ccf6b865c304a47d15f56a3bcdcef44b02f23e6192d",
+      "startOrdinal": 7,
+      "declarationCount": 9
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/structured_light.hpp",
+      "sha256": "5a8be515e6084ddb17f7a4e9c56de9b0e0b429b12742cc4de27387b03ecf05cd",
+      "startOrdinal": 16,
+      "declarationCount": 4
+    }
+  ],
+  "declarationCount": 20,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/graycodepattern.hpp",
+      "kind": "class",
+      "name": "cv.structured_light.GrayCodePattern",
+      "identity": "class cv.structured_light.GrayCodePattern",
+      "returnType": ": cv::structured_light::StructuredLightPattern",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::structured_light::StructuredLightPattern",
+      "documentation": "@brief Class implementing the Gray-code pattern, based on @cite UNDERWORLD.\n *\n *  The generation of the pattern images is performed with Gray encoding using the traditional white and black colors.\n *\n *  The information about the two image axes x, y is encoded separately into two different pattern sequences.\n *  A projector P with resolution (P_res_x, P_res_y) will result in Ncols = log 2 (P_res_x) encoded pattern images representing the columns, and\n *  in Nrows = log 2 (P_res_y) encoded pattern images representing the rows.\n *  For example a projector with resolution 1024x768 will result in Ncols = 10 and Nrows = 10.\n\n *  However, the generated pattern sequence consists of both regular color and color-inverted images: inverted pattern images are images\n *  with the same structure as the original but with inverted colors.\n *  This provides an effective method for easily determining the intensity value of each pixel when it is lit (highest value) and\n *  when it is not lit (lowest value). So for a a projector with resolution 1024x768, the number of pattern images will be Ncols * 2 + Nrows * 2 = 40.\n *"
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/graycodepattern.hpp",
+      "kind": "callable",
+      "name": "cv.structured_light.GrayCodePattern.create",
+      "identity": "cv.structured_light.GrayCodePattern.create(int width;int height)->Ptr<GrayCodePattern>",
+      "returnType": "Ptr<GrayCodePattern>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "width",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "height",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Constructor\n   @param parameters GrayCodePattern parameters GrayCodePattern::Params: the width and the height of the projector."
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/graycodepattern.hpp",
+      "kind": "callable",
+      "name": "cv.structured_light.GrayCodePattern.getNumberOfPatternImages",
+      "identity": "cv.structured_light.GrayCodePattern.getNumberOfPatternImages()->size_t",
+      "returnType": "size_t",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Get the number of pattern images needed for the graycode pattern.\n   *\n   * @return The number of pattern images needed for the graycode pattern.\n   *"
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/graycodepattern.hpp",
+      "kind": "callable",
+      "name": "cv.structured_light.GrayCodePattern.setWhiteThreshold",
+      "identity": "cv.structured_light.GrayCodePattern.setWhiteThreshold(size_t value)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "size_t",
+          "name": "value",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the value for white threshold, needed for decoding.\n   *\n   *  White threshold is a number between 0-255 that represents the minimum brightness difference required for valid pixels, between the graycode pattern and its inverse images; used in getProjPixel method.\n   *\n   *  @param value The desired white threshold value.\n   *"
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/graycodepattern.hpp",
+      "kind": "callable",
+      "name": "cv.structured_light.GrayCodePattern.setBlackThreshold",
+      "identity": "cv.structured_light.GrayCodePattern.setBlackThreshold(size_t value)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "size_t",
+          "name": "value",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the value for black threshold, needed for decoding (shadowsmasks computation).\n   *\n   *  Black threshold is a number between 0-255 that represents the minimum brightness difference required for valid pixels, between the fully illuminated (white) and the not illuminated images (black); used in computeShadowMasks method.\n   *\n   *  @param value The desired black threshold value.\n   *"
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/graycodepattern.hpp",
+      "kind": "callable",
+      "name": "cv.structured_light.GrayCodePattern.getImagesForShadowMasks",
+      "identity": "cv.structured_light.GrayCodePattern.getImagesForShadowMasks(Mat blackImage[/IO];Mat whiteImage[/IO])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "blackImage",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "whiteImage",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Generates the all-black and all-white images needed for shadowMasks computation.\n   *\n   *  To identify shadow regions, the regions of two images where the pixels are not lit by projector's light and thus where there is not coded information,\n   *  the 3DUNDERWORLD algorithm computes a shadow mask for the two cameras views, starting from a white and a black images captured by each camera.\n   *  This method generates these two additional images to project.\n   *\n   *  @param blackImage The generated all-black CV_8U image, at projector's resolution.\n   *  @param whiteImage The generated all-white CV_8U image, at projector's resolution."
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/graycodepattern.hpp",
+      "kind": "callable",
+      "name": "cv.structured_light.GrayCodePattern.getProjPixel",
+      "identity": "cv.structured_light.GrayCodePattern.getProjPixel(vector_Mat patternImages;int x;int y;Point projPix[/O,/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "patternImages",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "x",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "y",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Point",
+          "name": "projPix",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief For a (x,y) pixel of a camera returns the corresponding projector pixel.\n   *\n   *  The function decodes each pixel in the pattern images acquired by a camera into their corresponding decimal numbers representing the projector's column and row,\n   *  providing a mapping between camera's and projector's pixel.\n   *\n   *  @param patternImages The pattern images acquired by the camera, stored in a grayscale vector < Mat >.\n   *  @param x x coordinate of the image pixel.\n   *  @param y y coordinate of the image pixel.\n   *  @param projPix Projector's pixel corresponding to the camera's pixel: projPix.x and projPix.y are the image coordinates of the projector's pixel corresponding to the pixel being decoded in a camera."
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/sinusoidalpattern.hpp",
+      "kind": "enum",
+      "name": "cv.structured_light.<unnamed>",
+      "identity": "enum cv.structured_light.<unnamed>[const cv.structured_light.FTP=0;const cv.structured_light.PSP=1;const cv.structured_light.FAPS=2]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.structured_light.FTP",
+          "value": "0"
+        },
+        {
+          "name": "const cv.structured_light.PSP",
+          "value": "1"
+        },
+        {
+          "name": "const cv.structured_light.FAPS",
+          "value": "2"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/sinusoidalpattern.hpp",
+      "kind": "class",
+      "name": "cv.structured_light.SinusoidalPattern",
+      "identity": "class cv.structured_light.SinusoidalPattern",
+      "returnType": ": cv::structured_light::StructuredLightPattern",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::structured_light::StructuredLightPattern",
+      "documentation": "* @brief Class implementing Fourier transform profilometry (FTP) , phase-shifting profilometry (PSP)\n * and Fourier-assisted phase-shifting profilometry (FAPS) based on @cite faps.\n\n * This class generates sinusoidal patterns that can be used with FTP, PSP and FAPS."
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/sinusoidalpattern.hpp",
+      "kind": "class",
+      "name": "cv.structured_light.SinusoidalPattern.Params",
+      "identity": "class cv.structured_light.SinusoidalPattern.Params",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "width",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "height",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "nbrOfPeriods",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "shiftValue",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "methodId",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "nbrOfPixelsBetweenMarkers",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "horizontal",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "setMarkers",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Parameters of SinusoidalPattern constructor\n     * @param width Projector's width.\n     * @param height Projector's height.\n     * @param nbrOfPeriods Number of period along the patterns direction.\n     * @param shiftValue Phase shift between two consecutive patterns.\n     * @param methodId Allow to choose between FTP, PSP and FAPS.\n     * @param nbrOfPixelsBetweenMarkers Number of pixels between two consecutive markers on the same row.\n     * @param setMarkers Allow to set markers on the patterns.\n     * @param markersLocation vector used to store markers location on the patterns."
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/sinusoidalpattern.hpp",
+      "kind": "callable",
+      "name": "cv.structured_light.SinusoidalPattern.Params.Params",
+      "identity": "cv.structured_light.SinusoidalPattern.Params.Params()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/sinusoidalpattern.hpp",
+      "kind": "callable",
+      "name": "cv.structured_light.SinusoidalPattern.create",
+      "identity": "cv.structured_light.SinusoidalPattern.create(Ptr_SinusoidalPattern_Params parameters=makePtr<SinusoidalPattern::Params>())->Ptr<SinusoidalPattern>",
+      "returnType": "Ptr<SinusoidalPattern>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Ptr_SinusoidalPattern_Params",
+          "name": "parameters",
+          "default": "makePtr<SinusoidalPattern::Params>()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Constructor.\n     * @param parameters SinusoidalPattern parameters SinusoidalPattern::Params: width, height of the projector and patterns parameters.\n     *"
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/sinusoidalpattern.hpp",
+      "kind": "callable",
+      "name": "cv.structured_light.SinusoidalPattern.computePhaseMap",
+      "identity": "cv.structured_light.SinusoidalPattern.computePhaseMap(vector_Mat patternImages;Mat wrappedPhaseMap[/O];Mat shadowMask=Mat()[/O];Mat fundamental=Mat())->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "patternImages",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "wrappedPhaseMap",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "shadowMask",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "fundamental",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Compute a wrapped phase map from sinusoidal patterns.\n     * @param patternImages Input data to compute the wrapped phase map.\n     * @param wrappedPhaseMap Wrapped phase map obtained through one of the three methods.\n     * @param shadowMask Mask used to discard shadow regions.\n     * @param fundamental Fundamental matrix used to compute epipolar lines and ease the matching step."
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/sinusoidalpattern.hpp",
+      "kind": "callable",
+      "name": "cv.structured_light.SinusoidalPattern.unwrapPhaseMap",
+      "identity": "cv.structured_light.SinusoidalPattern.unwrapPhaseMap(Mat wrappedPhaseMap;Mat unwrappedPhaseMap[/O];Size camSize;Mat shadowMask=Mat())->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "wrappedPhaseMap",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "unwrappedPhaseMap",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Size",
+          "name": "camSize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "shadowMask",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Unwrap the wrapped phase map to remove phase ambiguities.\n     * @param wrappedPhaseMap The wrapped phase map computed from the pattern.\n     * @param unwrappedPhaseMap The unwrapped phase map used to find correspondences between the two devices.\n     * @param camSize Resolution of the camera.\n     * @param shadowMask Mask used to discard shadow regions."
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/sinusoidalpattern.hpp",
+      "kind": "callable",
+      "name": "cv.structured_light.SinusoidalPattern.findProCamMatches",
+      "identity": "cv.structured_light.SinusoidalPattern.findProCamMatches(Mat projUnwrappedPhaseMap;Mat camUnwrappedPhaseMap;vector_Mat matches[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "projUnwrappedPhaseMap",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "camUnwrappedPhaseMap",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Mat",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Find correspondences between the two devices thanks to unwrapped phase maps.\n     * @param projUnwrappedPhaseMap Projector's unwrapped phase map.\n     * @param camUnwrappedPhaseMap Camera's unwrapped phase map.\n     * @param matches Images used to display correspondences map."
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/sinusoidalpattern.hpp",
+      "kind": "callable",
+      "name": "cv.structured_light.SinusoidalPattern.computeDataModulationTerm",
+      "identity": "cv.structured_light.SinusoidalPattern.computeDataModulationTerm(vector_Mat patternImages;Mat dataModulationTerm[/O];Mat shadowMask)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "patternImages",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dataModulationTerm",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "shadowMask",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief compute the data modulation term.\n     * @param patternImages captured images with projected patterns.\n     * @param dataModulationTerm Mat where the data modulation term is saved.\n     * @param shadowMask Mask used to discard shadow regions."
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/structured_light.hpp",
+      "kind": "enum",
+      "name": "cv.structured_light.<unnamed>",
+      "identity": "enum cv.structured_light.<unnamed>[const cv.structured_light.DECODE_3D_UNDERWORLD=0]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.structured_light.DECODE_3D_UNDERWORLD",
+          "value": "0"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/structured_light.hpp",
+      "kind": "class",
+      "name": "cv.structured_light.StructuredLightPattern",
+      "identity": "class cv.structured_light.StructuredLightPattern",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Abstract base class for generating and decoding structured light patterns."
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/structured_light.hpp",
+      "kind": "callable",
+      "name": "cv.structured_light.StructuredLightPattern.generate",
+      "identity": "cv.structured_light.StructuredLightPattern.generate(vector_Mat patternImages[/O])->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "patternImages",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Generates the structured light pattern to project.\n\n   @param patternImages The generated pattern: a vector<Mat>, in which each image is a CV_8U Mat at projector's resolution."
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/structured_light/include/opencv2/structured_light/structured_light.hpp",
+      "kind": "callable",
+      "name": "cv.structured_light.StructuredLightPattern.decode",
+      "identity": "cv.structured_light.StructuredLightPattern.decode(vector_vector_Mat patternImages[/C,/Ref];Mat disparityMap[/O];vector_Mat blackImages=vector_Mat();vector_Mat whiteImages=vector_Mat();int flags=DECODE_3D_UNDERWORLD)->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_vector_Mat",
+          "name": "patternImages",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "disparityMap",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "vector_Mat",
+          "name": "blackImages",
+          "default": "vector_Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Mat",
+          "name": "whiteImages",
+          "default": "vector_Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "DECODE_3D_UNDERWORLD",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Decodes the structured light pattern, generating a disparity map\n\n   @param patternImages The acquired pattern images to decode (vector<vector<Mat>>), loaded as grayscale and previously rectified.\n   @param disparityMap The decoding result: a CV_64F Mat at image resolution, storing the computed disparity map.\n   @param blackImages The all-black images needed for shadowMasks computation.\n   @param whiteImages The all-white images needed for shadowMasks computation.\n   @param flags Flags setting decoding algorithms. Default: DECODE_3D_UNDERWORLD.\n   @note All the images must be at the same resolution."
+    }
+  ]
+}

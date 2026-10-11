@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 0,
+  "managedPublicMemberAdditionCount": 0,
+  "families": [
+    {
+      "id": "structured_light-wrapper-surface",
+      "rationale": "Current StructuredLight managed/native wrapper declarations with exact parser-backed callable evidence.",
+      "declarations": [
+        {
+          "ordinal": 1,
+          "upstreamIdentity": "cv.structured_light.GrayCodePattern.create(int width;int height)->Ptr<GrayCodePattern>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_structured_light_gray_code_pattern_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.StructuredLight.GrayCodePattern|method|public;static|JYPPX.OpenCvSharp.StructuredLight.GrayCodePattern Create(System.Int32 width,System.Int32 height)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/StructuredLight/StructuredLightTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/structured_light-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 2,
+          "upstreamIdentity": "cv.structured_light.GrayCodePattern.getNumberOfPatternImages()->size_t",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_structured_light_gray_code_pattern_get_number_of_pattern_images"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.StructuredLight.GrayCodePattern|property|instance;get:public|System.Int32 NumberOfPatternImages"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/StructuredLight/StructuredLightTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/structured_light-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 3,
+          "upstreamIdentity": "cv.structured_light.GrayCodePattern.setWhiteThreshold(size_t value)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_structured_light_gray_code_pattern_set_white_threshold"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.StructuredLight.GrayCodePattern|method|public;instance|System.Void SetWhiteThreshold(System.Int32 value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/StructuredLight/StructuredLightTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/structured_light-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 4,
+          "upstreamIdentity": "cv.structured_light.GrayCodePattern.setBlackThreshold(size_t value)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_structured_light_gray_code_pattern_set_black_threshold"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.StructuredLight.GrayCodePattern|method|public;instance|System.Void SetBlackThreshold(System.Int32 value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/StructuredLight/StructuredLightTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/structured_light-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 5,
+          "upstreamIdentity": "cv.structured_light.GrayCodePattern.getImagesForShadowMasks(Mat blackImage[/IO];Mat whiteImage[/IO])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_structured_light_gray_code_pattern_get_images_for_shadow_masks"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.StructuredLight.GrayCodePattern|method|public;instance|System.Void GetImagesForShadowMasks(JYPPX.OpenCvSharp.Core.Mat blackImage,JYPPX.OpenCvSharp.Core.Mat whiteImage)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/StructuredLight/StructuredLightTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/structured_light-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 6,
+          "upstreamIdentity": "cv.structured_light.GrayCodePattern.getProjPixel(vector_Mat patternImages;int x;int y;Point projPix[/O,/Ref])->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_structured_light_gray_code_pattern_get_proj_pixel"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.StructuredLight.GrayCodePattern|method|public;instance|System.Boolean GetProjPixel(JYPPX.OpenCvSharp.Core.Mat[] patternImages,System.Int32 x,System.Int32 y,out JYPPX.OpenCvSharp.Core.Point projectorPixel)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/StructuredLight/StructuredLightTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/structured_light-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 11,
+          "upstreamIdentity": "cv.structured_light.SinusoidalPattern.create(Ptr_SinusoidalPattern_Params parameters=makePtr<SinusoidalPattern::Params>())->Ptr<SinusoidalPattern>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_structured_light_sinusoidal_pattern_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.StructuredLight.SinusoidalPattern|method|public;static|JYPPX.OpenCvSharp.StructuredLight.SinusoidalPattern Create(JYPPX.OpenCvSharp.StructuredLight.SinusoidalPatternParams parameters)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/StructuredLight/StructuredLightTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/structured_light-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 12,
+          "upstreamIdentity": "cv.structured_light.SinusoidalPattern.computePhaseMap(vector_Mat patternImages;Mat wrappedPhaseMap[/O];Mat shadowMask=Mat()[/O];Mat fundamental=Mat())->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_structured_light_sinusoidal_pattern_compute_phase_map"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.StructuredLight.SinusoidalPattern|method|public;instance|System.Void ComputePhaseMap(JYPPX.OpenCvSharp.Core.Mat[] patternImages,JYPPX.OpenCvSharp.Core.Mat wrappedPhaseMap,JYPPX.OpenCvSharp.Core.Mat shadowMask,JYPPX.OpenCvSharp.Core.Mat? fundamental=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/StructuredLight/StructuredLightTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/structured_light-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 13,
+          "upstreamIdentity": "cv.structured_light.SinusoidalPattern.unwrapPhaseMap(Mat wrappedPhaseMap;Mat unwrappedPhaseMap[/O];Size camSize;Mat shadowMask=Mat())->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_structured_light_sinusoidal_pattern_unwrap_phase_map"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.StructuredLight.SinusoidalPattern|method|public;instance|System.Void UnwrapPhaseMap(JYPPX.OpenCvSharp.Core.Mat wrappedPhaseMap,JYPPX.OpenCvSharp.Core.Mat unwrappedPhaseMap,JYPPX.OpenCvSharp.Core.Size cameraSize,JYPPX.OpenCvSharp.Core.Mat? shadowMask=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/StructuredLight/StructuredLightTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/structured_light-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 15,
+          "upstreamIdentity": "cv.structured_light.SinusoidalPattern.computeDataModulationTerm(vector_Mat patternImages;Mat dataModulationTerm[/O];Mat shadowMask)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_structured_light_sinusoidal_pattern_compute_data_modulation_term"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.StructuredLight.SinusoidalPattern|method|public;instance|System.Void ComputeDataModulationTerm(JYPPX.OpenCvSharp.Core.Mat[] patternImages,JYPPX.OpenCvSharp.Core.Mat dataModulationTerm,JYPPX.OpenCvSharp.Core.Mat shadowMask)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/StructuredLight/StructuredLightTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/structured_light-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 18,
+          "upstreamIdentity": "cv.structured_light.StructuredLightPattern.generate(vector_Mat patternImages[/O])->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_structured_light_pattern_generate_count",
+            "jyppx_ocv_structured_light_pattern_generate_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.StructuredLight.StructuredLightPattern|method|public;instance|JYPPX.OpenCvSharp.Core.Mat[] Generate()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/StructuredLight/StructuredLightTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/structured_light-upstream-parity-guide.md"
+        }
+      ]
+    }
+  ]
+}
