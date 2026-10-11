@@ -1,5 +1,5 @@
 param(
-    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect')][string]$Module,
+    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect','dnn_superres')][string]$Module,
     [Parameter(Mandatory)][string]$DisplayName,
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [switch]$Check
@@ -68,7 +68,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
         }
         return $Owner
     }
-    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect')) {
+    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect','dnn_superres')) {
         if ($Module -eq 'face') {
             if ([string]::IsNullOrWhiteSpace($Owner)) {
                 switch ($Name) {
@@ -111,6 +111,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
                 'xstereo' { return $Owner }
                 'ptcloud' { return $Owner }
                 'xobjdetect' { return $Owner }
+                'dnn_superres' { return $Owner }
             }
             return [string]$managedType
         }
@@ -309,6 +310,9 @@ function GetManaged([string]$Owner, [string]$Name, [string]$Identity) {
         }
         $methodName = ToPascal $Name
         return @($typeEntries | Where-Object { $_ -match "\|method\|[^|]*\|[^|]*\b$([regex]::Escape($methodName))\(" } | Sort-Object -Unique)
+    }
+    if ($Module -eq 'dnn_superres') {
+        return @()
     }
     $typeName = GetManagedType $Owner $Name
     if ($Module -eq 'phase_unwrapping') {
@@ -664,6 +668,8 @@ function GetNative([object]$Parts, [string]$Identity) {
             'HOGDescriptor.detectMultiScale' { $result = @('jyppx_ocv_hog_descriptor_detect_multi_scale_count','jyppx_ocv_hog_descriptor_detect_multi_scale_fill') }
             default { if ($owner -eq 'HOGDescriptor' -and $name -match '^(get|set)') { $result = @('jyppx_ocv_hog_descriptor_get_property','jyppx_ocv_hog_descriptor_set_property') } }
         }
+    } elseif ($Module -eq 'dnn_superres') {
+        $result = @()
     } elseif ($Module -eq 'shape') {
         if ($owner -eq 'HistogramCostExtractor') {
             $result = switch ($name) {
@@ -1035,6 +1041,7 @@ foreach ($decl in @($raw.declarations)) {
         if ($Module -eq 'xstereo' -and [string]$decl.identity -match '^cv\.stereo\.MatchQuasiDense\.(?:MatchQuasiDense|operator <)') { $reason = 'MatchQuasiDense value construction and comparison are represented by the managed value type; the current native ABI exposes these records only through QuasiDenseStereo count/fill transport, not standalone callable entrypoints.' }
         if ($Module -eq 'ptcloud' -and [string]$decl.identity -match '^cv\.RgbdNormals\.(?:RgbdNormals|apply|cache|getRows|setRows|getCols|setCols|getWindowSize|setWindowSize|getDepth|getK|setK|getMethod)') { $reason = 'RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.' }
         if ($Module -eq 'xobjdetect' -and $classification -eq 'implemented' -and [string]$decl.identity -match '^cv\.(?:CascadeClassifier|HOGDescriptor)\.') { $reason = 'The current XObjDetect wrapper covers this declaration through opaque handles, count/fill transport, and property transport; optional NOT_LINKED behavior remains part of the native boundary.' }
+        if ($Module -eq 'dnn_superres' -and $classification -eq 'intentionally-omitted') { $reason = 'The DNN Super Resolution contrib surface is model-driven and has no native DnnSuperres wrapper entrypoint or managed public owner in the current package; model provenance, backend/target policy, and output ownership remain outside this scoped map.' }
         if ($Module -eq 'rapid' -and [string]$decl.identity -match '^cv\.rapid\.GOSTracker\.create\(') { $reason = 'GOSTracker is present in the pinned upstream header but the current managed/native wrapper exposes only Rapid and OLSTracker; this optional tracker remains deliberately omitted until its behavior, ABI, and ownership contract are separately reviewed.' }
         if ($Module -eq 'phase_unwrapping' -and [string]$decl.identity -match 'HistogramPhaseUnwrapping\.Params\.Params\(') { $reason = 'The upstream default Params constructor is represented by HistogramPhaseUnwrappingParams.Default and an explicit managed value constructor; value initialization has no native callable ABI.' }
         if ($Module -eq 'optflow' -and [string]$decl.identity -match '^cv\.optflow\.createOptFlow_PCAFlow\(') { $reason = 'PCAFlow is an optional dense optical-flow factory distinct from the wrapped RLOF and DualTVL1 families; the current ABI/API has no PCAFlow native factory, opaque handle, ownership/lifetime contract, or deterministic runtime smoke, so this declaration remains intentionally omitted.' }
@@ -1051,6 +1058,7 @@ foreach ($decl in @($raw.declarations)) {
 $externalDataDependencies = switch ($Module) {
     'face' { @('Facemark LBF fitting needs a caller-selected compatible landmark model loaded with Facemark.LoadModel; no model data is bundled.') }
     'quality' { @('QualityBRISQUE needs caller-selected SVM model and range files; no model data is bundled. Other quality metrics use caller-provided reference and comparison Mats.') }
+    'dnn_superres' { @('DNN Super Resolution requires caller-selected compatible model data and backend/target policy; no model asset or managed/native wrapper is bundled.') }
     'freetype' { @('The upstream FreeType2 module requires system FreeType2 and HarfBuzz development/runtime libraries; neither dependency is bundled by this repository.') }
     'intensity_transform' { @('BIMEF runtime execution requires OpenCV built with EIGEN support; a module runtime without EIGEN may report that the operation is unavailable.') }
     'saliency' { @('ObjectnessBING requires caller-supplied training/model data through SetTrainingPath; the repository bundles no model asset and therefore does not claim deterministic objectness model execution.') }

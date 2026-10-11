@@ -1,6 +1,8 @@
 # Upstream Map Toolchain
 
-The upstream map catalog centralizes the source scope, parser identity, classification policy, output files, and semantic check command for 39 parser-backed maps. Its schema is [`upstream-map-catalog.schema.json`](../../compatibility/upstream-map-catalog.schema.json), and the checked catalog is [`upstream-map-catalog.json`](../../compatibility/upstream-map-catalog.json).
+The upstream map catalog centralizes the source scope, parser identity, classification policy, output files, and semantic check command for 40 parser-backed maps. Its schema is [`upstream-map-catalog.schema.json`](../../compatibility/upstream-map-catalog.schema.json), and the checked catalog is [`upstream-map-catalog.json`](../../compatibility/upstream-map-catalog.json).
+
+上游映射 catalog 集中记录 40 个基于 parser 的映射的源码范围、parser 身份、分类策略、输出文件和语义检查命令。其 schema 是 [`upstream-map-catalog.schema.json`](../../compatibility/upstream-map-catalog.schema.json)，已审计的 catalog 是 [`upstream-map-catalog.json`](../../compatibility/upstream-map-catalog.json)。
 
 Regenerate the catalog after an intentional map-surface update:
 
@@ -36,6 +38,10 @@ PtCloud maps the selected `opencv2/ptcloud/depth.hpp` slice from the OpenCV 5.0.
 
 XObjDetect maps the OpenCV 5.0.0 contrib `opencv2/xobjdetect.hpp` closure: 34 declarations (27 callables, three classes, and four enums), with 20 implemented callables, seven intentional omissions, and zero missing. The implemented rows bind CascadeClassifier and HOGDescriptor wrappers to 27 distinct native ABI evidence rows and 21 managed evidence rows; cascade/HOG model files remain caller-supplied, and the map does not claim repository-wide contrib parity.
 
+DNN Super Resolution maps the OpenCV 5.0.0 contrib `opencv2/dnn_superres.hpp` closure: 10 declarations (nine callables and one class metadata row). All nine callable identities are intentional omissions because this package has no native DnnSuperres wrapper entrypoint or managed owner; model provenance, backend/target selection, and output ownership are explicit boundaries. The map records the caller-supplied model dependency and does not claim repository-wide contrib parity. See [`dnn-superres-upstream-parity-guide.md`](dnn-superres-upstream-parity-guide.md).
+
 XStereo maps the pinned `opencv2/xstereo.hpp` parser-emitted closure across `descriptor.hpp` and `quasi_dense_stereo.hpp`: 14 declarations (10 callables and four enum/class metadata rows), with eight implemented callables and two intentional omissions. The implemented rows bind the QuasiDenseStereo factory, parameter persistence, match count/fill transport, processing, point lookup, and disparity output to ten native entrypoints and nine managed members. The value-type constructor/comparison rows remain omitted because the ABI transports MatchQuasiDense records only through the opaque stereo handle; the umbrella header's BinaryBM/BinarySGBM and census declarations are outside this parser-emitted scope and are not inferred as missing.
 
-`MAP-001` includes the core PtCloud slice alongside the established core maps, while `MAP-002..004` are represented in the catalog. MAP-005 incrementally adds remaining contrib modules after each module's exact headers, optional dependency boundaries, source-review exclusions, and classification rules have been reviewed; sixteen MAP-005 modules currently have zero unexplained missing declarations.
+`MAP-001` includes the core PtCloud slice alongside the established core maps, while `MAP-002..004` are represented in the catalog. MAP-005 incrementally adds remaining contrib modules after each module's exact headers, optional dependency boundaries, source-review exclusions, and classification rules have been reviewed; seventeen MAP-005 modules currently have zero unexplained missing declarations.
+
+`MAP-001` 将 core PtCloud 范围与既有 core 映射一起纳入 catalog，`MAP-002..004` 也有对应记录。MAP-005 在逐项审阅精确头文件、可选依赖边界、源码审阅排除项和分类规则后增量加入 contrib 模块；当前 17 个 MAP-005 模块都没有未解释的 missing 声明。

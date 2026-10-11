@@ -1,0 +1,246 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/DnnSuperresUpstreamMap/extract_dnn_superres.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/dnn_superres/include/opencv2/dnn_superres.hpp",
+  "headerSha256": "e5c37697f6b8437d3c24fb3a413223e74596b47fac2a1bf48199272474afced6",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/dnn_superres/include/opencv2/dnn_superres.hpp",
+      "sha256": "e5c37697f6b8437d3c24fb3a413223e74596b47fac2a1bf48199272474afced6",
+      "startOrdinal": 0,
+      "declarationCount": 10
+    }
+  ],
+  "declarationCount": 10,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/dnn_superres/include/opencv2/dnn_superres.hpp",
+      "kind": "class",
+      "name": "cv.dnn_superres.DnnSuperResImpl",
+      "identity": "class cv.dnn_superres.DnnSuperResImpl",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief A class to upscale images via convolutional neural networks.\nThe following four models are implemented:\n\n- edsr\n- espcn\n- fsrcnn\n- lapsrn"
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/dnn_superres/include/opencv2/dnn_superres.hpp",
+      "kind": "callable",
+      "name": "cv.dnn_superres.DnnSuperResImpl.create",
+      "identity": "cv.dnn_superres.DnnSuperResImpl.create()->Ptr<DnnSuperResImpl>",
+      "returnType": "Ptr<DnnSuperResImpl>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Empty constructor for python"
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/dnn_superres/include/opencv2/dnn_superres.hpp",
+      "kind": "callable",
+      "name": "cv.dnn_superres.DnnSuperResImpl.readModel",
+      "identity": "cv.dnn_superres.DnnSuperResImpl.readModel(String path[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "path",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Read the model from the given path\n    @param path Path to the model file."
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/dnn_superres/include/opencv2/dnn_superres.hpp",
+      "kind": "callable",
+      "name": "cv.dnn_superres.DnnSuperResImpl.setModel",
+      "identity": "cv.dnn_superres.DnnSuperResImpl.setModel(String algo[/C,/Ref];int scale)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "algo",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "scale",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Set desired model\n    @param algo String containing one of the desired models:\n        - __edsr__\n        - __espcn__\n        - __fsrcnn__\n        - __lapsrn__\n    @param scale Integer specifying the upscale factor"
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/dnn_superres/include/opencv2/dnn_superres.hpp",
+      "kind": "callable",
+      "name": "cv.dnn_superres.DnnSuperResImpl.setPreferableBackend",
+      "identity": "cv.dnn_superres.DnnSuperResImpl.setPreferableBackend(int backendId)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "backendId",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Set computation backend"
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/dnn_superres/include/opencv2/dnn_superres.hpp",
+      "kind": "callable",
+      "name": "cv.dnn_superres.DnnSuperResImpl.setPreferableTarget",
+      "identity": "cv.dnn_superres.DnnSuperResImpl.setPreferableTarget(int targetId)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "targetId",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Set computation target"
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/dnn_superres/include/opencv2/dnn_superres.hpp",
+      "kind": "callable",
+      "name": "cv.dnn_superres.DnnSuperResImpl.upsample",
+      "identity": "cv.dnn_superres.DnnSuperResImpl.upsample(Mat img;Mat result[/O])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "result",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Upsample via neural network\n    @param img Image to upscale\n    @param result Destination upscaled image"
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/dnn_superres/include/opencv2/dnn_superres.hpp",
+      "kind": "callable",
+      "name": "cv.dnn_superres.DnnSuperResImpl.upsampleMultioutput",
+      "identity": "cv.dnn_superres.DnnSuperResImpl.upsampleMultioutput(Mat img;vector_Mat imgs_new[/Ref];vector_int scale_factors[/C,/Ref];vector_String node_names[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Mat",
+          "name": "imgs_new",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_int",
+          "name": "scale_factors",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_String",
+          "name": "node_names",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Upsample via neural network of multiple outputs\n    @param img Image to upscale\n    @param imgs_new Destination upscaled images\n    @param scale_factors Scaling factors of the output nodes\n    @param node_names Names of the output nodes in the neural network"
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/dnn_superres/include/opencv2/dnn_superres.hpp",
+      "kind": "callable",
+      "name": "cv.dnn_superres.DnnSuperResImpl.getScale",
+      "identity": "cv.dnn_superres.DnnSuperResImpl.getScale()->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the scale factor of the model:\n    @return Current scale factor."
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/dnn_superres/include/opencv2/dnn_superres.hpp",
+      "kind": "callable",
+      "name": "cv.dnn_superres.DnnSuperResImpl.getAlgorithm",
+      "identity": "cv.dnn_superres.DnnSuperResImpl.getAlgorithm()->String",
+      "returnType": "String",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the scale factor of the model:\n    @return Current algorithm."
+    }
+  ]
+}

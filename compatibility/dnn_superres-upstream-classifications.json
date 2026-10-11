@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/dnn_superres.hpp contrib public header closure from parser-emitted headers",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact DnnSuperres wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [
+    "DNN Super Resolution requires caller-selected compatible model data and backend/target policy; no model asset or managed/native wrapper is bundled."
+  ],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.dnn_superres.DnnSuperResImpl",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_DNN_SUPERRES=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.dnn_superres.DnnSuperResImpl.create()->Ptr<DnnSuperResImpl>",
+      "classification": "intentionally-omitted",
+      "reason": "The DNN Super Resolution contrib surface is model-driven and has no native DnnSuperres wrapper entrypoint or managed public owner in the current package; model provenance, backend/target policy, and output ownership remain outside this scoped map.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_DNN_SUPERRES=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.dnn_superres.DnnSuperResImpl.readModel(String path[/C,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The DNN Super Resolution contrib surface is model-driven and has no native DnnSuperres wrapper entrypoint or managed public owner in the current package; model provenance, backend/target policy, and output ownership remain outside this scoped map.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_DNN_SUPERRES=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.dnn_superres.DnnSuperResImpl.setModel(String algo[/C,/Ref];int scale)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The DNN Super Resolution contrib surface is model-driven and has no native DnnSuperres wrapper entrypoint or managed public owner in the current package; model provenance, backend/target policy, and output ownership remain outside this scoped map.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_DNN_SUPERRES=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.dnn_superres.DnnSuperResImpl.setPreferableBackend(int backendId)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The DNN Super Resolution contrib surface is model-driven and has no native DnnSuperres wrapper entrypoint or managed public owner in the current package; model provenance, backend/target policy, and output ownership remain outside this scoped map.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_DNN_SUPERRES=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.dnn_superres.DnnSuperResImpl.setPreferableTarget(int targetId)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The DNN Super Resolution contrib surface is model-driven and has no native DnnSuperres wrapper entrypoint or managed public owner in the current package; model provenance, backend/target policy, and output ownership remain outside this scoped map.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_DNN_SUPERRES=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.dnn_superres.DnnSuperResImpl.upsample(Mat img;Mat result[/O])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The DNN Super Resolution contrib surface is model-driven and has no native DnnSuperres wrapper entrypoint or managed public owner in the current package; model provenance, backend/target policy, and output ownership remain outside this scoped map.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_DNN_SUPERRES=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.dnn_superres.DnnSuperResImpl.upsampleMultioutput(Mat img;vector_Mat imgs_new[/Ref];vector_int scale_factors[/C,/Ref];vector_String node_names[/C,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The DNN Super Resolution contrib surface is model-driven and has no native DnnSuperres wrapper entrypoint or managed public owner in the current package; model provenance, backend/target policy, and output ownership remain outside this scoped map.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_DNN_SUPERRES=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.dnn_superres.DnnSuperResImpl.getScale()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The DNN Super Resolution contrib surface is model-driven and has no native DnnSuperres wrapper entrypoint or managed public owner in the current package; model provenance, backend/target policy, and output ownership remain outside this scoped map.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_DNN_SUPERRES=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.dnn_superres.DnnSuperResImpl.getAlgorithm()->String",
+      "classification": "intentionally-omitted",
+      "reason": "The DNN Super Resolution contrib surface is model-driven and has no native DnnSuperres wrapper entrypoint or managed public owner in the current package; model provenance, backend/target policy, and output ownership remain outside this scoped map.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_DNN_SUPERRES=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}

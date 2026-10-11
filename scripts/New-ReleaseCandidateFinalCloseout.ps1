@@ -125,6 +125,8 @@ function Get-Record {
     $calib3DSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/calib3d-upstream-summary.json") -Raw | ConvertFrom-Json
     $coreSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/core-upstream-summary.json") -Raw | ConvertFrom-Json
     $dnnSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/dnn-upstream-summary.json") -Raw | ConvertFrom-Json
+    $dnnSuperresRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/dnn_superres-upstream-raw.json") -Raw | ConvertFrom-Json
+    $dnnSuperresSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/dnn_superres-upstream-summary.json") -Raw | ConvertFrom-Json
     $featuresSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/features-upstream-summary.json") -Raw | ConvertFrom-Json
     $highGuiSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/highgui-upstream-summary.json") -Raw | ConvertFrom-Json
     $objDetectSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/objdetect-upstream-summary.json") -Raw | ConvertFrom-Json
@@ -168,6 +170,11 @@ function Get-Record {
         "compatibility/dnn-upstream-map.txt",
         "compatibility/dnn-upstream-raw.json",
         "compatibility/dnn-upstream-summary.json",
+        "compatibility/dnn_superres-implemented-families.json",
+        "compatibility/dnn_superres-upstream-classifications.json",
+        "compatibility/dnn_superres-upstream-map.txt",
+        "compatibility/dnn_superres-upstream-raw.json",
+        "compatibility/dnn_superres-upstream-summary.json",
         "compatibility/features-implemented-families.json",
         "compatibility/features-source-reviewed-extensions.json",
         "compatibility/features-upstream-classifications.json",
@@ -506,6 +513,7 @@ function Get-Record {
         "scripts/Generate-Calib3DUpstreamMap.ps1",
         "scripts/Generate-CoreUpstreamMap.ps1",
         "scripts/Generate-DnnUpstreamMap.ps1",
+        "scripts/Generate-DnnSuperresUpstreamMap.ps1",
         "scripts/Generate-FeaturesUpstreamMap.ps1",
         "scripts/Generate-HighGuiUpstreamMap.ps1",
         "scripts/Generate-ImgProcUpstreamMap.ps1",
@@ -558,6 +566,7 @@ function Get-Record {
         "scripts/Test-Calib3DUpstreamMap.ps1",
         "scripts/Test-CoreUpstreamMap.ps1",
         "scripts/Test-DnnUpstreamMap.ps1",
+        "scripts/Test-DnnSuperresUpstreamMap.ps1",
         "scripts/Test-FeaturesUpstreamMap.ps1",
         "scripts/Test-HighGuiUpstreamMap.ps1",
         "scripts/Test-ImgProcUpstreamMap.ps1",
@@ -716,6 +725,9 @@ function Get-Record {
         "tools/DnnUpstreamMap/DnnUpstreamMap.csproj",
         "tools/DnnUpstreamMap/Program.cs",
         "tools/DnnUpstreamMap/extract_dnn.py",
+        "tools/DnnSuperresUpstreamMap/DnnSuperresUpstreamMap.csproj",
+        "tools/DnnSuperresUpstreamMap/Program.cs",
+        "tools/DnnSuperresUpstreamMap/extract_dnn_superres.py",
         "tools/FeaturesUpstreamMap/FeaturesUpstreamMap.csproj",
         "tools/FeaturesUpstreamMap/Program.cs",
         "tools/FeaturesUpstreamMap/extract_features.py",
@@ -825,6 +837,7 @@ function Get-Record {
         "tools/XObjDetectUpstreamMap/XObjDetectUpstreamMap.csproj",
         "tools/XObjDetectUpstreamMap/Program.cs",
         "tools/XObjDetectUpstreamMap/extract_xobjdetect.py",
+        "docs/articles/dnn-superres-upstream-parity-guide.md",
         "tools/CodecBenchmark/CodecBenchmark.csproj",
         "tools/CodecBenchmark/Program.cs",
         "scripts/Measure-CodecTypedMatBenchmark.ps1",
@@ -1107,6 +1120,29 @@ function Get-Record {
                 ManagedPublicTypeAdditionCount = [int]$dnnSummary.managedPublicTypeAdditionCount
                 ManagedPublicMemberAdditionCount = [int]$dnnSummary.managedPublicMemberAdditionCount
                 RepositoryWideParityClaimed = [bool]$dnnSummary.repositoryWideUpstreamParityClaimed
+            }
+            DnnSuperresUpstreamMap = [ordered]@{
+                Path = "compatibility/dnn_superres-upstream-map.txt"
+                SummaryPath = "compatibility/dnn_superres-upstream-summary.json"
+                ClassificationPath = "compatibility/dnn_superres-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/dnn_superres-implemented-families.json"
+                RawExtractionPath = "compatibility/dnn_superres-upstream-raw.json"
+                Sha256 = $dnnSuperresSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/dnn_superres-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$dnnSuperresSummary.declarationCount
+                CallableCount = [int]$dnnSuperresSummary.callableCount
+                ImplementedCount = [int]$dnnSuperresSummary.classificationCounts.implemented
+                MissingCount = [int]$dnnSuperresSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$dnnSuperresSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$dnnSuperresSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$dnnSuperresSummary.classificationCounts.'upstream-conditional'
+                SourceHeaderCount = @($dnnSuperresRaw.sourceHeaders).Count
+                SelectedFamilyCount = [int]$dnnSuperresSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$dnnSuperresSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$dnnSuperresSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$dnnSuperresSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$dnnSuperresSummary.nativeEvidenceCount
+                RepositoryWideParityClaimed = [bool]$dnnSuperresSummary.repositoryWideUpstreamParityClaimed
             }
             FeaturesUpstreamMap = [ordered]@{
                 Path = "compatibility/features-upstream-map.txt"

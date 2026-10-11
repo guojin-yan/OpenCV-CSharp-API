@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 39,
+  "moduleCount": 40,
   "maps": [
     {
       "id": "calib3d",
@@ -252,6 +252,52 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "2c7674703c8a5104839e0bc80e610e2a7939e6b8842b0df742ad226de05a0d19",
         "familyInventorySha256": "483934cbbaa91a1d04366fa625c49ffd6a8dce0a7a76cda722ae18e5c29a58e8",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "dnn_superres",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/DnnSuperresUpstreamMap",
+      "extractorScript": "tools/DnnSuperresUpstreamMap/extract_dnn_superres.py",
+      "generationScript": "scripts/Generate-DnnSuperresUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-DnnSuperresUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/dnn_superres.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/dnn_superres/include/opencv2/dnn_superres.hpp",
+          "sha256": "e5c37697f6b8437d3c24fb3a413223e74596b47fac2a1bf48199272474afced6"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/dnn_superres/include/opencv2/dnn_superres.hpp",
+            "sha256": "e5c37697f6b8437d3c24fb3a413223e74596b47fac2a1bf48199272474afced6",
+            "startOrdinal": 0,
+            "declarationCount": 10
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/dnn_superres-upstream-raw.json",
+        "classifications": "compatibility/dnn_superres-upstream-classifications.json",
+        "mapping": "compatibility/dnn_superres-upstream-map.txt",
+        "summary": "compatibility/dnn_superres-upstream-summary.json",
+        "familyInventory": "compatibility/dnn_superres-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 10,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "5d8b06d467c592322f1c63513600b0fe0e53904c3978573cf95b55dc90667f9f",
+        "familyInventorySha256": "f3496c2a15c1c6eac9355f44f4b1ae06b37c4c5b586e6c99133bf090f8266497",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

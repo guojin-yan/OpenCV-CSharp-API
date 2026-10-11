@@ -11,6 +11,7 @@ $definitions = @(
     [pscustomobject]@{ Id = 'calib3d'; Tool = 'Calib3D'; Repository = 'opencv' },
     [pscustomobject]@{ Id = 'core'; Tool = 'Core'; Repository = 'opencv' },
     [pscustomobject]@{ Id = 'dnn'; Tool = 'Dnn'; Repository = 'opencv' },
+    [pscustomobject]@{ Id = 'dnn_superres'; Tool = 'DnnSuperres'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'features'; Tool = 'Features'; Repository = 'opencv' },
     [pscustomobject]@{ Id = 'highgui'; Tool = 'HighGui'; Repository = 'opencv' },
     [pscustomobject]@{ Id = 'imgcodecs'; Tool = 'ImgCodecs'; Repository = 'opencv' },
