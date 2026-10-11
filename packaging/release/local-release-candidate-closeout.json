@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/ba3bc248eb3c48b5",
-  "SourceIdentity": "sha256:ba3bc248eb3c48b58c8cb8357e56235737ed25aba3eb8abf407e3fe57e488957",
+  "CandidateId": "local-closeout/sha256/392dc673c3785c3a",
+  "SourceIdentity": "sha256:392dc673c3785c3a433cc1776f04980e1eacb2cf59f37ad1195dee49dda900ec",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 2022,
-    "Sha256": "ba3bc248eb3c48b58c8cb8357e56235737ed25aba3eb8abf407e3fe57e488957",
+    "FileCount": 2032,
+    "Sha256": "392dc673c3785c3a433cc1776f04980e1eacb2cf59f37ad1195dee49dda900ec",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -1182,6 +1182,31 @@
       "Length": 1416
     },
     {
+      "Path": "compatibility/saliency-implemented-families.json",
+      "Sha256": "80d44ff9a71b29bdb4ea6116c8f1298dc5d8af4e7507f598e4fcb9c04be240b2",
+      "Length": 23708
+    },
+    {
+      "Path": "compatibility/saliency-upstream-classifications.json",
+      "Sha256": "5e62b9a42c21f340fb3db03ef649be4bb6fdd62ff80287a1db4471d86f260f3d",
+      "Length": 23400
+    },
+    {
+      "Path": "compatibility/saliency-upstream-map.txt",
+      "Sha256": "f62159164ca0283249ea8170654589cc9ae07e1c6b3e0737ddd6439ecfbbe2f9",
+      "Length": 15169
+    },
+    {
+      "Path": "compatibility/saliency-upstream-raw.json",
+      "Sha256": "5cf4bd69bac006e0510c69e2bde5f3d27f637b143e9cde80d7afda06ff9793e3",
+      "Length": 28033
+    },
+    {
+      "Path": "compatibility/saliency-upstream-summary.json",
+      "Sha256": "5ff0a5147ed532d6e26603dd36d7c4cf5baba326551de7e765d3d332b0666a30",
+      "Length": 1434
+    },
+    {
       "Path": "compatibility/shape-implemented-families.json",
       "Sha256": "cf85f2d0c99f290ffe454c3fea601ce563cd690c4485746d486309ebd51e2eb9",
       "Length": 18125
@@ -1283,18 +1308,18 @@
     },
     {
       "Path": "compatibility/upstream-map-catalog.json",
-      "Sha256": "4807822ab3806778897bfe7d9ddded6e2e9c19429e53381ceb15822972bd16bf",
-      "Length": 114957
+      "Sha256": "099d5697f1079c56622e28432da2ca64866149a378c5d3eb712f67481eb66ebb",
+      "Length": 117413
     },
     {
       "Path": "compatibility/upstream-map-catalog.schema.json",
-      "Sha256": "d8b1d0767123b9c79e749e62b8b1a11711965b30a5c4ec0d0c369de360129229",
-      "Length": 5819
+      "Sha256": "cbac374e6639fb63a45990fd8daa662a31eefcf204bece50743220c255b4f3d7",
+      "Length": 5831
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "253297f01c45a1c65ef44fcf4f93fb77c05ce4211ab53bee99a490729512890b",
-      "Length": 37192
+      "Sha256": "7263596e090b08f5919a9b6d2f246e5f18608fb20f225afdd317ad98d98d8cb6",
+      "Length": 39536
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -1637,6 +1662,16 @@
       "Length": 11830
     },
     {
+      "Path": "docs/articles/saliency-guide.md",
+      "Sha256": "ecb5617e3f55baaf058719496bc02748d5d8a96bc14ba05d609fd883c0db620d",
+      "Length": 5054
+    },
+    {
+      "Path": "docs/articles/saliency-objectness-guide.md",
+      "Sha256": "0d5e0be54182160141a990eed9a67f55928eed4901494d87b8979739d02fcfd4",
+      "Length": 3638
+    },
+    {
       "Path": "docs/articles/sample-model-assets-guide.md",
       "Sha256": "1444aa09ef1c4ad836ce64a137046ffa7216d2cfe629d651f987d6970211734d",
       "Length": 3495
@@ -1708,8 +1743,8 @@
     },
     {
       "Path": "docs/articles/upstream-map-toolchain.md",
-      "Sha256": "e4d5489e69be39ea1cc3000922a0323ebe7d514a02a570b9fa4fc6e7de0a6959",
-      "Length": 4794
+      "Sha256": "6fb64df9106ad58efd852daf77675eff12f0dd0a0e7b4b0bc1f3f0d97886a815",
+      "Length": 5447
     },
     {
       "Path": "docs/articles/v501-modern-api-preview-guide.md",
@@ -2163,8 +2198,8 @@
     },
     {
       "Path": "scripts/Generate-ContribUpstreamMap.ps1",
-      "Sha256": "10fc226831fbcd2b725665150d437dc7154e2e7a31163b79539e0f2de6bb5d98",
-      "Length": 65807
+      "Sha256": "45dc83fe0bee5bb0c8c504818499f5c7c6348569aee07de7f9445a9314f85058",
+      "Length": 75814
     },
     {
       "Path": "scripts/Generate-CoreUpstreamMap.ps1",
@@ -2287,6 +2322,11 @@
       "Length": 341
     },
     {
+      "Path": "scripts/Generate-SaliencyUpstreamMap.ps1",
+      "Sha256": "ec74edf6f98af2c92675769289889e5344f9a6ab79dc042c4e76688ae51d27f8",
+      "Length": 347
+    },
+    {
       "Path": "scripts/Generate-ShapeUpstreamMap.ps1",
       "Sha256": "95c335d164b66cec15cd0c12d7cdd72a991a63d49b2da04e585e781f58348e80",
       "Length": 341
@@ -2333,8 +2373,8 @@
     },
     {
       "Path": "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
-      "Sha256": "50b35b76d71a9afdb4149ed481a6f1c5cfe57fa22338da1d8f1b970da7e84685",
-      "Length": 5190
+      "Sha256": "d5397d496adc2bc5a3821be75c559491f91c3def423a5015a30d42555c6525cb",
+      "Length": 5217
     },
     {
       "Path": "scripts/Invoke-LifecycleRefreshContainerProducer.ps1",
@@ -2413,8 +2453,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "d5c4f7012173aa885723c83c49ac6088a53d7808984d730cbb18f4194f9e5caf",
-      "Length": 86916
+      "Sha256": "f3887911e372e0631c6ce5758930ec9e5c318fb89ea29e68dc41fa64c92a7885",
+      "Length": 87565
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -2428,8 +2468,8 @@
     },
     {
       "Path": "scripts/New-UpstreamMapCatalog.ps1",
-      "Sha256": "ad75efe45c0907c94ba169b8e5d6d735a0033ea6a99a49601c60b535669ae41d",
-      "Length": 9531
+      "Sha256": "e9f956ff4523f25dc2eda4751d12bb4ab5f8a24ff346412f28ffc417ac05954f",
+      "Length": 9622
     },
     {
       "Path": "scripts/Test-AlphaMatUpstreamMap.ps1",
@@ -2783,8 +2823,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "896bc2afc4186de2aa17f97c74fb738b408d1dec7664a11dd2814b918d329e73",
-      "Length": 84518
+      "Sha256": "c348d8e9a1100e9b8a04672c4db65c4016255c12698e734ba7e6b6e4a6b883cd",
+      "Length": 85167
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -2825,6 +2865,11 @@
       "Path": "scripts/Test-ReleaseSupportContract.ps1",
       "Sha256": "c48d99fcbe7d45c68c5c1cdf9f11f23aeb1f4b14c7a8b2d4280153bbcfe42df3",
       "Length": 27834
+    },
+    {
+      "Path": "scripts/Test-SaliencyUpstreamMap.ps1",
+      "Sha256": "8e653c153d320a6d219b0b092046d633a64086071a37a6fe29d3df7906b82796",
+      "Length": 7490
     },
     {
       "Path": "scripts/Test-SampleModelAssetContract.ps1",
@@ -2878,8 +2923,8 @@
     },
     {
       "Path": "scripts/Test-UpstreamMapCatalog.ps1",
-      "Sha256": "e1ab5d3c4e79ee6b5e1227a7883c24f48351a88b8322b524db9536b1645d9b7f",
-      "Length": 14934
+      "Sha256": "d93d435a2bec5f028c6e1e564140fbf9b625c38357836642777c34e06a718d37",
+      "Length": 14945
     },
     {
       "Path": "scripts/Test-V501ChangeLedger.ps1",
@@ -3902,6 +3947,21 @@
       "Length": 228
     },
     {
+      "Path": "tools/SaliencyUpstreamMap/Program.cs",
+      "Sha256": "77b9237cc0d94ae13b7964c4ca2ee4c63c33f0ab3c0e08b264142889739645ef",
+      "Length": 106
+    },
+    {
+      "Path": "tools/SaliencyUpstreamMap/SaliencyUpstreamMap.csproj",
+      "Sha256": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+      "Length": 238
+    },
+    {
+      "Path": "tools/SaliencyUpstreamMap/extract_saliency.py",
+      "Sha256": "18a04b5f26fbd150b43aaa10d0e5efd4eb6e2a0cd5d66d8919c5c05857d5debf",
+      "Length": 231
+    },
+    {
       "Path": "tools/ScenarioBenchmark/Program.cs",
       "Sha256": "10260a6bc009aa1076a1b78848a67dc592ec88225ff1a78aa2ffd042863159c6",
       "Length": 12697
@@ -4008,8 +4068,8 @@
     },
     {
       "Path": "tools/XImgProcUpstreamMap/extract_ximgproc.py",
-      "Sha256": "91a7109e15b138d16437bc9391809ccec6d7aa5f68511408d304c99072d9232c",
-      "Length": 5578
+      "Sha256": "d36027969db9897df7cd2a7c24d835a78c733e026fb7c759dc9f18e5f13f589b",
+      "Length": 5614
     },
     {
       "Path": "tools/XPhotoUpstreamMap/Program.cs",

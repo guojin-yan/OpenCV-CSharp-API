@@ -41,6 +41,7 @@ $definitions = @(
     [pscustomobject]@{ Id = 'rapid'; Tool = 'Rapid'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'shape'; Tool = 'Shape'; Repository = 'opencv_contrib' }
     [pscustomobject]@{ Id = 'structured_light'; Tool = 'StructuredLight'; Repository = 'opencv_contrib' }
+    [pscustomobject]@{ Id = 'saliency'; Tool = 'Saliency'; Repository = 'opencv_contrib' }
 )
 
 function Get-HeaderRows {

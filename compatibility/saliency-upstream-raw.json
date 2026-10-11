@@ -1,0 +1,754 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/SaliencyUpstreamMap/extract_saliency.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency.hpp",
+  "headerSha256": "ee3cd04ba34adf02eb1dedd4e6b37b5b35848e050485589e0d85c26b9c8415f5",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencyBaseClasses.hpp",
+      "sha256": "e8f709e1cb2775be8fc938de99ce16e2a407abede7554de24cbfbb62f88a6547",
+      "startOrdinal": 0,
+      "declarationCount": 6
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "sha256": "89ea6b1e8f38b29428a467468437054cb9aee44c15897b74a906077f67d1115a",
+      "startOrdinal": 6,
+      "declarationCount": 33
+    }
+  ],
+  "declarationCount": 39,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencyBaseClasses.hpp",
+      "kind": "class",
+      "name": "cv.saliency.Saliency",
+      "identity": "class cv.saliency.Saliency",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "********************************** Saliency Base Class ***********************************"
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencyBaseClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.Saliency.computeSaliency",
+      "identity": "cv.saliency.Saliency.computeSaliency(Mat image;Mat saliencyMap[/O])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "saliencyMap",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Compute the saliency\n   * \\param image        The image.\n   * \\param saliencyMap      The computed saliency map.\n   * \\return true if the saliency map is computed, false otherwise"
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencyBaseClasses.hpp",
+      "kind": "class",
+      "name": "cv.saliency.StaticSaliency",
+      "identity": "class cv.saliency.StaticSaliency",
+      "returnType": ": cv::saliency::Saliency",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::saliency::Saliency",
+      "documentation": "********************************** Static Saliency Base Class ***********************************"
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencyBaseClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.StaticSaliency.computeBinaryMap",
+      "identity": "cv.saliency.StaticSaliency.computeBinaryMap(Mat _saliencyMap;Mat _binaryMap[/O])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "_saliencyMap",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "_binaryMap",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief This function perform a binary map of given saliency map. This is obtained in this\n    way:\n\n    In a first step, to improve the definition of interest areas and facilitate identification of\n    targets, a segmentation by clustering is performed, using *K-means algorithm*. Then, to gain a\n    binary representation of clustered saliency map, since values of the map can vary according to\n    the characteristics of frame under analysis, it is not convenient to use a fixed threshold. So,\n    *Otsu's algorithm* is used, which assumes that the image to be thresholded contains two classes\n    of pixels or bi-modal histograms (e.g. foreground and back-ground pixels); later on, the\n    algorithm calculates the optimal threshold separating those two classes, so that their\n    intra-class variance is minimal.\n\n    @param _saliencyMap the saliency map obtained through one of the specialized algorithms\n    @param _binaryMap the binary map"
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencyBaseClasses.hpp",
+      "kind": "class",
+      "name": "cv.saliency.MotionSaliency",
+      "identity": "class cv.saliency.MotionSaliency",
+      "returnType": ": cv::saliency::Saliency",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::saliency::Saliency",
+      "documentation": "********************************** Motion Saliency Base Class ***********************************"
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencyBaseClasses.hpp",
+      "kind": "class",
+      "name": "cv.saliency.Objectness",
+      "identity": "class cv.saliency.Objectness",
+      "returnType": ": cv::saliency::Saliency",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::saliency::Saliency",
+      "documentation": "********************************** Objectness Base Class ***********************************"
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "class",
+      "name": "cv.saliency.StaticSaliencySpectralResidual",
+      "identity": "class cv.saliency.StaticSaliencySpectralResidual",
+      "returnType": ": cv::saliency::StaticSaliency",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::saliency::StaticSaliency",
+      "documentation": "@brief the Spectral Residual approach from  @cite SR\n\nStarting from the principle of natural image statistics, this method simulate the behavior of\npre-attentive visual search. The algorithm analyze the log spectrum of each image and obtain the\nspectral residual. Then transform the spectral residual to spatial domain to obtain the saliency\nmap, which suggests the positions of proto-objects."
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.StaticSaliencySpectralResidual.create",
+      "identity": "cv.saliency.StaticSaliencySpectralResidual.create()->Ptr<StaticSaliencySpectralResidual>",
+      "returnType": "Ptr<StaticSaliencySpectralResidual>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.StaticSaliencySpectralResidual.computeSaliency",
+      "identity": "cv.saliency.StaticSaliencySpectralResidual.computeSaliency(Mat image;Mat saliencyMap[/O])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "saliencyMap",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.StaticSaliencySpectralResidual.read",
+      "identity": "cv.saliency.StaticSaliencySpectralResidual.read(FileNode fn[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "FileNode",
+          "name": "fn",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.StaticSaliencySpectralResidual.write",
+      "identity": "cv.saliency.StaticSaliencySpectralResidual.write(FileStorage fs[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "FileStorage",
+          "name": "fs",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.StaticSaliencySpectralResidual.getImageWidth",
+      "identity": "cv.saliency.StaticSaliencySpectralResidual.getImageWidth()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.StaticSaliencySpectralResidual.setImageWidth",
+      "identity": "cv.saliency.StaticSaliencySpectralResidual.setImageWidth(int val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.StaticSaliencySpectralResidual.getImageHeight",
+      "identity": "cv.saliency.StaticSaliencySpectralResidual.getImageHeight()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.StaticSaliencySpectralResidual.setImageHeight",
+      "identity": "cv.saliency.StaticSaliencySpectralResidual.setImageHeight(int val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "class",
+      "name": "cv.saliency.StaticSaliencyFineGrained",
+      "identity": "class cv.saliency.StaticSaliencyFineGrained",
+      "returnType": ": cv::saliency::StaticSaliency",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::saliency::StaticSaliency",
+      "documentation": "@brief the Fine Grained Saliency approach from @cite FGS\n\nThis method calculates saliency based on center-surround differences.\nHigh resolution saliency maps are generated in real time by using integral images."
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.StaticSaliencyFineGrained.create",
+      "identity": "cv.saliency.StaticSaliencyFineGrained.create()->Ptr<StaticSaliencyFineGrained>",
+      "returnType": "Ptr<StaticSaliencyFineGrained>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.StaticSaliencyFineGrained.computeSaliency",
+      "identity": "cv.saliency.StaticSaliencyFineGrained.computeSaliency(Mat image;Mat saliencyMap[/O])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "saliencyMap",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "class",
+      "name": "cv.saliency.MotionSaliencyBinWangApr2014",
+      "identity": "class cv.saliency.MotionSaliencyBinWangApr2014",
+      "returnType": ": cv::saliency::MotionSaliency",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::saliency::MotionSaliency",
+      "documentation": "@brief the Fast Self-tuning Background Subtraction Algorithm from @cite BinWangApr2014"
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.MotionSaliencyBinWangApr2014.create",
+      "identity": "cv.saliency.MotionSaliencyBinWangApr2014.create()->Ptr<MotionSaliencyBinWangApr2014>",
+      "returnType": "Ptr<MotionSaliencyBinWangApr2014>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.MotionSaliencyBinWangApr2014.computeSaliency",
+      "identity": "cv.saliency.MotionSaliencyBinWangApr2014.computeSaliency(Mat image;Mat saliencyMap[/O])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "saliencyMap",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.MotionSaliencyBinWangApr2014.setImagesize",
+      "identity": "cv.saliency.MotionSaliencyBinWangApr2014.setImagesize(int W;int H)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "W",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "H",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief This is a utility function that allows to set the correct size (taken from the input image) in the\n    corresponding variables that will be used to size the data structures of the algorithm.\n    @param W width of input image\n    @param H height of input image"
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.MotionSaliencyBinWangApr2014.init",
+      "identity": "cv.saliency.MotionSaliencyBinWangApr2014.init()->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief This function allows the correct initialization of all data structures that will be used by the\n    algorithm."
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.MotionSaliencyBinWangApr2014.getImageWidth",
+      "identity": "cv.saliency.MotionSaliencyBinWangApr2014.getImageWidth()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.MotionSaliencyBinWangApr2014.setImageWidth",
+      "identity": "cv.saliency.MotionSaliencyBinWangApr2014.setImageWidth(int val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.MotionSaliencyBinWangApr2014.getImageHeight",
+      "identity": "cv.saliency.MotionSaliencyBinWangApr2014.getImageHeight()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.MotionSaliencyBinWangApr2014.setImageHeight",
+      "identity": "cv.saliency.MotionSaliencyBinWangApr2014.setImageHeight(int val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "class",
+      "name": "cv.saliency.ObjectnessBING",
+      "identity": "class cv.saliency.ObjectnessBING",
+      "returnType": ": cv::saliency::Objectness",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::saliency::Objectness",
+      "documentation": "@brief the Binarized normed gradients algorithm from @cite BING"
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.ObjectnessBING.create",
+      "identity": "cv.saliency.ObjectnessBING.create()->Ptr<ObjectnessBING>",
+      "returnType": "Ptr<ObjectnessBING>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.ObjectnessBING.computeSaliency",
+      "identity": "cv.saliency.ObjectnessBING.computeSaliency(Mat image;Mat saliencyMap[/O])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "saliencyMap",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.ObjectnessBING.getobjectnessValues",
+      "identity": "cv.saliency.ObjectnessBING.getobjectnessValues()->std::vector<float>",
+      "returnType": "std::vector<float>",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Return the list of the rectangles' objectness value,\n\n    in the same order as the *vector\\<Vec4i\\> objectnessBoundingBox* returned by the algorithm (in\n    computeSaliencyImpl function). The bigger value these scores are, it is more likely to be an\n    object window."
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.ObjectnessBING.setTrainingPath",
+      "identity": "cv.saliency.ObjectnessBING.setTrainingPath(String trainingPath[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "trainingPath",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief This is a utility function that allows to set the correct path from which the algorithm will load\n    the trained model.\n    @param trainingPath trained model path"
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.ObjectnessBING.setBBResDir",
+      "identity": "cv.saliency.ObjectnessBING.setBBResDir(String resultsDir[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "resultsDir",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief This is a utility function that allows to set an arbitrary path in which the algorithm will save the\n    optional results\n\n    (ie writing on file the total number and the list of rectangles returned by objectess, one for\n    each row).\n    @param resultsDir results' folder path"
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.ObjectnessBING.getBase",
+      "identity": "cv.saliency.ObjectnessBING.getBase()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.ObjectnessBING.setBase",
+      "identity": "cv.saliency.ObjectnessBING.setBase(double val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.ObjectnessBING.getNSS",
+      "identity": "cv.saliency.ObjectnessBING.getNSS()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.ObjectnessBING.setNSS",
+      "identity": "cv.saliency.ObjectnessBING.setNSS(int val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 37,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.ObjectnessBING.getW",
+      "identity": "cv.saliency.ObjectnessBING.getW()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 38,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+      "kind": "callable",
+      "name": "cv.saliency.ObjectnessBING.setW",
+      "identity": "cv.saliency.ObjectnessBING.setW(int val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    }
+  ]
+}

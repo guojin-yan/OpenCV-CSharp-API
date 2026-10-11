@@ -1,6 +1,6 @@
 # Upstream Map Toolchain
 
-The upstream map catalog centralizes the source scope, parser identity, classification policy, output files, and semantic check command for 33 parser-backed maps. Its schema is [`upstream-map-catalog.schema.json`](../../compatibility/upstream-map-catalog.schema.json), and the checked catalog is [`upstream-map-catalog.json`](../../compatibility/upstream-map-catalog.json).
+The upstream map catalog centralizes the source scope, parser identity, classification policy, output files, and semantic check command for 34 parser-backed maps. Its schema is [`upstream-map-catalog.schema.json`](../../compatibility/upstream-map-catalog.schema.json), and the checked catalog is [`upstream-map-catalog.json`](../../compatibility/upstream-map-catalog.json).
 
 Regenerate the catalog after an intentional map-surface update:
 
@@ -26,4 +26,6 @@ Shape maps the pinned `opencv2/shape.hpp` parser closure's 20 callable declarati
 
 StructuredLight maps the pinned `opencv2/structured_light.hpp` closure's 14 callable declarations to 12 distinct native ABI symbols and 11 managed members. Gray-code creation, thresholds, shadow-mask images, projector-pixel lookup, sinusoidal creation/phase helpers, and bounded pattern generation are bound to the existing opaque-handle ABI. The upstream Params constructor, projector-camera matching helper, and decode operation remain explicit omissions because the current wrapper has no separate callable ABI or ownership/shape contract for them.
 
-`MAP-002..004` are represented in the catalog. MAP-005 incrementally adds remaining contrib modules after each module's exact headers, optional dependency boundaries, source-review exclusions, and classification rules have been reviewed; eleven MAP-005 modules currently have zero unexplained missing declarations.
+Saliency maps the pinned `opencv2/saliency.hpp` closure's 31 callable declarations and eight class metadata declarations to 27 distinct native ABI symbols and 21 managed members. The two omitted declarations are `StaticSaliencySpectralResidual.read/write`, which remain outside the current wrapper's persistence contract. `ObjectnessBING` preserves the path and parameter surface, but real objectness proposals require caller-supplied BING training data; the default tests intentionally do not download or bundle that external model data. See [`saliency-guide.md`](saliency-guide.md) and [`saliency-objectness-guide.md`](saliency-objectness-guide.md).
+
+`MAP-002..004` are represented in the catalog. MAP-005 incrementally adds remaining contrib modules after each module's exact headers, optional dependency boundaries, source-review exclusions, and classification rules have been reviewed; twelve MAP-005 modules currently have zero unexplained missing declarations.

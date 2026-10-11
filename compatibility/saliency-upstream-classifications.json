@@ -1,0 +1,485 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/saliency.hpp contrib public header closure from parser-emitted headers",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact Saliency wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [
+    "ObjectnessBING requires caller-supplied training/model data through SetTrainingPath; the repository bundles no model asset and therefore does not claim deterministic objectness model execution."
+  ],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.saliency.Saliency",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.saliency.Saliency.computeSaliency(Mat image;Mat saliencyMap[/O])->bool",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_compute_saliency"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.Saliency|method|public;instance|JYPPX.OpenCvSharp.Core.Mat ComputeSaliency(JYPPX.OpenCvSharp.Core.Mat image)",
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.Saliency|method|public;instance|System.Boolean ComputeSaliency(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat saliencyMap)"
+      ]
+    },
+    {
+      "ordinal": 2,
+      "identity": "class cv.saliency.StaticSaliency",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.saliency.StaticSaliency.computeBinaryMap(Mat _saliencyMap;Mat _binaryMap[/O])->bool",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_static_compute_binary_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.StaticSaliency|method|public;instance|JYPPX.OpenCvSharp.Core.Mat ComputeBinaryMap(JYPPX.OpenCvSharp.Core.Mat saliencyMap)",
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.StaticSaliency|method|public;instance|System.Boolean ComputeBinaryMap(JYPPX.OpenCvSharp.Core.Mat saliencyMap,JYPPX.OpenCvSharp.Core.Mat binaryMap)"
+      ]
+    },
+    {
+      "ordinal": 4,
+      "identity": "class cv.saliency.MotionSaliency",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "class cv.saliency.Objectness",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "class cv.saliency.StaticSaliencySpectralResidual",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.saliency.StaticSaliencySpectralResidual.create()->Ptr<StaticSaliencySpectralResidual>",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_spectral_residual_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.StaticSaliencySpectralResidual|method|public;static|JYPPX.OpenCvSharp.Saliency.StaticSaliencySpectralResidual Create()"
+      ]
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.saliency.StaticSaliencySpectralResidual.computeSaliency(Mat image;Mat saliencyMap[/O])->bool",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_compute_saliency"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.Saliency|method|public;instance|JYPPX.OpenCvSharp.Core.Mat ComputeSaliency(JYPPX.OpenCvSharp.Core.Mat image)",
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.Saliency|method|public;instance|System.Boolean ComputeSaliency(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat saliencyMap)"
+      ]
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.saliency.StaticSaliencySpectralResidual.read(FileNode fn[/C,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The upstream persistence helpers use FileNode/FileStorage ownership and serialization contracts that are outside the current managed/native Saliency wrapper; they remain intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.saliency.StaticSaliencySpectralResidual.write(FileStorage fs[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The upstream persistence helpers use FileNode/FileStorage ownership and serialization contracts that are outside the current managed/native Saliency wrapper; they remain intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.saliency.StaticSaliencySpectralResidual.getImageWidth()->int",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_spectral_residual_get_image_width"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.StaticSaliencySpectralResidual|property|instance;get:public;set:public|System.Int32 ImageWidth"
+      ]
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.saliency.StaticSaliencySpectralResidual.setImageWidth(int val)->void",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_spectral_residual_set_image_width"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.StaticSaliencySpectralResidual|property|instance;get:public;set:public|System.Int32 ImageWidth"
+      ]
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.saliency.StaticSaliencySpectralResidual.getImageHeight()->int",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_spectral_residual_get_image_height"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.StaticSaliencySpectralResidual|property|instance;get:public;set:public|System.Int32 ImageHeight"
+      ]
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.saliency.StaticSaliencySpectralResidual.setImageHeight(int val)->void",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_spectral_residual_set_image_height"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.StaticSaliencySpectralResidual|property|instance;get:public;set:public|System.Int32 ImageHeight"
+      ]
+    },
+    {
+      "ordinal": 15,
+      "identity": "class cv.saliency.StaticSaliencyFineGrained",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.saliency.StaticSaliencyFineGrained.create()->Ptr<StaticSaliencyFineGrained>",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_fine_grained_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.StaticSaliencyFineGrained|method|public;static|JYPPX.OpenCvSharp.Saliency.StaticSaliencyFineGrained Create()"
+      ]
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.saliency.StaticSaliencyFineGrained.computeSaliency(Mat image;Mat saliencyMap[/O])->bool",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_compute_saliency"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.Saliency|method|public;instance|JYPPX.OpenCvSharp.Core.Mat ComputeSaliency(JYPPX.OpenCvSharp.Core.Mat image)",
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.Saliency|method|public;instance|System.Boolean ComputeSaliency(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat saliencyMap)"
+      ]
+    },
+    {
+      "ordinal": 18,
+      "identity": "class cv.saliency.MotionSaliencyBinWangApr2014",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.saliency.MotionSaliencyBinWangApr2014.create()->Ptr<MotionSaliencyBinWangApr2014>",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_motion_bin_wang_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.MotionSaliencyBinWangApr2014|method|public;static|JYPPX.OpenCvSharp.Saliency.MotionSaliencyBinWangApr2014 Create()"
+      ]
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.saliency.MotionSaliencyBinWangApr2014.computeSaliency(Mat image;Mat saliencyMap[/O])->bool",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_compute_saliency"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.Saliency|method|public;instance|JYPPX.OpenCvSharp.Core.Mat ComputeSaliency(JYPPX.OpenCvSharp.Core.Mat image)",
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.Saliency|method|public;instance|System.Boolean ComputeSaliency(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat saliencyMap)"
+      ]
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.saliency.MotionSaliencyBinWangApr2014.setImagesize(int W;int H)->void",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_motion_bin_wang_set_image_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.MotionSaliencyBinWangApr2014|method|public;instance|System.Void SetImageSize(System.Int32 width,System.Int32 height)"
+      ]
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.saliency.MotionSaliencyBinWangApr2014.init()->bool",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_motion_bin_wang_init"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.MotionSaliencyBinWangApr2014|method|public;instance|System.Boolean Init()"
+      ]
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.saliency.MotionSaliencyBinWangApr2014.getImageWidth()->int",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_motion_bin_wang_get_image_width"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.MotionSaliencyBinWangApr2014|property|instance;get:public;set:public|System.Int32 ImageWidth"
+      ]
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.saliency.MotionSaliencyBinWangApr2014.setImageWidth(int val)->void",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_motion_bin_wang_set_image_width"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.MotionSaliencyBinWangApr2014|property|instance;get:public;set:public|System.Int32 ImageWidth"
+      ]
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.saliency.MotionSaliencyBinWangApr2014.getImageHeight()->int",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_motion_bin_wang_get_image_height"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.MotionSaliencyBinWangApr2014|property|instance;get:public;set:public|System.Int32 ImageHeight"
+      ]
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.saliency.MotionSaliencyBinWangApr2014.setImageHeight(int val)->void",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_motion_bin_wang_set_image_height"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.MotionSaliencyBinWangApr2014|property|instance;get:public;set:public|System.Int32 ImageHeight"
+      ]
+    },
+    {
+      "ordinal": 27,
+      "identity": "class cv.saliency.ObjectnessBING",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.saliency.ObjectnessBING.create()->Ptr<ObjectnessBING>",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_objectness_bing_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.ObjectnessBING|method|public;static|JYPPX.OpenCvSharp.Saliency.ObjectnessBING Create()"
+      ]
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.saliency.ObjectnessBING.computeSaliency(Mat image;Mat saliencyMap[/O])->bool",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_objectness_bing_compute"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.ObjectnessBING|method|public;instance|JYPPX.OpenCvSharp.Saliency.ObjectnessBINGResult ComputeObjectness(JYPPX.OpenCvSharp.Core.Mat image)"
+      ]
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.saliency.ObjectnessBING.getobjectnessValues()->std::vector<float>",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_objectness_bing_get_objectness_values_count",
+        "jyppx_ocv_saliency_objectness_bing_get_objectness_values_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.ObjectnessBING|method|public;instance|System.Single[] GetObjectnessValues()"
+      ]
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.saliency.ObjectnessBING.setTrainingPath(String trainingPath[/C,/Ref])->void",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_objectness_bing_set_training_path"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.ObjectnessBING|method|public;instance|System.Void SetTrainingPath(System.String trainingPath)"
+      ]
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.saliency.ObjectnessBING.setBBResDir(String resultsDir[/C,/Ref])->void",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_objectness_bing_set_bb_res_dir"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.ObjectnessBING|method|public;instance|System.Void SetBBResDir(System.String resultsDir)"
+      ]
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.saliency.ObjectnessBING.getBase()->double",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_objectness_bing_get_base"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.ObjectnessBING|property|instance;get:public;set:public|System.Double Base"
+      ]
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.saliency.ObjectnessBING.setBase(double val)->void",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_objectness_bing_set_base"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.ObjectnessBING|property|instance;get:public;set:public|System.Double Base"
+      ]
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.saliency.ObjectnessBING.getNSS()->int",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_objectness_bing_get_nss"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.ObjectnessBING|property|instance;get:public;set:public|System.Int32 NSS"
+      ]
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.saliency.ObjectnessBING.setNSS(int val)->void",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_objectness_bing_set_nss"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.ObjectnessBING|property|instance;get:public;set:public|System.Int32 NSS"
+      ]
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.saliency.ObjectnessBING.getW()->int",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_objectness_bing_get_w"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.ObjectnessBING|property|instance;get:public;set:public|System.Int32 W"
+      ]
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.saliency.ObjectnessBING.setW(int val)->void",
+      "classification": "implemented",
+      "reason": "Explicit Saliency declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SALIENCY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_saliency_objectness_bing_set_w"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Saliency.ObjectnessBING|property|instance;get:public;set:public|System.Int32 W"
+      ]
+    }
+  ]
+}

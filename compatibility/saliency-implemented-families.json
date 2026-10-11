@@ -1,0 +1,456 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 0,
+  "managedPublicMemberAdditionCount": 0,
+  "families": [
+    {
+      "id": "saliency-wrapper-surface",
+      "rationale": "Current Saliency managed/native wrapper declarations with exact parser-backed callable evidence.",
+      "declarations": [
+        {
+          "ordinal": 1,
+          "upstreamIdentity": "cv.saliency.Saliency.computeSaliency(Mat image;Mat saliencyMap[/O])->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_compute_saliency"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.Saliency|method|public;instance|JYPPX.OpenCvSharp.Core.Mat ComputeSaliency(JYPPX.OpenCvSharp.Core.Mat image)",
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.Saliency|method|public;instance|System.Boolean ComputeSaliency(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat saliencyMap)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 3,
+          "upstreamIdentity": "cv.saliency.StaticSaliency.computeBinaryMap(Mat _saliencyMap;Mat _binaryMap[/O])->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_static_compute_binary_map"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.StaticSaliency|method|public;instance|JYPPX.OpenCvSharp.Core.Mat ComputeBinaryMap(JYPPX.OpenCvSharp.Core.Mat saliencyMap)",
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.StaticSaliency|method|public;instance|System.Boolean ComputeBinaryMap(JYPPX.OpenCvSharp.Core.Mat saliencyMap,JYPPX.OpenCvSharp.Core.Mat binaryMap)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 7,
+          "upstreamIdentity": "cv.saliency.StaticSaliencySpectralResidual.create()->Ptr<StaticSaliencySpectralResidual>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_spectral_residual_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.StaticSaliencySpectralResidual|method|public;static|JYPPX.OpenCvSharp.Saliency.StaticSaliencySpectralResidual Create()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 8,
+          "upstreamIdentity": "cv.saliency.StaticSaliencySpectralResidual.computeSaliency(Mat image;Mat saliencyMap[/O])->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_compute_saliency"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.Saliency|method|public;instance|JYPPX.OpenCvSharp.Core.Mat ComputeSaliency(JYPPX.OpenCvSharp.Core.Mat image)",
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.Saliency|method|public;instance|System.Boolean ComputeSaliency(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat saliencyMap)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 11,
+          "upstreamIdentity": "cv.saliency.StaticSaliencySpectralResidual.getImageWidth()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_spectral_residual_get_image_width"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.StaticSaliencySpectralResidual|property|instance;get:public;set:public|System.Int32 ImageWidth"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 12,
+          "upstreamIdentity": "cv.saliency.StaticSaliencySpectralResidual.setImageWidth(int val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_spectral_residual_set_image_width"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.StaticSaliencySpectralResidual|property|instance;get:public;set:public|System.Int32 ImageWidth"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 13,
+          "upstreamIdentity": "cv.saliency.StaticSaliencySpectralResidual.getImageHeight()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_spectral_residual_get_image_height"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.StaticSaliencySpectralResidual|property|instance;get:public;set:public|System.Int32 ImageHeight"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 14,
+          "upstreamIdentity": "cv.saliency.StaticSaliencySpectralResidual.setImageHeight(int val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_spectral_residual_set_image_height"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.StaticSaliencySpectralResidual|property|instance;get:public;set:public|System.Int32 ImageHeight"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 16,
+          "upstreamIdentity": "cv.saliency.StaticSaliencyFineGrained.create()->Ptr<StaticSaliencyFineGrained>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_fine_grained_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.StaticSaliencyFineGrained|method|public;static|JYPPX.OpenCvSharp.Saliency.StaticSaliencyFineGrained Create()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 17,
+          "upstreamIdentity": "cv.saliency.StaticSaliencyFineGrained.computeSaliency(Mat image;Mat saliencyMap[/O])->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_compute_saliency"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.Saliency|method|public;instance|JYPPX.OpenCvSharp.Core.Mat ComputeSaliency(JYPPX.OpenCvSharp.Core.Mat image)",
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.Saliency|method|public;instance|System.Boolean ComputeSaliency(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat saliencyMap)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 19,
+          "upstreamIdentity": "cv.saliency.MotionSaliencyBinWangApr2014.create()->Ptr<MotionSaliencyBinWangApr2014>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_motion_bin_wang_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.MotionSaliencyBinWangApr2014|method|public;static|JYPPX.OpenCvSharp.Saliency.MotionSaliencyBinWangApr2014 Create()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 20,
+          "upstreamIdentity": "cv.saliency.MotionSaliencyBinWangApr2014.computeSaliency(Mat image;Mat saliencyMap[/O])->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_compute_saliency"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.Saliency|method|public;instance|JYPPX.OpenCvSharp.Core.Mat ComputeSaliency(JYPPX.OpenCvSharp.Core.Mat image)",
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.Saliency|method|public;instance|System.Boolean ComputeSaliency(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat saliencyMap)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 21,
+          "upstreamIdentity": "cv.saliency.MotionSaliencyBinWangApr2014.setImagesize(int W;int H)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_motion_bin_wang_set_image_size"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.MotionSaliencyBinWangApr2014|method|public;instance|System.Void SetImageSize(System.Int32 width,System.Int32 height)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 22,
+          "upstreamIdentity": "cv.saliency.MotionSaliencyBinWangApr2014.init()->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_motion_bin_wang_init"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.MotionSaliencyBinWangApr2014|method|public;instance|System.Boolean Init()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 23,
+          "upstreamIdentity": "cv.saliency.MotionSaliencyBinWangApr2014.getImageWidth()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_motion_bin_wang_get_image_width"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.MotionSaliencyBinWangApr2014|property|instance;get:public;set:public|System.Int32 ImageWidth"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 24,
+          "upstreamIdentity": "cv.saliency.MotionSaliencyBinWangApr2014.setImageWidth(int val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_motion_bin_wang_set_image_width"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.MotionSaliencyBinWangApr2014|property|instance;get:public;set:public|System.Int32 ImageWidth"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 25,
+          "upstreamIdentity": "cv.saliency.MotionSaliencyBinWangApr2014.getImageHeight()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_motion_bin_wang_get_image_height"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.MotionSaliencyBinWangApr2014|property|instance;get:public;set:public|System.Int32 ImageHeight"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 26,
+          "upstreamIdentity": "cv.saliency.MotionSaliencyBinWangApr2014.setImageHeight(int val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_motion_bin_wang_set_image_height"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.MotionSaliencyBinWangApr2014|property|instance;get:public;set:public|System.Int32 ImageHeight"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 28,
+          "upstreamIdentity": "cv.saliency.ObjectnessBING.create()->Ptr<ObjectnessBING>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_objectness_bing_create"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.ObjectnessBING|method|public;static|JYPPX.OpenCvSharp.Saliency.ObjectnessBING Create()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 29,
+          "upstreamIdentity": "cv.saliency.ObjectnessBING.computeSaliency(Mat image;Mat saliencyMap[/O])->bool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_objectness_bing_compute"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.ObjectnessBING|method|public;instance|JYPPX.OpenCvSharp.Saliency.ObjectnessBINGResult ComputeObjectness(JYPPX.OpenCvSharp.Core.Mat image)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 30,
+          "upstreamIdentity": "cv.saliency.ObjectnessBING.getobjectnessValues()->std::vector<float>",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_objectness_bing_get_objectness_values_count",
+            "jyppx_ocv_saliency_objectness_bing_get_objectness_values_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.ObjectnessBING|method|public;instance|System.Single[] GetObjectnessValues()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 31,
+          "upstreamIdentity": "cv.saliency.ObjectnessBING.setTrainingPath(String trainingPath[/C,/Ref])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_objectness_bing_set_training_path"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.ObjectnessBING|method|public;instance|System.Void SetTrainingPath(System.String trainingPath)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 32,
+          "upstreamIdentity": "cv.saliency.ObjectnessBING.setBBResDir(String resultsDir[/C,/Ref])->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_objectness_bing_set_bb_res_dir"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.ObjectnessBING|method|public;instance|System.Void SetBBResDir(System.String resultsDir)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 33,
+          "upstreamIdentity": "cv.saliency.ObjectnessBING.getBase()->double",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_objectness_bing_get_base"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.ObjectnessBING|property|instance;get:public;set:public|System.Double Base"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 34,
+          "upstreamIdentity": "cv.saliency.ObjectnessBING.setBase(double val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_objectness_bing_set_base"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.ObjectnessBING|property|instance;get:public;set:public|System.Double Base"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 35,
+          "upstreamIdentity": "cv.saliency.ObjectnessBING.getNSS()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_objectness_bing_get_nss"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.ObjectnessBING|property|instance;get:public;set:public|System.Int32 NSS"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 36,
+          "upstreamIdentity": "cv.saliency.ObjectnessBING.setNSS(int val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_objectness_bing_set_nss"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.ObjectnessBING|property|instance;get:public;set:public|System.Int32 NSS"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 37,
+          "upstreamIdentity": "cv.saliency.ObjectnessBING.getW()->int",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_objectness_bing_get_w"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.ObjectnessBING|property|instance;get:public;set:public|System.Int32 W"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 38,
+          "upstreamIdentity": "cv.saliency.ObjectnessBING.setW(int val)->void",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_saliency_objectness_bing_set_w"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Saliency.ObjectnessBING|property|instance;get:public;set:public|System.Int32 W"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Saliency/SaliencyTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/saliency-upstream-parity-guide.md"
+        }
+      ]
+    }
+  ]
+}

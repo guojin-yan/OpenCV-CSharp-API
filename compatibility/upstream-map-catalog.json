@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 33,
+  "moduleCount": 34,
   "maps": [
     {
       "id": "calib3d",
@@ -2384,6 +2384,58 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "09bbe1954da3e5f342e553e6d4091211b13e04fa503074194ae75df8b6e531be",
         "familyInventorySha256": "6f465a47bd10fb824d0f1f1770b49026bbb02eb2d59a786fee0d458520c7122d",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "saliency",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/SaliencyUpstreamMap",
+      "extractorScript": "tools/SaliencyUpstreamMap/extract_saliency.py",
+      "generationScript": "scripts/Generate-SaliencyUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-SaliencyUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/saliency.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency.hpp",
+          "sha256": "ee3cd04ba34adf02eb1dedd4e6b37b5b35848e050485589e0d85c26b9c8415f5"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencyBaseClasses.hpp",
+            "sha256": "e8f709e1cb2775be8fc938de99ce16e2a407abede7554de24cbfbb62f88a6547",
+            "startOrdinal": 0,
+            "declarationCount": 6
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/saliency/include/opencv2/saliency/saliencySpecializedClasses.hpp",
+            "sha256": "89ea6b1e8f38b29428a467468437054cb9aee44c15897b74a906077f67d1115a",
+            "startOrdinal": 6,
+            "declarationCount": 33
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/saliency-upstream-raw.json",
+        "classifications": "compatibility/saliency-upstream-classifications.json",
+        "mapping": "compatibility/saliency-upstream-map.txt",
+        "summary": "compatibility/saliency-upstream-summary.json",
+        "familyInventory": "compatibility/saliency-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 39,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "f62159164ca0283249ea8170654589cc9ae07e1c6b3e0737ddd6439ecfbbe2f9",
+        "familyInventorySha256": "31833b7dad77a94b41c2dd0e767aeb6cfc90fb3a56c1a3b776dc34de3b46b860",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

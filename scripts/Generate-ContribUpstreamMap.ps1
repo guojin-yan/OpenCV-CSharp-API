@@ -1,5 +1,5 @@
 param(
-    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light')][string]$Module,
+    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency')][string]$Module,
     [Parameter(Mandatory)][string]$DisplayName,
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [switch]$Check
@@ -37,6 +37,8 @@ function GetParts([string]$Identity) {
         '^cv\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     } elseif ($Module -eq 'structured_light') {
         '^cv\.structured_light\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
+    } elseif ($Module -eq 'saliency') {
+        '^cv\.saliency\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     } else {
         '^cv\.' + $Module + '\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     }
@@ -56,7 +58,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
         }
         return $Owner
     }
-    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light')) {
+    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency')) {
         if ($Module -eq 'face') {
             if ([string]::IsNullOrWhiteSpace($Owner)) {
                 switch ($Name) {
@@ -93,6 +95,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
                     }
                 }
                 'structured_light' { return $Owner }
+                'saliency' { return $Owner }
             }
             return [string]$managedType
         }
@@ -134,6 +137,42 @@ function GetManaged([string]$Owner, [string]$Name, [string]$Identity) {
             'SinusoidalPattern.unwrapPhaseMap' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;instance\|System\.Void UnwrapPhaseMap\(JYPPX\.OpenCvSharp\.Core\.Mat wrappedPhaseMap,JYPPX\.OpenCvSharp\.Core\.Mat unwrappedPhaseMap,JYPPX\.OpenCvSharp\.Core\.Size cameraSize,JYPPX\.OpenCvSharp\.Core\.Mat\? shadowMask=null\)' } | Sort-Object -Unique) }
             'SinusoidalPattern.computeDataModulationTerm' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;instance\|System\.Void ComputeDataModulationTerm\(JYPPX\.OpenCvSharp\.Core\.Mat\[\] patternImages,JYPPX\.OpenCvSharp\.Core\.Mat dataModulationTerm,JYPPX\.OpenCvSharp\.Core\.Mat shadowMask\)' } | Sort-Object -Unique) }
             'StructuredLightPattern.generate' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;instance\|JYPPX\.OpenCvSharp\.Core\.Mat\[\] Generate\(\)' } | Sort-Object -Unique) }
+            default { return @() }
+        }
+    }
+    if ($Module -eq 'saliency') {
+        $typeMarker = "JYPPX.OpenCvSharp.Saliency.$Owner|"
+        $typeEntries = @($managedEntries | Where-Object { $_.Contains($typeMarker, [StringComparison]::Ordinal) })
+        switch ("$Owner.$Name") {
+            'Saliency.computeSaliency' { return @($managedEntries | Where-Object { $_ -match 'JYPPX\.OpenCvSharp\.Saliency\.Saliency\|method\|public;instance\|.*\bComputeSaliency\(' } | Sort-Object -Unique) }
+            'StaticSaliency.computeBinaryMap' { return @($managedEntries | Where-Object { $_ -match 'JYPPX\.OpenCvSharp\.Saliency\.StaticSaliency\|method\|public;instance\|.*\bComputeBinaryMap\(' } | Sort-Object -Unique) }
+            'StaticSaliencySpectralResidual.create' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;static\|[^|]*\bCreate\(\)$' } | Sort-Object -Unique) }
+            'StaticSaliencySpectralResidual.computeSaliency' { return @($managedEntries | Where-Object { $_ -match 'JYPPX\.OpenCvSharp\.Saliency\.Saliency\|method\|public;instance\|.*\bComputeSaliency\(' } | Sort-Object -Unique) }
+            'StaticSaliencySpectralResidual.getImageWidth' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public;set:public\|System\.Int32 ImageWidth$' } | Sort-Object -Unique) }
+            'StaticSaliencySpectralResidual.setImageWidth' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public;set:public\|System\.Int32 ImageWidth$' } | Sort-Object -Unique) }
+            'StaticSaliencySpectralResidual.getImageHeight' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public;set:public\|System\.Int32 ImageHeight$' } | Sort-Object -Unique) }
+            'StaticSaliencySpectralResidual.setImageHeight' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public;set:public\|System\.Int32 ImageHeight$' } | Sort-Object -Unique) }
+            'StaticSaliencyFineGrained.create' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;static\|[^|]*\bCreate\(\)$' } | Sort-Object -Unique) }
+            'StaticSaliencyFineGrained.computeSaliency' { return @($managedEntries | Where-Object { $_ -match 'JYPPX\.OpenCvSharp\.Saliency\.Saliency\|method\|public;instance\|.*\bComputeSaliency\(' } | Sort-Object -Unique) }
+            'MotionSaliencyBinWangApr2014.create' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;static\|[^|]*\bCreate\(\)$' } | Sort-Object -Unique) }
+            'MotionSaliencyBinWangApr2014.computeSaliency' { return @($managedEntries | Where-Object { $_ -match 'JYPPX\.OpenCvSharp\.Saliency\.Saliency\|method\|public;instance\|.*\bComputeSaliency\(' } | Sort-Object -Unique) }
+            'MotionSaliencyBinWangApr2014.setImagesize' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;instance\|System\.Void SetImageSize\(System\.Int32 width,System\.Int32 height\)$' } | Sort-Object -Unique) }
+            'MotionSaliencyBinWangApr2014.init' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;instance\|System\.Boolean Init\(\)$' } | Sort-Object -Unique) }
+            'MotionSaliencyBinWangApr2014.getImageWidth' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public;set:public\|System\.Int32 ImageWidth$' } | Sort-Object -Unique) }
+            'MotionSaliencyBinWangApr2014.setImageWidth' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public;set:public\|System\.Int32 ImageWidth$' } | Sort-Object -Unique) }
+            'MotionSaliencyBinWangApr2014.getImageHeight' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public;set:public\|System\.Int32 ImageHeight$' } | Sort-Object -Unique) }
+            'MotionSaliencyBinWangApr2014.setImageHeight' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public;set:public\|System\.Int32 ImageHeight$' } | Sort-Object -Unique) }
+            'ObjectnessBING.create' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;static\|[^|]*\bCreate\(\)$' } | Sort-Object -Unique) }
+            'ObjectnessBING.computeSaliency' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;instance\|[^|]*\bComputeObjectness\(JYPPX\.OpenCvSharp\.Core\.Mat image\)$' } | Sort-Object -Unique) }
+            'ObjectnessBING.getobjectnessValues' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;instance\|System\.Single\[\] GetObjectnessValues\(\)$' } | Sort-Object -Unique) }
+            'ObjectnessBING.setTrainingPath' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;instance\|System\.Void SetTrainingPath\(System\.String trainingPath\)$' } | Sort-Object -Unique) }
+            'ObjectnessBING.setBBResDir' { return @($typeEntries | Where-Object { $_ -match '\|method\|public;instance\|System\.Void SetBBResDir\(System\.String resultsDir\)$' } | Sort-Object -Unique) }
+            'ObjectnessBING.getBase' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public;set:public\|System\.Double Base$' } | Sort-Object -Unique) }
+            'ObjectnessBING.setBase' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public;set:public\|System\.Double Base$' } | Sort-Object -Unique) }
+            'ObjectnessBING.getNSS' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public;set:public\|System\.Int32 NSS$' } | Sort-Object -Unique) }
+            'ObjectnessBING.setNSS' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public;set:public\|System\.Int32 NSS$' } | Sort-Object -Unique) }
+            'ObjectnessBING.getW' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public;set:public\|System\.Int32 W$' } | Sort-Object -Unique) }
+            'ObjectnessBING.setW' { return @($typeEntries | Where-Object { $_ -match '\|property\|instance;get:public;set:public\|System\.Int32 W$' } | Sort-Object -Unique) }
             default { return @() }
         }
     }
@@ -339,6 +378,39 @@ function GetNative([object]$Parts, [string]$Identity) {
             'SinusoidalPattern.unwrapPhaseMap' { @('jyppx_ocv_structured_light_sinusoidal_pattern_unwrap_phase_map') }
             'SinusoidalPattern.computeDataModulationTerm' { @('jyppx_ocv_structured_light_sinusoidal_pattern_compute_data_modulation_term') }
             'StructuredLightPattern.generate' { @('jyppx_ocv_structured_light_pattern_generate_count','jyppx_ocv_structured_light_pattern_generate_fill') }
+            default { @() }
+        }
+    } elseif ($Module -eq 'saliency') {
+        $result = switch ("$owner.$name") {
+            'Saliency.computeSaliency' { @('jyppx_ocv_saliency_compute_saliency') }
+            'StaticSaliency.computeBinaryMap' { @('jyppx_ocv_saliency_static_compute_binary_map') }
+            'StaticSaliencySpectralResidual.create' { @('jyppx_ocv_saliency_spectral_residual_create') }
+            'StaticSaliencySpectralResidual.computeSaliency' { @('jyppx_ocv_saliency_compute_saliency') }
+            'StaticSaliencySpectralResidual.getImageWidth' { @('jyppx_ocv_saliency_spectral_residual_get_image_width') }
+            'StaticSaliencySpectralResidual.setImageWidth' { @('jyppx_ocv_saliency_spectral_residual_set_image_width') }
+            'StaticSaliencySpectralResidual.getImageHeight' { @('jyppx_ocv_saliency_spectral_residual_get_image_height') }
+            'StaticSaliencySpectralResidual.setImageHeight' { @('jyppx_ocv_saliency_spectral_residual_set_image_height') }
+            'StaticSaliencyFineGrained.create' { @('jyppx_ocv_saliency_fine_grained_create') }
+            'StaticSaliencyFineGrained.computeSaliency' { @('jyppx_ocv_saliency_compute_saliency') }
+            'MotionSaliencyBinWangApr2014.create' { @('jyppx_ocv_saliency_motion_bin_wang_create') }
+            'MotionSaliencyBinWangApr2014.computeSaliency' { @('jyppx_ocv_saliency_compute_saliency') }
+            'MotionSaliencyBinWangApr2014.setImagesize' { @('jyppx_ocv_saliency_motion_bin_wang_set_image_size') }
+            'MotionSaliencyBinWangApr2014.init' { @('jyppx_ocv_saliency_motion_bin_wang_init') }
+            'MotionSaliencyBinWangApr2014.getImageWidth' { @('jyppx_ocv_saliency_motion_bin_wang_get_image_width') }
+            'MotionSaliencyBinWangApr2014.setImageWidth' { @('jyppx_ocv_saliency_motion_bin_wang_set_image_width') }
+            'MotionSaliencyBinWangApr2014.getImageHeight' { @('jyppx_ocv_saliency_motion_bin_wang_get_image_height') }
+            'MotionSaliencyBinWangApr2014.setImageHeight' { @('jyppx_ocv_saliency_motion_bin_wang_set_image_height') }
+            'ObjectnessBING.create' { @('jyppx_ocv_saliency_objectness_bing_create') }
+            'ObjectnessBING.computeSaliency' { @('jyppx_ocv_saliency_objectness_bing_compute') }
+            'ObjectnessBING.getobjectnessValues' { @('jyppx_ocv_saliency_objectness_bing_get_objectness_values_count','jyppx_ocv_saliency_objectness_bing_get_objectness_values_fill') }
+            'ObjectnessBING.setTrainingPath' { @('jyppx_ocv_saliency_objectness_bing_set_training_path') }
+            'ObjectnessBING.setBBResDir' { @('jyppx_ocv_saliency_objectness_bing_set_bb_res_dir') }
+            'ObjectnessBING.getBase' { @('jyppx_ocv_saliency_objectness_bing_get_base') }
+            'ObjectnessBING.setBase' { @('jyppx_ocv_saliency_objectness_bing_set_base') }
+            'ObjectnessBING.getNSS' { @('jyppx_ocv_saliency_objectness_bing_get_nss') }
+            'ObjectnessBING.setNSS' { @('jyppx_ocv_saliency_objectness_bing_set_nss') }
+            'ObjectnessBING.getW' { @('jyppx_ocv_saliency_objectness_bing_get_w') }
+            'ObjectnessBING.setW' { @('jyppx_ocv_saliency_objectness_bing_set_w') }
             default { @() }
         }
     } elseif ($Module -eq 'shape') {
@@ -706,6 +778,7 @@ foreach ($decl in @($raw.declarations)) {
         else { $classification = 'intentionally-omitted'; $reason = if ($native.Count -eq 0) { "No native $DisplayName wrapper entrypoint is mapped for this parser declaration in the current ABI." } else { "A native $DisplayName entrypoint exists, but no exact matching managed member is present in the current baseline." } }
         if ($Module -eq 'freetype') { $reason = 'The contrib FreeType2 surface depends on external FreeType/Harfbuzz and has no native wrapper entrypoint or managed API in the current package.' }
         if ($Module -eq 'shape') { $reason = 'The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.' }
+        if ($Module -eq 'saliency' -and [string]$decl.identity -match 'StaticSaliencySpectralResidual\.(?:read|write)\(') { $reason = 'The upstream persistence helpers use FileNode/FileStorage ownership and serialization contracts that are outside the current managed/native Saliency wrapper; they remain intentionally omitted.' }
         if ($Module -eq 'rapid' -and [string]$decl.identity -match '^cv\.rapid\.GOSTracker\.create\(') { $reason = 'GOSTracker is present in the pinned upstream header but the current managed/native wrapper exposes only Rapid and OLSTracker; this optional tracker remains deliberately omitted until its behavior, ABI, and ownership contract are separately reviewed.' }
         if ($Module -eq 'phase_unwrapping' -and [string]$decl.identity -match 'HistogramPhaseUnwrapping\.Params\.Params\(') { $reason = 'The upstream default Params constructor is represented by HistogramPhaseUnwrappingParams.Default and an explicit managed value constructor; value initialization has no native callable ABI.' }
         if ($Module -eq 'optflow' -and [string]$decl.identity -match '^cv\.optflow\.createOptFlow_PCAFlow\(') { $reason = 'PCAFlow is an optional dense optical-flow factory distinct from the wrapped RLOF and DualTVL1 families; the current ABI/API has no PCAFlow native factory, opaque handle, ownership/lifetime contract, or deterministic runtime smoke, so this declaration remains intentionally omitted.' }
@@ -724,6 +797,7 @@ $externalDataDependencies = switch ($Module) {
     'quality' { @('QualityBRISQUE needs caller-selected SVM model and range files; no model data is bundled. Other quality metrics use caller-provided reference and comparison Mats.') }
     'freetype' { @('The upstream FreeType2 module requires system FreeType2 and HarfBuzz development/runtime libraries; neither dependency is bundled by this repository.') }
     'intensity_transform' { @('BIMEF runtime execution requires OpenCV built with EIGEN support; a module runtime without EIGEN may report that the operation is unavailable.') }
+    'saliency' { @('ObjectnessBING requires caller-supplied training/model data through SetTrainingPath; the repository bundles no model asset and therefore does not claim deterministic objectness model execution.') }
     default { @() }
 }
 $classification = [ordered]@{ schemaVersion = 1; upstreamOpenCvVersion = '5.0.0'; claimedSlice = "opencv2/$Module.hpp contrib public header closure from parser-emitted headers"; reviewStatus = 'reviewed'; limitation = "The map records parser identities and exact $DisplayName wrapper evidence; it does not claim repository-wide contrib parity or external module availability."; externalDataDependencies = @($externalDataDependencies); declarations = @($rows) }
