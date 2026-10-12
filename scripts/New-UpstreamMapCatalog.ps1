@@ -13,6 +13,7 @@ $definitions = @(
     [pscustomobject]@{ Id = 'cnn_3dobj'; Tool = 'Cnn3DObj'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'signal'; Tool = 'Signal'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'dpm'; Tool = 'Dpm'; Repository = 'opencv_contrib' },
+    [pscustomobject]@{ Id = 'hdf'; Tool = 'Hdf'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'dnn'; Tool = 'Dnn'; Repository = 'opencv' },
     [pscustomobject]@{ Id = 'dnn_superres'; Tool = 'DnnSuperres'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'features'; Tool = 'Features'; Repository = 'opencv' },

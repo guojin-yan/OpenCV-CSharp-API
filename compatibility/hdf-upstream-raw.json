@@ -1,0 +1,1555 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/HdfUpstreamMap/extract_hdf.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf.hpp",
+  "headerSha256": "7fe7c7793b7829efb5646fcaf9582f3595a11d2b1bd114f9d6db933a21952d18",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "sha256": "ebcefbd958fc2e05b845e2be73d344c97f444972a2221fd6febc35d04508d460",
+      "startOrdinal": 0,
+      "declarationCount": 38
+    }
+  ],
+  "declarationCount": 38,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "class",
+      "name": "cv.hdf.HDF5",
+      "identity": "class cv.hdf.HDF5",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Hierarchical Data Format version 5 interface.\n\nNotice that this module is compiled only when hdf5 is correctly installed."
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.close",
+      "identity": "cv.hdf.HDF5.close()->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Close and release hdf5 object."
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.grcreate",
+      "identity": "cv.hdf.HDF5.grcreate(String grlabel[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "grlabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Create a group.\n    @param grlabel specify the hdf5 group label.\n\n    Create a hdf5 group with default properties. The group is closed automatically after creation.\n\n    @note Groups are useful for better organising multiple datasets. It is possible to create subgroups within any group.\n    Existence of a particular group can be checked using hlexists(). In case of subgroups, a label would be e.g: 'Group1/SubGroup1'\n    where SubGroup1 is within the root group Group1. Before creating a subgroup, its parent group MUST be created.\n\n    - In this example, Group1 will have one subgroup called SubGroup1:\n\n     @snippet samples/create_groups.cpp create_group\n\n     The corresponding result visualized using the HDFView tool is\n\n     ![Visualization of groups using the HDFView tool](pics/create_groups.png)\n\n    @note When a dataset is created with dscreate() or kpcreate(), it can be created within a group by specifying the\n    full path within the label. In our example, it would be: 'Group1/SubGroup1/MyDataSet'. It is not thread safe."
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.hlexists",
+      "identity": "cv.hdf.HDF5.hlexists(String label[/C,/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "label",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Check if label exists or not.\n    @param label specify the hdf5 dataset label.\n\n    Returns **true** if dataset exists, and **false** otherwise.\n\n    @note Checks if dataset, group or other object type (hdf5 link) exists under the label name. It is thread safe."
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.atexists",
+      "identity": "cv.hdf.HDF5.atexists(String atlabel[/C,/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "atlabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* Check whether a given attribute exits or not in the root group.\n     *\n     * @param atlabel the attribute name to be checked.\n     * @return true if the attribute exists, false otherwise.\n     *\n     * @sa atdelete, atwrite, atread"
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.atdelete",
+      "identity": "cv.hdf.HDF5.atdelete(String atlabel[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "atlabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* Delete an attribute from the root group.\n     *\n     * @param atlabel the attribute to be deleted.\n     *\n     * @note CV_Error() is called if the given attribute does not exist. Use atexists()\n     * to check whether it exists or not beforehand.\n     *\n     * @sa atexists, atwrite, atread"
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.atwrite",
+      "identity": "cv.hdf.HDF5.atwrite(int value[/C];String atlabel[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "value",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "atlabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* Write an attribute inside the root group.\n     *\n     * @param value attribute value.\n     * @param atlabel attribute name.\n     *\n     * The following example demonstrates how to write an attribute of type cv::String:\n     *\n     *  @snippet samples/read_write_attributes.cpp snippets_write_str\n     *\n     * @note CV_Error() is called if the given attribute already exists. Use atexists()\n     * to check whether it exists or not beforehand. And use atdelete() to delete\n     * it if it already exists.\n     *\n     * @sa atexists, atdelete, atread"
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.atread",
+      "identity": "cv.hdf.HDF5.atread(int* value;String atlabel[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int*",
+          "name": "value",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "String",
+          "name": "atlabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* Read an attribute from the root group.\n     *\n     * @param value address where the attribute is read into\n     * @param atlabel attribute name\n     *\n     * The following example demonstrates how to read an attribute of type cv::String:\n     *\n     *  @snippet samples/read_write_attributes.cpp snippets_read_str\n     *\n     * @note The attribute MUST exist, otherwise CV_Error() is called. Use atexists()\n     * to check if it exists beforehand.\n     *\n     * @sa atexists, atdelete, atwrite"
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.atwrite",
+      "identity": "cv.hdf.HDF5.atwrite(double value[/C];String atlabel[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "value",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "atlabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.atread",
+      "identity": "cv.hdf.HDF5.atread(double* value;String atlabel[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double*",
+          "name": "value",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "String",
+          "name": "atlabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.atwrite",
+      "identity": "cv.hdf.HDF5.atwrite(String value[/C,/Ref];String atlabel[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "value",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "atlabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.atread",
+      "identity": "cv.hdf.HDF5.atread(String* value;String atlabel[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String*",
+          "name": "value",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "String",
+          "name": "atlabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.atwrite",
+      "identity": "cv.hdf.HDF5.atwrite(Mat value;String atlabel[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "value",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "String",
+          "name": "atlabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* Write an attribute into the root group.\n     *\n     * @param value attribute value. Currently, only n-d continuous multi-channel arrays are supported.\n     * @param atlabel attribute name.\n     *\n     * @note CV_Error() is called if the given attribute already exists. Use atexists()\n     * to check whether it exists or not beforehand. And use atdelete() to delete\n     * it if it already exists.\n     *\n     * @sa atexists, atdelete, atread."
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.atread",
+      "identity": "cv.hdf.HDF5.atread(Mat value[/O];String atlabel[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "value",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "atlabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* Read an attribute from the root group.\n     *\n     * @param value attribute value. Currently, only n-d continuous multi-channel arrays are supported.\n     * @param atlabel attribute name.\n     *\n     * @note The attribute MUST exist, otherwise CV_Error() is called. Use atexists()\n     * to check if it exists beforehand.\n     *\n     * @sa atexists, atdelete, atwrite"
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.dscreate",
+      "identity": "cv.hdf.HDF5.dscreate(int rows[/C];int cols[/C];int type[/C];String dslabel[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "rows",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "cols",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "type",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "dslabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.dscreate",
+      "identity": "cv.hdf.HDF5.dscreate(int rows[/C];int cols[/C];int type[/C];String dslabel[/C,/Ref];int compresslevel[/C])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "rows",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "cols",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "type",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "dslabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "compresslevel",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.dscreate",
+      "identity": "cv.hdf.HDF5.dscreate(int rows[/C];int cols[/C];int type[/C];String dslabel[/C,/Ref];int compresslevel[/C];vector_int dims_chunks[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "rows",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "cols",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "type",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "dslabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "compresslevel",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "vector_int",
+          "name": "dims_chunks",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.dscreate",
+      "identity": "cv.hdf.HDF5.dscreate(int rows[/C];int cols[/C];int type[/C];String dslabel[/C,/Ref];int compresslevel[/C];int* dims_chunks[/C])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "rows",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "cols",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "type",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "dslabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "compresslevel",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int*",
+          "name": "dims_chunks",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Create and allocate storage for two dimensional single or multi channel dataset.\n    @param rows declare amount of rows\n    @param cols declare amount of columns\n    @param type type to be used, e.g, CV_8UC3, CV_32FC1 and etc.\n    @param dslabel specify the hdf5 dataset label. Existing dataset label will cause an error.\n    @param compresslevel specify the compression level 0-9 to be used, H5_NONE is the default value and means no compression.\n                         The value 0 also means no compression.\n                         A value 9 indicating the best compression ration. Note\n                         that a higher compression level indicates a higher computational cost. It relies\n                         on GNU gzip for compression.\n    @param dims_chunks each array member specifies the chunking size to be used for block I/O,\n           by default NULL means none at all.\n\n    @note If the dataset already exists, an exception will be thrown (CV_Error() is called).\n\n    - Existence of the dataset can be checked using hlexists(), see in this example:\n    @code{.cpp}\n      // open / autocreate hdf5 file\n      cv::Ptr<cv::hdf::HDF5> h5io = cv::hdf::open( \"mytest.h5\" );\n      // create space for 100x50 CV_64FC2 matrix\n      if ( ! h5io->hlexists( \"hilbert\" ) )\n        h5io->dscreate( 100, 50, CV_64FC2, \"hilbert\" );\n      else\n        printf(\"DS already created, skipping\\n\" );\n      // release\n      h5io->close();\n    @endcode\n\n    @note Activating compression requires internal chunking. Chunking can significantly improve access\n    speed both at read and write time, especially for windowed access logic that shifts offset inside dataset.\n    If no custom chunking is specified, the default one will be invoked by the size of the **whole** dataset\n    as a single big chunk of data.\n\n    - See example of level 9 compression using internal default chunking:\n    @code{.cpp}\n      // open / autocreate hdf5 file\n      cv::Ptr<cv::hdf::HDF5> h5io = cv::hdf::open( \"mytest.h5\" );\n      // create level 9 compressed space for CV_64FC2 matrix\n      if ( ! h5io->hlexists( \"hilbert\", 9 ) )\n        h5io->dscreate( 100, 50, CV_64FC2, \"hilbert\", 9 );\n      else\n        printf(\"DS already created, skipping\\n\" );\n      // release\n      h5io->close();\n    @endcode\n\n    @note A value of H5_UNLIMITED for **rows** or **cols** or both means **unlimited** data on the specified dimension,\n    thus, it is possible to expand anytime such a dataset on row, col or on both directions. Presence of H5_UNLIMITED on any\n    dimension **requires** to define custom chunking. No default chunking will be defined in the unlimited scenario since\n    default size on that dimension will be zero, and will grow once dataset is written. Writing into a dataset that has\n    H5_UNLIMITED on some of its dimensions requires dsinsert() that allows growth on unlimited dimensions, instead of dswrite()\n    that allows to write only in predefined data space.\n\n    - Example below shows no compression but unlimited dimension on cols using 100x100 internal chunking:\n    @code{.cpp}\n      // open / autocreate hdf5 file\n      cv::Ptr<cv::hdf::HDF5> h5io = cv::hdf::open( \"mytest.h5\" );\n      // create level 9 compressed space for CV_64FC2 matrix\n      int chunks[2] = { 100, 100 };\n      h5io->dscreate( 100, cv::hdf::HDF5::H5_UNLIMITED, CV_64FC2, \"hilbert\", cv::hdf::HDF5::H5_NONE, chunks );\n      // release\n      h5io->close();\n    @endcode\n\n    @note It is **not** thread safe, it must be called only once at dataset creation, otherwise an exception will occur.\n    Multiple datasets inside a single hdf5 file are allowed."
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.dscreate",
+      "identity": "cv.hdf.HDF5.dscreate(int n_dims[/C];int* sizes[/C];int type[/C];String dslabel[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "n_dims",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int*",
+          "name": "sizes",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "type",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "dslabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.dscreate",
+      "identity": "cv.hdf.HDF5.dscreate(int n_dims[/C];int* sizes[/C];int type[/C];String dslabel[/C,/Ref];int compresslevel[/C])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "n_dims",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int*",
+          "name": "sizes",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "type",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "dslabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "compresslevel",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.dscreate",
+      "identity": "cv.hdf.HDF5.dscreate(vector_int sizes[/C,/Ref];int type[/C];String dslabel[/C,/Ref];int compresslevel=HDF5::H5_NONE[/C];vector_int dims_chunks=vector<int>()[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_int",
+          "name": "sizes",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "type",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "dslabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "compresslevel",
+          "default": "HDF5::H5_NONE",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "vector_int",
+          "name": "dims_chunks",
+          "default": "vector<int>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.dscreate",
+      "identity": "cv.hdf.HDF5.dscreate(int n_dims[/C];int* sizes[/C];int type[/C];String dslabel[/C,/Ref];int compresslevel[/C];int* dims_chunks[/C])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "n_dims",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int*",
+          "name": "sizes",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "type",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "dslabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "compresslevel",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int*",
+          "name": "dims_chunks",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Create and allocate storage for n-dimensional dataset, single or multichannel type.\n    @param n_dims declare number of dimensions\n    @param sizes array containing sizes for each dimensions\n    @param type type to be used, e.g., CV_8UC3, CV_32FC1, etc.\n    @param dslabel specify the hdf5 dataset label. Existing dataset label will cause an error.\n    @param compresslevel specify the compression level 0-9 to be used, H5_NONE is the default value and means no compression.\n                         The value 0 also means no compression.\n                         A value 9 indicating the best compression ration. Note\n                         that a higher compression level indicates a higher computational cost. It relies\n                         on GNU gzip for compression.\n    @param dims_chunks each array member specifies chunking sizes to be used for block I/O,\n           by default NULL means none at all.\n    @note If the dataset already exists, an exception will be thrown. Existence of the dataset can be checked\n    using hlexists().\n\n    - See example below that creates a 6 dimensional storage space:\n    @code{.cpp}\n      // open / autocreate hdf5 file\n      cv::Ptr<cv::hdf::HDF5> h5io = cv::hdf::open( \"mytest.h5\" );\n      // create space for 6 dimensional CV_64FC2 matrix\n      if ( ! h5io->hlexists( \"nddata\" ) )\n        int n_dims = 5;\n        int dsdims[n_dims] = { 100, 100, 20, 10, 5, 5 };\n        h5io->dscreate( n_dims, sizes, CV_64FC2, \"nddata\" );\n      else\n        printf(\"DS already created, skipping\\n\" );\n      // release\n      h5io->close();\n    @endcode\n\n    @note Activating compression requires internal chunking. Chunking can significantly improve access\n    speed both at read and write time, especially for windowed access logic that shifts offset inside dataset.\n    If no custom chunking is specified, the default one will be invoked by the size of **whole** dataset\n    as single big chunk of data.\n\n    - See example of level 0 compression (shallow) using chunking against the first\n    dimension, thus storage will consists of 100 chunks of data:\n    @code{.cpp}\n      // open / autocreate hdf5 file\n      cv::Ptr<cv::hdf::HDF5> h5io = cv::hdf::open( \"mytest.h5\" );\n      // create space for 6 dimensional CV_64FC2 matrix\n      if ( ! h5io->hlexists( \"nddata\" ) )\n        int n_dims = 5;\n        int dsdims[n_dims] = { 100, 100, 20, 10, 5, 5 };\n        int chunks[n_dims] = {   1, 100, 20, 10, 5, 5 };\n        h5io->dscreate( n_dims, dsdims, CV_64FC2, \"nddata\", 0, chunks );\n      else\n        printf(\"DS already created, skipping\\n\" );\n      // release\n      h5io->close();\n    @endcode\n\n    @note A value of H5_UNLIMITED inside the **sizes** array means **unlimited** data on that dimension, thus it is\n    possible to expand anytime such dataset on those unlimited directions. Presence of H5_UNLIMITED on any dimension\n    **requires** to define custom chunking. No default chunking will be defined in unlimited scenario since the default size\n    on that dimension will be zero, and will grow once dataset is written. Writing into dataset that has H5_UNLIMITED on\n    some of its dimension requires dsinsert() instead of dswrite() that allows growth on unlimited dimension instead of\n    dswrite() that allows to write only in predefined data space.\n\n    - Example below shows a 3 dimensional dataset using no compression with all unlimited sizes and one unit chunking:\n    @code{.cpp}\n      // open / autocreate hdf5 file\n      cv::Ptr<cv::hdf::HDF5> h5io = cv::hdf::open( \"mytest.h5\" );\n      int n_dims = 3;\n      int chunks[n_dims] = { 1, 1, 1 };\n      int dsdims[n_dims] = { cv::hdf::HDF5::H5_UNLIMITED, cv::hdf::HDF5::H5_UNLIMITED, cv::hdf::HDF5::H5_UNLIMITED };\n      h5io->dscreate( n_dims, dsdims, CV_64FC2, \"nddata\", cv::hdf::HDF5::H5_NONE, chunks );\n      // release\n      h5io->close();\n    @endcode"
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.dsgetsize",
+      "identity": "cv.hdf.HDF5.dsgetsize(String dslabel[/C,/Ref];int dims_flag=HDF5::H5_GETDIMS)->vector<int>",
+      "returnType": "vector<int>",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "dslabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "dims_flag",
+          "default": "HDF5::H5_GETDIMS",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Fetch dataset sizes\n    @param dslabel specify the hdf5 dataset label to be measured.\n    @param dims_flag will fetch dataset dimensions on H5_GETDIMS, dataset maximum dimensions on H5_GETMAXDIMS,\n                     and chunk sizes on H5_GETCHUNKDIMS.\n\n    Returns vector object containing sizes of dataset on each dimensions.\n\n    @note Resulting vector size will match the amount of dataset dimensions. By default H5_GETDIMS will return\n    actual dataset dimensions. Using H5_GETMAXDIM flag will get maximum allowed dimension which normally match\n    actual dataset dimension but can hold H5_UNLIMITED value if dataset was prepared in **unlimited** mode on\n    some of its dimension. It can be useful to check existing dataset dimensions before overwrite it as whole or subset.\n    Trying to write with oversized source data into dataset target will thrown exception. The H5_GETCHUNKDIMS will\n    return the dimension of chunk if dataset was created with chunking options otherwise returned vector size\n    will be zero."
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.dsgettype",
+      "identity": "cv.hdf.HDF5.dsgettype(String dslabel[/C,/Ref])->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "dslabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Fetch dataset type\n    @param dslabel specify the hdf5 dataset label to be checked.\n\n    Returns the stored matrix type. This is an identifier compatible with the CvMat type system,\n    like e.g. CV_16SC5 (16-bit signed 5-channel array), and so on.\n\n    @note Result can be parsed with CV_MAT_CN() to obtain amount of channels and CV_MAT_DEPTH() to obtain native cvdata type.\n    It is thread safe."
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.dswrite",
+      "identity": "cv.hdf.HDF5.dswrite(Mat Array;String dslabel[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "Array",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "String",
+          "name": "dslabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.dswrite",
+      "identity": "cv.hdf.HDF5.dswrite(Mat Array;String dslabel[/C,/Ref];int* dims_offset[/C])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "Array",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "String",
+          "name": "dslabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int*",
+          "name": "dims_offset",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.dswrite",
+      "identity": "cv.hdf.HDF5.dswrite(Mat Array;String dslabel[/C,/Ref];vector_int dims_offset[/C,/Ref];vector_int dims_counts=vector<int>()[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "Array",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "String",
+          "name": "dslabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_int",
+          "name": "dims_offset",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_int",
+          "name": "dims_counts",
+          "default": "vector<int>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.dswrite",
+      "identity": "cv.hdf.HDF5.dswrite(Mat Array;String dslabel[/C,/Ref];int* dims_offset[/C];int* dims_counts[/C])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "Array",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "String",
+          "name": "dslabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int*",
+          "name": "dims_offset",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int*",
+          "name": "dims_counts",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Write or overwrite a Mat object into specified dataset of hdf5 file.\n    @param Array specify Mat data array to be written.\n    @param dslabel specify the target hdf5 dataset label.\n    @param dims_offset each array member specify the offset location\n           over dataset's each dimensions from where InputArray will be (over)written into dataset.\n    @param dims_counts each array member specifies the amount of data over dataset's\n           each dimensions from InputArray that will be written into dataset.\n\n    Writes Mat object into targeted dataset.\n\n    @note If dataset is not created and does not exist it will be created **automatically**. Only Mat is supported and\n    it must be **continuous**. It is thread safe but it is recommended that writes to happen over separate non-overlapping\n    regions. Multiple datasets can be written inside a single hdf5 file.\n\n    - Example below writes a 100x100 CV_64FC2 matrix into a dataset. No dataset pre-creation required. If routine\n    is called multiple times dataset will be just overwritten:\n    @code{.cpp}\n      // dual channel hilbert matrix\n      cv::Mat H(100, 100, CV_64FC2);\n      for(int i = 0; i < H.rows; i++)\n        for(int j = 0; j < H.cols; j++)\n        {\n            H.at<cv::Vec2d>(i,j)[0] =  1./(i+j+1);\n            H.at<cv::Vec2d>(i,j)[1] = -1./(i+j+1);\n            count++;\n        }\n      // open / autocreate hdf5 file\n      cv::Ptr<cv::hdf::HDF5> h5io = cv::hdf::open( \"mytest.h5\" );\n      // write / overwrite dataset\n      h5io->dswrite( H, \"hilbert\" );\n      // release\n      h5io->close();\n    @endcode\n\n    - Example below writes a smaller 50x100 matrix into 100x100 compressed space optimised by two 50x100 chunks.\n    Matrix is written twice into first half (0->50) and second half (50->100) of data space using offset.\n    @code{.cpp}\n      // dual channel hilbert matrix\n      cv::Mat H(50, 100, CV_64FC2);\n      for(int i = 0; i < H.rows; i++)\n        for(int j = 0; j < H.cols; j++)\n        {\n            H.at<cv::Vec2d>(i,j)[0] =  1./(i+j+1);\n            H.at<cv::Vec2d>(i,j)[1] = -1./(i+j+1);\n            count++;\n        }\n      // open / autocreate hdf5 file\n      cv::Ptr<cv::hdf::HDF5> h5io = cv::hdf::open( \"mytest.h5\" );\n      // optimise dataset by two chunks\n      int chunks[2] = { 50, 100 };\n      // create 100x100 CV_64FC2 compressed space\n      h5io->dscreate( 100, 100, CV_64FC2, \"hilbert\", 9, chunks );\n      // write into first half\n      int offset1[2] = { 0, 0 };\n      h5io->dswrite( H, \"hilbert\", offset1 );\n      // write into second half\n      int offset2[2] = { 50, 0 };\n      h5io->dswrite( H, \"hilbert\", offset2 );\n      // release\n      h5io->close();\n    @endcode"
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.dsinsert",
+      "identity": "cv.hdf.HDF5.dsinsert(Mat Array;String dslabel[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "Array",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "String",
+          "name": "dslabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.dsinsert",
+      "identity": "cv.hdf.HDF5.dsinsert(Mat Array;String dslabel[/C,/Ref];int* dims_offset[/C])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "Array",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "String",
+          "name": "dslabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int*",
+          "name": "dims_offset",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.dsinsert",
+      "identity": "cv.hdf.HDF5.dsinsert(Mat Array;String dslabel[/C,/Ref];vector_int dims_offset[/C,/Ref];vector_int dims_counts=vector<int>()[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "Array",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "String",
+          "name": "dslabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_int",
+          "name": "dims_offset",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_int",
+          "name": "dims_counts",
+          "default": "vector<int>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.dsinsert",
+      "identity": "cv.hdf.HDF5.dsinsert(Mat Array;String dslabel[/C,/Ref];int* dims_offset[/C];int* dims_counts[/C])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "Array",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "String",
+          "name": "dslabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int*",
+          "name": "dims_offset",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int*",
+          "name": "dims_counts",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Insert or overwrite a Mat object into specified dataset and auto expand dataset size if **unlimited** property allows.\n    @param Array specify Mat data array to be written.\n    @param dslabel specify the target hdf5 dataset label.\n    @param dims_offset each array member specify the offset location\n           over dataset's each dimensions from where InputArray will be (over)written into dataset.\n    @param dims_counts each array member specify the amount of data over dataset's\n           each dimensions from InputArray that will be written into dataset.\n\n    Writes Mat object into targeted dataset and **autoexpand** dataset dimension if allowed.\n\n    @note Unlike dswrite(), datasets are **not** created **automatically**. Only Mat is supported and it must be **continuous**.\n    If dsinsert() happens over outer regions of dataset dimensions and on that dimension of dataset is in **unlimited** mode then\n    dataset is expanded, otherwise exception is thrown. To create datasets with **unlimited** property on specific or more\n    dimensions see dscreate() and the optional H5_UNLIMITED flag at creation time. It is not thread safe over same dataset\n    but multiple datasets can be merged inside a single hdf5 file.\n\n    - Example below creates **unlimited** rows x 100 cols and expands rows 5 times with dsinsert() using single 100x100 CV_64FC2\n    over the dataset. Final size will have 5x100 rows and 100 cols, reflecting H matrix five times over row's span. Chunks size is\n    100x100 just optimized against the H matrix size having compression disabled. If routine is called multiple times dataset will be\n    just overwritten:\n    @code{.cpp}\n      // dual channel hilbert matrix\n      cv::Mat H(50, 100, CV_64FC2);\n      for(int i = 0; i < H.rows; i++)\n        for(int j = 0; j < H.cols; j++)\n        {\n            H.at<cv::Vec2d>(i,j)[0] =  1./(i+j+1);\n            H.at<cv::Vec2d>(i,j)[1] = -1./(i+j+1);\n            count++;\n        }\n      // open / autocreate hdf5 file\n      cv::Ptr<cv::hdf::HDF5> h5io = cv::hdf::open( \"mytest.h5\" );\n      // optimise dataset by chunks\n      int chunks[2] = { 100, 100 };\n      // create Unlimited x 100 CV_64FC2 space\n      h5io->dscreate( cv::hdf::HDF5::H5_UNLIMITED, 100, CV_64FC2, \"hilbert\", cv::hdf::HDF5::H5_NONE, chunks );\n      // write into first half\n      int offset[2] = { 0, 0 };\n      for ( int t = 0; t < 5; t++ )\n      {\n        offset[0] += 100 * t;\n        h5io->dsinsert( H, \"hilbert\", offset );\n      }\n      // release\n      h5io->close();\n    @endcode"
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.dsread",
+      "identity": "cv.hdf.HDF5.dsread(Mat Array[/O];String dslabel[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "Array",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "dslabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.dsread",
+      "identity": "cv.hdf.HDF5.dsread(Mat Array[/O];String dslabel[/C,/Ref];int* dims_offset[/C])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "Array",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "dslabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int*",
+          "name": "dims_offset",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.dsread",
+      "identity": "cv.hdf.HDF5.dsread(Mat Array[/O];String dslabel[/C,/Ref];vector_int dims_offset[/C,/Ref];vector_int dims_counts=vector<int>()[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "Array",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "dslabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_int",
+          "name": "dims_offset",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_int",
+          "name": "dims_counts",
+          "default": "vector<int>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.dsread",
+      "identity": "cv.hdf.HDF5.dsread(Mat Array[/O];String dslabel[/C,/Ref];int* dims_offset[/C];int* dims_counts[/C])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "Array",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "dslabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int*",
+          "name": "dims_offset",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int*",
+          "name": "dims_counts",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Read specific dataset from hdf5 file into Mat object.\n    @param Array Mat container where data reads will be returned.\n    @param dslabel specify the source hdf5 dataset label.\n    @param dims_offset each array member specify the offset location over\n           each dimensions from where dataset starts to read into OutputArray.\n    @param dims_counts each array member specify the amount over dataset's each\n           dimensions of dataset to read into OutputArray.\n\n    Reads out Mat object reflecting the stored dataset.\n\n    @note If hdf5 file does not exist an exception will be thrown. Use hlexists() to check dataset presence.\n    It is thread safe.\n\n    - Example below reads a dataset:\n    @code{.cpp}\n      // open hdf5 file\n      cv::Ptr<cv::hdf::HDF5> h5io = cv::hdf::open( \"mytest.h5\" );\n      // blank Mat container\n      cv::Mat H;\n      // read hibert dataset\n      h5io->read( H, \"hilbert\" );\n      // release\n      h5io->close();\n    @endcode\n\n    - Example below perform read of 3x5 submatrix from second row and third element.\n    @code{.cpp}\n      // open hdf5 file\n      cv::Ptr<cv::hdf::HDF5> h5io = cv::hdf::open( \"mytest.h5\" );\n      // blank Mat container\n      cv::Mat H;\n      int offset[2] = { 1, 2 };\n      int counts[2] = { 3, 5 };\n      // read hibert dataset\n      h5io->read( H, \"hilbert\", offset, counts );\n      // release\n      h5io->close();\n    @endcode"
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.HDF5.kpgetsize",
+      "identity": "cv.hdf.HDF5.kpgetsize(String kplabel[/C,/Ref];int dims_flag=HDF5::H5_GETDIMS)->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "kplabel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "dims_flag",
+          "default": "HDF5::H5_GETDIMS",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Fetch keypoint dataset size\n    @param kplabel specify the hdf5 dataset label to be measured.\n    @param dims_flag will fetch dataset dimensions on H5_GETDIMS, and dataset maximum dimensions on H5_GETMAXDIMS.\n\n    Returns size of keypoints dataset.\n\n    @note Resulting size will match the amount of keypoints. By default H5_GETDIMS will return actual dataset dimension.\n    Using H5_GETMAXDIM flag will get maximum allowed dimension which normally match actual dataset dimension but can hold\n    H5_UNLIMITED value if dataset was prepared in **unlimited** mode. It can be useful to check existing dataset dimension\n    before overwrite it as whole or subset. Trying to write with oversized source data into dataset target will thrown\n    exception. The H5_GETCHUNKDIMS will return the dimension of chunk if dataset was created with chunking options otherwise\n    returned vector size will be zero."
+    },
+    {
+      "ordinal": 37,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+      "kind": "callable",
+      "name": "cv.hdf.open",
+      "identity": "cv.hdf.open(String HDF5Filename[/C,/Ref])->Ptr<HDF5>",
+      "returnType": "Ptr<HDF5>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "HDF5Filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Open or create hdf5 file\n  @param HDF5Filename specify the HDF5 filename.\n\n  Returns a pointer to the hdf5 object class\n\n  @note If the specified file does not exist, it will be created using default properties.\n  Otherwise, it is opened in read and write mode with default access properties.\n  Any operations except dscreate() functions on object\n  will be thread safe. Multiple datasets can be created inside a single hdf5 file, and can be accessed\n  from the same hdf5 object from multiple instances as long read or write operations are done over\n  non-overlapping regions of dataset. Single hdf5 file also can be opened by multiple instances,\n  reads and writes can be instantiated at the same time as long as non-overlapping regions are involved. Object\n  is released using close().\n\n  - Example below opens and then releases the file.\n  @code{.cpp}\n    // open / auto create hdf5 file\n    cv::Ptr<cv::hdf::HDF5> h5io = cv::hdf::open( \"mytest.h5\" );\n    // ...\n    // release\n    h5io->close();\n  @endcode\n\n  ![Visualization of 10x10 CV_64FC2 (Hilbert matrix) using HDFView tool](pics/hdfview_demo.gif)\n\n  - Text dump (3x3 Hilbert matrix) of hdf5 dataset using **h5dump** tool:\n  @code{.txt}\n  $ h5dump test.h5\n  HDF5 \"test.h5\" {\n  GROUP \"/\" {\n     DATASET \"hilbert\" {\n        DATATYPE  H5T_ARRAY { [2] H5T_IEEE_F64LE }\n        DATASPACE  SIMPLE { ( 3, 3 ) / ( 3, 3 ) }\n        DATA {\n        (0,0): [ 1, -1 ], [ 0.5, -0.5 ], [ 0.333333, -0.333333 ],\n        (1,0): [ 0.5, -0.5 ], [ 0.333333, -0.333333 ], [ 0.25, -0.25 ],\n        (2,0): [ 0.333333, -0.333333 ], [ 0.25, -0.25 ], [ 0.2, -0.2 ]\n        }\n     }\n  }\n  }\n  @endcode"
+    }
+  ]
+}

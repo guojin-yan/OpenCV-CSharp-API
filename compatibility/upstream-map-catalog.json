@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 44,
+  "moduleCount": 45,
   "maps": [
     {
       "id": "calib3d",
@@ -332,6 +332,52 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "b0e24a5485d5b3dbeb6add5228bd2ed450d91bcec4df4079fa6fddde6ea274d7",
         "familyInventorySha256": "6a2a8ac0f1c3d80ad28e77e68e7c18b6cd1435663f3e8c296d5bcfa38c6d0a16",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "hdf",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/HdfUpstreamMap",
+      "extractorScript": "tools/HdfUpstreamMap/extract_hdf.py",
+      "generationScript": "scripts/Generate-HdfUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-HdfUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/hdf.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf.hpp",
+          "sha256": "7fe7c7793b7829efb5646fcaf9582f3595a11d2b1bd114f9d6db933a21952d18"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+            "sha256": "ebcefbd958fc2e05b845e2be73d344c97f444972a2221fd6febc35d04508d460",
+            "startOrdinal": 0,
+            "declarationCount": 38
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/hdf-upstream-raw.json",
+        "classifications": "compatibility/hdf-upstream-classifications.json",
+        "mapping": "compatibility/hdf-upstream-map.txt",
+        "summary": "compatibility/hdf-upstream-summary.json",
+        "familyInventory": "compatibility/hdf-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 38,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "73c94abdcc189dca33b3b0e5eb191269ec5a34a90dd8b86c5d95a9edb626914a",
+        "familyInventorySha256": "926fdddb0b60e7c477f2dfd56e890c21287b4a0b9667f171bee6eaff890ce76e",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

@@ -135,6 +135,8 @@ function Get-Record {
     $signalSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/signal-upstream-summary.json") -Raw | ConvertFrom-Json
     $dpmRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/dpm-upstream-raw.json") -Raw | ConvertFrom-Json
     $dpmSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/dpm-upstream-summary.json") -Raw | ConvertFrom-Json
+    $hdfRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/hdf-upstream-raw.json") -Raw | ConvertFrom-Json
+    $hdfSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/hdf-upstream-summary.json") -Raw | ConvertFrom-Json
     $featuresSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/features-upstream-summary.json") -Raw | ConvertFrom-Json
     $highGuiSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/highgui-upstream-summary.json") -Raw | ConvertFrom-Json
     $objDetectSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/objdetect-upstream-summary.json") -Raw | ConvertFrom-Json
@@ -203,6 +205,11 @@ function Get-Record {
         "compatibility/dpm-upstream-map.txt",
         "compatibility/dpm-upstream-raw.json",
         "compatibility/dpm-upstream-summary.json",
+        "compatibility/hdf-implemented-families.json",
+        "compatibility/hdf-upstream-classifications.json",
+        "compatibility/hdf-upstream-map.txt",
+        "compatibility/hdf-upstream-raw.json",
+        "compatibility/hdf-upstream-summary.json",
         "compatibility/features-implemented-families.json",
         "compatibility/features-source-reviewed-extensions.json",
         "compatibility/features-upstream-classifications.json",
@@ -397,6 +404,7 @@ function Get-Record {
         "docs/articles/upstream-map-toolchain.md",
         "docs/articles/signal-upstream-parity-guide.md",
         "docs/articles/dpm-upstream-parity-guide.md",
+        "docs/articles/hdf-upstream-parity-guide.md",
         "docs/articles/xphoto-upstream-parity-guide.md",
         "docs/articles/ximgproc-upstream-parity-guide.md",
         "docs/articles/optflow-bgsegm-upstream-parity-guide.md",
@@ -548,6 +556,7 @@ function Get-Record {
         "scripts/Generate-Cnn3DObjUpstreamMap.ps1",
         "scripts/Generate-SignalUpstreamMap.ps1",
         "scripts/Generate-DpmUpstreamMap.ps1",
+        "scripts/Generate-HdfUpstreamMap.ps1",
         "scripts/Generate-FeaturesUpstreamMap.ps1",
         "scripts/Generate-HighGuiUpstreamMap.ps1",
         "scripts/Generate-ImgProcUpstreamMap.ps1",
@@ -605,6 +614,7 @@ function Get-Record {
         "scripts/Test-Cnn3DObjUpstreamMap.ps1",
         "scripts/Test-SignalUpstreamMap.ps1",
         "scripts/Test-DpmUpstreamMap.ps1",
+        "scripts/Test-HdfUpstreamMap.ps1",
         "scripts/Test-FeaturesUpstreamMap.ps1",
         "scripts/Test-HighGuiUpstreamMap.ps1",
         "scripts/Test-ImgProcUpstreamMap.ps1",
@@ -778,6 +788,9 @@ function Get-Record {
         "tools/DpmUpstreamMap/DpmUpstreamMap.csproj",
         "tools/DpmUpstreamMap/Program.cs",
         "tools/DpmUpstreamMap/extract_dpm.py",
+        "tools/HdfUpstreamMap/HdfUpstreamMap.csproj",
+        "tools/HdfUpstreamMap/Program.cs",
+        "tools/HdfUpstreamMap/extract_hdf.py",
         "tools/FeaturesUpstreamMap/FeaturesUpstreamMap.csproj",
         "tools/FeaturesUpstreamMap/Program.cs",
         "tools/FeaturesUpstreamMap/extract_features.py",
@@ -1287,6 +1300,30 @@ function Get-Record {
                  ManagedPublicMemberAdditionCount = [int]$dpmSummary.managedPublicMemberAdditionCount
                  NativeEntrypointAdditionCount = [int]$dpmSummary.nativeEvidenceCount
                  RepositoryWideParityClaimed = [bool]$dpmSummary.repositoryWideUpstreamParityClaimed
+             }
+             HdfUpstreamMap = [ordered]@{
+                 Path = "compatibility/hdf-upstream-map.txt"
+                 SummaryPath = "compatibility/hdf-upstream-summary.json"
+                 ClassificationPath = "compatibility/hdf-upstream-classifications.json"
+                 FamilyInventoryPath = "compatibility/hdf-implemented-families.json"
+                 RawExtractionPath = "compatibility/hdf-upstream-raw.json"
+                 Sha256 = $hdfSummary.mappingSha256
+                 RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/hdf-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                 DeclarationCount = [int]$hdfSummary.declarationCount
+                 CallableCount = [int]$hdfSummary.callableCount
+                 ImplementedCount = [int]$hdfSummary.classificationCounts.implemented
+                 MissingCount = [int]$hdfSummary.classificationCounts.missing
+                 IntentionallyOmittedCount = [int]$hdfSummary.classificationCounts.'intentionally-omitted'
+                 UnsupportedCount = [int]$hdfSummary.classificationCounts.unsupported
+                 UpstreamConditionalCount = [int]$hdfSummary.classificationCounts.'upstream-conditional'
+                 SourceHeaderCount = @($hdfRaw.sourceHeaders).Count
+                 SelectedFamilyCount = [int]$hdfSummary.selectedFamilyCount
+                 SelectedDeclarationCount = [int]$hdfSummary.selectedDeclarationCount
+                 ManagedPublicTypeAdditionCount = [int]$hdfSummary.managedPublicTypeAdditionCount
+                 ManagedPublicMemberAdditionCount = [int]$hdfSummary.managedPublicMemberAdditionCount
+                 NativeEntrypointAdditionCount = [int]$hdfSummary.nativeEvidenceCount
+                 ExternalDataDependencyCount = [int]$hdfSummary.externalDataDependencyCount
+                 RepositoryWideParityClaimed = [bool]$hdfSummary.repositoryWideUpstreamParityClaimed
              }
             FeaturesUpstreamMap = [ordered]@{
                 Path = "compatibility/features-upstream-map.txt"

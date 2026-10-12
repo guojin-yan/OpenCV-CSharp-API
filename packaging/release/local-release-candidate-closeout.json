@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/0fb182116918ceba",
-  "SourceIdentity": "sha256:0fb182116918ceba071d070c67f52cbf44a0e3bf492f0bf6c34b79ed52b911ef",
+  "CandidateId": "local-closeout/sha256/0b1e56a18bd59213",
+  "SourceIdentity": "sha256:0b1e56a18bd592139cfd8b5a0b1bb329ece2c985bf129d58574c767879765598",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 2137,
-    "Sha256": "0fb182116918ceba071d070c67f52cbf44a0e3bf492f0bf6c34b79ed52b911ef",
+    "FileCount": 2148,
+    "Sha256": "0b1e56a18bd592139cfd8b5a0b1bb329ece2c985bf129d58574c767879765598",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -346,6 +346,30 @@
       "ManagedPublicTypeAdditionCount": 0,
       "ManagedPublicMemberAdditionCount": 0,
       "NativeEntrypointAdditionCount": 0,
+      "RepositoryWideParityClaimed": false
+    },
+    "HdfUpstreamMap": {
+      "Path": "compatibility/hdf-upstream-map.txt",
+      "SummaryPath": "compatibility/hdf-upstream-summary.json",
+      "ClassificationPath": "compatibility/hdf-upstream-classifications.json",
+      "FamilyInventoryPath": "compatibility/hdf-implemented-families.json",
+      "RawExtractionPath": "compatibility/hdf-upstream-raw.json",
+      "Sha256": "73c94abdcc189dca33b3b0e5eb191269ec5a34a90dd8b86c5d95a9edb626914a",
+      "RawSha256": "1389b8e7f1d672ceb9d240a3cc1dfe289b495836481f752147ba459a7ae343e9",
+      "DeclarationCount": 38,
+      "CallableCount": 37,
+      "ImplementedCount": 0,
+      "MissingCount": 0,
+      "IntentionallyOmittedCount": 37,
+      "UnsupportedCount": 0,
+      "UpstreamConditionalCount": 0,
+      "SourceHeaderCount": 1,
+      "SelectedFamilyCount": 1,
+      "SelectedDeclarationCount": 0,
+      "ManagedPublicTypeAdditionCount": 0,
+      "ManagedPublicMemberAdditionCount": 0,
+      "NativeEntrypointAdditionCount": 0,
+      "ExternalDataDependencyCount": 1,
       "RepositoryWideParityClaimed": false
     },
     "FeaturesUpstreamMap": {
@@ -1082,6 +1106,31 @@
       "Length": 1416
     },
     {
+      "Path": "compatibility/hdf-implemented-families.json",
+      "Sha256": "2a3db2cda4448dbb055047466789b16f3a80bef772a0ce8afc9694160cadcee6",
+      "Length": 384
+    },
+    {
+      "Path": "compatibility/hdf-upstream-classifications.json",
+      "Sha256": "dcad45984ec20532dba69958b553513c54d523a3cb23dff23d9d9bf3d4b1383e",
+      "Length": 23544
+    },
+    {
+      "Path": "compatibility/hdf-upstream-map.txt",
+      "Sha256": "73c94abdcc189dca33b3b0e5eb191269ec5a34a90dd8b86c5d95a9edb626914a",
+      "Length": 16718
+    },
+    {
+      "Path": "compatibility/hdf-upstream-raw.json",
+      "Sha256": "1389b8e7f1d672ceb9d240a3cc1dfe289b495836481f752147ba459a7ae343e9",
+      "Length": 59827
+    },
+    {
+      "Path": "compatibility/hdf-upstream-summary.json",
+      "Sha256": "f5d65b2979dd01e3dfc388eb8f15385673ad979132de646cd27c68e6bfd3b77a",
+      "Length": 1401
+    },
+    {
       "Path": "compatibility/hfs-implemented-families.json",
       "Sha256": "2b9bfd521b985cd0681773851099fd95f78c52bc2cd6b481f7b60b842ccd440c",
       "Length": 12482
@@ -1713,18 +1762,18 @@
     },
     {
       "Path": "compatibility/upstream-map-catalog.json",
-      "Sha256": "b1b6f4627dc85ef0ff0f3f7c7db13ed204a3a93682fe09cb080e31e6d72869e4",
-      "Length": 143580
+      "Sha256": "206696bcbe4a6d93a5611af02bc849266cc3a783e3a864999d38d6afb57d3967",
+      "Length": 145630
     },
     {
       "Path": "compatibility/upstream-map-catalog.schema.json",
-      "Sha256": "5a2477288fead14579a86085aba23f10ddf7d9c6ad802b353835e01eb1dc114e",
-      "Length": 5957
+      "Sha256": "0666c8e6480f4be92f9f4faa184f81eb11bc4d6fd77b6c997602951b86a52078",
+      "Length": 5964
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "6495ea0d6c8ac7feb1b6a6992cdfc785c664e04d6eb187de5501673d7ebbfcdd",
-      "Length": 55325
+      "Sha256": "1c286d7fdde56e220cbe0cb92af74f954fa5bdb646810ad13b3cf1826dc6dd06",
+      "Length": 56575
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -2025,6 +2074,11 @@
       "Path": "docs/articles/generic-linux-rid-adr.md",
       "Sha256": "dcf996f64c90c947b402d4301f7742dbf82ac68d65fe30bc2bfa2e1bdc1abc01",
       "Length": 9544
+    },
+    {
+      "Path": "docs/articles/hdf-upstream-parity-guide.md",
+      "Sha256": "d1ab2f855b52d246aada3453fe4c7eaa99bb854687419174c4a063cf09d120db",
+      "Length": 1637
     },
     {
       "Path": "docs/articles/headless-runtime-profile-adr.md",
@@ -2358,8 +2412,8 @@
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "5ffe35c7e3f497fc3bfd937bcff02e33eb200424597cc0ff4eba4eb050a5c1ff",
-      "Length": 17302
+      "Sha256": "9dac0e4b07ef3e5d2ed0544fab87a7dfaf5d998d284bd4510ab42cc6eb1626f1",
+      "Length": 17381
     },
     {
       "Path": "nuget/logo.jpg",
@@ -2723,8 +2777,8 @@
     },
     {
       "Path": "scripts/Generate-ContribUpstreamMap.ps1",
-      "Sha256": "105624fc0a88ca8dc97275ce9b5282eacd118202a735b821f6059523c2e19537",
-      "Length": 107876
+      "Sha256": "1a2043b47642cb3289218a9bed551e13ec71d5c4f33931e6898d965df6849c67",
+      "Length": 108419
     },
     {
       "Path": "scripts/Generate-CoreUpstreamMap.ps1",
@@ -2765,6 +2819,11 @@
       "Path": "scripts/Generate-FuzzyUpstreamMap.ps1",
       "Sha256": "3d62f2755063193f5fb35c232eb2b2f1425669cd610d1e18364fe3ad3d8b07a9",
       "Length": 341
+    },
+    {
+      "Path": "scripts/Generate-HdfUpstreamMap.ps1",
+      "Sha256": "9fce9ba7edaf19201cac3e3ba614d464ce1b49143f15a570bb83c0b650e5cbce",
+      "Length": 979
     },
     {
       "Path": "scripts/Generate-HfsUpstreamMap.ps1",
@@ -2943,8 +3002,8 @@
     },
     {
       "Path": "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
-      "Sha256": "cfab241e9d1b2a1f161a05121c0f5af7cd6dd8a1d38d0c468685b08b8559b742",
-      "Length": 5356
+      "Sha256": "a60cb26c3c73c78efc57d21315a281d0c3b68293ba4c9cef731c8bd04a089c65",
+      "Length": 5378
     },
     {
       "Path": "scripts/Invoke-LifecycleRefreshContainerProducer.ps1",
@@ -3023,8 +3082,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "af7df4b2e67ab576fc9b0a7bfda0a065c99ebee8273f4686de7b8a567a138b87",
-      "Length": 115657
+      "Sha256": "41a84b073b204ff64bb934e4b9eb748efd46d3174ac4c9108f15a873b2ab9465",
+      "Length": 118400
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -3038,8 +3097,8 @@
     },
     {
       "Path": "scripts/New-UpstreamMapCatalog.ps1",
-      "Sha256": "1c9caea9f8476fd85ff358827aa2a158773defcfd489f2d9d7408fea656a636f",
-      "Length": 10540
+      "Sha256": "0dcbf6702df249cd4fbda854ae46ed3273669f8c5c393785677c526f74e4e5ac",
+      "Length": 10622
     },
     {
       "Path": "scripts/Test-AlphaMatUpstreamMap.ps1",
@@ -3200,6 +3259,11 @@
       "Path": "scripts/Test-GitHubPackConsumerRestoreSurface.ps1",
       "Sha256": "23e5323f10cb67c88bd41cb4e9e6db023fad6e1c7661e3aaee2a0d4d0a076317",
       "Length": 45720
+    },
+    {
+      "Path": "scripts/Test-HdfUpstreamMap.ps1",
+      "Sha256": "5ddbf71f1e732fd6e733da0f4a9f17d4345f31c1da78f101576e21ef2a5c08b5",
+      "Length": 2528
     },
     {
       "Path": "scripts/Test-HeadlessCandidateEvidence.ps1",
@@ -3418,8 +3482,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "402600375fd0a8ddbb6112649802e6124fc57c6cc2e928147a3022135f300bff",
-      "Length": 103388
+      "Sha256": "c7028040f1804028fcc8bbe32c09e6d9c867a8d30cb20b4c790d8046329a97e1",
+      "Length": 105234
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -3528,8 +3592,8 @@
     },
     {
       "Path": "scripts/Test-UpstreamMapCatalog.ps1",
-      "Sha256": "9bd66dc8cffe46ba73dcd858199cecbafec72c166c65e8170126881511419151",
-      "Length": 15061
+      "Sha256": "0a9081168cf9140b8f860238d85e382f4fb1dd5b49a298a7d9af03c6c9490e5e",
+      "Length": 15067
     },
     {
       "Path": "scripts/Test-V501ChangeLedger.ps1",
@@ -4367,6 +4431,21 @@
       "Length": 228
     },
     {
+      "Path": "tools/HdfUpstreamMap/HdfUpstreamMap.csproj",
+      "Sha256": "727d0721f11212e08035cc59275b0226c0092f3ea92492d621c3d25879ef974f",
+      "Length": 273
+    },
+    {
+      "Path": "tools/HdfUpstreamMap/Program.cs",
+      "Sha256": "ebc880fafe3b98852e6f0e96457473c029a96efd7612c216a7f58c3f70398cd5",
+      "Length": 96
+    },
+    {
+      "Path": "tools/HdfUpstreamMap/extract_hdf.py",
+      "Sha256": "0ad3a091bd77aee55cdb632c8e1bb6ba0a9ea7a5ff5b7406ef62e72b1c09d181",
+      "Length": 226
+    },
+    {
       "Path": "tools/HfsUpstreamMap/HfsUpstreamMap.csproj",
       "Sha256": "b0655fe2e4b91db06fc9f4da7c1a91df7f87b7204830ea583c7e622398f5f38f",
       "Length": 241
@@ -4808,8 +4887,8 @@
     },
     {
       "Path": "tools/XImgProcUpstreamMap/extract_ximgproc.py",
-      "Sha256": "0bbfe66cfc7f809499b59707f67212ea4067238e0ff22f57cf6979a563b4d745",
-      "Length": 6052
+      "Sha256": "c194b5a1a23f66591cbbf0b52730c273eebd6ceb44c3667b337d5ccd448222e6",
+      "Length": 6073
     },
     {
       "Path": "tools/XObjDetectUpstreamMap/Program.cs",
