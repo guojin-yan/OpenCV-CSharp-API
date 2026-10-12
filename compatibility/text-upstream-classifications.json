@@ -1,0 +1,436 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/text.hpp contrib public header closure from parser-emitted headers",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact Text wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [
+    "OCRTesseract is compiled only when external Tesseract is installed; this package bundles neither Tesseract nor a Text wrapper.",
+    "Text detection and OCR classifier entrypoints require caller-selected classifier/model data; no model assets are bundled."
+  ],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.text.ERFilter",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "class cv.text.ERFilter.Callback",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.text.createERFilterNM1(Ptr_ERFilter_Callback cb[/C,/Ref];int thresholdDelta=1;float minArea=(float)0.00025;float maxArea=(float)0.13;float minProbability=(float)0.4;bool nonMaxSuppression=true;float minProbabilityDiff=(float)0.1)->Ptr<ERFilter>",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.text.createERFilterNM2(Ptr_ERFilter_Callback cb[/C,/Ref];float minProbability=(float)0.3)->Ptr<ERFilter>",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.text.createERFilterNM1(String filename[/C,/Ref,/PATH];int thresholdDelta=1;float minArea=(float)0.00025;float maxArea=(float)0.13;float minProbability=(float)0.4;bool nonMaxSuppression=true;float minProbabilityDiff=(float)0.1)->Ptr<ERFilter>",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.text.createERFilterNM2(String filename[/C,/Ref,/PATH];float minProbability=(float)0.3)->Ptr<ERFilter>",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.text.loadClassifierNM1(String filename[/C,/Ref,/PATH])->Ptr<ERFilter::Callback>",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.text.loadClassifierNM2(String filename[/C,/Ref,/PATH])->Ptr<ERFilter::Callback>",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 8,
+      "identity": "enum cv.text.<unnamed>[const cv.text.ERFILTER_NM_RGBLGrad=0;const cv.text.ERFILTER_NM_IHSGrad=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.text.computeNMChannels(Mat _src;vector_Mat _channels[/O,/O];int _mode=ERFILTER_NM_RGBLGrad)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "enum cv.text.erGrouping_Modes[const cv.text.ERGROUPING_ORIENTATION_HORIZ=0;const cv.text.ERGROUPING_ORIENTATION_ANY=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.text.erGrouping(Mat image;Mat channel;vector_vector_Point regions;vector_Rect groups_rects[/O,/Ref];int method=ERGROUPING_ORIENTATION_HORIZ;String filename=String()[/C,/Ref,/PATH];float minProbablity=(float)0.5)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.text.detectRegions(Mat image;Ptr_ERFilter er_filter1[/C,/Ref];Ptr_ERFilter er_filter2[/C,/Ref];vector_vector_Point regions[/O,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.text.detectRegions(Mat image;Ptr_ERFilter er_filter1[/C,/Ref];Ptr_ERFilter er_filter2[/C,/Ref];vector_Rect groups_rects[/O,/Ref];int method=ERGROUPING_ORIENTATION_HORIZ;String filename=String()[/C,/Ref,/PATH];float minProbability=(float)0.5)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 14,
+      "identity": "enum cv.text.<unnamed>[const cv.text.OCR_LEVEL_WORD=0;const cv.text.OCR_LEVEL_TEXTLINE=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 15,
+      "identity": "enum cv.text.page_seg_mode[const cv.text.PSM_OSD_ONLY=0;const cv.text.PSM_AUTO_OSD=1;const cv.text.PSM_AUTO_ONLY=2;const cv.text.PSM_AUTO=3;const cv.text.PSM_SINGLE_COLUMN=4;const cv.text.PSM_SINGLE_BLOCK_VERT_TEXT=5;const cv.text.PSM_SINGLE_BLOCK=6;const cv.text.PSM_SINGLE_LINE=7;const cv.text.PSM_SINGLE_WORD=8;const cv.text.PSM_CIRCLE_WORD=9;const cv.text.PSM_SINGLE_CHAR=10]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "enum cv.text.ocr_engine_mode[const cv.text.OEM_TESSERACT_ONLY=0;const cv.text.OEM_CUBE_ONLY=1;const cv.text.OEM_TESSERACT_CUBE_COMBINED=2;const cv.text.OEM_DEFAULT=3]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 17,
+      "identity": "class cv.text.BaseOCR",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 18,
+      "identity": "class cv.text.OCRTesseract",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.text.OCRTesseract.run(Mat image;int min_confidence;int component_level=0)->String",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.text.OCRTesseract.run(Mat image;Mat mask;int min_confidence;int component_level=0)->String",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.text.OCRTesseract.setWhiteList(String char_whitelist[/C,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.text.OCRTesseract.create(c_string datapath=0[/C];c_string language=0[/C];c_string char_whitelist=0[/C];int oem=OEM_DEFAULT;int psmode=PSM_AUTO)->Ptr<OCRTesseract>",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 23,
+      "identity": "enum cv.text.decoder_mode[const cv.text.OCR_DECODER_VITERBI=0]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 24,
+      "identity": "enum cv.text.classifier_type[const cv.text.OCR_KNN_CLASSIFIER=0;const cv.text.OCR_CNN_CLASSIFIER=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 25,
+      "identity": "class cv.text.OCRHMMDecoder",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 26,
+      "identity": "class cv.text.OCRHMMDecoder.ClassifierCallback",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.text.OCRHMMDecoder.run(Mat image;int min_confidence;int component_level=0)->String",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.text.OCRHMMDecoder.run(Mat image;Mat mask;int min_confidence;int component_level=0)->String",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.text.OCRHMMDecoder.create(Ptr_OCRHMMDecoder_ClassifierCallback classifier[/C];String vocabulary[/C,/Ref];Mat transition_probabilities_table;Mat emission_probabilities_table;int mode=OCR_DECODER_VITERBI)->Ptr<OCRHMMDecoder>",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.text.OCRHMMDecoder.create(String filename[/C,/Ref,/PATH];String vocabulary[/C,/Ref];Mat transition_probabilities_table;Mat emission_probabilities_table;int mode=OCR_DECODER_VITERBI;int classifier=OCR_KNN_CLASSIFIER)->Ptr<OCRHMMDecoder>",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.text.loadOCRHMMClassifierNM(String filename[/C,/Ref,/PATH])->Ptr<OCRHMMDecoder::ClassifierCallback>",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.text.loadOCRHMMClassifierCNN(String filename[/C,/Ref,/PATH])->Ptr<OCRHMMDecoder::ClassifierCallback>",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.text.loadOCRHMMClassifier(String filename[/C,/Ref,/PATH];int classifier)->Ptr<OCRHMMDecoder::ClassifierCallback>",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.text.createOCRHMMTransitionsTable(String vocabulary[/C,/Ref];vector_String lexicon[/Ref])->Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 35,
+      "identity": "class cv.text.OCRBeamSearchDecoder",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 36,
+      "identity": "class cv.text.OCRBeamSearchDecoder.ClassifierCallback",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.text.OCRBeamSearchDecoder.run(Mat image;int min_confidence;int component_level=0)->String",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.text.OCRBeamSearchDecoder.run(Mat image;Mat mask;int min_confidence;int component_level=0)->String",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.text.OCRBeamSearchDecoder.create(Ptr_OCRBeamSearchDecoder_ClassifierCallback classifier[/C];string vocabulary[/C,/Ref];Mat transition_probabilities_table;Mat emission_probabilities_table;text_decoder_mode mode=OCR_DECODER_VITERBI;int beam_size=500)->Ptr<OCRBeamSearchDecoder>",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.text.loadOCRBeamSearchClassifierCNN(String filename[/C,/Ref,/PATH])->Ptr<OCRBeamSearchDecoder::ClassifierCallback>",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.text.detectTextSWT(Mat input;vector_Rect result[/O,/Ref];bool dark_on_light;Mat draw=Mat()[/Ref,/O];Mat chainBBs=Mat()[/Ref,/O])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 42,
+      "identity": "class cv.text.TextDetector",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.text.TextDetector.detect(Mat inputImage;vector_Rect Bbox[/O,/Ref];vector_float confidence[/O,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 44,
+      "identity": "class cv.text.TextDetectorCNN",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 45,
+      "identity": "cv.text.TextDetectorCNN.detect(Mat inputImage;vector_Rect Bbox[/O,/Ref];vector_float confidence[/O,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 46,
+      "identity": "cv.text.TextDetectorCNN.create(String modelArchFilename[/C,/Ref];String modelWeightsFilename[/C,/Ref])->Ptr<TextDetectorCNN>",
+      "classification": "intentionally-omitted",
+      "reason": "The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TEXT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}

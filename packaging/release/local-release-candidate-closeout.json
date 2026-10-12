@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/0b1e56a18bd59213",
-  "SourceIdentity": "sha256:0b1e56a18bd592139cfd8b5a0b1bb329ece2c985bf129d58574c767879765598",
+  "CandidateId": "local-closeout/sha256/0eb2544253716ede",
+  "SourceIdentity": "sha256:0eb2544253716ede726b399b9b3037116b7f9e23a4ef2abf46a0fa657aefccdd",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 2148,
-    "Sha256": "0b1e56a18bd592139cfd8b5a0b1bb329ece2c985bf129d58574c767879765598",
+    "FileCount": 2159,
+    "Sha256": "0eb2544253716ede726b399b9b3037116b7f9e23a4ef2abf46a0fa657aefccdd",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -370,6 +370,30 @@
       "ManagedPublicMemberAdditionCount": 0,
       "NativeEntrypointAdditionCount": 0,
       "ExternalDataDependencyCount": 1,
+      "RepositoryWideParityClaimed": false
+    },
+    "TextUpstreamMap": {
+      "Path": "compatibility/text-upstream-map.txt",
+      "SummaryPath": "compatibility/text-upstream-summary.json",
+      "ClassificationPath": "compatibility/text-upstream-classifications.json",
+      "FamilyInventoryPath": "compatibility/text-implemented-families.json",
+      "RawExtractionPath": "compatibility/text-upstream-raw.json",
+      "Sha256": "1b804578982bb04e1d5728850db13de25dfd5e4d8fe6155f6f4302a5211a2513",
+      "RawSha256": "487983559b45219523baaaddf2535077221db8292e478cc1a5f641727981873e",
+      "DeclarationCount": 47,
+      "CallableCount": 30,
+      "ImplementedCount": 0,
+      "MissingCount": 0,
+      "IntentionallyOmittedCount": 30,
+      "UnsupportedCount": 0,
+      "UpstreamConditionalCount": 0,
+      "SourceHeaderCount": 4,
+      "SelectedFamilyCount": 1,
+      "SelectedDeclarationCount": 0,
+      "ManagedPublicTypeAdditionCount": 0,
+      "ManagedPublicMemberAdditionCount": 0,
+      "NativeEntrypointAdditionCount": 0,
+      "ExternalDataDependencyCount": 2,
       "RepositoryWideParityClaimed": false
     },
     "FeaturesUpstreamMap": {
@@ -1736,6 +1760,31 @@
       "Length": 1478
     },
     {
+      "Path": "compatibility/text-implemented-families.json",
+      "Sha256": "d1c16457e3838efd43f1ce5061ee93a56ef4a4d71bc7955668fc940efc4f8e58",
+      "Length": 386
+    },
+    {
+      "Path": "compatibility/text-upstream-classifications.json",
+      "Sha256": "25551f074b9e5491e84f5705019de29dd92e7ff2f000e6ea2444ff9d9d34a6aa",
+      "Length": 30852
+    },
+    {
+      "Path": "compatibility/text-upstream-map.txt",
+      "Sha256": "1b804578982bb04e1d5728850db13de25dfd5e4d8fe6155f6f4302a5211a2513",
+      "Length": 22295
+    },
+    {
+      "Path": "compatibility/text-upstream-raw.json",
+      "Sha256": "487983559b45219523baaaddf2535077221db8292e478cc1a5f641727981873e",
+      "Length": 65339
+    },
+    {
+      "Path": "compatibility/text-upstream-summary.json",
+      "Sha256": "dc55b94e2f1594714963eba47daaf3c28046da318a076d5b83b0059e5d5e506a",
+      "Length": 1409
+    },
+    {
       "Path": "compatibility/tracking-implemented-families.json",
       "Sha256": "d16dc81fe3f468b6d09e864db659842b765eb2082efe8a458d62131d18a14af5",
       "Length": 7530
@@ -1762,18 +1811,18 @@
     },
     {
       "Path": "compatibility/upstream-map-catalog.json",
-      "Sha256": "206696bcbe4a6d93a5611af02bc849266cc3a783e3a864999d38d6afb57d3967",
-      "Length": 145630
+      "Sha256": "c9072e977f2db679460353d88667a996cdec40084adb30f6a6a0f5caa6f96284",
+      "Length": 148568
     },
     {
       "Path": "compatibility/upstream-map-catalog.schema.json",
-      "Sha256": "0666c8e6480f4be92f9f4faa184f81eb11bc4d6fd77b6c997602951b86a52078",
-      "Length": 5964
+      "Sha256": "bd29418605844f345859323938fc91861d3d419f63b1691222663304a9ee78c3",
+      "Length": 5972
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "1c286d7fdde56e220cbe0cb92af74f954fa5bdb646810ad13b3cf1826dc6dd06",
-      "Length": 56575
+      "Sha256": "b02689e6d7470b6ee52e9573c7f805fb4973d275c4a7fd02073f0d282c2e46d3",
+      "Length": 57841
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -2261,6 +2310,11 @@
       "Length": 3384
     },
     {
+      "Path": "docs/articles/text-upstream-parity-guide.md",
+      "Sha256": "1fcd99e528794e9b702dbf9011bf45916ab58a695206592c76263fa08e026b68",
+      "Length": 1882
+    },
+    {
       "Path": "docs/articles/tracking-guide.md",
       "Sha256": "61259f6ffda70461a584e9ffc7474efee2c8a4a99d94f65416b3040675555d6e",
       "Length": 6684
@@ -2412,8 +2466,8 @@
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "9dac0e4b07ef3e5d2ed0544fab87a7dfaf5d998d284bd4510ab42cc6eb1626f1",
-      "Length": 17381
+      "Sha256": "5aeff2118db2348549d1742c300de8df07044de114d96a8664a70b8e89318772",
+      "Length": 17462
     },
     {
       "Path": "nuget/logo.jpg",
@@ -2777,8 +2831,8 @@
     },
     {
       "Path": "scripts/Generate-ContribUpstreamMap.ps1",
-      "Sha256": "1a2043b47642cb3289218a9bed551e13ec71d5c4f33931e6898d965df6849c67",
-      "Length": 108419
+      "Sha256": "f63745578d08d98f9f1404382a6f0a96acd069817d9b91190f9c43977aeb7868",
+      "Length": 109181
     },
     {
       "Path": "scripts/Generate-CoreUpstreamMap.ps1",
@@ -2956,6 +3010,11 @@
       "Length": 362
     },
     {
+      "Path": "scripts/Generate-TextUpstreamMap.ps1",
+      "Sha256": "6cb0efad804da963e7aa789ae9e4aa4ee0abf673a1e139198d2491076b9e4652",
+      "Length": 987
+    },
+    {
       "Path": "scripts/Generate-TrackingUpstreamMap.ps1",
       "Sha256": "c80010519cb97102d32a3e3065da0deff3e2f4aeaeae1f27b1daf27369ee52c2",
       "Length": 3106
@@ -3002,8 +3061,8 @@
     },
     {
       "Path": "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
-      "Sha256": "a60cb26c3c73c78efc57d21315a281d0c3b68293ba4c9cef731c8bd04a089c65",
-      "Length": 5378
+      "Sha256": "b83e2bb3cc3f348e7386b4f8f90dcc0f7e268852f882a908d491838e8a90a02b",
+      "Length": 5401
     },
     {
       "Path": "scripts/Invoke-LifecycleRefreshContainerProducer.ps1",
@@ -3082,8 +3141,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "41a84b073b204ff64bb934e4b9eb748efd46d3174ac4c9108f15a873b2ab9465",
-      "Length": 118400
+      "Sha256": "e39e5dabf00935e0a1e6063b0afad72e9e35c04065a53c2c83bb24d4a0edf9c0",
+      "Length": 121183
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -3097,8 +3156,8 @@
     },
     {
       "Path": "scripts/New-UpstreamMapCatalog.ps1",
-      "Sha256": "0dcbf6702df249cd4fbda854ae46ed3273669f8c5c393785677c526f74e4e5ac",
-      "Length": 10622
+      "Sha256": "8df80279a8eea98a4d9e46591a6ac1e86b828dc4b7ae0b1653dc6e67e41044bf",
+      "Length": 10706
     },
     {
       "Path": "scripts/Test-AlphaMatUpstreamMap.ps1",
@@ -3482,8 +3541,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "c7028040f1804028fcc8bbe32c09e6d9c867a8d30cb20b4c790d8046329a97e1",
-      "Length": 105234
+      "Sha256": "feea042a5eac3b399090d30af6843df3db6ae229ae8f31110d646cb5bc8ce13a",
+      "Length": 107110
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -3566,6 +3625,11 @@
       "Length": 4729
     },
     {
+      "Path": "scripts/Test-TextUpstreamMap.ps1",
+      "Sha256": "6a3e2fff420c3d4e5fbe805c2072f31d8e8afbba0a72b8395977781701827322",
+      "Length": 2890
+    },
+    {
       "Path": "scripts/Test-TrackingUpstreamMap.ps1",
       "Sha256": "2e5b8d58c464295f815c41d0c7fb8a58e6b4541ca463a49d7bc6bbb98a2bb293",
       "Length": 2283
@@ -3592,8 +3656,8 @@
     },
     {
       "Path": "scripts/Test-UpstreamMapCatalog.ps1",
-      "Sha256": "0a9081168cf9140b8f860238d85e382f4fb1dd5b49a298a7d9af03c6c9490e5e",
-      "Length": 15067
+      "Sha256": "432804da71351047bd4f714ef5ac6ca941680091f1cbfbf52e6b5d62a3a3caad",
+      "Length": 15074
     },
     {
       "Path": "scripts/Test-V501ChangeLedger.ps1",
@@ -4821,6 +4885,21 @@
       "Length": 239
     },
     {
+      "Path": "tools/TextUpstreamMap/Program.cs",
+      "Sha256": "ca2ff1d1df027d9e720284026eeff2d33143469c1d8bb56ddb19c873f6cdc048",
+      "Length": 98
+    },
+    {
+      "Path": "tools/TextUpstreamMap/TextUpstreamMap.csproj",
+      "Sha256": "727d0721f11212e08035cc59275b0226c0092f3ea92492d621c3d25879ef974f",
+      "Length": 273
+    },
+    {
+      "Path": "tools/TextUpstreamMap/extract_text.py",
+      "Sha256": "aa2b8da0d8b3db2ea1a014f8b2d21b3922ca23ca0d034660d9e0289499c2f0d3",
+      "Length": 227
+    },
+    {
       "Path": "tools/TrackingUpstreamMap/Program.cs",
       "Sha256": "8e95ba16f0814eb0be774cb1832260858d36941eb8acc4fce09342208bb2d7c4",
       "Length": 38986
@@ -4887,8 +4966,8 @@
     },
     {
       "Path": "tools/XImgProcUpstreamMap/extract_ximgproc.py",
-      "Sha256": "c194b5a1a23f66591cbbf0b52730c273eebd6ceb44c3667b337d5ccd448222e6",
-      "Length": 6073
+      "Sha256": "95ad1680420d7320f7d1924bafc15483fbb536a15a8498d0427e6453036d4050",
+      "Length": 6097
     },
     {
       "Path": "tools/XObjDetectUpstreamMap/Program.cs",

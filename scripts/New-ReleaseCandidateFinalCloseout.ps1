@@ -137,6 +137,8 @@ function Get-Record {
     $dpmSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/dpm-upstream-summary.json") -Raw | ConvertFrom-Json
     $hdfRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/hdf-upstream-raw.json") -Raw | ConvertFrom-Json
     $hdfSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/hdf-upstream-summary.json") -Raw | ConvertFrom-Json
+    $textRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/text-upstream-raw.json") -Raw | ConvertFrom-Json
+    $textSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/text-upstream-summary.json") -Raw | ConvertFrom-Json
     $featuresSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/features-upstream-summary.json") -Raw | ConvertFrom-Json
     $highGuiSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/highgui-upstream-summary.json") -Raw | ConvertFrom-Json
     $objDetectSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/objdetect-upstream-summary.json") -Raw | ConvertFrom-Json
@@ -210,6 +212,11 @@ function Get-Record {
         "compatibility/hdf-upstream-map.txt",
         "compatibility/hdf-upstream-raw.json",
         "compatibility/hdf-upstream-summary.json",
+        "compatibility/text-implemented-families.json",
+        "compatibility/text-upstream-classifications.json",
+        "compatibility/text-upstream-map.txt",
+        "compatibility/text-upstream-raw.json",
+        "compatibility/text-upstream-summary.json",
         "compatibility/features-implemented-families.json",
         "compatibility/features-source-reviewed-extensions.json",
         "compatibility/features-upstream-classifications.json",
@@ -405,6 +412,7 @@ function Get-Record {
         "docs/articles/signal-upstream-parity-guide.md",
         "docs/articles/dpm-upstream-parity-guide.md",
         "docs/articles/hdf-upstream-parity-guide.md",
+        "docs/articles/text-upstream-parity-guide.md",
         "docs/articles/xphoto-upstream-parity-guide.md",
         "docs/articles/ximgproc-upstream-parity-guide.md",
         "docs/articles/optflow-bgsegm-upstream-parity-guide.md",
@@ -557,6 +565,7 @@ function Get-Record {
         "scripts/Generate-SignalUpstreamMap.ps1",
         "scripts/Generate-DpmUpstreamMap.ps1",
         "scripts/Generate-HdfUpstreamMap.ps1",
+        "scripts/Generate-TextUpstreamMap.ps1",
         "scripts/Generate-FeaturesUpstreamMap.ps1",
         "scripts/Generate-HighGuiUpstreamMap.ps1",
         "scripts/Generate-ImgProcUpstreamMap.ps1",
@@ -615,6 +624,7 @@ function Get-Record {
         "scripts/Test-SignalUpstreamMap.ps1",
         "scripts/Test-DpmUpstreamMap.ps1",
         "scripts/Test-HdfUpstreamMap.ps1",
+        "scripts/Test-TextUpstreamMap.ps1",
         "scripts/Test-FeaturesUpstreamMap.ps1",
         "scripts/Test-HighGuiUpstreamMap.ps1",
         "scripts/Test-ImgProcUpstreamMap.ps1",
@@ -791,6 +801,9 @@ function Get-Record {
         "tools/HdfUpstreamMap/HdfUpstreamMap.csproj",
         "tools/HdfUpstreamMap/Program.cs",
         "tools/HdfUpstreamMap/extract_hdf.py",
+        "tools/TextUpstreamMap/TextUpstreamMap.csproj",
+        "tools/TextUpstreamMap/Program.cs",
+        "tools/TextUpstreamMap/extract_text.py",
         "tools/FeaturesUpstreamMap/FeaturesUpstreamMap.csproj",
         "tools/FeaturesUpstreamMap/Program.cs",
         "tools/FeaturesUpstreamMap/extract_features.py",
@@ -1324,6 +1337,30 @@ function Get-Record {
                  NativeEntrypointAdditionCount = [int]$hdfSummary.nativeEvidenceCount
                  ExternalDataDependencyCount = [int]$hdfSummary.externalDataDependencyCount
                  RepositoryWideParityClaimed = [bool]$hdfSummary.repositoryWideUpstreamParityClaimed
+             }
+             TextUpstreamMap = [ordered]@{
+                 Path = "compatibility/text-upstream-map.txt"
+                 SummaryPath = "compatibility/text-upstream-summary.json"
+                 ClassificationPath = "compatibility/text-upstream-classifications.json"
+                 FamilyInventoryPath = "compatibility/text-implemented-families.json"
+                 RawExtractionPath = "compatibility/text-upstream-raw.json"
+                 Sha256 = $textSummary.mappingSha256
+                 RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/text-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                 DeclarationCount = [int]$textSummary.declarationCount
+                 CallableCount = [int]$textSummary.callableCount
+                 ImplementedCount = [int]$textSummary.classificationCounts.implemented
+                 MissingCount = [int]$textSummary.classificationCounts.missing
+                 IntentionallyOmittedCount = [int]$textSummary.classificationCounts.'intentionally-omitted'
+                 UnsupportedCount = [int]$textSummary.classificationCounts.unsupported
+                 UpstreamConditionalCount = [int]$textSummary.classificationCounts.'upstream-conditional'
+                 SourceHeaderCount = @($textRaw.sourceHeaders).Count
+                 SelectedFamilyCount = [int]$textSummary.selectedFamilyCount
+                 SelectedDeclarationCount = [int]$textSummary.selectedDeclarationCount
+                 ManagedPublicTypeAdditionCount = [int]$textSummary.managedPublicTypeAdditionCount
+                 ManagedPublicMemberAdditionCount = [int]$textSummary.managedPublicMemberAdditionCount
+                 NativeEntrypointAdditionCount = [int]$textSummary.nativeEvidenceCount
+                 ExternalDataDependencyCount = [int]$textSummary.externalDataDependencyCount
+                 RepositoryWideParityClaimed = [bool]$textSummary.repositoryWideUpstreamParityClaimed
              }
             FeaturesUpstreamMap = [ordered]@{
                 Path = "compatibility/features-upstream-map.txt"

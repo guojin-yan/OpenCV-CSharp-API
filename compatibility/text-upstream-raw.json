@@ -1,0 +1,1565 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/TextUpstreamMap/extract_text.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text.hpp",
+  "headerSha256": "edc2fc32dfcd5f1359832e4366356fb00fb6b103a7c295d89d9334de909a6f3b",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/erfilter.hpp",
+      "sha256": "9d6adc90b2db4ef309c42394c80faf28bf53379145c1ff21751a49f5c5644924",
+      "startOrdinal": 0,
+      "declarationCount": 14
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "sha256": "4791a6ab4e3a81f1174f88742bf8c297b8637d5df21ea5c7b2c5cc4c99d47678",
+      "startOrdinal": 14,
+      "declarationCount": 27
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/swt_text_detection.hpp",
+      "sha256": "d9d77cf03052a864bd536510c91a832ce0dd35990e5ccfd909a37f2d5d079887",
+      "startOrdinal": 41,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/textDetector.hpp",
+      "sha256": "46c22a28d1d283214da48bf52c508f20af4a4c4cf097619d8551fe5a8cd46eb5",
+      "startOrdinal": 42,
+      "declarationCount": 5
+    }
+  ],
+  "declarationCount": 47,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/erfilter.hpp",
+      "kind": "class",
+      "name": "cv.text.ERFilter",
+      "identity": "class cv.text.ERFilter",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Base class for 1st and 2nd stages of Neumann and Matas scene text detection algorithm @cite Neumann12. :\n\nExtracts the component tree (if needed) and filter the extremal regions (ER's) by using a given classifier."
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/erfilter.hpp",
+      "kind": "class",
+      "name": "cv.text.ERFilter.Callback",
+      "identity": "class cv.text.ERFilter.Callback",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Callback with the classifier is made a class.\n\n    By doing it we hide SVM, Boost etc. Developers can provide their own classifiers to the\n    ERFilter algorithm."
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/erfilter.hpp",
+      "kind": "callable",
+      "name": "cv.text.createERFilterNM1",
+      "identity": "cv.text.createERFilterNM1(Ptr_ERFilter_Callback cb[/C,/Ref];int thresholdDelta=1;float minArea=(float)0.00025;float maxArea=(float)0.13;float minProbability=(float)0.4;bool nonMaxSuppression=true;float minProbabilityDiff=(float)0.1)->Ptr<ERFilter>",
+      "returnType": "Ptr<ERFilter>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr_ERFilter_Callback",
+          "name": "cb",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "thresholdDelta",
+          "default": "1",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "minArea",
+          "default": "(float)0.00025",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "maxArea",
+          "default": "(float)0.13",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "minProbability",
+          "default": "(float)0.4",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "nonMaxSuppression",
+          "default": "true",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "minProbabilityDiff",
+          "default": "(float)0.1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Create an Extremal Region Filter for the 1st stage classifier of N&M algorithm @cite Neumann12.\n\n@param  cb :   Callback with the classifier. Default classifier can be implicitly load with function\nloadClassifierNM1, e.g. from file in samples/cpp/trained_classifierNM1.xml\n@param  thresholdDelta :   Threshold step in subsequent thresholds when extracting the component tree\n@param  minArea :   The minimum area (% of image size) allowed for retreived ER's\n@param  maxArea :   The maximum area (% of image size) allowed for retreived ER's\n@param  minProbability :   The minimum probability P(er|character) allowed for retreived ER's\n@param  nonMaxSuppression :   Whenever non-maximum suppression is done over the branch probabilities\n@param  minProbabilityDiff :   The minimum probability difference between local maxima and local minima ERs\n\nThe component tree of the image is extracted by a threshold increased step by step from 0 to 255,\nincrementally computable descriptors (aspect_ratio, compactness, number of holes, and number of\nhorizontal crossings) are computed for each ER and used as features for a classifier which estimates\nthe class-conditional probability P(er|character). The value of P(er|character) is tracked using the\ninclusion relation of ER across all thresholds and only the ERs which correspond to local maximum of\nthe probability P(er|character) are selected (if the local maximum of the probability is above a\nglobal limit pmin and the difference between local maximum and local minimum is greater than\nminProbabilityDiff)."
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/erfilter.hpp",
+      "kind": "callable",
+      "name": "cv.text.createERFilterNM2",
+      "identity": "cv.text.createERFilterNM2(Ptr_ERFilter_Callback cb[/C,/Ref];float minProbability=(float)0.3)->Ptr<ERFilter>",
+      "returnType": "Ptr<ERFilter>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr_ERFilter_Callback",
+          "name": "cb",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "minProbability",
+          "default": "(float)0.3",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Create an Extremal Region Filter for the 2nd stage classifier of N&M algorithm @cite Neumann12.\n\n@param  cb :   Callback with the classifier. Default classifier can be implicitly load with function\nloadClassifierNM2, e.g. from file in samples/cpp/trained_classifierNM2.xml\n@param  minProbability :   The minimum probability P(er|character) allowed for retreived ER's\n\nIn the second stage, the ERs that passed the first stage are classified into character and\nnon-character classes using more informative but also more computationally expensive features. The\nclassifier uses all the features calculated in the first stage and the following additional\nfeatures: hole area ratio, convex hull ratio, and number of outer inflexion points."
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/erfilter.hpp",
+      "kind": "callable",
+      "name": "cv.text.createERFilterNM1",
+      "identity": "cv.text.createERFilterNM1(String filename[/C,/Ref,/PATH];int thresholdDelta=1;float minArea=(float)0.00025;float maxArea=(float)0.13;float minProbability=(float)0.4;bool nonMaxSuppression=true;float minProbabilityDiff=(float)0.1)->Ptr<ERFilter>",
+      "returnType": "Ptr<ERFilter>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "thresholdDelta",
+          "default": "1",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "minArea",
+          "default": "(float)0.00025",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "maxArea",
+          "default": "(float)0.13",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "minProbability",
+          "default": "(float)0.4",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "nonMaxSuppression",
+          "default": "true",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "minProbabilityDiff",
+          "default": "(float)0.1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Reads an Extremal Region Filter for the 1st stage classifier of N&M algorithm\n    from the provided path e.g. /path/to/cpp/trained_classifierNM1.xml\n\n@overload"
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/erfilter.hpp",
+      "kind": "callable",
+      "name": "cv.text.createERFilterNM2",
+      "identity": "cv.text.createERFilterNM2(String filename[/C,/Ref,/PATH];float minProbability=(float)0.3)->Ptr<ERFilter>",
+      "returnType": "Ptr<ERFilter>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "minProbability",
+          "default": "(float)0.3",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Reads an Extremal Region Filter for the 2nd stage classifier of N&M algorithm\n    from the provided path e.g. /path/to/cpp/trained_classifierNM2.xml\n\n@overload"
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/erfilter.hpp",
+      "kind": "callable",
+      "name": "cv.text.loadClassifierNM1",
+      "identity": "cv.text.loadClassifierNM1(String filename[/C,/Ref,/PATH])->Ptr<ERFilter::Callback>",
+      "returnType": "Ptr<ERFilter::Callback>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Allow to implicitly load the default classifier when creating an ERFilter object.\n\n@param filename The XML or YAML file with the classifier model (e.g. trained_classifierNM1.xml)\n\nreturns a pointer to ERFilter::Callback."
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/erfilter.hpp",
+      "kind": "callable",
+      "name": "cv.text.loadClassifierNM2",
+      "identity": "cv.text.loadClassifierNM2(String filename[/C,/Ref,/PATH])->Ptr<ERFilter::Callback>",
+      "returnType": "Ptr<ERFilter::Callback>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Allow to implicitly load the default classifier when creating an ERFilter object.\n\n@param filename The XML or YAML file with the classifier model (e.g. trained_classifierNM2.xml)\n\nreturns a pointer to ERFilter::Callback."
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/erfilter.hpp",
+      "kind": "enum",
+      "name": "cv.text.<unnamed>",
+      "identity": "enum cv.text.<unnamed>[const cv.text.ERFILTER_NM_RGBLGrad=0;const cv.text.ERFILTER_NM_IHSGrad=1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.text.ERFILTER_NM_RGBLGrad",
+          "value": "0"
+        },
+        {
+          "name": "const cv.text.ERFILTER_NM_IHSGrad",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/erfilter.hpp",
+      "kind": "callable",
+      "name": "cv.text.computeNMChannels",
+      "identity": "cv.text.computeNMChannels(Mat _src;vector_Mat _channels[/O,/O];int _mode=ERFILTER_NM_RGBLGrad)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "_src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Mat",
+          "name": "_channels",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "_mode",
+          "default": "ERFILTER_NM_RGBLGrad",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Compute the different channels to be processed independently in the N&M algorithm @cite Neumann12.\n\n@param _src Source image. Must be RGB CV_8UC3.\n\n@param _channels Output vector\\<Mat\\> where computed channels are stored.\n\n@param _mode Mode of operation. Currently the only available options are:\n**ERFILTER_NM_RGBLGrad** (used by default) and **ERFILTER_NM_IHSGrad**.\n\nIn N&M algorithm, the combination of intensity (I), hue (H), saturation (S), and gradient magnitude\nchannels (Grad) are used in order to obtain high localization recall. This implementation also\nprovides an alternative combination of red (R), green (G), blue (B), lightness (L), and gradient\nmagnitude (Grad)."
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/erfilter.hpp",
+      "kind": "enum",
+      "name": "cv.text.erGrouping_Modes",
+      "identity": "enum cv.text.erGrouping_Modes[const cv.text.ERGROUPING_ORIENTATION_HORIZ=0;const cv.text.ERGROUPING_ORIENTATION_ANY=1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.text.ERGROUPING_ORIENTATION_HORIZ",
+          "value": "0"
+        },
+        {
+          "name": "const cv.text.ERGROUPING_ORIENTATION_ANY",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/erfilter.hpp",
+      "kind": "callable",
+      "name": "cv.text.erGrouping",
+      "identity": "cv.text.erGrouping(Mat image;Mat channel;vector_vector_Point regions;vector_Rect groups_rects[/O,/Ref];int method=ERGROUPING_ORIENTATION_HORIZ;String filename=String()[/C,/Ref,/PATH];float minProbablity=(float)0.5)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "channel",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_vector_Point",
+          "name": "regions",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Rect",
+          "name": "groups_rects",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "method",
+          "default": "ERGROUPING_ORIENTATION_HORIZ",
+          "modifiers": []
+        },
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "String()",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "minProbablity",
+          "default": "(float)0.5",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Find groups of Extremal Regions that are organized as text blocks.\n\n@param img Original RGB or Greyscale image from wich the regions were extracted.\n\n@param channels Vector of single channel images CV_8UC1 from wich the regions were extracted.\n\n@param regions Vector of ER's retrieved from the ERFilter algorithm from each channel.\n\n@param groups The output of the algorithm is stored in this parameter as set of lists of indexes to\nprovided regions.\n\n@param groups_rects The output of the algorithm are stored in this parameter as list of rectangles.\n\n@param method Grouping method (see text::erGrouping_Modes). Can be one of ERGROUPING_ORIENTATION_HORIZ,\nERGROUPING_ORIENTATION_ANY.\n\n@param filename The XML or YAML file with the classifier model (e.g.\nsamples/trained_classifier_erGrouping.xml). Only to use when grouping method is\nERGROUPING_ORIENTATION_ANY.\n\n@param minProbablity The minimum probability for accepting a group. Only to use when grouping\nmethod is ERGROUPING_ORIENTATION_ANY."
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/erfilter.hpp",
+      "kind": "callable",
+      "name": "cv.text.detectRegions",
+      "identity": "cv.text.detectRegions(Mat image;Ptr_ERFilter er_filter1[/C,/Ref];Ptr_ERFilter er_filter2[/C,/Ref];vector_vector_Point regions[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Ptr_ERFilter",
+          "name": "er_filter1",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Ptr_ERFilter",
+          "name": "er_filter2",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_vector_Point",
+          "name": "regions",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Converts MSER contours (vector\\<Point\\>) to ERStat regions.\n\n@param image Source image CV_8UC1 from which the MSERs where extracted.\n\n@param contours Input vector with all the contours (vector\\<Point\\>).\n\n@param regions Output where the ERStat regions are stored.\n\nIt takes as input the contours provided by the OpenCV MSER feature detector and returns as output\ntwo vectors of ERStats. This is because MSER() output contains both MSER+ and MSER- regions in a\nsingle vector\\<Point\\>, the function separates them in two different vectors (this is as if the\nERStats where extracted from two different channels).\n\nAn example of MSERsToERStats in use can be found in the text detection webcam_demo:\n<https://github.com/opencv/opencv_contrib/blob/master/modules/text/samples/webcam_demo.cpp>"
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/erfilter.hpp",
+      "kind": "callable",
+      "name": "cv.text.detectRegions",
+      "identity": "cv.text.detectRegions(Mat image;Ptr_ERFilter er_filter1[/C,/Ref];Ptr_ERFilter er_filter2[/C,/Ref];vector_Rect groups_rects[/O,/Ref];int method=ERGROUPING_ORIENTATION_HORIZ;String filename=String()[/C,/Ref,/PATH];float minProbability=(float)0.5)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Ptr_ERFilter",
+          "name": "er_filter1",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Ptr_ERFilter",
+          "name": "er_filter2",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Rect",
+          "name": "groups_rects",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "method",
+          "default": "ERGROUPING_ORIENTATION_HORIZ",
+          "modifiers": []
+        },
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "String()",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "minProbability",
+          "default": "(float)0.5",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Extracts text regions from image.\n\n@param image Source image where text blocks needs to be extracted from.  Should be CV_8UC3 (color).\n@param er_filter1 Extremal Region Filter for the 1st stage classifier of N&M algorithm @cite Neumann12\n@param er_filter2 Extremal Region Filter for the 2nd stage classifier of N&M algorithm @cite Neumann12\n@param groups_rects Output list of rectangle blocks with text\n@param method Grouping method (see text::erGrouping_Modes). Can be one of ERGROUPING_ORIENTATION_HORIZ, ERGROUPING_ORIENTATION_ANY.\n@param filename The XML or YAML file with the classifier model (e.g. samples/trained_classifier_erGrouping.xml). Only to use when grouping method is ERGROUPING_ORIENTATION_ANY.\n@param minProbability The minimum probability for accepting a group. Only to use when grouping method is ERGROUPING_ORIENTATION_ANY."
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "enum",
+      "name": "cv.text.<unnamed>",
+      "identity": "enum cv.text.<unnamed>[const cv.text.OCR_LEVEL_WORD=0;const cv.text.OCR_LEVEL_TEXTLINE=1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.text.OCR_LEVEL_WORD",
+          "value": "0"
+        },
+        {
+          "name": "const cv.text.OCR_LEVEL_TEXTLINE",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "enum",
+      "name": "cv.text.page_seg_mode",
+      "identity": "enum cv.text.page_seg_mode[const cv.text.PSM_OSD_ONLY=0;const cv.text.PSM_AUTO_OSD=1;const cv.text.PSM_AUTO_ONLY=2;const cv.text.PSM_AUTO=3;const cv.text.PSM_SINGLE_COLUMN=4;const cv.text.PSM_SINGLE_BLOCK_VERT_TEXT=5;const cv.text.PSM_SINGLE_BLOCK=6;const cv.text.PSM_SINGLE_LINE=7;const cv.text.PSM_SINGLE_WORD=8;const cv.text.PSM_CIRCLE_WORD=9;const cv.text.PSM_SINGLE_CHAR=10]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.text.PSM_OSD_ONLY",
+          "value": "0"
+        },
+        {
+          "name": "const cv.text.PSM_AUTO_OSD",
+          "value": "1"
+        },
+        {
+          "name": "const cv.text.PSM_AUTO_ONLY",
+          "value": "2"
+        },
+        {
+          "name": "const cv.text.PSM_AUTO",
+          "value": "3"
+        },
+        {
+          "name": "const cv.text.PSM_SINGLE_COLUMN",
+          "value": "4"
+        },
+        {
+          "name": "const cv.text.PSM_SINGLE_BLOCK_VERT_TEXT",
+          "value": "5"
+        },
+        {
+          "name": "const cv.text.PSM_SINGLE_BLOCK",
+          "value": "6"
+        },
+        {
+          "name": "const cv.text.PSM_SINGLE_LINE",
+          "value": "7"
+        },
+        {
+          "name": "const cv.text.PSM_SINGLE_WORD",
+          "value": "8"
+        },
+        {
+          "name": "const cv.text.PSM_CIRCLE_WORD",
+          "value": "9"
+        },
+        {
+          "name": "const cv.text.PSM_SINGLE_CHAR",
+          "value": "10"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "enum",
+      "name": "cv.text.ocr_engine_mode",
+      "identity": "enum cv.text.ocr_engine_mode[const cv.text.OEM_TESSERACT_ONLY=0;const cv.text.OEM_CUBE_ONLY=1;const cv.text.OEM_TESSERACT_CUBE_COMBINED=2;const cv.text.OEM_DEFAULT=3]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.text.OEM_TESSERACT_ONLY",
+          "value": "0"
+        },
+        {
+          "name": "const cv.text.OEM_CUBE_ONLY",
+          "value": "1"
+        },
+        {
+          "name": "const cv.text.OEM_TESSERACT_CUBE_COMBINED",
+          "value": "2"
+        },
+        {
+          "name": "const cv.text.OEM_DEFAULT",
+          "value": "3"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "class",
+      "name": "cv.text.BaseOCR",
+      "identity": "class cv.text.BaseOCR",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "class",
+      "name": "cv.text.OCRTesseract",
+      "identity": "class cv.text.OCRTesseract",
+      "returnType": ": cv::text::BaseOCR",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::text::BaseOCR",
+      "documentation": "@brief OCRTesseract class provides an interface with the tesseract-ocr API (v3.02.02) in C++.\n\nNotice that it is compiled only when tesseract-ocr is correctly installed.\n\n@note\n   -   (C++) An example of OCRTesseract recognition combined with scene text detection can be found\n        at the end_to_end_recognition demo:\n        <https://github.com/opencv/opencv_contrib/blob/master/modules/text/samples/end_to_end_recognition.cpp>\n    -   (C++) Another example of OCRTesseract recognition combined with scene text detection can be\n        found at the webcam_demo:\n        <https://github.com/opencv/opencv_contrib/blob/master/modules/text/samples/webcam_demo.cpp>"
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "callable",
+      "name": "cv.text.OCRTesseract.run",
+      "identity": "cv.text.OCRTesseract.run(Mat image;int min_confidence;int component_level=0)->String",
+      "returnType": "String",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "min_confidence",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "component_level",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Recognize text using the tesseract-ocr API.\n\n    Takes image on input and returns recognized text in the output_text parameter. Optionally\n    provides also the Rects for individual text elements found (e.g. words), and the list of those\n    text elements with their confidence values.\n\n    @param image Input image CV_8UC1 or CV_8UC3\n    @param output_text Output text of the tesseract-ocr.\n    @param component_rects If provided the method will output a list of Rects for the individual\n    text elements found (e.g. words or text lines).\n    @param component_texts If provided the method will output a list of text strings for the\n    recognition of individual text elements found (e.g. words or text lines).\n    @param component_confidences If provided the method will output a list of confidence values\n    for the recognition of individual text elements found (e.g. words or text lines).\n    @param component_level OCR_LEVEL_WORD (by default), or OCR_LEVEL_TEXTLINE."
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "callable",
+      "name": "cv.text.OCRTesseract.run",
+      "identity": "cv.text.OCRTesseract.run(Mat image;Mat mask;int min_confidence;int component_level=0)->String",
+      "returnType": "String",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "min_confidence",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "component_level",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "callable",
+      "name": "cv.text.OCRTesseract.setWhiteList",
+      "identity": "cv.text.OCRTesseract.setWhiteList(String char_whitelist[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "char_whitelist",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "callable",
+      "name": "cv.text.OCRTesseract.create",
+      "identity": "cv.text.OCRTesseract.create(c_string datapath=0[/C];c_string language=0[/C];c_string char_whitelist=0[/C];int oem=OEM_DEFAULT;int psmode=PSM_AUTO)->Ptr<OCRTesseract>",
+      "returnType": "Ptr<OCRTesseract>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "c_string",
+          "name": "datapath",
+          "default": "0",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "c_string",
+          "name": "language",
+          "default": "0",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "c_string",
+          "name": "char_whitelist",
+          "default": "0",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "oem",
+          "default": "OEM_DEFAULT",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "psmode",
+          "default": "PSM_AUTO",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates an instance of the OCRTesseract class. Initializes Tesseract.\n\n    @param datapath the name of the parent directory of tessdata ended with \"/\", or NULL to use the\n    system's default directory.\n    @param language an ISO 639-3 code or NULL will default to \"eng\".\n    @param char_whitelist specifies the list of characters used for recognition. NULL defaults to \"\"\n    (All characters will be used for recognition).\n    @param oem tesseract-ocr offers different OCR Engine Modes (OEM), by default\n    tesseract::OEM_DEFAULT is used. See the tesseract-ocr API documentation for other possible\n    values.\n    @param psmode tesseract-ocr offers different Page Segmentation Modes (PSM) tesseract::PSM_AUTO\n    (fully automatic layout analysis) is used. See the tesseract-ocr API documentation for other\n    possible values.\n\n    @note The char_whitelist default is changed after OpenCV 4.7.0/3.19.0 from \"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\" to \"\"."
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "enum",
+      "name": "cv.text.decoder_mode",
+      "identity": "enum cv.text.decoder_mode[const cv.text.OCR_DECODER_VITERBI=0]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.text.OCR_DECODER_VITERBI",
+          "value": "0"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "enum",
+      "name": "cv.text.classifier_type",
+      "identity": "enum cv.text.classifier_type[const cv.text.OCR_KNN_CLASSIFIER=0;const cv.text.OCR_CNN_CLASSIFIER=1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.text.OCR_KNN_CLASSIFIER",
+          "value": "0"
+        },
+        {
+          "name": "const cv.text.OCR_CNN_CLASSIFIER",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "class",
+      "name": "cv.text.OCRHMMDecoder",
+      "identity": "class cv.text.OCRHMMDecoder",
+      "returnType": ": cv::text::BaseOCR",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::text::BaseOCR",
+      "documentation": "@brief OCRHMMDecoder class provides an interface for OCR using Hidden Markov Models.\n\n@note\n   -   (C++) An example on using OCRHMMDecoder recognition combined with scene text detection can\n        be found at the webcam_demo sample:\n        <https://github.com/opencv/opencv_contrib/blob/master/modules/text/samples/webcam_demo.cpp>"
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "class",
+      "name": "cv.text.OCRHMMDecoder.ClassifierCallback",
+      "identity": "class cv.text.OCRHMMDecoder.ClassifierCallback",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Callback with the character classifier is made a class.\n\n    This way it hides the feature extractor and the classifier itself, so developers can write\n    their own OCR code.\n\n    The default character classifier and feature extractor can be loaded using the utility function\n    loadOCRHMMClassifierNM and KNN model provided in\n    <https://github.com/opencv/opencv_contrib/blob/master/modules/text/samples/OCRHMM_knn_model_data.xml.gz>."
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "callable",
+      "name": "cv.text.OCRHMMDecoder.run",
+      "identity": "cv.text.OCRHMMDecoder.run(Mat image;int min_confidence;int component_level=0)->String",
+      "returnType": "String",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "min_confidence",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "component_level",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Recognize text using HMM.\n\n    Takes an image and a mask (where each connected component corresponds to a segmented character)\n    on input and returns recognized text in the output_text parameter. Optionally\n    provides also the Rects for individual text elements found (e.g. words), and the list of those\n    text elements with their confidence values.\n\n    @param image Input image CV_8UC1 or CV_8UC3 with a single text line (or word).\n    @param mask Input binary image CV_8UC1 same size as input image. Each connected component in mask corresponds to a segmented character in the input image.\n\n    @param output_text Output text. Most likely character sequence found by the HMM decoder.\n\n    @param component_rects If provided the method will output a list of Rects for the individual\n    text elements found (e.g. words).\n\n    @param component_texts If provided the method will output a list of text strings for the\n    recognition of individual text elements found (e.g. words).\n\n    @param component_confidences If provided the method will output a list of confidence values\n    for the recognition of individual text elements found (e.g. words).\n\n    @param component_level Only OCR_LEVEL_WORD is supported."
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "callable",
+      "name": "cv.text.OCRHMMDecoder.run",
+      "identity": "cv.text.OCRHMMDecoder.run(Mat image;Mat mask;int min_confidence;int component_level=0)->String",
+      "returnType": "String",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "min_confidence",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "component_level",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "callable",
+      "name": "cv.text.OCRHMMDecoder.create",
+      "identity": "cv.text.OCRHMMDecoder.create(Ptr_OCRHMMDecoder_ClassifierCallback classifier[/C];String vocabulary[/C,/Ref];Mat transition_probabilities_table;Mat emission_probabilities_table;int mode=OCR_DECODER_VITERBI)->Ptr<OCRHMMDecoder>",
+      "returnType": "Ptr<OCRHMMDecoder>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Ptr_OCRHMMDecoder_ClassifierCallback",
+          "name": "classifier",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "vocabulary",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "transition_probabilities_table",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "emission_probabilities_table",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "mode",
+          "default": "OCR_DECODER_VITERBI",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates an instance of the OCRHMMDecoder class. Initializes HMMDecoder.\n\n    @param classifier The character classifier with built in feature extractor.\n\n    @param vocabulary The language vocabulary (chars when ascii english text). vocabulary.size()\n    must be equal to the number of classes of the classifier.\n\n    @param transition_probabilities_table Table with transition probabilities between character\n    pairs. cols == rows == vocabulary.size().\n\n    @param emission_probabilities_table Table with observation emission probabilities. cols ==\n    rows == vocabulary.size().\n\n    @param mode HMM Decoding algorithm. Only OCR_DECODER_VITERBI is available for the moment\n    (<http://en.wikipedia.org/wiki/Viterbi_algorithm>)."
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "callable",
+      "name": "cv.text.OCRHMMDecoder.create",
+      "identity": "cv.text.OCRHMMDecoder.create(String filename[/C,/Ref,/PATH];String vocabulary[/C,/Ref];Mat transition_probabilities_table;Mat emission_probabilities_table;int mode=OCR_DECODER_VITERBI;int classifier=OCR_KNN_CLASSIFIER)->Ptr<OCRHMMDecoder>",
+      "returnType": "Ptr<OCRHMMDecoder>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "vocabulary",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "transition_probabilities_table",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "emission_probabilities_table",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "mode",
+          "default": "OCR_DECODER_VITERBI",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "classifier",
+          "default": "OCR_KNN_CLASSIFIER",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates an instance of the OCRHMMDecoder class. Loads and initializes HMMDecoder from the specified path\n\n     @overload"
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "callable",
+      "name": "cv.text.loadOCRHMMClassifierNM",
+      "identity": "cv.text.loadOCRHMMClassifierNM(String filename[/C,/Ref,/PATH])->Ptr<OCRHMMDecoder::ClassifierCallback>",
+      "returnType": "Ptr<OCRHMMDecoder::ClassifierCallback>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Allow to implicitly load the default character classifier when creating an OCRHMMDecoder object.\n\n@param filename The XML or YAML file with the classifier model (e.g. OCRHMM_knn_model_data.xml)\n\nThe KNN default classifier is based in the scene text recognition method proposed by Luk\u00e1s Neumann &\nJiri Matas in [Neumann11b]. Basically, the region (contour) in the input image is normalized to a\nfixed size, while retaining the centroid and aspect ratio, in order to extract a feature vector\nbased on gradient orientations along the chain-code of its perimeter. Then, the region is classified\nusing a KNN model trained with synthetic data of rendered characters with different standard font\ntypes.\n\n@deprecated loadOCRHMMClassifier instead"
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "callable",
+      "name": "cv.text.loadOCRHMMClassifierCNN",
+      "identity": "cv.text.loadOCRHMMClassifierCNN(String filename[/C,/Ref,/PATH])->Ptr<OCRHMMDecoder::ClassifierCallback>",
+      "returnType": "Ptr<OCRHMMDecoder::ClassifierCallback>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Allow to implicitly load the default character classifier when creating an OCRHMMDecoder object.\n\n@param filename The XML or YAML file with the classifier model (e.g. OCRBeamSearch_CNN_model_data.xml.gz)\n\nThe CNN default classifier is based in the scene text recognition method proposed by Adam Coates &\nAndrew NG in [Coates11a]. The character classifier consists in a Single Layer Convolutional Neural Network and\na linear classifier. It is applied to the input image in a sliding window fashion, providing a set of recognitions\nat each window location.\n\n@deprecated use loadOCRHMMClassifier instead"
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "callable",
+      "name": "cv.text.loadOCRHMMClassifier",
+      "identity": "cv.text.loadOCRHMMClassifier(String filename[/C,/Ref,/PATH];int classifier)->Ptr<OCRHMMDecoder::ClassifierCallback>",
+      "returnType": "Ptr<OCRHMMDecoder::ClassifierCallback>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "classifier",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Allow to implicitly load the default character classifier when creating an OCRHMMDecoder object.\n\n @param filename The XML or YAML file with the classifier model (e.g. OCRBeamSearch_CNN_model_data.xml.gz)\n\n @param classifier Can be one of classifier_type enum values."
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "callable",
+      "name": "cv.text.createOCRHMMTransitionsTable",
+      "identity": "cv.text.createOCRHMMTransitionsTable(String vocabulary[/C,/Ref];vector_String lexicon[/Ref])->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "vocabulary",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_String",
+          "name": "lexicon",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Utility function to create a tailored language model transitions table from a given list of words (lexicon).\n *\n * @param vocabulary The language vocabulary (chars when ASCII English text).\n *\n * @param lexicon The list of words that are expected to be found in a particular image.\n *\n * @param transition_probabilities_table Output table with transition probabilities between character pairs. cols == rows == vocabulary.size().\n *\n * The function calculate frequency statistics of character pairs from the given lexicon and fills the output transition_probabilities_table with them. The transition_probabilities_table can be used as input in the OCRHMMDecoder::create() and OCRBeamSearchDecoder::create() methods.\n * @note\n *    -   (C++) An alternative would be to load the default generic language transition table provided in the text module samples folder (created from ispell 42869 english words list) :\n *            <https://github.com/opencv/opencv_contrib/blob/master/modules/text/samples/OCRHMM_transitions_table.xml>\n*"
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "class",
+      "name": "cv.text.OCRBeamSearchDecoder",
+      "identity": "class cv.text.OCRBeamSearchDecoder",
+      "returnType": ": cv::text::BaseOCR",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::text::BaseOCR",
+      "documentation": "@brief OCRBeamSearchDecoder class provides an interface for OCR using Beam Search algorithm.\n\n@note\n   -   (C++) An example on using OCRBeamSearchDecoder recognition combined with scene text detection can\n        be found at the demo sample:\n        <https://github.com/opencv/opencv_contrib/blob/master/modules/text/samples/word_recognition.cpp>"
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "class",
+      "name": "cv.text.OCRBeamSearchDecoder.ClassifierCallback",
+      "identity": "class cv.text.OCRBeamSearchDecoder.ClassifierCallback",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Callback with the character classifier is made a class.\n\n    This way it hides the feature extractor and the classifier itself, so developers can write\n    their own OCR code.\n\n    The default character classifier and feature extractor can be loaded using the utility function\n    loadOCRBeamSearchClassifierCNN with all its parameters provided in\n    <https://github.com/opencv/opencv_contrib/blob/master/modules/text/samples/OCRBeamSearch_CNN_model_data.xml.gz>."
+    },
+    {
+      "ordinal": 37,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "callable",
+      "name": "cv.text.OCRBeamSearchDecoder.run",
+      "identity": "cv.text.OCRBeamSearchDecoder.run(Mat image;int min_confidence;int component_level=0)->String",
+      "returnType": "String",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "min_confidence",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "component_level",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Recognize text using Beam Search.\n\n    Takes image on input and returns recognized text in the output_text parameter. Optionally\n    provides also the Rects for individual text elements found (e.g. words), and the list of those\n    text elements with their confidence values.\n\n    @param image Input binary image CV_8UC1 with a single text line (or word).\n\n    @param output_text Output text. Most likely character sequence found by the HMM decoder.\n\n    @param component_rects If provided the method will output a list of Rects for the individual\n    text elements found (e.g. words).\n\n    @param component_texts If provided the method will output a list of text strings for the\n    recognition of individual text elements found (e.g. words).\n\n    @param component_confidences If provided the method will output a list of confidence values\n    for the recognition of individual text elements found (e.g. words).\n\n    @param component_level Only OCR_LEVEL_WORD is supported."
+    },
+    {
+      "ordinal": 38,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "callable",
+      "name": "cv.text.OCRBeamSearchDecoder.run",
+      "identity": "cv.text.OCRBeamSearchDecoder.run(Mat image;Mat mask;int min_confidence;int component_level=0)->String",
+      "returnType": "String",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "min_confidence",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "component_level",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 39,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "callable",
+      "name": "cv.text.OCRBeamSearchDecoder.create",
+      "identity": "cv.text.OCRBeamSearchDecoder.create(Ptr_OCRBeamSearchDecoder_ClassifierCallback classifier[/C];string vocabulary[/C,/Ref];Mat transition_probabilities_table;Mat emission_probabilities_table;text_decoder_mode mode=OCR_DECODER_VITERBI;int beam_size=500)->Ptr<OCRBeamSearchDecoder>",
+      "returnType": "Ptr<OCRBeamSearchDecoder>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Ptr_OCRBeamSearchDecoder_ClassifierCallback",
+          "name": "classifier",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "string",
+          "name": "vocabulary",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "transition_probabilities_table",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "emission_probabilities_table",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "text_decoder_mode",
+          "name": "mode",
+          "default": "OCR_DECODER_VITERBI",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "beam_size",
+          "default": "500",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates an instance of the OCRBeamSearchDecoder class. Initializes HMMDecoder.\n\n    @param classifier The character classifier with built in feature extractor.\n\n    @param vocabulary The language vocabulary (chars when ASCII English text). vocabulary.size()\n    must be equal to the number of classes of the classifier.\n\n    @param transition_probabilities_table Table with transition probabilities between character\n    pairs. cols == rows == vocabulary.size().\n\n    @param emission_probabilities_table Table with observation emission probabilities. cols ==\n    rows == vocabulary.size().\n\n    @param mode HMM Decoding algorithm. Only OCR_DECODER_VITERBI is available for the moment\n    (<http://en.wikipedia.org/wiki/Viterbi_algorithm>).\n\n    @param beam_size Size of the beam in Beam Search algorithm."
+    },
+    {
+      "ordinal": 40,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+      "kind": "callable",
+      "name": "cv.text.loadOCRBeamSearchClassifierCNN",
+      "identity": "cv.text.loadOCRBeamSearchClassifierCNN(String filename[/C,/Ref,/PATH])->Ptr<OCRBeamSearchDecoder::ClassifierCallback>",
+      "returnType": "Ptr<OCRBeamSearchDecoder::ClassifierCallback>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Allow to implicitly load the default character classifier when creating an OCRBeamSearchDecoder object.\n\n@param filename The XML or YAML file with the classifier model (e.g. OCRBeamSearch_CNN_model_data.xml.gz)\n\nThe CNN default classifier is based in the scene text recognition method proposed by Adam Coates &\nAndrew NG in [Coates11a]. The character classifier consists in a Single Layer Convolutional Neural Network and\na linear classifier. It is applied to the input image in a sliding window fashion, providing a set of recognitions\nat each window location."
+    },
+    {
+      "ordinal": 41,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/swt_text_detection.hpp",
+      "kind": "callable",
+      "name": "cv.text.detectTextSWT",
+      "identity": "cv.text.detectTextSWT(Mat input;vector_Rect result[/O,/Ref];bool dark_on_light;Mat draw=Mat()[/Ref,/O];Mat chainBBs=Mat()[/Ref,/O])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "input",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Rect",
+          "name": "result",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "dark_on_light",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "draw",
+          "default": "Mat()",
+          "modifiers": [
+            "/Ref",
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "chainBBs",
+          "default": "Mat()",
+          "modifiers": [
+            "/Ref",
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Applies the Stroke Width Transform operator followed by filtering of connected components of similar Stroke Widths to return letter candidates. It also chain them by proximity and size, saving the result in chainBBs.\n    @param input the input image with 3 channels.\n    @param result a vector of resulting bounding boxes where probability of finding text is high\n    @param dark_on_light a boolean value signifying whether the text is darker or lighter than the background, it is observed to reverse the gradient obtained from Scharr operator, and significantly affect the result.\n    @param draw an optional Mat of type CV_8UC3 which visualises the detected letters using bounding boxes.\n    @param chainBBs an optional parameter which chains the letter candidates according to heuristics in the paper and returns all possible regions where text is likely to occur."
+    },
+    {
+      "ordinal": 42,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/textDetector.hpp",
+      "kind": "class",
+      "name": "cv.text.TextDetector",
+      "identity": "class cv.text.TextDetector",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief An abstract class providing interface for text detection algorithms"
+    },
+    {
+      "ordinal": 43,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/textDetector.hpp",
+      "kind": "callable",
+      "name": "cv.text.TextDetector.detect",
+      "identity": "cv.text.TextDetector.detect(Mat inputImage;vector_Rect Bbox[/O,/Ref];vector_float confidence[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "inputImage",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Rect",
+          "name": "Bbox",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_float",
+          "name": "confidence",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Method that provides a quick and simple interface to detect text inside an image\n\n    @param inputImage an image to process\n    @param Bbox a vector of Rect that will store the detected word bounding box\n    @param confidence a vector of float that will be updated with the confidence the classifier has for the selected bounding box"
+    },
+    {
+      "ordinal": 44,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/textDetector.hpp",
+      "kind": "class",
+      "name": "cv.text.TextDetectorCNN",
+      "identity": "class cv.text.TextDetectorCNN",
+      "returnType": ": cv::text::TextDetector",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::text::TextDetector",
+      "documentation": "@brief TextDetectorCNN class provides the functionallity of text bounding box detection.\n This class is representing to find bounding boxes of text words given an input image.\n This class uses OpenCV dnn module to load pre-trained model described in @cite LiaoSBWL17.\n The original repository with the modified SSD Caffe version: https://github.com/MhLiao/TextBoxes.\n Model can be downloaded from [DropBox](https://www.dropbox.com/s/g8pjzv2de9gty8g/TextBoxes_icdar13.caffemodel?dl=0).\n Modified .prototxt file with the model description can be found in `opencv_contrib/modules/text/samples/textbox.prototxt`."
+    },
+    {
+      "ordinal": 45,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/textDetector.hpp",
+      "kind": "callable",
+      "name": "cv.text.TextDetectorCNN.detect",
+      "identity": "cv.text.TextDetectorCNN.detect(Mat inputImage;vector_Rect Bbox[/O,/Ref];vector_float confidence[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "inputImage",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Rect",
+          "name": "Bbox",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_float",
+          "name": "confidence",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload\n\n    @param inputImage an image expected to be a CV_U8C3 of any size\n    @param Bbox a vector of Rect that will store the detected word bounding box\n    @param confidence a vector of float that will be updated with the confidence the classifier has for the selected bounding box"
+    },
+    {
+      "ordinal": 46,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/textDetector.hpp",
+      "kind": "callable",
+      "name": "cv.text.TextDetectorCNN.create",
+      "identity": "cv.text.TextDetectorCNN.create(String modelArchFilename[/C,/Ref];String modelWeightsFilename[/C,/Ref])->Ptr<TextDetectorCNN>",
+      "returnType": "Ptr<TextDetectorCNN>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "modelArchFilename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "modelWeightsFilename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    }
+  ]
+}

@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 45,
+  "moduleCount": 46,
   "maps": [
     {
       "id": "calib3d",
@@ -378,6 +378,70 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "73c94abdcc189dca33b3b0e5eb191269ec5a34a90dd8b86c5d95a9edb626914a",
         "familyInventorySha256": "926fdddb0b60e7c477f2dfd56e890c21287b4a0b9667f171bee6eaff890ce76e",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "text",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/TextUpstreamMap",
+      "extractorScript": "tools/TextUpstreamMap/extract_text.py",
+      "generationScript": "scripts/Generate-TextUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-TextUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/text.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text.hpp",
+          "sha256": "edc2fc32dfcd5f1359832e4366356fb00fb6b103a7c295d89d9334de909a6f3b"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/erfilter.hpp",
+            "sha256": "9d6adc90b2db4ef309c42394c80faf28bf53379145c1ff21751a49f5c5644924",
+            "startOrdinal": 0,
+            "declarationCount": 14
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/ocr.hpp",
+            "sha256": "4791a6ab4e3a81f1174f88742bf8c297b8637d5df21ea5c7b2c5cc4c99d47678",
+            "startOrdinal": 14,
+            "declarationCount": 27
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/swt_text_detection.hpp",
+            "sha256": "d9d77cf03052a864bd536510c91a832ce0dd35990e5ccfd909a37f2d5d079887",
+            "startOrdinal": 41,
+            "declarationCount": 1
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/text/include/opencv2/text/textDetector.hpp",
+            "sha256": "46c22a28d1d283214da48bf52c508f20af4a4c4cf097619d8551fe5a8cd46eb5",
+            "startOrdinal": 42,
+            "declarationCount": 5
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/text-upstream-raw.json",
+        "classifications": "compatibility/text-upstream-classifications.json",
+        "mapping": "compatibility/text-upstream-map.txt",
+        "summary": "compatibility/text-upstream-summary.json",
+        "familyInventory": "compatibility/text-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 47,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "1b804578982bb04e1d5728850db13de25dfd5e4d8fe6155f6f4302a5211a2513",
+        "familyInventorySha256": "ad568736b9daefe27ad5a0b453af144424d8af88f177f7aa90a7b174e37bef6d",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false
