@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/SignalUpstreamMap/extract_signal.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/signal/include/opencv2/signal.hpp",
+  "headerSha256": "30a5e4986320a13b91b6711142cd4242bac94db4a135235a2b5ca2aef911292a",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/signal/include/opencv2/signal/signal_resample.hpp",
+      "sha256": "b94eee8cd60eb57c1c07aaea370193f5230726d2651236884e57bbae8ce8a5ec",
+      "startOrdinal": 0,
+      "declarationCount": 1
+    }
+  ],
+  "declarationCount": 1,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/signal/include/opencv2/signal/signal_resample.hpp",
+      "kind": "callable",
+      "name": "cv.signal.resampleSignal",
+      "identity": "cv.signal.resampleSignal(Mat inputSignal;Mat outSignal[/O];int inFreq[/C];int outFreq[/C])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "inputSignal",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "outSignal",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "inFreq",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "outFreq",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Signal resampling\n *\n * @param[in]  inputSignal              Array with input signal.\n * @param[out] outSignal                Array with output signal\n * @param[in]  inFreq                   Input signal frequency.\n * @param[in]  outFreq                  Output signal frequency.\n * Signal resampling implemented a cubic interpolation function and a filtering function based on Kaiser window and Bessel function, used to construct a FIR filter.\n * Result is similar to `scipy.signal.resample`.\n\nDetail: https://en.wikipedia.org/wiki/Sample-rate_conversion"
+    }
+  ]
+}

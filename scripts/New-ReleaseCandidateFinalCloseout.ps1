@@ -131,6 +131,8 @@ function Get-Record {
     $wechatQRCodeSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/wechat_qrcode-upstream-summary.json") -Raw | ConvertFrom-Json
     $cnn3DObjRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/cnn_3dobj-upstream-raw.json") -Raw | ConvertFrom-Json
     $cnn3DObjSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/cnn_3dobj-upstream-summary.json") -Raw | ConvertFrom-Json
+    $signalRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/signal-upstream-raw.json") -Raw | ConvertFrom-Json
+    $signalSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/signal-upstream-summary.json") -Raw | ConvertFrom-Json
     $featuresSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/features-upstream-summary.json") -Raw | ConvertFrom-Json
     $highGuiSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/highgui-upstream-summary.json") -Raw | ConvertFrom-Json
     $objDetectSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/objdetect-upstream-summary.json") -Raw | ConvertFrom-Json
@@ -189,6 +191,11 @@ function Get-Record {
         "compatibility/cnn_3dobj-upstream-map.txt",
         "compatibility/cnn_3dobj-upstream-raw.json",
         "compatibility/cnn_3dobj-upstream-summary.json",
+        "compatibility/signal-implemented-families.json",
+        "compatibility/signal-upstream-classifications.json",
+        "compatibility/signal-upstream-map.txt",
+        "compatibility/signal-upstream-raw.json",
+        "compatibility/signal-upstream-summary.json",
         "compatibility/features-implemented-families.json",
         "compatibility/features-source-reviewed-extensions.json",
         "compatibility/features-upstream-classifications.json",
@@ -381,6 +388,7 @@ function Get-Record {
         "compatibility/v5.0.1-change-ledger.schema.json",
         "docs/articles/api-abi-compatibility-policy.md",
         "docs/articles/upstream-map-toolchain.md",
+        "docs/articles/signal-upstream-parity-guide.md",
         "docs/articles/xphoto-upstream-parity-guide.md",
         "docs/articles/ximgproc-upstream-parity-guide.md",
         "docs/articles/optflow-bgsegm-upstream-parity-guide.md",
@@ -530,6 +538,7 @@ function Get-Record {
         "scripts/Generate-DnnSuperresUpstreamMap.ps1",
         "scripts/Generate-WechatQRCodeUpstreamMap.ps1",
         "scripts/Generate-Cnn3DObjUpstreamMap.ps1",
+        "scripts/Generate-SignalUpstreamMap.ps1",
         "scripts/Generate-FeaturesUpstreamMap.ps1",
         "scripts/Generate-HighGuiUpstreamMap.ps1",
         "scripts/Generate-ImgProcUpstreamMap.ps1",
@@ -585,6 +594,7 @@ function Get-Record {
         "scripts/Test-DnnSuperresUpstreamMap.ps1",
         "scripts/Test-WechatQRCodeUpstreamMap.ps1",
         "scripts/Test-Cnn3DObjUpstreamMap.ps1",
+        "scripts/Test-SignalUpstreamMap.ps1",
         "scripts/Test-FeaturesUpstreamMap.ps1",
         "scripts/Test-HighGuiUpstreamMap.ps1",
         "scripts/Test-ImgProcUpstreamMap.ps1",
@@ -752,6 +762,9 @@ function Get-Record {
         "tools/Cnn3DObjUpstreamMap/Cnn3DObjUpstreamMap.csproj",
         "tools/Cnn3DObjUpstreamMap/Program.cs",
         "tools/Cnn3DObjUpstreamMap/extract_cnn_3dobj.py",
+        "tools/SignalUpstreamMap/SignalUpstreamMap.csproj",
+        "tools/SignalUpstreamMap/Program.cs",
+        "tools/SignalUpstreamMap/extract_signal.py",
         "tools/FeaturesUpstreamMap/FeaturesUpstreamMap.csproj",
         "tools/FeaturesUpstreamMap/Program.cs",
         "tools/FeaturesUpstreamMap/extract_features.py",
@@ -1215,6 +1228,29 @@ function Get-Record {
                 ManagedPublicMemberAdditionCount = [int]$cnn3DObjSummary.managedPublicMemberAdditionCount
                 NativeEntrypointAdditionCount = [int]$cnn3DObjSummary.nativeEvidenceCount
                 RepositoryWideParityClaimed = [bool]$cnn3DObjSummary.repositoryWideUpstreamParityClaimed
+            }
+            SignalUpstreamMap = [ordered]@{
+                Path = "compatibility/signal-upstream-map.txt"
+                SummaryPath = "compatibility/signal-upstream-summary.json"
+                ClassificationPath = "compatibility/signal-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/signal-implemented-families.json"
+                RawExtractionPath = "compatibility/signal-upstream-raw.json"
+                Sha256 = $signalSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/signal-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$signalSummary.declarationCount
+                CallableCount = [int]$signalSummary.callableCount
+                ImplementedCount = [int]$signalSummary.classificationCounts.implemented
+                MissingCount = [int]$signalSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$signalSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$signalSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$signalSummary.classificationCounts.'upstream-conditional'
+                SourceHeaderCount = @($signalRaw.sourceHeaders).Count
+                SelectedFamilyCount = [int]$signalSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$signalSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$signalSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$signalSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$signalSummary.nativeEvidenceCount
+                RepositoryWideParityClaimed = [bool]$signalSummary.repositoryWideUpstreamParityClaimed
             }
             FeaturesUpstreamMap = [ordered]@{
                 Path = "compatibility/features-upstream-map.txt"

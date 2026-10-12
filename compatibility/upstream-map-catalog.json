@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 42,
+  "moduleCount": 43,
   "maps": [
     {
       "id": "calib3d",
@@ -240,6 +240,52 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "7f764a01806a9e8c730a2f0966e5b8156aeaa77d525191d87f1da04d1b7f170e",
         "familyInventorySha256": "e30aa38aa9d059528bcc8c2dcfef4bab961fef6c7b40f00d27fb6be7a0f652fa",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "signal",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/SignalUpstreamMap",
+      "extractorScript": "tools/SignalUpstreamMap/extract_signal.py",
+      "generationScript": "scripts/Generate-SignalUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-SignalUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/signal.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/signal/include/opencv2/signal.hpp",
+          "sha256": "30a5e4986320a13b91b6711142cd4242bac94db4a135235a2b5ca2aef911292a"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/signal/include/opencv2/signal/signal_resample.hpp",
+            "sha256": "b94eee8cd60eb57c1c07aaea370193f5230726d2651236884e57bbae8ce8a5ec",
+            "startOrdinal": 0,
+            "declarationCount": 1
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/signal-upstream-raw.json",
+        "classifications": "compatibility/signal-upstream-classifications.json",
+        "mapping": "compatibility/signal-upstream-map.txt",
+        "summary": "compatibility/signal-upstream-summary.json",
+        "familyInventory": "compatibility/signal-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 1,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "88662b9743a6825cad8695fe8fc788f99196c0430dddfd8b09f9b8908bfe7678",
+        "familyInventorySha256": "c14e5a804e2df8a91cbc4401150175e2d15c7d0691da5fee293a7c621e76893e",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

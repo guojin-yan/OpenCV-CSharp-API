@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/signal.hpp contrib public header closure from parser-emitted headers",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact Signal wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "cv.signal.resampleSignal(Mat inputSignal;Mat outSignal[/O];int inFreq[/C];int outFreq[/C])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The signal contrib surface exposes resampleSignal but the current package has no native Signal wrapper entrypoint or managed public owner; the optional module remains outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SIGNAL=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}
