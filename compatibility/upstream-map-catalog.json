@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 43,
+  "moduleCount": 44,
   "maps": [
     {
       "id": "calib3d",
@@ -286,6 +286,52 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "88662b9743a6825cad8695fe8fc788f99196c0430dddfd8b09f9b8908bfe7678",
         "familyInventorySha256": "c14e5a804e2df8a91cbc4401150175e2d15c7d0691da5fee293a7c621e76893e",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "dpm",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/DpmUpstreamMap",
+      "extractorScript": "tools/DpmUpstreamMap/extract_dpm.py",
+      "generationScript": "scripts/Generate-DpmUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-DpmUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/dpm.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/dpm/include/opencv2/dpm.hpp",
+          "sha256": "7fd81ecb13b05caef6d5157b6fd6ca23f4109db31c01d0fb243732484f7deebe"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/dpm/include/opencv2/dpm.hpp",
+            "sha256": "7fd81ecb13b05caef6d5157b6fd6ca23f4109db31c01d0fb243732484f7deebe",
+            "startOrdinal": 0,
+            "declarationCount": 2
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/dpm-upstream-raw.json",
+        "classifications": "compatibility/dpm-upstream-classifications.json",
+        "mapping": "compatibility/dpm-upstream-map.txt",
+        "summary": "compatibility/dpm-upstream-summary.json",
+        "familyInventory": "compatibility/dpm-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 2,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "b0e24a5485d5b3dbeb6add5228bd2ed450d91bcec4df4079fa6fddde6ea274d7",
+        "familyInventorySha256": "6a2a8ac0f1c3d80ad28e77e68e7c18b6cd1435663f3e8c296d5bcfa38c6d0a16",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

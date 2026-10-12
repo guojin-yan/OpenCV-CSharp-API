@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/2abd7d90e74040f8",
-  "SourceIdentity": "sha256:2abd7d90e74040f8795b27d27bcf772370d94361d607ea73a3bbb80770866dfb",
+  "CandidateId": "local-closeout/sha256/0fb182116918ceba",
+  "SourceIdentity": "sha256:0fb182116918ceba071d070c67f52cbf44a0e3bf492f0bf6c34b79ed52b911ef",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 2126,
-    "Sha256": "2abd7d90e74040f8795b27d27bcf772370d94361d607ea73a3bbb80770866dfb",
+    "FileCount": 2137,
+    "Sha256": "0fb182116918ceba071d070c67f52cbf44a0e3bf492f0bf6c34b79ed52b911ef",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -315,6 +315,29 @@
       "ImplementedCount": 0,
       "MissingCount": 0,
       "IntentionallyOmittedCount": 1,
+      "UnsupportedCount": 0,
+      "UpstreamConditionalCount": 0,
+      "SourceHeaderCount": 1,
+      "SelectedFamilyCount": 1,
+      "SelectedDeclarationCount": 0,
+      "ManagedPublicTypeAdditionCount": 0,
+      "ManagedPublicMemberAdditionCount": 0,
+      "NativeEntrypointAdditionCount": 0,
+      "RepositoryWideParityClaimed": false
+    },
+    "DpmUpstreamMap": {
+      "Path": "compatibility/dpm-upstream-map.txt",
+      "SummaryPath": "compatibility/dpm-upstream-summary.json",
+      "ClassificationPath": "compatibility/dpm-upstream-classifications.json",
+      "FamilyInventoryPath": "compatibility/dpm-implemented-families.json",
+      "RawExtractionPath": "compatibility/dpm-upstream-raw.json",
+      "Sha256": "b0e24a5485d5b3dbeb6add5228bd2ed450d91bcec4df4079fa6fddde6ea274d7",
+      "RawSha256": "dbf10f6f48fb3c19173d5a487460bf1717d8e5863a9de036c9a1bf4cdf7a080e",
+      "DeclarationCount": 2,
+      "CallableCount": 0,
+      "ImplementedCount": 0,
+      "MissingCount": 0,
+      "IntentionallyOmittedCount": 0,
       "UnsupportedCount": 0,
       "UpstreamConditionalCount": 0,
       "SourceHeaderCount": 1,
@@ -927,6 +950,31 @@
       "Path": "compatibility/dnn_superres-upstream-summary.json",
       "Sha256": "6c46a589367945c26f4f7f5213496a33aab802dcb384dfcde531478e1d5eb238",
       "Length": 1452
+    },
+    {
+      "Path": "compatibility/dpm-implemented-families.json",
+      "Sha256": "593619e1366243736aa359b74e35fb4989e9a93ea531cb1cc0a9f2457c513b13",
+      "Length": 384
+    },
+    {
+      "Path": "compatibility/dpm-upstream-classifications.json",
+      "Sha256": "90aa4464adf837c6b0e024ce64e015f93c934fa17a815d9c249d6c50cdddfa2c",
+      "Length": 1169
+    },
+    {
+      "Path": "compatibility/dpm-upstream-map.txt",
+      "Sha256": "b0e24a5485d5b3dbeb6add5228bd2ed450d91bcec4df4079fa6fddde6ea274d7",
+      "Length": 931
+    },
+    {
+      "Path": "compatibility/dpm-upstream-raw.json",
+      "Sha256": "dbf10f6f48fb3c19173d5a487460bf1717d8e5863a9de036c9a1bf4cdf7a080e",
+      "Length": 1804
+    },
+    {
+      "Path": "compatibility/dpm-upstream-summary.json",
+      "Sha256": "8a64aa3dcb7115755449dc80a4f5237150a5b1150a968b29d895c31f720eb801",
+      "Length": 1398
     },
     {
       "Path": "compatibility/face-implemented-families.json",
@@ -1665,18 +1713,18 @@
     },
     {
       "Path": "compatibility/upstream-map-catalog.json",
-      "Sha256": "03eed514019ef0fe2de8853f6c4d1bde4ca68bf0304b4f2c6e86b5a20d49285a",
-      "Length": 141537
+      "Sha256": "b1b6f4627dc85ef0ff0f3f7c7db13ed204a3a93682fe09cb080e31e6d72869e4",
+      "Length": 143580
     },
     {
       "Path": "compatibility/upstream-map-catalog.schema.json",
-      "Sha256": "b722ca6c5fe24e0618da17b4fc19b95c0ca57ec063549911f30be7673dc2ebe0",
-      "Length": 5950
+      "Sha256": "5a2477288fead14579a86085aba23f10ddf7d9c6ad802b353835e01eb1dc114e",
+      "Length": 5957
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "103068e82f88e456dc6b318317c4026d421ae31663bcb6d4cbecc8775489ca25",
-      "Length": 54079
+      "Sha256": "6495ea0d6c8ac7feb1b6a6992cdfc785c664e04d6eb187de5501673d7ebbfcdd",
+      "Length": 55325
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -1947,6 +1995,11 @@
       "Path": "docs/articles/domestic-platform-certification-adr.md",
       "Sha256": "be6985c79a702f70cbac1c0d8ca82817a53fd5e2255ce1a0a15fa05995c96344",
       "Length": 4096
+    },
+    {
+      "Path": "docs/articles/dpm-upstream-parity-guide.md",
+      "Sha256": "7e330a1f121a72ca005006f56f156dada75744a275d836f3f434b9f729d88ebc",
+      "Length": 1591
     },
     {
       "Path": "docs/articles/face-guide.md",
@@ -2305,8 +2358,8 @@
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "2e4ca0224e191a8b89361d98cbdeba14a6cf722540f2af967a25e606bc0d92e6",
-      "Length": 17223
+      "Sha256": "5ffe35c7e3f497fc3bfd937bcff02e33eb200424597cc0ff4eba4eb050a5c1ff",
+      "Length": 17302
     },
     {
       "Path": "nuget/logo.jpg",
@@ -2670,8 +2723,8 @@
     },
     {
       "Path": "scripts/Generate-ContribUpstreamMap.ps1",
-      "Sha256": "e461640bd8070b86ac25500d6b0319f0746497e798dbfd9f9cdbd631f69d28c8",
-      "Length": 107870
+      "Sha256": "105624fc0a88ca8dc97275ce9b5282eacd118202a735b821f6059523c2e19537",
+      "Length": 107876
     },
     {
       "Path": "scripts/Generate-CoreUpstreamMap.ps1",
@@ -2687,6 +2740,11 @@
       "Path": "scripts/Generate-DnnUpstreamMap.ps1",
       "Sha256": "eecd24c77976de4a4e9c4edb96617c861ea2c17145e316a72e8d50c35721fe1b",
       "Length": 2966
+    },
+    {
+      "Path": "scripts/Generate-DpmUpstreamMap.ps1",
+      "Sha256": "c16bafbf922b2b5c01975b7452ff153a362db445577b59caf22e43d215cfdd46",
+      "Length": 979
     },
     {
       "Path": "scripts/Generate-FaceUpstreamMap.ps1",
@@ -2885,8 +2943,8 @@
     },
     {
       "Path": "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
-      "Sha256": "7363a762ac758a301d3bc033cf2eba2d93da4d2307ba064f6ecd7d83825c6d02",
-      "Length": 5334
+      "Sha256": "cfab241e9d1b2a1f161a05121c0f5af7cd6dd8a1d38d0c468685b08b8559b742",
+      "Length": 5356
     },
     {
       "Path": "scripts/Invoke-LifecycleRefreshContainerProducer.ps1",
@@ -2965,8 +3023,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "f8279e06a12cbf50026d672d983610963c6531734656d43da3b35d0308df5e1c",
-      "Length": 113006
+      "Sha256": "af7df4b2e67ab576fc9b0a7bfda0a065c99ebee8273f4686de7b8a567a138b87",
+      "Length": 115657
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -2980,8 +3038,8 @@
     },
     {
       "Path": "scripts/New-UpstreamMapCatalog.ps1",
-      "Sha256": "fac726eab3e9a7b1b0388a23e9182ac9309d32ea0c5674eefdc958751fd69b66",
-      "Length": 10458
+      "Sha256": "1c9caea9f8476fd85ff358827aa2a158773defcfd489f2d9d7408fea656a636f",
+      "Length": 10540
     },
     {
       "Path": "scripts/Test-AlphaMatUpstreamMap.ps1",
@@ -3072,6 +3130,11 @@
       "Path": "scripts/Test-DomesticPlatformCertificationMatrix.ps1",
       "Sha256": "1aa5cd0b3690ce8ce5cea501dde39dcabe259530ec7b858a03bb9cfb8eab97cb",
       "Length": 4433
+    },
+    {
+      "Path": "scripts/Test-DpmUpstreamMap.ps1",
+      "Sha256": "ae0f7573b243ee289cbd7f0c2be8f08703b5f312f2eb1f0ed6ff616505bdbbd7",
+      "Length": 2234
     },
     {
       "Path": "scripts/Test-FaceUpstreamMap.ps1",
@@ -3355,8 +3418,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "1041e028c0785a0145cc3e460054309c3516fcadf51edfa3758102900e18d461",
-      "Length": 101762
+      "Sha256": "402600375fd0a8ddbb6112649802e6124fc57c6cc2e928147a3022135f300bff",
+      "Length": 103388
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -3465,8 +3528,8 @@
     },
     {
       "Path": "scripts/Test-UpstreamMapCatalog.ps1",
-      "Sha256": "a198c39d6e68d4281e67f8aa93da2441ed5de818f1978e48f7afe3c436c208d0",
-      "Length": 15055
+      "Sha256": "9bd66dc8cffe46ba73dcd858199cecbafec72c166c65e8170126881511419151",
+      "Length": 15061
     },
     {
       "Path": "scripts/Test-V501ChangeLedger.ps1",
@@ -4229,6 +4292,21 @@
       "Length": 5365
     },
     {
+      "Path": "tools/DpmUpstreamMap/DpmUpstreamMap.csproj",
+      "Sha256": "727d0721f11212e08035cc59275b0226c0092f3ea92492d621c3d25879ef974f",
+      "Length": 273
+    },
+    {
+      "Path": "tools/DpmUpstreamMap/Program.cs",
+      "Sha256": "03d1aa8c0a51dd91db9ff967662e78fd25d3290560780dd5e2bc42b6da753ba5",
+      "Length": 96
+    },
+    {
+      "Path": "tools/DpmUpstreamMap/extract_dpm.py",
+      "Sha256": "4de7e91f8ca96eb04e8f05a766dd62b0997cc4d3dafc719c0d48f7d07f076366",
+      "Length": 226
+    },
+    {
       "Path": "tools/FaceUpstreamMap/FaceUpstreamMap.csproj",
       "Sha256": "b0655fe2e4b91db06fc9f4da7c1a91df7f87b7204830ea583c7e622398f5f38f",
       "Length": 241
@@ -4730,8 +4808,8 @@
     },
     {
       "Path": "tools/XImgProcUpstreamMap/extract_ximgproc.py",
-      "Sha256": "29a1ca1feaa98b43e6a79fb7f40ff8e3ffd06be0dae97bcf5a3138b1708b6dfb",
-      "Length": 6031
+      "Sha256": "0bbfe66cfc7f809499b59707f67212ea4067238e0ff22f57cf6979a563b4d745",
+      "Length": 6052
     },
     {
       "Path": "tools/XObjDetectUpstreamMap/Program.cs",

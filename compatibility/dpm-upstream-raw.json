@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/DpmUpstreamMap/extract_dpm.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/dpm/include/opencv2/dpm.hpp",
+  "headerSha256": "7fd81ecb13b05caef6d5157b6fd6ca23f4109db31c01d0fb243732484f7deebe",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/dpm/include/opencv2/dpm.hpp",
+      "sha256": "7fd81ecb13b05caef6d5157b6fd6ca23f4109db31c01d0fb243732484f7deebe",
+      "startOrdinal": 0,
+      "declarationCount": 2
+    }
+  ],
+  "declarationCount": 2,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/dpm/include/opencv2/dpm.hpp",
+      "kind": "class",
+      "name": "cv.dpm.DPMDetector",
+      "identity": "class cv.dpm.DPMDetector",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief This is a C++ abstract class, it provides external user API to work with DPM."
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/dpm/include/opencv2/dpm.hpp",
+      "kind": "class",
+      "name": "cv.dpm.DPMDetector.ObjectDetection",
+      "identity": "class cv.dpm.DPMDetector.ObjectDetection",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    }
+  ]
+}
