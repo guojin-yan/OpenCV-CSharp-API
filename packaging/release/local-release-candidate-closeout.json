@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/b2f60681d77c91b6",
-  "SourceIdentity": "sha256:b2f60681d77c91b64c0ef8c9eb18c1b817fd7e3223436153e55178bda158a87f",
+  "CandidateId": "local-closeout/sha256/1679ee591c78ba81",
+  "SourceIdentity": "sha256:1679ee591c78ba81996f7567cd11900b6ce0ba917b27babab71cc9d845a5fe86",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 2170,
-    "Sha256": "b2f60681d77c91b64c0ef8c9eb18c1b817fd7e3223436153e55178bda158a87f",
+    "FileCount": 2181,
+    "Sha256": "1679ee591c78ba81996f7567cd11900b6ce0ba917b27babab71cc9d845a5fe86",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -770,6 +770,30 @@
       "ExternalDataDependencyCount": 2,
       "RepositoryWideParityClaimed": false
     },
+    "DnnObjDetectUpstreamMap": {
+      "Path": "compatibility/dnn_objdetect-upstream-map.txt",
+      "SummaryPath": "compatibility/dnn_objdetect-upstream-summary.json",
+      "ClassificationPath": "compatibility/dnn_objdetect-upstream-classifications.json",
+      "FamilyInventoryPath": "compatibility/dnn_objdetect-implemented-families.json",
+      "RawExtractionPath": "compatibility/dnn_objdetect-upstream-raw.json",
+      "Sha256": "08af4fda797cce9272e953b6e8c212987dafa0ebed69c8517aa3ef02f860ed64",
+      "RawSha256": "ec7ae00e1cf96d4bb936b006b6da8ea6681e0d102852cdd8688e570714b74128",
+      "DeclarationCount": 4,
+      "CallableCount": 2,
+      "ImplementedCount": 0,
+      "MissingCount": 0,
+      "IntentionallyOmittedCount": 2,
+      "UnsupportedCount": 0,
+      "UpstreamConditionalCount": 0,
+      "SourceHeaderCount": 1,
+      "SelectedFamilyCount": 1,
+      "SelectedDeclarationCount": 0,
+      "ManagedPublicTypeAdditionCount": 0,
+      "ManagedPublicMemberAdditionCount": 0,
+      "NativeEntrypointAdditionCount": 0,
+      "ExternalDataDependencyCount": 1,
+      "RepositoryWideParityClaimed": false
+    },
     "GapInventoryPath": "compatibility/api-gap-inventory.json",
     "GapInventoryStatus": "baseline-established-native-managed-parity-measured",
     "UpstreamParityMeasured": false,
@@ -997,6 +1021,31 @@
       "Path": "compatibility/dnn-upstream-summary.json",
       "Sha256": "5a10023a0f5381ce6452b883613f6451f354d9b6ea9fb53d64e68e0e49d23c2a",
       "Length": 1548
+    },
+    {
+      "Path": "compatibility/dnn_objdetect-implemented-families.json",
+      "Sha256": "0911cf9f4121c29aeb19ba7628d5b684f78ff203efc1f4f94a2f0e3ac1698a81",
+      "Length": 403
+    },
+    {
+      "Path": "compatibility/dnn_objdetect-upstream-classifications.json",
+      "Sha256": "95ea5e867e95f84ee871b7b786312c7def42adf4096e4b55d1c9e8beb3975d8b",
+      "Length": 2721
+    },
+    {
+      "Path": "compatibility/dnn_objdetect-upstream-map.txt",
+      "Sha256": "08af4fda797cce9272e953b6e8c212987dafa0ebed69c8517aa3ef02f860ed64",
+      "Length": 1969
+    },
+    {
+      "Path": "compatibility/dnn_objdetect-upstream-raw.json",
+      "Sha256": "ec7ae00e1cf96d4bb936b006b6da8ea6681e0d102852cdd8688e570714b74128",
+      "Length": 5254
+    },
+    {
+      "Path": "compatibility/dnn_objdetect-upstream-summary.json",
+      "Sha256": "046a37be78a6b96cacdc4996574fcdcf96c4a92ad57b98d82b341377c4d24f0a",
+      "Length": 1518
     },
     {
       "Path": "compatibility/dnn_superres-implemented-families.json",
@@ -1835,18 +1884,18 @@
     },
     {
       "Path": "compatibility/upstream-map-catalog.json",
-      "Sha256": "728577154b76b2f725e60115b3e288694f98c0593f35909108082bfe58ffac47",
-      "Length": 151044
+      "Sha256": "c4d6ca1aa44ec1d94577e321fd31c2808714e58aa0dbcd0c0aa9b8be98ea9a7b",
+      "Length": 153300
     },
     {
       "Path": "compatibility/upstream-map-catalog.schema.json",
-      "Sha256": "05ac117c5ed0ea7a087124975b1750bb2b7ffee4d57c36e3deb9c13a8e20516f",
-      "Length": 5987
+      "Sha256": "90e17b57350134d4268bfc5ce7d262665dd12c5090478051c1b7704807865c56",
+      "Length": 6004
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "7ca503d5ccc6d899ce2a2f931e0bafc5573d986d58c5a5e7a4d08d39166434e5",
-      "Length": 59268
+      "Sha256": "126ce245e115b4102b1028e49df8fa25c0024e44ea2c5d064c1f509fff93051c",
+      "Length": 60728
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -2060,8 +2109,8 @@
     },
     {
       "Path": "docs/articles/api-abi-compatibility-policy.md",
-      "Sha256": "42810aff5331b6cfd53fba224c09d60d3135664faf94588e35f4f21eb240cce4",
-      "Length": 16445
+      "Sha256": "759a481c250988acf49ee3609f467cf8bdcfc04676bbbf2efd4ec73529b82ac9",
+      "Length": 17152
     },
     {
       "Path": "docs/articles/async-video-owner-adr.md",
@@ -2117,6 +2166,11 @@
       "Path": "docs/articles/dnn-named-io-dynamic-shape-adr.md",
       "Sha256": "a6192e0009c1e6e8a83d60e6de3dcb057cf14c3c84e64bdc87a72389e47c242e",
       "Length": 3992
+    },
+    {
+      "Path": "docs/articles/dnn-objdetect-upstream-parity-guide.md",
+      "Sha256": "0f4d6bd883b8720fa405e09820a4e3b4f4c3d889d972324d94065d4311e7ce8d",
+      "Length": 2614
     },
     {
       "Path": "docs/articles/dnn-quantization-backend-diagnostics-adr.md",
@@ -2410,8 +2464,8 @@
     },
     {
       "Path": "docs/articles/upstream-map-toolchain.md",
-      "Sha256": "f81509f25e9523a21c86c805115b1214ce2077a8a4443603f292104130e18e8a",
-      "Length": 11691
+      "Sha256": "0bfd182ba024eeb47b0737856639ae48ab3d398cde910d0a0dad3f5d0f4d8fb0",
+      "Length": 12418
     },
     {
       "Path": "docs/articles/v501-modern-api-preview-guide.md",
@@ -2520,8 +2574,8 @@
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "b1ce69f8bbffbc985626dc89012d883f42fffb4aba592f22588e14cea2b5284a",
-      "Length": 17557
+      "Sha256": "684e9c8894b0d5ccce4592e349535cbfc16d1a763e60fde9f4dee414b01481a0",
+      "Length": 17663
     },
     {
       "Path": "nuget/logo.jpg",
@@ -2885,13 +2939,18 @@
     },
     {
       "Path": "scripts/Generate-ContribUpstreamMap.ps1",
-      "Sha256": "ec1744195e8aa5caf706215b45cb16a38fe11c2682e2ab1c63895e1897772626",
-      "Length": 110155
+      "Sha256": "0bee4bfea01e37bd0d929f505da2acc69158af8f81643843791cf598aefa34ae",
+      "Length": 110968
     },
     {
       "Path": "scripts/Generate-CoreUpstreamMap.ps1",
       "Sha256": "da4f60103a1571ed5902eedcbddb1575f2f733bccc5f8322bd9ddce4d0e35fab",
       "Length": 2479
+    },
+    {
+      "Path": "scripts/Generate-DnnObjDetectUpstreamMap.ps1",
+      "Sha256": "62cccf27db513adfe0a1fdfdf6bab9d86ca06ef5412366706a71f84450bc6a07",
+      "Length": 1050
     },
     {
       "Path": "scripts/Generate-DnnSuperresUpstreamMap.ps1",
@@ -3120,8 +3179,8 @@
     },
     {
       "Path": "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
-      "Sha256": "7d3e3c49f84c07a25f13c83604744cc4a3b2c34d955caf1b567794d9ef146b46",
-      "Length": 5431
+      "Sha256": "cfb52691d6cdff5ed6b072c56299ca063951fe0dba5940e2d3b0f09ab895c39c",
+      "Length": 5463
     },
     {
       "Path": "scripts/Invoke-LifecycleRefreshContainerProducer.ps1",
@@ -3200,8 +3259,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "7fe58004407803c50f66b40b9fdaac8bf9fbdc8d03481975fc8f8015d47aa722",
-      "Length": 124222
+      "Sha256": "de2dfcfcf308010841c8313acc9cf464f07ef791702df5665c36424c920ac0c1",
+      "Length": 127316
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -3215,8 +3274,8 @@
     },
     {
       "Path": "scripts/New-UpstreamMapCatalog.ps1",
-      "Sha256": "e4313709b6c017bf4de03abb731e77c5ebdce0bff6d5707f8f9d754e06a9fc86",
-      "Length": 10803
+      "Sha256": "afcc2e17d95160a6ae810150f4c8f823273033baa28b595d836094c9a7e4b014",
+      "Length": 10903
     },
     {
       "Path": "scripts/Test-AlphaMatUpstreamMap.ps1",
@@ -3292,6 +3351,11 @@
       "Path": "scripts/Test-DnnDiagnosticsContract.ps1",
       "Sha256": "787321642c1cc284ae3475f8c9fe3cfe08b1ab7aedf3fc0d16da2163e47e26ce",
       "Length": 2316
+    },
+    {
+      "Path": "scripts/Test-DnnObjDetectUpstreamMap.ps1",
+      "Sha256": "51a911d6ab29ea6f6b16c5b2b9eac591703f639a0291fed593b507adc733d850",
+      "Length": 3516
     },
     {
       "Path": "scripts/Test-DnnSuperresUpstreamMap.ps1",
@@ -3600,8 +3664,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "03f0ae7cbc2d28cde836a8b7919ed625904f34fae9a4a5411e70e226028461fd",
-      "Length": 109328
+      "Sha256": "d57396f0094851cbf1d13bac80065f57b3efc87d43f9e355c004aabf16516dc2",
+      "Length": 111542
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -3715,8 +3779,8 @@
     },
     {
       "Path": "scripts/Test-UpstreamMapCatalog.ps1",
-      "Sha256": "d9cb26b5848526ad3f90b44549dfbede707411a51f32b1c08ad46564666bd040",
-      "Length": 15088
+      "Sha256": "f95db3e5400d40cba357bc00bc10272974c395766f952457d969aa82dc75619f",
+      "Length": 15104
     },
     {
       "Path": "scripts/Test-V501ChangeLedger.ps1",
@@ -4454,6 +4518,21 @@
       "Length": 5122
     },
     {
+      "Path": "tools/DnnObjDetectUpstreamMap/DnnObjDetectUpstreamMap.csproj",
+      "Sha256": "727d0721f11212e08035cc59275b0226c0092f3ea92492d621c3d25879ef974f",
+      "Length": 273
+    },
+    {
+      "Path": "tools/DnnObjDetectUpstreamMap/Program.cs",
+      "Sha256": "a39b7b8fb9e8b2407d98c7cc116838c42570518726ea34660547e2da1137910a",
+      "Length": 114
+    },
+    {
+      "Path": "tools/DnnObjDetectUpstreamMap/extract_dnn_objdetect.py",
+      "Sha256": "b11b41f447c1b425fb7539e4e9283988cce6129d38b6479563963f8fdbfd7472",
+      "Length": 236
+    },
+    {
       "Path": "tools/DnnSuperresUpstreamMap/DnnSuperresUpstreamMap.csproj",
       "Sha256": "b0655fe2e4b91db06fc9f4da7c1a91df7f87b7204830ea583c7e622398f5f38f",
       "Length": 241
@@ -5045,8 +5124,8 @@
     },
     {
       "Path": "tools/XImgProcUpstreamMap/extract_ximgproc.py",
-      "Sha256": "bc9b07f697579ba1b3d3eef4b2c22abafab5f5db4c63ffa8cd3b8f710594e720",
-      "Length": 6142
+      "Sha256": "0a4e9133d08890db6656628d02ffb9049bc6ac5cc551cbd3488c506b67b19a7f",
+      "Length": 8721
     },
     {
       "Path": "tools/XObjDetectUpstreamMap/Program.cs",

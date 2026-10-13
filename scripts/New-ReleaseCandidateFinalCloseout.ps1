@@ -127,6 +127,8 @@ function Get-Record {
     $dnnSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/dnn-upstream-summary.json") -Raw | ConvertFrom-Json
     $dnnSuperresRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/dnn_superres-upstream-raw.json") -Raw | ConvertFrom-Json
     $dnnSuperresSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/dnn_superres-upstream-summary.json") -Raw | ConvertFrom-Json
+    $dnnObjDetectRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/dnn_objdetect-upstream-raw.json") -Raw | ConvertFrom-Json
+    $dnnObjDetectSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/dnn_objdetect-upstream-summary.json") -Raw | ConvertFrom-Json
     $wechatQRCodeRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/wechat_qrcode-upstream-raw.json") -Raw | ConvertFrom-Json
     $wechatQRCodeSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/wechat_qrcode-upstream-summary.json") -Raw | ConvertFrom-Json
     $cnn3DObjRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/cnn_3dobj-upstream-raw.json") -Raw | ConvertFrom-Json
@@ -189,6 +191,11 @@ function Get-Record {
         "compatibility/dnn_superres-upstream-map.txt",
         "compatibility/dnn_superres-upstream-raw.json",
         "compatibility/dnn_superres-upstream-summary.json",
+        "compatibility/dnn_objdetect-implemented-families.json",
+        "compatibility/dnn_objdetect-upstream-classifications.json",
+        "compatibility/dnn_objdetect-upstream-map.txt",
+        "compatibility/dnn_objdetect-upstream-raw.json",
+        "compatibility/dnn_objdetect-upstream-summary.json",
         "compatibility/wechat_qrcode-implemented-families.json",
         "compatibility/wechat_qrcode-upstream-classifications.json",
         "compatibility/wechat_qrcode-upstream-map.txt",
@@ -417,6 +424,7 @@ function Get-Record {
         "docs/articles/api-abi-compatibility-policy.md",
         "docs/articles/upstream-map-toolchain.md",
         "docs/articles/xfeatures2d-upstream-parity-guide.md",
+        "docs/articles/dnn-objdetect-upstream-parity-guide.md",
         "docs/articles/signal-upstream-parity-guide.md",
         "docs/articles/dpm-upstream-parity-guide.md",
         "docs/articles/hdf-upstream-parity-guide.md",
@@ -568,6 +576,7 @@ function Get-Record {
         "scripts/Generate-CoreUpstreamMap.ps1",
         "scripts/Generate-DnnUpstreamMap.ps1",
         "scripts/Generate-DnnSuperresUpstreamMap.ps1",
+        "scripts/Generate-DnnObjDetectUpstreamMap.ps1",
         "scripts/Generate-WechatQRCodeUpstreamMap.ps1",
         "scripts/Generate-Cnn3DObjUpstreamMap.ps1",
         "scripts/Generate-SignalUpstreamMap.ps1",
@@ -627,6 +636,7 @@ function Get-Record {
         "scripts/Test-CoreUpstreamMap.ps1",
         "scripts/Test-DnnUpstreamMap.ps1",
         "scripts/Test-DnnSuperresUpstreamMap.ps1",
+        "scripts/Test-DnnObjDetectUpstreamMap.ps1",
         "scripts/Test-WechatQRCodeUpstreamMap.ps1",
         "scripts/Test-Cnn3DObjUpstreamMap.ps1",
         "scripts/Test-SignalUpstreamMap.ps1",
@@ -924,6 +934,9 @@ function Get-Record {
         "tools/XFeatures2DUpstreamMap/XFeatures2DUpstreamMap.csproj",
         "tools/XFeatures2DUpstreamMap/Program.cs",
         "tools/XFeatures2DUpstreamMap/extract_xfeatures2d.py",
+        "tools/DnnObjDetectUpstreamMap/DnnObjDetectUpstreamMap.csproj",
+        "tools/DnnObjDetectUpstreamMap/Program.cs",
+        "tools/DnnObjDetectUpstreamMap/extract_dnn_objdetect.py",
         "docs/articles/dnn-superres-upstream-parity-guide.md",
         "docs/articles/wechat-qrcode-upstream-parity-guide.md",
         "docs/articles/cnn-3dobj-upstream-parity-guide.md",
@@ -1748,6 +1761,30 @@ function Get-Record {
                 NativeEntrypointAdditionCount = [int]$xfeatures2dSummary.nativeEvidenceCount
                 ExternalDataDependencyCount = [int]$xfeatures2dSummary.externalDataDependencyCount
                 RepositoryWideParityClaimed = [bool]$xfeatures2dSummary.repositoryWideUpstreamParityClaimed
+            }
+            DnnObjDetectUpstreamMap = [ordered]@{
+                Path = "compatibility/dnn_objdetect-upstream-map.txt"
+                SummaryPath = "compatibility/dnn_objdetect-upstream-summary.json"
+                ClassificationPath = "compatibility/dnn_objdetect-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/dnn_objdetect-implemented-families.json"
+                RawExtractionPath = "compatibility/dnn_objdetect-upstream-raw.json"
+                Sha256 = $dnnObjDetectSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/dnn_objdetect-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$dnnObjDetectSummary.declarationCount
+                CallableCount = [int]$dnnObjDetectSummary.callableCount
+                ImplementedCount = [int]$dnnObjDetectSummary.classificationCounts.implemented
+                MissingCount = [int]$dnnObjDetectSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$dnnObjDetectSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$dnnObjDetectSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$dnnObjDetectSummary.classificationCounts.'upstream-conditional'
+                SourceHeaderCount = @($dnnObjDetectRaw.sourceHeaders).Count
+                SelectedFamilyCount = [int]$dnnObjDetectSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$dnnObjDetectSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$dnnObjDetectSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$dnnObjDetectSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$dnnObjDetectSummary.nativeEvidenceCount
+                ExternalDataDependencyCount = [int]$dnnObjDetectSummary.externalDataDependencyCount
+                RepositoryWideParityClaimed = [bool]$dnnObjDetectSummary.repositoryWideUpstreamParityClaimed
             }
             GapInventoryPath = "compatibility/api-gap-inventory.json"
             GapInventoryStatus = $gapInventory.status

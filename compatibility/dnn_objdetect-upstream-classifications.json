@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/core_detect.hpp contrib public header closure from parser-emitted headers; dnn_objdetect has no separate umbrella header in OpenCV 5.0.0",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact DnnObjDetect wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [
+    "The dnn_objdetect helper requires caller-selected DNN network/model data and backend policy; no model assets or managed/native wrapper are bundled."
+  ],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.dnn_objdetect.object",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_DNN_OBJDETECT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "class cv.dnn_objdetect.InferBbox",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_DNN_OBJDETECT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.dnn_objdetect.InferBbox.InferBbox(Mat _delta_bbox;Mat _class_scores;Mat _conf_scores)->",
+      "classification": "intentionally-omitted",
+      "reason": "The dnn_objdetect contrib surface is a model-driven DNN post-processing helper and the current package has no native DnnObjDetect wrapper entrypoint or managed public owner; caller-selected network/model data, backend policy, and detection output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_DNN_OBJDETECT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.dnn_objdetect.InferBbox.filter(double thresh=0.8)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The dnn_objdetect contrib surface is a model-driven DNN post-processing helper and the current package has no native DnnObjDetect wrapper entrypoint or managed public owner; caller-selected network/model data, backend policy, and detection output ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_DNN_OBJDETECT=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}

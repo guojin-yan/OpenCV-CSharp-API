@@ -5,6 +5,7 @@ import argparse
 import hashlib
 import importlib.util
 import json
+import tempfile
 from pathlib import Path
 
 
@@ -64,13 +65,18 @@ def main():
     output = Path(args.output).resolve()
     parser_path = root / "modules/python/src2/hdr_parser.py"
     module = args.module
-    if module not in {"ximgproc", "optflow", "bgsegm", "face", "quality", "img_hash", "line_descriptor", "freetype", "alphamat", "intensity_transform", "plot", "bioinspired", "phase_unwrapping", "hfs", "fuzzy", "rapid", "shape", "structured_light", "saliency", "surface_matching", "reg", "xstereo", "xobjdetect", "dnn_superres", "wechat_qrcode", "cnn_3dobj", "signal", "dpm", "hdf", "text", "xfeatures2d"}:
+    if module not in {"ximgproc", "optflow", "bgsegm", "face", "quality", "img_hash", "line_descriptor", "freetype", "alphamat", "intensity_transform", "plot", "bioinspired", "phase_unwrapping", "hfs", "fuzzy", "rapid", "shape", "structured_light", "saliency", "surface_matching", "reg", "xstereo", "xobjdetect", "dnn_superres", "wechat_qrcode", "cnn_3dobj", "signal", "dpm", "hdf", "text", "xfeatures2d", "dnn_objdetect"}:
         raise RuntimeError("Unsupported contrib extraction module: " + module)
     contrib_include = root.parent.parent / f"opencv-source/opencv_contrib-5.0.0/modules/{module}/include/opencv2"
     contrib_root = contrib_include / module
-    umbrella = (contrib_root / "map.hpp") if module == "reg" else (contrib_include / f"{module}.hpp")
+    if module == "reg":
+        umbrella = contrib_root / "map.hpp"
+    elif module == "dnn_objdetect":
+        umbrella = contrib_include / "core_detect.hpp"
+    else:
+        umbrella = contrib_include / f"{module}.hpp"
     module_headers = sorted(contrib_root.glob("*.hpp"))
-    files = [umbrella] if module == "xobjdetect" else (module_headers if module_headers else [umbrella])
+    files = [umbrella] if module in {"xobjdetect", "dnn_objdetect"} else (module_headers if module_headers else [umbrella])
     spec = importlib.util.spec_from_file_location("opencv_hdr_parser", parser_path)
     hdr_module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(hdr_module)
@@ -79,7 +85,37 @@ def main():
     declarations = []
     source_headers = []
     for file in files:
-        parsed = parser_instance.parse(str(file))
+        if module == "dnn_objdetect":
+            # hdr_parser cannot parse this header's anonymous typedef struct.
+            # Normalize only that spelling for parsing, then retain the exact
+            # upstream header path/hash as the evidence source. This module has
+            # no CV_WRAP annotations, so parse its public declarations in
+            # non-wrapper mode rather than silently producing an empty map.
+            header_text = file.read_text(encoding="utf-8")
+            normalized_text = header_text.replace("typedef struct\n    {", "struct object\n    {", 1).replace("    } object;", "    };", 1)
+            # hdr_parser records data members only when they carry CV_PROP;
+            # expose the public fields as parser properties in the temporary
+            # copy so the class metadata retains the complete data shape.
+            for field in (
+                "      int xmin, xmax;",
+                "      int ymin, ymax;",
+                "      size_t class_idx;",
+                "      std::string label_name;",
+                "      double class_prob;",
+                "        std::vector<object> detections;",
+            ):
+                normalized_text = normalized_text.replace(field, field.replace("      ", "      CV_PROP_RW ", 1), 1)
+            # Non-wrapper parser mode also admits protected members by design;
+            # keep this map limited to the actual public native surface.
+            normalized_text = normalized_text.replace("      protected:", "      private:", 1)
+            if normalized_text == header_text:
+                raise RuntimeError("Could not normalize the known dnn_objdetect object typedef for hdr_parser")
+            with tempfile.TemporaryDirectory(prefix="dnn_objdetect_hdr_parser_") as temp_dir:
+                parser_file = Path(temp_dir) / file.name
+                parser_file.write_text(normalized_text, encoding="utf-8", newline="\n")
+                parsed = parser_instance.parse(str(parser_file), wmode=False)
+        else:
+            parsed = parser_instance.parse(str(file))
         source = rel(file, workspace)
         source_headers.append({"path": source, "sha256": sha256(file), "startOrdinal": len(declarations), "declarationCount": len(parsed)})
         declarations.extend(convert(value, ordinal, source) for ordinal, value in enumerate(parsed, start=len(declarations)))
@@ -87,8 +123,11 @@ def main():
     if len(identities) != len(set(identities)):
         duplicates = sorted(item for item in set(identities) if identities.count(item) > 1)
         raise RuntimeError("XImgProc parser closure contains duplicate identities: " + ", ".join(duplicates))
-    title = {"ximgproc": "XImgProc", "optflow": "OptFlow", "bgsegm": "BgSegm", "face": "Face", "quality": "Quality", "img_hash": "ImgHash", "line_descriptor": "LineDescriptor", "freetype": "Freetype", "alphamat": "AlphaMat", "intensity_transform": "IntensityTransform", "plot": "Plot", "bioinspired": "BioInspired", "phase_unwrapping": "PhaseUnwrapping", "hfs": "Hfs", "fuzzy": "Fuzzy", "rapid": "Rapid", "shape": "Shape", "structured_light": "StructuredLight", "saliency": "Saliency", "surface_matching": "SurfaceMatching", "reg": "Reg", "xstereo": "XStereo", "xobjdetect": "XObjDetect", "dnn_superres": "DnnSuperres", "wechat_qrcode": "WechatQRCode", "cnn_3dobj": "Cnn3DObj", "signal": "Signal", "dpm": "Dpm", "hdf": "Hdf", "text": "Text", "xfeatures2d": "XFeatures2D"}[module]
+    title = {"ximgproc": "XImgProc", "optflow": "OptFlow", "bgsegm": "BgSegm", "face": "Face", "quality": "Quality", "img_hash": "ImgHash", "line_descriptor": "LineDescriptor", "freetype": "Freetype", "alphamat": "AlphaMat", "intensity_transform": "IntensityTransform", "plot": "Plot", "bioinspired": "BioInspired", "phase_unwrapping": "PhaseUnwrapping", "hfs": "Hfs", "fuzzy": "Fuzzy", "rapid": "Rapid", "shape": "Shape", "structured_light": "StructuredLight", "saliency": "Saliency", "surface_matching": "SurfaceMatching", "reg": "Reg", "xstereo": "XStereo", "xobjdetect": "XObjDetect", "dnn_superres": "DnnSuperres", "wechat_qrcode": "WechatQRCode", "cnn_3dobj": "Cnn3DObj", "signal": "Signal", "dpm": "Dpm", "hdf": "Hdf", "text": "Text", "xfeatures2d": "XFeatures2D", "dnn_objdetect": "DnnObjDetect"}[module]
     result = {"schemaVersion": 1, "generator": f"tools/{title}UpstreamMap/extract_{module}.py", "upstreamOpenCvVersion": "5.0.0", "headerPath": rel(umbrella, workspace), "headerSha256": sha256(umbrella), "parserPath": rel(parser_path, workspace), "parserSha256": sha256(parser_path), "preprocessorDefinitions": definitions, "sourceHeaders": source_headers, "declarationCount": len(declarations), "declarations": declarations}
+    if module == "dnn_objdetect":
+        result["parserMode"] = "non-wrapper-public-declarations"
+        result["parserNormalization"] = "temporary parser-only normalization: name anonymous typedef struct object; annotate six public data members as CV_PROP_RW; protected -> private to exclude non-public methods; upstream source/hash unchanged"
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, ensure_ascii=True, indent=2) + "\n", encoding="utf-8", newline="\n")
     print("{}_UPSTREAM_EXTRACTION_OK declarations={} headers={}".format(module.upper(), len(declarations), len(files)))
