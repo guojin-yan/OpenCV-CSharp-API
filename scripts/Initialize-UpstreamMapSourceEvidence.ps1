@@ -22,6 +22,7 @@ $rawNames += @("cnn_3dobj")
 $rawNames += @("dpm")
 $rawNames += @("hdf")
 $rawNames += @("text")
+$rawNames += @("xfeatures2d")
 $maximumDownloadAttempts = 4
 $required = [System.Collections.Generic.Dictionary[string, string]]::new([StringComparer]::Ordinal)
 

@@ -156,6 +156,8 @@ function Get-Record {
     $ptcloudSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/ptcloud-upstream-summary.json") -Raw | ConvertFrom-Json
     $xobjdetectRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/xobjdetect-upstream-raw.json") -Raw | ConvertFrom-Json
     $xobjdetectSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/xobjdetect-upstream-summary.json") -Raw | ConvertFrom-Json
+    $xfeatures2dRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/xfeatures2d-upstream-raw.json") -Raw | ConvertFrom-Json
+    $xfeatures2dSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/xfeatures2d-upstream-summary.json") -Raw | ConvertFrom-Json
     $evidencePaths = @(
         ".github/workflows/pack.yml",
         ".github/workflows/publish-nuget.yml",
@@ -405,10 +407,16 @@ function Get-Record {
         "compatibility/xobjdetect-upstream-map.txt",
         "compatibility/xobjdetect-upstream-raw.json",
         "compatibility/xobjdetect-upstream-summary.json",
+        "compatibility/xfeatures2d-implemented-families.json",
+        "compatibility/xfeatures2d-upstream-classifications.json",
+        "compatibility/xfeatures2d-upstream-map.txt",
+        "compatibility/xfeatures2d-upstream-raw.json",
+        "compatibility/xfeatures2d-upstream-summary.json",
         "compatibility/v5.0.1-change-ledger.json",
         "compatibility/v5.0.1-change-ledger.schema.json",
         "docs/articles/api-abi-compatibility-policy.md",
         "docs/articles/upstream-map-toolchain.md",
+        "docs/articles/xfeatures2d-upstream-parity-guide.md",
         "docs/articles/signal-upstream-parity-guide.md",
         "docs/articles/dpm-upstream-parity-guide.md",
         "docs/articles/hdf-upstream-parity-guide.md",
@@ -913,6 +921,9 @@ function Get-Record {
         "tools/XObjDetectUpstreamMap/XObjDetectUpstreamMap.csproj",
         "tools/XObjDetectUpstreamMap/Program.cs",
         "tools/XObjDetectUpstreamMap/extract_xobjdetect.py",
+        "tools/XFeatures2DUpstreamMap/XFeatures2DUpstreamMap.csproj",
+        "tools/XFeatures2DUpstreamMap/Program.cs",
+        "tools/XFeatures2DUpstreamMap/extract_xfeatures2d.py",
         "docs/articles/dnn-superres-upstream-parity-guide.md",
         "docs/articles/wechat-qrcode-upstream-parity-guide.md",
         "docs/articles/cnn-3dobj-upstream-parity-guide.md",
@@ -1003,6 +1014,8 @@ function Get-Record {
         "scripts/Test-PtCloudUpstreamMap.ps1",
         "scripts/Generate-XObjDetectUpstreamMap.ps1",
         "scripts/Test-XObjDetectUpstreamMap.ps1",
+        "scripts/Generate-XFeatures2DUpstreamMap.ps1",
+        "scripts/Test-XFeatures2DUpstreamMap.ps1",
         "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
         "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
         "tools/TypedMatBenchmark/Program.cs",
@@ -1711,6 +1724,30 @@ function Get-Record {
                 ManagedPublicMemberAdditionCount = [int]$xobjdetectSummary.managedPublicMemberAdditionCount
                 NativeEntrypointAdditionCount = [int]$xobjdetectSummary.nativeEvidenceCount
                 RepositoryWideParityClaimed = [bool]$xobjdetectSummary.repositoryWideUpstreamParityClaimed
+            }
+            XFeatures2DUpstreamMap = [ordered]@{
+                Path = "compatibility/xfeatures2d-upstream-map.txt"
+                SummaryPath = "compatibility/xfeatures2d-upstream-summary.json"
+                ClassificationPath = "compatibility/xfeatures2d-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/xfeatures2d-implemented-families.json"
+                RawExtractionPath = "compatibility/xfeatures2d-upstream-raw.json"
+                Sha256 = $xfeatures2dSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/xfeatures2d-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$xfeatures2dSummary.declarationCount
+                CallableCount = [int]$xfeatures2dSummary.callableCount
+                ImplementedCount = [int]$xfeatures2dSummary.classificationCounts.implemented
+                MissingCount = [int]$xfeatures2dSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$xfeatures2dSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$xfeatures2dSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$xfeatures2dSummary.classificationCounts.'upstream-conditional'
+                SourceHeaderCount = @($xfeatures2dRaw.sourceHeaders).Count
+                SelectedFamilyCount = [int]$xfeatures2dSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$xfeatures2dSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$xfeatures2dSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$xfeatures2dSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$xfeatures2dSummary.nativeEvidenceCount
+                ExternalDataDependencyCount = [int]$xfeatures2dSummary.externalDataDependencyCount
+                RepositoryWideParityClaimed = [bool]$xfeatures2dSummary.repositoryWideUpstreamParityClaimed
             }
             GapInventoryPath = "compatibility/api-gap-inventory.json"
             GapInventoryStatus = $gapInventory.status

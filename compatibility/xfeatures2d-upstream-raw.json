@@ -1,0 +1,613 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/XFeatures2DUpstreamMap/extract_xfeatures2d.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d.hpp",
+  "headerSha256": "e413c697411bbed768a1602ab0df3d1b35191eadc6d0e44a015eba41fc3b1ce8",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d/cuda.hpp",
+      "sha256": "23d8f8a214e9da6e3aabd9f4da6c3d7b9050eea918e5cb6af0cc087a48205565",
+      "startOrdinal": 0,
+      "declarationCount": 8
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d/nonfree.hpp",
+      "sha256": "7e9665255e3a34536b36b51f17217d83d0c3ee1c6af6678ec91603d16ca915d4",
+      "startOrdinal": 8,
+      "declarationCount": 13
+    }
+  ],
+  "declarationCount": 21,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d/cuda.hpp",
+      "kind": "class",
+      "name": "cv.cuda.SURF_CUDA",
+      "identity": "class cv.cuda.SURF_CUDA",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "hessianThreshold",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "nOctaves",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "nOctaveLayers",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "extended",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "upright",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "keypointsRatio",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Class used for extracting Speeded Up Robust Features (SURF) from an image. :\n\nThe class SURF_CUDA implements Speeded Up Robust Features descriptor. There is a fast multi-scale\nHessian keypoint detector that can be used to find the keypoints (which is the default option). But\nthe descriptors can also be computed for the user-specified keypoints. Only 8-bit grayscale images\nare supported.\n\nThe class SURF_CUDA can store results in the GPU and CPU memory. It provides functions to convert\nresults between CPU and GPU version ( uploadKeypoints, downloadKeypoints, downloadDescriptors ). The\nformat of CPU results is the same as SURF results. GPU results are stored in GpuMat. The keypoints\nmatrix is \\f$\\texttt{nFeatures} \\times 7\\f$ matrix with the CV_32FC1 type.\n\n-   keypoints.ptr\\<float\\>(X_ROW)[i] contains x coordinate of the i-th feature.\n-   keypoints.ptr\\<float\\>(Y_ROW)[i] contains y coordinate of the i-th feature.\n-   keypoints.ptr\\<float\\>(LAPLACIAN_ROW)[i] contains the laplacian sign of the i-th feature.\n-   keypoints.ptr\\<float\\>(OCTAVE_ROW)[i] contains the octave of the i-th feature.\n-   keypoints.ptr\\<float\\>(SIZE_ROW)[i] contains the size of the i-th feature.\n-   keypoints.ptr\\<float\\>(ANGLE_ROW)[i] contain orientation of the i-th feature.\n-   keypoints.ptr\\<float\\>(HESSIAN_ROW)[i] contains the response of the i-th feature.\n\nThe descriptors matrix is \\f$\\texttt{nFeatures} \\times \\texttt{descriptorSize}\\f$ matrix with the\nCV_32FC1 type.\n\nThe class SURF_CUDA uses some buffers and provides access to it. All buffers can be safely released\nbetween function calls.\n\n@sa SURF\n\n@note\n   -   An example for using the SURF keypoint matcher on GPU can be found at\n        opencv_source_code/samples/gpu/surf_keypoint_matcher.cpp"
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d/cuda.hpp",
+      "kind": "enum",
+      "name": "cv.cuda.SURF_CUDA.KeypointLayout",
+      "identity": "enum cv.cuda.SURF_CUDA.KeypointLayout[const cv.cuda.SURF_CUDA.X_ROW=0;const cv.cuda.SURF_CUDA.Y_ROW=0+1;const cv.cuda.SURF_CUDA.LAPLACIAN_ROW=0+2;const cv.cuda.SURF_CUDA.OCTAVE_ROW=0+3;const cv.cuda.SURF_CUDA.SIZE_ROW=0+4;const cv.cuda.SURF_CUDA.ANGLE_ROW=0+5;const cv.cuda.SURF_CUDA.HESSIAN_ROW=0+6;const cv.cuda.SURF_CUDA.ROWS_COUNT=0+7]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.cuda.SURF_CUDA.X_ROW",
+          "value": "0"
+        },
+        {
+          "name": "const cv.cuda.SURF_CUDA.Y_ROW",
+          "value": "0+1"
+        },
+        {
+          "name": "const cv.cuda.SURF_CUDA.LAPLACIAN_ROW",
+          "value": "0+2"
+        },
+        {
+          "name": "const cv.cuda.SURF_CUDA.OCTAVE_ROW",
+          "value": "0+3"
+        },
+        {
+          "name": "const cv.cuda.SURF_CUDA.SIZE_ROW",
+          "value": "0+4"
+        },
+        {
+          "name": "const cv.cuda.SURF_CUDA.ANGLE_ROW",
+          "value": "0+5"
+        },
+        {
+          "name": "const cv.cuda.SURF_CUDA.HESSIAN_ROW",
+          "value": "0+6"
+        },
+        {
+          "name": "const cv.cuda.SURF_CUDA.ROWS_COUNT",
+          "value": "0+7"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d/cuda.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.SURF_CUDA.create",
+      "identity": "cv.cuda.SURF_CUDA.create(double _hessianThreshold;int _nOctaves=4;int _nOctaveLayers=2;bool _extended=false;float _keypointsRatio=0.01f;bool _upright=false)->Ptr<SURF_CUDA>",
+      "returnType": "Ptr<SURF_CUDA>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "_hessianThreshold",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "_nOctaves",
+          "default": "4",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "_nOctaveLayers",
+          "default": "2",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "_extended",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "_keypointsRatio",
+          "default": "0.01f",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "_upright",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@param _hessianThreshold Threshold for hessian keypoint detector used in SURF.\n    @param _nOctaves Number of pyramid octaves the keypoint detector will use.\n    @param _nOctaveLayers Number of octave layers within each octave.\n    @param _extended Extended descriptor flag (true - use extended 128-element descriptors; false - use\n    64-element descriptors).\n    @param _keypointsRatio Limits a maximum number of features\n    @param _upright Up-right or rotated features flag (true - do not compute orientation of features;\n    false - compute orientation)."
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d/cuda.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.SURF_CUDA.descriptorSize",
+      "identity": "cv.cuda.SURF_CUDA.descriptorSize()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d/cuda.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.SURF_CUDA.defaultNorm",
+      "identity": "cv.cuda.SURF_CUDA.defaultNorm()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d/cuda.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.SURF_CUDA.downloadKeypoints",
+      "identity": "cv.cuda.SURF_CUDA.downloadKeypoints(GpuMat keypointsGPU[/C,/Ref];vector_KeyPoint keypoints[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "GpuMat",
+          "name": "keypointsGPU",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_KeyPoint",
+          "name": "keypoints",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d/cuda.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.SURF_CUDA.detect",
+      "identity": "cv.cuda.SURF_CUDA.detect(GpuMat img[/C,/Ref];GpuMat mask[/C,/Ref];GpuMat keypoints[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "GpuMat",
+          "name": "img",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "GpuMat",
+          "name": "mask",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "GpuMat",
+          "name": "keypoints",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Finds the keypoints using fast hessian detector used in SURF\n\n    @param img Source image, currently supports only CV_8UC1 images.\n    @param mask A mask image same size as src and of type CV_8UC1.\n    @param keypoints Detected keypoints."
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d/cuda.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.SURF_CUDA.detectWithDescriptors",
+      "identity": "cv.cuda.SURF_CUDA.detectWithDescriptors(GpuMat img[/C,/Ref];GpuMat mask[/C,/Ref];GpuMat keypoints[/O,/Ref];GpuMat descriptors[/O,/Ref];bool useProvidedKeypoints=false)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "GpuMat",
+          "name": "img",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "GpuMat",
+          "name": "mask",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "GpuMat",
+          "name": "keypoints",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "GpuMat",
+          "name": "descriptors",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "useProvidedKeypoints",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Finds the keypoints and computes their descriptors using fast hessian detector used in SURF\n\n    @param img Source image, currently supports only CV_8UC1 images.\n    @param mask A mask image same size as src and of type CV_8UC1.\n    @param keypoints Detected keypoints.\n    @param descriptors Keypoint descriptors.\n    @param useProvidedKeypoints Compute descriptors for the user-provided keypoints and recompute keypoints direction."
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d/nonfree.hpp",
+      "kind": "class",
+      "name": "cv.xfeatures2d.SURF",
+      "identity": "class cv.xfeatures2d.SURF",
+      "returnType": ": cv::xfeatures2d::Feature2D",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::xfeatures2d::Feature2D",
+      "documentation": "@brief Class for extracting Speeded Up Robust Features from an image @cite Bay06 .\n\nThe algorithm parameters:\n-   member int extended\n    -   0 means that the basic descriptors (64 elements each) shall be computed\n    -   1 means that the extended descriptors (128 elements each) shall be computed\n-   member int upright\n    -   0 means that detector computes orientation of each feature.\n    -   1 means that the orientation is not computed (which is much, much faster). For example,\nif you match images from a stereo pair, or do image stitching, the matched features\nlikely have very similar angles, and you can speed up feature extraction by setting\nupright=1.\n-   member double hessianThreshold\nThreshold for the keypoint detector. Only features, whose hessian is larger than\nhessianThreshold are retained by the detector. Therefore, the larger the value, the less\nkeypoints you will get. A good default value could be from 300 to 500, depending from the\nimage contrast.\n-   member int nOctaves\nThe number of a gaussian pyramid octaves that the detector uses. It is set to 4 by default.\nIf you want to get very large features, use the larger value. If you want just small\nfeatures, decrease it.\n-   member int nOctaveLayers\nThe number of images within each octave of a gaussian pyramid. It is set to 2 by default.\n@note\n   -   An example using the SURF feature detector can be found at\n        opencv_source_code/samples/cpp/generic_descriptor_match.cpp\n    -   Another example using the SURF feature detector, extractor and matcher can be found at\n        opencv_source_code/samples/cpp/matcher_simple.cpp"
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d/nonfree.hpp",
+      "kind": "callable",
+      "name": "cv.xfeatures2d.SURF.create",
+      "identity": "cv.xfeatures2d.SURF.create(double hessianThreshold=100;int nOctaves=4;int nOctaveLayers=3;bool extended=false;bool upright=false)->Ptr<SURF>",
+      "returnType": "Ptr<SURF>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "hessianThreshold",
+          "default": "100",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "nOctaves",
+          "default": "4",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "nOctaveLayers",
+          "default": "3",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "extended",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "upright",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@param hessianThreshold Threshold for hessian keypoint detector used in SURF.\n    @param nOctaves Number of pyramid octaves the keypoint detector will use.\n    @param nOctaveLayers Number of octave layers within each octave.\n    @param extended Extended descriptor flag (true - use extended 128-element descriptors; false - use\n    64-element descriptors).\n    @param upright Up-right or rotated features flag (true - do not compute orientation of features;\n    false - compute orientation)."
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d/nonfree.hpp",
+      "kind": "callable",
+      "name": "cv.xfeatures2d.SURF.setHessianThreshold",
+      "identity": "cv.xfeatures2d.SURF.setHessianThreshold(double hessianThreshold)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "hessianThreshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d/nonfree.hpp",
+      "kind": "callable",
+      "name": "cv.xfeatures2d.SURF.getHessianThreshold",
+      "identity": "cv.xfeatures2d.SURF.getHessianThreshold()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d/nonfree.hpp",
+      "kind": "callable",
+      "name": "cv.xfeatures2d.SURF.setNOctaves",
+      "identity": "cv.xfeatures2d.SURF.setNOctaves(int nOctaves)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nOctaves",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d/nonfree.hpp",
+      "kind": "callable",
+      "name": "cv.xfeatures2d.SURF.getNOctaves",
+      "identity": "cv.xfeatures2d.SURF.getNOctaves()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d/nonfree.hpp",
+      "kind": "callable",
+      "name": "cv.xfeatures2d.SURF.setNOctaveLayers",
+      "identity": "cv.xfeatures2d.SURF.setNOctaveLayers(int nOctaveLayers)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nOctaveLayers",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d/nonfree.hpp",
+      "kind": "callable",
+      "name": "cv.xfeatures2d.SURF.getNOctaveLayers",
+      "identity": "cv.xfeatures2d.SURF.getNOctaveLayers()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d/nonfree.hpp",
+      "kind": "callable",
+      "name": "cv.xfeatures2d.SURF.setExtended",
+      "identity": "cv.xfeatures2d.SURF.setExtended(bool extended)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "extended",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d/nonfree.hpp",
+      "kind": "callable",
+      "name": "cv.xfeatures2d.SURF.getExtended",
+      "identity": "cv.xfeatures2d.SURF.getExtended()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d/nonfree.hpp",
+      "kind": "callable",
+      "name": "cv.xfeatures2d.SURF.setUpright",
+      "identity": "cv.xfeatures2d.SURF.setUpright(bool upright)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "upright",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d/nonfree.hpp",
+      "kind": "callable",
+      "name": "cv.xfeatures2d.SURF.getUpright",
+      "identity": "cv.xfeatures2d.SURF.getUpright()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d/nonfree.hpp",
+      "kind": "callable",
+      "name": "cv.xfeatures2d.SURF.getDefaultName",
+      "identity": "cv.xfeatures2d.SURF.getDefaultName()->String",
+      "returnType": "String",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    }
+  ]
+}

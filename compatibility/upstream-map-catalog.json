@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 46,
+  "moduleCount": 47,
   "maps": [
     {
       "id": "calib3d",
@@ -3102,6 +3102,58 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "64a6a4fca4b75318a4cdf72784548c302872728033045be09068fd2f5957920c",
         "familyInventorySha256": "81a4c222a776d07820780e51d9b89df185a088a7f37e6f2735201cf4603cb5ab",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "xfeatures2d",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/XFeatures2DUpstreamMap",
+      "extractorScript": "tools/XFeatures2DUpstreamMap/extract_xfeatures2d.py",
+      "generationScript": "scripts/Generate-XFeatures2DUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-XFeatures2DUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/xfeatures2d.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d.hpp",
+          "sha256": "e413c697411bbed768a1602ab0df3d1b35191eadc6d0e44a015eba41fc3b1ce8"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d/cuda.hpp",
+            "sha256": "23d8f8a214e9da6e3aabd9f4da6c3d7b9050eea918e5cb6af0cc087a48205565",
+            "startOrdinal": 0,
+            "declarationCount": 8
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/xfeatures2d/include/opencv2/xfeatures2d/nonfree.hpp",
+            "sha256": "7e9665255e3a34536b36b51f17217d83d0c3ee1c6af6678ec91603d16ca915d4",
+            "startOrdinal": 8,
+            "declarationCount": 13
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/xfeatures2d-upstream-raw.json",
+        "classifications": "compatibility/xfeatures2d-upstream-classifications.json",
+        "mapping": "compatibility/xfeatures2d-upstream-map.txt",
+        "summary": "compatibility/xfeatures2d-upstream-summary.json",
+        "familyInventory": "compatibility/xfeatures2d-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 21,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "cc37b07619c0a359b2413b8757d3387c092f93269c90bb610a9743999060ab73",
+        "familyInventorySha256": "7207ff63b31ea8106d064fe957f42631b1bf105c8f28c508c9efe0881fac574c",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

@@ -1,0 +1,202 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/xfeatures2d.hpp contrib public header closure from parser-emitted headers",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact XFeatures2D wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [
+    "The xfeatures2d CUDA headers require an optional CUDA build/runtime; this package bundles no CUDA XFeatures2D wrapper or CUDA runtime.",
+    "The xfeatures2d nonfree families require an explicit OPENCV_ENABLE_NONFREE build and licensing decision; no nonfree wrapper or feature model assets are bundled."
+  ],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.cuda.SURF_CUDA",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XFEATURES2D=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "enum cv.cuda.SURF_CUDA.KeypointLayout[const cv.cuda.SURF_CUDA.X_ROW=0;const cv.cuda.SURF_CUDA.Y_ROW=0+1;const cv.cuda.SURF_CUDA.LAPLACIAN_ROW=0+2;const cv.cuda.SURF_CUDA.OCTAVE_ROW=0+3;const cv.cuda.SURF_CUDA.SIZE_ROW=0+4;const cv.cuda.SURF_CUDA.ANGLE_ROW=0+5;const cv.cuda.SURF_CUDA.HESSIAN_ROW=0+6;const cv.cuda.SURF_CUDA.ROWS_COUNT=0+7]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XFEATURES2D=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.cuda.SURF_CUDA.create(double _hessianThreshold;int _nOctaves=4;int _nOctaveLayers=2;bool _extended=false;float _keypointsRatio=0.01f;bool _upright=false)->Ptr<SURF_CUDA>",
+      "classification": "intentionally-omitted",
+      "reason": "The xfeatures2d contrib surface is optional CUDA/nonfree functionality and the current package has no native XFeatures2D wrapper entrypoint or managed public owner; CUDA runtime/toolkit availability, nonfree build policy, and feature/model ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XFEATURES2D=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.cuda.SURF_CUDA.descriptorSize()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The xfeatures2d contrib surface is optional CUDA/nonfree functionality and the current package has no native XFeatures2D wrapper entrypoint or managed public owner; CUDA runtime/toolkit availability, nonfree build policy, and feature/model ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XFEATURES2D=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.cuda.SURF_CUDA.defaultNorm()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The xfeatures2d contrib surface is optional CUDA/nonfree functionality and the current package has no native XFeatures2D wrapper entrypoint or managed public owner; CUDA runtime/toolkit availability, nonfree build policy, and feature/model ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XFEATURES2D=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.cuda.SURF_CUDA.downloadKeypoints(GpuMat keypointsGPU[/C,/Ref];vector_KeyPoint keypoints[/O,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The xfeatures2d contrib surface is optional CUDA/nonfree functionality and the current package has no native XFeatures2D wrapper entrypoint or managed public owner; CUDA runtime/toolkit availability, nonfree build policy, and feature/model ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XFEATURES2D=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.cuda.SURF_CUDA.detect(GpuMat img[/C,/Ref];GpuMat mask[/C,/Ref];GpuMat keypoints[/O,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The xfeatures2d contrib surface is optional CUDA/nonfree functionality and the current package has no native XFeatures2D wrapper entrypoint or managed public owner; CUDA runtime/toolkit availability, nonfree build policy, and feature/model ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XFEATURES2D=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.cuda.SURF_CUDA.detectWithDescriptors(GpuMat img[/C,/Ref];GpuMat mask[/C,/Ref];GpuMat keypoints[/O,/Ref];GpuMat descriptors[/O,/Ref];bool useProvidedKeypoints=false)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The xfeatures2d contrib surface is optional CUDA/nonfree functionality and the current package has no native XFeatures2D wrapper entrypoint or managed public owner; CUDA runtime/toolkit availability, nonfree build policy, and feature/model ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XFEATURES2D=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 8,
+      "identity": "class cv.xfeatures2d.SURF",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XFEATURES2D=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.xfeatures2d.SURF.create(double hessianThreshold=100;int nOctaves=4;int nOctaveLayers=3;bool extended=false;bool upright=false)->Ptr<SURF>",
+      "classification": "intentionally-omitted",
+      "reason": "The xfeatures2d contrib surface is optional CUDA/nonfree functionality and the current package has no native XFeatures2D wrapper entrypoint or managed public owner; CUDA runtime/toolkit availability, nonfree build policy, and feature/model ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XFEATURES2D=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.xfeatures2d.SURF.setHessianThreshold(double hessianThreshold)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The xfeatures2d contrib surface is optional CUDA/nonfree functionality and the current package has no native XFeatures2D wrapper entrypoint or managed public owner; CUDA runtime/toolkit availability, nonfree build policy, and feature/model ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XFEATURES2D=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.xfeatures2d.SURF.getHessianThreshold()->double",
+      "classification": "intentionally-omitted",
+      "reason": "The xfeatures2d contrib surface is optional CUDA/nonfree functionality and the current package has no native XFeatures2D wrapper entrypoint or managed public owner; CUDA runtime/toolkit availability, nonfree build policy, and feature/model ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XFEATURES2D=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.xfeatures2d.SURF.setNOctaves(int nOctaves)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The xfeatures2d contrib surface is optional CUDA/nonfree functionality and the current package has no native XFeatures2D wrapper entrypoint or managed public owner; CUDA runtime/toolkit availability, nonfree build policy, and feature/model ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XFEATURES2D=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.xfeatures2d.SURF.getNOctaves()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The xfeatures2d contrib surface is optional CUDA/nonfree functionality and the current package has no native XFeatures2D wrapper entrypoint or managed public owner; CUDA runtime/toolkit availability, nonfree build policy, and feature/model ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XFEATURES2D=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.xfeatures2d.SURF.setNOctaveLayers(int nOctaveLayers)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The xfeatures2d contrib surface is optional CUDA/nonfree functionality and the current package has no native XFeatures2D wrapper entrypoint or managed public owner; CUDA runtime/toolkit availability, nonfree build policy, and feature/model ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XFEATURES2D=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.xfeatures2d.SURF.getNOctaveLayers()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The xfeatures2d contrib surface is optional CUDA/nonfree functionality and the current package has no native XFeatures2D wrapper entrypoint or managed public owner; CUDA runtime/toolkit availability, nonfree build policy, and feature/model ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XFEATURES2D=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.xfeatures2d.SURF.setExtended(bool extended)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The xfeatures2d contrib surface is optional CUDA/nonfree functionality and the current package has no native XFeatures2D wrapper entrypoint or managed public owner; CUDA runtime/toolkit availability, nonfree build policy, and feature/model ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XFEATURES2D=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.xfeatures2d.SURF.getExtended()->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The xfeatures2d contrib surface is optional CUDA/nonfree functionality and the current package has no native XFeatures2D wrapper entrypoint or managed public owner; CUDA runtime/toolkit availability, nonfree build policy, and feature/model ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XFEATURES2D=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.xfeatures2d.SURF.setUpright(bool upright)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The xfeatures2d contrib surface is optional CUDA/nonfree functionality and the current package has no native XFeatures2D wrapper entrypoint or managed public owner; CUDA runtime/toolkit availability, nonfree build policy, and feature/model ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XFEATURES2D=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.xfeatures2d.SURF.getUpright()->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The xfeatures2d contrib surface is optional CUDA/nonfree functionality and the current package has no native XFeatures2D wrapper entrypoint or managed public owner; CUDA runtime/toolkit availability, nonfree build policy, and feature/model ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XFEATURES2D=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.xfeatures2d.SURF.getDefaultName()->String",
+      "classification": "intentionally-omitted",
+      "reason": "The xfeatures2d contrib surface is optional CUDA/nonfree functionality and the current package has no native XFeatures2D wrapper entrypoint or managed public owner; CUDA runtime/toolkit availability, nonfree build policy, and feature/model ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XFEATURES2D=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}

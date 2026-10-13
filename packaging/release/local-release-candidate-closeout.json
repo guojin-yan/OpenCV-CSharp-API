@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/0eb2544253716ede",
-  "SourceIdentity": "sha256:0eb2544253716ede726b399b9b3037116b7f9e23a4ef2abf46a0fa657aefccdd",
+  "CandidateId": "local-closeout/sha256/b2f60681d77c91b6",
+  "SourceIdentity": "sha256:b2f60681d77c91b64c0ef8c9eb18c1b817fd7e3223436153e55178bda158a87f",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 2159,
-    "Sha256": "0eb2544253716ede726b399b9b3037116b7f9e23a4ef2abf46a0fa657aefccdd",
+    "FileCount": 2170,
+    "Sha256": "b2f60681d77c91b64c0ef8c9eb18c1b817fd7e3223436153e55178bda158a87f",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -744,6 +744,30 @@
       "ManagedPublicTypeAdditionCount": 0,
       "ManagedPublicMemberAdditionCount": 0,
       "NativeEntrypointAdditionCount": 27,
+      "RepositoryWideParityClaimed": false
+    },
+    "XFeatures2DUpstreamMap": {
+      "Path": "compatibility/xfeatures2d-upstream-map.txt",
+      "SummaryPath": "compatibility/xfeatures2d-upstream-summary.json",
+      "ClassificationPath": "compatibility/xfeatures2d-upstream-classifications.json",
+      "FamilyInventoryPath": "compatibility/xfeatures2d-implemented-families.json",
+      "RawExtractionPath": "compatibility/xfeatures2d-upstream-raw.json",
+      "Sha256": "cc37b07619c0a359b2413b8757d3387c092f93269c90bb610a9743999060ab73",
+      "RawSha256": "44e5991dadc1cfc14f431b23954582cab0946878f14553d4aec384c85aedb48c",
+      "DeclarationCount": 21,
+      "CallableCount": 18,
+      "ImplementedCount": 0,
+      "MissingCount": 0,
+      "IntentionallyOmittedCount": 18,
+      "UnsupportedCount": 0,
+      "UpstreamConditionalCount": 0,
+      "SourceHeaderCount": 2,
+      "SelectedFamilyCount": 1,
+      "SelectedDeclarationCount": 0,
+      "ManagedPublicTypeAdditionCount": 0,
+      "ManagedPublicMemberAdditionCount": 0,
+      "NativeEntrypointAdditionCount": 0,
+      "ExternalDataDependencyCount": 2,
       "RepositoryWideParityClaimed": false
     },
     "GapInventoryPath": "compatibility/api-gap-inventory.json",
@@ -1811,18 +1835,18 @@
     },
     {
       "Path": "compatibility/upstream-map-catalog.json",
-      "Sha256": "c9072e977f2db679460353d88667a996cdec40084adb30f6a6a0f5caa6f96284",
-      "Length": 148568
+      "Sha256": "728577154b76b2f725e60115b3e288694f98c0593f35909108082bfe58ffac47",
+      "Length": 151044
     },
     {
       "Path": "compatibility/upstream-map-catalog.schema.json",
-      "Sha256": "bd29418605844f345859323938fc91861d3d419f63b1691222663304a9ee78c3",
-      "Length": 5972
+      "Sha256": "05ac117c5ed0ea7a087124975b1750bb2b7ffee4d57c36e3deb9c13a8e20516f",
+      "Length": 5987
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "b02689e6d7470b6ee52e9573c7f805fb4973d275c4a7fd02073f0d282c2e46d3",
-      "Length": 57841
+      "Sha256": "7ca503d5ccc6d899ce2a2f931e0bafc5573d986d58c5a5e7a4d08d39166434e5",
+      "Length": 59268
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -1908,6 +1932,31 @@
       "Path": "compatibility/wechat_qrcode-upstream-summary.json",
       "Sha256": "d1efe63f780a706b2683aa48f84c3d08f630c44ede85690de1f0ea271e486a55",
       "Length": 1457
+    },
+    {
+      "Path": "compatibility/xfeatures2d-implemented-families.json",
+      "Sha256": "6a5bf479301bda6cfee711af61c4d9377fc8d6d7983a0bd59cdc2dab6d37e7bd",
+      "Length": 400
+    },
+    {
+      "Path": "compatibility/xfeatures2d-upstream-classifications.json",
+      "Sha256": "611dc1ae2fe81f9ad3da52938dc11f3eacc30d6ec28a906b4df19d66a00d4014",
+      "Length": 13689
+    },
+    {
+      "Path": "compatibility/xfeatures2d-upstream-map.txt",
+      "Sha256": "cc37b07619c0a359b2413b8757d3387c092f93269c90bb610a9743999060ab73",
+      "Length": 9739
+    },
+    {
+      "Path": "compatibility/xfeatures2d-upstream-raw.json",
+      "Sha256": "44e5991dadc1cfc14f431b23954582cab0946878f14553d4aec384c85aedb48c",
+      "Length": 22680
+    },
+    {
+      "Path": "compatibility/xfeatures2d-upstream-summary.json",
+      "Sha256": "acbc46fd3e9ff144546ef56d86e841ec111fadd363a8c0536bfe1d8c639d1cbe",
+      "Length": 1449
     },
     {
       "Path": "compatibility/ximgproc-implemented-families.json",
@@ -2011,8 +2060,8 @@
     },
     {
       "Path": "docs/articles/api-abi-compatibility-policy.md",
-      "Sha256": "76cb0db84f0efd4e6b1be4966e9ed1e6dd02c46777ced31e3f8558789fc18d09",
-      "Length": 15876
+      "Sha256": "42810aff5331b6cfd53fba224c09d60d3135664faf94588e35f4f21eb240cce4",
+      "Length": 16445
     },
     {
       "Path": "docs/articles/async-video-owner-adr.md",
@@ -2361,8 +2410,8 @@
     },
     {
       "Path": "docs/articles/upstream-map-toolchain.md",
-      "Sha256": "cd2544276102557c4586afb3d9072cb067ee3b7241e18b7713ecff444a98564a",
-      "Length": 10956
+      "Sha256": "f81509f25e9523a21c86c805115b1214ce2077a8a4443603f292104130e18e8a",
+      "Length": 11691
     },
     {
       "Path": "docs/articles/v501-modern-api-preview-guide.md",
@@ -2388,6 +2437,11 @@
       "Path": "docs/articles/wechat-qrcode-upstream-parity-guide.md",
       "Sha256": "a0b3c6192cdd277d95210d5e419a6d6a088e52379de1ab33a846ebe0e74aabed",
       "Length": 1837
+    },
+    {
+      "Path": "docs/articles/xfeatures2d-upstream-parity-guide.md",
+      "Sha256": "42b8d3b93736f73012d53960eb2ad9329d118b5b23da6f97d8784357b235505a",
+      "Length": 2011
     },
     {
       "Path": "docs/articles/ximgproc-upstream-parity-guide.md",
@@ -2466,8 +2520,8 @@
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "5aeff2118db2348549d1742c300de8df07044de114d96a8664a70b8e89318772",
-      "Length": 17462
+      "Sha256": "b1ce69f8bbffbc985626dc89012d883f42fffb4aba592f22588e14cea2b5284a",
+      "Length": 17557
     },
     {
       "Path": "nuget/logo.jpg",
@@ -2831,8 +2885,8 @@
     },
     {
       "Path": "scripts/Generate-ContribUpstreamMap.ps1",
-      "Sha256": "f63745578d08d98f9f1404382a6f0a96acd069817d9b91190f9c43977aeb7868",
-      "Length": 109181
+      "Sha256": "ec1744195e8aa5caf706215b45cb16a38fe11c2682e2ab1c63895e1897772626",
+      "Length": 110155
     },
     {
       "Path": "scripts/Generate-CoreUpstreamMap.ps1",
@@ -3030,6 +3084,11 @@
       "Length": 311
     },
     {
+      "Path": "scripts/Generate-XFeatures2DUpstreamMap.ps1",
+      "Sha256": "9b05a6371daa913598ee3c4c2b166fd620845de40d809e979574e2fd012ffde4",
+      "Length": 1043
+    },
+    {
       "Path": "scripts/Generate-XImgProcUpstreamMap.ps1",
       "Sha256": "937e2b6033ea0c8c2515d22fcf1130412e9cd7ff7862494137202358242a8c5f",
       "Length": 27480
@@ -3061,8 +3120,8 @@
     },
     {
       "Path": "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
-      "Sha256": "b83e2bb3cc3f348e7386b4f8f90dcc0f7e268852f882a908d491838e8a90a02b",
-      "Length": 5401
+      "Sha256": "7d3e3c49f84c07a25f13c83604744cc4a3b2c34d955caf1b567794d9ef146b46",
+      "Length": 5431
     },
     {
       "Path": "scripts/Invoke-LifecycleRefreshContainerProducer.ps1",
@@ -3141,8 +3200,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "e39e5dabf00935e0a1e6063b0afad72e9e35c04065a53c2c83bb24d4a0edf9c0",
-      "Length": 121183
+      "Sha256": "7fe58004407803c50f66b40b9fdaac8bf9fbdc8d03481975fc8f8015d47aa722",
+      "Length": 124222
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -3156,8 +3215,8 @@
     },
     {
       "Path": "scripts/New-UpstreamMapCatalog.ps1",
-      "Sha256": "8df80279a8eea98a4d9e46591a6ac1e86b828dc4b7ae0b1653dc6e67e41044bf",
-      "Length": 10706
+      "Sha256": "e4313709b6c017bf4de03abb731e77c5ebdce0bff6d5707f8f9d754e06a9fc86",
+      "Length": 10803
     },
     {
       "Path": "scripts/Test-AlphaMatUpstreamMap.ps1",
@@ -3541,8 +3600,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "feea042a5eac3b399090d30af6843df3db6ae229ae8f31110d646cb5bc8ce13a",
-      "Length": 107110
+      "Sha256": "03f0ae7cbc2d28cde836a8b7919ed625904f34fae9a4a5411e70e226028461fd",
+      "Length": 109328
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -3656,8 +3715,8 @@
     },
     {
       "Path": "scripts/Test-UpstreamMapCatalog.ps1",
-      "Sha256": "432804da71351047bd4f714ef5ac6ca941680091f1cbfbf52e6b5d62a3a3caad",
-      "Length": 15074
+      "Sha256": "d9cb26b5848526ad3f90b44549dfbede707411a51f32b1c08ad46564666bd040",
+      "Length": 15088
     },
     {
       "Path": "scripts/Test-V501ChangeLedger.ps1",
@@ -3693,6 +3752,11 @@
       "Path": "scripts/Test-WorkflowInvariantCoverage.ps1",
       "Sha256": "a17d61dc2ccbf66e806f2a44deeb0df2b8cced65e259c5fbe545ddcb79d8dec5",
       "Length": 14861
+    },
+    {
+      "Path": "scripts/Test-XFeatures2DUpstreamMap.ps1",
+      "Sha256": "ed295065b6b28a275b956e0dcb7839c898fdfac6de199f7de73a21f664f6c280",
+      "Length": 2742
     },
     {
       "Path": "scripts/Test-XImgProcUpstreamMap.ps1",
@@ -4955,6 +5019,21 @@
       "Length": 236
     },
     {
+      "Path": "tools/XFeatures2DUpstreamMap/Program.cs",
+      "Sha256": "90a5ce347748f62701076a792f8fdee6bd589a172ca9a0ddc3c67a29cb806856",
+      "Length": 112
+    },
+    {
+      "Path": "tools/XFeatures2DUpstreamMap/XFeatures2DUpstreamMap.csproj",
+      "Sha256": "727d0721f11212e08035cc59275b0226c0092f3ea92492d621c3d25879ef974f",
+      "Length": 273
+    },
+    {
+      "Path": "tools/XFeatures2DUpstreamMap/extract_xfeatures2d.py",
+      "Sha256": "335b08a99646b5e17fee9ab08ae5c6a090f0fb8b7576ac1fc530dfd021f4329a",
+      "Length": 234
+    },
+    {
       "Path": "tools/XImgProcUpstreamMap/Program.cs",
       "Sha256": "a76f0d011d3617e34c1b97b7f121fbe221a995609752ff9fedda1ef09f031376",
       "Length": 106
@@ -4966,8 +5045,8 @@
     },
     {
       "Path": "tools/XImgProcUpstreamMap/extract_ximgproc.py",
-      "Sha256": "95ad1680420d7320f7d1924bafc15483fbb536a15a8498d0427e6453036d4050",
-      "Length": 6097
+      "Sha256": "bc9b07f697579ba1b3d3eef4b2c22abafab5f5db4c63ffa8cd3b8f710594e720",
+      "Length": 6142
     },
     {
       "Path": "tools/XObjDetectUpstreamMap/Program.cs",
