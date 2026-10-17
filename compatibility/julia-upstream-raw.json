@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/JuliaUpstreamMap/extract_julia.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/julia/include/opencv2/julia.hpp",
+  "headerSha256": "80b6b2052b48082ec5f4de0573d01d10d3cc36060a4be9eb5ec6937acd43684d",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/julia/include/opencv2/julia.hpp",
+      "sha256": "80b6b2052b48082ec5f4de0573d01d10d3cc36060a4be9eb5ec6937acd43684d",
+      "startOrdinal": 0,
+      "declarationCount": 1
+    }
+  ],
+  "declarationCount": 1,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/julia/include/opencv2/julia.hpp",
+      "kind": "callable",
+      "name": "cv.julia.initJulia",
+      "identity": "cv.julia.initJulia(int argc;c_stc_string argv)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "argc",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "c_stc_string",
+          "name": "argv",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@defgroup julia Julia bindings for OpenCV\n\nJulia (https://julialang.org) is a programming language for scientific community with growing popularity.\nThese are bindings for a subset of OpenCV functionality, based on libcxxwrap-julia and CxxWrap packages.\n\nFor installation instructions, see README.md in this module or OpenCV wiki (https://github.com/opencv/opencv/wiki)"
+    }
+  ]
+}
