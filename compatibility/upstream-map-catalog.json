@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 57,
+  "moduleCount": 58,
   "maps": [
     {
       "id": "calib3d",
@@ -3692,6 +3692,58 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "da38018a05b2487671a04c275b9bb04ecff98f4e8dce4affc6c78e8cb2a2e573",
         "familyInventorySha256": "5e02d962dc5aaf678981b2d56b491bd0d21f800579ea405e64ee0b5fbe50021e",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "cudawarping",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/CudaWarpingUpstreamMap",
+      "extractorScript": "tools/CudaWarpingUpstreamMap/extract_cudawarping.py",
+      "generationScript": "scripts/Generate-CudaWarpingUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-CudaWarpingUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/cudawarping.hpp parser-backed CUDA image-warping public declarations plus the pinned module CMake build/dependency contract",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/cudawarping/include/opencv2/cudawarping.hpp",
+          "sha256": "3b0cc2a008c932ac6c1cb3b6adf972a919a1f5a5135f09277e5dc25b24679807"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudawarping/include/opencv2/cudawarping.hpp",
+            "sha256": "3b0cc2a008c932ac6c1cb3b6adf972a919a1f5a5135f09277e5dc25b24679807",
+            "startOrdinal": 0,
+            "declarationCount": 13
+          }
+        ],
+        "compatibilityHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudawarping/CMakeLists.txt",
+            "sha256": "91934e75b3aae4cf246783004d4b5dcbd87dd948bc4919cf85d23ed6d2dc11d3",
+            "reason": "Upstream module activation, core/imgproc/geometry dependency, and CUDA/NPP image-warping dependency contract; parser declarations are not gated in the public header."
+          }
+        ],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/cudawarping-upstream-raw.json",
+        "classifications": "compatibility/cudawarping-upstream-classifications.json",
+        "mapping": "compatibility/cudawarping-upstream-map.txt",
+        "summary": "compatibility/cudawarping-upstream-summary.json",
+        "familyInventory": "compatibility/cudawarping-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 13,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "135ba3ce8b955e15c74f0cd2ae57b66cd64e801efc0e8df244765e50feab07c1",
+        "familyInventorySha256": "e641fd45b6111a67616b50efcaffabde2fcd2397f80157f935759c675d2663a3",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

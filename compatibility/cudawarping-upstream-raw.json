@@ -1,0 +1,794 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/CudaWarpingUpstreamMap/extract_cudawarping.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/cudawarping/include/opencv2/cudawarping.hpp",
+  "headerSha256": "3b0cc2a008c932ac6c1cb3b6adf972a919a1f5a5135f09277e5dc25b24679807",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudawarping/include/opencv2/cudawarping.hpp",
+      "sha256": "3b0cc2a008c932ac6c1cb3b6adf972a919a1f5a5135f09277e5dc25b24679807",
+      "startOrdinal": 0,
+      "declarationCount": 13
+    }
+  ],
+  "declarationCount": 13,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudawarping/include/opencv2/cudawarping.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.remap",
+      "identity": "cv.cuda.remap(Mat src;Mat dst[/O];Mat xmap;Mat ymap;int interpolation;int borderMode=BORDER_CONSTANT;Scalar borderValue=Scalar();Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "xmap",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "ymap",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "interpolation",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "borderMode",
+          "default": "BORDER_CONSTANT",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "borderValue",
+          "default": "Scalar()",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Applies a generic geometrical transformation to an image.\n\n@param src Source image.\n@param dst Destination image with the size the same as xmap and the type the same as src .\n@param xmap X values. Only CV_32FC1 type is supported.\n@param ymap Y values. Only CV_32FC1 type is supported.\n@param interpolation Interpolation method (see resize ). INTER_NEAREST , INTER_LINEAR and\nINTER_CUBIC are supported for now.\nThe extra flag WARP_RELATIVE_MAP can be ORed to the interpolation method\n(e.g. INTER_LINEAR | WARP_RELATIVE_MAP)\n@param borderMode Pixel extrapolation method (see borderInterpolate ). BORDER_REFLECT101 ,\nBORDER_REPLICATE , BORDER_CONSTANT , BORDER_REFLECT and BORDER_WRAP are supported for now.\n@param borderValue Value used in case of a constant border. By default, it is 0.\n@param stream Stream for the asynchronous version.\n\nThe function transforms the source image using the specified map:\n\n\\f[\\texttt{dst} (x,y) =  \\texttt{src} (xmap(x,y), ymap(x,y))\\f]\n\nwith the WARP_RELATIVE_MAP flag :\n\n\\f[\\texttt{dst} (x,y) =  \\texttt{src} (x+map_x(x,y),y+map_y(x,y))\\f]\n\nValues of pixels with non-integer coordinates are computed using the bilinear interpolation.\n\n@sa remap"
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudawarping/include/opencv2/cudawarping.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.resize",
+      "identity": "cv.cuda.resize(Mat src;Mat dst[/O];Size dsize;double fx=0;double fy=0;int interpolation=INTER_LINEAR;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Size",
+          "name": "dsize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "fx",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "fy",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "interpolation",
+          "default": "INTER_LINEAR",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Resizes an image.\n\n@param src Source image.\n@param dst Destination image with the same type as src . The size is dsize (when it is non-zero)\nor the size is computed from src.size() , fx , and fy .\n@param dsize Destination image size. If it is zero, it is computed as:\n\\f[\\texttt{dsize = Size(round(fx*src.cols), round(fy*src.rows))}\\f]\nEither dsize or both fx and fy must be non-zero.\n@param fx Scale factor along the horizontal axis. If it is zero, it is computed as:\n\\f[\\texttt{(double)dsize.width/src.cols}\\f]\n@param fy Scale factor along the vertical axis. If it is zero, it is computed as:\n\\f[\\texttt{(double)dsize.height/src.rows}\\f]\n@param interpolation Interpolation method. INTER_NEAREST , INTER_LINEAR , INTER_CUBIC , and INTER_AREA are\nsupported.\n@param stream Stream for the asynchronous version.\n\n@sa resize"
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudawarping/include/opencv2/cudawarping.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.warpAffine",
+      "identity": "cv.cuda.warpAffine(Mat src;Mat dst[/O];UMat M;Size dsize;int flags=INTER_LINEAR;int borderMode=BORDER_CONSTANT;Scalar borderValue=Scalar();Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "UMat",
+          "name": "M",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "dsize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "INTER_LINEAR",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "borderMode",
+          "default": "BORDER_CONSTANT",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "borderValue",
+          "default": "Scalar()",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Applies an affine transformation to an image.\n\n@param src Source image. CV_8U , CV_16U , CV_32S , or CV_32F depth and 1, 3, or 4 channels are\nsupported.\n@param dst Destination image with the same type as src . The size is dsize .\n    **In-place operation (src == dst) is not supported and will result in an error.**\n@param M *2x3* Mat or UMat transformation matrix.\n@param dsize Size of the destination image.\n@param flags Combination of interpolation methods (see resize) and the optional flag\nWARP_INVERSE_MAP specifying that M is an inverse transformation ( dst=\\>src ). Only\nINTER_NEAREST , INTER_LINEAR , and INTER_CUBIC interpolation methods are supported.\n@param borderMode\n@param borderValue\n@param stream Stream for the asynchronous version.\n\n@note In-place operation is not supported. If src and dst refer to the same data, the behavior is undefined.\n@sa warpAffine"
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudawarping/include/opencv2/cudawarping.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.warpAffine",
+      "identity": "cv.cuda.warpAffine(Mat src;Mat dst[/O];Mat M;Size dsize;int flags=INTER_LINEAR;int borderMode=BORDER_CONSTANT;Scalar borderValue=Scalar();Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "M",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "dsize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "INTER_LINEAR",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "borderMode",
+          "default": "BORDER_CONSTANT",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "borderValue",
+          "default": "Scalar()",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudawarping/include/opencv2/cudawarping.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.buildWarpAffineMaps",
+      "identity": "cv.cuda.buildWarpAffineMaps(UMat M;bool inverse;Size dsize;GpuMat xmap[/O,/Ref];GpuMat ymap[/O,/Ref];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "UMat",
+          "name": "M",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "inverse",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "dsize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "GpuMat",
+          "name": "xmap",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "GpuMat",
+          "name": "ymap",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Builds transformation maps for affine transformation.\n\n@param M *2x3* Mat or UMat transformation matrix.\n@param inverse Flag specifying that M is an inverse transformation ( dst=\\>src ).\n@param dsize Size of the destination image.\n@param xmap X values with CV_32FC1 type.\n@param ymap Y values with CV_32FC1 type.\n@param stream Stream for the asynchronous version.\n\n@sa cuda::warpAffine , cuda::remap"
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudawarping/include/opencv2/cudawarping.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.buildWarpAffineMaps",
+      "identity": "cv.cuda.buildWarpAffineMaps(Mat M;bool inverse;Size dsize;GpuMat xmap[/O,/Ref];GpuMat ymap[/O,/Ref];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "M",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "inverse",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "dsize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "GpuMat",
+          "name": "xmap",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "GpuMat",
+          "name": "ymap",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudawarping/include/opencv2/cudawarping.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.warpPerspective",
+      "identity": "cv.cuda.warpPerspective(Mat src;Mat dst[/O];UMat M;Size dsize;int flags=INTER_LINEAR;int borderMode=BORDER_CONSTANT;Scalar borderValue=Scalar();Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "UMat",
+          "name": "M",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "dsize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "INTER_LINEAR",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "borderMode",
+          "default": "BORDER_CONSTANT",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "borderValue",
+          "default": "Scalar()",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Applies a perspective transformation to an image.\n\n@param src Source image. CV_8U , CV_16U , CV_32S , or CV_32F depth and 1, 3, or 4 channels are\nsupported.\n@param dst Destination image with the same type as src . The size is dsize .\n@param M *3x3* Mat or UMat transformation matrix.\n@param dsize Size of the destination image.\n@param flags Combination of interpolation methods (see resize ) and the optional flag\nWARP_INVERSE_MAP specifying that M is the inverse transformation ( dst =\\> src ). Only\nINTER_NEAREST , INTER_LINEAR , and INTER_CUBIC interpolation methods are supported.\n@param borderMode\n@param borderValue\n@param stream Stream for the asynchronous version.\n\n@sa warpPerspective"
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudawarping/include/opencv2/cudawarping.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.warpPerspective",
+      "identity": "cv.cuda.warpPerspective(Mat src;Mat dst[/O];Mat M;Size dsize;int flags=INTER_LINEAR;int borderMode=BORDER_CONSTANT;Scalar borderValue=Scalar();Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "M",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "dsize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "INTER_LINEAR",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "borderMode",
+          "default": "BORDER_CONSTANT",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "borderValue",
+          "default": "Scalar()",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudawarping/include/opencv2/cudawarping.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.buildWarpPerspectiveMaps",
+      "identity": "cv.cuda.buildWarpPerspectiveMaps(UMat M;bool inverse;Size dsize;GpuMat xmap[/O,/Ref];GpuMat ymap[/O,/Ref];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "UMat",
+          "name": "M",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "inverse",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "dsize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "GpuMat",
+          "name": "xmap",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "GpuMat",
+          "name": "ymap",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Builds transformation maps for perspective transformation.\n\n@param M *3x3* Mat or UMat transformation matrix.\n@param inverse Flag specifying that M is an inverse transformation ( dst=\\>src ).\n@param dsize Size of the destination image.\n@param xmap X values with CV_32FC1 type.\n@param ymap Y values with CV_32FC1 type.\n@param stream Stream for the asynchronous version.\n\n@sa cuda::warpPerspective , cuda::remap"
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudawarping/include/opencv2/cudawarping.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.buildWarpPerspectiveMaps",
+      "identity": "cv.cuda.buildWarpPerspectiveMaps(Mat M;bool inverse;Size dsize;GpuMat xmap[/O,/Ref];GpuMat ymap[/O,/Ref];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "M",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "inverse",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "dsize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "GpuMat",
+          "name": "xmap",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "GpuMat",
+          "name": "ymap",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudawarping/include/opencv2/cudawarping.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.rotate",
+      "identity": "cv.cuda.rotate(Mat src;Mat dst[/O];Size dsize;double angle;double xShift=0;double yShift=0;int interpolation=INTER_LINEAR;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Size",
+          "name": "dsize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "angle",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "xShift",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "yShift",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "interpolation",
+          "default": "INTER_LINEAR",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Rotates an image around the origin (0,0) and then shifts it.\n\n@param src Source image. Supports 1, 3 or 4 channels images with CV_8U , CV_16U or CV_32F\ndepth.\n@param dst Destination image with the same type as src . The size is dsize .\n@param dsize Size of the destination image.\n@param angle Angle of rotation in degrees.\n@param xShift Shift along the horizontal axis.\n@param yShift Shift along the vertical axis.\n@param interpolation Interpolation method. Only INTER_NEAREST , INTER_LINEAR , and INTER_CUBIC\nare supported.\n@param stream Stream for the asynchronous version.\n\n@sa cuda::warpAffine"
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudawarping/include/opencv2/cudawarping.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.pyrDown",
+      "identity": "cv.cuda.pyrDown(Mat src;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Smoothes an image and downsamples it.\n\n@param src Source image.\n@param dst Destination image. Will have Size((src.cols+1)/2, (src.rows+1)/2) size and the same\ntype as src .\n@param stream Stream for the asynchronous version.\n\n@sa pyrDown"
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudawarping/include/opencv2/cudawarping.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.pyrUp",
+      "identity": "cv.cuda.pyrUp(Mat src;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Upsamples an image and then smoothes it.\n\n@param src Source image.\n@param dst Destination image. Will have Size(src.cols\\*2, src.rows\\*2) size and the same type as\nsrc .\n@param stream Stream for the asynchronous version."
+    }
+  ],
+  "compatibilityHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudawarping/CMakeLists.txt",
+      "sha256": "91934e75b3aae4cf246783004d4b5dcbd87dd948bc4919cf85d23ed6d2dc11d3",
+      "reason": "Upstream module activation, core/imgproc/geometry dependency, and CUDA/NPP image-warping dependency contract; parser declarations are not gated in the public header."
+    }
+  ],
+  "moduleBuildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)"
+}
