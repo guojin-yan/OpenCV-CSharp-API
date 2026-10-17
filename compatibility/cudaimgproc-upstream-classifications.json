@@ -1,0 +1,850 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/cudaimgproc.hpp parser-backed CUDA image-processing declarations plus the pinned module CMake build/dependency contract",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact CudaImgProc wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [
+    "The cudaimgproc module is disabled unless the OpenCV build enables CUDA or CUDA stubs and is unavailable on iOS/WinRT; real image processing depends on an external CUDA toolkit/runtime and NPP image-processing libraries.",
+    "The module requires opencv_imgproc and optionally opencv_cudev, opencv_cudaarithm, opencv_cudafilters, and opencv_geometry plus GpuMat/Stream data, asynchronous execution policy, and persistent processing state; this package ships no CUDA image-processing wrapper/runtime."
+  ],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "cv.cuda.cvtColor(Mat src;Mat dst[/O];int code;int dcn=0;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "enum cv.cuda.DemosaicTypes[const cv.cuda.COLOR_BayerBG2BGR_MHT=256;const cv.cuda.COLOR_BayerGB2BGR_MHT=257;const cv.cuda.COLOR_BayerRG2BGR_MHT=258;const cv.cuda.COLOR_BayerGR2BGR_MHT=259;const cv.cuda.COLOR_BayerBG2RGB_MHT=COLOR_BayerRG2BGR_MHT;const cv.cuda.COLOR_BayerGB2RGB_MHT=COLOR_BayerGR2BGR_MHT;const cv.cuda.COLOR_BayerRG2RGB_MHT=COLOR_BayerBG2BGR_MHT;const cv.cuda.COLOR_BayerGR2RGB_MHT=COLOR_BayerGB2BGR_MHT;const cv.cuda.COLOR_BayerBG2GRAY_MHT=260;const cv.cuda.COLOR_BayerGB2GRAY_MHT=261;const cv.cuda.COLOR_BayerRG2GRAY_MHT=262;const cv.cuda.COLOR_BayerGR2GRAY_MHT=263]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.cuda.demosaicing(Mat src;Mat dst[/O];int code;int dcn=-1;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.cuda.gammaCorrection(Mat src;Mat dst[/O];bool forward=true;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "enum cv.cuda.AlphaCompTypes[const cv.cuda.ALPHA_OVER=0;const cv.cuda.ALPHA_IN=1;const cv.cuda.ALPHA_OUT=2;const cv.cuda.ALPHA_ATOP=3;const cv.cuda.ALPHA_XOR=4;const cv.cuda.ALPHA_PLUS=5;const cv.cuda.ALPHA_OVER_PREMUL=6;const cv.cuda.ALPHA_IN_PREMUL=7;const cv.cuda.ALPHA_OUT_PREMUL=8;const cv.cuda.ALPHA_ATOP_PREMUL=9;const cv.cuda.ALPHA_XOR_PREMUL=10;const cv.cuda.ALPHA_PLUS_PREMUL=11;const cv.cuda.ALPHA_PREMUL=12]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.cuda.alphaComp(Mat img1;Mat img2;Mat dst[/O];int alpha_op;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.cuda.calcHist(Mat src;Mat hist[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.cuda.calcHist(Mat src;Mat mask;Mat hist[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.cuda.equalizeHist(Mat src;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 9,
+      "identity": "class cv.cuda.CLAHE",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.cuda.CLAHE.apply(Mat src;Mat dst[/O];Stream stream[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.cuda.createCLAHE(double clipLimit=40.0;Size tileGridSize=Size(8, 8))->Ptr<cuda::CLAHE>",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.cuda.evenLevels(Mat levels[/O];int nLevels;int lowerLevel;int upperLevel;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.cuda.histEven(Mat src;Mat hist[/O];int histSize;int lowerLevel;int upperLevel;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.cuda.histEven(Mat src;GpuMat* hist[/A 4];int* histSize[/A 4];int* lowerLevel[/A 4];int* upperLevel[/A 4];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.cuda.histRange(Mat src;Mat hist[/O];Mat levels;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.cuda.histRange(Mat src;GpuMat* hist[/A 4];GpuMat* levels[/C,/A 4];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 17,
+      "identity": "class cv.cuda.CannyEdgeDetector",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.cuda.CannyEdgeDetector.detect(Mat image;Mat edges[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.cuda.CannyEdgeDetector.detect(Mat dx;Mat dy;Mat edges[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.cuda.CannyEdgeDetector.setLowThreshold(double low_thresh)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.cuda.CannyEdgeDetector.getLowThreshold()->double",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.cuda.CannyEdgeDetector.setHighThreshold(double high_thresh)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.cuda.CannyEdgeDetector.getHighThreshold()->double",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.cuda.CannyEdgeDetector.setAppertureSize(int apperture_size)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.cuda.CannyEdgeDetector.getAppertureSize()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.cuda.CannyEdgeDetector.setL2Gradient(bool L2gradient)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.cuda.CannyEdgeDetector.getL2Gradient()->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.cuda.createCannyEdgeDetector(double low_thresh;double high_thresh;int apperture_size=3;bool L2gradient=false)->Ptr<CannyEdgeDetector>",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 29,
+      "identity": "class cv.cuda.HoughLinesDetector",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.cuda.HoughLinesDetector.detect(Mat src;Mat lines[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.cuda.HoughLinesDetector.downloadResults(Mat d_lines;Mat h_lines[/O];Mat h_votes=Mat()[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.cuda.HoughLinesDetector.setRho(float rho)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.cuda.HoughLinesDetector.getRho()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.cuda.HoughLinesDetector.setTheta(float theta)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.cuda.HoughLinesDetector.getTheta()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.cuda.HoughLinesDetector.setThreshold(int threshold)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.cuda.HoughLinesDetector.getThreshold()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.cuda.HoughLinesDetector.setDoSort(bool doSort)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.cuda.HoughLinesDetector.getDoSort()->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.cuda.HoughLinesDetector.setMaxLines(int maxLines)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.cuda.HoughLinesDetector.getMaxLines()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 42,
+      "identity": "cv.cuda.createHoughLinesDetector(float rho;float theta;int threshold;bool doSort=false;int maxLines=4096)->Ptr<HoughLinesDetector>",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 43,
+      "identity": "class cv.cuda.HoughSegmentDetector",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.cuda.HoughSegmentDetector.detect(Mat src;Mat lines[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 45,
+      "identity": "cv.cuda.HoughSegmentDetector.setRho(float rho)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 46,
+      "identity": "cv.cuda.HoughSegmentDetector.getRho()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.cuda.HoughSegmentDetector.setTheta(float theta)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 48,
+      "identity": "cv.cuda.HoughSegmentDetector.getTheta()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.cuda.HoughSegmentDetector.setMinLineLength(int minLineLength)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 50,
+      "identity": "cv.cuda.HoughSegmentDetector.getMinLineLength()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 51,
+      "identity": "cv.cuda.HoughSegmentDetector.setMaxLineGap(int maxLineGap)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 52,
+      "identity": "cv.cuda.HoughSegmentDetector.getMaxLineGap()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 53,
+      "identity": "cv.cuda.HoughSegmentDetector.setMaxLines(int maxLines)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 54,
+      "identity": "cv.cuda.HoughSegmentDetector.getMaxLines()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 55,
+      "identity": "cv.cuda.HoughSegmentDetector.setThreshold(int threshold)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 56,
+      "identity": "cv.cuda.HoughSegmentDetector.getThreshold()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 57,
+      "identity": "cv.cuda.createHoughSegmentDetector(float rho;float theta;int minLineLength;int maxLineGap;int maxLines=4096;int threshold=-1)->Ptr<HoughSegmentDetector>",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 58,
+      "identity": "class cv.cuda.HoughCirclesDetector",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 59,
+      "identity": "cv.cuda.HoughCirclesDetector.detect(Mat src;Mat circles[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 60,
+      "identity": "cv.cuda.HoughCirclesDetector.setDp(float dp)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 61,
+      "identity": "cv.cuda.HoughCirclesDetector.getDp()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 62,
+      "identity": "cv.cuda.HoughCirclesDetector.setMinDist(float minDist)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 63,
+      "identity": "cv.cuda.HoughCirclesDetector.getMinDist()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 64,
+      "identity": "cv.cuda.HoughCirclesDetector.setCannyThreshold(int cannyThreshold)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 65,
+      "identity": "cv.cuda.HoughCirclesDetector.getCannyThreshold()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 66,
+      "identity": "cv.cuda.HoughCirclesDetector.setVotesThreshold(int votesThreshold)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 67,
+      "identity": "cv.cuda.HoughCirclesDetector.getVotesThreshold()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 68,
+      "identity": "cv.cuda.HoughCirclesDetector.setMinRadius(int minRadius)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 69,
+      "identity": "cv.cuda.HoughCirclesDetector.getMinRadius()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 70,
+      "identity": "cv.cuda.HoughCirclesDetector.setMaxRadius(int maxRadius)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 71,
+      "identity": "cv.cuda.HoughCirclesDetector.getMaxRadius()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 72,
+      "identity": "cv.cuda.HoughCirclesDetector.setMaxCircles(int maxCircles)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 73,
+      "identity": "cv.cuda.HoughCirclesDetector.getMaxCircles()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 74,
+      "identity": "cv.cuda.createHoughCirclesDetector(float dp;float minDist;int cannyThreshold;int votesThreshold;int minRadius;int maxRadius;int maxCircles=4096)->Ptr<HoughCirclesDetector>",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 75,
+      "identity": "cv.cuda.createGeneralizedHoughBallard()->Ptr<GeneralizedHoughBallard>",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 76,
+      "identity": "cv.cuda.createGeneralizedHoughGuil()->Ptr<GeneralizedHoughGuil>",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 77,
+      "identity": "cv.cuda.meanShiftFiltering(Mat src;Mat dst[/O];int sp;int sr;TermCriteria criteria=TermCriteria(TermCriteria::MAX_ITER + TermCriteria::EPS, 5, 1);Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 78,
+      "identity": "cv.cuda.meanShiftProc(Mat src;Mat dstr[/O];Mat dstsp[/O];int sp;int sr;TermCriteria criteria=TermCriteria(TermCriteria::MAX_ITER + TermCriteria::EPS, 5, 1);Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 79,
+      "identity": "cv.cuda.meanShiftSegmentation(Mat src;Mat dst[/O];int sp;int sr;int minsize;TermCriteria criteria=TermCriteria(TermCriteria::MAX_ITER + TermCriteria::EPS, 5, 1);Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 80,
+      "identity": "class cv.cuda.TemplateMatching",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 81,
+      "identity": "cv.cuda.TemplateMatching.match(Mat image;Mat templ;Mat result[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 82,
+      "identity": "cv.cuda.createTemplateMatching(int srcType;int method;Size user_block_size=Size())->Ptr<TemplateMatching>",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 83,
+      "identity": "cv.cuda.bilateralFilter(Mat src;Mat dst[/O];int kernel_size;float sigma_color;float sigma_spatial;int borderMode=BORDER_DEFAULT;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 84,
+      "identity": "cv.cuda.blendLinear(Mat img1;Mat img2;Mat weights1;Mat weights2;Mat result[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 85,
+      "identity": "enum cv.cuda.ConnectedComponentsAlgorithmsTypes[const cv.cuda.CCL_DEFAULT=-1;const cv.cuda.CCL_BKE=0]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 86,
+      "identity": "cv.cuda.connectedComponents(Mat image;Mat labels[/O];int connectivity;int ltype;cuda_ConnectedComponentsAlgorithmsTypes ccltype)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 87,
+      "identity": "cv.cuda.connectedComponents(Mat image;Mat labels[/O];int connectivity=8;int ltype=CV_32S)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 88,
+      "identity": "enum cv.cuda.MomentsOrder[const cv.cuda.FIRST_ORDER_MOMENTS=1;const cv.cuda.SECOND_ORDER_MOMENTS=2;const cv.cuda.THIRD_ORDER_MOMENTS=3]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 89,
+      "identity": "cv.cuda.numMoments(MomentsOrder order[/C])->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 90,
+      "identity": "cv.cuda.convertSpatialMoments(Mat spatialMoments;MomentsOrder order[/C];int momentsType[/C])->Moments",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 91,
+      "identity": "cv.cuda.spatialMoments(Mat src;Mat moments[/O];bool binaryImage=false[/C];MomentsOrder order=MomentsOrder::THIRD_ORDER_MOMENTS[/C];int momentsType=CV_64F[/C];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 92,
+      "identity": "cv.cuda.moments(Mat src;bool binaryImage=false[/C];MomentsOrder order=MomentsOrder::THIRD_ORDER_MOMENTS[/C];int momentsType=CV_64F[/C])->Moments",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA image-processing surface in cv::cuda has no native CudaImgProc wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real processing requires CUDA/NPP and the upstream imgproc/cudev/cudaarithm/cudafilters/geometry dependency chain. GpuMat/Stream ownership, asynchronous execution, and image-processing state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}

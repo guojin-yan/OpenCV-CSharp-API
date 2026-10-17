@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 55,
+  "moduleCount": 56,
   "maps": [
     {
       "id": "calib3d",
@@ -3588,6 +3588,58 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "0024d60bf6653fb834e6f8b13f2a8729846060e4ef84d13e1e3902303a16e743",
         "familyInventorySha256": "6179e9c635d2cee2975c6ea99a9196662c57a0bd6273b59128f5305be3a456d6",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "cudaimgproc",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/CudaImgProcUpstreamMap",
+      "extractorScript": "tools/CudaImgProcUpstreamMap/extract_cudaimgproc.py",
+      "generationScript": "scripts/Generate-CudaImgProcUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-CudaImgProcUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/cudaimgproc.hpp parser-backed CUDA image-processing declarations plus the pinned module CMake build/dependency contract",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/cudaimgproc/include/opencv2/cudaimgproc.hpp",
+          "sha256": "94c851e9ea17da630fce9a0133c85467548637bedff9e1b38ead2aa72819e356"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudaimgproc/include/opencv2/cudaimgproc.hpp",
+            "sha256": "94c851e9ea17da630fce9a0133c85467548637bedff9e1b38ead2aa72819e356",
+            "startOrdinal": 0,
+            "declarationCount": 93
+          }
+        ],
+        "compatibilityHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudaimgproc/CMakeLists.txt",
+            "sha256": "32a2d00d0101aecb1658016b729daa6bb99b4733103a1c0938a50046434d8c0d",
+            "reason": "Upstream module activation, image-processing dependency, and CUDA/NPP image-processing dependency contract; parser declarations are not gated in the public header."
+          }
+        ],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/cudaimgproc-upstream-raw.json",
+        "classifications": "compatibility/cudaimgproc-upstream-classifications.json",
+        "mapping": "compatibility/cudaimgproc-upstream-map.txt",
+        "summary": "compatibility/cudaimgproc-upstream-summary.json",
+        "familyInventory": "compatibility/cudaimgproc-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 93,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "d52b5dbd5ba1a33208910a903ffd7eb52eca37a030dda28e77dd1b9c0b1b527f",
+        "familyInventorySha256": "2d0100aca9912051dc62e17b5b08739fe5b959b8897b30c04b9e509d321299d5",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false
