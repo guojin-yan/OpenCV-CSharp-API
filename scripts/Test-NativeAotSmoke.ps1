@@ -114,7 +114,21 @@ try {
     }
     $hostArchitecture = 'x64'
     $targetArchitecture = if ($RuntimeIdentifier -eq 'win-arm64') { 'arm64' } else { 'x64' }
-    $toolProbeCommand = (Quote-CmdArgument -Value $vsDevCmd) + " -arch=$targetArchitecture -host_arch=$hostArchitecture && where link.exe"
+    # VsDevCmd appends several compiler and SDK directories to PATH.  A caller
+    # such as the Codex desktop runner can already have a very long PATH, which
+    # would make cmd.exe reject the initialized environment before link.exe is
+    # resolved.  Start the developer prompt from the minimal paths it needs and
+    # leave the PowerShell process environment untouched for the rest of smoke.
+    $dotnetDirectory = Split-Path -Parent $dotnet.Source
+    $systemRoot = if ([string]::IsNullOrWhiteSpace($env:SystemRoot)) { 'C:\Windows' } else { $env:SystemRoot }
+    $toolchainPath = @(
+        (Join-Path $systemRoot 'System32'),
+        $systemRoot,
+        (Join-Path $systemRoot 'System32\Wbem'),
+        $dotnetDirectory
+    ) | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Select-Object -Unique
+    $toolchainPathAssignment = 'set "PATH=' + (($toolchainPath | ForEach-Object { [string]$_ }) -join ';') + '"'
+    $toolProbeCommand = $toolchainPathAssignment + ' && ' + (Quote-CmdArgument -Value $vsDevCmd) + " -arch=$targetArchitecture -host_arch=$hostArchitecture && where link.exe"
     $toolProbe = @(& cmd.exe /d /s /c $toolProbeCommand 2>&1)
     if ($LASTEXITCODE -ne 0) {
         if ($RuntimeIdentifier -eq 'win-arm64') {
@@ -124,7 +138,7 @@ try {
     }
     $toolProbe | ForEach-Object { Write-Host ([string]$_) }
     $publishCommand = 'dotnet ' + (($publishArgs | ForEach-Object { Quote-CmdArgument -Value ([string]$_) }) -join ' ')
-    $developerCommand = (Quote-CmdArgument -Value $vsDevCmd) + " -arch=$targetArchitecture -host_arch=$hostArchitecture && " + $publishCommand
+    $developerCommand = $toolchainPathAssignment + ' && ' + (Quote-CmdArgument -Value $vsDevCmd) + " -arch=$targetArchitecture -host_arch=$hostArchitecture && " + $publishCommand
     $build = @(& cmd.exe /d /s /c $developerCommand 2>&1)
     $publishExitCode = $LASTEXITCODE
     Write-CommandOutput -Phase 'native-publish' -Lines $build

@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 49,
+  "moduleCount": 50,
   "maps": [
     {
       "id": "calib3d",
@@ -3258,6 +3258,58 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "26a22b4fb1445990395aebd4965bd99b41425502effe6dc7b7c0cad46c0757d3",
         "familyInventorySha256": "dc8ec6ce2b76e464adc8b09d6fd6e93e5c0e7af10ce090280f00f928fe47a489",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "superres",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/SuperresUpstreamMap",
+      "extractorScript": "tools/SuperresUpstreamMap/extract_superres.py",
+      "generationScript": "scripts/Generate-SuperresUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-SuperresUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/superres.hpp plus opencv2/superres/*.hpp parser-backed public header closure; protected SuperResolution implementation hooks are explicitly excluded",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+          "sha256": "6bdc0d3ed0c3e89810c6c57eb25319b6340a47344f5526c6baf5c001ccbcbdac"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+            "sha256": "6bdc0d3ed0c3e89810c6c57eb25319b6340a47344f5526c6baf5c001ccbcbdac",
+            "startOrdinal": 0,
+            "declarationCount": 35
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+            "sha256": "9ffabc8c6efa08bc3ac0fe1e3da55c1c7a0ad415fab6c47beec641a1e922491a",
+            "startOrdinal": 35,
+            "declarationCount": 61
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/superres-upstream-raw.json",
+        "classifications": "compatibility/superres-upstream-classifications.json",
+        "mapping": "compatibility/superres-upstream-map.txt",
+        "summary": "compatibility/superres-upstream-summary.json",
+        "familyInventory": "compatibility/superres-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 96,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "0be576cfa48aad6a71ec8bcc2eca48ff31afbca0fb35e0601d13349f7459f209",
+        "familyInventorySha256": "90346fdc9b635ff94cad0db325e2f07eb362f5f521bd19761222de1c35d6736b",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

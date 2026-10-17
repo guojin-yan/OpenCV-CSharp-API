@@ -131,6 +131,8 @@ function Get-Record {
     $dnnObjDetectSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/dnn_objdetect-upstream-summary.json") -Raw | ConvertFrom-Json
     $ccalibRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/ccalib-upstream-raw.json") -Raw | ConvertFrom-Json
     $ccalibSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/ccalib-upstream-summary.json") -Raw | ConvertFrom-Json
+    $superresRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/superres-upstream-raw.json") -Raw | ConvertFrom-Json
+    $superresSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/superres-upstream-summary.json") -Raw | ConvertFrom-Json
     $wechatQRCodeRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/wechat_qrcode-upstream-raw.json") -Raw | ConvertFrom-Json
     $wechatQRCodeSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/wechat_qrcode-upstream-summary.json") -Raw | ConvertFrom-Json
     $cnn3DObjRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/cnn_3dobj-upstream-raw.json") -Raw | ConvertFrom-Json
@@ -203,6 +205,11 @@ function Get-Record {
         "compatibility/ccalib-upstream-map.txt",
         "compatibility/ccalib-upstream-raw.json",
         "compatibility/ccalib-upstream-summary.json",
+        "compatibility/superres-implemented-families.json",
+        "compatibility/superres-upstream-classifications.json",
+        "compatibility/superres-upstream-map.txt",
+        "compatibility/superres-upstream-raw.json",
+        "compatibility/superres-upstream-summary.json",
         "compatibility/wechat_qrcode-implemented-families.json",
         "compatibility/wechat_qrcode-upstream-classifications.json",
         "compatibility/wechat_qrcode-upstream-map.txt",
@@ -586,6 +593,7 @@ function Get-Record {
         "scripts/Generate-DnnSuperresUpstreamMap.ps1",
         "scripts/Generate-DnnObjDetectUpstreamMap.ps1",
         "scripts/Generate-CcalibUpstreamMap.ps1",
+        "scripts/Generate-SuperresUpstreamMap.ps1",
         "scripts/Generate-WechatQRCodeUpstreamMap.ps1",
         "scripts/Generate-Cnn3DObjUpstreamMap.ps1",
         "scripts/Generate-SignalUpstreamMap.ps1",
@@ -647,6 +655,7 @@ function Get-Record {
         "scripts/Test-DnnSuperresUpstreamMap.ps1",
         "scripts/Test-DnnObjDetectUpstreamMap.ps1",
         "scripts/Test-CcalibUpstreamMap.ps1",
+        "scripts/Test-SuperresUpstreamMap.ps1",
         "scripts/Test-WechatQRCodeUpstreamMap.ps1",
         "scripts/Test-Cnn3DObjUpstreamMap.ps1",
         "scripts/Test-SignalUpstreamMap.ps1",
@@ -950,9 +959,13 @@ function Get-Record {
         "tools/CcalibUpstreamMap/CcalibUpstreamMap.csproj",
         "tools/CcalibUpstreamMap/Program.cs",
         "tools/CcalibUpstreamMap/extract_ccalib.py",
+        "tools/SuperresUpstreamMap/SuperresUpstreamMap.csproj",
+        "tools/SuperresUpstreamMap/Program.cs",
+        "tools/SuperresUpstreamMap/extract_superres.py",
         "docs/articles/dnn-superres-upstream-parity-guide.md",
         "docs/articles/wechat-qrcode-upstream-parity-guide.md",
         "docs/articles/cnn-3dobj-upstream-parity-guide.md",
+        "docs/articles/superres-upstream-parity-guide.md",
         "tools/CodecBenchmark/CodecBenchmark.csproj",
         "tools/CodecBenchmark/Program.cs",
         "scripts/Measure-CodecTypedMatBenchmark.ps1",
@@ -1260,6 +1273,30 @@ function Get-Record {
                 ManagedPublicMemberAdditionCount = [int]$dnnSuperresSummary.managedPublicMemberAdditionCount
                 NativeEntrypointAdditionCount = [int]$dnnSuperresSummary.nativeEvidenceCount
                 RepositoryWideParityClaimed = [bool]$dnnSuperresSummary.repositoryWideUpstreamParityClaimed
+            }
+            SuperresUpstreamMap = [ordered]@{
+                Path = "compatibility/superres-upstream-map.txt"
+                SummaryPath = "compatibility/superres-upstream-summary.json"
+                ClassificationPath = "compatibility/superres-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/superres-implemented-families.json"
+                RawExtractionPath = "compatibility/superres-upstream-raw.json"
+                Sha256 = $superresSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/superres-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$superresSummary.declarationCount
+                CallableCount = [int]$superresSummary.callableCount
+                ImplementedCount = [int]$superresSummary.classificationCounts.implemented
+                MissingCount = [int]$superresSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$superresSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$superresSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$superresSummary.classificationCounts.'upstream-conditional'
+                SourceHeaderCount = @($superresRaw.sourceHeaders).Count
+                SelectedFamilyCount = [int]$superresSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$superresSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$superresSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$superresSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$superresSummary.nativeEvidenceCount
+                ExternalDataDependencyCount = [int]$superresSummary.externalDataDependencyCount
+                RepositoryWideParityClaimed = [bool]$superresSummary.repositoryWideUpstreamParityClaimed
             }
             WechatQRCodeUpstreamMap = [ordered]@{
                 Path = "compatibility/wechat_qrcode-upstream-map.txt"

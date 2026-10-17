@@ -1,5 +1,5 @@
 param(
-    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect','dnn_superres','wechat_qrcode','cnn_3dobj','signal','dpm','hdf','text','xfeatures2d','dnn_objdetect','ccalib')][string]$Module,
+    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect','superres','dnn_superres','wechat_qrcode','cnn_3dobj','signal','dpm','hdf','text','xfeatures2d','dnn_objdetect','ccalib')][string]$Module,
     [Parameter(Mandatory)][string]$DisplayName,
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [switch]$Check
@@ -53,6 +53,8 @@ function GetParts([string]$Identity) {
         '^cv\.(?<namespace>xfeatures2d|cuda)\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     } elseif ($Module -eq 'ccalib') {
         '^cv\.(?<namespace>multicalib|omnidir|ccalib)\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
+    } elseif ($Module -eq 'superres') {
+        '^cv\.superres\.(?:(?<owner>.+)\.)?(?<name>(?:[A-Za-z]|~)[A-Za-z0-9_~]*)\('
     } else {
         '^cv\.' + $Module + '\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     }
@@ -72,7 +74,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
         }
         return $Owner
     }
-    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect','dnn_superres','wechat_qrcode','xfeatures2d','ccalib')) {
+    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect','superres','dnn_superres','wechat_qrcode','xfeatures2d','ccalib')) {
         if ($Module -eq 'face') {
             if ([string]::IsNullOrWhiteSpace($Owner)) {
                 switch ($Name) {
@@ -115,6 +117,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
                 'xstereo' { return $Owner }
                 'ptcloud' { return $Owner }
                 'xobjdetect' { return $Owner }
+                'superres' { return $Owner }
                 'dnn_superres' { return $Owner }
                 'wechat_qrcode' { return $Owner }
                 'xfeatures2d' { return 'XFeatures2D' }
@@ -496,7 +499,9 @@ function GetNative([object]$Parts, [string]$Identity) {
     $owner = [string]$Parts.Owner
     $name = [string]$Parts.Name
     $result = @()
-    if ($Module -eq 'rapid') {
+    if ($Module -eq 'superres') {
+        return @()
+    } elseif ($Module -eq 'rapid') {
         $symbol = switch ("$owner.$name") {
             '.drawCorrespondencies' { 'draw_correspondencies' }
             '.drawSearchLines' { 'draw_search_lines' }
@@ -1060,6 +1065,7 @@ foreach ($decl in @($raw.declarations)) {
         if ($Module -eq 'xfeatures2d' -and $classification -eq 'intentionally-omitted') { $reason = 'The xfeatures2d contrib surface is optional CUDA/nonfree functionality and the current package has no native XFeatures2D wrapper entrypoint or managed public owner; CUDA runtime/toolkit availability, nonfree build policy, and feature/model ownership remain outside the current ABI/API and deterministic smoke contract.' }
         if ($Module -eq 'dnn_objdetect' -and $classification -eq 'intentionally-omitted') { $reason = 'The dnn_objdetect contrib surface is a model-driven DNN post-processing helper and the current package has no native DnnObjDetect wrapper entrypoint or managed public owner; caller-selected network/model data, backend policy, and detection output ownership remain outside the current ABI/API and deterministic smoke contract.' }
         if ($Module -eq 'ccalib' -and $classification -eq 'intentionally-omitted') { $reason = 'The ccalib public surface, including omnidir calibration and reconstruction helpers, has no native Ccalib wrapper entrypoint or managed public owner in the current package; caller-owned calibration inputs, feature/matcher objects, and output buffers remain outside the current ABI/API and deterministic smoke contract.' }
+        if ($Module -eq 'superres' -and $classification -eq 'intentionally-omitted') { $reason = 'The Super Resolution contrib surface has no native Superres wrapper entrypoint or managed public owner in the current package; optional VideoIO/camera and CUDA frame-source/algorithm availability, input/output frame ownership, and algorithm state remain outside the current ABI/API and deterministic smoke contract.' }
         if ($Module -eq 'rapid' -and [string]$decl.identity -match '^cv\.rapid\.GOSTracker\.create\(') { $reason = 'GOSTracker is present in the pinned upstream header but the current managed/native wrapper exposes only Rapid and OLSTracker; this optional tracker remains deliberately omitted until its behavior, ABI, and ownership contract are separately reviewed.' }
         if ($Module -eq 'phase_unwrapping' -and [string]$decl.identity -match 'HistogramPhaseUnwrapping\.Params\.Params\(') { $reason = 'The upstream default Params constructor is represented by HistogramPhaseUnwrappingParams.Default and an explicit managed value constructor; value initialization has no native callable ABI.' }
         if ($Module -eq 'optflow' -and [string]$decl.identity -match '^cv\.optflow\.createOptFlow_PCAFlow\(') { $reason = 'PCAFlow is an optional dense optical-flow factory distinct from the wrapped RLOF and DualTVL1 families; the current ABI/API has no PCAFlow native factory, opaque handle, ownership/lifetime contract, or deterministic runtime smoke, so this declaration remains intentionally omitted.' }
@@ -1084,12 +1090,13 @@ $externalDataDependencies = switch ($Module) {
     'xfeatures2d' { @('The xfeatures2d CUDA headers require an optional CUDA build/runtime; this package bundles no CUDA XFeatures2D wrapper or CUDA runtime.', 'The xfeatures2d nonfree families require an explicit OPENCV_ENABLE_NONFREE build and licensing decision; no nonfree wrapper or feature model assets are bundled.') }
     'dnn_objdetect' { @('The dnn_objdetect helper requires caller-selected DNN network/model data and backend policy; no model assets or managed/native wrapper are bundled.') }
     'ccalib' { @('The ccalib CustomPattern API requires caller-selected pattern images, feature detector/descriptor/matcher objects, and calibration output ownership; no managed/native wrapper or pattern assets are bundled.') }
+    'superres' { @('The Super Resolution contrib module is optional and its video/camera and CUDA frame-source/algorithm paths depend on the OpenCV build, VideoIO backend, and CUDA toolkit/runtime; no managed/native Superres wrapper or CUDA runtime is bundled.') }
     'freetype' { @('The upstream FreeType2 module requires system FreeType2 and HarfBuzz development/runtime libraries; neither dependency is bundled by this repository.') }
     'intensity_transform' { @('BIMEF runtime execution requires OpenCV built with EIGEN support; a module runtime without EIGEN may report that the operation is unavailable.') }
     'saliency' { @('ObjectnessBING requires caller-supplied training/model data through SetTrainingPath; the repository bundles no model asset and therefore does not claim deterministic objectness model execution.') }
     default { @() }
 }
-$claimedSlice = if ($Module -eq 'reg') { 'opencv2/reg/*.hpp contrib public header closure from parser-emitted headers' } elseif ($Module -eq 'ptcloud') { 'opencv2/ptcloud/depth.hpp selected parser-backed depth/RGB-D wrapper slice; ptcloud umbrella volume/odometry headers are explicitly excluded' } elseif ($Module -eq 'dnn_objdetect') { 'opencv2/core_detect.hpp contrib public header closure from parser-emitted headers; dnn_objdetect has no separate umbrella header in OpenCV 5.0.0' } else { "opencv2/$Module.hpp contrib public header closure from parser-emitted headers" }
+$claimedSlice = if ($Module -eq 'reg') { 'opencv2/reg/*.hpp contrib public header closure from parser-emitted headers' } elseif ($Module -eq 'ptcloud') { 'opencv2/ptcloud/depth.hpp selected parser-backed depth/RGB-D wrapper slice; ptcloud umbrella volume/odometry headers are explicitly excluded' } elseif ($Module -eq 'dnn_objdetect') { 'opencv2/core_detect.hpp contrib public header closure from parser-emitted headers; dnn_objdetect has no separate umbrella header in OpenCV 5.0.0' } elseif ($Module -eq 'superres') { 'opencv2/superres.hpp plus opencv2/superres/*.hpp parser-backed public header closure; protected SuperResolution implementation hooks are explicitly excluded' } else { "opencv2/$Module.hpp contrib public header closure from parser-emitted headers" }
 $classification = [ordered]@{ schemaVersion = 1; upstreamOpenCvVersion = '5.0.0'; claimedSlice = $claimedSlice; reviewStatus = 'reviewed'; limitation = "The map records parser identities and exact $DisplayName wrapper evidence; it does not claim repository-wide contrib parity or external module availability."; externalDataDependencies = @($externalDataDependencies); declarations = @($rows) }
 $builder = [Text.StringBuilder]::new(); [void]$builder.AppendLine("# Generated by scripts/Generate-ContribUpstreamMap.ps1 -Module $Module. Do not edit."); [void]$builder.AppendLine('schema-version=1'); [void]$builder.AppendLine('upstream-opencv-version=5.0.0'); [void]$builder.AppendLine("claimed-slice=$($classification.claimedSlice)"); [void]$builder.AppendLine("header-sha256=$($raw.headerSha256)"); [void]$builder.AppendLine("parser-sha256=$($raw.parserSha256)"); [void]$builder.AppendLine("declaration-count=$($raw.declarationCount)"); [void]$builder.AppendLine('repository-wide-upstream-parity-claimed=false'); [void]$builder.AppendLine(''); [void]$builder.AppendLine('ordinal|classification|identity|native-entrypoints|managed-members|build-condition|reason')
 foreach ($row in $rows) { $nativeText = if (@($row.nativeEntrypoints).Count) { @($row.nativeEntrypoints) -join ';' } else { '-' }; $managedText = if (@($row.managedMembers).Count) { @($row.managedMembers) -join ';' } else { '-' }; [void]$builder.AppendLine("$($row.ordinal)|$($row.classification)|$($row.identity)|$nativeText|$managedText|$($row.buildCondition)|$($row.reason)") }

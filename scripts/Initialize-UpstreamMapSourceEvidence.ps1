@@ -25,6 +25,7 @@ $rawNames += @("text")
 $rawNames += @("xfeatures2d")
 $rawNames += @("dnn_objdetect")
 $rawNames += @("ccalib")
+$rawNames += @("superres")
 $maximumDownloadAttempts = 4
 $required = [System.Collections.Generic.Dictionary[string, string]]::new([StringComparer]::Ordinal)
 

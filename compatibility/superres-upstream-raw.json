@@ -1,0 +1,1765 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/SuperresUpstreamMap/extract_superres.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+  "headerSha256": "6bdc0d3ed0c3e89810c6c57eb25319b6340a47344f5526c6baf5c001ccbcbdac",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "sha256": "6bdc0d3ed0c3e89810c6c57eb25319b6340a47344f5526c6baf5c001ccbcbdac",
+      "startOrdinal": 0,
+      "declarationCount": 35
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "sha256": "9ffabc8c6efa08bc3ac0fe1e3da55c1c7a0ad415fab6c47beec641a1e922491a",
+      "startOrdinal": 35,
+      "declarationCount": 61
+    }
+  ],
+  "declarationCount": 96,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "class",
+      "name": "cv.superres.FrameSource",
+      "identity": "class cv.superres.FrameSource",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@defgroup superres Super Resolution\n\nThe Super Resolution module contains a set of functions and classes that can be used to solve the\nproblem of resolution enhancement. There are a few methods implemented, most of them are described in\nthe papers @cite Farsiu03 and @cite Mitzel09 ."
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.FrameSource.~FrameSource",
+      "identity": "cv.superres.FrameSource.~FrameSource()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.FrameSource.nextFrame",
+      "identity": "cv.superres.FrameSource.nextFrame(OutputArray frame)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "OutputArray",
+          "name": "frame",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.FrameSource.reset",
+      "identity": "cv.superres.FrameSource.reset()->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.createFrameSource_Empty",
+      "identity": "cv.superres.createFrameSource_Empty()->Ptr<FrameSource>",
+      "returnType": "Ptr<FrameSource>",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.createFrameSource_Video",
+      "identity": "cv.superres.createFrameSource_Video(const String& fileName)->Ptr<FrameSource>",
+      "returnType": "Ptr<FrameSource>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const String&",
+          "name": "fileName",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.createFrameSource_Video_CUDA",
+      "identity": "cv.superres.createFrameSource_Video_CUDA(const String& fileName)->Ptr<FrameSource>",
+      "returnType": "Ptr<FrameSource>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const String&",
+          "name": "fileName",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.createFrameSource_Camera",
+      "identity": "cv.superres.createFrameSource_Camera(int deviceId=0)->Ptr<FrameSource>",
+      "returnType": "Ptr<FrameSource>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "deviceId",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "class",
+      "name": "cv.superres.SuperResolution",
+      "identity": "class cv.superres.SuperResolution",
+      "returnType": ": cv::Algorithm, cv::superres::FrameSource",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm, cv::superres::FrameSource",
+      "documentation": "@brief Base class for Super Resolution algorithms.\n\n        The class is only used to define the common interface for the whole family of Super Resolution\n        algorithms."
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.SuperResolution.setInput",
+      "identity": "cv.superres.SuperResolution.setInput(const Ptr<FrameSource>& frameSource)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Ptr<FrameSource>&",
+          "name": "frameSource",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Set input frame source for Super Resolution algorithm.\n\n            @param frameSource Input frame source"
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.SuperResolution.nextFrame",
+      "identity": "cv.superres.SuperResolution.nextFrame(OutputArray frame)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "OutputArray",
+          "name": "frame",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Process next frame from input and return output result.\n\n            @param frame Output result"
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.SuperResolution.reset",
+      "identity": "cv.superres.SuperResolution.reset()->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.SuperResolution.collectGarbage",
+      "identity": "cv.superres.SuperResolution.collectGarbage()->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Clear all inner buffers."
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.SuperResolution.getScale",
+      "identity": "cv.superres.SuperResolution.getScale()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setScale"
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.SuperResolution.setScale",
+      "identity": "cv.superres.SuperResolution.setScale(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getScale @see getScale"
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.SuperResolution.getIterations",
+      "identity": "cv.superres.SuperResolution.getIterations()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setIterations"
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.SuperResolution.setIterations",
+      "identity": "cv.superres.SuperResolution.setIterations(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getIterations @see getIterations"
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.SuperResolution.getTau",
+      "identity": "cv.superres.SuperResolution.getTau()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setTau"
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.SuperResolution.setTau",
+      "identity": "cv.superres.SuperResolution.setTau(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getTau @see getTau"
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.SuperResolution.getLambda",
+      "identity": "cv.superres.SuperResolution.getLambda()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setLambda"
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.SuperResolution.setLambda",
+      "identity": "cv.superres.SuperResolution.setLambda(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getLambda @see getLambda"
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.SuperResolution.getAlpha",
+      "identity": "cv.superres.SuperResolution.getAlpha()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setAlpha"
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.SuperResolution.setAlpha",
+      "identity": "cv.superres.SuperResolution.setAlpha(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getAlpha @see getAlpha"
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.SuperResolution.getKernelSize",
+      "identity": "cv.superres.SuperResolution.getKernelSize()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setKernelSize"
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.SuperResolution.setKernelSize",
+      "identity": "cv.superres.SuperResolution.setKernelSize(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getKernelSize @see getKernelSize"
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.SuperResolution.getBlurKernelSize",
+      "identity": "cv.superres.SuperResolution.getBlurKernelSize()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setBlurKernelSize"
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.SuperResolution.setBlurKernelSize",
+      "identity": "cv.superres.SuperResolution.setBlurKernelSize(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getBlurKernelSize @see getBlurKernelSize"
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.SuperResolution.getBlurSigma",
+      "identity": "cv.superres.SuperResolution.getBlurSigma()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setBlurSigma"
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.SuperResolution.setBlurSigma",
+      "identity": "cv.superres.SuperResolution.setBlurSigma(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getBlurSigma @see getBlurSigma"
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.SuperResolution.getTemporalAreaRadius",
+      "identity": "cv.superres.SuperResolution.getTemporalAreaRadius()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setTemporalAreaRadius"
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.SuperResolution.setTemporalAreaRadius",
+      "identity": "cv.superres.SuperResolution.setTemporalAreaRadius(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getTemporalAreaRadius @see getTemporalAreaRadius"
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.SuperResolution.getOpticalFlow",
+      "identity": "cv.superres.SuperResolution.getOpticalFlow()->Ptr<cv::superres::DenseOpticalFlowExt>",
+      "returnType": "Ptr<cv::superres::DenseOpticalFlowExt>",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setOpticalFlow"
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.SuperResolution.setOpticalFlow",
+      "identity": "cv.superres.SuperResolution.setOpticalFlow(const Ptr<cv::superres::DenseOpticalFlowExt> & val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "const Ptr<cv::superres::DenseOpticalFlowExt> &",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getOpticalFlow @see getOpticalFlow"
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.createSuperResolution_BTVL1",
+      "identity": "cv.superres.createSuperResolution_BTVL1()->Ptr<SuperResolution>",
+      "returnType": "Ptr<SuperResolution>",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Create Bilateral TV-L1 Super Resolution.\n\n        This class implements Super Resolution algorithm described in the papers @cite Farsiu03 and\n        @cite Mitzel09 .\n\n        Here are important members of the class that control the algorithm, which you can set after\n        constructing the class instance:\n\n        -   **int scale** Scale factor.\n        -   **int iterations** Iteration count.\n        -   **double tau** Asymptotic value of steepest descent method.\n        -   **double lambda** Weight parameter to balance data term and smoothness term.\n        -   **double alpha** Parameter of spacial distribution in Bilateral-TV.\n        -   **int btvKernelSize** Kernel size of Bilateral-TV filter.\n        -   **int blurKernelSize** Gaussian blur kernel size.\n        -   **double blurSigma** Gaussian blur sigma.\n        -   **int temporalAreaRadius** Radius of the temporal search area.\n        -   **Ptr\\<DenseOpticalFlowExt\\> opticalFlow** Dense optical flow algorithm."
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres.hpp",
+      "kind": "callable",
+      "name": "cv.superres.createSuperResolution_BTVL1_CUDA",
+      "identity": "cv.superres.createSuperResolution_BTVL1_CUDA()->Ptr<SuperResolution>",
+      "returnType": "Ptr<SuperResolution>",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "class",
+      "name": "cv.superres.DenseOpticalFlowExt",
+      "identity": "class cv.superres.DenseOpticalFlowExt",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": ""
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.DenseOpticalFlowExt.calc",
+      "identity": "cv.superres.DenseOpticalFlowExt.calc(InputArray frame0;InputArray frame1;OutputArray flow1;OutputArray flow2=noArray())->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "frame0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "frame1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "flow1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "flow2",
+          "default": "noArray()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 37,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.DenseOpticalFlowExt.collectGarbage",
+      "identity": "cv.superres.DenseOpticalFlowExt.collectGarbage()->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 38,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "class",
+      "name": "cv.superres.FarnebackOpticalFlow",
+      "identity": "class cv.superres.FarnebackOpticalFlow",
+      "returnType": ": cv::superres::DenseOpticalFlowExt",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::superres::DenseOpticalFlowExt",
+      "documentation": ""
+    },
+    {
+      "ordinal": 39,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.FarnebackOpticalFlow.getPyrScale",
+      "identity": "cv.superres.FarnebackOpticalFlow.getPyrScale()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setPyrScale"
+    },
+    {
+      "ordinal": 40,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.FarnebackOpticalFlow.setPyrScale",
+      "identity": "cv.superres.FarnebackOpticalFlow.setPyrScale(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getPyrScale @see getPyrScale"
+    },
+    {
+      "ordinal": 41,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.FarnebackOpticalFlow.getLevelsNumber",
+      "identity": "cv.superres.FarnebackOpticalFlow.getLevelsNumber()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setLevelsNumber"
+    },
+    {
+      "ordinal": 42,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.FarnebackOpticalFlow.setLevelsNumber",
+      "identity": "cv.superres.FarnebackOpticalFlow.setLevelsNumber(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getLevelsNumber @see getLevelsNumber"
+    },
+    {
+      "ordinal": 43,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.FarnebackOpticalFlow.getWindowSize",
+      "identity": "cv.superres.FarnebackOpticalFlow.getWindowSize()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setWindowSize"
+    },
+    {
+      "ordinal": 44,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.FarnebackOpticalFlow.setWindowSize",
+      "identity": "cv.superres.FarnebackOpticalFlow.setWindowSize(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getWindowSize @see getWindowSize"
+    },
+    {
+      "ordinal": 45,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.FarnebackOpticalFlow.getIterations",
+      "identity": "cv.superres.FarnebackOpticalFlow.getIterations()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setIterations"
+    },
+    {
+      "ordinal": 46,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.FarnebackOpticalFlow.setIterations",
+      "identity": "cv.superres.FarnebackOpticalFlow.setIterations(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getIterations @see getIterations"
+    },
+    {
+      "ordinal": 47,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.FarnebackOpticalFlow.getPolyN",
+      "identity": "cv.superres.FarnebackOpticalFlow.getPolyN()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setPolyN"
+    },
+    {
+      "ordinal": 48,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.FarnebackOpticalFlow.setPolyN",
+      "identity": "cv.superres.FarnebackOpticalFlow.setPolyN(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getPolyN @see getPolyN"
+    },
+    {
+      "ordinal": 49,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.FarnebackOpticalFlow.getPolySigma",
+      "identity": "cv.superres.FarnebackOpticalFlow.getPolySigma()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setPolySigma"
+    },
+    {
+      "ordinal": 50,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.FarnebackOpticalFlow.setPolySigma",
+      "identity": "cv.superres.FarnebackOpticalFlow.setPolySigma(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getPolySigma @see getPolySigma"
+    },
+    {
+      "ordinal": 51,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.FarnebackOpticalFlow.getFlags",
+      "identity": "cv.superres.FarnebackOpticalFlow.getFlags()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setFlags"
+    },
+    {
+      "ordinal": 52,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.FarnebackOpticalFlow.setFlags",
+      "identity": "cv.superres.FarnebackOpticalFlow.setFlags(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getFlags @see getFlags"
+    },
+    {
+      "ordinal": 53,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.createOptFlow_Farneback",
+      "identity": "cv.superres.createOptFlow_Farneback()->Ptr<FarnebackOpticalFlow>",
+      "returnType": "Ptr<FarnebackOpticalFlow>",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 54,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.createOptFlow_Farneback_CUDA",
+      "identity": "cv.superres.createOptFlow_Farneback_CUDA()->Ptr<FarnebackOpticalFlow>",
+      "returnType": "Ptr<FarnebackOpticalFlow>",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 55,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "class",
+      "name": "cv.superres.DualTVL1OpticalFlow",
+      "identity": "class cv.superres.DualTVL1OpticalFlow",
+      "returnType": ": cv::superres::DenseOpticalFlowExt",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::superres::DenseOpticalFlowExt",
+      "documentation": ""
+    },
+    {
+      "ordinal": 56,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.DualTVL1OpticalFlow.getTau",
+      "identity": "cv.superres.DualTVL1OpticalFlow.getTau()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setTau"
+    },
+    {
+      "ordinal": 57,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.DualTVL1OpticalFlow.setTau",
+      "identity": "cv.superres.DualTVL1OpticalFlow.setTau(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getTau @see getTau"
+    },
+    {
+      "ordinal": 58,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.DualTVL1OpticalFlow.getLambda",
+      "identity": "cv.superres.DualTVL1OpticalFlow.getLambda()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setLambda"
+    },
+    {
+      "ordinal": 59,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.DualTVL1OpticalFlow.setLambda",
+      "identity": "cv.superres.DualTVL1OpticalFlow.setLambda(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getLambda @see getLambda"
+    },
+    {
+      "ordinal": 60,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.DualTVL1OpticalFlow.getTheta",
+      "identity": "cv.superres.DualTVL1OpticalFlow.getTheta()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setTheta"
+    },
+    {
+      "ordinal": 61,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.DualTVL1OpticalFlow.setTheta",
+      "identity": "cv.superres.DualTVL1OpticalFlow.setTheta(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getTheta @see getTheta"
+    },
+    {
+      "ordinal": 62,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.DualTVL1OpticalFlow.getScalesNumber",
+      "identity": "cv.superres.DualTVL1OpticalFlow.getScalesNumber()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setScalesNumber"
+    },
+    {
+      "ordinal": 63,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.DualTVL1OpticalFlow.setScalesNumber",
+      "identity": "cv.superres.DualTVL1OpticalFlow.setScalesNumber(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getScalesNumber @see getScalesNumber"
+    },
+    {
+      "ordinal": 64,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.DualTVL1OpticalFlow.getWarpingsNumber",
+      "identity": "cv.superres.DualTVL1OpticalFlow.getWarpingsNumber()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setWarpingsNumber"
+    },
+    {
+      "ordinal": 65,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.DualTVL1OpticalFlow.setWarpingsNumber",
+      "identity": "cv.superres.DualTVL1OpticalFlow.setWarpingsNumber(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getWarpingsNumber @see getWarpingsNumber"
+    },
+    {
+      "ordinal": 66,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.DualTVL1OpticalFlow.getEpsilon",
+      "identity": "cv.superres.DualTVL1OpticalFlow.getEpsilon()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setEpsilon"
+    },
+    {
+      "ordinal": 67,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.DualTVL1OpticalFlow.setEpsilon",
+      "identity": "cv.superres.DualTVL1OpticalFlow.setEpsilon(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getEpsilon @see getEpsilon"
+    },
+    {
+      "ordinal": 68,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.DualTVL1OpticalFlow.getIterations",
+      "identity": "cv.superres.DualTVL1OpticalFlow.getIterations()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setIterations"
+    },
+    {
+      "ordinal": 69,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.DualTVL1OpticalFlow.setIterations",
+      "identity": "cv.superres.DualTVL1OpticalFlow.setIterations(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getIterations @see getIterations"
+    },
+    {
+      "ordinal": 70,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.DualTVL1OpticalFlow.getUseInitialFlow",
+      "identity": "cv.superres.DualTVL1OpticalFlow.getUseInitialFlow()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setUseInitialFlow"
+    },
+    {
+      "ordinal": 71,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.DualTVL1OpticalFlow.setUseInitialFlow",
+      "identity": "cv.superres.DualTVL1OpticalFlow.setUseInitialFlow(bool val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getUseInitialFlow @see getUseInitialFlow"
+    },
+    {
+      "ordinal": 72,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.createOptFlow_DualTVL1",
+      "identity": "cv.superres.createOptFlow_DualTVL1()->Ptr<DualTVL1OpticalFlow>",
+      "returnType": "Ptr<DualTVL1OpticalFlow>",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 73,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.createOptFlow_DualTVL1_CUDA",
+      "identity": "cv.superres.createOptFlow_DualTVL1_CUDA()->Ptr<DualTVL1OpticalFlow>",
+      "returnType": "Ptr<DualTVL1OpticalFlow>",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 74,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "class",
+      "name": "cv.superres.BroxOpticalFlow",
+      "identity": "class cv.superres.BroxOpticalFlow",
+      "returnType": ": cv::superres::DenseOpticalFlowExt",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::superres::DenseOpticalFlowExt",
+      "documentation": ""
+    },
+    {
+      "ordinal": 75,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.BroxOpticalFlow.getAlpha",
+      "identity": "cv.superres.BroxOpticalFlow.getAlpha()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setAlpha"
+    },
+    {
+      "ordinal": 76,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.BroxOpticalFlow.setAlpha",
+      "identity": "cv.superres.BroxOpticalFlow.setAlpha(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getAlpha @see getAlpha"
+    },
+    {
+      "ordinal": 77,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.BroxOpticalFlow.getGamma",
+      "identity": "cv.superres.BroxOpticalFlow.getGamma()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setGamma"
+    },
+    {
+      "ordinal": 78,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.BroxOpticalFlow.setGamma",
+      "identity": "cv.superres.BroxOpticalFlow.setGamma(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getGamma @see getGamma"
+    },
+    {
+      "ordinal": 79,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.BroxOpticalFlow.getScaleFactor",
+      "identity": "cv.superres.BroxOpticalFlow.getScaleFactor()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setScaleFactor"
+    },
+    {
+      "ordinal": 80,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.BroxOpticalFlow.setScaleFactor",
+      "identity": "cv.superres.BroxOpticalFlow.setScaleFactor(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getScaleFactor @see getScaleFactor"
+    },
+    {
+      "ordinal": 81,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.BroxOpticalFlow.getInnerIterations",
+      "identity": "cv.superres.BroxOpticalFlow.getInnerIterations()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setInnerIterations"
+    },
+    {
+      "ordinal": 82,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.BroxOpticalFlow.setInnerIterations",
+      "identity": "cv.superres.BroxOpticalFlow.setInnerIterations(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getInnerIterations @see getInnerIterations"
+    },
+    {
+      "ordinal": 83,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.BroxOpticalFlow.getOuterIterations",
+      "identity": "cv.superres.BroxOpticalFlow.getOuterIterations()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setOuterIterations"
+    },
+    {
+      "ordinal": 84,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.BroxOpticalFlow.setOuterIterations",
+      "identity": "cv.superres.BroxOpticalFlow.setOuterIterations(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getOuterIterations @see getOuterIterations"
+    },
+    {
+      "ordinal": 85,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.BroxOpticalFlow.getSolverIterations",
+      "identity": "cv.superres.BroxOpticalFlow.getSolverIterations()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setSolverIterations"
+    },
+    {
+      "ordinal": 86,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.BroxOpticalFlow.setSolverIterations",
+      "identity": "cv.superres.BroxOpticalFlow.setSolverIterations(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getSolverIterations @see getSolverIterations"
+    },
+    {
+      "ordinal": 87,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.createOptFlow_Brox_CUDA",
+      "identity": "cv.superres.createOptFlow_Brox_CUDA()->Ptr<BroxOpticalFlow>",
+      "returnType": "Ptr<BroxOpticalFlow>",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 88,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "class",
+      "name": "cv.superres.PyrLKOpticalFlow",
+      "identity": "class cv.superres.PyrLKOpticalFlow",
+      "returnType": ": cv::superres::DenseOpticalFlowExt",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::superres::DenseOpticalFlowExt",
+      "documentation": ""
+    },
+    {
+      "ordinal": 89,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.PyrLKOpticalFlow.getWindowSize",
+      "identity": "cv.superres.PyrLKOpticalFlow.getWindowSize()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setWindowSize"
+    },
+    {
+      "ordinal": 90,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.PyrLKOpticalFlow.setWindowSize",
+      "identity": "cv.superres.PyrLKOpticalFlow.setWindowSize(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getWindowSize @see getWindowSize"
+    },
+    {
+      "ordinal": 91,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.PyrLKOpticalFlow.getMaxLevel",
+      "identity": "cv.superres.PyrLKOpticalFlow.getMaxLevel()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setMaxLevel"
+    },
+    {
+      "ordinal": 92,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.PyrLKOpticalFlow.setMaxLevel",
+      "identity": "cv.superres.PyrLKOpticalFlow.setMaxLevel(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getMaxLevel @see getMaxLevel"
+    },
+    {
+      "ordinal": 93,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.PyrLKOpticalFlow.getIterations",
+      "identity": "cv.superres.PyrLKOpticalFlow.getIterations()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setIterations"
+    },
+    {
+      "ordinal": 94,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.PyrLKOpticalFlow.setIterations",
+      "identity": "cv.superres.PyrLKOpticalFlow.setIterations(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getIterations @see getIterations"
+    },
+    {
+      "ordinal": 95,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.superres.createOptFlow_PyrLK_CUDA",
+      "identity": "cv.superres.createOptFlow_PyrLK_CUDA()->Ptr<PyrLKOpticalFlow>",
+      "returnType": "Ptr<PyrLKOpticalFlow>",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    }
+  ],
+  "parserMode": "non-wrapper-public-declarations",
+  "parserNormalization": "non-wrapper parser mode because superres uses CV_EXPORTS without CV_WRAP; exclude the three protected SuperResolution constructor/initImpl/processImpl declarations; upstream source/hash unchanged"
+}
