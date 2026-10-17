@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 52,
+  "moduleCount": 53,
   "maps": [
     {
       "id": "calib3d",
@@ -3432,6 +3432,58 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "22f26e53c89975523e113da4aa9b06702df829a3a4b03294d31c3858a91e1ae9",
         "familyInventorySha256": "9bc51c9528ea5ef8753374d267400cee76fc3f061163ddbd2f17ffcb4c86a158",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "cudaarithm",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/CudaArithmUpstreamMap",
+      "extractorScript": "tools/CudaArithmUpstreamMap/extract_cudaarithm.py",
+      "generationScript": "scripts/Generate-CudaArithmUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-CudaArithmUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/cudaarithm.hpp parser-backed CUDA arithmetic public declarations plus the pinned module CMake build/dependency contract",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+          "sha256": "db28b57a339e2e3e22cf4ea51bc780daa0aebeb1a4eb8dc90c6754a8f14cdd0e"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+            "sha256": "db28b57a339e2e3e22cf4ea51bc780daa0aebeb1a4eb8dc90c6754a8f14cdd0e",
+            "startOrdinal": 0,
+            "declarationCount": 89
+          }
+        ],
+        "compatibilityHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/CMakeLists.txt",
+            "sha256": "328e3ad715f2f02909007fee2c83b708a3a0707320db80fb2722ceb00da337a7",
+            "reason": "Upstream module activation and CUDA/NPP/optional cuBLAS/cuFFT dependency contract; parser declarations are not gated in the public header."
+          }
+        ],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/cudaarithm-upstream-raw.json",
+        "classifications": "compatibility/cudaarithm-upstream-classifications.json",
+        "mapping": "compatibility/cudaarithm-upstream-map.txt",
+        "summary": "compatibility/cudaarithm-upstream-summary.json",
+        "familyInventory": "compatibility/cudaarithm-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 89,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "78bead26e13d6d32eec141ab8d48b0636e4f27201f8d60d90316852f6078da22",
+        "familyInventorySha256": "ab85e7212ff28625b72000dda2f53431cc910aa06a23838175dbad5246df4c2b",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

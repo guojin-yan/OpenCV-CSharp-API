@@ -137,6 +137,8 @@ function Get-Record {
     $juliaSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/julia-upstream-summary.json") -Raw | ConvertFrom-Json
     $rgbdRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/rgbd-upstream-raw.json") -Raw | ConvertFrom-Json
     $rgbdSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/rgbd-upstream-summary.json") -Raw | ConvertFrom-Json
+    $cudaarithmRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/cudaarithm-upstream-raw.json") -Raw | ConvertFrom-Json
+    $cudaarithmSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/cudaarithm-upstream-summary.json") -Raw | ConvertFrom-Json
     $wechatQRCodeRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/wechat_qrcode-upstream-raw.json") -Raw | ConvertFrom-Json
     $wechatQRCodeSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/wechat_qrcode-upstream-summary.json") -Raw | ConvertFrom-Json
     $cnn3DObjRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/cnn_3dobj-upstream-raw.json") -Raw | ConvertFrom-Json
@@ -224,6 +226,11 @@ function Get-Record {
         "compatibility/rgbd-upstream-map.txt",
         "compatibility/rgbd-upstream-raw.json",
         "compatibility/rgbd-upstream-summary.json",
+        "compatibility/cudaarithm-implemented-families.json",
+        "compatibility/cudaarithm-upstream-classifications.json",
+        "compatibility/cudaarithm-upstream-map.txt",
+        "compatibility/cudaarithm-upstream-raw.json",
+        "compatibility/cudaarithm-upstream-summary.json",
         "compatibility/wechat_qrcode-implemented-families.json",
         "compatibility/wechat_qrcode-upstream-classifications.json",
         "compatibility/wechat_qrcode-upstream-map.txt",
@@ -456,6 +463,7 @@ function Get-Record {
         "docs/articles/ccalib-upstream-parity-guide.md",
         "docs/articles/julia-upstream-parity-guide.md",
         "docs/articles/rgbd-upstream-parity-guide.md",
+        "docs/articles/cudaarithm-upstream-parity-guide.md",
         "docs/articles/signal-upstream-parity-guide.md",
         "docs/articles/dpm-upstream-parity-guide.md",
         "docs/articles/hdf-upstream-parity-guide.md",
@@ -612,6 +620,7 @@ function Get-Record {
         "scripts/Generate-SuperresUpstreamMap.ps1",
         "scripts/Generate-JuliaUpstreamMap.ps1",
         "scripts/Generate-RgbdUpstreamMap.ps1",
+        "scripts/Generate-CudaArithmUpstreamMap.ps1",
         "scripts/Generate-WechatQRCodeUpstreamMap.ps1",
         "scripts/Generate-Cnn3DObjUpstreamMap.ps1",
         "scripts/Generate-SignalUpstreamMap.ps1",
@@ -676,6 +685,7 @@ function Get-Record {
         "scripts/Test-SuperresUpstreamMap.ps1",
         "scripts/Test-JuliaUpstreamMap.ps1",
         "scripts/Test-RgbdUpstreamMap.ps1",
+        "scripts/Test-CudaArithmUpstreamMap.ps1",
         "scripts/Test-WechatQRCodeUpstreamMap.ps1",
         "scripts/Test-Cnn3DObjUpstreamMap.ps1",
         "scripts/Test-SignalUpstreamMap.ps1",
@@ -988,6 +998,9 @@ function Get-Record {
         "tools/RgbdUpstreamMap/RgbdUpstreamMap.csproj",
         "tools/RgbdUpstreamMap/Program.cs",
         "tools/RgbdUpstreamMap/extract_rgbd.py",
+        "tools/CudaArithmUpstreamMap/CudaArithmUpstreamMap.csproj",
+        "tools/CudaArithmUpstreamMap/Program.cs",
+        "tools/CudaArithmUpstreamMap/extract_cudaarithm.py",
         "docs/articles/dnn-superres-upstream-parity-guide.md",
         "docs/articles/wechat-qrcode-upstream-parity-guide.md",
         "docs/articles/cnn-3dobj-upstream-parity-guide.md",
@@ -1371,6 +1384,33 @@ function Get-Record {
                 NativeEntrypointAdditionCount = [int]$rgbdSummary.nativeEvidenceCount
                 ExternalDataDependencyCount = [int]$rgbdSummary.externalDataDependencyCount
                 RepositoryWideParityClaimed = [bool]$rgbdSummary.repositoryWideUpstreamParityClaimed
+            }
+            CudaArithmUpstreamMap = [ordered]@{
+                Path = "compatibility/cudaarithm-upstream-map.txt"
+                SummaryPath = "compatibility/cudaarithm-upstream-summary.json"
+                ClassificationPath = "compatibility/cudaarithm-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/cudaarithm-implemented-families.json"
+                RawExtractionPath = "compatibility/cudaarithm-upstream-raw.json"
+                Sha256 = $cudaarithmSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/cudaarithm-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$cudaarithmSummary.declarationCount
+                CallableCount = [int]$cudaarithmSummary.callableCount
+                ImplementedCount = [int]$cudaarithmSummary.classificationCounts.implemented
+                MissingCount = [int]$cudaarithmSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$cudaarithmSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$cudaarithmSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$cudaarithmSummary.classificationCounts.'upstream-conditional'
+                SourceHeaderCount = @($cudaarithmRaw.sourceHeaders).Count
+                SelectedFamilyCount = [int]$cudaarithmSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$cudaarithmSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$cudaarithmSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$cudaarithmSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$cudaarithmSummary.nativeEvidenceCount
+                ExternalDataDependencyCount = [int]$cudaarithmSummary.externalDataDependencyCount
+                CompatibilityBuildPath = [string]$cudaarithmRaw.compatibilityHeaders[0].path
+                CompatibilityBuildSha256 = [string]$cudaarithmRaw.compatibilityHeaders[0].sha256
+                ModuleBuildCondition = [string]$cudaarithmRaw.moduleBuildCondition
+                RepositoryWideParityClaimed = [bool]$cudaarithmSummary.repositoryWideUpstreamParityClaimed
             }
             WechatQRCodeUpstreamMap = [ordered]@{
                 Path = "compatibility/wechat_qrcode-upstream-map.txt"

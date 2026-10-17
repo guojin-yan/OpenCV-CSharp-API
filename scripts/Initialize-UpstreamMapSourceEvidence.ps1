@@ -28,6 +28,7 @@ $rawNames += @("ccalib")
 $rawNames += @("superres")
 $rawNames += @("julia")
 $rawNames += @("rgbd")
+$rawNames += @("cudaarithm")
 $maximumDownloadAttempts = 4
 $required = [System.Collections.Generic.Dictionary[string, string]]::new([StringComparer]::Ordinal)
 

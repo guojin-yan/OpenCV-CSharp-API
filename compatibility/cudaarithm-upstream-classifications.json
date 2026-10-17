@@ -1,0 +1,814 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/cudaarithm.hpp parser-backed CUDA arithmetic public declarations plus the pinned module CMake build/dependency contract",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact CudaArithm wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [
+    "The cudaarithm module is disabled unless the OpenCV build enables CUDA or CUDA stubs and is unavailable on iOS/WinRT; real acceleration depends on an external CUDA toolkit/runtime and NPP.",
+    "The upstream module optionally uses opencv_cudev, cuBLAS/cuBLASLt, and cuFFT; this package ships no CUDA arithmetic wrapper/runtime, and GpuMat/Stream lifetime and async ownership are outside the managed contract."
+  ],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "cv.cuda.add(Mat src1;Mat src2;Mat dst[/O];Mat mask=Mat();int dtype=-1;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.cuda.addWithScalar(Mat src1;Scalar src2;Mat dst[/O];Mat mask=Mat();int dtype=-1;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.cuda.subtract(Mat src1;Mat src2;Mat dst[/O];Mat mask=Mat();int dtype=-1;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.cuda.subtractWithScalar(Mat src1;Scalar src2;Mat dst[/O];Mat mask=Mat();int dtype=-1;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.cuda.multiply(Mat src1;Mat src2;Mat dst[/O];double scale=1;int dtype=-1;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.cuda.multiplyWithScalar(Mat src1;Scalar src2;Mat dst[/O];double scale=1;int dtype=-1;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.cuda.divide(Mat src1;Mat src2;Mat dst[/O];double scale=1;int dtype=-1;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.cuda.divideWithScalar(Mat src1;Scalar src2;Mat dst[/O];double scale=1;int dtype=-1;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.cuda.absdiff(Mat src1;Mat src2;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.cuda.absdiffWithScalar(Mat src1;Scalar src2;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.cuda.abs(Mat src;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.cuda.sqr(Mat src;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.cuda.sqrt(Mat src;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.cuda.exp(Mat src;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.cuda.log(Mat src;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.cuda.pow(Mat src;double power;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.cuda.compare(Mat src1;Mat src2;Mat dst[/O];int cmpop;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.cuda.compareWithScalar(Mat src1;Scalar src2;Mat dst[/O];int cmpop;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.cuda.bitwise_not(Mat src;Mat dst[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.cuda.bitwise_or(Mat src1;Mat src2;Mat dst[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.cuda.bitwise_or_with_scalar(Mat src1;Scalar src2;Mat dst[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.cuda.bitwise_and(Mat src1;Mat src2;Mat dst[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.cuda.bitwise_and_with_scalar(Mat src1;Scalar src2;Mat dst[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.cuda.bitwise_xor(Mat src1;Mat src2;Mat dst[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.cuda.bitwise_xor_with_scalar(Mat src1;Scalar src2;Mat dst[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.cuda.rshift(Mat src;Scalar val;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.cuda.lshift(Mat src;Scalar val;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.cuda.min(Mat src1;Mat src2;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.cuda.minWithScalar(Mat src1;Scalar src2;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.cuda.max(Mat src1;Mat src2;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.cuda.maxWithScalar(Mat src1;Scalar src2;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.cuda.addWeighted(Mat src1;double alpha;Mat src2;double beta;double gamma;Mat dst[/O];int dtype=-1;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.cuda.threshold(Mat src;Mat dst[/O];double thresh;double maxval;int type;Stream stream=Stream::Null()[/Ref])->double",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.cuda.inRange(Mat src;Scalar lowerb[/C,/Ref];Scalar upperb[/C,/Ref];Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.cuda.magnitude(Mat xy;Mat magnitude[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.cuda.magnitudeSqr(Mat xy;Mat magnitude[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.cuda.magnitude(Mat x;Mat y;Mat magnitude[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.cuda.magnitudeSqr(Mat x;Mat y;Mat magnitude[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.cuda.phase(Mat x;Mat y;Mat angle[/O];bool angleInDegrees=false;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.cuda.phase(Mat xy;Mat angle[/O];bool angleInDegrees=false;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.cuda.cartToPolar(Mat x;Mat y;Mat magnitude[/O];Mat angle[/O];bool angleInDegrees=false;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.cuda.cartToPolar(Mat xy;Mat magnitude[/O];Mat angle[/O];bool angleInDegrees=false;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 42,
+      "identity": "cv.cuda.cartToPolar(Mat xy;Mat magnitudeAngle[/O];bool angleInDegrees=false;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.cuda.polarToCart(Mat magnitude;Mat angle;Mat x[/O];Mat y[/O];bool angleInDegrees=false;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.cuda.polarToCart(Mat magnitude;Mat angle;Mat xy[/O];bool angleInDegrees=false;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 45,
+      "identity": "cv.cuda.polarToCart(Mat magnitudeAngle;Mat xy[/O];bool angleInDegrees=false;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 46,
+      "identity": "cv.cuda.merge(vector_GpuMat src[/C,/Ref];Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.cuda.split(Mat src;vector_GpuMat dst[/O,/Ref];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 48,
+      "identity": "cv.cuda.transpose(Mat src1;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.cuda.flip(Mat src;Mat dst[/O];int flipCode;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 50,
+      "identity": "class cv.cuda.LookUpTable",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 51,
+      "identity": "cv.cuda.LookUpTable.transform(Mat src;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 52,
+      "identity": "cv.cuda.createLookUpTable(Mat lut)->Ptr<LookUpTable>",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 53,
+      "identity": "cv.cuda.copyMakeBorder(Mat src;Mat dst[/O];int top;int bottom;int left;int right;int borderType;Scalar value=Scalar();Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 54,
+      "identity": "cv.cuda.norm(Mat src1;int normType;Mat mask=Mat())->double",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 55,
+      "identity": "cv.cuda.calcNorm(Mat src;Mat dst[/O];int normType;Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 56,
+      "identity": "cv.cuda.norm(Mat src1;Mat src2;int normType=NORM_L2)->double",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 57,
+      "identity": "cv.cuda.calcNormDiff(Mat src1;Mat src2;Mat dst[/O];int normType=NORM_L2;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 58,
+      "identity": "cv.cuda.sum(Mat src;Mat mask=Mat())->Scalar",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 59,
+      "identity": "cv.cuda.calcSum(Mat src;Mat dst[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 60,
+      "identity": "cv.cuda.absSum(Mat src;Mat mask=Mat())->Scalar",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 61,
+      "identity": "cv.cuda.calcAbsSum(Mat src;Mat dst[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 62,
+      "identity": "cv.cuda.sqrSum(Mat src;Mat mask=Mat())->Scalar",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 63,
+      "identity": "cv.cuda.calcSqrSum(Mat src;Mat dst[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 64,
+      "identity": "cv.cuda.minMax(Mat src;double* minVal[/O];double* maxVal[/O];Mat mask=Mat())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 65,
+      "identity": "cv.cuda.findMinMax(Mat src;Mat dst[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 66,
+      "identity": "cv.cuda.minMaxLoc(Mat src;double* minVal[/O];double* maxVal[/O];Point* minLoc[/O];Point* maxLoc[/O];Mat mask=Mat())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 67,
+      "identity": "cv.cuda.findMinMaxLoc(Mat src;Mat minMaxVals[/O];Mat loc[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 68,
+      "identity": "cv.cuda.countNonZero(Mat src)->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 69,
+      "identity": "cv.cuda.countNonZero(Mat src;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 70,
+      "identity": "cv.cuda.reduce(Mat mtx;Mat vec[/O];int dim;int reduceOp;int dtype=-1;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 71,
+      "identity": "cv.cuda.meanStdDev(Mat src;Mat dst[/O];Mat mask;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 72,
+      "identity": "cv.cuda.meanStdDev(Mat mtx;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 73,
+      "identity": "cv.cuda.meanStdDev(Mat src;Scalar mean[/O,/Ref];Scalar stddev[/O,/Ref];Mat mask)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 74,
+      "identity": "cv.cuda.meanStdDev(Mat mtx;Scalar mean[/O,/Ref];Scalar stddev[/O,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 75,
+      "identity": "cv.cuda.rectStdDev(Mat src;Mat sqr;Mat dst[/O];Rect rect;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 76,
+      "identity": "cv.cuda.normalize(Mat src;Mat dst[/O];double alpha;double beta;int norm_type;int dtype;Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 77,
+      "identity": "cv.cuda.integral(Mat src;Mat sum[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 78,
+      "identity": "cv.cuda.sqrIntegral(Mat src;Mat sqsum[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 79,
+      "identity": "cv.cuda.gemm(Mat src1;Mat src2;double alpha;Mat src3;double beta;Mat dst[/O];int flags=0;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 80,
+      "identity": "cv.cuda.mulSpectrums(Mat src1;Mat src2;Mat dst[/O];int flags;bool conjB=false;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 81,
+      "identity": "cv.cuda.mulAndScaleSpectrums(Mat src1;Mat src2;Mat dst[/O];int flags;float scale;bool conjB=false;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 82,
+      "identity": "cv.cuda.dft(Mat src;Mat dst[/O];Size dft_size;int flags=0;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 83,
+      "identity": "class cv.cuda.DFT",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 84,
+      "identity": "cv.cuda.DFT.compute(Mat image;Mat result[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 85,
+      "identity": "cv.cuda.createDFT(Size dft_size;int flags)->Ptr<DFT>",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 86,
+      "identity": "class cv.cuda.Convolution",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 87,
+      "identity": "cv.cuda.Convolution.convolve(Mat image;Mat templ;Mat result[/O];bool ccorr=false;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 88,
+      "identity": "cv.cuda.createConvolution(Size user_block_size=Size())->Ptr<Convolution>",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA arithmetic surface in cv::cuda has no native CudaArithm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real acceleration requires CUDA/NPP and optional CUDA libraries. GpuMat/Stream ownership and asynchronous execution remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}

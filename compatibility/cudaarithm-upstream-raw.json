@@ -1,0 +1,3864 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/CudaArithmUpstreamMap/extract_cudaarithm.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+  "headerSha256": "db28b57a339e2e3e22cf4ea51bc780daa0aebeb1a4eb8dc90c6754a8f14cdd0e",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "sha256": "db28b57a339e2e3e22cf4ea51bc780daa0aebeb1a4eb8dc90c6754a8f14cdd0e",
+      "startOrdinal": 0,
+      "declarationCount": 89
+    }
+  ],
+  "declarationCount": 89,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.add",
+      "identity": "cv.cuda.add(Mat src1;Mat src2;Mat dst[/O];Mat mask=Mat();int dtype=-1;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dtype",
+          "default": "-1",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a matrix-matrix or matrix-scalar sum.\n\n@param src1 First source matrix or scalar.\n@param src2 Second source matrix or scalar. Matrix should have the same size and type as src1 .\n@param dst Destination matrix that has the same size and number of channels as the input array(s).\nThe depth is defined by dtype or @p src1 depth.\n@param mask Optional operation mask, 8-bit single channel array, that specifies elements of the\ndestination array to be changed. The mask can be used only with single channel images.\n@param dtype Optional depth of the output array.\n@param stream Stream for the asynchronous version.\n\n@warning In python both @p src1 and @p src2 have to be matrices, see @ref addWithScalar for scalar overload.\n\n@sa cv::add, addWithScalar"
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.addWithScalar",
+      "identity": "cv.cuda.addWithScalar(Mat src1;Scalar src2;Mat dst[/O];Mat mask=Mat();int dtype=-1;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dtype",
+          "default": "-1",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a matrix-scalar sum.\n\n@param src1 First source matrix.\n@param src2 Second source scalar.\n@param dst Destination matrix that has the same size and number of channels as the input array.\nThe depth is defined by dtype or @p src1 depth.\n@param mask Optional operation mask, 8-bit single channel array, that specifies elements of the\ndestination array to be changed. The mask can be used only with single channel images.\n@param dtype Optional depth of the output array.\n@param stream Stream for the asynchronous version.\n\n@sa add"
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.subtract",
+      "identity": "cv.cuda.subtract(Mat src1;Mat src2;Mat dst[/O];Mat mask=Mat();int dtype=-1;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dtype",
+          "default": "-1",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a matrix-matrix or matrix-scalar difference.\n\n@param src1 First source matrix or scalar.\n@param src2 Second source matrix or scalar. Matrix should have the same size and type as @p src1.\n@param dst Destination matrix that has the same size and number of channels as the input array(s).\nThe depth is defined by dtype or @p src1 depth.\n@param mask Optional operation mask, 8-bit single channel array, that specifies elements of the\ndestination array to be changed. The mask can be used only with single channel images.\n@param dtype Optional depth of the output array.\n@param stream Stream for the asynchronous version.\n\n@warning In python both @p src1 and @p src2 have to be matrices, see @ref subtractWithScalar for scalar overload.\n\n@sa cv::subtract, subtractWithScalar"
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.subtractWithScalar",
+      "identity": "cv.cuda.subtractWithScalar(Mat src1;Scalar src2;Mat dst[/O];Mat mask=Mat();int dtype=-1;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dtype",
+          "default": "-1",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes matrix-scalar difference.\n\n@param src1 First source matrix.\n@param src2 Second source scalar.\n@param dst Destination matrix that has the same size and number of channels as the input array.\nThe depth is defined by dtype or @p src1 depth.\n@param mask Optional operation mask, 8-bit single channel array, that specifies elements of the\ndestination array to be changed. The mask can be used only with single channel images.\n@param dtype Optional depth of the output array.\n@param stream Stream for the asynchronous version.\n\n@sa cv::subtract"
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.multiply",
+      "identity": "cv.cuda.multiply(Mat src1;Mat src2;Mat dst[/O];double scale=1;int dtype=-1;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "scale",
+          "default": "1",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dtype",
+          "default": "-1",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a matrix-matrix or matrix-scalar per-element product.\n\n@param src1 First source matrix or scalar.\n@param src2 Second source matrix or scalar.\n@param dst Destination matrix that has the same size and number of channels as the input array(s).\nThe depth is defined by dtype or @p src1 depth.\n@param scale Optional scale factor.\n@param dtype Optional depth of the output array.\n@param stream Stream for the asynchronous version.\n\n@warning In python both @p src1 and @p src2 have to be matrices, see @ref multiplyWithScalar for scalar overload.\n\n@sa cv::multiply, multiplyWithScalar"
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.multiplyWithScalar",
+      "identity": "cv.cuda.multiplyWithScalar(Mat src1;Scalar src2;Mat dst[/O];double scale=1;int dtype=-1;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "scale",
+          "default": "1",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dtype",
+          "default": "-1",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a matrix-scalar per-element product.\n\n@param src1 First source matrix.\n@param src2 Second source scalar.\n@param dst Destination matrix that has the same size and number of channels as the input array.\nThe depth is defined by dtype or @p src1 depth.\n@param scale Optional scale factor.\n@param dtype Optional depth of the output array.\n@param stream Stream for the asynchronous version.\n\n@sa multiply"
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.divide",
+      "identity": "cv.cuda.divide(Mat src1;Mat src2;Mat dst[/O];double scale=1;int dtype=-1;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "scale",
+          "default": "1",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dtype",
+          "default": "-1",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a matrix-matrix or matrix-scalar division.\n\n@param src1 First source matrix or scalar.\n@param src2 Second source matrix or scalar.\n@param dst Destination matrix that has the same size and number of channels as the input array(s).\nThe depth is defined by dtype or @p src1 depth.\n@param scale Optional scale factor.\n@param dtype Optional depth of the output array.\n@param stream Stream for the asynchronous version.\n\nThis function, in contrast to divide, uses a round-down rounding mode.\n\n@warning In python both @p src1 and @p src2 have to be matrices, see @ref divideWithScalar for scalar overload.\n\n@sa cv::divide, divideWithScalar"
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.divideWithScalar",
+      "identity": "cv.cuda.divideWithScalar(Mat src1;Scalar src2;Mat dst[/O];double scale=1;int dtype=-1;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "scale",
+          "default": "1",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dtype",
+          "default": "-1",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a matrix-scalar division.\n\n@param src1 First source matrix.\n@param src2 Second source scalar.\n@param dst Destination matrix that has the same size and number of channels as the input array.\nThe depth is defined by dtype or @p src1 depth.\n@param scale Optional scale factor.\n@param dtype Optional depth of the output array.\n@param stream Stream for the asynchronous version.\n\nThis function, in contrast to divide, uses a round-down rounding mode.\n\n@sa divide"
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.absdiff",
+      "identity": "cv.cuda.absdiff(Mat src1;Mat src2;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes per-element absolute difference of two matrices (or of a matrix and scalar).\n\n@param src1 First source matrix or scalar.\n@param src2 Second source matrix or scalar.\n@param dst Destination matrix that has the same size and type as the input array(s).\n@param stream Stream for the asynchronous version.\n\n@warning In python both @p src1 and @p src2 have to be matrices, see @ref absdiffWithScalar for scalar overload.\n\n@sa cv::absdiff, absdiffWithScalar"
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.absdiffWithScalar",
+      "identity": "cv.cuda.absdiffWithScalar(Mat src1;Scalar src2;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes per-element absolute difference of a matrix and scalar.\n\n@param src1 First source matrix.\n@param src2 Second source scalar.\n@param dst Destination matrix that has the same size and type as the input array.\n@param stream Stream for the asynchronous version.\n\n@sa absdiff"
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.abs",
+      "identity": "cv.cuda.abs(Mat src;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes an absolute value of each matrix element.\n\n@param src Source matrix.\n@param dst Destination matrix with the same size and type as src .\n@param stream Stream for the asynchronous version.\n\n@sa abs"
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.sqr",
+      "identity": "cv.cuda.sqr(Mat src;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a square value of each matrix element.\n\n@param src Source matrix.\n@param dst Destination matrix with the same size and type as src .\n@param stream Stream for the asynchronous version."
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.sqrt",
+      "identity": "cv.cuda.sqrt(Mat src;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a square root of each matrix element.\n\n@param src Source matrix.\n@param dst Destination matrix with the same size and type as src .\n@param stream Stream for the asynchronous version.\n\n@sa sqrt"
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.exp",
+      "identity": "cv.cuda.exp(Mat src;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes an exponent of each matrix element.\n\n@param src Source matrix.\n@param dst Destination matrix with the same size and type as src .\n@param stream Stream for the asynchronous version.\n\n@sa exp"
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.log",
+      "identity": "cv.cuda.log(Mat src;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a natural logarithm of absolute value of each matrix element.\n\n@param src Source matrix.\n@param dst Destination matrix with the same size and type as src .\n@param stream Stream for the asynchronous version.\n\n@sa log"
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.pow",
+      "identity": "cv.cuda.pow(Mat src;double power;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "power",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Raises every matrix element to a power.\n\n@param src Source matrix.\n@param power Exponent of power.\n@param dst Destination matrix with the same size and type as src .\n@param stream Stream for the asynchronous version.\n\nThe function pow raises every element of the input matrix to power :\n\n\\f[\\texttt{dst} (I) =  \\fork{\\texttt{src}(I)^power}{if \\texttt{power} is integer}{|\\texttt{src}(I)|^power}{otherwise}\\f]\n\n@sa pow"
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.compare",
+      "identity": "cv.cuda.compare(Mat src1;Mat src2;Mat dst[/O];int cmpop;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "cmpop",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Compares elements of two matrices (or of a matrix and scalar).\n\n@param src1 First source matrix or scalar.\n@param src2 Second source matrix or scalar.\n@param dst Destination matrix that has the same size as the input array(s) and type CV_8U.\n@param cmpop Flag specifying the relation between the elements to be checked:\n-   **CMP_EQ:** a(.) == b(.)\n-   **CMP_GT:** a(.) \\> b(.)\n-   **CMP_GE:** a(.) \\>= b(.)\n-   **CMP_LT:** a(.) \\< b(.)\n-   **CMP_LE:** a(.) \\<= b(.)\n-   **CMP_NE:** a(.) != b(.)\n@param stream Stream for the asynchronous version.\n\n@warning In python both @p src1 and @p src2 have to be matrices, see @ref compareWithScalar for scalar overload.\n\n@sa cv::compare, compareWithScalar"
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.compareWithScalar",
+      "identity": "cv.cuda.compareWithScalar(Mat src1;Scalar src2;Mat dst[/O];int cmpop;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "cmpop",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Compares elements of a matrix and scalar.\n\n@param src1 First source matrix.\n@param src2 Second source scalar.\n@param dst Destination matrix that has the same size as the input array and type \\ref CV_8U.\n@param cmpop Flag specifying the relation between the elements to be checked:\n-   **CMP_EQ:** a(.) == b(.)\n-   **CMP_GT:** a(.) \\> b(.)\n-   **CMP_GE:** a(.) \\>= b(.)\n-   **CMP_LT:** a(.) \\< b(.)\n-   **CMP_LE:** a(.) \\<= b(.)\n-   **CMP_NE:** a(.) != b(.)\n@param stream Stream for the asynchronous version.\n\n@sa compare"
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.bitwise_not",
+      "identity": "cv.cuda.bitwise_not(Mat src;Mat dst[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Performs a per-element bitwise inversion.\n\n@param src Source matrix.\n@param dst Destination matrix with the same size and type as src .\n@param mask Optional operation mask, 8-bit single channel array, that specifies elements of the\ndestination array to be changed. The mask can be used only with single channel images.\n@param stream Stream for the asynchronous version."
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.bitwise_or",
+      "identity": "cv.cuda.bitwise_or(Mat src1;Mat src2;Mat dst[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Performs a per-element bitwise disjunction of two matrices (or of matrix and scalar).\n\n@param src1 First source matrix or scalar.\n@param src2 Second source matrix or scalar.\n@param dst Destination matrix that has the same size and type as the input array(s).\n@param mask Optional operation mask, 8-bit single channel array, that specifies elements of the\ndestination array to be changed. The mask can be used only with single channel images.\n@param stream Stream for the asynchronous version.\n\n@warning In python both @p src1 and @p src2 have to be matrices, see @ref bitwise_or_with_scalar for scalar overload.\n\n@sa cv::bitwise_or, bitwise_or_with_scalar"
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.bitwise_or_with_scalar",
+      "identity": "cv.cuda.bitwise_or_with_scalar(Mat src1;Scalar src2;Mat dst[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Performs a per-element bitwise disjunction of a matrix and scalar.\n\n@param src1 First source matrix.\n@param src2 Second source scalar.\n@param dst Destination matrix that has the same size and type as the input array.\n@param mask Optional operation mask, 8-bit single channel array, that specifies elements of the\ndestination array to be changed. The mask can be used only with single channel images.\n@param stream Stream for the asynchronous version.\n\n@sa bitwise_or"
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.bitwise_and",
+      "identity": "cv.cuda.bitwise_and(Mat src1;Mat src2;Mat dst[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Performs a per-element bitwise conjunction of two matrices (or of matrix and scalar).\n\n@param src1 First source matrix or scalar.\n@param src2 Second source matrix or scalar.\n@param dst Destination matrix that has the same size and type as the input array(s).\n@param mask Optional operation mask, 8-bit single channel array, that specifies elements of the\ndestination array to be changed. The mask can be used only with single channel images.\n@param stream Stream for the asynchronous version.\n\n@warning In python both @p src1 and @p src2 have to be matrices, see @ref bitwise_and_with_scalar for scalar overload.\n\n@sa bitwise_and_with_scalar"
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.bitwise_and_with_scalar",
+      "identity": "cv.cuda.bitwise_and_with_scalar(Mat src1;Scalar src2;Mat dst[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Performs a per-element bitwise conjunction of a matrix and a scalar.\n\n@param src1 First source matrix.\n@param src2 Second source scalar.\n@param dst Destination matrix that has the same size and type as the input array.\n@param mask Optional operation mask, 8-bit single channel array, that specifies elements of the\ndestination array to be changed. The mask can be used only with single channel images.\n@param stream Stream for the asynchronous version.\n\n@sa bitwise_and"
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.bitwise_xor",
+      "identity": "cv.cuda.bitwise_xor(Mat src1;Mat src2;Mat dst[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Performs a per-element bitwise exclusive or operation of two matrices (or of matrix and scalar).\n\n@param src1 First source matrix or scalar.\n@param src2 Second source matrix or scalar.\n@param dst Destination matrix that has the same size and type as the input array.\n@param mask Optional operation mask, 8-bit single channel array, that specifies elements of the\ndestination array to be changed. The mask can be used only with single channel images.\n@param stream Stream for the asynchronous version.\n\n@warning In python both @p src1 and @p src2 have to be matrices, see @ref bitwise_xor_with_scalar for scalar overload.\n\n@sa cv::bitwise_xor, bitwise_xor_with_scalar"
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.bitwise_xor_with_scalar",
+      "identity": "cv.cuda.bitwise_xor_with_scalar(Mat src1;Scalar src2;Mat dst[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Performs a per-element bitwise exclusive or operation of a matrix and a scalar.\n\n@param src1 First source matrix.\n@param src2 Second source scalar.\n@param dst Destination matrix that has the same size and type as the input array(s).\n@param mask Optional operation mask, 8-bit single channel array, that specifies elements of the\ndestination array to be changed. The mask can be used only with single channel images.\n@param stream Stream for the asynchronous version.\n\n@sa bitwise_xor"
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.rshift",
+      "identity": "cv.cuda.rshift(Mat src;Scalar val;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Performs pixel by pixel right shift of an image by a constant value.\n\n@param src Source matrix. Supports 1, 3 and 4 channels images with integers elements.\n@param val Constant values, one per channel.\n@param dst Destination matrix with the same size and type as src .\n@param stream Stream for the asynchronous version."
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.lshift",
+      "identity": "cv.cuda.lshift(Mat src;Scalar val;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Performs pixel by pixel right left of an image by a constant value.\n\n@param src Source matrix. Supports 1, 3 and 4 channels images with CV_8U , CV_16U or CV_32S\ndepth.\n@param val Constant values, one per channel.\n@param dst Destination matrix with the same size and type as src .\n@param stream Stream for the asynchronous version."
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.min",
+      "identity": "cv.cuda.min(Mat src1;Mat src2;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes the per-element minimum of two matrices (or a matrix and a scalar).\n\n@param src1 First source matrix or scalar.\n@param src2 Second source matrix or scalar.\n@param dst Destination matrix that has the same size and type as the input array(s).\n@param stream Stream for the asynchronous version.\n\n@warning In python both @p src1 and @p src2 have to be matrices, see @ref minWithScalar for scalar overload.\n\n@sa cv::min, minWithScalar"
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.minWithScalar",
+      "identity": "cv.cuda.minWithScalar(Mat src1;Scalar src2;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes the per-element minimum or a matrix and a scalar.\n\n@param src1 First source matrix.\n@param src2 Second source scalar.\n@param dst Destination matrix that has the same size and type as the input array.\n@param stream Stream for the asynchronous version.\n\n@sa min"
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.max",
+      "identity": "cv.cuda.max(Mat src1;Mat src2;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes the per-element maximum of two matrices (or a matrix and a scalar).\n\n@param src1 First source matrix or scalar.\n@param src2 Second source matrix or scalar.\n@param dst Destination matrix that has the same size and type as the input array(s).\n@param stream Stream for the asynchronous version.\n\n@warning In python both @p src1 and @p src2 have to be matrices, see @ref maxWithScalar for scalar overload.\n\n@sa cv::max, maxWithScalar"
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.maxWithScalar",
+      "identity": "cv.cuda.maxWithScalar(Mat src1;Scalar src2;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes the per-element maximum of a matrix and a scalar.\n\n@param src1 First source matrix.\n@param src2 Second source scalar.\n@param dst Destination matrix that has the same size and type as the input array.\n@param stream Stream for the asynchronous version.\n\n@sa max"
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.addWeighted",
+      "identity": "cv.cuda.addWeighted(Mat src1;double alpha;Mat src2;double beta;double gamma;Mat dst[/O];int dtype=-1;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "alpha",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "beta",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "gamma",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "dtype",
+          "default": "-1",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes the weighted sum of two arrays.\n\n@param src1 First source array.\n@param alpha Weight for the first array elements.\n@param src2 Second source array of the same size and channel number as src1 .\n@param beta Weight for the second array elements.\n@param dst Destination array that has the same size and number of channels as the input arrays.\n@param gamma Scalar added to each sum.\n@param dtype Optional depth of the destination array. When both input arrays have the same depth,\ndtype can be set to -1, which will be equivalent to src1.depth().\n@param stream Stream for the asynchronous version.\n\nThe function addWeighted calculates the weighted sum of two arrays as follows:\n\n\\f[\\texttt{dst} (I)= \\texttt{saturate} ( \\texttt{src1} (I)* \\texttt{alpha} +  \\texttt{src2} (I)* \\texttt{beta} +  \\texttt{gamma} )\\f]\n\nwhere I is a multi-dimensional index of array elements. In case of multi-channel arrays, each\nchannel is processed independently.\n\n@sa addWeighted"
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.threshold",
+      "identity": "cv.cuda.threshold(Mat src;Mat dst[/O];double thresh;double maxval;int type;Stream stream=Stream::Null()[/Ref])->double",
+      "returnType": "double",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "thresh",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "maxval",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "type",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Applies a fixed-level threshold to each array element.\n\nThe special value cv::THRESH_OTSU may be combined with one of the other types. In this case, the function determines the\noptimal threshold value using the Otsu's and uses it instead of the specified threshold. The function returns the\ncomputed threshold value in addititon to the thresholded matrix.\nThe Otsu's method is implemented only for 8-bit matrices.\n\n@param src Source array (single-channel).\n@param dst Destination array with the same size and type as src.\n@param thresh Threshold value.\n@param maxval Maximum value to use with THRESH_BINARY and THRESH_BINARY_INV threshold types.\n@param type Threshold type. For details, see threshold. The THRESH_TRIANGLE threshold type is not supported.\n@param stream Stream for the asynchronous version.\n\n@sa threshold"
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.inRange",
+      "identity": "cv.cuda.inRange(Mat src;Scalar lowerb[/C,/Ref];Scalar upperb[/C,/Ref];Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "lowerb",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Scalar",
+          "name": "upperb",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief  Checks if array elements lie between two scalars.\n\nThe function checks the range as follows:\n-   For every element of a single-channel input array:\n    \\f[\\texttt{dst} (I)= \\texttt{lowerb}_0  \\leq \\texttt{src} (I)_0 \\leq  \\texttt{upperb}_0\\f]\n-   For two-channel arrays:\n    \\f[\\texttt{dst} (I)= \\texttt{lowerb}_0  \\leq \\texttt{src} (I)_0 \\leq  \\texttt{upperb}_0  \\land \\texttt{lowerb}_1  \\leq \\texttt{src} (I)_1 \\leq  \\texttt{upperb}_1\\f]\n-   and so forth.\n\nThat is, dst (I) is set to 255 (all 1 -bits) if src (I) is within the\nspecified 1D, 2D, 3D, ... box and 0 otherwise.\n\nNote that unlike the CPU inRange, this does NOT accept an array for lowerb or\nupperb, only a cv::Scalar.\n\n@param src first input array.\n@param lowerb inclusive lower boundary cv::Scalar.\n@param upperb inclusive upper boundary cv::Scalar.\n@param dst output array of the same size as src and CV_8U type.\n@param stream Stream for the asynchronous version.\n\n@sa cv::inRange"
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.magnitude",
+      "identity": "cv.cuda.magnitude(Mat xy;Mat magnitude[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "xy",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "magnitude",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes magnitudes of complex matrix elements.\n\n@param xy Source complex matrix in the interleaved format ( CV_32FC2 ).\n@param magnitude Destination matrix of float magnitudes ( CV_32FC1 ).\n@param stream Stream for the asynchronous version.\n\n@sa magnitude"
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.magnitudeSqr",
+      "identity": "cv.cuda.magnitudeSqr(Mat xy;Mat magnitude[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "xy",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "magnitude",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes squared magnitudes of complex matrix elements.\n\n@param xy Source complex matrix in the interleaved format ( CV_32FC2 ).\n@param magnitude Destination matrix of float magnitude squares ( CV_32FC1 ).\n@param stream Stream for the asynchronous version."
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.magnitude",
+      "identity": "cv.cuda.magnitude(Mat x;Mat y;Mat magnitude[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "x",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "y",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "magnitude",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload\n computes magnitude of each (x(i), y(i)) vector\n supports only floating-point source\n@param x Source matrix containing real components ( CV_32FC1 ).\n@param y Source matrix containing imaginary components ( CV_32FC1 ).\n@param magnitude Destination matrix of float magnitudes ( CV_32FC1 ).\n@param stream Stream for the asynchronous version."
+    },
+    {
+      "ordinal": 37,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.magnitudeSqr",
+      "identity": "cv.cuda.magnitudeSqr(Mat x;Mat y;Mat magnitude[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "x",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "y",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "magnitude",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload\n computes squared magnitude of each (x(i), y(i)) vector\n supports only floating-point source\n@param x Source matrix containing real components ( CV_32FC1 ).\n@param y Source matrix containing imaginary components ( CV_32FC1 ).\n@param magnitude Destination matrix of float magnitude squares ( CV_32FC1 ).\n@param stream Stream for the asynchronous version."
+    },
+    {
+      "ordinal": 38,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.phase",
+      "identity": "cv.cuda.phase(Mat x;Mat y;Mat angle[/O];bool angleInDegrees=false;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "x",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "y",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "angle",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "angleInDegrees",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes polar angles of complex matrix elements.\n\n@param x Source matrix containing real components ( CV_32FC1 ).\n@param y Source matrix containing imaginary components ( CV_32FC1 ).\n@param angle Destination matrix of angles ( CV_32FC1 ).\n@param angleInDegrees Flag for angles that must be evaluated in degrees.\n@param stream Stream for the asynchronous version.\n\n@sa phase"
+    },
+    {
+      "ordinal": 39,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.phase",
+      "identity": "cv.cuda.phase(Mat xy;Mat angle[/O];bool angleInDegrees=false;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "xy",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "angle",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "angleInDegrees",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes polar angles of complex matrix elements.\n\n@param xy Source matrix containing real and imaginary components ( CV_32FC2 ).\n@param angle Destination matrix of angles ( CV_32FC1 ).\n@param angleInDegrees Flag for angles that must be evaluated in degrees.\n@param stream Stream for the asynchronous version.\n\n@sa phase"
+    },
+    {
+      "ordinal": 40,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.cartToPolar",
+      "identity": "cv.cuda.cartToPolar(Mat x;Mat y;Mat magnitude[/O];Mat angle[/O];bool angleInDegrees=false;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "x",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "y",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "magnitude",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "angle",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "angleInDegrees",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Converts Cartesian coordinates into polar.\n\n@param x Source matrix containing real components ( CV_32FC1 ).\n@param y Source matrix containing imaginary components ( CV_32FC1 ).\n@param magnitude Destination matrix of float magnitudes ( CV_32FC1 ).\n@param angle Destination matrix of angles ( CV_32FC1 ).\n@param angleInDegrees Flag for angles that must be evaluated in degrees.\n@param stream Stream for the asynchronous version.\n\n@sa cartToPolar"
+    },
+    {
+      "ordinal": 41,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.cartToPolar",
+      "identity": "cv.cuda.cartToPolar(Mat xy;Mat magnitude[/O];Mat angle[/O];bool angleInDegrees=false;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "xy",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "magnitude",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "angle",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "angleInDegrees",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Converts Cartesian coordinates into polar.\n\n@param xy Source matrix containing real and imaginary components ( CV_32FC2 ).\n@param magnitude Destination matrix of float magnitudes ( CV_32FC1 ).\n@param angle Destination matrix of angles ( CV_32FC1 ).\n@param angleInDegrees Flag for angles that must be evaluated in degrees.\n@param stream Stream for the asynchronous version.\n\n@sa cartToPolar"
+    },
+    {
+      "ordinal": 42,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.cartToPolar",
+      "identity": "cv.cuda.cartToPolar(Mat xy;Mat magnitudeAngle[/O];bool angleInDegrees=false;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "xy",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "magnitudeAngle",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "angleInDegrees",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Converts Cartesian coordinates into polar.\n\n@param xy Source matrix containing real and imaginary components ( CV_32FC2 ).\n@param magnitudeAngle Destination matrix of float magnitudes and angles ( CV_32FC2 ).\n@param angleInDegrees Flag for angles that must be evaluated in degrees.\n@param stream Stream for the asynchronous version.\n\n@sa cartToPolar"
+    },
+    {
+      "ordinal": 43,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.polarToCart",
+      "identity": "cv.cuda.polarToCart(Mat magnitude;Mat angle;Mat x[/O];Mat y[/O];bool angleInDegrees=false;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "magnitude",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "angle",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "x",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "y",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "angleInDegrees",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Converts polar coordinates into Cartesian.\n\n@param magnitude Source matrix containing magnitudes ( CV_32FC1 or CV_64FC1 ).\n@param angle Source matrix containing angles ( same type as magnitude ).\n@param x Destination matrix of real components ( same type as magnitude ).\n@param y Destination matrix of imaginary components ( same type as magnitude ).\n@param angleInDegrees Flag that indicates angles in degrees.\n@param stream Stream for the asynchronous version."
+    },
+    {
+      "ordinal": 44,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.polarToCart",
+      "identity": "cv.cuda.polarToCart(Mat magnitude;Mat angle;Mat xy[/O];bool angleInDegrees=false;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "magnitude",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "angle",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "xy",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "angleInDegrees",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Converts polar coordinates into Cartesian.\n\n@param magnitude Source matrix containing magnitudes ( CV_32FC1 or CV_64FC1 ).\n@param angle Source matrix containing angles ( same type as magnitude ).\n@param xy Destination matrix of real and imaginary components ( same depth as magnitude, i.e. CV_32FC2 or CV_64FC2 ).\n@param angleInDegrees Flag that indicates angles in degrees.\n@param stream Stream for the asynchronous version."
+    },
+    {
+      "ordinal": 45,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.polarToCart",
+      "identity": "cv.cuda.polarToCart(Mat magnitudeAngle;Mat xy[/O];bool angleInDegrees=false;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "magnitudeAngle",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "xy",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "angleInDegrees",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Converts polar coordinates into Cartesian.\n\n@param magnitudeAngle Source matrix containing magnitudes and angles ( CV_32FC2 or CV_64FC2 ).\n@param xy Destination matrix of real and imaginary components ( same depth as source ).\n@param angleInDegrees Flag that indicates angles in degrees.\n@param stream Stream for the asynchronous version."
+    },
+    {
+      "ordinal": 46,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.merge",
+      "identity": "cv.cuda.merge(vector_GpuMat src[/C,/Ref];Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_GpuMat",
+          "name": "src",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 47,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.split",
+      "identity": "cv.cuda.split(Mat src;vector_GpuMat dst[/O,/Ref];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_GpuMat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 48,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.transpose",
+      "identity": "cv.cuda.transpose(Mat src1;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Transposes a matrix.\n\n@param src1 Source matrix. 1-, 4-, 8-byte element sizes are supported for now.\n@param dst Destination matrix.\n@param stream Stream for the asynchronous version.\n\n@sa transpose"
+    },
+    {
+      "ordinal": 49,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.flip",
+      "identity": "cv.cuda.flip(Mat src;Mat dst[/O];int flipCode;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flipCode",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Flips a 2D matrix around vertical, horizontal, or both axes.\n\n@param src Source matrix. Supports 1, 3 and 4 channels images with CV_8U, CV_16U, CV_32S or\nCV_32F depth.\n@param dst Destination matrix.\n@param flipCode Flip mode for the source:\n-   0 Flips around x-axis.\n-   \\> 0 Flips around y-axis.\n-   \\< 0 Flips around both axes.\n@param stream Stream for the asynchronous version.\n\n@sa flip"
+    },
+    {
+      "ordinal": 50,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "class",
+      "name": "cv.cuda.LookUpTable",
+      "identity": "class cv.cuda.LookUpTable",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Base class for transform using lookup table."
+    },
+    {
+      "ordinal": 51,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.LookUpTable.transform",
+      "identity": "cv.cuda.LookUpTable.transform(Mat src;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Transforms the source matrix into the destination matrix using the given look-up table:\n    dst(I) = lut(src(I)) .\n\n    @param src Source matrix. CV_8UC1 and CV_8UC3 matrices are supported for now.\n    @param dst Destination matrix.\n    @param stream Stream for the asynchronous version."
+    },
+    {
+      "ordinal": 52,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createLookUpTable",
+      "identity": "cv.cuda.createLookUpTable(Mat lut)->Ptr<LookUpTable>",
+      "returnType": "Ptr<LookUpTable>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "lut",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates implementation for cuda::LookUpTable .\n\n@param lut Look-up table of 256 elements. It is a continuous CV_8U matrix."
+    },
+    {
+      "ordinal": 53,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.copyMakeBorder",
+      "identity": "cv.cuda.copyMakeBorder(Mat src;Mat dst[/O];int top;int bottom;int left;int right;int borderType;Scalar value=Scalar();Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "top",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "bottom",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "left",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "right",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "borderType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "value",
+          "default": "Scalar()",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Forms a border around an image.\n\n@param src Source image. CV_8UC1 , CV_8UC4 , CV_32SC1 , and CV_32FC1 types are supported.\n@param dst Destination image with the same type as src. The size is\nSize(src.cols+left+right, src.rows+top+bottom) .\n@param top Number of top pixels\n@param bottom Number of bottom pixels\n@param left Number of left pixels\n@param right Number of pixels in each direction from the source image rectangle to extrapolate.\nFor example: top=1, bottom=1, left=1, right=1 mean that 1 pixel-wide border needs to be built.\n@param borderType Border type. See borderInterpolate for details. BORDER_REFLECT101 ,\nBORDER_REPLICATE , BORDER_CONSTANT , BORDER_REFLECT and BORDER_WRAP are supported for now.\n@param value Border value.\n@param stream Stream for the asynchronous version."
+    },
+    {
+      "ordinal": 54,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.norm",
+      "identity": "cv.cuda.norm(Mat src1;int normType;Mat mask=Mat())->double",
+      "returnType": "double",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "normType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the norm of a matrix (or difference of two matrices).\n\n@param src1 Source matrix. Any matrices except 64F are supported.\n@param normType Norm type. NORM_L1 , NORM_L2 , and NORM_INF are supported for now.\n@param mask optional operation mask; it must have the same size as src1 and CV_8UC1 type.\n\n@sa norm"
+    },
+    {
+      "ordinal": 55,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.calcNorm",
+      "identity": "cv.cuda.calcNorm(Mat src;Mat dst[/O];int normType;Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "normType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 56,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.norm",
+      "identity": "cv.cuda.norm(Mat src1;Mat src2;int normType=NORM_L2)->double",
+      "returnType": "double",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "normType",
+          "default": "NORM_L2",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the difference of two matrices.\n\n@param src1 Source matrix. Any matrices except 64F are supported.\n@param src2 Second source matrix (if any) with the same size and type as src1.\n@param normType Norm type. NORM_L1 , NORM_L2 , and NORM_INF are supported for now.\n\n@sa norm"
+    },
+    {
+      "ordinal": 57,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.calcNormDiff",
+      "identity": "cv.cuda.calcNormDiff(Mat src1;Mat src2;Mat dst[/O];int normType=NORM_L2;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "normType",
+          "default": "NORM_L2",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 58,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.sum",
+      "identity": "cv.cuda.sum(Mat src;Mat mask=Mat())->Scalar",
+      "returnType": "Scalar",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the sum of matrix elements.\n\n@param src Source image of any depth except for CV_64F .\n@param mask optional operation mask; it must have the same size as src1 and CV_8UC1 type.\n\n@sa sum"
+    },
+    {
+      "ordinal": 59,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.calcSum",
+      "identity": "cv.cuda.calcSum(Mat src;Mat dst[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 60,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.absSum",
+      "identity": "cv.cuda.absSum(Mat src;Mat mask=Mat())->Scalar",
+      "returnType": "Scalar",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the sum of absolute values for matrix elements.\n\n@param src Source image of any depth except for CV_64F .\n@param mask optional operation mask; it must have the same size as src1 and CV_8UC1 type."
+    },
+    {
+      "ordinal": 61,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.calcAbsSum",
+      "identity": "cv.cuda.calcAbsSum(Mat src;Mat dst[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 62,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.sqrSum",
+      "identity": "cv.cuda.sqrSum(Mat src;Mat mask=Mat())->Scalar",
+      "returnType": "Scalar",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the squared sum of matrix elements.\n\n@param src Source image of any depth except for CV_64F .\n@param mask optional operation mask; it must have the same size as src1 and CV_8UC1 type."
+    },
+    {
+      "ordinal": 63,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.calcSqrSum",
+      "identity": "cv.cuda.calcSqrSum(Mat src;Mat dst[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 64,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.minMax",
+      "identity": "cv.cuda.minMax(Mat src;double* minVal[/O];double* maxVal[/O];Mat mask=Mat())->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double*",
+          "name": "minVal",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double*",
+          "name": "maxVal",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Finds global minimum and maximum matrix elements and returns their values.\n\n@param src Single-channel source image.\n@param minVal Pointer to the returned minimum value. Use NULL if not required.\n@param maxVal Pointer to the returned maximum value. Use NULL if not required.\n@param mask Optional mask to select a sub-matrix.\n\nThe function does not work with CV_64F images on GPUs with the compute capability \\< 1.3.\n\n@sa minMaxLoc"
+    },
+    {
+      "ordinal": 65,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.findMinMax",
+      "identity": "cv.cuda.findMinMax(Mat src;Mat dst[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 66,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.minMaxLoc",
+      "identity": "cv.cuda.minMaxLoc(Mat src;double* minVal[/O];double* maxVal[/O];Point* minLoc[/O];Point* maxLoc[/O];Mat mask=Mat())->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double*",
+          "name": "minVal",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double*",
+          "name": "maxVal",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Point*",
+          "name": "minLoc",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Point*",
+          "name": "maxLoc",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Finds global minimum and maximum matrix elements and returns their values with locations.\n\n@param src Single-channel source image.\n@param minVal Pointer to the returned minimum value. Use NULL if not required.\n@param maxVal Pointer to the returned maximum value. Use NULL if not required.\n@param minLoc Pointer to the returned minimum location. Use NULL if not required.\n@param maxLoc Pointer to the returned maximum location. Use NULL if not required.\n@param mask Optional mask to select a sub-matrix.\n\nThe function does not work with CV_64F images on GPU with the compute capability \\< 1.3.\n\n@sa minMaxLoc"
+    },
+    {
+      "ordinal": 67,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.findMinMaxLoc",
+      "identity": "cv.cuda.findMinMaxLoc(Mat src;Mat minMaxVals[/O];Mat loc[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "minMaxVals",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "loc",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 68,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.countNonZero",
+      "identity": "cv.cuda.countNonZero(Mat src)->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Counts non-zero matrix elements.\n\n@param src Single-channel source image.\n\nThe function does not work with CV_64F images on GPUs with the compute capability \\< 1.3.\n\n@sa countNonZero"
+    },
+    {
+      "ordinal": 69,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.countNonZero",
+      "identity": "cv.cuda.countNonZero(Mat src;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 70,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.reduce",
+      "identity": "cv.cuda.reduce(Mat mtx;Mat vec[/O];int dim;int reduceOp;int dtype=-1;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "mtx",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "vec",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "dim",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "reduceOp",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dtype",
+          "default": "-1",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Reduces a matrix to a vector.\n\n@param mtx Source 2D matrix.\n@param vec Destination vector. Its size and type is defined by dim and dtype parameters.\n@param dim Dimension index along which the matrix is reduced. 0 means that the matrix is reduced\nto a single row. 1 means that the matrix is reduced to a single column.\n@param reduceOp Reduction operation that could be one of the following:\n-   **REDUCE_SUM** The output is the sum of all rows/columns of the matrix.\n-   **REDUCE_AVG** The output is the mean vector of all rows/columns of the matrix.\n-   **REDUCE_MAX** The output is the maximum (column/row-wise) of all rows/columns of the\nmatrix.\n-   **REDUCE_MIN** The output is the minimum (column/row-wise) of all rows/columns of the\nmatrix.\n@param dtype When it is negative, the destination vector will have the same type as the source\nmatrix. Otherwise, its type will be CV_MAKE_TYPE(CV_MAT_DEPTH(dtype), mtx.channels()) .\n@param stream Stream for the asynchronous version.\n\nThe function reduce reduces the matrix to a vector by treating the matrix rows/columns as a set of\n1D vectors and performing the specified operation on the vectors until a single row/column is\nobtained. For example, the function can be used to compute horizontal and vertical projections of a\nraster image. In case of REDUCE_SUM and REDUCE_AVG , the output may have a larger element\nbit-depth to preserve accuracy. And multi-channel arrays are also supported in these two reduction\nmodes.\n\n@sa reduce"
+    },
+    {
+      "ordinal": 71,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.meanStdDev",
+      "identity": "cv.cuda.meanStdDev(Mat src;Mat dst[/O];Mat mask;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a mean value and a standard deviation of matrix elements.\n\n@param src Source matrix. CV_8UC1 and CV_32FC1 matrices are supported for now.\n@param dst Target GpuMat with size 1x2 and type CV_64FC1. The first value is mean, the second - stddev.\n@param mask Operation mask.\n@param stream Stream for the asynchronous version.\n\n@sa meanStdDev"
+    },
+    {
+      "ordinal": 72,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.meanStdDev",
+      "identity": "cv.cuda.meanStdDev(Mat mtx;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "mtx",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload\n@param mtx Source matrix. CV_8UC1 and CV_32FC1 matrices are supported for now.\n@param dst Target GpuMat with size 1x2 and type CV_64FC1. The first value is mean, the second - stddev.\n@param stream Stream for the asynchronous version."
+    },
+    {
+      "ordinal": 73,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.meanStdDev",
+      "identity": "cv.cuda.meanStdDev(Mat src;Scalar mean[/O,/Ref];Scalar stddev[/O,/Ref];Mat mask)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "mean",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Scalar",
+          "name": "stddev",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload\n@param src Source matrix. CV_8UC1 and CV_32FC1 matrices are supported for now.\n@param mean Mean value.\n@param stddev Standard deviation value.\n@param mask Operation mask."
+    },
+    {
+      "ordinal": 74,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.meanStdDev",
+      "identity": "cv.cuda.meanStdDev(Mat mtx;Scalar mean[/O,/Ref];Scalar stddev[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "mtx",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "mean",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Scalar",
+          "name": "stddev",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload\n@param mtx Source matrix. CV_8UC1 and CV_32FC1 matrices are supported for now.\n@param mean Mean value.\n@param stddev Standard deviation value."
+    },
+    {
+      "ordinal": 75,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.rectStdDev",
+      "identity": "cv.cuda.rectStdDev(Mat src;Mat sqr;Mat dst[/O];Rect rect;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "sqr",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Rect",
+          "name": "rect",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a standard deviation of integral images.\n\n@param src Source image. Only the CV_32SC1 type is supported.\n@param sqr Squared source image. Only the CV_32FC1 type is supported.\n@param dst Destination image with the same type and size as src.\n@param rect Rectangular window.\n@param stream Stream for the asynchronous version."
+    },
+    {
+      "ordinal": 76,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.normalize",
+      "identity": "cv.cuda.normalize(Mat src;Mat dst[/O];double alpha;double beta;int norm_type;int dtype;Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "alpha",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "beta",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "norm_type",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dtype",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Normalizes the norm or value range of an array.\n\n@param src Input array.\n@param dst Output array of the same size as src .\n@param alpha Norm value to normalize to or the lower range boundary in case of the range\nnormalization.\n@param beta Upper range boundary in case of the range normalization; it is not used for the norm\nnormalization.\n@param norm_type Normalization type ( NORM_MINMAX , NORM_L2 , NORM_L1 or NORM_INF ).\n@param dtype When negative, the output array has the same type as src; otherwise, it has the same\nnumber of channels as src and the depth =CV_MAT_DEPTH(dtype).\n@param mask Optional operation mask.\n@param stream Stream for the asynchronous version.\n\n@sa normalize"
+    },
+    {
+      "ordinal": 77,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.integral",
+      "identity": "cv.cuda.integral(Mat src;Mat sum[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "sum",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes an integral image.\n\n@param src Source image. Only CV_8UC1 images are supported for now.\n@param sum Integral image containing 32-bit unsigned integer values packed into CV_32SC1 .\n@param stream Stream for the asynchronous version.\n\n@sa integral"
+    },
+    {
+      "ordinal": 78,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.sqrIntegral",
+      "identity": "cv.cuda.sqrIntegral(Mat src;Mat sqsum[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "sqsum",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a squared integral image.\n\n@param src Source image. Only CV_8UC1 images are supported for now.\n@param sqsum Squared integral image containing 64-bit unsigned integer values packed into\nCV_64FC1 .\n@param stream Stream for the asynchronous version."
+    },
+    {
+      "ordinal": 79,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.gemm",
+      "identity": "cv.cuda.gemm(Mat src1;Mat src2;double alpha;Mat src3;double beta;Mat dst[/O];int flags=0;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "alpha",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "src3",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "beta",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Performs generalized matrix multiplication.\n\n@param src1 First multiplied input matrix that should have CV_32FC1 , CV_64FC1 , CV_32FC2 , or\nCV_64FC2 type.\n@param src2 Second multiplied input matrix of the same type as src1 .\n@param alpha Weight of the matrix product.\n@param src3 Third optional delta matrix added to the matrix product. It should have the same type\nas src1 and src2 .\n@param beta Weight of src3 .\n@param dst Destination matrix. It has the proper size and the same type as input matrices.\n@param flags Operation flags:\n-   **GEMM_1_T** transpose src1\n-   **GEMM_2_T** transpose src2\n-   **GEMM_3_T** transpose src3\n@param stream Stream for the asynchronous version.\n\nThe function performs generalized matrix multiplication similar to the gemm functions in BLAS level\n3. For example, gemm(src1, src2, alpha, src3, beta, dst, GEMM_1_T + GEMM_3_T) corresponds to\n\n\\f[\\texttt{dst} =  \\texttt{alpha} \\cdot \\texttt{src1} ^T  \\cdot \\texttt{src2} +  \\texttt{beta} \\cdot \\texttt{src3} ^T\\f]\n\n@note Transposition operation doesn't support CV_64FC2 input type.\n\n@sa gemm"
+    },
+    {
+      "ordinal": 80,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.mulSpectrums",
+      "identity": "cv.cuda.mulSpectrums(Mat src1;Mat src2;Mat dst[/O];int flags;bool conjB=false;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "conjB",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Performs a per-element multiplication of two Fourier spectrums.\n\n@param src1 First spectrum.\n@param src2 Second spectrum with the same size and type as a .\n@param dst Destination spectrum.\n@param flags Mock parameter used for CPU/CUDA interfaces similarity.\n@param conjB Optional flag to specify if the second spectrum needs to be conjugated before the\nmultiplication.\n@param stream Stream for the asynchronous version.\n\nOnly full (not packed) CV_32FC2 complex spectrums in the interleaved format are supported for now.\n\n@sa mulSpectrums"
+    },
+    {
+      "ordinal": 81,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.mulAndScaleSpectrums",
+      "identity": "cv.cuda.mulAndScaleSpectrums(Mat src1;Mat src2;Mat dst[/O];int flags;float scale;bool conjB=false;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "scale",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "conjB",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Performs a per-element multiplication of two Fourier spectrums and scales the result.\n\n@param src1 First spectrum.\n@param src2 Second spectrum with the same size and type as a .\n@param dst Destination spectrum.\n@param flags Mock parameter used for CPU/CUDA interfaces similarity, simply add a `0` value.\n@param scale Scale constant.\n@param conjB Optional flag to specify if the second spectrum needs to be conjugated before the\nmultiplication.\n@param stream Stream for the asynchronous version.\n\nOnly full (not packed) CV_32FC2 complex spectrums in the interleaved format are supported for now.\n\n@sa mulSpectrums"
+    },
+    {
+      "ordinal": 82,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.dft",
+      "identity": "cv.cuda.dft(Mat src;Mat dst[/O];Size dft_size;int flags=0;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Size",
+          "name": "dft_size",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Performs a forward or inverse discrete Fourier transform (1D or 2D) of the floating point matrix.\n\n@param src Source matrix (real or complex).\n@param dst Destination matrix (real or complex).\n@param dft_size Size of a discrete Fourier transform.\n@param flags Optional flags:\n-   **DFT_ROWS** transforms each individual row of the source matrix.\n-   **DFT_SCALE** scales the result: divide it by the number of elements in the transform\n(obtained from dft_size ).\n-   **DFT_INVERSE** inverts DFT. Use for complex-complex cases (real-complex and complex-real\ncases are always forward and inverse, respectively).\n-   **DFT_COMPLEX_INPUT** Specifies that input is complex input with 2 channels.\n-   **DFT_REAL_OUTPUT** specifies the output as real. The source matrix is the result of\nreal-complex transform, so the destination matrix must be real.\n@param stream Stream for the asynchronous version.\n\nUse to handle real matrices ( CV32FC1 ) and complex matrices in the interleaved format ( CV32FC2 ).\n\nThe source matrix should be continuous, otherwise reallocation and data copying is performed. The\nfunction chooses an operation mode depending on the flags, size, and channel count of the source\nmatrix:\n\n-   If the source matrix is complex and the output is not specified as real, the destination\nmatrix is complex and has the dft_size size and CV_32FC2 type. The destination matrix\ncontains a full result of the DFT (forward or inverse).\n-   If the source matrix is complex and the output is specified as real, the function assumes that\nits input is the result of the forward transform (see the next item). The destination matrix\nhas the dft_size size and CV_32FC1 type. It contains the result of the inverse DFT.\n-   If the source matrix is real (its type is CV_32FC1 ), forward DFT is performed. The result of\nthe DFT is packed into complex ( CV_32FC2 ) matrix. So, the width of the destination matrix\nis dft_size.width / 2 + 1 . But if the source is a single column, the height is reduced\ninstead of the width.\n\n@sa dft"
+    },
+    {
+      "ordinal": 83,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "class",
+      "name": "cv.cuda.DFT",
+      "identity": "class cv.cuda.DFT",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Base class for DFT operator as a cv::Algorithm. :"
+    },
+    {
+      "ordinal": 84,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DFT.compute",
+      "identity": "cv.cuda.DFT.compute(Mat image;Mat result[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "result",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes an FFT of a given image.\n\n    @param image Source image. Only CV_32FC1 images are supported for now.\n    @param result Result image.\n    @param stream Stream for the asynchronous version."
+    },
+    {
+      "ordinal": 85,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createDFT",
+      "identity": "cv.cuda.createDFT(Size dft_size;int flags)->Ptr<DFT>",
+      "returnType": "Ptr<DFT>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "dft_size",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates implementation for cuda::DFT.\n\n@param dft_size The image size.\n@param flags Optional flags:\n-   **DFT_ROWS** transforms each individual row of the source matrix.\n-   **DFT_SCALE** scales the result: divide it by the number of elements in the transform\n(obtained from dft_size ).\n-   **DFT_INVERSE** inverts DFT. Use for complex-complex cases (real-complex and complex-real\ncases are always forward and inverse, respectively).\n-   **DFT_COMPLEX_INPUT** Specifies that inputs will be complex with 2 channels.\n-   **DFT_REAL_OUTPUT** specifies the output as real. The source matrix is the result of\nreal-complex transform, so the destination matrix must be real."
+    },
+    {
+      "ordinal": 86,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "class",
+      "name": "cv.cuda.Convolution",
+      "identity": "class cv.cuda.Convolution",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Base class for convolution (or cross-correlation) operator. :"
+    },
+    {
+      "ordinal": 87,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.Convolution.convolve",
+      "identity": "cv.cuda.Convolution.convolve(Mat image;Mat templ;Mat result[/O];bool ccorr=false;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "templ",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "result",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "ccorr",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a convolution (or cross-correlation) of two images.\n\n    @param image Source image. Only CV_32FC1 images are supported for now.\n    @param templ Template image. The size is not greater than the image size. The type is the same as\n    image .\n    @param result Result image. If image is *W x H* and templ is *w x h*, then result must be *W-w+1 x\n    H-h+1*.\n    @param ccorr Flags to evaluate cross-correlation instead of convolution.\n    @param stream Stream for the asynchronous version."
+    },
+    {
+      "ordinal": 88,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createConvolution",
+      "identity": "cv.cuda.createConvolution(Size user_block_size=Size())->Ptr<Convolution>",
+      "returnType": "Ptr<Convolution>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "user_block_size",
+          "default": "Size()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates implementation for cuda::Convolution .\n\n@param user_block_size Block size. If you leave default value Size(0,0) then automatic\nestimation of block size will be used (which is optimized for speed). By varying user_block_size\nyou can reduce memory requirements at the cost of speed."
+    }
+  ],
+  "compatibilityHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/CMakeLists.txt",
+      "sha256": "328e3ad715f2f02909007fee2c83b708a3a0707320db80fb2722ceb00da337a7",
+      "reason": "Upstream module activation and CUDA/NPP/optional cuBLAS/cuFFT dependency contract; parser declarations are not gated in the public header."
+    }
+  ],
+  "moduleBuildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)"
+}
