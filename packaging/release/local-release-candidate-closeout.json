@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/ea7118a335bef8ec",
-  "SourceIdentity": "sha256:ea7118a335bef8ecf20397d2d25dac2deaa19f04252fe1948f57bbb7181aecc8",
+  "CandidateId": "local-closeout/sha256/7df28b630d638b16",
+  "SourceIdentity": "sha256:7df28b630d638b16980fdf660faabade3a3cf489cc8aa8147c6f7c0b013b4306",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 2247,
-    "Sha256": "ea7118a335bef8ecf20397d2d25dac2deaa19f04252fe1948f57bbb7181aecc8",
+    "FileCount": 2258,
+    "Sha256": "7df28b630d638b16980fdf660faabade3a3cf489cc8aa8147c6f7c0b013b4306",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -380,6 +380,33 @@
       "CompatibilityBuildPath": "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/CMakeLists.txt",
       "CompatibilityBuildSha256": "6717aa128d815fbb1608e077aa07aa2e9cc78c017eb6c1dc1853d3542e231b30",
       "ModuleBuildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "RepositoryWideParityClaimed": false
+    },
+    "CudaFiltersUpstreamMap": {
+      "Path": "compatibility/cudafilters-upstream-map.txt",
+      "SummaryPath": "compatibility/cudafilters-upstream-summary.json",
+      "ClassificationPath": "compatibility/cudafilters-upstream-classifications.json",
+      "FamilyInventoryPath": "compatibility/cudafilters-implemented-families.json",
+      "RawExtractionPath": "compatibility/cudafilters-upstream-raw.json",
+      "Sha256": "0024d60bf6653fb834e6f8b13f2a8729846060e4ef84d13e1e3902303a16e743",
+      "RawSha256": "3293f95a38efcb107ea1fb92122d3a6224d38807e0babe89368a95974ed6ceaa",
+      "DeclarationCount": 16,
+      "CallableCount": 15,
+      "ImplementedCount": 0,
+      "MissingCount": 0,
+      "IntentionallyOmittedCount": 15,
+      "UnsupportedCount": 0,
+      "UpstreamConditionalCount": 0,
+      "SourceHeaderCount": 1,
+      "SelectedFamilyCount": 1,
+      "SelectedDeclarationCount": 0,
+      "ManagedPublicTypeAdditionCount": 0,
+      "ManagedPublicMemberAdditionCount": 0,
+      "NativeEntrypointAdditionCount": 0,
+      "ExternalDataDependencyCount": 2,
+      "CompatibilityBuildPath": "opencv-source/opencv_contrib-5.0.0/modules/cudafilters/CMakeLists.txt",
+      "CompatibilityBuildSha256": "e498766a5d3ac834615b433744c0333b56574ad6987840107dd7b580bfcdcc0c",
+      "ModuleBuildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
       "RepositoryWideParityClaimed": false
     },
     "WechatQRCodeUpstreamMap": {
@@ -1221,6 +1248,31 @@
       "Path": "compatibility/cudabgsegm-upstream-summary.json",
       "Sha256": "1bc89b5ac37a5d49353c7e37443e808bf1afd7abd2d1f7f7d0a3988af4c97226",
       "Length": 1496
+    },
+    {
+      "Path": "compatibility/cudafilters-implemented-families.json",
+      "Sha256": "1e9e57ff3db59ffc021417cd69fece799b7399675a56e79cf83673b88cce2b8f",
+      "Length": 400
+    },
+    {
+      "Path": "compatibility/cudafilters-upstream-classifications.json",
+      "Sha256": "fd81dadc19ed6f269ddbb201b48c192aac3ef7a5f5d26ce8a951f01c07291b20",
+      "Length": 14189
+    },
+    {
+      "Path": "compatibility/cudafilters-upstream-map.txt",
+      "Sha256": "0024d60bf6653fb834e6f8b13f2a8729846060e4ef84d13e1e3902303a16e743",
+      "Length": 11021
+    },
+    {
+      "Path": "compatibility/cudafilters-upstream-raw.json",
+      "Sha256": "3293f95a38efcb107ea1fb92122d3a6224d38807e0babe89368a95974ed6ceaa",
+      "Length": 33962
+    },
+    {
+      "Path": "compatibility/cudafilters-upstream-summary.json",
+      "Sha256": "e40a1ff17407307fb85ff804a73dff6052e1a76847ad0014150ac8056bc89b5e",
+      "Length": 1491
     },
     {
       "Path": "compatibility/dnn-implemented-families.json",
@@ -2184,18 +2236,18 @@
     },
     {
       "Path": "compatibility/upstream-map-catalog.json",
-      "Sha256": "11282c865a1bcbbf9d1d0af104e0f62c7b019f6fdef2bf0e39d1793886692dc3",
-      "Length": 169221
+      "Sha256": "b47605aff3f932e3701713ea6ec2af5961f1d42daf735a8ea7caa878f9b07ac7",
+      "Length": 171826
     },
     {
       "Path": "compatibility/upstream-map-catalog.schema.json",
-      "Sha256": "2b3d81b74f942833360dbf5dbb0707b1863043cc8a1da07d84b8ebb7549cb0e9",
-      "Length": 6069
+      "Sha256": "6016dedb6cac94757fa805992578f7a4e1757bbb06bcf5d20649c70d08f8903b",
+      "Length": 6084
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "98df550ee00fa627cd2b8a69c37b65cd64b1e73689b3c15c8917d07b0310d62b",
-      "Length": 68751
+      "Sha256": "db775c534f0cfaf91cd836fe894f526b353ef88098894a73161e40c3e2533c18",
+      "Length": 70141
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -2471,6 +2523,11 @@
       "Path": "docs/articles/cudabgsegm-upstream-parity-guide.md",
       "Sha256": "539d49a6065d8cd72200468ff5f119b320b523f828ee0e5c67f7b6d8c66a92ae",
       "Length": 2492
+    },
+    {
+      "Path": "docs/articles/cudafilters-upstream-parity-guide.md",
+      "Sha256": "e3454404aa163b0cbf89fc9b313f132ec30254a8deae63a7ea7925cc8ed04ba7",
+      "Length": 2439
     },
     {
       "Path": "docs/articles/dnn-model-wrapper-adr.md",
@@ -2794,8 +2851,8 @@
     },
     {
       "Path": "docs/articles/upstream-map-toolchain.md",
-      "Sha256": "254661d02865ef7c1ff1238e03abefc1aa53142701f851e1b15c3a30caa90002",
-      "Length": 16081
+      "Sha256": "92f8ce7594739d389ed2518cc10e4f456b7d88f77409548297d899d1343c9f7d",
+      "Length": 17202
     },
     {
       "Path": "docs/articles/v501-modern-api-preview-guide.md",
@@ -2904,8 +2961,8 @@
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "93aae7d7e61c074f615fa090ff04f2aa61f6b89f22b9379578d0f109f9e9c800",
-      "Length": 18196
+      "Sha256": "b7bb6f0b3ca3ef629aa19d065da226eb21c4edddca20ab2f284a8681dc532f30",
+      "Length": 18291
     },
     {
       "Path": "nuget/logo.jpg",
@@ -3274,8 +3331,8 @@
     },
     {
       "Path": "scripts/Generate-ContribUpstreamMap.ps1",
-      "Sha256": "581e5694c9685b29454b58b8aabd3b5cdeac37b1e1f0574c0683ae62f8e60284",
-      "Length": 117528
+      "Sha256": "4963ea6e69c421b007993efdcf0449cd925c5d200120bbfde047415e159a417f",
+      "Length": 118915
     },
     {
       "Path": "scripts/Generate-CoreUpstreamMap.ps1",
@@ -3291,6 +3348,11 @@
       "Path": "scripts/Generate-CudaBgSegmUpstreamMap.ps1",
       "Sha256": "04a2d435bbd92c36f539154968ae4832b52c0aaaa8d4b73538c765b8b504850c",
       "Length": 1037
+    },
+    {
+      "Path": "scripts/Generate-CudaFiltersUpstreamMap.ps1",
+      "Sha256": "bad6be63a622e8f023dca75362551cf2964ae57dba82052e956676eba996c988",
+      "Length": 1021
     },
     {
       "Path": "scripts/Generate-DnnObjDetectUpstreamMap.ps1",
@@ -3539,8 +3601,8 @@
     },
     {
       "Path": "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
-      "Sha256": "98a4b50fbdbcebde796b68dcc6540a7ab743a631a27987a84ced925a527764b7",
-      "Length": 5620
+      "Sha256": "bd091ef070b41b9969fcd2fff74a44a0068ddc2dc64d199adc2d4b026246b325",
+      "Length": 5650
     },
     {
       "Path": "scripts/Invoke-LifecycleRefreshContainerProducer.ps1",
@@ -3619,8 +3681,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "101fc436f9346daf1b15f21c37e91cec9477beb9bd399b7154f054978c0a6f02",
-      "Length": 145176
+      "Sha256": "69ec7ebfdc0b31d0724a6922e6ff25661a6b00379c3b55aa3a642c69839223c7",
+      "Length": 148491
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -3634,8 +3696,8 @@
     },
     {
       "Path": "scripts/New-UpstreamMapCatalog.ps1",
-      "Sha256": "5d727f5ef7cea514fd8eacc4faba281932478b4d2cfd9ea12c6b2a27908306e9",
-      "Length": 11444
+      "Sha256": "9d0d1a0ab746f20f783bbd877d820a83aa4b940ece27a7923682ea668d919474",
+      "Length": 11542
     },
     {
       "Path": "scripts/Test-AlphaMatUpstreamMap.ps1",
@@ -3721,6 +3783,11 @@
       "Path": "scripts/Test-CudaBgSegmUpstreamMap.ps1",
       "Sha256": "294c179174a9d35d38c1d921fd20da2c1dd724c36d4f592c17eb1644499cd842",
       "Length": 4455
+    },
+    {
+      "Path": "scripts/Test-CudaFiltersUpstreamMap.ps1",
+      "Sha256": "ad3f100a8aac942ef5ce1ffea559b73ca5af2e014913ff58b365a25f635b685d",
+      "Length": 4381
     },
     {
       "Path": "scripts/Test-DnnDiagnosticsContract.ps1",
@@ -4044,8 +4111,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "bbce64d4135a4e9fcdeb02860a09cbf7c5f80ee6baa05b7c092f0f0581ea887e",
-      "Length": 124699
+      "Sha256": "5f28d3a341cc497e3e5d7f83184ca24c56457b689b466bac42e9188989b68534",
+      "Length": 127303
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -4169,8 +4236,8 @@
     },
     {
       "Path": "scripts/Test-UpstreamMapCatalog.ps1",
-      "Sha256": "d350a5b0f53e40f61633835985c4e926219788fb4fe7c0be71b4998f1ba56951",
-      "Length": 15165
+      "Sha256": "ccd7235d1949189f096577691ecfebacdea3ca8725b6b19a6dda79e093dda84f",
+      "Length": 15179
     },
     {
       "Path": "scripts/Test-V501ChangeLedger.ps1",
@@ -4953,6 +5020,21 @@
       "Length": 233
     },
     {
+      "Path": "tools/CudaFiltersUpstreamMap/CudaFiltersUpstreamMap.csproj",
+      "Sha256": "727d0721f11212e08035cc59275b0226c0092f3ea92492d621c3d25879ef974f",
+      "Length": 273
+    },
+    {
+      "Path": "tools/CudaFiltersUpstreamMap/Program.cs",
+      "Sha256": "958551e1bf6374160199f7fb0c93721db04f0530ece88c6439e2ba52640a3026",
+      "Length": 118
+    },
+    {
+      "Path": "tools/CudaFiltersUpstreamMap/extract_cudafilters.py",
+      "Sha256": "f763181d3d9ab417b7a8f0281082f377f267defaba27dc54b30b58767fecf104",
+      "Length": 234
+    },
+    {
       "Path": "tools/DnnObjDetectUpstreamMap/DnnObjDetectUpstreamMap.csproj",
       "Sha256": "727d0721f11212e08035cc59275b0226c0092f3ea92492d621c3d25879ef974f",
       "Length": 273
@@ -5604,8 +5686,8 @@
     },
     {
       "Path": "tools/XImgProcUpstreamMap/extract_ximgproc.py",
-      "Sha256": "fa58aa0a8e6ce16efd81c7a750f9aa67d4fb178a3bc64dc349368660b3685ea6",
-      "Length": 11561
+      "Sha256": "af4036a258b066ae0738ec195e55f6ad822676d95040e7b34c108161f50cbc72",
+      "Length": 12138
     },
     {
       "Path": "tools/XObjDetectUpstreamMap/Program.cs",

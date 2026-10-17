@@ -30,6 +30,7 @@ $rawNames += @("julia")
 $rawNames += @("rgbd")
 $rawNames += @("cudaarithm")
 $rawNames += @("cudabgsegm")
+$rawNames += @("cudafilters")
 $maximumDownloadAttempts = 4
 $required = [System.Collections.Generic.Dictionary[string, string]]::new([StringComparer]::Ordinal)
 

@@ -132,6 +132,11 @@ function Get-ExpectedEvidencePaths {
         "compatibility/cudabgsegm-upstream-map.txt",
         "compatibility/cudabgsegm-upstream-raw.json",
         "compatibility/cudabgsegm-upstream-summary.json",
+        "compatibility/cudafilters-implemented-families.json",
+        "compatibility/cudafilters-upstream-classifications.json",
+        "compatibility/cudafilters-upstream-map.txt",
+        "compatibility/cudafilters-upstream-raw.json",
+        "compatibility/cudafilters-upstream-summary.json",
         "compatibility/wechat_qrcode-implemented-families.json",
         "compatibility/wechat_qrcode-upstream-classifications.json",
         "compatibility/wechat_qrcode-upstream-map.txt",
@@ -366,6 +371,7 @@ function Get-ExpectedEvidencePaths {
         "docs/articles/rgbd-upstream-parity-guide.md",
         "docs/articles/cudaarithm-upstream-parity-guide.md",
         "docs/articles/cudabgsegm-upstream-parity-guide.md",
+        "docs/articles/cudafilters-upstream-parity-guide.md",
         "docs/articles/superres-upstream-parity-guide.md",
         "docs/articles/signal-upstream-parity-guide.md",
         "docs/articles/dpm-upstream-parity-guide.md",
@@ -527,6 +533,7 @@ function Get-ExpectedEvidencePaths {
         "scripts/Generate-RgbdUpstreamMap.ps1",
         "scripts/Generate-CudaArithmUpstreamMap.ps1",
         "scripts/Generate-CudaBgSegmUpstreamMap.ps1",
+        "scripts/Generate-CudaFiltersUpstreamMap.ps1",
         "scripts/Generate-WechatQRCodeUpstreamMap.ps1",
         "scripts/Generate-Cnn3DObjUpstreamMap.ps1",
         "scripts/Generate-SignalUpstreamMap.ps1",
@@ -594,6 +601,7 @@ function Get-ExpectedEvidencePaths {
         "scripts/Test-RgbdUpstreamMap.ps1",
         "scripts/Test-CudaArithmUpstreamMap.ps1",
         "scripts/Test-CudaBgSegmUpstreamMap.ps1",
+        "scripts/Test-CudaFiltersUpstreamMap.ps1",
         "scripts/Test-WechatQRCodeUpstreamMap.ps1",
         "scripts/Test-Cnn3DObjUpstreamMap.ps1",
         "scripts/Test-SignalUpstreamMap.ps1",
@@ -912,6 +920,9 @@ function Get-ExpectedEvidencePaths {
         "tools/CudaBgSegmUpstreamMap/CudaBgSegmUpstreamMap.csproj",
         "tools/CudaBgSegmUpstreamMap/Program.cs",
         "tools/CudaBgSegmUpstreamMap/extract_cudabgsegm.py",
+        "tools/CudaFiltersUpstreamMap/CudaFiltersUpstreamMap.csproj",
+        "tools/CudaFiltersUpstreamMap/Program.cs",
+        "tools/CudaFiltersUpstreamMap/extract_cudafilters.py",
         "tools/CodecBenchmark/CodecBenchmark.csproj",
         "tools/CodecBenchmark/Program.cs",
         "scripts/Measure-CodecTypedMatBenchmark.ps1",
@@ -1142,6 +1153,7 @@ function Test-Record {
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.RgbdUpstreamMap.Sha256 -eq "22f26e53c89975523e113da4aa9b06702df829a3a4b03294d31c3858a91e1ae9" -and $Record.ApiAbiBaseline.RgbdUpstreamMap.RawSha256 -match "^[0-9a-f]{64}$" -and $Record.ApiAbiBaseline.RgbdUpstreamMap.DeclarationCount -eq 105 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.CallableCount -eq 88 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.ImplementedCount -eq 0 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.IntentionallyOmittedCount -eq 88 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.UnsupportedCount -eq 0 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.UpstreamConditionalCount -eq 0 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.SourceHeaderCount -eq 6 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.SelectedFamilyCount -eq 1 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.SelectedDeclarationCount -eq 0 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.ManagedPublicTypeAdditionCount -eq 0 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.ManagedPublicMemberAdditionCount -eq 0 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.NativeEntrypointAdditionCount -eq 0 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.ExternalDataDependencyCount -eq 2 -and -not [bool]$Record.ApiAbiBaseline.RgbdUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout RGBD upstream-map evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.CudaArithmUpstreamMap.Sha256 -eq "78bead26e13d6d32eec141ab8d48b0636e4f27201f8d60d90316852f6078da22" -and $Record.ApiAbiBaseline.CudaArithmUpstreamMap.RawSha256 -match "^[0-9a-f]{64}$" -and $Record.ApiAbiBaseline.CudaArithmUpstreamMap.DeclarationCount -eq 89 -and $Record.ApiAbiBaseline.CudaArithmUpstreamMap.CallableCount -eq 86 -and $Record.ApiAbiBaseline.CudaArithmUpstreamMap.ImplementedCount -eq 0 -and $Record.ApiAbiBaseline.CudaArithmUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.CudaArithmUpstreamMap.IntentionallyOmittedCount -eq 86 -and $Record.ApiAbiBaseline.CudaArithmUpstreamMap.UnsupportedCount -eq 0 -and $Record.ApiAbiBaseline.CudaArithmUpstreamMap.UpstreamConditionalCount -eq 0 -and $Record.ApiAbiBaseline.CudaArithmUpstreamMap.SourceHeaderCount -eq 1 -and $Record.ApiAbiBaseline.CudaArithmUpstreamMap.SelectedFamilyCount -eq 1 -and $Record.ApiAbiBaseline.CudaArithmUpstreamMap.SelectedDeclarationCount -eq 0 -and $Record.ApiAbiBaseline.CudaArithmUpstreamMap.ManagedPublicTypeAdditionCount -eq 0 -and $Record.ApiAbiBaseline.CudaArithmUpstreamMap.ManagedPublicMemberAdditionCount -eq 0 -and $Record.ApiAbiBaseline.CudaArithmUpstreamMap.NativeEntrypointAdditionCount -eq 0 -and $Record.ApiAbiBaseline.CudaArithmUpstreamMap.ExternalDataDependencyCount -eq 2 -and $Record.ApiAbiBaseline.CudaArithmUpstreamMap.CompatibilityBuildPath -eq "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/CMakeLists.txt" -and $Record.ApiAbiBaseline.CudaArithmUpstreamMap.CompatibilityBuildSha256 -eq "328e3ad715f2f02909007fee2c83b708a3a0707320db80fb2722ceb00da337a7" -and $Record.ApiAbiBaseline.CudaArithmUpstreamMap.ModuleBuildCondition -eq "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)" -and -not [bool]$Record.ApiAbiBaseline.CudaArithmUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout CudaArithm upstream-map evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.CudaBgSegmUpstreamMap.Sha256 -eq "0c29d37fff4ad7de411ef038b95665c589bb745be1ccc4aa6f8c3f4273315a09" -and $Record.ApiAbiBaseline.CudaBgSegmUpstreamMap.RawSha256 -match "^[0-9a-f]{64}$" -and $Record.ApiAbiBaseline.CudaBgSegmUpstreamMap.DeclarationCount -eq 18 -and $Record.ApiAbiBaseline.CudaBgSegmUpstreamMap.CallableCount -eq 16 -and $Record.ApiAbiBaseline.CudaBgSegmUpstreamMap.ImplementedCount -eq 0 -and $Record.ApiAbiBaseline.CudaBgSegmUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.CudaBgSegmUpstreamMap.IntentionallyOmittedCount -eq 16 -and $Record.ApiAbiBaseline.CudaBgSegmUpstreamMap.UnsupportedCount -eq 0 -and $Record.ApiAbiBaseline.CudaBgSegmUpstreamMap.UpstreamConditionalCount -eq 0 -and $Record.ApiAbiBaseline.CudaBgSegmUpstreamMap.SourceHeaderCount -eq 1 -and $Record.ApiAbiBaseline.CudaBgSegmUpstreamMap.SelectedFamilyCount -eq 1 -and $Record.ApiAbiBaseline.CudaBgSegmUpstreamMap.SelectedDeclarationCount -eq 0 -and $Record.ApiAbiBaseline.CudaBgSegmUpstreamMap.ManagedPublicTypeAdditionCount -eq 0 -and $Record.ApiAbiBaseline.CudaBgSegmUpstreamMap.ManagedPublicMemberAdditionCount -eq 0 -and $Record.ApiAbiBaseline.CudaBgSegmUpstreamMap.NativeEntrypointAdditionCount -eq 0 -and $Record.ApiAbiBaseline.CudaBgSegmUpstreamMap.ExternalDataDependencyCount -eq 2 -and $Record.ApiAbiBaseline.CudaBgSegmUpstreamMap.CompatibilityBuildPath -eq "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/CMakeLists.txt" -and $Record.ApiAbiBaseline.CudaBgSegmUpstreamMap.CompatibilityBuildSha256 -eq "6717aa128d815fbb1608e077aa07aa2e9cc78c017eb6c1dc1853d3542e231b30" -and $Record.ApiAbiBaseline.CudaBgSegmUpstreamMap.ModuleBuildCondition -eq "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)" -and -not [bool]$Record.ApiAbiBaseline.CudaBgSegmUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout CudaBgSegm upstream-map evidence drifted"
+    Assert-True -List $List -Condition ($Record.ApiAbiBaseline.CudaFiltersUpstreamMap.Sha256 -eq "0024d60bf6653fb834e6f8b13f2a8729846060e4ef84d13e1e3902303a16e743" -and $Record.ApiAbiBaseline.CudaFiltersUpstreamMap.RawSha256 -match "^[0-9a-f]{64}$" -and $Record.ApiAbiBaseline.CudaFiltersUpstreamMap.DeclarationCount -eq 16 -and $Record.ApiAbiBaseline.CudaFiltersUpstreamMap.CallableCount -eq 15 -and $Record.ApiAbiBaseline.CudaFiltersUpstreamMap.ImplementedCount -eq 0 -and $Record.ApiAbiBaseline.CudaFiltersUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.CudaFiltersUpstreamMap.IntentionallyOmittedCount -eq 15 -and $Record.ApiAbiBaseline.CudaFiltersUpstreamMap.UnsupportedCount -eq 0 -and $Record.ApiAbiBaseline.CudaFiltersUpstreamMap.UpstreamConditionalCount -eq 0 -and $Record.ApiAbiBaseline.CudaFiltersUpstreamMap.SourceHeaderCount -eq 1 -and $Record.ApiAbiBaseline.CudaFiltersUpstreamMap.SelectedFamilyCount -eq 1 -and $Record.ApiAbiBaseline.CudaFiltersUpstreamMap.SelectedDeclarationCount -eq 0 -and $Record.ApiAbiBaseline.CudaFiltersUpstreamMap.ManagedPublicTypeAdditionCount -eq 0 -and $Record.ApiAbiBaseline.CudaFiltersUpstreamMap.ManagedPublicMemberAdditionCount -eq 0 -and $Record.ApiAbiBaseline.CudaFiltersUpstreamMap.NativeEntrypointAdditionCount -eq 0 -and $Record.ApiAbiBaseline.CudaFiltersUpstreamMap.ExternalDataDependencyCount -eq 2 -and $Record.ApiAbiBaseline.CudaFiltersUpstreamMap.CompatibilityBuildPath -eq "opencv-source/opencv_contrib-5.0.0/modules/cudafilters/CMakeLists.txt" -and $Record.ApiAbiBaseline.CudaFiltersUpstreamMap.CompatibilityBuildSha256 -eq "e498766a5d3ac834615b433744c0333b56574ad6987840107dd7b580bfcdcc0c" -and $Record.ApiAbiBaseline.CudaFiltersUpstreamMap.ModuleBuildCondition -eq "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)" -and -not [bool]$Record.ApiAbiBaseline.CudaFiltersUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout CudaFilters upstream-map evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.GapInventoryStatus -eq "baseline-established-native-managed-parity-measured" -and -not [bool]$Record.ApiAbiBaseline.UpstreamParityMeasured -and [bool]$Record.ApiAbiBaseline.NativeToManagedParityMeasured -and $Record.ApiAbiBaseline.ImplementedSpanFamilyStatus -eq "implemented-verified") -Issue "Final closeout measured parity distinction or Span family status drifted"
 
     $expectedEvidence = @(Get-ExpectedEvidencePaths)

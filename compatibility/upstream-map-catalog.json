@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 54,
+  "moduleCount": 55,
   "maps": [
     {
       "id": "calib3d",
@@ -3536,6 +3536,58 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "0c29d37fff4ad7de411ef038b95665c589bb745be1ccc4aa6f8c3f4273315a09",
         "familyInventorySha256": "7a5f3e7d646e09f2b7679f0f9348b6d33122cd8a3997c1de79882fb2685022d2",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "cudafilters",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/CudaFiltersUpstreamMap",
+      "extractorScript": "tools/CudaFiltersUpstreamMap/extract_cudafilters.py",
+      "generationScript": "scripts/Generate-CudaFiltersUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-CudaFiltersUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/cudafilters.hpp parser-backed CUDA image-filter declarations plus the pinned module CMake build/dependency contract",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/cudafilters/include/opencv2/cudafilters.hpp",
+          "sha256": "3daf69bb6f7d260c90478b18697e64d622e77b3a483dace76e3f768f86ce70be"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudafilters/include/opencv2/cudafilters.hpp",
+            "sha256": "3daf69bb6f7d260c90478b18697e64d622e77b3a483dace76e3f768f86ce70be",
+            "startOrdinal": 0,
+            "declarationCount": 16
+          }
+        ],
+        "compatibilityHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudafilters/CMakeLists.txt",
+            "sha256": "e498766a5d3ac834615b433744c0333b56574ad6987840107dd7b580bfcdcc0c",
+            "reason": "Upstream module activation, OpenCV dependency, and CUDA/NPP image-filter dependency contract; parser declarations are not gated in the public header."
+          }
+        ],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/cudafilters-upstream-raw.json",
+        "classifications": "compatibility/cudafilters-upstream-classifications.json",
+        "mapping": "compatibility/cudafilters-upstream-map.txt",
+        "summary": "compatibility/cudafilters-upstream-summary.json",
+        "familyInventory": "compatibility/cudafilters-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 16,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "0024d60bf6653fb834e6f8b13f2a8729846060e4ef84d13e1e3902303a16e743",
+        "familyInventorySha256": "6179e9c635d2cee2975c6ea99a9196662c57a0bd6273b59128f5305be3a456d6",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

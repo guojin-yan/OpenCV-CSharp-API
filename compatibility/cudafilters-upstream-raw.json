@@ -1,0 +1,798 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/CudaFiltersUpstreamMap/extract_cudafilters.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/cudafilters/include/opencv2/cudafilters.hpp",
+  "headerSha256": "3daf69bb6f7d260c90478b18697e64d622e77b3a483dace76e3f768f86ce70be",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudafilters/include/opencv2/cudafilters.hpp",
+      "sha256": "3daf69bb6f7d260c90478b18697e64d622e77b3a483dace76e3f768f86ce70be",
+      "startOrdinal": 0,
+      "declarationCount": 16
+    }
+  ],
+  "declarationCount": 16,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafilters/include/opencv2/cudafilters.hpp",
+      "kind": "class",
+      "name": "cv.cuda.Filter",
+      "identity": "class cv.cuda.Filter",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Common interface for all CUDA filters :"
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafilters/include/opencv2/cudafilters.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.Filter.apply",
+      "identity": "cv.cuda.Filter.apply(Mat src;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Applies the specified filter to the image.\n\n    @param src Input image.\n    @param dst Output image.\n    @param stream Stream for the asynchronous version."
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafilters/include/opencv2/cudafilters.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createBoxFilter",
+      "identity": "cv.cuda.createBoxFilter(int srcType;int dstType;Size ksize;Point anchor=Point(-1, -1);int borderMode=BORDER_DEFAULT;Scalar borderVal=Scalar::all(0))->Ptr<Filter>",
+      "returnType": "Ptr<Filter>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "srcType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dstType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "ksize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Point",
+          "name": "anchor",
+          "default": "Point(-1, -1)",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "borderMode",
+          "default": "BORDER_DEFAULT",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "borderVal",
+          "default": "Scalar::all(0)",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates a normalized 2D box filter.\n\n@param srcType Input image type. Only CV_8UC1, CV_8UC4 and CV_32FC1 are supported for now.\n@param dstType Output image type. Only the same type as src is supported for now.\n@param ksize Kernel size.\n@param anchor Anchor point. The default value Point(-1, -1) means that the anchor is at the kernel\ncenter.\n@param borderMode Pixel extrapolation method. For details, see borderInterpolate .\n@param borderVal Default border value.\n\n@note\nIf applied in a CUDA Stream, a distinct filter instance must be created for each Stream. Sharing a single instance across multiple streams is unsupported and may lead to undefined behavior due to stream-specific internal state.\n\n@sa boxFilter"
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafilters/include/opencv2/cudafilters.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createLinearFilter",
+      "identity": "cv.cuda.createLinearFilter(int srcType;int dstType;Mat kernel;Point anchor=Point(-1, -1);int borderMode=BORDER_DEFAULT;Scalar borderVal=Scalar::all(0))->Ptr<Filter>",
+      "returnType": "Ptr<Filter>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "srcType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dstType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "kernel",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Point",
+          "name": "anchor",
+          "default": "Point(-1, -1)",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "borderMode",
+          "default": "BORDER_DEFAULT",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "borderVal",
+          "default": "Scalar::all(0)",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates a non-separable linear 2D filter.\n\n@param srcType Input image type. Supports CV_8U , CV_16U and CV_32F one and four channel image.\n@param dstType Output image type. Only the same type as src is supported for now.\n@param kernel 2D array of filter coefficients.\n@param anchor Anchor point. The default value Point(-1, -1) means that the anchor is at the kernel\ncenter.\n@param borderMode Pixel extrapolation method. For details, see borderInterpolate .\n@param borderVal Default border value.\n\n@note\nIf applied in a CUDA Stream, a distinct filter instance must be created for each Stream. Sharing a single instance across multiple streams is unsupported and may lead to undefined behavior due to stream-specific internal state.\n\n@sa filter2D"
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafilters/include/opencv2/cudafilters.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createLaplacianFilter",
+      "identity": "cv.cuda.createLaplacianFilter(int srcType;int dstType;int ksize=1;double scale=1;int borderMode=BORDER_DEFAULT;Scalar borderVal=Scalar::all(0))->Ptr<Filter>",
+      "returnType": "Ptr<Filter>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "srcType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dstType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "ksize",
+          "default": "1",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "scale",
+          "default": "1",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "borderMode",
+          "default": "BORDER_DEFAULT",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "borderVal",
+          "default": "Scalar::all(0)",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates a Laplacian operator.\n\n@param srcType Input image type. Supports CV_8U , CV_16U and CV_32F one and four channel image.\n@param dstType Output image type. Only the same type as src is supported for now.\n@param ksize Aperture size used to compute the second-derivative filters (see getDerivKernels). It\nmust be positive and odd. Only ksize = 1 and ksize = 3 are supported.\n@param scale Optional scale factor for the computed Laplacian values. By default, no scaling is\napplied (see getDerivKernels ).\n@param borderMode Pixel extrapolation method. For details, see borderInterpolate .\n@param borderVal Default border value.\n\n@note\nIf applied in a CUDA Stream, a distinct filter instance must be created for each Stream. Sharing a single instance across multiple streams is unsupported and may lead to undefined behavior due to stream-specific internal state.\n\n@sa Laplacian"
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafilters/include/opencv2/cudafilters.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createSeparableLinearFilter",
+      "identity": "cv.cuda.createSeparableLinearFilter(int srcType;int dstType;Mat rowKernel;Mat columnKernel;Point anchor=Point(-1,-1);int rowBorderMode=BORDER_DEFAULT;int columnBorderMode=-1)->Ptr<Filter>",
+      "returnType": "Ptr<Filter>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "srcType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dstType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "rowKernel",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "columnKernel",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Point",
+          "name": "anchor",
+          "default": "Point(-1,-1)",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "rowBorderMode",
+          "default": "BORDER_DEFAULT",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "columnBorderMode",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates a separable linear filter. In-place processing is supported.\n\n@param srcType Source array type.\n@param dstType Destination array type.\n@param rowKernel Horizontal filter coefficients. Support kernels with size \\<= 32 .\nnoArray() is supported to ignore the row filtering.\n@param columnKernel Vertical filter coefficients. Support kernels with size \\<= 32 .\nnoArray() is supported to ignore the column filtering.\n@param anchor Anchor position within the kernel. Negative values mean that anchor is positioned at\nthe aperture center.\n@param rowBorderMode Pixel extrapolation method in the vertical direction For details, see\nborderInterpolate.\n@param columnBorderMode Pixel extrapolation method in the horizontal direction.\n\n@note\nIf applied in a CUDA Stream, a distinct filter instance must be created for each Stream. Sharing a single instance across multiple streams is unsupported and may lead to undefined behavior due to stream-specific internal state.\n\n@sa sepFilter2D"
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafilters/include/opencv2/cudafilters.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createDerivFilter",
+      "identity": "cv.cuda.createDerivFilter(int srcType;int dstType;int dx;int dy;int ksize;bool normalize=false;double scale=1;int rowBorderMode=BORDER_DEFAULT;int columnBorderMode=-1)->Ptr<Filter>",
+      "returnType": "Ptr<Filter>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "srcType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dstType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dx",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dy",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "ksize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "normalize",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "scale",
+          "default": "1",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "rowBorderMode",
+          "default": "BORDER_DEFAULT",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "columnBorderMode",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates a generalized Deriv operator.\n\n@param srcType Source image type.\n@param dstType Destination array type.\n@param dx Derivative order in respect of x.\n@param dy Derivative order in respect of y.\n@param ksize Aperture size. See getDerivKernels for details.\n@param normalize Flag indicating whether to normalize (scale down) the filter coefficients or not.\nSee getDerivKernels for details.\n@param scale Optional scale factor for the computed derivative values. By default, no scaling is\napplied. For details, see getDerivKernels .\n@param rowBorderMode Pixel extrapolation method in the vertical direction. For details, see\nborderInterpolate.\n@param columnBorderMode Pixel extrapolation method in the horizontal direction.\n\n@note\nIf applied in a CUDA Stream, a distinct filter instance must be created for each Stream. Sharing a single instance across multiple streams is unsupported and may lead to undefined behavior due to stream-specific internal state."
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafilters/include/opencv2/cudafilters.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createSobelFilter",
+      "identity": "cv.cuda.createSobelFilter(int srcType;int dstType;int dx;int dy;int ksize=3;double scale=1;int rowBorderMode=BORDER_DEFAULT;int columnBorderMode=-1)->Ptr<Filter>",
+      "returnType": "Ptr<Filter>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "srcType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dstType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dx",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dy",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "ksize",
+          "default": "3",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "scale",
+          "default": "1",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "rowBorderMode",
+          "default": "BORDER_DEFAULT",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "columnBorderMode",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates a Sobel operator.\n\n@param srcType Source image type.\n@param dstType Destination array type.\n@param dx Derivative order in respect of x.\n@param dy Derivative order in respect of y.\n@param ksize Size of the extended Sobel kernel. Possible values are 1, 3, 5 or 7.\n@param scale Optional scale factor for the computed derivative values. By default, no scaling is\napplied. For details, see getDerivKernels .\n@param rowBorderMode Pixel extrapolation method in the vertical direction. For details, see\nborderInterpolate.\n@param columnBorderMode Pixel extrapolation method in the horizontal direction.\n\n@note\nIf applied in a CUDA Stream, a distinct filter instance must be created for each Stream. Sharing a single instance across multiple streams is unsupported and may lead to undefined behavior due to stream-specific internal state.\n\n@sa Sobel"
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafilters/include/opencv2/cudafilters.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createScharrFilter",
+      "identity": "cv.cuda.createScharrFilter(int srcType;int dstType;int dx;int dy;double scale=1;int rowBorderMode=BORDER_DEFAULT;int columnBorderMode=-1)->Ptr<Filter>",
+      "returnType": "Ptr<Filter>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "srcType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dstType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dx",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dy",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "scale",
+          "default": "1",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "rowBorderMode",
+          "default": "BORDER_DEFAULT",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "columnBorderMode",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates a vertical or horizontal Scharr operator.\n\n@param srcType Source image type.\n@param dstType Destination array type.\n@param dx Order of the derivative x.\n@param dy Order of the derivative y.\n@param scale Optional scale factor for the computed derivative values. By default, no scaling is\napplied. See getDerivKernels for details.\n@param rowBorderMode Pixel extrapolation method in the vertical direction. For details, see\nborderInterpolate.\n@param columnBorderMode Pixel extrapolation method in the horizontal direction.\n\n@note\nIf applied in a CUDA Stream, a distinct filter instance must be created for each Stream. Sharing a single instance across multiple streams is unsupported and may lead to undefined behavior due to stream-specific internal state.\n\n@sa Scharr"
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafilters/include/opencv2/cudafilters.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createGaussianFilter",
+      "identity": "cv.cuda.createGaussianFilter(int srcType;int dstType;Size ksize;double sigma1;double sigma2=0;int rowBorderMode=BORDER_DEFAULT;int columnBorderMode=-1)->Ptr<Filter>",
+      "returnType": "Ptr<Filter>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "srcType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dstType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "ksize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "sigma1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "sigma2",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "rowBorderMode",
+          "default": "BORDER_DEFAULT",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "columnBorderMode",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates a Gaussian filter.\n\n@param srcType Source image type.\n@param dstType Destination array type.\n@param ksize Aperture size. See getGaussianKernel for details.\n@param sigma1 Gaussian sigma in the horizontal direction. See getGaussianKernel for details.\n@param sigma2 Gaussian sigma in the vertical direction. If 0, then\n\\f$\\texttt{sigma2}\\leftarrow\\texttt{sigma1}\\f$ .\n@param rowBorderMode Pixel extrapolation method in the vertical direction. For details, see\nborderInterpolate.\n@param columnBorderMode Pixel extrapolation method in the horizontal direction.\n\n@note\nIf applied in a CUDA Stream, a distinct filter instance must be created for each Stream. Sharing a single instance across multiple streams is unsupported and may lead to undefined behavior due to stream-specific internal state.\n\n@sa GaussianBlur"
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafilters/include/opencv2/cudafilters.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createMorphologyFilter",
+      "identity": "cv.cuda.createMorphologyFilter(int op;int srcType;Mat kernel;Point anchor=Point(-1, -1);int iterations=1)->Ptr<Filter>",
+      "returnType": "Ptr<Filter>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "op",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "srcType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "kernel",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Point",
+          "name": "anchor",
+          "default": "Point(-1, -1)",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "iterations",
+          "default": "1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates a 2D morphological filter.\n\n@param op Type of morphological operation. The following types are possible:\n-   **MORPH_ERODE** erode\n-   **MORPH_DILATE** dilate\n-   **MORPH_OPEN** opening\n-   **MORPH_CLOSE** closing\n-   **MORPH_GRADIENT** morphological gradient\n-   **MORPH_TOPHAT** \"top hat\"\n-   **MORPH_BLACKHAT** \"black hat\"\n@param srcType Input/output image type. Only CV_8UC1, CV_8UC4, CV_32FC1 and CV_32FC4 are supported.\n@param kernel 2D 8-bit structuring element for the morphological operation.\n@param anchor Anchor position within the structuring element. Negative values mean that the anchor\nis at the center.\n@param iterations Number of times erosion and dilation to be applied.\n\n@note\nIf applied in a CUDA Stream, a distinct filter instance must be created for each Stream. Sharing a single instance across multiple streams is unsupported and may lead to undefined behavior due to stream-specific internal state.\n\n@sa morphologyEx"
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafilters/include/opencv2/cudafilters.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createBoxMaxFilter",
+      "identity": "cv.cuda.createBoxMaxFilter(int srcType;Size ksize;Point anchor=Point(-1, -1);int borderMode=BORDER_DEFAULT;Scalar borderVal=Scalar::all(0))->Ptr<Filter>",
+      "returnType": "Ptr<Filter>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "srcType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "ksize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Point",
+          "name": "anchor",
+          "default": "Point(-1, -1)",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "borderMode",
+          "default": "BORDER_DEFAULT",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "borderVal",
+          "default": "Scalar::all(0)",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates the maximum filter.\n\n@param srcType Input/output image type. Only CV_8UC1 and CV_8UC4 are supported.\n@param ksize Kernel size.\n@param anchor Anchor point. The default value (-1) means that the anchor is at the kernel center.\n@param borderMode Pixel extrapolation method. For details, see borderInterpolate .\n@param borderVal Default border value.\n\n@note\nIf applied in a CUDA Stream, a distinct filter instance must be created for each Stream. Sharing a single instance across multiple streams is unsupported and may lead to undefined behavior due to stream-specific internal state."
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafilters/include/opencv2/cudafilters.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createBoxMinFilter",
+      "identity": "cv.cuda.createBoxMinFilter(int srcType;Size ksize;Point anchor=Point(-1, -1);int borderMode=BORDER_DEFAULT;Scalar borderVal=Scalar::all(0))->Ptr<Filter>",
+      "returnType": "Ptr<Filter>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "srcType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "ksize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Point",
+          "name": "anchor",
+          "default": "Point(-1, -1)",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "borderMode",
+          "default": "BORDER_DEFAULT",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "borderVal",
+          "default": "Scalar::all(0)",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates the minimum filter.\n\n@param srcType Input/output image type. Only CV_8UC1 and CV_8UC4 are supported.\n@param ksize Kernel size.\n@param anchor Anchor point. The default value (-1) means that the anchor is at the kernel center.\n@param borderMode Pixel extrapolation method. For details, see borderInterpolate .\n@param borderVal Default border value.\n\n@note\nIf applied in a CUDA Stream, a distinct filter instance must be created for each Stream. Sharing a single instance across multiple streams is unsupported and may lead to undefined behavior due to stream-specific internal state."
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafilters/include/opencv2/cudafilters.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createRowSumFilter",
+      "identity": "cv.cuda.createRowSumFilter(int srcType;int dstType;int ksize;int anchor=-1;int borderMode=BORDER_DEFAULT;Scalar borderVal=Scalar::all(0))->Ptr<Filter>",
+      "returnType": "Ptr<Filter>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "srcType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dstType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "ksize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "anchor",
+          "default": "-1",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "borderMode",
+          "default": "BORDER_DEFAULT",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "borderVal",
+          "default": "Scalar::all(0)",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates a horizontal 1D box filter.\n\n@param srcType Input image type. Only CV_8UC1 type is supported for now.\n@param dstType Output image type. Only CV_32FC1 type is supported for now.\n@param ksize Kernel size.\n@param anchor Anchor point. The default value (-1) means that the anchor is at the kernel center.\n@param borderMode Pixel extrapolation method. For details, see borderInterpolate .\n@param borderVal Default border value.\n\n@note\nIf applied in a CUDA Stream, a distinct filter instance must be created for each Stream. Sharing a single instance across multiple streams is unsupported and may lead to undefined behavior due to stream-specific internal state."
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafilters/include/opencv2/cudafilters.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createColumnSumFilter",
+      "identity": "cv.cuda.createColumnSumFilter(int srcType;int dstType;int ksize;int anchor=-1;int borderMode=BORDER_DEFAULT;Scalar borderVal=Scalar::all(0))->Ptr<Filter>",
+      "returnType": "Ptr<Filter>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "srcType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dstType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "ksize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "anchor",
+          "default": "-1",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "borderMode",
+          "default": "BORDER_DEFAULT",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "borderVal",
+          "default": "Scalar::all(0)",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates a vertical 1D box filter.\n\n@param srcType Input image type. Only CV_8UC1 type is supported for now.\n@param dstType Output image type. Only CV_32FC1 type is supported for now.\n@param ksize Kernel size.\n@param anchor Anchor point. The default value (-1) means that the anchor is at the kernel center.\n@param borderMode Pixel extrapolation method. For details, see borderInterpolate .\n@param borderVal Default border value.\n\n@note\nIf applied in a CUDA Stream, a distinct filter instance must be created for each Stream. Sharing a single instance across multiple streams is unsupported and may lead to undefined behavior due to stream-specific internal state."
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafilters/include/opencv2/cudafilters.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createMedianFilter",
+      "identity": "cv.cuda.createMedianFilter(int srcType;int windowSize;int partition=128)->Ptr<Filter>",
+      "returnType": "Ptr<Filter>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "srcType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "windowSize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "partition",
+          "default": "128",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Performs median filtering for each point of the source image.\n\n@param srcType type of of source image. Only CV_8UC1 if CUDA_VERSION < 11. CV_8UC1, CV_8UC3, CV_8UC4, CV_16UC1, CV_16UC3, CV_16UC4, CV_32FC1, CV_32FC3 or CV_32FC4 if CUDA_VERSION >= 11.\n@param windowSize Size of the kernerl used for the filtering. Uses a (windowSize x windowSize) filter.\n@param partition Specifies the parallel granularity of the workload. Only used if CUDA_VERSION < 11.\n\nOutputs an image that has been filtered using a median-filtering formulation.\n\nIf compiled with CUDA 11 or greater, a wavelet based algorithm is used as described at:\nhttps://cgenglab.github.io/en/publication/sigga22_wmatrix_median/\nYuji Moroto, Nobuyuki Umetani, 2022, \"Constant Time Median Filter Using 2D Wavelet Matrix\",\n                                     ACM Transactions on Graphics, Volume 41, Issue 6.\n\nFor earlier versions of CUDA, details on the algorithm used can be found in:\nGreen, O., 2017. \"Efficient scalable median filtering using histogram-based operations\",\n                  IEEE Transactions on Image Processing, 27(5), pp.2217-2228.\n\n@note\nIf applied in a CUDA Stream, a distinct filter instance must be created for each Stream. Sharing a single instance across multiple streams is unsupported and may lead to undefined behavior due to stream-specific internal state."
+    }
+  ],
+  "compatibilityHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudafilters/CMakeLists.txt",
+      "sha256": "e498766a5d3ac834615b433744c0333b56574ad6987840107dd7b580bfcdcc0c",
+      "reason": "Upstream module activation, OpenCV dependency, and CUDA/NPP image-filter dependency contract; parser declarations are not gated in the public header."
+    }
+  ],
+  "moduleBuildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)"
+}
