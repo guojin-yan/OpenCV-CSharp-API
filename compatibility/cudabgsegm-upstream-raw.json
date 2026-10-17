@@ -1,0 +1,544 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/CudaBgSegmUpstreamMap/extract_cudabgsegm.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/include/opencv2/cudabgsegm.hpp",
+  "headerSha256": "f13781593040b547a6e773516fa31b24e24e68ae51377a499f4e94c298a2782a",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/include/opencv2/cudabgsegm.hpp",
+      "sha256": "f13781593040b547a6e773516fa31b24e24e68ae51377a499f4e94c298a2782a",
+      "startOrdinal": 0,
+      "declarationCount": 18
+    }
+  ],
+  "declarationCount": 18,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/include/opencv2/cudabgsegm.hpp",
+      "kind": "class",
+      "name": "cv.cuda.BackgroundSubtractorMOG",
+      "identity": "class cv.cuda.BackgroundSubtractorMOG",
+      "returnType": ": cv::BackgroundSubtractor",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::BackgroundSubtractor",
+      "documentation": "@brief Gaussian Mixture-based Background/Foreground Segmentation Algorithm.\n\nThe class discriminates between foreground and background pixels by building and maintaining a model\nof the background. Any pixel which does not fit this model is then deemed to be foreground. The\nclass implements algorithm described in @cite MOG2001 .\n\n@sa BackgroundSubtractorMOG\n\n@note\n   -   An example on gaussian mixture based background/foreground segmantation can be found at\n        opencv_source_code/samples/gpu/bgfg_segm.cpp"
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/include/opencv2/cudabgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.BackgroundSubtractorMOG.apply",
+      "identity": "cv.cuda.BackgroundSubtractorMOG.apply(Mat image;Mat fgmask[/O];double learningRate;Stream stream[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "fgmask",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "learningRate",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/include/opencv2/cudabgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.BackgroundSubtractorMOG.apply",
+      "identity": "cv.cuda.BackgroundSubtractorMOG.apply(Mat image;Mat knownForegroundMask;Mat fgmask[/O];double learningRate;Stream stream[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "knownForegroundMask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "fgmask",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "learningRate",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/include/opencv2/cudabgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.BackgroundSubtractorMOG.getBackgroundImage",
+      "identity": "cv.cuda.BackgroundSubtractorMOG.getBackgroundImage(GpuMat backgroundImage[/O,/Ref];Stream stream[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "GpuMat",
+          "name": "backgroundImage",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/include/opencv2/cudabgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.BackgroundSubtractorMOG.getHistory",
+      "identity": "cv.cuda.BackgroundSubtractorMOG.getHistory()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/include/opencv2/cudabgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.BackgroundSubtractorMOG.setHistory",
+      "identity": "cv.cuda.BackgroundSubtractorMOG.setHistory(int nframes)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nframes",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/include/opencv2/cudabgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.BackgroundSubtractorMOG.getNMixtures",
+      "identity": "cv.cuda.BackgroundSubtractorMOG.getNMixtures()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/include/opencv2/cudabgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.BackgroundSubtractorMOG.setNMixtures",
+      "identity": "cv.cuda.BackgroundSubtractorMOG.setNMixtures(int nmix)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nmix",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/include/opencv2/cudabgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.BackgroundSubtractorMOG.getBackgroundRatio",
+      "identity": "cv.cuda.BackgroundSubtractorMOG.getBackgroundRatio()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/include/opencv2/cudabgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.BackgroundSubtractorMOG.setBackgroundRatio",
+      "identity": "cv.cuda.BackgroundSubtractorMOG.setBackgroundRatio(double backgroundRatio)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "backgroundRatio",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/include/opencv2/cudabgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.BackgroundSubtractorMOG.getNoiseSigma",
+      "identity": "cv.cuda.BackgroundSubtractorMOG.getNoiseSigma()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/include/opencv2/cudabgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.BackgroundSubtractorMOG.setNoiseSigma",
+      "identity": "cv.cuda.BackgroundSubtractorMOG.setNoiseSigma(double noiseSigma)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "noiseSigma",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/include/opencv2/cudabgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createBackgroundSubtractorMOG",
+      "identity": "cv.cuda.createBackgroundSubtractorMOG(int history=200;int nmixtures=5;double backgroundRatio=0.7;double noiseSigma=0)->Ptr<cuda::BackgroundSubtractorMOG>",
+      "returnType": "Ptr<cuda::BackgroundSubtractorMOG>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "history",
+          "default": "200",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "nmixtures",
+          "default": "5",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "backgroundRatio",
+          "default": "0.7",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "noiseSigma",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates mixture-of-gaussian background subtractor\n\n@param history Length of the history.\n@param nmixtures Number of Gaussian mixtures.\n@param backgroundRatio Background ratio.\n@param noiseSigma Noise strength (standard deviation of the brightness or each color channel). 0\nmeans some automatic value."
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/include/opencv2/cudabgsegm.hpp",
+      "kind": "class",
+      "name": "cv.cuda.BackgroundSubtractorMOG2",
+      "identity": "class cv.cuda.BackgroundSubtractorMOG2",
+      "returnType": ": cv::BackgroundSubtractorMOG2",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::BackgroundSubtractorMOG2",
+      "documentation": "@brief Gaussian Mixture-based Background/Foreground Segmentation Algorithm.\n\nThe class discriminates between foreground and background pixels by building and maintaining a model\nof the background. Any pixel which does not fit this model is then deemed to be foreground. The\nclass implements algorithm described in @cite Zivkovic2004 .\n\n@sa BackgroundSubtractorMOG2"
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/include/opencv2/cudabgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.BackgroundSubtractorMOG2.apply",
+      "identity": "cv.cuda.BackgroundSubtractorMOG2.apply(Mat image;Mat fgmask[/O];double learningRate;Stream stream[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "fgmask",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "learningRate",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/include/opencv2/cudabgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.BackgroundSubtractorMOG2.apply",
+      "identity": "cv.cuda.BackgroundSubtractorMOG2.apply(Mat image;Mat knownForegroundMask;Mat fgmask[/O];double learningRate;Stream stream[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "knownForegroundMask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "fgmask",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "learningRate",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/include/opencv2/cudabgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.BackgroundSubtractorMOG2.getBackgroundImage",
+      "identity": "cv.cuda.BackgroundSubtractorMOG2.getBackgroundImage(GpuMat backgroundImage[/O,/Ref];Stream stream[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "GpuMat",
+          "name": "backgroundImage",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/include/opencv2/cudabgsegm.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createBackgroundSubtractorMOG2",
+      "identity": "cv.cuda.createBackgroundSubtractorMOG2(int history=500;double varThreshold=16;bool detectShadows=true)->Ptr<cuda::BackgroundSubtractorMOG2>",
+      "returnType": "Ptr<cuda::BackgroundSubtractorMOG2>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "history",
+          "default": "500",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "varThreshold",
+          "default": "16",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "detectShadows",
+          "default": "true",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates MOG2 Background Subtractor\n\n@param history Length of the history.\n@param varThreshold Threshold on the squared Mahalanobis distance between the pixel and the model\nto decide whether a pixel is well described by the background model. This parameter does not\naffect the background update.\n@param detectShadows If true, the algorithm will detect shadows and mark them. It decreases the\nspeed a bit, so if you do not need this feature, set the parameter to false."
+    }
+  ],
+  "compatibilityHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/CMakeLists.txt",
+      "sha256": "6717aa128d815fbb1608e077aa07aa2e9cc78c017eb6c1dc1853d3542e231b30",
+      "reason": "Upstream module activation and optional CUDA runtime dependency contract; parser declarations are not gated in the public header."
+    }
+  ],
+  "moduleBuildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)"
+}

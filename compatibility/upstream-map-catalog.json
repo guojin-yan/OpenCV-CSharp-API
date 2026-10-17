@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 53,
+  "moduleCount": 54,
   "maps": [
     {
       "id": "calib3d",
@@ -3484,6 +3484,58 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "78bead26e13d6d32eec141ab8d48b0636e4f27201f8d60d90316852f6078da22",
         "familyInventorySha256": "ab85e7212ff28625b72000dda2f53431cc910aa06a23838175dbad5246df4c2b",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "cudabgsegm",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/CudaBgSegmUpstreamMap",
+      "extractorScript": "tools/CudaBgSegmUpstreamMap/extract_cudabgsegm.py",
+      "generationScript": "scripts/Generate-CudaBgSegmUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-CudaBgSegmUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/cudabgsegm.hpp parser-backed CUDA background-segmentation declarations plus the pinned module CMake build/dependency contract",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/include/opencv2/cudabgsegm.hpp",
+          "sha256": "f13781593040b547a6e773516fa31b24e24e68ae51377a499f4e94c298a2782a"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/include/opencv2/cudabgsegm.hpp",
+            "sha256": "f13781593040b547a6e773516fa31b24e24e68ae51377a499f4e94c298a2782a",
+            "startOrdinal": 0,
+            "declarationCount": 18
+          }
+        ],
+        "compatibilityHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudabgsegm/CMakeLists.txt",
+            "sha256": "6717aa128d815fbb1608e077aa07aa2e9cc78c017eb6c1dc1853d3542e231b30",
+            "reason": "Upstream module activation and optional CUDA runtime dependency contract; parser declarations are not gated in the public header."
+          }
+        ],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/cudabgsegm-upstream-raw.json",
+        "classifications": "compatibility/cudabgsegm-upstream-classifications.json",
+        "mapping": "compatibility/cudabgsegm-upstream-map.txt",
+        "summary": "compatibility/cudabgsegm-upstream-summary.json",
+        "familyInventory": "compatibility/cudabgsegm-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 18,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "0c29d37fff4ad7de411ef038b95665c589bb745be1ccc4aa6f8c3f4273315a09",
+        "familyInventorySha256": "7a5f3e7d646e09f2b7679f0f9348b6d33122cd8a3997c1de79882fb2685022d2",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false
