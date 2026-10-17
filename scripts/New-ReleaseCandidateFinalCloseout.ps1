@@ -145,6 +145,8 @@ function Get-Record {
     $cudafiltersSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/cudafilters-upstream-summary.json") -Raw | ConvertFrom-Json
     $cudaimgprocRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/cudaimgproc-upstream-raw.json") -Raw | ConvertFrom-Json
     $cudaimgprocSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/cudaimgproc-upstream-summary.json") -Raw | ConvertFrom-Json
+    $cudacodecRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/cudacodec-upstream-raw.json") -Raw | ConvertFrom-Json
+    $cudacodecSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/cudacodec-upstream-summary.json") -Raw | ConvertFrom-Json
     $wechatQRCodeRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/wechat_qrcode-upstream-raw.json") -Raw | ConvertFrom-Json
     $wechatQRCodeSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/wechat_qrcode-upstream-summary.json") -Raw | ConvertFrom-Json
     $cnn3DObjRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/cnn_3dobj-upstream-raw.json") -Raw | ConvertFrom-Json
@@ -252,6 +254,11 @@ function Get-Record {
         "compatibility/cudaimgproc-upstream-map.txt",
         "compatibility/cudaimgproc-upstream-raw.json",
         "compatibility/cudaimgproc-upstream-summary.json",
+        "compatibility/cudacodec-implemented-families.json",
+        "compatibility/cudacodec-upstream-classifications.json",
+        "compatibility/cudacodec-upstream-map.txt",
+        "compatibility/cudacodec-upstream-raw.json",
+        "compatibility/cudacodec-upstream-summary.json",
         "compatibility/wechat_qrcode-implemented-families.json",
         "compatibility/wechat_qrcode-upstream-classifications.json",
         "compatibility/wechat_qrcode-upstream-map.txt",
@@ -488,6 +495,7 @@ function Get-Record {
         "docs/articles/cudabgsegm-upstream-parity-guide.md",
         "docs/articles/cudafilters-upstream-parity-guide.md",
         "docs/articles/cudaimgproc-upstream-parity-guide.md",
+        "docs/articles/cudacodec-upstream-parity-guide.md",
         "docs/articles/signal-upstream-parity-guide.md",
         "docs/articles/dpm-upstream-parity-guide.md",
         "docs/articles/hdf-upstream-parity-guide.md",
@@ -648,6 +656,7 @@ function Get-Record {
         "scripts/Generate-CudaBgSegmUpstreamMap.ps1",
         "scripts/Generate-CudaFiltersUpstreamMap.ps1",
         "scripts/Generate-CudaImgProcUpstreamMap.ps1",
+        "scripts/Generate-CudaCodecUpstreamMap.ps1",
         "scripts/Generate-WechatQRCodeUpstreamMap.ps1",
         "scripts/Generate-Cnn3DObjUpstreamMap.ps1",
         "scripts/Generate-SignalUpstreamMap.ps1",
@@ -716,6 +725,7 @@ function Get-Record {
         "scripts/Test-CudaBgSegmUpstreamMap.ps1",
         "scripts/Test-CudaFiltersUpstreamMap.ps1",
         "scripts/Test-CudaImgProcUpstreamMap.ps1",
+        "scripts/Test-CudaCodecUpstreamMap.ps1",
         "scripts/Test-WechatQRCodeUpstreamMap.ps1",
         "scripts/Test-Cnn3DObjUpstreamMap.ps1",
         "scripts/Test-SignalUpstreamMap.ps1",
@@ -1040,6 +1050,9 @@ function Get-Record {
         "tools/CudaImgProcUpstreamMap/CudaImgProcUpstreamMap.csproj",
         "tools/CudaImgProcUpstreamMap/Program.cs",
         "tools/CudaImgProcUpstreamMap/extract_cudaimgproc.py",
+        "tools/CudaCodecUpstreamMap/CudaCodecUpstreamMap.csproj",
+        "tools/CudaCodecUpstreamMap/Program.cs",
+        "tools/CudaCodecUpstreamMap/extract_cudacodec.py",
         "docs/articles/dnn-superres-upstream-parity-guide.md",
         "docs/articles/wechat-qrcode-upstream-parity-guide.md",
         "docs/articles/cnn-3dobj-upstream-parity-guide.md",
@@ -1531,6 +1544,33 @@ function Get-Record {
                 CompatibilityBuildSha256 = [string]$cudaimgprocRaw.compatibilityHeaders[0].sha256
                 ModuleBuildCondition = [string]$cudaimgprocRaw.moduleBuildCondition
                 RepositoryWideParityClaimed = [bool]$cudaimgprocSummary.repositoryWideUpstreamParityClaimed
+            }
+            CudaCodecUpstreamMap = [ordered]@{
+                Path = "compatibility/cudacodec-upstream-map.txt"
+                SummaryPath = "compatibility/cudacodec-upstream-summary.json"
+                ClassificationPath = "compatibility/cudacodec-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/cudacodec-implemented-families.json"
+                RawExtractionPath = "compatibility/cudacodec-upstream-raw.json"
+                Sha256 = $cudacodecSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/cudacodec-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$cudacodecSummary.declarationCount
+                CallableCount = [int]$cudacodecSummary.callableCount
+                ImplementedCount = [int]$cudacodecSummary.classificationCounts.implemented
+                MissingCount = [int]$cudacodecSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$cudacodecSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$cudacodecSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$cudacodecSummary.classificationCounts.'upstream-conditional'
+                SourceHeaderCount = @($cudacodecRaw.sourceHeaders).Count
+                SelectedFamilyCount = [int]$cudacodecSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$cudacodecSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$cudacodecSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$cudacodecSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$cudacodecSummary.nativeEvidenceCount
+                ExternalDataDependencyCount = [int]$cudacodecSummary.externalDataDependencyCount
+                CompatibilityBuildPath = [string]$cudacodecRaw.compatibilityHeaders[0].path
+                CompatibilityBuildSha256 = [string]$cudacodecRaw.compatibilityHeaders[0].sha256
+                ModuleBuildCondition = [string]$cudacodecRaw.moduleBuildCondition
+                RepositoryWideParityClaimed = [bool]$cudacodecSummary.repositoryWideUpstreamParityClaimed
             }
             WechatQRCodeUpstreamMap = [ordered]@{
                 Path = "compatibility/wechat_qrcode-upstream-map.txt"

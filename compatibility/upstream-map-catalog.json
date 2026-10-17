@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 56,
+  "moduleCount": 57,
   "maps": [
     {
       "id": "calib3d",
@@ -3640,6 +3640,58 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "d52b5dbd5ba1a33208910a903ffd7eb52eca37a030dda28e77dd1b9c0b1b527f",
         "familyInventorySha256": "2d0100aca9912051dc62e17b5b08739fe5b959b8897b30c04b9e509d321299d5",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "cudacodec",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/CudaCodecUpstreamMap",
+      "extractorScript": "tools/CudaCodecUpstreamMap/extract_cudacodec.py",
+      "generationScript": "scripts/Generate-CudaCodecUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-CudaCodecUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/cudacodec.hpp parser-backed CUDA codec public declarations plus the pinned module CMake build/dependency contract",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/cudacodec/include/opencv2/cudacodec.hpp",
+          "sha256": "e8033941faf7019d9a6b31c81429231fac1024eb5d5fb3735b059b488fb6ca6a"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudacodec/include/opencv2/cudacodec.hpp",
+            "sha256": "e8033941faf7019d9a6b31c81429231fac1024eb5d5fb3735b059b488fb6ca6a",
+            "startOrdinal": 0,
+            "declarationCount": 45
+          }
+        ],
+        "compatibilityHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudacodec/CMakeLists.txt",
+            "sha256": "65494cc7c2a8c1067378466fbe1c7d28b2e3a622abd61e71a8770c4c1301fe81",
+            "reason": "Upstream module activation, CUDA/videoio/cudaarithm/cudawarping dependency, and optional NVIDIA Video Codec SDK dependency contract; parser declarations are not gated in the public header."
+          }
+        ],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/cudacodec-upstream-raw.json",
+        "classifications": "compatibility/cudacodec-upstream-classifications.json",
+        "mapping": "compatibility/cudacodec-upstream-map.txt",
+        "summary": "compatibility/cudacodec-upstream-summary.json",
+        "familyInventory": "compatibility/cudacodec-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 45,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "da38018a05b2487671a04c275b9bb04ecff98f4e8dce4affc6c78e8cb2a2e573",
+        "familyInventorySha256": "5e02d962dc5aaf678981b2d56b491bd0d21f800579ea405e64ee0b5fbe50021e",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

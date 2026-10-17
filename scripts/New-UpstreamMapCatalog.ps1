@@ -63,7 +63,8 @@ $definitions = @(
     [pscustomobject]@{ Id = 'cudaarithm'; Tool = 'CudaArithm'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'cudabgsegm'; Tool = 'CudaBgSegm'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'cudafilters'; Tool = 'CudaFilters'; Repository = 'opencv_contrib' },
-    [pscustomobject]@{ Id = 'cudaimgproc'; Tool = 'CudaImgProc'; Repository = 'opencv_contrib' }
+    [pscustomobject]@{ Id = 'cudaimgproc'; Tool = 'CudaImgProc'; Repository = 'opencv_contrib' },
+    [pscustomobject]@{ Id = 'cudacodec'; Tool = 'CudaCodec'; Repository = 'opencv_contrib' }
 )
 
 function Get-HeaderRows {
