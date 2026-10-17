@@ -58,7 +58,8 @@ $definitions = @(
     [pscustomobject]@{ Id = 'dnn_objdetect'; Tool = 'DnnObjDetect'; Repository = 'opencv_contrib' }
     [pscustomobject]@{ Id = 'ccalib'; Tool = 'Ccalib'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'superres'; Tool = 'Superres'; Repository = 'opencv_contrib' },
-    [pscustomobject]@{ Id = 'julia'; Tool = 'Julia'; Repository = 'opencv_contrib' }
+    [pscustomobject]@{ Id = 'julia'; Tool = 'Julia'; Repository = 'opencv_contrib' },
+    [pscustomobject]@{ Id = 'rgbd'; Tool = 'Rgbd'; Repository = 'opencv_contrib' }
 )
 
 function Get-HeaderRows {

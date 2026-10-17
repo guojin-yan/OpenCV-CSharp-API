@@ -135,6 +135,8 @@ function Get-Record {
     $superresSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/superres-upstream-summary.json") -Raw | ConvertFrom-Json
     $juliaRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/julia-upstream-raw.json") -Raw | ConvertFrom-Json
     $juliaSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/julia-upstream-summary.json") -Raw | ConvertFrom-Json
+    $rgbdRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/rgbd-upstream-raw.json") -Raw | ConvertFrom-Json
+    $rgbdSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/rgbd-upstream-summary.json") -Raw | ConvertFrom-Json
     $wechatQRCodeRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/wechat_qrcode-upstream-raw.json") -Raw | ConvertFrom-Json
     $wechatQRCodeSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/wechat_qrcode-upstream-summary.json") -Raw | ConvertFrom-Json
     $cnn3DObjRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/cnn_3dobj-upstream-raw.json") -Raw | ConvertFrom-Json
@@ -217,6 +219,11 @@ function Get-Record {
         "compatibility/julia-upstream-map.txt",
         "compatibility/julia-upstream-raw.json",
         "compatibility/julia-upstream-summary.json",
+        "compatibility/rgbd-implemented-families.json",
+        "compatibility/rgbd-upstream-classifications.json",
+        "compatibility/rgbd-upstream-map.txt",
+        "compatibility/rgbd-upstream-raw.json",
+        "compatibility/rgbd-upstream-summary.json",
         "compatibility/wechat_qrcode-implemented-families.json",
         "compatibility/wechat_qrcode-upstream-classifications.json",
         "compatibility/wechat_qrcode-upstream-map.txt",
@@ -448,6 +455,7 @@ function Get-Record {
         "docs/articles/dnn-objdetect-upstream-parity-guide.md",
         "docs/articles/ccalib-upstream-parity-guide.md",
         "docs/articles/julia-upstream-parity-guide.md",
+        "docs/articles/rgbd-upstream-parity-guide.md",
         "docs/articles/signal-upstream-parity-guide.md",
         "docs/articles/dpm-upstream-parity-guide.md",
         "docs/articles/hdf-upstream-parity-guide.md",
@@ -603,6 +611,7 @@ function Get-Record {
         "scripts/Generate-CcalibUpstreamMap.ps1",
         "scripts/Generate-SuperresUpstreamMap.ps1",
         "scripts/Generate-JuliaUpstreamMap.ps1",
+        "scripts/Generate-RgbdUpstreamMap.ps1",
         "scripts/Generate-WechatQRCodeUpstreamMap.ps1",
         "scripts/Generate-Cnn3DObjUpstreamMap.ps1",
         "scripts/Generate-SignalUpstreamMap.ps1",
@@ -666,6 +675,7 @@ function Get-Record {
         "scripts/Test-CcalibUpstreamMap.ps1",
         "scripts/Test-SuperresUpstreamMap.ps1",
         "scripts/Test-JuliaUpstreamMap.ps1",
+        "scripts/Test-RgbdUpstreamMap.ps1",
         "scripts/Test-WechatQRCodeUpstreamMap.ps1",
         "scripts/Test-Cnn3DObjUpstreamMap.ps1",
         "scripts/Test-SignalUpstreamMap.ps1",
@@ -975,6 +985,9 @@ function Get-Record {
         "tools/JuliaUpstreamMap/JuliaUpstreamMap.csproj",
         "tools/JuliaUpstreamMap/Program.cs",
         "tools/JuliaUpstreamMap/extract_julia.py",
+        "tools/RgbdUpstreamMap/RgbdUpstreamMap.csproj",
+        "tools/RgbdUpstreamMap/Program.cs",
+        "tools/RgbdUpstreamMap/extract_rgbd.py",
         "docs/articles/dnn-superres-upstream-parity-guide.md",
         "docs/articles/wechat-qrcode-upstream-parity-guide.md",
         "docs/articles/cnn-3dobj-upstream-parity-guide.md",
@@ -1334,6 +1347,30 @@ function Get-Record {
                 NativeEntrypointAdditionCount = [int]$juliaSummary.nativeEvidenceCount
                 ExternalDataDependencyCount = [int]$juliaSummary.externalDataDependencyCount
                 RepositoryWideParityClaimed = [bool]$juliaSummary.repositoryWideUpstreamParityClaimed
+            }
+            RgbdUpstreamMap = [ordered]@{
+                Path = "compatibility/rgbd-upstream-map.txt"
+                SummaryPath = "compatibility/rgbd-upstream-summary.json"
+                ClassificationPath = "compatibility/rgbd-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/rgbd-implemented-families.json"
+                RawExtractionPath = "compatibility/rgbd-upstream-raw.json"
+                Sha256 = $rgbdSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/rgbd-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$rgbdSummary.declarationCount
+                CallableCount = [int]$rgbdSummary.callableCount
+                ImplementedCount = [int]$rgbdSummary.classificationCounts.implemented
+                MissingCount = [int]$rgbdSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$rgbdSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$rgbdSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$rgbdSummary.classificationCounts.'upstream-conditional'
+                SourceHeaderCount = @($rgbdRaw.sourceHeaders).Count
+                SelectedFamilyCount = [int]$rgbdSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$rgbdSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$rgbdSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$rgbdSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$rgbdSummary.nativeEvidenceCount
+                ExternalDataDependencyCount = [int]$rgbdSummary.externalDataDependencyCount
+                RepositoryWideParityClaimed = [bool]$rgbdSummary.repositoryWideUpstreamParityClaimed
             }
             WechatQRCodeUpstreamMap = [ordered]@{
                 Path = "compatibility/wechat_qrcode-upstream-map.txt"

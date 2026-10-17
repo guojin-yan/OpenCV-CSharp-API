@@ -65,7 +65,7 @@ def main():
     output = Path(args.output).resolve()
     parser_path = root / "modules/python/src2/hdr_parser.py"
     module = args.module
-    if module not in {"ximgproc", "optflow", "bgsegm", "face", "quality", "img_hash", "line_descriptor", "freetype", "alphamat", "intensity_transform", "plot", "bioinspired", "phase_unwrapping", "hfs", "fuzzy", "rapid", "shape", "structured_light", "saliency", "surface_matching", "reg", "xstereo", "xobjdetect", "superres", "dnn_superres", "wechat_qrcode", "cnn_3dobj", "signal", "dpm", "hdf", "text", "xfeatures2d", "dnn_objdetect", "ccalib", "julia"}:
+    if module not in {"ximgproc", "optflow", "bgsegm", "face", "quality", "img_hash", "line_descriptor", "freetype", "alphamat", "intensity_transform", "plot", "bioinspired", "phase_unwrapping", "hfs", "fuzzy", "rapid", "shape", "structured_light", "saliency", "surface_matching", "reg", "xstereo", "xobjdetect", "superres", "dnn_superres", "wechat_qrcode", "cnn_3dobj", "signal", "dpm", "hdf", "text", "xfeatures2d", "dnn_objdetect", "ccalib", "julia", "rgbd"}:
         raise RuntimeError("Unsupported contrib extraction module: " + module)
     contrib_include = root.parent.parent / f"opencv-source/opencv_contrib-5.0.0/modules/{module}/include/opencv2"
     contrib_root = contrib_include / module
@@ -83,6 +83,10 @@ def main():
         # optical_flow.hpp contributes the dense-flow families.  Keep both
         # source headers in the measured closure instead of silently dropping
         # the umbrella when a subheader exists.
+        files = [umbrella] + module_headers
+    elif module == "rgbd":
+        # The umbrella names five public component headers but has no parser
+        # declarations itself.  Keep it and all component headers in scope.
         files = [umbrella] + module_headers
     else:
         files = module_headers if module_headers else [umbrella]
@@ -142,8 +146,8 @@ def main():
     identities = [item["identity"] for item in declarations]
     if len(identities) != len(set(identities)):
         duplicates = sorted(item for item in set(identities) if identities.count(item) > 1)
-        raise RuntimeError("XImgProc parser closure contains duplicate identities: " + ", ".join(duplicates))
-    title = {"ximgproc": "XImgProc", "optflow": "OptFlow", "bgsegm": "BgSegm", "face": "Face", "quality": "Quality", "img_hash": "ImgHash", "line_descriptor": "LineDescriptor", "freetype": "Freetype", "alphamat": "AlphaMat", "intensity_transform": "IntensityTransform", "plot": "Plot", "bioinspired": "BioInspired", "phase_unwrapping": "PhaseUnwrapping", "hfs": "Hfs", "fuzzy": "Fuzzy", "rapid": "Rapid", "shape": "Shape", "structured_light": "StructuredLight", "saliency": "Saliency", "surface_matching": "SurfaceMatching", "reg": "Reg", "xstereo": "XStereo", "xobjdetect": "XObjDetect", "superres": "Superres", "dnn_superres": "DnnSuperres", "wechat_qrcode": "WechatQRCode", "cnn_3dobj": "Cnn3DObj", "signal": "Signal", "dpm": "Dpm", "hdf": "Hdf", "text": "Text", "xfeatures2d": "XFeatures2D", "dnn_objdetect": "DnnObjDetect", "ccalib": "Ccalib", "julia": "Julia"}[module]
+        raise RuntimeError(module + " parser closure contains duplicate identities: " + ", ".join(duplicates))
+    title = {"ximgproc": "XImgProc", "optflow": "OptFlow", "bgsegm": "BgSegm", "face": "Face", "quality": "Quality", "img_hash": "ImgHash", "line_descriptor": "LineDescriptor", "freetype": "Freetype", "alphamat": "AlphaMat", "intensity_transform": "IntensityTransform", "plot": "Plot", "bioinspired": "BioInspired", "phase_unwrapping": "PhaseUnwrapping", "hfs": "Hfs", "fuzzy": "Fuzzy", "rapid": "Rapid", "shape": "Shape", "structured_light": "StructuredLight", "saliency": "Saliency", "surface_matching": "SurfaceMatching", "reg": "Reg", "xstereo": "XStereo", "xobjdetect": "XObjDetect", "superres": "Superres", "dnn_superres": "DnnSuperres", "wechat_qrcode": "WechatQRCode", "cnn_3dobj": "Cnn3DObj", "signal": "Signal", "dpm": "Dpm", "hdf": "Hdf", "text": "Text", "xfeatures2d": "XFeatures2D", "dnn_objdetect": "DnnObjDetect", "ccalib": "Ccalib", "julia": "Julia", "rgbd": "Rgbd"}[module]
     result = {"schemaVersion": 1, "generator": f"tools/{title}UpstreamMap/extract_{module}.py", "upstreamOpenCvVersion": "5.0.0", "headerPath": rel(umbrella, workspace), "headerSha256": sha256(umbrella), "parserPath": rel(parser_path, workspace), "parserSha256": sha256(parser_path), "preprocessorDefinitions": definitions, "sourceHeaders": source_headers, "declarationCount": len(declarations), "declarations": declarations}
     if module == "dnn_objdetect":
         result["parserMode"] = "non-wrapper-public-declarations"

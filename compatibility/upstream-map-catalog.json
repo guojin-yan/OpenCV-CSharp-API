@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 51,
+  "moduleCount": 52,
   "maps": [
     {
       "id": "calib3d",
@@ -3356,6 +3356,82 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "61ce611dca97076a13c9cf1abdd6c1c54ce9864778364d132690e964d995e7b8",
         "familyInventorySha256": "4c2c08a02860364518136c13ea868993b6bef2c6320e86dc77d2cd1eab47854a",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "rgbd",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/RgbdUpstreamMap",
+      "extractorScript": "tools/RgbdUpstreamMap/extract_rgbd.py",
+      "generationScript": "scripts/Generate-RgbdUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-RgbdUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/rgbd.hpp plus opencv2/rgbd/*.hpp parser-backed public header closure",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd.hpp",
+          "sha256": "da3f7d86a1a12a275966c0fa1bf0f1b79b05d839d2cf98a61162bcaf80a08f15"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd.hpp",
+            "sha256": "da3f7d86a1a12a275966c0fa1bf0f1b79b05d839d2cf98a61162bcaf80a08f15",
+            "startOrdinal": 0,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/colored_kinfu.hpp",
+            "sha256": "1e9f54acd1df2fc4f00dcac857c144a857dba9e5532a6e9949c9750aa41f056e",
+            "startOrdinal": 0,
+            "declarationCount": 19
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/dynafu.hpp",
+            "sha256": "386ed80d31ca912ce61a980228d90d28da1e0630fc6bbda28e6ff0e70b9be9de",
+            "startOrdinal": 19,
+            "declarationCount": 8
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/kinfu.hpp",
+            "sha256": "281f9fed938ffe3515ca985e14e53f787833457a4d02744e92dd24e2544b43ec",
+            "startOrdinal": 27,
+            "declarationCount": 20
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/large_kinfu.hpp",
+            "sha256": "f6461aba7dd5f8cc943817eac9a19395236d7d7d59cb65bfbf5572380557be22",
+            "startOrdinal": 47,
+            "declarationCount": 16
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+            "sha256": "b6ae28343e1376e4b173aaddcd5df5f80a982008f0cb462780c29f8d22359310",
+            "startOrdinal": 63,
+            "declarationCount": 42
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/rgbd-upstream-raw.json",
+        "classifications": "compatibility/rgbd-upstream-classifications.json",
+        "mapping": "compatibility/rgbd-upstream-map.txt",
+        "summary": "compatibility/rgbd-upstream-summary.json",
+        "familyInventory": "compatibility/rgbd-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 105,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "22f26e53c89975523e113da4aa9b06702df829a3a4b03294d31c3858a91e1ae9",
+        "familyInventorySha256": "9bc51c9528ea5ef8753374d267400cee76fc3f061163ddbd2f17ffcb4c86a158",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

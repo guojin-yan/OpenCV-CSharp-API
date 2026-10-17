@@ -27,6 +27,7 @@ $rawNames += @("dnn_objdetect")
 $rawNames += @("ccalib")
 $rawNames += @("superres")
 $rawNames += @("julia")
+$rawNames += @("rgbd")
 $maximumDownloadAttempts = 4
 $required = [System.Collections.Generic.Dictionary[string, string]]::new([StringComparer]::Ordinal)
 

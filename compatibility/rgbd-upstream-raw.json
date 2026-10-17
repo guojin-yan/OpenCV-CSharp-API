@@ -1,0 +1,3249 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/RgbdUpstreamMap/extract_rgbd.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd.hpp",
+  "headerSha256": "da3f7d86a1a12a275966c0fa1bf0f1b79b05d839d2cf98a61162bcaf80a08f15",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd.hpp",
+      "sha256": "da3f7d86a1a12a275966c0fa1bf0f1b79b05d839d2cf98a61162bcaf80a08f15",
+      "startOrdinal": 0,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/colored_kinfu.hpp",
+      "sha256": "1e9f54acd1df2fc4f00dcac857c144a857dba9e5532a6e9949c9750aa41f056e",
+      "startOrdinal": 0,
+      "declarationCount": 19
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/dynafu.hpp",
+      "sha256": "386ed80d31ca912ce61a980228d90d28da1e0630fc6bbda28e6ff0e70b9be9de",
+      "startOrdinal": 19,
+      "declarationCount": 8
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/kinfu.hpp",
+      "sha256": "281f9fed938ffe3515ca985e14e53f787833457a4d02744e92dd24e2544b43ec",
+      "startOrdinal": 27,
+      "declarationCount": 20
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/large_kinfu.hpp",
+      "sha256": "f6461aba7dd5f8cc943817eac9a19395236d7d7d59cb65bfbf5572380557be22",
+      "startOrdinal": 47,
+      "declarationCount": 16
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "sha256": "b6ae28343e1376e4b173aaddcd5df5f80a982008f0cb462780c29f8d22359310",
+      "startOrdinal": 63,
+      "declarationCount": 42
+    }
+  ],
+  "declarationCount": 105,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/colored_kinfu.hpp",
+      "kind": "class",
+      "name": "cv.colored_kinfu.Params",
+      "identity": "class cv.colored_kinfu.Params",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "frameSize",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Size",
+          "name": "rgb_frameSize",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "VolumeType",
+          "name": "volumeKind",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Matx33f",
+          "name": "intr",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Matx33f",
+          "name": "rgb_intr",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "depthFactor",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "bilateral_sigma_depth",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "bilateral_sigma_spatial",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "bilateral_kernel_size",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "pyramidLevels",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Vec3i",
+          "name": "volumeDims",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "voxelSize",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "tsdf_min_camera_movement",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Matx44f",
+          "name": "volumePose",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "tsdf_trunc_dist",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "tsdf_max_weight",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "raycast_step_factor",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Vec3f",
+          "name": "lightPose",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "icpDistThresh",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "icpAngleThresh",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "vector_int",
+          "name": "icpIterations",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "truncateThreshold",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/colored_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.colored_kinfu.Params.Params",
+      "identity": "cv.colored_kinfu.Params.Params()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/colored_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.colored_kinfu.Params.Params",
+      "identity": "cv.colored_kinfu.Params.Params(Matx33f volumeInitialPoseRot;Vec3f volumeInitialPoseTransl)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Matx33f",
+          "name": "volumeInitialPoseRot",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Vec3f",
+          "name": "volumeInitialPoseTransl",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Constructor for Params\n     * Sets the initial pose of the TSDF volume.\n     * @param volumeInitialPoseRot rotation matrix\n     * @param volumeInitialPoseTransl translation vector"
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/colored_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.colored_kinfu.Params.Params",
+      "identity": "cv.colored_kinfu.Params.Params(Matx44f volumeInitialPose)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Matx44f",
+          "name": "volumeInitialPose",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Constructor for Params\n     * Sets the initial pose of the TSDF volume.\n     * @param volumeInitialPose 4 by 4 Homogeneous Transform matrix to set the intial pose of TSDF volume"
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/colored_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.colored_kinfu.Params.setInitialVolumePose",
+      "identity": "cv.colored_kinfu.Params.setInitialVolumePose(Matx33f R;Vec3f t)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Matx33f",
+          "name": "R",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Vec3f",
+          "name": "t",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Set Initial Volume Pose\n     * Sets the initial pose of the TSDF volume.\n     * @param R rotation matrix\n     * @param t translation vector"
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/colored_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.colored_kinfu.Params.setInitialVolumePose",
+      "identity": "cv.colored_kinfu.Params.setInitialVolumePose(Matx44f homogen_tf)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Matx44f",
+          "name": "homogen_tf",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Set Initial Volume Pose\n     * Sets the initial pose of the TSDF volume.\n     * @param homogen_tf 4 by 4 Homogeneous Transform matrix to set the intial pose of TSDF volume"
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/colored_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.colored_kinfu.Params.defaultParams",
+      "identity": "cv.colored_kinfu.Params.defaultParams()->Ptr<Params>",
+      "returnType": "Ptr<Params>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Default parameters\n     * A set of parameters which provides better model quality, can be very slow."
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/colored_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.colored_kinfu.Params.coarseParams",
+      "identity": "cv.colored_kinfu.Params.coarseParams()->Ptr<Params>",
+      "returnType": "Ptr<Params>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Coarse parameters\n    A set of parameters which provides better speed, can fail to match frames\n    in case of rapid sensor motion."
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/colored_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.colored_kinfu.Params.hashTSDFParams",
+      "identity": "cv.colored_kinfu.Params.hashTSDFParams(bool isCoarse)->Ptr<Params>",
+      "returnType": "Ptr<Params>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "isCoarse",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief HashTSDF parameters\n      A set of parameters suitable for use with HashTSDFVolume"
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/colored_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.colored_kinfu.Params.coloredTSDFParams",
+      "identity": "cv.colored_kinfu.Params.coloredTSDFParams(bool isCoarse)->Ptr<Params>",
+      "returnType": "Ptr<Params>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "isCoarse",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief ColoredTSDF parameters\n      A set of parameters suitable for use with HashTSDFVolume"
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/colored_kinfu.hpp",
+      "kind": "class",
+      "name": "cv.colored_kinfu.ColoredKinFu",
+      "identity": "class cv.colored_kinfu.ColoredKinFu",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief KinectFusion implementation\n\n  This class implements a 3d reconstruction algorithm described in\n  @cite kinectfusion paper.\n\n  It takes a sequence of depth images taken from depth sensor\n  (or any depth images source such as stereo camera matching algorithm or even raymarching renderer).\n  The output can be obtained as a vector of points and their normals\n  or can be Phong-rendered from given camera pose.\n\n  An internal representation of a model is a voxel cuboid that keeps TSDF values\n  which are a sort of distances to the surface (for details read the @cite kinectfusion article about TSDF).\n  There is no interface to that representation yet.\n\n  KinFu uses OpenCL acceleration automatically if available.\n  To enable or disable it explicitly use cv::setUseOptimized() or cv::ocl::setUseOpenCL().\n\n  This implementation is based on [kinfu-remake](https://github.com/Nerei/kinfu_remake).\n\n  Note that the KinectFusion algorithm was patented and its use may be restricted by\n  the list of patents mentioned in README.md file in this module directory.\n\n  That's why you need to set the OPENCV_ENABLE_NONFREE option in CMake to use KinectFusion."
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/colored_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.colored_kinfu.ColoredKinFu.create",
+      "identity": "cv.colored_kinfu.ColoredKinFu.create(Ptr_Params _params[/C,/Ref])->Ptr<ColoredKinFu>",
+      "returnType": "Ptr<ColoredKinFu>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Ptr_Params",
+          "name": "_params",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/colored_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.colored_kinfu.ColoredKinFu.render",
+      "identity": "cv.colored_kinfu.ColoredKinFu.render(Mat image[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Renders a volume into an image\n\n      Renders a 0-surface of TSDF using Phong shading into a CV_8UC4 Mat.\n      Light pose is fixed in KinFu params.\n\n        @param image resulting image"
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/colored_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.colored_kinfu.ColoredKinFu.render",
+      "identity": "cv.colored_kinfu.ColoredKinFu.render(Mat image[/O];Matx44f cameraPose[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Matx44f",
+          "name": "cameraPose",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Renders a volume into an image\n\n      Renders a 0-surface of TSDF using Phong shading into a CV_8UC4 Mat.\n      Light pose is fixed in KinFu params.\n\n        @param image resulting image\n        @param cameraPose pose of camera to render from. If empty then render from current pose\n        which is a last frame camera pose."
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/colored_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.colored_kinfu.ColoredKinFu.getCloud",
+      "identity": "cv.colored_kinfu.ColoredKinFu.getCloud(Mat points[/O];Mat normals[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "points",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "normals",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Gets points and normals of current 3d mesh\n\n      The order of normals corresponds to order of points.\n      The order of points is undefined.\n\n        @param points vector of points which are 4-float vectors\n        @param normals vector of normals which are 4-float vectors"
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/colored_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.colored_kinfu.ColoredKinFu.getPoints",
+      "identity": "cv.colored_kinfu.ColoredKinFu.getPoints(Mat points[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "points",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Gets points of current 3d mesh\n\n     The order of points is undefined.\n\n        @param points vector of points which are 4-float vectors"
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/colored_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.colored_kinfu.ColoredKinFu.getNormals",
+      "identity": "cv.colored_kinfu.ColoredKinFu.getNormals(Mat points;Mat normals[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "points",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "normals",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Calculates normals for given points\n        @param points input vector of points which are 4-float vectors\n        @param normals output vector of corresponding normals which are 4-float vectors"
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/colored_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.colored_kinfu.ColoredKinFu.reset",
+      "identity": "cv.colored_kinfu.ColoredKinFu.reset()->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Resets the algorithm\n\n    Clears current model and resets a pose."
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/colored_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.colored_kinfu.ColoredKinFu.update",
+      "identity": "cv.colored_kinfu.ColoredKinFu.update(Mat depth;Mat rgb)->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "depth",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "rgb",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Process next depth frame\n        @param depth input Mat of depth frame\n        @param rgb   input Mat of rgb (colored) frame\n\n        @return true if succeeded to align new frame with current scene, false if opposite"
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/dynafu.hpp",
+      "kind": "class",
+      "name": "cv.dynafu.DynaFu",
+      "identity": "class cv.dynafu.DynaFu",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Backwards compatibility for old versions"
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/dynafu.hpp",
+      "kind": "callable",
+      "name": "cv.dynafu.DynaFu.create",
+      "identity": "cv.dynafu.DynaFu.create(Ptr_kinfu_Params _params[/C,/Ref])->Ptr<DynaFu>",
+      "returnType": "Ptr<DynaFu>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Ptr_kinfu_Params",
+          "name": "_params",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/dynafu.hpp",
+      "kind": "callable",
+      "name": "cv.dynafu.DynaFu.render",
+      "identity": "cv.dynafu.DynaFu.render(Mat image[/O];Matx44f cameraPose=Matx44f::eye()[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Matx44f",
+          "name": "cameraPose",
+          "default": "Matx44f::eye()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Renders a volume into an image\n\n      Renders a 0-surface of TSDF using Phong shading into a CV_8UC4 Mat.\n      Light pose is fixed in DynaFu params.\n\n        @param image resulting image\n        @param cameraPose pose of camera to render from. If empty then render from current pose\n        which is a last frame camera pose."
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/dynafu.hpp",
+      "kind": "callable",
+      "name": "cv.dynafu.DynaFu.getCloud",
+      "identity": "cv.dynafu.DynaFu.getCloud(Mat points[/O];Mat normals[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "points",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "normals",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Gets points and normals of current 3d mesh\n\n      The order of normals corresponds to order of points.\n      The order of points is undefined.\n\n        @param points vector of points which are 4-float vectors\n        @param normals vector of normals which are 4-float vectors"
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/dynafu.hpp",
+      "kind": "callable",
+      "name": "cv.dynafu.DynaFu.getPoints",
+      "identity": "cv.dynafu.DynaFu.getPoints(Mat points[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "points",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Gets points of current 3d mesh\n\n     The order of points is undefined.\n\n        @param points vector of points which are 4-float vectors"
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/dynafu.hpp",
+      "kind": "callable",
+      "name": "cv.dynafu.DynaFu.getNormals",
+      "identity": "cv.dynafu.DynaFu.getNormals(Mat points;Mat normals[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "points",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "normals",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Calculates normals for given points\n        @param points input vector of points which are 4-float vectors\n        @param normals output vector of corresponding normals which are 4-float vectors"
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/dynafu.hpp",
+      "kind": "callable",
+      "name": "cv.dynafu.DynaFu.reset",
+      "identity": "cv.dynafu.DynaFu.reset()->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Resets the algorithm\n\n    Clears current model and resets a pose."
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/dynafu.hpp",
+      "kind": "callable",
+      "name": "cv.dynafu.DynaFu.update",
+      "identity": "cv.dynafu.DynaFu.update(Mat depth)->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "depth",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Process next depth frame\n\n      Integrates depth into voxel space with respect to its ICP-calculated pose.\n      Input image is converted to CV_32F internally if has another type.\n\n    @param depth one-channel image which size and depth scale is described in algorithm's parameters\n    @return true if succeeded to align new frame with current scene, false if opposite"
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/kinfu.hpp",
+      "kind": "class",
+      "name": "cv.kinfu.VolumeParams",
+      "identity": "class cv.kinfu.VolumeParams",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "VolumeType",
+          "name": "kind",
+          "default": " VolumeType::TSDF",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "resolutionX",
+          "default": " 128",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "resolutionY",
+          "default": " 128",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "resolutionZ",
+          "default": " 128",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "unitResolution",
+          "default": " 0",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "volumSize",
+          "default": " 3.f",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "voxelSize",
+          "default": " volumSize / 512.f",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "tsdfTruncDist",
+          "default": " 7.f * voxelSize",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "maxWeight",
+          "default": " 64",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "depthTruncThreshold",
+          "default": " 0.f",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "raycastStepFactor",
+          "default": " 0.25f",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/kinfu.hpp",
+      "kind": "class",
+      "name": "cv.kinfu.Params",
+      "identity": "class cv.kinfu.Params",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "frameSize",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Matx33f",
+          "name": "intr",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Matx33f",
+          "name": "rgb_intr",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "depthFactor",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "bilateral_sigma_depth",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "bilateral_sigma_spatial",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "bilateral_kernel_size",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "pyramidLevels",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Vec3i",
+          "name": "volumeDims",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "voxelSize",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "tsdf_min_camera_movement",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Matx44f",
+          "name": "volumePose",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "tsdf_trunc_dist",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "tsdf_max_weight",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "raycast_step_factor",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Vec3f",
+          "name": "lightPose",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "icpDistThresh",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "icpAngleThresh",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "vector_int",
+          "name": "icpIterations",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "truncateThreshold",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Length of single raycast step\n        Describes the percentage of voxel length that is skipped per march"
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.kinfu.Params.Params",
+      "identity": "cv.kinfu.Params.Params()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.kinfu.Params.Params",
+      "identity": "cv.kinfu.Params.Params(Matx33f volumeInitialPoseRot;Vec3f volumeInitialPoseTransl)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Matx33f",
+          "name": "volumeInitialPoseRot",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Vec3f",
+          "name": "volumeInitialPoseTransl",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Constructor for Params\n     * Sets the initial pose of the TSDF volume.\n     * @param volumeInitialPoseRot rotation matrix\n     * @param volumeInitialPoseTransl translation vector"
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.kinfu.Params.Params",
+      "identity": "cv.kinfu.Params.Params(Matx44f volumeInitialPose)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Matx44f",
+          "name": "volumeInitialPose",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Constructor for Params\n     * Sets the initial pose of the TSDF volume.\n     * @param volumeInitialPose 4 by 4 Homogeneous Transform matrix to set the intial pose of TSDF volume"
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.kinfu.Params.setInitialVolumePose",
+      "identity": "cv.kinfu.Params.setInitialVolumePose(Matx33f R;Vec3f t)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Matx33f",
+          "name": "R",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Vec3f",
+          "name": "t",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Set Initial Volume Pose\n     * Sets the initial pose of the TSDF volume.\n     * @param R rotation matrix\n     * @param t translation vector"
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.kinfu.Params.setInitialVolumePose",
+      "identity": "cv.kinfu.Params.setInitialVolumePose(Matx44f homogen_tf)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Matx44f",
+          "name": "homogen_tf",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Set Initial Volume Pose\n     * Sets the initial pose of the TSDF volume.\n     * @param homogen_tf 4 by 4 Homogeneous Transform matrix to set the intial pose of TSDF volume"
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.kinfu.Params.defaultParams",
+      "identity": "cv.kinfu.Params.defaultParams()->Ptr<Params>",
+      "returnType": "Ptr<Params>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Default parameters\n     * A set of parameters which provides better model quality, can be very slow."
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.kinfu.Params.coarseParams",
+      "identity": "cv.kinfu.Params.coarseParams()->Ptr<Params>",
+      "returnType": "Ptr<Params>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Coarse parameters\n    A set of parameters which provides better speed, can fail to match frames\n    in case of rapid sensor motion."
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.kinfu.Params.hashTSDFParams",
+      "identity": "cv.kinfu.Params.hashTSDFParams(bool isCoarse)->Ptr<Params>",
+      "returnType": "Ptr<Params>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "isCoarse",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief HashTSDF parameters\n      A set of parameters suitable for use with HashTSDFVolume"
+    },
+    {
+      "ordinal": 37,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.kinfu.Params.coloredTSDFParams",
+      "identity": "cv.kinfu.Params.coloredTSDFParams(bool isCoarse)->Ptr<Params>",
+      "returnType": "Ptr<Params>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "isCoarse",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief ColoredTSDF parameters\n      A set of parameters suitable for use with ColoredTSDFVolume"
+    },
+    {
+      "ordinal": 38,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/kinfu.hpp",
+      "kind": "class",
+      "name": "cv.kinfu.KinFu",
+      "identity": "class cv.kinfu.KinFu",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief KinectFusion implementation\n\n  This class implements a 3d reconstruction algorithm described in\n  @cite kinectfusion paper.\n\n  It takes a sequence of depth images taken from depth sensor\n  (or any depth images source such as stereo camera matching algorithm or even raymarching renderer).\n  The output can be obtained as a vector of points and their normals\n  or can be Phong-rendered from given camera pose.\n\n  An internal representation of a model is a voxel cuboid that keeps TSDF values\n  which are a sort of distances to the surface (for details read the @cite kinectfusion article about TSDF).\n  There is no interface to that representation yet.\n\n  KinFu uses OpenCL acceleration automatically if available.\n  To enable or disable it explicitly use cv::setUseOptimized() or cv::ocl::setUseOpenCL().\n\n  This implementation is based on [kinfu-remake](https://github.com/Nerei/kinfu_remake).\n\n  Note that the KinectFusion algorithm was patented and its use may be restricted by\n  the list of patents mentioned in README.md file in this module directory.\n\n  That's why you need to set the OPENCV_ENABLE_NONFREE option in CMake to use KinectFusion."
+    },
+    {
+      "ordinal": 39,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.kinfu.KinFu.create",
+      "identity": "cv.kinfu.KinFu.create(Ptr_Params _params[/C,/Ref])->Ptr<KinFu>",
+      "returnType": "Ptr<KinFu>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Ptr_Params",
+          "name": "_params",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 40,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.kinfu.KinFu.render",
+      "identity": "cv.kinfu.KinFu.render(Mat image[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Renders a volume into an image\n\n      Renders a 0-surface of TSDF using Phong shading into a CV_8UC4 Mat.\n      Light pose is fixed in KinFu params.\n\n        @param image resulting image"
+    },
+    {
+      "ordinal": 41,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.kinfu.KinFu.render",
+      "identity": "cv.kinfu.KinFu.render(Mat image[/O];Matx44f cameraPose[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Matx44f",
+          "name": "cameraPose",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Renders a volume into an image\n\n      Renders a 0-surface of TSDF using Phong shading into a CV_8UC4 Mat.\n      Light pose is fixed in KinFu params.\n\n        @param image resulting image\n        @param cameraPose pose of camera to render from. If empty then render from current pose\n        which is a last frame camera pose."
+    },
+    {
+      "ordinal": 42,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.kinfu.KinFu.getCloud",
+      "identity": "cv.kinfu.KinFu.getCloud(Mat points[/O];Mat normals[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "points",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "normals",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Gets points and normals of current 3d mesh\n\n      The order of normals corresponds to order of points.\n      The order of points is undefined.\n\n        @param points vector of points which are 4-float vectors\n        @param normals vector of normals which are 4-float vectors"
+    },
+    {
+      "ordinal": 43,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.kinfu.KinFu.getPoints",
+      "identity": "cv.kinfu.KinFu.getPoints(Mat points[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "points",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Gets points of current 3d mesh\n\n     The order of points is undefined.\n\n        @param points vector of points which are 4-float vectors"
+    },
+    {
+      "ordinal": 44,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.kinfu.KinFu.getNormals",
+      "identity": "cv.kinfu.KinFu.getNormals(Mat points;Mat normals[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "points",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "normals",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Calculates normals for given points\n        @param points input vector of points which are 4-float vectors\n        @param normals output vector of corresponding normals which are 4-float vectors"
+    },
+    {
+      "ordinal": 45,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.kinfu.KinFu.reset",
+      "identity": "cv.kinfu.KinFu.reset()->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Resets the algorithm\n\n    Clears current model and resets a pose."
+    },
+    {
+      "ordinal": 46,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.kinfu.KinFu.update",
+      "identity": "cv.kinfu.KinFu.update(Mat depth)->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "depth",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Process next depth frame\n\n      Integrates depth into voxel space with respect to its ICP-calculated pose.\n      Input image is converted to CV_32F internally if has another type.\n\n    @param depth one-channel image which size and depth scale is described in algorithm's parameters\n    @return true if succeeded to align new frame with current scene, false if opposite"
+    },
+    {
+      "ordinal": 47,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/large_kinfu.hpp",
+      "kind": "class",
+      "name": "cv.large_kinfu.VolumeParams",
+      "identity": "class cv.large_kinfu.VolumeParams",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "VolumeType",
+          "name": "kind",
+          "default": " VolumeType::TSDF",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "resolutionX",
+          "default": " 128",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "resolutionY",
+          "default": " 128",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "resolutionZ",
+          "default": " 128",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "unitResolution",
+          "default": " 0",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "volumSize",
+          "default": " 3.f",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "voxelSize",
+          "default": " volumSize / 512.f",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "tsdfTruncDist",
+          "default": " 7.f * voxelSize",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "maxWeight",
+          "default": " 64",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "depthTruncThreshold",
+          "default": " 0.f",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "raycastStepFactor",
+          "default": " 0.25f",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 48,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/large_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.large_kinfu.VolumeParams.defaultParams",
+      "identity": "cv.large_kinfu.VolumeParams.defaultParams(VolumeType volumeType)->Ptr<VolumeParams>",
+      "returnType": "Ptr<VolumeParams>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "VolumeType",
+          "name": "volumeType",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Default set of parameters that provide higher quality reconstruction at the cost of slow performance."
+    },
+    {
+      "ordinal": 49,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/large_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.large_kinfu.VolumeParams.coarseParams",
+      "identity": "cv.large_kinfu.VolumeParams.coarseParams(VolumeType volumeType)->Ptr<VolumeParams>",
+      "returnType": "Ptr<VolumeParams>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "VolumeType",
+          "name": "volumeType",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Coarse set of parameters that provides relatively higher performance at the cost of reconstrution quality."
+    },
+    {
+      "ordinal": 50,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/large_kinfu.hpp",
+      "kind": "class",
+      "name": "cv.large_kinfu.Params",
+      "identity": "class cv.large_kinfu.Params",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "frameSize",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Matx33f",
+          "name": "intr",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Matx33f",
+          "name": "rgb_intr",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "depthFactor",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "bilateral_sigma_depth",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "bilateral_sigma_spatial",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "bilateral_kernel_size",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "pyramidLevels",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "tsdf_min_camera_movement",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Vec3f",
+          "name": "lightPose",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "icpDistThresh",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "icpAngleThresh",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "vector_int",
+          "name": "icpIterations",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "truncateThreshold",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 51,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/large_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.large_kinfu.Params.defaultParams",
+      "identity": "cv.large_kinfu.Params.defaultParams()->Ptr<Params>",
+      "returnType": "Ptr<Params>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Default parameters\n\n        A set of parameters which provides better model quality, can be very slow."
+    },
+    {
+      "ordinal": 52,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/large_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.large_kinfu.Params.coarseParams",
+      "identity": "cv.large_kinfu.Params.coarseParams()->Ptr<Params>",
+      "returnType": "Ptr<Params>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Coarse parameters\n\n        A set of parameters which provides better speed, can fail to match frames\n        in case of rapid sensor motion."
+    },
+    {
+      "ordinal": 53,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/large_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.large_kinfu.Params.hashTSDFParams",
+      "identity": "cv.large_kinfu.Params.hashTSDFParams(bool isCoarse)->Ptr<Params>",
+      "returnType": "Ptr<Params>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "isCoarse",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief HashTSDF parameters\n\n        A set of parameters suitable for use with HashTSDFVolume"
+    },
+    {
+      "ordinal": 54,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/large_kinfu.hpp",
+      "kind": "class",
+      "name": "cv.large_kinfu.LargeKinfu",
+      "identity": "class cv.large_kinfu.LargeKinfu",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Large Scale Dense Depth Fusion implementation\n\n  This class implements a 3d reconstruction algorithm for larger environments using\n  Spatially hashed TSDF volume \"Submaps\".\n  It also runs a periodic posegraph optimization to minimize drift in tracking over long sequences.\n  Currently the algorithm does not implement a relocalization or loop closure module.\n  Potentially a Bag of words implementation or RGBD relocalization as described in\n  Glocker et al. ISMAR 2013 will be implemented\n\n  It takes a sequence of depth images taken from depth sensor\n  (or any depth images source such as stereo camera matching algorithm or even raymarching\n  renderer). The output can be obtained as a vector of points and their normals or can be\n  Phong-rendered from given camera pose.\n\n  An internal representation of a model is a spatially hashed voxel cube that stores TSDF values\n  which represent the distance to the closest surface (for details read the @cite kinectfusion article\n  about TSDF). There is no interface to that representation yet.\n\n  For posegraph optimization, a Submap abstraction over the Volume class is created.\n  New submaps are added to the model when there is low visibility overlap between current viewing frustrum\n  and the existing volume/model. Multiple submaps are simultaneously tracked and a posegraph is created and\n  optimized periodically.\n\n  LargeKinfu does not use any OpenCL acceleration yet.\n  To enable or disable it explicitly use cv::setUseOptimized() or cv::ocl::setUseOpenCL().\n\n  This implementation is inspired from Kintinuous, InfiniTAM and other SOTA algorithms\n\n  You need to set the OPENCV_ENABLE_NONFREE option in CMake to use KinectFusion."
+    },
+    {
+      "ordinal": 55,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/large_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.large_kinfu.LargeKinfu.create",
+      "identity": "cv.large_kinfu.LargeKinfu.create(Ptr_Params _params[/C,/Ref])->Ptr<LargeKinfu>",
+      "returnType": "Ptr<LargeKinfu>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Ptr_Params",
+          "name": "_params",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 56,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/large_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.large_kinfu.LargeKinfu.render",
+      "identity": "cv.large_kinfu.LargeKinfu.render(Mat image[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 57,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/large_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.large_kinfu.LargeKinfu.render",
+      "identity": "cv.large_kinfu.LargeKinfu.render(Mat image[/O];Matx44f cameraPose[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Matx44f",
+          "name": "cameraPose",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 58,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/large_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.large_kinfu.LargeKinfu.getCloud",
+      "identity": "cv.large_kinfu.LargeKinfu.getCloud(Mat points[/O];Mat normals[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "points",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "normals",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 59,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/large_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.large_kinfu.LargeKinfu.getPoints",
+      "identity": "cv.large_kinfu.LargeKinfu.getPoints(Mat points[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "points",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 60,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/large_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.large_kinfu.LargeKinfu.getNormals",
+      "identity": "cv.large_kinfu.LargeKinfu.getNormals(Mat points;Mat normals[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "points",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "normals",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 61,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/large_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.large_kinfu.LargeKinfu.reset",
+      "identity": "cv.large_kinfu.LargeKinfu.reset()->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 62,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/large_kinfu.hpp",
+      "kind": "callable",
+      "name": "cv.large_kinfu.LargeKinfu.update",
+      "identity": "cv.large_kinfu.LargeKinfu.update(Mat depth)->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "depth",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 63,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "class",
+      "name": "cv.linemod.Feature",
+      "identity": "class cv.linemod.Feature",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "x",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "y",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "label",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Discriminant feature described by its location and label."
+    },
+    {
+      "ordinal": 64,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.Feature.Feature",
+      "identity": "cv.linemod.Feature.Feature()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 65,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.Feature.Feature",
+      "identity": "cv.linemod.Feature.Feature(int x;int y;int label)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "x",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "y",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "label",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 66,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "class",
+      "name": "cv.linemod.Template",
+      "identity": "class cv.linemod.Template",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "width",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "height",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "pyramid_level",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Feature",
+          "name": "features",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 67,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "class",
+      "name": "cv.linemod.QuantizedPyramid",
+      "identity": "class cv.linemod.QuantizedPyramid",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Represents a modality operating over an image pyramid."
+    },
+    {
+      "ordinal": 68,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.QuantizedPyramid.quantize",
+      "identity": "cv.linemod.QuantizedPyramid.quantize(Mat dst[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Compute quantized image at current pyramid level for online detection.\n   *\n   * \\param[out] dst The destination 8-bit image. For each pixel at most one bit is set,\n   *                 representing its classification."
+    },
+    {
+      "ordinal": 69,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.QuantizedPyramid.extractTemplate",
+      "identity": "cv.linemod.QuantizedPyramid.extractTemplate(Template templ[/O,/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Template",
+          "name": "templ",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Extract most discriminant features at current pyramid level to form a new template.\n   *\n   * \\param[out] templ The new template."
+    },
+    {
+      "ordinal": 70,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.QuantizedPyramid.pyrDown",
+      "identity": "cv.linemod.QuantizedPyramid.pyrDown()->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Go to the next pyramid level.\n   *\n   * \\todo Allow pyramid scale factor other than 2"
+    },
+    {
+      "ordinal": 71,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "class",
+      "name": "cv.linemod.Modality",
+      "identity": "class cv.linemod.Modality",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Interface for modalities that plug into the LINE template matching representation.\n *\n * \\todo Max response, to allow optimization of summing (255/MAX) features as uint8"
+    },
+    {
+      "ordinal": 72,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.Modality.process",
+      "identity": "cv.linemod.Modality.process(Mat src[/C,/Ref];Mat mask=Mat()[/C,/Ref])->Ptr<QuantizedPyramid>",
+      "returnType": "Ptr<QuantizedPyramid>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Form a quantized image pyramid from a source image.\n   *\n   * \\param[in] src  The source image. Type depends on the modality.\n   * \\param[in] mask Optional mask. If not empty, unmasked pixels are set to zero\n   *                 in quantized image and cannot be extracted as features."
+    },
+    {
+      "ordinal": 73,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.Modality.name",
+      "identity": "cv.linemod.Modality.name()->String",
+      "returnType": "String",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 74,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.Modality.read",
+      "identity": "cv.linemod.Modality.read(FileNode fn[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "FileNode",
+          "name": "fn",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 75,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.Modality.create",
+      "identity": "cv.linemod.Modality.create(String modality_type[/C,/Ref])->Ptr<Modality>",
+      "returnType": "Ptr<Modality>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "modality_type",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Create modality by name.\n   *\n   * The following modality types are supported:\n   * - \"ColorGradient\"\n   * - \"DepthNormal\""
+    },
+    {
+      "ordinal": 76,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.Modality.create",
+      "identity": "cv.linemod.Modality.create(FileNode fn[/C,/Ref])->Ptr<Modality>",
+      "returnType": "Ptr<Modality>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "FileNode",
+          "name": "fn",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Load a modality from file."
+    },
+    {
+      "ordinal": 77,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "class",
+      "name": "cv.linemod.ColorGradient",
+      "identity": "class cv.linemod.ColorGradient",
+      "returnType": ": cv::linemod::Modality",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "weak_threshold",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "size_t",
+          "name": "num_features",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "strong_threshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": ": cv::linemod::Modality",
+      "documentation": "* \\brief Modality that computes quantized gradient orientations from a color image."
+    },
+    {
+      "ordinal": 78,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.ColorGradient.create",
+      "identity": "cv.linemod.ColorGradient.create(float weak_threshold;size_t num_features;float strong_threshold)->Ptr<ColorGradient>",
+      "returnType": "Ptr<ColorGradient>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "weak_threshold",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "size_t",
+          "name": "num_features",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "strong_threshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Constructor.\n   *\n   * \\param weak_threshold   When quantizing, discard gradients with magnitude less than this.\n   * \\param num_features     How many features a template must contain.\n   * \\param strong_threshold Consider as candidate features only gradients whose norms are\n   *                         larger than this."
+    },
+    {
+      "ordinal": 79,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "class",
+      "name": "cv.linemod.DepthNormal",
+      "identity": "class cv.linemod.DepthNormal",
+      "returnType": ": cv::linemod::Modality",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "distance_threshold",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "difference_threshold",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "size_t",
+          "name": "num_features",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "extract_threshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": ": cv::linemod::Modality",
+      "documentation": "* \\brief Modality that computes quantized surface normals from a dense depth map."
+    },
+    {
+      "ordinal": 80,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.DepthNormal.create",
+      "identity": "cv.linemod.DepthNormal.create(int distance_threshold;int difference_threshold;size_t num_features;int extract_threshold)->Ptr<DepthNormal>",
+      "returnType": "Ptr<DepthNormal>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "distance_threshold",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "difference_threshold",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "size_t",
+          "name": "num_features",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "extract_threshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Constructor.\n   *\n   * \\param distance_threshold   Ignore pixels beyond this distance.\n   * \\param difference_threshold When computing normals, ignore contributions of pixels whose\n   *                             depth difference with the central pixel is above this threshold.\n   * \\param num_features         How many features a template must contain.\n   * \\param extract_threshold    Consider as candidate feature only if there are no differing\n   *                             orientations within a distance of extract_threshold."
+    },
+    {
+      "ordinal": 81,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.colormap",
+      "identity": "cv.linemod.colormap(Mat quantized[/C,/Ref];Mat dst[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "quantized",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Debug function to colormap a quantized image for viewing."
+    },
+    {
+      "ordinal": 82,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.drawFeatures",
+      "identity": "cv.linemod.drawFeatures(Mat img[/IO];vector_Template templates[/C,/Ref];Point2i tl[/C,/Ref];int size=10)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "vector_Template",
+          "name": "templates",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Point2i",
+          "name": "tl",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "size",
+          "default": "10",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Debug function to draw linemod features\n * @param img\n * @param templates see @ref Detector::addTemplate\n * @param tl template bbox top-left offset see @ref Detector::addTemplate\n * @param size marker size see @ref cv::drawMarker"
+    },
+    {
+      "ordinal": 83,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "class",
+      "name": "cv.linemod.Match",
+      "identity": "class cv.linemod.Match",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "x",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "y",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "similarity",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "class_id",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "template_id",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Represents a successful template match."
+    },
+    {
+      "ordinal": 84,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.Match.Match",
+      "identity": "cv.linemod.Match.Match()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 85,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.Match.Match",
+      "identity": "cv.linemod.Match.Match(int x;int y;float similarity;String class_id[/C,/Ref];int template_id)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "x",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "y",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "similarity",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "String",
+          "name": "class_id",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "template_id",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 86,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "class",
+      "name": "cv.linemod.Detector",
+      "identity": "class cv.linemod.Detector",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Object detector using the LINE template matching algorithm with any set of\n * modalities."
+    },
+    {
+      "ordinal": 87,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.Detector.Detector",
+      "identity": "cv.linemod.Detector.Detector()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Empty constructor, initialize with read()."
+    },
+    {
+      "ordinal": 88,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.Detector.Detector",
+      "identity": "cv.linemod.Detector.Detector(vector_Ptr_Modality modalities[/C,/Ref];vector_int T_pyramid[/C,/Ref])->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Ptr_Modality",
+          "name": "modalities",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_int",
+          "name": "T_pyramid",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Constructor.\n   *\n   * \\param modalities       Modalities to use (color gradients, depth normals, ...).\n   * \\param T_pyramid        Value of the sampling step T at each pyramid level. The\n   *                         number of pyramid levels is T_pyramid.size()."
+    },
+    {
+      "ordinal": 89,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.Detector.match",
+      "identity": "cv.linemod.Detector.match(vector_Mat sources[/C,/Ref];float threshold;vector_Match matches[/O,/Ref];vector_String class_ids=std::vector<String>()[/C,/Ref];vector_Mat quantized_images=vector_Mat()[/O];vector_Mat masks=std::vector<Mat>()[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "sources",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "threshold",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Match",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_String",
+          "name": "class_ids",
+          "default": "std::vector<String>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Mat",
+          "name": "quantized_images",
+          "default": "vector_Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "vector_Mat",
+          "name": "masks",
+          "default": "std::vector<Mat>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Detect objects by template matching.\n   *\n   * Matches globally at the lowest pyramid level, then refines locally stepping up the pyramid.\n   *\n   * \\param      sources   Source images, one for each modality.\n   * \\param      threshold Similarity threshold, a percentage between 0 and 100.\n   * \\param[out] matches   Template matches, sorted by similarity score.\n   * \\param      class_ids If non-empty, only search for the desired object classes.\n   * \\param[out] quantized_images Optionally return vector<Mat> of quantized images.\n   * \\param      masks     The masks for consideration during matching. The masks should be CV_8UC1\n   *                       where 255 represents a valid pixel.  If non-empty, the vector must be\n   *                       the same size as sources.  Each element must be\n   *                       empty or the same size as its corresponding source."
+    },
+    {
+      "ordinal": 90,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.Detector.addTemplate",
+      "identity": "cv.linemod.Detector.addTemplate(vector_Mat sources[/C,/Ref];String class_id[/C,/Ref];Mat object_mask[/C,/Ref];Rect* bounding_box=0[/O])->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "sources",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "class_id",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "object_mask",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Rect*",
+          "name": "bounding_box",
+          "default": "0",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Add new object template.\n   *\n   * \\param      sources      Source images, one for each modality.\n   * \\param      class_id     Object class ID.\n   * \\param      object_mask  Mask separating object from background.\n   * \\param[out] bounding_box Optionally return bounding box of the extracted features.\n   *\n   * \\return Template ID, or -1 if failed to extract a valid template."
+    },
+    {
+      "ordinal": 91,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.Detector.addSyntheticTemplate",
+      "identity": "cv.linemod.Detector.addSyntheticTemplate(vector_Template templates[/C,/Ref];String class_id[/C,/Ref])->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Template",
+          "name": "templates",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "class_id",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Add a new object template computed by external means."
+    },
+    {
+      "ordinal": 92,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.Detector.getModalities",
+      "identity": "cv.linemod.Detector.getModalities()->std::vector< Ptr<Modality> >",
+      "returnType": "std::vector< Ptr<Modality> >",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Get the modalities used by this detector.\n   *\n   * You are not permitted to add/remove modalities, but you may dynamic_cast them to\n   * tweak parameters."
+    },
+    {
+      "ordinal": 93,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.Detector.getT",
+      "identity": "cv.linemod.Detector.getT(int pyramid_level)->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "pyramid_level",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Get sampling step T at pyramid_level."
+    },
+    {
+      "ordinal": 94,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.Detector.pyramidLevels",
+      "identity": "cv.linemod.Detector.pyramidLevels()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Get number of pyramid levels used by this detector."
+    },
+    {
+      "ordinal": 95,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.Detector.getTemplates",
+      "identity": "cv.linemod.Detector.getTemplates(String class_id[/C,/Ref];int template_id)->std::vector<Template>",
+      "returnType": "std::vector<Template>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "class_id",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "template_id",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Get the template pyramid identified by template_id.\n   *\n   * For example, with 2 modalities (Gradient, Normal) and two pyramid levels\n   * (L0, L1), the order is (GradientL0, NormalL0, GradientL1, NormalL1)."
+    },
+    {
+      "ordinal": 96,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.Detector.numTemplates",
+      "identity": "cv.linemod.Detector.numTemplates()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 97,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.Detector.numTemplates",
+      "identity": "cv.linemod.Detector.numTemplates(String class_id[/C,/Ref])->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "class_id",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 98,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.Detector.numClasses",
+      "identity": "cv.linemod.Detector.numClasses()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 99,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.Detector.classIds",
+      "identity": "cv.linemod.Detector.classIds()->std::vector<String>",
+      "returnType": "std::vector<String>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 100,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.Detector.read",
+      "identity": "cv.linemod.Detector.read(FileNode fn[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "FileNode",
+          "name": "fn",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 101,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.Detector.readClasses",
+      "identity": "cv.linemod.Detector.readClasses(vector_String class_ids[/C,/Ref];String format=\"templates_%s.yml.gz\"[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_String",
+          "name": "class_ids",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "format",
+          "default": "\"templates_%s.yml.gz\"",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 102,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.Detector.writeClasses",
+      "identity": "cv.linemod.Detector.writeClasses(String format=\"templates_%s.yml.gz\"[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "format",
+          "default": "\"templates_%s.yml.gz\"",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 103,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.getDefaultLINE",
+      "identity": "cv.linemod.getDefaultLINE()->Ptr<linemod::Detector>",
+      "returnType": "Ptr<linemod::Detector>",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Factory function for detector using LINE algorithm with color gradients.\n *\n * Default parameter settings suitable for VGA images."
+    },
+    {
+      "ordinal": 104,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+      "kind": "callable",
+      "name": "cv.linemod.getDefaultLINEMOD",
+      "identity": "cv.linemod.getDefaultLINEMOD()->Ptr<linemod::Detector>",
+      "returnType": "Ptr<linemod::Detector>",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Factory function for detector using LINE-MOD algorithm with color gradients\n * and depth normals.\n *\n * Default parameter settings suitable for VGA images."
+    }
+  ]
+}

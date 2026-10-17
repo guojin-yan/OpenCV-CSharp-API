@@ -117,6 +117,11 @@ function Get-ExpectedEvidencePaths {
         "compatibility/julia-upstream-map.txt",
         "compatibility/julia-upstream-raw.json",
         "compatibility/julia-upstream-summary.json",
+        "compatibility/rgbd-implemented-families.json",
+        "compatibility/rgbd-upstream-classifications.json",
+        "compatibility/rgbd-upstream-map.txt",
+        "compatibility/rgbd-upstream-raw.json",
+        "compatibility/rgbd-upstream-summary.json",
         "compatibility/wechat_qrcode-implemented-families.json",
         "compatibility/wechat_qrcode-upstream-classifications.json",
         "compatibility/wechat_qrcode-upstream-map.txt",
@@ -348,6 +353,7 @@ function Get-ExpectedEvidencePaths {
         "docs/articles/dnn-objdetect-upstream-parity-guide.md",
         "docs/articles/ccalib-upstream-parity-guide.md",
         "docs/articles/julia-upstream-parity-guide.md",
+        "docs/articles/rgbd-upstream-parity-guide.md",
         "docs/articles/superres-upstream-parity-guide.md",
         "docs/articles/signal-upstream-parity-guide.md",
         "docs/articles/dpm-upstream-parity-guide.md",
@@ -506,6 +512,7 @@ function Get-ExpectedEvidencePaths {
         "scripts/Generate-CcalibUpstreamMap.ps1",
         "scripts/Generate-SuperresUpstreamMap.ps1",
         "scripts/Generate-JuliaUpstreamMap.ps1",
+        "scripts/Generate-RgbdUpstreamMap.ps1",
         "scripts/Generate-WechatQRCodeUpstreamMap.ps1",
         "scripts/Generate-Cnn3DObjUpstreamMap.ps1",
         "scripts/Generate-SignalUpstreamMap.ps1",
@@ -570,6 +577,7 @@ function Get-ExpectedEvidencePaths {
         "scripts/Test-CcalibUpstreamMap.ps1",
         "scripts/Test-SuperresUpstreamMap.ps1",
         "scripts/Test-JuliaUpstreamMap.ps1",
+        "scripts/Test-RgbdUpstreamMap.ps1",
         "scripts/Test-WechatQRCodeUpstreamMap.ps1",
         "scripts/Test-Cnn3DObjUpstreamMap.ps1",
         "scripts/Test-SignalUpstreamMap.ps1",
@@ -879,6 +887,9 @@ function Get-ExpectedEvidencePaths {
         "tools/JuliaUpstreamMap/JuliaUpstreamMap.csproj",
         "tools/JuliaUpstreamMap/Program.cs",
         "tools/JuliaUpstreamMap/extract_julia.py",
+        "tools/RgbdUpstreamMap/RgbdUpstreamMap.csproj",
+        "tools/RgbdUpstreamMap/Program.cs",
+        "tools/RgbdUpstreamMap/extract_rgbd.py",
         "tools/CodecBenchmark/CodecBenchmark.csproj",
         "tools/CodecBenchmark/Program.cs",
         "scripts/Measure-CodecTypedMatBenchmark.ps1",
@@ -1106,6 +1117,7 @@ function Test-Record {
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.CcalibUpstreamMap.Sha256 -eq "26a22b4fb1445990395aebd4965bd99b41425502effe6dc7b7c0cad46c0757d3" -and $Record.ApiAbiBaseline.CcalibUpstreamMap.RawSha256 -match "^[0-9a-f]{64}$" -and $Record.ApiAbiBaseline.CcalibUpstreamMap.DeclarationCount -eq 12 -and $Record.ApiAbiBaseline.CcalibUpstreamMap.CallableCount -eq 8 -and $Record.ApiAbiBaseline.CcalibUpstreamMap.ImplementedCount -eq 0 -and $Record.ApiAbiBaseline.CcalibUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.CcalibUpstreamMap.IntentionallyOmittedCount -eq 8 -and $Record.ApiAbiBaseline.CcalibUpstreamMap.UnsupportedCount -eq 0 -and $Record.ApiAbiBaseline.CcalibUpstreamMap.UpstreamConditionalCount -eq 0 -and $Record.ApiAbiBaseline.CcalibUpstreamMap.SourceHeaderCount -eq 3 -and $Record.ApiAbiBaseline.CcalibUpstreamMap.SelectedFamilyCount -eq 1 -and $Record.ApiAbiBaseline.CcalibUpstreamMap.SelectedDeclarationCount -eq 0 -and $Record.ApiAbiBaseline.CcalibUpstreamMap.ManagedPublicTypeAdditionCount -eq 0 -and $Record.ApiAbiBaseline.CcalibUpstreamMap.ManagedPublicMemberAdditionCount -eq 0 -and $Record.ApiAbiBaseline.CcalibUpstreamMap.NativeEntrypointAdditionCount -eq 0 -and $Record.ApiAbiBaseline.CcalibUpstreamMap.ExternalDataDependencyCount -eq 1 -and -not [bool]$Record.ApiAbiBaseline.CcalibUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout Ccalib upstream-map evidence drifted"
       Assert-True -List $List -Condition ($Record.ApiAbiBaseline.SuperresUpstreamMap.Sha256 -eq "0be576cfa48aad6a71ec8bcc2eca48ff31afbca0fb35e0601d13349f7459f209" -and $Record.ApiAbiBaseline.SuperresUpstreamMap.RawSha256 -match "^[0-9a-f]{64}$" -and $Record.ApiAbiBaseline.SuperresUpstreamMap.DeclarationCount -eq 96 -and $Record.ApiAbiBaseline.SuperresUpstreamMap.CallableCount -eq 89 -and $Record.ApiAbiBaseline.SuperresUpstreamMap.ImplementedCount -eq 0 -and $Record.ApiAbiBaseline.SuperresUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.SuperresUpstreamMap.IntentionallyOmittedCount -eq 89 -and $Record.ApiAbiBaseline.SuperresUpstreamMap.UnsupportedCount -eq 0 -and $Record.ApiAbiBaseline.SuperresUpstreamMap.UpstreamConditionalCount -eq 0 -and $Record.ApiAbiBaseline.SuperresUpstreamMap.SourceHeaderCount -eq 2 -and $Record.ApiAbiBaseline.SuperresUpstreamMap.SelectedFamilyCount -eq 1 -and $Record.ApiAbiBaseline.SuperresUpstreamMap.SelectedDeclarationCount -eq 0 -and $Record.ApiAbiBaseline.SuperresUpstreamMap.ManagedPublicTypeAdditionCount -eq 0 -and $Record.ApiAbiBaseline.SuperresUpstreamMap.ManagedPublicMemberAdditionCount -eq 0 -and $Record.ApiAbiBaseline.SuperresUpstreamMap.NativeEntrypointAdditionCount -eq 0 -and $Record.ApiAbiBaseline.SuperresUpstreamMap.ExternalDataDependencyCount -eq 1 -and -not [bool]$Record.ApiAbiBaseline.SuperresUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout Superres upstream-map evidence drifted"
       Assert-True -List $List -Condition ($Record.ApiAbiBaseline.JuliaUpstreamMap.Sha256 -eq "61ce611dca97076a13c9cf1abdd6c1c54ce9864778364d132690e964d995e7b8" -and $Record.ApiAbiBaseline.JuliaUpstreamMap.RawSha256 -match "^[0-9a-f]{64}$" -and $Record.ApiAbiBaseline.JuliaUpstreamMap.DeclarationCount -eq 1 -and $Record.ApiAbiBaseline.JuliaUpstreamMap.CallableCount -eq 1 -and $Record.ApiAbiBaseline.JuliaUpstreamMap.ImplementedCount -eq 0 -and $Record.ApiAbiBaseline.JuliaUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.JuliaUpstreamMap.IntentionallyOmittedCount -eq 1 -and $Record.ApiAbiBaseline.JuliaUpstreamMap.UnsupportedCount -eq 0 -and $Record.ApiAbiBaseline.JuliaUpstreamMap.UpstreamConditionalCount -eq 0 -and $Record.ApiAbiBaseline.JuliaUpstreamMap.SourceHeaderCount -eq 1 -and $Record.ApiAbiBaseline.JuliaUpstreamMap.SelectedFamilyCount -eq 1 -and $Record.ApiAbiBaseline.JuliaUpstreamMap.SelectedDeclarationCount -eq 0 -and $Record.ApiAbiBaseline.JuliaUpstreamMap.ManagedPublicTypeAdditionCount -eq 0 -and $Record.ApiAbiBaseline.JuliaUpstreamMap.ManagedPublicMemberAdditionCount -eq 0 -and $Record.ApiAbiBaseline.JuliaUpstreamMap.NativeEntrypointAdditionCount -eq 0 -and $Record.ApiAbiBaseline.JuliaUpstreamMap.ExternalDataDependencyCount -eq 1 -and -not [bool]$Record.ApiAbiBaseline.JuliaUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout Julia upstream-map evidence drifted"
+    Assert-True -List $List -Condition ($Record.ApiAbiBaseline.RgbdUpstreamMap.Sha256 -eq "22f26e53c89975523e113da4aa9b06702df829a3a4b03294d31c3858a91e1ae9" -and $Record.ApiAbiBaseline.RgbdUpstreamMap.RawSha256 -match "^[0-9a-f]{64}$" -and $Record.ApiAbiBaseline.RgbdUpstreamMap.DeclarationCount -eq 105 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.CallableCount -eq 88 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.ImplementedCount -eq 0 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.IntentionallyOmittedCount -eq 88 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.UnsupportedCount -eq 0 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.UpstreamConditionalCount -eq 0 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.SourceHeaderCount -eq 6 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.SelectedFamilyCount -eq 1 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.SelectedDeclarationCount -eq 0 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.ManagedPublicTypeAdditionCount -eq 0 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.ManagedPublicMemberAdditionCount -eq 0 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.NativeEntrypointAdditionCount -eq 0 -and $Record.ApiAbiBaseline.RgbdUpstreamMap.ExternalDataDependencyCount -eq 2 -and -not [bool]$Record.ApiAbiBaseline.RgbdUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout RGBD upstream-map evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.GapInventoryStatus -eq "baseline-established-native-managed-parity-measured" -and -not [bool]$Record.ApiAbiBaseline.UpstreamParityMeasured -and [bool]$Record.ApiAbiBaseline.NativeToManagedParityMeasured -and $Record.ApiAbiBaseline.ImplementedSpanFamilyStatus -eq "implemented-verified") -Issue "Final closeout measured parity distinction or Span family status drifted"
 
     $expectedEvidence = @(Get-ExpectedEvidencePaths)
