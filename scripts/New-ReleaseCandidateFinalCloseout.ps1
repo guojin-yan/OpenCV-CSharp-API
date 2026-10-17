@@ -129,6 +129,8 @@ function Get-Record {
     $dnnSuperresSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/dnn_superres-upstream-summary.json") -Raw | ConvertFrom-Json
     $dnnObjDetectRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/dnn_objdetect-upstream-raw.json") -Raw | ConvertFrom-Json
     $dnnObjDetectSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/dnn_objdetect-upstream-summary.json") -Raw | ConvertFrom-Json
+    $ccalibRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/ccalib-upstream-raw.json") -Raw | ConvertFrom-Json
+    $ccalibSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/ccalib-upstream-summary.json") -Raw | ConvertFrom-Json
     $wechatQRCodeRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/wechat_qrcode-upstream-raw.json") -Raw | ConvertFrom-Json
     $wechatQRCodeSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/wechat_qrcode-upstream-summary.json") -Raw | ConvertFrom-Json
     $cnn3DObjRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/cnn_3dobj-upstream-raw.json") -Raw | ConvertFrom-Json
@@ -196,6 +198,11 @@ function Get-Record {
         "compatibility/dnn_objdetect-upstream-map.txt",
         "compatibility/dnn_objdetect-upstream-raw.json",
         "compatibility/dnn_objdetect-upstream-summary.json",
+        "compatibility/ccalib-implemented-families.json",
+        "compatibility/ccalib-upstream-classifications.json",
+        "compatibility/ccalib-upstream-map.txt",
+        "compatibility/ccalib-upstream-raw.json",
+        "compatibility/ccalib-upstream-summary.json",
         "compatibility/wechat_qrcode-implemented-families.json",
         "compatibility/wechat_qrcode-upstream-classifications.json",
         "compatibility/wechat_qrcode-upstream-map.txt",
@@ -425,6 +432,7 @@ function Get-Record {
         "docs/articles/upstream-map-toolchain.md",
         "docs/articles/xfeatures2d-upstream-parity-guide.md",
         "docs/articles/dnn-objdetect-upstream-parity-guide.md",
+        "docs/articles/ccalib-upstream-parity-guide.md",
         "docs/articles/signal-upstream-parity-guide.md",
         "docs/articles/dpm-upstream-parity-guide.md",
         "docs/articles/hdf-upstream-parity-guide.md",
@@ -577,6 +585,7 @@ function Get-Record {
         "scripts/Generate-DnnUpstreamMap.ps1",
         "scripts/Generate-DnnSuperresUpstreamMap.ps1",
         "scripts/Generate-DnnObjDetectUpstreamMap.ps1",
+        "scripts/Generate-CcalibUpstreamMap.ps1",
         "scripts/Generate-WechatQRCodeUpstreamMap.ps1",
         "scripts/Generate-Cnn3DObjUpstreamMap.ps1",
         "scripts/Generate-SignalUpstreamMap.ps1",
@@ -637,6 +646,7 @@ function Get-Record {
         "scripts/Test-DnnUpstreamMap.ps1",
         "scripts/Test-DnnSuperresUpstreamMap.ps1",
         "scripts/Test-DnnObjDetectUpstreamMap.ps1",
+        "scripts/Test-CcalibUpstreamMap.ps1",
         "scripts/Test-WechatQRCodeUpstreamMap.ps1",
         "scripts/Test-Cnn3DObjUpstreamMap.ps1",
         "scripts/Test-SignalUpstreamMap.ps1",
@@ -937,6 +947,9 @@ function Get-Record {
         "tools/DnnObjDetectUpstreamMap/DnnObjDetectUpstreamMap.csproj",
         "tools/DnnObjDetectUpstreamMap/Program.cs",
         "tools/DnnObjDetectUpstreamMap/extract_dnn_objdetect.py",
+        "tools/CcalibUpstreamMap/CcalibUpstreamMap.csproj",
+        "tools/CcalibUpstreamMap/Program.cs",
+        "tools/CcalibUpstreamMap/extract_ccalib.py",
         "docs/articles/dnn-superres-upstream-parity-guide.md",
         "docs/articles/wechat-qrcode-upstream-parity-guide.md",
         "docs/articles/cnn-3dobj-upstream-parity-guide.md",
@@ -1785,6 +1798,30 @@ function Get-Record {
                 NativeEntrypointAdditionCount = [int]$dnnObjDetectSummary.nativeEvidenceCount
                 ExternalDataDependencyCount = [int]$dnnObjDetectSummary.externalDataDependencyCount
                 RepositoryWideParityClaimed = [bool]$dnnObjDetectSummary.repositoryWideUpstreamParityClaimed
+            }
+            CcalibUpstreamMap = [ordered]@{
+                Path = "compatibility/ccalib-upstream-map.txt"
+                SummaryPath = "compatibility/ccalib-upstream-summary.json"
+                ClassificationPath = "compatibility/ccalib-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/ccalib-implemented-families.json"
+                RawExtractionPath = "compatibility/ccalib-upstream-raw.json"
+                Sha256 = $ccalibSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/ccalib-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$ccalibSummary.declarationCount
+                CallableCount = [int]$ccalibSummary.callableCount
+                ImplementedCount = [int]$ccalibSummary.classificationCounts.implemented
+                MissingCount = [int]$ccalibSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$ccalibSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$ccalibSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$ccalibSummary.classificationCounts.'upstream-conditional'
+                SourceHeaderCount = @($ccalibRaw.sourceHeaders).Count
+                SelectedFamilyCount = [int]$ccalibSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$ccalibSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$ccalibSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$ccalibSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$ccalibSummary.nativeEvidenceCount
+                ExternalDataDependencyCount = [int]$ccalibSummary.externalDataDependencyCount
+                RepositoryWideParityClaimed = [bool]$ccalibSummary.repositoryWideUpstreamParityClaimed
             }
             GapInventoryPath = "compatibility/api-gap-inventory.json"
             GapInventoryStatus = $gapInventory.status

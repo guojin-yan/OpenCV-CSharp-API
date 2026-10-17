@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/ccalib.hpp contrib public header closure from parser-emitted headers",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact Ccalib wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [
+    "The ccalib CustomPattern API requires caller-selected pattern images, feature detector/descriptor/matcher objects, and calibration output ownership; no managed/native wrapper or pattern assets are bundled."
+  ],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "enum cv.multicalib.MultiCameraCalibration.<unnamed>[const cv.multicalib.MultiCameraCalibration.PINHOLE=0;const cv.multicalib.MultiCameraCalibration.OMNIDIRECTIONAL=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CCALIB=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "enum cv.omnidir.<unnamed>[const cv.omnidir.CALIB_USE_GUESS=1;const cv.omnidir.CALIB_FIX_SKEW=2;const cv.omnidir.CALIB_FIX_K1=4;const cv.omnidir.CALIB_FIX_K2=8;const cv.omnidir.CALIB_FIX_P1=16;const cv.omnidir.CALIB_FIX_P2=32;const cv.omnidir.CALIB_FIX_XI=64;const cv.omnidir.CALIB_FIX_GAMMA=128;const cv.omnidir.CALIB_FIX_CENTER=256]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CCALIB=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "enum cv.omnidir.<unnamed>[const cv.omnidir.RECTIFY_PERSPECTIVE=1;const cv.omnidir.RECTIFY_CYLINDRICAL=2;const cv.omnidir.RECTIFY_LONGLATI=3;const cv.omnidir.RECTIFY_STEREOGRAPHIC=4]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CCALIB=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "enum cv.omnidir.<unnamed>[const cv.omnidir.XYZRGB=1;const cv.omnidir.XYZ=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CCALIB=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.omnidir.projectPoints(Mat objectPoints;Mat imagePoints[/O];Mat rvec;Mat tvec;Mat K;double xi;Mat D;Mat jacobian=Mat()[/O])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The ccalib public surface, including omnidir calibration and reconstruction helpers, has no native Ccalib wrapper entrypoint or managed public owner in the current package; caller-owned calibration inputs, feature/matcher objects, and output buffers remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CCALIB=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.omnidir.undistortPoints(Mat distorted;Mat undistorted[/O];Mat K;Mat D;Mat xi;Mat R)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The ccalib public surface, including omnidir calibration and reconstruction helpers, has no native Ccalib wrapper entrypoint or managed public owner in the current package; caller-owned calibration inputs, feature/matcher objects, and output buffers remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CCALIB=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.omnidir.initUndistortRectifyMap(Mat K;Mat D;Mat xi;Mat R;Mat P;Size size[/C,/Ref];int m1type;Mat map1[/O];Mat map2[/O];int flags)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The ccalib public surface, including omnidir calibration and reconstruction helpers, has no native Ccalib wrapper entrypoint or managed public owner in the current package; caller-owned calibration inputs, feature/matcher objects, and output buffers remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CCALIB=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.omnidir.undistortImage(Mat distorted;Mat undistorted[/O];Mat K;Mat D;Mat xi;int flags;Mat Knew=cv::Mat();Size new_size=Size()[/C,/Ref];Mat R=Mat::eye(3, 3, CV_64F))->void",
+      "classification": "intentionally-omitted",
+      "reason": "The ccalib public surface, including omnidir calibration and reconstruction helpers, has no native Ccalib wrapper entrypoint or managed public owner in the current package; caller-owned calibration inputs, feature/matcher objects, and output buffers remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CCALIB=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.omnidir.calibrate(vector_Mat objectPoints;vector_Mat imagePoints;Size size;Mat K[/IO];Mat xi[/IO];Mat D[/IO];vector_Mat rvecs[/O];vector_Mat tvecs[/O];int flags;TermCriteria criteria;Mat idx=Mat()[/O])->double",
+      "classification": "intentionally-omitted",
+      "reason": "The ccalib public surface, including omnidir calibration and reconstruction helpers, has no native Ccalib wrapper entrypoint or managed public owner in the current package; caller-owned calibration inputs, feature/matcher objects, and output buffers remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CCALIB=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.omnidir.stereoCalibrate(vector_Mat objectPoints[/IO];vector_Mat imagePoints1[/IO];vector_Mat imagePoints2[/IO];Size imageSize1[/C,/Ref];Size imageSize2[/C,/Ref];Mat K1[/IO];Mat xi1[/IO];Mat D1[/IO];Mat K2[/IO];Mat xi2[/IO];Mat D2[/IO];Mat rvec[/O];Mat tvec[/O];vector_Mat rvecsL[/O];vector_Mat tvecsL[/O];int flags;TermCriteria criteria;Mat idx=Mat()[/O])->double",
+      "classification": "intentionally-omitted",
+      "reason": "The ccalib public surface, including omnidir calibration and reconstruction helpers, has no native Ccalib wrapper entrypoint or managed public owner in the current package; caller-owned calibration inputs, feature/matcher objects, and output buffers remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CCALIB=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.omnidir.stereoRectify(Mat R;Mat T;Mat R1[/O];Mat R2[/O])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The ccalib public surface, including omnidir calibration and reconstruction helpers, has no native Ccalib wrapper entrypoint or managed public owner in the current package; caller-owned calibration inputs, feature/matcher objects, and output buffers remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CCALIB=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.omnidir.stereoReconstruct(Mat image1;Mat image2;Mat K1;Mat D1;Mat xi1;Mat K2;Mat D2;Mat xi2;Mat R;Mat T;int flag;int numDisparities;int SADWindowSize;Mat disparity[/O];Mat image1Rec[/O];Mat image2Rec[/O];Size newSize=Size()[/C,/Ref];Mat Knew=cv::Mat();Mat pointCloud=cv::Mat()[/O];int pointType=XYZRGB)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The ccalib public surface, including omnidir calibration and reconstruction helpers, has no native Ccalib wrapper entrypoint or managed public owner in the current package; caller-owned calibration inputs, feature/matcher objects, and output buffers remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CCALIB=1",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}

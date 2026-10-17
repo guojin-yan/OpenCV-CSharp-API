@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/1679ee591c78ba81",
-  "SourceIdentity": "sha256:1679ee591c78ba81996f7567cd11900b6ce0ba917b27babab71cc9d845a5fe86",
+  "CandidateId": "local-closeout/sha256/b1047fd4eb785d45",
+  "SourceIdentity": "sha256:b1047fd4eb785d45e73440bb41e4eb57f1ae0638a58777a6e53e88217cfb69d5",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 2181,
-    "Sha256": "1679ee591c78ba81996f7567cd11900b6ce0ba917b27babab71cc9d845a5fe86",
+    "FileCount": 2192,
+    "Sha256": "b1047fd4eb785d45e73440bb41e4eb57f1ae0638a58777a6e53e88217cfb69d5",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -794,6 +794,30 @@
       "ExternalDataDependencyCount": 1,
       "RepositoryWideParityClaimed": false
     },
+    "CcalibUpstreamMap": {
+      "Path": "compatibility/ccalib-upstream-map.txt",
+      "SummaryPath": "compatibility/ccalib-upstream-summary.json",
+      "ClassificationPath": "compatibility/ccalib-upstream-classifications.json",
+      "FamilyInventoryPath": "compatibility/ccalib-implemented-families.json",
+      "RawExtractionPath": "compatibility/ccalib-upstream-raw.json",
+      "Sha256": "26a22b4fb1445990395aebd4965bd99b41425502effe6dc7b7c0cad46c0757d3",
+      "RawSha256": "eb75f4a7e96ba86b7fa32c8d6dfaf0493e6fea0e505b283c57c368d43dd8dfc4",
+      "DeclarationCount": 12,
+      "CallableCount": 8,
+      "ImplementedCount": 0,
+      "MissingCount": 0,
+      "IntentionallyOmittedCount": 8,
+      "UnsupportedCount": 0,
+      "UpstreamConditionalCount": 0,
+      "SourceHeaderCount": 3,
+      "SelectedFamilyCount": 1,
+      "SelectedDeclarationCount": 0,
+      "ManagedPublicTypeAdditionCount": 0,
+      "ManagedPublicMemberAdditionCount": 0,
+      "NativeEntrypointAdditionCount": 0,
+      "ExternalDataDependencyCount": 1,
+      "RepositoryWideParityClaimed": false
+    },
     "GapInventoryPath": "compatibility/api-gap-inventory.json",
     "GapInventoryStatus": "baseline-established-native-managed-parity-measured",
     "UpstreamParityMeasured": false,
@@ -946,6 +970,31 @@
       "Path": "compatibility/calib3d-upstream-summary.json",
       "Sha256": "3d93304a0836df97b7dfb6f525ba8f503237721d81a985cffa640c8f445a79f7",
       "Length": 1586
+    },
+    {
+      "Path": "compatibility/ccalib-implemented-families.json",
+      "Sha256": "7d0424717f89e6b5bdc4f99d949385891bab722f07e48489e94d65cec7b6df44",
+      "Length": 390
+    },
+    {
+      "Path": "compatibility/ccalib-upstream-classifications.json",
+      "Sha256": "538bb9fbb5e5bef91b482de4185d2d877ec9fc03e29574c50ba0e145fbc558d5",
+      "Length": 8765
+    },
+    {
+      "Path": "compatibility/ccalib-upstream-map.txt",
+      "Sha256": "26a22b4fb1445990395aebd4965bd99b41425502effe6dc7b7c0cad46c0757d3",
+      "Length": 6523
+    },
+    {
+      "Path": "compatibility/ccalib-upstream-raw.json",
+      "Sha256": "eb75f4a7e96ba86b7fa32c8d6dfaf0493e6fea0e505b283c57c368d43dd8dfc4",
+      "Length": 31048
+    },
+    {
+      "Path": "compatibility/ccalib-upstream-summary.json",
+      "Sha256": "2f5d0c4d67e4ec669714f91feeb442ceb9334d2659090b3048e2a3fa140692c7",
+      "Length": 1417
     },
     {
       "Path": "compatibility/cnn_3dobj-implemented-families.json",
@@ -1884,18 +1933,18 @@
     },
     {
       "Path": "compatibility/upstream-map-catalog.json",
-      "Sha256": "c4d6ca1aa44ec1d94577e321fd31c2808714e58aa0dbcd0c0aa9b8be98ea9a7b",
-      "Length": 153300
+      "Sha256": "ca53832d31faae00dab37f7b7e964fa190afa3891fc808fa375c1a0c2b38c654",
+      "Length": 155985
     },
     {
       "Path": "compatibility/upstream-map-catalog.schema.json",
-      "Sha256": "90e17b57350134d4268bfc5ce7d262665dd12c5090478051c1b7704807865c56",
-      "Length": 6004
+      "Sha256": "c3890e24ecc0723ee77be9750ba4b0a20934223004b63150cce94e64b4dd2d2a",
+      "Length": 6014
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "126ce245e115b4102b1028e49df8fa25c0024e44ea2c5d064c1f509fff93051c",
-      "Length": 60728
+      "Sha256": "be0a336253b55a7e44b247e0cf671514d3abed273ea960ef0cf363312865491e",
+      "Length": 62076
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -2109,8 +2158,8 @@
     },
     {
       "Path": "docs/articles/api-abi-compatibility-policy.md",
-      "Sha256": "759a481c250988acf49ee3609f467cf8bdcfc04676bbbf2efd4ec73529b82ac9",
-      "Length": 17152
+      "Sha256": "8b100bea1163e3d6ae39add9da5ea336756a2bc2651a81480a7add8f0b0c83b0",
+      "Length": 17762
     },
     {
       "Path": "docs/articles/async-video-owner-adr.md",
@@ -2126,6 +2175,11 @@
       "Path": "docs/articles/calib3d-upstream-parity-guide.md",
       "Sha256": "0c2b9b831b882b4f58acfe8761613d0c69c1abd77e37be5dec4a1691a1e14e05",
       "Length": 4062
+    },
+    {
+      "Path": "docs/articles/ccalib-upstream-parity-guide.md",
+      "Sha256": "f9d875aa864df1a2ab3e6e74396e3357fd97ff2d33bbb84a3803375b3e1c0e77",
+      "Length": 1043
     },
     {
       "Path": "docs/articles/cnn-3dobj-upstream-parity-guide.md",
@@ -2464,8 +2518,8 @@
     },
     {
       "Path": "docs/articles/upstream-map-toolchain.md",
-      "Sha256": "0bfd182ba024eeb47b0737856639ae48ab3d398cde910d0a0dad3f5d0f4d8fb0",
-      "Length": 12418
+      "Sha256": "59ada66316e556455a982831a6aec45083b4601f791db2b2fac0c6ec4904284c",
+      "Length": 13028
     },
     {
       "Path": "docs/articles/v501-modern-api-preview-guide.md",
@@ -2574,8 +2628,8 @@
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "684e9c8894b0d5ccce4592e349535cbfc16d1a763e60fde9f4dee414b01481a0",
-      "Length": 17663
+      "Sha256": "e51e1e3118f12c809de008511bc9067932139cea66e036956ebc4b3a6b17d48b",
+      "Length": 17757
     },
     {
       "Path": "nuget/logo.jpg",
@@ -2933,14 +2987,19 @@
       "Length": 3613
     },
     {
+      "Path": "scripts/Generate-CcalibUpstreamMap.ps1",
+      "Sha256": "e3e8660f9537f256098e2acf459bdea3b9151fb27268a8a55f8456c994812bb7",
+      "Length": 1003
+    },
+    {
       "Path": "scripts/Generate-Cnn3DObjUpstreamMap.ps1",
       "Sha256": "6996c8ad32376d9ada4831ccb3e3958be556fbc3cdf4521ef33f8224bc0e0f3d",
       "Length": 303
     },
     {
       "Path": "scripts/Generate-ContribUpstreamMap.ps1",
-      "Sha256": "0bee4bfea01e37bd0d929f505da2acc69158af8f81643843791cf598aefa34ae",
-      "Length": 110968
+      "Sha256": "5507edd21f70f686bd50c7c035c5cacc8c5bf4102962162d66333067159d6a56",
+      "Length": 111826
     },
     {
       "Path": "scripts/Generate-CoreUpstreamMap.ps1",
@@ -3179,8 +3238,8 @@
     },
     {
       "Path": "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
-      "Sha256": "cfb52691d6cdff5ed6b072c56299ca063951fe0dba5940e2d3b0f09ab895c39c",
-      "Length": 5463
+      "Sha256": "b277aad89612f2c3cf7d6543ee392711f0bddaf4536f7c687e0d7be107cdaafc",
+      "Length": 5488
     },
     {
       "Path": "scripts/Invoke-LifecycleRefreshContainerProducer.ps1",
@@ -3259,8 +3318,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "de2dfcfcf308010841c8313acc9cf464f07ef791702df5665c36424c920ac0c1",
-      "Length": 127316
+      "Sha256": "822f7287958513260a6dc9b7bc0f622d1646d4073307d37dcec1cb1df3e071ac",
+      "Length": 130155
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -3274,8 +3333,8 @@
     },
     {
       "Path": "scripts/New-UpstreamMapCatalog.ps1",
-      "Sha256": "afcc2e17d95160a6ae810150f4c8f823273033baa28b595d836094c9a7e4b014",
-      "Length": 10903
+      "Sha256": "5af67630a34eb23457d896868c4e01f17551612596f2556a400c86e6290c7085",
+      "Length": 10990
     },
     {
       "Path": "scripts/Test-AlphaMatUpstreamMap.ps1",
@@ -3316,6 +3375,11 @@
       "Path": "scripts/Test-CapabilityProfileEvidence.ps1",
       "Sha256": "a2cdbddd3c09ee1f7d4e5812477707c8a9f0283f95e3c517265813914596964a",
       "Length": 8771
+    },
+    {
+      "Path": "scripts/Test-CcalibUpstreamMap.ps1",
+      "Sha256": "d9dd7833fa61ffbe7f77fb378a0cbcd966bfc004c20a2ac48b8651fac364472f",
+      "Length": 2541
     },
     {
       "Path": "scripts/Test-Cnn3DObjUpstreamMap.ps1",
@@ -3664,8 +3728,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "d57396f0094851cbf1d13bac80065f57b3efc87d43f9e355c004aabf16516dc2",
-      "Length": 111542
+      "Sha256": "326789fdb6ec6d829dc3b92c633c42de6e6d6ca926a53a49b0bbcbdfbe3c71f6",
+      "Length": 113556
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -3779,8 +3843,8 @@
     },
     {
       "Path": "scripts/Test-UpstreamMapCatalog.ps1",
-      "Sha256": "f95db3e5400d40cba357bc00bc10272974c395766f952457d969aa82dc75619f",
-      "Length": 15104
+      "Sha256": "bc52d3c9edeb391ff0e4d637f108a306da5b714a21dd75a17a2b581b3fb28b1f",
+      "Length": 15113
     },
     {
       "Path": "scripts/Test-V501ChangeLedger.ps1",
@@ -4478,6 +4542,21 @@
       "Length": 5852
     },
     {
+      "Path": "tools/CcalibUpstreamMap/CcalibUpstreamMap.csproj",
+      "Sha256": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+      "Length": 238
+    },
+    {
+      "Path": "tools/CcalibUpstreamMap/Program.cs",
+      "Sha256": "32044fe971304ce031783b3e91d7033168ffa5f1db518c5c5fda92994d195011",
+      "Length": 102
+    },
+    {
+      "Path": "tools/CcalibUpstreamMap/extract_ccalib.py",
+      "Sha256": "626097af0ce1d0d16a0326c3fb674572f3a4f7458ccf10aed49347245f57fd5a",
+      "Length": 229
+    },
+    {
       "Path": "tools/Cnn3DObjUpstreamMap/Cnn3DObjUpstreamMap.csproj",
       "Sha256": "727d0721f11212e08035cc59275b0226c0092f3ea92492d621c3d25879ef974f",
       "Length": 273
@@ -5124,8 +5203,8 @@
     },
     {
       "Path": "tools/XImgProcUpstreamMap/extract_ximgproc.py",
-      "Sha256": "0a4e9133d08890db6656628d02ffb9049bc6ac5cc551cbd3488c506b67b19a7f",
-      "Length": 8721
+      "Sha256": "35636c7d6c3005e77197bc292332fa31554fba09bcd9a068fe373a1c0dcd4bd4",
+      "Length": 8751
     },
     {
       "Path": "tools/XObjDetectUpstreamMap/Program.cs",

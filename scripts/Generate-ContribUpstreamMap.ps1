@@ -1,5 +1,5 @@
 param(
-    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect','dnn_superres','wechat_qrcode','cnn_3dobj','signal','dpm','hdf','text','xfeatures2d','dnn_objdetect')][string]$Module,
+    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect','dnn_superres','wechat_qrcode','cnn_3dobj','signal','dpm','hdf','text','xfeatures2d','dnn_objdetect','ccalib')][string]$Module,
     [Parameter(Mandatory)][string]$DisplayName,
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [switch]$Check
@@ -51,6 +51,8 @@ function GetParts([string]$Identity) {
         '^cv\.(?:(?<owner>[A-Za-z][A-Za-z0-9_]*)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     } elseif ($Module -eq 'xfeatures2d') {
         '^cv\.(?<namespace>xfeatures2d|cuda)\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
+    } elseif ($Module -eq 'ccalib') {
+        '^cv\.(?<namespace>multicalib|omnidir|ccalib)\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     } else {
         '^cv\.' + $Module + '\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     }
@@ -70,7 +72,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
         }
         return $Owner
     }
-    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect','dnn_superres','wechat_qrcode','xfeatures2d')) {
+    if ($Module -in @('face','quality','img_hash','line_descriptor','alphamat','intensity_transform','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect','dnn_superres','wechat_qrcode','xfeatures2d','ccalib')) {
         if ($Module -eq 'face') {
             if ([string]::IsNullOrWhiteSpace($Owner)) {
                 switch ($Name) {
@@ -116,6 +118,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
                 'dnn_superres' { return $Owner }
                 'wechat_qrcode' { return $Owner }
                 'xfeatures2d' { return 'XFeatures2D' }
+                'ccalib' { return 'CcalibCv2' }
             }
             return [string]$managedType
         }
@@ -1056,6 +1059,7 @@ foreach ($decl in @($raw.declarations)) {
         if ($Module -eq 'text' -and $classification -eq 'intentionally-omitted') { $reason = 'The contrib Text surface has no native Text wrapper entrypoint or managed public owner in the current package; scene-text classifiers and OCR models are caller-selected data, while OCRTesseract is conditionally built against external Tesseract, so model provenance, optional dependency behavior, and output ownership remain outside the current ABI/API and deterministic smoke contract.' }
         if ($Module -eq 'xfeatures2d' -and $classification -eq 'intentionally-omitted') { $reason = 'The xfeatures2d contrib surface is optional CUDA/nonfree functionality and the current package has no native XFeatures2D wrapper entrypoint or managed public owner; CUDA runtime/toolkit availability, nonfree build policy, and feature/model ownership remain outside the current ABI/API and deterministic smoke contract.' }
         if ($Module -eq 'dnn_objdetect' -and $classification -eq 'intentionally-omitted') { $reason = 'The dnn_objdetect contrib surface is a model-driven DNN post-processing helper and the current package has no native DnnObjDetect wrapper entrypoint or managed public owner; caller-selected network/model data, backend policy, and detection output ownership remain outside the current ABI/API and deterministic smoke contract.' }
+        if ($Module -eq 'ccalib' -and $classification -eq 'intentionally-omitted') { $reason = 'The ccalib public surface, including omnidir calibration and reconstruction helpers, has no native Ccalib wrapper entrypoint or managed public owner in the current package; caller-owned calibration inputs, feature/matcher objects, and output buffers remain outside the current ABI/API and deterministic smoke contract.' }
         if ($Module -eq 'rapid' -and [string]$decl.identity -match '^cv\.rapid\.GOSTracker\.create\(') { $reason = 'GOSTracker is present in the pinned upstream header but the current managed/native wrapper exposes only Rapid and OLSTracker; this optional tracker remains deliberately omitted until its behavior, ABI, and ownership contract are separately reviewed.' }
         if ($Module -eq 'phase_unwrapping' -and [string]$decl.identity -match 'HistogramPhaseUnwrapping\.Params\.Params\(') { $reason = 'The upstream default Params constructor is represented by HistogramPhaseUnwrappingParams.Default and an explicit managed value constructor; value initialization has no native callable ABI.' }
         if ($Module -eq 'optflow' -and [string]$decl.identity -match '^cv\.optflow\.createOptFlow_PCAFlow\(') { $reason = 'PCAFlow is an optional dense optical-flow factory distinct from the wrapped RLOF and DualTVL1 families; the current ABI/API has no PCAFlow native factory, opaque handle, ownership/lifetime contract, or deterministic runtime smoke, so this declaration remains intentionally omitted.' }
@@ -1079,6 +1083,7 @@ $externalDataDependencies = switch ($Module) {
     'text' { @('OCRTesseract is compiled only when external Tesseract is installed; this package bundles neither Tesseract nor a Text wrapper.', 'Text detection and OCR classifier entrypoints require caller-selected classifier/model data; no model assets are bundled.') }
     'xfeatures2d' { @('The xfeatures2d CUDA headers require an optional CUDA build/runtime; this package bundles no CUDA XFeatures2D wrapper or CUDA runtime.', 'The xfeatures2d nonfree families require an explicit OPENCV_ENABLE_NONFREE build and licensing decision; no nonfree wrapper or feature model assets are bundled.') }
     'dnn_objdetect' { @('The dnn_objdetect helper requires caller-selected DNN network/model data and backend policy; no model assets or managed/native wrapper are bundled.') }
+    'ccalib' { @('The ccalib CustomPattern API requires caller-selected pattern images, feature detector/descriptor/matcher objects, and calibration output ownership; no managed/native wrapper or pattern assets are bundled.') }
     'freetype' { @('The upstream FreeType2 module requires system FreeType2 and HarfBuzz development/runtime libraries; neither dependency is bundled by this repository.') }
     'intensity_transform' { @('BIMEF runtime execution requires OpenCV built with EIGEN support; a module runtime without EIGEN may report that the operation is unavailable.') }
     'saliency' { @('ObjectnessBING requires caller-supplied training/model data through SetTrainingPath; the repository bundles no model asset and therefore does not claim deterministic objectness model execution.') }

@@ -1,0 +1,869 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/CcalibUpstreamMap/extract_ccalib.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/ccalib/include/opencv2/ccalib.hpp",
+  "headerSha256": "c4e41eda55986eaa8b0cf5287a8fabc296545045bca59f502def3336d1f59a4a",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/ccalib/include/opencv2/ccalib/multicalib.hpp",
+      "sha256": "44a2ed8be750399b6d7e6769aa2dd9d2b688125e57a9ecfb387d5f852f5c4fb0",
+      "startOrdinal": 0,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/ccalib/include/opencv2/ccalib/omnidir.hpp",
+      "sha256": "b2f3bd9c90f185bfdbc7d837c170544ceae40ec3f8805311cc848544529c4def",
+      "startOrdinal": 1,
+      "declarationCount": 11
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/ccalib/include/opencv2/ccalib/randpattern.hpp",
+      "sha256": "8fa34a2b2217e41231edf2c9cb7044307e01eddf02f074f640283cb1715fb706",
+      "startOrdinal": 12,
+      "declarationCount": 0
+    }
+  ],
+  "declarationCount": 12,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ccalib/include/opencv2/ccalib/multicalib.hpp",
+      "kind": "enum",
+      "name": "cv.multicalib.MultiCameraCalibration.<unnamed>",
+      "identity": "enum cv.multicalib.MultiCameraCalibration.<unnamed>[const cv.multicalib.MultiCameraCalibration.PINHOLE=0;const cv.multicalib.MultiCameraCalibration.OMNIDIRECTIONAL=1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.multicalib.MultiCameraCalibration.PINHOLE",
+          "value": "0"
+        },
+        {
+          "name": "const cv.multicalib.MultiCameraCalibration.OMNIDIRECTIONAL",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ccalib/include/opencv2/ccalib/omnidir.hpp",
+      "kind": "enum",
+      "name": "cv.omnidir.<unnamed>",
+      "identity": "enum cv.omnidir.<unnamed>[const cv.omnidir.CALIB_USE_GUESS=1;const cv.omnidir.CALIB_FIX_SKEW=2;const cv.omnidir.CALIB_FIX_K1=4;const cv.omnidir.CALIB_FIX_K2=8;const cv.omnidir.CALIB_FIX_P1=16;const cv.omnidir.CALIB_FIX_P2=32;const cv.omnidir.CALIB_FIX_XI=64;const cv.omnidir.CALIB_FIX_GAMMA=128;const cv.omnidir.CALIB_FIX_CENTER=256]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.omnidir.CALIB_USE_GUESS",
+          "value": "1"
+        },
+        {
+          "name": "const cv.omnidir.CALIB_FIX_SKEW",
+          "value": "2"
+        },
+        {
+          "name": "const cv.omnidir.CALIB_FIX_K1",
+          "value": "4"
+        },
+        {
+          "name": "const cv.omnidir.CALIB_FIX_K2",
+          "value": "8"
+        },
+        {
+          "name": "const cv.omnidir.CALIB_FIX_P1",
+          "value": "16"
+        },
+        {
+          "name": "const cv.omnidir.CALIB_FIX_P2",
+          "value": "32"
+        },
+        {
+          "name": "const cv.omnidir.CALIB_FIX_XI",
+          "value": "64"
+        },
+        {
+          "name": "const cv.omnidir.CALIB_FIX_GAMMA",
+          "value": "128"
+        },
+        {
+          "name": "const cv.omnidir.CALIB_FIX_CENTER",
+          "value": "256"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ccalib/include/opencv2/ccalib/omnidir.hpp",
+      "kind": "enum",
+      "name": "cv.omnidir.<unnamed>",
+      "identity": "enum cv.omnidir.<unnamed>[const cv.omnidir.RECTIFY_PERSPECTIVE=1;const cv.omnidir.RECTIFY_CYLINDRICAL=2;const cv.omnidir.RECTIFY_LONGLATI=3;const cv.omnidir.RECTIFY_STEREOGRAPHIC=4]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.omnidir.RECTIFY_PERSPECTIVE",
+          "value": "1"
+        },
+        {
+          "name": "const cv.omnidir.RECTIFY_CYLINDRICAL",
+          "value": "2"
+        },
+        {
+          "name": "const cv.omnidir.RECTIFY_LONGLATI",
+          "value": "3"
+        },
+        {
+          "name": "const cv.omnidir.RECTIFY_STEREOGRAPHIC",
+          "value": "4"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ccalib/include/opencv2/ccalib/omnidir.hpp",
+      "kind": "enum",
+      "name": "cv.omnidir.<unnamed>",
+      "identity": "enum cv.omnidir.<unnamed>[const cv.omnidir.XYZRGB=1;const cv.omnidir.XYZ=2]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.omnidir.XYZRGB",
+          "value": "1"
+        },
+        {
+          "name": "const cv.omnidir.XYZ",
+          "value": "2"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ccalib/include/opencv2/ccalib/omnidir.hpp",
+      "kind": "callable",
+      "name": "cv.omnidir.projectPoints",
+      "identity": "cv.omnidir.projectPoints(Mat objectPoints;Mat imagePoints[/O];Mat rvec;Mat tvec;Mat K;double xi;Mat D;Mat jacobian=Mat()[/O])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "objectPoints",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "imagePoints",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "rvec",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "tvec",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "xi",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "D",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "jacobian",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Projects points for omnidirectional camera using CMei's model\n\n    @param objectPoints Object points in world coordinate, vector of vector of Vec3f or Mat of\n    1xN/Nx1 3-channel of type CV_32F and N is the number of points. 64F is also acceptable.\n    @param imagePoints Output array of image points, vector of vector of Vec2f or\n    1xN/Nx1 2-channel of type CV_32F. 64F is also acceptable.\n    @param rvec vector of rotation between world coordinate and camera coordinate, i.e., om\n    @param tvec vector of translation between pattern coordinate and camera coordinate\n    @param K Camera matrix \\f$K = \\vecthreethree{f_x}{s}{c_x}{0}{f_y}{c_y}{0}{0}{_1}\\f$.\n    @param D Input vector of distortion coefficients \\f$(k_1, k_2, p_1, p_2)\\f$.\n    @param xi The parameter xi for CMei's model\n    @param jacobian Optional output 2Nx16 of type CV_64F jacobian matrix, contains the derivatives of\n    image pixel points wrt parameters including \\f$om, T, f_x, f_y, s, c_x, c_y, xi, k_1, k_2, p_1, p_2\\f$.\n    This matrix will be used in calibration by optimization.\n\n    The function projects object 3D points of world coordinate to image pixels, parameter by intrinsic\n    and extrinsic parameters. Also, it optionally compute a by-product: the jacobian matrix containing\n    contains the derivatives of image pixel points wrt intrinsic and extrinsic parameters."
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ccalib/include/opencv2/ccalib/omnidir.hpp",
+      "kind": "callable",
+      "name": "cv.omnidir.undistortPoints",
+      "identity": "cv.omnidir.undistortPoints(Mat distorted;Mat undistorted[/O];Mat K;Mat D;Mat xi;Mat R)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "distorted",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "undistorted",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "D",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "xi",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "R",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Undistort 2D image points for omnidirectional camera using CMei's model\n\n    @param distorted Array of distorted image points, vector of Vec2f\n    or 1xN/Nx1 2-channel Mat of type CV_32F, 64F depth is also acceptable\n    @param K Camera matrix \\f$K = \\vecthreethree{f_x}{s}{c_x}{0}{f_y}{c_y}{0}{0}{_1}\\f$.\n    @param D Distortion coefficients \\f$(k_1, k_2, p_1, p_2)\\f$.\n    @param xi The parameter xi for CMei's model\n    @param R Rotation trainsform between the original and object space : 3x3 1-channel, or vector: 3x1/1x3\n    1-channel or 1x1 3-channel\n    @param undistorted array of normalized object points, vector of Vec2f/Vec2d or 1xN/Nx1 2-channel Mat with the same\n    depth of distorted points."
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ccalib/include/opencv2/ccalib/omnidir.hpp",
+      "kind": "callable",
+      "name": "cv.omnidir.initUndistortRectifyMap",
+      "identity": "cv.omnidir.initUndistortRectifyMap(Mat K;Mat D;Mat xi;Mat R;Mat P;Size size[/C,/Ref];int m1type;Mat map1[/O];Mat map2[/O];int flags)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "D",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "xi",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "R",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "P",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "size",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "m1type",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "map1",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "map2",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes undistortion and rectification maps for omnidirectional camera image transform by a rotation R.\n    It output two maps that are used for cv::remap(). If D is empty then zero distortion is used,\n    if R or P is empty then identity matrices are used.\n\n    @param K Camera matrix \\f$K = \\vecthreethree{f_x}{s}{c_x}{0}{f_y}{c_y}{0}{0}{_1}\\f$, with depth CV_32F or CV_64F\n    @param D Input vector of distortion coefficients \\f$(k_1, k_2, p_1, p_2)\\f$, with depth CV_32F or CV_64F\n    @param xi The parameter xi for CMei's model\n    @param R Rotation transform between the original and object space : 3x3 1-channel, or vector: 3x1/1x3, with depth CV_32F or CV_64F\n    @param P New camera matrix (3x3) or new projection matrix (3x4)\n    @param size Undistorted image size.\n    @param m1type Type of the first output map that can be CV_32FC1 or CV_16SC2 . See convertMaps()\n    for details.\n    @param map1 The first output map.\n    @param map2 The second output map.\n    @param flags Flags indicates the rectification type,  RECTIFY_PERSPECTIVE, RECTIFY_CYLINDRICAL, RECTIFY_LONGLATI and RECTIFY_STEREOGRAPHIC\n    are supported."
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ccalib/include/opencv2/ccalib/omnidir.hpp",
+      "kind": "callable",
+      "name": "cv.omnidir.undistortImage",
+      "identity": "cv.omnidir.undistortImage(Mat distorted;Mat undistorted[/O];Mat K;Mat D;Mat xi;int flags;Mat Knew=cv::Mat();Size new_size=Size()[/C,/Ref];Mat R=Mat::eye(3, 3, CV_64F))->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "distorted",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "undistorted",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "D",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "xi",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "Knew",
+          "default": "cv::Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "new_size",
+          "default": "Size()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "R",
+          "default": "Mat::eye(3, 3, CV_64F)",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Undistort omnidirectional images to perspective images\n\n    @param distorted The input omnidirectional image.\n    @param undistorted The output undistorted image.\n    @param K Camera matrix \\f$K = \\vecthreethree{f_x}{s}{c_x}{0}{f_y}{c_y}{0}{0}{_1}\\f$.\n    @param D Input vector of distortion coefficients \\f$(k_1, k_2, p_1, p_2)\\f$.\n    @param xi The parameter xi for CMei's model.\n    @param flags Flags indicates the rectification type,  RECTIFY_PERSPECTIVE, RECTIFY_CYLINDRICAL, RECTIFY_LONGLATI and RECTIFY_STEREOGRAPHIC\n    @param Knew Camera matrix of the distorted image. If it is not assigned, it is just K.\n    @param new_size The new image size. By default, it is the size of distorted.\n    @param R Rotation matrix between the input and output images. By default, it is identity matrix."
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ccalib/include/opencv2/ccalib/omnidir.hpp",
+      "kind": "callable",
+      "name": "cv.omnidir.calibrate",
+      "identity": "cv.omnidir.calibrate(vector_Mat objectPoints;vector_Mat imagePoints;Size size;Mat K[/IO];Mat xi[/IO];Mat D[/IO];vector_Mat rvecs[/O];vector_Mat tvecs[/O];int flags;TermCriteria criteria;Mat idx=Mat()[/O])->double",
+      "returnType": "double",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "objectPoints",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Mat",
+          "name": "imagePoints",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "size",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "K",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "xi",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "D",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "vector_Mat",
+          "name": "rvecs",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "vector_Mat",
+          "name": "tvecs",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "TermCriteria",
+          "name": "criteria",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "idx",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Perform omnidirectional camera calibration, the default depth of outputs is CV_64F.\n\n    @param objectPoints Vector of vector of Vec3f object points in world (pattern) coordinate.\n    It also can be vector of Mat with size 1xN/Nx1 and type CV_32FC3. Data with depth of 64_F is also acceptable.\n    @param imagePoints Vector of vector of Vec2f corresponding image points of objectPoints. It must be the same\n    size and the same type with objectPoints.\n    @param size Image size of calibration images.\n    @param K Output calibrated camera matrix.\n    @param xi Output parameter xi for CMei's model\n    @param D Output distortion parameters \\f$(k_1, k_2, p_1, p_2)\\f$\n    @param rvecs Output rotations for each calibration images\n    @param tvecs Output translation for each calibration images\n    @param flags The flags that control calibrate\n    @param criteria Termination criteria for optimization\n    @param idx Indices of images that pass initialization, which are really used in calibration. So the size of rvecs is the\n    same as idx.total()."
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ccalib/include/opencv2/ccalib/omnidir.hpp",
+      "kind": "callable",
+      "name": "cv.omnidir.stereoCalibrate",
+      "identity": "cv.omnidir.stereoCalibrate(vector_Mat objectPoints[/IO];vector_Mat imagePoints1[/IO];vector_Mat imagePoints2[/IO];Size imageSize1[/C,/Ref];Size imageSize2[/C,/Ref];Mat K1[/IO];Mat xi1[/IO];Mat D1[/IO];Mat K2[/IO];Mat xi2[/IO];Mat D2[/IO];Mat rvec[/O];Mat tvec[/O];vector_Mat rvecsL[/O];vector_Mat tvecsL[/O];int flags;TermCriteria criteria;Mat idx=Mat()[/O])->double",
+      "returnType": "double",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "objectPoints",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "vector_Mat",
+          "name": "imagePoints1",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "vector_Mat",
+          "name": "imagePoints2",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Size",
+          "name": "imageSize1",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Size",
+          "name": "imageSize2",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "K1",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "xi1",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "D1",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "K2",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "xi2",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "D2",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "rvec",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "tvec",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "vector_Mat",
+          "name": "rvecsL",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "vector_Mat",
+          "name": "tvecsL",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "TermCriteria",
+          "name": "criteria",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "idx",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Stereo calibration for omnidirectional camera model. It computes the intrinsic parameters for two\n    cameras and the extrinsic parameters between two cameras. The default depth of outputs is CV_64F.\n\n    @param objectPoints Object points in world (pattern) coordinate. Its type is vector<vector<Vec3f> >.\n    It also can be vector of Mat with size 1xN/Nx1 and type CV_32FC3. Data with depth of 64_F is also acceptable.\n    @param imagePoints1 The corresponding image points of the first camera, with type vector<vector<Vec2f> >.\n    It must be the same size and the same type as objectPoints.\n    @param imagePoints2 The corresponding image points of the second camera, with type vector<vector<Vec2f> >.\n    It must be the same size and the same type as objectPoints.\n    @param imageSize1 Image size of calibration images of the first camera.\n    @param imageSize2 Image size of calibration images of the second camera.\n    @param K1 Output camera matrix for the first camera.\n    @param xi1 Output parameter xi of Mei's model for the first camera\n    @param D1 Output distortion parameters \\f$(k_1, k_2, p_1, p_2)\\f$ for the first camera\n    @param K2 Output camera matrix for the first camera.\n    @param xi2 Output parameter xi of CMei's model for the second camera\n    @param D2 Output distortion parameters \\f$(k_1, k_2, p_1, p_2)\\f$ for the second camera\n    @param rvec Output rotation between the first and second camera\n    @param tvec Output translation between the first and second camera\n    @param rvecsL Output rotation for each image of the first camera\n    @param tvecsL Output translation for each image of the first camera\n    @param flags The flags that control stereoCalibrate\n    @param criteria Termination criteria for optimization\n    @param idx Indices of image pairs that pass initialization, which are really used in calibration. So the size of rvecs is the\n    same as idx.total().\n    @"
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ccalib/include/opencv2/ccalib/omnidir.hpp",
+      "kind": "callable",
+      "name": "cv.omnidir.stereoRectify",
+      "identity": "cv.omnidir.stereoRectify(Mat R;Mat T;Mat R1[/O];Mat R2[/O])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "R",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "T",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "R1",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "R2",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Stereo rectification for omnidirectional camera model. It computes the rectification rotations for two cameras\n\n    @param R Rotation between the first and second camera\n    @param T Translation between the first and second camera\n    @param R1 Output 3x3 rotation matrix for the first camera\n    @param R2 Output 3x3 rotation matrix for the second camera"
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ccalib/include/opencv2/ccalib/omnidir.hpp",
+      "kind": "callable",
+      "name": "cv.omnidir.stereoReconstruct",
+      "identity": "cv.omnidir.stereoReconstruct(Mat image1;Mat image2;Mat K1;Mat D1;Mat xi1;Mat K2;Mat D2;Mat xi2;Mat R;Mat T;int flag;int numDisparities;int SADWindowSize;Mat disparity[/O];Mat image1Rec[/O];Mat image2Rec[/O];Size newSize=Size()[/C,/Ref];Mat Knew=cv::Mat();Mat pointCloud=cv::Mat()[/O];int pointType=XYZRGB)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "image2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "K1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "D1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "xi1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "K2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "D2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "xi2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "R",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "T",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "flag",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "numDisparities",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "SADWindowSize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "disparity",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "image1Rec",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "image2Rec",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Size",
+          "name": "newSize",
+          "default": "Size()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "Knew",
+          "default": "cv::Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "pointCloud",
+          "default": "cv::Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "pointType",
+          "default": "XYZRGB",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Stereo 3D reconstruction from a pair of images\n\n    @param image1 The first input image\n    @param image2 The second input image\n    @param K1 Input camera matrix of the first camera\n    @param D1 Input distortion parameters \\f$(k_1, k_2, p_1, p_2)\\f$ for the first camera\n    @param xi1 Input parameter xi for the first camera for CMei's model\n    @param K2 Input camera matrix of the second camera\n    @param D2 Input distortion parameters \\f$(k_1, k_2, p_1, p_2)\\f$ for the second camera\n    @param xi2 Input parameter xi for the second camera for CMei's model\n    @param R Rotation between the first and second camera\n    @param T Translation between the first and second camera\n    @param flag Flag of rectification type, RECTIFY_PERSPECTIVE or RECTIFY_LONGLATI\n    @param numDisparities The parameter 'numDisparities' in StereoSGBM, see StereoSGBM for details.\n    @param SADWindowSize The parameter 'SADWindowSize' in StereoSGBM, see StereoSGBM for details.\n    @param disparity Disparity map generated by stereo matching\n    @param image1Rec Rectified image of the first image\n    @param image2Rec rectified image of the second image\n    @param newSize Image size of rectified image, see omnidir::undistortImage\n    @param Knew New camera matrix of rectified image, see omnidir::undistortImage\n    @param pointCloud Point cloud of 3D reconstruction, with type CV_64FC3\n    @param pointType Point cloud type, it can be XYZRGB or XYZ"
+    }
+  ]
+}

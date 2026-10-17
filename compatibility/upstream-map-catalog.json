@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 48,
+  "moduleCount": 49,
   "maps": [
     {
       "id": "calib3d",
@@ -3200,6 +3200,64 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "08af4fda797cce9272e953b6e8c212987dafa0ebed69c8517aa3ef02f860ed64",
         "familyInventorySha256": "7638ad231f59f36fe4d10028559b5be18d576629df38af0a93c64a80c15c1918",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "ccalib",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/CcalibUpstreamMap",
+      "extractorScript": "tools/CcalibUpstreamMap/extract_ccalib.py",
+      "generationScript": "scripts/Generate-CcalibUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-CcalibUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/ccalib.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/ccalib/include/opencv2/ccalib.hpp",
+          "sha256": "c4e41eda55986eaa8b0cf5287a8fabc296545045bca59f502def3336d1f59a4a"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ccalib/include/opencv2/ccalib/multicalib.hpp",
+            "sha256": "44a2ed8be750399b6d7e6769aa2dd9d2b688125e57a9ecfb387d5f852f5c4fb0",
+            "startOrdinal": 0,
+            "declarationCount": 1
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ccalib/include/opencv2/ccalib/omnidir.hpp",
+            "sha256": "b2f3bd9c90f185bfdbc7d837c170544ceae40ec3f8805311cc848544529c4def",
+            "startOrdinal": 1,
+            "declarationCount": 11
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ccalib/include/opencv2/ccalib/randpattern.hpp",
+            "sha256": "8fa34a2b2217e41231edf2c9cb7044307e01eddf02f074f640283cb1715fb706",
+            "startOrdinal": 12,
+            "declarationCount": 0
+          }
+        ],
+        "compatibilityHeaders": [],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/ccalib-upstream-raw.json",
+        "classifications": "compatibility/ccalib-upstream-classifications.json",
+        "mapping": "compatibility/ccalib-upstream-map.txt",
+        "summary": "compatibility/ccalib-upstream-summary.json",
+        "familyInventory": "compatibility/ccalib-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 12,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "26a22b4fb1445990395aebd4965bd99b41425502effe6dc7b7c0cad46c0757d3",
+        "familyInventorySha256": "dc8ec6ce2b76e464adc8b09d6fd6e93e5c0e7af10ce090280f00f928fe47a489",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false
