@@ -1,0 +1,1568 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/OvisUpstreamMap/extract_ovis.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+  "headerSha256": "8c05eb1a877c8f6603b5a1122ac437b065a9916f8b49433d215f9e0035c838d6",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "sha256": "8c05eb1a877c8f6603b5a1122ac437b065a9916f8b49433d215f9e0035c838d6",
+      "startOrdinal": 0,
+      "declarationCount": 42
+    }
+  ],
+  "declarationCount": 42,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "enum",
+      "name": "cv.ovis.SceneSettings",
+      "identity": "enum cv.ovis.SceneSettings[const cv.ovis.SCENE_SEPARATE=1;const cv.ovis.SCENE_INTERACTIVE=2;const cv.ovis.SCENE_SHOW_CS_CROSS=4;const cv.ovis.SCENE_AA=8;const cv.ovis.SCENE_OFFSCREEN=16;const cv.ovis.SCENE_SHADOWS=32]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ovis.SCENE_SEPARATE",
+          "value": "1"
+        },
+        {
+          "name": "const cv.ovis.SCENE_INTERACTIVE",
+          "value": "2"
+        },
+        {
+          "name": "const cv.ovis.SCENE_SHOW_CS_CROSS",
+          "value": "4"
+        },
+        {
+          "name": "const cv.ovis.SCENE_AA",
+          "value": "8"
+        },
+        {
+          "name": "const cv.ovis.SCENE_OFFSCREEN",
+          "value": "16"
+        },
+        {
+          "name": "const cv.ovis.SCENE_SHADOWS",
+          "value": "32"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "enum",
+      "name": "cv.ovis.MaterialProperty",
+      "identity": "enum cv.ovis.MaterialProperty[const cv.ovis.MATERIAL_POINT_SIZE=0;const cv.ovis.MATERIAL_LINE_WIDTH=1;const cv.ovis.MATERIAL_OPACITY=2;const cv.ovis.MATERIAL_EMISSIVE=3;const cv.ovis.MATERIAL_DIFFUSE=4;const cv.ovis.MATERIAL_TEXTURE0=5;const cv.ovis.MATERIAL_TEXTURE=MATERIAL_TEXTURE0;const cv.ovis.MATERIAL_TEXTURE1=MATERIAL_TEXTURE0+1;const cv.ovis.MATERIAL_TEXTURE2=MATERIAL_TEXTURE0+2;const cv.ovis.MATERIAL_TEXTURE3=MATERIAL_TEXTURE0+3]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ovis.MATERIAL_POINT_SIZE",
+          "value": "0"
+        },
+        {
+          "name": "const cv.ovis.MATERIAL_LINE_WIDTH",
+          "value": "1"
+        },
+        {
+          "name": "const cv.ovis.MATERIAL_OPACITY",
+          "value": "2"
+        },
+        {
+          "name": "const cv.ovis.MATERIAL_EMISSIVE",
+          "value": "3"
+        },
+        {
+          "name": "const cv.ovis.MATERIAL_DIFFUSE",
+          "value": "4"
+        },
+        {
+          "name": "const cv.ovis.MATERIAL_TEXTURE0",
+          "value": "5"
+        },
+        {
+          "name": "const cv.ovis.MATERIAL_TEXTURE",
+          "value": "MATERIAL_TEXTURE0"
+        },
+        {
+          "name": "const cv.ovis.MATERIAL_TEXTURE1",
+          "value": "MATERIAL_TEXTURE0+1"
+        },
+        {
+          "name": "const cv.ovis.MATERIAL_TEXTURE2",
+          "value": "MATERIAL_TEXTURE0+2"
+        },
+        {
+          "name": "const cv.ovis.MATERIAL_TEXTURE3",
+          "value": "MATERIAL_TEXTURE0+3"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "enum",
+      "name": "cv.ovis.EntityProperty",
+      "identity": "enum cv.ovis.EntityProperty[const cv.ovis.ENTITY_MATERIAL=0;const cv.ovis.ENTITY_SCALE=1;const cv.ovis.ENTITY_AABB_WORLD=2;const cv.ovis.ENTITY_ANIMBLEND_MODE=3;const cv.ovis.ENTITY_CAST_SHADOWS=4]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ovis.ENTITY_MATERIAL",
+          "value": "0"
+        },
+        {
+          "name": "const cv.ovis.ENTITY_SCALE",
+          "value": "1"
+        },
+        {
+          "name": "const cv.ovis.ENTITY_AABB_WORLD",
+          "value": "2"
+        },
+        {
+          "name": "const cv.ovis.ENTITY_ANIMBLEND_MODE",
+          "value": "3"
+        },
+        {
+          "name": "const cv.ovis.ENTITY_CAST_SHADOWS",
+          "value": "4"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "class",
+      "name": "cv.ovis.WindowScene",
+      "identity": "class cv.ovis.WindowScene",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* A 3D viewport and the associated scene"
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.setBackground",
+      "identity": "cv.ovis.WindowScene.setBackground(Mat image)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* set window background to custom image/ color\n     * @param image"
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.setBackground",
+      "identity": "cv.ovis.WindowScene.setBackground(Scalar color[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "=setBackgroundColor",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Scalar",
+          "name": "color",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.setCompositors",
+      "identity": "cv.ovis.WindowScene.setCompositors(vector_String names[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_String",
+          "name": "names",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* enable an ordered chain of full-screen post processing effects\n     *\n     * this way you can add distortion or SSAO effects.\n     * The effects themselves must be defined inside Ogre .compositor scripts.\n     * @param names compositor names that will be applied in order of appearance\n     * @see addResourceLocation"
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.createEntity",
+      "identity": "cv.ovis.WindowScene.createEntity(String name[/C,/Ref];String meshname[/C,/Ref];Mat tvec=Mat();Mat rot=Mat())->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "name",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "meshname",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "tvec",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "rot",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* place an entity of a mesh in the scene\n     *\n     * the mesh needs to be created beforehand. Either programmatically\n     * by e.g. @ref createPointCloudMesh or by placing the respective file in a resource location.\n     * @param name entity name\n     * @param meshname mesh name\n     * @param tvec translation\n     * @param rot @ref Rodrigues vector or 3x3 rotation matrix\n     * @see addResourceLocation"
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.removeEntity",
+      "identity": "cv.ovis.WindowScene.removeEntity(String name[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "name",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* remove an entity from the scene\n     * @param name entity name"
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.setEntityProperty",
+      "identity": "cv.ovis.WindowScene.setEntityProperty(String name[/C,/Ref];int prop;String value[/C,/Ref];int subEntityIdx=-1)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "name",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "prop",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "String",
+          "name": "value",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "subEntityIdx",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* set the property of an entity to the given value\n     * @param name entity name\n     * @param prop @ref EntityProperty\n     * @param value the value\n     * @param subEntityIdx index of the sub-entity (default: all)"
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.setEntityProperty",
+      "identity": "cv.ovis.WindowScene.setEntityProperty(String name[/C,/Ref];int prop;Scalar value[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "name",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "prop",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "value",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.getEntityProperty",
+      "identity": "cv.ovis.WindowScene.getEntityProperty(String name[/C,/Ref];int prop;Mat value[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "name",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "prop",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "value",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* get the property of an entity\n     * @param name entity name\n     * @param prop @ref EntityProperty\n     * @param value the value"
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.createCameraEntity",
+      "identity": "cv.ovis.WindowScene.createCameraEntity(String name[/C,/Ref];Mat K;Size imsize[/C,/Ref];float zFar;Mat tvec=Mat();Mat rot=Mat();Scalar color=Scalar::all(1)[/C,/Ref])->Rect2d",
+      "returnType": "Rect2d",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "name",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "imsize",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "zFar",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "tvec",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "rot",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "color",
+          "default": "Scalar::all(1)",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* convenience method to visualize a camera position\n     *\n     * @param name entity name\n     * @param K intrinsic matrix\n     * @param imsize image size\n     * @param zFar far plane in camera coordinates\n     * @param tvec translation\n     * @param rot @ref Rodrigues vector or 3x3 rotation matrix\n     * @param color line color\n     * @return the extents of the Frustum at far plane, where the top left corner denotes the principal\n     * point offset"
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.createLightEntity",
+      "identity": "cv.ovis.WindowScene.createLightEntity(String name[/C,/Ref];Mat tvec=Mat();Mat rot=Mat();Scalar diffuseColor=Scalar::all(1)[/C,/Ref];Scalar specularColor=Scalar::all(1)[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "name",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "tvec",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "rot",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "diffuseColor",
+          "default": "Scalar::all(1)",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Scalar",
+          "name": "specularColor",
+          "default": "Scalar::all(1)",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* creates a point light in the scene\n     * @param name entity name\n     * @param tvec translation\n     * @param rot @ref Rodrigues vector or 3x3 rotation matrix\n     * @param diffuseColor\n     * @param specularColor"
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.updateEntityPose",
+      "identity": "cv.ovis.WindowScene.updateEntityPose(String name[/C,/Ref];Mat tvec=Mat();Mat rot=Mat())->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "name",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "tvec",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "rot",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* update entity pose by transformation in the parent coordinate space. (pre-rotation)\n     * @param name entity name\n     * @param tvec translation\n     * @param rot @ref Rodrigues vector or 3x3 rotation matrix"
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.setEntityPose",
+      "identity": "cv.ovis.WindowScene.setEntityPose(String name[/C,/Ref];Mat tvec=Mat();Mat rot=Mat();bool invert=false)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "name",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "tvec",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "rot",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "invert",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* set entity pose in the world coordinate space.\n     * @param name enitity name\n     * @param tvec translation\n     * @param rot @ref Rodrigues vector or 3x3 rotation matrix\n     * @param invert use the inverse of the given pose"
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.getEntityPose",
+      "identity": "cv.ovis.WindowScene.getEntityPose(String name[/C,/Ref];Mat R=Mat()[/O];Mat tvec=Mat()[/O];bool invert=false)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "name",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "R",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "tvec",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "invert",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* Retrieves the current pose of an entity\n\t * @param name entity name\n     * @param R 3x3 rotation matrix\n     * @param tvec translation vector\n     * @param invert return the inverted pose"
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.getEntityAnimations",
+      "identity": "cv.ovis.WindowScene.getEntityAnimations(String name[/C,/Ref];vector_String out[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "name",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_String",
+          "name": "out",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* get a list of available entity animations\n     * @param name entity name\n     * @param out the animation names"
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.playEntityAnimation",
+      "identity": "cv.ovis.WindowScene.playEntityAnimation(String name[/C,/Ref];String animname[/C,/Ref];bool loop=true)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "name",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "animname",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "loop",
+          "default": "true",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* play entity animation\n     * @param name entity name\n     * @param animname animation name\n     * @param loop enable or disable animation loop\n     * @see getEntityAnimations"
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.stopEntityAnimation",
+      "identity": "cv.ovis.WindowScene.stopEntityAnimation(String name[/C,/Ref];String animname[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "name",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "animname",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* stop entity animation\n     * @param name enitity name\n     * @param animname animation name"
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.getScreenshot",
+      "identity": "cv.ovis.WindowScene.getScreenshot(Mat frame[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "frame",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* read back the image generated by the last call to @ref waitKey"
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.getCompositorTexture",
+      "identity": "cv.ovis.WindowScene.getCompositorTexture(String compname[/C,/Ref];String texname[/C,/Ref];Mat out[/O];int mrtIndex=0)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "compname",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "texname",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "out",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "mrtIndex",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* read back the texture of an active compositor\n     * @param compname name of the compositor\n     * @param texname name of the texture inside the compositor\n     * @param mrtIndex if texture is a MRT, specifies the attachment\n     * @param out the texture contents"
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.getDepth",
+      "identity": "cv.ovis.WindowScene.getDepth(Mat depth[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "depth",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* get the depth for the current frame.\n     *\n     * return the per pixel distance to the camera in world units"
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.fixCameraYawAxis",
+      "identity": "cv.ovis.WindowScene.fixCameraYawAxis(bool useFixed;Mat up=Mat())->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "useFixed",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "up",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* convenience method to force the \"up\" axis to stay fixed\n     *\n     * works with both programmatic changes and SCENE_INTERACTIVE\n     * @param useFixed whether to enforce the fixed yaw axis\n     * @param up the axis to be fixed"
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.setCameraPose",
+      "identity": "cv.ovis.WindowScene.setCameraPose(Mat tvec=Mat();Mat rot=Mat();bool invert=false)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "tvec",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "rot",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "invert",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* Sets the current camera pose\n     * @param tvec translation\n     * @param rot @ref Rodrigues vector or 3x3 rotation matrix\n     * @param invert use the inverse of the given pose"
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.setCameraLookAt",
+      "identity": "cv.ovis.WindowScene.setCameraLookAt(String target[/C,/Ref];Mat offset=Mat())->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "target",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "offset",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* convenience method to orient the camera to a specific entity\n     * @param target entity name\n     * @param offset offset from entity centre"
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.setEntityLookAt",
+      "identity": "cv.ovis.WindowScene.setEntityLookAt(String origin[/C,/Ref];String target[/C,/Ref];Mat offset=Mat())->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "origin",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "target",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "offset",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* convenience method to orient an entity to a specific entity.\n\t * If target is an empty string the entity looks at the given offset point\n\t * @param origin entity to make look at\n     * @param target name of target entity\n\t * @param offset offset from entity centre"
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.getCameraPose",
+      "identity": "cv.ovis.WindowScene.getCameraPose(Mat R=Mat()[/O];Mat tvec=Mat()[/O];bool invert=false)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "R",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "tvec",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "invert",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* Retrieves the current camera pose\n     * @param R 3x3 rotation matrix\n     * @param tvec translation vector\n     * @param invert return the inverted pose"
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.setCameraIntrinsics",
+      "identity": "cv.ovis.WindowScene.setCameraIntrinsics(Mat K;Size imsize[/C,/Ref];float zNear=-1;float zFar=-1)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "imsize",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "zNear",
+          "default": "-1",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "zFar",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* set intrinsics of the camera\n     *\n     * @param K intrinsic matrix or noArray(). If noArray() is specified, imsize\n     * is ignored and zNear/ zFar can be set separately.\n     * @param imsize image size\n     * @param zNear near clip distance or -1 to keep the current\n     * @param zFar  far clip distance or -1 to keep the current"
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.WindowScene.update",
+      "identity": "cv.ovis.WindowScene.update()->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* render this window, but do not swap buffers. Automatically called by @ref ovis::waitKey"
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.addResourceLocation",
+      "identity": "cv.ovis.addResourceLocation(String path[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "path",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* Add an additional resource location that is search for meshes, textures and materials\n *\n * must be called before the first createWindow. If give path does not exist, retries inside\n * Ogre Media Directory.\n * @param path folder or Zip archive."
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.createWindow",
+      "identity": "cv.ovis.createWindow(String title[/C,/Ref];Size size[/C,/Ref];int flags=SCENE_INTERACTIVE | SCENE_AA)->Ptr<WindowScene>",
+      "returnType": "Ptr<WindowScene>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "title",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Size",
+          "name": "size",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "SCENE_INTERACTIVE | SCENE_AA",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* create a new rendering window/ viewport\n * @param title window title\n * @param size size of the window\n * @param flags a combination of @ref SceneSettings\n *\n * Furthermore, the behavior is controlled by the following environment variables\n * - OPENCV_OVIS_VERBOSE_LOG: print all of OGRE log output\n * - OPENCV_OVIS_RENDERSYSTEM: the name of the OGRE RenderSystem to use\n * - OPENCV_OVIS_NOVSYNC: disable VSYNC for all windows"
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.waitKey",
+      "identity": "cv.ovis.waitKey(int delay=0)->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "delay",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* update all windows and wait for keyboard event\n *\n * @param delay 0 is the special value that means \"forever\".\n *        Any positive number returns after sync to blank (typically 16ms).\n * @return the code of the pressed key or -1 if no key was pressed"
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.setMaterialProperty",
+      "identity": "cv.ovis.setMaterialProperty(String name[/C,/Ref];int prop;Scalar value[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "name",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "prop",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "value",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* set the property of a material to the given value\n * @param name material name\n * @param prop @ref MaterialProperty\n * @param value the value"
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.setMaterialProperty",
+      "identity": "cv.ovis.setMaterialProperty(String name[/C,/Ref];int prop;String value[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "name",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "prop",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "String",
+          "name": "value",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.setMaterialProperty",
+      "identity": "cv.ovis.setMaterialProperty(String name[/C,/Ref];int prop;Mat value)->void",
+      "returnType": "void",
+      "modifiers": [
+        "=setMaterialTexture"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "name",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "prop",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "value",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* set the texture of a material to the given value\n * @param name material name\n * @param prop @ref MaterialProperty\n * @param value the texture data"
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.setMaterialProperty",
+      "identity": "cv.ovis.setMaterialProperty(String name[/C,/Ref];String prop[/C,/Ref];Scalar value[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "name",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "prop",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Scalar",
+          "name": "value",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* set the shader property of a material to the given value\n * @param name material name\n * @param prop property name\n * @param value the value"
+    },
+    {
+      "ordinal": 37,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.createPlaneMesh",
+      "identity": "cv.ovis.createPlaneMesh(String name[/C,/Ref];Size2f size[/C,/Ref];Mat image=Mat())->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "name",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Size2f",
+          "name": "size",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* create a 2D plane, X right, Y down, Z up\n *\n * creates a material with the same name\n * @param name name of the mesh\n * @param size size in world units\n * @param image optional texture"
+    },
+    {
+      "ordinal": 38,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.createPointCloudMesh",
+      "identity": "cv.ovis.createPointCloudMesh(String name[/C,/Ref];Mat vertices;Mat colors=Mat())->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "name",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "vertices",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "colors",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* creates a point cloud mesh\n *\n * creates a material with the same name\n * @param name name of the mesh\n * @param vertices float vector of positions\n * @param colors uchar vector of colors"
+    },
+    {
+      "ordinal": 39,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.createGridMesh",
+      "identity": "cv.ovis.createGridMesh(String name[/C,/Ref];Size2f size[/C,/Ref];Size segments=Size(1, 1)[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "name",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Size2f",
+          "name": "size",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Size",
+          "name": "segments",
+          "default": "Size(1, 1)",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* creates a grid\n *\n * creates a material with the same name\n * @param name name of the mesh\n * @param size extents of the grid\n * @param segments number of segments per side"
+    },
+    {
+      "ordinal": 40,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.createTriangleMesh",
+      "identity": "cv.ovis.createTriangleMesh(String name[/C,/Ref];Mat vertices;Mat normals=Mat();Mat indices=Mat())->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "name",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "vertices",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "normals",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "indices",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* creates a triangle mesh from vertex-vertex or face-vertex representation\n *\n * creates a material with the same name\n * @param name name of the mesh\n * @param vertices float vector of positions\n * @param normals float vector of normals\n * @param indices int vector of indices"
+    },
+    {
+      "ordinal": 41,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+      "kind": "callable",
+      "name": "cv.ovis.updateTexture",
+      "identity": "cv.ovis.updateTexture(String name[/C,/Ref];Mat image)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "name",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    }
+  ],
+  "compatibilityHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/ovis/CMakeLists.txt",
+      "sha256": "2757e492286d58019ac47d4d1035010d20b39df2410a7c2d0ec95dc251edcf6e",
+      "reason": "Upstream OVIS activation requires the external OGRE package at version 1.11.5 or later; parser declarations are not gated in the public header."
+    }
+  ],
+  "moduleBuildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT"
+}

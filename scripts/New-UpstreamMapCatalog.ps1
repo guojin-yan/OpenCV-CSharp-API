@@ -72,6 +72,7 @@ $definitions = @(
     [pscustomobject]@{ Id = 'cudastereo'; Tool = 'CudaStereo'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'cudalegacy'; Tool = 'CudaLegacy'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'videostab'; Tool = 'VideoStab'; Repository = 'opencv_contrib' }
+    [pscustomobject]@{ Id = 'ovis'; Tool = 'Ovis'; Repository = 'opencv_contrib' }
 )
 
 function Get-HeaderRows {

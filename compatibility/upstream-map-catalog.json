@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 64,
+  "moduleCount": 65,
   "maps": [
     {
       "id": "calib3d",
@@ -4170,6 +4170,58 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "89bfcd3658f739039a555b7a3ca79d05162a8505774029f5bae974ffecc85c64",
         "familyInventorySha256": "ac14d1d814ae1a76b227180cefe638b8bd56085e6aa1b3cd34ba69726ed311f0",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "ovis",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/OvisUpstreamMap",
+      "extractorScript": "tools/OvisUpstreamMap/extract_ovis.py",
+      "generationScript": "scripts/Generate-OvisUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-OvisUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/ovis.hpp contrib public header closure from parser-emitted headers",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+          "sha256": "8c05eb1a877c8f6603b5a1122ac437b065a9916f8b49433d215f9e0035c838d6"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ovis/include/opencv2/ovis.hpp",
+            "sha256": "8c05eb1a877c8f6603b5a1122ac437b065a9916f8b49433d215f9e0035c838d6",
+            "startOrdinal": 0,
+            "declarationCount": 42
+          }
+        ],
+        "compatibilityHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/ovis/CMakeLists.txt",
+            "sha256": "2757e492286d58019ac47d4d1035010d20b39df2410a7c2d0ec95dc251edcf6e",
+            "reason": "Upstream OVIS activation requires the external OGRE package at version 1.11.5 or later; parser declarations are not gated in the public header."
+          }
+        ],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/ovis-upstream-raw.json",
+        "classifications": "compatibility/ovis-upstream-classifications.json",
+        "mapping": "compatibility/ovis-upstream-map.txt",
+        "summary": "compatibility/ovis-upstream-summary.json",
+        "familyInventory": "compatibility/ovis-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 42,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "b01fedba6e266fd7d7eb2459b2e80aa01ac7edd36080ef4e860c45e5e272c9d2",
+        "familyInventorySha256": "5466b410320ab38b429814c3b321dd00114d02d4f122fcf6ff964af88234aabb",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

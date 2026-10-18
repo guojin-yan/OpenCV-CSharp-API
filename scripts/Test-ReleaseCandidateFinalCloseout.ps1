@@ -380,11 +380,17 @@ function Get-ExpectedEvidencePaths {
         "compatibility/videostab-upstream-map.txt",
         "compatibility/videostab-upstream-raw.json",
         "compatibility/videostab-upstream-summary.json",
+        "compatibility/ovis-implemented-families.json",
+        "compatibility/ovis-upstream-classifications.json",
+        "compatibility/ovis-upstream-map.txt",
+        "compatibility/ovis-upstream-raw.json",
+        "compatibility/ovis-upstream-summary.json",
         "compatibility/v5.0.1-change-ledger.json",
         "compatibility/v5.0.1-change-ledger.schema.json",
         "docs/articles/api-abi-compatibility-policy.md",
         "docs/articles/upstream-map-toolchain.md",
         "docs/articles/videostab-upstream-parity-guide.md",
+        "docs/articles/ovis-upstream-parity-guide.md",
         "docs/articles/xfeatures2d-upstream-parity-guide.md",
         "docs/articles/dnn-objdetect-upstream-parity-guide.md",
         "docs/articles/ccalib-upstream-parity-guide.md",
@@ -932,6 +938,9 @@ function Get-ExpectedEvidencePaths {
         "tools/VideoStabUpstreamMap/VideoStabUpstreamMap.csproj",
         "tools/VideoStabUpstreamMap/Program.cs",
         "tools/VideoStabUpstreamMap/extract_videostab.py",
+        "tools/OvisUpstreamMap/OvisUpstreamMap.csproj",
+        "tools/OvisUpstreamMap/Program.cs",
+        "tools/OvisUpstreamMap/extract_ovis.py",
         "tools/DnnObjDetectUpstreamMap/DnnObjDetectUpstreamMap.csproj",
         "tools/DnnObjDetectUpstreamMap/Program.cs",
         "tools/DnnObjDetectUpstreamMap/extract_dnn_objdetect.py",
@@ -1056,6 +1065,8 @@ function Get-ExpectedEvidencePaths {
         "scripts/Test-XFeatures2DUpstreamMap.ps1",
         "scripts/Generate-VideoStabUpstreamMap.ps1",
         "scripts/Test-VideoStabUpstreamMap.ps1",
+        "scripts/Generate-OvisUpstreamMap.ps1",
+        "scripts/Test-OvisUpstreamMap.ps1",
         "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
         "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
         "tools/TypedMatBenchmark/Program.cs",
@@ -1204,6 +1215,7 @@ function Test-Record {
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.CudaWarpingUpstreamMap.Sha256 -eq "135ba3ce8b955e15c74f0cd2ae57b66cd64e801efc0e8df244765e50feab07c1" -and $Record.ApiAbiBaseline.CudaWarpingUpstreamMap.RawSha256 -match "^[0-9a-f]{64}$" -and $Record.ApiAbiBaseline.CudaWarpingUpstreamMap.DeclarationCount -eq 13 -and $Record.ApiAbiBaseline.CudaWarpingUpstreamMap.CallableCount -eq 13 -and $Record.ApiAbiBaseline.CudaWarpingUpstreamMap.ImplementedCount -eq 0 -and $Record.ApiAbiBaseline.CudaWarpingUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.CudaWarpingUpstreamMap.IntentionallyOmittedCount -eq 13 -and $Record.ApiAbiBaseline.CudaWarpingUpstreamMap.UnsupportedCount -eq 0 -and $Record.ApiAbiBaseline.CudaWarpingUpstreamMap.UpstreamConditionalCount -eq 0 -and $Record.ApiAbiBaseline.CudaWarpingUpstreamMap.SourceHeaderCount -eq 1 -and $Record.ApiAbiBaseline.CudaWarpingUpstreamMap.SelectedFamilyCount -eq 1 -and $Record.ApiAbiBaseline.CudaWarpingUpstreamMap.SelectedDeclarationCount -eq 0 -and $Record.ApiAbiBaseline.CudaWarpingUpstreamMap.ManagedPublicTypeAdditionCount -eq 0 -and $Record.ApiAbiBaseline.CudaWarpingUpstreamMap.ManagedPublicMemberAdditionCount -eq 0 -and $Record.ApiAbiBaseline.CudaWarpingUpstreamMap.NativeEntrypointAdditionCount -eq 0 -and $Record.ApiAbiBaseline.CudaWarpingUpstreamMap.ExternalDataDependencyCount -eq 2 -and $Record.ApiAbiBaseline.CudaWarpingUpstreamMap.CompatibilityBuildPath -eq "opencv-source/opencv_contrib-5.0.0/modules/cudawarping/CMakeLists.txt" -and $Record.ApiAbiBaseline.CudaWarpingUpstreamMap.CompatibilityBuildSha256 -eq "91934e75b3aae4cf246783004d4b5dcbd87dd948bc4919cf85d23ed6d2dc11d3" -and $Record.ApiAbiBaseline.CudaWarpingUpstreamMap.ModuleBuildCondition -eq "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)" -and -not [bool]$Record.ApiAbiBaseline.CudaWarpingUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout CudaWarping upstream-map evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.GapInventoryStatus -eq "baseline-established-native-managed-parity-measured" -and -not [bool]$Record.ApiAbiBaseline.UpstreamParityMeasured -and [bool]$Record.ApiAbiBaseline.NativeToManagedParityMeasured -and $Record.ApiAbiBaseline.ImplementedSpanFamilyStatus -eq "implemented-verified") -Issue "Final closeout measured parity distinction or Span family status drifted"
 
+    Assert-True -List $List -Condition ($Record.ApiAbiBaseline.OvisUpstreamMap.Sha256 -eq "b01fedba6e266fd7d7eb2459b2e80aa01ac7edd36080ef4e860c45e5e272c9d2" -and $Record.ApiAbiBaseline.OvisUpstreamMap.RawSha256 -match "^[0-9a-f]{64}$" -and $Record.ApiAbiBaseline.OvisUpstreamMap.DeclarationCount -eq 42 -and $Record.ApiAbiBaseline.OvisUpstreamMap.CallableCount -eq 38 -and $Record.ApiAbiBaseline.OvisUpstreamMap.ClassCount -eq 1 -and $Record.ApiAbiBaseline.OvisUpstreamMap.EnumCount -eq 3 -and $Record.ApiAbiBaseline.OvisUpstreamMap.MetadataCount -eq 4 -and $Record.ApiAbiBaseline.OvisUpstreamMap.ImplementedCount -eq 0 -and $Record.ApiAbiBaseline.OvisUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.OvisUpstreamMap.IntentionallyOmittedCount -eq 38 -and $Record.ApiAbiBaseline.OvisUpstreamMap.UnsupportedCount -eq 0 -and $Record.ApiAbiBaseline.OvisUpstreamMap.UpstreamConditionalCount -eq 0 -and $Record.ApiAbiBaseline.OvisUpstreamMap.SourceHeaderCount -eq 1 -and $Record.ApiAbiBaseline.OvisUpstreamMap.CompatibilityHeaderCount -eq 1 -and $Record.ApiAbiBaseline.OvisUpstreamMap.SelectedFamilyCount -eq 1 -and $Record.ApiAbiBaseline.OvisUpstreamMap.SelectedDeclarationCount -eq 0 -and $Record.ApiAbiBaseline.OvisUpstreamMap.ManagedPublicTypeAdditionCount -eq 0 -and $Record.ApiAbiBaseline.OvisUpstreamMap.ManagedPublicMemberAdditionCount -eq 0 -and $Record.ApiAbiBaseline.OvisUpstreamMap.NativeEntrypointAdditionCount -eq 0 -and $Record.ApiAbiBaseline.OvisUpstreamMap.ExternalDataDependencyCount -eq 2 -and -not [bool]$Record.ApiAbiBaseline.OvisUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout OVIS upstream-map evidence drifted"
     $expectedEvidence = @(Get-ExpectedEvidencePaths)
     $actualEvidence = @($Record.EvidenceReferences | ForEach-Object { [string]$_.Path })
     $sortedEvidence = @(Get-OrdinalSorted -Values $actualEvidence)

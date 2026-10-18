@@ -1,0 +1,391 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/ovis.hpp contrib public header closure from parser-emitted headers",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact Ovis wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [
+    "OpenCV contrib OVIS is disabled unless external OGRE3D is found at version 1.11.5 or later; this package bundles neither OGRE nor an OVIS native/managed wrapper.",
+    "OVIS rendering depends on caller-selected scene meshes, textures/material scripts, renderer/window policy, and Mat input/output ownership; none is part of this package contract."
+  ],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "enum cv.ovis.SceneSettings[const cv.ovis.SCENE_SEPARATE=1;const cv.ovis.SCENE_INTERACTIVE=2;const cv.ovis.SCENE_SHOW_CS_CROSS=4;const cv.ovis.SCENE_AA=8;const cv.ovis.SCENE_OFFSCREEN=16;const cv.ovis.SCENE_SHADOWS=32]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "enum cv.ovis.MaterialProperty[const cv.ovis.MATERIAL_POINT_SIZE=0;const cv.ovis.MATERIAL_LINE_WIDTH=1;const cv.ovis.MATERIAL_OPACITY=2;const cv.ovis.MATERIAL_EMISSIVE=3;const cv.ovis.MATERIAL_DIFFUSE=4;const cv.ovis.MATERIAL_TEXTURE0=5;const cv.ovis.MATERIAL_TEXTURE=MATERIAL_TEXTURE0;const cv.ovis.MATERIAL_TEXTURE1=MATERIAL_TEXTURE0+1;const cv.ovis.MATERIAL_TEXTURE2=MATERIAL_TEXTURE0+2;const cv.ovis.MATERIAL_TEXTURE3=MATERIAL_TEXTURE0+3]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "enum cv.ovis.EntityProperty[const cv.ovis.ENTITY_MATERIAL=0;const cv.ovis.ENTITY_SCALE=1;const cv.ovis.ENTITY_AABB_WORLD=2;const cv.ovis.ENTITY_ANIMBLEND_MODE=3;const cv.ovis.ENTITY_CAST_SHADOWS=4]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "class cv.ovis.WindowScene",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.ovis.WindowScene.setBackground(Mat image)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.ovis.WindowScene.setBackground(Scalar color[/C,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.ovis.WindowScene.setCompositors(vector_String names[/C,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.ovis.WindowScene.createEntity(String name[/C,/Ref];String meshname[/C,/Ref];Mat tvec=Mat();Mat rot=Mat())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.ovis.WindowScene.removeEntity(String name[/C,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.ovis.WindowScene.setEntityProperty(String name[/C,/Ref];int prop;String value[/C,/Ref];int subEntityIdx=-1)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.ovis.WindowScene.setEntityProperty(String name[/C,/Ref];int prop;Scalar value[/C,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.ovis.WindowScene.getEntityProperty(String name[/C,/Ref];int prop;Mat value[/O])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.ovis.WindowScene.createCameraEntity(String name[/C,/Ref];Mat K;Size imsize[/C,/Ref];float zFar;Mat tvec=Mat();Mat rot=Mat();Scalar color=Scalar::all(1)[/C,/Ref])->Rect2d",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.ovis.WindowScene.createLightEntity(String name[/C,/Ref];Mat tvec=Mat();Mat rot=Mat();Scalar diffuseColor=Scalar::all(1)[/C,/Ref];Scalar specularColor=Scalar::all(1)[/C,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.ovis.WindowScene.updateEntityPose(String name[/C,/Ref];Mat tvec=Mat();Mat rot=Mat())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.ovis.WindowScene.setEntityPose(String name[/C,/Ref];Mat tvec=Mat();Mat rot=Mat();bool invert=false)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.ovis.WindowScene.getEntityPose(String name[/C,/Ref];Mat R=Mat()[/O];Mat tvec=Mat()[/O];bool invert=false)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.ovis.WindowScene.getEntityAnimations(String name[/C,/Ref];vector_String out[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.ovis.WindowScene.playEntityAnimation(String name[/C,/Ref];String animname[/C,/Ref];bool loop=true)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.ovis.WindowScene.stopEntityAnimation(String name[/C,/Ref];String animname[/C,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.ovis.WindowScene.getScreenshot(Mat frame[/O])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.ovis.WindowScene.getCompositorTexture(String compname[/C,/Ref];String texname[/C,/Ref];Mat out[/O];int mrtIndex=0)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.ovis.WindowScene.getDepth(Mat depth[/O])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.ovis.WindowScene.fixCameraYawAxis(bool useFixed;Mat up=Mat())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.ovis.WindowScene.setCameraPose(Mat tvec=Mat();Mat rot=Mat();bool invert=false)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.ovis.WindowScene.setCameraLookAt(String target[/C,/Ref];Mat offset=Mat())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.ovis.WindowScene.setEntityLookAt(String origin[/C,/Ref];String target[/C,/Ref];Mat offset=Mat())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.ovis.WindowScene.getCameraPose(Mat R=Mat()[/O];Mat tvec=Mat()[/O];bool invert=false)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.ovis.WindowScene.setCameraIntrinsics(Mat K;Size imsize[/C,/Ref];float zNear=-1;float zFar=-1)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.ovis.WindowScene.update()->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.ovis.addResourceLocation(String path[/C,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.ovis.createWindow(String title[/C,/Ref];Size size[/C,/Ref];int flags=SCENE_INTERACTIVE | SCENE_AA)->Ptr<WindowScene>",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.ovis.waitKey(int delay=0)->int",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.ovis.setMaterialProperty(String name[/C,/Ref];int prop;Scalar value[/C,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.ovis.setMaterialProperty(String name[/C,/Ref];int prop;String value[/C,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.ovis.setMaterialProperty(String name[/C,/Ref];int prop;Mat value)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.ovis.setMaterialProperty(String name[/C,/Ref];String prop[/C,/Ref];Scalar value[/C,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.ovis.createPlaneMesh(String name[/C,/Ref];Size2f size[/C,/Ref];Mat image=Mat())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.ovis.createPointCloudMesh(String name[/C,/Ref];Mat vertices;Mat colors=Mat())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.ovis.createGridMesh(String name[/C,/Ref];Size2f size[/C,/Ref];Size segments=Size(1, 1)[/C,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.ovis.createTriangleMesh(String name[/C,/Ref];Mat vertices;Mat normals=Mat();Mat indices=Mat())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.ovis.updateTexture(String name[/C,/Ref];Mat image)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.",
+      "buildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}

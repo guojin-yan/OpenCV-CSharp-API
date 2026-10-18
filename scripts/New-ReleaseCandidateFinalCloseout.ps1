@@ -182,6 +182,8 @@ function Get-Record {
     $xfeatures2dSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/xfeatures2d-upstream-summary.json") -Raw | ConvertFrom-Json
     $videostabRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/videostab-upstream-raw.json") -Raw | ConvertFrom-Json
     $videostabSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/videostab-upstream-summary.json") -Raw | ConvertFrom-Json
+    $ovisRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/ovis-upstream-raw.json") -Raw | ConvertFrom-Json
+    $ovisSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/ovis-upstream-summary.json") -Raw | ConvertFrom-Json
     $evidencePaths = @(
         ".github/workflows/pack.yml",
         ".github/workflows/publish-nuget.yml",
@@ -496,11 +498,17 @@ function Get-Record {
         "compatibility/videostab-upstream-map.txt",
         "compatibility/videostab-upstream-raw.json",
         "compatibility/videostab-upstream-summary.json",
+        "compatibility/ovis-implemented-families.json",
+        "compatibility/ovis-upstream-classifications.json",
+        "compatibility/ovis-upstream-map.txt",
+        "compatibility/ovis-upstream-raw.json",
+        "compatibility/ovis-upstream-summary.json",
         "compatibility/v5.0.1-change-ledger.json",
         "compatibility/v5.0.1-change-ledger.schema.json",
         "docs/articles/api-abi-compatibility-policy.md",
         "docs/articles/upstream-map-toolchain.md",
         "docs/articles/videostab-upstream-parity-guide.md",
+        "docs/articles/ovis-upstream-parity-guide.md",
         "docs/articles/xfeatures2d-upstream-parity-guide.md",
         "docs/articles/dnn-objdetect-upstream-parity-guide.md",
         "docs/articles/ccalib-upstream-parity-guide.md",
@@ -1044,6 +1052,9 @@ function Get-Record {
         "tools/VideoStabUpstreamMap/VideoStabUpstreamMap.csproj",
         "tools/VideoStabUpstreamMap/Program.cs",
         "tools/VideoStabUpstreamMap/extract_videostab.py",
+        "tools/OvisUpstreamMap/OvisUpstreamMap.csproj",
+        "tools/OvisUpstreamMap/Program.cs",
+        "tools/OvisUpstreamMap/extract_ovis.py",
         "tools/DnnObjDetectUpstreamMap/DnnObjDetectUpstreamMap.csproj",
         "tools/DnnObjDetectUpstreamMap/Program.cs",
         "tools/DnnObjDetectUpstreamMap/extract_dnn_objdetect.py",
@@ -1172,6 +1183,8 @@ function Get-Record {
         "scripts/Test-XFeatures2DUpstreamMap.ps1",
         "scripts/Generate-VideoStabUpstreamMap.ps1",
         "scripts/Test-VideoStabUpstreamMap.ps1",
+        "scripts/Generate-OvisUpstreamMap.ps1",
+        "scripts/Test-OvisUpstreamMap.ps1",
         "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
         "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
         "tools/TypedMatBenchmark/Program.cs",
@@ -2167,6 +2180,34 @@ function Get-Record {
                 NativeEntrypointAdditionCount = [int]$videostabSummary.nativeEvidenceCount
                 ExternalDataDependencyCount = [int]$videostabSummary.externalDataDependencyCount
                 RepositoryWideParityClaimed = [bool]$videostabSummary.repositoryWideUpstreamParityClaimed
+            }
+            OvisUpstreamMap = [ordered]@{
+                Path = "compatibility/ovis-upstream-map.txt"
+                SummaryPath = "compatibility/ovis-upstream-summary.json"
+                ClassificationPath = "compatibility/ovis-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/ovis-implemented-families.json"
+                RawExtractionPath = "compatibility/ovis-upstream-raw.json"
+                Sha256 = $ovisSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/ovis-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$ovisSummary.declarationCount
+                CallableCount = [int]$ovisSummary.callableCount
+                ClassCount = [int]$ovisSummary.classCount
+                EnumCount = [int]$ovisSummary.enumCount
+                MetadataCount = [int]$ovisSummary.classificationCounts.'non-callable-metadata'
+                ImplementedCount = [int]$ovisSummary.classificationCounts.implemented
+                MissingCount = [int]$ovisSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$ovisSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$ovisSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$ovisSummary.classificationCounts.'upstream-conditional'
+                SourceHeaderCount = @($ovisRaw.sourceHeaders).Count
+                CompatibilityHeaderCount = @($ovisRaw.compatibilityHeaders).Count
+                SelectedFamilyCount = [int]$ovisSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$ovisSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$ovisSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$ovisSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$ovisSummary.nativeEvidenceCount
+                ExternalDataDependencyCount = [int]$ovisSummary.externalDataDependencyCount
+                RepositoryWideParityClaimed = [bool]$ovisSummary.repositoryWideUpstreamParityClaimed
             }
             DnnObjDetectUpstreamMap = [ordered]@{
                 Path = "compatibility/dnn_objdetect-upstream-map.txt"
