@@ -1,0 +1,463 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/cudastereo.hpp parser-backed CUDA stereo-correspondence public declarations plus the pinned module CMake build/dependency contract",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact CudaStereo wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [
+    "The cudastereo module is disabled unless the OpenCV build enables CUDA or CUDA stubs and is unavailable on iOS/WinRT; real stereo execution depends on an external CUDA toolkit/runtime.",
+    "The module requires opencv_geometry and opencv_stereo and optionally opencv_cudev; GpuMat/Stream, asynchronous disparity transport, and belief-propagation/SGM state are outside this package. No CUDA stereo wrapper/runtime is bundled."
+  ],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.cuda.StereoBM",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.cuda.StereoBM.compute(Mat left;Mat right;Mat disparity[/O];Stream stream[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.cuda.createStereoBM(int numDisparities=64;int blockSize=19)->Ptr<cuda::StereoBM>",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "class cv.cuda.StereoBeliefPropagation",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.cuda.StereoBeliefPropagation.compute(Mat left;Mat right;Mat disparity[/O];Stream stream[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.cuda.StereoBeliefPropagation.compute(Mat data;Mat disparity[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.cuda.StereoBeliefPropagation.getNumIters()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.cuda.StereoBeliefPropagation.setNumIters(int iters)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.cuda.StereoBeliefPropagation.getNumLevels()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.cuda.StereoBeliefPropagation.setNumLevels(int levels)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.cuda.StereoBeliefPropagation.getMaxDataTerm()->double",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.cuda.StereoBeliefPropagation.setMaxDataTerm(double max_data_term)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.cuda.StereoBeliefPropagation.getDataWeight()->double",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.cuda.StereoBeliefPropagation.setDataWeight(double data_weight)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.cuda.StereoBeliefPropagation.getMaxDiscTerm()->double",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.cuda.StereoBeliefPropagation.setMaxDiscTerm(double max_disc_term)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.cuda.StereoBeliefPropagation.getDiscSingleJump()->double",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.cuda.StereoBeliefPropagation.setDiscSingleJump(double disc_single_jump)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.cuda.StereoBeliefPropagation.getMsgType()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.cuda.StereoBeliefPropagation.setMsgType(int msg_type)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.cuda.StereoBeliefPropagation.estimateRecommendedParams(int width;int height;int ndisp[/Ref];int iters[/Ref];int levels[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.cuda.createStereoBeliefPropagation(int ndisp=64;int iters=5;int levels=5;int msg_type=CV_32F)->Ptr<cuda::StereoBeliefPropagation>",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 22,
+      "identity": "class cv.cuda.StereoConstantSpaceBP",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.cuda.StereoConstantSpaceBP.getNrPlane()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.cuda.StereoConstantSpaceBP.setNrPlane(int nr_plane)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.cuda.StereoConstantSpaceBP.getUseLocalInitDataCost()->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.cuda.StereoConstantSpaceBP.setUseLocalInitDataCost(bool use_local_init_data_cost)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.cuda.StereoConstantSpaceBP.estimateRecommendedParams(int width;int height;int ndisp[/Ref];int iters[/Ref];int levels[/Ref];int nr_plane[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.cuda.createStereoConstantSpaceBP(int ndisp=128;int iters=8;int levels=4;int nr_plane=4;int msg_type=CV_32F)->Ptr<cuda::StereoConstantSpaceBP>",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 29,
+      "identity": "class cv.cuda.StereoSGM",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.cuda.StereoSGM.compute(Mat left;Mat right;Mat disparity[/O])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.cuda.StereoSGM.compute(Mat left;Mat right;Mat disparity[/O];Stream stream[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.cuda.createStereoSGM(int minDisparity=0;int numDisparities=128;int P1=10;int P2=120;int uniquenessRatio=5;int mode=cv::cuda::StereoSGM::MODE_HH4)->Ptr<cuda::StereoSGM>",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 33,
+      "identity": "class cv.cuda.DisparityBilateralFilter",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.cuda.DisparityBilateralFilter.apply(Mat disparity;Mat image;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.cuda.DisparityBilateralFilter.getNumDisparities()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.cuda.DisparityBilateralFilter.setNumDisparities(int numDisparities)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.cuda.DisparityBilateralFilter.getRadius()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.cuda.DisparityBilateralFilter.setRadius(int radius)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.cuda.DisparityBilateralFilter.getNumIters()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.cuda.DisparityBilateralFilter.setNumIters(int iters)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.cuda.DisparityBilateralFilter.getEdgeThreshold()->double",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 42,
+      "identity": "cv.cuda.DisparityBilateralFilter.setEdgeThreshold(double edge_threshold)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.cuda.DisparityBilateralFilter.getMaxDiscThreshold()->double",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.cuda.DisparityBilateralFilter.setMaxDiscThreshold(double max_disc_threshold)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 45,
+      "identity": "cv.cuda.DisparityBilateralFilter.getSigmaRange()->double",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 46,
+      "identity": "cv.cuda.DisparityBilateralFilter.setSigmaRange(double sigma_range)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.cuda.createDisparityBilateralFilter(int ndisp=64;int radius=3;int iters=1)->Ptr<cuda::DisparityBilateralFilter>",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 48,
+      "identity": "cv.cuda.reprojectImageTo3D(GpuMat disp;GpuMat xyzw[/O,/Ref];Mat Q;int dst_cn=4;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.cuda.drawColorDisp(Mat src_disp;Mat dst_disp[/O];int ndisp;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA stereo-correspondence surface in cv::cuda has no native CudaStereo wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while disparity execution requires an external CUDA toolkit/runtime and the upstream geometry/stereo dependency chain. GpuMat/Stream ownership, asynchronous execution, disparity output representation, and parameter-rich BP/SGM algorithm state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}

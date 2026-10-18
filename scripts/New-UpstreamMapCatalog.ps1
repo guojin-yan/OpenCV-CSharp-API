@@ -68,7 +68,8 @@ $definitions = @(
     [pscustomobject]@{ Id = 'cudawarping'; Tool = 'CudaWarping'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'cudafeatures2d'; Tool = 'CudaFeatures2D'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'cudaobjdetect'; Tool = 'CudaObjDetect'; Repository = 'opencv_contrib' },
-    [pscustomobject]@{ Id = 'cudaoptflow'; Tool = 'CudaOptFlow'; Repository = 'opencv_contrib' }
+    [pscustomobject]@{ Id = 'cudaoptflow'; Tool = 'CudaOptFlow'; Repository = 'opencv_contrib' },
+    [pscustomobject]@{ Id = 'cudastereo'; Tool = 'CudaStereo'; Repository = 'opencv_contrib' }
 )
 
 function Get-HeaderRows {

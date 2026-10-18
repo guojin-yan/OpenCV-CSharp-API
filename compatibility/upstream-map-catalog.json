@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 61,
+  "moduleCount": 62,
   "maps": [
     {
       "id": "calib3d",
@@ -3900,6 +3900,58 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "ac45508b1fb05e0a6154e42cf050161da9dc52fbb5b2ab5a5c6b511abedfde6a",
         "familyInventorySha256": "7291bf8549764ced7c9a79b908356bf33488420cc38cecaa9671708a69a20702",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "cudastereo",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/CudaStereoUpstreamMap",
+      "extractorScript": "tools/CudaStereoUpstreamMap/extract_cudastereo.py",
+      "generationScript": "scripts/Generate-CudaStereoUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-CudaStereoUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/cudastereo.hpp parser-backed CUDA stereo-correspondence public declarations plus the pinned module CMake build/dependency contract",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+          "sha256": "15d4a78fc69cb60c1fc11525388f688d01e4b7ab355041ee51dc68e538dd5534"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+            "sha256": "15d4a78fc69cb60c1fc11525388f688d01e4b7ab355041ee51dc68e538dd5534",
+            "startOrdinal": 0,
+            "declarationCount": 50
+          }
+        ],
+        "compatibilityHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/CMakeLists.txt",
+            "sha256": "84b1128921e1ffe5de4c942fd285e0b2c00ee7bda1dcd7e5d943e817391f6749",
+            "reason": "Upstream module activation, stereo/geometry dependency, optional cudev, and CUDA runtime dependency contract; parser declarations are not gated in the public header."
+          }
+        ],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/cudastereo-upstream-raw.json",
+        "classifications": "compatibility/cudastereo-upstream-classifications.json",
+        "mapping": "compatibility/cudastereo-upstream-map.txt",
+        "summary": "compatibility/cudastereo-upstream-summary.json",
+        "familyInventory": "compatibility/cudastereo-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 50,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "270329519bbc9f109301db62a0dfdfb5b4cd620777b94a1588b3ae34475a387c",
+        "familyInventorySha256": "09bb8cb7671f4bfff49e62944e92eaa8e031b543d752e92fbfd7863ce03e2708",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

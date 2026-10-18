@@ -1,0 +1,1349 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/CudaStereoUpstreamMap/extract_cudastereo.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+  "headerSha256": "15d4a78fc69cb60c1fc11525388f688d01e4b7ab355041ee51dc68e538dd5534",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "sha256": "15d4a78fc69cb60c1fc11525388f688d01e4b7ab355041ee51dc68e538dd5534",
+      "startOrdinal": 0,
+      "declarationCount": 50
+    }
+  ],
+  "declarationCount": 50,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "class",
+      "name": "cv.cuda.StereoBM",
+      "identity": "class cv.cuda.StereoBM",
+      "returnType": ": cv::StereoBM",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::StereoBM",
+      "documentation": "@brief Class computing stereo correspondence (disparity map) using the block matching algorithm. :\n\n@sa StereoBM"
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.StereoBM.compute",
+      "identity": "cv.cuda.StereoBM.compute(Mat left;Mat right;Mat disparity[/O];Stream stream[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "left",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "right",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "disparity",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createStereoBM",
+      "identity": "cv.cuda.createStereoBM(int numDisparities=64;int blockSize=19)->Ptr<cuda::StereoBM>",
+      "returnType": "Ptr<cuda::StereoBM>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "numDisparities",
+          "default": "64",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "blockSize",
+          "default": "19",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates StereoBM object.\n\n@param numDisparities the disparity search range. For each pixel algorithm will find the best\ndisparity from 0 (default minimum disparity) to numDisparities. The search range can then be\nshifted by changing the minimum disparity.\n@param blockSize the linear size of the blocks compared by the algorithm. The size should be odd\n(as the block is centered at the current pixel). Larger block size implies smoother, though less\naccurate disparity map. Smaller block size gives more detailed disparity map, but there is higher\nchance for algorithm to find a wrong correspondence."
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "class",
+      "name": "cv.cuda.StereoBeliefPropagation",
+      "identity": "class cv.cuda.StereoBeliefPropagation",
+      "returnType": ": cv::StereoMatcher",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::StereoMatcher",
+      "documentation": "@brief Class computing stereo correspondence using the belief propagation algorithm. :\n\nThe class implements algorithm described in @cite Felzenszwalb2006 . It can compute own data cost\n(using a truncated linear model) or use a user-provided data cost.\n\n@note\n   StereoBeliefPropagation requires a lot of memory for message storage:\n\n    \\f[width \\_ step  \\cdot height  \\cdot ndisp  \\cdot 4  \\cdot (1 + 0.25)\\f]\n\n    and for data cost storage:\n\n    \\f[width\\_step \\cdot height \\cdot ndisp \\cdot (1 + 0.25 + 0.0625 +  \\dotsm + \\frac{1}{4^{levels}})\\f]\n\n    width_step is the number of bytes in a line including padding.\n\nStereoBeliefPropagation uses a truncated linear model for the data cost and discontinuity terms:\n\n\\f[DataCost = data \\_ weight  \\cdot \\min ( \\lvert Img_Left(x,y)-Img_Right(x-d,y)  \\rvert , max \\_ data \\_ term)\\f]\n\n\\f[DiscTerm =  \\min (disc \\_ single \\_ jump  \\cdot \\lvert f_1-f_2  \\rvert , max \\_ disc \\_ term)\\f]\n\nFor more details, see @cite Felzenszwalb2006 .\n\nBy default, StereoBeliefPropagation uses floating-point arithmetics and the CV_32FC1 type for\nmessages. But it can also use fixed-point arithmetics and the CV_16SC1 message type for better\nperformance. To avoid an overflow in this case, the parameters must satisfy the following\nrequirement:\n\n\\f[10  \\cdot 2^{levels-1}  \\cdot max \\_ data \\_ term < SHRT \\_ MAX\\f]\n\n@sa StereoMatcher"
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.StereoBeliefPropagation.compute",
+      "identity": "cv.cuda.StereoBeliefPropagation.compute(Mat left;Mat right;Mat disparity[/O];Stream stream[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "left",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "right",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "disparity",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.StereoBeliefPropagation.compute",
+      "identity": "cv.cuda.StereoBeliefPropagation.compute(Mat data;Mat disparity[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "data",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "disparity",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Enables the stereo correspondence operator that finds the disparity for the specified data cost.\n\n    @param data User-specified data cost, a matrix of msg_type type and\n    Size(\\<image columns\\>\\*ndisp, \\<image rows\\>) size.\n    @param disparity Output disparity map. If disparity is empty, the output type is CV_16SC1 .\n    Otherwise, the type is retained. In 16-bit signed format, the disparity values do not have\n    fractional bits.\n    @param stream Stream for the asynchronous version."
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.StereoBeliefPropagation.getNumIters",
+      "identity": "cv.cuda.StereoBeliefPropagation.getNumIters()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.StereoBeliefPropagation.setNumIters",
+      "identity": "cv.cuda.StereoBeliefPropagation.setNumIters(int iters)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "iters",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.StereoBeliefPropagation.getNumLevels",
+      "identity": "cv.cuda.StereoBeliefPropagation.getNumLevels()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.StereoBeliefPropagation.setNumLevels",
+      "identity": "cv.cuda.StereoBeliefPropagation.setNumLevels(int levels)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "levels",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.StereoBeliefPropagation.getMaxDataTerm",
+      "identity": "cv.cuda.StereoBeliefPropagation.getMaxDataTerm()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.StereoBeliefPropagation.setMaxDataTerm",
+      "identity": "cv.cuda.StereoBeliefPropagation.setMaxDataTerm(double max_data_term)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "max_data_term",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.StereoBeliefPropagation.getDataWeight",
+      "identity": "cv.cuda.StereoBeliefPropagation.getDataWeight()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.StereoBeliefPropagation.setDataWeight",
+      "identity": "cv.cuda.StereoBeliefPropagation.setDataWeight(double data_weight)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "data_weight",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.StereoBeliefPropagation.getMaxDiscTerm",
+      "identity": "cv.cuda.StereoBeliefPropagation.getMaxDiscTerm()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.StereoBeliefPropagation.setMaxDiscTerm",
+      "identity": "cv.cuda.StereoBeliefPropagation.setMaxDiscTerm(double max_disc_term)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "max_disc_term",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.StereoBeliefPropagation.getDiscSingleJump",
+      "identity": "cv.cuda.StereoBeliefPropagation.getDiscSingleJump()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.StereoBeliefPropagation.setDiscSingleJump",
+      "identity": "cv.cuda.StereoBeliefPropagation.setDiscSingleJump(double disc_single_jump)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "disc_single_jump",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.StereoBeliefPropagation.getMsgType",
+      "identity": "cv.cuda.StereoBeliefPropagation.getMsgType()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.StereoBeliefPropagation.setMsgType",
+      "identity": "cv.cuda.StereoBeliefPropagation.setMsgType(int msg_type)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "msg_type",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.StereoBeliefPropagation.estimateRecommendedParams",
+      "identity": "cv.cuda.StereoBeliefPropagation.estimateRecommendedParams(int width;int height;int ndisp[/Ref];int iters[/Ref];int levels[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "width",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "height",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "ndisp",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "iters",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "levels",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Uses a heuristic method to compute the recommended parameters ( ndisp, iters and levels ) for the\n    specified image size ( width and height )."
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createStereoBeliefPropagation",
+      "identity": "cv.cuda.createStereoBeliefPropagation(int ndisp=64;int iters=5;int levels=5;int msg_type=CV_32F)->Ptr<cuda::StereoBeliefPropagation>",
+      "returnType": "Ptr<cuda::StereoBeliefPropagation>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "ndisp",
+          "default": "64",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "iters",
+          "default": "5",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "levels",
+          "default": "5",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "msg_type",
+          "default": "CV_32F",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates StereoBeliefPropagation object.\n\n@param ndisp Number of disparities.\n@param iters Number of BP iterations on each level.\n@param levels Number of levels.\n@param msg_type Type for messages. CV_16SC1 and CV_32FC1 types are supported."
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "class",
+      "name": "cv.cuda.StereoConstantSpaceBP",
+      "identity": "class cv.cuda.StereoConstantSpaceBP",
+      "returnType": ": cv::cuda::cuda::StereoBeliefPropagation",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::cuda::cuda::StereoBeliefPropagation",
+      "documentation": "@brief Class computing stereo correspondence using the constant space belief propagation algorithm. :\n\nThe class implements algorithm described in @cite Yang2010 . StereoConstantSpaceBP supports both local\nminimum and global minimum data cost initialization algorithms. For more details, see the paper\nmentioned above. By default, a local algorithm is used. To enable a global algorithm, set\nuse_local_init_data_cost to false .\n\nStereoConstantSpaceBP uses a truncated linear model for the data cost and discontinuity terms:\n\n\\f[DataCost = data \\_ weight  \\cdot \\min ( \\lvert I_2-I_1  \\rvert , max \\_ data \\_ term)\\f]\n\n\\f[DiscTerm =  \\min (disc \\_ single \\_ jump  \\cdot \\lvert f_1-f_2  \\rvert , max \\_ disc \\_ term)\\f]\n\nFor more details, see @cite Yang2010 .\n\nBy default, StereoConstantSpaceBP uses floating-point arithmetics and the CV_32FC1 type for\nmessages. But it can also use fixed-point arithmetics and the CV_16SC1 message type for better\nperformance. To avoid an overflow in this case, the parameters must satisfy the following\nrequirement:\n\n\\f[10  \\cdot 2^{levels-1}  \\cdot max \\_ data \\_ term < SHRT \\_ MAX\\f]"
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.StereoConstantSpaceBP.getNrPlane",
+      "identity": "cv.cuda.StereoConstantSpaceBP.getNrPlane()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.StereoConstantSpaceBP.setNrPlane",
+      "identity": "cv.cuda.StereoConstantSpaceBP.setNrPlane(int nr_plane)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nr_plane",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.StereoConstantSpaceBP.getUseLocalInitDataCost",
+      "identity": "cv.cuda.StereoConstantSpaceBP.getUseLocalInitDataCost()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.StereoConstantSpaceBP.setUseLocalInitDataCost",
+      "identity": "cv.cuda.StereoConstantSpaceBP.setUseLocalInitDataCost(bool use_local_init_data_cost)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "use_local_init_data_cost",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.StereoConstantSpaceBP.estimateRecommendedParams",
+      "identity": "cv.cuda.StereoConstantSpaceBP.estimateRecommendedParams(int width;int height;int ndisp[/Ref];int iters[/Ref];int levels[/Ref];int nr_plane[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "width",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "height",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "ndisp",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "iters",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "levels",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "nr_plane",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Uses a heuristic method to compute parameters (ndisp, iters, levelsand nrplane) for the specified\n    image size (widthand height)."
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createStereoConstantSpaceBP",
+      "identity": "cv.cuda.createStereoConstantSpaceBP(int ndisp=128;int iters=8;int levels=4;int nr_plane=4;int msg_type=CV_32F)->Ptr<cuda::StereoConstantSpaceBP>",
+      "returnType": "Ptr<cuda::StereoConstantSpaceBP>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "ndisp",
+          "default": "128",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "iters",
+          "default": "8",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "levels",
+          "default": "4",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "nr_plane",
+          "default": "4",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "msg_type",
+          "default": "CV_32F",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates StereoConstantSpaceBP object.\n\n@param ndisp Number of disparities.\n@param iters Number of BP iterations on each level.\n@param levels Number of levels.\n@param nr_plane Number of disparity levels on the first level.\n@param msg_type Type for messages. CV_16SC1 and CV_32FC1 types are supported."
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "class",
+      "name": "cv.cuda.StereoSGM",
+      "identity": "class cv.cuda.StereoSGM",
+      "returnType": ": cv::StereoSGBM",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::StereoSGBM",
+      "documentation": "@brief The class implements the modified H. Hirschmuller algorithm @cite HH08.\nLimitation and difference are as follows:\n\n-   By default, the algorithm uses only 4 directions which are horizontal and vertical path instead of 8.\nSet mode=StereoSGM::MODE_HH in createStereoSGM to run the full variant of the algorithm.\n-   Mutual Information cost function is not implemented.\nInstead, Center-Symmetric Census Transform with \\f$9 \\times 7\\f$ window size from @cite Spangenberg2013\nis used for robustness.\n\n@sa cv::StereoSGBM"
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.StereoSGM.compute",
+      "identity": "cv.cuda.StereoSGM.compute(Mat left;Mat right;Mat disparity[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "left",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "right",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "disparity",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes disparity map for the specified stereo pair\n\n    @param left Left 8-bit or 16-bit unsigned single-channel image.\n    @param right Right image of the same size and the same type as the left one.\n    @param disparity Output disparity map. It has the same size as the input images.\n    StereoSGM computes 16-bit fixed-point disparity map (where each disparity value has 4 fractional bits)."
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.StereoSGM.compute",
+      "identity": "cv.cuda.StereoSGM.compute(Mat left;Mat right;Mat disparity[/O];Stream stream[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "=compute_with_stream",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "left",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "right",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "disparity",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes disparity map with specified CUDA Stream\n\n    @sa compute"
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createStereoSGM",
+      "identity": "cv.cuda.createStereoSGM(int minDisparity=0;int numDisparities=128;int P1=10;int P2=120;int uniquenessRatio=5;int mode=cv::cuda::StereoSGM::MODE_HH4)->Ptr<cuda::StereoSGM>",
+      "returnType": "Ptr<cuda::StereoSGM>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "minDisparity",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "numDisparities",
+          "default": "128",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "P1",
+          "default": "10",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "P2",
+          "default": "120",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "uniquenessRatio",
+          "default": "5",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "mode",
+          "default": "cv::cuda::StereoSGM::MODE_HH4",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates StereoSGM object.\n\n@param minDisparity Minimum possible disparity value. Normally, it is zero but sometimes rectification algorithms can shift images, so this parameter needs to be adjusted accordingly.\n@param numDisparities Maximum disparity minus minimum disparity. The value must be 64, 128 or 256.\n@param P1 The first parameter controlling the disparity smoothness.This parameter is used for the case of slanted surfaces (not fronto parallel).\n@param P2 The second parameter controlling the disparity smoothness.This parameter is used for \"solving\" the depth discontinuities problem.\n@param uniquenessRatio Margin in percentage by which the best (minimum) computed cost function\nvalue should \"win\" the second best value to consider the found match correct. Normally, a value\nwithin the 5-15 range is good enough.\n@param mode Set it to StereoSGM::MODE_HH to run the full-scale two-pass dynamic programming algorithm.\nIt will consume O(W\\*H\\*numDisparities) bytes. By default, it is set to StereoSGM::MODE_HH4."
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "class",
+      "name": "cv.cuda.DisparityBilateralFilter",
+      "identity": "class cv.cuda.DisparityBilateralFilter",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Class refining a disparity map using joint bilateral filtering. :\n\nThe class implements @cite Yang2010 algorithm."
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DisparityBilateralFilter.apply",
+      "identity": "cv.cuda.DisparityBilateralFilter.apply(Mat disparity;Mat image;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "disparity",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Refines a disparity map using joint bilateral filtering.\n\n    @param disparity Input disparity map. CV_8UC1 and CV_16SC1 types are supported.\n    @param image Input image. CV_8UC1 and CV_8UC3 types are supported.\n    @param dst Destination disparity map. It has the same size and type as disparity .\n    @param stream Stream for the asynchronous version."
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DisparityBilateralFilter.getNumDisparities",
+      "identity": "cv.cuda.DisparityBilateralFilter.getNumDisparities()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DisparityBilateralFilter.setNumDisparities",
+      "identity": "cv.cuda.DisparityBilateralFilter.setNumDisparities(int numDisparities)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "numDisparities",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 37,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DisparityBilateralFilter.getRadius",
+      "identity": "cv.cuda.DisparityBilateralFilter.getRadius()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 38,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DisparityBilateralFilter.setRadius",
+      "identity": "cv.cuda.DisparityBilateralFilter.setRadius(int radius)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "radius",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 39,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DisparityBilateralFilter.getNumIters",
+      "identity": "cv.cuda.DisparityBilateralFilter.getNumIters()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 40,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DisparityBilateralFilter.setNumIters",
+      "identity": "cv.cuda.DisparityBilateralFilter.setNumIters(int iters)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "iters",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 41,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DisparityBilateralFilter.getEdgeThreshold",
+      "identity": "cv.cuda.DisparityBilateralFilter.getEdgeThreshold()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 42,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DisparityBilateralFilter.setEdgeThreshold",
+      "identity": "cv.cuda.DisparityBilateralFilter.setEdgeThreshold(double edge_threshold)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "edge_threshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 43,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DisparityBilateralFilter.getMaxDiscThreshold",
+      "identity": "cv.cuda.DisparityBilateralFilter.getMaxDiscThreshold()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 44,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DisparityBilateralFilter.setMaxDiscThreshold",
+      "identity": "cv.cuda.DisparityBilateralFilter.setMaxDiscThreshold(double max_disc_threshold)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "max_disc_threshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 45,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DisparityBilateralFilter.getSigmaRange",
+      "identity": "cv.cuda.DisparityBilateralFilter.getSigmaRange()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 46,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DisparityBilateralFilter.setSigmaRange",
+      "identity": "cv.cuda.DisparityBilateralFilter.setSigmaRange(double sigma_range)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "sigma_range",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 47,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createDisparityBilateralFilter",
+      "identity": "cv.cuda.createDisparityBilateralFilter(int ndisp=64;int radius=3;int iters=1)->Ptr<cuda::DisparityBilateralFilter>",
+      "returnType": "Ptr<cuda::DisparityBilateralFilter>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "ndisp",
+          "default": "64",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "radius",
+          "default": "3",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "iters",
+          "default": "1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates DisparityBilateralFilter object.\n\n@param ndisp Number of disparities.\n@param radius Filter radius.\n@param iters Number of iterations."
+    },
+    {
+      "ordinal": 48,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.reprojectImageTo3D",
+      "identity": "cv.cuda.reprojectImageTo3D(GpuMat disp;GpuMat xyzw[/O,/Ref];Mat Q;int dst_cn=4;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "GpuMat",
+          "name": "disp",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "GpuMat",
+          "name": "xyzw",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "Q",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "dst_cn",
+          "default": "4",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Reprojects a disparity image to 3D space.\n\n@param disp Input single-channel 8-bit unsigned, 16-bit signed, 32-bit signed or 32-bit\nfloating-point disparity image. If 16-bit signed format is used, the values are assumed to have no\nfractional bits.\n@param xyzw Output 3- or 4-channel floating-point image of the same size as disp . Each element of\nxyzw(x,y) contains 3D coordinates (x,y,z) or (x,y,z,1) of the point (x,y) , computed from the\ndisparity map.\n@param Q \\f$4 \\times 4\\f$ perspective transformation matrix that can be obtained via stereoRectify .\n@param dst_cn The number of channels for output image. Can be 3 or 4.\n@param stream Stream for the asynchronous version.\n\n@sa reprojectImageTo3D"
+    },
+    {
+      "ordinal": 49,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.drawColorDisp",
+      "identity": "cv.cuda.drawColorDisp(Mat src_disp;Mat dst_disp[/O];int ndisp;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src_disp",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst_disp",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "ndisp",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Colors a disparity image.\n\n@param src_disp Input single-channel 8-bit unsigned, 16-bit signed, 32-bit signed or 32-bit\nfloating-point disparity image. If 16-bit signed format is used, the values are assumed to have no\nfractional bits.\n@param dst_disp Output disparity image. It has the same size as src_disp. The type is CV_8UC4\nin BGRA format (alpha = 255).\n@param ndisp Number of disparities.\n@param stream Stream for the asynchronous version.\n\nThis function draws a colored disparity map by converting disparity values from [0..ndisp) interval\nfirst to HSV color space (where different disparity values correspond to different hues) and then\nconverting the pixels to RGB for visualization."
+    }
+  ],
+  "compatibilityHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/CMakeLists.txt",
+      "sha256": "84b1128921e1ffe5de4c942fd285e0b2c00ee7bda1dcd7e5d943e817391f6749",
+      "reason": "Upstream module activation, stereo/geometry dependency, optional cudev, and CUDA runtime dependency contract; parser declarations are not gated in the public header."
+    }
+  ],
+  "moduleBuildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)"
+}
