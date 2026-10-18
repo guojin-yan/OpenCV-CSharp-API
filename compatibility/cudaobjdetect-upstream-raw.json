@@ -1,0 +1,1067 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/CudaObjDetectUpstreamMap/extract_cudaobjdetect.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+  "headerSha256": "b34494e768fbedd8cdbafdb4095bcc373c558785dfe7342688d4537273ce69ee",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "sha256": "b34494e768fbedd8cdbafdb4095bcc373c558785dfe7342688d4537273ce69ee",
+      "startOrdinal": 0,
+      "declarationCount": 46
+    }
+  ],
+  "declarationCount": 46,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "class",
+      "name": "cv.cuda.HOG",
+      "identity": "class cv.cuda.HOG",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief The class implements Histogram of Oriented Gradients (@cite Dalal2005) object detector.\n\n@note\n    -   An example applying the HOG descriptor for people detection can be found at\n        xobjdetect_module/samples/peopledetect.cpp\n    -   A CUDA example applying the HOG descriptor for people detection can be found at\n        xobjdetect_module/samples/gpu/hog.cpp\n    -   (Python) An example applying the HOG descriptor for people detection can be found at\n        xobjdetect_module/samples/python/peopledetect.py"
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.create",
+      "identity": "cv.cuda.HOG.create(Size win_size=Size(64, 128);Size block_size=Size(16, 16);Size block_stride=Size(8, 8);Size cell_size=Size(8, 8);int nbins=9)->Ptr<HOG>",
+      "returnType": "Ptr<HOG>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "win_size",
+          "default": "Size(64, 128)",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "block_size",
+          "default": "Size(16, 16)",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "block_stride",
+          "default": "Size(8, 8)",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "cell_size",
+          "default": "Size(8, 8)",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "nbins",
+          "default": "9",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates the HOG descriptor and detector.\n\n    @param win_size Detection window size. Align to block size and block stride.\n    @param block_size Block size in pixels. Align to cell size. Only (16,16) is supported for now.\n    @param block_stride Block stride. It must be a multiple of cell size.\n    @param cell_size Cell size. Only (8, 8) is supported for now.\n    @param nbins Number of bins. Only 9 bins per cell are supported for now."
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.setWinSigma",
+      "identity": "cv.cuda.HOG.setWinSigma(double win_sigma)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "win_sigma",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.getWinSigma",
+      "identity": "cv.cuda.HOG.getWinSigma()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.setL2HysThreshold",
+      "identity": "cv.cuda.HOG.setL2HysThreshold(double threshold_L2hys)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "threshold_L2hys",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.getL2HysThreshold",
+      "identity": "cv.cuda.HOG.getL2HysThreshold()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.setGammaCorrection",
+      "identity": "cv.cuda.HOG.setGammaCorrection(bool gamma_correction)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "gamma_correction",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.getGammaCorrection",
+      "identity": "cv.cuda.HOG.getGammaCorrection()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.setNumLevels",
+      "identity": "cv.cuda.HOG.setNumLevels(int nlevels)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nlevels",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.getNumLevels",
+      "identity": "cv.cuda.HOG.getNumLevels()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.setHitThreshold",
+      "identity": "cv.cuda.HOG.setHitThreshold(double hit_threshold)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "hit_threshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.getHitThreshold",
+      "identity": "cv.cuda.HOG.getHitThreshold()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.setWinStride",
+      "identity": "cv.cuda.HOG.setWinStride(Size win_stride)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "win_stride",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.getWinStride",
+      "identity": "cv.cuda.HOG.getWinStride()->Size",
+      "returnType": "Size",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.setScaleFactor",
+      "identity": "cv.cuda.HOG.setScaleFactor(double scale0)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "scale0",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.getScaleFactor",
+      "identity": "cv.cuda.HOG.getScaleFactor()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.setGroupThreshold",
+      "identity": "cv.cuda.HOG.setGroupThreshold(int group_threshold)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "group_threshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.getGroupThreshold",
+      "identity": "cv.cuda.HOG.getGroupThreshold()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.setDescriptorFormat",
+      "identity": "cv.cuda.HOG.setDescriptorFormat(HOGDescriptor_DescriptorStorageFormat descr_format)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "HOGDescriptor_DescriptorStorageFormat",
+          "name": "descr_format",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.getDescriptorFormat",
+      "identity": "cv.cuda.HOG.getDescriptorFormat()->HOGDescriptor::DescriptorStorageFormat",
+      "returnType": "HOGDescriptor::DescriptorStorageFormat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.getDescriptorSize",
+      "identity": "cv.cuda.HOG.getDescriptorSize()->size_t",
+      "returnType": "size_t",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the number of coefficients required for the classification."
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.getBlockHistogramSize",
+      "identity": "cv.cuda.HOG.getBlockHistogramSize()->size_t",
+      "returnType": "size_t",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the block histogram size."
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.setSVMDetector",
+      "identity": "cv.cuda.HOG.setSVMDetector(Mat detector)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "detector",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets coefficients for the linear SVM classifier."
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.getDefaultPeopleDetector",
+      "identity": "cv.cuda.HOG.getDefaultPeopleDetector()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns coefficients of the classifier trained for people detection."
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.detect",
+      "identity": "cv.cuda.HOG.detect(Mat img;vector_Point found_locations[/O,/Ref];vector_double confidences[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Point",
+          "name": "found_locations",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_double",
+          "name": "confidences",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Performs object detection without a multi-scale window.\n\n    @param img Source image. CV_8UC1 and CV_8UC4 types are supported for now.\n    @param found_locations Left-top corner points of detected objects boundaries.\n    @param confidences Optional output array for confidences."
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.detectWithoutConf",
+      "identity": "cv.cuda.HOG.detectWithoutConf(Mat img;vector_Point found_locations[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Point",
+          "name": "found_locations",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Performs object detection without a multi-scale window.\n\n    @param img Source image. CV_8UC1 and CV_8UC4 types are supported for now.\n    @param found_locations Left-top corner points of detected objects boundaries."
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.detectMultiScale",
+      "identity": "cv.cuda.HOG.detectMultiScale(Mat img;vector_Rect found_locations[/O,/Ref];vector_double confidences[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Rect",
+          "name": "found_locations",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_double",
+          "name": "confidences",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Performs object detection with a multi-scale window.\n\n    @param img Source image. See cuda::HOGDescriptor::detect for type limitations.\n    @param found_locations Detected objects boundaries.\n    @param confidences Optional output array for confidences."
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.detectMultiScaleWithoutConf",
+      "identity": "cv.cuda.HOG.detectMultiScaleWithoutConf(Mat img;vector_Rect found_locations[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Rect",
+          "name": "found_locations",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Performs object detection with a multi-scale window.\n\n    @param img Source image. See cuda::HOGDescriptor::detect for type limitations.\n    @param found_locations Detected objects boundaries."
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.HOG.compute",
+      "identity": "cv.cuda.HOG.compute(Mat img;Mat descriptors[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "descriptors",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns block descriptors computed for the whole image.\n\n    @param img Source image. See cuda::HOGDescriptor::detect for type limitations.\n    @param descriptors 2D array of descriptors.\n    @param stream CUDA stream."
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "class",
+      "name": "cv.cuda.CascadeClassifier",
+      "identity": "class cv.cuda.CascadeClassifier",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Cascade classifier class used for object detection. Supports HAAR and LBP cascades. :\n\n@note\n    -   A cascade classifier example can be found at\n        xobjdetect_module/samples/gpu/cascadeclassifier.cpp\n    -   A Nvidea API specific cascade classifier example can be found at\n        opencv_source_code/samples/gpu/cascadeclassifier_nvidia_api.cpp"
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.CascadeClassifier.create",
+      "identity": "cv.cuda.CascadeClassifier.create(String filename[/C,/Ref,/PATH])->Ptr<cuda::CascadeClassifier>",
+      "returnType": "Ptr<cuda::CascadeClassifier>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Loads the classifier from a file. Cascade type is detected automatically by constructor parameter.\n\n    @param filename Name of the file from which the classifier is loaded. Only the old haar classifier\n    (trained by the haar training application) and NVIDIA's nvbin are supported for HAAR and only new\n    type of OpenCV XML cascade supported for LBP. The working haar models can be found at opencv_folder/data/haarcascades_cuda/"
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.CascadeClassifier.setMaxObjectSize",
+      "identity": "cv.cuda.CascadeClassifier.setMaxObjectSize(Size maxObjectSize)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "maxObjectSize",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.CascadeClassifier.getMaxObjectSize",
+      "identity": "cv.cuda.CascadeClassifier.getMaxObjectSize()->Size",
+      "returnType": "Size",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.CascadeClassifier.setMinObjectSize",
+      "identity": "cv.cuda.CascadeClassifier.setMinObjectSize(Size minSize)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "minSize",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.CascadeClassifier.getMinObjectSize",
+      "identity": "cv.cuda.CascadeClassifier.getMinObjectSize()->Size",
+      "returnType": "Size",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.CascadeClassifier.setScaleFactor",
+      "identity": "cv.cuda.CascadeClassifier.setScaleFactor(double scaleFactor)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "scaleFactor",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.CascadeClassifier.getScaleFactor",
+      "identity": "cv.cuda.CascadeClassifier.getScaleFactor()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 37,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.CascadeClassifier.setMinNeighbors",
+      "identity": "cv.cuda.CascadeClassifier.setMinNeighbors(int minNeighbors)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "minNeighbors",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 38,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.CascadeClassifier.getMinNeighbors",
+      "identity": "cv.cuda.CascadeClassifier.getMinNeighbors()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 39,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.CascadeClassifier.setFindLargestObject",
+      "identity": "cv.cuda.CascadeClassifier.setFindLargestObject(bool findLargestObject)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "findLargestObject",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 40,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.CascadeClassifier.getFindLargestObject",
+      "identity": "cv.cuda.CascadeClassifier.getFindLargestObject()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 41,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.CascadeClassifier.setMaxNumObjects",
+      "identity": "cv.cuda.CascadeClassifier.setMaxNumObjects(int maxNumObjects)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "maxNumObjects",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 42,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.CascadeClassifier.getMaxNumObjects",
+      "identity": "cv.cuda.CascadeClassifier.getMaxNumObjects()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 43,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.CascadeClassifier.getClassifierSize",
+      "identity": "cv.cuda.CascadeClassifier.getClassifierSize()->Size",
+      "returnType": "Size",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 44,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.CascadeClassifier.detectMultiScale",
+      "identity": "cv.cuda.CascadeClassifier.detectMultiScale(Mat image;Mat objects[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "objects",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Detects objects of different sizes in the input image.\n\n    @param image Matrix of type CV_8U containing an image where objects should be detected.\n    @param objects Buffer to store detected objects (rectangles).\n    @param stream CUDA stream.\n\n    To get final array of detected objects use CascadeClassifier::convert method.\n\n    @code\n        Ptr<cuda::CascadeClassifier> cascade_gpu = cuda::CascadeClassifier::create(...);\n\n        Mat image_cpu = imread(...)\n        GpuMat image_gpu(image_cpu);\n\n        GpuMat objbuf;\n        cascade_gpu->detectMultiScale(image_gpu, objbuf);\n\n        std::vector<Rect> faces;\n        cascade_gpu->convert(objbuf, faces);\n\n        for(int i = 0; i < detections_num; ++i)\n           cv::rectangle(image_cpu, faces[i], Scalar(255));\n\n        imshow(\"Faces\", image_cpu);\n    @endcode\n\n    @sa CascadeClassifier::detectMultiScale"
+    },
+    {
+      "ordinal": 45,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.CascadeClassifier.convert",
+      "identity": "cv.cuda.CascadeClassifier.convert(Mat gpu_objects[/O];vector_Rect objects[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "gpu_objects",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "vector_Rect",
+          "name": "objects",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Converts objects array from internal representation to standard vector.\n\n    @param gpu_objects Objects array in internal representation.\n    @param objects Resulting array."
+    }
+  ],
+  "compatibilityHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudaobjdetect/CMakeLists.txt",
+      "sha256": "f492ec89071339e6d4753dc66bc93fd9554957853751db4a646f8e8765059091",
+      "reason": "Upstream module activation, object-detection dependency, and CUDA runtime dependency contract; parser declarations are not gated in the public header."
+    }
+  ],
+  "moduleBuildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)"
+}

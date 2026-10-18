@@ -1,0 +1,427 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/cudaobjdetect.hpp parser-backed CUDA object-detection public declarations plus the pinned module CMake build/dependency contract",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact CudaObjDetect wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [
+    "The cudaobjdetect module is disabled unless the OpenCV build enables CUDA or CUDA stubs and is unavailable on iOS; real object detection depends on an external CUDA toolkit/runtime.",
+    "The module requires opencv_objdetect, opencv_xobjdetect, opencv_cudaarithm, and opencv_cudawarping plus GpuMat/Stream data, asynchronous execution policy, detector model transport, and output ownership outside this package; no CUDA object-detection wrapper/runtime is bundled."
+  ],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.cuda.HOG",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.cuda.HOG.create(Size win_size=Size(64, 128);Size block_size=Size(16, 16);Size block_stride=Size(8, 8);Size cell_size=Size(8, 8);int nbins=9)->Ptr<HOG>",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.cuda.HOG.setWinSigma(double win_sigma)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.cuda.HOG.getWinSigma()->double",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.cuda.HOG.setL2HysThreshold(double threshold_L2hys)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.cuda.HOG.getL2HysThreshold()->double",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.cuda.HOG.setGammaCorrection(bool gamma_correction)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.cuda.HOG.getGammaCorrection()->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.cuda.HOG.setNumLevels(int nlevels)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.cuda.HOG.getNumLevels()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.cuda.HOG.setHitThreshold(double hit_threshold)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.cuda.HOG.getHitThreshold()->double",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.cuda.HOG.setWinStride(Size win_stride)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.cuda.HOG.getWinStride()->Size",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.cuda.HOG.setScaleFactor(double scale0)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.cuda.HOG.getScaleFactor()->double",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.cuda.HOG.setGroupThreshold(int group_threshold)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.cuda.HOG.getGroupThreshold()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.cuda.HOG.setDescriptorFormat(HOGDescriptor_DescriptorStorageFormat descr_format)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.cuda.HOG.getDescriptorFormat()->HOGDescriptor::DescriptorStorageFormat",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.cuda.HOG.getDescriptorSize()->size_t",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.cuda.HOG.getBlockHistogramSize()->size_t",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.cuda.HOG.setSVMDetector(Mat detector)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.cuda.HOG.getDefaultPeopleDetector()->Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.cuda.HOG.detect(Mat img;vector_Point found_locations[/O,/Ref];vector_double confidences[/O,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.cuda.HOG.detectWithoutConf(Mat img;vector_Point found_locations[/O,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.cuda.HOG.detectMultiScale(Mat img;vector_Rect found_locations[/O,/Ref];vector_double confidences[/O,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.cuda.HOG.detectMultiScaleWithoutConf(Mat img;vector_Rect found_locations[/O,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.cuda.HOG.compute(Mat img;Mat descriptors[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 29,
+      "identity": "class cv.cuda.CascadeClassifier",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.cuda.CascadeClassifier.create(String filename[/C,/Ref,/PATH])->Ptr<cuda::CascadeClassifier>",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.cuda.CascadeClassifier.setMaxObjectSize(Size maxObjectSize)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.cuda.CascadeClassifier.getMaxObjectSize()->Size",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.cuda.CascadeClassifier.setMinObjectSize(Size minSize)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.cuda.CascadeClassifier.getMinObjectSize()->Size",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.cuda.CascadeClassifier.setScaleFactor(double scaleFactor)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.cuda.CascadeClassifier.getScaleFactor()->double",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.cuda.CascadeClassifier.setMinNeighbors(int minNeighbors)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.cuda.CascadeClassifier.getMinNeighbors()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.cuda.CascadeClassifier.setFindLargestObject(bool findLargestObject)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.cuda.CascadeClassifier.getFindLargestObject()->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.cuda.CascadeClassifier.setMaxNumObjects(int maxNumObjects)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 42,
+      "identity": "cv.cuda.CascadeClassifier.getMaxNumObjects()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.cuda.CascadeClassifier.getClassifierSize()->Size",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.cuda.CascadeClassifier.detectMultiScale(Mat image;Mat objects[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 45,
+      "identity": "cv.cuda.CascadeClassifier.convert(Mat gpu_objects[/O];vector_Rect objects[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA object-detection surface in cv::cuda has no native CudaObjDetect wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while real HOG/cascade execution requires an external CUDA toolkit/runtime and the upstream objdetect/xobjdetect/cudaarithm/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, detector model transport, and output rectangle/confidence ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}
