@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 66,
+  "moduleCount": 67,
   "maps": [
     {
       "id": "calib3d",
@@ -4258,6 +4258,244 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "ed143a8d17d85fd817bc95054c3da6d90d573dc1748e33d9911989195bb10698",
         "familyInventorySha256": "66c2bd8cce8723ca0d7472e3108a5b9c6bbf4418db74bb462f3bb229cbfcd928",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "datasets",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/DatasetsUpstreamMap",
+      "extractorScript": "tools/DatasetsUpstreamMap/extract_datasets.py",
+      "generationScript": "scripts/Generate-DatasetsUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-DatasetsUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/datasets/*.hpp parser-backed public header closure; OpenCV 5.0.0 has no datasets umbrella header and all caller-data loaders remain evidence-only",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/dataset.hpp",
+          "sha256": "d5d7b7d2b54e97ace76aa1d2952de68bcbfbc8a690f00827e18422f0f314c577"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/ar_hmdb.hpp",
+            "sha256": "59b2ffd671487110e5e919ab42234319b75a583378aec6fc091ab947df878af4",
+            "startOrdinal": 0,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/ar_sports.hpp",
+            "sha256": "5a9cb321d7dd3987654720021a442c4ccb3d3cc5e58cdd8f8b4f9a7aafcb3b17",
+            "startOrdinal": 4,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/dataset.hpp",
+            "sha256": "d5d7b7d2b54e97ace76aa1d2952de68bcbfbc8a690f00827e18422f0f314c577",
+            "startOrdinal": 8,
+            "declarationCount": 9
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/fr_adience.hpp",
+            "sha256": "979fd11260d716e6f44776f7c42604c033f211880096b35afc1b43e5b32a3793",
+            "startOrdinal": 17,
+            "declarationCount": 5
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/fr_lfw.hpp",
+            "sha256": "7eb9b2eb8d3724a108ab2cd16e2161d87c91b359491b0661f2c5f41a80162c98",
+            "startOrdinal": 22,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/gr_chalearn.hpp",
+            "sha256": "798b021632cbe126be9b66e866d8cdfa0e0069260e77a48a4b21eadc6e2c4866",
+            "startOrdinal": 26,
+            "declarationCount": 7
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/gr_skig.hpp",
+            "sha256": "94efd24c73a5e4cb6887b8c7ce83403993e8e0f8e26fe4fa3f9a6479d9d7e175",
+            "startOrdinal": 33,
+            "declarationCount": 8
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/hpe_humaneva.hpp",
+            "sha256": "36780f8098e5e9555863cf3118126d55636a69a4c11fa04a7e8392105824c4dc",
+            "startOrdinal": 41,
+            "declarationCount": 5
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/hpe_parse.hpp",
+            "sha256": "60efe6f92bfa83e726282e20b97e22a0be6e79d964ab80e21d8e0e4d2cdc10b5",
+            "startOrdinal": 46,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/ir_affine.hpp",
+            "sha256": "5d1d6110b246b1a3f2e3285b301be1de43ebe25eb0ded00f593d6a209d180be1",
+            "startOrdinal": 50,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/ir_robot.hpp",
+            "sha256": "478bb29f409d6e163c9b41a816882976116e8589ee0ba477a3990e16c109da67",
+            "startOrdinal": 54,
+            "declarationCount": 5
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/is_bsds.hpp",
+            "sha256": "b94fd4a97a08aa873165f673e765c05c5f0822c8e78d9a67df19f05861a19e5f",
+            "startOrdinal": 59,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/is_weizmann.hpp",
+            "sha256": "fa3197dc96fb63d678c8db00d53d56c068a7d17fb22017ba09466dc4ff706cc9",
+            "startOrdinal": 63,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/msm_epfl.hpp",
+            "sha256": "04ea4c0c35d231146c7f84907a8fe39ff985397b9303df995e44f7ebbd4815af",
+            "startOrdinal": 67,
+            "declarationCount": 5
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/msm_middlebury.hpp",
+            "sha256": "baf808ae617811f1104f676d68db4980a1c973e6e825147c1e3e9c2223e6a6da",
+            "startOrdinal": 72,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/or_imagenet.hpp",
+            "sha256": "ae54a22cfa173984997ae0ef3887ac3e85ed6cfa87fd08a3bfdcc7796ef6f0ec",
+            "startOrdinal": 76,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/or_mnist.hpp",
+            "sha256": "118861ba43bbf4a132e55c44126cf377b144532f09964939de9e45b7afe0bfc8",
+            "startOrdinal": 80,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/or_pascal.hpp",
+            "sha256": "24aeacf0213cbaaa909f0f06856d5548165f3f81e5a68e7f3deacdb131abf15b",
+            "startOrdinal": 84,
+            "declarationCount": 6
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/or_sun.hpp",
+            "sha256": "631f83a4289b7883110d7263601f437a0200ffa3829bf81d9fdd2968e08b921d",
+            "startOrdinal": 90,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/pd_caltech.hpp",
+            "sha256": "e8ed1856581719d801e6635c9ae329b0494d9dbd7eaaacf8a71af8d6caf5ee51",
+            "startOrdinal": 94,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/pd_inria.hpp",
+            "sha256": "00eb5e13e8c92e8d0e2f83ea10457e38e908f333a0405330493436a82a7614c1",
+            "startOrdinal": 98,
+            "declarationCount": 5
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/slam_kitti.hpp",
+            "sha256": "a60a72a75fb7ff61795724744836477db0b95ed3502d7f162dc1646579693468",
+            "startOrdinal": 103,
+            "declarationCount": 5
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/slam_tumindoor.hpp",
+            "sha256": "60c2f6499cfcb3aa97a50f39346a70a5714ed700dc504426a6105b43c4fa2240",
+            "startOrdinal": 108,
+            "declarationCount": 5
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/sr_bsds.hpp",
+            "sha256": "1d04fe693527641b813198156162129a7b0681c070a5f4c0ef53816fa1f429c7",
+            "startOrdinal": 113,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/sr_div2k.hpp",
+            "sha256": "69e21e14c9533cc1279e2cb805cc348fe7d664b82d7763c7e919671d6a7463e6",
+            "startOrdinal": 117,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/sr_general100.hpp",
+            "sha256": "a052d29dbb9ec2425fa2a97f175149abb264e0c34b0df4b5c22cff6cf027f52d",
+            "startOrdinal": 121,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/tr_chars.hpp",
+            "sha256": "1ccd98e7b0c43893df78a88622a2a0381e450916c20c7ee7332708635cbd124d",
+            "startOrdinal": 125,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/tr_icdar.hpp",
+            "sha256": "c1325d35e1340bd6e58c0334386430630cbe0208764e7fe67a1479b98b71f893",
+            "startOrdinal": 129,
+            "declarationCount": 5
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/tr_svt.hpp",
+            "sha256": "2b7ab5e70d31c4d55b428b1376eb1b6a25f70977c89cfe25f815b0e2e5fa994c",
+            "startOrdinal": 134,
+            "declarationCount": 5
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/track_alov.hpp",
+            "sha256": "09479d51fa58346cfad8fc4242fe40fe3ecd1450796de8dd701a59ea98fe117b",
+            "startOrdinal": 139,
+            "declarationCount": 12
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/track_vot.hpp",
+            "sha256": "4779b82b29bd391b3a258a0c21d36d84a6c56cd7316ac95fd9b2ca8d017ba822",
+            "startOrdinal": 151,
+            "declarationCount": 9
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/include/opencv2/datasets/util.hpp",
+            "sha256": "92d1ecabf3d45af715fc5260f6a1c884151d4dce938910f39562a4c4cfb16973",
+            "startOrdinal": 160,
+            "declarationCount": 3
+          }
+        ],
+        "compatibilityHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/datasets/CMakeLists.txt",
+            "sha256": "5e8872e8775ce0124e116c60d466895b4b9d3ef934c69f6a8e9f960fa0116934",
+            "reason": "Upstream datasets activation depends on core/imgcodecs/ml/flann and optionally text; parser declarations are not gated in the public headers."
+          }
+        ],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/datasets-upstream-raw.json",
+        "classifications": "compatibility/datasets-upstream-classifications.json",
+        "mapping": "compatibility/datasets-upstream-map.txt",
+        "summary": "compatibility/datasets-upstream-summary.json",
+        "familyInventory": "compatibility/datasets-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 163,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "7f678cb20b355be3109fa96edb8c935fd2b2d83e124a0deb93ce850330977143",
+        "familyInventorySha256": "5e78c6a7852c77db0157bf3ea8605aa00920f16d4929d14898f1e51e9a73bd04",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

@@ -1,0 +1,1479 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/datasets/*.hpp parser-backed public header closure; OpenCV 5.0.0 has no datasets umbrella header and all caller-data loaders remain evidence-only",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact Datasets wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [
+    "The datasets module consumes caller-provided dataset files, directory trees, annotations, and file paths; this package bundles no dataset assets or datasets native/managed wrapper."
+  ],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.datasets.AR_hmdbObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "class cv.datasets.AR_hmdb",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.datasets.AR_hmdb.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.datasets.AR_hmdb.create()->Ptr<AR_hmdb>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "class cv.datasets.AR_sportsObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "class cv.datasets.AR_sports",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.datasets.AR_sports.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.datasets.AR_sports.create()->Ptr<AR_sports>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 8,
+      "identity": "class cv.datasets.Object",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 9,
+      "identity": "class cv.datasets.Dataset",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.datasets.Dataset.Dataset()->",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.datasets.Dataset.~Dataset()->",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.datasets.Dataset.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.datasets.Dataset.getTrain(int splitNum=0)->std::vector< Ptr<Object> >&",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.datasets.Dataset.getTest(int splitNum=0)->std::vector< Ptr<Object> >&",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.datasets.Dataset.getValidation(int splitNum=0)->std::vector< Ptr<Object> >&",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.datasets.Dataset.getNumSplits()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 17,
+      "identity": "enum cv.datasets.genderType[const cv.datasets.male=0;const cv.datasets.female=0+1;const cv.datasets.none=0+2]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 18,
+      "identity": "class cv.datasets.FR_adienceObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 19,
+      "identity": "class cv.datasets.FR_adience",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.datasets.FR_adience.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.datasets.FR_adience.create()->Ptr<FR_adience>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 22,
+      "identity": "class cv.datasets.FR_lfwObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 23,
+      "identity": "class cv.datasets.FR_lfw",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.datasets.FR_lfw.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.datasets.FR_lfw.create()->Ptr<FR_lfw>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 26,
+      "identity": "class cv.datasets.groundTruth",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 27,
+      "identity": "class cv.datasets.join",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 28,
+      "identity": "class cv.datasets.skeleton",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 29,
+      "identity": "class cv.datasets.GR_chalearnObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 30,
+      "identity": "class cv.datasets.GR_chalearn",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.datasets.GR_chalearn.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.datasets.GR_chalearn.create()->Ptr<GR_chalearn>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 33,
+      "identity": "enum cv.datasets.actionType[const cv.datasets.circle=1;const cv.datasets.triangle=1+1;const cv.datasets.updown=1+2;const cv.datasets.rightleft=1+3;const cv.datasets.wave=1+4;const cv.datasets.z=1+5;const cv.datasets.cross=1+6;const cv.datasets.comehere=1+7;const cv.datasets.turnaround=1+8;const cv.datasets.pat=1+9]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 34,
+      "identity": "enum cv.datasets.poseType[const cv.datasets.fist=1;const cv.datasets.index=1+1;const cv.datasets.flat=1+2]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 35,
+      "identity": "enum cv.datasets.illuminationType[const cv.datasets.light=1;const cv.datasets.dark=1+1]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 36,
+      "identity": "enum cv.datasets.backgroundType[const cv.datasets.woodenBoard=1;const cv.datasets.whitePaper=1+1;const cv.datasets.paperWithCharacters=1+2]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 37,
+      "identity": "class cv.datasets.GR_skigObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 38,
+      "identity": "class cv.datasets.GR_skig",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.datasets.GR_skig.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.datasets.GR_skig.create()->Ptr<GR_skig>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 41,
+      "identity": "class cv.datasets.HPE_humanevaObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 42,
+      "identity": "enum cv.datasets.datasetType[const cv.datasets.humaneva_1=1;const cv.datasets.humaneva_2=1+1]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 43,
+      "identity": "class cv.datasets.HPE_humaneva",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.datasets.HPE_humaneva.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 45,
+      "identity": "cv.datasets.HPE_humaneva.create(int num=humaneva_1)->Ptr<HPE_humaneva>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 46,
+      "identity": "class cv.datasets.HPE_parseObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 47,
+      "identity": "class cv.datasets.HPE_parse",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 48,
+      "identity": "cv.datasets.HPE_parse.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.datasets.HPE_parse.create()->Ptr<HPE_parse>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 50,
+      "identity": "class cv.datasets.IR_affineObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 51,
+      "identity": "class cv.datasets.IR_affine",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 52,
+      "identity": "cv.datasets.IR_affine.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 53,
+      "identity": "cv.datasets.IR_affine.create()->Ptr<IR_affine>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 54,
+      "identity": "class cv.datasets.cameraPos",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 55,
+      "identity": "class cv.datasets.IR_robotObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 56,
+      "identity": "class cv.datasets.IR_robot",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 57,
+      "identity": "cv.datasets.IR_robot.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 58,
+      "identity": "cv.datasets.IR_robot.create()->Ptr<IR_robot>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 59,
+      "identity": "class cv.datasets.IS_bsdsObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 60,
+      "identity": "class cv.datasets.IS_bsds",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 61,
+      "identity": "cv.datasets.IS_bsds.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 62,
+      "identity": "cv.datasets.IS_bsds.create()->Ptr<IS_bsds>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 63,
+      "identity": "class cv.datasets.IS_weizmannObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 64,
+      "identity": "class cv.datasets.IS_weizmann",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 65,
+      "identity": "cv.datasets.IS_weizmann.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 66,
+      "identity": "cv.datasets.IS_weizmann.create()->Ptr<IS_weizmann>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 67,
+      "identity": "class cv.datasets.cameraParam",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 68,
+      "identity": "class cv.datasets.MSM_epflObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 69,
+      "identity": "class cv.datasets.MSM_epfl",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 70,
+      "identity": "cv.datasets.MSM_epfl.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 71,
+      "identity": "cv.datasets.MSM_epfl.create()->Ptr<MSM_epfl>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 72,
+      "identity": "class cv.datasets.MSM_middleburyObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 73,
+      "identity": "class cv.datasets.MSM_middlebury",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 74,
+      "identity": "cv.datasets.MSM_middlebury.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 75,
+      "identity": "cv.datasets.MSM_middlebury.create()->Ptr<MSM_middlebury>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 76,
+      "identity": "class cv.datasets.OR_imagenetObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 77,
+      "identity": "class cv.datasets.OR_imagenet",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 78,
+      "identity": "cv.datasets.OR_imagenet.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 79,
+      "identity": "cv.datasets.OR_imagenet.create()->Ptr<OR_imagenet>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 80,
+      "identity": "class cv.datasets.OR_mnistObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 81,
+      "identity": "class cv.datasets.OR_mnist",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 82,
+      "identity": "cv.datasets.OR_mnist.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 83,
+      "identity": "cv.datasets.OR_mnist.create()->Ptr<OR_mnist>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 84,
+      "identity": "class cv.datasets.PascalPart",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 85,
+      "identity": "class cv.datasets.PascalObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 86,
+      "identity": "class cv.datasets.OR_pascalObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 87,
+      "identity": "class cv.datasets.OR_pascal",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 88,
+      "identity": "cv.datasets.OR_pascal.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 89,
+      "identity": "cv.datasets.OR_pascal.create()->Ptr<OR_pascal>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 90,
+      "identity": "class cv.datasets.OR_sunObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 91,
+      "identity": "class cv.datasets.OR_sun",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 92,
+      "identity": "cv.datasets.OR_sun.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 93,
+      "identity": "cv.datasets.OR_sun.create()->Ptr<OR_sun>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 94,
+      "identity": "class cv.datasets.PD_caltechObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 95,
+      "identity": "class cv.datasets.PD_caltech",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 96,
+      "identity": "cv.datasets.PD_caltech.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 97,
+      "identity": "cv.datasets.PD_caltech.create()->Ptr<PD_caltech>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 98,
+      "identity": "enum cv.datasets.sampleType[const cv.datasets.POS=0;const cv.datasets.NEG=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 99,
+      "identity": "class cv.datasets.PD_inriaObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 100,
+      "identity": "class cv.datasets.PD_inria",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 101,
+      "identity": "cv.datasets.PD_inria.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 102,
+      "identity": "cv.datasets.PD_inria.create()->Ptr<PD_inria>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 103,
+      "identity": "class cv.datasets.pose",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 104,
+      "identity": "class cv.datasets.SLAM_kittiObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 105,
+      "identity": "class cv.datasets.SLAM_kitti",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 106,
+      "identity": "cv.datasets.SLAM_kitti.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 107,
+      "identity": "cv.datasets.SLAM_kitti.create()->Ptr<SLAM_kitti>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 108,
+      "identity": "enum cv.datasets.imageType[const cv.datasets.LEFT=0;const cv.datasets.RIGHT=0+1;const cv.datasets.LADYBUG=0+2]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 109,
+      "identity": "class cv.datasets.SLAM_tumindoorObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 110,
+      "identity": "class cv.datasets.SLAM_tumindoor",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 111,
+      "identity": "cv.datasets.SLAM_tumindoor.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 112,
+      "identity": "cv.datasets.SLAM_tumindoor.create()->Ptr<SLAM_tumindoor>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 113,
+      "identity": "class cv.datasets.SR_bsdsObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 114,
+      "identity": "class cv.datasets.SR_bsds",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 115,
+      "identity": "cv.datasets.SR_bsds.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 116,
+      "identity": "cv.datasets.SR_bsds.create()->Ptr<SR_bsds>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 117,
+      "identity": "class cv.datasets.SR_div2kObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 118,
+      "identity": "class cv.datasets.SR_div2k",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 119,
+      "identity": "cv.datasets.SR_div2k.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 120,
+      "identity": "cv.datasets.SR_div2k.create()->Ptr<SR_div2k>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 121,
+      "identity": "class cv.datasets.SR_general100Obj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 122,
+      "identity": "class cv.datasets.SR_general100",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 123,
+      "identity": "cv.datasets.SR_general100.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 124,
+      "identity": "cv.datasets.SR_general100.create()->Ptr<SR_general100>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 125,
+      "identity": "class cv.datasets.TR_charsObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 126,
+      "identity": "class cv.datasets.TR_chars",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 127,
+      "identity": "cv.datasets.TR_chars.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 128,
+      "identity": "cv.datasets.TR_chars.create()->Ptr<TR_chars>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 129,
+      "identity": "class cv.datasets.word",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 130,
+      "identity": "class cv.datasets.TR_icdarObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 131,
+      "identity": "class cv.datasets.TR_icdar",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 132,
+      "identity": "cv.datasets.TR_icdar.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 133,
+      "identity": "cv.datasets.TR_icdar.create()->Ptr<TR_icdar>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 134,
+      "identity": "class cv.datasets.tag",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 135,
+      "identity": "class cv.datasets.TR_svtObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 136,
+      "identity": "class cv.datasets.TR_svt",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 137,
+      "identity": "cv.datasets.TR_svt.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 138,
+      "identity": "cv.datasets.TR_svt.create()->Ptr<TR_svt>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 139,
+      "identity": "class cv.datasets.TRACK_alovObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 140,
+      "identity": "class cv.datasets.TRACK_alov",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 141,
+      "identity": "cv.datasets.TRACK_alov.create()->Ptr<TRACK_alov>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 142,
+      "identity": "cv.datasets.TRACK_alov.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 143,
+      "identity": "cv.datasets.TRACK_alov.loadAnnotatedOnly(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 144,
+      "identity": "cv.datasets.TRACK_alov.getDatasetsNum()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 145,
+      "identity": "cv.datasets.TRACK_alov.getDatasetLength(int id)->int",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 146,
+      "identity": "cv.datasets.TRACK_alov.initDataset(int id)->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 147,
+      "identity": "cv.datasets.TRACK_alov.getNextFrame(Mat & frame)->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 148,
+      "identity": "cv.datasets.TRACK_alov.getNextGT()->vector <Point2f>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 149,
+      "identity": "cv.datasets.TRACK_alov.getFrame(Mat & frame;int datasetID;int frameID)->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 150,
+      "identity": "cv.datasets.TRACK_alov.getGT(int datasetID;int frameID)->vector <Point2f>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 151,
+      "identity": "class cv.datasets.TRACK_votObj",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 152,
+      "identity": "class cv.datasets.TRACK_vot",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 153,
+      "identity": "cv.datasets.TRACK_vot.create()->Ptr<TRACK_vot>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 154,
+      "identity": "cv.datasets.TRACK_vot.load(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 155,
+      "identity": "cv.datasets.TRACK_vot.getDatasetsNum()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 156,
+      "identity": "cv.datasets.TRACK_vot.getDatasetLength(int id)->int",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 157,
+      "identity": "cv.datasets.TRACK_vot.initDataset(int id)->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 158,
+      "identity": "cv.datasets.TRACK_vot.getNextFrame(Mat & frame)->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 159,
+      "identity": "cv.datasets.TRACK_vot.getGT()->vector <Point2d>",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 160,
+      "identity": "cv.datasets.split(const std::string & s;std::vector<std::string> & elems;char delim)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 161,
+      "identity": "cv.datasets.createDirectory(const std::string & path)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 162,
+      "identity": "cv.datasets.getDirList(const std::string & dirName;std::vector<std::string> & fileNames)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The datasets declarations have no native or managed wrapper in the current package; each loader/evaluator requires caller-provided dataset files, directories, annotations, and file paths, while dataset object ownership and external assets remain outside the package contract.",
+      "buildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}
