@@ -65,7 +65,7 @@ def main():
     output = Path(args.output).resolve()
     parser_path = root / "modules/python/src2/hdr_parser.py"
     module = args.module
-    if module not in {"ximgproc", "optflow", "bgsegm", "face", "quality", "img_hash", "line_descriptor", "freetype", "alphamat", "intensity_transform", "plot", "bioinspired", "phase_unwrapping", "hfs", "fuzzy", "rapid", "shape", "structured_light", "saliency", "surface_matching", "reg", "xstereo", "xobjdetect", "superres", "dnn_superres", "wechat_qrcode", "cnn_3dobj", "signal", "dpm", "hdf", "text", "xfeatures2d", "dnn_objdetect", "ccalib", "julia", "rgbd", "cudaarithm", "cudabgsegm", "cudafilters", "cudaimgproc", "cudacodec", "cudawarping", "cudafeatures2d", "cudaobjdetect", "cudaoptflow", "cudastereo", "cudalegacy"}:
+    if module not in {"ximgproc", "optflow", "bgsegm", "face", "quality", "img_hash", "line_descriptor", "freetype", "alphamat", "intensity_transform", "plot", "bioinspired", "phase_unwrapping", "hfs", "fuzzy", "rapid", "shape", "structured_light", "saliency", "surface_matching", "reg", "xstereo", "xobjdetect", "superres", "dnn_superres", "wechat_qrcode", "cnn_3dobj", "signal", "dpm", "hdf", "text", "xfeatures2d", "dnn_objdetect", "ccalib", "julia", "rgbd", "cudaarithm", "cudabgsegm", "cudafilters", "cudaimgproc", "cudacodec", "cudawarping", "cudafeatures2d", "cudaobjdetect", "cudaoptflow", "cudastereo", "cudalegacy", "videostab"}:
         raise RuntimeError("Unsupported contrib extraction module: " + module)
     contrib_include = root.parent.parent / f"opencv-source/opencv_contrib-5.0.0/modules/{module}/include/opencv2"
     contrib_root = contrib_include / module
@@ -94,6 +94,12 @@ def main():
         # complete pinned public closure in non-wrapper mode and de-duplicate
         # the one destructor repeated by the umbrella/header pair below.
         files = [umbrella] + module_headers
+    elif module == "videostab":
+        # VideoStab declarations use CV_EXPORTS rather than CV_WRAP. Parse the
+        # public component headers, converting protected sections to private
+        # only in temporary parser copies so implementation hooks are excluded
+        # without changing the pinned source evidence.
+        files = module_headers
     else:
         files = module_headers if module_headers else [umbrella]
     spec = importlib.util.spec_from_file_location("opencv_hdr_parser", parser_path)
@@ -105,37 +111,50 @@ def main():
     source_headers = []
     seen_closure_identities = set()
     for file in files:
-        if module == "dnn_objdetect":
-            # hdr_parser cannot parse this header's anonymous typedef struct.
-            # Normalize only that spelling for parsing, then retain the exact
-            # upstream header path/hash as the evidence source. This module has
-            # no CV_WRAP annotations, so parse its public declarations in
-            # non-wrapper mode rather than silently producing an empty map.
-            header_text = file.read_text(encoding="utf-8")
-            normalized_text = header_text.replace("typedef struct\n    {", "struct object\n    {", 1).replace("    } object;", "    };", 1)
-            # hdr_parser records data members only when they carry CV_PROP;
-            # expose the public fields as parser properties in the temporary
-            # copy so the class metadata retains the complete data shape.
-            for field in (
-                "      int xmin, xmax;",
-                "      int ymin, ymax;",
-                "      size_t class_idx;",
-                "      std::string label_name;",
-                "      double class_prob;",
-                "        std::vector<object> detections;",
-            ):
-                normalized_text = normalized_text.replace(field, field.replace("      ", "      CV_PROP_RW ", 1), 1)
-            # Non-wrapper parser mode also admits protected members by design;
-            # keep this map limited to the actual public native surface.
-            normalized_text = normalized_text.replace("      protected:", "      private:", 1)
-            if normalized_text == header_text:
-                raise RuntimeError("Could not normalize the known dnn_objdetect object typedef for hdr_parser")
-            with tempfile.TemporaryDirectory(prefix="dnn_objdetect_hdr_parser_") as temp_dir:
-                parser_file = Path(temp_dir) / file.name
-                parser_file.write_text(normalized_text, encoding="utf-8", newline="\n")
-                parsed = parser_instance.parse(str(parser_file), wmode=False)
+        if module in {"dnn_objdetect", "videostab"}:
+            if module == "videostab":
+                header_text = file.read_text(encoding="utf-8")
+                normalized_text = header_text.replace("protected:", "private:")
+                if normalized_text == header_text and "protected:" in header_text:
+                    raise RuntimeError("Could not normalize protected VideoStab declarations for hdr_parser")
+                if normalized_text == header_text:
+                    parsed = parser_instance.parse(str(file), wmode=False)
+                else:
+                    with tempfile.TemporaryDirectory(prefix="videostab_hdr_parser_") as temp_dir:
+                        parser_file = Path(temp_dir) / file.name
+                        parser_file.write_text(normalized_text, encoding="utf-8", newline="\n")
+                        parsed = parser_instance.parse(str(parser_file), wmode=False)
+            else:
+                # hdr_parser cannot parse this header's anonymous typedef struct.
+                # Normalize only that spelling for parsing, then retain the exact
+                # upstream header path/hash as the evidence source. This module has
+                # no CV_WRAP annotations, so parse its public declarations in
+                # non-wrapper mode rather than silently producing an empty map.
+                header_text = file.read_text(encoding="utf-8")
+                normalized_text = header_text.replace("typedef struct\n    {", "struct object\n    {", 1).replace("    } object;", "    };", 1)
+                # hdr_parser records data members only when they carry CV_PROP;
+                # expose the public fields as parser properties in the temporary
+                # copy so the class metadata retains the complete data shape.
+                for field in (
+                    "      int xmin, xmax;",
+                    "      int ymin, ymax;",
+                    "      size_t class_idx;",
+                    "      std::string label_name;",
+                    "      double class_prob;",
+                    "        std::vector<object> detections;",
+                ):
+                    normalized_text = normalized_text.replace(field, field.replace("      ", "      CV_PROP_RW ", 1), 1)
+                # Non-wrapper parser mode also admits protected members by design;
+                # keep this map limited to the actual public native surface.
+                normalized_text = normalized_text.replace("      protected:", "      private:", 1)
+                if normalized_text == header_text:
+                    raise RuntimeError("Could not normalize the known dnn_objdetect object typedef for hdr_parser")
+                with tempfile.TemporaryDirectory(prefix="dnn_objdetect_hdr_parser_") as temp_dir:
+                    parser_file = Path(temp_dir) / file.name
+                    parser_file.write_text(normalized_text, encoding="utf-8", newline="\n")
+                    parsed = parser_instance.parse(str(parser_file), wmode=False)
         else:
-            parsed = parser_instance.parse(str(file), wmode=(module not in {"superres", "cudalegacy"}))
+            parsed = parser_instance.parse(str(file), wmode=(module not in {"superres", "cudalegacy", "videostab"}))
             if module == "superres":
                 # superres headers expose CV_EXPORTS rather than CV_WRAP.  The
                 # non-wrapper parser mode therefore also emits the three
@@ -147,7 +166,7 @@ def main():
                     "cv.superres.SuperResolution.processImpl",
                 }
                 parsed = [value for value in parsed if value[0] not in protected]
-        if module == "cudalegacy":
+        if module in {"cudalegacy", "videostab"}:
             unique = []
             for value in parsed:
                 candidate = convert(value, 0, "")
@@ -163,7 +182,7 @@ def main():
     if len(identities) != len(set(identities)):
         duplicates = sorted(item for item in set(identities) if identities.count(item) > 1)
         raise RuntimeError(module + " parser closure contains duplicate identities: " + ", ".join(duplicates))
-    title = {"ximgproc": "XImgProc", "optflow": "OptFlow", "bgsegm": "BgSegm", "face": "Face", "quality": "Quality", "img_hash": "ImgHash", "line_descriptor": "LineDescriptor", "freetype": "Freetype", "alphamat": "AlphaMat", "intensity_transform": "IntensityTransform", "plot": "Plot", "bioinspired": "BioInspired", "phase_unwrapping": "PhaseUnwrapping", "hfs": "Hfs", "fuzzy": "Fuzzy", "rapid": "Rapid", "shape": "Shape", "structured_light": "StructuredLight", "saliency": "Saliency", "surface_matching": "SurfaceMatching", "reg": "Reg", "xstereo": "XStereo", "xobjdetect": "XObjDetect", "superres": "Superres", "dnn_superres": "DnnSuperres", "wechat_qrcode": "WechatQRCode", "cnn_3dobj": "Cnn3DObj", "signal": "Signal", "dpm": "Dpm", "hdf": "Hdf", "text": "Text", "xfeatures2d": "XFeatures2D", "dnn_objdetect": "DnnObjDetect", "ccalib": "Ccalib", "julia": "Julia", "rgbd": "Rgbd", "cudaarithm": "CudaArithm", "cudabgsegm": "CudaBgSegm", "cudafilters": "CudaFilters", "cudaimgproc": "CudaImgProc", "cudacodec": "CudaCodec", "cudawarping": "CudaWarping", "cudafeatures2d": "CudaFeatures2D", "cudaobjdetect": "CudaObjDetect", "cudaoptflow": "CudaOptFlow", "cudastereo": "CudaStereo", "cudalegacy": "CudaLegacy"}[module]
+    title = {"ximgproc": "XImgProc", "optflow": "OptFlow", "bgsegm": "BgSegm", "face": "Face", "quality": "Quality", "img_hash": "ImgHash", "line_descriptor": "LineDescriptor", "freetype": "Freetype", "alphamat": "AlphaMat", "intensity_transform": "IntensityTransform", "plot": "Plot", "bioinspired": "BioInspired", "phase_unwrapping": "PhaseUnwrapping", "hfs": "Hfs", "fuzzy": "Fuzzy", "rapid": "Rapid", "shape": "Shape", "structured_light": "StructuredLight", "saliency": "Saliency", "surface_matching": "SurfaceMatching", "reg": "Reg", "xstereo": "XStereo", "xobjdetect": "XObjDetect", "superres": "Superres", "dnn_superres": "DnnSuperres", "wechat_qrcode": "WechatQRCode", "cnn_3dobj": "Cnn3DObj", "signal": "Signal", "dpm": "Dpm", "hdf": "Hdf", "text": "Text", "xfeatures2d": "XFeatures2D", "dnn_objdetect": "DnnObjDetect", "ccalib": "Ccalib", "julia": "Julia", "rgbd": "Rgbd", "cudaarithm": "CudaArithm", "cudabgsegm": "CudaBgSegm", "cudafilters": "CudaFilters", "cudaimgproc": "CudaImgProc", "cudacodec": "CudaCodec", "cudawarping": "CudaWarping", "cudafeatures2d": "CudaFeatures2D", "cudaobjdetect": "CudaObjDetect", "cudaoptflow": "CudaOptFlow", "cudastereo": "CudaStereo", "cudalegacy": "CudaLegacy", "videostab": "VideoStab"}[module]
     result = {"schemaVersion": 1, "generator": f"tools/{title}UpstreamMap/extract_{module}.py", "upstreamOpenCvVersion": "5.0.0", "headerPath": rel(umbrella, workspace), "headerSha256": sha256(umbrella), "parserPath": rel(parser_path, workspace), "parserSha256": sha256(parser_path), "preprocessorDefinitions": definitions, "sourceHeaders": source_headers, "declarationCount": len(declarations), "declarations": declarations}
     if module == "cudaarithm":
         build_contract = root.parent.parent / "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/CMakeLists.txt"
@@ -209,6 +228,13 @@ def main():
         build_contract = root.parent.parent / "opencv-source/opencv_contrib-5.0.0/modules/cudalegacy/CMakeLists.txt"
         result["compatibilityHeaders"] = [{"path": rel(build_contract, workspace), "sha256": sha256(build_contract), "reason": "Upstream legacy CUDA module activation, OpenCV dependency, and first-class CUDA runtime dependency contract; parser declarations are not gated in the public headers."}]
         result["moduleBuildCondition"] = "HAVE_CUDA"
+    if module == "videostab":
+        result["parserMode"] = "non-wrapper-public-declarations"
+        result["parserNormalization"] = "temporary parser-only normalization: protected sections changed to private so non-public stabilizer hooks are excluded; upstream source/hash unchanged"
+        build_contract = root.parent.parent / "opencv-source/opencv_contrib-5.0.0/modules/videostab/CMakeLists.txt"
+        result["compatibilityHeaders"] = [{"path": rel(build_contract, workspace), "sha256": sha256(build_contract), "reason": "Upstream VideoStab required OpenCV module dependencies plus optional CUDA and VideoIO components; parser declarations are not gated in the public headers."}]
+        result["moduleBuildCondition"] = "ocv_define_module(videostab opencv_imgproc opencv_features opencv_video opencv_photo opencv_geometry; OPTIONAL opencv_cudafeatures2d opencv_cudawarping opencv_cudaoptflow opencv_videoio)"
+        result["excludedPublicHeaders"] = []
     if module == "dnn_objdetect":
         result["parserMode"] = "non-wrapper-public-declarations"
         result["parserNormalization"] = "temporary parser-only normalization: name anonymous typedef struct object; annotate six public data members as CV_PROP_RW; protected -> private to exclude non-public methods; upstream source/hash unchanged"

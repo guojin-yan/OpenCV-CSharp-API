@@ -1,0 +1,5548 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/VideoStabUpstreamMap/extract_videostab.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab.hpp",
+  "headerSha256": "cd83d1cfd491ac1f9352f6b0721c9b1d916bd84187945b89a4891ccbec43ce04",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/deblurring.hpp",
+      "sha256": "eb6de0d78b5639bc740826fe69d0111fb2e5b7a4ae009c8246beacf1d038fc09",
+      "startOrdinal": 0,
+      "declarationCount": 20
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/fast_marching.hpp",
+      "sha256": "0046b83157984dc58b087d45daedc1955fb61a19eb6b73645c15ccc5a33be70f",
+      "startOrdinal": 20,
+      "declarationCount": 3
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/fast_marching_inl.hpp",
+      "sha256": "68e447cefb8e1cd736c65098acccbfa23c75c5768ce4120e7b445e86ae7765e7",
+      "startOrdinal": 23,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/frame_source.hpp",
+      "sha256": "e2be29adbf92d779d238ef2cf64e450e2bec229c06ea11f644ff571e7e1aec96",
+      "startOrdinal": 23,
+      "declarationCount": 20
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "sha256": "3840b0f172fe4da7ec1f26048e90d57c4bc225f24dbd7247d1203d1baeef82b2",
+      "startOrdinal": 43,
+      "declarationCount": 46
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "sha256": "5aecb663b4a731bd6d7529e8aec698cbad19ea0b247c1fd2ef6d67ed6930517d",
+      "startOrdinal": 89,
+      "declarationCount": 52
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/log.hpp",
+      "sha256": "7bf72dd243d5508f638c0c0b3bd9f4d0bc3aa70b226dd7f3cb88a608b63670c0",
+      "startOrdinal": 141,
+      "declarationCount": 7
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_core.hpp",
+      "sha256": "ddcba5788d59ca724107b8feac5a7a042ebf61e2520f212592a249147119f808",
+      "startOrdinal": 148,
+      "declarationCount": 7
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "sha256": "722b986a143f8c1fe44b44e4305f4285214142219aa8fdff9735e5540ccc2b4f",
+      "startOrdinal": 155,
+      "declarationCount": 37
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/optical_flow.hpp",
+      "sha256": "c1ec5dcd1038f7ed3391663c1d87ff86d056a98775dbe01b1027ea7f6dcf79a3",
+      "startOrdinal": 192,
+      "declarationCount": 15
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/outlier_rejection.hpp",
+      "sha256": "a1858d173bddfcf9da945849890b4ec35c0cbd84262fabccbcfe993461776022",
+      "startOrdinal": 207,
+      "declarationCount": 12
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/ring_buffer.hpp",
+      "sha256": "00608847b25889172025b0f4246a404fa686a6affc711734739580d131e39c17",
+      "startOrdinal": 219,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "sha256": "712875083e7d153025e792bf48be691d4869cb3cb04ac44aa660174dbb461c83",
+      "startOrdinal": 219,
+      "declarationCount": 38
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/wobble_suppression.hpp",
+      "sha256": "88dd6ad6a750322ccf2dd65b43fa1d60006708085fcb92fa79007ddb5418274c",
+      "startOrdinal": 257,
+      "declarationCount": 21
+    }
+  ],
+  "declarationCount": 278,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/deblurring.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.calcBlurriness",
+      "identity": "cv.videostab.calcBlurriness(const Mat & frame)->float",
+      "returnType": "float",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Mat &",
+          "name": "frame",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/deblurring.hpp",
+      "kind": "class",
+      "name": "cv.videostab.DeblurerBase",
+      "identity": "class cv.videostab.DeblurerBase",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/deblurring.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.DeblurerBase.DeblurerBase",
+      "identity": "cv.videostab.DeblurerBase.DeblurerBase()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/deblurring.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.DeblurerBase.~DeblurerBase",
+      "identity": "cv.videostab.DeblurerBase.~DeblurerBase()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/deblurring.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.DeblurerBase.setRadius",
+      "identity": "cv.videostab.DeblurerBase.setRadius(int val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/deblurring.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.DeblurerBase.radius",
+      "identity": "cv.videostab.DeblurerBase.radius()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/deblurring.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.DeblurerBase.deblur",
+      "identity": "cv.videostab.DeblurerBase.deblur(int idx;Mat & frame;const Range & range)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "idx",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat &",
+          "name": "frame",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const Range &",
+          "name": "range",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/deblurring.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.DeblurerBase.setFrames",
+      "identity": "cv.videostab.DeblurerBase.setFrames(const std::vector<Mat> & val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const std::vector<Mat> &",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/deblurring.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.DeblurerBase.frames",
+      "identity": "cv.videostab.DeblurerBase.frames()->const std::vector<Mat>&",
+      "returnType": "const std::vector<Mat>&",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/deblurring.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.DeblurerBase.setMotions",
+      "identity": "cv.videostab.DeblurerBase.setMotions(const std::vector<Mat> & val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const std::vector<Mat> &",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/deblurring.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.DeblurerBase.motions",
+      "identity": "cv.videostab.DeblurerBase.motions()->const std::vector<Mat>&",
+      "returnType": "const std::vector<Mat>&",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/deblurring.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.DeblurerBase.setBlurrinessRates",
+      "identity": "cv.videostab.DeblurerBase.setBlurrinessRates(const std::vector<float> & val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const std::vector<float> &",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/deblurring.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.DeblurerBase.blurrinessRates",
+      "identity": "cv.videostab.DeblurerBase.blurrinessRates()->const std::vector<float>&",
+      "returnType": "const std::vector<float>&",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/deblurring.hpp",
+      "kind": "class",
+      "name": "cv.videostab.NullDeblurer",
+      "identity": "class cv.videostab.NullDeblurer",
+      "returnType": ": cv::videostab::DeblurerBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::DeblurerBase",
+      "documentation": ""
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/deblurring.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.NullDeblurer.deblur",
+      "identity": "cv.videostab.NullDeblurer.deblur(int ;Mat & ;const Range & )->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat &",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const Range &",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/deblurring.hpp",
+      "kind": "class",
+      "name": "cv.videostab.WeightingDeblurer",
+      "identity": "class cv.videostab.WeightingDeblurer",
+      "returnType": ": cv::videostab::DeblurerBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::DeblurerBase",
+      "documentation": ""
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/deblurring.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.WeightingDeblurer.WeightingDeblurer",
+      "identity": "cv.videostab.WeightingDeblurer.WeightingDeblurer()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/deblurring.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.WeightingDeblurer.setSensitivity",
+      "identity": "cv.videostab.WeightingDeblurer.setSensitivity(float val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/deblurring.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.WeightingDeblurer.sensitivity",
+      "identity": "cv.videostab.WeightingDeblurer.sensitivity()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/deblurring.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.WeightingDeblurer.deblur",
+      "identity": "cv.videostab.WeightingDeblurer.deblur(int idx;Mat & frame;const Range & range)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "idx",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat &",
+          "name": "frame",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const Range &",
+          "name": "range",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/fast_marching.hpp",
+      "kind": "class",
+      "name": "cv.videostab.FastMarchingMethod",
+      "identity": "class cv.videostab.FastMarchingMethod",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Describes the Fast Marching Method implementation.\n\n  See http://iwi.eldoc.ub.rug.nl/FILES/root/2004/JGraphToolsTelea/2004JGraphToolsTelea.pdf"
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/fast_marching.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.FastMarchingMethod.FastMarchingMethod",
+      "identity": "cv.videostab.FastMarchingMethod.FastMarchingMethod()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/fast_marching.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.FastMarchingMethod.distanceMap",
+      "identity": "cv.videostab.FastMarchingMethod.distanceMap()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@return Distance map that's created during working of the method."
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/frame_source.hpp",
+      "kind": "class",
+      "name": "cv.videostab.IFrameSource",
+      "identity": "class cv.videostab.IFrameSource",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/frame_source.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.IFrameSource.~IFrameSource",
+      "identity": "cv.videostab.IFrameSource.~IFrameSource()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/frame_source.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.IFrameSource.reset",
+      "identity": "cv.videostab.IFrameSource.reset()->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/frame_source.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.IFrameSource.nextFrame",
+      "identity": "cv.videostab.IFrameSource.nextFrame()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/frame_source.hpp",
+      "kind": "class",
+      "name": "cv.videostab.NullFrameSource",
+      "identity": "class cv.videostab.NullFrameSource",
+      "returnType": ": cv::videostab::IFrameSource",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::IFrameSource",
+      "documentation": ""
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/frame_source.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.NullFrameSource.reset",
+      "identity": "cv.videostab.NullFrameSource.reset()->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/frame_source.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.NullFrameSource.nextFrame",
+      "identity": "cv.videostab.NullFrameSource.nextFrame()->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/frame_source.hpp",
+      "kind": "class",
+      "name": "cv.videostab.VideoFileSource",
+      "identity": "class cv.videostab.VideoFileSource",
+      "returnType": ": cv::videostab::IFrameSource",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::IFrameSource",
+      "documentation": ""
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/frame_source.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.VideoFileSource.VideoFileSource",
+      "identity": "cv.videostab.VideoFileSource.VideoFileSource(const String & path;bool volatileFrame=false)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const String &",
+          "name": "path",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "volatileFrame",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/frame_source.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.VideoFileSource.reset",
+      "identity": "cv.videostab.VideoFileSource.reset()->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/frame_source.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.VideoFileSource.nextFrame",
+      "identity": "cv.videostab.VideoFileSource.nextFrame()->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/frame_source.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.VideoFileSource.width",
+      "identity": "cv.videostab.VideoFileSource.width()->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/frame_source.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.VideoFileSource.height",
+      "identity": "cv.videostab.VideoFileSource.height()->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/frame_source.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.VideoFileSource.count",
+      "identity": "cv.videostab.VideoFileSource.count()->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 37,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/frame_source.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.VideoFileSource.fps",
+      "identity": "cv.videostab.VideoFileSource.fps()->double",
+      "returnType": "double",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 38,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/frame_source.hpp",
+      "kind": "class",
+      "name": "cv.videostab.MaskFrameSource",
+      "identity": "class cv.videostab.MaskFrameSource",
+      "returnType": ": cv::videostab::IFrameSource",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::IFrameSource",
+      "documentation": ""
+    },
+    {
+      "ordinal": 39,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/frame_source.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MaskFrameSource.MaskFrameSource",
+      "identity": "cv.videostab.MaskFrameSource.MaskFrameSource(const Ptr<IFrameSource>& source)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Ptr<IFrameSource>&",
+          "name": "source",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 40,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/frame_source.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MaskFrameSource.reset",
+      "identity": "cv.videostab.MaskFrameSource.reset()->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 41,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/frame_source.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MaskFrameSource.nextFrame",
+      "identity": "cv.videostab.MaskFrameSource.nextFrame()->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 42,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/frame_source.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MaskFrameSource.setMaskCallback",
+      "identity": "cv.videostab.MaskFrameSource.setMaskCallback(std::function<void(Mat&)> MaskCallback)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "std::function<void(Mat&)>",
+          "name": "MaskCallback",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 43,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.estimateGlobalMotionLeastSquares",
+      "identity": "cv.videostab.estimateGlobalMotionLeastSquares(InputOutputArray points0;InputOutputArray points1;int model=MM_AFFINE;float * rmse=0)->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputOutputArray",
+          "name": "points0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputOutputArray",
+          "name": "points1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "model",
+          "default": "MM_AFFINE",
+          "modifiers": []
+        },
+        {
+          "type": "float *",
+          "name": "rmse",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Estimates best global motion between two 2D point clouds in the least-squares sense.\n\n@note Works in-place and changes input point arrays.\n\n@param points0 Source set of 2D points (32F).\n@param points1 Destination set of 2D points (32F).\n@param model Motion model (up to MM_AFFINE).\n@param rmse Final root-mean-square error.\n@return 3x3 2D transformation matrix (32F)."
+    },
+    {
+      "ordinal": 44,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.estimateGlobalMotionRansac",
+      "identity": "cv.videostab.estimateGlobalMotionRansac(InputArray points0;InputArray points1;int model=MM_AFFINE;const RansacParams & params=RansacParams::default2dMotion(MM_AFFINE);float * rmse=0;int * ninliers=0)->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "points0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "points1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "model",
+          "default": "MM_AFFINE",
+          "modifiers": []
+        },
+        {
+          "type": "const RansacParams &",
+          "name": "params",
+          "default": "RansacParams::default2dMotion(MM_AFFINE)",
+          "modifiers": []
+        },
+        {
+          "type": "float *",
+          "name": "rmse",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "int *",
+          "name": "ninliers",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Estimates best global motion between two 2D point clouds robustly (using RANSAC method).\n\n@param points0 Source set of 2D points (32F).\n@param points1 Destination set of 2D points (32F).\n@param model Motion model. See cv::videostab::MotionModel.\n@param params RANSAC method parameters. See videostab::RansacParams.\n@param rmse Final root-mean-square error.\n@param ninliers Final number of inliers."
+    },
+    {
+      "ordinal": 45,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "class",
+      "name": "cv.videostab.MotionEstimatorBase",
+      "identity": "class cv.videostab.MotionEstimatorBase",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Base class for all global motion estimation methods."
+    },
+    {
+      "ordinal": 46,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionEstimatorBase.~MotionEstimatorBase",
+      "identity": "cv.videostab.MotionEstimatorBase.~MotionEstimatorBase()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 47,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionEstimatorBase.setMotionModel",
+      "identity": "cv.videostab.MotionEstimatorBase.setMotionModel(MotionModel val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "MotionModel",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets motion model.\n\n    @param val Motion model. See cv::videostab::MotionModel."
+    },
+    {
+      "ordinal": 48,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionEstimatorBase.motionModel",
+      "identity": "cv.videostab.MotionEstimatorBase.motionModel()->MotionModel",
+      "returnType": "MotionModel",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@return Motion model. See cv::videostab::MotionModel."
+    },
+    {
+      "ordinal": 49,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionEstimatorBase.estimate",
+      "identity": "cv.videostab.MotionEstimatorBase.estimate(InputArray points0;InputArray points1;bool * ok=0)->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "points0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "points1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool *",
+          "name": "ok",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Estimates global motion between two 2D point clouds.\n\n    @param points0 Source set of 2D points (32F).\n    @param points1 Destination set of 2D points (32F).\n    @param ok Indicates whether motion was estimated successfully.\n    @return 3x3 2D transformation matrix (32F)."
+    },
+    {
+      "ordinal": 50,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "class",
+      "name": "cv.videostab.MotionEstimatorRansacL2",
+      "identity": "class cv.videostab.MotionEstimatorRansacL2",
+      "returnType": ": cv::videostab::MotionEstimatorBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::MotionEstimatorBase",
+      "documentation": "@brief Describes a robust RANSAC-based global 2D motion estimation method which minimizes L2 error."
+    },
+    {
+      "ordinal": 51,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionEstimatorRansacL2.MotionEstimatorRansacL2",
+      "identity": "cv.videostab.MotionEstimatorRansacL2.MotionEstimatorRansacL2(MotionModel model=MM_AFFINE)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "MotionModel",
+          "name": "model",
+          "default": "MM_AFFINE",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 52,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionEstimatorRansacL2.setRansacParams",
+      "identity": "cv.videostab.MotionEstimatorRansacL2.setRansacParams(const RansacParams & val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const RansacParams &",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 53,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionEstimatorRansacL2.ransacParams",
+      "identity": "cv.videostab.MotionEstimatorRansacL2.ransacParams()->RansacParams",
+      "returnType": "RansacParams",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 54,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionEstimatorRansacL2.setMinInlierRatio",
+      "identity": "cv.videostab.MotionEstimatorRansacL2.setMinInlierRatio(float val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 55,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionEstimatorRansacL2.minInlierRatio",
+      "identity": "cv.videostab.MotionEstimatorRansacL2.minInlierRatio()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 56,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionEstimatorRansacL2.estimate",
+      "identity": "cv.videostab.MotionEstimatorRansacL2.estimate(InputArray points0;InputArray points1;bool * ok=0)->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "points0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "points1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool *",
+          "name": "ok",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 57,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "class",
+      "name": "cv.videostab.MotionEstimatorL1",
+      "identity": "class cv.videostab.MotionEstimatorL1",
+      "returnType": ": cv::videostab::MotionEstimatorBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::MotionEstimatorBase",
+      "documentation": "@brief Describes a global 2D motion estimation method which minimizes L1 error.\n\n@note To be able to use this method you must build OpenCV with CLP library support. :"
+    },
+    {
+      "ordinal": 58,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionEstimatorL1.MotionEstimatorL1",
+      "identity": "cv.videostab.MotionEstimatorL1.MotionEstimatorL1(MotionModel model=MM_AFFINE)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "MotionModel",
+          "name": "model",
+          "default": "MM_AFFINE",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 59,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionEstimatorL1.estimate",
+      "identity": "cv.videostab.MotionEstimatorL1.estimate(InputArray points0;InputArray points1;bool * ok=0)->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "points0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "points1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool *",
+          "name": "ok",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 60,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "class",
+      "name": "cv.videostab.ImageMotionEstimatorBase",
+      "identity": "class cv.videostab.ImageMotionEstimatorBase",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Base class for global 2D motion estimation methods which take frames as input."
+    },
+    {
+      "ordinal": 61,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.ImageMotionEstimatorBase.~ImageMotionEstimatorBase",
+      "identity": "cv.videostab.ImageMotionEstimatorBase.~ImageMotionEstimatorBase()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 62,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.ImageMotionEstimatorBase.setMotionModel",
+      "identity": "cv.videostab.ImageMotionEstimatorBase.setMotionModel(MotionModel val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "MotionModel",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 63,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.ImageMotionEstimatorBase.motionModel",
+      "identity": "cv.videostab.ImageMotionEstimatorBase.motionModel()->MotionModel",
+      "returnType": "MotionModel",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 64,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.ImageMotionEstimatorBase.setFrameMask",
+      "identity": "cv.videostab.ImageMotionEstimatorBase.setFrameMask(InputArray mask)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 65,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.ImageMotionEstimatorBase.estimate",
+      "identity": "cv.videostab.ImageMotionEstimatorBase.estimate(const Mat & frame0;const Mat & frame1;bool * ok=0)->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "const Mat &",
+          "name": "frame0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const Mat &",
+          "name": "frame1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool *",
+          "name": "ok",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 66,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "class",
+      "name": "cv.videostab.FromFileMotionReader",
+      "identity": "class cv.videostab.FromFileMotionReader",
+      "returnType": ": cv::videostab::ImageMotionEstimatorBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::ImageMotionEstimatorBase",
+      "documentation": ""
+    },
+    {
+      "ordinal": 67,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.FromFileMotionReader.FromFileMotionReader",
+      "identity": "cv.videostab.FromFileMotionReader.FromFileMotionReader(const String & path)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const String &",
+          "name": "path",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 68,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.FromFileMotionReader.estimate",
+      "identity": "cv.videostab.FromFileMotionReader.estimate(const Mat & frame0;const Mat & frame1;bool * ok=0)->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Mat &",
+          "name": "frame0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const Mat &",
+          "name": "frame1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool *",
+          "name": "ok",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 69,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "class",
+      "name": "cv.videostab.ToFileMotionWriter",
+      "identity": "class cv.videostab.ToFileMotionWriter",
+      "returnType": ": cv::videostab::ImageMotionEstimatorBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::ImageMotionEstimatorBase",
+      "documentation": ""
+    },
+    {
+      "ordinal": 70,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.ToFileMotionWriter.ToFileMotionWriter",
+      "identity": "cv.videostab.ToFileMotionWriter.ToFileMotionWriter(const String & path;Ptr<ImageMotionEstimatorBase> estimator)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const String &",
+          "name": "path",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Ptr<ImageMotionEstimatorBase>",
+          "name": "estimator",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 71,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.ToFileMotionWriter.setMotionModel",
+      "identity": "cv.videostab.ToFileMotionWriter.setMotionModel(MotionModel val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "MotionModel",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 72,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.ToFileMotionWriter.motionModel",
+      "identity": "cv.videostab.ToFileMotionWriter.motionModel()->MotionModel",
+      "returnType": "MotionModel",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 73,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.ToFileMotionWriter.setFrameMask",
+      "identity": "cv.videostab.ToFileMotionWriter.setFrameMask(InputArray mask)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 74,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.ToFileMotionWriter.estimate",
+      "identity": "cv.videostab.ToFileMotionWriter.estimate(const Mat & frame0;const Mat & frame1;bool * ok=0)->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Mat &",
+          "name": "frame0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const Mat &",
+          "name": "frame1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool *",
+          "name": "ok",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 75,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "class",
+      "name": "cv.videostab.KeypointBasedMotionEstimator",
+      "identity": "class cv.videostab.KeypointBasedMotionEstimator",
+      "returnType": ": cv::videostab::ImageMotionEstimatorBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::ImageMotionEstimatorBase",
+      "documentation": "@brief Describes a global 2D motion estimation method which uses keypoints detection and optical flow for\nmatching."
+    },
+    {
+      "ordinal": 76,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.KeypointBasedMotionEstimator.KeypointBasedMotionEstimator",
+      "identity": "cv.videostab.KeypointBasedMotionEstimator.KeypointBasedMotionEstimator(Ptr<MotionEstimatorBase> estimator)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr<MotionEstimatorBase>",
+          "name": "estimator",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 77,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.KeypointBasedMotionEstimator.setMotionModel",
+      "identity": "cv.videostab.KeypointBasedMotionEstimator.setMotionModel(MotionModel val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "MotionModel",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 78,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.KeypointBasedMotionEstimator.motionModel",
+      "identity": "cv.videostab.KeypointBasedMotionEstimator.motionModel()->MotionModel",
+      "returnType": "MotionModel",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 79,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.KeypointBasedMotionEstimator.setDetector",
+      "identity": "cv.videostab.KeypointBasedMotionEstimator.setDetector(Ptr<FeatureDetector> val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr<FeatureDetector>",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 80,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.KeypointBasedMotionEstimator.detector",
+      "identity": "cv.videostab.KeypointBasedMotionEstimator.detector()->Ptr<FeatureDetector>",
+      "returnType": "Ptr<FeatureDetector>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 81,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.KeypointBasedMotionEstimator.setOpticalFlowEstimator",
+      "identity": "cv.videostab.KeypointBasedMotionEstimator.setOpticalFlowEstimator(Ptr<ISparseOptFlowEstimator> val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr<ISparseOptFlowEstimator>",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 82,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.KeypointBasedMotionEstimator.opticalFlowEstimator",
+      "identity": "cv.videostab.KeypointBasedMotionEstimator.opticalFlowEstimator()->Ptr<ISparseOptFlowEstimator>",
+      "returnType": "Ptr<ISparseOptFlowEstimator>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 83,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.KeypointBasedMotionEstimator.setOutlierRejector",
+      "identity": "cv.videostab.KeypointBasedMotionEstimator.setOutlierRejector(Ptr<IOutlierRejector> val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr<IOutlierRejector>",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 84,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.KeypointBasedMotionEstimator.outlierRejector",
+      "identity": "cv.videostab.KeypointBasedMotionEstimator.outlierRejector()->Ptr<IOutlierRejector>",
+      "returnType": "Ptr<IOutlierRejector>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 85,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.KeypointBasedMotionEstimator.setFrameMask",
+      "identity": "cv.videostab.KeypointBasedMotionEstimator.setFrameMask(InputArray mask)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 86,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.KeypointBasedMotionEstimator.estimate",
+      "identity": "cv.videostab.KeypointBasedMotionEstimator.estimate(const Mat & frame0;const Mat & frame1;bool * ok=0)->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Mat &",
+          "name": "frame0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const Mat &",
+          "name": "frame1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool *",
+          "name": "ok",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 87,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.KeypointBasedMotionEstimator.estimate",
+      "identity": "cv.videostab.KeypointBasedMotionEstimator.estimate(InputArray frame0;InputArray frame1;bool * ok=0)->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "frame0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "frame1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool *",
+          "name": "ok",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 88,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.getMotion",
+      "identity": "cv.videostab.getMotion(int from;int to;const std::vector<Mat> & motions)->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "from",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "to",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const std::vector<Mat> &",
+          "name": "motions",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes motion between two frames assuming that all the intermediate motions are known.\n\n@param from Source frame index.\n@param to Destination frame index.\n@param motions Pair-wise motions. motions[i] denotes motion from the frame i to the frame i+1\n@return Motion from the Source frame to the Destination frame."
+    },
+    {
+      "ordinal": 89,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "class",
+      "name": "cv.videostab.InpainterBase",
+      "identity": "class cv.videostab.InpainterBase",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 90,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.InpainterBase.InpainterBase",
+      "identity": "cv.videostab.InpainterBase.InpainterBase()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 91,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.InpainterBase.~InpainterBase",
+      "identity": "cv.videostab.InpainterBase.~InpainterBase()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 92,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.InpainterBase.setRadius",
+      "identity": "cv.videostab.InpainterBase.setRadius(int val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 93,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.InpainterBase.radius",
+      "identity": "cv.videostab.InpainterBase.radius()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 94,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.InpainterBase.setMotionModel",
+      "identity": "cv.videostab.InpainterBase.setMotionModel(MotionModel val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "MotionModel",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 95,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.InpainterBase.motionModel",
+      "identity": "cv.videostab.InpainterBase.motionModel()->MotionModel",
+      "returnType": "MotionModel",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 96,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.InpainterBase.inpaint",
+      "identity": "cv.videostab.InpainterBase.inpaint(int idx;Mat & frame;Mat & mask)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "idx",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat &",
+          "name": "frame",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat &",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 97,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.InpainterBase.setFrames",
+      "identity": "cv.videostab.InpainterBase.setFrames(const std::vector<Mat> & val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const std::vector<Mat> &",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 98,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.InpainterBase.frames",
+      "identity": "cv.videostab.InpainterBase.frames()->const std::vector<Mat>&",
+      "returnType": "const std::vector<Mat>&",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 99,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.InpainterBase.setMotions",
+      "identity": "cv.videostab.InpainterBase.setMotions(const std::vector<Mat> & val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const std::vector<Mat> &",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 100,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.InpainterBase.motions",
+      "identity": "cv.videostab.InpainterBase.motions()->const std::vector<Mat>&",
+      "returnType": "const std::vector<Mat>&",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 101,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.InpainterBase.setStabilizedFrames",
+      "identity": "cv.videostab.InpainterBase.setStabilizedFrames(const std::vector<Mat> & val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const std::vector<Mat> &",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 102,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.InpainterBase.stabilizedFrames",
+      "identity": "cv.videostab.InpainterBase.stabilizedFrames()->const std::vector<Mat>&",
+      "returnType": "const std::vector<Mat>&",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 103,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.InpainterBase.setStabilizationMotions",
+      "identity": "cv.videostab.InpainterBase.setStabilizationMotions(const std::vector<Mat> & val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const std::vector<Mat> &",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 104,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.InpainterBase.stabilizationMotions",
+      "identity": "cv.videostab.InpainterBase.stabilizationMotions()->const std::vector<Mat>&",
+      "returnType": "const std::vector<Mat>&",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 105,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "class",
+      "name": "cv.videostab.NullInpainter",
+      "identity": "class cv.videostab.NullInpainter",
+      "returnType": ": cv::videostab::InpainterBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::InpainterBase",
+      "documentation": ""
+    },
+    {
+      "ordinal": 106,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.NullInpainter.inpaint",
+      "identity": "cv.videostab.NullInpainter.inpaint(int ;Mat & ;Mat & )->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat &",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat &",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 107,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "class",
+      "name": "cv.videostab.InpaintingPipeline",
+      "identity": "class cv.videostab.InpaintingPipeline",
+      "returnType": ": cv::videostab::InpainterBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::InpainterBase",
+      "documentation": ""
+    },
+    {
+      "ordinal": 108,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.InpaintingPipeline.pushBack",
+      "identity": "cv.videostab.InpaintingPipeline.pushBack(Ptr<InpainterBase> inpainter)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr<InpainterBase>",
+          "name": "inpainter",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 109,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.InpaintingPipeline.empty",
+      "identity": "cv.videostab.InpaintingPipeline.empty()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 110,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.InpaintingPipeline.setRadius",
+      "identity": "cv.videostab.InpaintingPipeline.setRadius(int val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 111,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.InpaintingPipeline.setMotionModel",
+      "identity": "cv.videostab.InpaintingPipeline.setMotionModel(MotionModel val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "MotionModel",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 112,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.InpaintingPipeline.setFrames",
+      "identity": "cv.videostab.InpaintingPipeline.setFrames(const std::vector<Mat> & val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const std::vector<Mat> &",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 113,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.InpaintingPipeline.setMotions",
+      "identity": "cv.videostab.InpaintingPipeline.setMotions(const std::vector<Mat> & val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const std::vector<Mat> &",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 114,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.InpaintingPipeline.setStabilizedFrames",
+      "identity": "cv.videostab.InpaintingPipeline.setStabilizedFrames(const std::vector<Mat> & val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const std::vector<Mat> &",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 115,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.InpaintingPipeline.setStabilizationMotions",
+      "identity": "cv.videostab.InpaintingPipeline.setStabilizationMotions(const std::vector<Mat> & val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const std::vector<Mat> &",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 116,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.InpaintingPipeline.inpaint",
+      "identity": "cv.videostab.InpaintingPipeline.inpaint(int idx;Mat & frame;Mat & mask)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "idx",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat &",
+          "name": "frame",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat &",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 117,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "class",
+      "name": "cv.videostab.ConsistentMosaicInpainter",
+      "identity": "class cv.videostab.ConsistentMosaicInpainter",
+      "returnType": ": cv::videostab::InpainterBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::InpainterBase",
+      "documentation": ""
+    },
+    {
+      "ordinal": 118,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.ConsistentMosaicInpainter.ConsistentMosaicInpainter",
+      "identity": "cv.videostab.ConsistentMosaicInpainter.ConsistentMosaicInpainter()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 119,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.ConsistentMosaicInpainter.setStdevThresh",
+      "identity": "cv.videostab.ConsistentMosaicInpainter.setStdevThresh(float val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 120,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.ConsistentMosaicInpainter.stdevThresh",
+      "identity": "cv.videostab.ConsistentMosaicInpainter.stdevThresh()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 121,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.ConsistentMosaicInpainter.inpaint",
+      "identity": "cv.videostab.ConsistentMosaicInpainter.inpaint(int idx;Mat & frame;Mat & mask)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "idx",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat &",
+          "name": "frame",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat &",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 122,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "class",
+      "name": "cv.videostab.MotionInpainter",
+      "identity": "class cv.videostab.MotionInpainter",
+      "returnType": ": cv::videostab::InpainterBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::InpainterBase",
+      "documentation": ""
+    },
+    {
+      "ordinal": 123,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionInpainter.MotionInpainter",
+      "identity": "cv.videostab.MotionInpainter.MotionInpainter()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 124,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionInpainter.setOptFlowEstimator",
+      "identity": "cv.videostab.MotionInpainter.setOptFlowEstimator(Ptr<IDenseOptFlowEstimator> val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr<IDenseOptFlowEstimator>",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 125,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionInpainter.optFlowEstimator",
+      "identity": "cv.videostab.MotionInpainter.optFlowEstimator()->Ptr<IDenseOptFlowEstimator>",
+      "returnType": "Ptr<IDenseOptFlowEstimator>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 126,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionInpainter.setFlowErrorThreshold",
+      "identity": "cv.videostab.MotionInpainter.setFlowErrorThreshold(float val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 127,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionInpainter.flowErrorThreshold",
+      "identity": "cv.videostab.MotionInpainter.flowErrorThreshold()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 128,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionInpainter.setDistThreshold",
+      "identity": "cv.videostab.MotionInpainter.setDistThreshold(float val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 129,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionInpainter.distThresh",
+      "identity": "cv.videostab.MotionInpainter.distThresh()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 130,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionInpainter.setBorderMode",
+      "identity": "cv.videostab.MotionInpainter.setBorderMode(int val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 131,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionInpainter.borderMode",
+      "identity": "cv.videostab.MotionInpainter.borderMode()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 132,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionInpainter.inpaint",
+      "identity": "cv.videostab.MotionInpainter.inpaint(int idx;Mat & frame;Mat & mask)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "idx",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat &",
+          "name": "frame",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat &",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 133,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "class",
+      "name": "cv.videostab.ColorAverageInpainter",
+      "identity": "class cv.videostab.ColorAverageInpainter",
+      "returnType": ": cv::videostab::InpainterBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::InpainterBase",
+      "documentation": ""
+    },
+    {
+      "ordinal": 134,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.ColorAverageInpainter.inpaint",
+      "identity": "cv.videostab.ColorAverageInpainter.inpaint(int idx;Mat & frame;Mat & mask)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "idx",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat &",
+          "name": "frame",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat &",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 135,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "class",
+      "name": "cv.videostab.ColorInpainter",
+      "identity": "class cv.videostab.ColorInpainter",
+      "returnType": ": cv::videostab::InpainterBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::InpainterBase",
+      "documentation": ""
+    },
+    {
+      "ordinal": 136,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.ColorInpainter.ColorInpainter",
+      "identity": "cv.videostab.ColorInpainter.ColorInpainter(int method=INPAINT_TELEA;double radius=2.)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "method",
+          "default": "INPAINT_TELEA",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "radius",
+          "default": "2.",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 137,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.ColorInpainter.inpaint",
+      "identity": "cv.videostab.ColorInpainter.inpaint(int idx;Mat & frame;Mat & mask)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "idx",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat &",
+          "name": "frame",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat &",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 138,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.ColorInpainter.ColorInpainter",
+      "identity": "cv.videostab.ColorInpainter.ColorInpainter(int _method;double _radius)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "_method",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "_radius",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 139,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.calcFlowMask",
+      "identity": "cv.videostab.calcFlowMask(const Mat & flowX;const Mat & flowY;const Mat & errors;float maxError;const Mat & mask0;const Mat & mask1;Mat & flowMask)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Mat &",
+          "name": "flowX",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const Mat &",
+          "name": "flowY",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const Mat &",
+          "name": "errors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "maxError",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const Mat &",
+          "name": "mask0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const Mat &",
+          "name": "mask1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat &",
+          "name": "flowMask",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 140,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.completeFrameAccordingToFlow",
+      "identity": "cv.videostab.completeFrameAccordingToFlow(const Mat & flowMask;const Mat & flowX;const Mat & flowY;const Mat & frame1;const Mat & mask1;float distThresh;Mat& frame0;Mat & mask0)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Mat &",
+          "name": "flowMask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const Mat &",
+          "name": "flowX",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const Mat &",
+          "name": "flowY",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const Mat &",
+          "name": "frame1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const Mat &",
+          "name": "mask1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "distThresh",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat&",
+          "name": "frame0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat &",
+          "name": "mask0",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 141,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/log.hpp",
+      "kind": "class",
+      "name": "cv.videostab.ILog",
+      "identity": "class cv.videostab.ILog",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 142,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/log.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.ILog.~ILog",
+      "identity": "cv.videostab.ILog.~ILog()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 143,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/log.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.ILog.print",
+      "identity": "cv.videostab.ILog.print(const char * format;... )->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "const char *",
+          "name": "format",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "...",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 144,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/log.hpp",
+      "kind": "class",
+      "name": "cv.videostab.NullLog",
+      "identity": "class cv.videostab.NullLog",
+      "returnType": ": cv::videostab::ILog",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::ILog",
+      "documentation": ""
+    },
+    {
+      "ordinal": 145,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/log.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.NullLog.print",
+      "identity": "cv.videostab.NullLog.print(const char * ;... )->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const char *",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "...",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 146,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/log.hpp",
+      "kind": "class",
+      "name": "cv.videostab.LogToStdout",
+      "identity": "class cv.videostab.LogToStdout",
+      "returnType": ": cv::videostab::ILog",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::ILog",
+      "documentation": ""
+    },
+    {
+      "ordinal": 147,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/log.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.LogToStdout.print",
+      "identity": "cv.videostab.LogToStdout.print(const char * format;... )->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const char *",
+          "name": "format",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "...",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 148,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_core.hpp",
+      "kind": "enum",
+      "name": "cv.videostab.MotionModel",
+      "identity": "enum cv.videostab.MotionModel[const cv.videostab.MM_TRANSLATION=0;const cv.videostab.MM_TRANSLATION_AND_SCALE=1;const cv.videostab.MM_ROTATION=2;const cv.videostab.MM_RIGID=3;const cv.videostab.MM_SIMILARITY=4;const cv.videostab.MM_AFFINE=5;const cv.videostab.MM_HOMOGRAPHY=6;const cv.videostab.MM_UNKNOWN=7]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.videostab.MM_TRANSLATION",
+          "value": "0"
+        },
+        {
+          "name": "const cv.videostab.MM_TRANSLATION_AND_SCALE",
+          "value": "1"
+        },
+        {
+          "name": "const cv.videostab.MM_ROTATION",
+          "value": "2"
+        },
+        {
+          "name": "const cv.videostab.MM_RIGID",
+          "value": "3"
+        },
+        {
+          "name": "const cv.videostab.MM_SIMILARITY",
+          "value": "4"
+        },
+        {
+          "name": "const cv.videostab.MM_AFFINE",
+          "value": "5"
+        },
+        {
+          "name": "const cv.videostab.MM_HOMOGRAPHY",
+          "value": "6"
+        },
+        {
+          "name": "const cv.videostab.MM_UNKNOWN",
+          "value": "7"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 149,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_core.hpp",
+      "kind": "class",
+      "name": "cv.videostab.RansacParams",
+      "identity": "class cv.videostab.RansacParams",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Describes RANSAC method parameters."
+    },
+    {
+      "ordinal": 150,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_core.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.RansacParams.RansacParams",
+      "identity": "cv.videostab.RansacParams.RansacParams()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 151,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_core.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.RansacParams.RansacParams",
+      "identity": "cv.videostab.RansacParams.RansacParams(int size;float thresh;float eps;float prob)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "size",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "thresh",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "eps",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "prob",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Constructor\n    @param size Subset size.\n    @param thresh Maximum re-projection error value to classify as inlier.\n    @param eps Maximum ratio of incorrect correspondences.\n    @param prob Required success probability."
+    },
+    {
+      "ordinal": 152,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_core.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.RansacParams.niters",
+      "identity": "cv.videostab.RansacParams.niters()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@return Number of iterations that'll be performed by RANSAC method."
+    },
+    {
+      "ordinal": 153,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_core.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.RansacParams.default2dMotion",
+      "identity": "cv.videostab.RansacParams.default2dMotion(MotionModel model)->RansacParams",
+      "returnType": "RansacParams",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "MotionModel",
+          "name": "model",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@param model Motion model. See cv::videostab::MotionModel.\n    @return Default RANSAC method parameters for the given motion model."
+    },
+    {
+      "ordinal": 154,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_core.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.RansacParams.RansacParams",
+      "identity": "cv.videostab.RansacParams.RansacParams(int _size;float _thresh;float _eps;float _prob)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "_size",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "_thresh",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "_eps",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "_prob",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 155,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "class",
+      "name": "cv.videostab.IMotionStabilizer",
+      "identity": "class cv.videostab.IMotionStabilizer",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 156,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.IMotionStabilizer.~IMotionStabilizer",
+      "identity": "cv.videostab.IMotionStabilizer.~IMotionStabilizer()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 157,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.IMotionStabilizer.stabilize",
+      "identity": "cv.videostab.IMotionStabilizer.stabilize(int size;const std::vector<Mat> & motions;const Range & range;Mat * stabilizationMotions)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "size",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const std::vector<Mat> &",
+          "name": "motions",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const Range &",
+          "name": "range",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat *",
+          "name": "stabilizationMotions",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 158,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "class",
+      "name": "cv.videostab.MotionStabilizationPipeline",
+      "identity": "class cv.videostab.MotionStabilizationPipeline",
+      "returnType": ": cv::videostab::IMotionStabilizer",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::IMotionStabilizer",
+      "documentation": ""
+    },
+    {
+      "ordinal": 159,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionStabilizationPipeline.pushBack",
+      "identity": "cv.videostab.MotionStabilizationPipeline.pushBack(Ptr<IMotionStabilizer> stabilizer)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr<IMotionStabilizer>",
+          "name": "stabilizer",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 160,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionStabilizationPipeline.empty",
+      "identity": "cv.videostab.MotionStabilizationPipeline.empty()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 161,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionStabilizationPipeline.stabilize",
+      "identity": "cv.videostab.MotionStabilizationPipeline.stabilize(int size;const std::vector<Mat> & motions;const Range & range;Mat * stabilizationMotions)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "size",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const std::vector<Mat> &",
+          "name": "motions",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const Range &",
+          "name": "range",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat *",
+          "name": "stabilizationMotions",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 162,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "class",
+      "name": "cv.videostab.MotionFilterBase",
+      "identity": "class cv.videostab.MotionFilterBase",
+      "returnType": ": cv::videostab::IMotionStabilizer",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::IMotionStabilizer",
+      "documentation": ""
+    },
+    {
+      "ordinal": 163,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionFilterBase.~MotionFilterBase",
+      "identity": "cv.videostab.MotionFilterBase.~MotionFilterBase()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 164,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionFilterBase.stabilize",
+      "identity": "cv.videostab.MotionFilterBase.stabilize(int idx;const std::vector<Mat> & motions;const Range & range)->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "idx",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const std::vector<Mat> &",
+          "name": "motions",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const Range &",
+          "name": "range",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 165,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MotionFilterBase.stabilize",
+      "identity": "cv.videostab.MotionFilterBase.stabilize(int size;const std::vector<Mat> & motions;const Range & range;Mat * stabilizationMotions)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "size",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const std::vector<Mat> &",
+          "name": "motions",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const Range &",
+          "name": "range",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat *",
+          "name": "stabilizationMotions",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 166,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "class",
+      "name": "cv.videostab.GaussianMotionFilter",
+      "identity": "class cv.videostab.GaussianMotionFilter",
+      "returnType": ": cv::videostab::MotionFilterBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::MotionFilterBase",
+      "documentation": ""
+    },
+    {
+      "ordinal": 167,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.GaussianMotionFilter.GaussianMotionFilter",
+      "identity": "cv.videostab.GaussianMotionFilter.GaussianMotionFilter(int radius=15;float stdev=-1.f)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "radius",
+          "default": "15",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "stdev",
+          "default": "-1.f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 168,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.GaussianMotionFilter.setParams",
+      "identity": "cv.videostab.GaussianMotionFilter.setParams(int radius;float stdev=-1.f)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "radius",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "stdev",
+          "default": "-1.f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 169,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.GaussianMotionFilter.radius",
+      "identity": "cv.videostab.GaussianMotionFilter.radius()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 170,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.GaussianMotionFilter.stdev",
+      "identity": "cv.videostab.GaussianMotionFilter.stdev()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 171,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.GaussianMotionFilter.stabilize",
+      "identity": "cv.videostab.GaussianMotionFilter.stabilize(int idx;const std::vector<Mat> & motions;const Range & range)->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "idx",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const std::vector<Mat> &",
+          "name": "motions",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const Range &",
+          "name": "range",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 172,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.GaussianMotionFilter.GaussianMotionFilter",
+      "identity": "cv.videostab.GaussianMotionFilter.GaussianMotionFilter(int _radius;float _stdev)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "_radius",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "_stdev",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 173,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "class",
+      "name": "cv.videostab.LpMotionStabilizer",
+      "identity": "class cv.videostab.LpMotionStabilizer",
+      "returnType": ": cv::videostab::IMotionStabilizer",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::IMotionStabilizer",
+      "documentation": ""
+    },
+    {
+      "ordinal": 174,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.LpMotionStabilizer.LpMotionStabilizer",
+      "identity": "cv.videostab.LpMotionStabilizer.LpMotionStabilizer(MotionModel model=MM_SIMILARITY)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "MotionModel",
+          "name": "model",
+          "default": "MM_SIMILARITY",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 175,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.LpMotionStabilizer.setMotionModel",
+      "identity": "cv.videostab.LpMotionStabilizer.setMotionModel(MotionModel val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "MotionModel",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 176,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.LpMotionStabilizer.motionModel",
+      "identity": "cv.videostab.LpMotionStabilizer.motionModel()->MotionModel",
+      "returnType": "MotionModel",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 177,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.LpMotionStabilizer.setFrameSize",
+      "identity": "cv.videostab.LpMotionStabilizer.setFrameSize(Size val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 178,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.LpMotionStabilizer.frameSize",
+      "identity": "cv.videostab.LpMotionStabilizer.frameSize()->Size",
+      "returnType": "Size",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 179,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.LpMotionStabilizer.setTrimRatio",
+      "identity": "cv.videostab.LpMotionStabilizer.setTrimRatio(float val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 180,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.LpMotionStabilizer.trimRatio",
+      "identity": "cv.videostab.LpMotionStabilizer.trimRatio()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 181,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.LpMotionStabilizer.setWeight1",
+      "identity": "cv.videostab.LpMotionStabilizer.setWeight1(float val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 182,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.LpMotionStabilizer.weight1",
+      "identity": "cv.videostab.LpMotionStabilizer.weight1()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 183,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.LpMotionStabilizer.setWeight2",
+      "identity": "cv.videostab.LpMotionStabilizer.setWeight2(float val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 184,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.LpMotionStabilizer.weight2",
+      "identity": "cv.videostab.LpMotionStabilizer.weight2()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 185,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.LpMotionStabilizer.setWeight3",
+      "identity": "cv.videostab.LpMotionStabilizer.setWeight3(float val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 186,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.LpMotionStabilizer.weight3",
+      "identity": "cv.videostab.LpMotionStabilizer.weight3()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 187,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.LpMotionStabilizer.setWeight4",
+      "identity": "cv.videostab.LpMotionStabilizer.setWeight4(float val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 188,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.LpMotionStabilizer.weight4",
+      "identity": "cv.videostab.LpMotionStabilizer.weight4()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 189,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.LpMotionStabilizer.stabilize",
+      "identity": "cv.videostab.LpMotionStabilizer.stabilize(int size;const std::vector<Mat> & motions;const Range & range;Mat * stabilizationMotions)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "size",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const std::vector<Mat> &",
+          "name": "motions",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const Range &",
+          "name": "range",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat *",
+          "name": "stabilizationMotions",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 190,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.ensureInclusionConstraint",
+      "identity": "cv.videostab.ensureInclusionConstraint(const Mat & M;Size size;float trimRatio)->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Mat &",
+          "name": "M",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "size",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "trimRatio",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 191,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.estimateOptimalTrimRatio",
+      "identity": "cv.videostab.estimateOptimalTrimRatio(const Mat & M;Size size)->float",
+      "returnType": "float",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Mat &",
+          "name": "M",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "size",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 192,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/optical_flow.hpp",
+      "kind": "class",
+      "name": "cv.videostab.ISparseOptFlowEstimator",
+      "identity": "class cv.videostab.ISparseOptFlowEstimator",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 193,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.ISparseOptFlowEstimator.~ISparseOptFlowEstimator",
+      "identity": "cv.videostab.ISparseOptFlowEstimator.~ISparseOptFlowEstimator()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 194,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.ISparseOptFlowEstimator.run",
+      "identity": "cv.videostab.ISparseOptFlowEstimator.run(InputArray frame0;InputArray frame1;InputArray points0;InputOutputArray points1;OutputArray status;OutputArray errors)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "frame0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "frame1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "points0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputOutputArray",
+          "name": "points1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "status",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "errors",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 195,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/optical_flow.hpp",
+      "kind": "class",
+      "name": "cv.videostab.IDenseOptFlowEstimator",
+      "identity": "class cv.videostab.IDenseOptFlowEstimator",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 196,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.IDenseOptFlowEstimator.~IDenseOptFlowEstimator",
+      "identity": "cv.videostab.IDenseOptFlowEstimator.~IDenseOptFlowEstimator()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 197,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.IDenseOptFlowEstimator.run",
+      "identity": "cv.videostab.IDenseOptFlowEstimator.run(InputArray frame0;InputArray frame1;InputOutputArray flowX;InputOutputArray flowY;OutputArray errors)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "frame0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "frame1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputOutputArray",
+          "name": "flowX",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputOutputArray",
+          "name": "flowY",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "errors",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 198,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/optical_flow.hpp",
+      "kind": "class",
+      "name": "cv.videostab.PyrLkOptFlowEstimatorBase",
+      "identity": "class cv.videostab.PyrLkOptFlowEstimatorBase",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 199,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.PyrLkOptFlowEstimatorBase.PyrLkOptFlowEstimatorBase",
+      "identity": "cv.videostab.PyrLkOptFlowEstimatorBase.PyrLkOptFlowEstimatorBase()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 200,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.PyrLkOptFlowEstimatorBase.setWinSize",
+      "identity": "cv.videostab.PyrLkOptFlowEstimatorBase.setWinSize(Size val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 201,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.PyrLkOptFlowEstimatorBase.winSize",
+      "identity": "cv.videostab.PyrLkOptFlowEstimatorBase.winSize()->Size",
+      "returnType": "Size",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 202,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.PyrLkOptFlowEstimatorBase.setMaxLevel",
+      "identity": "cv.videostab.PyrLkOptFlowEstimatorBase.setMaxLevel(int val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 203,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.PyrLkOptFlowEstimatorBase.maxLevel",
+      "identity": "cv.videostab.PyrLkOptFlowEstimatorBase.maxLevel()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 204,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.PyrLkOptFlowEstimatorBase.~PyrLkOptFlowEstimatorBase",
+      "identity": "cv.videostab.PyrLkOptFlowEstimatorBase.~PyrLkOptFlowEstimatorBase()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 205,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/optical_flow.hpp",
+      "kind": "class",
+      "name": "cv.videostab.SparsePyrLkOptFlowEstimator",
+      "identity": "class cv.videostab.SparsePyrLkOptFlowEstimator",
+      "returnType": ": cv::videostab::PyrLkOptFlowEstimatorBase, cv::videostab::ISparseOptFlowEstimator",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::PyrLkOptFlowEstimatorBase, cv::videostab::ISparseOptFlowEstimator",
+      "documentation": ""
+    },
+    {
+      "ordinal": 206,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/optical_flow.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.SparsePyrLkOptFlowEstimator.run",
+      "identity": "cv.videostab.SparsePyrLkOptFlowEstimator.run(InputArray frame0;InputArray frame1;InputArray points0;InputOutputArray points1;OutputArray status;OutputArray errors)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "frame0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "frame1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "points0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputOutputArray",
+          "name": "points1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "status",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "errors",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 207,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/outlier_rejection.hpp",
+      "kind": "class",
+      "name": "cv.videostab.IOutlierRejector",
+      "identity": "class cv.videostab.IOutlierRejector",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 208,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/outlier_rejection.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.IOutlierRejector.~IOutlierRejector",
+      "identity": "cv.videostab.IOutlierRejector.~IOutlierRejector()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 209,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/outlier_rejection.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.IOutlierRejector.process",
+      "identity": "cv.videostab.IOutlierRejector.process(Size frameSize;InputArray points0;InputArray points1;OutputArray mask)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "frameSize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "points0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "points1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 210,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/outlier_rejection.hpp",
+      "kind": "class",
+      "name": "cv.videostab.NullOutlierRejector",
+      "identity": "class cv.videostab.NullOutlierRejector",
+      "returnType": ": cv::videostab::IOutlierRejector",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::IOutlierRejector",
+      "documentation": ""
+    },
+    {
+      "ordinal": 211,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/outlier_rejection.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.NullOutlierRejector.process",
+      "identity": "cv.videostab.NullOutlierRejector.process(Size frameSize;InputArray points0;InputArray points1;OutputArray mask)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "frameSize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "points0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "points1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 212,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/outlier_rejection.hpp",
+      "kind": "class",
+      "name": "cv.videostab.TranslationBasedLocalOutlierRejector",
+      "identity": "class cv.videostab.TranslationBasedLocalOutlierRejector",
+      "returnType": ": cv::videostab::IOutlierRejector",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::IOutlierRejector",
+      "documentation": ""
+    },
+    {
+      "ordinal": 213,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/outlier_rejection.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.TranslationBasedLocalOutlierRejector.TranslationBasedLocalOutlierRejector",
+      "identity": "cv.videostab.TranslationBasedLocalOutlierRejector.TranslationBasedLocalOutlierRejector()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 214,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/outlier_rejection.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.TranslationBasedLocalOutlierRejector.setCellSize",
+      "identity": "cv.videostab.TranslationBasedLocalOutlierRejector.setCellSize(Size val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 215,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/outlier_rejection.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.TranslationBasedLocalOutlierRejector.cellSize",
+      "identity": "cv.videostab.TranslationBasedLocalOutlierRejector.cellSize()->Size",
+      "returnType": "Size",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 216,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/outlier_rejection.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.TranslationBasedLocalOutlierRejector.setRansacParams",
+      "identity": "cv.videostab.TranslationBasedLocalOutlierRejector.setRansacParams(RansacParams val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "RansacParams",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 217,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/outlier_rejection.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.TranslationBasedLocalOutlierRejector.ransacParams",
+      "identity": "cv.videostab.TranslationBasedLocalOutlierRejector.ransacParams()->RansacParams",
+      "returnType": "RansacParams",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 218,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/outlier_rejection.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.TranslationBasedLocalOutlierRejector.process",
+      "identity": "cv.videostab.TranslationBasedLocalOutlierRejector.process(Size frameSize;InputArray points0;InputArray points1;OutputArray mask)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "frameSize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "points0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "points1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 219,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "class",
+      "name": "cv.videostab.StabilizerBase",
+      "identity": "class cv.videostab.StabilizerBase",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 220,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.StabilizerBase.~StabilizerBase",
+      "identity": "cv.videostab.StabilizerBase.~StabilizerBase()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 221,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.StabilizerBase.setLog",
+      "identity": "cv.videostab.StabilizerBase.setLog(Ptr<ILog> ilog)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr<ILog>",
+          "name": "ilog",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 222,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.StabilizerBase.log",
+      "identity": "cv.videostab.StabilizerBase.log()->Ptr<ILog>",
+      "returnType": "Ptr<ILog>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 223,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.StabilizerBase.setRadius",
+      "identity": "cv.videostab.StabilizerBase.setRadius(int val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 224,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.StabilizerBase.radius",
+      "identity": "cv.videostab.StabilizerBase.radius()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 225,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.StabilizerBase.setFrameSource",
+      "identity": "cv.videostab.StabilizerBase.setFrameSource(Ptr<IFrameSource> val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr<IFrameSource>",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 226,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.StabilizerBase.frameSource",
+      "identity": "cv.videostab.StabilizerBase.frameSource()->Ptr<IFrameSource>",
+      "returnType": "Ptr<IFrameSource>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 227,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.StabilizerBase.setMaskSource",
+      "identity": "cv.videostab.StabilizerBase.setMaskSource(const Ptr<IFrameSource>& val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Ptr<IFrameSource>&",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 228,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.StabilizerBase.maskSource",
+      "identity": "cv.videostab.StabilizerBase.maskSource()->Ptr<IFrameSource>",
+      "returnType": "Ptr<IFrameSource>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 229,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.StabilizerBase.setMotionEstimator",
+      "identity": "cv.videostab.StabilizerBase.setMotionEstimator(Ptr<ImageMotionEstimatorBase> val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr<ImageMotionEstimatorBase>",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 230,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.StabilizerBase.motionEstimator",
+      "identity": "cv.videostab.StabilizerBase.motionEstimator()->Ptr<ImageMotionEstimatorBase>",
+      "returnType": "Ptr<ImageMotionEstimatorBase>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 231,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.StabilizerBase.setDeblurer",
+      "identity": "cv.videostab.StabilizerBase.setDeblurer(Ptr<DeblurerBase> val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr<DeblurerBase>",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 232,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.StabilizerBase.deblurrer",
+      "identity": "cv.videostab.StabilizerBase.deblurrer()->Ptr<DeblurerBase>",
+      "returnType": "Ptr<DeblurerBase>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 233,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.StabilizerBase.setTrimRatio",
+      "identity": "cv.videostab.StabilizerBase.setTrimRatio(float val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 234,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.StabilizerBase.trimRatio",
+      "identity": "cv.videostab.StabilizerBase.trimRatio()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 235,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.StabilizerBase.setCorrectionForInclusion",
+      "identity": "cv.videostab.StabilizerBase.setCorrectionForInclusion(bool val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 236,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.StabilizerBase.doCorrectionForInclusion",
+      "identity": "cv.videostab.StabilizerBase.doCorrectionForInclusion()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 237,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.StabilizerBase.setBorderMode",
+      "identity": "cv.videostab.StabilizerBase.setBorderMode(int val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 238,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.StabilizerBase.borderMode",
+      "identity": "cv.videostab.StabilizerBase.borderMode()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 239,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.StabilizerBase.setInpainter",
+      "identity": "cv.videostab.StabilizerBase.setInpainter(Ptr<InpainterBase> val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr<InpainterBase>",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 240,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.StabilizerBase.inpainter",
+      "identity": "cv.videostab.StabilizerBase.inpainter()->Ptr<InpainterBase>",
+      "returnType": "Ptr<InpainterBase>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 241,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "class",
+      "name": "cv.videostab.OnePassStabilizer",
+      "identity": "class cv.videostab.OnePassStabilizer",
+      "returnType": ": cv::videostab::StabilizerBase, cv::videostab::IFrameSource",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::StabilizerBase, cv::videostab::IFrameSource",
+      "documentation": ""
+    },
+    {
+      "ordinal": 242,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.OnePassStabilizer.OnePassStabilizer",
+      "identity": "cv.videostab.OnePassStabilizer.OnePassStabilizer()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 243,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.OnePassStabilizer.setMotionFilter",
+      "identity": "cv.videostab.OnePassStabilizer.setMotionFilter(Ptr<MotionFilterBase> val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr<MotionFilterBase>",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 244,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.OnePassStabilizer.motionFilter",
+      "identity": "cv.videostab.OnePassStabilizer.motionFilter()->Ptr<MotionFilterBase>",
+      "returnType": "Ptr<MotionFilterBase>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 245,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.OnePassStabilizer.reset",
+      "identity": "cv.videostab.OnePassStabilizer.reset()->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 246,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.OnePassStabilizer.nextFrame",
+      "identity": "cv.videostab.OnePassStabilizer.nextFrame()->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 247,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "class",
+      "name": "cv.videostab.TwoPassStabilizer",
+      "identity": "class cv.videostab.TwoPassStabilizer",
+      "returnType": ": cv::videostab::StabilizerBase, cv::videostab::IFrameSource",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::StabilizerBase, cv::videostab::IFrameSource",
+      "documentation": ""
+    },
+    {
+      "ordinal": 248,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.TwoPassStabilizer.TwoPassStabilizer",
+      "identity": "cv.videostab.TwoPassStabilizer.TwoPassStabilizer()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 249,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.TwoPassStabilizer.setMotionStabilizer",
+      "identity": "cv.videostab.TwoPassStabilizer.setMotionStabilizer(Ptr<IMotionStabilizer> val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr<IMotionStabilizer>",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 250,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.TwoPassStabilizer.motionStabilizer",
+      "identity": "cv.videostab.TwoPassStabilizer.motionStabilizer()->Ptr<IMotionStabilizer>",
+      "returnType": "Ptr<IMotionStabilizer>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 251,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.TwoPassStabilizer.setWobbleSuppressor",
+      "identity": "cv.videostab.TwoPassStabilizer.setWobbleSuppressor(Ptr<WobbleSuppressorBase> val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr<WobbleSuppressorBase>",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 252,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.TwoPassStabilizer.wobbleSuppressor",
+      "identity": "cv.videostab.TwoPassStabilizer.wobbleSuppressor()->Ptr<WobbleSuppressorBase>",
+      "returnType": "Ptr<WobbleSuppressorBase>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 253,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.TwoPassStabilizer.setEstimateTrimRatio",
+      "identity": "cv.videostab.TwoPassStabilizer.setEstimateTrimRatio(bool val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 254,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.TwoPassStabilizer.mustEstimateTrimaRatio",
+      "identity": "cv.videostab.TwoPassStabilizer.mustEstimateTrimaRatio()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 255,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.TwoPassStabilizer.reset",
+      "identity": "cv.videostab.TwoPassStabilizer.reset()->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 256,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.TwoPassStabilizer.nextFrame",
+      "identity": "cv.videostab.TwoPassStabilizer.nextFrame()->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 257,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/wobble_suppression.hpp",
+      "kind": "class",
+      "name": "cv.videostab.WobbleSuppressorBase",
+      "identity": "class cv.videostab.WobbleSuppressorBase",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 258,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/wobble_suppression.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.WobbleSuppressorBase.WobbleSuppressorBase",
+      "identity": "cv.videostab.WobbleSuppressorBase.WobbleSuppressorBase()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 259,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/wobble_suppression.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.WobbleSuppressorBase.~WobbleSuppressorBase",
+      "identity": "cv.videostab.WobbleSuppressorBase.~WobbleSuppressorBase()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 260,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/wobble_suppression.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.WobbleSuppressorBase.setMotionEstimator",
+      "identity": "cv.videostab.WobbleSuppressorBase.setMotionEstimator(Ptr<ImageMotionEstimatorBase> val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr<ImageMotionEstimatorBase>",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 261,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/wobble_suppression.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.WobbleSuppressorBase.motionEstimator",
+      "identity": "cv.videostab.WobbleSuppressorBase.motionEstimator()->Ptr<ImageMotionEstimatorBase>",
+      "returnType": "Ptr<ImageMotionEstimatorBase>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 262,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/wobble_suppression.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.WobbleSuppressorBase.suppress",
+      "identity": "cv.videostab.WobbleSuppressorBase.suppress(int idx;const Mat & frame;Mat & result)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "idx",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const Mat &",
+          "name": "frame",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat &",
+          "name": "result",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 263,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/wobble_suppression.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.WobbleSuppressorBase.setFrameCount",
+      "identity": "cv.videostab.WobbleSuppressorBase.setFrameCount(int val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 264,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/wobble_suppression.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.WobbleSuppressorBase.frameCount",
+      "identity": "cv.videostab.WobbleSuppressorBase.frameCount()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 265,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/wobble_suppression.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.WobbleSuppressorBase.setMotions",
+      "identity": "cv.videostab.WobbleSuppressorBase.setMotions(const std::vector<Mat> & val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const std::vector<Mat> &",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 266,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/wobble_suppression.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.WobbleSuppressorBase.motions",
+      "identity": "cv.videostab.WobbleSuppressorBase.motions()->const std::vector<Mat>&",
+      "returnType": "const std::vector<Mat>&",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 267,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/wobble_suppression.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.WobbleSuppressorBase.setMotions2",
+      "identity": "cv.videostab.WobbleSuppressorBase.setMotions2(const std::vector<Mat> & val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const std::vector<Mat> &",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 268,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/wobble_suppression.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.WobbleSuppressorBase.motions2",
+      "identity": "cv.videostab.WobbleSuppressorBase.motions2()->const std::vector<Mat>&",
+      "returnType": "const std::vector<Mat>&",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 269,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/wobble_suppression.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.WobbleSuppressorBase.setStabilizationMotions",
+      "identity": "cv.videostab.WobbleSuppressorBase.setStabilizationMotions(const std::vector<Mat> & val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const std::vector<Mat> &",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 270,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/wobble_suppression.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.WobbleSuppressorBase.stabilizationMotions",
+      "identity": "cv.videostab.WobbleSuppressorBase.stabilizationMotions()->const std::vector<Mat>&",
+      "returnType": "const std::vector<Mat>&",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 271,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/wobble_suppression.hpp",
+      "kind": "class",
+      "name": "cv.videostab.NullWobbleSuppressor",
+      "identity": "class cv.videostab.NullWobbleSuppressor",
+      "returnType": ": cv::videostab::WobbleSuppressorBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::WobbleSuppressorBase",
+      "documentation": ""
+    },
+    {
+      "ordinal": 272,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/wobble_suppression.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.NullWobbleSuppressor.suppress",
+      "identity": "cv.videostab.NullWobbleSuppressor.suppress(int idx;const Mat & frame;Mat & result)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "idx",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const Mat &",
+          "name": "frame",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat &",
+          "name": "result",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 273,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/wobble_suppression.hpp",
+      "kind": "class",
+      "name": "cv.videostab.MoreAccurateMotionWobbleSuppressorBase",
+      "identity": "class cv.videostab.MoreAccurateMotionWobbleSuppressorBase",
+      "returnType": ": cv::videostab::WobbleSuppressorBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::WobbleSuppressorBase",
+      "documentation": ""
+    },
+    {
+      "ordinal": 274,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/wobble_suppression.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MoreAccurateMotionWobbleSuppressorBase.setPeriod",
+      "identity": "cv.videostab.MoreAccurateMotionWobbleSuppressorBase.setPeriod(int val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 275,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/wobble_suppression.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MoreAccurateMotionWobbleSuppressorBase.period",
+      "identity": "cv.videostab.MoreAccurateMotionWobbleSuppressorBase.period()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 276,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/wobble_suppression.hpp",
+      "kind": "class",
+      "name": "cv.videostab.MoreAccurateMotionWobbleSuppressor",
+      "identity": "class cv.videostab.MoreAccurateMotionWobbleSuppressor",
+      "returnType": ": cv::videostab::MoreAccurateMotionWobbleSuppressorBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::videostab::MoreAccurateMotionWobbleSuppressorBase",
+      "documentation": ""
+    },
+    {
+      "ordinal": 277,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/wobble_suppression.hpp",
+      "kind": "callable",
+      "name": "cv.videostab.MoreAccurateMotionWobbleSuppressor.suppress",
+      "identity": "cv.videostab.MoreAccurateMotionWobbleSuppressor.suppress(int idx;const Mat & frame;Mat & result)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "idx",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const Mat &",
+          "name": "frame",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat &",
+          "name": "result",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    }
+  ],
+  "parserMode": "non-wrapper-public-declarations",
+  "parserNormalization": "temporary parser-only normalization: protected sections changed to private so non-public stabilizer hooks are excluded; upstream source/hash unchanged",
+  "compatibilityHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/CMakeLists.txt",
+      "sha256": "c5f873f81a3559eb06f834993f29563b92fa82d144aab8ad493bf9d6fd1c1932",
+      "reason": "Upstream VideoStab required OpenCV module dependencies plus optional CUDA and VideoIO components; parser declarations are not gated in the public headers."
+    }
+  ],
+  "moduleBuildCondition": "ocv_define_module(videostab opencv_imgproc opencv_features opencv_video opencv_photo opencv_geometry; OPTIONAL opencv_cudafeatures2d opencv_cudawarping opencv_cudaoptflow opencv_videoio)",
+  "excludedPublicHeaders": []
+}

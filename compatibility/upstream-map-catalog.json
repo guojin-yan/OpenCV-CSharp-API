@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 63,
+  "moduleCount": 64,
   "maps": [
     {
       "id": "calib3d",
@@ -4040,6 +4040,136 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "a63a1faebd85b919c4dce51941f13ea333a31019a23c418e876cc485feb90442",
         "familyInventorySha256": "afac91592cb0cbe452d8715ef6f71c86d6b714748b4cbc98c85a9da82f28adfe",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "videostab",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/VideoStabUpstreamMap",
+      "extractorScript": "tools/VideoStabUpstreamMap/extract_videostab.py",
+      "generationScript": "scripts/Generate-VideoStabUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-VideoStabUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/videostab/*.hpp parser-backed VideoStab public component-header closure; the umbrella has no parser declarations and protected implementation hooks are explicitly excluded",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab.hpp",
+          "sha256": "cd83d1cfd491ac1f9352f6b0721c9b1d916bd84187945b89a4891ccbec43ce04"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/deblurring.hpp",
+            "sha256": "eb6de0d78b5639bc740826fe69d0111fb2e5b7a4ae009c8246beacf1d038fc09",
+            "startOrdinal": 0,
+            "declarationCount": 20
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/fast_marching.hpp",
+            "sha256": "0046b83157984dc58b087d45daedc1955fb61a19eb6b73645c15ccc5a33be70f",
+            "startOrdinal": 20,
+            "declarationCount": 3
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/fast_marching_inl.hpp",
+            "sha256": "68e447cefb8e1cd736c65098acccbfa23c75c5768ce4120e7b445e86ae7765e7",
+            "startOrdinal": 23,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/frame_source.hpp",
+            "sha256": "e2be29adbf92d779d238ef2cf64e450e2bec229c06ea11f644ff571e7e1aec96",
+            "startOrdinal": 23,
+            "declarationCount": 20
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+            "sha256": "3840b0f172fe4da7ec1f26048e90d57c4bc225f24dbd7247d1203d1baeef82b2",
+            "startOrdinal": 43,
+            "declarationCount": 46
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+            "sha256": "5aecb663b4a731bd6d7529e8aec698cbad19ea0b247c1fd2ef6d67ed6930517d",
+            "startOrdinal": 89,
+            "declarationCount": 52
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/log.hpp",
+            "sha256": "7bf72dd243d5508f638c0c0b3bd9f4d0bc3aa70b226dd7f3cb88a608b63670c0",
+            "startOrdinal": 141,
+            "declarationCount": 7
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_core.hpp",
+            "sha256": "ddcba5788d59ca724107b8feac5a7a042ebf61e2520f212592a249147119f808",
+            "startOrdinal": 148,
+            "declarationCount": 7
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+            "sha256": "722b986a143f8c1fe44b44e4305f4285214142219aa8fdff9735e5540ccc2b4f",
+            "startOrdinal": 155,
+            "declarationCount": 37
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/optical_flow.hpp",
+            "sha256": "c1ec5dcd1038f7ed3391663c1d87ff86d056a98775dbe01b1027ea7f6dcf79a3",
+            "startOrdinal": 192,
+            "declarationCount": 15
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/outlier_rejection.hpp",
+            "sha256": "a1858d173bddfcf9da945849890b4ec35c0cbd84262fabccbcfe993461776022",
+            "startOrdinal": 207,
+            "declarationCount": 12
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/ring_buffer.hpp",
+            "sha256": "00608847b25889172025b0f4246a404fa686a6affc711734739580d131e39c17",
+            "startOrdinal": 219,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+            "sha256": "712875083e7d153025e792bf48be691d4869cb3cb04ac44aa660174dbb461c83",
+            "startOrdinal": 219,
+            "declarationCount": 38
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/include/opencv2/videostab/wobble_suppression.hpp",
+            "sha256": "88dd6ad6a750322ccf2dd65b43fa1d60006708085fcb92fa79007ddb5418274c",
+            "startOrdinal": 257,
+            "declarationCount": 21
+          }
+        ],
+        "compatibilityHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/videostab/CMakeLists.txt",
+            "sha256": "c5f873f81a3559eb06f834993f29563b92fa82d144aab8ad493bf9d6fd1c1932",
+            "reason": "Upstream VideoStab required OpenCV module dependencies plus optional CUDA and VideoIO components; parser declarations are not gated in the public headers."
+          }
+        ],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/videostab-upstream-raw.json",
+        "classifications": "compatibility/videostab-upstream-classifications.json",
+        "mapping": "compatibility/videostab-upstream-map.txt",
+        "summary": "compatibility/videostab-upstream-summary.json",
+        "familyInventory": "compatibility/videostab-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 278,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "89bfcd3658f739039a555b7a3ca79d05162a8505774029f5bae974ffecc85c64",
+        "familyInventorySha256": "ac14d1d814ae1a76b227180cefe638b8bd56085e6aa1b3cd34ba69726ed311f0",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

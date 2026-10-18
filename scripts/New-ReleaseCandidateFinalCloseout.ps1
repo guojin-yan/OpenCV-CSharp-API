@@ -180,6 +180,8 @@ function Get-Record {
     $xobjdetectSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/xobjdetect-upstream-summary.json") -Raw | ConvertFrom-Json
     $xfeatures2dRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/xfeatures2d-upstream-raw.json") -Raw | ConvertFrom-Json
     $xfeatures2dSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/xfeatures2d-upstream-summary.json") -Raw | ConvertFrom-Json
+    $videostabRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/videostab-upstream-raw.json") -Raw | ConvertFrom-Json
+    $videostabSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/videostab-upstream-summary.json") -Raw | ConvertFrom-Json
     $evidencePaths = @(
         ".github/workflows/pack.yml",
         ".github/workflows/publish-nuget.yml",
@@ -489,10 +491,16 @@ function Get-Record {
         "compatibility/xfeatures2d-upstream-map.txt",
         "compatibility/xfeatures2d-upstream-raw.json",
         "compatibility/xfeatures2d-upstream-summary.json",
+        "compatibility/videostab-implemented-families.json",
+        "compatibility/videostab-upstream-classifications.json",
+        "compatibility/videostab-upstream-map.txt",
+        "compatibility/videostab-upstream-raw.json",
+        "compatibility/videostab-upstream-summary.json",
         "compatibility/v5.0.1-change-ledger.json",
         "compatibility/v5.0.1-change-ledger.schema.json",
         "docs/articles/api-abi-compatibility-policy.md",
         "docs/articles/upstream-map-toolchain.md",
+        "docs/articles/videostab-upstream-parity-guide.md",
         "docs/articles/xfeatures2d-upstream-parity-guide.md",
         "docs/articles/dnn-objdetect-upstream-parity-guide.md",
         "docs/articles/ccalib-upstream-parity-guide.md",
@@ -1033,6 +1041,9 @@ function Get-Record {
         "tools/XFeatures2DUpstreamMap/XFeatures2DUpstreamMap.csproj",
         "tools/XFeatures2DUpstreamMap/Program.cs",
         "tools/XFeatures2DUpstreamMap/extract_xfeatures2d.py",
+        "tools/VideoStabUpstreamMap/VideoStabUpstreamMap.csproj",
+        "tools/VideoStabUpstreamMap/Program.cs",
+        "tools/VideoStabUpstreamMap/extract_videostab.py",
         "tools/DnnObjDetectUpstreamMap/DnnObjDetectUpstreamMap.csproj",
         "tools/DnnObjDetectUpstreamMap/Program.cs",
         "tools/DnnObjDetectUpstreamMap/extract_dnn_objdetect.py",
@@ -1159,6 +1170,8 @@ function Get-Record {
         "scripts/Test-XObjDetectUpstreamMap.ps1",
         "scripts/Generate-XFeatures2DUpstreamMap.ps1",
         "scripts/Test-XFeatures2DUpstreamMap.ps1",
+        "scripts/Generate-VideoStabUpstreamMap.ps1",
+        "scripts/Test-VideoStabUpstreamMap.ps1",
         "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
         "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
         "tools/TypedMatBenchmark/Program.cs",
@@ -2125,6 +2138,35 @@ function Get-Record {
                 NativeEntrypointAdditionCount = [int]$xfeatures2dSummary.nativeEvidenceCount
                 ExternalDataDependencyCount = [int]$xfeatures2dSummary.externalDataDependencyCount
                 RepositoryWideParityClaimed = [bool]$xfeatures2dSummary.repositoryWideUpstreamParityClaimed
+            }
+            VideoStabUpstreamMap = [ordered]@{
+                Path = "compatibility/videostab-upstream-map.txt"
+                SummaryPath = "compatibility/videostab-upstream-summary.json"
+                ClassificationPath = "compatibility/videostab-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/videostab-implemented-families.json"
+                RawExtractionPath = "compatibility/videostab-upstream-raw.json"
+                Sha256 = $videostabSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/videostab-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$videostabSummary.declarationCount
+                CallableCount = [int]$videostabSummary.callableCount
+                ClassCount = [int]$videostabSummary.classCount
+                EnumCount = [int]$videostabSummary.enumCount
+                MetadataCount = [int]$videostabSummary.classificationCounts.'non-callable-metadata'
+                ProtectedExclusionCount = 22
+                ParserMode = [string]$videostabRaw.parserMode
+                ImplementedCount = [int]$videostabSummary.classificationCounts.implemented
+                MissingCount = [int]$videostabSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$videostabSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$videostabSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$videostabSummary.classificationCounts.'upstream-conditional'
+                SourceHeaderCount = @($videostabRaw.sourceHeaders).Count
+                SelectedFamilyCount = [int]$videostabSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$videostabSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$videostabSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$videostabSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$videostabSummary.nativeEvidenceCount
+                ExternalDataDependencyCount = [int]$videostabSummary.externalDataDependencyCount
+                RepositoryWideParityClaimed = [bool]$videostabSummary.repositoryWideUpstreamParityClaimed
             }
             DnnObjDetectUpstreamMap = [ordered]@{
                 Path = "compatibility/dnn_objdetect-upstream-map.txt"

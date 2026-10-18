@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/ccf11f00d4dd674f",
-  "SourceIdentity": "sha256:ccf11f00d4dd674f9b04c4575ae36c1455d51fe4626ebd51c44fb4b25d850e17",
+  "CandidateId": "local-closeout/sha256/5f7cccb64b9b3353",
+  "SourceIdentity": "sha256:5f7cccb64b9b33534eef65ab8d37acf6627649f17e6ab4335c9e98a2a5d09211",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 2346,
-    "Sha256": "ccf11f00d4dd674f9b04c4575ae36c1455d51fe4626ebd51c44fb4b25d850e17",
+    "FileCount": 2357,
+    "Sha256": "5f7cccb64b9b33534eef65ab8d37acf6627649f17e6ab4335c9e98a2a5d09211",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -1002,6 +1002,35 @@
       "ManagedPublicMemberAdditionCount": 0,
       "NativeEntrypointAdditionCount": 0,
       "ExternalDataDependencyCount": 2,
+      "RepositoryWideParityClaimed": false
+    },
+    "VideoStabUpstreamMap": {
+      "Path": "compatibility/videostab-upstream-map.txt",
+      "SummaryPath": "compatibility/videostab-upstream-summary.json",
+      "ClassificationPath": "compatibility/videostab-upstream-classifications.json",
+      "FamilyInventoryPath": "compatibility/videostab-implemented-families.json",
+      "RawExtractionPath": "compatibility/videostab-upstream-raw.json",
+      "Sha256": "89bfcd3658f739039a555b7a3ca79d05162a8505774029f5bae974ffecc85c64",
+      "RawSha256": "8d1e3124061eb627b06b8faa15d793e3537809f56a58c683cf509b82ceddcda3",
+      "DeclarationCount": 278,
+      "CallableCount": 232,
+      "ClassCount": 45,
+      "EnumCount": 1,
+      "MetadataCount": 46,
+      "ProtectedExclusionCount": 22,
+      "ParserMode": "non-wrapper-public-declarations",
+      "ImplementedCount": 0,
+      "MissingCount": 0,
+      "IntentionallyOmittedCount": 232,
+      "UnsupportedCount": 0,
+      "UpstreamConditionalCount": 0,
+      "SourceHeaderCount": 14,
+      "SelectedFamilyCount": 1,
+      "SelectedDeclarationCount": 0,
+      "ManagedPublicTypeAdditionCount": 0,
+      "ManagedPublicMemberAdditionCount": 0,
+      "NativeEntrypointAdditionCount": 0,
+      "ExternalDataDependencyCount": 1,
       "RepositoryWideParityClaimed": false
     },
     "DnnObjDetectUpstreamMap": {
@@ -2392,18 +2421,18 @@
     },
     {
       "Path": "compatibility/upstream-map-catalog.json",
-      "Sha256": "185a6a5f437068b456ba01f4d4a8791111256f9c6c544cf3c96579754a221e14",
-      "Length": 194780
+      "Sha256": "95a27ca8cd259254872555f3ee205f5aeaab451fe3c2fd663a80b296b9cdc1f9",
+      "Length": 201351
     },
     {
       "Path": "compatibility/upstream-map-catalog.schema.json",
-      "Sha256": "e37fb6f7f136fcc1b3c06e9e8d6ef1f8f0e9e30e4ee73af4a09aad2073fce987",
-      "Length": 6205
+      "Sha256": "fb32a6d8ed60d837c4983d8b0bc9ad492f124aba2a0e532e97688387cb862139",
+      "Length": 6218
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "ee98f26fb5dd1ce23e466f0d7dd4690bb00f3bd1704d4dc55d634bac38113443",
-      "Length": 81262
+      "Sha256": "64ade9e2d511f8cb805e22918cc940664da6ab48e5121a308b85beca7f1da912",
+      "Length": 82621
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -2464,6 +2493,31 @@
       "Path": "compatibility/videoio-upstream-summary.json",
       "Sha256": "cfcce8f8d8c32fa8b86e32df4672dba75c6e0811c25d3bc34688d107c3e40311",
       "Length": 1382
+    },
+    {
+      "Path": "compatibility/videostab-implemented-families.json",
+      "Sha256": "d399a1262b5868f85b111f963426f5ed05f386fb713a15791186c8230241886f",
+      "Length": 396
+    },
+    {
+      "Path": "compatibility/videostab-upstream-classifications.json",
+      "Sha256": "1b3b487fd12ffcf0c6de6aa54babccb07e6db70bba5b9344b4ea3e146d0149c6",
+      "Length": 170156
+    },
+    {
+      "Path": "compatibility/videostab-upstream-map.txt",
+      "Sha256": "89bfcd3658f739039a555b7a3ca79d05162a8505774029f5bae974ffecc85c64",
+      "Length": 120204
+    },
+    {
+      "Path": "compatibility/videostab-upstream-raw.json",
+      "Sha256": "8d1e3124061eb627b06b8faa15d793e3537809f56a58c683cf509b82ceddcda3",
+      "Length": 180976
+    },
+    {
+      "Path": "compatibility/videostab-upstream-summary.json",
+      "Sha256": "55a953366b7b2b7e04ff0ee0948e52e253d6324f1fa4350b2f0886378ab3ec6f",
+      "Length": 1542
     },
     {
       "Path": "compatibility/wechat_qrcode-implemented-families.json",
@@ -3022,8 +3076,8 @@
     },
     {
       "Path": "docs/articles/upstream-map-toolchain.md",
-      "Sha256": "c3afd9d880744cbd43054584aa0a502003adc3fbed7ac4258ad53c371c3a02d0",
-      "Length": 18377
+      "Sha256": "fe236e044a791a845e70e4b00efd37da0f44d4bdf72a501c8d6393d1adee8524",
+      "Length": 19141
     },
     {
       "Path": "docs/articles/v501-modern-api-preview-guide.md",
@@ -3044,6 +3098,11 @@
       "Path": "docs/articles/videoio-upstream-parity-guide.md",
       "Sha256": "3bf71be7c1c7d0cd61430e677b6421d2084fa26a6176302e01e1e181b701f1a2",
       "Length": 4555
+    },
+    {
+      "Path": "docs/articles/videostab-upstream-parity-guide.md",
+      "Sha256": "f70e403c27c3a35db0393fbfc2f4a820e9552b62e5f8b746d36d7866e5449db9",
+      "Length": 1707
     },
     {
       "Path": "docs/articles/wechat-qrcode-upstream-parity-guide.md",
@@ -3132,8 +3191,8 @@
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "9d8663d59eec9865985ca90ca7525e480b56ba1a89f199369fe81992ed48f387",
-      "Length": 19053
+      "Sha256": "a1728b4d2d8f4cd2c5b99b0274708982686bff5c0fe3e1f67ef6f3b396d8712a",
+      "Length": 19144
     },
     {
       "Path": "nuget/logo.jpg",
@@ -3502,8 +3561,8 @@
     },
     {
       "Path": "scripts/Generate-ContribUpstreamMap.ps1",
-      "Sha256": "b0e1864a1af6d9e1347e57759ec2984e1bf1b68970e21e7a3922a2a29d3edbb8",
-      "Length": 131459
+      "Sha256": "a7bc5805085965f08fc930e318177a6e661c74a89e2331ca55de6e1d9b0a21dd",
+      "Length": 132734
     },
     {
       "Path": "scripts/Generate-CoreUpstreamMap.ps1",
@@ -3741,6 +3800,11 @@
       "Length": 3106
     },
     {
+      "Path": "scripts/Generate-VideoStabUpstreamMap.ps1",
+      "Sha256": "1dd2c79eaff5f830b05fada8cfa2469993f3c57a26eaa73a9efde0738351990c",
+      "Length": 1027
+    },
+    {
       "Path": "scripts/Generate-VideoUpstreamMap.ps1",
       "Sha256": "c4f08bf258cb931424087b44ac1221cc434251486f431e25f7259cd9694dc87b",
       "Length": 2897
@@ -3787,8 +3851,8 @@
     },
     {
       "Path": "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
-      "Sha256": "cabba580e4fb8f95d5dd8cda3b8443cf6ca2c40127720783618277deb1738a77",
-      "Length": 5680
+      "Sha256": "22a7bdd4d8a7597864b17c788bf411464cda75c91823643f3f58c14ca1d358e4",
+      "Length": 5708
     },
     {
       "Path": "scripts/Invoke-LifecycleRefreshContainerProducer.ps1",
@@ -3867,8 +3931,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "cb9a26f9f5aa8443d922701e9849702f7147add924796140949bf5e6289d57b9",
-      "Length": 158350
+      "Sha256": "a219c2a6959bf00375698bfec2500df0a828b1dbe1b88e5275ad9b93d1a5ee39",
+      "Length": 161640
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -3882,8 +3946,8 @@
     },
     {
       "Path": "scripts/New-UpstreamMapCatalog.ps1",
-      "Sha256": "e3f056164d7d4726e3fc2e13cb95e892b5b0c13afd59b59b1d663ffcaf96fc24",
-      "Length": 12328
+      "Sha256": "a30e399ce6da78c5e03edf243dd77e87ad67802c43333a4f11e3485e97a1bb27",
+      "Length": 12422
     },
     {
       "Path": "scripts/Test-AlphaMatUpstreamMap.ps1",
@@ -4312,8 +4376,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "9fad9085907e8d33aa8bb97b8bea4d133e126cc440c70e9d0db4baf61c2aa19b",
-      "Length": 135059
+      "Sha256": "49a8fa6331284f46e8148437e00478e16efa3f6423e070337c356164f14656de",
+      "Length": 137552
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -4437,8 +4501,8 @@
     },
     {
       "Path": "scripts/Test-UpstreamMapCatalog.ps1",
-      "Sha256": "6c6f8a89db90be07cfb56f5fe9787a284e8b4a9d6f2f7b7f01708019c3fafa4e",
-      "Length": 15292
+      "Sha256": "20c81aa492216e56f0a45880a1ed8d301c32da03bb0b910d24c771765fab257a",
+      "Length": 15304
     },
     {
       "Path": "scripts/Test-V501ChangeLedger.ps1",
@@ -4459,6 +4523,11 @@
       "Path": "scripts/Test-VideoIOUpstreamMap.ps1",
       "Sha256": "19990899322f16b3b1d75ab8d5a819a21701c916ff90ecba41199bd18eb4f91d",
       "Length": 2021
+    },
+    {
+      "Path": "scripts/Test-VideoStabUpstreamMap.ps1",
+      "Sha256": "2aacd8b65555cd8c3427f4d797ae02899461bd6f900688ab4a8fc2a8a1ac9307",
+      "Length": 6253
     },
     {
       "Path": "scripts/Test-VideoUpstreamMap.ps1",
@@ -5876,6 +5945,21 @@
       "Length": 861
     },
     {
+      "Path": "tools/VideoStabUpstreamMap/Program.cs",
+      "Sha256": "38151d21582c79bb1d7f0668f15c1c5aadfe18630faced94e8dfa94daea2ab28",
+      "Length": 108
+    },
+    {
+      "Path": "tools/VideoStabUpstreamMap/VideoStabUpstreamMap.csproj",
+      "Sha256": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+      "Length": 238
+    },
+    {
+      "Path": "tools/VideoStabUpstreamMap/extract_videostab.py",
+      "Sha256": "96cf8a6626154d95c1e04cfdd6f99c71ce21cfeab34cf9d66936d5ab6c81ec23",
+      "Length": 232
+    },
+    {
       "Path": "tools/VideoUpstreamMap/Program.cs",
       "Sha256": "e01ca5f3f0448af31479b908d244f702b66703be5d6df6da0fa62756be0d32fe",
       "Length": 44547
@@ -5932,8 +6016,8 @@
     },
     {
       "Path": "tools/XImgProcUpstreamMap/extract_ximgproc.py",
-      "Sha256": "750815f6e094defa918c267ecb5460d4f4b1cb5900790e059b32a05544e76b21",
-      "Length": 17633
+      "Sha256": "533009635caa24c4506fa229b8b3773531d76a5acbed96a6009c18e4f4534610",
+      "Length": 20030
     },
     {
       "Path": "tools/XObjDetectUpstreamMap/Program.cs",

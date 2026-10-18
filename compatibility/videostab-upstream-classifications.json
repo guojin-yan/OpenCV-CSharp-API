@@ -1,0 +1,2514 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/videostab/*.hpp parser-backed VideoStab public component-header closure; the umbrella has no parser declarations and protected implementation hooks are explicitly excluded",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact VideoStab wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [
+    "Video stabilization consumes caller-selected frame sequences or sources and carries callback, state, and Mat ownership contracts; the package has no native/managed VideoStab wrapper. Upstream VideoIO and CUDA components are optional build-time integrations, not runtime support claims for this package."
+  ],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "cv.videostab.calcBlurriness(const Mat & frame)->float",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "class cv.videostab.DeblurerBase",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.videostab.DeblurerBase.DeblurerBase()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.videostab.DeblurerBase.~DeblurerBase()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.videostab.DeblurerBase.setRadius(int val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.videostab.DeblurerBase.radius()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.videostab.DeblurerBase.deblur(int idx;Mat & frame;const Range & range)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.videostab.DeblurerBase.setFrames(const std::vector<Mat> & val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.videostab.DeblurerBase.frames()->const std::vector<Mat>&",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.videostab.DeblurerBase.setMotions(const std::vector<Mat> & val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.videostab.DeblurerBase.motions()->const std::vector<Mat>&",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.videostab.DeblurerBase.setBlurrinessRates(const std::vector<float> & val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.videostab.DeblurerBase.blurrinessRates()->const std::vector<float>&",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 13,
+      "identity": "class cv.videostab.NullDeblurer",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.videostab.NullDeblurer.deblur(int ;Mat & ;const Range & )->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 15,
+      "identity": "class cv.videostab.WeightingDeblurer",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.videostab.WeightingDeblurer.WeightingDeblurer()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.videostab.WeightingDeblurer.setSensitivity(float val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.videostab.WeightingDeblurer.sensitivity()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.videostab.WeightingDeblurer.deblur(int idx;Mat & frame;const Range & range)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 20,
+      "identity": "class cv.videostab.FastMarchingMethod",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.videostab.FastMarchingMethod.FastMarchingMethod()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.videostab.FastMarchingMethod.distanceMap()->Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 23,
+      "identity": "class cv.videostab.IFrameSource",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.videostab.IFrameSource.~IFrameSource()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.videostab.IFrameSource.reset()->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.videostab.IFrameSource.nextFrame()->Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 27,
+      "identity": "class cv.videostab.NullFrameSource",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.videostab.NullFrameSource.reset()->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.videostab.NullFrameSource.nextFrame()->Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 30,
+      "identity": "class cv.videostab.VideoFileSource",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.videostab.VideoFileSource.VideoFileSource(const String & path;bool volatileFrame=false)->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.videostab.VideoFileSource.reset()->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.videostab.VideoFileSource.nextFrame()->Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.videostab.VideoFileSource.width()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.videostab.VideoFileSource.height()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.videostab.VideoFileSource.count()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.videostab.VideoFileSource.fps()->double",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 38,
+      "identity": "class cv.videostab.MaskFrameSource",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.videostab.MaskFrameSource.MaskFrameSource(const Ptr<IFrameSource>& source)->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.videostab.MaskFrameSource.reset()->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.videostab.MaskFrameSource.nextFrame()->Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 42,
+      "identity": "cv.videostab.MaskFrameSource.setMaskCallback(std::function<void(Mat&)> MaskCallback)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.videostab.estimateGlobalMotionLeastSquares(InputOutputArray points0;InputOutputArray points1;int model=MM_AFFINE;float * rmse=0)->Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.videostab.estimateGlobalMotionRansac(InputArray points0;InputArray points1;int model=MM_AFFINE;const RansacParams & params=RansacParams::default2dMotion(MM_AFFINE);float * rmse=0;int * ninliers=0)->Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 45,
+      "identity": "class cv.videostab.MotionEstimatorBase",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 46,
+      "identity": "cv.videostab.MotionEstimatorBase.~MotionEstimatorBase()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.videostab.MotionEstimatorBase.setMotionModel(MotionModel val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 48,
+      "identity": "cv.videostab.MotionEstimatorBase.motionModel()->MotionModel",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.videostab.MotionEstimatorBase.estimate(InputArray points0;InputArray points1;bool * ok=0)->Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 50,
+      "identity": "class cv.videostab.MotionEstimatorRansacL2",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 51,
+      "identity": "cv.videostab.MotionEstimatorRansacL2.MotionEstimatorRansacL2(MotionModel model=MM_AFFINE)->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 52,
+      "identity": "cv.videostab.MotionEstimatorRansacL2.setRansacParams(const RansacParams & val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 53,
+      "identity": "cv.videostab.MotionEstimatorRansacL2.ransacParams()->RansacParams",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 54,
+      "identity": "cv.videostab.MotionEstimatorRansacL2.setMinInlierRatio(float val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 55,
+      "identity": "cv.videostab.MotionEstimatorRansacL2.minInlierRatio()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 56,
+      "identity": "cv.videostab.MotionEstimatorRansacL2.estimate(InputArray points0;InputArray points1;bool * ok=0)->Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 57,
+      "identity": "class cv.videostab.MotionEstimatorL1",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 58,
+      "identity": "cv.videostab.MotionEstimatorL1.MotionEstimatorL1(MotionModel model=MM_AFFINE)->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 59,
+      "identity": "cv.videostab.MotionEstimatorL1.estimate(InputArray points0;InputArray points1;bool * ok=0)->Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 60,
+      "identity": "class cv.videostab.ImageMotionEstimatorBase",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 61,
+      "identity": "cv.videostab.ImageMotionEstimatorBase.~ImageMotionEstimatorBase()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 62,
+      "identity": "cv.videostab.ImageMotionEstimatorBase.setMotionModel(MotionModel val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 63,
+      "identity": "cv.videostab.ImageMotionEstimatorBase.motionModel()->MotionModel",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 64,
+      "identity": "cv.videostab.ImageMotionEstimatorBase.setFrameMask(InputArray mask)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 65,
+      "identity": "cv.videostab.ImageMotionEstimatorBase.estimate(const Mat & frame0;const Mat & frame1;bool * ok=0)->Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 66,
+      "identity": "class cv.videostab.FromFileMotionReader",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 67,
+      "identity": "cv.videostab.FromFileMotionReader.FromFileMotionReader(const String & path)->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 68,
+      "identity": "cv.videostab.FromFileMotionReader.estimate(const Mat & frame0;const Mat & frame1;bool * ok=0)->Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 69,
+      "identity": "class cv.videostab.ToFileMotionWriter",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 70,
+      "identity": "cv.videostab.ToFileMotionWriter.ToFileMotionWriter(const String & path;Ptr<ImageMotionEstimatorBase> estimator)->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 71,
+      "identity": "cv.videostab.ToFileMotionWriter.setMotionModel(MotionModel val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 72,
+      "identity": "cv.videostab.ToFileMotionWriter.motionModel()->MotionModel",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 73,
+      "identity": "cv.videostab.ToFileMotionWriter.setFrameMask(InputArray mask)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 74,
+      "identity": "cv.videostab.ToFileMotionWriter.estimate(const Mat & frame0;const Mat & frame1;bool * ok=0)->Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 75,
+      "identity": "class cv.videostab.KeypointBasedMotionEstimator",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 76,
+      "identity": "cv.videostab.KeypointBasedMotionEstimator.KeypointBasedMotionEstimator(Ptr<MotionEstimatorBase> estimator)->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 77,
+      "identity": "cv.videostab.KeypointBasedMotionEstimator.setMotionModel(MotionModel val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 78,
+      "identity": "cv.videostab.KeypointBasedMotionEstimator.motionModel()->MotionModel",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 79,
+      "identity": "cv.videostab.KeypointBasedMotionEstimator.setDetector(Ptr<FeatureDetector> val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 80,
+      "identity": "cv.videostab.KeypointBasedMotionEstimator.detector()->Ptr<FeatureDetector>",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 81,
+      "identity": "cv.videostab.KeypointBasedMotionEstimator.setOpticalFlowEstimator(Ptr<ISparseOptFlowEstimator> val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 82,
+      "identity": "cv.videostab.KeypointBasedMotionEstimator.opticalFlowEstimator()->Ptr<ISparseOptFlowEstimator>",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 83,
+      "identity": "cv.videostab.KeypointBasedMotionEstimator.setOutlierRejector(Ptr<IOutlierRejector> val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 84,
+      "identity": "cv.videostab.KeypointBasedMotionEstimator.outlierRejector()->Ptr<IOutlierRejector>",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 85,
+      "identity": "cv.videostab.KeypointBasedMotionEstimator.setFrameMask(InputArray mask)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 86,
+      "identity": "cv.videostab.KeypointBasedMotionEstimator.estimate(const Mat & frame0;const Mat & frame1;bool * ok=0)->Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 87,
+      "identity": "cv.videostab.KeypointBasedMotionEstimator.estimate(InputArray frame0;InputArray frame1;bool * ok=0)->Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 88,
+      "identity": "cv.videostab.getMotion(int from;int to;const std::vector<Mat> & motions)->Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 89,
+      "identity": "class cv.videostab.InpainterBase",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 90,
+      "identity": "cv.videostab.InpainterBase.InpainterBase()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 91,
+      "identity": "cv.videostab.InpainterBase.~InpainterBase()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 92,
+      "identity": "cv.videostab.InpainterBase.setRadius(int val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 93,
+      "identity": "cv.videostab.InpainterBase.radius()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 94,
+      "identity": "cv.videostab.InpainterBase.setMotionModel(MotionModel val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 95,
+      "identity": "cv.videostab.InpainterBase.motionModel()->MotionModel",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 96,
+      "identity": "cv.videostab.InpainterBase.inpaint(int idx;Mat & frame;Mat & mask)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 97,
+      "identity": "cv.videostab.InpainterBase.setFrames(const std::vector<Mat> & val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 98,
+      "identity": "cv.videostab.InpainterBase.frames()->const std::vector<Mat>&",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 99,
+      "identity": "cv.videostab.InpainterBase.setMotions(const std::vector<Mat> & val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 100,
+      "identity": "cv.videostab.InpainterBase.motions()->const std::vector<Mat>&",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 101,
+      "identity": "cv.videostab.InpainterBase.setStabilizedFrames(const std::vector<Mat> & val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 102,
+      "identity": "cv.videostab.InpainterBase.stabilizedFrames()->const std::vector<Mat>&",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 103,
+      "identity": "cv.videostab.InpainterBase.setStabilizationMotions(const std::vector<Mat> & val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 104,
+      "identity": "cv.videostab.InpainterBase.stabilizationMotions()->const std::vector<Mat>&",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 105,
+      "identity": "class cv.videostab.NullInpainter",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 106,
+      "identity": "cv.videostab.NullInpainter.inpaint(int ;Mat & ;Mat & )->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 107,
+      "identity": "class cv.videostab.InpaintingPipeline",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 108,
+      "identity": "cv.videostab.InpaintingPipeline.pushBack(Ptr<InpainterBase> inpainter)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 109,
+      "identity": "cv.videostab.InpaintingPipeline.empty()->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 110,
+      "identity": "cv.videostab.InpaintingPipeline.setRadius(int val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 111,
+      "identity": "cv.videostab.InpaintingPipeline.setMotionModel(MotionModel val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 112,
+      "identity": "cv.videostab.InpaintingPipeline.setFrames(const std::vector<Mat> & val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 113,
+      "identity": "cv.videostab.InpaintingPipeline.setMotions(const std::vector<Mat> & val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 114,
+      "identity": "cv.videostab.InpaintingPipeline.setStabilizedFrames(const std::vector<Mat> & val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 115,
+      "identity": "cv.videostab.InpaintingPipeline.setStabilizationMotions(const std::vector<Mat> & val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 116,
+      "identity": "cv.videostab.InpaintingPipeline.inpaint(int idx;Mat & frame;Mat & mask)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 117,
+      "identity": "class cv.videostab.ConsistentMosaicInpainter",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 118,
+      "identity": "cv.videostab.ConsistentMosaicInpainter.ConsistentMosaicInpainter()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 119,
+      "identity": "cv.videostab.ConsistentMosaicInpainter.setStdevThresh(float val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 120,
+      "identity": "cv.videostab.ConsistentMosaicInpainter.stdevThresh()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 121,
+      "identity": "cv.videostab.ConsistentMosaicInpainter.inpaint(int idx;Mat & frame;Mat & mask)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 122,
+      "identity": "class cv.videostab.MotionInpainter",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 123,
+      "identity": "cv.videostab.MotionInpainter.MotionInpainter()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 124,
+      "identity": "cv.videostab.MotionInpainter.setOptFlowEstimator(Ptr<IDenseOptFlowEstimator> val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 125,
+      "identity": "cv.videostab.MotionInpainter.optFlowEstimator()->Ptr<IDenseOptFlowEstimator>",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 126,
+      "identity": "cv.videostab.MotionInpainter.setFlowErrorThreshold(float val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 127,
+      "identity": "cv.videostab.MotionInpainter.flowErrorThreshold()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 128,
+      "identity": "cv.videostab.MotionInpainter.setDistThreshold(float val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 129,
+      "identity": "cv.videostab.MotionInpainter.distThresh()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 130,
+      "identity": "cv.videostab.MotionInpainter.setBorderMode(int val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 131,
+      "identity": "cv.videostab.MotionInpainter.borderMode()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 132,
+      "identity": "cv.videostab.MotionInpainter.inpaint(int idx;Mat & frame;Mat & mask)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 133,
+      "identity": "class cv.videostab.ColorAverageInpainter",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 134,
+      "identity": "cv.videostab.ColorAverageInpainter.inpaint(int idx;Mat & frame;Mat & mask)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 135,
+      "identity": "class cv.videostab.ColorInpainter",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 136,
+      "identity": "cv.videostab.ColorInpainter.ColorInpainter(int method=INPAINT_TELEA;double radius=2.)->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 137,
+      "identity": "cv.videostab.ColorInpainter.inpaint(int idx;Mat & frame;Mat & mask)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 138,
+      "identity": "cv.videostab.ColorInpainter.ColorInpainter(int _method;double _radius)->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 139,
+      "identity": "cv.videostab.calcFlowMask(const Mat & flowX;const Mat & flowY;const Mat & errors;float maxError;const Mat & mask0;const Mat & mask1;Mat & flowMask)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 140,
+      "identity": "cv.videostab.completeFrameAccordingToFlow(const Mat & flowMask;const Mat & flowX;const Mat & flowY;const Mat & frame1;const Mat & mask1;float distThresh;Mat& frame0;Mat & mask0)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 141,
+      "identity": "class cv.videostab.ILog",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 142,
+      "identity": "cv.videostab.ILog.~ILog()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 143,
+      "identity": "cv.videostab.ILog.print(const char * format;... )->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 144,
+      "identity": "class cv.videostab.NullLog",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 145,
+      "identity": "cv.videostab.NullLog.print(const char * ;... )->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 146,
+      "identity": "class cv.videostab.LogToStdout",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 147,
+      "identity": "cv.videostab.LogToStdout.print(const char * format;... )->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 148,
+      "identity": "enum cv.videostab.MotionModel[const cv.videostab.MM_TRANSLATION=0;const cv.videostab.MM_TRANSLATION_AND_SCALE=1;const cv.videostab.MM_ROTATION=2;const cv.videostab.MM_RIGID=3;const cv.videostab.MM_SIMILARITY=4;const cv.videostab.MM_AFFINE=5;const cv.videostab.MM_HOMOGRAPHY=6;const cv.videostab.MM_UNKNOWN=7]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 149,
+      "identity": "class cv.videostab.RansacParams",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 150,
+      "identity": "cv.videostab.RansacParams.RansacParams()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 151,
+      "identity": "cv.videostab.RansacParams.RansacParams(int size;float thresh;float eps;float prob)->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 152,
+      "identity": "cv.videostab.RansacParams.niters()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 153,
+      "identity": "cv.videostab.RansacParams.default2dMotion(MotionModel model)->RansacParams",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 154,
+      "identity": "cv.videostab.RansacParams.RansacParams(int _size;float _thresh;float _eps;float _prob)->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 155,
+      "identity": "class cv.videostab.IMotionStabilizer",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 156,
+      "identity": "cv.videostab.IMotionStabilizer.~IMotionStabilizer()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 157,
+      "identity": "cv.videostab.IMotionStabilizer.stabilize(int size;const std::vector<Mat> & motions;const Range & range;Mat * stabilizationMotions)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 158,
+      "identity": "class cv.videostab.MotionStabilizationPipeline",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 159,
+      "identity": "cv.videostab.MotionStabilizationPipeline.pushBack(Ptr<IMotionStabilizer> stabilizer)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 160,
+      "identity": "cv.videostab.MotionStabilizationPipeline.empty()->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 161,
+      "identity": "cv.videostab.MotionStabilizationPipeline.stabilize(int size;const std::vector<Mat> & motions;const Range & range;Mat * stabilizationMotions)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 162,
+      "identity": "class cv.videostab.MotionFilterBase",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 163,
+      "identity": "cv.videostab.MotionFilterBase.~MotionFilterBase()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 164,
+      "identity": "cv.videostab.MotionFilterBase.stabilize(int idx;const std::vector<Mat> & motions;const Range & range)->Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 165,
+      "identity": "cv.videostab.MotionFilterBase.stabilize(int size;const std::vector<Mat> & motions;const Range & range;Mat * stabilizationMotions)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 166,
+      "identity": "class cv.videostab.GaussianMotionFilter",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 167,
+      "identity": "cv.videostab.GaussianMotionFilter.GaussianMotionFilter(int radius=15;float stdev=-1.f)->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 168,
+      "identity": "cv.videostab.GaussianMotionFilter.setParams(int radius;float stdev=-1.f)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 169,
+      "identity": "cv.videostab.GaussianMotionFilter.radius()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 170,
+      "identity": "cv.videostab.GaussianMotionFilter.stdev()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 171,
+      "identity": "cv.videostab.GaussianMotionFilter.stabilize(int idx;const std::vector<Mat> & motions;const Range & range)->Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 172,
+      "identity": "cv.videostab.GaussianMotionFilter.GaussianMotionFilter(int _radius;float _stdev)->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 173,
+      "identity": "class cv.videostab.LpMotionStabilizer",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 174,
+      "identity": "cv.videostab.LpMotionStabilizer.LpMotionStabilizer(MotionModel model=MM_SIMILARITY)->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 175,
+      "identity": "cv.videostab.LpMotionStabilizer.setMotionModel(MotionModel val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 176,
+      "identity": "cv.videostab.LpMotionStabilizer.motionModel()->MotionModel",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 177,
+      "identity": "cv.videostab.LpMotionStabilizer.setFrameSize(Size val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 178,
+      "identity": "cv.videostab.LpMotionStabilizer.frameSize()->Size",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 179,
+      "identity": "cv.videostab.LpMotionStabilizer.setTrimRatio(float val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 180,
+      "identity": "cv.videostab.LpMotionStabilizer.trimRatio()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 181,
+      "identity": "cv.videostab.LpMotionStabilizer.setWeight1(float val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 182,
+      "identity": "cv.videostab.LpMotionStabilizer.weight1()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 183,
+      "identity": "cv.videostab.LpMotionStabilizer.setWeight2(float val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 184,
+      "identity": "cv.videostab.LpMotionStabilizer.weight2()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 185,
+      "identity": "cv.videostab.LpMotionStabilizer.setWeight3(float val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 186,
+      "identity": "cv.videostab.LpMotionStabilizer.weight3()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 187,
+      "identity": "cv.videostab.LpMotionStabilizer.setWeight4(float val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 188,
+      "identity": "cv.videostab.LpMotionStabilizer.weight4()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 189,
+      "identity": "cv.videostab.LpMotionStabilizer.stabilize(int size;const std::vector<Mat> & motions;const Range & range;Mat * stabilizationMotions)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 190,
+      "identity": "cv.videostab.ensureInclusionConstraint(const Mat & M;Size size;float trimRatio)->Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 191,
+      "identity": "cv.videostab.estimateOptimalTrimRatio(const Mat & M;Size size)->float",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 192,
+      "identity": "class cv.videostab.ISparseOptFlowEstimator",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 193,
+      "identity": "cv.videostab.ISparseOptFlowEstimator.~ISparseOptFlowEstimator()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 194,
+      "identity": "cv.videostab.ISparseOptFlowEstimator.run(InputArray frame0;InputArray frame1;InputArray points0;InputOutputArray points1;OutputArray status;OutputArray errors)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 195,
+      "identity": "class cv.videostab.IDenseOptFlowEstimator",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 196,
+      "identity": "cv.videostab.IDenseOptFlowEstimator.~IDenseOptFlowEstimator()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 197,
+      "identity": "cv.videostab.IDenseOptFlowEstimator.run(InputArray frame0;InputArray frame1;InputOutputArray flowX;InputOutputArray flowY;OutputArray errors)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 198,
+      "identity": "class cv.videostab.PyrLkOptFlowEstimatorBase",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 199,
+      "identity": "cv.videostab.PyrLkOptFlowEstimatorBase.PyrLkOptFlowEstimatorBase()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 200,
+      "identity": "cv.videostab.PyrLkOptFlowEstimatorBase.setWinSize(Size val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 201,
+      "identity": "cv.videostab.PyrLkOptFlowEstimatorBase.winSize()->Size",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 202,
+      "identity": "cv.videostab.PyrLkOptFlowEstimatorBase.setMaxLevel(int val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 203,
+      "identity": "cv.videostab.PyrLkOptFlowEstimatorBase.maxLevel()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 204,
+      "identity": "cv.videostab.PyrLkOptFlowEstimatorBase.~PyrLkOptFlowEstimatorBase()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 205,
+      "identity": "class cv.videostab.SparsePyrLkOptFlowEstimator",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 206,
+      "identity": "cv.videostab.SparsePyrLkOptFlowEstimator.run(InputArray frame0;InputArray frame1;InputArray points0;InputOutputArray points1;OutputArray status;OutputArray errors)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 207,
+      "identity": "class cv.videostab.IOutlierRejector",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 208,
+      "identity": "cv.videostab.IOutlierRejector.~IOutlierRejector()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 209,
+      "identity": "cv.videostab.IOutlierRejector.process(Size frameSize;InputArray points0;InputArray points1;OutputArray mask)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 210,
+      "identity": "class cv.videostab.NullOutlierRejector",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 211,
+      "identity": "cv.videostab.NullOutlierRejector.process(Size frameSize;InputArray points0;InputArray points1;OutputArray mask)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 212,
+      "identity": "class cv.videostab.TranslationBasedLocalOutlierRejector",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 213,
+      "identity": "cv.videostab.TranslationBasedLocalOutlierRejector.TranslationBasedLocalOutlierRejector()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 214,
+      "identity": "cv.videostab.TranslationBasedLocalOutlierRejector.setCellSize(Size val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 215,
+      "identity": "cv.videostab.TranslationBasedLocalOutlierRejector.cellSize()->Size",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 216,
+      "identity": "cv.videostab.TranslationBasedLocalOutlierRejector.setRansacParams(RansacParams val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 217,
+      "identity": "cv.videostab.TranslationBasedLocalOutlierRejector.ransacParams()->RansacParams",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 218,
+      "identity": "cv.videostab.TranslationBasedLocalOutlierRejector.process(Size frameSize;InputArray points0;InputArray points1;OutputArray mask)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 219,
+      "identity": "class cv.videostab.StabilizerBase",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 220,
+      "identity": "cv.videostab.StabilizerBase.~StabilizerBase()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 221,
+      "identity": "cv.videostab.StabilizerBase.setLog(Ptr<ILog> ilog)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 222,
+      "identity": "cv.videostab.StabilizerBase.log()->Ptr<ILog>",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 223,
+      "identity": "cv.videostab.StabilizerBase.setRadius(int val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 224,
+      "identity": "cv.videostab.StabilizerBase.radius()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 225,
+      "identity": "cv.videostab.StabilizerBase.setFrameSource(Ptr<IFrameSource> val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 226,
+      "identity": "cv.videostab.StabilizerBase.frameSource()->Ptr<IFrameSource>",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 227,
+      "identity": "cv.videostab.StabilizerBase.setMaskSource(const Ptr<IFrameSource>& val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 228,
+      "identity": "cv.videostab.StabilizerBase.maskSource()->Ptr<IFrameSource>",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 229,
+      "identity": "cv.videostab.StabilizerBase.setMotionEstimator(Ptr<ImageMotionEstimatorBase> val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 230,
+      "identity": "cv.videostab.StabilizerBase.motionEstimator()->Ptr<ImageMotionEstimatorBase>",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 231,
+      "identity": "cv.videostab.StabilizerBase.setDeblurer(Ptr<DeblurerBase> val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 232,
+      "identity": "cv.videostab.StabilizerBase.deblurrer()->Ptr<DeblurerBase>",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 233,
+      "identity": "cv.videostab.StabilizerBase.setTrimRatio(float val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 234,
+      "identity": "cv.videostab.StabilizerBase.trimRatio()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 235,
+      "identity": "cv.videostab.StabilizerBase.setCorrectionForInclusion(bool val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 236,
+      "identity": "cv.videostab.StabilizerBase.doCorrectionForInclusion()->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 237,
+      "identity": "cv.videostab.StabilizerBase.setBorderMode(int val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 238,
+      "identity": "cv.videostab.StabilizerBase.borderMode()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 239,
+      "identity": "cv.videostab.StabilizerBase.setInpainter(Ptr<InpainterBase> val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 240,
+      "identity": "cv.videostab.StabilizerBase.inpainter()->Ptr<InpainterBase>",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 241,
+      "identity": "class cv.videostab.OnePassStabilizer",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 242,
+      "identity": "cv.videostab.OnePassStabilizer.OnePassStabilizer()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 243,
+      "identity": "cv.videostab.OnePassStabilizer.setMotionFilter(Ptr<MotionFilterBase> val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 244,
+      "identity": "cv.videostab.OnePassStabilizer.motionFilter()->Ptr<MotionFilterBase>",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 245,
+      "identity": "cv.videostab.OnePassStabilizer.reset()->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 246,
+      "identity": "cv.videostab.OnePassStabilizer.nextFrame()->Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 247,
+      "identity": "class cv.videostab.TwoPassStabilizer",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 248,
+      "identity": "cv.videostab.TwoPassStabilizer.TwoPassStabilizer()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 249,
+      "identity": "cv.videostab.TwoPassStabilizer.setMotionStabilizer(Ptr<IMotionStabilizer> val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 250,
+      "identity": "cv.videostab.TwoPassStabilizer.motionStabilizer()->Ptr<IMotionStabilizer>",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 251,
+      "identity": "cv.videostab.TwoPassStabilizer.setWobbleSuppressor(Ptr<WobbleSuppressorBase> val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 252,
+      "identity": "cv.videostab.TwoPassStabilizer.wobbleSuppressor()->Ptr<WobbleSuppressorBase>",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 253,
+      "identity": "cv.videostab.TwoPassStabilizer.setEstimateTrimRatio(bool val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 254,
+      "identity": "cv.videostab.TwoPassStabilizer.mustEstimateTrimaRatio()->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 255,
+      "identity": "cv.videostab.TwoPassStabilizer.reset()->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 256,
+      "identity": "cv.videostab.TwoPassStabilizer.nextFrame()->Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 257,
+      "identity": "class cv.videostab.WobbleSuppressorBase",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 258,
+      "identity": "cv.videostab.WobbleSuppressorBase.WobbleSuppressorBase()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 259,
+      "identity": "cv.videostab.WobbleSuppressorBase.~WobbleSuppressorBase()->",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 260,
+      "identity": "cv.videostab.WobbleSuppressorBase.setMotionEstimator(Ptr<ImageMotionEstimatorBase> val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 261,
+      "identity": "cv.videostab.WobbleSuppressorBase.motionEstimator()->Ptr<ImageMotionEstimatorBase>",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 262,
+      "identity": "cv.videostab.WobbleSuppressorBase.suppress(int idx;const Mat & frame;Mat & result)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 263,
+      "identity": "cv.videostab.WobbleSuppressorBase.setFrameCount(int val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 264,
+      "identity": "cv.videostab.WobbleSuppressorBase.frameCount()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 265,
+      "identity": "cv.videostab.WobbleSuppressorBase.setMotions(const std::vector<Mat> & val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 266,
+      "identity": "cv.videostab.WobbleSuppressorBase.motions()->const std::vector<Mat>&",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 267,
+      "identity": "cv.videostab.WobbleSuppressorBase.setMotions2(const std::vector<Mat> & val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 268,
+      "identity": "cv.videostab.WobbleSuppressorBase.motions2()->const std::vector<Mat>&",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 269,
+      "identity": "cv.videostab.WobbleSuppressorBase.setStabilizationMotions(const std::vector<Mat> & val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 270,
+      "identity": "cv.videostab.WobbleSuppressorBase.stabilizationMotions()->const std::vector<Mat>&",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 271,
+      "identity": "class cv.videostab.NullWobbleSuppressor",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 272,
+      "identity": "cv.videostab.NullWobbleSuppressor.suppress(int idx;const Mat & frame;Mat & result)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 273,
+      "identity": "class cv.videostab.MoreAccurateMotionWobbleSuppressorBase",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 274,
+      "identity": "cv.videostab.MoreAccurateMotionWobbleSuppressorBase.setPeriod(int val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 275,
+      "identity": "cv.videostab.MoreAccurateMotionWobbleSuppressorBase.period()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 276,
+      "identity": "class cv.videostab.MoreAccurateMotionWobbleSuppressor",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 277,
+      "identity": "cv.videostab.MoreAccurateMotionWobbleSuppressor.suppress(int idx;const Mat & frame;Mat & result)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The VideoStab public declarations require a native/managed wrapper that the current package does not provide; caller-selected frame sources, callback behavior, stabilization state, and Mat ownership remain outside the current ABI/API and deterministic smoke contract. Optional VideoIO/CUDA integrations are build-dependent.",
+      "buildCondition": "REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}
