@@ -1,0 +1,2002 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/cudalegacy.hpp plus opencv2/cudalegacy/*.hpp parser-backed legacy CUDA public closure, including cv::cuda declarations and NCV/NPP staging metadata, plus the pinned module CMake build/dependency contract",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact CudaLegacy wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [
+    "The cudalegacy module is disabled unless HAVE_CUDA is enabled; real execution requires an external CUDA toolkit/runtime plus legacy NCV/NPP staging support.",
+    "The module depends on opencv_core, opencv_geometry, opencv_video and optional objdetect/xobjdetect/imgproc/stereo/calib/CUDA modules; this package ships no CudaLegacy wrapper/runtime, and GpuMat/Stream and legacy allocator/device-state ownership remain outside the managed contract."
+  ],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.cuda.ImagePyramid",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.cuda.ImagePyramid.getLayer(OutputArray outImg;Size outRoi;Stream& stream=Stream::Null())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.cuda.createImagePyramid(InputArray img;int nLayers=-1;Stream& stream=Stream::Null())->Ptr<ImagePyramid>",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "class cv.cuda.BackgroundSubtractorGMG",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.cuda.BackgroundSubtractorGMG.apply(InputArray image;OutputArray fgmask;double learningRate;Stream& stream)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.cuda.BackgroundSubtractorGMG.apply(InputArray image;InputArray knownForegroundMask;OutputArray fgmask;double learningRate;Stream& stream)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.cuda.BackgroundSubtractorGMG.getMaxFeatures()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.cuda.BackgroundSubtractorGMG.setMaxFeatures(int maxFeatures)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.cuda.BackgroundSubtractorGMG.getDefaultLearningRate()->double",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.cuda.BackgroundSubtractorGMG.setDefaultLearningRate(double lr)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.cuda.BackgroundSubtractorGMG.getNumFrames()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.cuda.BackgroundSubtractorGMG.setNumFrames(int nframes)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.cuda.BackgroundSubtractorGMG.getQuantizationLevels()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.cuda.BackgroundSubtractorGMG.setQuantizationLevels(int nlevels)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.cuda.BackgroundSubtractorGMG.getBackgroundPrior()->double",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.cuda.BackgroundSubtractorGMG.setBackgroundPrior(double bgprior)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.cuda.BackgroundSubtractorGMG.getSmoothingRadius()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.cuda.BackgroundSubtractorGMG.setSmoothingRadius(int radius)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.cuda.BackgroundSubtractorGMG.getDecisionThreshold()->double",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.cuda.BackgroundSubtractorGMG.setDecisionThreshold(double thresh)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.cuda.BackgroundSubtractorGMG.getUpdateBackgroundModel()->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.cuda.BackgroundSubtractorGMG.setUpdateBackgroundModel(bool update)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.cuda.BackgroundSubtractorGMG.getMinVal()->double",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.cuda.BackgroundSubtractorGMG.setMinVal(double val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.cuda.BackgroundSubtractorGMG.getMaxVal()->double",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.cuda.BackgroundSubtractorGMG.setMaxVal(double val)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.cuda.createBackgroundSubtractorGMG(int initializationFrames=120;double decisionThreshold=0.8)->Ptr<cuda::BackgroundSubtractorGMG>",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 27,
+      "identity": "class cv.cuda.BackgroundSubtractorFGD",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.cuda.BackgroundSubtractorFGD.getForegroundRegions(OutputArrayOfArrays foreground_regions)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 29,
+      "identity": "class cv.cuda.FGDParams",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.cuda.FGDParams.FGDParams()->",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.cuda.createBackgroundSubtractorFGD(const FGDParams& params=FGDParams())->Ptr<cuda::BackgroundSubtractorFGD>",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.cuda.calcOpticalFlowBM(const GpuMat& prev;const GpuMat& curr;Size block_size;Size shift_size;Size max_range;bool use_previous;GpuMat& velx;GpuMat& vely;GpuMat& buf;Stream& stream=Stream::Null())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 33,
+      "identity": "class cv.cuda.FastOpticalFlowBM",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.cuda.FastOpticalFlowBM.operator ()(const GpuMat& I0;const GpuMat& I1;GpuMat& flowx;GpuMat& flowy;int search_window=21;int block_window=7;Stream& s=Stream::Null())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.cuda.interpolateFrames(const GpuMat& frame0;const GpuMat& frame1;const GpuMat& fu;const GpuMat& fv;const GpuMat& bu;const GpuMat& bv;float pos;GpuMat& newFrame;GpuMat& buf;Stream& stream=Stream::Null())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.cuda.createOpticalFlowNeedleMap(const GpuMat& u;const GpuMat& v;GpuMat& vertex;GpuMat& colors)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.cuda.graphcut(GpuMat& terminals;GpuMat& leftTransp;GpuMat& rightTransp;GpuMat& top;GpuMat& bottom;GpuMat& labels;GpuMat& buf;Stream& stream=Stream::Null())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.cuda.graphcut(GpuMat& terminals;GpuMat& leftTransp;GpuMat& rightTransp;GpuMat& top;GpuMat& topLeft;GpuMat& topRight;GpuMat& bottom;GpuMat& bottomLeft;GpuMat& bottomRight;GpuMat& labels;GpuMat& buf;Stream& stream=Stream::Null())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.cuda.connectivityMask(const GpuMat& image;GpuMat& mask;const cv::Scalar& lo;const cv::Scalar& hi;Stream& stream=Stream::Null())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.cuda.labelComponents(const GpuMat& mask;GpuMat& components;int flags=0;Stream& stream=Stream::Null())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.cuda.transformPoints(const GpuMat& src;const Mat& rvec;const Mat& tvec;GpuMat& dst;Stream& stream=Stream::Null())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 42,
+      "identity": "cv.cuda.projectPoints(const GpuMat& src;const Mat& rvec;const Mat& tvec;const Mat& camera_mat;const Mat& dist_coef;GpuMat& dst;Stream& stream=Stream::Null())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.cuda.solvePnPRansac(const Mat& object;const Mat& image;const Mat& camera_mat;const Mat& dist_coef;Mat& rvec;Mat& tvec;bool use_extrinsic_guess=false;int num_iters=100;float max_dist=8.0;int min_inlier_count=100;std::vector<int>* inliers=NULL)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 44,
+      "identity": "class NcvRect8u",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 45,
+      "identity": "NcvRect8u.__device__ NcvRect8u()->__host__ __device__",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 46,
+      "identity": "NcvRect8u.__device__ NcvRect8u(Ncv8u x_;Ncv8u y_;Ncv8u width_;Ncv8u height_)->__host__ __device__",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 47,
+      "identity": "class NcvRect32s",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 48,
+      "identity": "NcvRect32s.__device__ NcvRect32s()->__host__ __device__",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 49,
+      "identity": "NcvRect32s.__device__ NcvRect32s(Ncv32s x_;Ncv32s y_;Ncv32s width_;Ncv32s height_)->__host__ __device__",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 50,
+      "identity": "class NcvRect32u",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 51,
+      "identity": "NcvRect32u.__device__ NcvRect32u()->__host__ __device__",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 52,
+      "identity": "NcvRect32u.__device__ NcvRect32u(Ncv32u x_;Ncv32u y_;Ncv32u width_;Ncv32u height_)->__host__ __device__",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 53,
+      "identity": "class NcvSize32s",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 54,
+      "identity": "NcvSize32s.__device__ NcvSize32s()->__host__ __device__",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 55,
+      "identity": "NcvSize32s.__device__ NcvSize32s(Ncv32s width_;Ncv32s height_)->__host__ __device__",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 56,
+      "identity": "class NcvSize32u",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 57,
+      "identity": "NcvSize32u.__device__ NcvSize32u()->__host__ __device__",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 58,
+      "identity": "NcvSize32u.__device__ NcvSize32u(Ncv32u width_;Ncv32u height_)->__host__ __device__",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 59,
+      "identity": "NcvSize32u.__device__ bool operator ==(const NcvSize32u & another)->__host__ __device__ bool",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 60,
+      "identity": "class NcvPoint2D32s",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 61,
+      "identity": "NcvPoint2D32s.__device__ NcvPoint2D32s()->__host__ __device__",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 62,
+      "identity": "NcvPoint2D32s.__device__ NcvPoint2D32s(Ncv32s x_;Ncv32s y_)->__host__ __device__",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 63,
+      "identity": "class NcvPoint2D32u",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 64,
+      "identity": "NcvPoint2D32u.__device__ NcvPoint2D32u()->__host__ __device__",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 65,
+      "identity": "NcvPoint2D32u.__device__ NcvPoint2D32u(Ncv32u x_;Ncv32u y_)->__host__ __device__",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 66,
+      "identity": "ncvDebugOutput(const cv::String & msg)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 67,
+      "identity": "ncvSetDebugOutputHandler(NCVDebugOutputHandler* func)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 68,
+      "identity": "enum <unnamed>[const NCV_SUCCESS=0;const NCV_UNKNOWN_ERROR=1;const NCV_CUDA_ERROR=2;const NCV_NPP_ERROR=3;const NCV_FILE_ERROR=4;const NCV_NULL_PTR=5;const NCV_INCONSISTENT_INPUT=6;const NCV_TEXTURE_BIND_ERROR=7;const NCV_DIMENSIONS_INVALID=8;const NCV_INVALID_ROI=9;const NCV_INVALID_STEP=10;const NCV_INVALID_SCALE=11;const NCV_ALLOCATOR_NOT_INITIALIZED=12;const NCV_ALLOCATOR_BAD_ALLOC=13;const NCV_ALLOCATOR_BAD_DEALLOC=14;const NCV_ALLOCATOR_INSUFFICIENT_CAPACITY=15;const NCV_ALLOCATOR_DEALLOC_ORDER=16;const NCV_ALLOCATOR_BAD_REUSE=17;const NCV_MEM_COPY_ERROR=18;const NCV_MEM_RESIDENCE_ERROR=19;const NCV_MEM_INSUFFICIENT_CAPACITY=20;const NCV_HAAR_INVALID_PIXEL_STEP=21;const NCV_HAAR_TOO_MANY_FEATURES_IN_CLASSIFIER=22;const NCV_HAAR_TOO_MANY_FEATURES_IN_CASCADE=23;const NCV_HAAR_TOO_LARGE_FEATURES=24;const NCV_HAAR_XML_LOADING_EXCEPTION=25;const NCV_NOIMPL_HAAR_TILTED_FEATURES=26;const NCV_NOT_IMPLEMENTED=27;const NCV_WARNING_HAAR_DETECTIONS_VECTOR_OVERFLOW=28;const NPPST_SUCCESS=NCV_SUCCESS;const NPPST_ERROR=NCV_SUCCESS+1;const NPPST_CUDA_KERNEL_EXECUTION_ERROR=NCV_SUCCESS+2;const NPPST_NULL_POINTER_ERROR=NCV_SUCCESS+3;const NPPST_TEXTURE_BIND_ERROR=NCV_SUCCESS+4;const NPPST_MEMCPY_ERROR=NCV_SUCCESS+5;const NPPST_MEM_ALLOC_ERR=NCV_SUCCESS+6;const NPPST_MEMFREE_ERR=NCV_SUCCESS+7;const NPPST_INVALID_ROI=NCV_SUCCESS+8;const NPPST_INVALID_STEP=NCV_SUCCESS+9;const NPPST_INVALID_SCALE=NCV_SUCCESS+10;const NPPST_MEM_INSUFFICIENT_BUFFER=NCV_SUCCESS+11;const NPPST_MEM_RESIDENCE_ERROR=NCV_SUCCESS+12;const NPPST_MEM_INTERNAL_ERROR=NCV_SUCCESS+13;const NCV_LAST_STATUS=NCV_SUCCESS+14]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 69,
+      "identity": "ncvStartTimer()->NcvTimer",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 70,
+      "identity": "ncvEndQueryTimerUs(NcvTimer t)->double",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 71,
+      "identity": "ncvEndQueryTimerMs(NcvTimer t)->double",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 72,
+      "identity": "alignUp(Ncv32u what;Ncv32u alignment)->Ncv32u",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 73,
+      "identity": "enum NCVMemoryType[const NCVMemoryTypeNone=0;const NCVMemoryTypeHostPageable=1;const NCVMemoryTypeHostPinned=2;const NCVMemoryTypeDevice=3]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 74,
+      "identity": "class NCVMemPtr",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 75,
+      "identity": "NCVMemPtr.clear()->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 76,
+      "identity": "class NCVMemSegment",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 77,
+      "identity": "NCVMemSegment.clear()->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 78,
+      "identity": "class INCVMemAllocator",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 79,
+      "identity": "INCVMemAllocator.~INCVMemAllocator()->",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 80,
+      "identity": "INCVMemAllocator.alloc(NCVMemSegment & seg;size_t size)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 81,
+      "identity": "INCVMemAllocator.dealloc(NCVMemSegment & seg)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 82,
+      "identity": "INCVMemAllocator.isInitialized()->NcvBool",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 83,
+      "identity": "INCVMemAllocator.isCounting()->NcvBool",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 84,
+      "identity": "INCVMemAllocator.memType()->NCVMemoryType",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 85,
+      "identity": "INCVMemAllocator.alignment()->Ncv32u",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 86,
+      "identity": "INCVMemAllocator.maxSize()->size_t",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 87,
+      "identity": "class NCVMemStackAllocator",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 88,
+      "identity": "NCVMemStackAllocator.NCVMemStackAllocator(Ncv32u alignment)->",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 89,
+      "identity": "NCVMemStackAllocator.NCVMemStackAllocator(NCVMemoryType memT;size_t capacity;Ncv32u alignment;void * reusePtr=NULL)->",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 90,
+      "identity": "NCVMemStackAllocator.~NCVMemStackAllocator()->",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 91,
+      "identity": "NCVMemStackAllocator.alloc(NCVMemSegment & seg;size_t size)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 92,
+      "identity": "NCVMemStackAllocator.dealloc(NCVMemSegment & seg)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 93,
+      "identity": "NCVMemStackAllocator.isInitialized()->NcvBool",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 94,
+      "identity": "NCVMemStackAllocator.isCounting()->NcvBool",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 95,
+      "identity": "NCVMemStackAllocator.memType()->NCVMemoryType",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 96,
+      "identity": "NCVMemStackAllocator.alignment()->Ncv32u",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 97,
+      "identity": "NCVMemStackAllocator.maxSize()->size_t",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 98,
+      "identity": "class NCVMemNativeAllocator",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 99,
+      "identity": "NCVMemNativeAllocator.NCVMemNativeAllocator(NCVMemoryType memT;Ncv32u alignment)->",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 100,
+      "identity": "NCVMemNativeAllocator.~NCVMemNativeAllocator()->",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 101,
+      "identity": "NCVMemNativeAllocator.alloc(NCVMemSegment & seg;size_t size)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 102,
+      "identity": "NCVMemNativeAllocator.dealloc(NCVMemSegment & seg)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 103,
+      "identity": "NCVMemNativeAllocator.isInitialized()->NcvBool",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 104,
+      "identity": "NCVMemNativeAllocator.isCounting()->NcvBool",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 105,
+      "identity": "NCVMemNativeAllocator.memType()->NCVMemoryType",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 106,
+      "identity": "NCVMemNativeAllocator.alignment()->Ncv32u",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 107,
+      "identity": "NCVMemNativeAllocator.maxSize()->size_t",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 108,
+      "identity": "memSegCopyHelper(void * dst;NCVMemoryType dstType;const void * src;NCVMemoryType srcType;size_t sz;cudaStream_t cuStream)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 109,
+      "identity": "memSegCopyHelper2D(void * dst;Ncv32u dstPitch;NCVMemoryType dstType;const void * src;Ncv32u srcPitch;NCVMemoryType srcType;Ncv32u widthbytes;Ncv32u height;cudaStream_t cuStream)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 110,
+      "identity": "ncvGroupRectangles_host(NCVVector<NcvRect32u> & hypotheses;Ncv32u & numHypotheses;Ncv32u minNeighbors;Ncv32f intersectEps;NCVVector<Ncv32u> * hypothesesWeights)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 111,
+      "identity": "ncvDrawRects_8u_host(Ncv8u * h_dst;Ncv32u dstStride;Ncv32u dstWidth;Ncv32u dstHeight;NcvRect32u * h_rects;Ncv32u numRects;Ncv8u color)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 112,
+      "identity": "ncvDrawRects_32u_host(Ncv32u * h_dst;Ncv32u dstStride;Ncv32u dstWidth;Ncv32u dstHeight;NcvRect32u * h_rects;Ncv32u numRects;Ncv32u color)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 113,
+      "identity": "ncvDrawRects_8u_device(Ncv8u * d_dst;Ncv32u dstStride;Ncv32u dstWidth;Ncv32u dstHeight;NcvRect32u * d_rects;Ncv32u numRects;Ncv8u color;cudaStream_t cuStream)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 114,
+      "identity": "ncvDrawRects_32u_device(Ncv32u * d_dst;Ncv32u dstStride;Ncv32u dstWidth;Ncv32u dstHeight;NcvRect32u * d_rects;Ncv32u numRects;Ncv32u color;cudaStream_t cuStream)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 115,
+      "identity": "class NCVBroxOpticalFlowDescriptor",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 116,
+      "identity": "NCVBroxOpticalFlow(const NCVBroxOpticalFlowDescriptor desc;INCVMemAllocator & gpu_mem_allocator;const NCVMatrix<Ncv32f> & frame0;const NCVMatrix<Ncv32f> & frame1;NCVMatrix<Ncv32f> & u;NCVMatrix<Ncv32f> & v;cudaStream_t stream)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 117,
+      "identity": "class HaarFeature64",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 118,
+      "identity": "HaarFeature64.NCVStatus setRect(Ncv32u rectX;Ncv32u rectY;Ncv32u rectWidth;Ncv32u rectHeight;Ncv32u ;Ncv32u )->__host__ NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 119,
+      "identity": "HaarFeature64.NCVStatus setWeight(Ncv32f weight)->__host__ NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 120,
+      "identity": "HaarFeature64.__host__ void getRect(Ncv32u * rectX;Ncv32u * rectY;Ncv32u * rectWidth;Ncv32u * rectHeight)->__device__ __host__ void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 121,
+      "identity": "HaarFeature64.__host__ Ncv32f getWeight()->__device__ __host__ Ncv32f",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 122,
+      "identity": "class HaarFeatureDescriptor32",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 123,
+      "identity": "HaarFeatureDescriptor32.NCVStatus create(NcvBool bTilted;NcvBool bLeftLeaf;NcvBool bRightLeaf;Ncv32u numFeatures;Ncv32u offsetFeatures)->__host__ NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 124,
+      "identity": "HaarFeatureDescriptor32.__host__ NcvBool isTilted()->__device__ __host__ NcvBool",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 125,
+      "identity": "HaarFeatureDescriptor32.__host__ NcvBool isLeftNodeLeaf()->__device__ __host__ NcvBool",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 126,
+      "identity": "HaarFeatureDescriptor32.__host__ NcvBool isRightNodeLeaf()->__device__ __host__ NcvBool",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 127,
+      "identity": "HaarFeatureDescriptor32.__host__ Ncv32u getNumFeatures()->__device__ __host__ Ncv32u",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 128,
+      "identity": "HaarFeatureDescriptor32.__host__ Ncv32u getFeaturesOffset()->__device__ __host__ Ncv32u",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 129,
+      "identity": "class HaarClassifierNodeDescriptor32",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 130,
+      "identity": "HaarClassifierNodeDescriptor32.NCVStatus create(Ncv32f leafValue)->__host__ NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 131,
+      "identity": "HaarClassifierNodeDescriptor32.NCVStatus create(Ncv32u offsetHaarClassifierNode)->__host__ NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 132,
+      "identity": "HaarClassifierNodeDescriptor32.Ncv32f getLeafValueHost()->__host__ Ncv32f",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 133,
+      "identity": "HaarClassifierNodeDescriptor32.__host__ Ncv32u getNextNodeOffset()->__device__ __host__ Ncv32u",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 134,
+      "identity": "class HaarClassifierNode128",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 135,
+      "identity": "HaarClassifierNode128.NCVStatus setFeatureDesc(HaarFeatureDescriptor32 f)->__host__ NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 136,
+      "identity": "HaarClassifierNode128.NCVStatus setThreshold(Ncv32f t)->__host__ NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 137,
+      "identity": "HaarClassifierNode128.NCVStatus setLeftNodeDesc(HaarClassifierNodeDescriptor32 nl)->__host__ NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 138,
+      "identity": "HaarClassifierNode128.NCVStatus setRightNodeDesc(HaarClassifierNodeDescriptor32 nr)->__host__ NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 139,
+      "identity": "HaarClassifierNode128.__device__ HaarFeatureDescriptor32 getFeatureDesc()->__host__ __device__ HaarFeatureDescriptor32",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 140,
+      "identity": "HaarClassifierNode128.__device__ Ncv32f getThreshold()->__host__ __device__ Ncv32f",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 141,
+      "identity": "HaarClassifierNode128.__device__ HaarClassifierNodeDescriptor32 getLeftNodeDesc()->__host__ __device__ HaarClassifierNodeDescriptor32",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 142,
+      "identity": "HaarClassifierNode128.__device__ HaarClassifierNodeDescriptor32 getRightNodeDesc()->__host__ __device__ HaarClassifierNodeDescriptor32",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 143,
+      "identity": "class HaarStage64",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 144,
+      "identity": "HaarStage64.NCVStatus setStageThreshold(Ncv32f t)->__host__ NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 145,
+      "identity": "HaarStage64.NCVStatus setStartClassifierRootNodeOffset(Ncv32u val)->__host__ NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 146,
+      "identity": "HaarStage64.NCVStatus setNumClassifierRootNodes(Ncv32u val)->__host__ NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 147,
+      "identity": "HaarStage64.__device__ Ncv32f getStageThreshold()->__host__ __device__ Ncv32f",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 148,
+      "identity": "HaarStage64.__device__ Ncv32u getStartClassifierRootNodeOffset()->__host__ __device__ Ncv32u",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 149,
+      "identity": "HaarStage64.__device__ Ncv32u getNumClassifierRootNodes()->__host__ __device__ Ncv32u",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 150,
+      "identity": "class HaarClassifierCascadeDescriptor",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 151,
+      "identity": "enum <unnamed>[const NCVPipeObjDet_Default=0x000;const NCVPipeObjDet_UseFairImageScaling=0x001;const NCVPipeObjDet_FindLargestObject=0x002;const NCVPipeObjDet_VisualizeInPlace=0x004]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 152,
+      "identity": "ncvDetectObjectsMultiScale_device(NCVMatrix<Ncv8u> & d_srcImg;NcvSize32u srcRoi;NCVVector<NcvRect32u> & d_dstRects;Ncv32u & dstNumRects;HaarClassifierCascadeDescriptor & haar;NCVVector<HaarStage64> & h_HaarStages;NCVVector<HaarStage64> & d_HaarStages;NCVVector<HaarClassifierNode128> & d_HaarNodes;NCVVector<HaarFeature64> & d_HaarFeatures;NcvSize32u minObjSize;Ncv32u minNeighbors;Ncv32f scaleStep;Ncv32u pixelStep;Ncv32u flags;INCVMemAllocator & gpuAllocator;INCVMemAllocator & cpuAllocator;cudaDeviceProp & devProp;cudaStream_t cuStream)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 153,
+      "identity": "ncvApplyHaarClassifierCascade_device(NCVMatrix<Ncv32u> & d_integralImage;NCVMatrix<Ncv32f> & d_weights;NCVMatrixAlloc<Ncv32u> & d_pixelMask;Ncv32u & numDetections;HaarClassifierCascadeDescriptor & haar;NCVVector<HaarStage64> & h_HaarStages;NCVVector<HaarStage64> & d_HaarStages;NCVVector<HaarClassifierNode128> & d_HaarNodes;NCVVector<HaarFeature64> & d_HaarFeatures;NcvBool bMaskElements;NcvSize32u anchorsRoi;Ncv32u pixelStep;Ncv32f scaleArea;INCVMemAllocator & gpuAllocator;INCVMemAllocator & cpuAllocator;cudaDeviceProp & devProp;cudaStream_t cuStream)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 154,
+      "identity": "ncvApplyHaarClassifierCascade_host(NCVMatrix<Ncv32u> & h_integralImage;NCVMatrix<Ncv32f> & h_weights;NCVMatrixAlloc<Ncv32u> & h_pixelMask;Ncv32u & numDetections;HaarClassifierCascadeDescriptor & haar;NCVVector<HaarStage64> & h_HaarStages;NCVVector<HaarClassifierNode128> & h_HaarNodes;NCVVector<HaarFeature64> & h_HaarFeatures;NcvBool bMaskElements;NcvSize32u anchorsRoi;Ncv32u pixelStep;Ncv32f scaleArea)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 155,
+      "identity": "ncvGrowDetectionsVector_device(NCVVector<Ncv32u> & pixelMask;Ncv32u numPixelMaskDetections;NCVVector<NcvRect32u> & hypotheses;Ncv32u & totalDetections;Ncv32u totalMaxDetections;Ncv32u rectWidth;Ncv32u rectHeight;Ncv32f curScale;cudaStream_t cuStream)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 156,
+      "identity": "ncvGrowDetectionsVector_host(NCVVector<Ncv32u> & pixelMask;Ncv32u numPixelMaskDetections;NCVVector<NcvRect32u> & hypotheses;Ncv32u & totalDetections;Ncv32u totalMaxDetections;Ncv32u rectWidth;Ncv32u rectHeight;Ncv32f curScale)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 157,
+      "identity": "ncvHaarGetClassifierSize(const cv::String & filename;Ncv32u & numStages;Ncv32u & numNodes;Ncv32u & numFeatures)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 158,
+      "identity": "ncvHaarLoadFromFile_host(const cv::String & filename;HaarClassifierCascadeDescriptor & haar;NCVVector<HaarStage64> & h_HaarStages;NCVVector<HaarClassifierNode128> & h_HaarNodes;NCVVector<HaarFeature64> & h_HaarFeatures)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 159,
+      "identity": "ncvHaarStoreNVBIN_host(const cv::String & filename;HaarClassifierCascadeDescriptor haar;NCVVector<HaarStage64> & h_HaarStages;NCVVector<HaarClassifierNode128> & h_HaarNodes;NCVVector<HaarFeature64> & h_HaarFeatures)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 160,
+      "identity": "cv.cuda.device.pyramid.downsampleX2(PtrStepSzb src;PtrStepSzb dst;int depth;int cn;cudaStream_t stream)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 161,
+      "identity": "cv.cuda.device.pyramid.interpolateFrom1(PtrStepSzb src;PtrStepSzb dst;int depth;int cn;cudaStream_t stream)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 162,
+      "identity": "nppStGetActiveCUDAstream()->cudaStream_t",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 163,
+      "identity": "nppStSetActiveCUDAstream(cudaStream_t cudaStream)->cudaStream_t",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 164,
+      "identity": "enum NppStBorderType[const nppStBorderNone=0;const nppStBorderClamp=1;const nppStBorderWrap=2;const nppStBorderMirror=3]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 165,
+      "identity": "enum NppStInterpMode[const nppStSupersample=0;const nppStBicubic=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 166,
+      "identity": "class NppStInterpolationState",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 167,
+      "identity": "nppiStGetInterpolationBufferSize(NcvSize32u srcSize;Ncv32u nStep;Ncv32u * hpSize)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 168,
+      "identity": "nppiStInterpolateFrames(const NppStInterpolationState * pState)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 169,
+      "identity": "nppiStFilterRowBorder_32f_C1R(Ncv32f * pSrc;NcvSize32u srcSize;Ncv32u nSrcStep;Ncv32f * pDst;NcvSize32u dstSize;Ncv32u nDstStep;NcvRect32u oROI;NppStBorderType borderType;Ncv32f * pKernel;Ncv32s nKernelSize;Ncv32s nAnchor;Ncv32f multiplier)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 170,
+      "identity": "nppiStFilterColumnBorder_32f_C1R(Ncv32f * pSrc;NcvSize32u srcSize;Ncv32u nSrcStep;Ncv32f * pDst;NcvSize32u dstSize;Ncv32u nDstStep;NcvRect32u oROI;NppStBorderType borderType;Ncv32f * pKernel;Ncv32s nKernelSize;Ncv32s nAnchor;Ncv32f multiplier)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 171,
+      "identity": "nppiStVectorWarpGetBufferSize(NcvSize32u srcSize;Ncv32u nSrcStep;Ncv32u * hpSize)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 172,
+      "identity": "nppiStVectorWarp_PSF1x1_32f_C1(const Ncv32f * pSrc;NcvSize32u srcSize;Ncv32u nSrcStep;const Ncv32f * pU;const Ncv32f * pV;Ncv32u nVFStep;Ncv32f timeScale;Ncv32f * pDst)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 173,
+      "identity": "nppiStVectorWarp_PSF2x2_32f_C1(const Ncv32f * pSrc;NcvSize32u srcSize;Ncv32u nSrcStep;const Ncv32f * pU;const Ncv32f * pV;Ncv32u nVFStep;Ncv32f * pBuffer;Ncv32f timeScale;Ncv32f * pDst)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 174,
+      "identity": "nppiStResize_32f_C1R(Ncv32f * pSrc;NcvSize32u srcSize;Ncv32u nSrcStep;NcvRect32u srcROI;Ncv32f * pDst;NcvSize32u dstSize;Ncv32u nDstStep;NcvRect32u dstROI;Ncv32f xFactor;Ncv32f yFactor;NppStInterpMode interpolation)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 175,
+      "identity": "nppiStDecimate_32u_C1R(Ncv32u * d_src;Ncv32u srcStep;Ncv32u * d_dst;Ncv32u dstStep;NcvSize32u srcRoi;Ncv32u scale;NcvBool readThruTexture)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 176,
+      "identity": "nppiStDecimate_32s_C1R(Ncv32s * d_src;Ncv32u srcStep;Ncv32s * d_dst;Ncv32u dstStep;NcvSize32u srcRoi;Ncv32u scale;NcvBool readThruTexture)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 177,
+      "identity": "nppiStDecimate_32f_C1R(Ncv32f * d_src;Ncv32u srcStep;Ncv32f * d_dst;Ncv32u dstStep;NcvSize32u srcRoi;Ncv32u scale;NcvBool readThruTexture)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 178,
+      "identity": "nppiStDecimate_64u_C1R(Ncv64u * d_src;Ncv32u srcStep;Ncv64u * d_dst;Ncv32u dstStep;NcvSize32u srcRoi;Ncv32u scale;NcvBool readThruTexture)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 179,
+      "identity": "nppiStDecimate_64s_C1R(Ncv64s * d_src;Ncv32u srcStep;Ncv64s * d_dst;Ncv32u dstStep;NcvSize32u srcRoi;Ncv32u scale;NcvBool readThruTexture)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 180,
+      "identity": "nppiStDecimate_64f_C1R(Ncv64f * d_src;Ncv32u srcStep;Ncv64f * d_dst;Ncv32u dstStep;NcvSize32u srcRoi;Ncv32u scale;NcvBool readThruTexture)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 181,
+      "identity": "nppiStDecimate_32u_C1R_host(Ncv32u * h_src;Ncv32u srcStep;Ncv32u * h_dst;Ncv32u dstStep;NcvSize32u srcRoi;Ncv32u scale)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 182,
+      "identity": "nppiStDecimate_32s_C1R_host(Ncv32s * h_src;Ncv32u srcStep;Ncv32s * h_dst;Ncv32u dstStep;NcvSize32u srcRoi;Ncv32u scale)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 183,
+      "identity": "nppiStDecimate_32f_C1R_host(Ncv32f * h_src;Ncv32u srcStep;Ncv32f * h_dst;Ncv32u dstStep;NcvSize32u srcRoi;Ncv32u scale)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 184,
+      "identity": "nppiStDecimate_64u_C1R_host(Ncv64u * h_src;Ncv32u srcStep;Ncv64u * h_dst;Ncv32u dstStep;NcvSize32u srcRoi;Ncv32u scale)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 185,
+      "identity": "nppiStDecimate_64s_C1R_host(Ncv64s * h_src;Ncv32u srcStep;Ncv64s * h_dst;Ncv32u dstStep;NcvSize32u srcRoi;Ncv32u scale)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 186,
+      "identity": "nppiStDecimate_64f_C1R_host(Ncv64f * h_src;Ncv32u srcStep;Ncv64f * h_dst;Ncv32u dstStep;NcvSize32u srcRoi;Ncv32u scale)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 187,
+      "identity": "nppiStRectStdDev_32f_C1R(Ncv32u * d_sum;Ncv32u sumStep;Ncv64u * d_sqsum;Ncv32u sqsumStep;Ncv32f * d_norm;Ncv32u normStep;NcvSize32u roi;NcvRect32u rect;Ncv32f scaleArea;NcvBool readThruTexture)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 188,
+      "identity": "nppiStRectStdDev_32f_C1R_host(Ncv32u * h_sum;Ncv32u sumStep;Ncv64u * h_sqsum;Ncv32u sqsumStep;Ncv32f * h_norm;Ncv32u normStep;NcvSize32u roi;NcvRect32u rect;Ncv32f scaleArea)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 189,
+      "identity": "nppiStTranspose_32u_C1R(Ncv32u * d_src;Ncv32u srcStride;Ncv32u * d_dst;Ncv32u dstStride;NcvSize32u srcRoi)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 190,
+      "identity": "nppiStTranspose_32s_C1R(Ncv32s * d_src;Ncv32u srcStride;Ncv32s * d_dst;Ncv32u dstStride;NcvSize32u srcRoi)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 191,
+      "identity": "nppiStTranspose_32f_C1R(Ncv32f * d_src;Ncv32u srcStride;Ncv32f * d_dst;Ncv32u dstStride;NcvSize32u srcRoi)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 192,
+      "identity": "nppiStTranspose_64u_C1R(Ncv64u * d_src;Ncv32u srcStride;Ncv64u * d_dst;Ncv32u dstStride;NcvSize32u srcRoi)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 193,
+      "identity": "nppiStTranspose_64s_C1R(Ncv64s * d_src;Ncv32u srcStride;Ncv64s * d_dst;Ncv32u dstStride;NcvSize32u srcRoi)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 194,
+      "identity": "nppiStTranspose_64f_C1R(Ncv64f * d_src;Ncv32u srcStride;Ncv64f * d_dst;Ncv32u dstStride;NcvSize32u srcRoi)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 195,
+      "identity": "nppiStTranspose_128_C1R(void * d_src;Ncv32u srcStep;void * d_dst;Ncv32u dstStep;NcvSize32u srcRoi)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 196,
+      "identity": "nppiStTranspose_32u_C1R_host(Ncv32u * h_src;Ncv32u srcStride;Ncv32u * h_dst;Ncv32u dstStride;NcvSize32u srcRoi)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 197,
+      "identity": "nppiStTranspose_32s_C1R_host(Ncv32s * h_src;Ncv32u srcStride;Ncv32s * h_dst;Ncv32u dstStride;NcvSize32u srcRoi)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 198,
+      "identity": "nppiStTranspose_32f_C1R_host(Ncv32f * h_src;Ncv32u srcStride;Ncv32f * h_dst;Ncv32u dstStride;NcvSize32u srcRoi)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 199,
+      "identity": "nppiStTranspose_64u_C1R_host(Ncv64u * h_src;Ncv32u srcStride;Ncv64u * h_dst;Ncv32u dstStride;NcvSize32u srcRoi)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 200,
+      "identity": "nppiStTranspose_64s_C1R_host(Ncv64s * h_src;Ncv32u srcStride;Ncv64s * h_dst;Ncv32u dstStride;NcvSize32u srcRoi)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 201,
+      "identity": "nppiStTranspose_64f_C1R_host(Ncv64f * h_src;Ncv32u srcStride;Ncv64f * h_dst;Ncv32u dstStride;NcvSize32u srcRoi)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 202,
+      "identity": "nppiStTranspose_128_C1R_host(void * d_src;Ncv32u srcStep;void * d_dst;Ncv32u dstStep;NcvSize32u srcRoi)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 203,
+      "identity": "nppiStIntegralGetSize_8u32u(NcvSize32u roiSize;Ncv32u * pBufsize;cudaDeviceProp & devProp)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 204,
+      "identity": "nppiStIntegralGetSize_32f32f(NcvSize32u roiSize;Ncv32u * pBufsize;cudaDeviceProp & devProp)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 205,
+      "identity": "nppiStIntegral_8u32u_C1R(Ncv8u * d_src;Ncv32u srcStep;Ncv32u * d_dst;Ncv32u dstStep;NcvSize32u roiSize;Ncv8u * pBuffer;Ncv32u bufSize;cudaDeviceProp & devProp)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 206,
+      "identity": "nppiStIntegral_32f32f_C1R(Ncv32f * d_src;Ncv32u srcStep;Ncv32f * d_dst;Ncv32u dstStep;NcvSize32u roiSize;Ncv8u * pBuffer;Ncv32u bufSize;cudaDeviceProp & devProp)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 207,
+      "identity": "nppiStIntegral_8u32u_C1R_host(Ncv8u * h_src;Ncv32u srcStep;Ncv32u * h_dst;Ncv32u dstStep;NcvSize32u roiSize)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 208,
+      "identity": "nppiStIntegral_32f32f_C1R_host(Ncv32f * h_src;Ncv32u srcStep;Ncv32f * h_dst;Ncv32u dstStep;NcvSize32u roiSize)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 209,
+      "identity": "nppiStSqrIntegralGetSize_8u64u(NcvSize32u roiSize;Ncv32u * pBufsize;cudaDeviceProp & devProp)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 210,
+      "identity": "nppiStSqrIntegral_8u64u_C1R(Ncv8u * d_src;Ncv32u srcStep;Ncv64u * d_dst;Ncv32u dstStep;NcvSize32u roiSize;Ncv8u * pBuffer;Ncv32u bufSize;cudaDeviceProp & devProp)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 211,
+      "identity": "nppiStSqrIntegral_8u64u_C1R_host(Ncv8u * h_src;Ncv32u srcStep;Ncv64u * h_dst;Ncv32u dstStep;NcvSize32u roiSize)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 212,
+      "identity": "nppsStCompactGetSize_32u(Ncv32u srcLen;Ncv32u * pBufsize;cudaDeviceProp & devProp)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 213,
+      "identity": "nppsStCompactGetSize_32s(Ncv32u srcLen;Ncv32u * pBufsize;cudaDeviceProp & devProp)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 214,
+      "identity": "nppsStCompactGetSize_32f(Ncv32u srcLen;Ncv32u * pBufsize;cudaDeviceProp & devProp)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 215,
+      "identity": "nppsStCompact_32u(Ncv32u * d_src;Ncv32u srcLen;Ncv32u * d_dst;Ncv32u * p_dstLen;Ncv32u elemRemove;Ncv8u * pBuffer;Ncv32u bufSize;cudaDeviceProp & devProp)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 216,
+      "identity": "nppsStCompact_32s(Ncv32s * d_src;Ncv32u srcLen;Ncv32s * d_dst;Ncv32u * p_dstLen;Ncv32s elemRemove;Ncv8u * pBuffer;Ncv32u bufSize;cudaDeviceProp & devProp)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 217,
+      "identity": "nppsStCompact_32f(Ncv32f * d_src;Ncv32u srcLen;Ncv32f * d_dst;Ncv32u * p_dstLen;Ncv32f elemRemove;Ncv8u * pBuffer;Ncv32u bufSize;cudaDeviceProp & devProp)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 218,
+      "identity": "nppsStCompact_32u_host(Ncv32u * h_src;Ncv32u srcLen;Ncv32u * h_dst;Ncv32u * dstLen;Ncv32u elemRemove)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 219,
+      "identity": "nppsStCompact_32s_host(Ncv32s * h_src;Ncv32u srcLen;Ncv32s * h_dst;Ncv32u * dstLen;Ncv32s elemRemove)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 220,
+      "identity": "nppsStCompact_32f_host(Ncv32f * h_src;Ncv32u srcLen;Ncv32f * h_dst;Ncv32u * dstLen;Ncv32f elemRemove)->NCVStatus",
+      "classification": "intentionally-omitted",
+      "reason": "The legacy CUDA public closure contains cv::cuda background-subtractor/pyramid declarations plus NCV/NPP staging structs and helpers, but the current package has no native CudaLegacy wrapper entrypoint or managed public owner. OpenCV disables cudalegacy unless HAVE_CUDA is enabled; CUDA runtime/toolkit, GpuMat/Stream ownership, device execution, and legacy NPP/NCV state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "HAVE_CUDA",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}

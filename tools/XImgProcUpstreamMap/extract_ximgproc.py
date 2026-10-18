@@ -65,7 +65,7 @@ def main():
     output = Path(args.output).resolve()
     parser_path = root / "modules/python/src2/hdr_parser.py"
     module = args.module
-    if module not in {"ximgproc", "optflow", "bgsegm", "face", "quality", "img_hash", "line_descriptor", "freetype", "alphamat", "intensity_transform", "plot", "bioinspired", "phase_unwrapping", "hfs", "fuzzy", "rapid", "shape", "structured_light", "saliency", "surface_matching", "reg", "xstereo", "xobjdetect", "superres", "dnn_superres", "wechat_qrcode", "cnn_3dobj", "signal", "dpm", "hdf", "text", "xfeatures2d", "dnn_objdetect", "ccalib", "julia", "rgbd", "cudaarithm", "cudabgsegm", "cudafilters", "cudaimgproc", "cudacodec", "cudawarping", "cudafeatures2d", "cudaobjdetect", "cudaoptflow", "cudastereo"}:
+    if module not in {"ximgproc", "optflow", "bgsegm", "face", "quality", "img_hash", "line_descriptor", "freetype", "alphamat", "intensity_transform", "plot", "bioinspired", "phase_unwrapping", "hfs", "fuzzy", "rapid", "shape", "structured_light", "saliency", "surface_matching", "reg", "xstereo", "xobjdetect", "superres", "dnn_superres", "wechat_qrcode", "cnn_3dobj", "signal", "dpm", "hdf", "text", "xfeatures2d", "dnn_objdetect", "ccalib", "julia", "rgbd", "cudaarithm", "cudabgsegm", "cudafilters", "cudaimgproc", "cudacodec", "cudawarping", "cudafeatures2d", "cudaobjdetect", "cudaoptflow", "cudastereo", "cudalegacy"}:
         raise RuntimeError("Unsupported contrib extraction module: " + module)
     contrib_include = root.parent.parent / f"opencv-source/opencv_contrib-5.0.0/modules/{module}/include/opencv2"
     contrib_root = contrib_include / module
@@ -88,6 +88,12 @@ def main():
         # The umbrella names five public component headers but has no parser
         # declarations itself.  Keep it and all component headers in scope.
         files = [umbrella] + module_headers
+    elif module == "cudalegacy":
+        # The compatibility umbrella uses CV_EXPORTS while the legacy CUDA
+        # staging headers expose additional public structs/enums.  Parse the
+        # complete pinned public closure in non-wrapper mode and de-duplicate
+        # the one destructor repeated by the umbrella/header pair below.
+        files = [umbrella] + module_headers
     else:
         files = module_headers if module_headers else [umbrella]
     spec = importlib.util.spec_from_file_location("opencv_hdr_parser", parser_path)
@@ -97,6 +103,7 @@ def main():
     parser_instance = hdr_module.CppHeaderParser(preprocessor_definitions=dict(definitions))
     declarations = []
     source_headers = []
+    seen_closure_identities = set()
     for file in files:
         if module == "dnn_objdetect":
             # hdr_parser cannot parse this header's anonymous typedef struct.
@@ -128,7 +135,7 @@ def main():
                 parser_file.write_text(normalized_text, encoding="utf-8", newline="\n")
                 parsed = parser_instance.parse(str(parser_file), wmode=False)
         else:
-            parsed = parser_instance.parse(str(file), wmode=(module != "superres"))
+            parsed = parser_instance.parse(str(file), wmode=(module not in {"superres", "cudalegacy"}))
             if module == "superres":
                 # superres headers expose CV_EXPORTS rather than CV_WRAP.  The
                 # non-wrapper parser mode therefore also emits the three
@@ -140,6 +147,15 @@ def main():
                     "cv.superres.SuperResolution.processImpl",
                 }
                 parsed = [value for value in parsed if value[0] not in protected]
+        if module == "cudalegacy":
+            unique = []
+            for value in parsed:
+                candidate = convert(value, 0, "")
+                if candidate["identity"] in seen_closure_identities:
+                    continue
+                seen_closure_identities.add(candidate["identity"])
+                unique.append(value)
+            parsed = unique
         source = rel(file, workspace)
         source_headers.append({"path": source, "sha256": sha256(file), "startOrdinal": len(declarations), "declarationCount": len(parsed)})
         declarations.extend(convert(value, ordinal, source) for ordinal, value in enumerate(parsed, start=len(declarations)))
@@ -147,7 +163,7 @@ def main():
     if len(identities) != len(set(identities)):
         duplicates = sorted(item for item in set(identities) if identities.count(item) > 1)
         raise RuntimeError(module + " parser closure contains duplicate identities: " + ", ".join(duplicates))
-    title = {"ximgproc": "XImgProc", "optflow": "OptFlow", "bgsegm": "BgSegm", "face": "Face", "quality": "Quality", "img_hash": "ImgHash", "line_descriptor": "LineDescriptor", "freetype": "Freetype", "alphamat": "AlphaMat", "intensity_transform": "IntensityTransform", "plot": "Plot", "bioinspired": "BioInspired", "phase_unwrapping": "PhaseUnwrapping", "hfs": "Hfs", "fuzzy": "Fuzzy", "rapid": "Rapid", "shape": "Shape", "structured_light": "StructuredLight", "saliency": "Saliency", "surface_matching": "SurfaceMatching", "reg": "Reg", "xstereo": "XStereo", "xobjdetect": "XObjDetect", "superres": "Superres", "dnn_superres": "DnnSuperres", "wechat_qrcode": "WechatQRCode", "cnn_3dobj": "Cnn3DObj", "signal": "Signal", "dpm": "Dpm", "hdf": "Hdf", "text": "Text", "xfeatures2d": "XFeatures2D", "dnn_objdetect": "DnnObjDetect", "ccalib": "Ccalib", "julia": "Julia", "rgbd": "Rgbd", "cudaarithm": "CudaArithm", "cudabgsegm": "CudaBgSegm", "cudafilters": "CudaFilters", "cudaimgproc": "CudaImgProc", "cudacodec": "CudaCodec", "cudawarping": "CudaWarping", "cudafeatures2d": "CudaFeatures2D", "cudaobjdetect": "CudaObjDetect", "cudaoptflow": "CudaOptFlow", "cudastereo": "CudaStereo"}[module]
+    title = {"ximgproc": "XImgProc", "optflow": "OptFlow", "bgsegm": "BgSegm", "face": "Face", "quality": "Quality", "img_hash": "ImgHash", "line_descriptor": "LineDescriptor", "freetype": "Freetype", "alphamat": "AlphaMat", "intensity_transform": "IntensityTransform", "plot": "Plot", "bioinspired": "BioInspired", "phase_unwrapping": "PhaseUnwrapping", "hfs": "Hfs", "fuzzy": "Fuzzy", "rapid": "Rapid", "shape": "Shape", "structured_light": "StructuredLight", "saliency": "Saliency", "surface_matching": "SurfaceMatching", "reg": "Reg", "xstereo": "XStereo", "xobjdetect": "XObjDetect", "superres": "Superres", "dnn_superres": "DnnSuperres", "wechat_qrcode": "WechatQRCode", "cnn_3dobj": "Cnn3DObj", "signal": "Signal", "dpm": "Dpm", "hdf": "Hdf", "text": "Text", "xfeatures2d": "XFeatures2D", "dnn_objdetect": "DnnObjDetect", "ccalib": "Ccalib", "julia": "Julia", "rgbd": "Rgbd", "cudaarithm": "CudaArithm", "cudabgsegm": "CudaBgSegm", "cudafilters": "CudaFilters", "cudaimgproc": "CudaImgProc", "cudacodec": "CudaCodec", "cudawarping": "CudaWarping", "cudafeatures2d": "CudaFeatures2D", "cudaobjdetect": "CudaObjDetect", "cudaoptflow": "CudaOptFlow", "cudastereo": "CudaStereo", "cudalegacy": "CudaLegacy"}[module]
     result = {"schemaVersion": 1, "generator": f"tools/{title}UpstreamMap/extract_{module}.py", "upstreamOpenCvVersion": "5.0.0", "headerPath": rel(umbrella, workspace), "headerSha256": sha256(umbrella), "parserPath": rel(parser_path, workspace), "parserSha256": sha256(parser_path), "preprocessorDefinitions": definitions, "sourceHeaders": source_headers, "declarationCount": len(declarations), "declarations": declarations}
     if module == "cudaarithm":
         build_contract = root.parent.parent / "opencv-source/opencv_contrib-5.0.0/modules/cudaarithm/CMakeLists.txt"
@@ -189,6 +205,10 @@ def main():
         build_contract = root.parent.parent / "opencv-source/opencv_contrib-5.0.0/modules/cudastereo/CMakeLists.txt"
         result["compatibilityHeaders"] = [{"path": rel(build_contract, workspace), "sha256": sha256(build_contract), "reason": "Upstream module activation, stereo/geometry dependency, optional cudev, and CUDA runtime dependency contract; parser declarations are not gated in the public header."}]
         result["moduleBuildCondition"] = "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)"
+    if module == "cudalegacy":
+        build_contract = root.parent.parent / "opencv-source/opencv_contrib-5.0.0/modules/cudalegacy/CMakeLists.txt"
+        result["compatibilityHeaders"] = [{"path": rel(build_contract, workspace), "sha256": sha256(build_contract), "reason": "Upstream legacy CUDA module activation, OpenCV dependency, and first-class CUDA runtime dependency contract; parser declarations are not gated in the public headers."}]
+        result["moduleBuildCondition"] = "HAVE_CUDA"
     if module == "dnn_objdetect":
         result["parserMode"] = "non-wrapper-public-declarations"
         result["parserNormalization"] = "temporary parser-only normalization: name anonymous typedef struct object; annotate six public data members as CV_PROP_RW; protected -> private to exclude non-public methods; upstream source/hash unchanged"

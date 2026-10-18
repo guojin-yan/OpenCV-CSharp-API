@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 62,
+  "moduleCount": 63,
   "maps": [
     {
       "id": "calib3d",
@@ -3952,6 +3952,94 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "270329519bbc9f109301db62a0dfdfb5b4cd620777b94a1588b3ae34475a387c",
         "familyInventorySha256": "09bb8cb7671f4bfff49e62944e92eaa8e031b543d752e92fbfd7863ce03e2708",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "cudalegacy",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/CudaLegacyUpstreamMap",
+      "extractorScript": "tools/CudaLegacyUpstreamMap/extract_cudalegacy.py",
+      "generationScript": "scripts/Generate-CudaLegacyUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-CudaLegacyUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/cudalegacy.hpp plus opencv2/cudalegacy/*.hpp parser-backed legacy CUDA public closure, including cv::cuda declarations and NCV/NPP staging metadata, plus the pinned module CMake build/dependency contract",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/cudalegacy/include/opencv2/cudalegacy.hpp",
+          "sha256": "c8e6499a7e63d130952bdef8195abeacfe8d7912d23de9d19a2280c31460d2d4"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudalegacy/include/opencv2/cudalegacy.hpp",
+            "sha256": "c8e6499a7e63d130952bdef8195abeacfe8d7912d23de9d19a2280c31460d2d4",
+            "startOrdinal": 0,
+            "declarationCount": 44
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudalegacy/include/opencv2/cudalegacy/NCV.hpp",
+            "sha256": "9ef6726de65c7a31dba72643d5d003819798b0403c138ea00fa56a7834ed1829",
+            "startOrdinal": 44,
+            "declarationCount": 71
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudalegacy/include/opencv2/cudalegacy/NCVBroxOpticalFlow.hpp",
+            "sha256": "1e3e1a4326e0658178c1693e303cb07251e75e0b02969bb826325e1d451b8c0c",
+            "startOrdinal": 115,
+            "declarationCount": 2
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudalegacy/include/opencv2/cudalegacy/NCVHaarObjectDetection.hpp",
+            "sha256": "084a9a672c9b695f027a72e8f7524d9cf0b70cf03505ddbf9b3b267762d37e7f",
+            "startOrdinal": 117,
+            "declarationCount": 43
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudalegacy/include/opencv2/cudalegacy/NCVPyramid.hpp",
+            "sha256": "f2425ef602b494ac2dc8b19d4f3b1957f68991bb48e5895a7ec3630ebde25cdc",
+            "startOrdinal": 160,
+            "declarationCount": 2
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudalegacy/include/opencv2/cudalegacy/NPP_staging.hpp",
+            "sha256": "35ae0b1dda11d553aed97014076f805d4f0173c7090388a177481f5724a6dc50",
+            "startOrdinal": 162,
+            "declarationCount": 59
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudalegacy/include/opencv2/cudalegacy/private.hpp",
+            "sha256": "fb9f4e8f5ea34a0d813abaeb7d745f1007b536013aab9e0af64b5ea76a26562a",
+            "startOrdinal": 221,
+            "declarationCount": 0
+          }
+        ],
+        "compatibilityHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudalegacy/CMakeLists.txt",
+            "sha256": "fd06474459601e77046c1949f39e5118b9bde08723edbf0fc9f40d0a2c494659",
+            "reason": "Upstream legacy CUDA module activation, OpenCV dependency, and first-class CUDA runtime dependency contract; parser declarations are not gated in the public headers."
+          }
+        ],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/cudalegacy-upstream-raw.json",
+        "classifications": "compatibility/cudalegacy-upstream-classifications.json",
+        "mapping": "compatibility/cudalegacy-upstream-map.txt",
+        "summary": "compatibility/cudalegacy-upstream-summary.json",
+        "familyInventory": "compatibility/cudalegacy-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 221,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "a63a1faebd85b919c4dce51941f13ea333a31019a23c418e876cc485feb90442",
+        "familyInventorySha256": "afac91592cb0cbe452d8715ef6f71c86d6b714748b4cbc98c85a9da82f28adfe",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false
