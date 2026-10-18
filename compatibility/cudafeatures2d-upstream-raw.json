@@ -1,0 +1,2002 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/CudaFeatures2DUpstreamMap/extract_cudafeatures2d.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+  "headerSha256": "1e00a3dd22bf1b03d714dd387fcb93fec0af4d148639cf8f0d871fadb55fd640",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "sha256": "1e00a3dd22bf1b03d714dd387fcb93fec0af4d148639cf8f0d871fadb55fd640",
+      "startOrdinal": 0,
+      "declarationCount": 64
+    }
+  ],
+  "declarationCount": 64,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "class",
+      "name": "cv.cuda.CornernessCriteria",
+      "identity": "class cv.cuda.CornernessCriteria",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Base class for Cornerness Criteria computation. :"
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.CornernessCriteria.compute",
+      "identity": "cv.cuda.CornernessCriteria.compute(Mat src;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes the cornerness criteria at each image pixel.\n\n    @param src Source image.\n    @param dst Destination image containing cornerness values. It will have the same size as src and\n    CV_32FC1 type.\n    @param stream Stream for the asynchronous version."
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createHarrisCorner",
+      "identity": "cv.cuda.createHarrisCorner(int srcType;int blockSize;int ksize;double k;int borderType=BORDER_REFLECT101)->Ptr<CornernessCriteria>",
+      "returnType": "Ptr<CornernessCriteria>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "srcType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "blockSize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "ksize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "k",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "borderType",
+          "default": "BORDER_REFLECT101",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates implementation for Harris cornerness criteria.\n\n@param srcType Input source type. Only CV_8UC1 and CV_32FC1 are supported for now.\n@param blockSize Neighborhood size.\n@param ksize Aperture parameter for the Sobel operator.\n@param k Harris detector free parameter.\n@param borderType Pixel extrapolation method. Only BORDER_REFLECT101 and BORDER_REPLICATE are\nsupported for now.\n\n@sa cornerHarris"
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createMinEigenValCorner",
+      "identity": "cv.cuda.createMinEigenValCorner(int srcType;int blockSize;int ksize;int borderType=BORDER_REFLECT101)->Ptr<CornernessCriteria>",
+      "returnType": "Ptr<CornernessCriteria>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "srcType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "blockSize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "ksize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "borderType",
+          "default": "BORDER_REFLECT101",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates implementation for the minimum eigen value of a 2x2 derivative covariation matrix (the\ncornerness criteria).\n\n@param srcType Input source type. Only CV_8UC1 and CV_32FC1 are supported for now.\n@param blockSize Neighborhood size.\n@param ksize Aperture parameter for the Sobel operator.\n@param borderType Pixel extrapolation method. Only BORDER_REFLECT101 and BORDER_REPLICATE are\nsupported for now.\n\n@sa cornerMinEigenVal"
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "class",
+      "name": "cv.cuda.CornersDetector",
+      "identity": "class cv.cuda.CornersDetector",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Base class for Corners Detector. :"
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.CornersDetector.detect",
+      "identity": "cv.cuda.CornersDetector.detect(Mat image;Mat corners[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "corners",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Determines strong corners on an image.\n\n    @param image Input 8-bit or floating-point 32-bit, single-channel image.\n    @param corners Output vector of detected corners (1-row matrix with CV_32FC2 type with corners\n    positions).\n    @param mask Optional region of interest. If the image is not empty (it needs to have the type\n    CV_8UC1 and the same size as image ), it specifies the region in which the corners are detected.\n    @param stream Stream for the asynchronous version."
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.CornersDetector.setMaxCorners",
+      "identity": "cv.cuda.CornersDetector.setMaxCorners(int maxCorners)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "maxCorners",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.CornersDetector.setMinDistance",
+      "identity": "cv.cuda.CornersDetector.setMinDistance(double minDistance)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "minDistance",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.createGoodFeaturesToTrackDetector",
+      "identity": "cv.cuda.createGoodFeaturesToTrackDetector(int srcType;int maxCorners=1000;double qualityLevel=0.01;double minDistance=0.0;int blockSize=3;bool useHarrisDetector=false;double harrisK=0.04)->Ptr<CornersDetector>",
+      "returnType": "Ptr<CornersDetector>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "srcType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "maxCorners",
+          "default": "1000",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "qualityLevel",
+          "default": "0.01",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "minDistance",
+          "default": "0.0",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "blockSize",
+          "default": "3",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "useHarrisDetector",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "harrisK",
+          "default": "0.04",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates implementation for cuda::CornersDetector .\n\n@param srcType Input source type. Only CV_8UC1 and CV_32FC1 are supported for now.\n@param maxCorners Maximum number of corners to return. If there are more corners than are found,\nthe strongest of them is returned.\n@param qualityLevel Parameter characterizing the minimal accepted quality of image corners. The\nparameter value is multiplied by the best corner quality measure, which is the minimal eigenvalue\n(see cornerMinEigenVal ) or the Harris function response (see cornerHarris ). The corners with the\nquality measure less than the product are rejected. For example, if the best corner has the\nquality measure = 1500, and the qualityLevel=0.01 , then all the corners with the quality measure\nless than 15 are rejected.\n@param minDistance Minimum possible Euclidean distance between the returned corners.\n@param blockSize Size of an average block for computing a derivative covariation matrix over each\npixel neighborhood. See cornerEigenValsAndVecs .\n@param useHarrisDetector Parameter indicating whether to use a Harris detector (see cornerHarris)\nor cornerMinEigenVal.\n@param harrisK Free parameter of the Harris detector."
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "class",
+      "name": "cv.cuda.DescriptorMatcher",
+      "identity": "class cv.cuda.DescriptorMatcher",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Abstract base class for matching keypoint descriptors.\n\nIt has two groups of match methods: for matching descriptors of an image with another image or with\nan image set."
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DescriptorMatcher.createBFMatcher",
+      "identity": "cv.cuda.DescriptorMatcher.createBFMatcher(int normType=cv::NORM_L2)->Ptr<cuda::DescriptorMatcher>",
+      "returnType": "Ptr<cuda::DescriptorMatcher>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "normType",
+          "default": "cv::NORM_L2",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Brute-force descriptor matcher.\n\n    For each descriptor in the first set, this matcher finds the closest descriptor in the second set\n    by trying each one. This descriptor matcher supports masking permissible matches of descriptor\n    sets.\n\n    @param normType One of NORM_L1, NORM_L2, NORM_HAMMING. L1 and L2 norms are\n    preferable choices for SIFT and SURF descriptors, NORM_HAMMING should be used with ORB, BRISK and\n    BRIEF)."
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DescriptorMatcher.isMaskSupported",
+      "identity": "cv.cuda.DescriptorMatcher.isMaskSupported()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns true if the descriptor matcher supports masking permissible matches."
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DescriptorMatcher.add",
+      "identity": "cv.cuda.DescriptorMatcher.add(vector_GpuMat descriptors[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_GpuMat",
+          "name": "descriptors",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Adds descriptors to train a descriptor collection.\n\n    If the collection is not empty, the new descriptors are added to existing train descriptors.\n\n    @param descriptors Descriptors to add. Each descriptors[i] is a set of descriptors from the same\n    train image."
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DescriptorMatcher.getTrainDescriptors",
+      "identity": "cv.cuda.DescriptorMatcher.getTrainDescriptors()->std::vector<GpuMat>",
+      "returnType": "std::vector<GpuMat>",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns a constant link to the train descriptor collection."
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DescriptorMatcher.clear",
+      "identity": "cv.cuda.DescriptorMatcher.clear()->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Clears the train descriptor collection."
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DescriptorMatcher.empty",
+      "identity": "cv.cuda.DescriptorMatcher.empty()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns true if there are no train descriptors in the collection."
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DescriptorMatcher.train",
+      "identity": "cv.cuda.DescriptorMatcher.train()->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Trains a descriptor matcher.\n\n    Trains a descriptor matcher (for example, the flann index). In all methods to match, the method\n    train() is run every time before matching."
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DescriptorMatcher.match",
+      "identity": "cv.cuda.DescriptorMatcher.match(Mat queryDescriptors;Mat trainDescriptors;vector_DMatch matches[/O,/Ref];Mat mask=Mat())->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "queryDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "trainDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_DMatch",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Finds the best match for each descriptor from a query set (blocking version).\n\n    @param queryDescriptors Query set of descriptors.\n    @param trainDescriptors Train set of descriptors. This set is not added to the train descriptors\n    collection stored in the class object.\n    @param matches Matches. If a query descriptor is masked out in mask , no match is added for this\n    descriptor. So, matches size may be smaller than the query descriptors count.\n    @param mask Mask specifying permissible matches between an input query and train matrices of\n    descriptors.\n\n    In the first variant of this method, the train descriptors are passed as an input argument. In the\n    second variant of the method, train descriptors collection that was set by DescriptorMatcher::add is\n    used. Optional mask (or masks) can be passed to specify which query and training descriptors can be\n    matched. Namely, queryDescriptors[i] can be matched with trainDescriptors[j] only if\n    mask.at\\<uchar\\>(i,j) is non-zero."
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DescriptorMatcher.match",
+      "identity": "cv.cuda.DescriptorMatcher.match(Mat queryDescriptors;vector_DMatch matches[/O,/Ref];vector_GpuMat masks=std::vector<GpuMat>()[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "queryDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_DMatch",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_GpuMat",
+          "name": "masks",
+          "default": "std::vector<GpuMat>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DescriptorMatcher.matchAsync",
+      "identity": "cv.cuda.DescriptorMatcher.matchAsync(Mat queryDescriptors;Mat trainDescriptors;Mat matches[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "queryDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "trainDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Finds the best match for each descriptor from a query set (asynchronous version).\n\n    @param queryDescriptors Query set of descriptors.\n    @param trainDescriptors Train set of descriptors. This set is not added to the train descriptors\n    collection stored in the class object.\n    @param matches Matches array stored in GPU memory. Internal representation is not defined.\n    Use DescriptorMatcher::matchConvert method to retrieve results in standard representation.\n    @param mask Mask specifying permissible matches between an input query and train matrices of\n    descriptors.\n    @param stream CUDA stream.\n\n    In the first variant of this method, the train descriptors are passed as an input argument. In the\n    second variant of the method, train descriptors collection that was set by DescriptorMatcher::add is\n    used. Optional mask (or masks) can be passed to specify which query and training descriptors can be\n    matched. Namely, queryDescriptors[i] can be matched with trainDescriptors[j] only if\n    mask.at\\<uchar\\>(i,j) is non-zero."
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DescriptorMatcher.matchAsync",
+      "identity": "cv.cuda.DescriptorMatcher.matchAsync(Mat queryDescriptors;Mat matches[/O];vector_GpuMat masks=std::vector<GpuMat>()[/C,/Ref];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "queryDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "vector_GpuMat",
+          "name": "masks",
+          "default": "std::vector<GpuMat>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DescriptorMatcher.matchConvert",
+      "identity": "cv.cuda.DescriptorMatcher.matchConvert(Mat gpu_matches;vector_DMatch matches[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "gpu_matches",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_DMatch",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Converts matches array from internal representation to standard matches vector.\n\n    The method is supposed to be used with DescriptorMatcher::matchAsync to get final result.\n    Call this method only after DescriptorMatcher::matchAsync is completed (ie. after synchronization).\n\n    @param gpu_matches Matches, returned from DescriptorMatcher::matchAsync.\n    @param matches Vector of DMatch objects."
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DescriptorMatcher.knnMatch",
+      "identity": "cv.cuda.DescriptorMatcher.knnMatch(Mat queryDescriptors;Mat trainDescriptors;vector_vector_DMatch matches[/O,/Ref];int k;Mat mask=Mat();bool compactResult=false)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "queryDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "trainDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_vector_DMatch",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "k",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "compactResult",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Finds the k best matches for each descriptor from a query set (blocking version).\n\n    @param queryDescriptors Query set of descriptors.\n    @param trainDescriptors Train set of descriptors. This set is not added to the train descriptors\n    collection stored in the class object.\n    @param matches Matches. Each matches[i] is k or less matches for the same query descriptor.\n    @param k Count of best matches found per each query descriptor or less if a query descriptor has\n    less than k possible matches in total.\n    @param mask Mask specifying permissible matches between an input query and train matrices of\n    descriptors.\n    @param compactResult Parameter used when the mask (or masks) is not empty. If compactResult is\n    false, the matches vector has the same size as queryDescriptors rows. If compactResult is true,\n    the matches vector does not contain matches for fully masked-out query descriptors.\n\n    These extended variants of DescriptorMatcher::match methods find several best matches for each query\n    descriptor. The matches are returned in the distance increasing order. See DescriptorMatcher::match\n    for the details about query and train descriptors."
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DescriptorMatcher.knnMatch",
+      "identity": "cv.cuda.DescriptorMatcher.knnMatch(Mat queryDescriptors;vector_vector_DMatch matches[/O,/Ref];int k;vector_GpuMat masks=std::vector<GpuMat>()[/C,/Ref];bool compactResult=false)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "queryDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_vector_DMatch",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "k",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_GpuMat",
+          "name": "masks",
+          "default": "std::vector<GpuMat>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "compactResult",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DescriptorMatcher.knnMatchAsync",
+      "identity": "cv.cuda.DescriptorMatcher.knnMatchAsync(Mat queryDescriptors;Mat trainDescriptors;Mat matches[/O];int k;Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "queryDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "trainDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "k",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Finds the k best matches for each descriptor from a query set (asynchronous version).\n\n    @param queryDescriptors Query set of descriptors.\n    @param trainDescriptors Train set of descriptors. This set is not added to the train descriptors\n    collection stored in the class object.\n    @param matches Matches array stored in GPU memory. Internal representation is not defined.\n    Use DescriptorMatcher::knnMatchConvert method to retrieve results in standard representation.\n    @param k Count of best matches found per each query descriptor or less if a query descriptor has\n    less than k possible matches in total.\n    @param mask Mask specifying permissible matches between an input query and train matrices of\n    descriptors.\n    @param stream CUDA stream.\n\n    These extended variants of DescriptorMatcher::matchAsync methods find several best matches for each query\n    descriptor. The matches are returned in the distance increasing order. See DescriptorMatcher::matchAsync\n    for the details about query and train descriptors."
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DescriptorMatcher.knnMatchAsync",
+      "identity": "cv.cuda.DescriptorMatcher.knnMatchAsync(Mat queryDescriptors;Mat matches[/O];int k;vector_GpuMat masks=std::vector<GpuMat>()[/C,/Ref];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "queryDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "k",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_GpuMat",
+          "name": "masks",
+          "default": "std::vector<GpuMat>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DescriptorMatcher.knnMatchConvert",
+      "identity": "cv.cuda.DescriptorMatcher.knnMatchConvert(Mat gpu_matches;vector_vector_DMatch matches[/O,/Ref];bool compactResult=false)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "gpu_matches",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_vector_DMatch",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "compactResult",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Converts matches array from internal representation to standard matches vector.\n\n    The method is supposed to be used with DescriptorMatcher::knnMatchAsync to get final result.\n    Call this method only after DescriptorMatcher::knnMatchAsync is completed (ie. after synchronization).\n\n    @param gpu_matches Matches, returned from DescriptorMatcher::knnMatchAsync.\n    @param matches Vector of DMatch objects.\n    @param compactResult Parameter used when the mask (or masks) is not empty. If compactResult is\n    false, the matches vector has the same size as queryDescriptors rows. If compactResult is true,\n    the matches vector does not contain matches for fully masked-out query descriptors."
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DescriptorMatcher.radiusMatch",
+      "identity": "cv.cuda.DescriptorMatcher.radiusMatch(Mat queryDescriptors;Mat trainDescriptors;vector_vector_DMatch matches[/O,/Ref];float maxDistance;Mat mask=Mat();bool compactResult=false)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "queryDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "trainDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_vector_DMatch",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "maxDistance",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "compactResult",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief For each query descriptor, finds the training descriptors not farther than the specified distance (blocking version).\n\n    @param queryDescriptors Query set of descriptors.\n    @param trainDescriptors Train set of descriptors. This set is not added to the train descriptors\n    collection stored in the class object.\n    @param matches Found matches.\n    @param maxDistance Threshold for the distance between matched descriptors. Distance means here\n    metric distance (e.g. Hamming distance), not the distance between coordinates (which is measured\n    in Pixels)!\n    @param mask Mask specifying permissible matches between an input query and train matrices of\n    descriptors.\n    @param compactResult Parameter used when the mask (or masks) is not empty. If compactResult is\n    false, the matches vector has the same size as queryDescriptors rows. If compactResult is true,\n    the matches vector does not contain matches for fully masked-out query descriptors.\n\n    For each query descriptor, the methods find such training descriptors that the distance between the\n    query descriptor and the training descriptor is equal or smaller than maxDistance. Found matches are\n    returned in the distance increasing order."
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DescriptorMatcher.radiusMatch",
+      "identity": "cv.cuda.DescriptorMatcher.radiusMatch(Mat queryDescriptors;vector_vector_DMatch matches[/O,/Ref];float maxDistance;vector_GpuMat masks=std::vector<GpuMat>()[/C,/Ref];bool compactResult=false)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "queryDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_vector_DMatch",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "maxDistance",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_GpuMat",
+          "name": "masks",
+          "default": "std::vector<GpuMat>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "compactResult",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DescriptorMatcher.radiusMatchAsync",
+      "identity": "cv.cuda.DescriptorMatcher.radiusMatchAsync(Mat queryDescriptors;Mat trainDescriptors;Mat matches[/O];float maxDistance;Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "queryDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "trainDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "maxDistance",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief For each query descriptor, finds the training descriptors not farther than the specified distance (asynchronous version).\n\n    @param queryDescriptors Query set of descriptors.\n    @param trainDescriptors Train set of descriptors. This set is not added to the train descriptors\n    collection stored in the class object.\n    @param matches Matches array stored in GPU memory. Internal representation is not defined.\n    Use DescriptorMatcher::radiusMatchConvert method to retrieve results in standard representation.\n    @param maxDistance Threshold for the distance between matched descriptors. Distance means here\n    metric distance (e.g. Hamming distance), not the distance between coordinates (which is measured\n    in Pixels)!\n    @param mask Mask specifying permissible matches between an input query and train matrices of\n    descriptors.\n    @param stream CUDA stream.\n\n    For each query descriptor, the methods find such training descriptors that the distance between the\n    query descriptor and the training descriptor is equal or smaller than maxDistance. Found matches are\n    returned in the distance increasing order."
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DescriptorMatcher.radiusMatchAsync",
+      "identity": "cv.cuda.DescriptorMatcher.radiusMatchAsync(Mat queryDescriptors;Mat matches[/O];float maxDistance;vector_GpuMat masks=std::vector<GpuMat>()[/C,/Ref];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "queryDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "maxDistance",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_GpuMat",
+          "name": "masks",
+          "default": "std::vector<GpuMat>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.DescriptorMatcher.radiusMatchConvert",
+      "identity": "cv.cuda.DescriptorMatcher.radiusMatchConvert(Mat gpu_matches;vector_vector_DMatch matches[/O,/Ref];bool compactResult=false)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "gpu_matches",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_vector_DMatch",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "compactResult",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Converts matches array from internal representation to standard matches vector.\n\n    The method is supposed to be used with DescriptorMatcher::radiusMatchAsync to get final result.\n    Call this method only after DescriptorMatcher::radiusMatchAsync is completed (ie. after synchronization).\n\n    @param gpu_matches Matches, returned from DescriptorMatcher::radiusMatchAsync.\n    @param matches Vector of DMatch objects.\n    @param compactResult Parameter used when the mask (or masks) is not empty. If compactResult is\n    false, the matches vector has the same size as queryDescriptors rows. If compactResult is true,\n    the matches vector does not contain matches for fully masked-out query descriptors."
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "class",
+      "name": "cv.cuda.Feature2DAsync",
+      "identity": "class cv.cuda.Feature2DAsync",
+      "returnType": ": cv::Feature2D",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Feature2D",
+      "documentation": "@brief Abstract base class for CUDA asynchronous 2D image feature detectors and descriptor extractors."
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.Feature2DAsync.detectAsync",
+      "identity": "cv.cuda.Feature2DAsync.detectAsync(Mat image;Mat keypoints[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "keypoints",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Detects keypoints in an image.\n\n    @param image Image.\n    @param keypoints The detected keypoints.\n    @param mask Mask specifying where to look for keypoints (optional). It must be a 8-bit integer\n    matrix with non-zero values in the region of interest.\n    @param stream CUDA stream."
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.Feature2DAsync.computeAsync",
+      "identity": "cv.cuda.Feature2DAsync.computeAsync(Mat image;Mat keypoints[/O];Mat descriptors[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "keypoints",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "descriptors",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes the descriptors for a set of keypoints detected in an image.\n\n    @param image Image.\n    @param keypoints Input collection of keypoints.\n    @param descriptors Computed descriptors. Row j is the descriptor for j-th keypoint.\n    @param stream CUDA stream."
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.Feature2DAsync.detectAndComputeAsync",
+      "identity": "cv.cuda.Feature2DAsync.detectAndComputeAsync(Mat image;Mat mask;Mat keypoints[/O];Mat descriptors[/O];bool useProvidedKeypoints=false;Stream stream=Stream::Null()[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "keypoints",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "descriptors",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "useProvidedKeypoints",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "Stream",
+          "name": "stream",
+          "default": "Stream::Null()",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Detects keypoints and computes the descriptors."
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.Feature2DAsync.convert",
+      "identity": "cv.cuda.Feature2DAsync.convert(Mat gpu_keypoints;vector_KeyPoint keypoints[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "gpu_keypoints",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_KeyPoint",
+          "name": "keypoints",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Converts keypoints array from internal representation to standard vector."
+    },
+    {
+      "ordinal": 37,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "class",
+      "name": "cv.cuda.FastFeatureDetector",
+      "identity": "class cv.cuda.FastFeatureDetector",
+      "returnType": ": cv::cuda::Feature2DAsync",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::cuda::Feature2DAsync",
+      "documentation": "@brief Wrapping class for feature detection using the FAST method."
+    },
+    {
+      "ordinal": 38,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.FastFeatureDetector.create",
+      "identity": "cv.cuda.FastFeatureDetector.create(int threshold=10;bool nonmaxSuppression=true;int type=cv::FastFeatureDetector::TYPE_9_16;int max_npoints=5000)->Ptr<cuda::FastFeatureDetector>",
+      "returnType": "Ptr<cuda::FastFeatureDetector>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "threshold",
+          "default": "10",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "nonmaxSuppression",
+          "default": "true",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "type",
+          "default": "cv::FastFeatureDetector::TYPE_9_16",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "max_npoints",
+          "default": "5000",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 39,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.FastFeatureDetector.setThreshold",
+      "identity": "cv.cuda.FastFeatureDetector.setThreshold(int threshold)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "threshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 40,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.FastFeatureDetector.setMaxNumPoints",
+      "identity": "cv.cuda.FastFeatureDetector.setMaxNumPoints(int max_npoints)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "max_npoints",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 41,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.FastFeatureDetector.getMaxNumPoints",
+      "identity": "cv.cuda.FastFeatureDetector.getMaxNumPoints()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 42,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "class",
+      "name": "cv.cuda.ORB",
+      "identity": "class cv.cuda.ORB",
+      "returnType": ": cv::cuda::Feature2DAsync",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::cuda::Feature2DAsync",
+      "documentation": "@brief Class implementing the ORB (*oriented BRIEF*) keypoint detector and descriptor extractor\n *\n * @sa cv::ORB"
+    },
+    {
+      "ordinal": 43,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.ORB.create",
+      "identity": "cv.cuda.ORB.create(int nfeatures=500;float scaleFactor=1.2f;int nlevels=8;int edgeThreshold=31;int firstLevel=0;int WTA_K=2;int scoreType=cv::ORB::HARRIS_SCORE;int patchSize=31;int fastThreshold=20;bool blurForDescriptor=false)->Ptr<cuda::ORB>",
+      "returnType": "Ptr<cuda::ORB>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nfeatures",
+          "default": "500",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "scaleFactor",
+          "default": "1.2f",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "nlevels",
+          "default": "8",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "edgeThreshold",
+          "default": "31",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "firstLevel",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "WTA_K",
+          "default": "2",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "scoreType",
+          "default": "cv::ORB::HARRIS_SCORE",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "patchSize",
+          "default": "31",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "fastThreshold",
+          "default": "20",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "blurForDescriptor",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 44,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.ORB.setMaxFeatures",
+      "identity": "cv.cuda.ORB.setMaxFeatures(int maxFeatures)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "maxFeatures",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 45,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.ORB.getMaxFeatures",
+      "identity": "cv.cuda.ORB.getMaxFeatures()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 46,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.ORB.setScaleFactor",
+      "identity": "cv.cuda.ORB.setScaleFactor(double scaleFactor)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "scaleFactor",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 47,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.ORB.getScaleFactor",
+      "identity": "cv.cuda.ORB.getScaleFactor()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 48,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.ORB.setNLevels",
+      "identity": "cv.cuda.ORB.setNLevels(int nlevels)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nlevels",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 49,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.ORB.getNLevels",
+      "identity": "cv.cuda.ORB.getNLevels()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 50,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.ORB.setEdgeThreshold",
+      "identity": "cv.cuda.ORB.setEdgeThreshold(int edgeThreshold)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "edgeThreshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 51,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.ORB.getEdgeThreshold",
+      "identity": "cv.cuda.ORB.getEdgeThreshold()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 52,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.ORB.setFirstLevel",
+      "identity": "cv.cuda.ORB.setFirstLevel(int firstLevel)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "firstLevel",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 53,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.ORB.getFirstLevel",
+      "identity": "cv.cuda.ORB.getFirstLevel()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 54,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.ORB.setWTA_K",
+      "identity": "cv.cuda.ORB.setWTA_K(int wta_k)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "wta_k",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 55,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.ORB.getWTA_K",
+      "identity": "cv.cuda.ORB.getWTA_K()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 56,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.ORB.setScoreType",
+      "identity": "cv.cuda.ORB.setScoreType(int scoreType)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "scoreType",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 57,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.ORB.getScoreType",
+      "identity": "cv.cuda.ORB.getScoreType()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 58,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.ORB.setPatchSize",
+      "identity": "cv.cuda.ORB.setPatchSize(int patchSize)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "patchSize",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 59,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.ORB.getPatchSize",
+      "identity": "cv.cuda.ORB.getPatchSize()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 60,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.ORB.setFastThreshold",
+      "identity": "cv.cuda.ORB.setFastThreshold(int fastThreshold)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "fastThreshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 61,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.ORB.getFastThreshold",
+      "identity": "cv.cuda.ORB.getFastThreshold()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 62,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.ORB.setBlurForDescriptor",
+      "identity": "cv.cuda.ORB.setBlurForDescriptor(bool blurForDescriptor)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "blurForDescriptor",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 63,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+      "kind": "callable",
+      "name": "cv.cuda.ORB.getBlurForDescriptor",
+      "identity": "cv.cuda.ORB.getBlurForDescriptor()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    }
+  ],
+  "compatibilityHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/CMakeLists.txt",
+      "sha256": "9a85df97da9b13d5786766557c7c0ae2c11279a223dbcc9adbb30aa209614650",
+      "reason": "Upstream module activation and CUDA feature-detection dependency contract; parser declarations are not gated in the public header."
+    }
+  ],
+  "moduleBuildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)"
+}

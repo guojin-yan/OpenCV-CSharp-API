@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 58,
+  "moduleCount": 59,
   "maps": [
     {
       "id": "calib3d",
@@ -3744,6 +3744,58 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "135ba3ce8b955e15c74f0cd2ae57b66cd64e801efc0e8df244765e50feab07c1",
         "familyInventorySha256": "e641fd45b6111a67616b50efcaffabde2fcd2397f80157f935759c675d2663a3",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "cudafeatures2d",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/CudaFeatures2DUpstreamMap",
+      "extractorScript": "tools/CudaFeatures2DUpstreamMap/extract_cudafeatures2d.py",
+      "generationScript": "scripts/Generate-CudaFeatures2DUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-CudaFeatures2DUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/cudafeatures2d.hpp parser-backed CUDA feature-detection and description public declarations plus the pinned module CMake build/dependency contract",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+          "sha256": "1e00a3dd22bf1b03d714dd387fcb93fec0af4d148639cf8f0d871fadb55fd640"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+            "sha256": "1e00a3dd22bf1b03d714dd387fcb93fec0af4d148639cf8f0d871fadb55fd640",
+            "startOrdinal": 0,
+            "declarationCount": 64
+          }
+        ],
+        "compatibilityHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudafeatures2d/CMakeLists.txt",
+            "sha256": "9a85df97da9b13d5786766557c7c0ae2c11279a223dbcc9adbb30aa209614650",
+            "reason": "Upstream module activation and CUDA feature-detection dependency contract; parser declarations are not gated in the public header."
+          }
+        ],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/cudafeatures2d-upstream-raw.json",
+        "classifications": "compatibility/cudafeatures2d-upstream-classifications.json",
+        "mapping": "compatibility/cudafeatures2d-upstream-map.txt",
+        "summary": "compatibility/cudafeatures2d-upstream-summary.json",
+        "familyInventory": "compatibility/cudafeatures2d-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 64,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "73b6f1fb4e81b4803dd458062f4b1a0853a3f035c277bdf5fe765517f5958b18",
+        "familyInventorySha256": "b9e9b4ca1b86b30f83ed03102813a5989915f78841135a1c1be7f3ce22b812dd",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

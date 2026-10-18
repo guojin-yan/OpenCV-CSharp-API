@@ -1,0 +1,589 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/cudafeatures2d.hpp parser-backed CUDA feature-detection and description public declarations plus the pinned module CMake build/dependency contract",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact CudaFeatures2D wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [
+    "The cudafeatures2d module is disabled unless the OpenCV build enables CUDA or CUDA stubs and is unavailable on iOS/WinRT; real feature detection, description, and matching depend on an external CUDA toolkit/runtime.",
+    "The module requires opencv_features, opencv_cudafilters, and opencv_cudawarping plus GpuMat/Stream data, asynchronous execution policy, keypoint/descriptor transport, and matcher state outside this package; no CUDA features2d wrapper/runtime is bundled."
+  ],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.cuda.CornernessCriteria",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.cuda.CornernessCriteria.compute(Mat src;Mat dst[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.cuda.createHarrisCorner(int srcType;int blockSize;int ksize;double k;int borderType=BORDER_REFLECT101)->Ptr<CornernessCriteria>",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.cuda.createMinEigenValCorner(int srcType;int blockSize;int ksize;int borderType=BORDER_REFLECT101)->Ptr<CornernessCriteria>",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "class cv.cuda.CornersDetector",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.cuda.CornersDetector.detect(Mat image;Mat corners[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.cuda.CornersDetector.setMaxCorners(int maxCorners)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.cuda.CornersDetector.setMinDistance(double minDistance)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.cuda.createGoodFeaturesToTrackDetector(int srcType;int maxCorners=1000;double qualityLevel=0.01;double minDistance=0.0;int blockSize=3;bool useHarrisDetector=false;double harrisK=0.04)->Ptr<CornersDetector>",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 9,
+      "identity": "class cv.cuda.DescriptorMatcher",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.cuda.DescriptorMatcher.createBFMatcher(int normType=cv::NORM_L2)->Ptr<cuda::DescriptorMatcher>",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.cuda.DescriptorMatcher.isMaskSupported()->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.cuda.DescriptorMatcher.add(vector_GpuMat descriptors[/C,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.cuda.DescriptorMatcher.getTrainDescriptors()->std::vector<GpuMat>",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.cuda.DescriptorMatcher.clear()->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.cuda.DescriptorMatcher.empty()->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.cuda.DescriptorMatcher.train()->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.cuda.DescriptorMatcher.match(Mat queryDescriptors;Mat trainDescriptors;vector_DMatch matches[/O,/Ref];Mat mask=Mat())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.cuda.DescriptorMatcher.match(Mat queryDescriptors;vector_DMatch matches[/O,/Ref];vector_GpuMat masks=std::vector<GpuMat>()[/C,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.cuda.DescriptorMatcher.matchAsync(Mat queryDescriptors;Mat trainDescriptors;Mat matches[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.cuda.DescriptorMatcher.matchAsync(Mat queryDescriptors;Mat matches[/O];vector_GpuMat masks=std::vector<GpuMat>()[/C,/Ref];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.cuda.DescriptorMatcher.matchConvert(Mat gpu_matches;vector_DMatch matches[/O,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.cuda.DescriptorMatcher.knnMatch(Mat queryDescriptors;Mat trainDescriptors;vector_vector_DMatch matches[/O,/Ref];int k;Mat mask=Mat();bool compactResult=false)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.cuda.DescriptorMatcher.knnMatch(Mat queryDescriptors;vector_vector_DMatch matches[/O,/Ref];int k;vector_GpuMat masks=std::vector<GpuMat>()[/C,/Ref];bool compactResult=false)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.cuda.DescriptorMatcher.knnMatchAsync(Mat queryDescriptors;Mat trainDescriptors;Mat matches[/O];int k;Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.cuda.DescriptorMatcher.knnMatchAsync(Mat queryDescriptors;Mat matches[/O];int k;vector_GpuMat masks=std::vector<GpuMat>()[/C,/Ref];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.cuda.DescriptorMatcher.knnMatchConvert(Mat gpu_matches;vector_vector_DMatch matches[/O,/Ref];bool compactResult=false)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.cuda.DescriptorMatcher.radiusMatch(Mat queryDescriptors;Mat trainDescriptors;vector_vector_DMatch matches[/O,/Ref];float maxDistance;Mat mask=Mat();bool compactResult=false)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.cuda.DescriptorMatcher.radiusMatch(Mat queryDescriptors;vector_vector_DMatch matches[/O,/Ref];float maxDistance;vector_GpuMat masks=std::vector<GpuMat>()[/C,/Ref];bool compactResult=false)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.cuda.DescriptorMatcher.radiusMatchAsync(Mat queryDescriptors;Mat trainDescriptors;Mat matches[/O];float maxDistance;Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.cuda.DescriptorMatcher.radiusMatchAsync(Mat queryDescriptors;Mat matches[/O];float maxDistance;vector_GpuMat masks=std::vector<GpuMat>()[/C,/Ref];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.cuda.DescriptorMatcher.radiusMatchConvert(Mat gpu_matches;vector_vector_DMatch matches[/O,/Ref];bool compactResult=false)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 32,
+      "identity": "class cv.cuda.Feature2DAsync",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.cuda.Feature2DAsync.detectAsync(Mat image;Mat keypoints[/O];Mat mask=Mat();Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.cuda.Feature2DAsync.computeAsync(Mat image;Mat keypoints[/O];Mat descriptors[/O];Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.cuda.Feature2DAsync.detectAndComputeAsync(Mat image;Mat mask;Mat keypoints[/O];Mat descriptors[/O];bool useProvidedKeypoints=false;Stream stream=Stream::Null()[/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.cuda.Feature2DAsync.convert(Mat gpu_keypoints;vector_KeyPoint keypoints[/O,/Ref])->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 37,
+      "identity": "class cv.cuda.FastFeatureDetector",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.cuda.FastFeatureDetector.create(int threshold=10;bool nonmaxSuppression=true;int type=cv::FastFeatureDetector::TYPE_9_16;int max_npoints=5000)->Ptr<cuda::FastFeatureDetector>",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.cuda.FastFeatureDetector.setThreshold(int threshold)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.cuda.FastFeatureDetector.setMaxNumPoints(int max_npoints)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.cuda.FastFeatureDetector.getMaxNumPoints()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 42,
+      "identity": "class cv.cuda.ORB",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.cuda.ORB.create(int nfeatures=500;float scaleFactor=1.2f;int nlevels=8;int edgeThreshold=31;int firstLevel=0;int WTA_K=2;int scoreType=cv::ORB::HARRIS_SCORE;int patchSize=31;int fastThreshold=20;bool blurForDescriptor=false)->Ptr<cuda::ORB>",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.cuda.ORB.setMaxFeatures(int maxFeatures)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 45,
+      "identity": "cv.cuda.ORB.getMaxFeatures()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 46,
+      "identity": "cv.cuda.ORB.setScaleFactor(double scaleFactor)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.cuda.ORB.getScaleFactor()->double",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 48,
+      "identity": "cv.cuda.ORB.setNLevels(int nlevels)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.cuda.ORB.getNLevels()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 50,
+      "identity": "cv.cuda.ORB.setEdgeThreshold(int edgeThreshold)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 51,
+      "identity": "cv.cuda.ORB.getEdgeThreshold()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 52,
+      "identity": "cv.cuda.ORB.setFirstLevel(int firstLevel)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 53,
+      "identity": "cv.cuda.ORB.getFirstLevel()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 54,
+      "identity": "cv.cuda.ORB.setWTA_K(int wta_k)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 55,
+      "identity": "cv.cuda.ORB.getWTA_K()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 56,
+      "identity": "cv.cuda.ORB.setScoreType(int scoreType)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 57,
+      "identity": "cv.cuda.ORB.getScoreType()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 58,
+      "identity": "cv.cuda.ORB.setPatchSize(int patchSize)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 59,
+      "identity": "cv.cuda.ORB.getPatchSize()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 60,
+      "identity": "cv.cuda.ORB.setFastThreshold(int fastThreshold)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 61,
+      "identity": "cv.cuda.ORB.getFastThreshold()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 62,
+      "identity": "cv.cuda.ORB.setBlurForDescriptor(bool blurForDescriptor)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 63,
+      "identity": "cv.cuda.ORB.getBlurForDescriptor()->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA feature-detection and description surface in cv::cuda has no native CudaFeatures2D wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS/WinRT and unless CUDA or CUDA stubs are enabled, while real corner, detector, descriptor, and matcher execution requires an external CUDA toolkit/runtime and the upstream features/cudafilters/cudawarping dependency chain. GpuMat/Stream ownership, asynchronous execution, keypoint/descriptor transport, and matcher state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}
