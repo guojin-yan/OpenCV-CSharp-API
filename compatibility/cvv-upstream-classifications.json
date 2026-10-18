@@ -1,0 +1,192 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/cvv.hpp plus opencv2/cvv/*.hpp parser-backed CVV public header closure; debug-only Qt GUI declarations are retained as evidence and no wrapper parity is claimed",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact Cvv wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [
+    "The CVV debug-visualization module is disabled unless Qt 5 or later and C++11 are available; this package bundles neither Qt nor a CVV native/managed wrapper."
+  ],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cvv.impl.CallMetaData",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_QT_GE_5_AND_CXX11",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "cvv.impl.CallMetaData.CallMetaData()->",
+      "classification": "intentionally-omitted",
+      "reason": "The CVV debug-visualization declarations have no native or managed wrapper in the current package; upstream disables the module unless Qt 5 or later and C++11 are available, while interactive GUI state, callbacks, and debug-only ownership remain outside the package contract.",
+      "buildCondition": "HAVE_QT_GE_5_AND_CXX11",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "cvv.impl.CallMetaData.CallMetaData(const char * file;size_t line;const char * function)->",
+      "classification": "intentionally-omitted",
+      "reason": "The CVV debug-visualization declarations have no native or managed wrapper in the current package; upstream disables the module unless Qt 5 or later and C++11 are available, while interactive GUI state, callbacks, and debug-only ownership remain outside the package contract.",
+      "buildCondition": "HAVE_QT_GE_5_AND_CXX11",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "cvv.impl.CallMetaData.operator bool()->",
+      "classification": "intentionally-omitted",
+      "reason": "The CVV debug-visualization declarations have no native or managed wrapper in the current package; upstream disables the module unless Qt 5 or later and C++11 are available, while interactive GUI state, callbacks, and debug-only ownership remain outside the package contract.",
+      "buildCondition": "HAVE_QT_GE_5_AND_CXX11",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "cvv.impl.getDebugFlag()->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The CVV debug-visualization declarations have no native or managed wrapper in the current package; upstream disables the module unless Qt 5 or later and C++11 are available, while interactive GUI state, callbacks, and debug-only ownership remain outside the package contract.",
+      "buildCondition": "HAVE_QT_GE_5_AND_CXX11",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "cvv.debugMode()->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The CVV debug-visualization declarations have no native or managed wrapper in the current package; upstream disables the module unless Qt 5 or later and C++11 are available, while interactive GUI state, callbacks, and debug-only ownership remain outside the package contract.",
+      "buildCondition": "HAVE_QT_GE_5_AND_CXX11",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "cvv.setDebugFlag(bool active)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CVV debug-visualization declarations have no native or managed wrapper in the current package; upstream disables the module unless Qt 5 or later and C++11 are available, while interactive GUI state, callbacks, and debug-only ownership remain outside the package contract.",
+      "buildCondition": "HAVE_QT_GE_5_AND_CXX11",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "cvv.impl.debugDMatch(cv::InputArray img1;std::vector<cv::KeyPoint> keypoints1;cv::InputArray img2;std::vector<cv::KeyPoint> keypoints2;std::vector<cv::DMatch> matches;const CallMetaData & data;const char * description;const char * view;bool useTrainDescriptor)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CVV debug-visualization declarations have no native or managed wrapper in the current package; upstream disables the module unless Qt 5 or later and C++11 are available, while interactive GUI state, callbacks, and debug-only ownership remain outside the package contract.",
+      "buildCondition": "HAVE_QT_GE_5_AND_CXX11",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 8,
+      "identity": "cvv.debugDMatch(cv:: InputArray;std::vector<cv::KeyPoint> ;cv:: InputArray;std::vector<cv::KeyPoint> ;std::vector<cv::DMatch> ;const impl::CallMetaData & ;const char * =nullptr;const char * =nullptr;bool =true)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CVV debug-visualization declarations have no native or managed wrapper in the current package; upstream disables the module unless Qt 5 or later and C++11 are available, while interactive GUI state, callbacks, and debug-only ownership remain outside the package contract.",
+      "buildCondition": "HAVE_QT_GE_5_AND_CXX11",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 9,
+      "identity": "cvv.debugDMatch(cv:: InputArray;std::vector<cv::KeyPoint> ;cv:: InputArray;std::vector<cv::KeyPoint> ;std::vector<cv::DMatch> ;const impl::CallMetaData & ;const std::string & ;const std::string & ;bool =true)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CVV debug-visualization declarations have no native or managed wrapper in the current package; upstream disables the module unless Qt 5 or later and C++11 are available, while interactive GUI state, callbacks, and debug-only ownership remain outside the package contract.",
+      "buildCondition": "HAVE_QT_GE_5_AND_CXX11",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "cvv.impl.debugFilter(cv::InputArray original;cv::InputArray result;const CallMetaData & data;const char * description;const char * view)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CVV debug-visualization declarations have no native or managed wrapper in the current package; upstream disables the module unless Qt 5 or later and C++11 are available, while interactive GUI state, callbacks, and debug-only ownership remain outside the package contract.",
+      "buildCondition": "HAVE_QT_GE_5_AND_CXX11",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "identity": "cvv.debugFilter(cv:: InputArray;cv:: InputArray;impl:: CallMetaData=impl::CallMetaData();const char * =nullptr;const char * =nullptr)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CVV debug-visualization declarations have no native or managed wrapper in the current package; upstream disables the module unless Qt 5 or later and C++11 are available, while interactive GUI state, callbacks, and debug-only ownership remain outside the package contract.",
+      "buildCondition": "HAVE_QT_GE_5_AND_CXX11",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 12,
+      "identity": "cvv.debugFilter(cv:: InputArray;cv:: InputArray;impl:: CallMetaData;const ::std::string & ;const ::std::string & )->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CVV debug-visualization declarations have no native or managed wrapper in the current package; upstream disables the module unless Qt 5 or later and C++11 are available, while interactive GUI state, callbacks, and debug-only ownership remain outside the package contract.",
+      "buildCondition": "HAVE_QT_GE_5_AND_CXX11",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 13,
+      "identity": "cvv.impl.finalShow()->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CVV debug-visualization declarations have no native or managed wrapper in the current package; upstream disables the module unless Qt 5 or later and C++11 are available, while interactive GUI state, callbacks, and debug-only ownership remain outside the package contract.",
+      "buildCondition": "HAVE_QT_GE_5_AND_CXX11",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 14,
+      "identity": "cvv.finalShow()->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CVV debug-visualization declarations have no native or managed wrapper in the current package; upstream disables the module unless Qt 5 or later and C++11 are available, while interactive GUI state, callbacks, and debug-only ownership remain outside the package contract.",
+      "buildCondition": "HAVE_QT_GE_5_AND_CXX11",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 15,
+      "identity": "class cvv.FinalShowCaller",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_QT_GE_5_AND_CXX11",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "cvv.FinalShowCaller.~FinalShowCaller()->",
+      "classification": "intentionally-omitted",
+      "reason": "The CVV debug-visualization declarations have no native or managed wrapper in the current package; upstream disables the module unless Qt 5 or later and C++11 are available, while interactive GUI state, callbacks, and debug-only ownership remain outside the package contract.",
+      "buildCondition": "HAVE_QT_GE_5_AND_CXX11",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 17,
+      "identity": "cvv.impl.showImage(cv::InputArray img;const CallMetaData & data;const char * description;const char * view)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CVV debug-visualization declarations have no native or managed wrapper in the current package; upstream disables the module unless Qt 5 or later and C++11 are available, while interactive GUI state, callbacks, and debug-only ownership remain outside the package contract.",
+      "buildCondition": "HAVE_QT_GE_5_AND_CXX11",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 18,
+      "identity": "cvv.showImage(cv:: InputArray;impl:: CallMetaData=impl::CallMetaData();const char * =nullptr;const char * =nullptr)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CVV debug-visualization declarations have no native or managed wrapper in the current package; upstream disables the module unless Qt 5 or later and C++11 are available, while interactive GUI state, callbacks, and debug-only ownership remain outside the package contract.",
+      "buildCondition": "HAVE_QT_GE_5_AND_CXX11",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 19,
+      "identity": "cvv.showImage(cv:: InputArray;impl:: CallMetaData;const ::std::string & ;const ::std::string & )->void",
+      "classification": "intentionally-omitted",
+      "reason": "The CVV debug-visualization declarations have no native or managed wrapper in the current package; upstream disables the module unless Qt 5 or later and C++11 are available, while interactive GUI state, callbacks, and debug-only ownership remain outside the package contract.",
+      "buildCondition": "HAVE_QT_GE_5_AND_CXX11",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}

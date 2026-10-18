@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 65,
+  "moduleCount": 66,
   "maps": [
     {
       "id": "calib3d",
@@ -4170,6 +4170,94 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "89bfcd3658f739039a555b7a3ca79d05162a8505774029f5bae974ffecc85c64",
         "familyInventorySha256": "ac14d1d814ae1a76b227180cefe638b8bd56085e6aa1b3cd34ba69726ed311f0",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "cvv",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/CvvUpstreamMap",
+      "extractorScript": "tools/CvvUpstreamMap/extract_cvv.py",
+      "generationScript": "scripts/Generate-CvvUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-CvvUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/cvv.hpp plus opencv2/cvv/*.hpp parser-backed CVV public header closure; debug-only Qt GUI declarations are retained as evidence and no wrapper parity is claimed",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv.hpp",
+          "sha256": "11833fced7aca3673e4fb0a0377535623ec349fb6d8eb4fc9c074693e1a76503"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/call_meta_data.hpp",
+            "sha256": "583ade09072fc82ec63a2a9462d00663da51f798d87ebf4dd8a26657fa54e3c3",
+            "startOrdinal": 0,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/cvv.hpp",
+            "sha256": "b08cb1cae1d21032248ceb62b3228c5da79468dd0bff9ffa5eb9d95a8cf8443e",
+            "startOrdinal": 4,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/debug_mode.hpp",
+            "sha256": "75cef73d3c81655771502d13c3779eaad0c639e644f354f102d7f0a12a32cc1f",
+            "startOrdinal": 4,
+            "declarationCount": 3
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/dmatch.hpp",
+            "sha256": "2f0ec3010a6a3a8c2e3e95e76363b5c594dbfbb0c6d2af64c5fff5ebe5864deb",
+            "startOrdinal": 7,
+            "declarationCount": 3
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/filter.hpp",
+            "sha256": "f2d9f0e39960ea20be7f332f852d89f0f9de38c6612a96a1bc08a14914aba28f",
+            "startOrdinal": 10,
+            "declarationCount": 3
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/final_show.hpp",
+            "sha256": "64f2759f27948eff65e3dc6bb6abced90997b3c969f99eda3f91c9257ababfe4",
+            "startOrdinal": 13,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/show_image.hpp",
+            "sha256": "5427f66c90c4bec92ff6a5a7ab3178dc3ba0b8b54199ffacb9a67d5e462ab120",
+            "startOrdinal": 17,
+            "declarationCount": 3
+          }
+        ],
+        "compatibilityHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cvv/CMakeLists.txt",
+            "sha256": "3ec884361062471380ae63eb6b6b319379019d941392773fc34131c8b28de275",
+            "reason": "Upstream CVV activation requires Qt 5 or later and C++11; parser declarations are not gated in the public headers."
+          }
+        ],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/cvv-upstream-raw.json",
+        "classifications": "compatibility/cvv-upstream-classifications.json",
+        "mapping": "compatibility/cvv-upstream-map.txt",
+        "summary": "compatibility/cvv-upstream-summary.json",
+        "familyInventory": "compatibility/cvv-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 20,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "ed143a8d17d85fd817bc95054c3da6d90d573dc1748e33d9911989195bb10698",
+        "familyInventorySha256": "66c2bd8cce8723ca0d7472e3108a5b9c6bbf4418db74bb462f3bb229cbfcd928",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

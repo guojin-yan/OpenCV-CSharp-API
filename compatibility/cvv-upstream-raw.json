@@ -1,0 +1,689 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/CvvUpstreamMap/extract_cvv.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv.hpp",
+  "headerSha256": "11833fced7aca3673e4fb0a0377535623ec349fb6d8eb4fc9c074693e1a76503",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/call_meta_data.hpp",
+      "sha256": "583ade09072fc82ec63a2a9462d00663da51f798d87ebf4dd8a26657fa54e3c3",
+      "startOrdinal": 0,
+      "declarationCount": 4
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/cvv.hpp",
+      "sha256": "b08cb1cae1d21032248ceb62b3228c5da79468dd0bff9ffa5eb9d95a8cf8443e",
+      "startOrdinal": 4,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/debug_mode.hpp",
+      "sha256": "75cef73d3c81655771502d13c3779eaad0c639e644f354f102d7f0a12a32cc1f",
+      "startOrdinal": 4,
+      "declarationCount": 3
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/dmatch.hpp",
+      "sha256": "2f0ec3010a6a3a8c2e3e95e76363b5c594dbfbb0c6d2af64c5fff5ebe5864deb",
+      "startOrdinal": 7,
+      "declarationCount": 3
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/filter.hpp",
+      "sha256": "f2d9f0e39960ea20be7f332f852d89f0f9de38c6612a96a1bc08a14914aba28f",
+      "startOrdinal": 10,
+      "declarationCount": 3
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/final_show.hpp",
+      "sha256": "64f2759f27948eff65e3dc6bb6abced90997b3c969f99eda3f91c9257ababfe4",
+      "startOrdinal": 13,
+      "declarationCount": 4
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/show_image.hpp",
+      "sha256": "5427f66c90c4bec92ff6a5a7ab3178dc3ba0b8b54199ffacb9a67d5e462ab120",
+      "startOrdinal": 17,
+      "declarationCount": 3
+    }
+  ],
+  "declarationCount": 20,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/call_meta_data.hpp",
+      "kind": "class",
+      "name": "cvv.impl.CallMetaData",
+      "identity": "class cvv.impl.CallMetaData",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Optional information about a location in Code."
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/call_meta_data.hpp",
+      "kind": "callable",
+      "name": "cvv.impl.CallMetaData.CallMetaData",
+      "identity": "cvv.impl.CallMetaData.CallMetaData()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Creates an unknown location."
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/call_meta_data.hpp",
+      "kind": "callable",
+      "name": "cvv.impl.CallMetaData.CallMetaData",
+      "identity": "cvv.impl.CallMetaData.CallMetaData(const char * file;size_t line;const char * function)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const char *",
+          "name": "file",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "size_t",
+          "name": "line",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const char *",
+          "name": "function",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Creates the provided location.\n\t *\n\t * Argument should be self-explaining."
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/call_meta_data.hpp",
+      "kind": "callable",
+      "name": "cvv.impl.CallMetaData.operator bool",
+      "identity": "cvv.impl.CallMetaData.operator bool()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/debug_mode.hpp",
+      "kind": "callable",
+      "name": "cvv.impl.getDebugFlag",
+      "identity": "cvv.impl.getDebugFlag()->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* The debug-flag-singleton"
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/debug_mode.hpp",
+      "kind": "callable",
+      "name": "cvv.debugMode",
+      "identity": "cvv.debugMode()->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns whether debug-mode is active for this TU and thread."
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/debug_mode.hpp",
+      "kind": "callable",
+      "name": "cvv.setDebugFlag",
+      "identity": "cvv.setDebugFlag(bool active)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "active",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Enable or disable cvv for current translation unit and thread\n\n(disabled this way has higher - but still low - overhead compared to using the compile flags).\n@param active"
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/dmatch.hpp",
+      "kind": "callable",
+      "name": "cvv.impl.debugDMatch",
+      "identity": "cvv.impl.debugDMatch(cv::InputArray img1;std::vector<cv::KeyPoint> keypoints1;cv::InputArray img2;std::vector<cv::KeyPoint> keypoints2;std::vector<cv::DMatch> matches;const CallMetaData & data;const char * description;const char * view;bool useTrainDescriptor)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "cv::InputArray",
+          "name": "img1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "std::vector<cv::KeyPoint>",
+          "name": "keypoints1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "cv::InputArray",
+          "name": "img2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "std::vector<cv::KeyPoint>",
+          "name": "keypoints2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "std::vector<cv::DMatch>",
+          "name": "matches",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const CallMetaData &",
+          "name": "data",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const char *",
+          "name": "description",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const char *",
+          "name": "view",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "useTrainDescriptor",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/dmatch.hpp",
+      "kind": "callable",
+      "name": "cvv.debugDMatch",
+      "identity": "cvv.debugDMatch(cv:: InputArray;std::vector<cv::KeyPoint> ;cv:: InputArray;std::vector<cv::KeyPoint> ;std::vector<cv::DMatch> ;const impl::CallMetaData & ;const char * =nullptr;const char * =nullptr;bool =true)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "cv::",
+          "name": "InputArray",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "std::vector<cv::KeyPoint>",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "cv::",
+          "name": "InputArray",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "std::vector<cv::KeyPoint>",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "std::vector<cv::DMatch>",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const impl::CallMetaData &",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const char *",
+          "name": "",
+          "default": "nullptr",
+          "modifiers": []
+        },
+        {
+          "type": "const char *",
+          "name": "",
+          "default": "nullptr",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "",
+          "default": "true",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/dmatch.hpp",
+      "kind": "callable",
+      "name": "cvv.debugDMatch",
+      "identity": "cvv.debugDMatch(cv:: InputArray;std::vector<cv::KeyPoint> ;cv:: InputArray;std::vector<cv::KeyPoint> ;std::vector<cv::DMatch> ;const impl::CallMetaData & ;const std::string & ;const std::string & ;bool =true)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "cv::",
+          "name": "InputArray",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "std::vector<cv::KeyPoint>",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "cv::",
+          "name": "InputArray",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "std::vector<cv::KeyPoint>",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "std::vector<cv::DMatch>",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const impl::CallMetaData &",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const std::string &",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const std::string &",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "",
+          "default": "true",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/filter.hpp",
+      "kind": "callable",
+      "name": "cvv.impl.debugFilter",
+      "identity": "cvv.impl.debugFilter(cv::InputArray original;cv::InputArray result;const CallMetaData & data;const char * description;const char * view)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "cv::InputArray",
+          "name": "original",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "cv::InputArray",
+          "name": "result",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const CallMetaData &",
+          "name": "data",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const char *",
+          "name": "description",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const char *",
+          "name": "view",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/filter.hpp",
+      "kind": "callable",
+      "name": "cvv.debugFilter",
+      "identity": "cvv.debugFilter(cv:: InputArray;cv:: InputArray;impl:: CallMetaData=impl::CallMetaData();const char * =nullptr;const char * =nullptr)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "cv::",
+          "name": "InputArray",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "cv::",
+          "name": "InputArray",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "impl::",
+          "name": "CallMetaData",
+          "default": "impl::CallMetaData()",
+          "modifiers": []
+        },
+        {
+          "type": "const char *",
+          "name": "",
+          "default": "nullptr",
+          "modifiers": []
+        },
+        {
+          "type": "const char *",
+          "name": "",
+          "default": "nullptr",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/filter.hpp",
+      "kind": "callable",
+      "name": "cvv.debugFilter",
+      "identity": "cvv.debugFilter(cv:: InputArray;cv:: InputArray;impl:: CallMetaData;const ::std::string & ;const ::std::string & )->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "cv::",
+          "name": "InputArray",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "cv::",
+          "name": "InputArray",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "impl::",
+          "name": "CallMetaData",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const ::std::string &",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const ::std::string &",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/final_show.hpp",
+      "kind": "callable",
+      "name": "cvv.impl.finalShow",
+      "identity": "cvv.impl.finalShow()->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/final_show.hpp",
+      "kind": "callable",
+      "name": "cvv.finalShow",
+      "identity": "cvv.finalShow()->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Passes the control to the debug-window for a last time.\n\nThis function **must** be called *once* *after* all cvv calls if any. As an alternative create an\ninstance of FinalShowCaller, which calls finalShow() in its destructor (RAII-style)."
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/final_show.hpp",
+      "kind": "class",
+      "name": "cvv.FinalShowCaller",
+      "identity": "class cvv.FinalShowCaller",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief RAII-class to call finalShow() in it's dtor."
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/final_show.hpp",
+      "kind": "callable",
+      "name": "cvv.FinalShowCaller.~FinalShowCaller",
+      "identity": "cvv.FinalShowCaller.~FinalShowCaller()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Calls finalShow()."
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/show_image.hpp",
+      "kind": "callable",
+      "name": "cvv.impl.showImage",
+      "identity": "cvv.impl.showImage(cv::InputArray img;const CallMetaData & data;const char * description;const char * view)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "cv::InputArray",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const CallMetaData &",
+          "name": "data",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const char *",
+          "name": "description",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const char *",
+          "name": "view",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/show_image.hpp",
+      "kind": "callable",
+      "name": "cvv.showImage",
+      "identity": "cvv.showImage(cv:: InputArray;impl:: CallMetaData=impl::CallMetaData();const char * =nullptr;const char * =nullptr)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "cv::",
+          "name": "InputArray",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "impl::",
+          "name": "CallMetaData",
+          "default": "impl::CallMetaData()",
+          "modifiers": []
+        },
+        {
+          "type": "const char *",
+          "name": "",
+          "default": "nullptr",
+          "modifiers": []
+        },
+        {
+          "type": "const char *",
+          "name": "",
+          "default": "nullptr",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cvv/include/opencv2/cvv/show_image.hpp",
+      "kind": "callable",
+      "name": "cvv.showImage",
+      "identity": "cvv.showImage(cv:: InputArray;impl:: CallMetaData;const ::std::string & ;const ::std::string & )->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "cv::",
+          "name": "InputArray",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "impl::",
+          "name": "CallMetaData",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const ::std::string &",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const ::std::string &",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    }
+  ],
+  "compatibilityHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cvv/CMakeLists.txt",
+      "sha256": "3ec884361062471380ae63eb6b6b319379019d941392773fc34131c8b28de275",
+      "reason": "Upstream CVV activation requires Qt 5 or later and C++11; parser declarations are not gated in the public headers."
+    }
+  ],
+  "moduleBuildCondition": "HAVE_QT_GE_5_AND_CXX11"
+}
