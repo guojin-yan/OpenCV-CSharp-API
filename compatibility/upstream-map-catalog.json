@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 67,
+  "moduleCount": 68,
   "maps": [
     {
       "id": "calib3d",
@@ -4496,6 +4496,82 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "7f678cb20b355be3109fa96edb8c935fd2b2d83e124a0deb93ce850330977143",
         "familyInventorySha256": "5e78c6a7852c77db0157bf3ea8605aa00920f16d4929d14898f1e51e9a73bd04",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "viz",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/VizUpstreamMap",
+      "extractorScript": "tools/VizUpstreamMap/extract_viz.py",
+      "generationScript": "scripts/Generate-VizUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-VizUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/viz.hpp plus opencv2/viz/*.hpp parser-backed public header closure; CV_EXPORTS declarations, external VTK, and GUI/rendering ownership remain evidence-only",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/viz/include/opencv2/viz.hpp",
+          "sha256": "f1e9aedb81fe0967ebb0a2b524706f89ba548d8b14a3d883373f1df53efe685d"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/viz/include/opencv2/viz/types.hpp",
+            "sha256": "a7f7851da62a2d0168139df69f9562feac2140992602cc7d8b6e3e12f9d4531d",
+            "startOrdinal": 0,
+            "declarationCount": 108
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/viz/include/opencv2/viz/viz3d.hpp",
+            "sha256": "f487e03ff244d55d582028b1ba40e8a3fa0ca11125ef75a431a4fd4c0b9a030e",
+            "startOrdinal": 108,
+            "declarationCount": 44
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/viz/include/opencv2/viz/vizcore.hpp",
+            "sha256": "1a7e30f880adb8b61f085ffb22e985d12e0c0af39b19d48e1e6e9ad4024ebdcb",
+            "startOrdinal": 152,
+            "declarationCount": 15
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/viz/include/opencv2/viz/widget_accessor.hpp",
+            "sha256": "a63e171e411037a14c380cc0e21aa6b939fe292d92c8732134fb920fbf87c93d",
+            "startOrdinal": 167,
+            "declarationCount": 3
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/viz/include/opencv2/viz/widgets.hpp",
+            "sha256": "06c57cb3e2728b3ce68b1264fb69710c54403bf2a2ce576ca66f1cf1a06971b5",
+            "startOrdinal": 170,
+            "declarationCount": 101
+          }
+        ],
+        "compatibilityHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/viz/CMakeLists.txt",
+            "sha256": "73757b86d1a8f4d1626c76e9d752e620709f240b1d009fdbb415b30e6b19d3bd",
+            "reason": "Upstream viz activation requires an external VTK installation and may be disabled for static-library dependency conflicts; parser declarations are not gated in the public headers."
+          }
+        ],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/viz-upstream-raw.json",
+        "classifications": "compatibility/viz-upstream-classifications.json",
+        "mapping": "compatibility/viz-upstream-map.txt",
+        "summary": "compatibility/viz-upstream-summary.json",
+        "familyInventory": "compatibility/viz-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 269,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "dfff0e359914083dcef58b133e0ea7597a8b84d4c33e4bea77f89d5d967ba2e6",
+        "familyInventorySha256": "7b736e51f14699e3c1b95bee58b1ff52d4fe58163dc61335d6869eee2fa67f33",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

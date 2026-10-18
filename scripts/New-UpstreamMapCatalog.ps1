@@ -74,6 +74,7 @@ $definitions = @(
     [pscustomobject]@{ Id = 'videostab'; Tool = 'VideoStab'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'cvv'; Tool = 'Cvv'; Repository = 'opencv_contrib' },
     [pscustomobject]@{ Id = 'datasets'; Tool = 'Datasets'; Repository = 'opencv_contrib' }
+    [pscustomobject]@{ Id = 'viz'; Tool = 'Viz'; Repository = 'opencv_contrib' }
     [pscustomobject]@{ Id = 'ovis'; Tool = 'Ovis'; Repository = 'opencv_contrib' }
 )
 

@@ -184,6 +184,8 @@ function Get-Record {
     $videostabSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/videostab-upstream-summary.json") -Raw | ConvertFrom-Json
     $datasetsRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/datasets-upstream-raw.json") -Raw | ConvertFrom-Json
     $datasetsSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/datasets-upstream-summary.json") -Raw | ConvertFrom-Json
+    $vizRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/viz-upstream-raw.json") -Raw | ConvertFrom-Json
+    $vizSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/viz-upstream-summary.json") -Raw | ConvertFrom-Json
     $ovisRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/ovis-upstream-raw.json") -Raw | ConvertFrom-Json
     $ovisSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/ovis-upstream-summary.json") -Raw | ConvertFrom-Json
     $evidencePaths = @(
@@ -505,6 +507,11 @@ function Get-Record {
         "compatibility/datasets-upstream-map.txt",
         "compatibility/datasets-upstream-raw.json",
         "compatibility/datasets-upstream-summary.json",
+        "compatibility/viz-implemented-families.json",
+        "compatibility/viz-upstream-classifications.json",
+        "compatibility/viz-upstream-map.txt",
+        "compatibility/viz-upstream-raw.json",
+        "compatibility/viz-upstream-summary.json",
         "compatibility/ovis-implemented-families.json",
         "compatibility/ovis-upstream-classifications.json",
         "compatibility/ovis-upstream-map.txt",
@@ -516,6 +523,7 @@ function Get-Record {
         "docs/articles/upstream-map-toolchain.md",
         "docs/articles/videostab-upstream-parity-guide.md",
         "docs/articles/datasets-upstream-parity-guide.md",
+        "docs/articles/viz-upstream-parity-guide.md",
         "docs/articles/ovis-upstream-parity-guide.md",
         "docs/articles/xfeatures2d-upstream-parity-guide.md",
         "docs/articles/dnn-objdetect-upstream-parity-guide.md",
@@ -1063,6 +1071,9 @@ function Get-Record {
         "tools/DatasetsUpstreamMap/DatasetsUpstreamMap.csproj",
         "tools/DatasetsUpstreamMap/Program.cs",
         "tools/DatasetsUpstreamMap/extract_datasets.py",
+        "tools/VizUpstreamMap/VizUpstreamMap.csproj",
+        "tools/VizUpstreamMap/Program.cs",
+        "tools/VizUpstreamMap/extract_viz.py",
         "tools/OvisUpstreamMap/OvisUpstreamMap.csproj",
         "tools/OvisUpstreamMap/Program.cs",
         "tools/OvisUpstreamMap/extract_ovis.py",
@@ -1196,6 +1207,8 @@ function Get-Record {
         "scripts/Test-VideoStabUpstreamMap.ps1",
         "scripts/Generate-DatasetsUpstreamMap.ps1",
         "scripts/Test-DatasetsUpstreamMap.ps1",
+        "scripts/Generate-VizUpstreamMap.ps1",
+        "scripts/Test-VizUpstreamMap.ps1",
         "scripts/Generate-OvisUpstreamMap.ps1",
         "scripts/Test-OvisUpstreamMap.ps1",
         "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
@@ -2222,6 +2235,35 @@ function Get-Record {
                 NativeEntrypointAdditionCount = [int]$datasetsSummary.nativeEvidenceCount
                 ExternalDataDependencyCount = [int]$datasetsSummary.externalDataDependencyCount
                 RepositoryWideParityClaimed = [bool]$datasetsSummary.repositoryWideUpstreamParityClaimed
+            }
+            VizUpstreamMap = [ordered]@{
+                Path = "compatibility/viz-upstream-map.txt"
+                SummaryPath = "compatibility/viz-upstream-summary.json"
+                ClassificationPath = "compatibility/viz-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/viz-implemented-families.json"
+                RawExtractionPath = "compatibility/viz-upstream-raw.json"
+                Sha256 = $vizSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/viz-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$vizSummary.declarationCount
+                CallableCount = [int]$vizSummary.callableCount
+                ClassCount = [int]$vizSummary.classCount
+                EnumCount = [int]$vizSummary.enumCount
+                MetadataCount = [int]$vizSummary.classificationCounts.'non-callable-metadata'
+                ImplementedCount = [int]$vizSummary.classificationCounts.implemented
+                MissingCount = [int]$vizSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$vizSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$vizSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$vizSummary.classificationCounts.'upstream-conditional'
+                SourceHeaderCount = @($vizRaw.sourceHeaders).Count
+                CompatibilityHeaderCount = @($vizRaw.compatibilityHeaders).Count
+                ParserMode = [string]$vizRaw.parserMode
+                SelectedFamilyCount = [int]$vizSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$vizSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$vizSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$vizSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$vizSummary.nativeEvidenceCount
+                ExternalDataDependencyCount = [int]$vizSummary.externalDataDependencyCount
+                RepositoryWideParityClaimed = [bool]$vizSummary.repositoryWideUpstreamParityClaimed
             }
             OvisUpstreamMap = [ordered]@{
                 Path = "compatibility/ovis-upstream-map.txt"

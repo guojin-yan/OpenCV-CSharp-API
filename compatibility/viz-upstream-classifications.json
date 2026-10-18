@@ -1,0 +1,2434 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/viz.hpp plus opencv2/viz/*.hpp parser-backed public header closure; CV_EXPORTS declarations, external VTK, and GUI/rendering ownership remain evidence-only",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact Viz wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [
+    "The viz module requires an external VTK installation and is disabled when VTK is unavailable or conflicts with statically bundled third-party libraries; this package bundles no VTK runtime or viz wrapper.",
+    "Viz rendering consumes caller-selected GUI/window policy, mesh/cloud/trajectory files, and widget ownership; none is part of this package contract."
+  ],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.viz.Color",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.viz.Color.Color()->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.viz.Color.Color(double gray)->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.viz.Color.Color(double blue;double green;double red)->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.viz.Color.Color(const Scalar& color)->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.viz.Color.operator Vec3b()->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.viz.Color.black()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.viz.Color.blue()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.viz.Color.green()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.viz.Color.red()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.viz.Color.cyan()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.viz.Color.yellow()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.viz.Color.magenta()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.viz.Color.white()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.viz.Color.gray()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.viz.Color.silver()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.viz.Color.mlab()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.viz.Color.navy()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.viz.Color.maroon()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.viz.Color.teal()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.viz.Color.olive()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.viz.Color.purple()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.viz.Color.azure()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.viz.Color.chartreuse()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.viz.Color.rose()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.viz.Color.lime()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.viz.Color.gold()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.viz.Color.orange()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.viz.Color.orange_red()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.viz.Color.indigo()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.viz.Color.brown()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.viz.Color.apricot()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.viz.Color.pink()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.viz.Color.raspberry()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.viz.Color.cherry()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.viz.Color.violet()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.viz.Color.amethyst()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.viz.Color.bluberry()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.viz.Color.celestial_blue()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.viz.Color.turquoise()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.viz.Color.not_set()->Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 41,
+      "identity": "class cv.viz.Mesh",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 42,
+      "identity": "enum cv.viz.Mesh.<unnamed>[const cv.viz.Mesh.LOAD_AUTO=0;const cv.viz.Mesh.LOAD_PLY=1;const cv.viz.Mesh.LOAD_OBJ=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.viz.Mesh.Mesh()->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.viz.Mesh.load(const String& file;int type=LOAD_PLY)->Mesh",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 45,
+      "identity": "class cv.viz.Camera",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 46,
+      "identity": "cv.viz.Camera.Camera(double fx;double fy;double cx;double cy;const Size & window_size)->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.viz.Camera.Camera(const Vec2d & fov;const Size & window_size)->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 48,
+      "identity": "cv.viz.Camera.Camera(const Matx33d & K;const Size & window_size)->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.viz.Camera.Camera(const Matx44d & proj;const Size & window_size)->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 50,
+      "identity": "cv.viz.Camera.getClip()->const Vec2d &",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 51,
+      "identity": "cv.viz.Camera.setClip(const Vec2d & clip)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 52,
+      "identity": "cv.viz.Camera.getWindowSize()->const Size &",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 53,
+      "identity": "cv.viz.Camera.setWindowSize(const Size & window_size)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 54,
+      "identity": "cv.viz.Camera.getFov()->const Vec2d&",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 55,
+      "identity": "cv.viz.Camera.setFov(const Vec2d& fov)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 56,
+      "identity": "cv.viz.Camera.getPrincipalPoint()->const Vec2d&",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 57,
+      "identity": "cv.viz.Camera.getFocalLength()->const Vec2d&",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 58,
+      "identity": "cv.viz.Camera.computeProjectionMatrix(Matx44d & proj)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 59,
+      "identity": "cv.viz.Camera.KinectCamera(const Size & window_size)->Camera",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 60,
+      "identity": "class cv.viz.KeyboardEvent",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 61,
+      "identity": "enum cv.viz.KeyboardEvent.<unnamed>[const cv.viz.KeyboardEvent.NONE=0;const cv.viz.KeyboardEvent.ALT=1;const cv.viz.KeyboardEvent.CTRL=2;const cv.viz.KeyboardEvent.SHIFT=4]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 62,
+      "identity": "enum cv.viz.KeyboardEvent.Action[const cv.viz.KeyboardEvent.KEY_UP=0;const cv.viz.KeyboardEvent.KEY_DOWN=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 63,
+      "identity": "cv.viz.KeyboardEvent.KeyboardEvent(Action action;const String& symbol;unsigned char code;int modifiers)->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 64,
+      "identity": "class cv.viz.MouseEvent",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 65,
+      "identity": "enum cv.viz.MouseEvent.Type[const cv.viz.MouseEvent.MouseMove=1;const cv.viz.MouseEvent.MouseButtonPress=1+1;const cv.viz.MouseEvent.MouseButtonRelease=1+2;const cv.viz.MouseEvent.MouseScrollDown=1+3;const cv.viz.MouseEvent.MouseScrollUp=1+4;const cv.viz.MouseEvent.MouseDblClick=1+5]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 66,
+      "identity": "enum cv.viz.MouseEvent.MouseButton[const cv.viz.MouseEvent.NoButton=0;const cv.viz.MouseEvent.LeftButton=0+1;const cv.viz.MouseEvent.MiddleButton=0+2;const cv.viz.MouseEvent.RightButton=0+3;const cv.viz.MouseEvent.VScroll=0+4]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 67,
+      "identity": "cv.viz.MouseEvent.MouseEvent(const Type& type;const MouseButton& button;const Point& pointer;int modifiers)->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 68,
+      "identity": "cv.viz.Color.Color(double _gray)->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 69,
+      "identity": "cv.viz.Color.Color(double _blue;double _green;double _red)->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 70,
+      "identity": "cv.Vec3b()->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 71,
+      "identity": "cv.viz.Color.black()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 72,
+      "identity": "cv.viz.Color.blue()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 73,
+      "identity": "cv.viz.Color.green()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 74,
+      "identity": "cv.viz.Color.red()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 75,
+      "identity": "cv.viz.Color.cyan()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 76,
+      "identity": "cv.viz.Color.yellow()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 77,
+      "identity": "cv.viz.Color.magenta()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 78,
+      "identity": "cv.viz.Color.white()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 79,
+      "identity": "cv.viz.Color.gray()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 80,
+      "identity": "cv.viz.Color.silver()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 81,
+      "identity": "cv.viz.Color.mlab()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 82,
+      "identity": "cv.viz.Color.navy()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 83,
+      "identity": "cv.viz.Color.maroon()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 84,
+      "identity": "cv.viz.Color.teal()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 85,
+      "identity": "cv.viz.Color.olive()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 86,
+      "identity": "cv.viz.Color.purple()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 87,
+      "identity": "cv.viz.Color.azure()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 88,
+      "identity": "cv.viz.Color.chartreuse()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 89,
+      "identity": "cv.viz.Color.rose()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 90,
+      "identity": "cv.viz.Color.lime()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 91,
+      "identity": "cv.viz.Color.gold()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 92,
+      "identity": "cv.viz.Color.orange()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 93,
+      "identity": "cv.viz.Color.orange_red()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 94,
+      "identity": "cv.viz.Color.indigo()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 95,
+      "identity": "cv.viz.Color.brown()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 96,
+      "identity": "cv.viz.Color.apricot()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 97,
+      "identity": "cv.viz.Color.pink()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 98,
+      "identity": "cv.viz.Color.raspberry()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 99,
+      "identity": "cv.viz.Color.cherry()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 100,
+      "identity": "cv.viz.Color.violet()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 101,
+      "identity": "cv.viz.Color.amethyst()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 102,
+      "identity": "cv.viz.Color.bluberry()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 103,
+      "identity": "cv.viz.Color.celestial_blue()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 104,
+      "identity": "cv.viz.Color.turquoise()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 105,
+      "identity": "cv.viz.Color.not_set()->cv::viz::Color",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 106,
+      "identity": "class cv.viz.Viz3d",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 107,
+      "identity": "cv.viz.Viz3d.Viz3d(const String& window_name=String())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 108,
+      "identity": "cv.viz.Viz3d.Viz3d(const Viz3d& )->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 109,
+      "identity": "cv.viz.Viz3d.operator=(const Viz3d& )->Viz3d&",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 110,
+      "identity": "cv.viz.Viz3d.~Viz3d()->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 111,
+      "identity": "cv.viz.Viz3d.showWidget(const String & id;const Widget & widget;const Affine3d & pose=Affine3d::Identity())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 112,
+      "identity": "cv.viz.Viz3d.removeWidget(const String & id)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 113,
+      "identity": "cv.viz.Viz3d.getWidget(const String & id)->Widget",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 114,
+      "identity": "cv.viz.Viz3d.removeAllWidgets()->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 115,
+      "identity": "cv.viz.Viz3d.showImage(InputArray image;const Size& window_size=Size(-1, -1))->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 116,
+      "identity": "cv.viz.Viz3d.setWidgetPose(const String & id;const Affine3d & pose)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 117,
+      "identity": "cv.viz.Viz3d.updateWidgetPose(const String & id;const Affine3d & pose)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 118,
+      "identity": "cv.viz.Viz3d.getWidgetPose(const String & id)->Affine3d",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 119,
+      "identity": "cv.viz.Viz3d.setCamera(const Camera & camera)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 120,
+      "identity": "cv.viz.Viz3d.getCamera()->Camera",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 121,
+      "identity": "cv.viz.Viz3d.getViewerPose()->Affine3d",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 122,
+      "identity": "cv.viz.Viz3d.setViewerPose(const Affine3d & pose)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 123,
+      "identity": "cv.viz.Viz3d.resetCameraViewpoint(const String & id)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 124,
+      "identity": "cv.viz.Viz3d.resetCamera()->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 125,
+      "identity": "cv.viz.Viz3d.convertToWindowCoordinates(const Point3d & pt;Point3d & window_coord)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 126,
+      "identity": "cv.viz.Viz3d.converTo3DRay(const Point3d & window_coord;Point3d & origin;Vec3d & direction)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 127,
+      "identity": "cv.viz.Viz3d.getWindowSize()->Size",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 128,
+      "identity": "cv.viz.Viz3d.setWindowSize(const Size & window_size)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 129,
+      "identity": "cv.viz.Viz3d.getWindowName()->String",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 130,
+      "identity": "cv.viz.Viz3d.getScreenshot()->cv::Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 131,
+      "identity": "cv.viz.Viz3d.saveScreenshot(const String & file)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 132,
+      "identity": "cv.viz.Viz3d.setWindowPosition(const Point& window_position)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 133,
+      "identity": "cv.viz.Viz3d.setFullScreen(bool mode=true)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 134,
+      "identity": "cv.viz.Viz3d.setBackgroundColor(const Color& color=Color::black();const Color& color2=Color::not_set())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 135,
+      "identity": "cv.viz.Viz3d.setBackgroundTexture(InputArray image=noArray())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 136,
+      "identity": "cv.viz.Viz3d.setBackgroundMeshLab()->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 137,
+      "identity": "cv.viz.Viz3d.spin()->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 138,
+      "identity": "cv.viz.Viz3d.spinOnce(int time=1;bool force_redraw=false)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 139,
+      "identity": "cv.viz.Viz3d.setOffScreenRendering()->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 140,
+      "identity": "cv.viz.Viz3d.removeAllLights()->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 141,
+      "identity": "cv.viz.Viz3d.addLight(const Vec3d & position;const Vec3d & focalPoint=Vec3d(0, 0, 0);const Color & color=Color::white();const Color & diffuseColor=Color::white();const Color & ambientColor=Color::black();const Color & specularColor=Color::white())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 142,
+      "identity": "cv.viz.Viz3d.wasStopped()->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 143,
+      "identity": "cv.viz.Viz3d.close()->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 144,
+      "identity": "cv.viz.Viz3d.registerKeyboardCallback(KeyboardCallback callback;void* cookie=0)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 145,
+      "identity": "cv.viz.Viz3d.registerMouseCallback(MouseCallback callback;void* cookie=0)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 146,
+      "identity": "cv.viz.Viz3d.setRenderingProperty(const String & id;int property;double value)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 147,
+      "identity": "cv.viz.Viz3d.getRenderingProperty(const String & id;int property)->double",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 148,
+      "identity": "cv.viz.Viz3d.setRepresentation(int representation)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 149,
+      "identity": "cv.viz.Viz3d.setGlobalWarnings(bool enabled=false)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 150,
+      "identity": "cv.viz.makeTransformToGlobal(const Vec3d& axis_x;const Vec3d& axis_y;const Vec3d& axis_z;const Vec3d& origin=Vec3d::all(0))->Affine3d",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 151,
+      "identity": "cv.viz.makeCameraPose(const Vec3d& position;const Vec3d& focal_point;const Vec3d& y_dir)->Affine3d",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 152,
+      "identity": "cv.viz.getWindowByName(const String & window_name)->Viz3d",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 153,
+      "identity": "cv.viz.unregisterAllWindows()->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 154,
+      "identity": "cv.viz.imshow(const String& window_name;InputArray image;const Size& window_size=Size(-1, -1))->Viz3d",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 155,
+      "identity": "cv.viz.isNan(float x)->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 156,
+      "identity": "cv.viz.isNan(double x)->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 157,
+      "identity": "cv.viz.writeCloud(const String& file;InputArray cloud;InputArray colors=noArray();InputArray normals=noArray();bool binary=false)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 158,
+      "identity": "cv.viz.readCloud(const String& file;OutputArray colors=noArray();OutputArray normals=noArray())->Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 159,
+      "identity": "cv.viz.readMesh(const String& file)->Mesh",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 160,
+      "identity": "cv.viz.readPose(const String& file;Affine3d& pose;const String& tag=\"pose\")->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 161,
+      "identity": "cv.viz.writePose(const String& file;const Affine3d& pose;const String& tag=\"pose\")->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 162,
+      "identity": "cv.viz.writeTrajectory(InputArray traj;const String& files_format=\"pose%05d.xml\";int start=0;const String& tag=\"pose\")->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 163,
+      "identity": "cv.viz.readTrajectory(OutputArray traj;const String& files_format=\"pose%05d.xml\";int start=0;int end=INT_MAX;const String& tag=\"pose\")->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 164,
+      "identity": "cv.viz.computeNormals(const Mesh& mesh;OutputArray normals)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 165,
+      "identity": "class cv.viz.WidgetAccessor",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 166,
+      "identity": "cv.viz.WidgetAccessor.getProp(const Widget & widget)->vtkSmartPointer<vtkProp>",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 167,
+      "identity": "cv.viz.WidgetAccessor.setProp(Widget & widget;vtkSmartPointer<vtkProp> prop)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 168,
+      "identity": "enum cv.viz.RenderingProperties[const cv.viz.POINT_SIZE=0;const cv.viz.OPACITY=1;const cv.viz.LINE_WIDTH=2;const cv.viz.FONT_SIZE=3;const cv.viz.REPRESENTATION=4;const cv.viz.IMMEDIATE_RENDERING=5;const cv.viz.SHADING=6;const cv.viz.AMBIENT=7;const cv.viz.LIGHTING=8]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 169,
+      "identity": "enum cv.viz.RepresentationValues[const cv.viz.REPRESENTATION_POINTS=0;const cv.viz.REPRESENTATION_WIREFRAME=1;const cv.viz.REPRESENTATION_SURFACE=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 170,
+      "identity": "enum cv.viz.ShadingValues[const cv.viz.SHADING_FLAT=0;const cv.viz.SHADING_GOURAUD=1;const cv.viz.SHADING_PHONG=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 171,
+      "identity": "class cv.viz.Widget",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 172,
+      "identity": "cv.viz.Widget.Widget()->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 173,
+      "identity": "cv.viz.Widget.Widget(const Widget& other)->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 174,
+      "identity": "cv.viz.Widget.operator=(const Widget& other)->Widget&",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 175,
+      "identity": "cv.viz.Widget.~Widget()->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 176,
+      "identity": "cv.viz.Widget.fromPlyFile(const String & file_name)->Widget",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 177,
+      "identity": "cv.viz.Widget.setRenderingProperty(int property;double value)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 178,
+      "identity": "cv.viz.Widget.getRenderingProperty(int property)->double",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 179,
+      "identity": "class cv.viz.Widget3D",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 180,
+      "identity": "cv.viz.Widget3D.Widget3D()->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 181,
+      "identity": "cv.viz.Widget3D.setPose(const Affine3d & pose)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 182,
+      "identity": "cv.viz.Widget3D.updatePose(const Affine3d & pose)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 183,
+      "identity": "cv.viz.Widget3D.getPose()->Affine3d",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 184,
+      "identity": "cv.viz.Widget3D.applyTransform(const Affine3d & transform)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 185,
+      "identity": "cv.viz.Widget3D.setColor(const Color & color)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 186,
+      "identity": "class cv.viz.Widget2D",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 187,
+      "identity": "cv.viz.Widget2D.Widget2D()->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 188,
+      "identity": "cv.viz.Widget2D.setColor(const Color & color)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 189,
+      "identity": "class cv.viz.WLine",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 190,
+      "identity": "cv.viz.WLine.WLine(const Point3d & pt1;const Point3d & pt2;const Color & color=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 191,
+      "identity": "class cv.viz.WPlane",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 192,
+      "identity": "cv.viz.WPlane.WPlane(const Size2d& size=Size2d(1.0, 1.0);const Color & color=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 193,
+      "identity": "cv.viz.WPlane.WPlane(const Point3d& center;const Vec3d& normal;const Vec3d& new_yaxis;const Size2d& size=Size2d(1.0, 1.0);const Color & color=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 194,
+      "identity": "class cv.viz.WSphere",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 195,
+      "identity": "cv.viz.WSphere.WSphere(const cv::Point3d & center;double radius;int sphere_resolution=10;const Color & color=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 196,
+      "identity": "class cv.viz.WArrow",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 197,
+      "identity": "cv.viz.WArrow.WArrow(const Point3d& pt1;const Point3d& pt2;double thickness=0.03;const Color & color=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 198,
+      "identity": "class cv.viz.WCircle",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 199,
+      "identity": "cv.viz.WCircle.WCircle(double radius;double thickness=0.01;const Color & color=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 200,
+      "identity": "cv.viz.WCircle.WCircle(double radius;const Point3d& center;const Vec3d& normal;double thickness=0.01;const Color & color=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 201,
+      "identity": "class cv.viz.WCone",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 202,
+      "identity": "cv.viz.WCone.WCone(double length;double radius;int resolution=6;const Color & color=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 203,
+      "identity": "cv.viz.WCone.WCone(double radius;const Point3d& center;const Point3d& tip;int resolution=6;const Color & color=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 204,
+      "identity": "class cv.viz.WCylinder",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 205,
+      "identity": "cv.viz.WCylinder.WCylinder(const Point3d& axis_point1;const Point3d& axis_point2;double radius;int numsides=30;const Color & color=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 206,
+      "identity": "class cv.viz.WCube",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 207,
+      "identity": "cv.viz.WCube.WCube(const Point3d& min_point=Vec3d::all(-0.5);const Point3d& max_point=Vec3d::all(0.5);bool wire_frame=true;const Color & color=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 208,
+      "identity": "class cv.viz.WPolyLine",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 209,
+      "identity": "cv.viz.WPolyLine.WPolyLine(InputArray points;InputArray colors)->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 210,
+      "identity": "cv.viz.WPolyLine.WPolyLine(InputArray points;const Color & color=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 211,
+      "identity": "class cv.viz.WText",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 212,
+      "identity": "cv.viz.WText.WText(const String & text;const Point & pos;int font_size=20;const Color & color=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 213,
+      "identity": "cv.viz.WText.setText(const String & text)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 214,
+      "identity": "cv.viz.WText.getText()->String",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 215,
+      "identity": "class cv.viz.WText3D",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 216,
+      "identity": "cv.viz.WText3D.WText3D(const String & text;const Point3d & position;double text_scale=1.;bool face_camera=true;const Color & color=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 217,
+      "identity": "cv.viz.WText3D.setText(const String & text)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 218,
+      "identity": "cv.viz.WText3D.getText()->String",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 219,
+      "identity": "class cv.viz.WImageOverlay",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 220,
+      "identity": "cv.viz.WImageOverlay.WImageOverlay(InputArray image;const Rect & rect)->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 221,
+      "identity": "cv.viz.WImageOverlay.setImage(InputArray image)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 222,
+      "identity": "class cv.viz.WImage3D",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 223,
+      "identity": "cv.viz.WImage3D.WImage3D(InputArray image;const Size2d & size)->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 224,
+      "identity": "cv.viz.WImage3D.WImage3D(InputArray image;const Size2d & size;const Vec3d & center;const Vec3d & normal;const Vec3d & up_vector)->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 225,
+      "identity": "cv.viz.WImage3D.setImage(InputArray image)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 226,
+      "identity": "cv.viz.WImage3D.setSize(const Size& size)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 227,
+      "identity": "class cv.viz.WCoordinateSystem",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 228,
+      "identity": "cv.viz.WCoordinateSystem.WCoordinateSystem(double scale=1.0)->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 229,
+      "identity": "class cv.viz.WGrid",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 230,
+      "identity": "cv.viz.WGrid.WGrid(const Vec2i & cells=Vec2i::all(10);const Vec2d & cells_spacing=Vec2d::all(1.0);const Color & color=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 231,
+      "identity": "cv.viz.WGrid.WGrid(const Point3d& center;const Vec3d& normal;const Vec3d& new_yaxis;const Vec2i & cells=Vec2i::all(10);const Vec2d & cells_spacing=Vec2d::all(1.0);const Color & color=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 232,
+      "identity": "class cv.viz.WCameraPosition",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 233,
+      "identity": "cv.viz.WCameraPosition.WCameraPosition(double scale=1.0)->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 234,
+      "identity": "cv.viz.WCameraPosition.WCameraPosition(const Matx33d & K;double scale=1.0;const Color & color=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 235,
+      "identity": "cv.viz.WCameraPosition.WCameraPosition(const Vec2d & fov;double scale=1.0;const Color & color=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 236,
+      "identity": "cv.viz.WCameraPosition.WCameraPosition(const Matx33d & K;InputArray image;double scale=1.0;const Color & color=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 237,
+      "identity": "cv.viz.WCameraPosition.WCameraPosition(const Vec2d & fov;InputArray image;double scale=1.0;const Color & color=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 238,
+      "identity": "class cv.viz.WTrajectory",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 239,
+      "identity": "enum cv.viz.WTrajectory.<unnamed>[const cv.viz.WTrajectory.FRAMES=1;const cv.viz.WTrajectory.PATH=2;const cv.viz.WTrajectory.BOTH=FRAMES + PATH]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 240,
+      "identity": "cv.viz.WTrajectory.WTrajectory(InputArray path;int display_mode=WTrajectory::PATH;double scale=1.0;const Color & color=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 241,
+      "identity": "class cv.viz.WTrajectoryFrustums",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 242,
+      "identity": "cv.viz.WTrajectoryFrustums.WTrajectoryFrustums(InputArray path;const Matx33d & K;double scale=1.;const Color & color=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 243,
+      "identity": "cv.viz.WTrajectoryFrustums.WTrajectoryFrustums(InputArray path;const Vec2d & fov;double scale=1.;const Color & color=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 244,
+      "identity": "class cv.viz.WTrajectorySpheres",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 245,
+      "identity": "cv.viz.WTrajectorySpheres.WTrajectorySpheres(InputArray path;double line_length=0.05;double radius=0.007;const Color & from=Color::red();const Color & to=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 246,
+      "identity": "class cv.viz.WCloud",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 247,
+      "identity": "cv.viz.WCloud.WCloud(InputArray cloud;InputArray colors)->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 248,
+      "identity": "cv.viz.WCloud.WCloud(InputArray cloud;const Color & color=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 249,
+      "identity": "cv.viz.WCloud.WCloud(InputArray cloud;InputArray colors;InputArray normals)->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 250,
+      "identity": "cv.viz.WCloud.WCloud(InputArray cloud;const Color & color;InputArray normals)->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 251,
+      "identity": "class cv.viz.WPaintedCloud",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 252,
+      "identity": "cv.viz.WPaintedCloud.WPaintedCloud(InputArray cloud)->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 253,
+      "identity": "cv.viz.WPaintedCloud.WPaintedCloud(InputArray cloud;const Point3d& p1;const Point3d& p2)->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 254,
+      "identity": "cv.viz.WPaintedCloud.WPaintedCloud(InputArray cloud;const Point3d& p1;const Point3d& p2;const Color& c1;const Color c2)->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 255,
+      "identity": "class cv.viz.WCloudCollection",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 256,
+      "identity": "cv.viz.WCloudCollection.WCloudCollection()->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 257,
+      "identity": "cv.viz.WCloudCollection.addCloud(InputArray cloud;InputArray colors;const Affine3d & pose=Affine3d::Identity())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 258,
+      "identity": "cv.viz.WCloudCollection.addCloud(InputArray cloud;const Color & color=Color::white();const Affine3d & pose=Affine3d::Identity())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 259,
+      "identity": "cv.viz.WCloudCollection.finalize()->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 260,
+      "identity": "class cv.viz.WCloudNormals",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 261,
+      "identity": "cv.viz.WCloudNormals.WCloudNormals(InputArray cloud;InputArray normals;int level=64;double scale=0.1;const Color & color=Color::white())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 262,
+      "identity": "class cv.viz.WMesh",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 263,
+      "identity": "cv.viz.WMesh.WMesh(const Mesh & mesh)->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 264,
+      "identity": "cv.viz.WMesh.WMesh(InputArray cloud;InputArray polygons;InputArray colors=noArray();InputArray normals=noArray())->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 265,
+      "identity": "class cv.viz.WWidgetMerger",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 266,
+      "identity": "cv.viz.WWidgetMerger.WWidgetMerger()->",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 267,
+      "identity": "cv.viz.WWidgetMerger.addWidget(const Widget3D& widget;const Affine3d & pose=Affine3d::Identity())->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 268,
+      "identity": "cv.viz.WWidgetMerger.finalize()->void",
+      "classification": "intentionally-omitted",
+      "reason": "The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.",
+      "buildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}

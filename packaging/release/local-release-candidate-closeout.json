@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/7701926666f68081",
-  "SourceIdentity": "sha256:7701926666f6808193dc0eec636fe340327397e963d4bd924edd8c9e305593b5",
+  "CandidateId": "local-closeout/sha256/ad95419a654b44be",
+  "SourceIdentity": "sha256:ad95419a654b44beead799f390d30ed8ecaaeb9323857c82a3645862021ab65c",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 2390,
-    "Sha256": "7701926666f6808193dc0eec636fe340327397e963d4bd924edd8c9e305593b5",
+    "FileCount": 2401,
+    "Sha256": "ad95419a654b44beead799f390d30ed8ecaaeb9323857c82a3645862021ab65c",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -1060,6 +1060,35 @@
       "ManagedPublicMemberAdditionCount": 0,
       "NativeEntrypointAdditionCount": 0,
       "ExternalDataDependencyCount": 1,
+      "RepositoryWideParityClaimed": false
+    },
+    "VizUpstreamMap": {
+      "Path": "compatibility/viz-upstream-map.txt",
+      "SummaryPath": "compatibility/viz-upstream-summary.json",
+      "ClassificationPath": "compatibility/viz-upstream-classifications.json",
+      "FamilyInventoryPath": "compatibility/viz-implemented-families.json",
+      "RawExtractionPath": "compatibility/viz-upstream-raw.json",
+      "Sha256": "dfff0e359914083dcef58b133e0ea7597a8b84d4c33e4bea77f89d5d967ba2e6",
+      "RawSha256": "5c232834a9a957797d281e247406efb216e5386cec6ae7e35183783b5ae54a6e",
+      "DeclarationCount": 269,
+      "CallableCount": 225,
+      "ClassCount": 35,
+      "EnumCount": 9,
+      "MetadataCount": 44,
+      "ImplementedCount": 0,
+      "MissingCount": 0,
+      "IntentionallyOmittedCount": 225,
+      "UnsupportedCount": 0,
+      "UpstreamConditionalCount": 0,
+      "SourceHeaderCount": 5,
+      "CompatibilityHeaderCount": 1,
+      "ParserMode": "non-wrapper-public-declarations",
+      "SelectedFamilyCount": 1,
+      "SelectedDeclarationCount": 0,
+      "ManagedPublicTypeAdditionCount": 0,
+      "ManagedPublicMemberAdditionCount": 0,
+      "NativeEntrypointAdditionCount": 0,
+      "ExternalDataDependencyCount": 2,
       "RepositoryWideParityClaimed": false
     },
     "OvisUpstreamMap": {
@@ -2528,18 +2557,18 @@
     },
     {
       "Path": "compatibility/upstream-map-catalog.json",
-      "Sha256": "771aedef6b8e3197fbad45620f37339b5d0e6156f44e1f50f72d3472e3c29867",
-      "Length": 219736
+      "Sha256": "bf15cc70da67bd1e083c42e547a0444a86af60c58d29d0ea4e4cdca816519c6d",
+      "Length": 223437
     },
     {
       "Path": "compatibility/upstream-map-catalog.schema.json",
-      "Sha256": "766ebb7a02ce49c5859b43d50bd5b5f1bc8ed899a214982fd2ab4f1c0a7f022a",
-      "Length": 6245
+      "Sha256": "956c496672855401e8c3f4c11806ab6c279c3853a5a4fc40349b5cb2bf4fb269",
+      "Length": 6252
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "79bd40b87391d878fe06af81ddf67819b3da8b18747c7729b976e4acf789625b",
-      "Length": 86408
+      "Sha256": "1427ba35ee3fddfee8add095c128a4b9bc9de0c6401c36abbce9c77d38a0aac3",
+      "Length": 87622
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -2625,6 +2654,31 @@
       "Path": "compatibility/videostab-upstream-summary.json",
       "Sha256": "55a953366b7b2b7e04ff0ee0948e52e253d6324f1fa4350b2f0886378ab3ec6f",
       "Length": 1542
+    },
+    {
+      "Path": "compatibility/viz-implemented-families.json",
+      "Sha256": "abbb102cedadc4df93df769cfdc18f4ae5f5942bcdcf0d81bd027a6236162aec",
+      "Length": 384
+    },
+    {
+      "Path": "compatibility/viz-upstream-classifications.json",
+      "Sha256": "7d6380b8a5d2f3f13f939a90507ce2ec6170580279ded68fab6025825cb203c7",
+      "Length": 142847
+    },
+    {
+      "Path": "compatibility/viz-upstream-map.txt",
+      "Sha256": "dfff0e359914083dcef58b133e0ea7597a8b84d4c33e4bea77f89d5d967ba2e6",
+      "Length": 94437
+    },
+    {
+      "Path": "compatibility/viz-upstream-raw.json",
+      "Sha256": "5c232834a9a957797d281e247406efb216e5386cec6ae7e35183783b5ae54a6e",
+      "Length": 198918
+    },
+    {
+      "Path": "compatibility/viz-upstream-summary.json",
+      "Sha256": "184fd9c43afac60a57bedbc6d6d8fd97bc708c4f485fc302286e2dc037c5753d",
+      "Length": 1496
     },
     {
       "Path": "compatibility/wechat_qrcode-implemented-families.json",
@@ -3222,6 +3276,11 @@
       "Length": 1707
     },
     {
+      "Path": "docs/articles/viz-upstream-parity-guide.md",
+      "Sha256": "d2be5073aa8ea006e2bc185779f17a91035452d0125e5c805a46f09380a555db",
+      "Length": 959
+    },
+    {
       "Path": "docs/articles/wechat-qrcode-upstream-parity-guide.md",
       "Sha256": "a0b3c6192cdd277d95210d5e419a6d6a088e52379de1ab33a846ebe0e74aabed",
       "Length": 1837
@@ -3308,8 +3367,8 @@
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "60753e99446045552f8bc6997d33662598a98446d57933b2ba1dd47f38e5dff9",
-      "Length": 19393
+      "Sha256": "2db1fd043a2b13f451a258a848ada903172fb27777f4e515faa80861f9719bb1",
+      "Length": 19472
     },
     {
       "Path": "nuget/logo.jpg",
@@ -3678,8 +3737,8 @@
     },
     {
       "Path": "scripts/Generate-ContribUpstreamMap.ps1",
-      "Sha256": "e3ea7e87ac602b2d07c537e38bf18c75236c2d2028cc138d48485f219cf8287e",
-      "Length": 135493
+      "Sha256": "9ec75d7010f09c67225f595c362c4db62beb2d2c272028cec0cc8339b9de7c74",
+      "Length": 136644
     },
     {
       "Path": "scripts/Generate-CoreUpstreamMap.ps1",
@@ -3937,6 +3996,11 @@
       "Length": 2897
     },
     {
+      "Path": "scripts/Generate-VizUpstreamMap.ps1",
+      "Sha256": "df827a3484f98a4f7ade42eb368bec5ea379c64d6d3ee1dc603c868f25e2e23e",
+      "Length": 963
+    },
+    {
       "Path": "scripts/Generate-WechatQRCodeUpstreamMap.ps1",
       "Sha256": "50d0000a19a67ba7d3b8bd93a2d8459bbeb79fddab8840ee2addda4155a7437b",
       "Length": 311
@@ -3978,8 +4042,8 @@
     },
     {
       "Path": "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
-      "Sha256": "0eaa978e55449d45c66f0f495221a5b7321eb7971d6c4b4c69992e9dad89c632",
-      "Length": 5731
+      "Sha256": "7ff8a988127345fae64ee5695316c504e17dee1251cd784ab0cfd4df9fd5a96d",
+      "Length": 5753
     },
     {
       "Path": "scripts/Invoke-LifecycleRefreshContainerProducer.ps1",
@@ -4058,8 +4122,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "003d5fe833d60555a5cadfb18f2fed87fbea9b4d634df714d6f254d091575d6b",
-      "Length": 167977
+      "Sha256": "0a22f6164330ed2e2b08b993048c4f33d9d130511ede92ba0ac15462d29afd9e",
+      "Length": 171039
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -4073,8 +4137,8 @@
     },
     {
       "Path": "scripts/New-UpstreamMapCatalog.ps1",
-      "Sha256": "a042498065763db7e945e0abb757f3599bf8e4aa9f103b2bd6f38df1ca8c2f3a",
-      "Length": 12679
+      "Sha256": "4c8f2e18c2b8fc5329711bfe8fc5e5d41d98a789812c694f09da98455838cb6a",
+      "Length": 12760
     },
     {
       "Path": "scripts/Test-AlphaMatUpstreamMap.ps1",
@@ -4513,8 +4577,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "b360fbc54b6b3d679887a6f0a92d30f3f1b1e62e6adfd55519b2723adf2ea47e",
-      "Length": 142174
+      "Sha256": "818d3ca48d47af1254755d100ae58fef8965c09aa7c8c9cded787defc0067bdd",
+      "Length": 144450
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -4638,8 +4702,8 @@
     },
     {
       "Path": "scripts/Test-UpstreamMapCatalog.ps1",
-      "Sha256": "cbfb9204c16b489a8ea9ea5e6ff683efa6c072dec6031bf42cf8d2287c2a398c",
-      "Length": 15328
+      "Sha256": "ab030ea12779cadefddea832cc0f2cd149c0655ba1b7379e605a0529861dca84",
+      "Length": 15334
     },
     {
       "Path": "scripts/Test-V501ChangeLedger.ps1",
@@ -4670,6 +4734,11 @@
       "Path": "scripts/Test-VideoUpstreamMap.ps1",
       "Sha256": "081963cfba9ab5c62a237c18ed8d48e65e8a858e88cb36da5618f79bf7aa3f5d",
       "Length": 2125
+    },
+    {
+      "Path": "scripts/Test-VizUpstreamMap.ps1",
+      "Sha256": "8f35ed384a8168592caa6cfe5f7cfd202d1e2cf7bab2c16f60f9f448b6a77560",
+      "Length": 5107
     },
     {
       "Path": "scripts/Test-WechatQRCodeUpstreamMap.ps1",
@@ -6140,6 +6209,21 @@
       "Path": "tools/VideoUpstreamMap/extract_video.py",
       "Sha256": "2012da45a77d0fbf4693cd1cc5818ddfd9084a892321a049ed657d1a32b8a158",
       "Length": 6442
+    },
+    {
+      "Path": "tools/VizUpstreamMap/Program.cs",
+      "Sha256": "22cb1241b3731fb4c4d384aa45efcfcb99acacf7073b5ca70901828f49bc66f4",
+      "Length": 96
+    },
+    {
+      "Path": "tools/VizUpstreamMap/VizUpstreamMap.csproj",
+      "Sha256": "727d0721f11212e08035cc59275b0226c0092f3ea92492d621c3d25879ef974f",
+      "Length": 273
+    },
+    {
+      "Path": "tools/VizUpstreamMap/extract_viz.py",
+      "Sha256": "ce702552261beae977495b115bc2cb44a7f08c783515823f71098032b372751a",
+      "Length": 6060
     },
     {
       "Path": "tools/WechatQRCodeUpstreamMap/Program.cs",
