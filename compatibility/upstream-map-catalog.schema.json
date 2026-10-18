@@ -22,17 +22,17 @@
         "unexplainedMissingAllowed": { "const": false }
       }
     },
-  "moduleCount": { "const": 60 },
+  "moduleCount": { "const": 61 },
     "maps": {
       "type": "array",
-      "minItems": 60,
-      "maxItems": 60,
+      "minItems": 61,
+      "maxItems": 61,
       "items": {
         "type": "object",
         "additionalProperties": false,
         "required": [ "id", "repository", "generatorProject", "extractorScript", "generationScript", "semanticGuard", "scope", "artifacts", "evidenceContract" ],
         "properties": {
-          "id": { "enum": [ "calib3d", "core", "cnn_3dobj", "signal", "dpm", "hdf", "text", "dnn", "dnn_superres", "features", "highgui", "imgcodecs", "imgproc", "ml", "objdetect", "photo", "stitching", "tracking", "video", "videoio", "xphoto", "ximgproc", "optflow", "bgsegm", "face", "quality", "img_hash", "line_descriptor", "freetype", "alphamat", "intensity_transform", "plot", "bioinspired", "phase_unwrapping", "hfs", "fuzzy", "rapid", "shape", "structured_light", "saliency", "surface_matching", "reg", "xstereo", "ptcloud", "xobjdetect", "wechat_qrcode", "xfeatures2d", "dnn_objdetect", "ccalib", "superres", "julia", "rgbd", "cudaarithm", "cudabgsegm", "cudafilters", "cudaimgproc", "cudacodec", "cudawarping", "cudafeatures2d", "cudaobjdetect" ] },
+          "id": { "enum": [ "calib3d", "core", "cnn_3dobj", "signal", "dpm", "hdf", "text", "dnn", "dnn_superres", "features", "highgui", "imgcodecs", "imgproc", "ml", "objdetect", "photo", "stitching", "tracking", "video", "videoio", "xphoto", "ximgproc", "optflow", "bgsegm", "face", "quality", "img_hash", "line_descriptor", "freetype", "alphamat", "intensity_transform", "plot", "bioinspired", "phase_unwrapping", "hfs", "fuzzy", "rapid", "shape", "structured_light", "saliency", "surface_matching", "reg", "xstereo", "ptcloud", "xobjdetect", "wechat_qrcode", "xfeatures2d", "dnn_objdetect", "ccalib", "superres", "julia", "rgbd", "cudaarithm", "cudabgsegm", "cudafilters", "cudaimgproc", "cudacodec", "cudawarping", "cudafeatures2d", "cudaobjdetect", "cudaoptflow" ] },
           "repository": { "enum": [ "opencv", "opencv_contrib" ] },
           "generatorProject": { "type": "string", "pattern": "^tools/[A-Za-z0-9]+UpstreamMap$" },
           "extractorScript": { "$ref": "#/$defs/repositoryPath" },

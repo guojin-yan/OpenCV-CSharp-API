@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 60,
+  "moduleCount": 61,
   "maps": [
     {
       "id": "calib3d",
@@ -3848,6 +3848,58 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "7309fcbf343989be395a99cae228c4faa14dd3b9c2484f5dcea0615a5f08bce9",
         "familyInventorySha256": "d198bd8d3139062b56d69fa85820a9908218ec4846ba5154cc6319d5f3d16fd0",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "cudaoptflow",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/CudaOptFlowUpstreamMap",
+      "extractorScript": "tools/CudaOptFlowUpstreamMap/extract_cudaoptflow.py",
+      "generationScript": "scripts/Generate-CudaOptFlowUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-CudaOptFlowUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/cudaoptflow.hpp parser-backed CUDA optical-flow public declarations plus the pinned module CMake build/dependency contract",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/cudaoptflow/include/opencv2/cudaoptflow.hpp",
+          "sha256": "97cc9528b32bb441c1eb7ac84b4b73bc11e460142d398a5b9b2a2b33fdc079a1"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudaoptflow/include/opencv2/cudaoptflow.hpp",
+            "sha256": "97cc9528b32bb441c1eb7ac84b4b73bc11e460142d398a5b9b2a2b33fdc079a1",
+            "startOrdinal": 0,
+            "declarationCount": 93
+          }
+        ],
+        "compatibilityHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudaoptflow/CMakeLists.txt",
+            "sha256": "78c5ab06b0428fc4d422b1700d7a7335f7d24b3ee56efcdd60d25424309f0942",
+            "reason": "Upstream module activation, optical-flow dependency, CUDA runtime, and optional NVIDIA Optical Flow SDK dependency contract; parser declarations are not gated in the public header."
+          }
+        ],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/cudaoptflow-upstream-raw.json",
+        "classifications": "compatibility/cudaoptflow-upstream-classifications.json",
+        "mapping": "compatibility/cudaoptflow-upstream-map.txt",
+        "summary": "compatibility/cudaoptflow-upstream-summary.json",
+        "familyInventory": "compatibility/cudaoptflow-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 93,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "ac45508b1fb05e0a6154e42cf050161da9dc52fbb5b2ab5a5c6b511abedfde6a",
+        "familyInventorySha256": "7291bf8549764ced7c9a79b908356bf33488420cc38cecaa9671708a69a20702",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false
