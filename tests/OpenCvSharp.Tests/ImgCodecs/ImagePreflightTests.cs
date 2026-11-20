@@ -1785,8 +1785,10 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             byte[] ipco = ConcatenateAvifBoxes(
                 CreateAvifBox("ispe", ispePayload),
                 CreateAvifBox("pixi", pixiPayload));
-            byte[] iprp = CreateAvifBox("iprp", CreateAvifBox("ipco", ipco));
-            byte[] metaPayload = ConcatenateAvifBoxes(new byte[4], iprp);
+            byte[] ipma = CreateAvifBox("ipma", new byte[] { 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 2, 1, 2 });
+            byte[] iprp = CreateAvifBox("iprp", ConcatenateAvifBoxes(CreateAvifBox("ipco", ipco), ipma));
+            byte[] pitm = CreateAvifBox("pitm", new byte[] { 0, 0, 0, 0, 0, 1 });
+            byte[] metaPayload = ConcatenateAvifBoxes(new byte[4], pitm, iprp);
             return ConcatenateAvifBoxes(
                 CreateAvifBox("ftyp", fileTypePayload),
                 CreateAvifBox("meta", metaPayload),

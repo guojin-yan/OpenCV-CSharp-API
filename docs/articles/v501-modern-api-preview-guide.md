@@ -52,6 +52,8 @@ Use `ImageIdentifyResult` and `ImageDecodeOptions` before decoding untrusted byt
 
 Complete GIF containers now expose stored extension and ICC payload lengths. Exact budgets can admit those inputs; truncated or trailing containers keep both facts unknown and are rejected when the corresponding strict-known options are enabled. These facts do not validate ICC content, expanded allocation, or decoded color/precision.
 
+AVIF dimensions and encoded pixel facts require `pitm`/`ipma` associations to the primary item. Thumbnail and unassociated `ispe/pixi` properties cannot supply those facts. Missing or malformed associations remain unknown and fail the relevant strict-known options.
+
 The existing `byte[]` APIs remain the compatibility baseline. On modern target frameworks, preview `ImEncodeTo(..., IBufferWriter<byte>)` performs one final `GetSpan`/copy/`Advance`; writer faults are terminal and no native result is retried. The internal `CodecBufferLease` prototype validates pinned owner and stride boundaries but does not create a Mat header or ABI entry.
 
 Untrusted decode policy is documented in [Codec Preflight And Limits](codec-preflight-and-limits.md). Buffer ownership and rollback are in [Codec Buffer And Owner ADR](codec-buffer-and-owner-adr.md) and [Codec Buffer Lease ADR](codec-buffer-lease-adr.md).
@@ -59,6 +61,8 @@ Untrusted decode policy is documented in [Codec Preflight And Limits](codec-pref
 对于不可信输入，先使用 `ImageIdentifyResult` 与 `ImageDecodeOptions` 做预检。限制覆盖输入字节、尺寸、像素、累计像素、帧数、metadata、ICC、编码像素存储、深度和通道。现有 `byte[]` API 仍是兼容基线；`IBufferWriter<byte>` 与 pinned lease 仍是 preview/internal，未进入稳定 ABI。
 
 完整 GIF 容器现在提供扩展块及 ICC 的存储负载长度，可按精确预算准入；截断或尾部多余输入使两项事实保持未知，启用相应 strict-known 选项时会被拒绝。这些事实不验证 ICC 内容、展开后的分配量或解码后的颜色/精度。
+
+AVIF 尺寸和编码像素事实要求通过 `pitm`/`ipma` 关联到主图，缩略图或未关联的 `ispe/pixi` 不能提供这些事实；缺失或损坏的关联保持未知，启用相应 strict-known 选项时拒绝。
 
 `ConsoleSamples` 的 `typed-mat` 与 `buffered-codec` 命令提供可运行的机器可读示例；没有 native runtime 时明确 skipped，不能把 skipped 当作能力已验证。
 
@@ -76,7 +80,7 @@ The headless profile is candidate-only. It keeps the managed API shape, omits th
 pwsh -NoProfile -File .\scripts\Test-CapabilitiesJsonContract.ps1
 pwsh -NoProfile -File .\scripts\Test-GenericLinuxArm64PreviewMatrix.ps1
 pwsh -NoProfile -File .\scripts\Test-HeadlessRuntimeProfileContract.ps1
-dotnet test .\tests\OpenCvSharp.Tests\OpenCvSharp.Tests.csproj -c Release -f net8.0 --filter "FullyQualifiedName~ImagePreflightTests|FullyQualifiedName~GifMetadataPreflightTests"
+dotnet test .\tests\OpenCvSharp.Tests\OpenCvSharp.Tests.csproj -c Release -f net8.0 --filter "FullyQualifiedName~ImagePreflightTests|FullyQualifiedName~GifMetadataPreflightTests|FullyQualifiedName~AvifPrimaryItemPreflightTests"
 dotnet test .\tests\OpenCvSharp.Tests\OpenCvSharp.Tests.csproj -c Release -f net8.0 --filter FullyQualifiedName~CodecBufferLeaseTests
 ```
 

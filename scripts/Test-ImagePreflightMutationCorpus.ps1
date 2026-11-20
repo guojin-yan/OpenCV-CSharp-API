@@ -23,6 +23,8 @@ foreach ($fixture in @($manifest.fixtures)) {
 if ($testText.IndexOf('IdentifyDeterministicMutationCorpusPreservesSeekAndConsumesNonSeekStreams', [StringComparison]::Ordinal) -lt 0) { throw 'Stream mutation test is missing from the focused test.' }
 $gifTestPath = Join-Path $repo 'tests/OpenCvSharp.Tests/ImgCodecs/GifMetadataPreflightTests.cs'
 if (-not (Test-Path -LiteralPath $gifTestPath -PathType Leaf)) { throw 'GIF metadata admission tests are missing.' }
+$avifTestPath = Join-Path $repo 'tests/OpenCvSharp.Tests/ImgCodecs/AvifPrimaryItemPreflightTests.cs'
+if (-not (Test-Path -LiteralPath $avifTestPath -PathType Leaf)) { throw 'AVIF primary item admission tests are missing.' }
 if (@($manifest.frameworks).Count -ne 2 -or @($manifest.replacementBytes).Count -ne 5 -or @($manifest.fixtures).Count -lt 13) { throw 'Mutation corpus manifest dimensions drifted.' }
 
 $frameworks = @('net8.0', 'net10.0')
@@ -37,7 +39,7 @@ foreach ($framework in $frameworks) {
     $startInfo.RedirectStandardError = $true
     foreach ($argument in @(
             'test', $project, '-c', 'Release', '-f', $framework, '--no-restore',
-            '--filter', 'FullyQualifiedName~IdentifyDeterministicMutationCorpus|FullyQualifiedName~GifMetadataPreflightTests',
+            '--filter', 'FullyQualifiedName~IdentifyDeterministicMutationCorpus|FullyQualifiedName~GifMetadataPreflightTests|FullyQualifiedName~AvifPrimaryItemPreflightTests',
             '--results-directory', $resultsDirectory, '--logger', 'trx;LogFileName=preflight.trx',
             '--logger', 'console;verbosity=minimal')) {
         [void]$startInfo.ArgumentList.Add($argument)
@@ -66,7 +68,10 @@ foreach ($framework in $frameworks) {
             'IdentifyDeterministicMutationCorpusNeverEscapesParserOrPublishesInvalidFacts',
             'IdentifyDeterministicMutationCorpusPreservesSeekAndConsumesNonSeekStreams',
             'GifMetadataBudgetsRejectBeforeNativeDecodeAndAcceptExactStoredLengths',
-            'GifStrictMetadataPolicyRejectsUnknownLengthsWhilePermissiveIdentifyPreservesThem')) {
+            'GifStrictMetadataPolicyRejectsUnknownLengthsWhilePermissiveIdentifyPreservesThem',
+            'IdentifyDoesNotUseUnassociatedAvifProperties',
+            'IdentifyUsesOnlyPropertiesOfThePrimaryAvifItem',
+            'AvifPrimaryItemLimitsRejectBeforeNativeDecodeAndPreserveStreamPosition')) {
         if (@($results | Where-Object { ([string]$_.testName).Contains($requiredTest) -and [string]$_.outcome -ceq 'Passed' }).Count -ne 1) { throw "Required image preflight test did not pass on ${framework}: $requiredTest" }
     }
     Write-Host "IMAGE_PREFLIGHT_MUTATION_FRAMEWORK_OK framework=$framework tests_passed=$($counters.passed) timeout_seconds=$TimeoutSeconds trx=$trxPath"
