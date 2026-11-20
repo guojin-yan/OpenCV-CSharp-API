@@ -190,6 +190,8 @@ function Get-Record {
     $ovisSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/ovis-upstream-summary.json") -Raw | ConvertFrom-Json
     $fastcvRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/fastcv-upstream-raw.json") -Raw | ConvertFrom-Json
     $fastcvSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/fastcv-upstream-summary.json") -Raw | ConvertFrom-Json
+    $cannopsRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/cannops-upstream-raw.json") -Raw | ConvertFrom-Json
+    $cannopsSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/cannops-upstream-summary.json") -Raw | ConvertFrom-Json
     $evidencePaths = @(
         ".github/workflows/pack.yml",
         ".github/workflows/publish-nuget.yml",
@@ -524,6 +526,11 @@ function Get-Record {
         "compatibility/fastcv-upstream-map.txt",
         "compatibility/fastcv-upstream-raw.json",
         "compatibility/fastcv-upstream-summary.json",
+        "compatibility/cannops-implemented-families.json",
+        "compatibility/cannops-upstream-classifications.json",
+        "compatibility/cannops-upstream-map.txt",
+        "compatibility/cannops-upstream-raw.json",
+        "compatibility/cannops-upstream-summary.json",
         "compatibility/v5.0.1-change-ledger.json",
         "compatibility/v5.0.1-change-ledger.schema.json",
         "docs/articles/api-abi-compatibility-policy.md",
@@ -533,6 +540,7 @@ function Get-Record {
         "docs/articles/viz-upstream-parity-guide.md",
         "docs/articles/ovis-upstream-parity-guide.md",
         "docs/articles/fastcv-upstream-parity-guide.md",
+        "docs/articles/cannops-upstream-parity-guide.md",
         "docs/articles/xfeatures2d-upstream-parity-guide.md",
         "docs/articles/dnn-objdetect-upstream-parity-guide.md",
         "docs/articles/ccalib-upstream-parity-guide.md",
@@ -1088,6 +1096,9 @@ function Get-Record {
         "tools/FastCVUpstreamMap/FastCVUpstreamMap.csproj",
         "tools/FastCVUpstreamMap/Program.cs",
         "tools/FastCVUpstreamMap/extract_fastcv.py",
+        "tools/CannOpsUpstreamMap/CannOpsUpstreamMap.csproj",
+        "tools/CannOpsUpstreamMap/Program.cs",
+        "tools/CannOpsUpstreamMap/extract_cannops.py",
         "tools/DnnObjDetectUpstreamMap/DnnObjDetectUpstreamMap.csproj",
         "tools/DnnObjDetectUpstreamMap/Program.cs",
         "tools/DnnObjDetectUpstreamMap/extract_dnn_objdetect.py",
@@ -1224,6 +1235,8 @@ function Get-Record {
         "scripts/Test-OvisUpstreamMap.ps1",
         "scripts/Generate-FastCVUpstreamMap.ps1",
         "scripts/Test-FastCVUpstreamMap.ps1",
+        "scripts/Generate-CannOpsUpstreamMap.ps1",
+        "scripts/Test-CannOpsUpstreamMap.ps1",
         "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
         "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
         "tools/TypedMatBenchmark/Program.cs",
@@ -2334,6 +2347,39 @@ function Get-Record {
                 NativeEntrypointAdditionCount = [int]$fastcvSummary.nativeEvidenceCount
                 ExternalDataDependencyCount = [int]$fastcvSummary.externalDataDependencyCount
                 RepositoryWideParityClaimed = [bool]$fastcvSummary.repositoryWideUpstreamParityClaimed
+            }
+            CannOpsUpstreamMap = [ordered]@{
+                Path = "compatibility/cannops-upstream-map.txt"
+                SummaryPath = "compatibility/cannops-upstream-summary.json"
+                ClassificationPath = "compatibility/cannops-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/cannops-implemented-families.json"
+                RawExtractionPath = "compatibility/cannops-upstream-raw.json"
+                Sha256 = $cannopsSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/cannops-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$cannopsSummary.declarationCount
+                CallableCount = [int]$cannopsSummary.callableCount
+                ClassCount = [int]$cannopsSummary.classCount
+                EnumCount = [int]$cannopsSummary.enumCount
+                MetadataCount = [int]$cannopsSummary.classificationCounts.'non-callable-metadata'
+                ImplementedCount = [int]$cannopsSummary.classificationCounts.implemented
+                MissingCount = [int]$cannopsSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$cannopsSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$cannopsSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$cannopsSummary.classificationCounts.'upstream-conditional'
+                SourceHeaderCount = @($cannopsRaw.sourceHeaders).Count
+                CompatibilityHeaderCount = @($cannopsRaw.compatibilityHeaders).Count
+                ParserMode = [string]$cannopsRaw.parserMode
+                ModuleBuildCondition = [string]$cannopsRaw.moduleBuildCondition
+                InlineReconciledCount = @($cannopsRaw.inlineDefinitionIdentities).Count
+                PrivateInlineExcludedCount = @($cannopsRaw.excludedPrivateInlineDefinitions).Count
+                BindingOnlyPlaceholderBlockCount = [int]$cannopsRaw.bindingOnlyPlaceholderBlockCount
+                SelectedFamilyCount = [int]$cannopsSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$cannopsSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$cannopsSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$cannopsSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$cannopsSummary.nativeEvidenceCount
+                ExternalDataDependencyCount = [int]$cannopsSummary.externalDataDependencyCount
+                RepositoryWideParityClaimed = [bool]$cannopsSummary.repositoryWideUpstreamParityClaimed
             }
             DnnObjDetectUpstreamMap = [ordered]@{
                 Path = "compatibility/dnn_objdetect-upstream-map.txt"

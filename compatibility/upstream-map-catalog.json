@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 69,
+  "moduleCount": 70,
   "maps": [
     {
       "id": "calib3d",
@@ -4855,6 +4855,115 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "fcb81059010d51821cc881dcb32017cb7ca098ca58286cc141bcee678c2512ae",
         "familyInventorySha256": "8fa8dd6ab650bf6e4b68431c9ae92b63d4d5d4eb79adaf345c3daf558447b7f0",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "cannops",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/CannOpsUpstreamMap",
+      "extractorScript": "tools/CannOpsUpstreamMap/extract_cannops.py",
+      "generationScript": "scripts/Generate-CannOpsUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-CannOpsUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "All eight installed CannOps opencv2/*.hpp headers, including internal helpers; cv::cann parser declarations retain restored nested Impl identities, reconcile inline definitions and exclude private inline constructors and inactive binding-only placeholders; CANN/AscendC build and runtime boundaries remain evidence-only",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/cannops/include/opencv2/cann.hpp",
+          "sha256": "0eea669daf1b24f78742b8ba4721ea304f6eed9c2e505fcb4c9a98d7ed6d32a2"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cannops/include/opencv2/ascendc_kernels.hpp",
+            "sha256": "137eb88743cbac6bc8e38b3805b2e50b7e8330dfb9c9ddce1a538ce18e5d7854",
+            "startOrdinal": 0,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cannops/include/opencv2/cann.hpp",
+            "sha256": "0eea669daf1b24f78742b8ba4721ea304f6eed9c2e505fcb4c9a98d7ed6d32a2",
+            "startOrdinal": 0,
+            "declarationCount": 61
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cannops/include/opencv2/cann.inl.hpp",
+            "sha256": "0d4df6136113d77bd46b3875188f8d5d504f678b1aa8f6d5c9d8d90aaf3248dd",
+            "startOrdinal": 61,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cannops/include/opencv2/cann_call.hpp",
+            "sha256": "7619334330fabe4db25566d9da41272dd171df28e84398e168450f2786cb27c5",
+            "startOrdinal": 61,
+            "declarationCount": 41
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cannops/include/opencv2/cann_interface.hpp",
+            "sha256": "02cf044d0b777b50f0dcc44e32304b3b103846d56bf04473b0ff83e87c2ac2b6",
+            "startOrdinal": 102,
+            "declarationCount": 61
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cannops/include/opencv2/cann_private.hpp",
+            "sha256": "1bb6e60d6a78cf198e1c8d3abeba6a006f62335f3c7f0490acaeab84ee38acc4",
+            "startOrdinal": 163,
+            "declarationCount": 10
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cannops/include/opencv2/dvpp_call.hpp",
+            "sha256": "d4524f797a6d1155fa1ab3e0e4f2d064580f84c7053040c1bf5950676699b43e",
+            "startOrdinal": 173,
+            "declarationCount": 22
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cannops/include/opencv2/stream_accessor.hpp",
+            "sha256": "1d7e02858b2489ddddda1c4352beaee289bafb5fd9e3b4d52f70b0b9cfe31cb0",
+            "startOrdinal": 195,
+            "declarationCount": 6
+          }
+        ],
+        "compatibilityHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cannops/CMakeLists.txt",
+            "sha256": "1d5a7ea5194d764f4c3bd72efec3b3a6cf8d80f8e21f58b9182fe9938288d367",
+            "reason": "Module platform exclusions, HAVE_CANN gate, OpenCV core and CANN library dependencies, and AscendC kernel integration."
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cannops/ascendc_kernels/CMakeLists.txt",
+            "sha256": "b877dbdbce1ab090446fc96139720b517ff6e0d8400ea3af847dd7a678c24008",
+            "reason": "External AscendC compiler package, SOC_VERSION, RUN_MODE and threshold kernel build contract."
+          },
+          {
+            "path": "opencv-source/opencv-5.0.0/cmake/OpenCVFindCANN.cmake",
+            "sha256": "24827103dc438b9465f5cd5d1d2c919518e7bdb72f2c77c9ab854aff2b299e07",
+            "reason": "UNIX/x86_64/amd64/aarch64, external toolkit/shared libraries and VALID_ASCENDCL compile probe."
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cannops/tutorials/ascend_npu_image_processing.markdown",
+            "sha256": "b198435b466a1e85ca095f215ef8ddb762c9b4e9dcaae3f1cf8331933b5d6915",
+            "reason": "External Ascend NPU/CANN execution and stream/event synchronization ownership."
+          }
+        ],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/cannops-upstream-raw.json",
+        "classifications": "compatibility/cannops-upstream-classifications.json",
+        "mapping": "compatibility/cannops-upstream-map.txt",
+        "summary": "compatibility/cannops-upstream-summary.json",
+        "familyInventory": "compatibility/cannops-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 201,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "9c5a07d6cd0130c44eed6292a70cde1d2f6282d0bbd28100c16d5ac906547fb0",
+        "familyInventorySha256": "8addb64ec360c990a22aff3176dc61068a5e1359c36c276e117ae7f42a7c7dbe",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false
