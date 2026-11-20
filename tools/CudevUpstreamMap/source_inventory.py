@@ -148,8 +148,9 @@ def inventory(text):
             raise ValueError("Template declaration has no body or semicolon")
         head = compact(text[tokens[close].end():tokens[cursor].start()])
         class_match = re.match(r"(class|struct)\s+([A-Za-z_]\w*)", head)
-        kind = "class-template" if class_match else "function-template"
-        if not class_match and "(" not in head:
+        alias_match = re.match(r"using\s+[A-Za-z_]\w*\s*=", head)
+        kind = "class-template" if class_match else "alias-template" if alias_match else "function-template"
+        if not class_match and not alias_match and "(" not in head:
             raise ValueError(f"Unrecognized template declaration: {head}")
         end = matching(tokens, cursor, "{", "}") if tokens[cursor].group() == "{" else cursor
         if class_match and end + 1 < len(tokens) and tokens[end + 1].group() == ";":
@@ -201,6 +202,10 @@ template<class T> void host(T value) { /* } */ }
     assert result["templates"][1]["kind"] == "function-template"
     assert "!((ARCH >= 300)) && (ARCH >= 200)" in result["templates"][2]["conditions"]
     assert "!((ARCH >= 300) || (ARCH >= 200))" in result["templates"][3]["conditions"]
+    aliases, _, _ = inventory('template<class T> using Storage = std::vector<T>;\n')
+    assert len(aliases["templates"]) == 1
+    assert aliases["templates"][0]["kind"] == "alias-template"
+    assert aliases["templates"][0]["declarationHead"] == "using Storage = std::vector<T>"
     for broken in ("template<class T> struct Broken {", "#if X\ntemplate<class T> struct A {};", "#else\n", "#if X\n#else\n#else\n#endif\n"):
         try:
             inventory(broken)

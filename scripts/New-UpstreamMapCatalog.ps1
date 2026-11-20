@@ -80,6 +80,7 @@ $definitions = @(
     [pscustomobject]@{ Id = 'cannops'; Tool = 'CannOps'; Repository = 'opencv_contrib' }
     [pscustomobject]@{ Id = 'sfm'; Tool = 'Sfm'; Repository = 'opencv_contrib' }
     [pscustomobject]@{ Id = 'cudev'; Tool = 'Cudev'; Repository = 'opencv_contrib' }
+    [pscustomobject]@{ Id = 'matlab'; Tool = 'Matlab'; Repository = 'opencv_contrib' }
 )
 
 function Get-HeaderRows {
@@ -179,7 +180,8 @@ $catalog = [ordered]@{
         'The catalog centralizes source/header scope, classification policy, artifact bindings, generator commands, and semantic guard commands for the parser-backed map set, including the staged contrib batches.',
         'Each module retains its specialized extraction and semantic implementation; catalog orchestration does not assert repository-wide OpenCV parity.',
         'Additional contrib modules are introduced only as explicit catalog rows after their source scope and classification evidence are reviewed.',
-        'Cudev reconciles a non-template parser subset with a separate source callable inventory, including class-template members and 44 finite local declaration generators. Complete callable/instantiation coverage and external declaration closure remain open; zero missing applies only to the recorded parser subset.'
+        'Cudev reconciles a non-template parser subset with a separate source callable inventory, including class-template members and 44 finite local declaration generators. Complete callable/instantiation coverage and external declaration closure remain open; zero missing applies only to the recorded parser subset.',
+        'MATLAB records a non-template installed-helper parser subset and all-branch lexical template provenance. Complete callable/instantiation coverage, external include closure, generated +cv gateways and MATLAB/MEX execution remain open; zero missing applies only to the recorded parser subset.'
     )
 }
 $outputFullPath = if ([IO.Path]::IsPathRooted($OutputPath)) { [IO.Path]::GetFullPath($OutputPath) } else { [IO.Path]::GetFullPath((Join-Path $repo ($OutputPath -replace '/', [IO.Path]::DirectorySeparatorChar))) }

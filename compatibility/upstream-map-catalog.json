@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 72,
+  "moduleCount": 73,
   "maps": [
     {
       "id": "calib3d",
@@ -5611,12 +5611,138 @@
         "zeroMissing": true,
         "repositoryWideParityClaimed": false
       }
+    },
+    {
+      "id": "matlab",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/MatlabUpstreamMap",
+      "extractorScript": "tools/MatlabUpstreamMap/extract_matlab.py",
+      "generationScript": "scripts/Generate-MatlabUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-MatlabUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "All four installed opencv2/matlab/*.hpp helpers: non-template public parser subset under source C++11, with restored conversion-operator ownership, reconciled inline definitions and linked all-branch lexical template/conditional provenance; complete callable and generated +cv gateway coverage remain open",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+          "sha256": "312ac0f7df5406498d82909a505e3709240e0ad1947a7ca9c1e08f24dd1dd252"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+            "sha256": "312ac0f7df5406498d82909a505e3709240e0ad1947a7ca9c1e08f24dd1dd252",
+            "startOrdinal": 0,
+            "declarationCount": 154
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/map.hpp",
+            "sha256": "81dd56dec0f4b250e46047b53e4bedf05d9762d826e1cfad0774c3de44d59daa",
+            "startOrdinal": 154,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+            "sha256": "1ff1e2372af3ea1ef81ac41de2c6d88809574d1b59c152ebdcee20c0f4b9a9d8",
+            "startOrdinal": 154,
+            "declarationCount": 36
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/transpose.hpp",
+            "sha256": "2b730a66f83ed727021e9539a8ffc6e08d6386e8cd7bc102e5f87f58d008716c",
+            "startOrdinal": 190,
+            "declarationCount": 0
+          }
+        ],
+        "compatibilityHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/CMakeLists.txt",
+            "sha256": "e4d856a4e6f1232e415d7bb8f28632530dcac4c2a7eeafd5c7d51e3f2440eb1f",
+            "reason": "BINDINGS module; MATLAB/Python/Jinja2/platform/bitness and generator/MEX probes; optional OpenCV inputs and installed headers/+cv gateways."
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/cmake/init.cmake",
+            "sha256": "26d25243dff9cc661db7a07098a09e266c6548f285c5955fb71234dcf93ca60a",
+            "reason": "Registers the external MATLAB discovery script."
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/cmake/OpenCVFindMatlab.cmake",
+            "sha256": "cdef09543322e57819d21d5947325a1be3a0065c2cda08bfa6ade78cecaba9bb",
+            "reason": "External MATLAB installation, mex.h, mx/mex/mat libraries, MEX executable/extension and architecture discovery."
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/compile.cmake",
+            "sha256": "a43ebe566a17702f5eb87c15f59c5fe777e8b011f0092496ef7968cab937f4a4",
+            "reason": "Invokes MEX for generated gateway sources and unconditionally skips Debug configurations, despite the preceding MSVC-only comment."
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/README.md",
+            "sha256": "ae5b6382f65aa172975e4c68c5cc9cef578024c8b4aba557edb9e140aff0af14",
+            "reason": "MATLAB generator, MEX usage, scoped mxArray ownership and generated-binding installation."
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/generator/gen_matlab.py",
+            "sha256": "248019a1b1ae5c8d412cbe9c663999b35f9c54d7c4109f8e77b28f67f3a74a86",
+            "reason": "Parses available module headers and renders generated binding templates; not this installed-helper declaration map."
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/generator/parse_tree.py",
+            "sha256": "9b8df7502f6f7c95b765804aa32d30d06c4c0f754adaaeff17b41929f4cecc91",
+            "reason": "Transforms parser declarations into generator namespaces/classes/functions."
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/generator/templates/functional.cpp",
+            "sha256": "17e9e8dfa94ecfedd62819288de6b671bf234b61802d682d0e2c3098a408c61a",
+            "reason": "Generated MEX entrypoint, argument transport, exception and returned mxArray ownership boundary."
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/generator/templates/template_class_base.cpp",
+            "sha256": "e917ec60a995fc5e736281cb631add5e324acede8c8afc16289afa43e9a8b4be",
+            "reason": "Generated object dispatch and instance storage boundary."
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/generator/templates/template_function_base.cpp",
+            "sha256": "2daaeaf781fbf0815cd7a96bb9d2fe5f51180f96a5c6154db843455f9ef8d956",
+            "reason": "Generated per-function MEX gateway template."
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/test/test_compiler.cpp",
+            "sha256": "142e62c451021f58fc578eab98a2f43c18f36e431153cee14a9e7d1b43c0a428",
+            "reason": "Upstream configure-time MEX compile fixture; pinned source is not an executed probe here."
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/test/test_generator.hpp",
+            "sha256": "12b3bd069501dd2e7431241bbd8f8db80a6a776e69812e24daad67013275e0ac",
+            "reason": "Upstream configure-time generator fixture; pinned source is not executed MATLAB evidence."
+          }
+        ],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/matlab-upstream-raw.json",
+        "classifications": "compatibility/matlab-upstream-classifications.json",
+        "mapping": "compatibility/matlab-upstream-map.txt",
+        "summary": "compatibility/matlab-upstream-summary.json",
+        "familyInventory": "compatibility/matlab-implemented-families.json",
+        "sourceReviewedExtensions": "compatibility/matlab-source-reviewed-extensions.json"
+      },
+      "evidenceContract": {
+        "declarations": 190,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "57a52ce43f4e82a7ecdfdfce43c09b2e39698c882953e4ea93b818ec641b0184",
+        "familyInventorySha256": "baa3625938e83d9c3a752ae6fd33b073300336da9621c0632b0da7d6eb782693",
+        "sourceReviewedExtensionSha256": "76fd052f3e2b1c9c4460cf2cc0784376b024204e047fe8a077a86d130966c45a",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
     }
   ],
   "limitations": [
     "The catalog centralizes source/header scope, classification policy, artifact bindings, generator commands, and semantic guard commands for the parser-backed map set, including the staged contrib batches.",
     "Each module retains its specialized extraction and semantic implementation; catalog orchestration does not assert repository-wide OpenCV parity.",
     "Additional contrib modules are introduced only as explicit catalog rows after their source scope and classification evidence are reviewed.",
-    "Cudev reconciles a non-template parser subset with a separate source callable inventory, including class-template members and 44 finite local declaration generators. Complete callable/instantiation coverage and external declaration closure remain open; zero missing applies only to the recorded parser subset."
+    "Cudev reconciles a non-template parser subset with a separate source callable inventory, including class-template members and 44 finite local declaration generators. Complete callable/instantiation coverage and external declaration closure remain open; zero missing applies only to the recorded parser subset.",
+    "MATLAB records a non-template installed-helper parser subset and all-branch lexical template provenance. Complete callable/instantiation coverage, external include closure, generated +cv gateways and MATLAB/MEX execution remain open; zero missing applies only to the recorded parser subset."
   ]
 }

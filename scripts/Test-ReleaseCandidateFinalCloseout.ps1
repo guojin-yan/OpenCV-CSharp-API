@@ -417,6 +417,12 @@ function Get-ExpectedEvidencePaths {
         "compatibility/cudev-upstream-summary.json",
         "compatibility/cudev-source-reviewed-extensions.json",
         "compatibility/cudev-source-callables.json",
+        "compatibility/matlab-implemented-families.json",
+        "compatibility/matlab-upstream-classifications.json",
+        "compatibility/matlab-upstream-map.txt",
+        "compatibility/matlab-upstream-raw.json",
+        "compatibility/matlab-upstream-summary.json",
+        "compatibility/matlab-source-reviewed-extensions.json",
         "compatibility/v5.0.1-change-ledger.json",
         "compatibility/v5.0.1-change-ledger.schema.json",
         "docs/articles/api-abi-compatibility-policy.md",
@@ -429,6 +435,7 @@ function Get-ExpectedEvidencePaths {
         "docs/articles/cannops-upstream-parity-guide.md",
         "docs/articles/sfm-upstream-parity-guide.md",
         "docs/articles/cudev-upstream-parity-guide.md",
+        "docs/articles/matlab-upstream-parity-guide.md",
         "docs/articles/xfeatures2d-upstream-parity-guide.md",
         "docs/articles/dnn-objdetect-upstream-parity-guide.md",
         "docs/articles/ccalib-upstream-parity-guide.md",
@@ -1003,6 +1010,9 @@ function Get-ExpectedEvidencePaths {
         "tools/CudevUpstreamMap/extract_source_callables.py",
         "tools/CudevUpstreamMap/test_source_callables.py",
         "tools/CudevUpstreamMap/syntax-requirements.txt",
+        "tools/MatlabUpstreamMap/MatlabUpstreamMap.csproj",
+        "tools/MatlabUpstreamMap/Program.cs",
+        "tools/MatlabUpstreamMap/extract_matlab.py",
         "tools/DnnObjDetectUpstreamMap/DnnObjDetectUpstreamMap.csproj",
         "tools/DnnObjDetectUpstreamMap/Program.cs",
         "tools/DnnObjDetectUpstreamMap/extract_dnn_objdetect.py",
@@ -1141,6 +1151,8 @@ function Get-ExpectedEvidencePaths {
         "scripts/Test-CudevUpstreamMap.ps1",
         "scripts/Test-CudevSourceCallables.ps1",
         "scripts/Initialize-CudevSyntaxParser.ps1",
+        "scripts/Generate-MatlabUpstreamMap.ps1",
+        "scripts/Test-MatlabUpstreamMap.ps1",
         "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
         "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
         "tools/TypedMatBenchmark/Program.cs",
@@ -1300,6 +1312,11 @@ function Test-Record {
     Assert-True -List $List -Condition ($cudevSyntaxBinding.path -ceq 'compatibility/cudev-source-callables.json' -and $cudevSyntaxBinding.sha256 -ceq (Get-FileHash -LiteralPath (Join-Path $repo 'compatibility/cudev-source-callables.json') -Algorithm SHA256).Hash.ToLowerInvariant()) -Issue 'Final closeout Cudev source callable hash binding drifted'
     $cudevSyntaxCounts = @{ callableDeclarationCount = 5433; directCallableCount = 1096; macroGeneratedCallableCount = 4337; templateContextCallableCount = 1979; definitionCount = 5382; declarationOnlyCount = 51; declarationMacroDefinitionCount = 44; expandedMacroInvocationCount = 1088; nonCallableExpansionCount = 213; reconciledParserCallableCount = 110; declarationErrorCount = 0; bodyParseDiagnosticCount = 28 }
     foreach ($key in $cudevSyntaxCounts.Keys) { Assert-True -List $List -Condition ([int]$cudevSyntaxBinding.counts.$key -eq $cudevSyntaxCounts[$key]) -Issue "Final closeout Cudev source callable count drifted: $key" }
+    $matlab = $Record.ApiAbiBaseline.MatlabUpstreamMap
+    $matlabNumbers = @{ DeclarationCount = 190; CallableCount = 185; ClassCount = 5; EnumCount = 0; MetadataCount = 5; ImplementedCount = 0; MissingCount = 0; IntentionallyOmittedCount = 185; SourceHeaderCount = 4; CompatibilityHeaderCount = 12; ParserNameRepairCount = 14; InlineReconciliationCount = 2; ParserConfigurationProbeCount = 3; NoOpAssignmentDefinitionCount = 48; SelectedDeclarationCount = 0; ManagedPublicTypeAdditionCount = 0; ManagedPublicMemberAdditionCount = 0; NativeEntrypointAdditionCount = 0; ManagedEvidenceCount = 0; ExternalDataDependencyCount = 3; NegativeFixtureCount = 18 }
+    foreach ($key in $matlabNumbers.Keys) { Assert-True -List $List -Condition ([int]$matlab.$key -eq $matlabNumbers[$key]) -Issue "Final closeout MATLAB count drifted: $key" }
+    Assert-True -List $List -Condition ($matlab.Sha256 -ceq '57a52ce43f4e82a7ecdfdfce43c09b2e39698c882953e4ea93b818ec641b0184' -and $matlab.RawSha256 -ceq (Get-FileHash -LiteralPath (Join-Path $repo 'compatibility/matlab-upstream-raw.json') -Algorithm SHA256).Hash.ToLowerInvariant() -and $matlab.SourceInventoryPath -ceq 'compatibility/matlab-source-reviewed-extensions.json' -and $matlab.SourceInventorySha256 -ceq (Get-FileHash -LiteralPath (Join-Path $repo 'compatibility/matlab-source-reviewed-extensions.json') -Algorithm SHA256).Hash.ToLowerInvariant()) -Issue 'Final closeout MATLAB source-map hashes drifted'
+    Assert-True -List $List -Condition ($matlab.ParserMode -ceq 'non-wrapper-non-template-subset' -and $matlab.ModuleBuildCondition -ceq 'MATLAB_FOUND_AND_PYTHON_AND_JINJA2_AND_MATCHING_BITNESS_AND_MEX_PROBES_AND_NOT_ANDROID_APPLE_FRAMEWORK' -and $matlab.CoverageStatus -ceq 'parser-subset-with-lexical-template-inventory' -and $matlab.SourceInventoryCounts.templatesCount -eq 38 -and $matlab.SourceInventoryCounts.conditionalDirectivesCount -eq 22 -and $matlab.SourceInventoryCounts.templateKindCounts.'class-template' -eq 15 -and $matlab.SourceInventoryCounts.templateKindCounts.'function-template' -eq 22 -and $matlab.SourceInventoryCounts.templateKindCounts.'alias-template' -eq 1 -and $matlab.CompleteCallableCoverageClaimed -eq $false -and $matlab.MatlabExecutionVerified -eq $false -and $matlab.GeneratedBindingSurfaceIncluded -eq $false -and $matlab.RepositoryWideParityClaimed -eq $false) -Issue 'Final closeout MATLAB partial scope/runtime boundary drifted'
     $expectedEvidence = @(Get-ExpectedEvidencePaths)
     $actualEvidence = @($Record.EvidenceReferences | ForEach-Object { [string]$_.Path })
     $sortedEvidence = @(Get-OrdinalSorted -Values $actualEvidence)

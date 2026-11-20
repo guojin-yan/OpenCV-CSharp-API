@@ -196,6 +196,8 @@ function Get-Record {
     $sfmSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/sfm-upstream-summary.json") -Raw | ConvertFrom-Json
     $cudevRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/cudev-upstream-raw.json") -Raw | ConvertFrom-Json
     $cudevSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/cudev-upstream-summary.json") -Raw | ConvertFrom-Json
+    $matlabRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/matlab-upstream-raw.json") -Raw | ConvertFrom-Json
+    $matlabSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/matlab-upstream-summary.json") -Raw | ConvertFrom-Json
     $evidencePaths = @(
         ".github/workflows/pack.yml",
         ".github/workflows/publish-nuget.yml",
@@ -547,6 +549,12 @@ function Get-Record {
         "compatibility/cudev-upstream-summary.json",
         "compatibility/cudev-source-reviewed-extensions.json",
         "compatibility/cudev-source-callables.json",
+        "compatibility/matlab-implemented-families.json",
+        "compatibility/matlab-upstream-classifications.json",
+        "compatibility/matlab-upstream-map.txt",
+        "compatibility/matlab-upstream-raw.json",
+        "compatibility/matlab-upstream-summary.json",
+        "compatibility/matlab-source-reviewed-extensions.json",
         "compatibility/v5.0.1-change-ledger.json",
         "compatibility/v5.0.1-change-ledger.schema.json",
         "docs/articles/api-abi-compatibility-policy.md",
@@ -559,6 +567,7 @@ function Get-Record {
         "docs/articles/cannops-upstream-parity-guide.md",
         "docs/articles/sfm-upstream-parity-guide.md",
         "docs/articles/cudev-upstream-parity-guide.md",
+        "docs/articles/matlab-upstream-parity-guide.md",
         "docs/articles/xfeatures2d-upstream-parity-guide.md",
         "docs/articles/dnn-objdetect-upstream-parity-guide.md",
         "docs/articles/ccalib-upstream-parity-guide.md",
@@ -1127,6 +1136,9 @@ function Get-Record {
         "tools/CudevUpstreamMap/extract_source_callables.py",
         "tools/CudevUpstreamMap/test_source_callables.py",
         "tools/CudevUpstreamMap/syntax-requirements.txt",
+        "tools/MatlabUpstreamMap/MatlabUpstreamMap.csproj",
+        "tools/MatlabUpstreamMap/Program.cs",
+        "tools/MatlabUpstreamMap/extract_matlab.py",
         "tools/DnnObjDetectUpstreamMap/DnnObjDetectUpstreamMap.csproj",
         "tools/DnnObjDetectUpstreamMap/Program.cs",
         "tools/DnnObjDetectUpstreamMap/extract_dnn_objdetect.py",
@@ -1271,6 +1283,8 @@ function Get-Record {
         "scripts/Test-CudevUpstreamMap.ps1",
         "scripts/Test-CudevSourceCallables.ps1",
         "scripts/Initialize-CudevSyntaxParser.ps1",
+        "scripts/Generate-MatlabUpstreamMap.ps1",
+        "scripts/Test-MatlabUpstreamMap.ps1",
         "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
         "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
         "tools/TypedMatBenchmark/Program.cs",
@@ -2492,6 +2506,46 @@ function Get-Record {
                 ExternalDataDependencyCount = [int]$cudevSummary.externalDataDependencyCount
                 NegativeFixtureCount = [int]$cudevSummary.negativeFixtureCount
                 RepositoryWideParityClaimed = [bool]$cudevSummary.repositoryWideUpstreamParityClaimed
+            }
+            MatlabUpstreamMap = [ordered]@{
+                Path = "compatibility/matlab-upstream-map.txt"
+                SummaryPath = "compatibility/matlab-upstream-summary.json"
+                ClassificationPath = "compatibility/matlab-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/matlab-implemented-families.json"
+                RawExtractionPath = "compatibility/matlab-upstream-raw.json"
+                SourceInventoryPath = $matlabSummary.sourceReviewedExtensionPath
+                SourceInventorySha256 = $matlabSummary.sourceReviewedExtensionSha256
+                Sha256 = $matlabSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/matlab-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$matlabSummary.declarationCount
+                CallableCount = [int]$matlabSummary.callableCount
+                ClassCount = [int]$matlabSummary.classCount
+                EnumCount = [int]$matlabSummary.enumCount
+                MetadataCount = [int]$matlabSummary.classificationCounts.'non-callable-metadata'
+                ImplementedCount = [int]$matlabSummary.classificationCounts.implemented
+                MissingCount = [int]$matlabSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$matlabSummary.classificationCounts.'intentionally-omitted'
+                SourceHeaderCount = @($matlabRaw.sourceHeaders).Count
+                CompatibilityHeaderCount = @($matlabRaw.compatibilityHeaders).Count
+                ParserNameRepairCount = @($matlabRaw.parserNameRepairs).Count
+                InlineReconciliationCount = @($matlabRaw.reconciledInlineDefinitions).Count
+                ParserConfigurationProbeCount = @($matlabRaw.parserConfigurationProbes).Count
+                ParserMode = [string]$matlabRaw.parserMode
+                ModuleBuildCondition = [string]$matlabRaw.moduleBuildCondition
+                SourceInventoryCounts = $matlabSummary.sourceInventoryCounts
+                CoverageStatus = [string]$matlabSummary.coverageStatus
+                CompleteCallableCoverageClaimed = [bool]$matlabSummary.completeCallableCoverageClaimed
+                MatlabExecutionVerified = [bool]$matlabSummary.matlabExecutionVerified
+                GeneratedBindingSurfaceIncluded = [bool]$matlabSummary.generatedBindingSurfaceIncluded
+                NoOpAssignmentDefinitionCount = [int]$matlabRaw.upstreamPlaceholderBoundaries.noOpAssignmentDefinitionCount
+                SelectedDeclarationCount = [int]$matlabSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$matlabSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$matlabSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$matlabSummary.nativeEvidenceCount
+                ManagedEvidenceCount = [int]$matlabSummary.managedEvidenceCount
+                ExternalDataDependencyCount = [int]$matlabSummary.externalDataDependencyCount
+                NegativeFixtureCount = [int]$matlabSummary.negativeFixtureCount
+                RepositoryWideParityClaimed = [bool]$matlabSummary.repositoryWideUpstreamParityClaimed
             }
             DnnObjDetectUpstreamMap = [ordered]@{
                 Path = "compatibility/dnn_objdetect-upstream-map.txt"

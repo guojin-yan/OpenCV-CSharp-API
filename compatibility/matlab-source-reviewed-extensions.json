@@ -1,0 +1,650 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/CudevUpstreamMap/source_inventory.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "scope": "All four installed opencv2/matlab/*.hpp headers with every source conditional branch retained.",
+  "coordinateSystem": "Zero-based Unicode offsets, exclusive end, UTF-8 source normalized to LF; line numbers are one-based.",
+  "reviewDisposition": "intentionally-omitted-unwrapped-matlab-source",
+  "limitation": "This is the pinned hdr_parser non-template public subset, not complete MATLAB callable coverage. All four installed headers and every lexical template/conditional branch remain in a linked source inventory. The parser ignores __cplusplus checks, so temporary copies rename that identifier to a recorded numeric input. Templates, class-template members, specializations and generated +cv gateways are not enumerated as concrete APIs. External mex.h/standard-library/OpenCV include closure, C++ type checking, MATLAB/MEX build/link/runtime and complete callable parity remain unverified; the package has no MATLAB native or managed wrapper.",
+  "completeCallableCoverageClaimed": false,
+  "macroExpansionClaimed": false,
+  "templateInstantiationCoverageClaimed": false,
+  "counts": {
+    "templatesCount": 38,
+    "templateParametersCount": 0,
+    "macroDefinitionsCount": 0,
+    "conditionalDirectivesCount": 22,
+    "templateKindCounts": {
+      "alias-template": 1,
+      "class-template": 15,
+      "function-template": 22
+    }
+  },
+  "headers": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "sha256": "312ac0f7df5406498d82909a505e3709240e0ad1947a7ca9c1e08f24dd1dd252",
+      "templates": [
+        {
+          "startOffset": 5067,
+          "endOffset": 5190,
+          "line": 125,
+          "sourceSha256": "a856503c8ecdc03b36746fff99db140f03d651e76cea2c75652813ab82477297",
+          "conditions": [
+            "!defined(OPENCV_BRIDGE_HPP_)"
+          ],
+          "kind": "function-template",
+          "templateParameters": "<typename InputScalar, typename OutputScalar>",
+          "declarationHead": "void deepCopyAndTranspose(const cv::Mat& src, matlab::MxArray& dst)",
+          "headEndOffset": 5189
+        },
+        {
+          "startOffset": 5192,
+          "endOffset": 5315,
+          "line": 128,
+          "sourceSha256": "ef24192a06a3dd2104905d4f80290231ddbb96296e348e477099bfac8c124750",
+          "conditions": [
+            "!defined(OPENCV_BRIDGE_HPP_)"
+          ],
+          "kind": "function-template",
+          "templateParameters": "<typename InputScalar, typename OutputScalar>",
+          "declarationHead": "void deepCopyAndTranspose(const matlab::MxArray& src, cv::Mat& dst)",
+          "headEndOffset": 5314
+        },
+        {
+          "startOffset": 7842,
+          "endOffset": 9035,
+          "line": 199,
+          "sourceSha256": "0c76ca66ed3247dcd59f94c4878a9f320bcd8beeee2149c4ce2c3a1553582235",
+          "conditions": [
+            "!defined(OPENCV_BRIDGE_HPP_)"
+          ],
+          "kind": "function-template",
+          "templateParameters": "<typename Object>",
+          "declarationHead": "Object* getObjectByName(const std::string& name)",
+          "headEndOffset": 7920
+        },
+        {
+          "startOffset": 9859,
+          "endOffset": 10695,
+          "line": 245,
+          "sourceSha256": "28aa7f1fb439a4ae7b3e85364ce5f13b43577b274e8c5597414e92857a02023a",
+          "conditions": [
+            "!defined(OPENCV_BRIDGE_HPP_)"
+          ],
+          "kind": "function-template",
+          "templateParameters": "<typename Scalar>",
+          "declarationHead": "static matlab::MxArray FromMat(const cv::Mat& mat)",
+          "headEndOffset": 9939
+        },
+        {
+          "startOffset": 10699,
+          "endOffset": 12024,
+          "line": 261,
+          "sourceSha256": "9d20f78026b39f6c35b6384b50557644fda491664b53e1e4aca8eae9acf5022e",
+          "conditions": [
+            "!defined(OPENCV_BRIDGE_HPP_)"
+          ],
+          "kind": "function-template",
+          "templateParameters": "<typename Scalar>",
+          "declarationHead": "cv::Mat toMat() const",
+          "headEndOffset": 10750
+        },
+        {
+          "startOffset": 26167,
+          "endOffset": 26753,
+          "line": 575,
+          "sourceSha256": "f46c077103bc433fec6e8f3565f7f296bc2a7344fb51238ebc72790ee1ba1eea",
+          "conditions": [
+            "!defined(OPENCV_BRIDGE_HPP_)"
+          ],
+          "kind": "function-template",
+          "templateParameters": "<>",
+          "declarationHead": "matlab::MxArray Bridge::FromMat<matlab::InheritType>(const cv::Mat& mat)",
+          "headEndOffset": 26252
+        },
+        {
+          "startOffset": 27074,
+          "endOffset": 27921,
+          "line": 598,
+          "sourceSha256": "50dec14025603f675ad283d8b04bb0890ab41f218dd4066a5d0a4211b183cd85",
+          "conditions": [
+            "!defined(OPENCV_BRIDGE_HPP_)"
+          ],
+          "kind": "function-template",
+          "templateParameters": "<>",
+          "declarationHead": "cv::Mat Bridge::toMat<matlab::InheritType>() const",
+          "headEndOffset": 27137
+        },
+        {
+          "startOffset": 28311,
+          "endOffset": 29531,
+          "line": 627,
+          "sourceSha256": "e9831cf7f7ad98d097fc3c4b38be79f11d0e2f50c588db9e20f44c5e11b6f139",
+          "conditions": [
+            "!defined(OPENCV_BRIDGE_HPP_)"
+          ],
+          "kind": "function-template",
+          "templateParameters": "<typename InputScalar, typename OutputScalar>",
+          "declarationHead": "void deepCopyAndTranspose(const cv::Mat& in, matlab::MxArray& out)",
+          "headEndOffset": 28433
+        },
+        {
+          "startOffset": 29533,
+          "endOffset": 30773,
+          "line": 654,
+          "sourceSha256": "80eb6ccaa4678197b7a353561d0b43ef11124c92494c8be3842fcf5ccbacab10",
+          "conditions": [
+            "!defined(OPENCV_BRIDGE_HPP_)"
+          ],
+          "kind": "function-template",
+          "templateParameters": "<typename InputScalar, typename OutputScalar>",
+          "declarationHead": "void deepCopyAndTranspose(const matlab::MxArray& in, cv::Mat& out)",
+          "headEndOffset": 29655
+        }
+      ],
+      "templateParameters": [],
+      "macroDefinitions": [],
+      "conditionalDirectives": [
+        {
+          "line": 43,
+          "directive": "#ifndef OPENCV_BRIDGE_HPP_"
+        },
+        {
+          "line": 688,
+          "directive": "#endif"
+        }
+      ]
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/map.hpp",
+      "sha256": "81dd56dec0f4b250e46047b53e4bedf05d9762d826e1cfad0774c3de44d59daa",
+      "templates": [
+        {
+          "startOffset": 2347,
+          "endOffset": 2446,
+          "line": 51,
+          "sourceSha256": "41f107f8cf675df1144efe657f18ddc54fc1fa978452641d7b78dabc456c0c22",
+          "conditions": [
+            "!defined(OPENCV_MAP_HPP_)",
+            "__cplusplus >= 201103L"
+          ],
+          "kind": "alias-template",
+          "templateParameters": "<typename KeyType, typename ValueType>",
+          "declarationHead": "using Map = std::unordered_map<KeyType, ValueType>",
+          "headEndOffset": 2445
+        },
+        {
+          "startOffset": 2668,
+          "endOffset": 3372,
+          "line": 67,
+          "sourceSha256": "6c097457afc7786ea76c5109a30a4d4499a37f02fe211cb7c7abef217e35c011",
+          "conditions": [
+            "!defined(OPENCV_MAP_HPP_)",
+            "!((__cplusplus >= 201103L))"
+          ],
+          "kind": "class-template",
+          "templateParameters": "<typename KeyType, typename ValueType>",
+          "declarationHead": "class Map",
+          "headEndOffset": 2726
+        }
+      ],
+      "templateParameters": [],
+      "macroDefinitions": [],
+      "conditionalDirectives": [
+        {
+          "line": 43,
+          "directive": "#ifndef OPENCV_MAP_HPP_"
+        },
+        {
+          "line": 47,
+          "directive": "#if __cplusplus >= 201103L"
+        },
+        {
+          "line": 54,
+          "directive": "#else"
+        },
+        {
+          "line": 98,
+          "directive": "#endif"
+        },
+        {
+          "line": 99,
+          "directive": "#endif"
+        }
+      ]
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "sha256": "1ff1e2372af3ea1ef81ac41de2c6d88809574d1b59c152ebdcee20c0f4b9a9d8",
+      "templates": [
+        {
+          "startOffset": 4059,
+          "endOffset": 4340,
+          "line": 116,
+          "sourceSha256": "d2ffa7129538dd28bc2830d3c3604c8732fd0731b445f432be0dcd8053b841b6",
+          "conditions": [
+            "!defined(OPENCV_MXARRAY_HPP_)"
+          ],
+          "kind": "class-template",
+          "templateParameters": "<typename _Tp = DefaultTraits>",
+          "declarationHead": "class Traits",
+          "headEndOffset": 4111
+        },
+        {
+          "startOffset": 4349,
+          "endOffset": 4501,
+          "line": 124,
+          "sourceSha256": "a70a4381b51fd5eb11c04a1b7569f721fab33ca6db4364d75b38e643b58de11b",
+          "conditions": [
+            "!defined(OPENCV_MXARRAY_HPP_)"
+          ],
+          "kind": "class-template",
+          "templateParameters": "<>",
+          "declarationHead": "class Traits<bool>",
+          "headEndOffset": 4379
+        },
+        {
+          "startOffset": 4513,
+          "endOffset": 4666,
+          "line": 130,
+          "sourceSha256": "cf321832904a17ac6f0ed22e940d1763c016198aace0dc9ca9917e32d54e07a6",
+          "conditions": [
+            "!defined(OPENCV_MXARRAY_HPP_)"
+          ],
+          "kind": "class-template",
+          "templateParameters": "<>",
+          "declarationHead": "class Traits<uint8_t>",
+          "headEndOffset": 4546
+        },
+        {
+          "startOffset": 4677,
+          "endOffset": 4827,
+          "line": 136,
+          "sourceSha256": "cb75d3eef1c40971a16e51e91e254a731816651ce0135257761ef37e3920f826",
+          "conditions": [
+            "!defined(OPENCV_MXARRAY_HPP_)"
+          ],
+          "kind": "class-template",
+          "templateParameters": "<>",
+          "declarationHead": "class Traits<int8_t>",
+          "headEndOffset": 4709
+        },
+        {
+          "startOffset": 4840,
+          "endOffset": 4996,
+          "line": 142,
+          "sourceSha256": "634c8de4b89cd2b0bf72fe783506ba487c43b2ef11797911c983f7bc8387ab02",
+          "conditions": [
+            "!defined(OPENCV_MXARRAY_HPP_)"
+          ],
+          "kind": "class-template",
+          "templateParameters": "<>",
+          "declarationHead": "class Traits<uint16_t>",
+          "headEndOffset": 4874
+        },
+        {
+          "startOffset": 5008,
+          "endOffset": 5161,
+          "line": 148,
+          "sourceSha256": "3fcb700f28b70acd6a2efade5c771a338143abc05dcb291279d46d9e2a5cd16e",
+          "conditions": [
+            "!defined(OPENCV_MXARRAY_HPP_)"
+          ],
+          "kind": "class-template",
+          "templateParameters": "<>",
+          "declarationHead": "class Traits<int16_t>",
+          "headEndOffset": 5041
+        },
+        {
+          "startOffset": 5174,
+          "endOffset": 5330,
+          "line": 154,
+          "sourceSha256": "6a6ac9dce2cdce85c684f97fba7f2dfea2f5387d4c55c023b12dfd7f5d20f67c",
+          "conditions": [
+            "!defined(OPENCV_MXARRAY_HPP_)"
+          ],
+          "kind": "class-template",
+          "templateParameters": "<>",
+          "declarationHead": "class Traits<uint32_t>",
+          "headEndOffset": 5208
+        },
+        {
+          "startOffset": 5342,
+          "endOffset": 5495,
+          "line": 160,
+          "sourceSha256": "c5df74cc9cfd31fb19aa9e6c242088c458fcf1582736afb560bd3dc20d98f5b8",
+          "conditions": [
+            "!defined(OPENCV_MXARRAY_HPP_)"
+          ],
+          "kind": "class-template",
+          "templateParameters": "<>",
+          "declarationHead": "class Traits<int32_t>",
+          "headEndOffset": 5375
+        },
+        {
+          "startOffset": 5508,
+          "endOffset": 5664,
+          "line": 166,
+          "sourceSha256": "d080f82dc74713e9e003481484be61f37e92a7b3da3dfefeb643ea523aa9b02e",
+          "conditions": [
+            "!defined(OPENCV_MXARRAY_HPP_)"
+          ],
+          "kind": "class-template",
+          "templateParameters": "<>",
+          "declarationHead": "class Traits<uint64_t>",
+          "headEndOffset": 5542
+        },
+        {
+          "startOffset": 5676,
+          "endOffset": 5829,
+          "line": 172,
+          "sourceSha256": "a887e3614a4f9ec578d9ad6ce3624b684c7bcdc0a0410b42c3807c1e61a63e5a",
+          "conditions": [
+            "!defined(OPENCV_MXARRAY_HPP_)"
+          ],
+          "kind": "class-template",
+          "templateParameters": "<>",
+          "declarationHead": "class Traits<int64_t>",
+          "headEndOffset": 5709
+        },
+        {
+          "startOffset": 5839,
+          "endOffset": 5989,
+          "line": 178,
+          "sourceSha256": "30a9d0bb7de2261f406fef17cf317f213ba17d98a91c2beba280b6c3fc3cc7da",
+          "conditions": [
+            "!defined(OPENCV_MXARRAY_HPP_)"
+          ],
+          "kind": "class-template",
+          "templateParameters": "<>",
+          "declarationHead": "class Traits<float>",
+          "headEndOffset": 5870
+        },
+        {
+          "startOffset": 6000,
+          "endOffset": 6152,
+          "line": 184,
+          "sourceSha256": "300ed58928312da5d555f581f9bdcf8933a61cb35ec33003716e91f02f315f30",
+          "conditions": [
+            "!defined(OPENCV_MXARRAY_HPP_)"
+          ],
+          "kind": "class-template",
+          "templateParameters": "<>",
+          "declarationHead": "class Traits<double>",
+          "headEndOffset": 6032
+        },
+        {
+          "startOffset": 6161,
+          "endOffset": 6307,
+          "line": 190,
+          "sourceSha256": "00b97360009ced69d80b61c56ef580ed6727aa03cbe082563ab138c31979f471",
+          "conditions": [
+            "!defined(OPENCV_MXARRAY_HPP_)"
+          ],
+          "kind": "class-template",
+          "templateParameters": "<>",
+          "declarationHead": "class Traits<char>",
+          "headEndOffset": 6191
+        },
+        {
+          "startOffset": 6326,
+          "endOffset": 6445,
+          "line": 196,
+          "sourceSha256": "9ef04f1ab4e4aba5f5c7bcbd5245e8e59182ddbf35aa20249ef10ca1c48a488f",
+          "conditions": [
+            "!defined(OPENCV_MXARRAY_HPP_)"
+          ],
+          "kind": "class-template",
+          "templateParameters": "<>",
+          "declarationHead": "class Traits<matlab::InheritType>",
+          "headEndOffset": 6371
+        },
+        {
+          "startOffset": 9577,
+          "endOffset": 9730,
+          "line": 296,
+          "sourceSha256": "9b9b3b4c6593286eac75f9c90076ca6beebf50f64dc37e9471ca9b3ec51724ee",
+          "conditions": [
+            "!defined(OPENCV_MXARRAY_HPP_)"
+          ],
+          "kind": "function-template",
+          "templateParameters": "<typename Scalar>",
+          "declarationHead": "static MxArray Tensor(size_t m, size_t n, size_t k=1)",
+          "headEndOffset": 9660
+        },
+        {
+          "startOffset": 9938,
+          "endOffset": 10079,
+          "line": 307,
+          "sourceSha256": "846a9dfc3448ae4f9db49bc251373de6e90c76f828da6a6be3a0a711152fb42e",
+          "conditions": [
+            "!defined(OPENCV_MXARRAY_HPP_)"
+          ],
+          "kind": "function-template",
+          "templateParameters": "<typename Scalar>",
+          "declarationHead": "static MxArray Matrix(size_t m, size_t n)",
+          "headEndOffset": 10009
+        },
+        {
+          "startOffset": 10287,
+          "endOffset": 10418,
+          "line": 318,
+          "sourceSha256": "d86228a902b1f88023b54e3550c559a20c94bb770838fab5a340b9ead0e3d543",
+          "conditions": [
+            "!defined(OPENCV_MXARRAY_HPP_)"
+          ],
+          "kind": "function-template",
+          "templateParameters": "<typename Scalar>",
+          "declarationHead": "static MxArray Vector(size_t m)",
+          "headEndOffset": 10348
+        },
+        {
+          "startOffset": 10617,
+          "endOffset": 10814,
+          "line": 329,
+          "sourceSha256": "e8bbb7ffc9a395f367a22c68eb8f0f603fb06b87c1690d5452865649a8a1eff6",
+          "conditions": [
+            "!defined(OPENCV_MXARRAY_HPP_)"
+          ],
+          "kind": "function-template",
+          "templateParameters": "<typename ScalarType>",
+          "declarationHead": "static MxArray Scalar(ScalarType value = 0)",
+          "headEndOffset": 10694
+        },
+        {
+          "startOffset": 13141,
+          "endOffset": 13235,
+          "line": 400,
+          "sourceSha256": "cd2fcfcd1854f49e6732af466a9275f5d164a34e50340e088be8c86b3011faad",
+          "conditions": [
+            "!defined(OPENCV_MXARRAY_HPP_)"
+          ],
+          "kind": "function-template",
+          "templateParameters": "<typename Scalar>",
+          "declarationHead": "Scalar* real()",
+          "headEndOffset": 13185
+        },
+        {
+          "startOffset": 13239,
+          "endOffset": 13337,
+          "line": 403,
+          "sourceSha256": "b7885d4ac54128528c2819e2e39d650f50ac81a2fab47dd4b907bf9c2b961252",
+          "conditions": [
+            "!defined(OPENCV_MXARRAY_HPP_)"
+          ],
+          "kind": "function-template",
+          "templateParameters": "<typename Scalar>",
+          "declarationHead": "Scalar* imag()",
+          "headEndOffset": 13283
+        },
+        {
+          "startOffset": 13341,
+          "endOffset": 13453,
+          "line": 406,
+          "sourceSha256": "d6902f50c36334df40ab78477e8071abb6d4f43f0bd6b4bcb39572a221629889",
+          "conditions": [
+            "!defined(OPENCV_MXARRAY_HPP_)"
+          ],
+          "kind": "function-template",
+          "templateParameters": "<typename Scalar>",
+          "declarationHead": "const Scalar* real() const",
+          "headEndOffset": 13397
+        },
+        {
+          "startOffset": 13457,
+          "endOffset": 13569,
+          "line": 409,
+          "sourceSha256": "766de48b0a8b68fe6a530cccf704ccae85a3a09f45f2c62b2d78ea75c177dae7",
+          "conditions": [
+            "!defined(OPENCV_MXARRAY_HPP_)"
+          ],
+          "kind": "function-template",
+          "templateParameters": "<typename Scalar>",
+          "declarationHead": "const Scalar* imag() const",
+          "headEndOffset": 13513
+        },
+        {
+          "startOffset": 13573,
+          "endOffset": 13677,
+          "line": 412,
+          "sourceSha256": "4aeec97140c047780828af6ebfab0867a8966d04fca9564943c3f37d29983f2b",
+          "conditions": [
+            "!defined(OPENCV_MXARRAY_HPP_)"
+          ],
+          "kind": "function-template",
+          "templateParameters": "<typename Scalar>",
+          "declarationHead": "Scalar scalar() const",
+          "headEndOffset": 13624
+        }
+      ],
+      "templateParameters": [],
+      "macroDefinitions": [],
+      "conditionalDirectives": [
+        {
+          "line": 43,
+          "directive": "#ifndef OPENCV_MXARRAY_HPP_"
+        },
+        {
+          "line": 53,
+          "directive": "#if __cplusplus > 201103"
+        },
+        {
+          "line": 56,
+          "directive": "#else"
+        },
+        {
+          "line": 59,
+          "directive": "#endif"
+        },
+        {
+          "line": 71,
+          "directive": "#ifdef __cplusplus"
+        },
+        {
+          "line": 73,
+          "directive": "#endif"
+        },
+        {
+          "line": 74,
+          "directive": "#ifdef __cplusplus"
+        },
+        {
+          "line": 76,
+          "directive": "#endif"
+        },
+        {
+          "line": 358,
+          "directive": "#if __cplusplus >= 201103L"
+        },
+        {
+          "line": 370,
+          "directive": "#endif"
+        },
+        {
+          "line": 690,
+          "directive": "#endif"
+        }
+      ]
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/transpose.hpp",
+      "sha256": "2b730a66f83ed727021e9539a8ffc6e08d6386e8cd7bc102e5f87f58d008716c",
+      "templates": [
+        {
+          "startOffset": 2254,
+          "endOffset": 2767,
+          "line": 49,
+          "sourceSha256": "4baff188c995b3ccc9bd739966a39e873cc59fe82d484a6da82e6090283f9b26",
+          "conditions": [
+            "!defined(OPENCV_TRANSPOSE_HPP_)"
+          ],
+          "kind": "function-template",
+          "templateParameters": "<typename InputScalar, typename OutputScalar>",
+          "declarationHead": "void transposeBlock(const size_t M, const size_t N, const InputScalar* src, size_t lda, OutputScalar* dst, size_t ldb)",
+          "headEndOffset": 2428
+        },
+        {
+          "startOffset": 2769,
+          "endOffset": 3776,
+          "line": 62,
+          "sourceSha256": "d9339c0507d8f7b92ff9779b5d43c96b67fe33d58f9a83dab89444e34e19168d",
+          "conditions": [
+            "!defined(OPENCV_TRANSPOSE_HPP_)"
+          ],
+          "kind": "function-template",
+          "templateParameters": "<typename InputScalar, typename OutputScalar>",
+          "declarationHead": "void transpose4x4(const InputScalar* src, size_t lda, OutputScalar* dst, size_t ldb)",
+          "headEndOffset": 2909
+        },
+        {
+          "startOffset": 3822,
+          "endOffset": 5307,
+          "line": 81,
+          "sourceSha256": "7435e852bd5996284932fc85c71a1221af11e54e26728ed48eb1e5857700acbd",
+          "conditions": [
+            "!defined(OPENCV_TRANSPOSE_HPP_)"
+          ],
+          "kind": "function-template",
+          "templateParameters": "<typename InputScalar, typename OutputScalar>",
+          "declarationHead": "void gemt(const char major, const size_t M, const size_t N, const InputScalar* a, size_t lda, OutputScalar* b, size_t ldb)",
+          "headEndOffset": 4000
+        },
+        {
+          "startOffset": 5404,
+          "endOffset": 5839,
+          "line": 129,
+          "sourceSha256": "893644216f4b08cb591da81615f0fc6103491f3cf8470485a5743fadd4fa35d1",
+          "conditions": [
+            "!defined(OPENCV_TRANSPOSE_HPP_)",
+            "defined(__SSE2__)"
+          ],
+          "kind": "function-template",
+          "templateParameters": "<>",
+          "declarationHead": "void transpose4x4<float, float>(const float* src, size_t lda, float* dst, size_t ldb)",
+          "headEndOffset": 5502
+        }
+      ],
+      "templateParameters": [],
+      "macroDefinitions": [],
+      "conditionalDirectives": [
+        {
+          "line": 43,
+          "directive": "#ifndef OPENCV_TRANSPOSE_HPP_"
+        },
+        {
+          "line": 123,
+          "directive": "#ifdef __SSE2__"
+        },
+        {
+          "line": 143,
+          "directive": "#endif"
+        },
+        {
+          "line": 147,
+          "directive": "#endif"
+        }
+      ]
+    }
+  ]
+}

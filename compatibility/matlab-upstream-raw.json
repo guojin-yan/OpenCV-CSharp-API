@@ -1,0 +1,3528 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/MatlabUpstreamMap/extract_matlab.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+  "headerSha256": "312ac0f7df5406498d82909a505e3709240e0ad1947a7ca9c1e08f24dd1dd252",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "parserMode": "non-wrapper-non-template-subset",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "MATLAB_SOURCE_CPLUSPLUS": 201103
+  },
+  "parserNormalization": "Temporary copies rename __cplusplus to MATLAB_SOURCE_CPLUSPLUS=201103 and remove the L integer suffix only in its two >= 201103L directives for the Python expression evaluator. Two static names lose parser-injected return-type text; qualified conversion operators regain Bridge ownership and C++ target spelling. Two inline definitions reconcile to their class declarations. /S and /C metadata remain unchanged; upstream source files remain untouched.",
+  "parserNameRepairs": [
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "parserName": "cv.bridge.operator cv.Mat",
+      "correctedName": "cv.bridge.Bridge.operator cv::Mat"
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "parserName": "cv.bridge.operator std.string",
+      "correctedName": "cv.bridge.Bridge.operator std::string"
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "parserName": "cv.bridge.operator cv.Point",
+      "correctedName": "cv.bridge.Bridge.operator cv::Point"
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "parserName": "cv.bridge.operator cv.Point2f",
+      "correctedName": "cv.bridge.Bridge.operator cv::Point2f"
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "parserName": "cv.bridge.operator cv.Point2d",
+      "correctedName": "cv.bridge.Bridge.operator cv::Point2d"
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "parserName": "cv.bridge.operator cv.Size",
+      "correctedName": "cv.bridge.Bridge.operator cv::Size"
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "parserName": "cv.bridge.operator cv.Moments",
+      "correctedName": "cv.bridge.Bridge.operator cv::Moments"
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "parserName": "cv.bridge.operator cv.Scalar",
+      "correctedName": "cv.bridge.Bridge.operator cv::Scalar"
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "parserName": "cv.bridge.operator cv.Rect",
+      "correctedName": "cv.bridge.Bridge.operator cv::Rect"
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "parserName": "cv.bridge.operator cv.RotatedRect",
+      "correctedName": "cv.bridge.Bridge.operator cv::RotatedRect"
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "parserName": "cv.bridge.operator cv.TermCriteria",
+      "correctedName": "cv.bridge.Bridge.operator cv::TermCriteria"
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "parserName": "cv.bridge.operator cv.RNG",
+      "correctedName": "cv.bridge.Bridge.operator cv::RNG"
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "parserName": "matlab.void conditionalError",
+      "correctedName": "matlab.conditionalError"
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "parserName": "matlab.void error",
+      "correctedName": "matlab.error"
+    }
+  ],
+  "reconciledInlineDefinitions": [
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "identity": "cv.bridge.Bridge.operator=(const cv::Mat& mat)->Bridge&",
+      "retainedOrdinal": 9,
+      "reason": "Out-of-class inline definition reconciled to the existing class declaration; const/operator metadata is identical."
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "identity": "cv.bridge.Bridge.toMat()->cv::Mat",
+      "retainedOrdinal": 10,
+      "reason": "Out-of-class inline definition reconciled to the existing class declaration; const/operator metadata is identical."
+    }
+  ],
+  "parserConfigurationProbes": [
+    {
+      "configuration": "source-cplusplus-199711",
+      "cplusplus": 199711,
+      "originalMxarrayDeclarationCount": 36,
+      "normalizedMxarrayDeclarationCount": 35,
+      "normalizedMapDeclarationCount": 0
+    },
+    {
+      "configuration": "source-cplusplus-201103",
+      "cplusplus": 201103,
+      "originalMxarrayDeclarationCount": 36,
+      "normalizedMxarrayDeclarationCount": 36,
+      "normalizedMapDeclarationCount": 0
+    },
+    {
+      "configuration": "source-cplusplus-201703",
+      "cplusplus": 201703,
+      "originalMxarrayDeclarationCount": 36,
+      "normalizedMxarrayDeclarationCount": 36,
+      "normalizedMapDeclarationCount": 0
+    }
+  ],
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "sha256": "312ac0f7df5406498d82909a505e3709240e0ad1947a7ca9c1e08f24dd1dd252",
+      "startOrdinal": 0,
+      "declarationCount": 154
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/map.hpp",
+      "sha256": "81dd56dec0f4b250e46047b53e4bedf05d9762d826e1cfad0774c3de44d59daa",
+      "startOrdinal": 154,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "sha256": "1ff1e2372af3ea1ef81ac41de2c6d88809574d1b59c152ebdcee20c0f4b9a9d8",
+      "startOrdinal": 154,
+      "declarationCount": 36
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/transpose.hpp",
+      "sha256": "2b730a66f83ed727021e9539a8ffc6e08d6386e8cd7bc102e5f87f58d008716c",
+      "startOrdinal": 190,
+      "declarationCount": 0
+    }
+  ],
+  "declarationCount": 190,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "class",
+      "name": "cv.bridge.Bridge",
+      "identity": "class cv.bridge.Bridge",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@defgroup matlab MATLAB Bridge",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.Bridge",
+      "identity": "cv.bridge.Bridge.Bridge()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.~Bridge",
+      "identity": "cv.bridge.Bridge.~Bridge()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.empty",
+      "identity": "cv.bridge.Bridge.empty()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const mxArray* obj)->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const mxArray*",
+          "name": "obj",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const matlab::MxArray& obj)->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const matlab::MxArray&",
+          "name": "obj",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.Bridge",
+      "identity": "cv.bridge.Bridge.Bridge(const matlab::MxArray& obj)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const matlab::MxArray&",
+          "name": "obj",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.Bridge",
+      "identity": "cv.bridge.Bridge.Bridge(const mxArray* obj)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const mxArray*",
+          "name": "obj",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toMxArray",
+      "identity": "cv.bridge.Bridge.toMxArray()->matlab::MxArray",
+      "returnType": "matlab::MxArray",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const cv::Mat& mat)->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const cv::Mat&",
+          "name": "mat",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toMat",
+      "identity": "cv.bridge.Bridge.toMat()->cv::Mat",
+      "returnType": "cv::Mat",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator cv::Mat",
+      "identity": "cv.bridge.Bridge.operator cv::Mat()->",
+      "returnType": "",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const std::string& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const std::string&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toString",
+      "identity": "cv.bridge.Bridge.toString()->std::string",
+      "returnType": "std::string",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator std::string",
+      "identity": "cv.bridge.Bridge.operator std::string()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const bool& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const bool&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toBool",
+      "identity": "cv.bridge.Bridge.toBool()->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator bool",
+      "identity": "cv.bridge.Bridge.operator bool()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const double& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const double&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toDouble",
+      "identity": "cv.bridge.Bridge.toDouble()->double",
+      "returnType": "double",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator double",
+      "identity": "cv.bridge.Bridge.operator double()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const float& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const float&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toFloat",
+      "identity": "cv.bridge.Bridge.toFloat()->float",
+      "returnType": "float",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator float",
+      "identity": "cv.bridge.Bridge.operator float()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const int& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const int&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toInt",
+      "identity": "cv.bridge.Bridge.toInt()->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator int",
+      "identity": "cv.bridge.Bridge.operator int()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const size_t& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const size_t&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toSizeT",
+      "identity": "cv.bridge.Bridge.toSizeT()->size_t",
+      "returnType": "size_t",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator size_t",
+      "identity": "cv.bridge.Bridge.operator size_t()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const cv::Point& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const cv::Point&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toPoint",
+      "identity": "cv.bridge.Bridge.toPoint()->cv::Point",
+      "returnType": "cv::Point",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator cv::Point",
+      "identity": "cv.bridge.Bridge.operator cv::Point()->",
+      "returnType": "",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const cv::Point2f& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const cv::Point2f&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toPoint2f",
+      "identity": "cv.bridge.Bridge.toPoint2f()->cv::Point2f",
+      "returnType": "cv::Point2f",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator cv::Point2f",
+      "identity": "cv.bridge.Bridge.operator cv::Point2f()->",
+      "returnType": "",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const cv::Point2d& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const cv::Point2d&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 37,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toPoint2d",
+      "identity": "cv.bridge.Bridge.toPoint2d()->cv::Point2d",
+      "returnType": "cv::Point2d",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 38,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator cv::Point2d",
+      "identity": "cv.bridge.Bridge.operator cv::Point2d()->",
+      "returnType": "",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 39,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const cv::Size& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const cv::Size&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 40,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toSize",
+      "identity": "cv.bridge.Bridge.toSize()->cv::Size",
+      "returnType": "cv::Size",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 41,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator cv::Size",
+      "identity": "cv.bridge.Bridge.operator cv::Size()->",
+      "returnType": "",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 42,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const cv::Moments& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const cv::Moments&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 43,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toMoments",
+      "identity": "cv.bridge.Bridge.toMoments()->cv::Moments",
+      "returnType": "cv::Moments",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 44,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator cv::Moments",
+      "identity": "cv.bridge.Bridge.operator cv::Moments()->",
+      "returnType": "",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 45,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const cv::Scalar& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const cv::Scalar&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 46,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toScalar",
+      "identity": "cv.bridge.Bridge.toScalar()->cv::Scalar",
+      "returnType": "cv::Scalar",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 47,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator cv::Scalar",
+      "identity": "cv.bridge.Bridge.operator cv::Scalar()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 48,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const cv::Rect& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const cv::Rect&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 49,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toRect",
+      "identity": "cv.bridge.Bridge.toRect()->cv::Rect",
+      "returnType": "cv::Rect",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 50,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator cv::Rect",
+      "identity": "cv.bridge.Bridge.operator cv::Rect()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 51,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const cv::RotatedRect& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const cv::RotatedRect&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 52,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toRotatedRect",
+      "identity": "cv.bridge.Bridge.toRotatedRect()->cv::RotatedRect",
+      "returnType": "cv::RotatedRect",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 53,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator cv::RotatedRect",
+      "identity": "cv.bridge.Bridge.operator cv::RotatedRect()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 54,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const cv::TermCriteria& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const cv::TermCriteria&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 55,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toTermCriteria",
+      "identity": "cv.bridge.Bridge.toTermCriteria()->cv::TermCriteria",
+      "returnType": "cv::TermCriteria",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 56,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator cv::TermCriteria",
+      "identity": "cv.bridge.Bridge.operator cv::TermCriteria()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 57,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const cv::RNG& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const cv::RNG&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 58,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toRNG",
+      "identity": "cv.bridge.Bridge.toRNG()->cv::RNG",
+      "returnType": "cv::RNG",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 59,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator cv::RNG",
+      "identity": "cv.bridge.Bridge.operator cv::RNG()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 60,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const vector_Mat& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const vector_Mat&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 61,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toVectorMat",
+      "identity": "cv.bridge.Bridge.toVectorMat()->vector_Mat",
+      "returnType": "vector_Mat",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 62,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator vector_Mat",
+      "identity": "cv.bridge.Bridge.operator vector_Mat()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 63,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const vector_int& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const vector_int&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 64,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toVectorInt",
+      "identity": "cv.bridge.Bridge.toVectorInt()->vector_int",
+      "returnType": "vector_int",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 65,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator vector_int",
+      "identity": "cv.bridge.Bridge.operator vector_int()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 66,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const vector_float& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const vector_float&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 67,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toVectorFloat",
+      "identity": "cv.bridge.Bridge.toVectorFloat()->vector_float",
+      "returnType": "vector_float",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 68,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator vector_float",
+      "identity": "cv.bridge.Bridge.operator vector_float()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 69,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const vector_Rect& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const vector_Rect&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 70,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toVectorRect",
+      "identity": "cv.bridge.Bridge.toVectorRect()->vector_Rect",
+      "returnType": "vector_Rect",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 71,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator vector_Rect",
+      "identity": "cv.bridge.Bridge.operator vector_Rect()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 72,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const vector_KeyPoint& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const vector_KeyPoint&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 73,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toVectorKeyPoint",
+      "identity": "cv.bridge.Bridge.toVectorKeyPoint()->vector_KeyPoint",
+      "returnType": "vector_KeyPoint",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 74,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator vector_KeyPoint",
+      "identity": "cv.bridge.Bridge.operator vector_KeyPoint()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 75,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const vector_String& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const vector_String&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 76,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toVectorString",
+      "identity": "cv.bridge.Bridge.toVectorString()->vector_String",
+      "returnType": "vector_String",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 77,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator vector_String",
+      "identity": "cv.bridge.Bridge.operator vector_String()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 78,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const vector_Point& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const vector_Point&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 79,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toVectorPoint",
+      "identity": "cv.bridge.Bridge.toVectorPoint()->vector_Point",
+      "returnType": "vector_Point",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 80,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator vector_Point",
+      "identity": "cv.bridge.Bridge.operator vector_Point()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 81,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const vector_uchar& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const vector_uchar&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 82,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toVectorUchar",
+      "identity": "cv.bridge.Bridge.toVectorUchar()->vector_uchar",
+      "returnType": "vector_uchar",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 83,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator vector_uchar",
+      "identity": "cv.bridge.Bridge.operator vector_uchar()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 84,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const vector_vector_char& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const vector_vector_char&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 85,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toVectorVectorChar",
+      "identity": "cv.bridge.Bridge.toVectorVectorChar()->vector_vector_char",
+      "returnType": "vector_vector_char",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 86,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator vector_vector_char",
+      "identity": "cv.bridge.Bridge.operator vector_vector_char()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 87,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const vector_vector_DMatch& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const vector_vector_DMatch&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 88,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toVectorVectorDMatch",
+      "identity": "cv.bridge.Bridge.toVectorVectorDMatch()->vector_vector_DMatch",
+      "returnType": "vector_vector_DMatch",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 89,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator vector_vector_DMatch",
+      "identity": "cv.bridge.Bridge.operator vector_vector_DMatch()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 90,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const Ptr_StereoBM& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Ptr_StereoBM&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 91,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toPtrStereoBM",
+      "identity": "cv.bridge.Bridge.toPtrStereoBM()->Ptr_StereoBM",
+      "returnType": "Ptr_StereoBM",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 92,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator Ptr_StereoBM",
+      "identity": "cv.bridge.Bridge.operator Ptr_StereoBM()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 93,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const Ptr_StereoSGBM& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Ptr_StereoSGBM&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 94,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toPtrStereoSGBM",
+      "identity": "cv.bridge.Bridge.toPtrStereoSGBM()->Ptr_StereoSGBM",
+      "returnType": "Ptr_StereoSGBM",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 95,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator Ptr_StereoSGBM",
+      "identity": "cv.bridge.Bridge.operator Ptr_StereoSGBM()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 96,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const Ptr_FeatureDetector& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Ptr_FeatureDetector&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 97,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toPtrFeatureDetector",
+      "identity": "cv.bridge.Bridge.toPtrFeatureDetector()->Ptr_FeatureDetector",
+      "returnType": "Ptr_FeatureDetector",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 98,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator Ptr_FeatureDetector",
+      "identity": "cv.bridge.Bridge.operator Ptr_FeatureDetector()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 99,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const Ptr_CLAHE& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Ptr_CLAHE&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 100,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toPtrCLAHE",
+      "identity": "cv.bridge.Bridge.toPtrCLAHE()->Ptr_CLAHE",
+      "returnType": "Ptr_CLAHE",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 101,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator Ptr_CLAHE",
+      "identity": "cv.bridge.Bridge.operator Ptr_CLAHE()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 102,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const Ptr_LineSegmentDetector& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Ptr_LineSegmentDetector&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 103,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toPtrLineSegmentDetector",
+      "identity": "cv.bridge.Bridge.toPtrLineSegmentDetector()->Ptr_LineSegmentDetector",
+      "returnType": "Ptr_LineSegmentDetector",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 104,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator Ptr_LineSegmentDetector",
+      "identity": "cv.bridge.Bridge.operator Ptr_LineSegmentDetector()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 105,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const Ptr_AlignMTB& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Ptr_AlignMTB&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 106,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toPtrAlignMTB",
+      "identity": "cv.bridge.Bridge.toPtrAlignMTB()->Ptr_AlignMTB",
+      "returnType": "Ptr_AlignMTB",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 107,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator Ptr_AlignMTB",
+      "identity": "cv.bridge.Bridge.operator Ptr_AlignMTB()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 108,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const Ptr_CalibrateDebevec& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Ptr_CalibrateDebevec&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 109,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toPtrCalibrateDebevec",
+      "identity": "cv.bridge.Bridge.toPtrCalibrateDebevec()->Ptr_CalibrateDebevec",
+      "returnType": "Ptr_CalibrateDebevec",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 110,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator Ptr_CalibrateDebevec",
+      "identity": "cv.bridge.Bridge.operator Ptr_CalibrateDebevec()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 111,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const Ptr_CalibrateRobertson& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Ptr_CalibrateRobertson&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 112,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toPtrCalibrateRobertson",
+      "identity": "cv.bridge.Bridge.toPtrCalibrateRobertson()->Ptr_CalibrateRobertson",
+      "returnType": "Ptr_CalibrateRobertson",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 113,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator Ptr_CalibrateRobertson",
+      "identity": "cv.bridge.Bridge.operator Ptr_CalibrateRobertson()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 114,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const Ptr_DenseOpticalFlow& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Ptr_DenseOpticalFlow&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 115,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toPtrDenseOpticalFlow",
+      "identity": "cv.bridge.Bridge.toPtrDenseOpticalFlow()->Ptr_DenseOpticalFlow",
+      "returnType": "Ptr_DenseOpticalFlow",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 116,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator Ptr_DenseOpticalFlow",
+      "identity": "cv.bridge.Bridge.operator Ptr_DenseOpticalFlow()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 117,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const Ptr_DualTVL1OpticalFlow& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Ptr_DualTVL1OpticalFlow&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 118,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toPtrDualTVL1OpticalFlow",
+      "identity": "cv.bridge.Bridge.toPtrDualTVL1OpticalFlow()->Ptr_DualTVL1OpticalFlow",
+      "returnType": "Ptr_DualTVL1OpticalFlow",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 119,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator Ptr_DualTVL1OpticalFlow",
+      "identity": "cv.bridge.Bridge.operator Ptr_DualTVL1OpticalFlow()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 120,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const Ptr_MergeDebevec& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Ptr_MergeDebevec&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 121,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toPtrMergeDebevec",
+      "identity": "cv.bridge.Bridge.toPtrMergeDebevec()->Ptr_MergeDebevec",
+      "returnType": "Ptr_MergeDebevec",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 122,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator Ptr_MergeDebevec",
+      "identity": "cv.bridge.Bridge.operator Ptr_MergeDebevec()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 123,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const Ptr_MergeMertens& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Ptr_MergeMertens&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 124,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toPtrMergeMertens",
+      "identity": "cv.bridge.Bridge.toPtrMergeMertens()->Ptr_MergeMertens",
+      "returnType": "Ptr_MergeMertens",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 125,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator Ptr_MergeMertens",
+      "identity": "cv.bridge.Bridge.operator Ptr_MergeMertens()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 126,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const Ptr_MergeRobertson& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Ptr_MergeRobertson&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 127,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toPtrMergeRobertson",
+      "identity": "cv.bridge.Bridge.toPtrMergeRobertson()->Ptr_MergeRobertson",
+      "returnType": "Ptr_MergeRobertson",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 128,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator Ptr_MergeRobertson",
+      "identity": "cv.bridge.Bridge.operator Ptr_MergeRobertson()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 129,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const Ptr_Stitcher& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Ptr_Stitcher&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 130,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toPtrStitcher",
+      "identity": "cv.bridge.Bridge.toPtrStitcher()->Ptr_Stitcher",
+      "returnType": "Ptr_Stitcher",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 131,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator Ptr_Stitcher",
+      "identity": "cv.bridge.Bridge.operator Ptr_Stitcher()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 132,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const Ptr_Tonemap& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Ptr_Tonemap&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 133,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toPtrTonemap",
+      "identity": "cv.bridge.Bridge.toPtrTonemap()->Ptr_Tonemap",
+      "returnType": "Ptr_Tonemap",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 134,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator Ptr_Tonemap",
+      "identity": "cv.bridge.Bridge.operator Ptr_Tonemap()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 135,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const Ptr_TonemapDrago& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Ptr_TonemapDrago&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 136,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toPtrTonemapDrago",
+      "identity": "cv.bridge.Bridge.toPtrTonemapDrago()->Ptr_TonemapDrago",
+      "returnType": "Ptr_TonemapDrago",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 137,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator Ptr_TonemapDrago",
+      "identity": "cv.bridge.Bridge.operator Ptr_TonemapDrago()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 138,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const Ptr_TonemapDurand& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Ptr_TonemapDurand&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 139,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toPtrTonemapDurand",
+      "identity": "cv.bridge.Bridge.toPtrTonemapDurand()->Ptr_TonemapDurand",
+      "returnType": "Ptr_TonemapDurand",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 140,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator Ptr_TonemapDurand",
+      "identity": "cv.bridge.Bridge.operator Ptr_TonemapDurand()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 141,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const Ptr_TonemapMantiuk& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Ptr_TonemapMantiuk&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 142,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toPtrTonemapMantiuk",
+      "identity": "cv.bridge.Bridge.toPtrTonemapMantiuk()->Ptr_TonemapMantiuk",
+      "returnType": "Ptr_TonemapMantiuk",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 143,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator Ptr_TonemapMantiuk",
+      "identity": "cv.bridge.Bridge.operator Ptr_TonemapMantiuk()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 144,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const Ptr_TonemapReinhard& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Ptr_TonemapReinhard&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 145,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toPtrTonemapReinhard",
+      "identity": "cv.bridge.Bridge.toPtrTonemapReinhard()->Ptr_TonemapReinhard",
+      "returnType": "Ptr_TonemapReinhard",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 146,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator Ptr_TonemapReinhard",
+      "identity": "cv.bridge.Bridge.operator Ptr_TonemapReinhard()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 147,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const Ptr_float& )->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Ptr_float&",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 148,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.toPtrFloat",
+      "identity": "cv.bridge.Bridge.toPtrFloat()->Ptr_float",
+      "returnType": "Ptr_float",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 149,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator Ptr_float",
+      "identity": "cv.bridge.Bridge.operator Ptr_float()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 150,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const Ptr_GeneralizedHoughBallard& obj)->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Ptr_GeneralizedHoughBallard&",
+          "name": "obj",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 151,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator Ptr_GeneralizedHoughBallard",
+      "identity": "cv.bridge.Bridge.operator Ptr_GeneralizedHoughBallard()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 152,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator=",
+      "identity": "cv.bridge.Bridge.operator=(const Ptr_GeneralizedHoughGuil& obj)->Bridge&",
+      "returnType": "Bridge&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const Ptr_GeneralizedHoughGuil&",
+          "name": "obj",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 153,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+      "kind": "callable",
+      "name": "cv.bridge.Bridge.operator Ptr_GeneralizedHoughGuil",
+      "identity": "cv.bridge.Bridge.operator Ptr_GeneralizedHoughGuil()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 154,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.conditionalError",
+      "identity": "matlab.conditionalError(bool expr;const std::string& str)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "expr",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const std::string&",
+          "name": "str",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 155,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.error",
+      "identity": "matlab.error(const std::string& str)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "const std::string&",
+          "name": "str",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 156,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "class",
+      "name": "matlab.DefaultTraits",
+      "identity": "class matlab.DefaultTraits",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 157,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "class",
+      "name": "matlab.InheritType",
+      "identity": "class matlab.InheritType",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 158,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "class",
+      "name": "matlab.MxArray",
+      "identity": "class matlab.MxArray",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 159,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.MxArray.MxArray",
+      "identity": "matlab.MxArray.MxArray()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 160,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.MxArray.~MxArray",
+      "identity": "matlab.MxArray.~MxArray()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 161,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.MxArray.MxArray",
+      "identity": "matlab.MxArray.MxArray(const mxArray* ptr)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const mxArray*",
+          "name": "ptr",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 162,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.MxArray.operator=",
+      "identity": "matlab.MxArray.operator=(const mxArray* ptr)->MxArray&",
+      "returnType": "MxArray&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const mxArray*",
+          "name": "ptr",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 163,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.MxArray.MxArray",
+      "identity": "matlab.MxArray.MxArray(size_t m;size_t n;size_t k;mxClassID id;mxComplexity com=matlab::Traits<>::Real)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "size_t",
+          "name": "m",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "size_t",
+          "name": "n",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "size_t",
+          "name": "k",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "mxClassID",
+          "name": "id",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "mxComplexity",
+          "name": "com",
+          "default": "matlab::Traits<>::Real",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 164,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.MxArray.MxArray",
+      "identity": "matlab.MxArray.MxArray(const MxArray& other)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const MxArray&",
+          "name": "other",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 165,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.MxArray.operator=",
+      "identity": "matlab.MxArray.operator=(MxArray other)->MxArray&",
+      "returnType": "MxArray&",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "MxArray",
+          "name": "other",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 166,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.MxArray.MxArray",
+      "identity": "matlab.MxArray.MxArray(MxArray&& other)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "MxArray&&",
+          "name": "other",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": true
+    },
+    {
+      "ordinal": 167,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.MxArray.releaseOwnership",
+      "identity": "matlab.MxArray.releaseOwnership()->mxArray*",
+      "returnType": "mxArray*",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 168,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.MxArray.field",
+      "identity": "matlab.MxArray.field(const std::string& name)->MxArray",
+      "returnType": "MxArray",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const std::string&",
+          "name": "name",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 169,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.MxArray.toString",
+      "identity": "matlab.MxArray.toString()->std::string",
+      "returnType": "std::string",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 170,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.MxArray.size",
+      "identity": "matlab.MxArray.size()->size_t",
+      "returnType": "size_t",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 171,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.MxArray.empty",
+      "identity": "matlab.MxArray.empty()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 172,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.MxArray.rows",
+      "identity": "matlab.MxArray.rows()->size_t",
+      "returnType": "size_t",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 173,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.MxArray.cols",
+      "identity": "matlab.MxArray.cols()->size_t",
+      "returnType": "size_t",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 174,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.MxArray.channels",
+      "identity": "matlab.MxArray.channels()->size_t",
+      "returnType": "size_t",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 175,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.MxArray.isComplex",
+      "identity": "matlab.MxArray.isComplex()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 176,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.MxArray.isNumeric",
+      "identity": "matlab.MxArray.isNumeric()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 177,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.MxArray.isLogical",
+      "identity": "matlab.MxArray.isLogical()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 178,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.MxArray.isString",
+      "identity": "matlab.MxArray.isString()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 179,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.MxArray.isCell",
+      "identity": "matlab.MxArray.isCell()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 180,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.MxArray.isStructure",
+      "identity": "matlab.MxArray.isStructure()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 181,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.MxArray.isClass",
+      "identity": "matlab.MxArray.isClass(const std::string& name)->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "const std::string&",
+          "name": "name",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 182,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.MxArray.className",
+      "identity": "matlab.MxArray.className()->std::string",
+      "returnType": "std::string",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 183,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.MxArray.ID",
+      "identity": "matlab.MxArray.ID()->mxClassID",
+      "returnType": "mxClassID",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 184,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "class",
+      "name": "matlab.ArgumentParser",
+      "identity": "class matlab.ArgumentParser",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 185,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.ArgumentParser.ArgumentParser",
+      "identity": "matlab.ArgumentParser.ArgumentParser(const String& method_name)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const String&",
+          "name": "method_name",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 186,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.ArgumentParser.addVariant",
+      "identity": "matlab.ArgumentParser.addVariant(const String& name;size_t nreq;size_t nopt=0;... )->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const String&",
+          "name": "name",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "size_t",
+          "name": "nreq",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "size_t",
+          "name": "nopt",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "...",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 187,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.ArgumentParser.addVariant",
+      "identity": "matlab.ArgumentParser.addVariant(const String& name;size_t nreq;size_t nopt;StringVector keys)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const String&",
+          "name": "name",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "size_t",
+          "name": "nreq",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "size_t",
+          "name": "nopt",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "StringVector",
+          "name": "keys",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 188,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.ArgumentParser.variantIs",
+      "identity": "matlab.ArgumentParser.variantIs(const String& name)->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const String&",
+          "name": "name",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    },
+    {
+      "ordinal": 189,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+      "kind": "callable",
+      "name": "matlab.ArgumentParser.parse",
+      "identity": "matlab.ArgumentParser.parse(const MxArrayVector& inputs)->MxArrayVector",
+      "returnType": "MxArrayVector",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const MxArrayVector&",
+          "name": "inputs",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCpp11": false
+    }
+  ],
+  "sourceReviewedExtensionPath": "compatibility/matlab-source-reviewed-extensions.json",
+  "sourceReviewedExtensionSha256": "76fd052f3e2b1c9c4460cf2cc0784376b024204e047fe8a077a86d130966c45a",
+  "sourceInventoryCounts": {
+    "templatesCount": 38,
+    "templateParametersCount": 0,
+    "macroDefinitionsCount": 0,
+    "conditionalDirectivesCount": 22,
+    "templateKindCounts": {
+      "alias-template": 1,
+      "class-template": 15,
+      "function-template": 22
+    }
+  },
+  "sourceInventoryLimitation": "This is the pinned hdr_parser non-template public subset, not complete MATLAB callable coverage. All four installed headers and every lexical template/conditional branch remain in a linked source inventory. The parser ignores __cplusplus checks, so temporary copies rename that identifier to a recorded numeric input. Templates, class-template members, specializations and generated +cv gateways are not enumerated as concrete APIs. External mex.h/standard-library/OpenCV include closure, C++ type checking, MATLAB/MEX build/link/runtime and complete callable parity remain unverified; the package has no MATLAB native or managed wrapper.",
+  "completeCallableCoverageClaimed": false,
+  "matlabExecutionVerified": false,
+  "compatibilityHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/CMakeLists.txt",
+      "sha256": "e4d856a4e6f1232e415d7bb8f28632530dcac4c2a7eeafd5c7d51e3f2440eb1f",
+      "reason": "BINDINGS module; MATLAB/Python/Jinja2/platform/bitness and generator/MEX probes; optional OpenCV inputs and installed headers/+cv gateways."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/cmake/init.cmake",
+      "sha256": "26d25243dff9cc661db7a07098a09e266c6548f285c5955fb71234dcf93ca60a",
+      "reason": "Registers the external MATLAB discovery script."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/cmake/OpenCVFindMatlab.cmake",
+      "sha256": "cdef09543322e57819d21d5947325a1be3a0065c2cda08bfa6ade78cecaba9bb",
+      "reason": "External MATLAB installation, mex.h, mx/mex/mat libraries, MEX executable/extension and architecture discovery."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/compile.cmake",
+      "sha256": "a43ebe566a17702f5eb87c15f59c5fe777e8b011f0092496ef7968cab937f4a4",
+      "reason": "Invokes MEX for generated gateway sources and unconditionally skips Debug configurations, despite the preceding MSVC-only comment."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/README.md",
+      "sha256": "ae5b6382f65aa172975e4c68c5cc9cef578024c8b4aba557edb9e140aff0af14",
+      "reason": "MATLAB generator, MEX usage, scoped mxArray ownership and generated-binding installation."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/generator/gen_matlab.py",
+      "sha256": "248019a1b1ae5c8d412cbe9c663999b35f9c54d7c4109f8e77b28f67f3a74a86",
+      "reason": "Parses available module headers and renders generated binding templates; not this installed-helper declaration map."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/generator/parse_tree.py",
+      "sha256": "9b8df7502f6f7c95b765804aa32d30d06c4c0f754adaaeff17b41929f4cecc91",
+      "reason": "Transforms parser declarations into generator namespaces/classes/functions."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/generator/templates/functional.cpp",
+      "sha256": "17e9e8dfa94ecfedd62819288de6b671bf234b61802d682d0e2c3098a408c61a",
+      "reason": "Generated MEX entrypoint, argument transport, exception and returned mxArray ownership boundary."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/generator/templates/template_class_base.cpp",
+      "sha256": "e917ec60a995fc5e736281cb631add5e324acede8c8afc16289afa43e9a8b4be",
+      "reason": "Generated object dispatch and instance storage boundary."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/generator/templates/template_function_base.cpp",
+      "sha256": "2daaeaf781fbf0815cd7a96bb9d2fe5f51180f96a5c6154db843455f9ef8d956",
+      "reason": "Generated per-function MEX gateway template."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/test/test_compiler.cpp",
+      "sha256": "142e62c451021f58fc578eab98a2f43c18f36e431153cee14a9e7d1b43c0a428",
+      "reason": "Upstream configure-time MEX compile fixture; pinned source is not an executed probe here."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/test/test_generator.hpp",
+      "sha256": "12b3bd069501dd2e7431241bbd8f8db80a6a776e69812e24daad67013275e0ac",
+      "reason": "Upstream configure-time generator fixture; pinned source is not executed MATLAB evidence."
+    }
+  ],
+  "moduleBuildCondition": "MATLAB_FOUND_AND_PYTHON_AND_JINJA2_AND_MATCHING_BITNESS_AND_MEX_PROBES_AND_NOT_ANDROID_APPLE_FRAMEWORK",
+  "optionalGeneratorModuleDependencies": [
+    "opencv_core",
+    "opencv_imgproc",
+    "opencv_ml",
+    "opencv_imgcodecs",
+    "opencv_videoio",
+    "opencv_highgui",
+    "opencv_objdetect",
+    "opencv_flann",
+    "opencv_features",
+    "opencv_photo",
+    "opencv_video",
+    "opencv_videostab",
+    "opencv_calib",
+    "opencv_geometry",
+    "opencv_stitching",
+    "opencv_superres",
+    "opencv_xfeatures2d",
+    "opencv_optflow",
+    "opencv_xphoto"
+  ],
+  "ownershipBoundaries": [
+    "MxArray from const mxArray* borrows and does not destroy the input.",
+    "MxArray copy construction duplicates the array; owned destruction calls mxDestroyArray.",
+    "releaseOwnership clears ownership before the pointer is returned to MATLAB.",
+    "Bridge Mat conversion uses deepCopyAndTranspose; generated object pointers and MEX exception handling require their own lifetime contract."
+  ],
+  "generatedBindingSurfaceIncluded": false,
+  "upstreamPlaceholderBoundaries": {
+    "noOpAssignmentDefinitionCount": 48,
+    "boolConversionReturnsZero": true,
+    "limitation": "Several Bridge conversions are upstream placeholder bodies. Header declarations and parser identities are not conversion correctness or MATLAB runtime evidence."
+  }
+}

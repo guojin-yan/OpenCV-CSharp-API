@@ -76,7 +76,7 @@ pwsh -NoProfile -File .\scripts\Generate-CudevUpstreamMap.ps1 -PythonPath <pytho
 
 Generation bootstraps tool dependencies into ignored `artifacts/tools/cudev-syntax/`, keyed by Python platform and the requirements hash. Exact releases use official PyPI wheel SHA256 values and `--require-hashes --no-deps --only-binary=:all:`. No global Python or C# package/runtime dependency is added. Hosts without a compatible wheel fail generation; invariant checks do not bootstrap tools.
 
-The catalog, source-evidence initializer, ledger and release closeout bind all seven Cudev artifacts, extractors/tests, pinned requirements, bootstrap and .NET guards. Catalog maps remain 72; MAP-005 has 49 distinct source-map entries and 50 ledger increments after this second Cudev phase. Complete callable/instantiation coverage, external declaration closure and CUDA compiler/runtime validation remain open.
+The catalog, source-evidence initializer, ledger and release closeout bind all seven Cudev artifacts, extractors/tests, pinned requirements, bootstrap and .NET guards. The second Cudev phase adds one ledger increment without adding another catalog map; see the [toolchain guide](upstream-map-toolchain.md) for current aggregate counts. Complete callable/instantiation coverage, external declaration closure and CUDA compiler/runtime validation remain open.
 
 ## 中文边界说明
 

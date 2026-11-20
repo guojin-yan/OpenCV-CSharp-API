@@ -1,5 +1,5 @@
 param(
-    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect','superres','dnn_superres','wechat_qrcode','cnn_3dobj','signal','dpm','hdf','text','xfeatures2d','dnn_objdetect','ccalib','julia','rgbd','cudaarithm','cudabgsegm','cudafilters','cudaimgproc','cudacodec','cudawarping','cudafeatures2d','cudaobjdetect','cudaoptflow','cudastereo','cudalegacy','videostab','cvv','datasets','viz','ovis','fastcv','cannops','sfm','cudev')][string]$Module,
+    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect','superres','dnn_superres','wechat_qrcode','cnn_3dobj','signal','dpm','hdf','text','xfeatures2d','dnn_objdetect','ccalib','julia','rgbd','cudaarithm','cudabgsegm','cudafilters','cudaimgproc','cudacodec','cudawarping','cudafeatures2d','cudaobjdetect','cudaoptflow','cudastereo','cudalegacy','videostab','cvv','datasets','viz','ovis','fastcv','cannops','sfm','cudev','matlab')][string]$Module,
     [Parameter(Mandatory)][string]$DisplayName,
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [switch]$Check
@@ -29,6 +29,7 @@ function ToPascal([string]$Value) {
 }
 
 function GetParts([string]$Identity) {
+    if ($Module -eq 'matlab') { return [pscustomobject]@{ Namespace = ''; Owner = ''; Name = '' } }
     $pattern = if ($Module -eq 'optflow') {
         '^cv\.(?<namespace>optflow|motempl)\.(?:(?<owner>.+)\.)?(?<name>[A-Za-z][A-Za-z0-9_]*)\('
     } elseif ($Module -eq 'cvv') {
@@ -200,6 +201,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
 }
 
 function GetManaged([string]$Owner, [string]$Name, [string]$Identity) {
+    if ($Module -eq 'matlab') { return @() }
     if ($Module -in @('freetype','cnn_3dobj','cudaarithm','cudabgsegm','cudafilters','cudaimgproc','cudacodec','cudawarping','cudafeatures2d','cudaobjdetect','cudaoptflow','cudastereo','cudalegacy','videostab','viz','fastcv','cannops','sfm','cudev')) { return @() }
     if ($Module -eq 'structured_light') {
         $typeMarker = "JYPPX.OpenCvSharp.StructuredLight.$Owner|"
@@ -549,6 +551,7 @@ function GetManaged([string]$Owner, [string]$Name, [string]$Identity) {
 }
 
 function GetNative([object]$Parts, [string]$Identity) {
+    if ($Module -eq 'matlab') { return @() }
     $owner = [string]$Parts.Owner
     $name = [string]$Parts.Name
     $result = @()
@@ -1146,6 +1149,11 @@ foreach ($decl in @($raw.declarations)) {
 $claimedSlice = if ($Module -eq 'reg') { 'opencv2/reg/*.hpp contrib public header closure from parser-emitted headers' } elseif ($Module -eq 'ptcloud') { 'opencv2/ptcloud/depth.hpp selected parser-backed depth/RGB-D wrapper slice; ptcloud umbrella volume/odometry headers are explicitly excluded' } elseif ($Module -eq 'dnn_objdetect') { 'opencv2/core_detect.hpp contrib public header closure from parser-emitted headers; dnn_objdetect has no separate umbrella header in OpenCV 5.0.0' } elseif ($Module -eq 'superres') { 'opencv2/superres.hpp plus opencv2/superres/*.hpp parser-backed public header closure; protected SuperResolution implementation hooks are explicitly excluded' } elseif ($Module -eq 'rgbd') { 'opencv2/rgbd.hpp plus opencv2/rgbd/*.hpp parser-backed public header closure' } elseif ($Module -eq 'cudaarithm') { 'opencv2/cudaarithm.hpp parser-backed CUDA arithmetic public declarations plus the pinned module CMake build/dependency contract' } elseif ($Module -eq 'cudabgsegm') { 'opencv2/cudabgsegm.hpp parser-backed CUDA background-segmentation declarations plus the pinned module CMake build/dependency contract' } elseif ($Module -eq 'cudafilters') { 'opencv2/cudafilters.hpp parser-backed CUDA image-filter declarations plus the pinned module CMake build/dependency contract' } elseif ($Module -eq 'cudaimgproc') { 'opencv2/cudaimgproc.hpp parser-backed CUDA image-processing declarations plus the pinned module CMake build/dependency contract' } elseif ($Module -eq 'cudacodec') { 'opencv2/cudacodec.hpp parser-backed CUDA codec public declarations plus the pinned module CMake build/dependency contract' } elseif ($Module -eq 'cudawarping') { 'opencv2/cudawarping.hpp parser-backed CUDA image-warping public declarations plus the pinned module CMake build/dependency contract' } elseif ($Module -eq 'cudafeatures2d') { 'opencv2/cudafeatures2d.hpp parser-backed CUDA feature-detection and description public declarations plus the pinned module CMake build/dependency contract' } elseif ($Module -eq 'cudaobjdetect') { 'opencv2/cudaobjdetect.hpp parser-backed CUDA object-detection public declarations plus the pinned module CMake build/dependency contract' } elseif ($Module -eq 'cudaoptflow') { 'opencv2/cudaoptflow.hpp parser-backed CUDA optical-flow public declarations plus the pinned module CMake build/dependency contract' } elseif ($Module -eq 'cudastereo') { 'opencv2/cudastereo.hpp parser-backed CUDA stereo-correspondence public declarations plus the pinned module CMake build/dependency contract' } elseif ($Module -eq 'cudalegacy') { 'opencv2/cudalegacy.hpp plus opencv2/cudalegacy/*.hpp parser-backed legacy CUDA public closure, including cv::cuda declarations and NCV/NPP staging metadata, plus the pinned module CMake build/dependency contract' } elseif ($Module -eq 'videostab') { 'opencv2/videostab/*.hpp parser-backed VideoStab public component-header closure; the umbrella has no parser declarations and protected implementation hooks are explicitly excluded' } else { "opencv2/$Module.hpp contrib public header closure from parser-emitted headers" }
  $buildCondition = if ($Module -in @('cudaarithm','cudafilters','cudaimgproc','cudawarping','cudafeatures2d','cudaoptflow','cudastereo')) { 'NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)' } elseif ($Module -in @('cudabgsegm','cudaobjdetect')) { 'NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)' } elseif ($Module -eq 'cudacodec') { 'NOT_IOS_AND_NOT_APPLE_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)' } elseif ($Module -eq 'cudalegacy') { 'HAVE_CUDA' } elseif ($Module -eq 'videostab') { 'REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT' } elseif ($Module -eq 'cvv') { 'HAVE_QT_GE_5_AND_CXX11' } elseif ($Module -eq 'datasets') { 'OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT' } elseif ($Module -eq 'viz') { 'HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT' } else { "OPENCV_CSHARP_HAS_OPENCV_$($Module.ToUpperInvariant())=1" }
     if ($Module -eq 'fastcv') { $buildCondition = 'HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY' }
+    if ($Module -eq 'matlab') {
+        $buildCondition = [string]$raw.moduleBuildCondition
+        if ([bool]$decl.requiresCpp11) { $buildCondition += '_AND_SOURCE_CPLUSPLUS_GE_201103' }
+        if ($classification -eq 'intentionally-omitted') { $reason = 'The MATLAB installed-helper declaration has no native or managed wrapper in the current package. External MATLAB mex.h and mx/mex/mat libraries, Python/Jinja2, matching compiler/MATLAB bitness and successful generator/MEX probes are required. MxArray borrow/copy/releaseOwnership, Mat layout conversion and generated object lifetime remain outside this package contract. This row belongs to a non-template parser subset; complete callable and generated-binding coverage and MATLAB/MEX execution remain unverified.' }
+    }
     if ($Module -eq 'cannops') { $buildCondition = 'HAVE_CANN_AND_SUPPORTED_UNIX_X86_64_OR_AARCH64_AND_NOT_IOS_WINRT_ANDROID_APPLE_WIN32_AND_ASCENDC_TOOLCHAIN' }
     if ($Module -eq 'sfm') { $buildCondition = if ([bool]$decl.requiresCeres) { 'HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND' } else { 'HAVE_EIGEN_AND_SFM_DEPS_OK' } }
     if ($Module -eq 'cudev') {
@@ -1169,6 +1177,7 @@ $claimedSlice = if ($Module -eq 'reg') { 'opencv2/reg/*.hpp contrib public heade
 }
 
 $externalDataDependencies = switch ($Module) {
+    'matlab' { @('The MATLAB BINDINGS module requires an external MATLAB installation, mex.h, mx/mex/mat libraries, MEX compiler script/extension and matching architecture; this package bundles no MATLAB native/managed wrapper or runtime.', 'Python and Jinja2 plus successful generator and MEX compile configuration probes are required; generated +cv gateway declarations depend on available optional OpenCV modules and are outside this installed-helper map.', 'Caller-owned mxArray inputs, duplicated/owned outputs, releaseOwnership handoff, Mat row/column and channel layout conversions, generated object pointers and MEX exception handling require external lifetime contracts.') }
     'face' { @('Facemark LBF fitting needs a caller-selected compatible landmark model loaded with Facemark.LoadModel; no model data is bundled.') }
     'quality' { @('QualityBRISQUE needs caller-selected SVM model and range files; no model data is bundled. Other quality metrics use caller-provided reference and comparison Mats.') }
     'dnn_superres' { @('DNN Super Resolution requires caller-selected compatible model data and backend/target policy; no model asset or managed/native wrapper is bundled.') }
@@ -1214,14 +1223,17 @@ if ($Module -eq 'fastcv') { $claimedSlice = 'opencv2/fastcv.hpp plus all 30 dire
 if ($Module -eq 'cannops') { $claimedSlice = 'All eight installed CannOps opencv2/*.hpp headers, including internal helpers; cv::cann parser declarations retain restored nested Impl identities, reconcile inline definitions and exclude private inline constructors and inactive binding-only placeholders; CANN/AscendC build and runtime boundaries remain evidence-only' }
 if ($Module -eq 'sfm') { $claimedSlice = 'opencv2/sfm.hpp plus all nine installed opencv2/sfm/*.hpp headers, including standalone robust.hpp and the Ceres reconstruction/pipeline surface; exact non-wrapper declarations preserve per-header Ceres build gates and upstream incomplete-runtime boundaries' }
 if ($Module -eq 'cudev') { $claimedSlice = 'All 76 installed cudev headers: a non-template parser subset reconciled with an expanded source callable inventory, including class-template members and 44 local declaration generators, plus lexical template/macro/conditional provenance; complete callable/instantiation coverage remains open' }
+if ($Module -eq 'matlab') { $claimedSlice = 'All four installed opencv2/matlab/*.hpp helpers: non-template public parser subset under source C++11, with restored conversion-operator ownership, reconciled inline definitions and linked all-branch lexical template/conditional provenance; complete callable and generated +cv gateway coverage remain open' }
 $classification = [ordered]@{ schemaVersion = 1; upstreamOpenCvVersion = '5.0.0'; claimedSlice = $claimedSlice; reviewStatus = 'reviewed'; limitation = "The map records parser identities and exact $DisplayName wrapper evidence; it does not claim repository-wide contrib parity or external module availability."; externalDataDependencies = @($externalDataDependencies); declarations = @($rows) }
 if ($Module -eq 'cudev') { $classification.limitation = [string]$raw.sourceInventoryLimitation }
+if ($Module -eq 'matlab') { $classification.limitation = [string]$raw.sourceInventoryLimitation }
 $builder = [Text.StringBuilder]::new(); [void]$builder.AppendLine("# Generated by scripts/Generate-ContribUpstreamMap.ps1 -Module $Module. Do not edit."); [void]$builder.AppendLine('schema-version=1'); [void]$builder.AppendLine('upstream-opencv-version=5.0.0'); [void]$builder.AppendLine("claimed-slice=$($classification.claimedSlice)"); [void]$builder.AppendLine("header-sha256=$($raw.headerSha256)"); [void]$builder.AppendLine("parser-sha256=$($raw.parserSha256)"); [void]$builder.AppendLine("declaration-count=$($raw.declarationCount)"); [void]$builder.AppendLine('repository-wide-upstream-parity-claimed=false'); [void]$builder.AppendLine(''); [void]$builder.AppendLine('ordinal|classification|identity|native-entrypoints|managed-members|build-condition|reason')
 foreach ($row in $rows) { $nativeText = if (@($row.nativeEntrypoints).Count) { @($row.nativeEntrypoints) -join ';' } else { '-' }; $managedText = if (@($row.managedMembers).Count) { @($row.managedMembers) -join ';' } else { '-' }; [void]$builder.AppendLine("$($row.ordinal)|$($row.classification)|$($row.identity)|$nativeText|$managedText|$($row.buildCondition)|$($row.reason)") }
 $mappingText = $builder.ToString().Replace("`r`n", "`n"); $implemented = @($rows | Where-Object classification -eq 'implemented'); $omitted = @($rows | Where-Object classification -eq 'intentionally-omitted'); $metadata = @($rows | Where-Object classification -eq 'non-callable-metadata')
 $guide = switch ($Module) { 'face' {'docs/articles/face-guide.md'} 'quality' {'docs/articles/quality-guide.md'} 'img_hash' {'docs/articles/img-hash-guide.md'} 'line_descriptor' {'docs/articles/line-descriptor-guide.md'} 'intensity_transform' {'docs/articles/intensity-transform-guide.md'} 'plot' {'docs/articles/plot-guide.md'} 'bioinspired' {'docs/articles/bioinspired-guide.md'} 'phase_unwrapping' {'docs/articles/phase-unwrapping-guide.md'} 'hfs' {'docs/articles/hfs-guide.md'} 'fuzzy' {'docs/articles/fuzzy-guide.md'} 'rapid' {'docs/articles/rapid-guide.md'} 'shape' {'docs/articles/shape-guide.md'} 'reg' {'docs/articles/reg-guide.md'} 'ptcloud' {'docs/articles/ptcloud-guide.md'} 'xobjdetect' {'docs/articles/xobjdetect-guide.md'} default { "docs/articles/$Module-upstream-parity-guide.md" } }
 $family = [ordered]@{ schemaVersion = 1; upstreamOpenCvVersion = '5.0.0'; status = 'implemented-verified'; managedPublicTypeAdditionCount = 0; managedPublicMemberAdditionCount = 0; families = @([ordered]@{ id = "$Module-wrapper-surface"; rationale = "Current $DisplayName managed/native wrapper declarations with exact parser-backed callable evidence."; declarations = @($implemented | ForEach-Object { [ordered]@{ ordinal = $_.ordinal; upstreamIdentity = $_.identity; upstreamClassification = $_.classification; nativeEntrypoints = $_.nativeEntrypoints; managedMembers = $_.managedMembers; focusedTest = "tests/OpenCvSharp.Tests/$DisplayName/$DisplayName`Tests.cs"; nativeSmoke = 'src/OpenCvSharp.Native/tests/native_smoke.cpp'; sample = 'samples/ConsoleSamples/Program.cs'; guide = $guide } }) }) }
 if ($Module -eq 'cudev') { $family.families[0].rationale = 'No Cudev managed/native wrapper is implemented. This empty wrapper inventory and the partial callable/source map do not establish template or device parity.' }
+if ($Module -eq 'matlab') { $family.families[0].rationale = 'No MATLAB managed/native wrapper is implemented. This empty wrapper inventory and partial parser/source map do not establish template, generated gateway or MEX runtime parity.' }
 $classificationJson = ($classification | ConvertTo-Json -Depth 20).Replace("`r`n", "`n") + "`n"
 $familyJson = ($family | ConvertTo-Json -Depth 20).Replace("`r`n", "`n") + "`n"
 $mapHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($mappingText))).ToLowerInvariant()
@@ -1237,6 +1249,17 @@ if ($Module -eq 'cudev') {
     $summary.coverageStatus = 'parser-subset-with-expanded-source-callable-inventory'
     $summary.completeCallableCoverageClaimed = $false
     $summary.cudaExecutionVerified = $false
+    $summaryJson = ($summary | ConvertTo-Json -Depth 20) + "`n"
+}
+if ($Module -eq 'matlab') {
+    $summary.negativeFixtureCount = 18
+    $summary.sourceReviewedExtensionPath = [string]$raw.sourceReviewedExtensionPath
+    $summary.sourceReviewedExtensionSha256 = [string]$raw.sourceReviewedExtensionSha256
+    $summary.sourceInventoryCounts = $raw.sourceInventoryCounts
+    $summary.coverageStatus = 'parser-subset-with-lexical-template-inventory'
+    $summary.completeCallableCoverageClaimed = $false
+    $summary.matlabExecutionVerified = $false
+    $summary.generatedBindingSurfaceIncluded = $false
     $summaryJson = ($summary | ConvertTo-Json -Depth 20) + "`n"
 }
 $summaryJson = $summaryJson.Replace("`r`n", "`n")
