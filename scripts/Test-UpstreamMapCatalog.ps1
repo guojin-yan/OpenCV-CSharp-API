@@ -10,7 +10,7 @@ foreach ($path in @($catalogPath,$schemaPath)) { if (-not (Test-Path -LiteralPat
 if (-not (Test-Json -LiteralPath $catalogPath -SchemaFile $schemaPath -ErrorAction Stop)) { throw 'Upstream map catalog failed JSON Schema validation.' }
 $catalog = Get-Content -LiteralPath $catalogPath -Raw | ConvertFrom-Json
 $pwsh = Get-Command pwsh -ErrorAction Stop
-$expectedIds = @('calib3d','core','cnn_3dobj','signal','dpm','hdf','text','dnn','dnn_superres','features','highgui','imgcodecs','imgproc','ml','objdetect','photo','stitching','tracking','video','videoio','xphoto','ximgproc','optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect','wechat_qrcode','xfeatures2d','dnn_objdetect','ccalib','superres','julia','rgbd','cudaarithm','cudabgsegm','cudafilters','cudaimgproc','cudacodec','cudawarping','cudafeatures2d','cudaobjdetect','cudaoptflow','cudastereo','cudalegacy','videostab','cvv','datasets','viz','ovis')
+$expectedIds = @('calib3d','core','cnn_3dobj','signal','dpm','hdf','text','dnn','dnn_superres','features','highgui','imgcodecs','imgproc','ml','objdetect','photo','stitching','tracking','video','videoio','xphoto','ximgproc','optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect','wechat_qrcode','xfeatures2d','dnn_objdetect','ccalib','superres','julia','rgbd','cudaarithm','cudabgsegm','cudafilters','cudaimgproc','cudacodec','cudawarping','cudafeatures2d','cudaobjdetect','cudaoptflow','cudastereo','cudalegacy','videostab','cvv','datasets','viz','ovis','fastcv')
 $maps = @($catalog.maps)
 if ($maps.Count -ne $expectedIds.Count) { throw 'Upstream map catalog module count drifted.' }
 if ((@($maps | ForEach-Object { [string]$_.id }) -join '|') -cne ($expectedIds -join '|')) { throw 'Upstream map catalog IDs or stable ordering drifted.' }
@@ -33,9 +33,31 @@ function Resolve-RepositoryPath {
     [IO.Path]::GetFullPath((Join-Path $repo ($RelativePath -replace '/', [IO.Path]::DirectorySeparatorChar)))
 }
 
+function Assert-CanonicalArtifactBytes {
+    param([Parameter(Mandatory)][byte[]]$Bytes)
+    if ($Bytes.Length -eq 0 -or $Bytes[-1] -ne 10 -or $Bytes -contains 13 -or
+        ($Bytes.Length -ge 3 -and $Bytes[0] -eq 239 -and $Bytes[1] -eq 187 -and $Bytes[2] -eq 191)) {
+        throw 'Generated family inventory must use UTF-8 without BOM, LF line endings, and a final newline.'
+    }
+    [void][Text.UTF8Encoding]::new($false, $true).GetString($Bytes)
+}
+
+$canonicalTextFixtures = @(
+    @{ Name = 'CRLF inventory'; Bytes = [Text.Encoding]::UTF8.GetBytes("{}`r`n") }
+    @{ Name = 'BOM inventory'; Bytes = [byte[]](@(239, 187, 191) + [Text.Encoding]::UTF8.GetBytes("{}`n")) }
+    @{ Name = 'missing final newline'; Bytes = [Text.Encoding]::UTF8.GetBytes('{}') }
+)
+foreach ($fixture in $canonicalTextFixtures) {
+    $rejected = $false
+    try { Assert-CanonicalArtifactBytes -Bytes $fixture.Bytes }
+    catch { $rejected = $true }
+    if (-not $rejected) { throw "Upstream map canonical text guard accepted negative fixture: $($fixture.Name)" }
+}
+
 function Assert-Hash {
-    param([Parameter(Mandatory)][string]$Path, [Parameter(Mandatory)][string]$Expected, [Parameter(Mandatory)][string]$Description)
+    param([Parameter(Mandatory)][string]$Path, [Parameter(Mandatory)][string]$Expected, [Parameter(Mandatory)][string]$Description, [switch]$CanonicalText)
     if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) { throw "Upstream map $Description is missing: $Path" }
+    if ($CanonicalText) { Assert-CanonicalArtifactBytes -Bytes ([IO.File]::ReadAllBytes($Path)) }
     $actual = (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant()
     if ($actual -cne $Expected) { throw "Upstream map $Description hash drifted. Expected $Expected, found ${actual}: $Path" }
 }
@@ -122,7 +144,7 @@ foreach ($map in $maps) {
     if ([int]$summary.classificationCounts.missing -ne 0 -or -not [bool]$map.evidenceContract.zeroMissing) { throw "Upstream map contains unexplained missing declarations for $id." }
     if ([bool]$summary.repositoryWideUpstreamParityClaimed -or [bool]$map.evidenceContract.repositoryWideParityClaimed) { throw "Upstream map must not claim repository-wide parity for $id." }
     Assert-Hash -Path $mappingPath -Expected ([string]$map.evidenceContract.mappingSha256) -Description "$id mapping"
-    Assert-Hash -Path $familyPath -Expected ([string]$map.evidenceContract.familyInventorySha256) -Description "$id family inventory"
+    Assert-Hash -Path $familyPath -Expected ([string]$map.evidenceContract.familyInventorySha256) -Description "$id family inventory" -CanonicalText
     if (-not [string]::IsNullOrWhiteSpace([string]$artifactPaths.sourceReviewedExtensions)) {
         if ([string]$summary.sourceReviewedExtensionPath -cne [string]$artifactPaths.sourceReviewedExtensions -or [string]$summary.sourceReviewedExtensionSha256 -cne [string]$map.evidenceContract.sourceReviewedExtensionSha256) { throw "Upstream map source-reviewed extension binding drifted for $id." }
         Assert-Hash -Path $extensionPath -Expected ([string]$map.evidenceContract.sourceReviewedExtensionSha256) -Description "$id source-reviewed extensions"
@@ -153,4 +175,4 @@ foreach ($map in $maps) {
     if ($LASTEXITCODE -ne 0) { throw "Configured upstream map semantic guard failed for ${id}: $guardPath" }
 }
 
-Write-Host "UPSTREAM_MAP_CATALOG_OK modules=$($maps.Count) upstream=$($catalog.upstreamOpenCvVersion) classification_policy=shared semantic_guards=$($maps.Count) schema_negative_fixtures=4 repository_wide_parity_claimed=false"
+Write-Host "UPSTREAM_MAP_CATALOG_OK modules=$($maps.Count) upstream=$($catalog.upstreamOpenCvVersion) classification_policy=shared semantic_guards=$($maps.Count) schema_negative_fixtures=4 canonical_text_negative_fixtures=$($canonicalTextFixtures.Count) repository_wide_parity_claimed=false"

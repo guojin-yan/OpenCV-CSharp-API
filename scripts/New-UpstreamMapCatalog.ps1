@@ -76,6 +76,7 @@ $definitions = @(
     [pscustomobject]@{ Id = 'datasets'; Tool = 'Datasets'; Repository = 'opencv_contrib' }
     [pscustomobject]@{ Id = 'viz'; Tool = 'Viz'; Repository = 'opencv_contrib' }
     [pscustomobject]@{ Id = 'ovis'; Tool = 'Ovis'; Repository = 'opencv_contrib' }
+    [pscustomobject]@{ Id = 'fastcv'; Tool = 'FastCV'; Repository = 'opencv_contrib' }
 )
 
 function Get-HeaderRows {
@@ -179,5 +180,5 @@ $catalog = [ordered]@{
 }
 $outputFullPath = if ([IO.Path]::IsPathRooted($OutputPath)) { [IO.Path]::GetFullPath($OutputPath) } else { [IO.Path]::GetFullPath((Join-Path $repo ($OutputPath -replace '/', [IO.Path]::DirectorySeparatorChar))) }
 New-Item -ItemType Directory -Force -Path (Split-Path -Parent $outputFullPath) | Out-Null
-[IO.File]::WriteAllText($outputFullPath, (($catalog | ConvertTo-Json -Depth 20) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
+[IO.File]::WriteAllText($outputFullPath, (($catalog | ConvertTo-Json -Depth 20).Replace("`r`n", "`n") + "`n"), [Text.UTF8Encoding]::new($false))
 Write-Host "UPSTREAM_MAP_CATALOG_WRITTEN maps=$($mapRows.Count) output=$outputFullPath"

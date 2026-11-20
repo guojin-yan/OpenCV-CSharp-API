@@ -137,8 +137,8 @@ $family = [ordered]@{
             declarations = @($implementedRows | ForEach-Object { [ordered]@{ ordinal = $_.ordinal; upstreamIdentity = $_.identity; upstreamClassification = $_.classification; nativeEntrypoints = $_.nativeEntrypoints; managedMembers = $_.managedMembers; focusedTest = 'tests/OpenCvSharp.Tests/XPhoto/XPhotoTests.cs'; nativeSmoke = 'src/OpenCvSharp.Native/tests/native_smoke.cpp'; sample = 'samples/ConsoleSamples/Program.cs'; guide = 'docs/articles/xphoto-upstream-parity-guide.md' } })
         })
 }
-$classificationJson = (($classification | ConvertTo-Json -Depth 16) + [Environment]::NewLine)
-$familyJson = (($family | ConvertTo-Json -Depth 16) + [Environment]::NewLine)
+$classificationJson = ($classification | ConvertTo-Json -Depth 16).Replace("`r`n", "`n") + "`n"
+$familyJson = ($family | ConvertTo-Json -Depth 16).Replace("`r`n", "`n") + "`n"
 $implementedCount = @($rows | Where-Object { [string]$_.classification -ceq 'implemented' }).Count
 $omittedCount = @($rows | Where-Object { [string]$_.classification -ceq 'intentionally-omitted' }).Count
 $metadataCount = @($rows | Where-Object { [string]$_.classification -ceq 'non-callable-metadata' }).Count
@@ -169,7 +169,7 @@ $summary = [ordered]@{
     managedPublicMemberAdditionCount = 33
     repositoryWideUpstreamParityClaimed = $false
 }
-$summaryJson = (($summary | ConvertTo-Json -Depth 16) + [Environment]::NewLine)
+$summaryJson = ($summary | ConvertTo-Json -Depth 16).Replace("`r`n", "`n") + "`n"
 foreach ($target in @(
         @{ Path = (Join-Path $repo 'compatibility/xphoto-upstream-classifications.json'); Text = $classificationJson },
         @{ Path = (Join-Path $repo 'compatibility/xphoto-upstream-map.txt'); Text = $mappingText },

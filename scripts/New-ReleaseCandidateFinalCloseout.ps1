@@ -188,6 +188,8 @@ function Get-Record {
     $vizSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/viz-upstream-summary.json") -Raw | ConvertFrom-Json
     $ovisRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/ovis-upstream-raw.json") -Raw | ConvertFrom-Json
     $ovisSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/ovis-upstream-summary.json") -Raw | ConvertFrom-Json
+    $fastcvRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/fastcv-upstream-raw.json") -Raw | ConvertFrom-Json
+    $fastcvSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/fastcv-upstream-summary.json") -Raw | ConvertFrom-Json
     $evidencePaths = @(
         ".github/workflows/pack.yml",
         ".github/workflows/publish-nuget.yml",
@@ -517,6 +519,11 @@ function Get-Record {
         "compatibility/ovis-upstream-map.txt",
         "compatibility/ovis-upstream-raw.json",
         "compatibility/ovis-upstream-summary.json",
+        "compatibility/fastcv-implemented-families.json",
+        "compatibility/fastcv-upstream-classifications.json",
+        "compatibility/fastcv-upstream-map.txt",
+        "compatibility/fastcv-upstream-raw.json",
+        "compatibility/fastcv-upstream-summary.json",
         "compatibility/v5.0.1-change-ledger.json",
         "compatibility/v5.0.1-change-ledger.schema.json",
         "docs/articles/api-abi-compatibility-policy.md",
@@ -525,6 +532,7 @@ function Get-Record {
         "docs/articles/datasets-upstream-parity-guide.md",
         "docs/articles/viz-upstream-parity-guide.md",
         "docs/articles/ovis-upstream-parity-guide.md",
+        "docs/articles/fastcv-upstream-parity-guide.md",
         "docs/articles/xfeatures2d-upstream-parity-guide.md",
         "docs/articles/dnn-objdetect-upstream-parity-guide.md",
         "docs/articles/ccalib-upstream-parity-guide.md",
@@ -1077,6 +1085,9 @@ function Get-Record {
         "tools/OvisUpstreamMap/OvisUpstreamMap.csproj",
         "tools/OvisUpstreamMap/Program.cs",
         "tools/OvisUpstreamMap/extract_ovis.py",
+        "tools/FastCVUpstreamMap/FastCVUpstreamMap.csproj",
+        "tools/FastCVUpstreamMap/Program.cs",
+        "tools/FastCVUpstreamMap/extract_fastcv.py",
         "tools/DnnObjDetectUpstreamMap/DnnObjDetectUpstreamMap.csproj",
         "tools/DnnObjDetectUpstreamMap/Program.cs",
         "tools/DnnObjDetectUpstreamMap/extract_dnn_objdetect.py",
@@ -1211,6 +1222,8 @@ function Get-Record {
         "scripts/Test-VizUpstreamMap.ps1",
         "scripts/Generate-OvisUpstreamMap.ps1",
         "scripts/Test-OvisUpstreamMap.ps1",
+        "scripts/Generate-FastCVUpstreamMap.ps1",
+        "scripts/Test-FastCVUpstreamMap.ps1",
         "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
         "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
         "tools/TypedMatBenchmark/Program.cs",
@@ -2292,6 +2305,35 @@ function Get-Record {
                 NativeEntrypointAdditionCount = [int]$ovisSummary.nativeEvidenceCount
                 ExternalDataDependencyCount = [int]$ovisSummary.externalDataDependencyCount
                 RepositoryWideParityClaimed = [bool]$ovisSummary.repositoryWideUpstreamParityClaimed
+            }
+            FastCVUpstreamMap = [ordered]@{
+                Path = "compatibility/fastcv-upstream-map.txt"
+                SummaryPath = "compatibility/fastcv-upstream-summary.json"
+                ClassificationPath = "compatibility/fastcv-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/fastcv-implemented-families.json"
+                RawExtractionPath = "compatibility/fastcv-upstream-raw.json"
+                Sha256 = $fastcvSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/fastcv-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$fastcvSummary.declarationCount
+                CallableCount = [int]$fastcvSummary.callableCount
+                ClassCount = [int]$fastcvSummary.classCount
+                EnumCount = [int]$fastcvSummary.enumCount
+                MetadataCount = [int]$fastcvSummary.classificationCounts.'non-callable-metadata'
+                ImplementedCount = [int]$fastcvSummary.classificationCounts.implemented
+                MissingCount = [int]$fastcvSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$fastcvSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$fastcvSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$fastcvSummary.classificationCounts.'upstream-conditional'
+                SourceHeaderCount = @($fastcvRaw.sourceHeaders).Count
+                CompatibilityHeaderCount = @($fastcvRaw.compatibilityHeaders).Count
+                ParserMode = [string]$fastcvRaw.parserMode
+                SelectedFamilyCount = [int]$fastcvSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$fastcvSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$fastcvSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$fastcvSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$fastcvSummary.nativeEvidenceCount
+                ExternalDataDependencyCount = [int]$fastcvSummary.externalDataDependencyCount
+                RepositoryWideParityClaimed = [bool]$fastcvSummary.repositoryWideUpstreamParityClaimed
             }
             DnnObjDetectUpstreamMap = [ordered]@{
                 Path = "compatibility/dnn_objdetect-upstream-map.txt"

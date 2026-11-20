@@ -1,0 +1,652 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/fastcv.hpp plus all 30 directly included opencv2/fastcv/*.hpp parser-backed public declarations; upstream wrapper annotations and ARM/external-library build boundaries remain evidence-only",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact FastCV wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [
+    "OpenCV contrib FastCV is disabled unless HAVE_FASTCV is enabled and depends on an external Qualcomm FastCV SDK/library; this package bundles neither that runtime nor a FastCV native/managed wrapper.",
+    "The upstream FastCV module supports ARM only and cannot configure/build on x86; DSP initialization, device/runtime compatibility, and allocator ownership remain outside this package contract."
+  ],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.fastcv.QcResourceManager",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.fastcv.QcResourceManager.getInstance()->QcResourceManager&",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.fastcv.QcResourceManager.addAllocation(void* ptr)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.fastcv.QcResourceManager.removeAllocation(void* ptr)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "class cv.fastcv.QcAllocator",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.fastcv.QcAllocator.QcAllocator()->",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.fastcv.QcAllocator.~QcAllocator()->",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.fastcv.QcAllocator.allocate(int dims;const int* sizes;int type;void* data0;size_t* step;cv::AccessFlag flags;cv::UMatUsageFlags usageFlags)->cv::UMatData*",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.fastcv.QcAllocator.allocate(cv::UMatData* u;cv::AccessFlag accessFlags;cv::UMatUsageFlags usageFlags)->bool",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.fastcv.QcAllocator.deallocate(cv::UMatData* u)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.fastcv.getQcAllocator()->cv::MatAllocator*",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.fastcv.matmuls8s32(InputArray src1;InputArray src2;OutputArray dst)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.fastcv.arithmetic_op(InputArray src1;InputArray src2;OutputArray dst;int op)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.fastcv.gemm(InputArray src1;InputArray src2;OutputArray dst;float alpha=1.0;InputArray src3=noArray();float beta=0.0)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.fastcv.integrateYUV(InputArray Y;InputArray CbCr;OutputArray IY;OutputArray ICb;OutputArray ICr)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.fastcv.bilateralFilter(InputArray _src;OutputArray _dst;int d;float sigmaColor;float sigmaSpace;int borderType=BORDER_DEFAULT)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.fastcv.gaussianBlur(InputArray _src;OutputArray _dst;int kernel_size=3;bool blur_border=true)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.fastcv.filter2D(InputArray _src;OutputArray _dst;int ddepth;InputArray _kernel)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.fastcv.sepFilter2D(InputArray _src;OutputArray _dst;int ddepth;InputArray _kernelX;InputArray _kernelY)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.fastcv.normalizeLocalBox(InputArray _src;OutputArray _dst;Size pSize;bool useStdDev)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.fastcv.dsp.filter2D(InputArray _src;OutputArray _dst;int ddepth;InputArray _kernel)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.fastcv.merge(InputArrayOfArrays mv;OutputArray dst)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.fastcv.split(InputArray src;OutputArrayOfArrays mv)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.fastcv.clusterEuclidean(InputArray points;InputArray clusterCenters;OutputArray newClusterCenters;OutputArray clusterSizes;OutputArray clusterBindings;OutputArray clusterSumDists;int numPointsUsed=-1)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 24,
+      "identity": "enum cv.fastcv.ColorConversionCodes[const cv.fastcv.COLOR_YUV2YUV444sp_NV12=156;const cv.fastcv.COLOR_YUV2YUV422sp_NV12=157;const cv.fastcv.COLOR_YUV422sp2YUV444sp=158;const cv.fastcv.COLOR_YUV422sp2YUV_NV12=159;const cv.fastcv.COLOR_YUV444sp2YUV422sp=160;const cv.fastcv.COLOR_YUV444sp2YUV_NV12=161;const cv.fastcv.COLOR_YUV2RGB565_NV12=162;const cv.fastcv.COLOR_YUV422sp2RGB565=163;const cv.fastcv.COLOR_YUV422sp2RGB=164;const cv.fastcv.COLOR_YUV422sp2RGBA=165;const cv.fastcv.COLOR_YUV444sp2RGB565=166;const cv.fastcv.COLOR_YUV444sp2RGB=167;const cv.fastcv.COLOR_YUV444sp2RGBA=168;const cv.fastcv.COLOR_RGB2YUV_NV12=169;const cv.fastcv.COLOR_RGB5652YUV444sp=170;const cv.fastcv.COLOR_RGB5652YUV422sp=171;const cv.fastcv.COLOR_RGB5652YUV_NV12=172;const cv.fastcv.COLOR_RGB2YUV444sp=173;const cv.fastcv.COLOR_RGB2YUV422sp=174]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.fastcv.cvtColor(InputArray src;OutputArray dst;int code)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.fastcv.fillConvexPoly(InputOutputArray img;InputArray pts;Scalar color)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.fastcv.dsp.fcvdspinit()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.fastcv.dsp.fcvdspdeinit()->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.fastcv.sobel(InputArray _src;OutputArray _dx;OutputArray _dy;int kernel_size;int borderType;int borderValue)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.fastcv.sobel3x3u8(InputArray _src;OutputArray _dst;OutputArray _dsty=noArray();int ddepth=CV_8U;bool normalization=false)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.fastcv.dsp.Canny(InputArray _src;OutputArray _dst;int lowThreshold;int highThreshold;int apertureSize=3;bool L2gradient=false)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.fastcv.FAST10(InputArray src;InputArray mask;OutputArray coords;OutputArray scores;int barrier;int border;bool nmsEnabled)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.fastcv.FFT(InputArray src;OutputArray dst)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.fastcv.IFFT(InputArray src;OutputArray dst)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.fastcv.dsp.FFT(InputArray src;OutputArray dst)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.fastcv.dsp.IFFT(InputArray src;OutputArray dst)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.fastcv.calcHist(InputArray _src;OutputArray _hist)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.fastcv.houghLines(InputArray src;OutputArray lines;double threshold=0.25)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.fastcv.DCT(InputArray src;OutputArray dst)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.fastcv.IDCT(InputArray src;OutputArray dst)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.fastcv.moments(InputArray _src;bool binary)->cv::Moments",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 42,
+      "identity": "class cv.fastcv.FCVMSER",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 43,
+      "identity": "class cv.fastcv.FCVMSER.ContourData",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.fastcv.FCVMSER.create(const cv::Size& imgSize;int numNeighbors=4;int delta=2;int minArea=30;int maxArea=14400;float maxVariation=0.15f;float minDiversity=0.2f)->Ptr<FCVMSER>",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 45,
+      "identity": "cv.fastcv.FCVMSER.detect(InputArray src;std::vector<std::vector<Point>>& contours)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 46,
+      "identity": "cv.fastcv.FCVMSER.detect(InputArray src;std::vector<std::vector<Point>>& contours;std::vector<cv::Rect>& boundingBoxes)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.fastcv.FCVMSER.detect(InputArray src;std::vector<std::vector<Point>>& contours;std::vector<cv::Rect>& boundingBoxes;std::vector<ContourData>& contourData)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 48,
+      "identity": "cv.fastcv.FCVMSER.getImgSize()->cv::Size",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.fastcv.FCVMSER.getNumNeighbors()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 50,
+      "identity": "cv.fastcv.FCVMSER.getDelta()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 51,
+      "identity": "cv.fastcv.FCVMSER.getMinArea()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 52,
+      "identity": "cv.fastcv.FCVMSER.getMaxArea()->int",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 53,
+      "identity": "cv.fastcv.FCVMSER.getMaxVariation()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 54,
+      "identity": "cv.fastcv.FCVMSER.getMinDiversity()->float",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 55,
+      "identity": "cv.fastcv.FCVMSER.~FCVMSER()->",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 56,
+      "identity": "cv.fastcv.sobelPyramid(InputArrayOfArrays pyr;OutputArrayOfArrays dx;OutputArrayOfArrays dy;int outType=CV_8S)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 57,
+      "identity": "cv.fastcv.buildPyramid(InputArray src;OutputArrayOfArrays pyr;int nLevels;bool scaleBy2=true;int borderType=cv::BORDER_REFLECT;uint8_t borderValue=0)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 58,
+      "identity": "cv.fastcv.remap(InputArray src;OutputArray dst;InputArray map1;InputArray map2;int interpolation;int borderValue=0)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 59,
+      "identity": "cv.fastcv.remapRGBA(InputArray src;OutputArray dst;InputArray map1;InputArray map2;int interpolation)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 60,
+      "identity": "cv.fastcv.dsp.sumOfAbsoluteDiffs(cv::InputArray _patch;cv::InputArray _src;cv::OutputArray _dst)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 61,
+      "identity": "cv.fastcv.resizeDown(cv::InputArray _src;cv::OutputArray _dst;Size dsize;double inv_scale_x;double inv_scale_y)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 62,
+      "identity": "cv.fastcv.meanShift(InputArray src;Rect& rect;TermCriteria termCrit)->int",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 63,
+      "identity": "cv.fastcv.bilateralRecursive(cv::InputArray src;cv::OutputArray dst;float sigmaColor=0.03f;float sigmaSpace=0.1f)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 64,
+      "identity": "cv.fastcv.thresholdRange(InputArray src;OutputArray dst;int lowThresh;int highThresh;int trueValue;int falseValue)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 65,
+      "identity": "cv.fastcv.dsp.thresholdOtsu(InputArray _src;OutputArray _dst;bool type)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 66,
+      "identity": "cv.fastcv.trackOpticalFlowLK(InputArray src;InputArray dst;InputArrayOfArrays srcPyr;InputArrayOfArrays dstPyr;InputArray ptsIn;OutputArray ptsOut;InputArray ptsEst;OutputArray statusVec;cv::Size winSize=cv::Size(7, 7);cv::TermCriteria termCriteria=cv::TermCriteria(cv::TermCriteria::MAX_ITER | cv::TermCriteria::EPS, 7, 0.03f * 0.03f))->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 67,
+      "identity": "cv.fastcv.trackOpticalFlowLK(InputArray src;InputArray dst;InputArrayOfArrays srcPyr;InputArrayOfArrays dstPyr;InputArrayOfArrays srcDxPyr;InputArrayOfArrays srcDyPyr;InputArray ptsIn;OutputArray ptsOut;OutputArray statusVec;cv::Size winSize=cv::Size(7, 7);int maxIterations=7)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 68,
+      "identity": "cv.fastcv.warpPerspective(InputArray _src;OutputArray _dst;InputArray _M0;Size dsize;int interpolation;int borderType;const Scalar& borderValue)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 69,
+      "identity": "cv.fastcv.warpPerspective2Plane(InputArray _src1;InputArray _src2;OutputArray _dst1;OutputArray _dst2;InputArray _M0;Size dsize)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 70,
+      "identity": "cv.fastcv.warpAffine(InputArray _src;OutputArray _dst;InputArray _M;Size dsize;int interpolation=INTER_LINEAR;int borderValue=0)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.",
+      "buildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}
