@@ -205,8 +205,9 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                 int height;
                 PixelFacts pixelFacts;
                 bool frameCountKnown;
-                bool found = TryReadJpegSize(data, out width, out height, out pixelFacts, out frameCountKnown);
-                return Result("jpeg", width, height, found, 1, frameCountKnown, data.Length, ReadMetadataFacts(data, "jpeg"), pixelFacts);
+                MetadataFacts metadataFacts;
+                bool found = TryReadJpegFacts(data, out width, out height, out pixelFacts, out frameCountKnown, out metadataFacts);
+                return Result("jpeg", width, height, found, 1, frameCountKnown, data.Length, metadataFacts, pixelFacts);
             }
 
             if (data.Length >= 12 && data[0] == (byte)'R' && data[1] == (byte)'I' && data[2] == (byte)'F' && data[3] == (byte)'F' &&
@@ -1111,74 +1112,6 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
         private static int ReadSignedLe32(byte[] data, int offset)
         {
             return data[offset] | (data[offset + 1] << 8) | (data[offset + 2] << 16) | (data[offset + 3] << 24);
-        }
-
-        private static bool TryReadJpegSize(byte[] data, out int width, out int height, out PixelFacts pixelFacts, out bool frameCountKnown)
-        {
-            width = 0;
-            height = 0;
-            pixelFacts = new PixelFacts();
-            frameCountKnown = false;
-            bool sawStartOfFrame = false;
-            int offset = 2;
-            while (offset < data.Length)
-            {
-                while (offset < data.Length && data[offset] == 0xFF) ++offset;
-                if (offset >= data.Length) break;
-                int marker = data[offset++];
-                if (marker == 0xD9)
-                {
-                    frameCountKnown = sawStartOfFrame && offset == data.Length;
-                    break;
-                }
-                if (marker == 0xDA)
-                {
-                    if (offset + 1 >= data.Length) break;
-                    int scanLength = (data[offset] << 8) | data[offset + 1];
-                    if (scanLength < 2 || offset + scanLength > data.Length) break;
-                    offset += scanLength;
-                    frameCountKnown = sawStartOfFrame && ContainsJpegEndOfImage(data, offset);
-                    break;
-                }
-                if (marker >= 0xD0 && marker <= 0xD7 || marker == 0x01) continue;
-                if (offset + 1 >= data.Length) break;
-                int length = (data[offset] << 8) | data[offset + 1];
-                if (length < 2 || offset + length > data.Length) break;
-                if (IsJpegStartOfFrame(marker) && length >= 7)
-                {
-                    int precision = data[offset + 2];
-                    int channels = data[offset + 7];
-                    height = (data[offset + 3] << 8) | data[offset + 4];
-                    width = (data[offset + 5] << 8) | data[offset + 6];
-                    if (precision > 0) pixelFacts.BitDepth = precision;
-                    pixelFacts.BitDepthKnown = precision > 0;
-                    if (channels > 0) pixelFacts.Channels = channels;
-                    pixelFacts.ChannelsKnown = channels > 0;
-                    sawStartOfFrame = width > 0 && height > 0;
-                }
-                offset += length;
-            }
-            return sawStartOfFrame;
-        }
-
-        private static bool ContainsJpegEndOfImage(byte[] data, int offset)
-        {
-            while (offset + 1 < data.Length)
-            {
-                if (data[offset++] != 0xFF) continue;
-                while (offset < data.Length && data[offset] == 0xFF) ++offset;
-                if (offset >= data.Length) return false;
-                byte marker = data[offset++];
-                if (marker == 0x00 || (marker >= 0xD0 && marker <= 0xD7)) continue;
-                if (marker == 0xD9) return offset == data.Length;
-            }
-            return false;
-        }
-
-        private static bool IsJpegStartOfFrame(int marker)
-        {
-            return (marker >= 0xC0 && marker <= 0xC3) || (marker >= 0xC5 && marker <= 0xC7) ||
-                (marker >= 0xC9 && marker <= 0xCB) || (marker >= 0xCD && marker <= 0xCF);
         }
 
         private static bool TryReadWebpSize(byte[] data, out int width, out int height)

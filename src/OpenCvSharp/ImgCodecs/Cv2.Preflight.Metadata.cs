@@ -15,7 +15,6 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
         private static MetadataFacts ReadMetadataFacts(byte[] data, string format)
         {
             if (string.Equals(format, "png", StringComparison.Ordinal)) return ReadPngMetadataFacts(data);
-            if (string.Equals(format, "jpeg", StringComparison.Ordinal)) return ReadJpegMetadataFacts(data);
             if (string.Equals(format, "webp", StringComparison.Ordinal)) return ReadWebpMetadataFacts(data);
             return default(MetadataFacts);
         }
@@ -71,78 +70,6 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
         {
             return data[offset] == (byte)first && data[offset + 1] == (byte)second &&
                 data[offset + 2] == (byte)third && data[offset + 3] == (byte)fourth;
-        }
-
-        private static MetadataFacts ReadJpegMetadataFacts(byte[] data)
-        {
-            MetadataFacts facts = new MetadataFacts();
-            if (data.Length < 2) return facts;
-            int offset = 2;
-            int iccSegmentCount = 0;
-            int nextIccSegment = 1;
-            bool inEntropyData = false;
-            while (offset < data.Length)
-            {
-                int marker;
-                if (inEntropyData)
-                {
-                    while (offset < data.Length && data[offset] != 0xFF) ++offset;
-                    if (offset >= data.Length) return default(MetadataFacts);
-                    while (offset < data.Length && data[offset] == 0xFF) ++offset;
-                    if (offset >= data.Length) return default(MetadataFacts);
-                    marker = data[offset++];
-                    if (marker == 0x00 || (marker >= 0xD0 && marker <= 0xD7)) continue;
-                    inEntropyData = false;
-                }
-                else
-                {
-                    if (data[offset] != 0xFF) return default(MetadataFacts);
-                    while (offset < data.Length && data[offset] == 0xFF) ++offset;
-                    if (offset >= data.Length) return default(MetadataFacts);
-                    marker = data[offset++];
-                }
-
-                if (marker == 0xD9)
-                {
-                    if (iccSegmentCount != 0 && nextIccSegment != iccSegmentCount + 1) return default(MetadataFacts);
-                    facts.MetadataSizeKnown = true;
-                    facts.IccProfileSizeKnown = true;
-                    return facts;
-                }
-                if ((marker >= 0xD0 && marker <= 0xD7) || marker == 0x01) continue;
-                if (offset + 1 >= data.Length) return default(MetadataFacts);
-                int length = (data[offset] << 8) | data[offset + 1];
-                if (length < 2 || offset + length > data.Length) return default(MetadataFacts);
-                int payloadStart = offset + 2;
-                int payloadLength = length - 2;
-                if ((marker >= 0xE0 && marker <= 0xEF) || marker == 0xFE)
-                {
-                    facts.MetadataBytes = checked(facts.MetadataBytes + payloadLength);
-                    if (marker == 0xE2 && IsJpegIccProfileSegment(data, payloadStart, payloadLength))
-                    {
-                        int sequence = data[payloadStart + 12];
-                        int count = data[payloadStart + 13];
-                        if (count == 0 || sequence != nextIccSegment || sequence > count ||
-                            (iccSegmentCount != 0 && count != iccSegmentCount)) return default(MetadataFacts);
-                        iccSegmentCount = count;
-                        ++nextIccSegment;
-                        facts.IccProfileBytes = checked(facts.IccProfileBytes + payloadLength - 14);
-                    }
-                }
-                offset += length;
-                if (marker == 0xDA) inEntropyData = true;
-            }
-            return default(MetadataFacts);
-        }
-
-        private static bool IsJpegIccProfileSegment(byte[] data, int offset, int length)
-        {
-            return length >= 14 && data[offset] == (byte)'I' && data[offset + 1] == (byte)'C' &&
-                data[offset + 2] == (byte)'C' && data[offset + 3] == (byte)'_' &&
-                data[offset + 4] == (byte)'P' && data[offset + 5] == (byte)'R' &&
-                data[offset + 6] == (byte)'O' && data[offset + 7] == (byte)'F' &&
-                data[offset + 8] == (byte)'I' && data[offset + 9] == (byte)'L' &&
-                data[offset + 10] == (byte)'E' && data[offset + 11] == 0;
         }
 
         private static MetadataFacts ReadWebpMetadataFacts(byte[] data)

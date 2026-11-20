@@ -116,7 +116,8 @@ function Invoke-FuzzFramework {
                     'IdentifyDeterministicMutationCorpusNeverEscapesParserOrPublishesInvalidFacts',
                     'IdentifyDeterministicMutationCorpusPreservesSeekAndConsumesNonSeekStreams',
                     'IdentifyDeterministicMutationCorpusGifMetadataNeverEscapesParserOrPublishesUnboundedSizes',
-                    'IdentifyDeterministicMutationCorpusAvifPrimaryItemKeepsEveryTraversalBounded')) {
+                    'IdentifyDeterministicMutationCorpusAvifPrimaryItemKeepsEveryTraversalBounded',
+                    'IdentifyDeterministicMutationCorpusJpegMarkersNeverEscapeOrPublishUnboundedFacts')) {
                 if (@($results | Where-Object { ([string]$_.testName).Contains($requiredTest) -and [string]$_.outcome -ceq 'Passed' }).Count -ne 1) { $testsExecuted = $false }
             }
             if ($testsExecuted) { Write-Host "IMAGE_PREFLIGHT_FUZZ_TEST_RESULTS framework=$Framework tests_passed=$($counters.passed) trx=$trxPath" }
