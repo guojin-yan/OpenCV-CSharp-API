@@ -21,10 +21,14 @@ foreach ($fixture in @($manifest.fixtures)) {
     if ($testText.IndexOf('Name = "' + [string]$fixture + '"', [StringComparison]::Ordinal) -lt 0) { throw "Mutation fixture is missing from the focused test: $fixture" }
 }
 if ($testText.IndexOf('IdentifyDeterministicMutationCorpusPreservesSeekAndConsumesNonSeekStreams', [StringComparison]::Ordinal) -lt 0) { throw 'Stream mutation test is missing from the focused test.' }
+$gifTestPath = Join-Path $repo 'tests/OpenCvSharp.Tests/ImgCodecs/GifMetadataPreflightTests.cs'
+if (-not (Test-Path -LiteralPath $gifTestPath -PathType Leaf)) { throw 'GIF metadata admission tests are missing.' }
 if (@($manifest.frameworks).Count -ne 2 -or @($manifest.replacementBytes).Count -ne 5 -or @($manifest.fixtures).Count -lt 13) { throw 'Mutation corpus manifest dimensions drifted.' }
 
 $frameworks = @('net8.0', 'net10.0')
 foreach ($framework in $frameworks) {
+    $resultsDirectory = Join-Path ([IO.Path]::GetTempPath()) ('opencv-preflight-tests-' + [Guid]::NewGuid().ToString('N'))
+    $trxPath = Join-Path $resultsDirectory 'preflight.trx'
     $startInfo = [System.Diagnostics.ProcessStartInfo]::new()
     $startInfo.FileName = $dotnetCommand.Source
     $startInfo.WorkingDirectory = $repo
@@ -33,7 +37,8 @@ foreach ($framework in $frameworks) {
     $startInfo.RedirectStandardError = $true
     foreach ($argument in @(
             'test', $project, '-c', 'Release', '-f', $framework, '--no-restore',
-            '--filter', 'FullyQualifiedName~IdentifyDeterministicMutationCorpus',
+            '--filter', 'FullyQualifiedName~IdentifyDeterministicMutationCorpus|FullyQualifiedName~GifMetadataPreflightTests',
+            '--results-directory', $resultsDirectory, '--logger', 'trx;LogFileName=preflight.trx',
             '--logger', 'console;verbosity=minimal')) {
         [void]$startInfo.ArgumentList.Add($argument)
     }
@@ -52,7 +57,19 @@ foreach ($framework in $frameworks) {
     if (-not [string]::IsNullOrWhiteSpace($stdout)) { Write-Host $stdout.TrimEnd() }
     if (-not [string]::IsNullOrWhiteSpace($stderr)) { Write-Host $stderr.TrimEnd() }
     if ($process.ExitCode -ne 0) { throw "Image preflight mutation corpus failed on $framework with exit code $($process.ExitCode)." }
-    Write-Host "IMAGE_PREFLIGHT_MUTATION_FRAMEWORK_OK framework=$framework timeout_seconds=$TimeoutSeconds"
+    if (-not (Test-Path -LiteralPath $trxPath -PathType Leaf)) { throw "Image preflight tests produced no TRX execution evidence on $framework; an empty dotnet test invocation is not a pass." }
+    $trx = [xml]([IO.File]::ReadAllText($trxPath))
+    $counters = $trx.SelectSingleNode("//*[local-name()='Counters']")
+    $results = @($trx.SelectNodes("//*[local-name()='UnitTestResult']"))
+    if ($null -eq $counters -or [int]$counters.executed -lt 3 -or [int]$counters.executed -ne [int]$counters.passed -or [int]$counters.total -ne [int]$counters.executed) { throw "Image preflight tests were missing, skipped, or unsuccessful on $framework." }
+    foreach ($requiredTest in @(
+            'IdentifyDeterministicMutationCorpusNeverEscapesParserOrPublishesInvalidFacts',
+            'IdentifyDeterministicMutationCorpusPreservesSeekAndConsumesNonSeekStreams',
+            'GifMetadataBudgetsRejectBeforeNativeDecodeAndAcceptExactStoredLengths',
+            'GifStrictMetadataPolicyRejectsUnknownLengthsWhilePermissiveIdentifyPreservesThem')) {
+        if (@($results | Where-Object { ([string]$_.testName).Contains($requiredTest) -and [string]$_.outcome -ceq 'Passed' }).Count -ne 1) { throw "Required image preflight test did not pass on ${framework}: $requiredTest" }
+    }
+    Write-Host "IMAGE_PREFLIGHT_MUTATION_FRAMEWORK_OK framework=$framework tests_passed=$($counters.passed) timeout_seconds=$TimeoutSeconds trx=$trxPath"
     $process.Dispose()
 }
 

@@ -177,5 +177,14 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                 (data[offset] == (byte)'X' && data[offset + 1] == (byte)'M' && data[offset + 2] == (byte)'P' && data[offset + 3] == (byte)' ') ||
                 (data[offset] == (byte)'I' && data[offset + 1] == (byte)'C' && data[offset + 2] == (byte)'C' && data[offset + 3] == (byte)'P');
         }
+
+        private static bool IsGifIccProfileExtension(byte[] data, int offset)
+        {
+            // The application identifier and authentication code occupy a validated 11-byte block.
+            return data[offset] == (byte)'I' && data[offset + 1] == (byte)'C' && data[offset + 2] == (byte)'C' &&
+                data[offset + 3] == (byte)'R' && data[offset + 4] == (byte)'G' && data[offset + 5] == (byte)'B' &&
+                data[offset + 6] == (byte)'G' && data[offset + 7] == (byte)'1' && data[offset + 8] == (byte)'0' &&
+                data[offset + 9] == (byte)'1' && data[offset + 10] == (byte)'2';
+        }
     }
 }

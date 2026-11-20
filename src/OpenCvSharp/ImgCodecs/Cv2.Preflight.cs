@@ -192,10 +192,11 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                 int width = data.Length >= 10 ? ReadLe16(data, 6) : 0;
                 int height = data.Length >= 10 ? ReadLe16(data, 8) : 0;
                 int frameCount;
-                bool countKnown = TryCountGifFrames(data, out frameCount);
+                MetadataFacts metadataFacts;
+                bool countKnown = TryReadGifFrameAndMetadataFacts(data, out frameCount, out metadataFacts);
                 PixelFacts pixelFacts = ReadGifPixelFacts(data);
                 return Result("gif", width, height, width > 0 && height > 0, frameCount, countKnown, data.Length,
-                    default(MetadataFacts), pixelFacts);
+                    metadataFacts, pixelFacts);
             }
 
             if (data.Length >= 2 && data[0] == 0xFF && data[1] == 0xD8)
@@ -1639,10 +1640,13 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             return offset < data.Length && (IsPnmWhitespace(data[offset]) || data[offset] == (byte)'#');
         }
 
-        private static bool TryCountGifFrames(byte[] data, out int frameCount)
+        private static bool TryReadGifFrameAndMetadataFacts(byte[] data, out int frameCount, out MetadataFacts metadataFacts)
         {
             frameCount = 0;
-            if (data.Length < 13) return false;
+            metadataFacts = default(MetadataFacts);
+            if (data.Length < 13 || data[3] != (byte)'8' ||
+                (data[4] != (byte)'7' && data[4] != (byte)'9') || data[5] != (byte)'a') return false;
+            MetadataFacts facts = new MetadataFacts();
             int offset = 13;
             if ((data[10] & 0x80) != 0)
             {
@@ -1653,16 +1657,23 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             while (offset < data.Length)
             {
                 byte marker = data[offset++];
-                if (marker == 0x3B) return frameCount > 0 && offset == data.Length;
+                if (marker == 0x3B)
+                {
+                    if (frameCount == 0 || offset != data.Length) return false;
+                    facts.MetadataSizeKnown = true;
+                    facts.IccProfileSizeKnown = true;
+                    metadataFacts = facts;
+                    return true;
+                }
                 if (marker == 0x2C)
                 {
-                    if (offset + 9 > data.Length) return false;
+                    if (data.Length - offset < 9) return false;
                     byte packed = data[offset + 8];
                     offset += 9;
                     if ((packed & 0x80) != 0)
                     {
                         int tableBytes = 3 * (1 << ((packed & 7) + 1));
-                        if (offset + tableBytes > data.Length) return false;
+                        if (tableBytes > data.Length - offset) return false;
                         offset += tableBytes;
                     }
                     if (offset >= data.Length) return false;
@@ -1677,17 +1688,27 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                     byte extensionLabel = data[offset++];
                     if (extensionLabel == 0xF9)
                     {
-                        if (offset + 5 >= data.Length || data[offset] != 4 || data[offset + 5] != 0) return false;
+                        if (data.Length - offset < 6 || data[offset] != 4 || data[offset + 5] != 0) return false;
+                        facts.MetadataBytes += 4;
                         offset += 6;
                     }
                     else if (extensionLabel == 0xFF || extensionLabel == 0x01)
                     {
                         int fixedBlockLength = extensionLabel == 0xFF ? 11 : 12;
-                        if (offset >= data.Length || data[offset] != fixedBlockLength || offset + 1 + fixedBlockLength > data.Length) return false;
+                        if (data.Length - offset < 1 + fixedBlockLength || data[offset] != fixedBlockLength) return false;
+                        bool isIccProfile = extensionLabel == 0xFF && IsGifIccProfileExtension(data, offset + 1);
                         offset += 1 + fixedBlockLength;
-                        if (!SkipGifSubBlocks(data, ref offset)) return false;
+                        int payloadBytes;
+                        if (!SkipGifSubBlocks(data, ref offset, out payloadBytes)) return false;
+                        facts.MetadataBytes += fixedBlockLength + (long)payloadBytes;
+                        if (isIccProfile) facts.IccProfileBytes += payloadBytes;
                     }
-                    else if (!SkipGifSubBlocks(data, ref offset)) return false;
+                    else
+                    {
+                        int payloadBytes;
+                        if (!SkipGifSubBlocks(data, ref offset, out payloadBytes)) return false;
+                        facts.MetadataBytes += payloadBytes;
+                    }
                     continue;
                 }
                 return false;
@@ -1697,11 +1718,19 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
 
         private static bool SkipGifSubBlocks(byte[] data, ref int offset)
         {
+            int payloadBytes;
+            return SkipGifSubBlocks(data, ref offset, out payloadBytes);
+        }
+
+        private static bool SkipGifSubBlocks(byte[] data, ref int offset, out int payloadBytes)
+        {
+            payloadBytes = 0;
             while (offset < data.Length)
             {
                 int length = data[offset++];
                 if (length == 0) return true;
-                if (offset + length > data.Length) return false;
+                if (length > data.Length - offset) return false;
+                payloadBytes += length;
                 offset += length;
             }
             return false;

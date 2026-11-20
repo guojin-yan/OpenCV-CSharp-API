@@ -53,6 +53,8 @@ function Get-ArchitectureName {
 function Invoke-FuzzFramework {
     param([Parameter(Mandatory)][string]$Framework)
 
+    $resultsDirectory = Join-Path ([IO.Path]::GetTempPath()) ('opencv-preflight-fuzz-' + [Guid]::NewGuid().ToString('N'))
+    $trxPath = Join-Path $resultsDirectory 'preflight.trx'
     $startInfo = [Diagnostics.ProcessStartInfo]::new()
     $startInfo.FileName = $dotnet.Source
     $startInfo.WorkingDirectory = $repo
@@ -62,6 +64,7 @@ function Invoke-FuzzFramework {
     foreach ($argument in @(
             'test', $project, '-c', 'Release', '-f', $Framework, '--no-restore',
             '--filter', 'FullyQualifiedName~IdentifyDeterministicMutationCorpus',
+            '--results-directory', $resultsDirectory, '--logger', 'trx;LogFileName=preflight.trx',
             '--logger', 'console;verbosity=minimal')) {
         [void]$startInfo.ArgumentList.Add($argument)
     }
@@ -102,10 +105,29 @@ function Invoke-FuzzFramework {
     $stderr = $stderrTask.GetAwaiter().GetResult()
     $exitCode = if ($timedOut) { -1 } else { [int]$process.ExitCode }
     $combined = $stdout + "`n" + $stderr
+    $testsExecuted = $false
+    if ($exitCode -eq 0 -and (Test-Path -LiteralPath $trxPath -PathType Leaf)) {
+        try {
+            $trx = [xml]([IO.File]::ReadAllText($trxPath))
+            $counters = $trx.SelectSingleNode("//*[local-name()='Counters']")
+            $results = @($trx.SelectNodes("//*[local-name()='UnitTestResult']"))
+            $testsExecuted = $null -ne $counters -and [int]$counters.executed -ge 3 -and [int]$counters.executed -eq [int]$counters.passed -and [int]$counters.total -eq [int]$counters.executed
+            foreach ($requiredTest in @(
+                    'IdentifyDeterministicMutationCorpusNeverEscapesParserOrPublishesInvalidFacts',
+                    'IdentifyDeterministicMutationCorpusPreservesSeekAndConsumesNonSeekStreams',
+                    'IdentifyDeterministicMutationCorpusGifMetadataNeverEscapesParserOrPublishesUnboundedSizes')) {
+                if (@($results | Where-Object { ([string]$_.testName).Contains($requiredTest) -and [string]$_.outcome -ceq 'Passed' }).Count -ne 1) { $testsExecuted = $false }
+            }
+            if ($testsExecuted) { Write-Host "IMAGE_PREFLIGHT_FUZZ_TEST_RESULTS framework=$Framework tests_passed=$($counters.passed) trx=$trxPath" }
+        } catch { $testsExecuted = $false }
+    }
+    if ($exitCode -eq 0 -and -not $testsExecuted) { $combined = "Required preflight mutation tests did not produce passing TRX execution evidence.`n" + $combined }
     $failureClass = if ($timedOut) {
         'hang'
     } elseif ($combined -match '(?i)OutOfMemoryException|InsufficientMemoryException|out of memory') {
         'oom'
+    } elseif ($exitCode -eq 0 -and -not $testsExecuted) {
+        'managed-test-failure'
     } elseif ($exitCode -eq 0) {
         'clean'
     } elseif ($combined -match '(?i)Test Run Failed|Failed!|Xunit\.Sdk|Assert\.') {
@@ -177,6 +199,7 @@ $evidence = [ordered]@{
     limitations = @(
         'The corpus is deterministic managed preflight coverage; it is not coverage-guided native fuzzing.',
         'The isolated dotnet test process distinguishes clean, managed failure, OOM, crash, and timeout outcomes.',
+        'A clean classification requires passing TRX execution evidence for both general corpus tests and the GIF metadata mutation test; an empty dotnet test invocation fails.',
         'WorkingSet64 is sampled process RSS evidence for this runner; process teardown cannot prove absence of a long-lived native leak.',
         'No native runtime is required because the tested Identify paths stop before native decoding.'
     )
