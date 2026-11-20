@@ -1223,7 +1223,7 @@ if ($Module -eq 'fastcv') { $claimedSlice = 'opencv2/fastcv.hpp plus all 30 dire
 if ($Module -eq 'cannops') { $claimedSlice = 'All eight installed CannOps opencv2/*.hpp headers, including internal helpers; cv::cann parser declarations retain restored nested Impl identities, reconcile inline definitions and exclude private inline constructors and inactive binding-only placeholders; CANN/AscendC build and runtime boundaries remain evidence-only' }
 if ($Module -eq 'sfm') { $claimedSlice = 'opencv2/sfm.hpp plus all nine installed opencv2/sfm/*.hpp headers, including standalone robust.hpp and the Ceres reconstruction/pipeline surface; exact non-wrapper declarations preserve per-header Ceres build gates and upstream incomplete-runtime boundaries' }
 if ($Module -eq 'cudev') { $claimedSlice = 'All 76 installed cudev headers: a non-template parser subset reconciled with an expanded source callable inventory, including class-template members and 44 local declaration generators, plus lexical template/macro/conditional provenance; complete callable/instantiation coverage remains open' }
-if ($Module -eq 'matlab') { $claimedSlice = 'All four installed opencv2/matlab/*.hpp helpers: non-template public parser subset under source C++11, with restored conversion-operator ownership, reconciled inline definitions and linked all-branch lexical template/conditional provenance; complete callable and generated +cv gateway coverage remain open' }
+if ($Module -eq 'matlab') { $claimedSlice = 'All four installed opencv2/matlab/*.hpp helpers: non-template public parser subset under source C++11 reconciled with uninstantiated source functions, class-template members and specializations, plus all-branch lexical template/conditional provenance; complete callable and generated +cv gateway coverage remain open' }
 $classification = [ordered]@{ schemaVersion = 1; upstreamOpenCvVersion = '5.0.0'; claimedSlice = $claimedSlice; reviewStatus = 'reviewed'; limitation = "The map records parser identities and exact $DisplayName wrapper evidence; it does not claim repository-wide contrib parity or external module availability."; externalDataDependencies = @($externalDataDependencies); declarations = @($rows) }
 if ($Module -eq 'cudev') { $classification.limitation = [string]$raw.sourceInventoryLimitation }
 if ($Module -eq 'matlab') { $classification.limitation = [string]$raw.sourceInventoryLimitation }
@@ -1252,11 +1252,13 @@ if ($Module -eq 'cudev') {
     $summaryJson = ($summary | ConvertTo-Json -Depth 20) + "`n"
 }
 if ($Module -eq 'matlab') {
-    $summary.negativeFixtureCount = 18
+    $summary.negativeFixtureCount = 36
     $summary.sourceReviewedExtensionPath = [string]$raw.sourceReviewedExtensionPath
     $summary.sourceReviewedExtensionSha256 = [string]$raw.sourceReviewedExtensionSha256
     $summary.sourceInventoryCounts = $raw.sourceInventoryCounts
-    $summary.coverageStatus = 'parser-subset-with-lexical-template-inventory'
+    $matlabSourceInventory = Get-Content -LiteralPath (Join-Path $repo 'compatibility/matlab-source-reviewed-extensions.json') -Raw | ConvertFrom-Json
+    $summary.sourceCallableInventory = $matlabSourceInventory.sourceCallableInventory
+    $summary.coverageStatus = 'parser-subset-with-expanded-source-callable-inventory'
     $summary.completeCallableCoverageClaimed = $false
     $summary.matlabExecutionVerified = $false
     $summary.generatedBindingSurfaceIncluded = $false

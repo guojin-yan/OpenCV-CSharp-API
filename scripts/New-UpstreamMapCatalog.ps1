@@ -181,7 +181,7 @@ $catalog = [ordered]@{
         'Each module retains its specialized extraction and semantic implementation; catalog orchestration does not assert repository-wide OpenCV parity.',
         'Additional contrib modules are introduced only as explicit catalog rows after their source scope and classification evidence are reviewed.',
         'Cudev reconciles a non-template parser subset with a separate source callable inventory, including class-template members and 44 finite local declaration generators. Complete callable/instantiation coverage and external declaration closure remain open; zero missing applies only to the recorded parser subset.',
-        'MATLAB records a non-template installed-helper parser subset and all-branch lexical template provenance. Complete callable/instantiation coverage, external include closure, generated +cv gateways and MATLAB/MEX execution remain open; zero missing applies only to the recorded parser subset.'
+        'MATLAB reconciles its non-template installed-helper parser subset with uninstantiated source functions, class-template members and specializations, alongside all-branch lexical provenance. Conditional namespace closure and function-body diagnostics remain explicit. Complete callable/instantiation coverage, external include closure, generated +cv gateways and MATLAB/MEX execution remain open; zero missing applies only to the recorded parser subset.'
     )
 }
 $outputFullPath = if ([IO.Path]::IsPathRooted($OutputPath)) { [IO.Path]::GetFullPath($OutputPath) } else { [IO.Path]::GetFullPath((Join-Path $repo ($OutputPath -replace '/', [IO.Path]::DirectorySeparatorChar))) }

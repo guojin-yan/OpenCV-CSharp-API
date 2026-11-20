@@ -5620,7 +5620,7 @@
       "generationScript": "scripts/Generate-MatlabUpstreamMap.ps1",
       "semanticGuard": "scripts/Test-MatlabUpstreamMap.ps1",
       "scope": {
-        "claimedSlice": "All four installed opencv2/matlab/*.hpp helpers: non-template public parser subset under source C++11, with restored conversion-operator ownership, reconciled inline definitions and linked all-branch lexical template/conditional provenance; complete callable and generated +cv gateway coverage remain open",
+        "claimedSlice": "All four installed opencv2/matlab/*.hpp helpers: non-template public parser subset under source C++11 reconciled with uninstantiated source functions, class-template members and specializations, plus all-branch lexical template/conditional provenance; complete callable and generated +cv gateway coverage remain open",
         "primaryHeader": {
           "path": "opencv-source/opencv_contrib-5.0.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
           "sha256": "312ac0f7df5406498d82909a505e3709240e0ad1947a7ca9c1e08f24dd1dd252"
@@ -5730,9 +5730,9 @@
       "evidenceContract": {
         "declarations": 190,
         "negativeFixturesMinimum": 10,
-        "mappingSha256": "57a52ce43f4e82a7ecdfdfce43c09b2e39698c882953e4ea93b818ec641b0184",
+        "mappingSha256": "2a603a38769e3952ce74646b74c2fb8a86f06f421169b97f9aed4c9382533592",
         "familyInventorySha256": "baa3625938e83d9c3a752ae6fd33b073300336da9621c0632b0da7d6eb782693",
-        "sourceReviewedExtensionSha256": "76fd052f3e2b1c9c4460cf2cc0784376b024204e047fe8a077a86d130966c45a",
+        "sourceReviewedExtensionSha256": "94bfdb239139d8b9d183bbd06c23e1c9876d2bf860ada87ac2276357909e222e",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false
       }
@@ -5743,6 +5743,6 @@
     "Each module retains its specialized extraction and semantic implementation; catalog orchestration does not assert repository-wide OpenCV parity.",
     "Additional contrib modules are introduced only as explicit catalog rows after their source scope and classification evidence are reviewed.",
     "Cudev reconciles a non-template parser subset with a separate source callable inventory, including class-template members and 44 finite local declaration generators. Complete callable/instantiation coverage and external declaration closure remain open; zero missing applies only to the recorded parser subset.",
-    "MATLAB records a non-template installed-helper parser subset and all-branch lexical template provenance. Complete callable/instantiation coverage, external include closure, generated +cv gateways and MATLAB/MEX execution remain open; zero missing applies only to the recorded parser subset."
+    "MATLAB reconciles its non-template installed-helper parser subset with uninstantiated source functions, class-template members and specializations, alongside all-branch lexical provenance. Conditional namespace closure and function-body diagnostics remain explicit. Complete callable/instantiation coverage, external include closure, generated +cv gateways and MATLAB/MEX execution remain open; zero missing applies only to the recorded parser subset."
   ]
 }

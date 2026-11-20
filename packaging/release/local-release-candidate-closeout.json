@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/c6cc7bffb8081720",
-  "SourceIdentity": "sha256:c6cc7bffb8081720b76a82d8a35ba09e2e0b3c3cb74cb70dd9c036b7a7236f7e",
+  "CandidateId": "local-closeout/sha256/ef86f5af221095c5",
+  "SourceIdentity": "sha256:ef86f5af221095c528d09ce61176bd497e0fda88c261a17416ba158b022f5b4a",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 2465,
-    "Sha256": "c6cc7bffb8081720b76a82d8a35ba09e2e0b3c3cb74cb70dd9c036b7a7236f7e",
+    "FileCount": 2468,
+    "Sha256": "ef86f5af221095c528d09ce61176bd497e0fda88c261a17416ba158b022f5b4a",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -1290,9 +1290,26 @@
       "FamilyInventoryPath": "compatibility/matlab-implemented-families.json",
       "RawExtractionPath": "compatibility/matlab-upstream-raw.json",
       "SourceInventoryPath": "compatibility/matlab-source-reviewed-extensions.json",
-      "SourceInventorySha256": "76fd052f3e2b1c9c4460cf2cc0784376b024204e047fe8a077a86d130966c45a",
-      "Sha256": "57a52ce43f4e82a7ecdfdfce43c09b2e39698c882953e4ea93b818ec641b0184",
-      "RawSha256": "72a8b54b3e6478ecc99d0b3842c56f7e839f395532fd8de17cbdbd19e73ea1e5",
+      "SourceInventorySha256": "94bfdb239139d8b9d183bbd06c23e1c9876d2bf860ada87ac2276357909e222e",
+      "SourceCallableInventory": {
+        "path": "compatibility/matlab-source-callables.json",
+        "sha256": "b979781fcfb79bd18d03e4e74cfcf6c7446c1b2c26b0f4b30ce862ec8ec8dc7e",
+        "counts": {
+          "callableDeclarationCount": 242,
+          "directCallableCount": 242,
+          "templateContextCallableCount": 39,
+          "definitionCount": 238,
+          "declarationOnlyCount": 4,
+          "friendFunctionCount": 1,
+          "conditionalScopeBoundaryCount": 1,
+          "constructorInitializerCount": 10,
+          "reconciledParserCallableCount": 185,
+          "declarationErrorCount": 0,
+          "bodyParseDiagnosticCount": 1
+        }
+      },
+      "Sha256": "2a603a38769e3952ce74646b74c2fb8a86f06f421169b97f9aed4c9382533592",
+      "RawSha256": "6f6c82a4ff2a644c8f5421bc3cecee2593d72d5ca29794d4de7b51bd113fee56",
       "DeclarationCount": 190,
       "CallableCount": 185,
       "ClassCount": 5,
@@ -1319,7 +1336,7 @@
           "function-template": 22
         }
       },
-      "CoverageStatus": "parser-subset-with-lexical-template-inventory",
+      "CoverageStatus": "parser-subset-with-expanded-source-callable-inventory",
       "CompleteCallableCoverageClaimed": false,
       "MatlabExecutionVerified": false,
       "GeneratedBindingSurfaceIncluded": false,
@@ -1330,7 +1347,7 @@
       "NativeEntrypointAdditionCount": 0,
       "ManagedEvidenceCount": 0,
       "ExternalDataDependencyCount": 3,
-      "NegativeFixtureCount": 18,
+      "NegativeFixtureCount": 36,
       "RepositoryWideParityClaimed": false
     },
     "DnnObjDetectUpstreamMap": {
@@ -2325,29 +2342,34 @@
       "Length": 471
     },
     {
+      "Path": "compatibility/matlab-source-callables.json",
+      "Sha256": "b979781fcfb79bd18d03e4e74cfcf6c7446c1b2c26b0f4b30ce862ec8ec8dc7e",
+      "Length": 400390
+    },
+    {
       "Path": "compatibility/matlab-source-reviewed-extensions.json",
-      "Sha256": "76fd052f3e2b1c9c4460cf2cc0784376b024204e047fe8a077a86d130966c45a",
-      "Length": 22930
+      "Sha256": "94bfdb239139d8b9d183bbd06c23e1c9876d2bf860ada87ac2276357909e222e",
+      "Length": 23756
     },
     {
       "Path": "compatibility/matlab-upstream-classifications.json",
-      "Sha256": "5262c0d4135d5d65d65a83bc7205efd318ce11ffc92b89397ef77751024a7b14",
-      "Length": 165986
+      "Sha256": "77a9f2259b47246998b74041909409a0ac0ce120103028d65997067fc8dfdbc0",
+      "Length": 166218
     },
     {
       "Path": "compatibility/matlab-upstream-map.txt",
-      "Sha256": "57a52ce43f4e82a7ecdfdfce43c09b2e39698c882953e4ea93b818ec641b0184",
-      "Length": 130931
+      "Sha256": "2a603a38769e3952ce74646b74c2fb8a86f06f421169b97f9aed4c9382533592",
+      "Length": 130942
     },
     {
       "Path": "compatibility/matlab-upstream-raw.json",
-      "Sha256": "72a8b54b3e6478ecc99d0b3842c56f7e839f395532fd8de17cbdbd19e73ea1e5",
-      "Length": 114652
+      "Sha256": "6f6c82a4ff2a644c8f5421bc3cecee2593d72d5ca29794d4de7b51bd113fee56",
+      "Length": 114873
     },
     {
       "Path": "compatibility/matlab-upstream-summary.json",
-      "Sha256": "909c7708e3d58b5cbd08b7fbc0a4dabcd48a063bb3db6408c86a39aeaf59638c",
-      "Length": 2319
+      "Sha256": "9275781db45913ea93451b803264b19b6f262106881b846899c044bd6e019466",
+      "Length": 2943
     },
     {
       "Path": "compatibility/ml-implemented-families.json",
@@ -2911,8 +2933,8 @@
     },
     {
       "Path": "compatibility/upstream-map-catalog.json",
-      "Sha256": "2d50326d55b5bfdaa09489f7dffdc85a78a7cbc180b65b80e928042198fd3216",
-      "Length": 280741
+      "Sha256": "e3c457176be250b02a45fb2abc67756e2142919eeab063c39853a9f36b1d8616",
+      "Length": 280913
     },
     {
       "Path": "compatibility/upstream-map-catalog.schema.json",
@@ -2921,8 +2943,8 @@
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "90a1d903c64161ae25e8962a78a6837273a761de99835dfcefea13e334051c26",
-      "Length": 96367
+      "Sha256": "a8118948082d18242fa182f0576c5f57c2f91831e435bc41a574f2203fabd5e3",
+      "Length": 97825
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -3421,8 +3443,8 @@
     },
     {
       "Path": "docs/articles/matlab-upstream-parity-guide.md",
-      "Sha256": "b742b4f073f2245ce6f4ad094a2e8ac12badb4826291dbe6fb3b547ffb52375b",
-      "Length": 5741
+      "Sha256": "0919beb8b45ece763872a49ebd20356668410941f296b9c9d4a3c07d8dd0fa6b",
+      "Length": 8724
     },
     {
       "Path": "docs/articles/ml-guide.md",
@@ -3626,8 +3648,8 @@
     },
     {
       "Path": "docs/articles/upstream-map-toolchain.md",
-      "Sha256": "439ec6629f37c615e166901fcf45b2779cd53c875cf669b1ec00c2f65efa0db3",
-      "Length": 28416
+      "Sha256": "9c2f46b1e9d64ef52fd577f91ae43109feaf5df131298ef8ea0b8ef45fdd11d4",
+      "Length": 28902
     },
     {
       "Path": "docs/articles/v501-modern-api-preview-guide.md",
@@ -4121,8 +4143,8 @@
     },
     {
       "Path": "scripts/Generate-ContribUpstreamMap.ps1",
-      "Sha256": "a8037fa4fac82a63c24b867ce139a15eeeabb97f40ab41e8b0ce233f324d0a68",
-      "Length": 147706
+      "Sha256": "07a6cde2dc3f2a8907641b46efff7c809ec0a73a8bac05b05b64caf2ff614321",
+      "Length": 147962
     },
     {
       "Path": "scripts/Generate-CoreUpstreamMap.ps1",
@@ -4266,8 +4288,8 @@
     },
     {
       "Path": "scripts/Generate-MatlabUpstreamMap.ps1",
-      "Sha256": "d089b4f34ebbc0de2494c55958fe31b2b135309662fa3083ef9c7b74ad94eb44",
-      "Length": 947
+      "Sha256": "3e4bfe1db7d5460a23c98d2b4f8290d7389c99afdac4931109dff7809929f133",
+      "Length": 1492
     },
     {
       "Path": "scripts/Generate-MlUpstreamMap.ps1",
@@ -4531,8 +4553,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "58840b209341b05ff2396079fb0d1ff6b798427d3a248a22a7fa528fa3c30bb0",
-      "Length": 190369
+      "Sha256": "949eca62c9eac5837be756bcc894f694e4cb482545ed162bd280734b47482f75",
+      "Length": 190617
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -4546,8 +4568,8 @@
     },
     {
       "Path": "scripts/New-UpstreamMapCatalog.ps1",
-      "Sha256": "a02f0063e289d1b7f55491ba6e224f428ee8b672a1286325e9f4df760c6c38fa",
-      "Length": 13816
+      "Sha256": "5d0c5f2f3703e00dafd313db375eaf2fd539093ce6d0c3ab5c01577ba511b483",
+      "Length": 13977
     },
     {
       "Path": "scripts/Test-AlphaMatUpstreamMap.ps1",
@@ -4880,9 +4902,14 @@
       "Length": 36659
     },
     {
+      "Path": "scripts/Test-MatlabSourceCallables.ps1",
+      "Sha256": "68de43d916a810438affcec6d97ee75f81f356dff07a6072b658839f20fd5058",
+      "Length": 24977
+    },
+    {
       "Path": "scripts/Test-MatlabUpstreamMap.ps1",
-      "Sha256": "00d0fd82609d82761ff54ba50df06cbe5dd27ab9d39c075a7092e46fa2840fff",
-      "Length": 23027
+      "Sha256": "f3690b6f003db671f4845f5f991748f795cc483bd747d232f660b5bd106b5d7a",
+      "Length": 23274
     },
     {
       "Path": "scripts/Test-MlUpstreamMap.ps1",
@@ -5011,8 +5038,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "666d7b24cec8d3c50270253c443ae4f5f1771b95ecb9720a1cbccb5e9c118569",
-      "Length": 161145
+      "Sha256": "e5d0a3ab6a5a05149609073b6e44aaf15b5e7d801f4ac3b6a16bc60cf3dcfd6f",
+      "Length": 162291
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -6341,8 +6368,13 @@
     },
     {
       "Path": "tools/MatlabUpstreamMap/extract_matlab.py",
-      "Sha256": "9658974f046146210e85e700cba5f66083140f7a24f854f6f2ec674dff5dea7f",
-      "Length": 12536
+      "Sha256": "5fb6b7fadbd11ee775b00f7e8f5fc4a40fc92b2dd72fd8f60b2fb26ca98240d4",
+      "Length": 12771
+    },
+    {
+      "Path": "tools/MatlabUpstreamMap/extract_matlab_callables.py",
+      "Sha256": "f6411e7b1c49d0eb81fef841c7b766177e63beee01af08e62d957af232e08426",
+      "Length": 14547
     },
     {
       "Path": "tools/MlUpstreamMap/MlUpstreamMap.csproj",

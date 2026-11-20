@@ -5,7 +5,7 @@
   "scope": "All four installed opencv2/matlab/*.hpp headers with every source conditional branch retained.",
   "coordinateSystem": "Zero-based Unicode offsets, exclusive end, UTF-8 source normalized to LF; line numbers are one-based.",
   "reviewDisposition": "intentionally-omitted-unwrapped-matlab-source",
-  "limitation": "This is the pinned hdr_parser non-template public subset, not complete MATLAB callable coverage. All four installed headers and every lexical template/conditional branch remain in a linked source inventory. The parser ignores __cplusplus checks, so temporary copies rename that identifier to a recorded numeric input. Templates, class-template members, specializations and generated +cv gateways are not enumerated as concrete APIs. External mex.h/standard-library/OpenCV include closure, C++ type checking, MATLAB/MEX build/link/runtime and complete callable parity remain unverified; the package has no MATLAB native or managed wrapper.",
+  "limitation": "This is the pinned hdr_parser non-template public subset, not complete MATLAB callable coverage. All four installed headers and every lexical template/conditional branch remain in a linked source inventory. The parser ignores __cplusplus checks, so temporary copies rename that identifier to a recorded numeric input. Templates, class-template members, specializations and generated +cv gateways are not enumerated as concrete APIs. A linked C++ CST separately enumerates uninstantiated source functions, class-template members and specializations, reconciles the parser callables and retains friend scope, constructor initializers and body diagnostics. External mex.h/standard-library/OpenCV include closure, C++ type checking, MATLAB/MEX build/link/runtime and complete callable parity remain unverified; the package has no MATLAB native or managed wrapper.",
   "completeCallableCoverageClaimed": false,
   "macroExpansionClaimed": false,
   "templateInstantiationCoverageClaimed": false,
@@ -646,5 +646,22 @@
         }
       ]
     }
-  ]
+  ],
+  "sourceCallableInventory": {
+    "path": "compatibility/matlab-source-callables.json",
+    "sha256": "b979781fcfb79bd18d03e4e74cfcf6c7446c1b2c26b0f4b30ce862ec8ec8dc7e",
+    "counts": {
+      "callableDeclarationCount": 242,
+      "directCallableCount": 242,
+      "templateContextCallableCount": 39,
+      "definitionCount": 238,
+      "declarationOnlyCount": 4,
+      "friendFunctionCount": 1,
+      "conditionalScopeBoundaryCount": 1,
+      "constructorInitializerCount": 10,
+      "reconciledParserCallableCount": 185,
+      "declarationErrorCount": 0,
+      "bodyParseDiagnosticCount": 1
+    }
+  }
 }

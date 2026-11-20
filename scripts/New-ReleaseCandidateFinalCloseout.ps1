@@ -555,6 +555,7 @@ function Get-Record {
         "compatibility/matlab-upstream-raw.json",
         "compatibility/matlab-upstream-summary.json",
         "compatibility/matlab-source-reviewed-extensions.json",
+        "compatibility/matlab-source-callables.json",
         "compatibility/v5.0.1-change-ledger.json",
         "compatibility/v5.0.1-change-ledger.schema.json",
         "docs/articles/api-abi-compatibility-policy.md",
@@ -1139,6 +1140,8 @@ function Get-Record {
         "tools/MatlabUpstreamMap/MatlabUpstreamMap.csproj",
         "tools/MatlabUpstreamMap/Program.cs",
         "tools/MatlabUpstreamMap/extract_matlab.py",
+        "tools/MatlabUpstreamMap/extract_matlab_callables.py",
+        "scripts/Test-MatlabSourceCallables.ps1",
         "tools/DnnObjDetectUpstreamMap/DnnObjDetectUpstreamMap.csproj",
         "tools/DnnObjDetectUpstreamMap/Program.cs",
         "tools/DnnObjDetectUpstreamMap/extract_dnn_objdetect.py",
@@ -2515,6 +2518,7 @@ function Get-Record {
                 RawExtractionPath = "compatibility/matlab-upstream-raw.json"
                 SourceInventoryPath = $matlabSummary.sourceReviewedExtensionPath
                 SourceInventorySha256 = $matlabSummary.sourceReviewedExtensionSha256
+                SourceCallableInventory = $matlabSummary.sourceCallableInventory
                 Sha256 = $matlabSummary.mappingSha256
                 RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/matlab-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
                 DeclarationCount = [int]$matlabSummary.declarationCount

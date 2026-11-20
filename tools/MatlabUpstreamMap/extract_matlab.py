@@ -24,6 +24,8 @@ LIMITATION = (
     "All four installed headers and every lexical template/conditional branch remain in a linked source inventory. "
     "The parser ignores __cplusplus checks, so temporary copies rename that identifier to a recorded numeric input. "
     "Templates, class-template members, specializations and generated +cv gateways are not enumerated as concrete APIs. "
+    "A linked C++ CST separately enumerates uninstantiated source functions, class-template members and specializations, "
+    "reconciles the parser callables and retains friend scope, constructor initializers and body diagnostics. "
     "External mex.h/standard-library/OpenCV include closure, C++ type checking, MATLAB/MEX build/link/runtime "
     "and complete callable parity remain unverified; the package has no MATLAB native or managed wrapper."
 )

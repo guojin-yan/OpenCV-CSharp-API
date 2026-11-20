@@ -71,7 +71,7 @@ foreach ($name in $names) {
     }
     if ($stack.Count -ne 0) { throw 'MATLAB source has unclosed conditionals.' }
     $code = [regex]::Replace((Mask-Text $text), $directivePattern, [Text.RegularExpressions.MatchEvaluator]{ param($match) [regex]::Replace($match.Value, '[^\n]', ' ') })
-    $sourceCache["${prefix}include/opencv2/matlab/$name"] = @{ Text = $text; Events = $events.ToArray(); Conditions = $conditionRows.ToArray();
+    $sourceCache["${prefix}include/opencv2/matlab/$name"] = @{ Text = $text; Code = $code; Events = $events.ToArray(); Conditions = $conditionRows.ToArray();
         TemplateOffsets = @([regex]::Matches($code, '\btemplate\s*<') | ForEach-Object Index) }
 }
 
@@ -149,7 +149,7 @@ function Assert-MatlabData {
     }
     if ([string]$Raw.declarations[166].identity -cne 'matlab.MxArray.MxArray(MxArray&& other)->' -or [string]$Raw.declarations[186].arguments[3].type -cne '...' -or (@($Raw.declarations[10].modifiers) -join '|') -cne '/C') { throw 'MATLAB move/variadic/const signature metadata drifted.' }
     if ([int]$Summary.declarationCount -ne 190 -or [int]$Summary.callableCount -ne 185 -or [int]$Summary.classCount -ne 5 -or [int]$Summary.enumCount -ne 0 -or [int]$Summary.classificationCounts.'intentionally-omitted' -ne 185 -or [int]$Summary.classificationCounts.'non-callable-metadata' -ne 5 -or [int]$Summary.classificationCounts.missing -ne 0 -or [int]$Summary.nativeEvidenceCount -ne 0 -or [int]$Summary.managedEvidenceCount -ne 0 -or [int]$Summary.selectedDeclarationCount -ne 0 -or [int]$Summary.managedPublicTypeAdditionCount -ne 0 -or [int]$Summary.managedPublicMemberAdditionCount -ne 0 -or [bool]$Summary.repositoryWideUpstreamParityClaimed) { throw 'MATLAB parser subset summary overstates wrapper/parity evidence.' }
-    if ([bool]$Raw.completeCallableCoverageClaimed -or [bool]$Summary.completeCallableCoverageClaimed -or [bool]$Extension.completeCallableCoverageClaimed -or [bool]$Extension.macroExpansionClaimed -or [bool]$Extension.templateInstantiationCoverageClaimed -or [bool]$Raw.matlabExecutionVerified -or [bool]$Summary.matlabExecutionVerified -or [bool]$Raw.generatedBindingSurfaceIncluded -or [bool]$Summary.generatedBindingSurfaceIncluded -or [string]$Summary.coverageStatus -cne 'parser-subset-with-lexical-template-inventory') { throw 'MATLAB source inventory overstates complete/generated/runtime coverage.' }
+    if ([bool]$Raw.completeCallableCoverageClaimed -or [bool]$Summary.completeCallableCoverageClaimed -or [bool]$Extension.completeCallableCoverageClaimed -or [bool]$Extension.macroExpansionClaimed -or [bool]$Extension.templateInstantiationCoverageClaimed -or [bool]$Raw.matlabExecutionVerified -or [bool]$Summary.matlabExecutionVerified -or [bool]$Raw.generatedBindingSurfaceIncluded -or [bool]$Summary.generatedBindingSurfaceIncluded -or [string]$Summary.coverageStatus -cne 'parser-subset-with-expanded-source-callable-inventory') { throw 'MATLAB source inventory overstates complete/generated/runtime coverage.' }
     foreach ($limitation in @($Raw.sourceInventoryLimitation, $Extension.limitation, $Map.limitation)) { if ([string]$limitation -notmatch 'not complete MATLAB callable coverage' -or [string]$limitation -notmatch 'MATLAB/MEX build/link/runtime') { throw 'MATLAB partial-source limitation disappeared.' } }
     if ([int]$Summary.externalDataDependencyCount -ne 3 -or @($Map.externalDataDependencies).Count -ne 3 -or [string]$Map.externalDataDependencies[0] -notmatch 'external MATLAB' -or [string]$Map.externalDataDependencies[1] -notmatch 'Python and Jinja2' -or [string]$Map.externalDataDependencies[2] -notmatch 'releaseOwnership') { throw 'MATLAB external dependency boundaries drifted.' }
     if ((Get-Content (Join-Path $repo 'src/OpenCvSharp.Native/generated/native_abi_manifest.txt') -Raw) -match '(?m)^jyppx_ocv_matlab_' -or (Get-Content (Join-Path $repo 'compatibility/managed-public-api.txt') -Raw) -match 'JYPPX\.OpenCvSharp\.Matlab(?:\.|\|)') { throw 'MATLAB native/managed wrapper evidence must remain empty.' }
@@ -183,5 +183,6 @@ foreach ($fixture in $fixtures) {
     try { Assert-MatlabData $value.raw $value.summary $value.map $value.extension } catch { $rejected = $true }
     if (-not $rejected) { throw "MATLAB guard accepted negative fixture: $($fixture.Name)" }
 }
-if ($fixtures.Count -ne [int]$summary.negativeFixtureCount) { throw 'MATLAB negative fixture evidence count drifted.' }
-Write-Host "MATLAB_UPSTREAM_MAP_CONTRACT_OK parserDeclarations=190 parserCallable=185 omitted=185 missing=0 headers=4 templates=38 conditionals=22 fixtures=$($fixtures.Count) completeCallableCoverage=false matlabVerified=false"
+$sourceFixtureCount = & (Join-Path $PSScriptRoot 'Test-MatlabSourceCallables.ps1') -RepositoryRoot $repo -SourceCache $sourceCache -Extension $extension -Raw $raw -Summary $summary
+if ($fixtures.Count + $sourceFixtureCount -ne [int]$summary.negativeFixtureCount) { throw 'MATLAB negative fixture evidence count drifted.' }
+Write-Host "MATLAB_UPSTREAM_MAP_CONTRACT_OK parserDeclarations=190 parserCallable=185 omitted=185 missing=0 headers=4 templates=38 conditionals=22 fixtures=$($fixtures.Count + $sourceFixtureCount) completeCallableCoverage=false matlabVerified=false"

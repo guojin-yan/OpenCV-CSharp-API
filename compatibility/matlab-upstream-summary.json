@@ -2,13 +2,13 @@
   "schemaVersion": 1,
   "generator": "tools/MatlabUpstreamMap",
   "upstreamOpenCvVersion": "5.0.0",
-  "claimedSlice": "All four installed opencv2/matlab/*.hpp helpers: non-template public parser subset under source C++11, with restored conversion-operator ownership, reconciled inline definitions and linked all-branch lexical template/conditional provenance; complete callable and generated +cv gateway coverage remain open",
+  "claimedSlice": "All four installed opencv2/matlab/*.hpp helpers: non-template public parser subset under source C++11 reconciled with uninstantiated source functions, class-template members and specializations, plus all-branch lexical template/conditional provenance; complete callable and generated +cv gateway coverage remain open",
   "rawExtractionPath": "compatibility/matlab-upstream-raw.json",
   "classificationPath": "compatibility/matlab-upstream-classifications.json",
   "mappingPath": "compatibility/matlab-upstream-map.txt",
   "headerSha256": "312ac0f7df5406498d82909a505e3709240e0ad1947a7ca9c1e08f24dd1dd252",
   "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
-  "mappingSha256": "57a52ce43f4e82a7ecdfdfce43c09b2e39698c882953e4ea93b818ec641b0184",
+  "mappingSha256": "2a603a38769e3952ce74646b74c2fb8a86f06f421169b97f9aed4c9382533592",
   "declarationCount": 190,
   "enumCount": 0,
   "classCount": 5,
@@ -23,7 +23,7 @@
   },
   "nativeEvidenceCount": 0,
   "managedEvidenceCount": 0,
-  "negativeFixtureCount": 18,
+  "negativeFixtureCount": 36,
   "externalDataDependencyCount": 3,
   "familyInventoryPath": "compatibility/matlab-implemented-families.json",
   "familyInventorySha256": "baa3625938e83d9c3a752ae6fd33b073300336da9621c0632b0da7d6eb782693",
@@ -33,7 +33,7 @@
   "managedPublicMemberAdditionCount": 0,
   "repositoryWideUpstreamParityClaimed": false,
   "sourceReviewedExtensionPath": "compatibility/matlab-source-reviewed-extensions.json",
-  "sourceReviewedExtensionSha256": "76fd052f3e2b1c9c4460cf2cc0784376b024204e047fe8a077a86d130966c45a",
+  "sourceReviewedExtensionSha256": "94bfdb239139d8b9d183bbd06c23e1c9876d2bf860ada87ac2276357909e222e",
   "sourceInventoryCounts": {
     "templatesCount": 38,
     "templateParametersCount": 0,
@@ -45,7 +45,24 @@
       "function-template": 22
     }
   },
-  "coverageStatus": "parser-subset-with-lexical-template-inventory",
+  "sourceCallableInventory": {
+    "path": "compatibility/matlab-source-callables.json",
+    "sha256": "b979781fcfb79bd18d03e4e74cfcf6c7446c1b2c26b0f4b30ce862ec8ec8dc7e",
+    "counts": {
+      "callableDeclarationCount": 242,
+      "directCallableCount": 242,
+      "templateContextCallableCount": 39,
+      "definitionCount": 238,
+      "declarationOnlyCount": 4,
+      "friendFunctionCount": 1,
+      "conditionalScopeBoundaryCount": 1,
+      "constructorInitializerCount": 10,
+      "reconciledParserCallableCount": 185,
+      "declarationErrorCount": 0,
+      "bodyParseDiagnosticCount": 1
+    }
+  },
+  "coverageStatus": "parser-subset-with-expanded-source-callable-inventory",
   "completeCallableCoverageClaimed": false,
   "matlabExecutionVerified": false,
   "generatedBindingSurfaceIncluded": false
