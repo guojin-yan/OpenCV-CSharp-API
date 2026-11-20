@@ -5118,7 +5118,7 @@
       "generationScript": "scripts/Generate-CudevUpstreamMap.ps1",
       "semanticGuard": "scripts/Test-CudevUpstreamMap.ps1",
       "scope": {
-        "claimedSlice": "All 76 installed cudev headers: a non-template parser subset plus a source inventory of template declarations, template-template parameters, macro definitions/invocations and all conditional branches; complete callable/instantiation coverage remains open",
+        "claimedSlice": "All 76 installed cudev headers: a non-template parser subset reconciled with an expanded source callable inventory, including class-template members and 44 local declaration generators, plus lexical template/macro/conditional provenance; complete callable/instantiation coverage remains open",
         "primaryHeader": {
           "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev.hpp",
           "sha256": "a1cac9bc839b596a46ed6724adfb22e7578da1311a7f8945b20c93b952f4ae87"
@@ -5605,9 +5605,9 @@
       "evidenceContract": {
         "declarations": 144,
         "negativeFixturesMinimum": 10,
-        "mappingSha256": "4a6019d4ed601b67e9b1033b39e9b404c589e603ae0e288bcc44e38919a2019e",
+        "mappingSha256": "5ccae967640c4a2230675f63531145384854797463eb8499601467571351ae16",
         "familyInventorySha256": "8b7b566dca90f32421051c49e1a44b954b237bfac24188f9d4896dd97d5da2ac",
-        "sourceReviewedExtensionSha256": "eb4febed8020b99f487c98b888f526eecb8246392b3ea40d409c9555f8c02e42",
+        "sourceReviewedExtensionSha256": "ffc299134043301be2972bb7ff0c9843054a82c1bd4a0742104de4757d010d2a",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false
       }
@@ -5617,6 +5617,6 @@
     "The catalog centralizes source/header scope, classification policy, artifact bindings, generator commands, and semantic guard commands for the parser-backed map set, including the staged contrib batches.",
     "Each module retains its specialized extraction and semantic implementation; catalog orchestration does not assert repository-wide OpenCV parity.",
     "Additional contrib modules are introduced only as explicit catalog rows after their source scope and classification evidence are reviewed.",
-    "Cudev records a non-template parser subset and a separate template/macro source inventory. Its complete callable, macro-expansion and template-instantiation coverage remains open; zero missing applies only to the recorded parser subset."
+    "Cudev reconciles a non-template parser subset with a separate source callable inventory, including class-template members and 44 finite local declaration generators. Complete callable/instantiation coverage and external declaration closure remain open; zero missing applies only to the recorded parser subset."
   ]
 }

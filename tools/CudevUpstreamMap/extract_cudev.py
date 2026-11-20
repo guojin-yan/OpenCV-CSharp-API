@@ -26,8 +26,9 @@ LIMITATION = ("The pinned hdr_parser skips template declarations and does not ex
               "Its declaration/callable counts cover only the non-template parser subset under the recorded source configuration. "
               "The companion source inventory records template definitions (including nested template-template parameters), "
               "function-like macro definitions/invocations and every conditional directive across all installed headers. "
-              "These source units overlap and are not concrete callable counts; class-template members, macro expansions, "
-              "external using declarations and concrete template instantiations are not semantically enumerated. "
+              "These lexical source units overlap and are not concrete callable counts. A linked C++ CST inventory separately "
+              "enumerates source function declarations, class-template members and the 44 finite local declaration generators. "
+              "External using/include closure and concrete template instantiations are not semantically enumerated. "
               "No CUDA compilation, linking, device/runtime validation or complete callable parity is claimed.")
 
 

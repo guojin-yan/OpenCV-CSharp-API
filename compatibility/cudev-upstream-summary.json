@@ -2,13 +2,13 @@
   "schemaVersion": 1,
   "generator": "tools/CudevUpstreamMap",
   "upstreamOpenCvVersion": "5.0.0",
-  "claimedSlice": "All 76 installed cudev headers: a non-template parser subset plus a source inventory of template declarations, template-template parameters, macro definitions/invocations and all conditional branches; complete callable/instantiation coverage remains open",
+  "claimedSlice": "All 76 installed cudev headers: a non-template parser subset reconciled with an expanded source callable inventory, including class-template members and 44 local declaration generators, plus lexical template/macro/conditional provenance; complete callable/instantiation coverage remains open",
   "rawExtractionPath": "compatibility/cudev-upstream-raw.json",
   "classificationPath": "compatibility/cudev-upstream-classifications.json",
   "mappingPath": "compatibility/cudev-upstream-map.txt",
   "headerSha256": "a1cac9bc839b596a46ed6724adfb22e7578da1311a7f8945b20c93b952f4ae87",
   "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
-  "mappingSha256": "4a6019d4ed601b67e9b1033b39e9b404c589e603ae0e288bcc44e38919a2019e",
+  "mappingSha256": "5ccae967640c4a2230675f63531145384854797463eb8499601467571351ae16",
   "declarationCount": 144,
   "enumCount": 10,
   "classCount": 24,
@@ -23,7 +23,7 @@
   },
   "nativeEvidenceCount": 0,
   "managedEvidenceCount": 0,
-  "negativeFixtureCount": 16,
+  "negativeFixtureCount": 28,
   "externalDataDependencyCount": 3,
   "familyInventoryPath": "compatibility/cudev-implemented-families.json",
   "familyInventorySha256": "8b7b566dca90f32421051c49e1a44b954b237bfac24188f9d4896dd97d5da2ac",
@@ -33,7 +33,7 @@
   "managedPublicMemberAdditionCount": 0,
   "repositoryWideUpstreamParityClaimed": false,
   "sourceReviewedExtensionPath": "compatibility/cudev-source-reviewed-extensions.json",
-  "sourceReviewedExtensionSha256": "eb4febed8020b99f487c98b888f526eecb8246392b3ea40d409c9555f8c02e42",
+  "sourceReviewedExtensionSha256": "ffc299134043301be2972bb7ff0c9843054a82c1bd4a0742104de4757d010d2a",
   "sourceInventoryCounts": {
     "templatesCount": 1100,
     "templateParametersCount": 11,
@@ -42,7 +42,25 @@
     "conditionalDirectivesCount": 397,
     "macroBodyTemplateKeywordCount": 92
   },
-  "coverageStatus": "partial-callable-map-with-source-inventory",
+  "sourceCallableInventory": {
+    "path": "compatibility/cudev-source-callables.json",
+    "sha256": "c52f9f4bd92a480896f3fdfa51beea7e4529e4e58b63bda583e1d066b1fe6479",
+    "counts": {
+      "callableDeclarationCount": 5433,
+      "directCallableCount": 1096,
+      "macroGeneratedCallableCount": 4337,
+      "templateContextCallableCount": 1979,
+      "definitionCount": 5382,
+      "declarationOnlyCount": 51,
+      "declarationMacroDefinitionCount": 44,
+      "expandedMacroInvocationCount": 1088,
+      "nonCallableExpansionCount": 213,
+      "reconciledParserCallableCount": 110,
+      "declarationErrorCount": 0,
+      "bodyParseDiagnosticCount": 28
+    }
+  },
+  "coverageStatus": "parser-subset-with-expanded-source-callable-inventory",
   "completeCallableCoverageClaimed": false,
   "cudaExecutionVerified": false
 }

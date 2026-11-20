@@ -546,6 +546,7 @@ function Get-Record {
         "compatibility/cudev-upstream-raw.json",
         "compatibility/cudev-upstream-summary.json",
         "compatibility/cudev-source-reviewed-extensions.json",
+        "compatibility/cudev-source-callables.json",
         "compatibility/v5.0.1-change-ledger.json",
         "compatibility/v5.0.1-change-ledger.schema.json",
         "docs/articles/api-abi-compatibility-policy.md",
@@ -1123,6 +1124,9 @@ function Get-Record {
         "tools/CudevUpstreamMap/Program.cs",
         "tools/CudevUpstreamMap/extract_cudev.py",
         "tools/CudevUpstreamMap/source_inventory.py",
+        "tools/CudevUpstreamMap/extract_source_callables.py",
+        "tools/CudevUpstreamMap/test_source_callables.py",
+        "tools/CudevUpstreamMap/syntax-requirements.txt",
         "tools/DnnObjDetectUpstreamMap/DnnObjDetectUpstreamMap.csproj",
         "tools/DnnObjDetectUpstreamMap/Program.cs",
         "tools/DnnObjDetectUpstreamMap/extract_dnn_objdetect.py",
@@ -1265,6 +1269,8 @@ function Get-Record {
         "scripts/Test-SfmUpstreamMap.ps1",
         "scripts/Generate-CudevUpstreamMap.ps1",
         "scripts/Test-CudevUpstreamMap.ps1",
+        "scripts/Test-CudevSourceCallables.ps1",
+        "scripts/Initialize-CudevSyntaxParser.ps1",
         "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
         "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
         "tools/TypedMatBenchmark/Program.cs",
@@ -2454,6 +2460,7 @@ function Get-Record {
                 RawExtractionPath = "compatibility/cudev-upstream-raw.json"
                 SourceInventoryPath = $cudevSummary.sourceReviewedExtensionPath
                 SourceInventorySha256 = $cudevSummary.sourceReviewedExtensionSha256
+                SourceCallableInventory = $cudevSummary.sourceCallableInventory
                 Sha256 = $cudevSummary.mappingSha256
                 RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/cudev-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
                 DeclarationCount = [int]$cudevSummary.declarationCount

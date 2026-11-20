@@ -5,7 +5,7 @@
   "scope": "All 76 installed cudev .hpp files, including detail headers, with all source conditional branches retained.",
   "coordinateSystem": "Zero-based Unicode offsets, exclusive end, UTF-8 source normalized to LF; line numbers are one-based.",
   "reviewDisposition": "intentionally-omitted-unwrapped-device-source",
-  "limitation": "The pinned hdr_parser skips template declarations and does not expand declaration macros. Its declaration/callable counts cover only the non-template parser subset under the recorded source configuration. The companion source inventory records template definitions (including nested template-template parameters), function-like macro definitions/invocations and every conditional directive across all installed headers. These source units overlap and are not concrete callable counts; class-template members, macro expansions, external using declarations and concrete template instantiations are not semantically enumerated. No CUDA compilation, linking, device/runtime validation or complete callable parity is claimed.",
+  "limitation": "The pinned hdr_parser skips template declarations and does not expand declaration macros. Its declaration/callable counts cover only the non-template parser subset under the recorded source configuration. The companion source inventory records template definitions (including nested template-template parameters), function-like macro definitions/invocations and every conditional directive across all installed headers. These lexical source units overlap and are not concrete callable counts. A linked C++ CST inventory separately enumerates source function declarations, class-template members and the 44 finite local declaration generators. External using/include closure and concrete template instantiations are not semantically enumerated. No CUDA compilation, linking, device/runtime validation or complete callable parity is claimed.",
   "completeCallableCoverageClaimed": false,
   "macroExpansionClaimed": false,
   "templateInstantiationCoverageClaimed": false,
@@ -34788,5 +34788,23 @@
       ],
       "macroInvocations": []
     }
-  ]
+  ],
+  "sourceCallableInventory": {
+    "path": "compatibility/cudev-source-callables.json",
+    "sha256": "c52f9f4bd92a480896f3fdfa51beea7e4529e4e58b63bda583e1d066b1fe6479",
+    "counts": {
+      "callableDeclarationCount": 5433,
+      "directCallableCount": 1096,
+      "macroGeneratedCallableCount": 4337,
+      "templateContextCallableCount": 1979,
+      "definitionCount": 5382,
+      "declarationOnlyCount": 51,
+      "declarationMacroDefinitionCount": 44,
+      "expandedMacroInvocationCount": 1088,
+      "nonCallableExpansionCount": 213,
+      "reconciledParserCallableCount": 110,
+      "declarationErrorCount": 0,
+      "bodyParseDiagnosticCount": 28
+    }
+  }
 }
