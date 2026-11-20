@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/b8d7c7b4bde331fe",
-  "SourceIdentity": "sha256:b8d7c7b4bde331fee49afc42c848b65231c0eda1296846e6a1d86f24ec0ef925",
+  "CandidateId": "local-closeout/sha256/2963cef08cef4d71",
+  "SourceIdentity": "sha256:2963cef08cef4d7134174f5654cbcee2ad012cb987a379ee313f9d0db2f19287",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 2423,
-    "Sha256": "b8d7c7b4bde331fee49afc42c848b65231c0eda1296846e6a1d86f24ec0ef925",
+    "FileCount": 2434,
+    "Sha256": "2963cef08cef4d7134174f5654cbcee2ad012cb987a379ee313f9d0db2f19287",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -1173,6 +1173,43 @@
       "InlineReconciledCount": 16,
       "PrivateInlineExcludedCount": 2,
       "BindingOnlyPlaceholderBlockCount": 7,
+      "SelectedFamilyCount": 1,
+      "SelectedDeclarationCount": 0,
+      "ManagedPublicTypeAdditionCount": 0,
+      "ManagedPublicMemberAdditionCount": 0,
+      "NativeEntrypointAdditionCount": 0,
+      "ExternalDataDependencyCount": 3,
+      "RepositoryWideParityClaimed": false
+    },
+    "SfmUpstreamMap": {
+      "Path": "compatibility/sfm-upstream-map.txt",
+      "SummaryPath": "compatibility/sfm-upstream-summary.json",
+      "ClassificationPath": "compatibility/sfm-upstream-classifications.json",
+      "FamilyInventoryPath": "compatibility/sfm-implemented-families.json",
+      "RawExtractionPath": "compatibility/sfm-upstream-raw.json",
+      "Sha256": "4c4ce06f25b3fb4821c779dd4d2c95658e44894bba21b6563e0a72b25f7016bc",
+      "RawSha256": "98ba41469d78fc24b38e0720d84aa134a8d6c33b3ceb2dba3b9080d7d8b61766",
+      "DeclarationCount": 62,
+      "CallableCount": 55,
+      "ClassCount": 4,
+      "EnumCount": 3,
+      "MetadataCount": 7,
+      "ImplementedCount": 0,
+      "MissingCount": 0,
+      "IntentionallyOmittedCount": 55,
+      "UnsupportedCount": 0,
+      "UpstreamConditionalCount": 0,
+      "SourceHeaderCount": 10,
+      "CompatibilityHeaderCount": 8,
+      "ParserMode": "non-wrapper-public-declarations",
+      "ModuleBuildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "CeresBuildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "BaseDeclarationCount": 28,
+      "CeresDeclarationCount": 34,
+      "CeresCallableCount": 28,
+      "StandaloneHeaderCount": 1,
+      "CeresHeaderGuardProbeCount": 3,
+      "AffineNotImplementedBranchCount": 4,
       "SelectedFamilyCount": 1,
       "SelectedDeclarationCount": 0,
       "ManagedPublicTypeAdditionCount": 0,
@@ -2468,6 +2505,31 @@
       "Length": 1434
     },
     {
+      "Path": "compatibility/sfm-implemented-families.json",
+      "Sha256": "4f66c11de5807fe7a58b8ec70ce06015a8bd2ca249bd215d26788734d1f696fd",
+      "Length": 384
+    },
+    {
+      "Path": "compatibility/sfm-upstream-classifications.json",
+      "Sha256": "0dbcb672260361601004eaf682e72b72b3eb3b6047aafd9f52b0f9942dc7c58e",
+      "Length": 45460
+    },
+    {
+      "Path": "compatibility/sfm-upstream-map.txt",
+      "Sha256": "4c4ce06f25b3fb4821c779dd4d2c95658e44894bba21b6563e0a72b25f7016bc",
+      "Length": 33881
+    },
+    {
+      "Path": "compatibility/sfm-upstream-raw.json",
+      "Sha256": "98ba41469d78fc24b38e0720d84aa134a8d6c33b3ceb2dba3b9080d7d8b61766",
+      "Length": 89690
+    },
+    {
+      "Path": "compatibility/sfm-upstream-summary.json",
+      "Sha256": "8391628e9f90d5a21d129f7b4f0af2d32ed99784e3ffe05123164cd7e657fc18",
+      "Length": 1585
+    },
+    {
       "Path": "compatibility/shape-implemented-families.json",
       "Sha256": "cf85f2d0c99f290ffe454c3fea601ce563cd690c4485746d486309ebd51e2eb9",
       "Length": 18125
@@ -2669,18 +2731,18 @@
     },
     {
       "Path": "compatibility/upstream-map-catalog.json",
-      "Sha256": "edb5aad742321c11f3851d9df46277ffbb8d25ef28f37ecd339268c397e5b3d7",
-      "Length": 240532
+      "Sha256": "79235162b9c2688a0362e8812cf212f86d31a1db3425a576bd85b3940c69abc0",
+      "Length": 247915
     },
     {
       "Path": "compatibility/upstream-map-catalog.schema.json",
-      "Sha256": "9bbf6a97adb52326817a5b3dc2920d2e7139d51c4f05440b6ac9f19388eb372e",
-      "Length": 6273
+      "Sha256": "6626f0555d4218e2d51d5fb66ae1c41757bf23c6c5af3248c765db046e5c0934",
+      "Length": 6280
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "0a79a2eccddd0404a31d629196d4c7c29da5eb23ee5f7938939b982c98b02f37",
-      "Length": 90914
+      "Sha256": "025f47cfbd10a4cf4b6a5341d9a556657eb0445ca8692bb8801a4941e362c6d4",
+      "Length": 92176
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -3283,6 +3345,11 @@
       "Length": 3495
     },
     {
+      "Path": "docs/articles/sfm-upstream-parity-guide.md",
+      "Sha256": "ff1f8d142ee572042ec705774819476eb62d540f5330678d95b0b226176ee63e",
+      "Length": 5538
+    },
+    {
       "Path": "docs/articles/shape-guide.md",
       "Sha256": "2db0c6fab5c5c17f8d63bcddc7ed3337219b5e8edb8d88a561cab67d526ceb07",
       "Length": 3381
@@ -3369,8 +3436,8 @@
     },
     {
       "Path": "docs/articles/upstream-map-toolchain.md",
-      "Sha256": "00d05a2155417b7bba66011dab4ee065742ba2af3899ac96f2512d3d19f56721",
-      "Length": 23440
+      "Sha256": "8df781a5c53ac5922494c33bd33762c74288491b1dad9aa1a656d7c3c57f2b9d",
+      "Length": 24849
     },
     {
       "Path": "docs/articles/v501-modern-api-preview-guide.md",
@@ -3489,8 +3556,8 @@
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "10adf7c965d7264642dbca2e6842a15face071daa50036f7b57c6e55949ab520",
-      "Length": 19644
+      "Sha256": "3e19cb5c6729cf8a5bf129033fcdd5d56dc022c926f7fd9a9e816c940e1cac88",
+      "Length": 19723
     },
     {
       "Path": "nuget/logo.jpg",
@@ -3864,8 +3931,8 @@
     },
     {
       "Path": "scripts/Generate-ContribUpstreamMap.ps1",
-      "Sha256": "43bcbb5c49fcbe2c40e61dfeae06e906a6808c00984b74ea5c177c0471acd3c7",
-      "Length": 139737
+      "Sha256": "9908d0b52fc79fc6beee6244165b195795720bd3879faf4ea50f327e88e375a7",
+      "Length": 141893
     },
     {
       "Path": "scripts/Generate-CoreUpstreamMap.ps1",
@@ -4078,6 +4145,11 @@
       "Length": 347
     },
     {
+      "Path": "scripts/Generate-SfmUpstreamMap.ps1",
+      "Sha256": "668655c97058bacd5296f42a0bd966e9bac292e71085674d6be937600b301a29",
+      "Length": 931
+    },
+    {
       "Path": "scripts/Generate-ShapeUpstreamMap.ps1",
       "Sha256": "95c335d164b66cec15cd0c12d7cdd72a991a63d49b2da04e585e781f58348e80",
       "Length": 341
@@ -4174,8 +4246,8 @@
     },
     {
       "Path": "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
-      "Sha256": "513bbffbf91cf71f4f92b36d6c4f90d75cbff80e404c29c713978077d0969a4b",
-      "Length": 5804
+      "Sha256": "2d3cc67f1d56f4c2aa1318cf87e2f9360bd2d48004b5f5285ac4c76fa3d9e34c",
+      "Length": 5826
     },
     {
       "Path": "scripts/Invoke-LifecycleRefreshContainerProducer.ps1",
@@ -4254,8 +4326,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "081abf79c4a5d7de442883de7ab5e2f4c158c6f29c23a3bab5fe52cf37d2c3d9",
-      "Length": 177846
+      "Sha256": "169b9e879163bca49772bd584b7b65e2c033057665b1e0a2ad6f148baa57b53a",
+      "Length": 181553
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -4269,8 +4341,8 @@
     },
     {
       "Path": "scripts/New-UpstreamMapCatalog.ps1",
-      "Sha256": "8984723b2d2c2d0a699af96aee335ced7c1e7bc8e15ba6bc29a05c6110e09432",
-      "Length": 12940
+      "Sha256": "e6226dc2679cb0204a04dacc23fa0b06a690efba9ce41517de8fd9f918994c7f",
+      "Length": 13021
     },
     {
       "Path": "scripts/Test-AlphaMatUpstreamMap.ps1",
@@ -4719,8 +4791,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "b67b66bb6ef1b483d19a142c2275829a56307feef109b8ea6392802fcfda6e31",
-      "Length": 149673
+      "Sha256": "8476f8786e283b5b82a9b3856d512c9c2c41884efd8f5c84f39bee491b22e2e2",
+      "Length": 152594
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -4781,6 +4853,11 @@
       "Path": "scripts/Test-ScenarioBenchmarkHarness.ps1",
       "Sha256": "6aaeadb8f19ae8ebfbd5aa4f9659560946e8e53036a3ba29554da4ddefeb8c19",
       "Length": 3757
+    },
+    {
+      "Path": "scripts/Test-SfmUpstreamMap.ps1",
+      "Sha256": "c1b13d754e5f87523f07cb4ad0df4a707a0a306fb640304b3054251ff9223c78",
+      "Length": 17366
     },
     {
       "Path": "scripts/Test-ShapeUpstreamMap.ps1",
@@ -4844,8 +4921,8 @@
     },
     {
       "Path": "scripts/Test-UpstreamMapCatalog.ps1",
-      "Sha256": "34ac8ae2ed80f8b606c7731a3b6a5c9f651cd330a4cad513a6ba8037767a0edd",
-      "Length": 16601
+      "Sha256": "24d2b59f0c28e1308a0f81372e47d8a4a4074a60f6def2408ce262b7a5094f1e",
+      "Length": 16607
     },
     {
       "Path": "scripts/Test-V501ChangeLedger.ps1",
@@ -6221,6 +6298,21 @@
       "Path": "tools/ScenarioBenchmark/ScenarioBenchmark.csproj",
       "Sha256": "d151295f5b77ab5d35855b64925e3f416aef6d12a2b99a41215a3c9a7394be11",
       "Length": 1096
+    },
+    {
+      "Path": "tools/SfmUpstreamMap/Program.cs",
+      "Sha256": "5e40368422771393d1974022b74c0cf819690f55cea1ebc039d3f20331f40402",
+      "Length": 96
+    },
+    {
+      "Path": "tools/SfmUpstreamMap/SfmUpstreamMap.csproj",
+      "Sha256": "727d0721f11212e08035cc59275b0226c0092f3ea92492d621c3d25879ef974f",
+      "Length": 273
+    },
+    {
+      "Path": "tools/SfmUpstreamMap/extract_sfm.py",
+      "Sha256": "a6f848f28a0fd4809a2a32c27666d16a2c4c330189f908e4f8dbfc1244c0b9cd",
+      "Length": 8019
     },
     {
       "Path": "tools/ShapeUpstreamMap/Program.cs",

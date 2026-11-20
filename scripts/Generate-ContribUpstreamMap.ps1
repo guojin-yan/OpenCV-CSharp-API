@@ -1,5 +1,5 @@
 param(
-    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect','superres','dnn_superres','wechat_qrcode','cnn_3dobj','signal','dpm','hdf','text','xfeatures2d','dnn_objdetect','ccalib','julia','rgbd','cudaarithm','cudabgsegm','cudafilters','cudaimgproc','cudacodec','cudawarping','cudafeatures2d','cudaobjdetect','cudaoptflow','cudastereo','cudalegacy','videostab','cvv','datasets','viz','ovis','fastcv','cannops')][string]$Module,
+    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect','superres','dnn_superres','wechat_qrcode','cnn_3dobj','signal','dpm','hdf','text','xfeatures2d','dnn_objdetect','ccalib','julia','rgbd','cudaarithm','cudabgsegm','cudafilters','cudaimgproc','cudacodec','cudawarping','cudafeatures2d','cudaobjdetect','cudaoptflow','cudastereo','cudalegacy','videostab','cvv','datasets','viz','ovis','fastcv','cannops','sfm')][string]$Module,
     [Parameter(Mandatory)][string]$DisplayName,
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [switch]$Check
@@ -89,6 +89,8 @@ function GetParts([string]$Identity) {
         return [pscustomobject]@{ Namespace = ''; Owner = ''; Name = '' }
     } elseif ($Module -eq 'fastcv') {
         '^cv\.fastcv\.(?:(?<owner>.+)\.)?(?<name>~?[A-Za-z][A-Za-z0-9_]*)\('
+    } elseif ($Module -eq 'sfm') {
+        '^cv\.sfm\.(?:(?<owner>.+)\.)?(?<name>~?[A-Za-z][A-Za-z0-9_]*)\('
     } elseif ($Module -eq 'cannops') {
         '^cv\.cann\.(?:(?<owner>.+)\.)?(?<name>operator[^\(]+|~?[A-Za-z][A-Za-z0-9_]*)\('
     } elseif ($Module -eq 'videostab') {
@@ -196,7 +198,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
 }
 
 function GetManaged([string]$Owner, [string]$Name, [string]$Identity) {
-    if ($Module -in @('freetype','cnn_3dobj','cudaarithm','cudabgsegm','cudafilters','cudaimgproc','cudacodec','cudawarping','cudafeatures2d','cudaobjdetect','cudaoptflow','cudastereo','cudalegacy','videostab','viz','fastcv','cannops')) { return @() }
+    if ($Module -in @('freetype','cnn_3dobj','cudaarithm','cudabgsegm','cudafilters','cudaimgproc','cudacodec','cudawarping','cudafeatures2d','cudaobjdetect','cudaoptflow','cudastereo','cudalegacy','videostab','viz','fastcv','cannops','sfm')) { return @() }
     if ($Module -eq 'structured_light') {
         $typeMarker = "JYPPX.OpenCvSharp.StructuredLight.$Owner|"
         $typeEntries = @($managedEntries | Where-Object { $_.Contains($typeMarker, [StringComparison]::Ordinal) })
@@ -548,7 +550,7 @@ function GetNative([object]$Parts, [string]$Identity) {
     $owner = [string]$Parts.Owner
     $name = [string]$Parts.Name
     $result = @()
-    if ($Module -in @('superres','videostab','viz','cannops')) {
+    if ($Module -in @('superres','videostab','viz','cannops','sfm')) {
         return @()
     } elseif ($Module -eq 'rapid') {
         $symbol = switch ("$owner.$name") {
@@ -1143,6 +1145,7 @@ $claimedSlice = if ($Module -eq 'reg') { 'opencv2/reg/*.hpp contrib public heade
  $buildCondition = if ($Module -in @('cudaarithm','cudafilters','cudaimgproc','cudawarping','cudafeatures2d','cudaoptflow','cudastereo')) { 'NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)' } elseif ($Module -in @('cudabgsegm','cudaobjdetect')) { 'NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)' } elseif ($Module -eq 'cudacodec') { 'NOT_IOS_AND_NOT_APPLE_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)' } elseif ($Module -eq 'cudalegacy') { 'HAVE_CUDA' } elseif ($Module -eq 'videostab') { 'REQUIRED_OPENCV_MODULE_DEPENDENCIES_PRESENT' } elseif ($Module -eq 'cvv') { 'HAVE_QT_GE_5_AND_CXX11' } elseif ($Module -eq 'datasets') { 'OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT' } elseif ($Module -eq 'viz') { 'HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT' } else { "OPENCV_CSHARP_HAS_OPENCV_$($Module.ToUpperInvariant())=1" }
     if ($Module -eq 'fastcv') { $buildCondition = 'HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY' }
     if ($Module -eq 'cannops') { $buildCondition = 'HAVE_CANN_AND_SUPPORTED_UNIX_X86_64_OR_AARCH64_AND_NOT_IOS_WINRT_ANDROID_APPLE_WIN32_AND_ASCENDC_TOOLCHAIN' }
+    if ($Module -eq 'sfm') { $buildCondition = if ([bool]$decl.requiresCeres) { 'HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND' } else { 'HAVE_EIGEN_AND_SFM_DEPS_OK' } }
     if ($Module -eq 'ovis') { $buildCondition = 'HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT' }
     if ($Module -eq 'ovis' -and $classification -eq 'intentionally-omitted') { $reason = 'The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.' }
     if ($Module -eq 'cvv' -and $classification -eq 'intentionally-omitted') { $reason = 'The CVV debug-visualization declarations have no native or managed wrapper in the current package; upstream disables the module unless Qt 5 or later and C++11 are available, while interactive GUI state, callbacks, and debug-only ownership remain outside the package contract.' }
@@ -1150,6 +1153,12 @@ $claimedSlice = if ($Module -eq 'reg') { 'opencv2/reg/*.hpp contrib public heade
     if ($Module -eq 'viz' -and $classification -eq 'intentionally-omitted') { $reason = 'The viz declarations have no native or managed wrapper in the current package; visualization requires external VTK, GUI/window state, caller-owned mesh/cloud/trajectory files, and rendering object lifetime outside the package contract.' }
     if ($Module -eq 'fastcv' -and $classification -eq 'intentionally-omitted') { $reason = 'The FastCV declarations have no native or managed wrapper in the current package; upstream execution is gated by HAVE_FASTCV, ARM support, and an external Qualcomm FastCV library/runtime, while DSP initialization, allocator, and Mat input/output ownership remain outside this package contract.' }
     if ($Module -eq 'cannops' -and $classification -eq 'intentionally-omitted') { $reason = 'The CannOps declarations in cv::cann have no native or managed wrapper in the current package; upstream requires HAVE_CANN on supported UNIX x86-64/arm64 targets, external Huawei CANN SDK/libraries and the AscendC toolchain, while Ascend device/runtime, allocator, stream/event/context and Mat ownership remain outside this package contract.' }
+    if ($Module -eq 'sfm' -and $classification -eq 'intentionally-omitted') {
+        $reason = 'The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.'
+        if ([bool]$decl.requiresCeres) { $reason += ' This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation.' }
+        if ([string]$decl.name -eq 'cv.sfm.reconstruct') { $reason += ' The pinned upstream affine reconstruction branch raises StsNotImplemented.' }
+        if ([string]$decl.name -eq 'cv.sfm.computeOrientation') { $reason += ' The pinned upstream implementation contains TODO: finish implementation.' }
+    }
     $rows.Add([ordered]@{ ordinal = [int]$decl.ordinal; identity = [string]$decl.identity; classification = $classification; reason = $reason; buildCondition = $buildCondition; nativeEntrypoints = @($native); managedMembers = @($managed) })
 }
 
@@ -1162,6 +1171,7 @@ $externalDataDependencies = switch ($Module) {
     'ovis' { @('OpenCV contrib OVIS is disabled unless external OGRE3D is found at version 1.11.5 or later; this package bundles neither OGRE nor an OVIS native/managed wrapper.', 'OVIS rendering depends on caller-selected scene meshes, textures/material scripts, renderer/window policy, and Mat input/output ownership; none is part of this package contract.') }
     'fastcv' { @('OpenCV contrib FastCV is disabled unless HAVE_FASTCV is enabled and depends on an external Qualcomm FastCV SDK/library; this package bundles neither that runtime nor a FastCV native/managed wrapper.', 'The upstream FastCV module supports ARM only and cannot configure/build on x86; DSP initialization, device/runtime compatibility, and allocator ownership remain outside this package contract.') }
     'cannops' { @('OpenCV contrib CannOps requires an external Huawei CANN SDK and CANN_LIBRARIES, a supported UNIX x86-64/arm64 platform and a successful VALID_ASCENDCL probe; this package bundles neither the SDK/runtime nor a CannOps native/managed wrapper.', 'AscendC kernel compilation requires an external compiler/devkit package and caller-selected SOC_VERSION and RUN_MODE; the pinned defaults are ascend310p3 and npu.', 'Ascend device/runtime compatibility, initialization, allocator, stream/event/context synchronization and Mat input/output ownership remain external caller responsibilities.') }
+    'sfm' { @('The SFM module requires external Eigen, Glog and Gflags plus a successful SFM_GLOG_GFLAGS_TEST compile/link probe; this package provides no SFM native/managed wrapper.', 'The reconstruction and simple pipeline implementations require external Ceres Solver and CERES_LIBRARIES; defining CERES_FOUND as zero may expose direct header declarations but does not enable those implementations.', 'Image sequences/paths, point tracks, reconstruction files, camera intrinsics, output Mat ownership and reconstruction state are caller-provided; the package bundles no SFM scene or track assets.') }
     'hdf' { @('The HDF contrib surface requires an external HDF5 development/runtime dependency; no HDF5 runtime or managed/native wrapper is bundled.') }
     'cvv' { @('The CVV debug-visualization module is disabled unless Qt 5 or later and C++11 are available; this package bundles neither Qt nor a CVV native/managed wrapper.') }
     'datasets' { @('The datasets module consumes caller-provided dataset files, directory trees, annotations, and file paths; this package bundles no dataset assets or datasets native/managed wrapper.') }
@@ -1195,6 +1205,7 @@ if ($Module -eq 'datasets') { $claimedSlice = 'opencv2/datasets/*.hpp parser-bac
 if ($Module -eq 'viz') { $claimedSlice = 'opencv2/viz.hpp plus opencv2/viz/*.hpp parser-backed public header closure; CV_EXPORTS declarations, external VTK, and GUI/rendering ownership remain evidence-only' }
 if ($Module -eq 'fastcv') { $claimedSlice = 'opencv2/fastcv.hpp plus all 30 directly included opencv2/fastcv/*.hpp parser-backed public declarations; upstream wrapper annotations and ARM/external-library build boundaries remain evidence-only' }
 if ($Module -eq 'cannops') { $claimedSlice = 'All eight installed CannOps opencv2/*.hpp headers, including internal helpers; cv::cann parser declarations retain restored nested Impl identities, reconcile inline definitions and exclude private inline constructors and inactive binding-only placeholders; CANN/AscendC build and runtime boundaries remain evidence-only' }
+if ($Module -eq 'sfm') { $claimedSlice = 'opencv2/sfm.hpp plus all nine installed opencv2/sfm/*.hpp headers, including standalone robust.hpp and the Ceres reconstruction/pipeline surface; exact non-wrapper declarations preserve per-header Ceres build gates and upstream incomplete-runtime boundaries' }
 $classification = [ordered]@{ schemaVersion = 1; upstreamOpenCvVersion = '5.0.0'; claimedSlice = $claimedSlice; reviewStatus = 'reviewed'; limitation = "The map records parser identities and exact $DisplayName wrapper evidence; it does not claim repository-wide contrib parity or external module availability."; externalDataDependencies = @($externalDataDependencies); declarations = @($rows) }
 $builder = [Text.StringBuilder]::new(); [void]$builder.AppendLine("# Generated by scripts/Generate-ContribUpstreamMap.ps1 -Module $Module. Do not edit."); [void]$builder.AppendLine('schema-version=1'); [void]$builder.AppendLine('upstream-opencv-version=5.0.0'); [void]$builder.AppendLine("claimed-slice=$($classification.claimedSlice)"); [void]$builder.AppendLine("header-sha256=$($raw.headerSha256)"); [void]$builder.AppendLine("parser-sha256=$($raw.parserSha256)"); [void]$builder.AppendLine("declaration-count=$($raw.declarationCount)"); [void]$builder.AppendLine('repository-wide-upstream-parity-claimed=false'); [void]$builder.AppendLine(''); [void]$builder.AppendLine('ordinal|classification|identity|native-entrypoints|managed-members|build-condition|reason')
 foreach ($row in $rows) { $nativeText = if (@($row.nativeEntrypoints).Count) { @($row.nativeEntrypoints) -join ';' } else { '-' }; $managedText = if (@($row.managedMembers).Count) { @($row.managedMembers) -join ';' } else { '-' }; [void]$builder.AppendLine("$($row.ordinal)|$($row.classification)|$($row.identity)|$nativeText|$managedText|$($row.buildCondition)|$($row.reason)") }

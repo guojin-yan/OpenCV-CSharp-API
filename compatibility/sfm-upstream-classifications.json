@@ -1,0 +1,572 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/sfm.hpp plus all nine installed opencv2/sfm/*.hpp headers, including standalone robust.hpp and the Ceres reconstruction/pipeline surface; exact non-wrapper declarations preserve per-header Ceres build gates and upstream incomplete-runtime boundaries",
+  "reviewStatus": "reviewed",
+  "limitation": "The map records parser identities and exact Sfm wrapper evidence; it does not claim repository-wide contrib parity or external module availability.",
+  "externalDataDependencies": [
+    "The SFM module requires external Eigen, Glog and Gflags plus a successful SFM_GLOG_GFLAGS_TEST compile/link probe; this package provides no SFM native/managed wrapper.",
+    "The reconstruction and simple pipeline implementations require external Ceres Solver and CERES_LIBRARIES; defining CERES_FOUND as zero may expose direct header declarations but does not enable those implementations.",
+    "Image sequences/paths, point tracks, reconstruction files, camera intrinsics, output Mat ownership and reconstruction state are caller-provided; the package bundles no SFM scene or track assets."
+  ],
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "cv.sfm.preconditionerFromPoints(InputArray points;OutputArray T)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.sfm.isotropicPreconditionerFromPoints(InputArray points;OutputArray T)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.sfm.applyTransformationToPoints(InputArray points;InputArray T;OutputArray transformed_points)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.sfm.normalizePoints(InputArray points;OutputArray normalized_points;OutputArray T)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.sfm.normalizeIsotropicPoints(InputArray points;OutputArray normalized_points;OutputArray T)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.sfm.projectionsFromFundamental(InputArray F;OutputArray P1;OutputArray P2)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.sfm.fundamentalFromProjections(InputArray P1;InputArray P2;OutputArray F)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.sfm.normalizedEightPointSolver(InputArray x1;InputArray x2;OutputArray F)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.sfm.relativeCameraMotion(InputArray R1;InputArray t1;InputArray R2;InputArray t2;OutputArray R;OutputArray t)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.sfm.motionFromEssential(InputArray E;OutputArrayOfArrays Rs;OutputArrayOfArrays ts)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.sfm.motionFromEssentialChooseSolution(InputArrayOfArrays Rs;InputArrayOfArrays ts;InputArray K1;InputArray x1;InputArray K2;InputArray x2)->int",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.sfm.fundamentalFromEssential(InputArray E;InputArray K1;InputArray K2;OutputArray F)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.sfm.essentialFromFundamental(InputArray F;InputArray K1;InputArray K2;OutputArray E)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.sfm.essentialFromRt(InputArray R1;InputArray t1;InputArray R2;InputArray t2;OutputArray E)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.sfm.normalizeFundamental(InputArray F;OutputArray F_normalized)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.sfm.computeOrientation(InputArrayOfArrays x1;InputArrayOfArrays x2;OutputArray R;OutputArray t;double s)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. The pinned upstream implementation contains TODO: finish implementation.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "enum cv.sfm.<unnamed>[const cv.sfm.SFM_IO_BUNDLER=0;const cv.sfm.SFM_IO_VISUALSFM=1;const cv.sfm.SFM_IO_OPENSFM=2;const cv.sfm.SFM_IO_OPENMVG=3;const cv.sfm.SFM_IO_THEIASFM=4]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.sfm.importReconstruction(const cv::String & file;OutputArrayOfArrays Rs;OutputArrayOfArrays Ts;OutputArrayOfArrays Ks;OutputArrayOfArrays points3d;int file_format=SFM_IO_BUNDLER)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.sfm.meanAndVarianceAlongRows(InputArray A;OutputArray mean;OutputArray variance)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.sfm.skew(InputArray x)->Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.sfm.homogeneousToEuclidean(InputArray src;OutputArray dst)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.sfm.euclideanToHomogeneous(InputArray src;OutputArray dst)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.sfm.projectionFromKRt(InputArray K;InputArray R;InputArray t;OutputArray P)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.sfm.KRtFromProjection(InputArray P;OutputArray K;OutputArray R;OutputArray t)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.sfm.depth(InputArray R;InputArray t;InputArray X)->double",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.sfm.reconstruct(InputArrayOfArrays points2d;OutputArray Ps;OutputArray points3d;InputOutputArray K;bool is_projective=false)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation. The pinned upstream affine reconstruction branch raises StsNotImplemented.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.sfm.reconstruct(InputArrayOfArrays points2d;OutputArray Rs;OutputArray Ts;InputOutputArray K;OutputArray points3d;bool is_projective=false)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation. The pinned upstream affine reconstruction branch raises StsNotImplemented.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.sfm.reconstruct(const std::vector<String> images;OutputArray Ps;OutputArray points3d;InputOutputArray K;bool is_projective=false)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation. The pinned upstream affine reconstruction branch raises StsNotImplemented.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.sfm.reconstruct(const std::vector<String> images;OutputArray Rs;OutputArray Ts;InputOutputArray K;OutputArray points3d;bool is_projective=false)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation. The pinned upstream affine reconstruction branch raises StsNotImplemented.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.sfm.fundamentalFromCorrespondences8PointRobust(InputArray x1;InputArray x2;double max_error;OutputArray F;OutputArray inliers;double outliers_probability=1e-2)->double",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.sfm.fundamentalFromCorrespondences7PointRobust(InputArray x1;InputArray x2;double max_error;OutputArray F;OutputArray inliers;double outliers_probability=1e-2)->double",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 31,
+      "identity": "enum cv.sfm.<unnamed>[const cv.sfm.SFM_DISTORTION_MODEL_POLYNOMIAL=0;const cv.sfm.SFM_DISTORTION_MODEL_DIVISION=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 32,
+      "identity": "class cv.sfm.libmv_CameraIntrinsicsOptions",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.sfm.libmv_CameraIntrinsicsOptions.libmv_CameraIntrinsicsOptions(const int _distortion_model=0;const double _focal_length_x=0;const double _focal_length_y=0;const double _principal_point_x=0;const double _principal_point_y=0;const double _polynomial_k1=0;const double _polynomial_k2=0;const double _polynomial_k3=0;const double _polynomial_p1=0;const double _polynomial_p2=0)->",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 34,
+      "identity": "enum cv.sfm.<unnamed>[const cv.sfm.SFM_REFINE_FOCAL_LENGTH=(1 << 0);const cv.sfm.SFM_REFINE_PRINCIPAL_POINT=(1 << 1);const cv.sfm.SFM_REFINE_RADIAL_DISTORTION_K1=(1 << 2);const cv.sfm.SFM_REFINE_RADIAL_DISTORTION_K2=(1 << 4)]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 35,
+      "identity": "class cv.sfm.libmv_ReconstructionOptions",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.sfm.libmv_ReconstructionOptions.libmv_ReconstructionOptions(const int _keyframe1=1;const int _keyframe2=2;const int _refine_intrinsics=1;const int _select_keyframes=1;const int _verbosity_level=-1)->",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 37,
+      "identity": "class cv.sfm.BaseSFM",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.sfm.BaseSFM.~BaseSFM()->",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.sfm.BaseSFM.run(InputArrayOfArrays points2d)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.sfm.BaseSFM.run(InputArrayOfArrays points2d;InputOutputArray K;OutputArray Rs;OutputArray Ts;OutputArray points3d)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.sfm.BaseSFM.run(const std::vector<String> & images)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 42,
+      "identity": "cv.sfm.BaseSFM.run(const std::vector<String> & images;InputOutputArray K;OutputArray Rs;OutputArray Ts;OutputArray points3d)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.sfm.BaseSFM.getError()->double",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.sfm.BaseSFM.getPoints(OutputArray points3d)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 45,
+      "identity": "cv.sfm.BaseSFM.getIntrinsics()->cv::Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 46,
+      "identity": "cv.sfm.BaseSFM.getCameras(OutputArray Rs;OutputArray Ts)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.sfm.BaseSFM.setReconstructionOptions(const libmv_ReconstructionOptions & libmv_reconstruction_options)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 48,
+      "identity": "cv.sfm.BaseSFM.setCameraIntrinsicOptions(const libmv_CameraIntrinsicsOptions & libmv_camera_intrinsics_options)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 49,
+      "identity": "class cv.sfm.SFMLibmvEuclideanReconstruction",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 50,
+      "identity": "cv.sfm.SFMLibmvEuclideanReconstruction.run(InputArrayOfArrays points2d)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 51,
+      "identity": "cv.sfm.SFMLibmvEuclideanReconstruction.run(InputArrayOfArrays points2d;InputOutputArray K;OutputArray Rs;OutputArray Ts;OutputArray points3d)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 52,
+      "identity": "cv.sfm.SFMLibmvEuclideanReconstruction.run(const std::vector<String> & images)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 53,
+      "identity": "cv.sfm.SFMLibmvEuclideanReconstruction.run(const std::vector<String> & images;InputOutputArray K;OutputArray Rs;OutputArray Ts;OutputArray points3d)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 54,
+      "identity": "cv.sfm.SFMLibmvEuclideanReconstruction.getError()->double",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 55,
+      "identity": "cv.sfm.SFMLibmvEuclideanReconstruction.getPoints(OutputArray points3d)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 56,
+      "identity": "cv.sfm.SFMLibmvEuclideanReconstruction.getIntrinsics()->cv::Mat",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 57,
+      "identity": "cv.sfm.SFMLibmvEuclideanReconstruction.getCameras(OutputArray Rs;OutputArray Ts)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 58,
+      "identity": "cv.sfm.SFMLibmvEuclideanReconstruction.setReconstructionOptions(const libmv_ReconstructionOptions & libmv_reconstruction_options)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 59,
+      "identity": "cv.sfm.SFMLibmvEuclideanReconstruction.setCameraIntrinsicOptions(const libmv_CameraIntrinsicsOptions & libmv_camera_intrinsics_options)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 60,
+      "identity": "cv.sfm.SFMLibmvEuclideanReconstruction.create(const libmv_CameraIntrinsicsOptions & camera_instrinsic_options=libmv_CameraIntrinsicsOptions();const libmv_ReconstructionOptions & reconstruction_options=libmv_ReconstructionOptions())->Ptr<SFMLibmvEuclideanReconstruction>",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract. This declaration belongs to the optional reconstruction/pipeline surface and requires Ceres_FOUND and external Ceres Solver libraries; direct header visibility is not proof of a linkable implementation.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 61,
+      "identity": "cv.sfm.triangulatePoints(InputArrayOfArrays points2d;InputArrayOfArrays projection_matrices;OutputArray points3d)->void",
+      "classification": "intentionally-omitted",
+      "reason": "The SFM declarations have no native or managed wrapper in the current package; upstream requires external Eigen and a successful Glog/Gflags compile/link probe. Caller-owned image paths, tracks, calibration, output Mats and reconstruction lifetime remain outside this package contract.",
+      "buildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}

@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 70,
+  "moduleCount": 71,
   "maps": [
     {
       "id": "calib3d",
@@ -4964,6 +4964,147 @@
         "negativeFixturesMinimum": 10,
         "mappingSha256": "9c5a07d6cd0130c44eed6292a70cde1d2f6282d0bbd28100c16d5ac906547fb0",
         "familyInventorySha256": "8addb64ec360c990a22aff3176dc61068a5e1359c36c276e117ae7f42a7c7dbe",
+        "sourceReviewedExtensionSha256": "",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
+    },
+    {
+      "id": "sfm",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/SfmUpstreamMap",
+      "extractorScript": "tools/SfmUpstreamMap/extract_sfm.py",
+      "generationScript": "scripts/Generate-SfmUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-SfmUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "opencv2/sfm.hpp plus all nine installed opencv2/sfm/*.hpp headers, including standalone robust.hpp and the Ceres reconstruction/pipeline surface; exact non-wrapper declarations preserve per-header Ceres build gates and upstream incomplete-runtime boundaries",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm.hpp",
+          "sha256": "2bc9c796ed0ca8c1d6c182529bcb61d6185342194cb51b848992eb25e1553c87"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm.hpp",
+            "sha256": "2bc9c796ed0ca8c1d6c182529bcb61d6185342194cb51b848992eb25e1553c87",
+            "startOrdinal": 0,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/conditioning.hpp",
+            "sha256": "0b829e796758bbbf480fe3b2cea4465b0c40f210d5c4da743c3700d51dfc7662",
+            "startOrdinal": 0,
+            "declarationCount": 5
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/fundamental.hpp",
+            "sha256": "1a6225be19eb41284bfea1baf89cad9c30dde2ab7b3697f494280310c59cf19e",
+            "startOrdinal": 5,
+            "declarationCount": 11
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/io.hpp",
+            "sha256": "8cb26ffd8932d70a383a1703959c6d96692d3f3f6d039ab13aa77491028c147c",
+            "startOrdinal": 16,
+            "declarationCount": 2
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/numeric.hpp",
+            "sha256": "c6ef38431e3d5600a7a34fd9e7b28b6dd595d175ac478bc95f7baa8d2ea257dd",
+            "startOrdinal": 18,
+            "declarationCount": 2
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/projection.hpp",
+            "sha256": "265ea5b13dc1e5202c53f97fa51e525629b0c66ba3c87bd18a5c3a35e4574e53",
+            "startOrdinal": 20,
+            "declarationCount": 5
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/reconstruct.hpp",
+            "sha256": "db18afe6ddbefadbdfa62cb9c4e00d11d5c76fedc9c512ce7bfabd7406213cb3",
+            "startOrdinal": 25,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/robust.hpp",
+            "sha256": "925a99d0fa04e02ca4b45e80a13ee2c6be15e6f4c4e698524056803f4cefbecf",
+            "startOrdinal": 29,
+            "declarationCount": 2
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+            "sha256": "636046f1fcd231a8911eafffd919e48a0a21d24d95bd94ee18bf70bbc0335532",
+            "startOrdinal": 31,
+            "declarationCount": 30
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/triangulation.hpp",
+            "sha256": "7d6930852c730f217a2ec64e235ece022a410962c16caceba5acd76d799aea41",
+            "startOrdinal": 61,
+            "declarationCount": 1
+          }
+        ],
+        "compatibilityHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/CMakeLists.txt",
+            "sha256": "bf96f2606119b940146cba0cb5701f07b9f9077ba9d7d3429f9667fd180b6d6d",
+            "reason": "Eigen and Glog/Gflags compile/link probe; optional Ceres definition and module dependencies."
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/src/libmv_light/libmv/CMakeLists.txt",
+            "sha256": "088bbd395b7f4a38c595a3a52b67a32775ec6e293bc6cb6be67971d443f20925",
+            "reason": "simple_pipeline subdirectory is built only when Ceres_FOUND is true."
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/src/libmv_light/libmv/simple_pipeline/CMakeLists.txt",
+            "sha256": "673479d17c930e85444b40037be241f203a185832d8d22401e767e2c49e6ed3d",
+            "reason": "External CERES_LIBRARIES linkage for the reconstruction pipeline."
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/src/reconstruct.cpp",
+            "sha256": "3f85036e2f062979cb6db4c35c33b7b40176743fd59b728e5bf4ade25078c077",
+            "reason": "Reconstruction definitions require CERES_FOUND; all four affine branches raise StsNotImplemented."
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/src/simple_pipeline.cpp",
+            "sha256": "2b37f41ef49bd2a10fc2001a05ae57a8306e73093aec017776c435293ccd28ba",
+            "reason": "Pipeline implementation definitions require CERES_FOUND even though its direct header is unguarded."
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/src/fundamental.cpp",
+            "sha256": "17ea662fab0ff82c5dd7d98aed2f2823759e043f135d8714bbf0475792e3b836",
+            "reason": "The computeOrientation implementation retains an upstream TODO: finish implementation."
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/README.md",
+            "sha256": "0e760ff7c527ab7b0356666536f81f6349072ff0698db6920013e0bbdfea6b79",
+            "reason": "Documentary Linux/GNU platform advice, external dependencies and caller image/track data."
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/tutorials/sfm_installation/sfm_installation.markdown",
+            "sha256": "3f6fb494eba777e59c029db5738b24eeff69cc72fc8c5c6ee9955a7c2563e344",
+            "reason": "Eigen/Glog/Gflags installation and Ceres reconstruction requirement."
+          }
+        ],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/sfm-upstream-raw.json",
+        "classifications": "compatibility/sfm-upstream-classifications.json",
+        "mapping": "compatibility/sfm-upstream-map.txt",
+        "summary": "compatibility/sfm-upstream-summary.json",
+        "familyInventory": "compatibility/sfm-implemented-families.json",
+        "sourceReviewedExtensions": ""
+      },
+      "evidenceContract": {
+        "declarations": 62,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "4c4ce06f25b3fb4821c779dd4d2c95658e44894bba21b6563e0a72b25f7016bc",
+        "familyInventorySha256": "4f66c11de5807fe7a58b8ec70ce06015a8bd2ca249bd215d26788734d1f696fd",
         "sourceReviewedExtensionSha256": "",
         "zeroMissing": true,
         "repositoryWideParityClaimed": false

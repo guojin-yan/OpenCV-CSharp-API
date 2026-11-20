@@ -192,6 +192,8 @@ function Get-Record {
     $fastcvSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/fastcv-upstream-summary.json") -Raw | ConvertFrom-Json
     $cannopsRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/cannops-upstream-raw.json") -Raw | ConvertFrom-Json
     $cannopsSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/cannops-upstream-summary.json") -Raw | ConvertFrom-Json
+    $sfmRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/sfm-upstream-raw.json") -Raw | ConvertFrom-Json
+    $sfmSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/sfm-upstream-summary.json") -Raw | ConvertFrom-Json
     $evidencePaths = @(
         ".github/workflows/pack.yml",
         ".github/workflows/publish-nuget.yml",
@@ -531,6 +533,11 @@ function Get-Record {
         "compatibility/cannops-upstream-map.txt",
         "compatibility/cannops-upstream-raw.json",
         "compatibility/cannops-upstream-summary.json",
+        "compatibility/sfm-implemented-families.json",
+        "compatibility/sfm-upstream-classifications.json",
+        "compatibility/sfm-upstream-map.txt",
+        "compatibility/sfm-upstream-raw.json",
+        "compatibility/sfm-upstream-summary.json",
         "compatibility/v5.0.1-change-ledger.json",
         "compatibility/v5.0.1-change-ledger.schema.json",
         "docs/articles/api-abi-compatibility-policy.md",
@@ -541,6 +548,7 @@ function Get-Record {
         "docs/articles/ovis-upstream-parity-guide.md",
         "docs/articles/fastcv-upstream-parity-guide.md",
         "docs/articles/cannops-upstream-parity-guide.md",
+        "docs/articles/sfm-upstream-parity-guide.md",
         "docs/articles/xfeatures2d-upstream-parity-guide.md",
         "docs/articles/dnn-objdetect-upstream-parity-guide.md",
         "docs/articles/ccalib-upstream-parity-guide.md",
@@ -1099,6 +1107,9 @@ function Get-Record {
         "tools/CannOpsUpstreamMap/CannOpsUpstreamMap.csproj",
         "tools/CannOpsUpstreamMap/Program.cs",
         "tools/CannOpsUpstreamMap/extract_cannops.py",
+        "tools/SfmUpstreamMap/SfmUpstreamMap.csproj",
+        "tools/SfmUpstreamMap/Program.cs",
+        "tools/SfmUpstreamMap/extract_sfm.py",
         "tools/DnnObjDetectUpstreamMap/DnnObjDetectUpstreamMap.csproj",
         "tools/DnnObjDetectUpstreamMap/Program.cs",
         "tools/DnnObjDetectUpstreamMap/extract_dnn_objdetect.py",
@@ -1237,6 +1248,8 @@ function Get-Record {
         "scripts/Test-FastCVUpstreamMap.ps1",
         "scripts/Generate-CannOpsUpstreamMap.ps1",
         "scripts/Test-CannOpsUpstreamMap.ps1",
+        "scripts/Generate-SfmUpstreamMap.ps1",
+        "scripts/Test-SfmUpstreamMap.ps1",
         "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
         "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
         "tools/TypedMatBenchmark/Program.cs",
@@ -2380,6 +2393,43 @@ function Get-Record {
                 NativeEntrypointAdditionCount = [int]$cannopsSummary.nativeEvidenceCount
                 ExternalDataDependencyCount = [int]$cannopsSummary.externalDataDependencyCount
                 RepositoryWideParityClaimed = [bool]$cannopsSummary.repositoryWideUpstreamParityClaimed
+            }
+            SfmUpstreamMap = [ordered]@{
+                Path = "compatibility/sfm-upstream-map.txt"
+                SummaryPath = "compatibility/sfm-upstream-summary.json"
+                ClassificationPath = "compatibility/sfm-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/sfm-implemented-families.json"
+                RawExtractionPath = "compatibility/sfm-upstream-raw.json"
+                Sha256 = $sfmSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/sfm-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$sfmSummary.declarationCount
+                CallableCount = [int]$sfmSummary.callableCount
+                ClassCount = [int]$sfmSummary.classCount
+                EnumCount = [int]$sfmSummary.enumCount
+                MetadataCount = [int]$sfmSummary.classificationCounts.'non-callable-metadata'
+                ImplementedCount = [int]$sfmSummary.classificationCounts.implemented
+                MissingCount = [int]$sfmSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$sfmSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$sfmSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$sfmSummary.classificationCounts.'upstream-conditional'
+                SourceHeaderCount = @($sfmRaw.sourceHeaders).Count
+                CompatibilityHeaderCount = @($sfmRaw.compatibilityHeaders).Count
+                ParserMode = [string]$sfmRaw.parserMode
+                ModuleBuildCondition = [string]$sfmRaw.moduleBuildCondition
+                CeresBuildCondition = [string]$sfmRaw.ceresBuildCondition
+                BaseDeclarationCount = [int]$sfmRaw.baseDeclarationCount
+                CeresDeclarationCount = [int]$sfmRaw.ceresDeclarationCount
+                CeresCallableCount = [int]$sfmRaw.ceresCallableCount
+                StandaloneHeaderCount = @($sfmRaw.standaloneInstalledHeaders).Count
+                CeresHeaderGuardProbeCount = @($sfmRaw.ceresHeaderGuardProbes).Count
+                AffineNotImplementedBranchCount = [int]$sfmRaw.affineReconstructionNotImplementedBranchCount
+                SelectedFamilyCount = [int]$sfmSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$sfmSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$sfmSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$sfmSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$sfmSummary.nativeEvidenceCount
+                ExternalDataDependencyCount = [int]$sfmSummary.externalDataDependencyCount
+                RepositoryWideParityClaimed = [bool]$sfmSummary.repositoryWideUpstreamParityClaimed
             }
             DnnObjDetectUpstreamMap = [ordered]@{
                 Path = "compatibility/dnn_objdetect-upstream-map.txt"

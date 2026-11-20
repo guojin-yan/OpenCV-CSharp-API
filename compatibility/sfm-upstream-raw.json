@@ -1,0 +1,2369 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/SfmUpstreamMap/extract_sfm.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm.hpp",
+  "headerSha256": "2bc9c796ed0ca8c1d6c182529bcb61d6185342194cb51b848992eb25e1553c87",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "CERES_FOUND": 1
+  },
+  "parserMode": "non-wrapper-public-declarations",
+  "parserNormalization": "No source normalization or identity deduplication is needed. All ten installed headers remain in scope, including standalone robust.hpp and the optional Ceres headers. Anonymous enums retain exact parser identities and value lists.",
+  "umbrellaIncludes": [
+    "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/conditioning.hpp",
+    "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/fundamental.hpp",
+    "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/io.hpp",
+    "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/numeric.hpp",
+    "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/projection.hpp",
+    "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/triangulation.hpp",
+    "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/reconstruct.hpp",
+    "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp"
+  ],
+  "standaloneInstalledHeaders": [
+    "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/robust.hpp"
+  ],
+  "ceresConditionalHeaders": [
+    "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/reconstruct.hpp",
+    "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp"
+  ],
+  "ceresHeaderGuardProbes": [
+    {
+      "configuration": "undefined",
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500
+      },
+      "reconstructHeaderDeclarationCount": 0
+    },
+    {
+      "configuration": "defined-zero",
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "CERES_FOUND": 0
+      },
+      "reconstructHeaderDeclarationCount": 4
+    },
+    {
+      "configuration": "defined-one",
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "CERES_FOUND": 1
+      },
+      "reconstructHeaderDeclarationCount": 4
+    }
+  ],
+  "ceresHeaderGuardLimitation": "reconstruct.hpp tests defined(CERES_FOUND), so defining the macro as zero still emits declarations. sfm.hpp and implementation files test its value; direct header visibility is not linkable Ceres support. simple_pipeline.hpp has no Ceres guard of its own.",
+  "parserDuplicateIdentities": [],
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm.hpp",
+      "sha256": "2bc9c796ed0ca8c1d6c182529bcb61d6185342194cb51b848992eb25e1553c87",
+      "startOrdinal": 0,
+      "declarationCount": 0,
+      "requiresCeres": false
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/conditioning.hpp",
+      "sha256": "0b829e796758bbbf480fe3b2cea4465b0c40f210d5c4da743c3700d51dfc7662",
+      "startOrdinal": 0,
+      "declarationCount": 5,
+      "requiresCeres": false
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/fundamental.hpp",
+      "sha256": "1a6225be19eb41284bfea1baf89cad9c30dde2ab7b3697f494280310c59cf19e",
+      "startOrdinal": 5,
+      "declarationCount": 11,
+      "requiresCeres": false
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/io.hpp",
+      "sha256": "8cb26ffd8932d70a383a1703959c6d96692d3f3f6d039ab13aa77491028c147c",
+      "startOrdinal": 16,
+      "declarationCount": 2,
+      "requiresCeres": false
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/numeric.hpp",
+      "sha256": "c6ef38431e3d5600a7a34fd9e7b28b6dd595d175ac478bc95f7baa8d2ea257dd",
+      "startOrdinal": 18,
+      "declarationCount": 2,
+      "requiresCeres": false
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/projection.hpp",
+      "sha256": "265ea5b13dc1e5202c53f97fa51e525629b0c66ba3c87bd18a5c3a35e4574e53",
+      "startOrdinal": 20,
+      "declarationCount": 5,
+      "requiresCeres": false
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/reconstruct.hpp",
+      "sha256": "db18afe6ddbefadbdfa62cb9c4e00d11d5c76fedc9c512ce7bfabd7406213cb3",
+      "startOrdinal": 25,
+      "declarationCount": 4,
+      "requiresCeres": true
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/robust.hpp",
+      "sha256": "925a99d0fa04e02ca4b45e80a13ee2c6be15e6f4c4e698524056803f4cefbecf",
+      "startOrdinal": 29,
+      "declarationCount": 2,
+      "requiresCeres": false
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "sha256": "636046f1fcd231a8911eafffd919e48a0a21d24d95bd94ee18bf70bbc0335532",
+      "startOrdinal": 31,
+      "declarationCount": 30,
+      "requiresCeres": true
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/triangulation.hpp",
+      "sha256": "7d6930852c730f217a2ec64e235ece022a410962c16caceba5acd76d799aea41",
+      "startOrdinal": 61,
+      "declarationCount": 1,
+      "requiresCeres": false
+    }
+  ],
+  "declarationCount": 62,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/conditioning.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.preconditionerFromPoints",
+      "identity": "cv.sfm.preconditionerFromPoints(InputArray points;OutputArray T)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "points",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "T",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Point conditioning (non isotropic).\n  @param points Input vector of N-dimensional points.\n  @param T Output 3x3 transformation matrix.\n\n  Computes the transformation matrix such that the two principal moments of the set of points are equal to unity,\n  forming an approximately symmetric circular cloud of points of radius 1 about the origin.\\n\n  Reference: @cite HartleyZ00 4.4.4 pag.109",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/conditioning.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.isotropicPreconditionerFromPoints",
+      "identity": "cv.sfm.isotropicPreconditionerFromPoints(InputArray points;OutputArray T)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "points",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "T",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Point conditioning (isotropic).\n  @param points Input vector of N-dimensional points.\n  @param T Output 3x3 transformation matrix.\n\n  Computes the transformation matrix such that each coordinate direction will be scaled equally,\n  bringing the centroid to the origin with an average centroid \\f$(1,1,1)^T\\f$.\\n\n  Reference: @cite HartleyZ00 4.4.4 pag.107.",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/conditioning.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.applyTransformationToPoints",
+      "identity": "cv.sfm.applyTransformationToPoints(InputArray points;InputArray T;OutputArray transformed_points)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "points",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "T",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "transformed_points",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Apply Transformation to points.\n  @param points Input vector of N-dimensional points.\n  @param T Input 3x3 transformation matrix such that \\f$x = T*X\\f$, where \\f$X\\f$ are the points to transform and \\f$x\\f$ the transformed points.\n  @param transformed_points Output vector of N-dimensional transformed points.",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/conditioning.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.normalizePoints",
+      "identity": "cv.sfm.normalizePoints(InputArray points;OutputArray normalized_points;OutputArray T)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "points",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "normalized_points",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "T",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief This function normalizes points (non isotropic).\n  @param points Input vector of N-dimensional points.\n  @param normalized_points Output vector of the same N-dimensional points but with mean 0 and average norm \\f$\\sqrt{2}\\f$.\n  @param T Output 3x3 transform matrix such that \\f$x = T*X\\f$, where \\f$X\\f$ are the points to normalize and \\f$x\\f$ the normalized points.\n\n  Internally calls @ref preconditionerFromPoints in order to get the scaling matrix before applying @ref applyTransformationToPoints.\n  This operation is an essential step before applying the DLT algorithm in order to consider the result as optimal.\\n\n  Reference: @cite HartleyZ00 4.4.4 pag.109",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/conditioning.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.normalizeIsotropicPoints",
+      "identity": "cv.sfm.normalizeIsotropicPoints(InputArray points;OutputArray normalized_points;OutputArray T)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "points",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "normalized_points",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "T",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief This function normalizes points. (isotropic).\n  @param points Input vector of N-dimensional points.\n  @param normalized_points Output vector of the same N-dimensional points but with mean 0 and average norm \\f$\\sqrt{2}\\f$.\n  @param T Output 3x3 transform matrix such that \\f$x = T*X\\f$, where \\f$X\\f$ are the points to normalize and \\f$x\\f$ the normalized points.\n\n  Internally calls @ref preconditionerFromPoints in order to get the scaling matrix before applying @ref applyTransformationToPoints.\n  This operation is an essential step before applying the DLT algorithm in order to consider the result as optimal.\\n\n  Reference: @cite HartleyZ00 4.4.4 pag.107.",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/fundamental.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.projectionsFromFundamental",
+      "identity": "cv.sfm.projectionsFromFundamental(InputArray F;OutputArray P1;OutputArray P2)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "F",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "P1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "P2",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Get projection matrices from Fundamental matrix\n  @param F Input 3x3 fundamental matrix.\n  @param P1 Output 3x4 one possible projection matrix.\n  @param P2 Output 3x4 another possible projection matrix.",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/fundamental.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.fundamentalFromProjections",
+      "identity": "cv.sfm.fundamentalFromProjections(InputArray P1;InputArray P2;OutputArray F)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "P1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "P2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "F",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Get Fundamental matrix from Projection matrices.\n  @param P1 Input 3x4 first projection matrix.\n  @param P2 Input 3x4 second projection matrix.\n  @param F Output 3x3 fundamental matrix.",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/fundamental.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.normalizedEightPointSolver",
+      "identity": "cv.sfm.normalizedEightPointSolver(InputArray x1;InputArray x2;OutputArray F)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "x1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "x2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "F",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Estimate the fundamental matrix between two dataset of 2D point (image coords space).\n  @param x1 Input 2xN Array of 2D points in view 1.\n  @param x2 Input 2xN Array of 2D points in view 2.\n  @param F Output 3x3 fundamental matrix.\n\n  Uses the normalized 8-point fundamental matrix solver.\n  Reference: @cite HartleyZ00 11.2 pag.281 (x1 = x, x2 = x')",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/fundamental.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.relativeCameraMotion",
+      "identity": "cv.sfm.relativeCameraMotion(InputArray R1;InputArray t1;InputArray R2;InputArray t2;OutputArray R;OutputArray t)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "R1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "t1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "R2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "t2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "R",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "t",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes the relative camera motion between two cameras.\n  @param R1 Input 3x3 first camera rotation matrix.\n  @param t1 Input 3x1 first camera translation vector.\n  @param R2 Input 3x3 second camera rotation matrix.\n  @param t2 Input 3x1 second camera translation vector.\n  @param R Output 3x3 relative rotation matrix.\n  @param t Output 3x1 relative translation vector.\n\n  Given the motion parameters of two cameras, computes the motion parameters\n  of the second one assuming the first one to be at the origin.\n  If T1 and T2 are the camera motions, the computed relative motion is \\f$T = T_2 T_1^{-1}\\f$",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/fundamental.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.motionFromEssential",
+      "identity": "cv.sfm.motionFromEssential(InputArray E;OutputArrayOfArrays Rs;OutputArrayOfArrays ts)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "E",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArrayOfArrays",
+          "name": "Rs",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArrayOfArrays",
+          "name": "ts",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Get Motion (R's and t's ) from Essential matrix.\n  @param E Input 3x3 essential matrix.\n  @param Rs Output vector of 3x3 rotation matrices.\n  @param ts Output vector of 3x1 translation vectors.\n\n  Reference: @cite HartleyZ00 9.6 pag 259 (Result 9.19)",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/fundamental.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.motionFromEssentialChooseSolution",
+      "identity": "cv.sfm.motionFromEssentialChooseSolution(InputArrayOfArrays Rs;InputArrayOfArrays ts;InputArray K1;InputArray x1;InputArray K2;InputArray x2)->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArrayOfArrays",
+          "name": "Rs",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArrayOfArrays",
+          "name": "ts",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "K1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "x1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "K2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "x2",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Choose one of the four possible motion solutions from an essential matrix.\n  @param Rs Input vector of 3x3 rotation matrices.\n  @param ts Input vector of 3x1 translation vectors.\n  @param K1 Input 3x3 first camera matrix \\f$K = \\vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{1}\\f$.\n  @param x1 Input 2x1 vector with first 2d point.\n  @param K2 Input 3x3 second camera matrix. The parameters are similar to K1.\n  @param x2 Input 2x1 vector with second 2d point.\n\n  Decides the right solution by checking that the triangulation of a match\n  x1--x2 lies in front of the cameras. Return index of the right solution or -1 if no solution.\n\n  Reference: See @cite HartleyZ00 9.6 pag 259 (9.6.3 Geometrical interpretation of the 4 solutions).",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/fundamental.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.fundamentalFromEssential",
+      "identity": "cv.sfm.fundamentalFromEssential(InputArray E;InputArray K1;InputArray K2;OutputArray F)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "E",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "K1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "K2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "F",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Get Essential matrix from Fundamental and Camera matrices.\n  @param E Input 3x3 essential matrix.\n  @param K1 Input 3x3 first camera matrix \\f$K = \\vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{1}\\f$.\n  @param K2 Input 3x3 second camera matrix. The parameters are similar to K1.\n  @param F Output 3x3 fundamental matrix.\n\n  Reference: @cite HartleyZ00 9.6 pag 257 (formula 9.12) or http://ai.stanford.edu/~birch/projective/node20.html",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/fundamental.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.essentialFromFundamental",
+      "identity": "cv.sfm.essentialFromFundamental(InputArray F;InputArray K1;InputArray K2;OutputArray E)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "F",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "K1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "K2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "E",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Get Essential matrix from Fundamental and Camera matrices.\n  @param F Input 3x3 fundamental matrix.\n  @param K1 Input 3x3 first camera matrix \\f$K = \\vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{1}\\f$.\n  @param K2 Input 3x3 second camera matrix. The parameters are similar to K1.\n  @param E Output 3x3 essential matrix.\n\n  Reference: @cite HartleyZ00 9.6 pag 257 (formula 9.12)",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/fundamental.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.essentialFromRt",
+      "identity": "cv.sfm.essentialFromRt(InputArray R1;InputArray t1;InputArray R2;InputArray t2;OutputArray E)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "R1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "t1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "R2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "t2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "E",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Get Essential matrix from Motion (R's and t's ).\n  @param R1 Input 3x3 first camera rotation matrix.\n  @param t1 Input 3x1 first camera translation vector.\n  @param R2 Input 3x3 second camera rotation matrix.\n  @param t2 Input 3x1 second camera translation vector.\n  @param E Output 3x3 essential matrix.\n\n  Reference: @cite HartleyZ00 9.6 pag 257 (formula 9.12)",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/fundamental.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.normalizeFundamental",
+      "identity": "cv.sfm.normalizeFundamental(InputArray F;OutputArray F_normalized)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "F",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "F_normalized",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Normalizes the Fundamental matrix.\n  @param F Input 3x3 fundamental matrix.\n  @param F_normalized Output 3x3 normalized fundamental matrix.\n\n  By default divides the fundamental matrix by its L2 norm.",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/fundamental.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.computeOrientation",
+      "identity": "cv.sfm.computeOrientation(InputArrayOfArrays x1;InputArrayOfArrays x2;OutputArray R;OutputArray t;double s)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArrayOfArrays",
+          "name": "x1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArrayOfArrays",
+          "name": "x2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "R",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "t",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "s",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes Absolute or Exterior Orientation (Pose Estimation) between 2 sets of 3D point.\n  @param x1 Input first 3xN or 2xN array of points.\n  @param x2 Input second 3xN or 2xN array of points.\n  @param R Output 3x3 computed rotation matrix.\n  @param t Output 3x1 computed translation vector.\n  @param s Output computed scale factor.\n\n  Find the best transformation such that xp=projection*(s*R*x+t) (same as Pose Estimation, ePNP).\n  The routines below are only for the orthographic case for now.",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/io.hpp",
+      "kind": "enum",
+      "name": "cv.sfm.<unnamed>",
+      "identity": "enum cv.sfm.<unnamed>[const cv.sfm.SFM_IO_BUNDLER=0;const cv.sfm.SFM_IO_VISUALSFM=1;const cv.sfm.SFM_IO_OPENSFM=2;const cv.sfm.SFM_IO_OPENMVG=3;const cv.sfm.SFM_IO_THEIASFM=4]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.sfm.SFM_IO_BUNDLER",
+          "value": "0"
+        },
+        {
+          "name": "const cv.sfm.SFM_IO_VISUALSFM",
+          "value": "1"
+        },
+        {
+          "name": "const cv.sfm.SFM_IO_OPENSFM",
+          "value": "2"
+        },
+        {
+          "name": "const cv.sfm.SFM_IO_OPENMVG",
+          "value": "3"
+        },
+        {
+          "name": "const cv.sfm.SFM_IO_THEIASFM",
+          "value": "4"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/io.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.importReconstruction",
+      "identity": "cv.sfm.importReconstruction(const cv::String & file;OutputArrayOfArrays Rs;OutputArrayOfArrays Ts;OutputArrayOfArrays Ks;OutputArrayOfArrays points3d;int file_format=SFM_IO_BUNDLER)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const cv::String &",
+          "name": "file",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArrayOfArrays",
+          "name": "Rs",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArrayOfArrays",
+          "name": "Ts",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArrayOfArrays",
+          "name": "Ks",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArrayOfArrays",
+          "name": "points3d",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "file_format",
+          "default": "SFM_IO_BUNDLER",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Import a reconstruction file.\n  @param file The path to the file.\n  @param Rs Output vector of 3x3 rotations of the camera\n  @param Ts Output vector of 3x1 translations of the camera.\n  @param Ks Output vector of 3x3 instrinsics of the camera.\n  @param points3d Output array with 3d points. Is 3 x N.\n  @param file_format The format of the file to import.\n\n  The function supports reconstructions from Bundler.",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/numeric.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.meanAndVarianceAlongRows",
+      "identity": "cv.sfm.meanAndVarianceAlongRows(InputArray A;OutputArray mean;OutputArray variance)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "A",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "mean",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "variance",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes the mean and variance of a given matrix along its rows.\n  @param A Input NxN matrix.\n  @param mean Output Nx1 matrix with computed mean.\n  @param variance Output Nx1 matrix with computed variance.\n\n  It computes in the same way as woud do @ref reduce but with \\a Variance function.",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/numeric.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.skew",
+      "identity": "cv.sfm.skew(InputArray x)->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "x",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the 3x3 skew symmetric matrix of a vector.\n  @param x Input 3x1 vector.\n\n  Reference: @cite HartleyZ00, p581, equation (A4.5).",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/projection.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.homogeneousToEuclidean",
+      "identity": "cv.sfm.homogeneousToEuclidean(InputArray src;OutputArray dst)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "dst",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Converts point coordinates from homogeneous to euclidean pixel coordinates. E.g., ((x,y,z)->(x/z, y/z))\n  @param src Input vector of N-dimensional points.\n  @param dst Output vector of N-1-dimensional points.",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/projection.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.euclideanToHomogeneous",
+      "identity": "cv.sfm.euclideanToHomogeneous(InputArray src;OutputArray dst)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "dst",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Converts points from Euclidean to homogeneous space. E.g., ((x,y)->(x,y,1))\n  @param src Input vector of N-dimensional points.\n  @param dst Output vector of N+1-dimensional points.",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/projection.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.projectionFromKRt",
+      "identity": "cv.sfm.projectionFromKRt(InputArray K;InputArray R;InputArray t;OutputArray P)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "R",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "t",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "P",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Get projection matrix P from K, R and t.\n  @param K Input 3x3 camera matrix \\f$K = \\vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{1}\\f$.\n  @param R Input 3x3 rotation matrix.\n  @param t Input 3x1 translation vector.\n  @param P Output 3x4 projection matrix.\n\n  This function estimate the projection matrix by solving the following equation: \\f$P = K * [R|t]\\f$",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/projection.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.KRtFromProjection",
+      "identity": "cv.sfm.KRtFromProjection(InputArray P;OutputArray K;OutputArray R;OutputArray t)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "P",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "R",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "t",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Get K, R and t from projection matrix P, decompose using the RQ decomposition.\n  @param P Input 3x4 projection matrix.\n  @param K Output 3x3 camera matrix \\f$K = \\vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{1}\\f$.\n  @param R Output 3x3 rotation matrix.\n  @param t Output 3x1 translation vector.\n\n  Reference: @cite HartleyZ00 A4.1.1 pag.579",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/projection.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.depth",
+      "identity": "cv.sfm.depth(InputArray R;InputArray t;InputArray X)->double",
+      "returnType": "double",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "R",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "t",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "X",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the depth of a point transformed by a rigid transform.\n  @param R Input 3x3 rotation matrix.\n  @param t Input 3x1 translation vector.\n  @param X Input 3x1 or 4x1 vector with the 3d point.",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/reconstruct.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.reconstruct",
+      "identity": "cv.sfm.reconstruct(InputArrayOfArrays points2d;OutputArray Ps;OutputArray points3d;InputOutputArray K;bool is_projective=false)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArrayOfArrays",
+          "name": "points2d",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "Ps",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "points3d",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputOutputArray",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "is_projective",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Reconstruct 3d points from 2d correspondences while performing autocalibration.\n  @param points2d Input vector of vectors of 2d points (the inner vector is per image).\n  @param Ps Output vector with the 3x4 projections matrices of each image.\n  @param points3d Output array with estimated 3d points.\n  @param K Input/Output camera matrix \\f$K = \\vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{1}\\f$. Input parameters used as initial guess.\n  @param is_projective if true, the cameras are supposed to be projective.\n\n  This method calls below signature and extracts projection matrices from estimated K, R and t.\n\n   @note\n    - Tracks must be as precise as possible. It does not handle outliers and is very sensible to them.",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/reconstruct.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.reconstruct",
+      "identity": "cv.sfm.reconstruct(InputArrayOfArrays points2d;OutputArray Rs;OutputArray Ts;InputOutputArray K;OutputArray points3d;bool is_projective=false)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArrayOfArrays",
+          "name": "points2d",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "Rs",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "Ts",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputOutputArray",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "points3d",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "is_projective",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Reconstruct 3d points from 2d correspondences while performing autocalibration.\n  @param points2d Input vector of vectors of 2d points (the inner vector is per image).\n  @param Rs Output vector of 3x3 rotations of the camera.\n  @param Ts Output vector of 3x1 translations of the camera.\n  @param points3d Output array with estimated 3d points.\n  @param K Input/Output camera matrix \\f$K = \\vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{1}\\f$. Input parameters used as initial guess.\n  @param is_projective if true, the cameras are supposed to be projective.\n\n  Internally calls libmv simple pipeline routine with some default parameters by instatiating SFMLibmvEuclideanReconstruction class.\n\n  @note\n    - Tracks must be as precise as possible. It does not handle outliers and is very sensible to them.\n    - To see a working example for camera motion reconstruction, check the following tutorial: @ref tutorial_sfm_trajectory_estimation.",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/reconstruct.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.reconstruct",
+      "identity": "cv.sfm.reconstruct(const std::vector<String> images;OutputArray Ps;OutputArray points3d;InputOutputArray K;bool is_projective=false)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const std::vector<String>",
+          "name": "images",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "Ps",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "points3d",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputOutputArray",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "is_projective",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Reconstruct 3d points from 2d images while performing autocalibration.\n  @param images a vector of string with the images paths.\n  @param Ps Output vector with the 3x4 projections matrices of each image.\n  @param points3d Output array with estimated 3d points.\n  @param K Input/Output camera matrix \\f$K = \\vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{1}\\f$. Input parameters used as initial guess.\n  @param is_projective if true, the cameras are supposed to be projective.\n\n  This method calls below signature and extracts projection matrices from estimated K, R and t.\n\n   @note\n    - The images must be ordered as they were an image sequence. Additionally, each frame should be as close as posible to the previous and posterior.\n    - For now DAISY features are used in order to compute the 2d points tracks and it only works for 3-4 images.",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/reconstruct.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.reconstruct",
+      "identity": "cv.sfm.reconstruct(const std::vector<String> images;OutputArray Rs;OutputArray Ts;InputOutputArray K;OutputArray points3d;bool is_projective=false)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const std::vector<String>",
+          "name": "images",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "Rs",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "Ts",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputOutputArray",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "points3d",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "is_projective",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Reconstruct 3d points from 2d images while performing autocalibration.\n  @param images a vector of string with the images paths.\n  @param Rs Output vector of 3x3 rotations of the camera.\n  @param Ts Output vector of 3x1 translations of the camera.\n  @param points3d Output array with estimated 3d points.\n  @param K Input/Output camera matrix \\f$K = \\vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{1}\\f$. Input parameters used as initial guess.\n  @param is_projective if true, the cameras are supposed to be projective.\n\n  Internally calls libmv simple pipeline routine with some default parameters by instatiating SFMLibmvEuclideanReconstruction class.\n\n   @note\n    - The images must be ordered as they were an image sequence. Additionally, each frame should be as close as posible to the previous and posterior.\n    - For now DAISY features are used in order to compute the 2d points tracks and it only works for 3-4 images.\n    - To see a working example for scene reconstruction, check the following tutorial: @ref tutorial_sfm_scene_reconstruction.",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/robust.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.fundamentalFromCorrespondences8PointRobust",
+      "identity": "cv.sfm.fundamentalFromCorrespondences8PointRobust(InputArray x1;InputArray x2;double max_error;OutputArray F;OutputArray inliers;double outliers_probability=1e-2)->double",
+      "returnType": "double",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "x1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "x2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "max_error",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "F",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "inliers",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "outliers_probability",
+          "default": "1e-2",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Estimate robustly the fundamental matrix between two dataset of 2D point (image coords space).\n  @param x1 Input 2xN Array of 2D points in view 1.\n  @param x2 Input 2xN Array of 2D points in view 2.\n  @param max_error maximum error (in pixels).\n  @param F Output 3x3 fundamental matrix such that \\f$x_2^T F x_1=0\\f$.\n  @param inliers Output 1xN vector that contains the indexes of the detected inliers.\n  @param outliers_probability outliers probability (in ]0,1[).\n         The number of iterations is controlled using the following equation:\n         \\f$k = \\frac{log(1-p)}{log(1.0 - w^n )}\\f$ where \\f$k\\f$, \\f$w\\f$ and \\f$n\\f$ are the number of\n         iterations, the inliers ratio and minimun number of selected independent samples.\n         The more this value is high, the less the function selects ramdom samples.\n\nThe fundamental solver relies on the 8 point solution. Returns the best error (in pixels), associated to the solution F.",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/robust.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.fundamentalFromCorrespondences7PointRobust",
+      "identity": "cv.sfm.fundamentalFromCorrespondences7PointRobust(InputArray x1;InputArray x2;double max_error;OutputArray F;OutputArray inliers;double outliers_probability=1e-2)->double",
+      "returnType": "double",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "x1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "x2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "max_error",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "F",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "inliers",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "outliers_probability",
+          "default": "1e-2",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Estimate robustly the fundamental matrix between two dataset of 2D point (image coords space).\n  @param x1 Input 2xN Array of 2D points in view 1.\n  @param x2 Input 2xN Array of 2D points in view 2.\n  @param max_error maximum error (in pixels).\n  @param F Output 3x3 fundamental matrix such that \\f$x_2^T F x_1=0\\f$.\n  @param inliers Output 1xN vector that contains the indexes of the detected inliers.\n  @param outliers_probability outliers probability (in ]0,1[).\n         The number of iterations is controlled using the following equation:\n         \\f$k = \\frac{log(1-p)}{log(1.0 - w^n )}\\f$ where \\f$k\\f$, \\f$w\\f$ and \\f$n\\f$ are the number of\n         iterations, the inliers ratio and minimun number of selected independent samples.\n         The more this value is high, the less the function selects ramdom samples.\n\nThe fundamental solver relies on the 7 point solution. Returns the best error (in pixels), associated to the solution F.",
+      "requiresCeres": false
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "enum",
+      "name": "cv.sfm.<unnamed>",
+      "identity": "enum cv.sfm.<unnamed>[const cv.sfm.SFM_DISTORTION_MODEL_POLYNOMIAL=0;const cv.sfm.SFM_DISTORTION_MODEL_DIVISION=1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.sfm.SFM_DISTORTION_MODEL_POLYNOMIAL",
+          "value": "0"
+        },
+        {
+          "name": "const cv.sfm.SFM_DISTORTION_MODEL_DIVISION",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "class",
+      "name": "cv.sfm.libmv_CameraIntrinsicsOptions",
+      "identity": "class cv.sfm.libmv_CameraIntrinsicsOptions",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "distortion_model",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "image_width",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "image_height",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "focal_length_x",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "focal_length_y",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "principal_point_x",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "principal_point_y",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "polynomial_k1",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "polynomial_k2",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "polynomial_k3",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "polynomial_p1",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "polynomial_p2",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "division_k1",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "division_k2",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Data structure describing the camera model and its parameters.\n  @param _distortion_model Type of camera model.\n  @param _focal_length_x focal length of the camera (in pixels).\n  @param _focal_length_y focal length of the camera (in pixels).\n  @param _principal_point_x principal point of the camera in the x direction (in pixels).\n  @param _principal_point_y principal point of the camera in the y direction (in pixels).\n  @param _polynomial_k1 radial distortion parameter.\n  @param _polynomial_k2 radial distortion parameter.\n  @param _polynomial_k3 radial distortion parameter.\n  @param _polynomial_p1 radial distortion parameter.\n  @param _polynomial_p2 radial distortion parameter.\n\n  Is assumed that modern cameras have their principal point in the image center.\\n\n  In case that the camera model was SFM_DISTORTION_MODEL_DIVISION, it's only needed to provide\n  _polynomial_k1 and _polynomial_k2 which will be assigned as division distortion parameters.",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.libmv_CameraIntrinsicsOptions.libmv_CameraIntrinsicsOptions",
+      "identity": "cv.sfm.libmv_CameraIntrinsicsOptions.libmv_CameraIntrinsicsOptions(const int _distortion_model=0;const double _focal_length_x=0;const double _focal_length_y=0;const double _principal_point_x=0;const double _principal_point_y=0;const double _polynomial_k1=0;const double _polynomial_k2=0;const double _polynomial_k3=0;const double _polynomial_p1=0;const double _polynomial_p2=0)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const int",
+          "name": "_distortion_model",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "const double",
+          "name": "_focal_length_x",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "const double",
+          "name": "_focal_length_y",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "const double",
+          "name": "_principal_point_x",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "const double",
+          "name": "_principal_point_y",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "const double",
+          "name": "_polynomial_k1",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "const double",
+          "name": "_polynomial_k2",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "const double",
+          "name": "_polynomial_k3",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "const double",
+          "name": "_polynomial_p1",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "const double",
+          "name": "_polynomial_p2",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "enum",
+      "name": "cv.sfm.<unnamed>",
+      "identity": "enum cv.sfm.<unnamed>[const cv.sfm.SFM_REFINE_FOCAL_LENGTH=(1 << 0);const cv.sfm.SFM_REFINE_PRINCIPAL_POINT=(1 << 1);const cv.sfm.SFM_REFINE_RADIAL_DISTORTION_K1=(1 << 2);const cv.sfm.SFM_REFINE_RADIAL_DISTORTION_K2=(1 << 4)]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.sfm.SFM_REFINE_FOCAL_LENGTH",
+          "value": "(1 << 0)"
+        },
+        {
+          "name": "const cv.sfm.SFM_REFINE_PRINCIPAL_POINT",
+          "value": "(1 << 1)"
+        },
+        {
+          "name": "const cv.sfm.SFM_REFINE_RADIAL_DISTORTION_K1",
+          "value": "(1 << 2)"
+        },
+        {
+          "name": "const cv.sfm.SFM_REFINE_RADIAL_DISTORTION_K2",
+          "value": "(1 << 4)"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "class",
+      "name": "cv.sfm.libmv_ReconstructionOptions",
+      "identity": "class cv.sfm.libmv_ReconstructionOptions",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "keyframe1",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "keyframe2",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "refine_intrinsics",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "select_keyframes",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "verbosity_level",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Data structure describing the reconstruction options.\n  @param _keyframe1 first keyframe used in order to initialize the reconstruction.\n  @param _keyframe2 second keyframe used in order to initialize the reconstruction.\n  @param _refine_intrinsics camera parameter or combination of parameters to refine.\n  @param _select_keyframes allows to select automatically the initial keyframes. If 1 then autoselection is enabled. If 0 then is disabled.\n  @param _verbosity_level verbosity logs level for Glog. If -1 then logs are disabled, otherwise the log level will be the input integer.",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.libmv_ReconstructionOptions.libmv_ReconstructionOptions",
+      "identity": "cv.sfm.libmv_ReconstructionOptions.libmv_ReconstructionOptions(const int _keyframe1=1;const int _keyframe2=2;const int _refine_intrinsics=1;const int _select_keyframes=1;const int _verbosity_level=-1)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const int",
+          "name": "_keyframe1",
+          "default": "1",
+          "modifiers": []
+        },
+        {
+          "type": "const int",
+          "name": "_keyframe2",
+          "default": "2",
+          "modifiers": []
+        },
+        {
+          "type": "const int",
+          "name": "_refine_intrinsics",
+          "default": "1",
+          "modifiers": []
+        },
+        {
+          "type": "const int",
+          "name": "_select_keyframes",
+          "default": "1",
+          "modifiers": []
+        },
+        {
+          "type": "const int",
+          "name": "_verbosity_level",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 37,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "class",
+      "name": "cv.sfm.BaseSFM",
+      "identity": "class cv.sfm.BaseSFM",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief base class BaseSFM declares a common API that would be used in a typical scene reconstruction scenario",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 38,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.BaseSFM.~BaseSFM",
+      "identity": "cv.sfm.BaseSFM.~BaseSFM()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 39,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.BaseSFM.run",
+      "identity": "cv.sfm.BaseSFM.run(InputArrayOfArrays points2d)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "InputArrayOfArrays",
+          "name": "points2d",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 40,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.BaseSFM.run",
+      "identity": "cv.sfm.BaseSFM.run(InputArrayOfArrays points2d;InputOutputArray K;OutputArray Rs;OutputArray Ts;OutputArray points3d)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "InputArrayOfArrays",
+          "name": "points2d",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputOutputArray",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "Rs",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "Ts",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "points3d",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 41,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.BaseSFM.run",
+      "identity": "cv.sfm.BaseSFM.run(const std::vector<String> & images)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "const std::vector<String> &",
+          "name": "images",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 42,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.BaseSFM.run",
+      "identity": "cv.sfm.BaseSFM.run(const std::vector<String> & images;InputOutputArray K;OutputArray Rs;OutputArray Ts;OutputArray points3d)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "const std::vector<String> &",
+          "name": "images",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputOutputArray",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "Rs",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "Ts",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "points3d",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 43,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.BaseSFM.getError",
+      "identity": "cv.sfm.BaseSFM.getError()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 44,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.BaseSFM.getPoints",
+      "identity": "cv.sfm.BaseSFM.getPoints(OutputArray points3d)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "OutputArray",
+          "name": "points3d",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 45,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.BaseSFM.getIntrinsics",
+      "identity": "cv.sfm.BaseSFM.getIntrinsics()->cv::Mat",
+      "returnType": "cv::Mat",
+      "modifiers": [
+        "/A",
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 46,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.BaseSFM.getCameras",
+      "identity": "cv.sfm.BaseSFM.getCameras(OutputArray Rs;OutputArray Ts)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "OutputArray",
+          "name": "Rs",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "Ts",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 47,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.BaseSFM.setReconstructionOptions",
+      "identity": "cv.sfm.BaseSFM.setReconstructionOptions(const libmv_ReconstructionOptions & libmv_reconstruction_options)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "const libmv_ReconstructionOptions &",
+          "name": "libmv_reconstruction_options",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 48,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.BaseSFM.setCameraIntrinsicOptions",
+      "identity": "cv.sfm.BaseSFM.setCameraIntrinsicOptions(const libmv_CameraIntrinsicsOptions & libmv_camera_intrinsics_options)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "const libmv_CameraIntrinsicsOptions &",
+          "name": "libmv_camera_intrinsics_options",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 49,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "class",
+      "name": "cv.sfm.SFMLibmvEuclideanReconstruction",
+      "identity": "class cv.sfm.SFMLibmvEuclideanReconstruction",
+      "returnType": ": cv::sfm::BaseSFM",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::sfm::BaseSFM",
+      "documentation": "@brief SFMLibmvEuclideanReconstruction class provides an interface with the Libmv Structure From Motion pipeline.",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 50,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.SFMLibmvEuclideanReconstruction.run",
+      "identity": "cv.sfm.SFMLibmvEuclideanReconstruction.run(InputArrayOfArrays points2d)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArrayOfArrays",
+          "name": "points2d",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Calls the pipeline in order to perform Eclidean reconstruction.\n    @param points2d Input vector of vectors of 2d points (the inner vector is per image).\n\n    @note\n      - Tracks must be as precise as possible. It does not handle outliers and is very sensible to them.",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 51,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.SFMLibmvEuclideanReconstruction.run",
+      "identity": "cv.sfm.SFMLibmvEuclideanReconstruction.run(InputArrayOfArrays points2d;InputOutputArray K;OutputArray Rs;OutputArray Ts;OutputArray points3d)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArrayOfArrays",
+          "name": "points2d",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputOutputArray",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "Rs",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "Ts",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "points3d",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Calls the pipeline in order to perform Eclidean reconstruction.\n    @param points2d Input vector of vectors of 2d points (the inner vector is per image).\n    @param K Input/Output camera matrix \\f$K = \\vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{1}\\f$. Input parameters used as initial guess.\n    @param Rs Output vector of 3x3 rotations of the camera.\n    @param Ts Output vector of 3x1 translations of the camera.\n    @param points3d Output array with estimated 3d points.\n\n    @note\n      - Tracks must be as precise as possible. It does not handle outliers and is very sensible to them.",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 52,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.SFMLibmvEuclideanReconstruction.run",
+      "identity": "cv.sfm.SFMLibmvEuclideanReconstruction.run(const std::vector<String> & images)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const std::vector<String> &",
+          "name": "images",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Calls the pipeline in order to perform Eclidean reconstruction.\n    @param images a vector of string with the images paths.\n\n    @note\n      - The images must be ordered as they were an image sequence. Additionally, each frame should be as close as posible to the previous and posterior.\n      - For now DAISY features are used in order to compute the 2d points tracks and it only works for 3-4 images.",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 53,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.SFMLibmvEuclideanReconstruction.run",
+      "identity": "cv.sfm.SFMLibmvEuclideanReconstruction.run(const std::vector<String> & images;InputOutputArray K;OutputArray Rs;OutputArray Ts;OutputArray points3d)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const std::vector<String> &",
+          "name": "images",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputOutputArray",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "Rs",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "Ts",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "points3d",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Calls the pipeline in order to perform Eclidean reconstruction.\n    @param images a vector of string with the images paths.\n    @param K Input/Output camera matrix \\f$K = \\vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{1}\\f$. Input parameters used as initial guess.\n    @param Rs Output vector of 3x3 rotations of the camera.\n    @param Ts Output vector of 3x1 translations of the camera.\n    @param points3d Output array with estimated 3d points.\n\n    @note\n      - The images must be ordered as they were an image sequence. Additionally, each frame should be as close as posible to the previous and posterior.\n      - For now DAISY features are used in order to compute the 2d points tracks and it only works for 3-4 images.",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 54,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.SFMLibmvEuclideanReconstruction.getError",
+      "identity": "cv.sfm.SFMLibmvEuclideanReconstruction.getError()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the computed reprojection error.",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 55,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.SFMLibmvEuclideanReconstruction.getPoints",
+      "identity": "cv.sfm.SFMLibmvEuclideanReconstruction.getPoints(OutputArray points3d)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "OutputArray",
+          "name": "points3d",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the estimated 3d points.\n    @param points3d Output array with estimated 3d points.",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 56,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.SFMLibmvEuclideanReconstruction.getIntrinsics",
+      "identity": "cv.sfm.SFMLibmvEuclideanReconstruction.getIntrinsics()->cv::Mat",
+      "returnType": "cv::Mat",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the refined camera calibration matrix.",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 57,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.SFMLibmvEuclideanReconstruction.getCameras",
+      "identity": "cv.sfm.SFMLibmvEuclideanReconstruction.getCameras(OutputArray Rs;OutputArray Ts)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "OutputArray",
+          "name": "Rs",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "Ts",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the estimated camera extrinsic parameters.\n    @param Rs Output vector of 3x3 rotations of the camera.\n    @param Ts Output vector of 3x1 translations of the camera.",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 58,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.SFMLibmvEuclideanReconstruction.setReconstructionOptions",
+      "identity": "cv.sfm.SFMLibmvEuclideanReconstruction.setReconstructionOptions(const libmv_ReconstructionOptions & libmv_reconstruction_options)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const libmv_ReconstructionOptions &",
+          "name": "libmv_reconstruction_options",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Setter method for reconstruction options.\n    @param libmv_reconstruction_options struct with reconstruction options such as initial keyframes,\n      automatic keyframe selection, parameters to refine and the verbosity level.",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 59,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.SFMLibmvEuclideanReconstruction.setCameraIntrinsicOptions",
+      "identity": "cv.sfm.SFMLibmvEuclideanReconstruction.setCameraIntrinsicOptions(const libmv_CameraIntrinsicsOptions & libmv_camera_intrinsics_options)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const libmv_CameraIntrinsicsOptions &",
+          "name": "libmv_camera_intrinsics_options",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Setter method for camera intrinsic options.\n    @param libmv_camera_intrinsics_options struct with camera intrinsic options such as camera model and\n      the internal camera parameters.",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 60,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.SFMLibmvEuclideanReconstruction.create",
+      "identity": "cv.sfm.SFMLibmvEuclideanReconstruction.create(const libmv_CameraIntrinsicsOptions & camera_instrinsic_options=libmv_CameraIntrinsicsOptions();const libmv_ReconstructionOptions & reconstruction_options=libmv_ReconstructionOptions())->Ptr<SFMLibmvEuclideanReconstruction>",
+      "returnType": "Ptr<SFMLibmvEuclideanReconstruction>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "const libmv_CameraIntrinsicsOptions &",
+          "name": "camera_instrinsic_options",
+          "default": "libmv_CameraIntrinsicsOptions()",
+          "modifiers": []
+        },
+        {
+          "type": "const libmv_ReconstructionOptions &",
+          "name": "reconstruction_options",
+          "default": "libmv_ReconstructionOptions()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates an instance of the SFMLibmvEuclideanReconstruction class. Initializes Libmv.",
+      "requiresCeres": true
+    },
+    {
+      "ordinal": 61,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/sfm/include/opencv2/sfm/triangulation.hpp",
+      "kind": "callable",
+      "name": "cv.sfm.triangulatePoints",
+      "identity": "cv.sfm.triangulatePoints(InputArrayOfArrays points2d;InputArrayOfArrays projection_matrices;OutputArray points3d)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArrayOfArrays",
+          "name": "points2d",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArrayOfArrays",
+          "name": "projection_matrices",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "points3d",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Reconstructs bunch of points by triangulation.\n  @param points2d Input vector of vectors of 2d points (the inner vector is per image). Has to be 2 X N.\n  @param projection_matrices Input vector with 3x4 projections matrices of each image.\n  @param points3d Output array with computed 3d points. Is 3 x N.\n\n  Triangulates the 3d position of 2d correspondences between several images.\n  Reference: Internally it uses DLT method @cite HartleyZ00 12.2 pag.312",
+      "requiresCeres": false
+    }
+  ],
+  "baseDeclarationCount": 28,
+  "ceresDeclarationCount": 34,
+  "ceresCallableCount": 28,
+  "compatibilityHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/CMakeLists.txt",
+      "sha256": "bf96f2606119b940146cba0cb5701f07b9f9077ba9d7d3429f9667fd180b6d6d",
+      "reason": "Eigen and Glog/Gflags compile/link probe; optional Ceres definition and module dependencies."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/src/libmv_light/libmv/CMakeLists.txt",
+      "sha256": "088bbd395b7f4a38c595a3a52b67a32775ec6e293bc6cb6be67971d443f20925",
+      "reason": "simple_pipeline subdirectory is built only when Ceres_FOUND is true."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/src/libmv_light/libmv/simple_pipeline/CMakeLists.txt",
+      "sha256": "673479d17c930e85444b40037be241f203a185832d8d22401e767e2c49e6ed3d",
+      "reason": "External CERES_LIBRARIES linkage for the reconstruction pipeline."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/src/reconstruct.cpp",
+      "sha256": "3f85036e2f062979cb6db4c35c33b7b40176743fd59b728e5bf4ade25078c077",
+      "reason": "Reconstruction definitions require CERES_FOUND; all four affine branches raise StsNotImplemented."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/src/simple_pipeline.cpp",
+      "sha256": "2b37f41ef49bd2a10fc2001a05ae57a8306e73093aec017776c435293ccd28ba",
+      "reason": "Pipeline implementation definitions require CERES_FOUND even though its direct header is unguarded."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/src/fundamental.cpp",
+      "sha256": "17ea662fab0ff82c5dd7d98aed2f2823759e043f135d8714bbf0475792e3b836",
+      "reason": "The computeOrientation implementation retains an upstream TODO: finish implementation."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/README.md",
+      "sha256": "0e760ff7c527ab7b0356666536f81f6349072ff0698db6920013e0bbdfea6b79",
+      "reason": "Documentary Linux/GNU platform advice, external dependencies and caller image/track data."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/sfm/tutorials/sfm_installation/sfm_installation.markdown",
+      "sha256": "3f6fb494eba777e59c029db5738b24eeff69cc72fc8c5c6ee9955a7c2563e344",
+      "reason": "Eigen/Glog/Gflags installation and Ceres reconstruction requirement."
+    }
+  ],
+  "moduleDependencies": [
+    "opencv_core",
+    "opencv_geometry",
+    "opencv_features",
+    "opencv_xfeatures2d",
+    "opencv_imgcodecs"
+  ],
+  "moduleBuildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+  "ceresBuildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+  "readmePlatformAdvice": "The pinned README says Linux/GNU systems only; CMake has no corresponding unconditional platform disable and contains Windows-specific handling. Neither establishes verified package platform support.",
+  "affineReconstructionNotImplementedBranchCount": 4,
+  "upstreamRuntimeLimitations": [
+    "The upstream computeOrientation implementation is unfinished.",
+    "The four reconstruct overloads reject their affine reconstruction branch with StsNotImplemented."
+  ]
+}
