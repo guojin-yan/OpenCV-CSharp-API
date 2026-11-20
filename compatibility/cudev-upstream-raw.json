@@ -1,0 +1,4285 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/CudevUpstreamMap/extract_cudev.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev.hpp",
+  "headerSha256": "a1cac9bc839b596a46ed6724adfb22e7578da1311a7f8945b20c93b952f4ae87",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "__CUDACC__": 1,
+    "CUDART_VERSION": 12040,
+    "__CUDACC_VER_MAJOR__": 12,
+    "__CUDACC_VER_MINOR__": 4,
+    "__CUDA_ARCH__": 750,
+    "CV_CUDEV_ARCH": 750
+  },
+  "parserMode": "non-wrapper-non-template-subset",
+  "parserNormalization": "CUDA attribute tokens are removed only in temporary copies. Thirteen namespace-scope static parser names have return-type contamination repaired after parsing; /S metadata is retained. Static/const qualifiers, operators and upstream source hashes are retained. Templates and declaration macros remain outside the pinned parser subset.",
+  "staticParserNameRepairs": [
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/functional/detail/color_cvt.hpp",
+      "parserName": "cv.cudev.color_cvt_detail.int LabCbrt_b",
+      "correctedName": "cv.cudev.color_cvt_detail.LabCbrt_b"
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/functional/detail/color_cvt.hpp",
+      "parserName": "cv.cudev.color_cvt_detail.float splineInterpolate",
+      "correctedName": "cv.cudev.color_cvt_detail.splineInterpolate"
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/integral.hpp",
+      "parserName": "cv.cudev.integral_detail.uchar4 int_to_uchar4",
+      "correctedName": "cv.cudev.integral_detail.int_to_uchar4"
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/integral.hpp",
+      "parserName": "cv.cudev.integral_detail.void horisontal_pass_8u_shfl_kernel",
+      "correctedName": "cv.cudev.integral_detail.horisontal_pass_8u_shfl_kernel"
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/integral.hpp",
+      "parserName": "cv.cudev.integral_detail.void horisontal_pass_8u_shfl",
+      "correctedName": "cv.cudev.integral_detail.horisontal_pass_8u_shfl"
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/integral.hpp",
+      "parserName": "cv.cudev.integral_detail.void integral",
+      "correctedName": "cv.cudev.integral_detail.integral"
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/warping.hpp",
+      "parserName": "cv.cudev.AffineMapPtrSz affineMap",
+      "correctedName": "cv.cudev.affineMap"
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/warping.hpp",
+      "parserName": "cv.cudev.PerspectiveMapPtrSz perspectiveMap",
+      "correctedName": "cv.cudev.perspectiveMap"
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+      "parserName": "cv.cudev.double atomicAdd",
+      "correctedName": "cv.cudev.atomicAdd"
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+      "parserName": "cv.cudev.float atomicMin",
+      "correctedName": "cv.cudev.atomicMin"
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+      "parserName": "cv.cudev.double atomicMin",
+      "correctedName": "cv.cudev.atomicMin"
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+      "parserName": "cv.cudev.float atomicMax",
+      "correctedName": "cv.cudev.atomicMax"
+    },
+    {
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+      "parserName": "cv.cudev.double atomicMax",
+      "correctedName": "cv.cudev.atomicMax"
+    }
+  ],
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/block.hpp",
+      "sha256": "20ef363751988a3f49bd0229c2045be435b8d562ff7e2155a78343d91b5fba30",
+      "startOrdinal": 0,
+      "declarationCount": 4
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/detail/reduce.hpp",
+      "sha256": "e5a039b5760eeca7eb308249ac090304b700bdfee83d8c6cef21160ade13b97a",
+      "startOrdinal": 4,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/detail/reduce_key_val.hpp",
+      "sha256": "5209633fcae242311d0754686e7730fdaa3cc4a112b1100725108590056cbfcf",
+      "startOrdinal": 4,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/dynamic_smem.hpp",
+      "sha256": "67b751f6f8a63f83cb2de8ff1432e0fbe22e31b4d0dce0702ab8eab4a6334906",
+      "startOrdinal": 4,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/reduce.hpp",
+      "sha256": "3e4a59d2cbc4af5f17303bde259b3996dfb4ba8ff4edcc75e63e48686d6e352e",
+      "startOrdinal": 4,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/scan.hpp",
+      "sha256": "c72fac2438d08d2c58b1b97966b20104bddbf9d4b347ecab0f54291799e67419",
+      "startOrdinal": 4,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/vec_distance.hpp",
+      "sha256": "5998f94efa05c591669b170a06d74034f95c65fae6e269fd7622dd8b6851aa21",
+      "startOrdinal": 4,
+      "declarationCount": 10
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/common.hpp",
+      "sha256": "ffce8a11163a1efcdfe597002515a4d6e4c284b66865543a6b431048c00544a9",
+      "startOrdinal": 14,
+      "declarationCount": 2
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/expr/binary_func.hpp",
+      "sha256": "a87c9984171f47d480904c995d8a52a5187bf3128f87a55f2c405c62a062df19",
+      "startOrdinal": 16,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/expr/binary_op.hpp",
+      "sha256": "77a2de98bf74d5521e63825d212c35be3e9b3c2ed654318537b886be19271f6a",
+      "startOrdinal": 16,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/expr/color.hpp",
+      "sha256": "3013c1f903f5168725927b573d686ca0fe53242b2642c78db0227e317e49e102",
+      "startOrdinal": 16,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/expr/deriv.hpp",
+      "sha256": "44f439399d6244322cbcb3c2cbe41233f5e466db2c3cf9f098aca37d03417a2c",
+      "startOrdinal": 16,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/expr/expr.hpp",
+      "sha256": "b3a36559710f165afed7f702ce90d84c289e8d959e69d954bea2d01cc85c8eed",
+      "startOrdinal": 16,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/expr/per_element_func.hpp",
+      "sha256": "aa974e6d20e6a8b589c2d8095b2f8dddefef8300351b59ea1bb1e1a98decaabd",
+      "startOrdinal": 16,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/expr/reduction.hpp",
+      "sha256": "484eb7d42c0357574ac4d59e780c62e3b20823167806215103e56b81420cebe8",
+      "startOrdinal": 16,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/expr/unary_func.hpp",
+      "sha256": "5913369d225c01912c3ef57ed446854601d1162d77bb944477567b7254e3cc3d",
+      "startOrdinal": 16,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/expr/unary_op.hpp",
+      "sha256": "5741484701117ac6c6d8c796b077fbe9548229ee752590653406886f49a85574",
+      "startOrdinal": 16,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/expr/warping.hpp",
+      "sha256": "7239f913c2c10e4463e1788a33099f211d3794ccf105949058e8656989d267da",
+      "startOrdinal": 16,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/functional/color_cvt.hpp",
+      "sha256": "23b447955cdea458fcdaab040a25ee201a56684392ec0cc378aff8ba791cfc1a",
+      "startOrdinal": 16,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/functional/detail/color_cvt.hpp",
+      "sha256": "9657a04388e5c60cb07eee6a199988d4c7364a8b4bb766290dea4301b2934f3d",
+      "startOrdinal": 16,
+      "declarationCount": 4
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/functional/functional.hpp",
+      "sha256": "cffa399f8af66ebd99b419e5785ee45813b0cd23315c3858eb2b3104384862d9",
+      "startOrdinal": 20,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/functional/tuple_adapter.hpp",
+      "sha256": "a1ca76c8ace8c284fb77f721455cb2f09213bf045a0046af72dd3b4d43ad9979",
+      "startOrdinal": 20,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/copy.hpp",
+      "sha256": "9a0e3f9263dd740828c224a98269db4c8a7cf337d6e57e5452646e3b6cc9256e",
+      "startOrdinal": 20,
+      "declarationCount": 2
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/copy.hpp",
+      "sha256": "4991d986289f7e495d4efc5bd676e2e3fbc559f9f729bcd2aad439d775d306d4",
+      "startOrdinal": 22,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/histogram.hpp",
+      "sha256": "52a304212684ed853d5d3d364562309a2bbf25d47575b210b836c8debd1c1ba0",
+      "startOrdinal": 22,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/integral.hpp",
+      "sha256": "2f70d896f96d752b4c4c9bc26ef96cf7a4e18194f7d5b4069da9cc69fc59b841",
+      "startOrdinal": 22,
+      "declarationCount": 5
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/minmaxloc.hpp",
+      "sha256": "8ab36352c8c59b41bc00ebfc36476d0acedb15cb6d305a38ae826d8ddaca6d88",
+      "startOrdinal": 27,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/pyr_down.hpp",
+      "sha256": "d46cc935f7e9697ff36e4c6f51ef3a233807e06ee0eadbb9a2e6a4492bddb701",
+      "startOrdinal": 27,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/pyr_up.hpp",
+      "sha256": "1555de9bbb107c0dfd132c24c531c9af701476c8c85c22c214f0bb4d4c3dd9fc",
+      "startOrdinal": 27,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/reduce.hpp",
+      "sha256": "0ca4c354381b6f0aa18c642e2a559c5956e8ea9df1d1094d394aa40cc95ce90a",
+      "startOrdinal": 27,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/reduce_to_column.hpp",
+      "sha256": "ea7096b75c6b47553cde950db251bb7e63356f5729bf143e9907e00045dd5534",
+      "startOrdinal": 28,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/reduce_to_row.hpp",
+      "sha256": "4deac0be81cffc22da45a6eaad549ab0794e284c5e96ecf6774a8a78fdbb05cc",
+      "startOrdinal": 28,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/split_merge.hpp",
+      "sha256": "c70f3c4d5e92a11d30b1652664ac7077fc69d8a84f20e1ddb502e3a976129783",
+      "startOrdinal": 28,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/transform.hpp",
+      "sha256": "fe07c3e347a5720f6efc4efa10aa62fc871d8ad417d55a812e864673672d154d",
+      "startOrdinal": 28,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/transpose.hpp",
+      "sha256": "89b110fc6955ac724e7fd8ede0b35d2fb9e32ac6e2fd51dca51df2f409a728c8",
+      "startOrdinal": 28,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/histogram.hpp",
+      "sha256": "94e4c294363a048290a504479aff2b4f85cb731a052e3bbae3fdb5ca3163caa8",
+      "startOrdinal": 28,
+      "declarationCount": 2
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/integral.hpp",
+      "sha256": "733e9ea4b3877a03c94a75dd0f39ac2efaee29a7a1a11f632b06125c65937084",
+      "startOrdinal": 30,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/pyramids.hpp",
+      "sha256": "50648be72425dcc5572f7283f1cc1815b371bdca8a409d41607acbd21c73fd71",
+      "startOrdinal": 30,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/reduce.hpp",
+      "sha256": "85e2757b0f2049290160b9e20d39bf5f2fe44bd5bfebc8b48f1714a2d56b1784",
+      "startOrdinal": 30,
+      "declarationCount": 2
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/reduce_to_vec.hpp",
+      "sha256": "aaa589ba856388c5e9f0af7e09befe511b9ebd6791d65c1e6d369d0edb024c73",
+      "startOrdinal": 32,
+      "declarationCount": 2
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/split_merge.hpp",
+      "sha256": "b578f659ead1cc09b6d66e63707332a4ed51fa56d12507759f66df846b90a896",
+      "startOrdinal": 34,
+      "declarationCount": 2
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/transform.hpp",
+      "sha256": "14a8d708193f27214950ef4bc04601f87a7d510599ce8c2a3b64a4341b9403b9",
+      "startOrdinal": 36,
+      "declarationCount": 2
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/transpose.hpp",
+      "sha256": "1fe421ae97c23423705ee39169bc2b32d3819dd3466f3b01e8f311f828a57e07",
+      "startOrdinal": 38,
+      "declarationCount": 2
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/constant.hpp",
+      "sha256": "63c7a48008c046b17aad1593b7606589686c1c14644748edbf64ec59a71daa15",
+      "startOrdinal": 40,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/deriv.hpp",
+      "sha256": "cdbe363c06c6fb48170429e9026b32626535dd3740823c7053ad320c33c47df7",
+      "startOrdinal": 40,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/detail/gpumat.hpp",
+      "sha256": "b0a0ccc540b75c8c7fcc8d1bc6059b188ae8637eccfdda9e7b6e21f880945c06",
+      "startOrdinal": 40,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/extrapolation.hpp",
+      "sha256": "00a5091edab88260fe7a48d08b26e8270e4c0915b382a0a0ca37e7471ee7176d",
+      "startOrdinal": 40,
+      "declarationCount": 12
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/glob.hpp",
+      "sha256": "cdf0fb9534054d03de907d006cce2a8ad78555fd3c7828d2e24c7f274ea2b825",
+      "startOrdinal": 52,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/gpumat.hpp",
+      "sha256": "6b2f6976ac599e7a7017ba697a245a3e7773cacc2c25c07fb7b735ff59e9fa9b",
+      "startOrdinal": 52,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/interpolation.hpp",
+      "sha256": "d699a0442c78f5800d65f4510efd48c24e0b0998b201bb787bc20283b953b35b",
+      "startOrdinal": 52,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/lut.hpp",
+      "sha256": "f937e51d01c1f1359db3a50dcfea995e9d2339c4524e7302b30fcebc0fc35f07",
+      "startOrdinal": 52,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/mask.hpp",
+      "sha256": "8a3c6cf7f566ad89af6375ae2986952ee6195bdb17bd96ad7aea433c761eda4c",
+      "startOrdinal": 52,
+      "declarationCount": 2
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/remap.hpp",
+      "sha256": "092a73d3b12286e5a193f33e9b21a7075895d5aee70a1c6dfa3c16dfb838f981",
+      "startOrdinal": 54,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/resize.hpp",
+      "sha256": "cf38c4d7bd3abf250745642f7c4b1d3c44c14ac7a1a082beb1618c269ec6e79a",
+      "startOrdinal": 54,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/texture.hpp",
+      "sha256": "deb405918aa0580ce601e3f9abf516508d840318d84977ec692094f5f82dcbd0",
+      "startOrdinal": 54,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/traits.hpp",
+      "sha256": "932fba7dbeaa281dc7b1e6a7e7c52f779388094b923bef17fdb8b63660f84a00",
+      "startOrdinal": 54,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/transform.hpp",
+      "sha256": "707da07ab71e464fd0f99deedaad24af3a82cff26a83a50d258e5b35d717f286",
+      "startOrdinal": 54,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/warping.hpp",
+      "sha256": "f1f7da641c911348da044133d81e5be256dade5407b34128111ca2f1decb95ba",
+      "startOrdinal": 54,
+      "declarationCount": 8
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/zip.hpp",
+      "sha256": "e6065052850cfb35ef379e4d5c2a153c0efb22713cbd044c54cbf935e02f945b",
+      "startOrdinal": 62,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+      "sha256": "a114d1b8b6d55035299ed38d356476ad78307427aabf98d0f316865be9a1fa78",
+      "startOrdinal": 62,
+      "declarationCount": 12
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/detail/tuple.hpp",
+      "sha256": "975f1f60cfc69d7fd45fdaabb981acb7ca35b9e3130e71055135d923262f7415",
+      "startOrdinal": 74,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/detail/type_traits.hpp",
+      "sha256": "26d8a350868319041416d98b73364fe0e0c07d06d7d3b8b14fa10259679d2630",
+      "startOrdinal": 74,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/limits.hpp",
+      "sha256": "5c30625941b41a4d1ddf3a32117a11e4b54805927fea3fb71008a35bfd99e0ad",
+      "startOrdinal": 74,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/saturate_cast.hpp",
+      "sha256": "69365c6027868ae7b9a41be0c5a7f3e13984fb2716ad78ab250db7a8460828ac",
+      "startOrdinal": 74,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "sha256": "1707318b4b3c032c31128dd1f4f9fe0afc3473533c25b539b15da003b5ea964e",
+      "startOrdinal": 74,
+      "declarationCount": 38
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/tuple.hpp",
+      "sha256": "eb826fed941f015f778bfe6f66bd6bd8846497fffc7095c0d90c19bc4de876c2",
+      "startOrdinal": 112,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/type_traits.hpp",
+      "sha256": "d335a2c1b79d14f8bcb086de2fd8ce3435fbdee67d7615fdda33294acd00418a",
+      "startOrdinal": 112,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/vec_math.hpp",
+      "sha256": "7b416c6957d60c2f477c5575c248473a2744cc5e0e47c7f8bc8b6a3cc0474322",
+      "startOrdinal": 113,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/vec_traits.hpp",
+      "sha256": "3faf1f87d73aaec9bb334722230db65af33edb81a6e960a76c2746432d5da908",
+      "startOrdinal": 113,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/detail/reduce.hpp",
+      "sha256": "1dd1720e87eb3692fb8c48a5d8be2c5f1fa56d4ed5d41eb28d33bd523c0b3eb7",
+      "startOrdinal": 113,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/detail/reduce_key_val.hpp",
+      "sha256": "1aaee45203718b379664fd44deecc13490f7e933828d329eb9c8d4f544e80d6d",
+      "startOrdinal": 114,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/reduce.hpp",
+      "sha256": "e2a84c5ee5337a151f6137932d4c212299c781b582bfda4d4ff7b39514af41a6",
+      "startOrdinal": 115,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/scan.hpp",
+      "sha256": "78ff5490b467ef992ac7f68176498957af23f8213f221175c72aab4a47034668",
+      "startOrdinal": 115,
+      "declarationCount": 0
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "sha256": "90fc8bbfdd2d7b35fb70afef7bf1b379747fcc2ec18cd9195000d98b88dce9d0",
+      "startOrdinal": 115,
+      "declarationCount": 25
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/warp.hpp",
+      "sha256": "14c26acb7bcca1fab1462868cd4024545d3d95e2e97bd53ef42c25640c45a087",
+      "startOrdinal": 140,
+      "declarationCount": 4
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev.hpp",
+      "sha256": "a1cac9bc839b596a46ed6724adfb22e7578da1311a7f8945b20c93b952f4ae87",
+      "startOrdinal": 144,
+      "declarationCount": 0
+    }
+  ],
+  "declarationCount": 144,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/block.hpp",
+      "kind": "class",
+      "name": "cv.cudev.Block",
+      "identity": "class cv.cudev.Block",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/block.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.Block.blockId",
+      "identity": "cv.cudev.Block.blockId()->uint",
+      "returnType": "uint",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/block.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.Block.blockSize",
+      "identity": "cv.cudev.Block.blockSize()->uint",
+      "returnType": "uint",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/block.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.Block.threadLineId",
+      "identity": "cv.cudev.Block.threadLineId()->uint",
+      "returnType": "uint",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/vec_distance.hpp",
+      "kind": "class",
+      "name": "cv.cudev.NormL2",
+      "identity": "class cv.cudev.NormL2",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/vec_distance.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.NormL2.NormL2",
+      "identity": "cv.cudev.NormL2.NormL2()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/vec_distance.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.NormL2.reduceThread",
+      "identity": "cv.cudev.NormL2.reduceThread(value_type val1;value_type val2)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "value_type",
+          "name": "val1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "value_type",
+          "name": "val2",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/vec_distance.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.NormL2.reduceWarp",
+      "identity": "cv.cudev.NormL2.reduceWarp(result_type* smem;uint tid)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "result_type*",
+          "name": "smem",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "tid",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/vec_distance.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.NormL2.operator result_type",
+      "identity": "cv.cudev.NormL2.operator result_type()->",
+      "returnType": "",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/vec_distance.hpp",
+      "kind": "class",
+      "name": "cv.cudev.NormHamming",
+      "identity": "class cv.cudev.NormHamming",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/vec_distance.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.NormHamming.NormHamming",
+      "identity": "cv.cudev.NormHamming.NormHamming()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/vec_distance.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.NormHamming.reduceThread",
+      "identity": "cv.cudev.NormHamming.reduceThread(value_type val1;value_type val2)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "value_type",
+          "name": "val1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "value_type",
+          "name": "val2",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/vec_distance.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.NormHamming.reduceWarp",
+      "identity": "cv.cudev.NormHamming.reduceWarp(result_type* smem;uint tid)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "result_type*",
+          "name": "smem",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "tid",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/vec_distance.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.NormHamming.operator result_type",
+      "identity": "cv.cudev.NormHamming.operator result_type()->",
+      "returnType": "",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/common.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.checkCudaError",
+      "identity": "cv.cudev.checkCudaError(cudaError_t err;const char* file;const int line;const char* func)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "cudaError_t",
+          "name": "err",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const char*",
+          "name": "file",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const int",
+          "name": "line",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const char*",
+          "name": "func",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/common.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.divUp",
+      "identity": "cv.cudev.divUp(int total;int grain)->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "total",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "grain",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/functional/detail/color_cvt.hpp",
+      "kind": "enum",
+      "name": "cv.cudev.color_cvt_detail.<unnamed>",
+      "identity": "enum cv.cudev.color_cvt_detail.<unnamed>[const cv.cudev.color_cvt_detail.rgb_shift=15;const cv.cudev.color_cvt_detail.yuv_shift=14;const cv.cudev.color_cvt_detail.xyz_shift=12;const cv.cudev.color_cvt_detail.R2Y=4899;const cv.cudev.color_cvt_detail.G2Y=9617;const cv.cudev.color_cvt_detail.B2Y=1868;const cv.cudev.color_cvt_detail.RY15=9798;const cv.cudev.color_cvt_detail.GY15=19235;const cv.cudev.color_cvt_detail.BY15=3735;const cv.cudev.color_cvt_detail.BLOCK_SIZE=256]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.cudev.color_cvt_detail.rgb_shift",
+          "value": "15"
+        },
+        {
+          "name": "const cv.cudev.color_cvt_detail.yuv_shift",
+          "value": "14"
+        },
+        {
+          "name": "const cv.cudev.color_cvt_detail.xyz_shift",
+          "value": "12"
+        },
+        {
+          "name": "const cv.cudev.color_cvt_detail.R2Y",
+          "value": "4899"
+        },
+        {
+          "name": "const cv.cudev.color_cvt_detail.G2Y",
+          "value": "9617"
+        },
+        {
+          "name": "const cv.cudev.color_cvt_detail.B2Y",
+          "value": "1868"
+        },
+        {
+          "name": "const cv.cudev.color_cvt_detail.RY15",
+          "value": "9798"
+        },
+        {
+          "name": "const cv.cudev.color_cvt_detail.GY15",
+          "value": "19235"
+        },
+        {
+          "name": "const cv.cudev.color_cvt_detail.BY15",
+          "value": "3735"
+        },
+        {
+          "name": "const cv.cudev.color_cvt_detail.BLOCK_SIZE",
+          "value": "256"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/functional/detail/color_cvt.hpp",
+      "kind": "enum",
+      "name": "cv.cudev.color_cvt_detail.<unnamed>",
+      "identity": "enum cv.cudev.color_cvt_detail.<unnamed>[const cv.cudev.color_cvt_detail.LAB_CBRT_TAB_SIZE=1024;const cv.cudev.color_cvt_detail.GAMMA_TAB_SIZE=1024;const cv.cudev.color_cvt_detail.lab_shift=xyz_shift;const cv.cudev.color_cvt_detail.gamma_shift=3;const cv.cudev.color_cvt_detail.lab_shift2=(lab_shift + gamma_shift);const cv.cudev.color_cvt_detail.LAB_CBRT_TAB_SIZE_B=(256 * 3 / 2 * (1 << gamma_shift))]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.cudev.color_cvt_detail.LAB_CBRT_TAB_SIZE",
+          "value": "1024"
+        },
+        {
+          "name": "const cv.cudev.color_cvt_detail.GAMMA_TAB_SIZE",
+          "value": "1024"
+        },
+        {
+          "name": "const cv.cudev.color_cvt_detail.lab_shift",
+          "value": "xyz_shift"
+        },
+        {
+          "name": "const cv.cudev.color_cvt_detail.gamma_shift",
+          "value": "3"
+        },
+        {
+          "name": "const cv.cudev.color_cvt_detail.lab_shift2",
+          "value": "(lab_shift + gamma_shift)"
+        },
+        {
+          "name": "const cv.cudev.color_cvt_detail.LAB_CBRT_TAB_SIZE_B",
+          "value": "(256 * 3 / 2 * (1 << gamma_shift))"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/functional/detail/color_cvt.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.color_cvt_detail.LabCbrt_b",
+      "identity": "cv.cudev.color_cvt_detail.LabCbrt_b(int i)->int",
+      "returnType": "int",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "i",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/functional/detail/color_cvt.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.color_cvt_detail.splineInterpolate",
+      "identity": "cv.cudev.color_cvt_detail.splineInterpolate(float x;const float* tab;int n)->float",
+      "returnType": "float",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "x",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const float*",
+          "name": "tab",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "n",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/copy.hpp",
+      "kind": "class",
+      "name": "cv.cudev.DefaultCopyPolicy",
+      "identity": "class cv.cudev.DefaultCopyPolicy",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/copy.hpp",
+      "kind": "enum",
+      "name": "cv.cudev.DefaultCopyPolicy.<unnamed>",
+      "identity": "enum cv.cudev.DefaultCopyPolicy.<unnamed>[const cv.cudev.DefaultCopyPolicy.block_size_x=32;const cv.cudev.DefaultCopyPolicy.block_size_y=8]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.cudev.DefaultCopyPolicy.block_size_x",
+          "value": "32"
+        },
+        {
+          "name": "const cv.cudev.DefaultCopyPolicy.block_size_y",
+          "value": "8"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/integral.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.integral_detail.int_to_uchar4",
+      "identity": "cv.cudev.integral_detail.int_to_uchar4(unsigned int in)->uchar4",
+      "returnType": "uchar4",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "unsigned int",
+          "name": "in",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/integral.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.integral_detail.horisontal_pass_8u_shfl_kernel",
+      "identity": "cv.cudev.integral_detail.horisontal_pass_8u_shfl_kernel(const GlobPtr<uint4> img;GlobPtr<uint4> integral)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "const GlobPtr<uint4>",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "GlobPtr<uint4>",
+          "name": "integral",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/integral.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.integral_detail.horisontal_pass_8u_shfl",
+      "identity": "cv.cudev.integral_detail.horisontal_pass_8u_shfl(const GlobPtr<uchar> src;GlobPtr<uint> integral;int rows;int cols;cudaStream_t stream)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "const GlobPtr<uchar>",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "GlobPtr<uint>",
+          "name": "integral",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "rows",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "cols",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "cudaStream_t",
+          "name": "stream",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/integral.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.integral_detail.integral",
+      "identity": "cv.cudev.integral_detail.integral(const GlobPtr<uchar>& src;const GlobPtr<uint>& dst;int rows;int cols;cudaStream_t stream)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "const GlobPtr<uchar>&",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const GlobPtr<uint>&",
+          "name": "dst",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "rows",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "cols",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "cudaStream_t",
+          "name": "stream",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/integral.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.integral_detail.integral",
+      "identity": "cv.cudev.integral_detail.integral(const GlobPtr<uchar>& src;const GlobPtr<int>& dst;int rows;int cols;cudaStream_t stream)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "const GlobPtr<uchar>&",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const GlobPtr<int>&",
+          "name": "dst",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "rows",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "cols",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "cudaStream_t",
+          "name": "stream",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/reduce.hpp",
+      "kind": "class",
+      "name": "cv.cudev.grid_reduce_detail.both",
+      "identity": "class cv.cudev.grid_reduce_detail.both",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/histogram.hpp",
+      "kind": "class",
+      "name": "cv.cudev.DefaultHistogramPolicy",
+      "identity": "class cv.cudev.DefaultHistogramPolicy",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/histogram.hpp",
+      "kind": "enum",
+      "name": "cv.cudev.DefaultHistogramPolicy.<unnamed>",
+      "identity": "enum cv.cudev.DefaultHistogramPolicy.<unnamed>[const cv.cudev.DefaultHistogramPolicy.block_size_x=32;const cv.cudev.DefaultHistogramPolicy.block_size_y=8]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.cudev.DefaultHistogramPolicy.block_size_x",
+          "value": "32"
+        },
+        {
+          "name": "const cv.cudev.DefaultHistogramPolicy.block_size_y",
+          "value": "8"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/reduce.hpp",
+      "kind": "class",
+      "name": "cv.cudev.DefaultGlobReducePolicy",
+      "identity": "class cv.cudev.DefaultGlobReducePolicy",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/reduce.hpp",
+      "kind": "enum",
+      "name": "cv.cudev.DefaultGlobReducePolicy.<unnamed>",
+      "identity": "enum cv.cudev.DefaultGlobReducePolicy.<unnamed>[const cv.cudev.DefaultGlobReducePolicy.block_size_x=32;const cv.cudev.DefaultGlobReducePolicy.block_size_y=8;const cv.cudev.DefaultGlobReducePolicy.patch_size_x=4;const cv.cudev.DefaultGlobReducePolicy.patch_size_y=4]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.cudev.DefaultGlobReducePolicy.block_size_x",
+          "value": "32"
+        },
+        {
+          "name": "const cv.cudev.DefaultGlobReducePolicy.block_size_y",
+          "value": "8"
+        },
+        {
+          "name": "const cv.cudev.DefaultGlobReducePolicy.patch_size_x",
+          "value": "4"
+        },
+        {
+          "name": "const cv.cudev.DefaultGlobReducePolicy.patch_size_y",
+          "value": "4"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/reduce_to_vec.hpp",
+      "kind": "class",
+      "name": "cv.cudev.DefaultReduceToVecPolicy",
+      "identity": "class cv.cudev.DefaultReduceToVecPolicy",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/reduce_to_vec.hpp",
+      "kind": "enum",
+      "name": "cv.cudev.DefaultReduceToVecPolicy.<unnamed>",
+      "identity": "enum cv.cudev.DefaultReduceToVecPolicy.<unnamed>[const cv.cudev.DefaultReduceToVecPolicy.block_size_x=32;const cv.cudev.DefaultReduceToVecPolicy.block_size_y=8]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.cudev.DefaultReduceToVecPolicy.block_size_x",
+          "value": "32"
+        },
+        {
+          "name": "const cv.cudev.DefaultReduceToVecPolicy.block_size_y",
+          "value": "8"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/split_merge.hpp",
+      "kind": "class",
+      "name": "cv.cudev.DefaultSplitMergePolicy",
+      "identity": "class cv.cudev.DefaultSplitMergePolicy",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/split_merge.hpp",
+      "kind": "enum",
+      "name": "cv.cudev.DefaultSplitMergePolicy.<unnamed>",
+      "identity": "enum cv.cudev.DefaultSplitMergePolicy.<unnamed>[const cv.cudev.DefaultSplitMergePolicy.block_size_x=32;const cv.cudev.DefaultSplitMergePolicy.block_size_y=8]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.cudev.DefaultSplitMergePolicy.block_size_x",
+          "value": "32"
+        },
+        {
+          "name": "const cv.cudev.DefaultSplitMergePolicy.block_size_y",
+          "value": "8"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/transform.hpp",
+      "kind": "class",
+      "name": "cv.cudev.DefaultTransformPolicy",
+      "identity": "class cv.cudev.DefaultTransformPolicy",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 37,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/transform.hpp",
+      "kind": "enum",
+      "name": "cv.cudev.DefaultTransformPolicy.<unnamed>",
+      "identity": "enum cv.cudev.DefaultTransformPolicy.<unnamed>[const cv.cudev.DefaultTransformPolicy.block_size_x=32;const cv.cudev.DefaultTransformPolicy.block_size_y=8;const cv.cudev.DefaultTransformPolicy.shift=4]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.cudev.DefaultTransformPolicy.block_size_x",
+          "value": "32"
+        },
+        {
+          "name": "const cv.cudev.DefaultTransformPolicy.block_size_y",
+          "value": "8"
+        },
+        {
+          "name": "const cv.cudev.DefaultTransformPolicy.shift",
+          "value": "4"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 38,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/transpose.hpp",
+      "kind": "class",
+      "name": "cv.cudev.DefaultTransposePolicy",
+      "identity": "class cv.cudev.DefaultTransposePolicy",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 39,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/transpose.hpp",
+      "kind": "enum",
+      "name": "cv.cudev.DefaultTransposePolicy.<unnamed>",
+      "identity": "enum cv.cudev.DefaultTransposePolicy.<unnamed>[const cv.cudev.DefaultTransposePolicy.tile_dim=16;const cv.cudev.DefaultTransposePolicy.block_dim_y=16]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.cudev.DefaultTransposePolicy.tile_dim",
+          "value": "16"
+        },
+        {
+          "name": "const cv.cudev.DefaultTransposePolicy.block_dim_y",
+          "value": "16"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 40,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/extrapolation.hpp",
+      "kind": "class",
+      "name": "cv.cudev.BrdReplicate",
+      "identity": "class cv.cudev.BrdReplicate",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 41,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/extrapolation.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.BrdReplicate.idx_low",
+      "identity": "cv.cudev.BrdReplicate.idx_low(int i;int len)->int",
+      "returnType": "int",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "i",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "len",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 42,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/extrapolation.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.BrdReplicate.idx_high",
+      "identity": "cv.cudev.BrdReplicate.idx_high(int i;int len)->int",
+      "returnType": "int",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "i",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "len",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 43,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/extrapolation.hpp",
+      "kind": "class",
+      "name": "cv.cudev.BrdReflect101",
+      "identity": "class cv.cudev.BrdReflect101",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 44,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/extrapolation.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.BrdReflect101.idx_low",
+      "identity": "cv.cudev.BrdReflect101.idx_low(int i;int len)->int",
+      "returnType": "int",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "i",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "len",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 45,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/extrapolation.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.BrdReflect101.idx_high",
+      "identity": "cv.cudev.BrdReflect101.idx_high(int i;int len)->int",
+      "returnType": "int",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "i",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "len",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 46,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/extrapolation.hpp",
+      "kind": "class",
+      "name": "cv.cudev.BrdReflect",
+      "identity": "class cv.cudev.BrdReflect",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 47,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/extrapolation.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.BrdReflect.idx_low",
+      "identity": "cv.cudev.BrdReflect.idx_low(int i;int len)->int",
+      "returnType": "int",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "i",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "len",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 48,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/extrapolation.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.BrdReflect.idx_high",
+      "identity": "cv.cudev.BrdReflect.idx_high(int i;int len)->int",
+      "returnType": "int",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "i",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "len",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 49,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/extrapolation.hpp",
+      "kind": "class",
+      "name": "cv.cudev.BrdWrap",
+      "identity": "class cv.cudev.BrdWrap",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 50,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/extrapolation.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.BrdWrap.idx_low",
+      "identity": "cv.cudev.BrdWrap.idx_low(int i;int len)->int",
+      "returnType": "int",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "i",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "len",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 51,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/extrapolation.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.BrdWrap.idx_high",
+      "identity": "cv.cudev.BrdWrap.idx_high(int i;int len)->int",
+      "returnType": "int",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "i",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "len",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 52,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/mask.hpp",
+      "kind": "class",
+      "name": "cv.cudev.WithOutMask",
+      "identity": "class cv.cudev.WithOutMask",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 53,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/mask.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.WithOutMask.operator ()",
+      "identity": "cv.cudev.WithOutMask.operator ()(int ;int )->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 54,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/warping.hpp",
+      "kind": "class",
+      "name": "cv.cudev.AffineMapPtr",
+      "identity": "class cv.cudev.AffineMapPtr",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 55,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/warping.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.AffineMapPtr.operator ()",
+      "identity": "cv.cudev.AffineMapPtr.operator ()(float y;float x)->float2",
+      "returnType": "float2",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "y",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "x",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 56,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/warping.hpp",
+      "kind": "class",
+      "name": "cv.cudev.AffineMapPtrSz",
+      "identity": "class cv.cudev.AffineMapPtrSz",
+      "returnType": ": cv::cudev::AffineMapPtr",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::cudev::AffineMapPtr",
+      "documentation": ""
+    },
+    {
+      "ordinal": 57,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/warping.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.affineMap",
+      "identity": "cv.cudev.affineMap(Size dstSize;const GpuMat_<float>& warpMat)->AffineMapPtrSz",
+      "returnType": "AffineMapPtrSz",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "dstSize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const GpuMat_<float>&",
+          "name": "warpMat",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 58,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/warping.hpp",
+      "kind": "class",
+      "name": "cv.cudev.PerspectiveMapPtr",
+      "identity": "class cv.cudev.PerspectiveMapPtr",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 59,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/warping.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.PerspectiveMapPtr.operator ()",
+      "identity": "cv.cudev.PerspectiveMapPtr.operator ()(float y;float x)->float2",
+      "returnType": "float2",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "y",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "x",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 60,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/warping.hpp",
+      "kind": "class",
+      "name": "cv.cudev.PerspectiveMapPtrSz",
+      "identity": "class cv.cudev.PerspectiveMapPtrSz",
+      "returnType": ": cv::cudev::PerspectiveMapPtr",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::cudev::PerspectiveMapPtr",
+      "documentation": ""
+    },
+    {
+      "ordinal": 61,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/warping.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.perspectiveMap",
+      "identity": "cv.cudev.perspectiveMap(Size dstSize;const GpuMat_<float>& warpMat)->PerspectiveMapPtrSz",
+      "returnType": "PerspectiveMapPtrSz",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "dstSize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const GpuMat_<float>&",
+          "name": "warpMat",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 62,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.atomicAdd",
+      "identity": "cv.cudev.atomicAdd(int* address;int val)->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int*",
+          "name": "address",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 63,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.atomicAdd",
+      "identity": "cv.cudev.atomicAdd(uint* address;uint val)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint*",
+          "name": "address",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 64,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.atomicAdd",
+      "identity": "cv.cudev.atomicAdd(float* address;float val)->float",
+      "returnType": "float",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float*",
+          "name": "address",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 65,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.atomicAdd",
+      "identity": "cv.cudev.atomicAdd(double* address;double val)->double",
+      "returnType": "double",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "double*",
+          "name": "address",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 66,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.atomicMin",
+      "identity": "cv.cudev.atomicMin(int* address;int val)->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int*",
+          "name": "address",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 67,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.atomicMin",
+      "identity": "cv.cudev.atomicMin(uint* address;uint val)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint*",
+          "name": "address",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 68,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.atomicMin",
+      "identity": "cv.cudev.atomicMin(float* address;float val)->float",
+      "returnType": "float",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "float*",
+          "name": "address",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 69,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.atomicMin",
+      "identity": "cv.cudev.atomicMin(double* address;double val)->double",
+      "returnType": "double",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "double*",
+          "name": "address",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 70,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.atomicMax",
+      "identity": "cv.cudev.atomicMax(int* address;int val)->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int*",
+          "name": "address",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 71,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.atomicMax",
+      "identity": "cv.cudev.atomicMax(uint* address;uint val)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint*",
+          "name": "address",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 72,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.atomicMax",
+      "identity": "cv.cudev.atomicMax(float* address;float val)->float",
+      "returnType": "float",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "float*",
+          "name": "address",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 73,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.atomicMax",
+      "identity": "cv.cudev.atomicMax(double* address;double val)->double",
+      "returnType": "double",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "double*",
+          "name": "address",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 74,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vadd2",
+      "identity": "cv.cudev.vadd2(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 75,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vsub2",
+      "identity": "cv.cudev.vsub2(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 76,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vabsdiff2",
+      "identity": "cv.cudev.vabsdiff2(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 77,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vavg2",
+      "identity": "cv.cudev.vavg2(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 78,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vavrg2",
+      "identity": "cv.cudev.vavrg2(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 79,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vseteq2",
+      "identity": "cv.cudev.vseteq2(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 80,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vcmpeq2",
+      "identity": "cv.cudev.vcmpeq2(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 81,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vsetge2",
+      "identity": "cv.cudev.vsetge2(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 82,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vcmpge2",
+      "identity": "cv.cudev.vcmpge2(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 83,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vsetgt2",
+      "identity": "cv.cudev.vsetgt2(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 84,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vcmpgt2",
+      "identity": "cv.cudev.vcmpgt2(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 85,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vsetle2",
+      "identity": "cv.cudev.vsetle2(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 86,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vcmple2",
+      "identity": "cv.cudev.vcmple2(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 87,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vsetlt2",
+      "identity": "cv.cudev.vsetlt2(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 88,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vcmplt2",
+      "identity": "cv.cudev.vcmplt2(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 89,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vsetne2",
+      "identity": "cv.cudev.vsetne2(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 90,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vcmpne2",
+      "identity": "cv.cudev.vcmpne2(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 91,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vmax2",
+      "identity": "cv.cudev.vmax2(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 92,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vmin2",
+      "identity": "cv.cudev.vmin2(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 93,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vadd4",
+      "identity": "cv.cudev.vadd4(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 94,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vsub4",
+      "identity": "cv.cudev.vsub4(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 95,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vavg4",
+      "identity": "cv.cudev.vavg4(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 96,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vavrg4",
+      "identity": "cv.cudev.vavrg4(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 97,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vseteq4",
+      "identity": "cv.cudev.vseteq4(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 98,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vcmpeq4",
+      "identity": "cv.cudev.vcmpeq4(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 99,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vsetle4",
+      "identity": "cv.cudev.vsetle4(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 100,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vcmple4",
+      "identity": "cv.cudev.vcmple4(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 101,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vsetlt4",
+      "identity": "cv.cudev.vsetlt4(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 102,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vcmplt4",
+      "identity": "cv.cudev.vcmplt4(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 103,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vsetge4",
+      "identity": "cv.cudev.vsetge4(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 104,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vcmpge4",
+      "identity": "cv.cudev.vcmpge4(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 105,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vsetgt4",
+      "identity": "cv.cudev.vsetgt4(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 106,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vcmpgt4",
+      "identity": "cv.cudev.vcmpgt4(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 107,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vsetne4",
+      "identity": "cv.cudev.vsetne4(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 108,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vcmpne4",
+      "identity": "cv.cudev.vcmpne4(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 109,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vabsdiff4",
+      "identity": "cv.cudev.vabsdiff4(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 110,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vmax4",
+      "identity": "cv.cudev.vmax4(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 111,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.vmin4",
+      "identity": "cv.cudev.vmin4(uint a;uint b)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "a",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 112,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/type_traits.hpp",
+      "kind": "class",
+      "name": "cv.cudev.NullType",
+      "identity": "class cv.cudev.NullType",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 113,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/detail/reduce.hpp",
+      "kind": "class",
+      "name": "cv.cudev.warp_reduce_detail.WarpReductor",
+      "identity": "class cv.cudev.warp_reduce_detail.WarpReductor",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 114,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/detail/reduce_key_val.hpp",
+      "kind": "class",
+      "name": "cv.cudev.warp_reduce_key_val_detail.WarpReductor",
+      "identity": "class cv.cudev.warp_reduce_key_val_detail.WarpReductor",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 115,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.shfl",
+      "identity": "cv.cudev.shfl(uchar val;int srcLane;int width=warpSize)->uchar",
+      "returnType": "uchar",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uchar",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "srcLane",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "warpSize",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 116,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.shfl",
+      "identity": "cv.cudev.shfl(schar val;int srcLane;int width=warpSize)->schar",
+      "returnType": "schar",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "schar",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "srcLane",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "warpSize",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 117,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.shfl",
+      "identity": "cv.cudev.shfl(ushort val;int srcLane;int width=warpSize)->ushort",
+      "returnType": "ushort",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "ushort",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "srcLane",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "warpSize",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 118,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.shfl",
+      "identity": "cv.cudev.shfl(short val;int srcLane;int width=warpSize)->short",
+      "returnType": "short",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "short",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "srcLane",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "warpSize",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 119,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.shfl",
+      "identity": "cv.cudev.shfl(int val;int srcLane;int width=warpSize)->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "srcLane",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "warpSize",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 120,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.shfl",
+      "identity": "cv.cudev.shfl(uint val;int srcLane;int width=warpSize)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "srcLane",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "warpSize",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 121,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.shfl",
+      "identity": "cv.cudev.shfl(float val;int srcLane;int width=warpSize)->float",
+      "returnType": "float",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "srcLane",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "warpSize",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 122,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.shfl",
+      "identity": "cv.cudev.shfl(double val;int srcLane;int width=warpSize)->double",
+      "returnType": "double",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "srcLane",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "warpSize",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 123,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.shfl_down",
+      "identity": "cv.cudev.shfl_down(uchar val;uint delta;int width=warpSize)->uchar",
+      "returnType": "uchar",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uchar",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "delta",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "warpSize",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 124,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.shfl_down",
+      "identity": "cv.cudev.shfl_down(schar val;uint delta;int width=warpSize)->schar",
+      "returnType": "schar",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "schar",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "delta",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "warpSize",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 125,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.shfl_down",
+      "identity": "cv.cudev.shfl_down(ushort val;uint delta;int width=warpSize)->ushort",
+      "returnType": "ushort",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "ushort",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "delta",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "warpSize",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 126,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.shfl_down",
+      "identity": "cv.cudev.shfl_down(short val;uint delta;int width=warpSize)->short",
+      "returnType": "short",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "short",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "delta",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "warpSize",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 127,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.shfl_down",
+      "identity": "cv.cudev.shfl_down(int val;uint delta;int width=warpSize)->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "delta",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "warpSize",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 128,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.shfl_down",
+      "identity": "cv.cudev.shfl_down(uint val;uint delta;int width=warpSize)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "delta",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "warpSize",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 129,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.shfl_down",
+      "identity": "cv.cudev.shfl_down(signed long long val;uint delta;int width=warpSize)->signed long long",
+      "returnType": "signed long long",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "signed long long",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "delta",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "warpSize",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 130,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.shfl_down",
+      "identity": "cv.cudev.shfl_down(unsigned long long val;uint delta;int width=warpSize)->unsigned long long",
+      "returnType": "unsigned long long",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "unsigned long long",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "delta",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "warpSize",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 131,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.shfl_down",
+      "identity": "cv.cudev.shfl_down(float val;uint delta;int width=warpSize)->float",
+      "returnType": "float",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "delta",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "warpSize",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 132,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.shfl_down",
+      "identity": "cv.cudev.shfl_down(double val;uint delta;int width=warpSize)->double",
+      "returnType": "double",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "uint",
+          "name": "delta",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "warpSize",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 133,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.shfl_xor",
+      "identity": "cv.cudev.shfl_xor(schar val;int laneMask;int width=warpSize)->schar",
+      "returnType": "schar",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "schar",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "laneMask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "warpSize",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 134,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.shfl_xor",
+      "identity": "cv.cudev.shfl_xor(ushort val;int laneMask;int width=warpSize)->ushort",
+      "returnType": "ushort",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "ushort",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "laneMask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "warpSize",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 135,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.shfl_xor",
+      "identity": "cv.cudev.shfl_xor(short val;int laneMask;int width=warpSize)->short",
+      "returnType": "short",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "short",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "laneMask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "warpSize",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 136,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.shfl_xor",
+      "identity": "cv.cudev.shfl_xor(int val;int laneMask;int width=warpSize)->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "laneMask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "warpSize",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 137,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.shfl_xor",
+      "identity": "cv.cudev.shfl_xor(uint val;int laneMask;int width=warpSize)->uint",
+      "returnType": "uint",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "uint",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "laneMask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "warpSize",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 138,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.shfl_xor",
+      "identity": "cv.cudev.shfl_xor(float val;int laneMask;int width=warpSize)->float",
+      "returnType": "float",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "laneMask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "warpSize",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 139,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.shfl_xor",
+      "identity": "cv.cudev.shfl_xor(double val;int laneMask;int width=warpSize)->double",
+      "returnType": "double",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "laneMask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "warpSize",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 140,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/warp.hpp",
+      "kind": "enum",
+      "name": "cv.cudev.<unnamed>",
+      "identity": "enum cv.cudev.<unnamed>[const cv.cudev.LOG_WARP_SIZE=5;const cv.cudev.WARP_SIZE=1 << LOG_WARP_SIZE]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.cudev.LOG_WARP_SIZE",
+          "value": "5"
+        },
+        {
+          "name": "const cv.cudev.WARP_SIZE",
+          "value": "1 << LOG_WARP_SIZE"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 141,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/warp.hpp",
+      "kind": "class",
+      "name": "cv.cudev.Warp",
+      "identity": "class cv.cudev.Warp",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 142,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/warp.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.Warp.laneId",
+      "identity": "cv.cudev.Warp.laneId()->uint",
+      "returnType": "uint",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 143,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/warp.hpp",
+      "kind": "callable",
+      "name": "cv.cudev.Warp.warpId",
+      "identity": "cv.cudev.Warp.warpId()->uint",
+      "returnType": "uint",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    }
+  ],
+  "parserDuplicateIdentities": [],
+  "parserConfigurationProbes": [
+    {
+      "configuration": "source-arch-0",
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "__CUDACC__": 1,
+        "CUDART_VERSION": 12040,
+        "__CUDACC_VER_MAJOR__": 12,
+        "__CUDACC_VER_MINOR__": 4,
+        "CV_CUDEV_ARCH": 0
+      },
+      "headerDeclarationCounts": {
+        "warp/shuffle.hpp": 0,
+        "util/atomic.hpp": 12,
+        "util/simd_functions.hpp": 38
+      }
+    },
+    {
+      "configuration": "source-arch-120",
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "__CUDACC__": 1,
+        "CUDART_VERSION": 12040,
+        "__CUDACC_VER_MAJOR__": 12,
+        "__CUDACC_VER_MINOR__": 4,
+        "__CUDA_ARCH__": 120,
+        "CV_CUDEV_ARCH": 120
+      },
+      "headerDeclarationCounts": {
+        "warp/shuffle.hpp": 0,
+        "util/atomic.hpp": 12,
+        "util/simd_functions.hpp": 38
+      }
+    },
+    {
+      "configuration": "source-arch-200",
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "__CUDACC__": 1,
+        "CUDART_VERSION": 12040,
+        "__CUDACC_VER_MAJOR__": 12,
+        "__CUDACC_VER_MINOR__": 4,
+        "__CUDA_ARCH__": 200,
+        "CV_CUDEV_ARCH": 200
+      },
+      "headerDeclarationCounts": {
+        "warp/shuffle.hpp": 0,
+        "util/atomic.hpp": 12,
+        "util/simd_functions.hpp": 38
+      }
+    },
+    {
+      "configuration": "source-arch-300",
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "__CUDACC__": 1,
+        "CUDART_VERSION": 12040,
+        "__CUDACC_VER_MAJOR__": 12,
+        "__CUDACC_VER_MINOR__": 4,
+        "__CUDA_ARCH__": 300,
+        "CV_CUDEV_ARCH": 300
+      },
+      "headerDeclarationCounts": {
+        "warp/shuffle.hpp": 25,
+        "util/atomic.hpp": 12,
+        "util/simd_functions.hpp": 38
+      }
+    },
+    {
+      "configuration": "source-arch-750",
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "__CUDACC__": 1,
+        "CUDART_VERSION": 12040,
+        "__CUDACC_VER_MAJOR__": 12,
+        "__CUDACC_VER_MINOR__": 4,
+        "__CUDA_ARCH__": 750,
+        "CV_CUDEV_ARCH": 750
+      },
+      "headerDeclarationCounts": {
+        "warp/shuffle.hpp": 25,
+        "util/atomic.hpp": 12,
+        "util/simd_functions.hpp": 38
+      }
+    }
+  ],
+  "sourceReviewedExtensionPath": "compatibility/cudev-source-reviewed-extensions.json",
+  "sourceReviewedExtensionSha256": "eb4febed8020b99f487c98b888f526eecb8246392b3ea40d409c9555f8c02e42",
+  "sourceInventoryCounts": {
+    "templatesCount": 1100,
+    "templateParametersCount": 11,
+    "macroDefinitionsCount": 49,
+    "macroInvocationsCount": 1206,
+    "conditionalDirectivesCount": 397,
+    "macroBodyTemplateKeywordCount": 92
+  },
+  "sourceInventoryLimitation": "The pinned hdr_parser skips template declarations and does not expand declaration macros. Its declaration/callable counts cover only the non-template parser subset under the recorded source configuration. The companion source inventory records template definitions (including nested template-template parameters), function-like macro definitions/invocations and every conditional directive across all installed headers. These source units overlap and are not concrete callable counts; class-template members, macro expansions, external using declarations and concrete template instantiations are not semantically enumerated. No CUDA compilation, linking, device/runtime validation or complete callable parity is claimed.",
+  "completeCallableCoverageClaimed": false,
+  "cudaExecutionVerified": false,
+  "compatibilityHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/CMakeLists.txt",
+      "sha256": "b6c4d49f9b7bc656048635e1b181528a6514c55ae60a72596024322a596c70c0",
+      "reason": "HAVE_CUDA module disable; recursive installed-header scope; opencv_core include dependency and conditional CUDA tests."
+    }
+  ],
+  "moduleBuildCondition": "HAVE_CUDA",
+  "moduleDependencies": [
+    "opencv_core"
+  ],
+  "externalDependencies": [
+    "CUDA toolkit/runtime and compatible NVIDIA driver/device",
+    "CUDA/Thrust headers including tuple",
+    "OpenCV core CUDA GpuMat and Stream infrastructure"
+  ],
+  "sourceConditionBoundaries": [
+    "CV_CUDEV_ARCH >= 120",
+    "CV_CUDEV_ARCH >= 200",
+    "CV_CUDEV_ARCH >= 300",
+    "__CUDACC_VER_MAJOR__ >= 9",
+    "CUDART_VERSION < 12040"
+  ],
+  "configurationLimitation": "The recorded CUDA 12.4 / source architecture 750 defines are extraction inputs, not measured compiler or device capabilities. Header visibility does not establish build, package or runtime availability."
+}

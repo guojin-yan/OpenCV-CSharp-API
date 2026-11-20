@@ -1,5 +1,5 @@
 param(
-    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect','superres','dnn_superres','wechat_qrcode','cnn_3dobj','signal','dpm','hdf','text','xfeatures2d','dnn_objdetect','ccalib','julia','rgbd','cudaarithm','cudabgsegm','cudafilters','cudaimgproc','cudacodec','cudawarping','cudafeatures2d','cudaobjdetect','cudaoptflow','cudastereo','cudalegacy','videostab','cvv','datasets','viz','ovis','fastcv','cannops','sfm')][string]$Module,
+    [Parameter(Mandatory)][ValidateSet('optflow','bgsegm','face','quality','img_hash','line_descriptor','freetype','alphamat','intensity_transform','plot','bioinspired','phase_unwrapping','hfs','fuzzy','rapid','shape','structured_light','saliency','surface_matching','reg','xstereo','ptcloud','xobjdetect','superres','dnn_superres','wechat_qrcode','cnn_3dobj','signal','dpm','hdf','text','xfeatures2d','dnn_objdetect','ccalib','julia','rgbd','cudaarithm','cudabgsegm','cudafilters','cudaimgproc','cudacodec','cudawarping','cudafeatures2d','cudaobjdetect','cudaoptflow','cudastereo','cudalegacy','videostab','cvv','datasets','viz','ovis','fastcv','cannops','sfm','cudev')][string]$Module,
     [Parameter(Mandatory)][string]$DisplayName,
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [switch]$Check
@@ -91,6 +91,8 @@ function GetParts([string]$Identity) {
         '^cv\.fastcv\.(?:(?<owner>.+)\.)?(?<name>~?[A-Za-z][A-Za-z0-9_]*)\('
     } elseif ($Module -eq 'sfm') {
         '^cv\.sfm\.(?:(?<owner>.+)\.)?(?<name>~?[A-Za-z][A-Za-z0-9_]*)\('
+    } elseif ($Module -eq 'cudev') {
+        '^cv\.cudev\.(?:(?<owner>.+)\.)?(?<name>operator \(\)|operator[^\(]+|~?[A-Za-z][A-Za-z0-9_]*)\('
     } elseif ($Module -eq 'cannops') {
         '^cv\.cann\.(?:(?<owner>.+)\.)?(?<name>operator[^\(]+|~?[A-Za-z][A-Za-z0-9_]*)\('
     } elseif ($Module -eq 'videostab') {
@@ -198,7 +200,7 @@ function GetManagedType([string]$Owner, [string]$Name) {
 }
 
 function GetManaged([string]$Owner, [string]$Name, [string]$Identity) {
-    if ($Module -in @('freetype','cnn_3dobj','cudaarithm','cudabgsegm','cudafilters','cudaimgproc','cudacodec','cudawarping','cudafeatures2d','cudaobjdetect','cudaoptflow','cudastereo','cudalegacy','videostab','viz','fastcv','cannops','sfm')) { return @() }
+    if ($Module -in @('freetype','cnn_3dobj','cudaarithm','cudabgsegm','cudafilters','cudaimgproc','cudacodec','cudawarping','cudafeatures2d','cudaobjdetect','cudaoptflow','cudastereo','cudalegacy','videostab','viz','fastcv','cannops','sfm','cudev')) { return @() }
     if ($Module -eq 'structured_light') {
         $typeMarker = "JYPPX.OpenCvSharp.StructuredLight.$Owner|"
         $typeEntries = @($managedEntries | Where-Object { $_.Contains($typeMarker, [StringComparison]::Ordinal) })
@@ -550,7 +552,7 @@ function GetNative([object]$Parts, [string]$Identity) {
     $owner = [string]$Parts.Owner
     $name = [string]$Parts.Name
     $result = @()
-    if ($Module -in @('superres','videostab','viz','cannops','sfm')) {
+    if ($Module -in @('superres','videostab','viz','cannops','sfm','cudev')) {
         return @()
     } elseif ($Module -eq 'rapid') {
         $symbol = switch ("$owner.$name") {
@@ -1146,6 +1148,10 @@ $claimedSlice = if ($Module -eq 'reg') { 'opencv2/reg/*.hpp contrib public heade
     if ($Module -eq 'fastcv') { $buildCondition = 'HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY' }
     if ($Module -eq 'cannops') { $buildCondition = 'HAVE_CANN_AND_SUPPORTED_UNIX_X86_64_OR_AARCH64_AND_NOT_IOS_WINRT_ANDROID_APPLE_WIN32_AND_ASCENDC_TOOLCHAIN' }
     if ($Module -eq 'sfm') { $buildCondition = if ([bool]$decl.requiresCeres) { 'HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND' } else { 'HAVE_EIGEN_AND_SFM_DEPS_OK' } }
+    if ($Module -eq 'cudev') {
+        $buildCondition = 'HAVE_CUDA_AND_RECORDED_CUDA_SOURCE_CONFIGURATION'
+        if ($classification -eq 'intentionally-omitted') { $reason = 'The Cudev CUDA device-layer declaration has no native or managed wrapper in the current package. HAVE_CUDA, external CUDA/Thrust headers, architecture/compiler conditions, GpuMat/Stream ownership and device execution remain outside this package contract. This row is in the non-template parser subset; the source inventory separately retains template and macro units without claiming complete callable or instantiation coverage.' }
+    }
     if ($Module -eq 'ovis') { $buildCondition = 'HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT' }
     if ($Module -eq 'ovis' -and $classification -eq 'intentionally-omitted') { $reason = 'The OVIS declarations have no native or managed wrapper in the current package; rendering requires external OGRE and caller-provided scene resources, while WindowScene, renderer, and Mat ownership remain outside the package contract.' }
     if ($Module -eq 'cvv' -and $classification -eq 'intentionally-omitted') { $reason = 'The CVV debug-visualization declarations have no native or managed wrapper in the current package; upstream disables the module unless Qt 5 or later and C++11 are available, while interactive GUI state, callbacks, and debug-only ownership remain outside the package contract.' }
@@ -1172,6 +1178,7 @@ $externalDataDependencies = switch ($Module) {
     'fastcv' { @('OpenCV contrib FastCV is disabled unless HAVE_FASTCV is enabled and depends on an external Qualcomm FastCV SDK/library; this package bundles neither that runtime nor a FastCV native/managed wrapper.', 'The upstream FastCV module supports ARM only and cannot configure/build on x86; DSP initialization, device/runtime compatibility, and allocator ownership remain outside this package contract.') }
     'cannops' { @('OpenCV contrib CannOps requires an external Huawei CANN SDK and CANN_LIBRARIES, a supported UNIX x86-64/arm64 platform and a successful VALID_ASCENDCL probe; this package bundles neither the SDK/runtime nor a CannOps native/managed wrapper.', 'AscendC kernel compilation requires an external compiler/devkit package and caller-selected SOC_VERSION and RUN_MODE; the pinned defaults are ascend310p3 and npu.', 'Ascend device/runtime compatibility, initialization, allocator, stream/event/context synchronization and Mat input/output ownership remain external caller responsibilities.') }
     'sfm' { @('The SFM module requires external Eigen, Glog and Gflags plus a successful SFM_GLOG_GFLAGS_TEST compile/link probe; this package provides no SFM native/managed wrapper.', 'The reconstruction and simple pipeline implementations require external Ceres Solver and CERES_LIBRARIES; defining CERES_FOUND as zero may expose direct header declarations but does not enable those implementations.', 'Image sequences/paths, point tracks, reconstruction files, camera intrinsics, output Mat ownership and reconstruction state are caller-provided; the package bundles no SFM scene or track assets.') }
+    'cudev' { @('The cudev module requires HAVE_CUDA and external CUDA toolkit/runtime headers; source architecture/compiler definitions do not establish a supported build or device.', 'Thrust tuple and other CUDA headers supply external templates and using declarations; no external declaration closure or concrete template instantiation is enumerated.', 'Caller-owned device memory, GpuMat/Stream state, NVIDIA driver/device availability and asynchronous kernel execution remain outside this package wrapper and runtime evidence.') }
     'hdf' { @('The HDF contrib surface requires an external HDF5 development/runtime dependency; no HDF5 runtime or managed/native wrapper is bundled.') }
     'cvv' { @('The CVV debug-visualization module is disabled unless Qt 5 or later and C++11 are available; this package bundles neither Qt nor a CVV native/managed wrapper.') }
     'datasets' { @('The datasets module consumes caller-provided dataset files, directory trees, annotations, and file paths; this package bundles no dataset assets or datasets native/managed wrapper.') }
@@ -1206,17 +1213,30 @@ if ($Module -eq 'viz') { $claimedSlice = 'opencv2/viz.hpp plus opencv2/viz/*.hpp
 if ($Module -eq 'fastcv') { $claimedSlice = 'opencv2/fastcv.hpp plus all 30 directly included opencv2/fastcv/*.hpp parser-backed public declarations; upstream wrapper annotations and ARM/external-library build boundaries remain evidence-only' }
 if ($Module -eq 'cannops') { $claimedSlice = 'All eight installed CannOps opencv2/*.hpp headers, including internal helpers; cv::cann parser declarations retain restored nested Impl identities, reconcile inline definitions and exclude private inline constructors and inactive binding-only placeholders; CANN/AscendC build and runtime boundaries remain evidence-only' }
 if ($Module -eq 'sfm') { $claimedSlice = 'opencv2/sfm.hpp plus all nine installed opencv2/sfm/*.hpp headers, including standalone robust.hpp and the Ceres reconstruction/pipeline surface; exact non-wrapper declarations preserve per-header Ceres build gates and upstream incomplete-runtime boundaries' }
+if ($Module -eq 'cudev') { $claimedSlice = 'All 76 installed cudev headers: a non-template parser subset plus a source inventory of template declarations, template-template parameters, macro definitions/invocations and all conditional branches; complete callable/instantiation coverage remains open' }
 $classification = [ordered]@{ schemaVersion = 1; upstreamOpenCvVersion = '5.0.0'; claimedSlice = $claimedSlice; reviewStatus = 'reviewed'; limitation = "The map records parser identities and exact $DisplayName wrapper evidence; it does not claim repository-wide contrib parity or external module availability."; externalDataDependencies = @($externalDataDependencies); declarations = @($rows) }
+if ($Module -eq 'cudev') { $classification.limitation = [string]$raw.sourceInventoryLimitation }
 $builder = [Text.StringBuilder]::new(); [void]$builder.AppendLine("# Generated by scripts/Generate-ContribUpstreamMap.ps1 -Module $Module. Do not edit."); [void]$builder.AppendLine('schema-version=1'); [void]$builder.AppendLine('upstream-opencv-version=5.0.0'); [void]$builder.AppendLine("claimed-slice=$($classification.claimedSlice)"); [void]$builder.AppendLine("header-sha256=$($raw.headerSha256)"); [void]$builder.AppendLine("parser-sha256=$($raw.parserSha256)"); [void]$builder.AppendLine("declaration-count=$($raw.declarationCount)"); [void]$builder.AppendLine('repository-wide-upstream-parity-claimed=false'); [void]$builder.AppendLine(''); [void]$builder.AppendLine('ordinal|classification|identity|native-entrypoints|managed-members|build-condition|reason')
 foreach ($row in $rows) { $nativeText = if (@($row.nativeEntrypoints).Count) { @($row.nativeEntrypoints) -join ';' } else { '-' }; $managedText = if (@($row.managedMembers).Count) { @($row.managedMembers) -join ';' } else { '-' }; [void]$builder.AppendLine("$($row.ordinal)|$($row.classification)|$($row.identity)|$nativeText|$managedText|$($row.buildCondition)|$($row.reason)") }
 $mappingText = $builder.ToString().Replace("`r`n", "`n"); $implemented = @($rows | Where-Object classification -eq 'implemented'); $omitted = @($rows | Where-Object classification -eq 'intentionally-omitted'); $metadata = @($rows | Where-Object classification -eq 'non-callable-metadata')
 $guide = switch ($Module) { 'face' {'docs/articles/face-guide.md'} 'quality' {'docs/articles/quality-guide.md'} 'img_hash' {'docs/articles/img-hash-guide.md'} 'line_descriptor' {'docs/articles/line-descriptor-guide.md'} 'intensity_transform' {'docs/articles/intensity-transform-guide.md'} 'plot' {'docs/articles/plot-guide.md'} 'bioinspired' {'docs/articles/bioinspired-guide.md'} 'phase_unwrapping' {'docs/articles/phase-unwrapping-guide.md'} 'hfs' {'docs/articles/hfs-guide.md'} 'fuzzy' {'docs/articles/fuzzy-guide.md'} 'rapid' {'docs/articles/rapid-guide.md'} 'shape' {'docs/articles/shape-guide.md'} 'reg' {'docs/articles/reg-guide.md'} 'ptcloud' {'docs/articles/ptcloud-guide.md'} 'xobjdetect' {'docs/articles/xobjdetect-guide.md'} default { "docs/articles/$Module-upstream-parity-guide.md" } }
 $family = [ordered]@{ schemaVersion = 1; upstreamOpenCvVersion = '5.0.0'; status = 'implemented-verified'; managedPublicTypeAdditionCount = 0; managedPublicMemberAdditionCount = 0; families = @([ordered]@{ id = "$Module-wrapper-surface"; rationale = "Current $DisplayName managed/native wrapper declarations with exact parser-backed callable evidence."; declarations = @($implemented | ForEach-Object { [ordered]@{ ordinal = $_.ordinal; upstreamIdentity = $_.identity; upstreamClassification = $_.classification; nativeEntrypoints = $_.nativeEntrypoints; managedMembers = $_.managedMembers; focusedTest = "tests/OpenCvSharp.Tests/$DisplayName/$DisplayName`Tests.cs"; nativeSmoke = 'src/OpenCvSharp.Native/tests/native_smoke.cpp'; sample = 'samples/ConsoleSamples/Program.cs'; guide = $guide } }) }) }
+if ($Module -eq 'cudev') { $family.families[0].rationale = 'No Cudev managed/native wrapper is implemented. This empty wrapper inventory and the partial callable/source map do not establish template or device parity.' }
 $classificationJson = ($classification | ConvertTo-Json -Depth 20).Replace("`r`n", "`n") + "`n"
 $familyJson = ($family | ConvertTo-Json -Depth 20).Replace("`r`n", "`n") + "`n"
 $mapHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($mappingText))).ToLowerInvariant()
 $familyHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($familyJson))).ToLowerInvariant()
 $summary = [ordered]@{ schemaVersion = 1; generator = "tools/$DisplayName`UpstreamMap"; upstreamOpenCvVersion = '5.0.0'; claimedSlice = $classification.claimedSlice; rawExtractionPath = "compatibility/$Module-upstream-raw.json"; classificationPath = "compatibility/$Module-upstream-classifications.json"; mappingPath = "compatibility/$Module-upstream-map.txt"; headerSha256 = [string]$raw.headerSha256; parserSha256 = [string]$raw.parserSha256; mappingSha256 = $mapHash; declarationCount = [int]$raw.declarationCount; enumCount = [int](@($raw.declarations | Where-Object kind -eq enum).Count); classCount = [int](@($raw.declarations | Where-Object kind -eq class).Count); callableCount = [int](@($raw.declarations | Where-Object kind -eq callable).Count); classificationCounts = [ordered]@{ implemented = [int]$implemented.Count; 'intentionally-omitted' = [int]$omitted.Count; missing = 0; 'non-callable-metadata' = [int]$metadata.Count; unsupported = 0; 'upstream-conditional' = 0 }; nativeEvidenceCount = @($rows | ForEach-Object { @($_.nativeEntrypoints) } | Where-Object { $_ } | Sort-Object -Unique).Count; managedEvidenceCount = @($rows | ForEach-Object { @($_.managedMembers) } | Where-Object { $_ } | Sort-Object -Unique).Count; negativeFixtureCount = 12; externalDataDependencyCount = @($externalDataDependencies).Count; familyInventoryPath = "compatibility/$Module-implemented-families.json"; familyInventorySha256 = $familyHash; selectedFamilyCount = 1; selectedDeclarationCount = $implemented.Count; managedPublicTypeAdditionCount = 0; managedPublicMemberAdditionCount = 0; repositoryWideUpstreamParityClaimed = $false }; $summaryJson = (($summary | ConvertTo-Json -Depth 20) + [Environment]::NewLine)
+if ($Module -eq 'cudev') {
+    $summary.negativeFixtureCount = 16
+    $summary.sourceReviewedExtensionPath = [string]$raw.sourceReviewedExtensionPath
+    $summary.sourceReviewedExtensionSha256 = [string]$raw.sourceReviewedExtensionSha256
+    $summary.sourceInventoryCounts = $raw.sourceInventoryCounts
+    $summary.coverageStatus = 'partial-callable-map-with-source-inventory'
+    $summary.completeCallableCoverageClaimed = $false
+    $summary.cudaExecutionVerified = $false
+    $summaryJson = ($summary | ConvertTo-Json -Depth 20) + "`n"
+}
 $summaryJson = $summaryJson.Replace("`r`n", "`n")
 foreach ($target in @(@{ Path = $classificationPath; Text = $classificationJson }, @{ Path = (Join-Path $repo "compatibility/$Module-upstream-map.txt"); Text = $mappingText }, @{ Path = $summaryPath; Text = $summaryJson }, @{ Path = $familyPath; Text = $familyJson })) {
     if ($Check) {
@@ -1226,4 +1246,4 @@ foreach ($target in @(@{ Path = $classificationPath; Text = $classificationJson 
         if ($current -ne $expected) { throw "Contrib map generated artifact is stale: $($target.Path)" }
     } else { [IO.File]::WriteAllText($target.Path, $target.Text, [Text.UTF8Encoding]::new($false)) }
 }
-Write-Host "$($Module.ToUpperInvariant())_UPSTREAM_MAP_OK declarations=$($summary.declarationCount) callable=$($summary.callableCount) implemented=$($summary.classificationCounts.implemented) missing=0 omitted=$($summary.classificationCounts.'intentionally-omitted') fixtures=12 nativeEvidence=$($summary.nativeEvidenceCount) managedEvidence=$($summary.managedEvidenceCount) sha256=$mapHash mode=$(if ($Check) { 'check' } else { 'write' })"
+Write-Host "$($Module.ToUpperInvariant())_UPSTREAM_MAP_OK declarations=$($summary.declarationCount) callable=$($summary.callableCount) implemented=$($summary.classificationCounts.implemented) missing=0 omitted=$($summary.classificationCounts.'intentionally-omitted') fixtures=$($summary.negativeFixtureCount) nativeEvidence=$($summary.nativeEvidenceCount) managedEvidence=$($summary.managedEvidenceCount) sha256=$mapHash mode=$(if ($Check) { 'check' } else { 'write' })"

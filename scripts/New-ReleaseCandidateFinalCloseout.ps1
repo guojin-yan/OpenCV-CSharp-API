@@ -194,6 +194,8 @@ function Get-Record {
     $cannopsSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/cannops-upstream-summary.json") -Raw | ConvertFrom-Json
     $sfmRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/sfm-upstream-raw.json") -Raw | ConvertFrom-Json
     $sfmSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/sfm-upstream-summary.json") -Raw | ConvertFrom-Json
+    $cudevRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/cudev-upstream-raw.json") -Raw | ConvertFrom-Json
+    $cudevSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/cudev-upstream-summary.json") -Raw | ConvertFrom-Json
     $evidencePaths = @(
         ".github/workflows/pack.yml",
         ".github/workflows/publish-nuget.yml",
@@ -538,6 +540,12 @@ function Get-Record {
         "compatibility/sfm-upstream-map.txt",
         "compatibility/sfm-upstream-raw.json",
         "compatibility/sfm-upstream-summary.json",
+        "compatibility/cudev-implemented-families.json",
+        "compatibility/cudev-upstream-classifications.json",
+        "compatibility/cudev-upstream-map.txt",
+        "compatibility/cudev-upstream-raw.json",
+        "compatibility/cudev-upstream-summary.json",
+        "compatibility/cudev-source-reviewed-extensions.json",
         "compatibility/v5.0.1-change-ledger.json",
         "compatibility/v5.0.1-change-ledger.schema.json",
         "docs/articles/api-abi-compatibility-policy.md",
@@ -549,6 +557,7 @@ function Get-Record {
         "docs/articles/fastcv-upstream-parity-guide.md",
         "docs/articles/cannops-upstream-parity-guide.md",
         "docs/articles/sfm-upstream-parity-guide.md",
+        "docs/articles/cudev-upstream-parity-guide.md",
         "docs/articles/xfeatures2d-upstream-parity-guide.md",
         "docs/articles/dnn-objdetect-upstream-parity-guide.md",
         "docs/articles/ccalib-upstream-parity-guide.md",
@@ -1110,6 +1119,10 @@ function Get-Record {
         "tools/SfmUpstreamMap/SfmUpstreamMap.csproj",
         "tools/SfmUpstreamMap/Program.cs",
         "tools/SfmUpstreamMap/extract_sfm.py",
+        "tools/CudevUpstreamMap/CudevUpstreamMap.csproj",
+        "tools/CudevUpstreamMap/Program.cs",
+        "tools/CudevUpstreamMap/extract_cudev.py",
+        "tools/CudevUpstreamMap/source_inventory.py",
         "tools/DnnObjDetectUpstreamMap/DnnObjDetectUpstreamMap.csproj",
         "tools/DnnObjDetectUpstreamMap/Program.cs",
         "tools/DnnObjDetectUpstreamMap/extract_dnn_objdetect.py",
@@ -1250,6 +1263,8 @@ function Get-Record {
         "scripts/Test-CannOpsUpstreamMap.ps1",
         "scripts/Generate-SfmUpstreamMap.ps1",
         "scripts/Test-SfmUpstreamMap.ps1",
+        "scripts/Generate-CudevUpstreamMap.ps1",
+        "scripts/Test-CudevUpstreamMap.ps1",
         "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
         "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
         "tools/TypedMatBenchmark/Program.cs",
@@ -2430,6 +2445,46 @@ function Get-Record {
                 NativeEntrypointAdditionCount = [int]$sfmSummary.nativeEvidenceCount
                 ExternalDataDependencyCount = [int]$sfmSummary.externalDataDependencyCount
                 RepositoryWideParityClaimed = [bool]$sfmSummary.repositoryWideUpstreamParityClaimed
+            }
+            CudevUpstreamMap = [ordered]@{
+                Path = "compatibility/cudev-upstream-map.txt"
+                SummaryPath = "compatibility/cudev-upstream-summary.json"
+                ClassificationPath = "compatibility/cudev-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/cudev-implemented-families.json"
+                RawExtractionPath = "compatibility/cudev-upstream-raw.json"
+                SourceInventoryPath = $cudevSummary.sourceReviewedExtensionPath
+                SourceInventorySha256 = $cudevSummary.sourceReviewedExtensionSha256
+                Sha256 = $cudevSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/cudev-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$cudevSummary.declarationCount
+                CallableCount = [int]$cudevSummary.callableCount
+                ClassCount = [int]$cudevSummary.classCount
+                EnumCount = [int]$cudevSummary.enumCount
+                MetadataCount = [int]$cudevSummary.classificationCounts.'non-callable-metadata'
+                ImplementedCount = [int]$cudevSummary.classificationCounts.implemented
+                MissingCount = [int]$cudevSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$cudevSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$cudevSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$cudevSummary.classificationCounts.'upstream-conditional'
+                SourceHeaderCount = @($cudevRaw.sourceHeaders).Count
+                CompatibilityHeaderCount = @($cudevRaw.compatibilityHeaders).Count
+                StaticParserNameRepairCount = @($cudevRaw.staticParserNameRepairs).Count
+                ParserConfigurationProbeCount = @($cudevRaw.parserConfigurationProbes).Count
+                ParserMode = [string]$cudevRaw.parserMode
+                ModuleBuildCondition = [string]$cudevRaw.moduleBuildCondition
+                SourceInventoryCounts = $cudevSummary.sourceInventoryCounts
+                CoverageStatus = [string]$cudevSummary.coverageStatus
+                CompleteCallableCoverageClaimed = [bool]$cudevSummary.completeCallableCoverageClaimed
+                CudaExecutionVerified = [bool]$cudevSummary.cudaExecutionVerified
+                SelectedFamilyCount = [int]$cudevSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$cudevSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$cudevSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$cudevSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$cudevSummary.nativeEvidenceCount
+                ManagedEvidenceCount = [int]$cudevSummary.managedEvidenceCount
+                ExternalDataDependencyCount = [int]$cudevSummary.externalDataDependencyCount
+                NegativeFixtureCount = [int]$cudevSummary.negativeFixtureCount
+                RepositoryWideParityClaimed = [bool]$cudevSummary.repositoryWideUpstreamParityClaimed
             }
             DnnObjDetectUpstreamMap = [ordered]@{
                 Path = "compatibility/dnn_objdetect-upstream-map.txt"

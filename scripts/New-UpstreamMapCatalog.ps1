@@ -79,6 +79,7 @@ $definitions = @(
     [pscustomobject]@{ Id = 'fastcv'; Tool = 'FastCV'; Repository = 'opencv_contrib' }
     [pscustomobject]@{ Id = 'cannops'; Tool = 'CannOps'; Repository = 'opencv_contrib' }
     [pscustomobject]@{ Id = 'sfm'; Tool = 'Sfm'; Repository = 'opencv_contrib' }
+    [pscustomobject]@{ Id = 'cudev'; Tool = 'Cudev'; Repository = 'opencv_contrib' }
 )
 
 function Get-HeaderRows {
@@ -177,7 +178,8 @@ $catalog = [ordered]@{
     limitations = @(
         'The catalog centralizes source/header scope, classification policy, artifact bindings, generator commands, and semantic guard commands for the parser-backed map set, including the staged contrib batches.',
         'Each module retains its specialized extraction and semantic implementation; catalog orchestration does not assert repository-wide OpenCV parity.',
-        'Additional contrib modules are introduced only as explicit catalog rows after their source scope and classification evidence are reviewed.'
+        'Additional contrib modules are introduced only as explicit catalog rows after their source scope and classification evidence are reviewed.',
+        'Cudev records a non-template parser subset and a separate template/macro source inventory. Its complete callable, macro-expansion and template-instantiation coverage remains open; zero missing applies only to the recorded parser subset.'
     )
 }
 $outputFullPath = if ([IO.Path]::IsPathRooted($OutputPath)) { [IO.Path]::GetFullPath($OutputPath) } else { [IO.Path]::GetFullPath((Join-Path $repo ($OutputPath -replace '/', [IO.Path]::DirectorySeparatorChar))) }

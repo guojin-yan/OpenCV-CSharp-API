@@ -27,7 +27,7 @@
     "implementedRequiresNativeAndManagedEvidence": true,
     "unexplainedMissingAllowed": false
   },
-  "moduleCount": 71,
+  "moduleCount": 72,
   "maps": [
     {
       "id": "calib3d",
@@ -5109,11 +5109,514 @@
         "zeroMissing": true,
         "repositoryWideParityClaimed": false
       }
+    },
+    {
+      "id": "cudev",
+      "repository": "opencv_contrib",
+      "generatorProject": "tools/CudevUpstreamMap",
+      "extractorScript": "tools/CudevUpstreamMap/extract_cudev.py",
+      "generationScript": "scripts/Generate-CudevUpstreamMap.ps1",
+      "semanticGuard": "scripts/Test-CudevUpstreamMap.ps1",
+      "scope": {
+        "claimedSlice": "All 76 installed cudev headers: a non-template parser subset plus a source inventory of template declarations, template-template parameters, macro definitions/invocations and all conditional branches; complete callable/instantiation coverage remains open",
+        "primaryHeader": {
+          "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev.hpp",
+          "sha256": "a1cac9bc839b596a46ed6724adfb22e7578da1311a7f8945b20c93b952f4ae87"
+        },
+        "parser": {
+          "path": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+          "sha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702"
+        },
+        "sourceHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/block.hpp",
+            "sha256": "20ef363751988a3f49bd0229c2045be435b8d562ff7e2155a78343d91b5fba30",
+            "startOrdinal": 0,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/detail/reduce.hpp",
+            "sha256": "e5a039b5760eeca7eb308249ac090304b700bdfee83d8c6cef21160ade13b97a",
+            "startOrdinal": 4,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/detail/reduce_key_val.hpp",
+            "sha256": "5209633fcae242311d0754686e7730fdaa3cc4a112b1100725108590056cbfcf",
+            "startOrdinal": 4,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/dynamic_smem.hpp",
+            "sha256": "67b751f6f8a63f83cb2de8ff1432e0fbe22e31b4d0dce0702ab8eab4a6334906",
+            "startOrdinal": 4,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/reduce.hpp",
+            "sha256": "3e4a59d2cbc4af5f17303bde259b3996dfb4ba8ff4edcc75e63e48686d6e352e",
+            "startOrdinal": 4,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/scan.hpp",
+            "sha256": "c72fac2438d08d2c58b1b97966b20104bddbf9d4b347ecab0f54291799e67419",
+            "startOrdinal": 4,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/block/vec_distance.hpp",
+            "sha256": "5998f94efa05c591669b170a06d74034f95c65fae6e269fd7622dd8b6851aa21",
+            "startOrdinal": 4,
+            "declarationCount": 10
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/common.hpp",
+            "sha256": "ffce8a11163a1efcdfe597002515a4d6e4c284b66865543a6b431048c00544a9",
+            "startOrdinal": 14,
+            "declarationCount": 2
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/expr/binary_func.hpp",
+            "sha256": "a87c9984171f47d480904c995d8a52a5187bf3128f87a55f2c405c62a062df19",
+            "startOrdinal": 16,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/expr/binary_op.hpp",
+            "sha256": "77a2de98bf74d5521e63825d212c35be3e9b3c2ed654318537b886be19271f6a",
+            "startOrdinal": 16,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/expr/color.hpp",
+            "sha256": "3013c1f903f5168725927b573d686ca0fe53242b2642c78db0227e317e49e102",
+            "startOrdinal": 16,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/expr/deriv.hpp",
+            "sha256": "44f439399d6244322cbcb3c2cbe41233f5e466db2c3cf9f098aca37d03417a2c",
+            "startOrdinal": 16,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/expr/expr.hpp",
+            "sha256": "b3a36559710f165afed7f702ce90d84c289e8d959e69d954bea2d01cc85c8eed",
+            "startOrdinal": 16,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/expr/per_element_func.hpp",
+            "sha256": "aa974e6d20e6a8b589c2d8095b2f8dddefef8300351b59ea1bb1e1a98decaabd",
+            "startOrdinal": 16,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/expr/reduction.hpp",
+            "sha256": "484eb7d42c0357574ac4d59e780c62e3b20823167806215103e56b81420cebe8",
+            "startOrdinal": 16,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/expr/unary_func.hpp",
+            "sha256": "5913369d225c01912c3ef57ed446854601d1162d77bb944477567b7254e3cc3d",
+            "startOrdinal": 16,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/expr/unary_op.hpp",
+            "sha256": "5741484701117ac6c6d8c796b077fbe9548229ee752590653406886f49a85574",
+            "startOrdinal": 16,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/expr/warping.hpp",
+            "sha256": "7239f913c2c10e4463e1788a33099f211d3794ccf105949058e8656989d267da",
+            "startOrdinal": 16,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/functional/color_cvt.hpp",
+            "sha256": "23b447955cdea458fcdaab040a25ee201a56684392ec0cc378aff8ba791cfc1a",
+            "startOrdinal": 16,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/functional/detail/color_cvt.hpp",
+            "sha256": "9657a04388e5c60cb07eee6a199988d4c7364a8b4bb766290dea4301b2934f3d",
+            "startOrdinal": 16,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/functional/functional.hpp",
+            "sha256": "cffa399f8af66ebd99b419e5785ee45813b0cd23315c3858eb2b3104384862d9",
+            "startOrdinal": 20,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/functional/tuple_adapter.hpp",
+            "sha256": "a1ca76c8ace8c284fb77f721455cb2f09213bf045a0046af72dd3b4d43ad9979",
+            "startOrdinal": 20,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/copy.hpp",
+            "sha256": "9a0e3f9263dd740828c224a98269db4c8a7cf337d6e57e5452646e3b6cc9256e",
+            "startOrdinal": 20,
+            "declarationCount": 2
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/copy.hpp",
+            "sha256": "4991d986289f7e495d4efc5bd676e2e3fbc559f9f729bcd2aad439d775d306d4",
+            "startOrdinal": 22,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/histogram.hpp",
+            "sha256": "52a304212684ed853d5d3d364562309a2bbf25d47575b210b836c8debd1c1ba0",
+            "startOrdinal": 22,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/integral.hpp",
+            "sha256": "2f70d896f96d752b4c4c9bc26ef96cf7a4e18194f7d5b4069da9cc69fc59b841",
+            "startOrdinal": 22,
+            "declarationCount": 5
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/minmaxloc.hpp",
+            "sha256": "8ab36352c8c59b41bc00ebfc36476d0acedb15cb6d305a38ae826d8ddaca6d88",
+            "startOrdinal": 27,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/pyr_down.hpp",
+            "sha256": "d46cc935f7e9697ff36e4c6f51ef3a233807e06ee0eadbb9a2e6a4492bddb701",
+            "startOrdinal": 27,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/pyr_up.hpp",
+            "sha256": "1555de9bbb107c0dfd132c24c531c9af701476c8c85c22c214f0bb4d4c3dd9fc",
+            "startOrdinal": 27,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/reduce.hpp",
+            "sha256": "0ca4c354381b6f0aa18c642e2a559c5956e8ea9df1d1094d394aa40cc95ce90a",
+            "startOrdinal": 27,
+            "declarationCount": 1
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/reduce_to_column.hpp",
+            "sha256": "ea7096b75c6b47553cde950db251bb7e63356f5729bf143e9907e00045dd5534",
+            "startOrdinal": 28,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/reduce_to_row.hpp",
+            "sha256": "4deac0be81cffc22da45a6eaad549ab0794e284c5e96ecf6774a8a78fdbb05cc",
+            "startOrdinal": 28,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/split_merge.hpp",
+            "sha256": "c70f3c4d5e92a11d30b1652664ac7077fc69d8a84f20e1ddb502e3a976129783",
+            "startOrdinal": 28,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/transform.hpp",
+            "sha256": "fe07c3e347a5720f6efc4efa10aa62fc871d8ad417d55a812e864673672d154d",
+            "startOrdinal": 28,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/detail/transpose.hpp",
+            "sha256": "89b110fc6955ac724e7fd8ede0b35d2fb9e32ac6e2fd51dca51df2f409a728c8",
+            "startOrdinal": 28,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/histogram.hpp",
+            "sha256": "94e4c294363a048290a504479aff2b4f85cb731a052e3bbae3fdb5ca3163caa8",
+            "startOrdinal": 28,
+            "declarationCount": 2
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/integral.hpp",
+            "sha256": "733e9ea4b3877a03c94a75dd0f39ac2efaee29a7a1a11f632b06125c65937084",
+            "startOrdinal": 30,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/pyramids.hpp",
+            "sha256": "50648be72425dcc5572f7283f1cc1815b371bdca8a409d41607acbd21c73fd71",
+            "startOrdinal": 30,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/reduce.hpp",
+            "sha256": "85e2757b0f2049290160b9e20d39bf5f2fe44bd5bfebc8b48f1714a2d56b1784",
+            "startOrdinal": 30,
+            "declarationCount": 2
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/reduce_to_vec.hpp",
+            "sha256": "aaa589ba856388c5e9f0af7e09befe511b9ebd6791d65c1e6d369d0edb024c73",
+            "startOrdinal": 32,
+            "declarationCount": 2
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/split_merge.hpp",
+            "sha256": "b578f659ead1cc09b6d66e63707332a4ed51fa56d12507759f66df846b90a896",
+            "startOrdinal": 34,
+            "declarationCount": 2
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/transform.hpp",
+            "sha256": "14a8d708193f27214950ef4bc04601f87a7d510599ce8c2a3b64a4341b9403b9",
+            "startOrdinal": 36,
+            "declarationCount": 2
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/grid/transpose.hpp",
+            "sha256": "1fe421ae97c23423705ee39169bc2b32d3819dd3466f3b01e8f311f828a57e07",
+            "startOrdinal": 38,
+            "declarationCount": 2
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/constant.hpp",
+            "sha256": "63c7a48008c046b17aad1593b7606589686c1c14644748edbf64ec59a71daa15",
+            "startOrdinal": 40,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/deriv.hpp",
+            "sha256": "cdbe363c06c6fb48170429e9026b32626535dd3740823c7053ad320c33c47df7",
+            "startOrdinal": 40,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/detail/gpumat.hpp",
+            "sha256": "b0a0ccc540b75c8c7fcc8d1bc6059b188ae8637eccfdda9e7b6e21f880945c06",
+            "startOrdinal": 40,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/extrapolation.hpp",
+            "sha256": "00a5091edab88260fe7a48d08b26e8270e4c0915b382a0a0ca37e7471ee7176d",
+            "startOrdinal": 40,
+            "declarationCount": 12
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/glob.hpp",
+            "sha256": "cdf0fb9534054d03de907d006cce2a8ad78555fd3c7828d2e24c7f274ea2b825",
+            "startOrdinal": 52,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/gpumat.hpp",
+            "sha256": "6b2f6976ac599e7a7017ba697a245a3e7773cacc2c25c07fb7b735ff59e9fa9b",
+            "startOrdinal": 52,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/interpolation.hpp",
+            "sha256": "d699a0442c78f5800d65f4510efd48c24e0b0998b201bb787bc20283b953b35b",
+            "startOrdinal": 52,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/lut.hpp",
+            "sha256": "f937e51d01c1f1359db3a50dcfea995e9d2339c4524e7302b30fcebc0fc35f07",
+            "startOrdinal": 52,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/mask.hpp",
+            "sha256": "8a3c6cf7f566ad89af6375ae2986952ee6195bdb17bd96ad7aea433c761eda4c",
+            "startOrdinal": 52,
+            "declarationCount": 2
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/remap.hpp",
+            "sha256": "092a73d3b12286e5a193f33e9b21a7075895d5aee70a1c6dfa3c16dfb838f981",
+            "startOrdinal": 54,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/resize.hpp",
+            "sha256": "cf38c4d7bd3abf250745642f7c4b1d3c44c14ac7a1a082beb1618c269ec6e79a",
+            "startOrdinal": 54,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/texture.hpp",
+            "sha256": "deb405918aa0580ce601e3f9abf516508d840318d84977ec692094f5f82dcbd0",
+            "startOrdinal": 54,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/traits.hpp",
+            "sha256": "932fba7dbeaa281dc7b1e6a7e7c52f779388094b923bef17fdb8b63660f84a00",
+            "startOrdinal": 54,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/transform.hpp",
+            "sha256": "707da07ab71e464fd0f99deedaad24af3a82cff26a83a50d258e5b35d717f286",
+            "startOrdinal": 54,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/warping.hpp",
+            "sha256": "f1f7da641c911348da044133d81e5be256dade5407b34128111ca2f1decb95ba",
+            "startOrdinal": 54,
+            "declarationCount": 8
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/ptr2d/zip.hpp",
+            "sha256": "e6065052850cfb35ef379e4d5c2a153c0efb22713cbd044c54cbf935e02f945b",
+            "startOrdinal": 62,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+            "sha256": "a114d1b8b6d55035299ed38d356476ad78307427aabf98d0f316865be9a1fa78",
+            "startOrdinal": 62,
+            "declarationCount": 12
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/detail/tuple.hpp",
+            "sha256": "975f1f60cfc69d7fd45fdaabb981acb7ca35b9e3130e71055135d923262f7415",
+            "startOrdinal": 74,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/detail/type_traits.hpp",
+            "sha256": "26d8a350868319041416d98b73364fe0e0c07d06d7d3b8b14fa10259679d2630",
+            "startOrdinal": 74,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/limits.hpp",
+            "sha256": "5c30625941b41a4d1ddf3a32117a11e4b54805927fea3fb71008a35bfd99e0ad",
+            "startOrdinal": 74,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/saturate_cast.hpp",
+            "sha256": "69365c6027868ae7b9a41be0c5a7f3e13984fb2716ad78ab250db7a8460828ac",
+            "startOrdinal": 74,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+            "sha256": "1707318b4b3c032c31128dd1f4f9fe0afc3473533c25b539b15da003b5ea964e",
+            "startOrdinal": 74,
+            "declarationCount": 38
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/tuple.hpp",
+            "sha256": "eb826fed941f015f778bfe6f66bd6bd8846497fffc7095c0d90c19bc4de876c2",
+            "startOrdinal": 112,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/type_traits.hpp",
+            "sha256": "d335a2c1b79d14f8bcb086de2fd8ce3435fbdee67d7615fdda33294acd00418a",
+            "startOrdinal": 112,
+            "declarationCount": 1
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/vec_math.hpp",
+            "sha256": "7b416c6957d60c2f477c5575c248473a2744cc5e0e47c7f8bc8b6a3cc0474322",
+            "startOrdinal": 113,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/util/vec_traits.hpp",
+            "sha256": "3faf1f87d73aaec9bb334722230db65af33edb81a6e960a76c2746432d5da908",
+            "startOrdinal": 113,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/detail/reduce.hpp",
+            "sha256": "1dd1720e87eb3692fb8c48a5d8be2c5f1fa56d4ed5d41eb28d33bd523c0b3eb7",
+            "startOrdinal": 113,
+            "declarationCount": 1
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/detail/reduce_key_val.hpp",
+            "sha256": "1aaee45203718b379664fd44deecc13490f7e933828d329eb9c8d4f544e80d6d",
+            "startOrdinal": 114,
+            "declarationCount": 1
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/reduce.hpp",
+            "sha256": "e2a84c5ee5337a151f6137932d4c212299c781b582bfda4d4ff7b39514af41a6",
+            "startOrdinal": 115,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/scan.hpp",
+            "sha256": "78ff5490b467ef992ac7f68176498957af23f8213f221175c72aab4a47034668",
+            "startOrdinal": 115,
+            "declarationCount": 0
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+            "sha256": "90fc8bbfdd2d7b35fb70afef7bf1b379747fcc2ec18cd9195000d98b88dce9d0",
+            "startOrdinal": 115,
+            "declarationCount": 25
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev/warp/warp.hpp",
+            "sha256": "14c26acb7bcca1fab1462868cd4024545d3d95e2e97bd53ef42c25640c45a087",
+            "startOrdinal": 140,
+            "declarationCount": 4
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/include/opencv2/cudev.hpp",
+            "sha256": "a1cac9bc839b596a46ed6724adfb22e7578da1311a7f8945b20c93b952f4ae87",
+            "startOrdinal": 144,
+            "declarationCount": 0
+          }
+        ],
+        "compatibilityHeaders": [
+          {
+            "path": "opencv-source/opencv_contrib-5.0.0/modules/cudev/CMakeLists.txt",
+            "sha256": "b6c4d49f9b7bc656048635e1b181528a6514c55ae60a72596024322a596c70c0",
+            "reason": "HAVE_CUDA module disable; recursive installed-header scope; opencv_core include dependency and conditional CUDA tests."
+          }
+        ],
+        "excludedPublicHeaders": []
+      },
+      "artifacts": {
+        "raw": "compatibility/cudev-upstream-raw.json",
+        "classifications": "compatibility/cudev-upstream-classifications.json",
+        "mapping": "compatibility/cudev-upstream-map.txt",
+        "summary": "compatibility/cudev-upstream-summary.json",
+        "familyInventory": "compatibility/cudev-implemented-families.json",
+        "sourceReviewedExtensions": "compatibility/cudev-source-reviewed-extensions.json"
+      },
+      "evidenceContract": {
+        "declarations": 144,
+        "negativeFixturesMinimum": 10,
+        "mappingSha256": "4a6019d4ed601b67e9b1033b39e9b404c589e603ae0e288bcc44e38919a2019e",
+        "familyInventorySha256": "8b7b566dca90f32421051c49e1a44b954b237bfac24188f9d4896dd97d5da2ac",
+        "sourceReviewedExtensionSha256": "eb4febed8020b99f487c98b888f526eecb8246392b3ea40d409c9555f8c02e42",
+        "zeroMissing": true,
+        "repositoryWideParityClaimed": false
+      }
     }
   ],
   "limitations": [
     "The catalog centralizes source/header scope, classification policy, artifact bindings, generator commands, and semantic guard commands for the parser-backed map set, including the staged contrib batches.",
     "Each module retains its specialized extraction and semantic implementation; catalog orchestration does not assert repository-wide OpenCV parity.",
-    "Additional contrib modules are introduced only as explicit catalog rows after their source scope and classification evidence are reviewed."
+    "Additional contrib modules are introduced only as explicit catalog rows after their source scope and classification evidence are reviewed.",
+    "Cudev records a non-template parser subset and a separate template/macro source inventory. Its complete callable, macro-expansion and template-instantiation coverage remains open; zero missing applies only to the recorded parser subset."
   ]
 }
