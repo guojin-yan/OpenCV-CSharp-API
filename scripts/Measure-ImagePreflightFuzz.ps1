@@ -118,7 +118,8 @@ function Invoke-FuzzFramework {
                     'IdentifyDeterministicMutationCorpusGifMetadataNeverEscapesParserOrPublishesUnboundedSizes',
                     'IdentifyDeterministicMutationCorpusAvifPrimaryItemKeepsEveryTraversalBounded',
                     'IdentifyDeterministicMutationCorpusJpegMarkersNeverEscapeOrPublishUnboundedFacts',
-                    'IdentifyDeterministicMutationCorpusApngFramesNeverEscapeOrPublishInvalidCanvasBudgets')) {
+                    'IdentifyDeterministicMutationCorpusApngFramesNeverEscapeOrPublishInvalidCanvasBudgets',
+                    'IdentifyDeterministicMutationCorpusWebpContainersNeverEscapeOrPublishUnboundedCanvasFacts')) {
                 if (@($results | Where-Object { ([string]$_.testName).Contains($requiredTest) -and [string]$_.outcome -ceq 'Passed' }).Count -ne 1) { $testsExecuted = $false }
             }
             if ($testsExecuted) { Write-Host "IMAGE_PREFLIGHT_FUZZ_TEST_RESULTS framework=$Framework tests_passed=$($counters.passed) trx=$trxPath" }
@@ -202,7 +203,7 @@ $evidence = [ordered]@{
     limitations = @(
         'The corpus is deterministic managed preflight coverage; it is not coverage-guided native fuzzing.',
         'The isolated dotnet test process distinguishes clean, managed failure, OOM, crash, and timeout outcomes.',
-        'A clean classification requires passing TRX execution evidence for both general corpus tests plus the GIF metadata, AVIF primary item, JPEG marker, and APNG frame mutation tests; an empty dotnet test invocation fails.',
+        'A clean classification requires passing TRX execution evidence for both general corpus tests plus the GIF metadata, AVIF primary item, JPEG marker, APNG frame, and WebP container mutation tests; an empty dotnet test invocation fails.',
         'WorkingSet64 is sampled process RSS evidence for this runner; process teardown cannot prove absence of a long-lived native leak.',
         'No native runtime is required because the tested Identify paths stop before native decoding.'
     )
