@@ -37,6 +37,8 @@ $jpeg2000TestPath = Join-Path $repo 'tests/OpenCvSharp.Tests/ImgCodecs/Jpeg2000H
 if (-not (Test-Path -LiteralPath $jpeg2000TestPath -PathType Leaf)) { throw 'JPEG 2000 header admission tests are missing.' }
 $openExrTestPath = Join-Path $repo 'tests/OpenCvSharp.Tests/ImgCodecs/OpenExrHeaderPreflightTests.cs'
 if (-not (Test-Path -LiteralPath $openExrTestPath -PathType Leaf)) { throw 'OpenEXR first-header admission tests are missing.' }
+$bmpTestPath = Join-Path $repo 'tests/OpenCvSharp.Tests/ImgCodecs/BmpHeaderPreflightTests.cs'
+if (-not (Test-Path -LiteralPath $bmpTestPath -PathType Leaf)) { throw 'BMP DIB/palette admission tests are missing.' }
 if (@($manifest.frameworks).Count -ne 2 -or @($manifest.replacementBytes).Count -ne 5 -or @($manifest.fixtures).Count -lt 13) { throw 'Mutation corpus manifest dimensions drifted.' }
 
 $frameworks = @('net8.0', 'net10.0')
@@ -51,7 +53,7 @@ foreach ($framework in $frameworks) {
     $startInfo.RedirectStandardError = $true
     foreach ($argument in @(
             'test', $project, '-c', 'Release', '-f', $framework, '--no-restore',
-            '--filter', 'FullyQualifiedName~IdentifyDeterministicMutationCorpus|FullyQualifiedName~GifMetadataPreflightTests|FullyQualifiedName~AvifPrimaryItemPreflightTests|FullyQualifiedName~JpegMarkerPreflightTests|FullyQualifiedName~ApngFramePreflightTests|FullyQualifiedName~WebpContainerPreflightTests|FullyQualifiedName~TiffDirectoryPreflightTests|FullyQualifiedName~Jpeg2000HeaderPreflightTests|FullyQualifiedName~OpenExrHeaderPreflightTests',
+            '--filter', 'FullyQualifiedName~IdentifyDeterministicMutationCorpus|FullyQualifiedName~GifMetadataPreflightTests|FullyQualifiedName~AvifPrimaryItemPreflightTests|FullyQualifiedName~JpegMarkerPreflightTests|FullyQualifiedName~ApngFramePreflightTests|FullyQualifiedName~WebpContainerPreflightTests|FullyQualifiedName~TiffDirectoryPreflightTests|FullyQualifiedName~Jpeg2000HeaderPreflightTests|FullyQualifiedName~OpenExrHeaderPreflightTests|FullyQualifiedName~BmpHeaderPreflightTests',
             '--results-directory', $resultsDirectory, '--logger', 'trx;LogFileName=preflight.trx',
             '--logger', 'console;verbosity=minimal')) {
         [void]$startInfo.ArgumentList.Add($argument)
@@ -118,7 +120,12 @@ foreach ($framework in $frameworks) {
             'OpenExrStrictPolicyRejectsConflictingOrUnknownPixelFacts',
             'IdentifyRequiresCompleteFirstOpenExrHeaderBeforePublishingFacts',
             'IdentifyDoesNotApplyLaterOpenExrDeepPartsToTheFirstScanlinePart',
-            'IdentifyDeterministicMutationCorpusOpenExrNeverEscapesOrPublishesConflictingHeaderFacts')) {
+            'IdentifyDeterministicMutationCorpusOpenExrNeverEscapesOrPublishesConflictingHeaderFacts',
+            'IdentifyDoesNotInterpretUnsignedOs2BmpHeightAsTopDown',
+            'BmpHeaderBudgetsRejectBeforeNativeDecodeAndPreserveStreams',
+            'BmpStrictPolicyRejectsUnknownLayoutsAndConflictingStorageFacts',
+            'IdentifyRequiresCompleteBmpDibAndExactPayloadBeforePublishingFrameFacts',
+            'IdentifyDeterministicMutationCorpusBmpNeverEscapesOrPublishesInconsistentStorageFacts')) {
         if (@($results | Where-Object { ([string]$_.testName).Contains($requiredTest) -and [string]$_.outcome -ceq 'Passed' }).Count -ne 1) { throw "Required image preflight test did not pass on ${framework}: $requiredTest" }
     }
     foreach ($requiredRegression in @(
@@ -142,6 +149,17 @@ foreach ($framework in $frameworks) {
             @{ Name = 'IdentifyRejectsOpenExrSamplingThatConflictsWithDataWindow'; Count = 4 },
             @{ Name = 'IdentifyReadsRealOpenExrFirstHeaderFixtures'; Count = 7 })) {
         if (@($results | Where-Object { ([string]$_.testName).Contains($regression.Name) -and [string]$_.outcome -ceq 'Passed' }).Count -ne $regression.Count) { throw "All $($regression.Count) OpenEXR cases must pass on ${framework}: $($regression.Name)" }
+    }
+    foreach ($regression in @(
+            @{ Name = 'IdentifyReadsBmpCoreDimensionsFromUnsigned16BitFields'; Count = 5 },
+            @{ Name = 'IdentifyNeverPublishesIndexedBmpFactsWithoutCompletePalette'; Count = 3 },
+            @{ Name = 'IdentifyRejectsConflictingBmpImageByteLengths'; Count = 2 },
+            @{ Name = 'IdentifyRejectsUnrecognizedBmpDibLayouts'; Count = 2 },
+            @{ Name = 'IdentifyRequiresOneBmpColorPlane'; Count = 2 },
+            @{ Name = 'IdentifyDoesNotClaimFrameForInvalidBmpBitCounts'; Count = 2 },
+            @{ Name = 'IdentifyNeverLetsBmpV5ProfilesOverlapHeaders'; Count = 2 },
+            @{ Name = 'IdentifyReadsRealBmpDibAndPaletteFixtures'; Count = 10 })) {
+        if (@($results | Where-Object { ([string]$_.testName).Contains($regression.Name) -and [string]$_.outcome -ceq 'Passed' }).Count -ne $regression.Count) { throw "All $($regression.Count) BMP cases must pass on ${framework}: $($regression.Name)" }
     }
     Write-Host "IMAGE_PREFLIGHT_MUTATION_FRAMEWORK_OK framework=$framework tests_passed=$($counters.passed) timeout_seconds=$TimeoutSeconds trx=$trxPath"
     $process.Dispose()

@@ -233,15 +233,9 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
 
             if (data.Length >= 2 && data[0] == (byte)'B' && data[1] == (byte)'M')
             {
-                long signedWidth = data.Length >= 22 ? ReadSignedLe32(data, 18) : 0;
-                long signedHeight = data.Length >= 26 ? ReadSignedLe32(data, 22) : 0;
-                long absoluteHeight = signedHeight == int.MinValue ? (long)int.MaxValue + 1 : Math.Abs(signedHeight);
-                int width = signedWidth > 0 && signedWidth <= int.MaxValue ? (int)signedWidth : 0;
-                int height = absoluteHeight > 0 && absoluteHeight <= int.MaxValue ? (int)absoluteHeight : 0;
-                PixelFacts pixelFacts = ReadBmpPixelFacts(data);
-                bool frameKnown = IsBmpHeaderComplete(data);
-                return Result("bmp", width, height, width > 0 && height > 0, 1, frameKnown, data.Length,
-                    default(MetadataFacts), pixelFacts);
+                BmpFacts facts = ReadBmpFacts(data);
+                return Result("bmp", facts.Width, facts.Height, facts.SizeKnown, 1, facts.FrameKnown, data.Length,
+                    default(MetadataFacts), facts.Pixels);
             }
 
             if (data.Length >= 4 && ReadBe32(data, 0) == 0x59A66A95)
@@ -515,100 +509,6 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             }
 
             return facts;
-        }
-
-        private static PixelFacts ReadBmpPixelFacts(byte[] data)
-        {
-            PixelFacts facts = new PixelFacts();
-            if (!IsBmpHeaderComplete(data) || data.Length < 26) return facts;
-
-            int dibSize = ReadSignedLe32(data, 14);
-            int bitCount;
-            int compression = 0;
-            if (dibSize == 12)
-            {
-                bitCount = ReadLe16(data, 24);
-            }
-            else
-            {
-                if (dibSize < 40 || data.Length < 34) return facts;
-                bitCount = ReadLe16(data, 28);
-                compression = ReadSignedLe32(data, 30);
-            }
-
-            if (compression != 0) return facts;
-            switch (bitCount)
-            {
-                case 1:
-                case 4:
-                case 8:
-                    facts.BitDepth = bitCount;
-                    facts.BitDepthKnown = true;
-                    facts.Channels = 1;
-                    facts.ChannelsKnown = true;
-                    break;
-                case 24:
-                case 32:
-                    facts.BitDepth = 8;
-                    facts.BitDepthKnown = true;
-                    facts.Channels = 3;
-                    facts.ChannelsKnown = true;
-                    break;
-            }
-            return facts;
-        }
-
-        private static bool IsBmpHeaderComplete(byte[] data)
-        {
-            if (data.Length < 26 || data[0] != (byte)'B' || data[1] != (byte)'M') return false;
-
-            uint fileSize = ReadUnsignedLe32(data, 2);
-            uint pixelOffset = ReadUnsignedLe32(data, 10);
-            uint dibSize = ReadUnsignedLe32(data, 14);
-            long dibEnd;
-            long width;
-            long height;
-            int bitCount;
-            int compression;
-            if (dibSize == 12)
-            {
-                if (data.Length < 26 || ReadLe16(data, 22) != 1) return false;
-                width = ReadLe16(data, 18);
-                height = ReadLe16(data, 20);
-                bitCount = ReadLe16(data, 24);
-                compression = 0;
-                dibEnd = 26;
-            }
-            else
-            {
-                if (dibSize < 40 || dibSize > int.MaxValue) return false;
-                dibEnd = 14L + dibSize;
-                if (dibEnd > data.Length || data.Length < 34 || ReadLe16(data, 26) != 1) return false;
-                width = ReadSignedLe32(data, 18);
-                long signedHeight = ReadSignedLe32(data, 22);
-                height = signedHeight == int.MinValue ? (long)int.MaxValue + 1 : Math.Abs(signedHeight);
-                bitCount = ReadLe16(data, 28);
-                compression = ReadSignedLe32(data, 30);
-            }
-
-            if (width <= 0 || height <= 0 || bitCount <= 0 || compression != 0 ||
-                fileSize != (uint)data.Length || pixelOffset < (ulong)dibEnd || pixelOffset >= fileSize)
-            {
-                return false;
-            }
-
-            try
-            {
-                long rowBits = checked(width * bitCount);
-                long rowStride = checked(((rowBits + 31) / 32) * 4);
-                long payloadBytes = checked(rowStride * height);
-                long pixelEnd = checked((long)pixelOffset + payloadBytes);
-                return pixelEnd == fileSize;
-            }
-            catch (OverflowException)
-            {
-                return false;
-            }
         }
 
         private static bool TryReadSunRasterHeader(byte[] data, out int width, out int height, out bool frameKnown, out PixelFacts pixelFacts)

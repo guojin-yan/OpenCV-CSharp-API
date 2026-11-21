@@ -1490,8 +1490,9 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         [Fact]
         public void SpanIdentifyUsesTheSameManagedContract()
         {
-            ImageIdentifyResult result = ImgCodecsCv2.Identify(new byte[] { (byte)'B', (byte)'M', 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0 }.AsSpan());
+            ImageIdentifyResult result = ImgCodecsCv2.Identify(CreateBmpFixture(24, 0).AsSpan());
             Assert.Equal("bmp", result.Format);
+            Assert.True(result.IsSizeKnown);
             Assert.Equal(2, result.Width);
             Assert.Equal(3, result.Height);
         }
@@ -1829,7 +1830,7 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         {
             const int width = 2;
             const int height = 3;
-            const int pixelOffset = 54;
+            int pixelOffset = 54 + (bitCount <= 8 ? (1 << bitCount) * 4 : 0);
             int rowStride = ((width * bitCount + 31) / 32) * 4;
             int fileSize = pixelOffset + rowStride * height;
             byte[] bmp = new byte[fileSize];

@@ -88,6 +88,10 @@ OpenEXR requires a complete first header, known version flags, unique typed admi
 
 OpenEXR 要求首个头部完整、版本标志已知、准入属性类型正确且唯一、通道名逐字节唯一。通道采样必须与 dataWindow 一致，平铺/deep 首部件要求单位采样。HALF 为 16-bit 存储，UINT/FLOAT 为 32-bit；混合位宽使深度未知。多部件文件只报告首部件事实，不证明 chunk、帧数、总分配量或最终 Mat 精度。
 
+BMP reads geometry from complete known DIB layouts, including unsigned CORE/OS2 dimensions and signed Windows height. BI_RGB frame/pixel facts additionally require complete palettes, consistent byte declarations and exact pixel/profile file ranges. V5 linked profiles are range-checked without opening names. Compressed/bitfield facts and metadata/ICC lengths remain unknown; encoded budgets do not prove palette expansion, color conversion or native allocation.
+
+BMP 从完整已知 DIB 读取尺寸，区分 CORE/OS2 无符号宽高和 Windows 有符号高度。BI_RGB 帧/像素事实还要求色表完整、字节声明一致、像素/profile 文件范围精确。V5 linked profile 只检查范围，不打开名称。压缩/bitfield 事实及 metadata/ICC 长度仍未知；编码预算不证明调色板展开、颜色转换或 native 分配量。
+
 `ConsoleSamples` 的 `typed-mat` 与 `buffered-codec` 命令提供可运行的机器可读示例；没有 native runtime 时明确 skipped，不能把 skipped 当作能力已验证。
 
 ## Platform and headless boundaries / 平台与 headless 边界
