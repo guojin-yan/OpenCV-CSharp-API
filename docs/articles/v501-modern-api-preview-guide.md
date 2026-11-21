@@ -100,6 +100,10 @@ PAM requires unique line-based WIDTH/HEIGHT/DEPTH/MAXVAL and complete ENDHDR. He
 
 PAM 要求 WIDTH/HEIGHT/DEPTH/MAXVAL 按行且唯一，以及完整 ENDHDR。支持头部空白和任意正数元组深度，可选/重复的 TUPLTYPE 不决定通道数。checked 的精确 raster 长度决定帧/存储事实，负载失败可保留已证明的头部。13 份真实文件包含 5/17 通道自定义元组；OpenCV native PAM 仍限于 1..4 通道。头部事实不证明 native 支持、元组/样本有效性、metadata 长度或最终/native 分配量。
 
+PNM P1 counts individual ASCII bits, P2/P3 count bounded decimal samples, and P4/P5/P6 require exact raw bytes after a single delimiter. Comments terminate at CR or LF; LF after a raw CR delimiter is a raster byte. Sixteen independently decoded fixtures cover plain/raw, 8/16-bit and packed-row boundaries. Conservative standalone completion excludes trailing junk and image sequences; raw sample/color semantics and final/native allocation remain unknown.
+
+PNM P1 逐个计数 ASCII bit，P2/P3 计数有界十进制样本，P4/P5/P6 在单个分隔字节后核对精确 raw 长度。注释以 CR 或 LF 结束，raw CR 分隔符后的 LF 属于 raster。16 份独立解码文件覆盖 plain/raw、8/16 位及位打包行边界。保守单图完整性不涵盖尾部杂项和图像序列；raw 样本/色彩语义与最终/native 分配仍未知。
+
 `ConsoleSamples` 的 `typed-mat` 与 `buffered-codec` 命令提供可运行的机器可读示例；没有 native runtime 时明确 skipped，不能把 skipped 当作能力已验证。
 
 ## Platform and headless boundaries / 平台与 headless 边界

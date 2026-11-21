@@ -846,7 +846,7 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                 {
                     asciiSampleCount = long.MaxValue;
                 }
-                frameKnown = TryReadPnmAsciiPayload(data, offset, asciiSampleCount, 1);
+                frameKnown = TryReadPlainPbmPayload(data, offset, asciiSampleCount);
                 return true;
             }
 
@@ -1025,6 +1025,19 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             return HasOnlyPnmWhitespaceAndComments(data, offset);
         }
 
+        private static bool TryReadPlainPbmPayload(byte[] data, int offset, long sampleCount)
+        {
+            // P1 pixels are individual ASCII bits, with optional whitespace;
+            // unlike P2/P3 samples, adjacent digits do not form an integer.
+            for (long sample = 0; sample < sampleCount; ++sample)
+            {
+                SkipPnmWhitespaceAndComments(data, ref offset);
+                if (offset >= data.Length || (data[offset] != '0' && data[offset] != '1')) return false;
+                ++offset;
+            }
+            return HasOnlyPnmWhitespaceAndComments(data, offset);
+        }
+
         private static bool IsPnmBinaryPayloadComplete(byte[] data, int headerOffset, int width, int height, int channels, int bytesPerSample, bool packedBits)
         {
             int payloadOffset;
@@ -1049,21 +1062,22 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             int delimiter = offset;
             if (data[delimiter] == (byte)'#')
             {
-                while (delimiter < data.Length && data[delimiter] != 10) ++delimiter;
-                if (delimiter >= data.Length) return false;
-                ++delimiter;
+                while (delimiter < data.Length && data[delimiter] != 10 && data[delimiter] != 13) ++delimiter;
             }
-            else
-            {
-                if (!IsPnmWhitespace(data[delimiter])) return false;
-                byte whitespace = data[delimiter++];
-                if (whitespace == 13 && delimiter < data.Length && data[delimiter] == 10) ++delimiter;
-            }
-            payloadOffset = delimiter;
+            if (delimiter >= data.Length || !IsPnmWhitespace(data[delimiter])) return false;
+            // Raw P4/P5/P6 have exactly one whitespace byte before the raster.
+            // After a CR delimiter, LF is already a binary sample, not CRLF.
+            payloadOffset = delimiter + 1;
             return true;
         }
 
         private static bool HasOnlyPnmWhitespaceAndComments(byte[] data, int offset)
+        {
+            SkipPnmWhitespaceAndComments(data, ref offset);
+            return offset == data.Length;
+        }
+
+        private static void SkipPnmWhitespaceAndComments(byte[] data, ref int offset)
         {
             while (offset < data.Length)
             {
@@ -1072,10 +1086,11 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                     ++offset;
                     continue;
                 }
-                if (data[offset] != (byte)'#') return false;
-                while (offset < data.Length && data[offset] != 10) ++offset;
+                if (data[offset] != (byte)'#') return;
+                // Netpbm comments end before either CR or LF. The terminator
+                // remains whitespace, or the sole raw-raster delimiter above.
+                while (offset < data.Length && data[offset] != 10 && data[offset] != 13) ++offset;
             }
-            return true;
         }
 
         private static bool TryReadPnmIntegerBounded(byte[] data, ref int offset, int end, out int value)
@@ -1106,16 +1121,7 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
         private static bool TryReadPnmInteger(byte[] data, ref int offset, out int value)
         {
             value = 0;
-            while (offset < data.Length)
-            {
-                if (IsPnmWhitespace(data[offset]))
-                {
-                    ++offset;
-                    continue;
-                }
-                if (data[offset] != (byte)'#') break;
-                while (offset < data.Length && data[offset] != 10) ++offset;
-            }
+            SkipPnmWhitespaceAndComments(data, ref offset);
             if (offset >= data.Length || data[offset] < (byte)'0' || data[offset] > (byte)'9') return false;
 
             long parsed = 0;
