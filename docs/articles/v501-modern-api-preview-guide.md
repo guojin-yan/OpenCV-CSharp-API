@@ -84,6 +84,10 @@ JPEG 2000 checks Part 1 SIZ precision and tile-grid limits. JP2 additionally req
 
 JPEG 2000 检查 Part 1 SIZ 精度和 tile 网格限制；JP2 还要求文件类型、头与码流盒有界且唯一，并交叉核对 IHDR/BPCC 与 SIZ 的尺寸、组件数、精度及符号描述。矛盾头部或损坏尾盒使准入事实未知；完整码流/帧有效性、调色板/颜色转换、native 可用性和最终 Mat 精度仍单独验证。
 
+OpenEXR requires a complete first header, known version flags, unique typed admission attributes and unique byte-exact channel names. Channel sampling must agree with the data window; tiled/deep first parts require unit sampling. HALF stores 16 bits, UINT/FLOAT store 32; mixed widths keep depth unknown. Multipart facts describe the first part only. Chunks, frame count, aggregate allocation and final Mat precision remain unproven.
+
+OpenEXR 要求首个头部完整、版本标志已知、准入属性类型正确且唯一、通道名逐字节唯一。通道采样必须与 dataWindow 一致，平铺/deep 首部件要求单位采样。HALF 为 16-bit 存储，UINT/FLOAT 为 32-bit；混合位宽使深度未知。多部件文件只报告首部件事实，不证明 chunk、帧数、总分配量或最终 Mat 精度。
+
 `ConsoleSamples` 的 `typed-mat` 与 `buffered-codec` 命令提供可运行的机器可读示例；没有 native runtime 时明确 skipped，不能把 skipped 当作能力已验证。
 
 ## Platform and headless boundaries / 平台与 headless 边界

@@ -35,6 +35,8 @@ $tiffTestPath = Join-Path $repo 'tests/OpenCvSharp.Tests/ImgCodecs/TiffDirectory
 if (-not (Test-Path -LiteralPath $tiffTestPath -PathType Leaf)) { throw 'TIFF directory admission tests are missing.' }
 $jpeg2000TestPath = Join-Path $repo 'tests/OpenCvSharp.Tests/ImgCodecs/Jpeg2000HeaderPreflightTests.cs'
 if (-not (Test-Path -LiteralPath $jpeg2000TestPath -PathType Leaf)) { throw 'JPEG 2000 header admission tests are missing.' }
+$openExrTestPath = Join-Path $repo 'tests/OpenCvSharp.Tests/ImgCodecs/OpenExrHeaderPreflightTests.cs'
+if (-not (Test-Path -LiteralPath $openExrTestPath -PathType Leaf)) { throw 'OpenEXR first-header admission tests are missing.' }
 if (@($manifest.frameworks).Count -ne 2 -or @($manifest.replacementBytes).Count -ne 5 -or @($manifest.fixtures).Count -lt 13) { throw 'Mutation corpus manifest dimensions drifted.' }
 
 $frameworks = @('net8.0', 'net10.0')
@@ -49,7 +51,7 @@ foreach ($framework in $frameworks) {
     $startInfo.RedirectStandardError = $true
     foreach ($argument in @(
             'test', $project, '-c', 'Release', '-f', $framework, '--no-restore',
-            '--filter', 'FullyQualifiedName~IdentifyDeterministicMutationCorpus|FullyQualifiedName~GifMetadataPreflightTests|FullyQualifiedName~AvifPrimaryItemPreflightTests|FullyQualifiedName~JpegMarkerPreflightTests|FullyQualifiedName~ApngFramePreflightTests|FullyQualifiedName~WebpContainerPreflightTests|FullyQualifiedName~TiffDirectoryPreflightTests|FullyQualifiedName~Jpeg2000HeaderPreflightTests',
+            '--filter', 'FullyQualifiedName~IdentifyDeterministicMutationCorpus|FullyQualifiedName~GifMetadataPreflightTests|FullyQualifiedName~AvifPrimaryItemPreflightTests|FullyQualifiedName~JpegMarkerPreflightTests|FullyQualifiedName~ApngFramePreflightTests|FullyQualifiedName~WebpContainerPreflightTests|FullyQualifiedName~TiffDirectoryPreflightTests|FullyQualifiedName~Jpeg2000HeaderPreflightTests|FullyQualifiedName~OpenExrHeaderPreflightTests',
             '--results-directory', $resultsDirectory, '--logger', 'trx;LogFileName=preflight.trx',
             '--logger', 'console;verbosity=minimal')) {
         [void]$startInfo.ArgumentList.Add($argument)
@@ -111,7 +113,12 @@ foreach ($framework in $frameworks) {
             'IdentifyNeverIgnoresMalformedJp2BoxesAfterCodestream',
             'Jpeg2000HeaderBudgetsRejectBeforeNativeDecodeAndPreserveStreams',
             'Jpeg2000StrictPolicyRejectsConflictingHeadersAndMixedPrecision',
-            'IdentifyDeterministicMutationCorpusJpeg2000NeverEscapesOrPublishesConflictingHeaderFacts')) {
+            'IdentifyDeterministicMutationCorpusJpeg2000NeverEscapesOrPublishesConflictingHeaderFacts',
+            'OpenExrHeaderBudgetsRejectBeforeNativeDecodeAndPreserveStreams',
+            'OpenExrStrictPolicyRejectsConflictingOrUnknownPixelFacts',
+            'IdentifyRequiresCompleteFirstOpenExrHeaderBeforePublishingFacts',
+            'IdentifyDoesNotApplyLaterOpenExrDeepPartsToTheFirstScanlinePart',
+            'IdentifyDeterministicMutationCorpusOpenExrNeverEscapesOrPublishesConflictingHeaderFacts')) {
         if (@($results | Where-Object { ([string]$_.testName).Contains($requiredTest) -and [string]$_.outcome -ceq 'Passed' }).Count -ne 1) { throw "Required image preflight test did not pass on ${framework}: $requiredTest" }
     }
     foreach ($requiredRegression in @(
@@ -128,6 +135,14 @@ foreach ($framework in $frameworks) {
         if (@($results | Where-Object { ([string]$_.testName).Contains($requiredRegression) -and [string]$_.outcome -ceq 'Passed' }).Count -ne 2) { throw "Both JPEG 2000 regression cases must pass on ${framework}: $requiredRegression" }
     }
     if (@($results | Where-Object { ([string]$_.testName).Contains('IdentifyReadsRealLosslessJpeg2000Fixtures') -and [string]$_.outcome -ceq 'Passed' }).Count -ne 5) { throw "All five real JPEG 2000 fixtures must pass on $framework." }
+    foreach ($regression in @(
+            @{ Name = 'IdentifyRejectsDuplicateOpenExrChannelNames'; Count = 3 },
+            @{ Name = 'IdentifyNeverIgnoresWrongTypedOpenExrChannels'; Count = 2 },
+            @{ Name = 'IdentifyRejectsUnsupportedOpenExrVersionFlags'; Count = 3 },
+            @{ Name = 'IdentifyRejectsOpenExrSamplingThatConflictsWithDataWindow'; Count = 4 },
+            @{ Name = 'IdentifyReadsRealOpenExrFirstHeaderFixtures'; Count = 7 })) {
+        if (@($results | Where-Object { ([string]$_.testName).Contains($regression.Name) -and [string]$_.outcome -ceq 'Passed' }).Count -ne $regression.Count) { throw "All $($regression.Count) OpenEXR cases must pass on ${framework}: $($regression.Name)" }
+    }
     Write-Host "IMAGE_PREFLIGHT_MUTATION_FRAMEWORK_OK framework=$framework tests_passed=$($counters.passed) timeout_seconds=$TimeoutSeconds trx=$trxPath"
     $process.Dispose()
 }
