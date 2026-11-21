@@ -33,6 +33,8 @@ $webpTestPath = Join-Path $repo 'tests/OpenCvSharp.Tests/ImgCodecs/WebpContainer
 if (-not (Test-Path -LiteralPath $webpTestPath -PathType Leaf)) { throw 'WebP container admission tests are missing.' }
 $tiffTestPath = Join-Path $repo 'tests/OpenCvSharp.Tests/ImgCodecs/TiffDirectoryPreflightTests.cs'
 if (-not (Test-Path -LiteralPath $tiffTestPath -PathType Leaf)) { throw 'TIFF directory admission tests are missing.' }
+$jpeg2000TestPath = Join-Path $repo 'tests/OpenCvSharp.Tests/ImgCodecs/Jpeg2000HeaderPreflightTests.cs'
+if (-not (Test-Path -LiteralPath $jpeg2000TestPath -PathType Leaf)) { throw 'JPEG 2000 header admission tests are missing.' }
 if (@($manifest.frameworks).Count -ne 2 -or @($manifest.replacementBytes).Count -ne 5 -or @($manifest.fixtures).Count -lt 13) { throw 'Mutation corpus manifest dimensions drifted.' }
 
 $frameworks = @('net8.0', 'net10.0')
@@ -47,7 +49,7 @@ foreach ($framework in $frameworks) {
     $startInfo.RedirectStandardError = $true
     foreach ($argument in @(
             'test', $project, '-c', 'Release', '-f', $framework, '--no-restore',
-            '--filter', 'FullyQualifiedName~IdentifyDeterministicMutationCorpus|FullyQualifiedName~GifMetadataPreflightTests|FullyQualifiedName~AvifPrimaryItemPreflightTests|FullyQualifiedName~JpegMarkerPreflightTests|FullyQualifiedName~ApngFramePreflightTests|FullyQualifiedName~WebpContainerPreflightTests|FullyQualifiedName~TiffDirectoryPreflightTests',
+            '--filter', 'FullyQualifiedName~IdentifyDeterministicMutationCorpus|FullyQualifiedName~GifMetadataPreflightTests|FullyQualifiedName~AvifPrimaryItemPreflightTests|FullyQualifiedName~JpegMarkerPreflightTests|FullyQualifiedName~ApngFramePreflightTests|FullyQualifiedName~WebpContainerPreflightTests|FullyQualifiedName~TiffDirectoryPreflightTests|FullyQualifiedName~Jpeg2000HeaderPreflightTests',
             '--results-directory', $resultsDirectory, '--logger', 'trx;LogFileName=preflight.trx',
             '--logger', 'console;verbosity=minimal')) {
         [void]$startInfo.ArgumentList.Add($argument)
@@ -102,7 +104,14 @@ foreach ($framework in $frameworks) {
             'IdentifyDeterministicMutationCorpusWebpContainersNeverEscapeOrPublishUnboundedCanvasFacts',
             'IdentifyRejectsDuplicateTiffAdmissionTagsInBothDirectoryFormats',
             'TiffStrictPixelPolicyRejectsAmbiguousSamplesAndDuplicates',
-            'IdentifyDeterministicMutationCorpusTiffDirectoriesNeverEscapeOrPublishInconsistentBudgets')) {
+            'IdentifyDeterministicMutationCorpusTiffDirectoriesNeverEscapeOrPublishInconsistentBudgets',
+            'IdentifyRequiresJp2ImageHeaderComponentsToAgree',
+            'IdentifyRequiresJp2PerComponentPrecisionToAgree',
+            'IdentifyRejectsDuplicateJp2CodestreamBoxes',
+            'IdentifyNeverIgnoresMalformedJp2BoxesAfterCodestream',
+            'Jpeg2000HeaderBudgetsRejectBeforeNativeDecodeAndPreserveStreams',
+            'Jpeg2000StrictPolicyRejectsConflictingHeadersAndMixedPrecision',
+            'IdentifyDeterministicMutationCorpusJpeg2000NeverEscapesOrPublishesConflictingHeaderFacts')) {
         if (@($results | Where-Object { ([string]$_.testName).Contains($requiredTest) -and [string]$_.outcome -ceq 'Passed' }).Count -ne 1) { throw "Required image preflight test did not pass on ${framework}: $requiredTest" }
     }
     foreach ($requiredRegression in @(
@@ -111,6 +120,14 @@ foreach ($framework in $frameworks) {
             'IdentifyRequiresTiffPerSampleBitCountsToMatchChannels')) {
         if (@($results | Where-Object { ([string]$_.testName).Contains($requiredRegression) -and [string]$_.outcome -ceq 'Passed' }).Count -ne 4) { throw "All four TIFF directory/byte-order regression cases must pass on ${framework}: $requiredRegression" }
     }
+    foreach ($requiredRegression in @(
+            'IdentifyRequiresJp2ImageHeaderAndCodestreamGeometryToAgree',
+            'IdentifyRequiresJp2ConstantPrecisionAndSignToAgree',
+            'IdentifyRejectsJpeg2000PrecisionOutsidePartOneRange',
+            'IdentifyRejectsJpeg2000TileGridsAbove65535')) {
+        if (@($results | Where-Object { ([string]$_.testName).Contains($requiredRegression) -and [string]$_.outcome -ceq 'Passed' }).Count -ne 2) { throw "Both JPEG 2000 regression cases must pass on ${framework}: $requiredRegression" }
+    }
+    if (@($results | Where-Object { ([string]$_.testName).Contains('IdentifyReadsRealLosslessJpeg2000Fixtures') -and [string]$_.outcome -ceq 'Passed' }).Count -ne 5) { throw "All five real JPEG 2000 fixtures must pass on $framework." }
     Write-Host "IMAGE_PREFLIGHT_MUTATION_FRAMEWORK_OK framework=$framework tests_passed=$($counters.passed) timeout_seconds=$TimeoutSeconds trx=$trxPath"
     $process.Dispose()
 }

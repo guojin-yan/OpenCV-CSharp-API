@@ -80,6 +80,10 @@ WebP 支持普通 VP8/VP8L 尺寸；报告帧数和编码像素事实前，要�
 
 TIFF/BigTIFF 拒绝重复的准入标签，并要求显式样本布局一致才能报告深度/存储。目录和样本扫描量受实际输入限制；样本扫描预算不足时深度/存储保持未知。主目录链的页数及编码头预算不证明 strip/tile 完整性或最终 Mat 精度。
 
+JPEG 2000 checks Part 1 SIZ precision and tile-grid limits. JP2 additionally requires bounded, unique file-type/header/codestream boxes and agreement between IHDR/BPCC and SIZ dimensions, component counts, precision and sign descriptors. Conflicting headers or broken suffix boxes keep admission facts unknown. Complete codestream/frame validity, palette/color conversion, native availability and final Mat precision remain separate.
+
+JPEG 2000 检查 Part 1 SIZ 精度和 tile 网格限制；JP2 还要求文件类型、头与码流盒有界且唯一，并交叉核对 IHDR/BPCC 与 SIZ 的尺寸、组件数、精度及符号描述。矛盾头部或损坏尾盒使准入事实未知；完整码流/帧有效性、调色板/颜色转换、native 可用性和最终 Mat 精度仍单独验证。
+
 `ConsoleSamples` 的 `typed-mat` 与 `buffered-codec` 命令提供可运行的机器可读示例；没有 native runtime 时明确 skipped，不能把 skipped 当作能力已验证。
 
 ## Platform and headless boundaries / 平台与 headless 边界

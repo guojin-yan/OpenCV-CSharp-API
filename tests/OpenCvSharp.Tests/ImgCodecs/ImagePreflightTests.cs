@@ -2093,14 +2093,25 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
                 WriteBe32(stream, 0);
                 WriteAscii(stream, "jp2 ");
 
-                WriteBe32(stream, 30);
+                int components = (codestream[40] << 8) | codestream[41];
+                bool uniform = true;
+                for (int component = 1; component < components; ++component)
+                    uniform &= codestream[42] == codestream[42 + component * 3];
+                WriteBe32(stream, (uint)(30 + (uniform ? 0 : 8 + components)));
                 WriteAscii(stream, "jp2h");
                 WriteBe32(stream, 22);
                 WriteAscii(stream, "ihdr");
-                WriteBe32(stream, 1);
-                WriteBe32(stream, 1);
-                WriteBe16(stream, 1);
-                stream.WriteByte(0xFF); stream.WriteByte(7); stream.WriteByte(0); stream.WriteByte(0);
+                stream.Write(codestream, 12, 4);
+                stream.Write(codestream, 8, 4);
+                WriteBe16(stream, components);
+                stream.WriteByte(uniform ? codestream[42] : (byte)255);
+                stream.WriteByte(7); stream.WriteByte(0); stream.WriteByte(0);
+                if (!uniform)
+                {
+                    WriteBe32(stream, (uint)(8 + components)); WriteAscii(stream, "bpcc");
+                    for (int component = 0; component < components; ++component)
+                        stream.WriteByte(codestream[42 + component * 3]);
+                }
 
                 if (extendedCodestreamBox)
                 {

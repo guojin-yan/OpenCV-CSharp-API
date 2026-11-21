@@ -24,49 +24,18 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
 
             int codestreamStart = 0;
             int codestreamEnd = data.Length;
-            if (isJp2 && !TryFindJp2Codestream(data, out codestreamStart, out codestreamEnd)) return false;
-            return TryReadJpeg2000Siz(data, codestreamStart, codestreamEnd, out width, out height, out pixelFacts);
-        }
-
-        private static bool TryFindJp2Codestream(byte[] data, out int codestreamStart, out int codestreamEnd)
-        {
-            codestreamStart = 0;
-            codestreamEnd = 0;
-            if (!IsJp2Container(data)) return false;
-
-            int offset = 12;
-            while (offset < data.Length)
-            {
-                if (data.Length - offset < 8) return false;
-                uint shortLength = ReadBe32(data, offset);
-                int headerLength = 8;
-                ulong boxLength = shortLength;
-                if (shortLength == 1)
-                {
-                    if (data.Length - offset < 16) return false;
-                    boxLength = ReadJpeg2000Be64(data, offset + 8);
-                    headerLength = 16;
-                }
-                else if (shortLength == 0)
-                {
-                    boxLength = (ulong)(data.Length - offset);
-                }
-
-                if (boxLength < (ulong)headerLength || boxLength > (ulong)(data.Length - offset)) return false;
-                int boxEnd = offset + (int)boxLength;
-                bool isCodestream = data[offset + 4] == (byte)'j' && data[offset + 5] == (byte)'p' &&
-                    data[offset + 6] == (byte)'2' && data[offset + 7] == (byte)'c';
-                if (isCodestream)
-                {
-                    codestreamStart = offset + headerLength;
-                    codestreamEnd = boxEnd;
-                    return true;
-                }
-
-                offset = boxEnd;
-                if (shortLength == 0) return false;
-            }
-            return false;
+            Jp2Header header = default(Jp2Header);
+            if (isJp2 && !TryFindJp2Codestream(data, out codestreamStart, out codestreamEnd, out header)) return false;
+            int candidateWidth, candidateHeight;
+            PixelFacts candidatePixels;
+            if (!TryReadJpeg2000Siz(data, codestreamStart, codestreamEnd,
+                out candidateWidth, out candidateHeight, out candidatePixels)) return false;
+            if (isJp2 && !Jp2HeaderMatchesSiz(data, header, codestreamStart,
+                candidateWidth, candidateHeight, candidatePixels.Channels)) return false;
+            width = candidateWidth;
+            height = candidateHeight;
+            pixelFacts = candidatePixels;
+            return true;
         }
 
         private static bool TryReadJpeg2000Siz(byte[] data, int offset, int end, out int width, out int height,
@@ -95,6 +64,11 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             if (xSize <= xOrigin || ySize <= yOrigin || tileWidth == 0 || tileHeight == 0) return false;
             if (tileXOrigin > xOrigin || tileYOrigin > yOrigin) return false;
             if ((ulong)tileXOrigin + tileWidth <= xOrigin || (ulong)tileYOrigin + tileHeight <= yOrigin) return false;
+            // Part 1 limits the entire tile grid to 65,535, including clipped edge tiles.
+            // Widen before ceil division; unsigned reference-grid coordinates can approach 2^32.
+            ulong tileColumns = ((ulong)xSize - tileXOrigin + tileWidth - 1) / tileWidth;
+            ulong tileRows = ((ulong)ySize - tileYOrigin + tileHeight - 1) / tileHeight;
+            if (tileRows > 65535 || tileColumns > 65535 / tileRows) return false;
 
             uint imageWidth = xSize - xOrigin;
             uint imageHeight = ySize - yOrigin;
@@ -106,7 +80,7 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             for (int component = 0; component < componentCount; ++component)
             {
                 int currentBitDepth = (data[componentOffset] & 0x7F) + 1;
-                if (data[componentOffset + 1] == 0 || data[componentOffset + 2] == 0) return false;
+                if (currentBitDepth > 38 || data[componentOffset + 1] == 0 || data[componentOffset + 2] == 0) return false;
                 if (component == 0)
                     bitDepth = currentBitDepth;
                 else if (bitDepth != currentBitDepth)
