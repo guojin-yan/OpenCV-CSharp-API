@@ -96,6 +96,10 @@ PNG requires a complete supported IHDR for geometry/pixels and consistent core c
 
 PNG 仅从完整受支持的 IHDR 报告尺寸/像素，帧和 metadata 存储长度闭合还要求核心 chunk、色表、tRNS 和 ICC/Exif 外层结构一致。截断或矛盾容器可保留已独立证明的首个头部事实。15 份真实文件覆盖全部颜色/位深组合及 3 份 Adam7；编码通道不含色表/tRNS 展开。CRC、压缩/metadata 内容、其他 ancillary 语义及最终/native 分配仍未证明。既有 APNG 帧检查在共用核心检查之后执行。
 
+PAM requires unique line-based WIDTH/HEIGHT/DEPTH/MAXVAL and complete ENDHDR. Header whitespace and arbitrary positive tuple depth are supported; optional repeated TUPLTYPE does not determine channels. Checked exact raster length gates frame/storage facts, while proven header facts survive payload failure. Thirteen real files include 5/17-channel custom tuples; OpenCV native PAM remains limited to 1..4 channels. Header facts do not prove native support, tuple/sample validity, metadata lengths or final/native allocation.
+
+PAM 要求 WIDTH/HEIGHT/DEPTH/MAXVAL 按行且唯一，以及完整 ENDHDR。支持头部空白和任意正数元组深度，可选/重复的 TUPLTYPE 不决定通道数。checked 的精确 raster 长度决定帧/存储事实，负载失败可保留已证明的头部。13 份真实文件包含 5/17 通道自定义元组；OpenCV native PAM 仍限于 1..4 通道。头部事实不证明 native 支持、元组/样本有效性、metadata 长度或最终/native 分配量。
+
 `ConsoleSamples` 的 `typed-mat` 与 `buffered-codec` 命令提供可运行的机器可读示例；没有 native runtime 时明确 skipped，不能把 skipped 当作能力已验证。
 
 ## Platform and headless boundaries / 平台与 headless 边界
