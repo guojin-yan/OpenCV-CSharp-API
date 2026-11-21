@@ -13,12 +13,7 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         [Fact]
         public void IdentifyReadsPngDimensionsWithoutNativeRuntime()
         {
-            byte[] png = new byte[24];
-            png[0] = 0x89; png[1] = 0x50; png[2] = 0x4E; png[3] = 0x47;
-            png[4] = 0x0D; png[5] = 0x0A; png[6] = 0x1A; png[7] = 0x0A;
-            png[12] = (byte)'I'; png[13] = (byte)'H'; png[14] = (byte)'D'; png[15] = (byte)'R';
-            png[16] = 0x00; png[17] = 0x00; png[18] = 0x04; png[19] = 0x00;
-            png[20] = 0x00; png[21] = 0x00; png[22] = 0x02; png[23] = 0x00;
+            byte[] png = CreatePngHeader(1024, 512, 8, 2);
 
             ImageIdentifyResult result = ImgCodecsCv2.Identify(png);
 
@@ -1348,7 +1343,7 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         [Fact]
         public void IdentifyDoesNotClaimStaticContainerFrameWithoutImageData()
         {
-            Assert.False(ImgCodecsCv2.Identify(CreatePngWithIccProfile(new byte[] { 1, 2, 3 })).IsFrameCountKnown);
+            Assert.False(ImgCodecsCv2.Identify(CreatePngWithIccProfile(new byte[] { 1, 2, 3 }, false)).IsFrameCountKnown);
             Assert.False(ImgCodecsCv2.Identify(CreateWebpWithMetadataAndIccProfile()).IsFrameCountKnown);
         }
 
@@ -1364,10 +1359,7 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         [Fact]
         public void DecodeOptionsRejectKnownDimensionsAndUnknownFormats()
         {
-            byte[] png = new byte[24];
-            png[0] = 0x89; png[1] = 0x50; png[2] = 0x4E; png[3] = 0x47; png[4] = 0x0D; png[5] = 0x0A; png[6] = 0x1A; png[7] = 0x0A;
-            png[12] = (byte)'I'; png[13] = (byte)'H'; png[14] = (byte)'D'; png[15] = (byte)'R';
-            png[19] = 100; png[23] = 100;
+            byte[] png = CreatePngHeader(100, 100, 8, 2);
 
             Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(png, new ImageDecodeOptions(1024, 10, 1000, 1000000, 4, false, false)));
             Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(new byte[] { 1, 2, 3 }, new ImageDecodeOptions(1024, 10, 10, 100, 1, true, false)));
@@ -1498,7 +1490,7 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         }
 #endif
 
-        private static byte[] CreatePngWithIccProfile(byte[] profile)
+        private static byte[] CreatePngWithIccProfile(byte[] profile, bool includeImage = true)
         {
             byte[] header = new byte[] { 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A };
             byte[] ihdr = new byte[] { 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, 0, 0, 0 };
@@ -1506,11 +1498,12 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             iccp[0] = (byte)'s'; iccp[1] = (byte)'R'; iccp[2] = (byte)'G'; iccp[3] = (byte)'B';
             Array.Copy(profile, 0, iccp, 6, profile.Length);
 
-            byte[] png = new byte[header.Length + 12 + ihdr.Length + 12 + iccp.Length + 12];
+            byte[] png = new byte[header.Length + 12 + ihdr.Length + 12 + iccp.Length + (includeImage ? 13 : 0) + 12];
             Array.Copy(header, png, header.Length);
             int offset = header.Length;
             offset = WritePngChunk(png, offset, "IHDR", ihdr);
             offset = WritePngChunk(png, offset, "iCCP", iccp);
+            if (includeImage) offset = WritePngChunk(png, offset, "IDAT", new byte[] { 0 });
             offset = WritePngChunk(png, offset, "IEND", Array.Empty<byte>());
             Assert.Equal(png.Length, offset);
             return png;
@@ -1518,7 +1511,7 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
 
         private static byte[] CreatePngHeader(int width, int height, byte bitDepth, byte colorType)
         {
-            byte[] png = new byte[26];
+            byte[] png = new byte[33];
             png[0] = 0x89; png[1] = 0x50; png[2] = 0x4E; png[3] = 0x47;
             png[4] = 0x0D; png[5] = 0x0A; png[6] = 0x1A; png[7] = 0x0A;
             png[11] = 13;

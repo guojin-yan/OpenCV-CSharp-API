@@ -177,14 +177,9 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
         {
             if (StartsWith(data, new byte[] { 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A }))
             {
-                bool hasIhdr = data.Length >= 24 &&
-                    data[12] == (byte)'I' && data[13] == (byte)'H' &&
-                    data[14] == (byte)'D' && data[15] == (byte)'R';
-                int width = hasIhdr && ReadBe32(data, 16) <= int.MaxValue ? (int)ReadBe32(data, 16) : 0;
-                int height = hasIhdr && ReadBe32(data, 20) <= int.MaxValue ? (int)ReadBe32(data, 20) : 0;
-                PixelFacts pixelFacts = ReadPngPixelFacts(data, hasIhdr);
-                FrameFacts frameFacts = ReadPngFrameFacts(data);
-                return Result("png", width, height, width > 0 && height > 0, frameFacts.FrameCount, frameFacts.FrameCountKnown, data.Length, ReadMetadataFacts(data, "png"), pixelFacts);
+                PngFacts facts = ReadPngFacts(data);
+                return Result("png", facts.Width, facts.Height, facts.SizeKnown, facts.Frames.FrameCount,
+                    facts.Frames.FrameCountKnown, data.Length, facts.Metadata, facts.Pixels);
             }
 
             if (data.Length >= 6 && data[0] == (byte)'G' && data[1] == (byte)'I' && data[2] == (byte)'F')
@@ -385,35 +380,6 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             public bool BitDepthKnown;
             public int Channels;
             public bool ChannelsKnown;
-        }
-
-        private static PixelFacts ReadPngPixelFacts(byte[] data, bool hasIhdr)
-        {
-            PixelFacts facts = new PixelFacts();
-            if (!hasIhdr || data.Length < 26 || ReadBe32(data, 8) != 13) return facts;
-
-            int bitDepth = data[24];
-            int colorType = data[25];
-            int channels;
-            switch (colorType)
-            {
-                case 0: channels = 1; break;
-                case 2: channels = 3; break;
-                case 3: channels = 1; break;
-                case 4: channels = 2; break;
-                case 6: channels = 4; break;
-                default: return facts;
-            }
-
-            bool validDepth = bitDepth == 1 || bitDepth == 2 || bitDepth == 4 || bitDepth == 8 || bitDepth == 16;
-            if (!validDepth) return facts;
-            if ((colorType == 2 || colorType == 4 || colorType == 6) && bitDepth != 8 && bitDepth != 16) return facts;
-            if (colorType == 3 && bitDepth == 16) return facts;
-            facts.BitDepth = bitDepth;
-            facts.BitDepthKnown = true;
-            facts.Channels = channels;
-            facts.ChannelsKnown = true;
-            return facts;
         }
 
         private static PixelFacts ReadGifPixelFacts(byte[] data)

@@ -92,6 +92,10 @@ BMP reads geometry from complete known DIB layouts, including unsigned CORE/OS2 
 
 BMP 从完整已知 DIB 读取尺寸，区分 CORE/OS2 无符号宽高和 Windows 有符号高度。BI_RGB 帧/像素事实还要求色表完整、字节声明一致、像素/profile 文件范围精确。V5 linked profile 只检查范围，不打开名称。压缩/bitfield 事实及 metadata/ICC 长度仍未知；编码预算不证明调色板展开、颜色转换或 native 分配量。
 
+PNG requires a complete supported IHDR for geometry/pixels and consistent core chunk, palette, tRNS and ICC/Exif envelopes for frame and stored-metadata completion. Truncated/contradictory containers preserve independently proven first-header facts. Fifteen real fixtures cover all color/depth pairs and three Adam7 cases; encoded channels exclude palette/tRNS expansion. CRC, compressed/metadata contents, other ancillary semantics and final/native allocation remain unproven. Existing APNG frame checks apply after the shared core checks.
+
+PNG 仅从完整受支持的 IHDR 报告尺寸/像素，帧和 metadata 存储长度闭合还要求核心 chunk、色表、tRNS 和 ICC/Exif 外层结构一致。截断或矛盾容器可保留已独立证明的首个头部事实。15 份真实文件覆盖全部颜色/位深组合及 3 份 Adam7；编码通道不含色表/tRNS 展开。CRC、压缩/metadata 内容、其他 ancillary 语义及最终/native 分配仍未证明。既有 APNG 帧检查在共用核心检查之后执行。
+
 `ConsoleSamples` 的 `typed-mat` 与 `buffered-codec` 命令提供可运行的机器可读示例；没有 native runtime 时明确 skipped，不能把 skipped 当作能力已验证。
 
 ## Platform and headless boundaries / 平台与 headless 边界

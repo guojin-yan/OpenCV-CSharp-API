@@ -123,7 +123,8 @@ function Invoke-FuzzFramework {
                     'IdentifyDeterministicMutationCorpusTiffDirectoriesNeverEscapeOrPublishInconsistentBudgets',
                     'IdentifyDeterministicMutationCorpusJpeg2000NeverEscapesOrPublishesConflictingHeaderFacts',
                     'IdentifyDeterministicMutationCorpusOpenExrNeverEscapesOrPublishesConflictingHeaderFacts',
-                    'IdentifyDeterministicMutationCorpusBmpNeverEscapesOrPublishesInconsistentStorageFacts')) {
+                    'IdentifyDeterministicMutationCorpusBmpNeverEscapesOrPublishesInconsistentStorageFacts',
+                    'IdentifyDeterministicMutationCorpusPngNeverEscapesOrPublishesInconsistentHeaderFacts')) {
                 if (@($results | Where-Object { ([string]$_.testName).Contains($requiredTest) -and [string]$_.outcome -ceq 'Passed' }).Count -ne 1) { $testsExecuted = $false }
             }
             if ($testsExecuted) { Write-Host "IMAGE_PREFLIGHT_FUZZ_TEST_RESULTS framework=$Framework tests_passed=$($counters.passed) trx=$trxPath" }
@@ -207,7 +208,8 @@ $evidence = [ordered]@{
     limitations = @(
         'The corpus is deterministic managed preflight coverage; it is not coverage-guided native fuzzing.',
         'The isolated dotnet test process distinguishes clean, managed failure, OOM, crash, and timeout outcomes.',
-        'A clean classification requires passing TRX execution evidence for both general corpus tests plus the GIF metadata, AVIF primary item, JPEG marker, APNG frame, WebP container, TIFF directory, JPEG 2000 header, OpenEXR first-header, and BMP DIB/palette mutation tests; an empty dotnet test invocation fails.',
+        'A clean classification requires passing TRX execution evidence for both general corpus tests plus the GIF metadata, AVIF primary item, JPEG marker, APNG frame, WebP container, TIFF directory, JPEG 2000 header, OpenEXR first-header, BMP DIB/palette, and PNG IHDR/chunk mutation tests; an empty dotnet test invocation fails.',
+        'PNG completion checks core chunk, palette, transparency and ICC/Exif envelopes; CRC, zlib/ICC/text contents and other ancillary semantics remain unverified.',
         'WorkingSet64 is sampled process RSS evidence for this runner; process teardown cannot prove absence of a long-lived native leak.',
         'No native runtime is required because the tested Identify paths stop before native decoding.'
     )

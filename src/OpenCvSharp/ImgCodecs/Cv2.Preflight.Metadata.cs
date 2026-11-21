@@ -14,46 +14,7 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
 
         private static MetadataFacts ReadMetadataFacts(byte[] data, string format)
         {
-            if (string.Equals(format, "png", StringComparison.Ordinal)) return ReadPngMetadataFacts(data);
             if (string.Equals(format, "webp", StringComparison.Ordinal)) return ReadWebpMetadataFacts(data);
-            return default(MetadataFacts);
-        }
-
-        private static MetadataFacts ReadPngMetadataFacts(byte[] data)
-        {
-            MetadataFacts facts = new MetadataFacts();
-            if (data.Length < 8) return facts;
-            int offset = 8;
-            while (offset + 12 <= data.Length)
-            {
-                uint chunkLength = ReadBe32(data, offset);
-                if (chunkLength > int.MaxValue || offset > data.Length - 12 || offset + 12L + chunkLength > data.Length)
-                {
-                    return default(MetadataFacts);
-                }
-
-                int payloadStart = offset + 8;
-                int payloadLength = (int)chunkLength;
-                bool metadata = IsPngMetadataChunk(data, offset + 4);
-                bool isIend = IsPngChunkType(data, offset + 4, 'I', 'E', 'N', 'D');
-                if (metadata) facts.MetadataBytes = checked(facts.MetadataBytes + payloadLength);
-                if (IsPngChunkType(data, offset + 4, 'i', 'C', 'C', 'P'))
-                {
-                    int profileNameEnd = payloadStart;
-                    while (profileNameEnd < payloadStart + payloadLength && data[profileNameEnd] != 0) ++profileNameEnd;
-                    if (profileNameEnd == payloadStart || profileNameEnd + 2 > payloadStart + payloadLength) return default(MetadataFacts);
-                    facts.IccProfileBytes = checked(facts.IccProfileBytes + (payloadStart + payloadLength - profileNameEnd - 2));
-                }
-
-                offset += 12 + payloadLength;
-                if (isIend)
-                {
-                    if (payloadLength != 0 || offset != data.Length) return default(MetadataFacts);
-                    facts.MetadataSizeKnown = true;
-                    facts.IccProfileSizeKnown = true;
-                    return facts;
-                }
-            }
             return default(MetadataFacts);
         }
 

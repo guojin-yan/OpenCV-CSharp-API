@@ -49,10 +49,7 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                     if (sawIhdr || offset != 8 || payloadLength != 13) return default(FrameFacts);
                     canvasWidth = ReadBe32(data, payloadStart);
                     canvasHeight = ReadBe32(data, payloadStart + 4);
-                    PixelFacts pixels = ReadPngPixelFacts(data, true);
-                    if (canvasWidth == 0 || canvasWidth > int.MaxValue || canvasHeight == 0 || canvasHeight > int.MaxValue ||
-                        !pixels.BitDepthKnown || !pixels.ChannelsKnown || data[payloadStart + 10] != 0 ||
-                        data[payloadStart + 11] != 0 || data[payloadStart + 12] > 1) return default(FrameFacts);
+                    if (!ReadPngHeader(data).SizeKnown) return default(FrameFacts);
                     sawIhdr = true;
                 }
                 else if (!sawIhdr) return default(FrameFacts);
