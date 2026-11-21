@@ -60,6 +60,8 @@ APNG frame counts require bounded frame rectangles, valid operations, and consis
 
 WebP supports simple VP8/VP8L dimensions and requires bounded image data, exact RIFF padding, and canvas/bitstream agreement before reporting frames or encoded pixel facts. Animation rectangles use doubled offsets; each cropped frame budgets the full canvas. Header-only ANMF, conflicting image chunks, or invalid nested boundaries keep those facts unknown. Reserved fields remain ignored as the format requires.
 
+TIFF/BigTIFF reject duplicate admission tags and require consistent explicit sample layouts before reporting depth/storage. Directory and sample scans are bounded by the actual input; a sample scan budget failure keeps depth/storage unknown. Main-chain page counts and encoded header budgets do not prove strip/tile completeness or final Mat precision.
+
 The existing `byte[]` APIs remain the compatibility baseline. On modern target frameworks, preview `ImEncodeTo(..., IBufferWriter<byte>)` performs one final `GetSpan`/copy/`Advance`; writer faults are terminal and no native result is retried. The internal `CodecBufferLease` prototype validates pinned owner and stride boundaries but does not create a Mat header or ABI entry.
 
 Untrusted decode policy is documented in [Codec Preflight And Limits](codec-preflight-and-limits.md). Buffer ownership and rollback are in [Codec Buffer And Owner ADR](codec-buffer-and-owner-adr.md) and [Codec Buffer Lease ADR](codec-buffer-lease-adr.md).
@@ -75,6 +77,8 @@ JPEG 检查出现的 SOF/SOS 组件表，并要求标记遍历精确止于 EOI �
 APNG 帧数要求帧矩形有界、操作值有效，且默认图像与 IDAT/fdAT 转换一致；独立默认静态图不计入动画帧数。裁剪帧的累计像素与编码存储限制按完整画布计算，损坏的动画边界使这些事实保持未知。
 
 WebP 支持普通 VP8/VP8L 尺寸；报告帧数和编码像素事实前，要求图像数据有界、RIFF 填充精确、画布/bitstream 尺寸一致。动画矩形使用乘二偏移，每个裁剪帧按完整画布预算。只有帧头的 ANMF、冲突图像块或无效嵌套边界使这些事实未知；按格式要求忽略保留字段。
+
+TIFF/BigTIFF 拒绝重复的准入标签，并要求显式样本布局一致才能报告深度/存储。目录和样本扫描量受实际输入限制；样本扫描预算不足时深度/存储保持未知。主目录链的页数及编码头预算不证明 strip/tile 完整性或最终 Mat 精度。
 
 `ConsoleSamples` 的 `typed-mat` 与 `buffered-codec` 命令提供可运行的机器可读示例；没有 native runtime 时明确 skipped，不能把 skipped 当作能力已验证。
 

@@ -31,6 +31,8 @@ $apngTestPath = Join-Path $repo 'tests/OpenCvSharp.Tests/ImgCodecs/ApngFramePref
 if (-not (Test-Path -LiteralPath $apngTestPath -PathType Leaf)) { throw 'APNG frame admission tests are missing.' }
 $webpTestPath = Join-Path $repo 'tests/OpenCvSharp.Tests/ImgCodecs/WebpContainerPreflightTests.cs'
 if (-not (Test-Path -LiteralPath $webpTestPath -PathType Leaf)) { throw 'WebP container admission tests are missing.' }
+$tiffTestPath = Join-Path $repo 'tests/OpenCvSharp.Tests/ImgCodecs/TiffDirectoryPreflightTests.cs'
+if (-not (Test-Path -LiteralPath $tiffTestPath -PathType Leaf)) { throw 'TIFF directory admission tests are missing.' }
 if (@($manifest.frameworks).Count -ne 2 -or @($manifest.replacementBytes).Count -ne 5 -or @($manifest.fixtures).Count -lt 13) { throw 'Mutation corpus manifest dimensions drifted.' }
 
 $frameworks = @('net8.0', 'net10.0')
@@ -45,7 +47,7 @@ foreach ($framework in $frameworks) {
     $startInfo.RedirectStandardError = $true
     foreach ($argument in @(
             'test', $project, '-c', 'Release', '-f', $framework, '--no-restore',
-            '--filter', 'FullyQualifiedName~IdentifyDeterministicMutationCorpus|FullyQualifiedName~GifMetadataPreflightTests|FullyQualifiedName~AvifPrimaryItemPreflightTests|FullyQualifiedName~JpegMarkerPreflightTests|FullyQualifiedName~ApngFramePreflightTests|FullyQualifiedName~WebpContainerPreflightTests',
+            '--filter', 'FullyQualifiedName~IdentifyDeterministicMutationCorpus|FullyQualifiedName~GifMetadataPreflightTests|FullyQualifiedName~AvifPrimaryItemPreflightTests|FullyQualifiedName~JpegMarkerPreflightTests|FullyQualifiedName~ApngFramePreflightTests|FullyQualifiedName~WebpContainerPreflightTests|FullyQualifiedName~TiffDirectoryPreflightTests',
             '--results-directory', $resultsDirectory, '--logger', 'trx;LogFileName=preflight.trx',
             '--logger', 'console;verbosity=minimal')) {
         [void]$startInfo.ArgumentList.Add($argument)
@@ -97,8 +99,17 @@ foreach ($framework in $frameworks) {
             'IdentifyRequiresWebpFrameAndBitstreamDimensionsToAgree',
             'IdentifyNeverMixesStaticAndAnimatedWebpImageData',
             'WebpCanvasBudgetsRejectBeforeNativeDecodeAndPreserveStreams',
-            'IdentifyDeterministicMutationCorpusWebpContainersNeverEscapeOrPublishUnboundedCanvasFacts')) {
+            'IdentifyDeterministicMutationCorpusWebpContainersNeverEscapeOrPublishUnboundedCanvasFacts',
+            'IdentifyRejectsDuplicateTiffAdmissionTagsInBothDirectoryFormats',
+            'TiffStrictPixelPolicyRejectsAmbiguousSamplesAndDuplicates',
+            'IdentifyDeterministicMutationCorpusTiffDirectoriesNeverEscapeOrPublishInconsistentBudgets')) {
         if (@($results | Where-Object { ([string]$_.testName).Contains($requiredTest) -and [string]$_.outcome -ceq 'Passed' }).Count -ne 1) { throw "Required image preflight test did not pass on ${framework}: $requiredTest" }
+    }
+    foreach ($requiredRegression in @(
+            'IdentifyNeverLetsDuplicateTiffDimensionsOverrideTheAdmissionBudget',
+            'IdentifyNeverLetsDuplicateTiffChannelsOverrideTheAdmissionBudget',
+            'IdentifyRequiresTiffPerSampleBitCountsToMatchChannels')) {
+        if (@($results | Where-Object { ([string]$_.testName).Contains($requiredRegression) -and [string]$_.outcome -ceq 'Passed' }).Count -ne 4) { throw "All four TIFF directory/byte-order regression cases must pass on ${framework}: $requiredRegression" }
     }
     Write-Host "IMAGE_PREFLIGHT_MUTATION_FRAMEWORK_OK framework=$framework tests_passed=$($counters.passed) timeout_seconds=$TimeoutSeconds trx=$trxPath"
     $process.Dispose()
