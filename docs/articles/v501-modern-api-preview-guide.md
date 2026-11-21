@@ -56,6 +56,8 @@ AVIF dimensions and encoded pixel facts require `pitm`/`ipma` associations to th
 
 JPEG checks any present SOF/SOS component tables and requires a marker walk ending exactly at EOI for frame/metadata completion. A frame fact also requires one supported SOF. APPn/COM payloads cannot supply EOI markers. ICC fragments may arrive in any order; missing, duplicate, or inconsistent fragments keep metadata/ICC lengths unknown and fail strict-known options. These checks do not validate entropy coding or decoded color/precision.
 
+APNG frame counts require bounded frame rectangles, valid operations, and consistent default-image/IDAT/fdAT transitions. A separate default still image is excluded from the animation count. Cropped frames use the full canvas for cumulative-pixel and encoded-storage limits; malformed animation boundaries keep those facts unknown.
+
 The existing `byte[]` APIs remain the compatibility baseline. On modern target frameworks, preview `ImEncodeTo(..., IBufferWriter<byte>)` performs one final `GetSpan`/copy/`Advance`; writer faults are terminal and no native result is retried. The internal `CodecBufferLease` prototype validates pinned owner and stride boundaries but does not create a Mat header or ABI entry.
 
 Untrusted decode policy is documented in [Codec Preflight And Limits](codec-preflight-and-limits.md). Buffer ownership and rollback are in [Codec Buffer And Owner ADR](codec-buffer-and-owner-adr.md) and [Codec Buffer Lease ADR](codec-buffer-lease-adr.md).
@@ -67,6 +69,8 @@ Untrusted decode policy is documented in [Codec Preflight And Limits](codec-pref
 AVIF 尺寸和编码像素事实要求通过 `pitm`/`ipma` 关联到主图，缩略图或未关联的 `ispe/pixi` 不能提供这些事实；缺失或损坏的关联保持未知，启用相应 strict-known 选项时拒绝。
 
 JPEG 检查出现的 SOF/SOS 组件表，并要求标记遍历精确止于 EOI 才能证明帧或 metadata 闭合；帧事实还要求存在单一受支持 SOF。APPn/COM 负载中的 EOI 字节不计为结束标记。ICC 分片允许任意顺序，缺失、重复或数量不一致使 metadata/ICC 长度未知，并触发相应 strict-known 拒绝。这些检查不验证熵编码或解码颜色/精度。
+
+APNG 帧数要求帧矩形有界、操作值有效，且默认图像与 IDAT/fdAT 转换一致；独立默认静态图不计入动画帧数。裁剪帧的累计像素与编码存储限制按完整画布计算，损坏的动画边界使这些事实保持未知。
 
 `ConsoleSamples` 的 `typed-mat` 与 `buffered-codec` 命令提供可运行的机器可读示例；没有 native runtime 时明确 skipped，不能把 skipped 当作能力已验证。
 
