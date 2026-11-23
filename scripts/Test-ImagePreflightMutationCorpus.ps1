@@ -45,6 +45,8 @@ $pamTestPath = Join-Path $repo 'tests/OpenCvSharp.Tests/ImgCodecs/PamHeaderPrefl
 if (-not (Test-Path -LiteralPath $pamTestPath -PathType Leaf)) { throw 'PAM header admission tests are missing.' }
 $pnmTestPath = Join-Path $repo 'tests/OpenCvSharp.Tests/ImgCodecs/PnmHeaderPreflightTests.cs'
 if (-not (Test-Path -LiteralPath $pnmTestPath -PathType Leaf)) { throw 'PNM text/raster admission tests are missing.' }
+$pfmTestPath = Join-Path $repo 'tests/OpenCvSharp.Tests/ImgCodecs/PfmHeaderPreflightTests.cs'
+if (-not (Test-Path -LiteralPath $pfmTestPath -PathType Leaf)) { throw 'PFM scale/raster admission tests are missing.' }
 if (@($manifest.frameworks).Count -ne 2 -or @($manifest.replacementBytes).Count -ne 5 -or @($manifest.fixtures).Count -lt 13) { throw 'Mutation corpus manifest dimensions drifted.' }
 
 $frameworks = @('net8.0', 'net10.0')
@@ -59,7 +61,7 @@ foreach ($framework in $frameworks) {
     $startInfo.RedirectStandardError = $true
     foreach ($argument in @(
             'test', $project, '-c', 'Release', '-f', $framework, '--no-restore',
-            '--filter', 'FullyQualifiedName~IdentifyDeterministicMutationCorpus|FullyQualifiedName~GifMetadataPreflightTests|FullyQualifiedName~AvifPrimaryItemPreflightTests|FullyQualifiedName~JpegMarkerPreflightTests|FullyQualifiedName~ApngFramePreflightTests|FullyQualifiedName~WebpContainerPreflightTests|FullyQualifiedName~TiffDirectoryPreflightTests|FullyQualifiedName~Jpeg2000HeaderPreflightTests|FullyQualifiedName~OpenExrHeaderPreflightTests|FullyQualifiedName~BmpHeaderPreflightTests|FullyQualifiedName~PngHeaderPreflightTests|FullyQualifiedName~PamHeaderPreflightTests|FullyQualifiedName~PnmHeaderPreflightTests',
+            '--filter', 'FullyQualifiedName~IdentifyDeterministicMutationCorpus|FullyQualifiedName~GifMetadataPreflightTests|FullyQualifiedName~AvifPrimaryItemPreflightTests|FullyQualifiedName~JpegMarkerPreflightTests|FullyQualifiedName~ApngFramePreflightTests|FullyQualifiedName~WebpContainerPreflightTests|FullyQualifiedName~TiffDirectoryPreflightTests|FullyQualifiedName~Jpeg2000HeaderPreflightTests|FullyQualifiedName~OpenExrHeaderPreflightTests|FullyQualifiedName~BmpHeaderPreflightTests|FullyQualifiedName~PngHeaderPreflightTests|FullyQualifiedName~PamHeaderPreflightTests|FullyQualifiedName~PnmHeaderPreflightTests|FullyQualifiedName~PfmHeaderPreflightTests',
             '--results-directory', $resultsDirectory, '--logger', 'trx;LogFileName=preflight.trx',
             '--logger', 'console;verbosity=minimal')) {
         [void]$startInfo.ArgumentList.Add($argument)
@@ -146,7 +148,13 @@ foreach ($framework in $frameworks) {
             'PnmStrictPolicyRejectsUnknownHeaderOrMetadataBeforeNativeDecode',
             'IdentifyPreservesEveryRawPnmFirstByteAfterEachSingleWhitespaceDelimiter',
             'IdentifyRequiresExactStandalonePnmRasterAndPreservesProvenHeaders',
-            'IdentifyDeterministicMutationCorpusPnmNeverEscapesOrPublishesInconsistentRasterFacts')) {
+            'IdentifyDeterministicMutationCorpusPnmNeverEscapesOrPublishesInconsistentRasterFacts',
+            'PfmHeaderBudgetsRejectBeforeNativeDecodeAndPreserveStreams',
+            'PfmStrictPolicyRejectsUnknownHeaderOrMetadataBeforeNativeDecode',
+            'IdentifyPreservesEveryPfmFirstPayloadByteAfterEachSingleWhitespaceDelimiter',
+            'IdentifyRequiresExactStandalonePfmPayloadAndPreservesProvenHeaders',
+            'IdentifyScansLongPfmScaleAndCommentsWithoutTokenAllocation',
+            'IdentifyDeterministicMutationCorpusPfmNeverEscapesOrPublishesInconsistentFloatFacts')) {
         if (@($results | Where-Object { ([string]$_.testName).Contains($requiredTest) -and [string]$_.outcome -ceq 'Passed' }).Count -ne 1) { throw "Required image preflight test did not pass on ${framework}: $requiredTest" }
     }
     foreach ($requiredRegression in @(
@@ -170,6 +178,18 @@ foreach ($framework in $frameworks) {
             @{ Name = 'IdentifyRejectsOpenExrSamplingThatConflictsWithDataWindow'; Count = 4 },
             @{ Name = 'IdentifyReadsRealOpenExrFirstHeaderFixtures'; Count = 7 })) {
         if (@($results | Where-Object { ([string]$_.testName).Contains($regression.Name) -and [string]$_.outcome -ceq 'Passed' }).Count -ne $regression.Count) { throw "All $($regression.Count) OpenEXR cases must pass on ${framework}: $($regression.Name)" }
+    }
+    foreach ($regression in @(
+            @{ Name = 'IdentifyReadsRealPfmFloatFixtures'; Count = 8 },
+            @{ Name = 'IdentifyStopsPfmHeaderCommentsAtCarriageReturn'; Count = 2 },
+            @{ Name = 'IdentifyPreservesPfmLfRasterByteAfterCrDelimiter'; Count = 2 },
+            @{ Name = 'IdentifyNeverSkipsAdditionalPfmRasterWhitespace'; Count = 2 },
+            @{ Name = 'IdentifyAcceptsNonzeroPfmDecimalScaleWithoutInferringNativeRepresentability'; Count = 15 },
+            @{ Name = 'IdentifyRejectsMalformedPfmScaleBeforePublishingFacts'; Count = 21 },
+            @{ Name = 'IdentifyKeepsPfmHeaderFactsWhenPayloadIsIncomplete'; Count = 4 },
+            @{ Name = 'IdentifyBoundsHugePfmGeometryWithoutAllocatingSamples'; Count = 2 },
+            @{ Name = 'IdentifyRejectsMalformedPfmGeometryTokens'; Count = 7 })) {
+        if (@($results | Where-Object { ([string]$_.testName).Contains($regression.Name) -and [string]$_.outcome -ceq 'Passed' }).Count -ne $regression.Count) { throw "All $($regression.Count) PFM cases must pass on ${framework}: $($regression.Name)" }
     }
     foreach ($regression in @(
             @{ Name = 'IdentifyReadsPlainPbmPixelsAsIndividualBits'; Count = 6 },

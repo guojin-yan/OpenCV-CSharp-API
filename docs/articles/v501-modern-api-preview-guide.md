@@ -104,6 +104,10 @@ PNM P1 counts individual ASCII bits, P2/P3 count bounded decimal samples, and P4
 
 PNM P1 逐个计数 ASCII bit，P2/P3 计数有界十进制样本，P4/P5/P6 在单个分隔字节后核对精确 raw 长度。注释以 CR 或 LF 结束，raw CR 分隔符后的 LF 属于 raster。16 份独立解码文件覆盖 plain/raw、8/16 位及位打包行边界。保守单图完整性不涵盖尾部杂项和图像序列；raw 样本/色彩语义与最终/native 分配仍未知。
 
+PFM scans nonzero decimal scale syntax without token allocation or native range inference. One whitespace byte ends scale; LF after CR belongs to the float raster. Checked exact float32 bytes gate frame/storage facts while a proven header survives payload failure. Eight files have independent NumPy sample/byte-order checks, with six also decoded by Netpbmfile. PNM-style comments remain a compatibility extension. Scale conversion, sample/orientation semantics, native support/allocation and final Mat precision remain separate.
+
+PFM 扫描非零十进制 scale 语法，不分配 token，也不推断 native 表示范围。scale 仅以一个空白字节结束，CR 后的 LF 属于 float raster。checked 的精确 float32 长度决定帧/存储事实，负载失败可保留已证明的头部。8 份文件由 NumPy 独立核对样本/字节序，其中 6 份额外经 Netpbmfile 解码。PNM 风格注释保持为兼容扩展；scale 转换、样本/方向语义、native 支持/分配和最终 Mat 精度独立处理。
+
 `ConsoleSamples` 的 `typed-mat` 与 `buffered-codec` 命令提供可运行的机器可读示例；没有 native runtime 时明确 skipped，不能把 skipped 当作能力已验证。
 
 ## Platform and headless boundaries / 平台与 headless 边界
