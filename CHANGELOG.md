@@ -6,7 +6,8 @@ This file is the concise chronological index for package-visible changes. Detail
 
 ## [5.1.0] - In development / 开发中
 
-- Refresh eight contrib parser scopes (611 declarations): the current 5.1 inventory covers 22 scopes and 2,825 declarations, with 51 historical maps pending. Preserve exact bindings and omissions, review HoughPoint2Line documentation, and support enum-free and unordered historical evidence inputs in the shared validator.
+- Refresh fourteen image/geometry contrib parser scopes with 346 unchanged declarations: current evidence covers 36 scopes and 3,171 declarations, with 37 historical maps pending. Extend validation to singleton, pure-callable and wholly omitted scopes while preserving exact bindings and omissions.
+- Refresh eight contrib parser scopes (611 declarations): that batch brought the 5.1 inventory to 22 scopes and 2,825 declarations. Preserve exact bindings and omissions, review HoughPoint2Line documentation, and support enum-free and unordered historical evidence inputs in the shared validator.
 - Refresh nine more parser scopes against the fixed OpenCV/contrib 5.1 sources: that batch brought coverage to 14 scopes and 2,214 declarations. Record XFeat/LightGlue, Qt persistence, dictionary ratio distance and video writer/device gaps explicitly; runtime implementation is unchanged.
 - Correct `CalibrationFlags.DisableSchurComplement` to OpenCV 5.1 bit 27 so it no longer enables tilted distortion. Recompile callers that used the old constant; see the calibration migration guide. BFMatcher mask support now follows 5.1's CrossCheck-dependent result.
 - Refreshed Core, ImgProc and ImgCodecs against official 5.1 source with a shared review tool; the earlier five parser slices including Calib3D cover 914 declarations and new API/input-domain gaps recorded explicitly.

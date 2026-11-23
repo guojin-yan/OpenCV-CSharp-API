@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.1.0",
+  "module": "alphamat",
+  "claimedSlice": "Historical alphamat parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+  "reviewStatus": "reviewed-parser-slice",
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "cv.alphamat.infoFlow(Mat image;Mat tmap;Mat result[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit AlphaMat declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ALPHAMAT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_alphamat_info_flow"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.AlphaMat.AlphaMatCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat InfoFlow(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat trimap)",
+        "MEMBER|JYPPX.OpenCvSharp.AlphaMat.AlphaMatCv2|method|public;static|System.Void InfoFlow(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat trimap,JYPPX.OpenCvSharp.Core.Mat result)"
+      ],
+      "historicalOrdinal": 0,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    }
+  ]
+}

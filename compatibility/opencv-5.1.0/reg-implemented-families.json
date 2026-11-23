@@ -1,0 +1,730 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.1.0",
+  "module": "reg",
+  "claimedSlice": "Historical reg parser scope refreshed against official 5.1 sources: 11 contributing header(s); parser-emitted declarations only",
+  "completeCppParityClaimed": false,
+  "implemented": [
+    {
+      "ordinal": 1,
+      "identity": "cv.reg.Map.warp(Mat img1;Mat img2[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_warp"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Warp(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ],
+      "historicalOrdinal": 1,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.reg.Map.inverseWarp(Mat img1;Mat img2[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_inverse_warp"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void InverseWarp(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ],
+      "historicalOrdinal": 2,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.reg.Map.inverseMap()-\u003Ecv::Ptr\u003CMap\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_inverse_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap InverseMap()"
+      ],
+      "historicalOrdinal": 3,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.reg.Map.compose(Ptr_Map map)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_compose"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Compose(JYPPX.OpenCvSharp.Reg.RegMap other)"
+      ],
+      "historicalOrdinal": 4,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.reg.Map.scale(double factor)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_scale"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Scale(System.Double factor)"
+      ],
+      "historicalOrdinal": 5,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.reg.MapAffine.MapAffine()-\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_affine_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapAffine|constructor|public;instance|.ctor()"
+      ],
+      "historicalOrdinal": 7,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.reg.MapAffine.MapAffine(Mat linTr;Mat shift)-\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_affine_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapAffine|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.Reg.AffineTransform2D transform)"
+      ],
+      "historicalOrdinal": 8,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.reg.MapAffine.inverseWarp(Mat img1;Mat img2[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_inverse_warp"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void InverseWarp(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ],
+      "historicalOrdinal": 9,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.reg.MapAffine.inverseMap()-\u003Ecv::Ptr\u003CMap\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_inverse_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap InverseMap()"
+      ],
+      "historicalOrdinal": 10,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.reg.MapAffine.compose(Ptr_Map map)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_compose"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Compose(JYPPX.OpenCvSharp.Reg.RegMap other)"
+      ],
+      "historicalOrdinal": 11,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.reg.MapAffine.scale(double factor)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_scale"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Scale(System.Double factor)"
+      ],
+      "historicalOrdinal": 12,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.reg.MapAffine.getLinTr(Mat linTr[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_affine_get"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapAffine|property|instance;get:public|JYPPX.OpenCvSharp.Reg.AffineTransform2D Transform"
+      ],
+      "historicalOrdinal": 13,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.reg.MapAffine.getShift(Mat shift[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_affine_get"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapAffine|property|instance;get:public|JYPPX.OpenCvSharp.Reg.AffineTransform2D Transform"
+      ],
+      "historicalOrdinal": 14,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.reg.Mapper.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr\u003CMap\u003E())-\u003Ecv::Ptr\u003CMap\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_calculate"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap Calculate(JYPPX.OpenCvSharp.Core.Mat img1,JYPPX.OpenCvSharp.Core.Mat img2,JYPPX.OpenCvSharp.Reg.RegMap? init=null)"
+      ],
+      "historicalOrdinal": 16,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.reg.Mapper.getMap()-\u003Ecv::Ptr\u003CMap\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_get_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap GetMap()"
+      ],
+      "historicalOrdinal": 17,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.reg.MapperGradAffine.MapperGradAffine()-\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_grad_affine_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapperGradAffine|constructor|public;instance|.ctor()"
+      ],
+      "historicalOrdinal": 19,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.reg.MapperGradAffine.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr\u003CMap\u003E())-\u003Ecv::Ptr\u003CMap\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_calculate"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap Calculate(JYPPX.OpenCvSharp.Core.Mat img1,JYPPX.OpenCvSharp.Core.Mat img2,JYPPX.OpenCvSharp.Reg.RegMap? init=null)"
+      ],
+      "historicalOrdinal": 20,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.reg.MapperGradAffine.getMap()-\u003Ecv::Ptr\u003CMap\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_get_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap GetMap()"
+      ],
+      "historicalOrdinal": 21,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.reg.MapperGradEuclid.MapperGradEuclid()-\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_grad_euclid_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapperGradEuclid|constructor|public;instance|.ctor()"
+      ],
+      "historicalOrdinal": 23,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.reg.MapperGradEuclid.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr\u003CMap\u003E())-\u003Ecv::Ptr\u003CMap\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_calculate"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap Calculate(JYPPX.OpenCvSharp.Core.Mat img1,JYPPX.OpenCvSharp.Core.Mat img2,JYPPX.OpenCvSharp.Reg.RegMap? init=null)"
+      ],
+      "historicalOrdinal": 24,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.reg.MapperGradEuclid.getMap()-\u003Ecv::Ptr\u003CMap\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_get_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap GetMap()"
+      ],
+      "historicalOrdinal": 25,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.reg.MapperGradProj.MapperGradProj()-\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_grad_proj_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapperGradProj|constructor|public;instance|.ctor()"
+      ],
+      "historicalOrdinal": 27,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.reg.MapperGradProj.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr\u003CMap\u003E())-\u003Ecv::Ptr\u003CMap\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_calculate"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap Calculate(JYPPX.OpenCvSharp.Core.Mat img1,JYPPX.OpenCvSharp.Core.Mat img2,JYPPX.OpenCvSharp.Reg.RegMap? init=null)"
+      ],
+      "historicalOrdinal": 28,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.reg.MapperGradProj.getMap()-\u003Ecv::Ptr\u003CMap\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_get_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap GetMap()"
+      ],
+      "historicalOrdinal": 29,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.reg.MapperGradShift.MapperGradShift()-\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_grad_shift_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapperGradShift|constructor|public;instance|.ctor()"
+      ],
+      "historicalOrdinal": 31,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.reg.MapperGradShift.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr\u003CMap\u003E())-\u003Ecv::Ptr\u003CMap\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_calculate"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap Calculate(JYPPX.OpenCvSharp.Core.Mat img1,JYPPX.OpenCvSharp.Core.Mat img2,JYPPX.OpenCvSharp.Reg.RegMap? init=null)"
+      ],
+      "historicalOrdinal": 32,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.reg.MapperGradShift.getMap()-\u003Ecv::Ptr\u003CMap\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_get_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap GetMap()"
+      ],
+      "historicalOrdinal": 33,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.reg.MapperGradSimilar.MapperGradSimilar()-\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_grad_similar_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapperGradSimilar|constructor|public;instance|.ctor()"
+      ],
+      "historicalOrdinal": 35,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.reg.MapperGradSimilar.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr\u003CMap\u003E())-\u003Ecv::Ptr\u003CMap\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_calculate"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap Calculate(JYPPX.OpenCvSharp.Core.Mat img1,JYPPX.OpenCvSharp.Core.Mat img2,JYPPX.OpenCvSharp.Reg.RegMap? init=null)"
+      ],
+      "historicalOrdinal": 36,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.reg.MapperGradSimilar.getMap()-\u003Ecv::Ptr\u003CMap\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_get_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap GetMap()"
+      ],
+      "historicalOrdinal": 37,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.reg.MapperPyramid.MapperPyramid(Ptr_Mapper baseMapper)-\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_pyramid_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapperPyramid|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.Reg.RegMapper baseMapper)"
+      ],
+      "historicalOrdinal": 39,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.reg.MapperPyramid.calculate(Mat img1;Mat img2;Ptr_Map init=cv::Ptr\u003CMap\u003E())-\u003Ecv::Ptr\u003CMap\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_calculate"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap Calculate(JYPPX.OpenCvSharp.Core.Mat img1,JYPPX.OpenCvSharp.Core.Mat img2,JYPPX.OpenCvSharp.Reg.RegMap? init=null)"
+      ],
+      "historicalOrdinal": 40,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.reg.MapperPyramid.getMap()-\u003Ecv::Ptr\u003CMap\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_mapper_get_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMapper|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap GetMap()"
+      ],
+      "historicalOrdinal": 41,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.reg.MapProjec.MapProjec()-\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_projec_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapProjec|constructor|public;instance|.ctor()"
+      ],
+      "historicalOrdinal": 47,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 48,
+      "identity": "cv.reg.MapProjec.MapProjec(Mat projTr)-\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_projec_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapProjec|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.Reg.ProjectiveTransform2D transform)"
+      ],
+      "historicalOrdinal": 48,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.reg.MapProjec.inverseWarp(Mat img1;Mat img2[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_inverse_warp"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void InverseWarp(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ],
+      "historicalOrdinal": 49,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 50,
+      "identity": "cv.reg.MapProjec.inverseMap()-\u003Ecv::Ptr\u003CMap\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_inverse_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap InverseMap()"
+      ],
+      "historicalOrdinal": 50,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 51,
+      "identity": "cv.reg.MapProjec.compose(Ptr_Map map)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_compose"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Compose(JYPPX.OpenCvSharp.Reg.RegMap other)"
+      ],
+      "historicalOrdinal": 51,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 52,
+      "identity": "cv.reg.MapProjec.scale(double factor)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_scale"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Scale(System.Double factor)"
+      ],
+      "historicalOrdinal": 52,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 53,
+      "identity": "cv.reg.MapProjec.getProjTr(Mat projTr[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_projec_get"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapProjec|property|instance;get:public|JYPPX.OpenCvSharp.Reg.ProjectiveTransform2D Transform"
+      ],
+      "historicalOrdinal": 53,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 54,
+      "identity": "cv.reg.MapProjec.normalize()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_projec_normalize"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapProjec|method|public;instance|System.Void Normalize()"
+      ],
+      "historicalOrdinal": 54,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 56,
+      "identity": "cv.reg.MapShift.MapShift()-\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_shift_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapShift|constructor|public;instance|.ctor(System.Double shiftX=0,System.Double shiftY=0)"
+      ],
+      "historicalOrdinal": 56,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 57,
+      "identity": "cv.reg.MapShift.MapShift(Mat shift)-\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_shift_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapShift|constructor|public;instance|.ctor(System.Double shiftX=0,System.Double shiftY=0)"
+      ],
+      "historicalOrdinal": 57,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 58,
+      "identity": "cv.reg.MapShift.inverseWarp(Mat img1;Mat img2[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_inverse_warp"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void InverseWarp(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ],
+      "historicalOrdinal": 58,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 59,
+      "identity": "cv.reg.MapShift.inverseMap()-\u003Ecv::Ptr\u003CMap\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_inverse_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|JYPPX.OpenCvSharp.Reg.RegMap InverseMap()"
+      ],
+      "historicalOrdinal": 59,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 60,
+      "identity": "cv.reg.MapShift.compose(Ptr_Map map)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_compose"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Compose(JYPPX.OpenCvSharp.Reg.RegMap other)"
+      ],
+      "historicalOrdinal": 60,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 61,
+      "identity": "cv.reg.MapShift.scale(double factor)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_scale"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.RegMap|method|public;instance|System.Void Scale(System.Double factor)"
+      ],
+      "historicalOrdinal": 61,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 62,
+      "identity": "cv.reg.MapShift.getShift(Mat shift[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Reg declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_REG=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_reg_map_shift_get"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Reg.MapShift|method|public;instance|System.Void GetShift(out System.Double shiftX,out System.Double shiftY)"
+      ],
+      "historicalOrdinal": 62,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    }
+  ],
+  "limitation": "Implemented means the recorded managed/C ABI binding exists, subject to its documented validation. It does not certify wider 5.1 input domains, optional codecs/backends, or complete C\u002B\u002B coverage."
+}

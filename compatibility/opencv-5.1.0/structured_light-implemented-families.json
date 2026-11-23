@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.1.0",
+  "module": "structured_light",
+  "claimedSlice": "Historical structured_light parser scope refreshed against official 5.1 sources: 3 contributing header(s); parser-emitted declarations only",
+  "completeCppParityClaimed": false,
+  "implemented": [
+    {
+      "ordinal": 1,
+      "identity": "cv.structured_light.GrayCodePattern.create(int width;int height)-\u003EPtr\u003CGrayCodePattern\u003E",
+      "classification": "implemented",
+      "reason": "Explicit StructuredLight declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_structured_light_gray_code_pattern_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.StructuredLight.GrayCodePattern|method|public;static|JYPPX.OpenCvSharp.StructuredLight.GrayCodePattern Create(System.Int32 width,System.Int32 height)"
+      ],
+      "historicalOrdinal": 1,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.structured_light.GrayCodePattern.getNumberOfPatternImages()-\u003Esize_t",
+      "classification": "implemented",
+      "reason": "Explicit StructuredLight declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_structured_light_gray_code_pattern_get_number_of_pattern_images"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.StructuredLight.GrayCodePattern|property|instance;get:public|System.Int32 NumberOfPatternImages"
+      ],
+      "historicalOrdinal": 2,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.structured_light.GrayCodePattern.setWhiteThreshold(size_t value)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit StructuredLight declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_structured_light_gray_code_pattern_set_white_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.StructuredLight.GrayCodePattern|method|public;instance|System.Void SetWhiteThreshold(System.Int32 value)"
+      ],
+      "historicalOrdinal": 3,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.structured_light.GrayCodePattern.setBlackThreshold(size_t value)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit StructuredLight declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_structured_light_gray_code_pattern_set_black_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.StructuredLight.GrayCodePattern|method|public;instance|System.Void SetBlackThreshold(System.Int32 value)"
+      ],
+      "historicalOrdinal": 4,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.structured_light.GrayCodePattern.getImagesForShadowMasks(Mat blackImage[/IO];Mat whiteImage[/IO])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit StructuredLight declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_structured_light_gray_code_pattern_get_images_for_shadow_masks"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.StructuredLight.GrayCodePattern|method|public;instance|System.Void GetImagesForShadowMasks(JYPPX.OpenCvSharp.Core.Mat blackImage,JYPPX.OpenCvSharp.Core.Mat whiteImage)"
+      ],
+      "historicalOrdinal": 5,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.structured_light.GrayCodePattern.getProjPixel(vector_Mat patternImages;int x;int y;Point projPix[/O,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Explicit StructuredLight declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_structured_light_gray_code_pattern_get_proj_pixel"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.StructuredLight.GrayCodePattern|method|public;instance|System.Boolean GetProjPixel(JYPPX.OpenCvSharp.Core.Mat[] patternImages,System.Int32 x,System.Int32 y,out JYPPX.OpenCvSharp.Core.Point projectorPixel)"
+      ],
+      "historicalOrdinal": 6,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.structured_light.SinusoidalPattern.create(Ptr_SinusoidalPattern_Params parameters=makePtr\u003CSinusoidalPattern::Params\u003E())-\u003EPtr\u003CSinusoidalPattern\u003E",
+      "classification": "implemented",
+      "reason": "Explicit StructuredLight declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_structured_light_sinusoidal_pattern_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.StructuredLight.SinusoidalPattern|method|public;static|JYPPX.OpenCvSharp.StructuredLight.SinusoidalPattern Create(JYPPX.OpenCvSharp.StructuredLight.SinusoidalPatternParams parameters)"
+      ],
+      "historicalOrdinal": 11,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.structured_light.SinusoidalPattern.computePhaseMap(vector_Mat patternImages;Mat wrappedPhaseMap[/O];Mat shadowMask=Mat()[/O];Mat fundamental=Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit StructuredLight declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_structured_light_sinusoidal_pattern_compute_phase_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.StructuredLight.SinusoidalPattern|method|public;instance|System.Void ComputePhaseMap(JYPPX.OpenCvSharp.Core.Mat[] patternImages,JYPPX.OpenCvSharp.Core.Mat wrappedPhaseMap,JYPPX.OpenCvSharp.Core.Mat shadowMask,JYPPX.OpenCvSharp.Core.Mat? fundamental=null)"
+      ],
+      "historicalOrdinal": 12,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.structured_light.SinusoidalPattern.unwrapPhaseMap(Mat wrappedPhaseMap;Mat unwrappedPhaseMap[/O];Size camSize;Mat shadowMask=Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit StructuredLight declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_structured_light_sinusoidal_pattern_unwrap_phase_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.StructuredLight.SinusoidalPattern|method|public;instance|System.Void UnwrapPhaseMap(JYPPX.OpenCvSharp.Core.Mat wrappedPhaseMap,JYPPX.OpenCvSharp.Core.Mat unwrappedPhaseMap,JYPPX.OpenCvSharp.Core.Size cameraSize,JYPPX.OpenCvSharp.Core.Mat? shadowMask=null)"
+      ],
+      "historicalOrdinal": 13,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.structured_light.SinusoidalPattern.computeDataModulationTerm(vector_Mat patternImages;Mat dataModulationTerm[/O];Mat shadowMask)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit StructuredLight declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_structured_light_sinusoidal_pattern_compute_data_modulation_term"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.StructuredLight.SinusoidalPattern|method|public;instance|System.Void ComputeDataModulationTerm(JYPPX.OpenCvSharp.Core.Mat[] patternImages,JYPPX.OpenCvSharp.Core.Mat dataModulationTerm,JYPPX.OpenCvSharp.Core.Mat shadowMask)"
+      ],
+      "historicalOrdinal": 15,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.structured_light.StructuredLightPattern.generate(vector_Mat patternImages[/O])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Explicit StructuredLight declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STRUCTURED_LIGHT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_structured_light_pattern_generate_count",
+        "jyppx_ocv_structured_light_pattern_generate_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.StructuredLight.StructuredLightPattern|method|public;instance|JYPPX.OpenCvSharp.Core.Mat[] Generate()"
+      ],
+      "historicalOrdinal": 18,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    }
+  ],
+  "limitation": "Implemented means the recorded managed/C ABI binding exists, subject to its documented validation. It does not certify wider 5.1 input domains, optional codecs/backends, or complete C\u002B\u002B coverage."
+}

@@ -1,0 +1,5 @@
+# OpenCV 5.1.0 alphamat upstream-to-native-to-managed map
+claimed-slice=Historical alphamat parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only
+upstream-commit=e4f78fbcf1a773fbed69e14500e8b734963eb585
+repository-wide-upstream-parity=false
+000|cv.alphamat.infoFlow(Mat image;Mat tmap;Mat result[/O])->void|implemented|OPENCV_CSHARP_HAS_OPENCV_ALPHAMAT=1|Explicit AlphaMat declaration-to-symbol mapping and exact managed baseline evidence are present.|review=Exact historical identity retained; evidence and managed validation remain the recorded binding scope.|native=jyppx_ocv_alphamat_info_flow|managed=MEMBER|JYPPX.OpenCvSharp.AlphaMat.AlphaMatCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat InfoFlow(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat trimap);MEMBER|JYPPX.OpenCvSharp.AlphaMat.AlphaMatCv2|method|public;static|System.Void InfoFlow(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat trimap,JYPPX.OpenCvSharp.Core.Mat result)

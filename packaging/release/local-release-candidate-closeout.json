@@ -1,14 +1,14 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/c9af499b0f835716",
-  "SourceIdentity": "sha256:c9af499b0f8357165e5d9d510b8fa3c4d49531e83f020c91302fd838ed51fd18",
+  "CandidateId": "local-closeout/sha256/e3df2c42b845e09f",
+  "SourceIdentity": "sha256:e3df2c42b845e09f99e17126146c56ae594be7ea6540c60a8be437df208550a0",
   "OpenCvRevision": "5.1.0",
   "RevisionValidation": {
     "CurrentBuildEvidence": {
       "Path": "packaging/runtime/opencv-5.1.0-source-build-evidence.json",
-      "Sha256": "0dd6d76c84832a2c0fb2726e6f5f8b2d1dbbe24b2e98b4248ccb0e1583314852",
-      "Length": 53841
+      "Sha256": "af8627eae58c0b20123dac26fcd6e345bb08b35b78d06634ff34f818e4148f14",
+      "Length": 56297
     },
     "LocalBuildRid": "win-x64",
     "HistoricalUpstreamMapRevision": "5.0.0",
@@ -22,18 +22,18 @@
     "HistoricalCatalogMapCount": 73,
     "CurrentParserRefreshInventory": {
       "Path": "compatibility/opencv-5.1.0/upstream-map-refresh-summary.json",
-      "Sha256": "e9f2d911055f63598f748fed93d790ef1a7ea0d7afc52f11402890bb332238be",
-      "Length": 7695
+      "Sha256": "c3f83ce85fa6783adc1ceece75f8a66fb91c4907be4d6bb41a9dc53a32145e48",
+      "Length": 11305
     },
-    "CurrentRevisionRefreshedParserSliceCount": 22,
-    "CurrentRevisionPendingCatalogMapCount": 51,
+    "CurrentRevisionRefreshedParserSliceCount": 36,
+    "CurrentRevisionPendingCatalogMapCount": 37,
     "HistoricalSupportEvidenceRevision": "5.0.0",
     "CurrentRevisionMultiRidValidated": false,
     "CurrentRevisionUpstreamParityClaimed": false
   },
   "SourceSet": {
-    "FileCount": 2654,
-    "Sha256": "c9af499b0f8357165e5d9d510b8fa3c4d49531e83f020c91302fd838ed51fd18",
+    "FileCount": 2739,
+    "Sha256": "e3df2c42b845e09f99e17126146c56ae594be7ea6540c60a8be437df208550a0",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -1455,8 +1455,8 @@
     },
     {
       "Path": "CHANGELOG.md",
-      "Sha256": "75a7e35034ad78b706574dac1a3f327a1d1336f8ddf4f152e3c9e6643630365c",
-      "Length": 3603
+      "Sha256": "9abe256a04ae55c187fb80010c5c53f25fc27946a4fbd4be855c8e6fdf4e6658",
+      "Length": 3876
     },
     {
       "Path": "CONTRIBUTING.md",
@@ -2460,8 +2460,38 @@
     },
     {
       "Path": "compatibility/opencv-5.1.0/README.md",
-      "Sha256": "767db4b8d93713e9aaf3021cc43f30512a35529ccba620a90dd3acc597321071",
-      "Length": 6049
+      "Sha256": "dbc5c67c67e278591258a5496271fca30647c0b2d1bc657b1badb02ad1ffc47e",
+      "Length": 9382
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/alphamat-implemented-families.json",
+      "Sha256": "179cfb9335255e3a1b7f099a3eac0f5c799d5dce111d9d6b0b77501a9c2f8872",
+      "Length": 1514
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/alphamat-upstream-classifications.json",
+      "Sha256": "476c3c9e6c195fd871a0d79fc9c1391cc8971b052b5b468b1f27988ebb43c126",
+      "Length": 1296
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/alphamat-upstream-delta.json",
+      "Sha256": "9be56f0afd846b8e92bd28cb481f004e6099607ba860936735e550315a0f25d9",
+      "Length": 156
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/alphamat-upstream-map.txt",
+      "Sha256": "5de9a97d9d681f35433c6e5bbd3baf003618599a503a4b4adde5a97286d0158b",
+      "Length": 1025
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/alphamat-upstream-raw.json",
+      "Sha256": "6b7bc3c49a450a03dac39f91738676ee14f9026bbd7f80898385fd6b15e7fdd2",
+      "Length": 2391
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/alphamat-upstream-summary.json",
+      "Sha256": "55a8b5e66af6d46a7f34dab7d670ac0a182c20bcf38577d3f98caa3cccf0dfb4",
+      "Length": 2193
     },
     {
       "Path": "compatibility/opencv-5.1.0/bgsegm-implemented-families.json",
@@ -2492,6 +2522,36 @@
       "Path": "compatibility/opencv-5.1.0/bgsegm-upstream-summary.json",
       "Sha256": "2836bb91f23af821f76fe516ebe578ab957d054f8277a1428943fdfaac1c7be4",
       "Length": 2185
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/bioinspired-implemented-families.json",
+      "Sha256": "673b45c92d2881334bc048d98f50ac459d8b90735122926dee11a45b6e2966f7",
+      "Length": 27565
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/bioinspired-upstream-classifications.json",
+      "Sha256": "48c027eeadea53aee51f7a08eba46715a34ff1e108983b1f718604f8c4589e0d",
+      "Length": 29699
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/bioinspired-upstream-delta.json",
+      "Sha256": "e887f5bf72b3a3078fc2078700e7409b8c03fc1594c3e3f864062a7dd27a676c",
+      "Length": 160
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/bioinspired-upstream-map.txt",
+      "Sha256": "f4d86050eceeeb8d9c7df54f04f3d7e809a828bcf08af6b3619b40919e574cb8",
+      "Length": 20569
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/bioinspired-upstream-raw.json",
+      "Sha256": "e43e5a4389d812c8486dc5e3290052fd1e48d1ceba9ec7f834ff0deeb0aacccb",
+      "Length": 48536
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/bioinspired-upstream-summary.json",
+      "Sha256": "1388d3af73bca1ee5cd7cf0be8125835cfa6503e420a19d60dd9f7918b1f2fb1",
+      "Length": 2220
     },
     {
       "Path": "compatibility/opencv-5.1.0/calib3d-implemented-families.json",
@@ -2644,6 +2704,96 @@
       "Length": 2129
     },
     {
+      "Path": "compatibility/opencv-5.1.0/freetype-implemented-families.json",
+      "Sha256": "6512e53a47373e9ea2a4b03bc8ae6d765d46ba9be0590406559cecdfb47fd0e2",
+      "Length": 521
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/freetype-upstream-classifications.json",
+      "Sha256": "b9d9f0fa0b20d7969f581831c36e080785a66a6614f485ef3adbc6193695e930",
+      "Length": 4674
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/freetype-upstream-delta.json",
+      "Sha256": "93aff1e3302f108514b7583f97ca436531f530098752f68a879b317644d643a6",
+      "Length": 156
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/freetype-upstream-map.txt",
+      "Sha256": "52b5f625c95265935643cdb640e60cc74ace0a83fab48d300aaca8a016ed0de9",
+      "Length": 3137
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/freetype-upstream-raw.json",
+      "Sha256": "3b8e48812714a38e4743217bccb0d118009284746f168b8411f947ae8932092c",
+      "Length": 11204
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/freetype-upstream-summary.json",
+      "Sha256": "b4594c968355cba3b5870251f5ef0e6a4a3f514d661e8a8b12d96705d5922cb5",
+      "Length": 2193
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/fuzzy-implemented-families.json",
+      "Sha256": "e31f9a7670e488b392ea9af3dc1ab2765e1def25d3b202b823ff1c86e034385b",
+      "Length": 14411
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/fuzzy-upstream-classifications.json",
+      "Sha256": "e7ff1437e0902191f769b8d7801b1912076828df0434a863b36260f5caf34826",
+      "Length": 15388
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/fuzzy-upstream-delta.json",
+      "Sha256": "cf954b6947cbbb766dfc5abda6a974ffd3ad02bcd0526989df19352d1ff15171",
+      "Length": 154
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/fuzzy-upstream-map.txt",
+      "Sha256": "9479d544036f6775675958bb9f04a31a0ce7fc707bf5fe2a04cba9af69ff6647",
+      "Length": 10856
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/fuzzy-upstream-raw.json",
+      "Sha256": "c4d63e89df325678c5366e4b21a0fb8150ed8d410ffebf481fa0460e11ffdbf7",
+      "Length": 27002
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/fuzzy-upstream-summary.json",
+      "Sha256": "b52143f7657637d4b15a96a206eb11a4fba79dc7fe49f02492f8cb236ad551eb",
+      "Length": 2178
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/hfs-implemented-families.json",
+      "Sha256": "cc0f1bde88b38a1e7ab3649286ac747be6b260041bbfece9b1014ecb163d1555",
+      "Length": 13048
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/hfs-upstream-classifications.json",
+      "Sha256": "acb4e7ceed14d3ca37b196c171477c65d252474b42ceb6e23cc17ebbd68291be",
+      "Length": 13359
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/hfs-upstream-delta.json",
+      "Sha256": "4a75e9af7f39202cb418694f6d4997d4b6e72919e258d89716a05869b4c3e3f1",
+      "Length": 152
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/hfs-upstream-map.txt",
+      "Sha256": "4580d39da8bec3bfe76b995bfd21a91c5a674e475a0aa51b9a838cbc1b067543",
+      "Length": 8796
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/hfs-upstream-raw.json",
+      "Sha256": "ecaf3849e9e569869c25c3de284e3e0c6771dec42a9c2d60529b2c4db5fd1c2d",
+      "Length": 16846
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/hfs-upstream-summary.json",
+      "Sha256": "ef07aa6d894a7f3b4a210a9eade410cfae284938bd663762802c824452cd7d1f",
+      "Length": 2163
+    },
+    {
       "Path": "compatibility/opencv-5.1.0/highgui-implemented-families.json",
       "Sha256": "bac35de34ae86b5d9223182754eba5e70cef790f82dc4530ee2ec62911f983f3",
       "Length": 16799
@@ -2762,6 +2912,36 @@
       "Path": "compatibility/opencv-5.1.0/imgproc-upstream-summary.json",
       "Sha256": "a51410ec02edd8e7db9274789f0ee22f6a01fcab957b96b432b651af445f0afb",
       "Length": 2023
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/intensity_transform-implemented-families.json",
+      "Sha256": "e202cac89775de57e1221223b3f533bae6fb4a4cac887b8ecfec043c7a881193",
+      "Length": 7313
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/intensity_transform-upstream-classifications.json",
+      "Sha256": "81ff97704912d0836705affd40feb60035b21600cbea9ac52d80cebbafdca0ba",
+      "Length": 7095
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/intensity_transform-upstream-delta.json",
+      "Sha256": "b4b4be3582328f8dcd565aef81ae3948c662afe8d6bb5309038c735dc21f4e04",
+      "Length": 167
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/intensity_transform-upstream-map.txt",
+      "Sha256": "94767253da3ad27dad861cc4c73e990bbbd819d7870fb4aee2ec3a4443a895c8",
+      "Length": 5499
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/intensity_transform-upstream-raw.json",
+      "Sha256": "590a407e76bad7d24d4afaa6fbdf3ff3451067ef5ac9c6b48524e3c456106257",
+      "Length": 10621
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/intensity_transform-upstream-summary.json",
+      "Sha256": "bb9924c1fb83aa44884073c9ee02fe04520c5b2c0132661b85584e89465e5c9a",
+      "Length": 2271
     },
     {
       "Path": "compatibility/opencv-5.1.0/line_descriptor-implemented-families.json",
@@ -2884,6 +3064,36 @@
       "Length": 2194
     },
     {
+      "Path": "compatibility/opencv-5.1.0/phase_unwrapping-implemented-families.json",
+      "Sha256": "59218d99ddd572d3aa42d6ea325e664482b6bfd38b814ea1453ac763e13c27a0",
+      "Length": 3372
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/phase_unwrapping-upstream-classifications.json",
+      "Sha256": "5c46be4b07003c06e0053677f6cd54d6e92673e4a94eda789148879a521384a7",
+      "Length": 5526
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/phase_unwrapping-upstream-delta.json",
+      "Sha256": "e19580bce024d8bc1c9a8126986f3c45caa2a5a5b9c74c3a0820d34125ea153f",
+      "Length": 164
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/phase_unwrapping-upstream-map.txt",
+      "Sha256": "d1979db14903757498a81d5e979bb876711ae2d844514dd032d07b8e608e1daf",
+      "Length": 3891
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/phase_unwrapping-upstream-raw.json",
+      "Sha256": "31cd39d57a0062c12c7109b54e8bc1450fe574ff681cd43438a5afa450eec8a5",
+      "Length": 9110
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/phase_unwrapping-upstream-summary.json",
+      "Sha256": "d964256518ec0509774f25fb8705d1489b8cf191356464b2db29d5c7263b1a41",
+      "Length": 2249
+    },
+    {
       "Path": "compatibility/opencv-5.1.0/photo-implemented-families.json",
       "Sha256": "b21113570672a7ca6190156a35f990f85d95a55edf158060e210c6723dec50ac",
       "Length": 108466
@@ -2912,6 +3122,36 @@
       "Path": "compatibility/opencv-5.1.0/photo-upstream-summary.json",
       "Sha256": "dbff3f03af2478b510398c7ff7dad36a8971faf37d8a7019418e4203e7b0d537",
       "Length": 2107
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/plot-implemented-families.json",
+      "Sha256": "4e4f7a5f4b20c47dc1effb062d1a40fc0836b1edcac0f6f59426c7073b2f1b2d",
+      "Length": 15514
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/plot-upstream-classifications.json",
+      "Sha256": "d4792a3f8460a275ae0aa0a89833ef08c2bf940b34b47d9b64aece3148b67361",
+      "Length": 15823
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/plot-upstream-delta.json",
+      "Sha256": "3d41199f2dacde2b21463bcd46e3e3e9574b36108fd4f4607c8f5983ace9a4c4",
+      "Length": 153
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/plot-upstream-map.txt",
+      "Sha256": "36a37ca9a4cbf37f06d1dafec4c9d972cc123789bbc0c1844f1ac4be1cbe6e63",
+      "Length": 10471
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/plot-upstream-raw.json",
+      "Sha256": "a5043cca9b60ea974bca13409b75f0d18d317f2c861be2b61563b5af008031b5",
+      "Length": 14889
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/plot-upstream-summary.json",
+      "Sha256": "a9df4be4a964f89ce0ba75c0453e9c8494cb6f25237a3a52d94fd7fced355c75",
+      "Length": 2171
     },
     {
       "Path": "compatibility/opencv-5.1.0/quality-implemented-families.json",
@@ -2944,6 +3184,126 @@
       "Length": 2192
     },
     {
+      "Path": "compatibility/opencv-5.1.0/rapid-implemented-families.json",
+      "Sha256": "409ae17188a789ff97dc500f7f84d685459fdfaa355238ee43d8fd7f72efbe5e",
+      "Length": 11462
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/rapid-upstream-classifications.json",
+      "Sha256": "ca60eac44344dcaba34a1e4b044b17fcc5bb7f9fd3d9b69fd923b23d2a4da435",
+      "Length": 14139
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/rapid-upstream-delta.json",
+      "Sha256": "09f113aca504a1f9307ca043e4cebba0e0097814c9367d141131054609ff76fb",
+      "Length": 154
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/rapid-upstream-map.txt",
+      "Sha256": "be8e167a9e2c51cdffa2f2f9961420389dfee0677faad3b3689ff3239474dbd3",
+      "Length": 9971
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/rapid-upstream-raw.json",
+      "Sha256": "668d70efb464aeb11464b0fac9cb4ae298d2a40322935050197baaf5705c6888",
+      "Length": 20973
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/rapid-upstream-summary.json",
+      "Sha256": "db96a006fe161382ef4c8475bce9243ca74e9418b295679e4b3bdf9b58229926",
+      "Length": 2178
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/reg-implemented-families.json",
+      "Sha256": "706a51e3ad2b040d03930bdef1a19d236929b42aad2bf3208016ade1f9d1e916",
+      "Length": 35506
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/reg-upstream-classifications.json",
+      "Sha256": "8e8e8d2d7c3bec7aea64d1963ba60394b3d0f42d4617b1b00e70eaed4f252660",
+      "Length": 43581
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/reg-upstream-delta.json",
+      "Sha256": "34fee18fd0c0f6ceb45237072e49dafca01c18f8de33a19dc573f8628c7281ec",
+      "Length": 152
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/reg-upstream-map.txt",
+      "Sha256": "b72e3a8b75e1c06dcf782d728259ac9a00108f6d2e21b8fac7c1a4ba266128ef",
+      "Length": 27787
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/reg-upstream-raw.json",
+      "Sha256": "bc96f5e2995894762f10736c889d062b91970422484ee449d35be8a22bef5e87",
+      "Length": 39575
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/reg-upstream-summary.json",
+      "Sha256": "e79d47c0a7b1781cac2311cd1d9e359e166670159ced6a25f30bc146280a14c8",
+      "Length": 2168
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/saliency-implemented-families.json",
+      "Sha256": "6fe6400d97f8bf357e4751be24d44bcc739cd08fd102da23ac613932e0c6f390",
+      "Length": 23998
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/saliency-upstream-classifications.json",
+      "Sha256": "de51a47f2b1100653fbb1da955ba6a59f8f6be76b325fee26dea8142b00c16c0",
+      "Length": 29516
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/saliency-upstream-delta.json",
+      "Sha256": "8d8196a80af06da6f945bea03d0b98bf95d9e899e584efe4081e62237f477581",
+      "Length": 157
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/saliency-upstream-map.txt",
+      "Sha256": "0343316ae8a7022b45f900e478fbc050e8eed1366b15b9515bb0dd6f26d9eb3f",
+      "Length": 19830
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/saliency-upstream-raw.json",
+      "Sha256": "e11342f0194d6092eca95f3376db2177300a66f60403369f72e829ee4515b3d8",
+      "Length": 28158
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/saliency-upstream-summary.json",
+      "Sha256": "eccdba71b697327f033dbd2a4b5b4a0e3242c08c8cdfa440984572f9459bc0db",
+      "Length": 2199
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/shape-implemented-families.json",
+      "Sha256": "12827b3ace656fbd6d7d95408f4206dff471b261889331e8ad9488764890db84",
+      "Length": 21156
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/shape-upstream-classifications.json",
+      "Sha256": "7dde3aa8d162cb4ff2317fb43dd48a3537ddf0dfa606c62ff01b70a076664b7c",
+      "Length": 51304
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/shape-upstream-delta.json",
+      "Sha256": "6cc70275d7187a3a4eaae858b1f34206fe457f1948157192407662fbe7a452e7",
+      "Length": 154
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/shape-upstream-map.txt",
+      "Sha256": "1bc7b86c0838b71629c849c3bfb53656950267af94dffde81543ef3ba9fae9fa",
+      "Length": 35967
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/shape-upstream-raw.json",
+      "Sha256": "cfac8b3daf973a655a0c0121543b7abe2596be40e23a3dde8b82c2e420b70584",
+      "Length": 50843
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/shape-upstream-summary.json",
+      "Sha256": "74418cb38a51afe91fdccae7dc3c8bd66995c784fe3fc5442e24a39ab105932b",
+      "Length": 2181
+    },
+    {
       "Path": "compatibility/opencv-5.1.0/stitching-implemented-families.json",
       "Sha256": "bed2c1474f2ec1c40cd7e46f5d32c6e647745ea5b932af22dcdb7e62ae97ceeb",
       "Length": 153944
@@ -2972,6 +3332,66 @@
       "Path": "compatibility/opencv-5.1.0/stitching-upstream-summary.json",
       "Sha256": "2a16bb288db8f08de037d7cbc16556f65aa4676e006194d33c4863fb3e3b1824",
       "Length": 2137
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/structured_light-implemented-families.json",
+      "Sha256": "f3a21b12294564708b67e2f1b2ff113a4ed29f458a61206d6b26d4a6ced6b0a6",
+      "Length": 10629
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/structured_light-upstream-classifications.json",
+      "Sha256": "c746de86187f2a1b92676c67f4bdc09728d4d3c6be8665cff2d697a945c3ae3c",
+      "Length": 15922
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/structured_light-upstream-delta.json",
+      "Sha256": "68c07b1dbfc87be4ae3c349f70279fa09345f23e1abe08180072453a2099ac87",
+      "Length": 165
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/structured_light-upstream-map.txt",
+      "Sha256": "a0969ab969f8d39ede42a8d5cc2ac9d41c070407ee56bebb097a190eaf82d94a",
+      "Length": 11109
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/structured_light-upstream-raw.json",
+      "Sha256": "065166656ab06d6e82854ce846c599c8915689f3e26a9b586f549561e802f3a5",
+      "Length": 26277
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/structured_light-upstream-summary.json",
+      "Sha256": "354c8643a4f177dd51a8845aff58d4eb58ca7b44922f6d9a61520cce64e182a3",
+      "Length": 2255
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/surface_matching-implemented-families.json",
+      "Sha256": "14a6a3497d2ff2eb89456520a1a61e053159b2e7f96b29584254b6fbf92d0a61",
+      "Length": 7260
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/surface_matching-upstream-classifications.json",
+      "Sha256": "ae21b3c311208254eb999f23fb39823badc4b329268c16ae45c00ef4d506f332",
+      "Length": 20856
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/surface_matching-upstream-delta.json",
+      "Sha256": "f8ac5b040e7b78276807ddaa34e321a0a29957833a8cf7c052140534e8f211fe",
+      "Length": 165
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/surface_matching-upstream-map.txt",
+      "Sha256": "4aa0bb76533126507d91b7c8aed9e1a7cbed8a8189b85d07d31bae16b35d9a83",
+      "Length": 14687
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/surface_matching-upstream-raw.json",
+      "Sha256": "c63c0465dc0199a4fddb42cd40c066f634340730855a2bf06d9186868e9da00d",
+      "Length": 36025
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/surface_matching-upstream-summary.json",
+      "Sha256": "c69460fb0ae7bc4d309acb0f0be7a7042a60b7ea9fe8704627c7b63436b1907a",
+      "Length": 2253
     },
     {
       "Path": "compatibility/opencv-5.1.0/tracking-implemented-families.json",
@@ -3005,13 +3425,13 @@
     },
     {
       "Path": "compatibility/opencv-5.1.0/upstream-map-refresh-catalog.json",
-      "Sha256": "4d0e132f129a001384e4880d415067f4991668b5b01158a5711b72e8972b545f",
-      "Length": 117388
+      "Sha256": "eece9dad554db0663d5d1b4d76370991340a262254c32105393b3e1335604077",
+      "Length": 146689
     },
     {
       "Path": "compatibility/opencv-5.1.0/upstream-map-refresh-summary.json",
-      "Sha256": "e9f2d911055f63598f748fed93d790ef1a7ea0d7afc52f11402890bb332238be",
-      "Length": 7695
+      "Sha256": "c3f83ce85fa6783adc1ceece75f8a66fb91c4907be4d6bb41a9dc53a32145e48",
+      "Length": 11305
     },
     {
       "Path": "compatibility/opencv-5.1.0/video-implemented-families.json",
@@ -3645,8 +4065,8 @@
     },
     {
       "Path": "compatibility/v5.1.0-change-ledger.json",
-      "Sha256": "344e221c25cd6bb16e01be196aa0d8f2f5ecfeeae2919aa8643c0d8810c2529e",
-      "Length": 126107
+      "Sha256": "8a86b24323868637650fd432992614676e5315288d9945c3ec7517de65a62e71",
+      "Length": 132190
     },
     {
       "Path": "compatibility/v5.1.0-change-ledger.schema.json",
@@ -4180,18 +4600,23 @@
     },
     {
       "Path": "docs/articles/opencv-5.1-contrib-mapping.md",
-      "Sha256": "3c4776ca29a81dfe480235c4bd4f111b6d53ed2da73021f9d1f96c4de19e54ef",
-      "Length": 4969
+      "Sha256": "1e7e8bcb3ce833a45b02060796f5f4539f3467b8a4658afcc7c0b0434da2524d",
+      "Length": 5051
+    },
+    {
+      "Path": "docs/articles/opencv-5.1-image-geometry-mapping.md",
+      "Sha256": "bc111c5bb6651bca8bda24bc1b0ca5d84f3d3cba4513fcd07f0223287f8c916c",
+      "Length": 4904
     },
     {
       "Path": "docs/articles/opencv-5.1-module-mapping.md",
-      "Sha256": "76df48435ff22896b3bb8c1f8967060a0803d0b10f6c7467eaa499d68f9dcaf4",
-      "Length": 5127
+      "Sha256": "6351190f9193294ccf7ae21f954a46a329f7a5b6a892122ec31f77a4a159c644",
+      "Length": 5261
     },
     {
       "Path": "docs/articles/opencv-5.1-source-mapping.md",
-      "Sha256": "fda203cf2f8263cd45142559f091559d32a223d9ac257d886b9c01125b7a137a",
-      "Length": 6802
+      "Sha256": "04a53bc18d7410db64622a3096cf000733b5985b4dc9b35b6b4dded91c8e5f0a",
+      "Length": 6979
     },
     {
       "Path": "docs/articles/optflow-bgsegm-upstream-parity-guide.md",
@@ -4375,8 +4800,8 @@
     },
     {
       "Path": "docs/articles/upstream-map-toolchain.md",
-      "Sha256": "b81791dcab60234ada48445788bdb2feb0c1302686d44620508efa67387f0b8c",
-      "Length": 29652
+      "Sha256": "a6accc59120be31e7754f5f20c39a246b480cc7b0448edf17e38bd4f732cc370",
+      "Length": 29760
     },
     {
       "Path": "docs/articles/v501-modern-api-preview-guide.md",
@@ -4490,8 +4915,8 @@
     },
     {
       "Path": "docs/releases/5.1.0.md",
-      "Sha256": "7b72c40a38e7cced46aacc2bfaa74fd6adafcf98d034bc139b34867646b9d721",
-      "Length": 6879
+      "Sha256": "08012f9f1e08806062fd9a0756576f48c7a8e447d18752a20dc5efb633bef64b",
+      "Length": 7017
     },
     {
       "Path": "docs/releases/README.md",
@@ -4500,8 +4925,8 @@
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "65308721bc47ed2ab6702e239f1b4dc8ca1a860aebbd9fec489e232e9fe7e1cf",
-      "Length": 20414
+      "Sha256": "6ef9166e3e96af59773ebdd0e2ec3947acd7c361ddd497bbf01dc881fa422706",
+      "Length": 20523
     },
     {
       "Path": "nuget/logo.jpg",
@@ -4690,8 +5115,8 @@
     },
     {
       "Path": "packaging/runtime/opencv-5.1.0-source-build-evidence.json",
-      "Sha256": "0dd6d76c84832a2c0fb2726e6f5f8b2d1dbbe24b2e98b4248ccb0e1583314852",
-      "Length": 53841
+      "Sha256": "af8627eae58c0b20123dac26fcd6e345bb08b35b78d06634ff34f818e4148f14",
+      "Length": 56297
     },
     {
       "Path": "packaging/runtime/patches/opencv-5.0.0-photo-ccm-instance-color-space.patch",
@@ -5305,8 +5730,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "8f78a310da00176a2d4d3c033ab1c2a6cfc4ce40c635b7c3b9300d9da1f0be1a",
-      "Length": 202936
+      "Sha256": "41eebd7dcca79408f62af7cb1b6c3b20c0b09e7dd1c2e1a000de88444dc06bc2",
+      "Length": 208898
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -5795,8 +6220,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "f1ee517196729b261f2a7f765702c65dac46ffbc97023755de87ad9b95c8bb82",
-      "Length": 177841
+      "Sha256": "414d8bf42b1841baef16505c551b91411d925355b650122d25e3e31ea800fd55",
+      "Length": 183944
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -5925,8 +6350,8 @@
     },
     {
       "Path": "scripts/Test-UpstreamMap51.ps1",
-      "Sha256": "efe44b78b2dd2e318a45b3f3c4d3f4789cf1b1a6652239aded589738bb2fbc9a",
-      "Length": 1359
+      "Sha256": "1f9a537083c4b994354e22fb157d54f5a095b859fa366b35a36c47315e77e6c2",
+      "Length": 1502
     },
     {
       "Path": "scripts/Test-UpstreamMapCatalog.ps1",
@@ -5935,8 +6360,8 @@
     },
     {
       "Path": "scripts/Test-V510ChangeLedger.ps1",
-      "Sha256": "24f359c527997ad369422547c202833b7b9e36b4d8374877ff37238da8cc67e5",
-      "Length": 11562
+      "Sha256": "042f73c543883f71d00f7c1e5c54bb39f565fcb8e90d10128a746a2a28d6cc30",
+      "Length": 12821
     },
     {
       "Path": "scripts/Test-VideoDnnBenchmarkEvidence.ps1",
@@ -7560,8 +7985,8 @@
     },
     {
       "Path": "tools/UpstreamMapRefresh/Program.cs",
-      "Sha256": "d5be487a7bc904652cfb98ea50dae5da8227599a9d64acbd11937ff194a8277d",
-      "Length": 42710
+      "Sha256": "37c8f791db44b86c2ff0e9ab136861db22124d666638404f0ec62c1b892672c4",
+      "Length": 44054
     },
     {
       "Path": "tools/UpstreamMapRefresh/UpstreamMapRefresh.csproj",

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.1.0",
+  "module": "surface_matching",
+  "claimedSlice": "Historical surface_matching parser scope refreshed against official 5.1 sources: 5 contributing header(s); parser-emitted declarations only",
+  "completeCppParityClaimed": false,
+  "implemented": [
+    {
+      "ordinal": 1,
+      "identity": "cv.ppf_match_3d.ICP.ICP()-\u003E",
+      "classification": "implemented",
+      "reason": "Explicit SurfaceMatching declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SURFACE_MATCHING=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_surface_matching_icp_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.SurfaceMatching.Icp|method|public;static|JYPPX.OpenCvSharp.SurfaceMatching.Icp Create(System.Int32 iterations=250,System.Single tolerance=0.005,System.Single rejectionScale=2.5,System.Int32 numLevels=6,JYPPX.OpenCvSharp.SurfaceMatching.IcpSamplingType sampleType=Uniform,System.Int32 numMaxCorr=1)"
+      ],
+      "historicalOrdinal": 1,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.ppf_match_3d.ICP.ICP(int iterations[/C];float tolerence=0.05f[/C];float rejectionScale=2.5f[/C];int numLevels=6[/C];int sampleType=ICP::ICP_SAMPLING_TYPE_UNIFORM[/C];int numMaxCorr=1[/C])-\u003E",
+      "classification": "implemented",
+      "reason": "Explicit SurfaceMatching declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SURFACE_MATCHING=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_surface_matching_icp_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.SurfaceMatching.Icp|method|public;static|JYPPX.OpenCvSharp.SurfaceMatching.Icp Create(System.Int32 iterations=250,System.Single tolerance=0.005,System.Single rejectionScale=2.5,System.Int32 numLevels=6,JYPPX.OpenCvSharp.SurfaceMatching.IcpSamplingType sampleType=Uniform,System.Int32 numMaxCorr=1)"
+      ],
+      "historicalOrdinal": 2,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.ppf_match_3d.ICP.registerModelToScene(Mat srcPC[/C,/Ref];Mat dstPC[/C,/Ref];double residual[/O,/Ref];Matx44d pose[/O,/Ref])-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit SurfaceMatching declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SURFACE_MATCHING=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_surface_matching_icp_register_model_to_scene"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.SurfaceMatching.Icp|method|public;instance|JYPPX.OpenCvSharp.SurfaceMatching.IcpRegistrationResult RegisterModelToScene(JYPPX.OpenCvSharp.Core.Mat srcPc,JYPPX.OpenCvSharp.Core.Mat dstPc)"
+      ],
+      "historicalOrdinal": 3,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.ppf_match_3d.PPF3DDetector.PPF3DDetector()-\u003E",
+      "classification": "implemented",
+      "reason": "Explicit SurfaceMatching declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SURFACE_MATCHING=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_surface_matching_ppf_3d_detector_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.SurfaceMatching.Ppf3DDetector|method|public;static|JYPPX.OpenCvSharp.SurfaceMatching.Ppf3DDetector Create(System.Double relativeSamplingStep=0.05,System.Double relativeDistanceStep=0.05,System.Double numAngles=30)"
+      ],
+      "historicalOrdinal": 23,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.ppf_match_3d.PPF3DDetector.PPF3DDetector(double relativeSamplingStep[/C];double relativeDistanceStep=0.05[/C];double numAngles=30[/C])-\u003E",
+      "classification": "implemented",
+      "reason": "Explicit SurfaceMatching declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SURFACE_MATCHING=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_surface_matching_ppf_3d_detector_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.SurfaceMatching.Ppf3DDetector|method|public;static|JYPPX.OpenCvSharp.SurfaceMatching.Ppf3DDetector Create(System.Double relativeSamplingStep=0.05,System.Double relativeDistanceStep=0.05,System.Double numAngles=30)"
+      ],
+      "historicalOrdinal": 24,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.ppf_match_3d.PPF3DDetector.trainModel(Mat Model[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit SurfaceMatching declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SURFACE_MATCHING=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_surface_matching_ppf_3d_detector_train_model"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.SurfaceMatching.Ppf3DDetector|method|public;instance|System.Void TrainModel(JYPPX.OpenCvSharp.Core.Mat model)"
+      ],
+      "historicalOrdinal": 25,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.ppf_match_3d.PPF3DDetector.match(Mat scene[/C,/Ref];vector_Pose3DPtr results[/O,/Ref];double relativeSceneSampleStep=1.0/5.0[/C];double relativeSceneDistance=0.03[/C])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit SurfaceMatching declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SURFACE_MATCHING=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_surface_matching_ppf_3d_detector_match_count",
+        "jyppx_ocv_surface_matching_ppf_3d_detector_match_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.SurfaceMatching.Ppf3DDetector|method|public;instance|JYPPX.OpenCvSharp.SurfaceMatching.Pose3DResult[] Match(JYPPX.OpenCvSharp.Core.Mat scene,System.Double relativeSceneSampleStep=0.2,System.Double relativeSceneDistance=0.03)"
+      ],
+      "historicalOrdinal": 26,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    }
+  ],
+  "limitation": "Implemented means the recorded managed/C ABI binding exists, subject to its documented validation. It does not certify wider 5.1 input domains, optional codecs/backends, or complete C\u002B\u002B coverage."
+}

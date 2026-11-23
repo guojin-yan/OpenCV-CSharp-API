@@ -4,17 +4,31 @@
   "upstreamCommit": "e4f78fbcf1a773fbed69e14500e8b734963eb585",
   "upstreamContribCommit": "b67a855188a3d683813731010f6d39ac614733a4",
   "catalogPath": "compatibility/opencv-5.1.0/upstream-map-refresh-catalog.json",
-  "catalogSha256": "4d0e132f129a001384e4880d415067f4991668b5b01158a5711b72e8972b545f",
+  "catalogSha256": "eece9dad554db0663d5d1b4d76370991340a262254c32105393b3e1335604077",
   "historicalCatalogRevision": "5.0.0",
   "historicalCatalogMapCount": 73,
-  "refreshedParserSliceCount": 22,
-  "pendingCatalogMapCount": 51,
+  "refreshedParserSliceCount": 36,
+  "pendingCatalogMapCount": 37,
   "slices": [
+    {
+      "id": "alphamat",
+      "summaryPath": "compatibility/opencv-5.1.0/alphamat-upstream-summary.json",
+      "sha256": "55a8b5e66af6d46a7f34dab7d670ac0a182c20bcf38577d3f98caa3cccf0dfb4",
+      "declarationCount": 1,
+      "completeCppParityClaimed": false
+    },
     {
       "id": "bgsegm",
       "summaryPath": "compatibility/opencv-5.1.0/bgsegm-upstream-summary.json",
       "sha256": "2836bb91f23af821f76fe516ebe578ab957d054f8277a1428943fdfaac1c7be4",
       "declarationCount": 66,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "bioinspired",
+      "summaryPath": "compatibility/opencv-5.1.0/bioinspired-upstream-summary.json",
+      "sha256": "1388d3af73bca1ee5cd7cf0be8125835cfa6503e420a19d60dd9f7918b1f2fb1",
+      "declarationCount": 36,
       "completeCppParityClaimed": false
     },
     {
@@ -53,6 +67,27 @@
       "completeCppParityClaimed": false
     },
     {
+      "id": "freetype",
+      "summaryPath": "compatibility/opencv-5.1.0/freetype-upstream-summary.json",
+      "sha256": "b4594c968355cba3b5870251f5ef0e6a4a3f514d661e8a8b12d96705d5922cb5",
+      "declarationCount": 7,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "fuzzy",
+      "summaryPath": "compatibility/opencv-5.1.0/fuzzy-upstream-summary.json",
+      "sha256": "b52143f7657637d4b15a96a206eb11a4fba79dc7fe49f02492f8cb236ad551eb",
+      "declarationCount": 18,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "hfs",
+      "summaryPath": "compatibility/opencv-5.1.0/hfs-upstream-summary.json",
+      "sha256": "ef07aa6d894a7f3b4a210a9eade410cfae284938bd663762802c824452cd7d1f",
+      "declarationCount": 18,
+      "completeCppParityClaimed": false
+    },
+    {
       "id": "highgui",
       "summaryPath": "compatibility/opencv-5.1.0/highgui-upstream-summary.json",
       "sha256": "d74c5ec464bae4f4b186525cd80b75ba25a1649d2913953082aab8afc10d986c",
@@ -78,6 +113,13 @@
       "summaryPath": "compatibility/opencv-5.1.0/imgproc-upstream-summary.json",
       "sha256": "a51410ec02edd8e7db9274789f0ee22f6a01fcab957b96b432b651af445f0afb",
       "declarationCount": 206,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "intensity_transform",
+      "summaryPath": "compatibility/opencv-5.1.0/intensity_transform-upstream-summary.json",
+      "sha256": "bb9924c1fb83aa44884073c9ee02fe04520c5b2c0132661b85584e89465e5c9a",
+      "declarationCount": 6,
       "completeCppParityClaimed": false
     },
     {
@@ -109,10 +151,24 @@
       "completeCppParityClaimed": false
     },
     {
+      "id": "phase_unwrapping",
+      "summaryPath": "compatibility/opencv-5.1.0/phase_unwrapping-upstream-summary.json",
+      "sha256": "d964256518ec0509774f25fb8705d1489b8cf191356464b2db29d5c7263b1a41",
+      "declarationCount": 7,
+      "completeCppParityClaimed": false
+    },
+    {
       "id": "photo",
       "summaryPath": "compatibility/opencv-5.1.0/photo-upstream-summary.json",
       "sha256": "dbff3f03af2478b510398c7ff7dad36a8971faf37d8a7019418e4203e7b0d537",
       "declarationCount": 145,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "plot",
+      "summaryPath": "compatibility/opencv-5.1.0/plot-upstream-summary.json",
+      "sha256": "a9df4be4a964f89ce0ba75c0453e9c8494cb6f25237a3a52d94fd7fced355c75",
+      "declarationCount": 21,
       "completeCppParityClaimed": false
     },
     {
@@ -123,10 +179,52 @@
       "completeCppParityClaimed": false
     },
     {
+      "id": "rapid",
+      "summaryPath": "compatibility/opencv-5.1.0/rapid-upstream-summary.json",
+      "sha256": "db96a006fe161382ef4c8475bce9243ca74e9418b295679e4b3bdf9b58229926",
+      "declarationCount": 17,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "reg",
+      "summaryPath": "compatibility/opencv-5.1.0/reg-upstream-summary.json",
+      "sha256": "e79d47c0a7b1781cac2311cd1d9e359e166670159ced6a25f30bc146280a14c8",
+      "declarationCount": 63,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "saliency",
+      "summaryPath": "compatibility/opencv-5.1.0/saliency-upstream-summary.json",
+      "sha256": "eccdba71b697327f033dbd2a4b5b4a0e3242c08c8cdfa440984572f9459bc0db",
+      "declarationCount": 39,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "shape",
+      "summaryPath": "compatibility/opencv-5.1.0/shape-upstream-summary.json",
+      "sha256": "74418cb38a51afe91fdccae7dc3c8bd66995c784fe3fc5442e24a39ab105932b",
+      "declarationCount": 66,
+      "completeCppParityClaimed": false
+    },
+    {
       "id": "stitching",
       "summaryPath": "compatibility/opencv-5.1.0/stitching-upstream-summary.json",
       "sha256": "2a16bb288db8f08de037d7cbc16556f65aa4676e006194d33c4863fb3e3b1824",
       "declarationCount": 207,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "structured_light",
+      "summaryPath": "compatibility/opencv-5.1.0/structured_light-upstream-summary.json",
+      "sha256": "354c8643a4f177dd51a8845aff58d4eb58ca7b44922f6d9a61520cce64e182a3",
+      "declarationCount": 20,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "surface_matching",
+      "summaryPath": "compatibility/opencv-5.1.0/surface_matching-upstream-summary.json",
+      "sha256": "c69460fb0ae7bc4d309acb0f0be7a7042a60b7ea9fe8704627c7b63436b1907a",
+      "declarationCount": 27,
       "completeCppParityClaimed": false
     },
     {
@@ -166,8 +264,6 @@
     }
   ],
   "pendingCatalogMaps": [
-    "alphamat",
-    "bioinspired",
     "cannops",
     "ccalib",
     "cnn_3dobj",
@@ -189,27 +285,15 @@
     "dnn_superres",
     "dpm",
     "fastcv",
-    "freetype",
-    "fuzzy",
     "hdf",
-    "hfs",
-    "intensity_transform",
     "julia",
     "matlab",
     "ovis",
-    "phase_unwrapping",
-    "plot",
     "ptcloud",
-    "rapid",
-    "reg",
     "rgbd",
-    "saliency",
     "sfm",
-    "shape",
     "signal",
-    "structured_light",
     "superres",
-    "surface_matching",
     "text",
     "videostab",
     "viz",
@@ -218,7 +302,7 @@
     "xobjdetect",
     "xstereo"
   ],
-  "sharedGeneratorNegativeFixtureCount": 675,
+  "sharedGeneratorNegativeFixtureCount": 1123,
   "repositoryWideUpstreamParityClaimed": false,
   "completeCppParityClaimed": false,
   "limitation": "Only the recorded parser slices have been reviewed. Historical maps, complete C\u002B\u002B/template surfaces and runtime/platform certification retain separate evidence and version identities."

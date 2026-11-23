@@ -28,8 +28,25 @@ The historical catalog contains 73 OpenCV 5.0.0 source maps. Current-version evi
 | img_hash | [summary](img_hash-upstream-summary.json), [delta](img_hash-upstream-delta.json), [classifications](img_hash-upstream-classifications.json) | 7 contributing headers, 31 declarations, 32 negative fixtures |
 | line_descriptor | [summary](line_descriptor-upstream-summary.json), [delta](line_descriptor-upstream-delta.json), [classifications](line_descriptor-upstream-classifications.json) | 1 contributing headers, 34 declarations, 32 negative fixtures |
 
-The [shared catalog](upstream-map-refresh-catalog.json) and [inventory](upstream-map-refresh-summary.json) record 22 reviewed scopes (2,825 declarations) and 51 pending maps. This record does not establish complete C++ coverage, repository-wide parity or optional backend/codec runtime support. See the [source mapping guide](../../docs/articles/opencv-5.1-source-mapping.md), [calibration migration guide](../../docs/articles/calibration-5.1-migration.md), and [DNN migration guide](../../docs/articles/dnn-5.1-migration.md).
+| freetype | [summary](freetype-upstream-summary.json), [delta](freetype-upstream-delta.json), [classifications](freetype-upstream-classifications.json) | 1 contributing headers, 7 declarations, 32 negative fixtures |
+| alphamat | [summary](alphamat-upstream-summary.json), [delta](alphamat-upstream-delta.json), [classifications](alphamat-upstream-classifications.json) | 1 contributing headers, 1 declarations, 32 negative fixtures |
+| intensity_transform | [summary](intensity_transform-upstream-summary.json), [delta](intensity_transform-upstream-delta.json), [classifications](intensity_transform-upstream-classifications.json) | 1 contributing headers, 6 declarations, 32 negative fixtures |
+| plot | [summary](plot-upstream-summary.json), [delta](plot-upstream-delta.json), [classifications](plot-upstream-classifications.json) | 1 contributing headers, 21 declarations, 32 negative fixtures |
+| bioinspired | [summary](bioinspired-upstream-summary.json), [delta](bioinspired-upstream-delta.json), [classifications](bioinspired-upstream-classifications.json) | 4 contributing headers, 36 declarations, 32 negative fixtures |
+| phase_unwrapping | [summary](phase_unwrapping-upstream-summary.json), [delta](phase_unwrapping-upstream-delta.json), [classifications](phase_unwrapping-upstream-classifications.json) | 2 contributing headers, 7 declarations, 32 negative fixtures |
+| hfs | [summary](hfs-upstream-summary.json), [delta](hfs-upstream-delta.json), [classifications](hfs-upstream-classifications.json) | 1 contributing headers, 18 declarations, 32 negative fixtures |
+| fuzzy | [summary](fuzzy-upstream-summary.json), [delta](fuzzy-upstream-delta.json), [classifications](fuzzy-upstream-classifications.json) | 4 contributing headers, 18 declarations, 32 negative fixtures |
+| rapid | [summary](rapid-upstream-summary.json), [delta](rapid-upstream-delta.json), [classifications](rapid-upstream-classifications.json) | 1 contributing headers, 17 declarations, 32 negative fixtures |
+| shape | [summary](shape-upstream-summary.json), [delta](shape-upstream-delta.json), [classifications](shape-upstream-classifications.json) | 5 contributing headers, 66 declarations, 32 negative fixtures |
+| structured_light | [summary](structured_light-upstream-summary.json), [delta](structured_light-upstream-delta.json), [classifications](structured_light-upstream-classifications.json) | 3 contributing headers, 20 declarations, 32 negative fixtures |
+| saliency | [summary](saliency-upstream-summary.json), [delta](saliency-upstream-delta.json), [classifications](saliency-upstream-classifications.json) | 2 contributing headers, 39 declarations, 32 negative fixtures |
+| surface_matching | [summary](surface_matching-upstream-summary.json), [delta](surface_matching-upstream-delta.json), [classifications](surface_matching-upstream-classifications.json) | 5 contributing headers, 27 declarations, 32 negative fixtures |
+| reg | [summary](reg-upstream-summary.json), [delta](reg-upstream-delta.json), [classifications](reg-upstream-classifications.json) | 11 contributing headers, 63 declarations, 32 negative fixtures |
+
+The [shared catalog](upstream-map-refresh-catalog.json) and [inventory](upstream-map-refresh-summary.json) record 36 reviewed scopes (3,171 declarations) and 37 pending maps. This record does not establish complete C++ coverage, repository-wide parity or optional backend/codec runtime support. See the [source mapping guide](../../docs/articles/opencv-5.1-source-mapping.md), [calibration migration guide](../../docs/articles/calibration-5.1-migration.md), and [DNN migration guide](../../docs/articles/dnn-5.1-migration.md).
 
 The [additional module review](../../docs/articles/opencv-5.1-module-mapping.md) explains the nine new scopes, fixed contrib revision, compatibility headers, new explicit omissions and unchanged-surface limits.
 
 The [contrib review](../../docs/articles/opencv-5.1-contrib-mapping.md) adds eight scopes and 611 declarations, including the enum-free and inherited evidence-order validation boundaries.
+
+The [image and geometry review](../../docs/articles/opencv-5.1-image-geometry-mapping.md) adds fourteen scopes and 346 declarations, including singleton, pure-callable and entirely omitted module validation.

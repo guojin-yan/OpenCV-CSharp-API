@@ -13,7 +13,7 @@ internal static class Program
     private const string ContribCommit = "b67a855188a3d683813731010f6d39ac614733a4";
     private const string CatalogPath = "compatibility/opencv-5.1.0/upstream-map-refresh-catalog.json";
     // Updating a reviewed slice requires reviewing its source and decisions together.
-    private const string ReviewedCatalogSha256 = "4d0e132f129a001384e4880d415067f4991668b5b01158a5711b72e8972b545f";
+    private const string ReviewedCatalogSha256 = "eece9dad554db0663d5d1b4d76370991340a262254c32105393b3e1335604077";
     private static readonly string[] Classes = { "implemented", "intentionally-omitted", "missing", "non-callable-metadata", "unsupported", "upstream-conditional" };
     private static readonly JsonSerializerOptions Json = new() { WriteIndented = true };
     private sealed record Options(string Repository, string Workspace, string Output, bool Check);
@@ -349,7 +349,18 @@ internal static class Program
         Raw("header partition", "Raw header partition", v => Arr(v, "sourceHeaders")[0]!["startOrdinal"] = 1);
         Raw("lost declaration", "Raw declaration count", v => Arr(v, "declarations").RemoveAt(0));
         Raw("ordinal", "Raw ordinals", v => Arr(v, "declarations")[0]!["ordinal"] = 1);
-        Raw("collapsed overload", "Raw duplicate identities", v => Arr(v, "declarations")[1]!["identity"] = Str(Arr(v, "declarations")[0]!, "identity"));
+        if (Arr(raw, "declarations").Count > 1)
+            Raw("collapsed overload", "Raw duplicate identities", v => Arr(v, "declarations")[1]!["identity"] = Str(Arr(v, "declarations")[0]!, "identity"));
+        else
+            Reject("duplicated singleton declaration", "Raw duplicate identities", () =>
+            {
+                var value = Copy(raw); var scope = Copy(module);
+                JsonNode duplicate = Arr(value, "declarations")[0]!.DeepClone(); duplicate["ordinal"] = 1;
+                Arr(value, "declarations").Add(duplicate);
+                value["declarationCount"] = 2; scope["declarationCount"] = 2; scope["callableCount"] = 2;
+                Arr(value, "sourceHeaders")[0]!["declarationCount"] = 2;
+                ValidateRaw(value, scope, catalog, trusted);
+            });
         Raw("wrong source", "Raw declaration source scope", v => Arr(v, "declarations")[0]!["sourceHeader"] = "outside.hpp");
         Raw("signature", "Raw signature identity", v => Arr(v, "declarations").First(row => Str(row!, "kind") == "callable")!["returnType"] = "unreviewed");
         Raw("lost documentation", "Raw reviewed snapshot", v => Arr(v, "declarations").First(row => Str(row!, "documentation").Length > 0)!["documentation"] = "");
@@ -363,10 +374,18 @@ internal static class Program
             Raw("invented enum metadata", "Raw reviewed snapshot", v => Arr(Arr(v, "declarations").First(row => Str(row!, "kind") == "callable")!, "enumValues").Add(new JsonObject { ["name"] = "const cv.UNREVIEWED", ["value"] = "1" }));
         Classification("missing classification", v => Arr(v, "declarations").RemoveAt(0));
         Classification("wrong order", v => Arr(v, "declarations")[0]!["ordinal"] = 1);
-        Classification("false native", v => Arr(Arr(v, "declarations").First(row => Arr(row!, "nativeEntrypoints").Count > 0)!, "nativeEntrypoints")[0] = "jyppx_ocv_core_false");
-        Classification("false managed", v => Arr(Arr(v, "declarations").First(row => Arr(row!, "managedMembers").Count > 0)!, "managedMembers")[0] = "false");
-        Classification("metadata promoted", v => Arr(v, "declarations").First(row => Str(row!, "classification") == "non-callable-metadata")!["classification"] = "implemented");
-        Classification("binding erased", v => Arr(v, "declarations").First(row => Str(row!, "classification") == "implemented")!["classification"] = "intentionally-omitted");
+        JsonNode EvidenceRow(JsonObject value, string key) =>
+            Arr(value, "declarations").FirstOrDefault(row => Arr(row!, key).Count > 0) ?? Arr(value, "declarations")[0]!;
+        Classification("false native", v => EvidenceRow(v, "nativeEntrypoints")["nativeEntrypoints"] = new JsonArray("jyppx_ocv_core_false"));
+        Classification("false managed", v => EvidenceRow(v, "managedMembers")["managedMembers"] = new JsonArray("false"));
+        if (Arr(classified, "declarations").Any(row => Str(row!, "classification") == "non-callable-metadata"))
+            Classification("metadata promoted", v => Arr(v, "declarations").First(row => Str(row!, "classification") == "non-callable-metadata")!["classification"] = "implemented");
+        else
+            Classification("callable relabeled as metadata", v => Arr(v, "declarations")[0]!["classification"] = "non-callable-metadata");
+        if (Arr(classified, "declarations").Any(row => Str(row!, "classification") == "implemented"))
+            Classification("binding erased", v => Arr(v, "declarations").First(row => Str(row!, "classification") == "implemented")!["classification"] = "intentionally-omitted");
+        else
+            Classification("omitted callable promoted", v => Arr(v, "declarations").First(row => Str(row!, "classification") == "intentionally-omitted")!["classification"] = "implemented");
         Classification("missing reason", v => Arr(v, "declarations")[0]!["reason"] = "");
         Classification("lost build condition", v => Arr(v, "declarations")[0]!["buildCondition"] = "unreviewed");
         if (Arr(previous, "declarations").Any(row => !Strings(row!, "managedMembers").SequenceEqual(Strings(row!, "managedMembers").Order(StringComparer.Ordinal))))

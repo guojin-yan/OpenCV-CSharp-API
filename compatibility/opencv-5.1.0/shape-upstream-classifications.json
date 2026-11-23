@@ -1,0 +1,821 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.1.0",
+  "module": "shape",
+  "claimedSlice": "Historical shape parser scope refreshed against official 5.1 sources: 5 contributing header(s); parser-emitted declarations only",
+  "reviewStatus": "reviewed-parser-slice",
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.HistogramCostExtractor",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 0,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.HistogramCostExtractor.buildCostMatrix(Mat descriptors1;Mat descriptors2;Mat costMatrix[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_histogram_cost_extractor_build_cost_matrix"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.HistogramCostExtractor|method|public;instance|System.Void BuildCostMatrix(JYPPX.OpenCvSharp.Core.Mat descriptors1,JYPPX.OpenCvSharp.Core.Mat descriptors2,JYPPX.OpenCvSharp.Core.Mat costMatrix)"
+      ],
+      "historicalOrdinal": 1,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.HistogramCostExtractor.setNDummies(int nDummies)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_histogram_cost_extractor_set_n_dummies"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.HistogramCostExtractor|property|instance;get:public;set:public|System.Int32 NDummies"
+      ],
+      "historicalOrdinal": 2,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.HistogramCostExtractor.getNDummies()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_histogram_cost_extractor_get_n_dummies"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.HistogramCostExtractor|property|instance;get:public;set:public|System.Int32 NDummies"
+      ],
+      "historicalOrdinal": 3,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.HistogramCostExtractor.setDefaultCost(float defaultCost)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_histogram_cost_extractor_set_default_cost"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.HistogramCostExtractor|property|instance;get:public;set:public|System.Single DefaultCost"
+      ],
+      "historicalOrdinal": 4,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.HistogramCostExtractor.getDefaultCost()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_histogram_cost_extractor_get_default_cost"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.HistogramCostExtractor|property|instance;get:public;set:public|System.Single DefaultCost"
+      ],
+      "historicalOrdinal": 5,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 6,
+      "identity": "class cv.NormHistogramCostExtractor",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 6,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.NormHistogramCostExtractor.setNormFlag(int flag)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_histogram_cost_extractor_set_norm_flag"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.NormHistogramCostExtractorBase|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.NormTypes NormFlag"
+      ],
+      "historicalOrdinal": 7,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.NormHistogramCostExtractor.getNormFlag()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_histogram_cost_extractor_get_norm_flag"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.NormHistogramCostExtractorBase|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.NormTypes NormFlag"
+      ],
+      "historicalOrdinal": 8,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.createNormHistogramCostExtractor(int flag=DIST_L2;int nDummies=25;float defaultCost=0.2f)-\u003EPtr\u003CHistogramCostExtractor\u003E",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_norm_histogram_cost_extractor_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.NormHistogramCostExtractor|method|public;static|JYPPX.OpenCvSharp.Shape.NormHistogramCostExtractor Create(JYPPX.OpenCvSharp.Core.NormTypes flag=L2,System.Int32 nDummies=25,System.Single defaultCost=0.2)",
+        "MEMBER|JYPPX.OpenCvSharp.Shape.ShapeCv2|method|public;static|JYPPX.OpenCvSharp.Shape.NormHistogramCostExtractor CreateNormHistogramCostExtractor(JYPPX.OpenCvSharp.Core.NormTypes flag=L2,System.Int32 nDummies=25,System.Single defaultCost=0.2)"
+      ],
+      "historicalOrdinal": 9,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 10,
+      "identity": "class cv.EMDHistogramCostExtractor",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 10,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.EMDHistogramCostExtractor.setNormFlag(int flag)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_histogram_cost_extractor_set_norm_flag"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.NormHistogramCostExtractorBase|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.NormTypes NormFlag"
+      ],
+      "historicalOrdinal": 11,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.EMDHistogramCostExtractor.getNormFlag()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_histogram_cost_extractor_get_norm_flag"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.NormHistogramCostExtractorBase|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.NormTypes NormFlag"
+      ],
+      "historicalOrdinal": 12,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.createEMDHistogramCostExtractor(int flag=DIST_L2;int nDummies=25;float defaultCost=0.2f)-\u003EPtr\u003CHistogramCostExtractor\u003E",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_emd_histogram_cost_extractor_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.EMDHistogramCostExtractor|method|public;static|JYPPX.OpenCvSharp.Shape.EMDHistogramCostExtractor Create(JYPPX.OpenCvSharp.Core.NormTypes flag=L2,System.Int32 nDummies=25,System.Single defaultCost=0.2)",
+        "MEMBER|JYPPX.OpenCvSharp.Shape.ShapeCv2|method|public;static|JYPPX.OpenCvSharp.Shape.EMDHistogramCostExtractor CreateEMDHistogramCostExtractor(JYPPX.OpenCvSharp.Core.NormTypes flag=L2,System.Int32 nDummies=25,System.Single defaultCost=0.2)"
+      ],
+      "historicalOrdinal": 13,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 14,
+      "identity": "class cv.ChiHistogramCostExtractor",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 14,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.createChiHistogramCostExtractor(int nDummies=25;float defaultCost=0.2f)-\u003EPtr\u003CHistogramCostExtractor\u003E",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_chi_histogram_cost_extractor_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.ChiHistogramCostExtractor|method|public;static|JYPPX.OpenCvSharp.Shape.ChiHistogramCostExtractor Create(System.Int32 nDummies=25,System.Single defaultCost=0.2)",
+        "MEMBER|JYPPX.OpenCvSharp.Shape.ShapeCv2|method|public;static|JYPPX.OpenCvSharp.Shape.ChiHistogramCostExtractor CreateChiHistogramCostExtractor(System.Int32 nDummies=25,System.Single defaultCost=0.2)"
+      ],
+      "historicalOrdinal": 15,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 16,
+      "identity": "class cv.EMDL1HistogramCostExtractor",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 16,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.createEMDL1HistogramCostExtractor(int nDummies=25;float defaultCost=0.2f)-\u003EPtr\u003CHistogramCostExtractor\u003E",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_emd_l1_histogram_cost_extractor_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.EMDL1HistogramCostExtractor|method|public;static|JYPPX.OpenCvSharp.Shape.EMDL1HistogramCostExtractor Create(System.Int32 nDummies=25,System.Single defaultCost=0.2)",
+        "MEMBER|JYPPX.OpenCvSharp.Shape.ShapeCv2|method|public;static|JYPPX.OpenCvSharp.Shape.EMDL1HistogramCostExtractor CreateEMDL1HistogramCostExtractor(System.Int32 nDummies=25,System.Single defaultCost=0.2)"
+      ],
+      "historicalOrdinal": 17,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 18,
+      "identity": "class cv.ShapeDistanceExtractor",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 18,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.ShapeDistanceExtractor.computeDistance(Mat contour1;Mat contour2)-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_distance_extractor_compute_distance"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.ShapeDistanceExtractor|method|public;instance|System.Single ComputeDistance(JYPPX.OpenCvSharp.Core.Mat contour1,JYPPX.OpenCvSharp.Core.Mat contour2)"
+      ],
+      "historicalOrdinal": 19,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 20,
+      "identity": "class cv.ShapeContextDistanceExtractor",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 20,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.ShapeContextDistanceExtractor.setAngularBins(int nAngularBins)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 21,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.ShapeContextDistanceExtractor.getAngularBins()-\u003Eint",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 22,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.ShapeContextDistanceExtractor.setRadialBins(int nRadialBins)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 23,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.ShapeContextDistanceExtractor.getRadialBins()-\u003Eint",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 24,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.ShapeContextDistanceExtractor.setInnerRadius(float innerRadius)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 25,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.ShapeContextDistanceExtractor.getInnerRadius()-\u003Efloat",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 26,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.ShapeContextDistanceExtractor.setOuterRadius(float outerRadius)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 27,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.ShapeContextDistanceExtractor.getOuterRadius()-\u003Efloat",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 28,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.ShapeContextDistanceExtractor.setRotationInvariant(bool rotationInvariant)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 29,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.ShapeContextDistanceExtractor.getRotationInvariant()-\u003Ebool",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 30,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.ShapeContextDistanceExtractor.setShapeContextWeight(float shapeContextWeight)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 31,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.ShapeContextDistanceExtractor.getShapeContextWeight()-\u003Efloat",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 32,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.ShapeContextDistanceExtractor.setImageAppearanceWeight(float imageAppearanceWeight)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 33,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.ShapeContextDistanceExtractor.getImageAppearanceWeight()-\u003Efloat",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 34,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.ShapeContextDistanceExtractor.setBendingEnergyWeight(float bendingEnergyWeight)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 35,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.ShapeContextDistanceExtractor.getBendingEnergyWeight()-\u003Efloat",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 36,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.ShapeContextDistanceExtractor.setImages(Mat image1;Mat image2)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 37,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.ShapeContextDistanceExtractor.getImages(Mat image1[/O];Mat image2[/O])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 38,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.ShapeContextDistanceExtractor.setIterations(int iterations)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 39,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.ShapeContextDistanceExtractor.getIterations()-\u003Eint",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 40,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.ShapeContextDistanceExtractor.setCostExtractor(Ptr_HistogramCostExtractor comparer)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 41,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 42,
+      "identity": "cv.ShapeContextDistanceExtractor.getCostExtractor()-\u003EPtr\u003CHistogramCostExtractor\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 42,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.ShapeContextDistanceExtractor.setStdDev(float sigma)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 43,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.ShapeContextDistanceExtractor.getStdDev()-\u003Efloat",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 44,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 45,
+      "identity": "cv.ShapeContextDistanceExtractor.setTransformAlgorithm(Ptr_ShapeTransformer transformer)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 45,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 46,
+      "identity": "cv.ShapeContextDistanceExtractor.getTransformAlgorithm()-\u003EPtr\u003CShapeTransformer\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 46,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.createShapeContextDistanceExtractor(int nAngularBins=12;int nRadialBins=4;float innerRadius=0.2f;float outerRadius=2;int iterations=3;Ptr_HistogramCostExtractor comparer=createChiHistogramCostExtractor()[/C,/Ref];Ptr_ShapeTransformer transformer=createThinPlateSplineShapeTransformer()[/C,/Ref])-\u003EPtr\u003CShapeContextDistanceExtractor\u003E",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_context_distance_extractor_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.ShapeContextDistanceExtractor|method|public;static|JYPPX.OpenCvSharp.Shape.ShapeContextDistanceExtractor Create(System.Int32 angularBins=12,System.Int32 radialBins=4,System.Single innerRadius=0.2,System.Single outerRadius=2,System.Int32 iterations=3)",
+        "MEMBER|JYPPX.OpenCvSharp.Shape.ShapeCv2|method|public;static|JYPPX.OpenCvSharp.Shape.ShapeContextDistanceExtractor CreateShapeContextDistanceExtractor(System.Int32 angularBins=12,System.Int32 radialBins=4,System.Single innerRadius=0.2,System.Single outerRadius=2,System.Int32 iterations=3)"
+      ],
+      "historicalOrdinal": 47,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 48,
+      "identity": "class cv.HausdorffDistanceExtractor",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 48,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.HausdorffDistanceExtractor.setDistanceFlag(int distanceFlag)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_hausdorff_distance_extractor_set_distance_flag"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.HausdorffDistanceExtractor|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.NormTypes DistanceFlag"
+      ],
+      "historicalOrdinal": 49,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 50,
+      "identity": "cv.HausdorffDistanceExtractor.getDistanceFlag()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_hausdorff_distance_extractor_get_distance_flag"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.HausdorffDistanceExtractor|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.NormTypes DistanceFlag"
+      ],
+      "historicalOrdinal": 50,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 51,
+      "identity": "cv.HausdorffDistanceExtractor.setRankProportion(float rankProportion)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_hausdorff_distance_extractor_set_rank_proportion"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.HausdorffDistanceExtractor|property|instance;get:public;set:public|System.Single RankProportion"
+      ],
+      "historicalOrdinal": 51,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 52,
+      "identity": "cv.HausdorffDistanceExtractor.getRankProportion()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_hausdorff_distance_extractor_get_rank_proportion"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.HausdorffDistanceExtractor|property|instance;get:public;set:public|System.Single RankProportion"
+      ],
+      "historicalOrdinal": 52,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 53,
+      "identity": "cv.createHausdorffDistanceExtractor(int distanceFlag=cv::NORM_L2;float rankProp=0.6f)-\u003EPtr\u003CHausdorffDistanceExtractor\u003E",
+      "classification": "implemented",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_shape_hausdorff_distance_extractor_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Shape.HausdorffDistanceExtractor|method|public;static|JYPPX.OpenCvSharp.Shape.HausdorffDistanceExtractor Create(JYPPX.OpenCvSharp.Core.NormTypes distanceFlag=L2,System.Single rankProportion=0.6)",
+        "MEMBER|JYPPX.OpenCvSharp.Shape.ShapeCv2|method|public;static|JYPPX.OpenCvSharp.Shape.HausdorffDistanceExtractor CreateHausdorffDistanceExtractor(JYPPX.OpenCvSharp.Core.NormTypes distanceFlag=L2,System.Single rankProportion=0.6)"
+      ],
+      "historicalOrdinal": 53,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 54,
+      "identity": "class cv.ShapeTransformer",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 54,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 55,
+      "identity": "cv.ShapeTransformer.estimateTransformation(Mat transformingShape;Mat targetShape;vector_DMatch matches[/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 55,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 56,
+      "identity": "cv.ShapeTransformer.applyTransformation(Mat input;Mat output=Mat()[/O])-\u003Efloat",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 56,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 57,
+      "identity": "cv.ShapeTransformer.warpImage(Mat transformingImage;Mat output[/O];int flags=INTER_LINEAR;int borderMode=BORDER_CONSTANT;Scalar borderValue=Scalar()[/C,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 57,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 58,
+      "identity": "class cv.ThinPlateSplineShapeTransformer",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 58,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 59,
+      "identity": "cv.ThinPlateSplineShapeTransformer.setRegularizationParameter(double beta)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 59,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 60,
+      "identity": "cv.ThinPlateSplineShapeTransformer.getRegularizationParameter()-\u003Edouble",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 60,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 61,
+      "identity": "cv.createThinPlateSplineShapeTransformer(double regularizationParameter=0)-\u003EPtr\u003CThinPlateSplineShapeTransformer\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 61,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 62,
+      "identity": "class cv.AffineTransformer",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 62,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 63,
+      "identity": "cv.AffineTransformer.setFullAffine(bool fullAffine)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 63,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 64,
+      "identity": "cv.AffineTransformer.getFullAffine()-\u003Ebool",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 64,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 65,
+      "identity": "cv.createAffineTransformer(bool fullAffine)-\u003EPtr\u003CAffineTransformer\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "The pinned Shape parser closure includes APIs beyond the current managed/native wrapper; this declaration has no corresponding native ABI entrypoint in the scoped wrapper surface and remains intentionally omitted.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SHAPE=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 65,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    }
+  ]
+}
