@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <None Update="Dnn\Fixtures\identity-opset13.onnx.base64" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="Dnn\Fixtures\add-zero.tflite.base64" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <Target Name="CopyOpenCvNativeRuntime" AfterTargets="Build" Condition="'$(OpenCvNativeRuntimeDir)' != '' and '$(TargetDir)' != ''">

@@ -22,5 +22,18 @@ namespace JYPPX.OpenCvSharp.Tests.Dnn
             }
             return model;
         }
+
+        internal static byte[] ReadAddZeroTFLite()
+        {
+            string path = Path.Combine(AppContext.BaseDirectory, "Dnn", "Fixtures", "add-zero.tflite.base64");
+            byte[] model = Convert.FromBase64String(File.ReadAllText(path, Encoding.ASCII).Trim());
+            using (SHA256 hasher = SHA256.Create())
+            {
+                string hash = BitConverter.ToString(hasher.ComputeHash(model)).Replace("-", string.Empty).ToLowerInvariant();
+                if (hash != "bfec1c8a625eabcb718538f14221ad821f4614e32d8e8031b3c179d3502c56c1")
+                    throw new InvalidOperationException("The deterministic TFLite fixture hash does not match its declared contract.");
+            }
+            return model;
+        }
     }
 }

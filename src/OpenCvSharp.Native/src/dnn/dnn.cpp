@@ -4,6 +4,7 @@
 #include "../core/utf8_result_handle.h"
 #include "../error_state.h"
 #include "dnn_handles.h"
+#include "dnn_contract_values.h"
 
 #include <algorithm>
 #include <cmath>
@@ -21,6 +22,27 @@
 
 namespace
 {
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+#if CV_VERSION_MAJOR > 5 || (CV_VERSION_MAJOR == 5 && CV_VERSION_MINOR >= 1)
+    constexpr bool unified_dnn_engine = true;
+    static_assert(cv::dnn::ENGINE_AUTO == 0 && cv::dnn::ENGINE_OPENCV == 1 && cv::dnn::ENGINE_ORT == 2,
+        "Review the ABI 1 DNN engine projection when upstream engine values change.");
+    static_assert(cv::dnn::DNN_MODEL_TFLITE == 2,
+        "Review the ABI 1 DNN model-format projection when upstream format values change.");
+#else
+    constexpr bool unified_dnn_engine = false;
+    static_assert(cv::dnn::ENGINE_CLASSIC == 1 && cv::dnn::ENGINE_NEW == 2 &&
+        cv::dnn::ENGINE_AUTO == 3 && cv::dnn::ENGINE_ORT == 4,
+        "Review the ABI 1 DNN engine projection when upstream engine values change.");
+    static_assert(cv::dnn::DNN_MODEL_TFLITE == 3,
+        "Review the ABI 1 DNN model-format projection when upstream format values change.");
+#endif
+    int upstream_engine(int engine)
+    {
+        return opencv_csharp_native::upstream_dnn_engine(engine, unified_dnn_engine);
+    }
+#endif
+
     int validate_net(const char* api_name, const jyppx_ocv_dnn_net* net)
     {
         return net == nullptr
@@ -821,7 +843,7 @@ int jyppx_ocv_dnn_read_net(const char* model, const char* config, const char* fr
         if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
         status = path_from_utf8(api_name, config, "config", config_path);
         if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
-        cv::dnn::Net native = cv::dnn::readNet(model_path, config_path, safe_string(framework), engine);
+        cv::dnn::Net native = cv::dnn::readNet(model_path, config_path, safe_string(framework), upstream_engine(engine));
         return create_net_handle(api_name, native, net);
 #else
         (void)config; (void)framework; (void)engine; (void)net;
@@ -863,7 +885,7 @@ int jyppx_ocv_dnn_read_net_from_buffer(
             safe_string(framework),
             to_byte_vector(model_buffer, model_buffer_size),
             to_byte_vector(config_buffer, config_buffer_size),
-            engine);
+            upstream_engine(engine));
         return create_net_handle(api_name, native, net);
 #else
         (void)engine; (void)net;
@@ -892,7 +914,7 @@ int jyppx_ocv_dnn_read_net_from_onnx(const char* model, int engine, jyppx_ocv_dn
         std::string model_path;
         status = path_from_utf8(api_name, model, "model", model_path);
         if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
-        cv::dnn::Net native = cv::dnn::readNetFromONNX(model_path, engine);
+        cv::dnn::Net native = cv::dnn::readNetFromONNX(model_path, upstream_engine(engine));
         return create_net_handle(api_name, native, net);
 #else
         (void)engine; (void)net;
@@ -928,7 +950,7 @@ int jyppx_ocv_dnn_read_net_from_tensorflow(const char* model, const char* config
         CV_Error(cv::Error::StsNotImplemented,
             "TensorFlow importer was removed in OpenCV 5.1. Use an ONNX-converted model or OpenCV 5.0.");
 #else
-        cv::dnn::Net native = cv::dnn::readNetFromTensorflow(model_path, config_path, engine);
+        cv::dnn::Net native = cv::dnn::readNetFromTensorflow(model_path, config_path, upstream_engine(engine));
         return create_net_handle(api_name, native, net);
 #endif
 #else
@@ -958,7 +980,7 @@ int jyppx_ocv_dnn_read_net_from_tflite(const char* model, int engine, jyppx_ocv_
         std::string model_path;
         status = path_from_utf8(api_name, model, "model", model_path);
         if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
-        cv::dnn::Net native = cv::dnn::readNetFromTFLite(model_path, engine);
+        cv::dnn::Net native = cv::dnn::readNetFromTFLite(model_path, upstream_engine(engine));
         return create_net_handle(api_name, native, net);
 #else
         (void)engine; (void)net;
@@ -1932,7 +1954,7 @@ int jyppx_ocv_dnn_read_net_from_tensorflow_ex(
         cv::dnn::Net value = cv::dnn::readNetFromTensorflow(
             model_path,
             config_path,
-            engine,
+            upstream_engine(engine),
             to_string_vector(extra_outputs_buffer, extra_output_offsets, extra_output_count));
         return create_net_handle(api_name, value, net);
 #endif
@@ -1977,7 +1999,7 @@ int jyppx_ocv_dnn_read_net_from_tensorflow_buffer(
         cv::dnn::Net value = cv::dnn::readNetFromTensorflow(
             to_byte_vector(model_buffer, model_buffer_size),
             to_byte_vector(config_buffer, config_buffer_size),
-            engine,
+            upstream_engine(engine),
             to_string_vector(extra_outputs_buffer, extra_output_offsets, extra_output_count));
         return create_net_handle(api_name, value, net);
 #endif
@@ -2002,7 +2024,7 @@ int jyppx_ocv_dnn_read_net_from_tflite_buffer(const unsigned char* model_buffer,
         status = validate_engine(api_name, engine);
         if (status != OPENCV_CSHARP_STATUS_OK) return status;
 #if defined(OPENCV_CSHARP_HAS_OPENCV)
-        return create_net_handle(api_name, cv::dnn::readNetFromTFLite(to_byte_vector(model_buffer, model_buffer_size), engine), net);
+        return create_net_handle(api_name, cv::dnn::readNetFromTFLite(to_byte_vector(model_buffer, model_buffer_size), upstream_engine(engine)), net);
 #else
         return opencv_csharp_native::set_not_linked(api_name);
 #endif
@@ -2059,7 +2081,7 @@ int jyppx_ocv_dnn_read_net_from_onnx_buffer(const unsigned char* model_buffer, i
             cv::dnn::readNetFromONNX(
                 reinterpret_cast<const char*>(model_buffer),
                 static_cast<size_t>(model_buffer_size),
-                engine),
+                upstream_engine(engine)),
             net);
 #else
         return opencv_csharp_native::set_not_linked(api_name);
@@ -2506,7 +2528,8 @@ int jyppx_ocv_dnn_net_get_model_format(const jyppx_ocv_dnn_net* net, int* format
         status = validate_output_int(api_name, format, "format");
         if (status != OPENCV_CSHARP_STATUS_OK) return status;
 #if defined(OPENCV_CSHARP_HAS_OPENCV)
-        *format = static_cast<int>(net->value.getModelFormat());
+        *format = opencv_csharp_native::contract_dnn_model_format(
+            static_cast<int>(net->value.getModelFormat()), unified_dnn_engine);
         return OPENCV_CSHARP_STATUS_OK;
 #else
         *format = 0;

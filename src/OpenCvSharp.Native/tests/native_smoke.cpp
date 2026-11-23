@@ -6,6 +6,7 @@
 #if !defined(OPENCV_CSHARP_RUNTIME_PROFILE_MINI)
 #include "open_cv_sharp/calib3d/calib3d.h"
 #include "open_cv_sharp/dnn/dnn.h"
+#include "../src/dnn/dnn_contract_values.h"
 #include "open_cv_sharp/features2d/features2d.h"
 #include "open_cv_sharp/highgui/highgui.h"
 #include "open_cv_sharp/ml/ml.h"
@@ -3103,6 +3104,19 @@ namespace
 
     int run_dnn_structured_smoke()
     {
+        // Check both upstream revisions even when the linked runtime has no ORT.
+        // Its importer fallback would otherwise conceal an incorrect engine value.
+        using opencv_csharp_native::upstream_dnn_engine;
+        using opencv_csharp_native::contract_dnn_model_format;
+        if (upstream_dnn_engine(3, true) != 0 || upstream_dnn_engine(1, true) != 1 ||
+            upstream_dnn_engine(2, true) != 1 || upstream_dnn_engine(4, true) != 2 ||
+            upstream_dnn_engine(1, false) != 1 || upstream_dnn_engine(2, false) != 2 ||
+            upstream_dnn_engine(3, false) != 3 || upstream_dnn_engine(4, false) != 4 ||
+            contract_dnn_model_format(0, true) != 0 || contract_dnn_model_format(1, true) != 1 ||
+            contract_dnn_model_format(2, true) != 3 || contract_dnn_model_format(2, false) != 2 ||
+            contract_dnn_model_format(3, false) != 3)
+            return 699;
+
         jyppx_ocv_dnn_net* net = nullptr;
         if (jyppx_ocv_dnn_net_create_empty(&net) != OPENCV_CSHARP_STATUS_OK || net == nullptr)
         {
