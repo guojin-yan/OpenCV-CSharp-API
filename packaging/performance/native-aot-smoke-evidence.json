@@ -2,7 +2,7 @@
   "$schema": "native-aot-smoke-evidence.schema.json",
   "schemaVersion": 1,
   "status": "verified",
-  "sourceCommit": "dbf2fb4f7f7c2f709ecdea25c8e35ebcd607851b",
+  "sourceCommit": "0614a9257ede85e0fdbab00513630b9ef3349a93",
   "runner": {
     "os": "Microsoft Windows 10.0.26200",
     "architecture": "x64",
@@ -17,16 +17,23 @@
   "publishTrimmed": true,
   "trimMode": "partial",
   "publishSingleFile": true,
-  "nativeRuntimeArtifact": "local-package-cache:jyppx.opencv.runtime.win-x64.5.0.0.nupkg",
-  "nativeRuntimeArtifactSha256": "07de65af0ec14420d84d49caa4663d08393880a1bae402c789177d2dfff2544e",
-  "nativeRuntimePackage": "jyppx.opencv.runtime.win-x64.5.0.0.nupkg",
-  "nativeRuntimePackageSha256": "07de65af0ec14420d84d49caa4663d08393880a1bae402c789177d2dfff2544e",
-  "managedAssemblySha256": "4b0ae43fd3f5e8a27fb8dc74b36590b8309697e6af600b85d99756c9615800a5",
-  "managedPackageVersion": "5.0.0",
-  "openCvVersion": "5.0.0",
+  "nativeAotToolchain": {
+    "runtimeFrameworkVersion": "10.0.15",
+    "ilCompilerVersion": "10.0.15",
+    "ilLinkTasksVersion": "10.0.15",
+    "nugetAuditEnabled": true,
+    "nu1903TreatedAsError": true
+  },
+  "nativeRuntimeArtifact": "package-consumer-evidence:packaging/runtime/opencv-5.1.0-package-consumer-evidence.json",
+  "nativeRuntimeArtifactSha256": "d0b6898df70684c3a39da6091adcabaf43b7d184347e8db4aba2059e652949ec",
+  "nativeRuntimePackage": "jyppx.opencv.runtime.win-x64.5.1.0.nupkg",
+  "nativeRuntimePackageSha256": "d0b6898df70684c3a39da6091adcabaf43b7d184347e8db4aba2059e652949ec",
+  "managedAssemblySha256": "3121a142cb5b6813cffe09e937659ba58faf94a9fc7a013ec6790ed82e68935e",
+  "managedPackageVersion": "5.1.0",
+  "openCvVersion": "5.1.0",
   "nativeAbiVersion": 1,
-  "publishedFileCount": 21,
-  "nativePayloadFileCount": 18,
+  "publishedFileCount": 46,
+  "nativePayloadFileCount": 43,
   "nativeSmoke": "verified",
   "encodedBytes": 71,
   "dnnCpuAvailable": true,
@@ -34,97 +41,223 @@
   "nativePayload": [
     {
       "name": "JYPPX.OpenCV.Native.dll",
-      "bytes": 1646080,
-      "sha256": "522e5ca18591bc510661a69cd1b1d9f1b937b266bcbe9230a6dd00e720581d59"
+      "bytes": 1894912,
+      "sha256": "df3bb6b53e1d67d081eb984ff0e71817a892904808ff829533f43be2d7c66656"
     },
     {
-      "name": "opencv_calib500.dll",
-      "bytes": 1099776,
-      "sha256": "966f6c8ecfd0659f2a5ff28a0280958413ea3fb0dad59461d8e161666ee8c472"
+      "name": "opencv_alphamat510.dll",
+      "bytes": 466944,
+      "sha256": "6d84d33cd04b583645b6326b3144cdc37c0cae06c83f323cf47d342c801c161d"
     },
     {
-      "name": "opencv_core500.dll",
-      "bytes": 5803520,
-      "sha256": "3b8709f4dc4478cb2fa1af97b14e50a5756c601e8623f426fe3478330b50b68a"
+      "name": "opencv_bgsegm510.dll",
+      "bytes": 410624,
+      "sha256": "338a2b66744291181ef7529201e837ea847813b4631127a4550928d221f406b4"
     },
     {
-      "name": "opencv_dnn500.dll",
-      "bytes": 17764352,
-      "sha256": "c8467204f81dd7e8e5ad29123b5d01273f509a7331d55bdde6e0a05dbc3a7c51"
+      "name": "opencv_bioinspired510.dll",
+      "bytes": 275968,
+      "sha256": "3af58fc0b458d5096984c85b6bb46a2a06f49ce53bc151560039c625e3d231b4"
     },
     {
-      "name": "opencv_features500.dll",
-      "bytes": 1371136,
-      "sha256": "724a6dd07b09ffbce5f384d21eea30b62f8c53d5f5b729234b7ad92e663e1de3"
+      "name": "opencv_calib510.dll",
+      "bytes": 1124864,
+      "sha256": "ff19683bd993c15af40df58b0daa8ae75561029697ac203a9353801fe1df23d7"
     },
     {
-      "name": "opencv_flann500.dll",
-      "bytes": 809984,
-      "sha256": "1cadc60f1bedec53245665663768209a67feb3bfc49ce84691fb1672a9ef7ce4"
+      "name": "opencv_core510.dll",
+      "bytes": 10464256,
+      "sha256": "6888f84e2b2ebe707e0a093ef2b3be9f500ea8bab1b60eea7a468060635be403"
     },
     {
-      "name": "opencv_geometry500.dll",
-      "bytes": 3350016,
-      "sha256": "642679ea6260e7a11560b2c532c72aa932e0eeb55de717e773731ee669b44f8b"
+      "name": "opencv_dnn510.dll",
+      "bytes": 15418880,
+      "sha256": "6b1d0a3eee3ef20c57affaeb188b77a3ee81a3421b52927cbe6c608eb9c06efc"
     },
     {
-      "name": "opencv_highgui500.dll",
-      "bytes": 679936,
-      "sha256": "11d07e5b8d86c6d1aa3dea5490c80f7714159be7ea18f17406312e984abc10d3"
+      "name": "opencv_face510.dll",
+      "bytes": 1117696,
+      "sha256": "00f950bb0083a5a6d7194a663ee549e3465be407ff0987db2f5c901817ab98ed"
     },
     {
-      "name": "opencv_imgcodecs500.dll",
-      "bytes": 3500032,
-      "sha256": "82460749076373cf81073c2a374854a6d78362a0c52a0886c8291bcf4973422f"
+      "name": "opencv_features510.dll",
+      "bytes": 1451008,
+      "sha256": "f7c2098d547baa39567edc1f29d73a519bf0631b1b77bf31b99b3bed7b297413"
     },
     {
-      "name": "opencv_imgproc500.dll",
-      "bytes": 11042304,
-      "sha256": "72e542fb4fcba81e75a30eefa708966b3168a144424416092c507a37e666ea1b"
+      "name": "opencv_flann510.dll",
+      "bytes": 703488,
+      "sha256": "45d860283c0f8494bcdc5e6d495e0e6a13755a6108e8510b8a769763c4f3a549"
     },
     {
-      "name": "opencv_ml500.dll",
-      "bytes": 1054208,
-      "sha256": "a2962b72333b039ca48875106b3b839f8ecdcf9a8e6b2b036307225c7e585095"
+      "name": "opencv_fuzzy510.dll",
+      "bytes": 171520,
+      "sha256": "e5ac5cf387a6dedfe7cb8af1909383497da109719b7f8bafb61ecb09e991f966"
     },
     {
-      "name": "opencv_objdetect500.dll",
-      "bytes": 2651648,
-      "sha256": "7af553b712e163e09dd7b17b714293cee4fb68da32d318735b05415079873432"
+      "name": "opencv_geometry510.dll",
+      "bytes": 5060096,
+      "sha256": "a6b5a7f54568cee502d1ab36502ff50b2d915582f146fc8de2adc04ab0dcca8b"
     },
     {
-      "name": "opencv_photo500.dll",
-      "bytes": 1441792,
-      "sha256": "43c94da5c28d1b92c10cabd867c41334d06685c65aea183542a2f7125051259d"
+      "name": "opencv_hfs510.dll",
+      "bytes": 450560,
+      "sha256": "80b6f288e1647f11ebcc8ecaca6c308458e341898b9430e42b9c15e45c82d49e"
     },
     {
-      "name": "opencv_ptcloud500.dll",
-      "bytes": 1358848,
-      "sha256": "31268ee2f8e42b751ad114573fb9ad04a4346462e9de71e0b280241b95786487"
+      "name": "opencv_highgui510.dll",
+      "bytes": 695296,
+      "sha256": "3096edc4110df7fc5e2e0444e6da43fa894bab6ac1e1d931b87718a050b651e5"
     },
     {
-      "name": "opencv_stereo500.dll",
-      "bytes": 329216,
-      "sha256": "b2f31140874101bb96a7185a61ed997418975770936483cdc20fbe21de61dd48"
+      "name": "opencv_img_hash510.dll",
+      "bytes": 234496,
+      "sha256": "54bb857911633adb6ba36156b31cc1d49fb1e26915761555f8d585303ad7b744"
     },
     {
-      "name": "opencv_stitching500.dll",
-      "bytes": 1558016,
-      "sha256": "e383b3433597a7dee121f1ada6944be5b3036535c27cbd778839019f5f5b41f8"
+      "name": "opencv_imgcodecs510.dll",
+      "bytes": 3518976,
+      "sha256": "d64f7347a182b2a64817db661a74ff827ad97c72c040273501f946eb2d10e382"
     },
     {
-      "name": "opencv_video500.dll",
-      "bytes": 1244160,
-      "sha256": "ca6bdf798a8c425183ed119544fcd4278e7b0aab37c21b82ef0eb7e6e17c7ec8"
+      "name": "opencv_imgproc510.dll",
+      "bytes": 10991104,
+      "sha256": "7a9e3c382f6013521f08e037810a2e7b5a8fe1cfd9c763c509a79fcd76198b1e"
     },
     {
-      "name": "opencv_videoio500.dll",
-      "bytes": 989184,
-      "sha256": "438fa0e7fe474ee435afaafab46ef63852073625f4c1e4c4aac1ddc0c8b6564e"
+      "name": "opencv_intensity_transform510.dll",
+      "bytes": 403968,
+      "sha256": "74fb147fe3f98c633faa7d0cc6fc800fdb232a543a62ccaa7c4a0ed2557ebf0b"
+    },
+    {
+      "name": "opencv_line_descriptor510.dll",
+      "bytes": 395776,
+      "sha256": "648a5eeb941641273193205352499e481fd4271c6554d592743818997d438fdf"
+    },
+    {
+      "name": "opencv_ml510.dll",
+      "bytes": 1047040,
+      "sha256": "e52a4ef734a69a496a6ca17ad7d3ca7d5c7586b3b377bc467fa5cf56f246fa39"
+    },
+    {
+      "name": "opencv_objdetect510.dll",
+      "bytes": 2650624,
+      "sha256": "33cfde5e4c6632f343118e0bea50d8ff4f472e93e9ad0b59d48925182a6c6579"
+    },
+    {
+      "name": "opencv_optflow510.dll",
+      "bytes": 1091584,
+      "sha256": "c446e2eb0dd1797d448967d6b8b7e3f582e519e859754f75bff716aa4231bf68"
+    },
+    {
+      "name": "opencv_phase_unwrapping510.dll",
+      "bytes": 161792,
+      "sha256": "2412985667bb425abd8755611e49ef51a2febd3c50ce539083be489542f31b7a"
+    },
+    {
+      "name": "opencv_photo510.dll",
+      "bytes": 1440768,
+      "sha256": "75cdfabe2dab880da68d1096bcd4ca24625452db0c250d5540c62bb678d1332c"
+    },
+    {
+      "name": "opencv_plot510.dll",
+      "bytes": 141824,
+      "sha256": "df310dbcbcb457dfefda832e6d0ec677a658c72b4b0f96cf8ce383eb5377831b"
+    },
+    {
+      "name": "opencv_ptcloud510.dll",
+      "bytes": 2217472,
+      "sha256": "271c50525455600367099feebf0d997a78c99a15af3fcff4d32faa040d240bb5"
+    },
+    {
+      "name": "opencv_quality510.dll",
+      "bytes": 217600,
+      "sha256": "0f4bb129cd699c3d172def174399ac92e00779e5a899a5d9da4cb3021107b1b2"
+    },
+    {
+      "name": "opencv_rapid510.dll",
+      "bytes": 230912,
+      "sha256": "5eaaa901e1ac26ac651cf7b3770b5a92f11ebd331adebd0fa73566149182736c"
+    },
+    {
+      "name": "opencv_reg510.dll",
+      "bytes": 243712,
+      "sha256": "fdf9fafff7cb3bf012597fee79d424f7c3480501ea2b589485d44d1a9b86df74"
+    },
+    {
+      "name": "opencv_saliency510.dll",
+      "bytes": 325632,
+      "sha256": "b6d4c4ec48c38760b04c76fbdc1fbda130be5616b87c7c3a58a64db7ca33dace"
+    },
+    {
+      "name": "opencv_shape510.dll",
+      "bytes": 334848,
+      "sha256": "c5c009361fab5e9a27b01c1099a036915d1eae7a2557803391b706ccd5a0e182"
+    },
+    {
+      "name": "opencv_stereo510.dll",
+      "bytes": 334848,
+      "sha256": "58922e789a19989540b083401fe0cd3bb65c45fbb43738242f6c751282362a3f"
+    },
+    {
+      "name": "opencv_stitching510.dll",
+      "bytes": 1683456,
+      "sha256": "1c34321ef1a5775f199eae97d5eaaa090df766c932afa24530fb82ae925252be"
+    },
+    {
+      "name": "opencv_structured_light510.dll",
+      "bytes": 227840,
+      "sha256": "5d7d32217bcd822acd00b073ccb1d06036455704978a9a1edd262a5649c601f3"
+    },
+    {
+      "name": "opencv_surface_matching510.dll",
+      "bytes": 805376,
+      "sha256": "568ba584938bb88185407349f1edb09e2619a251d9ccd945a60484b260e4d4a0"
+    },
+    {
+      "name": "opencv_tracking510.dll",
+      "bytes": 2908672,
+      "sha256": "ac184d08d971a079fe9f53a6be443cb1fd850fad8c0ec3d3b66a7bdc6a6437a2"
+    },
+    {
+      "name": "opencv_video510.dll",
+      "bytes": 1256960,
+      "sha256": "5888b99835e548972ead58e732da8b8cf0bfe46c9c8065c7ee4b207d8d325f69"
+    },
+    {
+      "name": "opencv_videoio510.dll",
+      "bytes": 1007104,
+      "sha256": "4140341b2cd0599e283257a2bb23b10752f2f9854405ebfc34acc9a97a5f66b5"
+    },
+    {
+      "name": "opencv_xfeatures2d510.dll",
+      "bytes": 3503616,
+      "sha256": "63d6b6f471bc1973426d4e5b9abe04cf829da61e25ec06d7e6a234ba8f1f3af1"
+    },
+    {
+      "name": "opencv_ximgproc510.dll",
+      "bytes": 2313216,
+      "sha256": "693d752859c9adfc92b67d94be9c3ce8bec967c4c082323fd3f02b4ff09dedae"
+    },
+    {
+      "name": "opencv_xobjdetect510.dll",
+      "bytes": 571904,
+      "sha256": "65678a14328b84ef4ba2431a373a37b710c56e8230de47c7de65b47c573223b7"
+    },
+    {
+      "name": "opencv_xphoto510.dll",
+      "bytes": 1028608,
+      "sha256": "a53ac3f7360e30209cc711689821331c925fda4ee7b64b5f43e3d39e9dbb6440"
+    },
+    {
+      "name": "opencv_xstereo510.dll",
+      "bytes": 413696,
+      "sha256": "054e543e492b464e7fee1a3d7b26a6a414125b7c8175dab3449b57bb4b1a2de6"
     }
   ],
   "limitations": [
-    "This record binds a current-source Windows x64 NativeAOT consumer run to the exact factual full runtime package and all 18 native DLL hashes.",
+    "This record binds a current-source Windows x64 NativeAOT consumer run to the verified OpenCV 5.1.0 Full package evidence and all 43 native DLL hashes.",
+    "The AOT smoke copies the exact native DLL bytes recorded in the local package-consumer evidence; it does not restore the runtime package through NuGet.",
     "The win-arm64 linker and native runtime evidence remain pending until a matching Visual Studio ARM64 toolchain and runtime payload are available.",
     "This smoke does not promote package-wide IsAotCompatible or IsTrimmable metadata."
   ]
