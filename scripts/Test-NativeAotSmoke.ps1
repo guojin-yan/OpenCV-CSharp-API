@@ -18,6 +18,21 @@ if ($TimeoutSeconds -lt 30 -or $TimeoutSeconds -gt 900) { throw 'TimeoutSeconds 
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $project = Join-Path $repo 'tools/AotSmoke/AotSmoke.csproj'
 if (-not (Test-Path -LiteralPath $project -PathType Leaf)) { throw "AOT smoke project was not found: $project" }
+$nativeRuntimeFiles = @()
+if (-not [string]::IsNullOrWhiteSpace($OpenCvNativeRuntimeDir)) {
+    $nativeRuntimeCandidate = if ([IO.Path]::IsPathRooted($OpenCvNativeRuntimeDir)) {
+        $OpenCvNativeRuntimeDir
+    }
+    else {
+        Join-Path $repo ($OpenCvNativeRuntimeDir -replace '/', [IO.Path]::DirectorySeparatorChar)
+    }
+    if (-not (Test-Path -LiteralPath $nativeRuntimeCandidate -PathType Container)) {
+        throw "OpenCV native runtime directory was not found: $nativeRuntimeCandidate"
+    }
+    $OpenCvNativeRuntimeDir = (Resolve-Path -LiteralPath $nativeRuntimeCandidate).Path
+    $nativeRuntimeFiles = @(Get-ChildItem -LiteralPath $OpenCvNativeRuntimeDir -File -Filter '*.dll' | Sort-Object Name)
+    if ($nativeRuntimeFiles.Count -eq 0) { throw "OpenCV native runtime directory contains no DLLs: $OpenCvNativeRuntimeDir" }
+}
 $dotnet = Get-Command dotnet -ErrorAction Stop
 $publishRoot = Join-Path ([IO.Path]::GetTempPath()) ('opencv-aot-smoke-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Force -Path $publishRoot | Out-Null
@@ -148,8 +163,25 @@ try {
     if (-not (Test-Path -LiteralPath $executable -PathType Leaf)) { throw "AOT executable was not produced: $executable" }
     $files = @(Get-ChildItem -LiteralPath $publishRoot -File)
     $nativePayload = @($files | Where-Object { $_.Name -match '^JYPPX\.OpenCV\.Native\.dll$|^opencv_.*\.dll$' })
-    if ([string]::IsNullOrWhiteSpace($OpenCvNativeRuntimeDir) -and $nativePayload.Count -ne 0) {
-        throw 'AOT smoke output unexpectedly contained native runtime payload without explicit runtime input.'
+    if ([string]::IsNullOrWhiteSpace($OpenCvNativeRuntimeDir)) {
+        if ($nativePayload.Count -ne 0) { throw 'AOT smoke output unexpectedly contained native runtime payload without explicit runtime input.' }
+    }
+    else {
+        if ($nativePayload.Count -ne $nativeRuntimeFiles.Count) {
+            throw "AOT smoke copied $($nativePayload.Count) native DLLs, expected $($nativeRuntimeFiles.Count) from the explicit runtime input."
+        }
+        $publishedByName = @{}
+        foreach ($file in $nativePayload) { $publishedByName[$file.Name] = $file }
+        foreach ($sourceFile in $nativeRuntimeFiles) {
+            if (-not $publishedByName.ContainsKey($sourceFile.Name)) {
+                throw "AOT smoke output is missing native runtime DLL $($sourceFile.Name)."
+            }
+            $sourceHash = (Get-FileHash -LiteralPath $sourceFile.FullName -Algorithm SHA256).Hash
+            $publishedHash = (Get-FileHash -LiteralPath $publishedByName[$sourceFile.Name].FullName -Algorithm SHA256).Hash
+            if (-not $sourceHash.Equals($publishedHash, [StringComparison]::OrdinalIgnoreCase)) {
+                throw "AOT smoke native runtime DLL differs from its explicit input: $($sourceFile.Name)"
+            }
+        }
     }
 
     $stdoutPath = Join-Path $publishRoot 'AotSmoke.stdout.log'

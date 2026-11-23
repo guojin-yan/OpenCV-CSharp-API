@@ -5,16 +5,16 @@ $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $evidenceRel = 'packaging/performance/native-aot-smoke-evidence.json'
 $schemaRel = 'packaging/performance/native-aot-smoke-evidence.schema.json'
-$codecRel = 'packaging/performance/codec-writer-native-evidence.json'
+$packageEvidenceRel = 'packaging/runtime/opencv-5.1.0-package-consumer-evidence.json'
 $evidencePath = Join-Path $repo ($evidenceRel -replace '/', [IO.Path]::DirectorySeparatorChar)
 $schemaPath = Join-Path $repo ($schemaRel -replace '/', [IO.Path]::DirectorySeparatorChar)
-$codecPath = Join-Path $repo ($codecRel -replace '/', [IO.Path]::DirectorySeparatorChar)
-foreach ($path in @($evidencePath, $schemaPath, $codecPath)) {
+$packageEvidencePath = Join-Path $repo ($packageEvidenceRel -replace '/', [IO.Path]::DirectorySeparatorChar)
+foreach ($path in @($evidencePath, $schemaPath, $packageEvidencePath)) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "NativeAOT smoke evidence input is missing: $path" }
 }
 if (-not (Test-Json -LiteralPath $evidencePath -SchemaFile $schemaPath -ErrorAction Stop)) { throw 'NativeAOT smoke evidence failed JSON Schema validation.' }
 $evidence = Get-Content -LiteralPath $evidencePath -Raw | ConvertFrom-Json
-$codec = Get-Content -LiteralPath $codecPath -Raw | ConvertFrom-Json
+$packageEvidence = Get-Content -LiteralPath $packageEvidencePath -Raw | ConvertFrom-Json
 
 if ([string]$evidence.status -cne 'verified' -or [string]$evidence.sourceCommit -notmatch '^[0-9a-f]{40}$') { throw 'NativeAOT smoke evidence identity is invalid.' }
 $commitType = ((& git -C $repo cat-file -t ([string]$evidence.sourceCommit) 2>$null) | Select-Object -First 1).Trim()
@@ -24,18 +24,43 @@ if ($LASTEXITCODE -ne 0) { throw 'NativeAOT smoke source commit is not an ancest
 if ([string]$evidence.runner.architecture -cne 'x64' -or [string]$evidence.runner.configuration -cne 'Release' -or [string]$evidence.runner.dotnet -notmatch '^10\.0\.\d+$') { throw 'NativeAOT smoke runner identity drifted.' }
 if ([string]$evidence.runtimeIdentifier -cne 'win-x64' -or [string]$evidence.targetFramework -cne 'net10.0' -or [string]$evidence.sdk -notmatch '^10\.0\.\d+$') { throw 'NativeAOT smoke target identity drifted.' }
 if (-not [bool]$evidence.publishAot -or -not [bool]$evidence.publishTrimmed -or [string]$evidence.trimMode -cne 'partial' -or -not [bool]$evidence.publishSingleFile) { throw 'NativeAOT publish settings drifted.' }
-if ([string]$evidence.nativeRuntimeArtifact -notmatch '^local-package-cache:jyppx\.opencv\.runtime\.win-x64\.5\.0\.0\.nupkg$' -or
-    [string]$evidence.nativeRuntimePackage -cne 'jyppx.opencv.runtime.win-x64.5.0.0.nupkg' -or
-    [string]$evidence.nativeRuntimePackageSha256 -cne '07de65af0ec14420d84d49caa4663d08393880a1bae402c789177d2dfff2544e' -or
+if ([string]$packageEvidence.status -cne 'verified-local-windows-x64' -or
+    [string]$packageEvidence.recordKind -cne 'opencv-5.1.0-package-consumer-evidence' -or
+    [string]$packageEvidence.openCvVersion -cne '5.1.0' -or [string]$packageEvidence.packageVersion -cne '5.1.0.0' -or
+    [string]$packageEvidence.rid -cne 'win-x64') { throw 'NativeAOT smoke package-consumer evidence identity drifted.' }
+foreach ($revision in @([string]$packageEvidence.sourceCommit, [string]$packageEvidence.nativeBuildSourceCommit)) {
+    if ($revision -notmatch '^[0-9a-f]{40}$') { throw 'NativeAOT package-consumer evidence source identity is malformed.' }
+    & git -C $repo merge-base --is-ancestor $revision ([string]$evidence.sourceCommit) 2>$null
+    if ($LASTEXITCODE -ne 0) { throw "NativeAOT package-consumer evidence is newer than the measured smoke source: $revision" }
+}
+$managedPackage = @($packageEvidence.packages | Where-Object { [string]$_.label -ceq 'managed' })
+$fullPackage = @($packageEvidence.packages | Where-Object { [string]$_.label -ceq 'full' })
+if ($managedPackage.Count -ne 1 -or [string]$managedPackage[0].packageId -cne 'JYPPX.OpenCV.CSharp.API' -or
+    [string]$managedPackage[0].nugetVersion -cne [string]$evidence.managedPackageVersion -or
+    $fullPackage.Count -ne 1 -or [string]$fullPackage[0].packageId -cne 'JYPPX.OpenCV.runtime.win-x64' -or
+    [string]$fullPackage[0].nugetVersion -cne '5.1.0' -or
+    [string]$evidence.nativeRuntimeArtifact -cne "package-consumer-evidence:$packageEvidenceRel" -or
+    [string]$evidence.nativeRuntimePackage -cne 'jyppx.opencv.runtime.win-x64.5.1.0.nupkg' -or
+    [string]$fullPackage[0].sha256 -cne [string]$evidence.nativeRuntimePackageSha256 -or
     [string]$evidence.nativeRuntimeArtifactSha256 -cne [string]$evidence.nativeRuntimePackageSha256) { throw 'NativeAOT runtime package identity drifted.' }
-if ([int]$evidence.publishedFileCount -ne 21 -or [int]$evidence.nativePayloadFileCount -ne 18 -or [string]$evidence.nativeSmoke -cne 'verified' -or [int]$evidence.encodedBytes -ne 71 -or -not [bool]$evidence.dnnCpuAvailable -or [int]$evidence.dnnTargetCount -lt 1) { throw 'NativeAOT native smoke result drifted.' }
+if ([int]$evidence.nativeAbiVersion -ne 1 -or [int]$evidence.publishedFileCount -lt 1 -or
+    [int]$evidence.nativePayloadFileCount -ne [int]$fullPackage[0].nativeFiles -or
+    [string]$evidence.nativeSmoke -cne 'verified' -or [int]$evidence.encodedBytes -ne 71 -or
+    -not [bool]$evidence.dnnCpuAvailable -or [int]$evidence.dnnTargetCount -lt 1) { throw 'NativeAOT native smoke result drifted.' }
 if ([string]$evidence.managedAssemblySha256 -notmatch '^[0-9a-f]{64}$') { throw 'NativeAOT managed assembly hash is malformed.' }
-
-$codecPackage = @($codec.runtimePackages | Where-Object { [string]$_.profile -ceq 'full' })
-if ($codecPackage.Count -ne 1 -or [string]$codecPackage[0].package.packageSha256 -cne [string]$evidence.nativeRuntimePackageSha256) { throw 'NativeAOT package hash is not bound to the full runtime evidence.' }
-$expectedPayload = @($codecPackage[0].package.payload | Sort-Object name)
+$toolchain = $evidence.nativeAotToolchain
+if ([string]$toolchain.runtimeFrameworkVersion -notmatch '^10\.0\.\d+$' -or
+    [version]::Parse([string]$toolchain.runtimeFrameworkVersion) -lt [version]'10.0.14' -or
+    [string]$toolchain.ilCompilerVersion -cne [string]$toolchain.runtimeFrameworkVersion -or
+    [string]$toolchain.ilLinkTasksVersion -cne [string]$toolchain.runtimeFrameworkVersion -or
+    -not [bool]$toolchain.nugetAuditEnabled -or -not [bool]$toolchain.nu1903TreatedAsError) {
+    throw 'NativeAOT toolchain security policy drifted.'
+}
+$expectedPayload = @($fullPackage[0].nativeFilesSha256 | Sort-Object { [IO.Path]::GetFileName([string]$_.path) } | ForEach-Object {
+        [pscustomobject]@{ name = [IO.Path]::GetFileName([string]$_.path); bytes = [int64]$_.length; sha256 = [string]$_.sha256 }
+    })
 $actualPayload = @($evidence.nativePayload | Sort-Object name)
-if ($actualPayload.Count -ne 18) { throw 'NativeAOT native payload count drifted.' }
+if ($actualPayload.Count -ne [int]$fullPackage[0].nativeFiles -or $expectedPayload.Count -ne $actualPayload.Count) { throw 'NativeAOT native payload count drifted.' }
 for ($index = 0; $index -lt $expectedPayload.Count; $index++) {
     $expected = $expectedPayload[$index]
     $actual = $actualPayload[$index]

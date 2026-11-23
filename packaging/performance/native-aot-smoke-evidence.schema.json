@@ -4,7 +4,7 @@
   "title": "NativeAOT trim single-file smoke evidence",
   "type": "object",
   "additionalProperties": false,
-  "required": [ "$schema", "schemaVersion", "status", "sourceCommit", "runner", "runtimeIdentifier", "targetFramework", "sdk", "configuration", "publishAot", "publishTrimmed", "trimMode", "publishSingleFile", "nativeRuntimeArtifact", "nativeRuntimeArtifactSha256", "nativeRuntimePackage", "nativeRuntimePackageSha256", "managedAssemblySha256", "managedPackageVersion", "openCvVersion", "nativeAbiVersion", "publishedFileCount", "nativePayloadFileCount", "nativeSmoke", "encodedBytes", "dnnCpuAvailable", "dnnTargetCount", "nativePayload", "limitations" ],
+  "required": [ "$schema", "schemaVersion", "status", "sourceCommit", "runner", "runtimeIdentifier", "targetFramework", "sdk", "configuration", "publishAot", "publishTrimmed", "trimMode", "publishSingleFile", "nativeAotToolchain", "nativeRuntimeArtifact", "nativeRuntimeArtifactSha256", "nativeRuntimePackage", "nativeRuntimePackageSha256", "managedAssemblySha256", "managedPackageVersion", "openCvVersion", "nativeAbiVersion", "publishedFileCount", "nativePayloadFileCount", "nativeSmoke", "encodedBytes", "dnnCpuAvailable", "dnnTargetCount", "nativePayload", "limitations" ],
   "properties": {
     "$schema": { "const": "native-aot-smoke-evidence.schema.json" },
     "schemaVersion": { "const": 1 },
@@ -29,13 +29,25 @@
     "publishTrimmed": { "const": true },
     "trimMode": { "const": "partial" },
     "publishSingleFile": { "const": true },
+    "nativeAotToolchain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "runtimeFrameworkVersion", "ilCompilerVersion", "ilLinkTasksVersion", "nugetAuditEnabled", "nu1903TreatedAsError" ],
+      "properties": {
+        "runtimeFrameworkVersion": { "type": "string", "pattern": "^10\\.0\\.\\d+$" },
+        "ilCompilerVersion": { "type": "string", "pattern": "^10\\.0\\.\\d+$" },
+        "ilLinkTasksVersion": { "type": "string", "pattern": "^10\\.0\\.\\d+$" },
+        "nugetAuditEnabled": { "const": true },
+        "nu1903TreatedAsError": { "const": true }
+      }
+    },
     "nativeRuntimeArtifact": { "type": "string" },
     "nativeRuntimeArtifactSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
-    "nativeRuntimePackage": { "const": "jyppx.opencv.runtime.win-x64.5.0.0.nupkg" },
+    "nativeRuntimePackage": { "const": "jyppx.opencv.runtime.win-x64.5.1.0.nupkg" },
     "nativeRuntimePackageSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
     "managedAssemblySha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
-    "managedPackageVersion": { "const": "5.0.0" },
-    "openCvVersion": { "const": "5.0.0" },
+    "managedPackageVersion": { "const": "5.1.0" },
+    "openCvVersion": { "const": "5.1.0" },
     "nativeAbiVersion": { "const": 1 },
     "publishedFileCount": { "type": "integer", "minimum": 1 },
     "nativePayloadFileCount": { "type": "integer", "minimum": 1 },
