@@ -102,7 +102,7 @@ namespace JYPPX.OpenCvSharp.Tests.Dnn
                 string modelPath = Path.Combine(tempRoot, "identity-model.onnx");
                 File.WriteAllBytes(modelPath, model);
                 using (Net pathNet = Net.ReadNetFromOnnx(modelPath, DnnEngine.Classic))
-                    Assert.Equal(DnnModelFormat.Generic, pathNet.ModelFormat);
+                    Assert.Equal(DnnModelFormat.Onnx, pathNet.ModelFormat);
 
                 using (Net net = Net.ReadNetFromOnnx(model, DnnEngine.Classic))
                 using (var image = new Mat(2, 2, MatType.CV_32FC1))
@@ -118,7 +118,7 @@ namespace JYPPX.OpenCvSharp.Tests.Dnn
                             .EnableWinograd(true);
                         Assert.Equal(DnnTracingMode.None, net.GetTracingMode());
                         Assert.Equal(DnnProfilingMode.Detailed, net.GetProfilingMode());
-                        Assert.Equal(DnnModelFormat.Generic, net.ModelFormat);
+                        Assert.Equal(DnnModelFormat.Onnx, net.ModelFormat);
                         Assert.Contains(DnnTarget.Cpu, DnnCv2.GetAvailableTargets(DnnBackend.OpenCV));
                         net.SetInput(refreshedBlob, "input");
 
@@ -134,9 +134,11 @@ namespace JYPPX.OpenCvSharp.Tests.Dnn
                         string dumpPath = Path.Combine(tempRoot, "network-dump.txt");
                         string pbtxtPath = Path.Combine(tempRoot, "network-dump.pbtxt");
                         net.DumpToFile(dumpPath);
-                        net.DumpToPbtxt(pbtxtPath);
+                        OpenCvException pbtxtError = Assert.Throws<OpenCvException>(() => net.DumpToPbtxt(pbtxtPath));
+                        Assert.Contains("PBTXT export is unavailable for OpenCV 5.1 ONNX graphs", pbtxtError.Message);
+                        Assert.Equal(DnnModelFormat.Onnx, net.ModelFormat);
+                        Assert.False(File.Exists(pbtxtPath));
                         Assert.True(new FileInfo(dumpPath).Length > 0);
-                        Assert.True(new FileInfo(pbtxtPath).Length > 0);
                         using (Layer byId = net.GetLayer(layerId))
                         using (Layer byName = net.GetLayer(layerNames[0]))
                         {
@@ -179,7 +181,7 @@ namespace JYPPX.OpenCvSharp.Tests.Dnn
                         Assert.Equal(detailed.Names.Length, detailed.Times.Length);
                         Assert.Equal(detailed.Names.Length, detailed.InvocationCounts.Length);
 
-                        Assert.Throws<OpenCvException>(() => net.EnableKvCache());
+                        net.EnableKvCache().ResetKvCache().DisableKvCache();
                     }
                 }
 

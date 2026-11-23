@@ -7,7 +7,7 @@
 <h1 align="center">📷 OpenCV CSharp API</h1>
 
 <p align="center">
-  Version-neutral OpenCV 5.0 bindings for C# and .NET, with managed APIs and verified native runtime packages.
+  Version-neutral OpenCV 5 bindings for C# and .NET, with managed APIs and verified native runtime packages.
 </p>
 
 <p align="center">
@@ -27,31 +27,31 @@
 
 ## 📖 Introduction
 
-OpenCV CSharp API brings [OpenCV 5.0](https://opencv.org/) to C# through the familiar `JYPPX.OpenCvSharp.*` namespace family. It combines an idiomatic managed API, a stable native C ABI, explicit native-resource ownership, and runtime NuGet packages for verified Windows, Linux, and Android emulator targets.
+OpenCV CSharp API brings [OpenCV 5](https://opencv.org/) to C# through the familiar `JYPPX.OpenCvSharp.*` namespace family. It combines an idiomatic managed API, a stable native C ABI, explicit native-resource ownership, and runtime NuGet packages for verified Windows, Linux, and Android emulator targets. Current development targets OpenCV 5.1.0; published 5.0.0 platform evidence remains historical until revalidated.
 
 The current public version is reported by the live NuGet badges below. Stable releases preserve the declared managed API and native ABI under semantic versioning while continuing to add compatible computer-vision capabilities.
 
 ## ✨ Release Highlights
 
 - Broad coverage of Core, ImgProc, ImgCodecs, VideoIO, Calib3D, DNN, Features, ObjDetect, Photo, Video, HighGui, Stitching, ML, Tracking, and selected contrib APIs.
-- One managed package plus full and mini native runtime profiles for 14 verified Windows, Linux, and Android emulator RIDs.
+- The published 5.0.0 runtime matrix covers full and mini profiles for 14 verified Windows, Linux, and Android emulator RIDs; 5.1.0 validation is tracked separately.
 - .NET Framework 4.6 through 4.8.1, .NET Core 3.1, and .NET 5 through .NET 10.
 - Deterministic packages on NuGet.org and GitHub Packages, SPDX 2.3 SBOMs, protected release approval, and verified GitHub Release assets.
 - Managed codec preflight identifies common image headers and applies explicit input, dimension, pixel, and frame budgets before native decoding.
 - Twenty-three grouped, headless workflows with inspectable PNG output; model-backed DNN cases use one-time, hash-verified asset bundles while the remaining cases stay fully offline.
-- Checked compatibility baselines covering 644 public managed types, 6,965 public/protected members, 41 namespaces under `JYPPX.OpenCvSharp`, and the declared native ABI.
+- Current development compatibility baselines cover 647 public managed types, 7,010 public/protected members, 41 namespaces under `JYPPX.OpenCvSharp`, and native ABI 1.
 
-## 📢 What's New In 5.0.0
+## 📢 What's New In 5.1.0
 
-- Added package-version diagnostics, broader color conversions, safe non-contiguous `Mat` row/stride access, typed pixel vectors, and type-safe image encoder parameters.
-- Added `VideoCapture.TryRead`/`TryRetrieve` and OpenCV-backed standard, batched, rotated-box, and Soft-NMS detection postprocessing.
-- Expanded the verified runtime/package pipeline, grouped examples, tutorials, and repository-signing checks for NuGet.org, GitHub Packages, and GitHub Releases.
+- Source and package metadata now target the official matching OpenCV and opencv_contrib 5.1.0 tags. This version is in development and has not been published.
+- Windows x64 Full/Mini wrappers compile with the existing ABI. TensorFlow import APIs report the importer removal in OpenCV 5.1 with ONNX migration guidance.
+- Inherited codec preflight improvements include Sun Raster byte-RLE across all existing storage depths; the audited CCM model-state patch continues to apply.
 
-See the [detailed 5.0.0 notes](docs/releases/5.0.0.md) or browse the complete [changelog](CHANGELOG.md). Public availability is confirmed by the live NuGet badges, GitHub Packages pages, and the matching GitHub Release.
+See the [detailed 5.1.0 notes](docs/releases/5.1.0.md) or browse the complete [changelog](CHANGELOG.md). Earlier multi-RID and upstream mapping evidence remains bound to 5.0.0 until refreshed for 5.1.0.
 
 ## 🔬 5.0.1 Preview Surface
 
-The 5.0.1 preview keeps the existing managed API and package identities while making capability, typed-pixel, bounded-codec, platform, and headless boundaries inspectable. The complete command contracts and evidence limits are documented in the [5.0.1 Modern API And Platform Preview Guide](docs/articles/v501-modern-api-preview-guide.md).
+The original 5.0.1 preview work is carried into 5.1.0 with the existing managed API and package identities. Capability, typed-pixel, bounded-codec, platform, and headless command contracts remain documented in the inherited [5.0.1 Modern API And Platform Preview Guide](docs/articles/v501-modern-api-preview-guide.md); its historical runtime evidence does not establish 5.1.0 support.
 
 Run these machine-readable ConsoleSamples commands from a checked-out repository:
 

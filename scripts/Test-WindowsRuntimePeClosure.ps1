@@ -5,7 +5,7 @@ param(
     [string]$Rid = "win-x64",
     [ValidateSet("full", "mini")]
     [string]$RuntimeProfile = "full",
-    [string]$OpenCvVersion = "5.0.0",
+    [string]$OpenCvVersion = "5.1.0",
     [string]$RuntimePackageMatrix = "packaging/runtime/runtime-package-matrix.json",
     [string]$DumpbinPath = ""
 )
@@ -279,7 +279,6 @@ $version = [System.Version]::Parse($OpenCvVersion)
 $binarySuffix = "$($version.Major)$($version.Minor)$($version.Build)"
 $moduleFileNames = @($profileSpecs[0].modules | ForEach-Object { "opencv_$_$binarySuffix.dll" })
 $primaryLoaderName = "JYPPX.OpenCV.Native.dll"
-$expectedFileNames = @($primaryLoaderName) + $moduleFileNames
 
 $filesByName = [System.Collections.Generic.Dictionary[string, System.IO.FileInfo]]::new([System.StringComparer]::OrdinalIgnoreCase)
 foreach ($directory in $runtimeDirectories) {
@@ -292,6 +291,11 @@ foreach ($directory in $runtimeDirectories) {
     }
 }
 
+# Optional contrib modules are audited when present in a Full payload. Their
+# complete import graph must satisfy the same architecture and closure checks.
+$optionalModuleNames = @($profileSpecs[0].optionalModules | ForEach-Object { "opencv_$_$binarySuffix.dll" })
+$moduleFileNames += @($optionalModuleNames | Where-Object { $filesByName.ContainsKey($_) })
+$expectedFileNames = @($primaryLoaderName) + $moduleFileNames
 $missing = @($expectedFileNames | Where-Object { -not $filesByName.ContainsKey($_) })
 $unexpected = @($filesByName.Keys | Where-Object { $expectedFileNames -notcontains $_ })
 if ($missing.Count -gt 0 -or $unexpected.Count -gt 0 -or $filesByName.Count -ne $expectedFileNames.Count) {

@@ -170,6 +170,7 @@ function Invoke-SbomGenerator {
         '-PackagePath', $Package,
         '-SourceCommit', $Commit,
         '-Created', $CreatedValue,
+        '-OpenCvVersion', '5.0.0',
         '-OutputPath', $Output
     )
     $arguments += $AdditionalArguments

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(OpenCvCSharpNative VERSION 5.0.0 LANGUAGES CXX)
+project(OpenCvCSharpNative VERSION 5.1.0 LANGUAGES CXX)
 
 set(OPENCV_CSHARP_OPENCV_DIR_DESCRIPTION "Directory containing OpenCVConfig.cmake.")
 set(OPENCV_CSHARP_OPENCV_BUILD_LIST_DEFAULT "core,imgproc,imgcodecs,videoio,flann,geometry,calib,stereo,dnn,ml,objdetect,photo,features,video,highgui,stitching,ptcloud")

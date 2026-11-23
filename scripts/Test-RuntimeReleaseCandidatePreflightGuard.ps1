@@ -240,6 +240,7 @@ try {
     $stageResult = Invoke-ChildPwsh -Arguments @(
         "-NoProfile",
         "-File", $stageRuntimePath,
+        "-OpenCvVersion", $openCvVersion,
         "-Rid", $rid,
         "-RuntimeProfile", $runtimeProfile,
         "-Configuration", "Release",
@@ -274,6 +275,7 @@ try {
     $miniStageResult = Invoke-ChildPwsh -Arguments @(
         "-NoProfile",
         "-File", $stageRuntimePath,
+        "-OpenCvVersion", $openCvVersion,
         "-Rid", $rid,
         "-RuntimeProfile", "mini",
         "-Configuration", "Release",
@@ -423,6 +425,7 @@ try {
     $syntheticStageResult = Invoke-ChildPwsh -Arguments @(
         "-NoProfile",
         "-File", $stageRuntimePath,
+        "-OpenCvVersion", $openCvVersion,
         "-Rid", $rid,
         "-RuntimeProfile", $runtimeProfile,
         "-Configuration", "Release",

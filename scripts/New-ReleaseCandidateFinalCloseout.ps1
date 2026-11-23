@@ -556,8 +556,9 @@ function Get-Record {
         "compatibility/matlab-upstream-summary.json",
         "compatibility/matlab-source-reviewed-extensions.json",
         "compatibility/matlab-source-callables.json",
-        "compatibility/v5.0.1-change-ledger.json",
-        "compatibility/v5.0.1-change-ledger.schema.json",
+        "compatibility/v5.1.0-change-ledger.json",
+        "compatibility/v5.1.0-change-ledger.schema.json",
+        "packaging/runtime/opencv-5.1.0-source-build-evidence.json",
         "docs/articles/api-abi-compatibility-policy.md",
         "docs/articles/upstream-map-toolchain.md",
         "docs/articles/videostab-upstream-parity-guide.md",
@@ -790,6 +791,7 @@ function Get-Record {
         ".github/workflows/generic-linux-arm64-preview.yml",
         "scripts/Test-GitHubPackConsumerRestoreSurface.ps1",
           "packaging/runtime/patches/opencv-5.0.0-photo-ccm-instance-color-space.patch",
+          "packaging/runtime/patches/opencv-5.1.0-photo-ccm-instance-color-space.patch",
           "scripts/New-RuntimeInputArtifact.ps1",
         "scripts/Get-SampleModelAssets.ps1",
         "scripts/New-ReleaseCandidateFinalCloseout.ps1",
@@ -853,6 +855,7 @@ function Get-Record {
         "docs/releases/README.md",
         "docs/releases/5.0.0-preview.1.md",
         "docs/releases/5.0.0.md",
+        "docs/releases/5.1.0.md",
         "src/OpenCvSharp.Native/generated/native_abi_manifest.txt",
         "src/OpenCvSharp.Native/generated/native_abi_mini_manifest.txt",
         "src/OpenCvSharp.Native/include/open_cv_sharp/highgui/highgui.h",
@@ -1212,7 +1215,7 @@ function Get-Record {
         "scripts/Test-ImageFormatPolicy.ps1",
         "scripts/Test-ModernApiPreviewSamples.ps1",
         "scripts/Test-PlatformProbeSample.ps1",
-        "scripts/Test-V501ChangeLedger.ps1",
+        "scripts/Test-V510ChangeLedger.ps1",
         "scripts/New-UpstreamMapCatalog.ps1",
         "scripts/Test-UpstreamMapCatalog.ps1",
         "scripts/Generate-XPhotoUpstreamMap.ps1",
@@ -1302,8 +1305,9 @@ function Get-Record {
         [ordered]@{ Id = "android-arm-device-evidence"; Status = "android-evidence-pending"; Evidence = "Android x64/x86 Full and Mini have authoritative single-loader emulator loading evidence. Android ARM/ARM64 NDK, ELF, same-run package, and APK evidence has passed; matching device loading evidence remains required before promotion." },
         [ordered]@{ Id = "api-gap-implementation"; Status = "open-local-follow-up"; Evidence = "The structured ImgProc, ImgCodecs, VideoIO, Calib3D, Core, DNN, Features, ObjDetect, main CPU Photo, and main Video slices are closed at zero missing callable declarations. Repository-wide upstream parity and prioritized ownership/marshalling work remain open." },
         [ordered]@{ Id = "macos-support-decision"; Status = "decision-deferred"; Evidence = "macOS is outside the declared matrix until an explicit decision and native/consumer evidence exist." },
+        [ordered]@{ Id = "opencv-5.1-evidence-refresh"; Status = "new-revision-evidence-pending"; Evidence = "Windows x64 OpenCV 5.1.0 source and Full/Mini wrapper builds passed local native tests. The inherited 5.0.0 maps and multi-RID/hosted support records remain historical; new 5.1.0 parser, platform, optional-module package closure and independent package-consumer evidence must be refreshed before promotion." },
         [ordered]@{ Id = "publication-authorization"; Status = "not-authorized"; Evidence = "No publish, tag, release, or mutable feed operation is authorized in the current quota state." },
-        [ordered]@{ Id = "release-approval"; Status = "candidate-token-required"; Evidence = "The owner accepted the version-bounded stable 5.0.0 single-maintainer risk exception; exact candidate bytes still require the dry-run authorization token." },
+        [ordered]@{ Id = "release-approval"; Status = "candidate-token-required"; Evidence = "OpenCV 5.1.0 requires new candidate review and authorization; the stable 5.0.0 exception does not apply to this version." },
         [ordered]@{ Id = "repository-signing-verification"; Status = "post-publication-required"; Evidence = "NuGet.org must add a Repository primary signature and pass exact payload comparison; GitHub Packages must be public, repository-linked, and byte-identical to the reviewed candidate." },
         [ordered]@{ Id = "sbom-inputs"; Status = "candidate-refresh-required"; Evidence = "The deterministic SPDX-2.3 generator and guard are provisioned; final package-bound documents must be regenerated from the final source commit and approved." }
     )
@@ -1313,7 +1317,15 @@ function Get-Record {
         RecordKind = "local-release-candidate-closeout"
         CandidateId = "local-closeout/sha256/$($sourceSet.Sha256.Substring(0, 16))"
         SourceIdentity = "sha256:$($sourceSet.Sha256)"
-        OpenCvRevision = "5.0.0"
+        OpenCvRevision = "5.1.0"
+        RevisionValidation = [ordered]@{
+            CurrentBuildEvidence = Get-FileEvidence -RelativePath "packaging/runtime/opencv-5.1.0-source-build-evidence.json"
+            LocalBuildRid = "win-x64"
+            HistoricalUpstreamMapRevision = "5.0.0"
+            HistoricalSupportEvidenceRevision = "5.0.0"
+            CurrentRevisionMultiRidValidated = $false
+            CurrentRevisionUpstreamParityClaimed = $false
+        }
         SourceSet = [ordered]@{
             FileCount = $sourceSet.FileCount
             Sha256 = $sourceSet.Sha256
@@ -2650,7 +2662,7 @@ function Get-Record {
             GitHubPackagesRepository = "guojin-yan/OpenCV-CSharp-API"
             RequiredPublicVisibility = "public"
             RequiredFeedCount = 2
-            CandidatePackage = "https://api.nuget.org/v3-flatcontainer/jyppx.opencv.csharp.api/5.0.0/jyppx.opencv.csharp.api.5.0.0.nupkg"
+            CandidatePackage = "https://api.nuget.org/v3-flatcontainer/jyppx.opencv.csharp.api/5.1.0/jyppx.opencv.csharp.api.5.1.0.nupkg"
             Methods = @("GET", "HEAD")
             Mutable = $false
             CandidateStatus = "not-published"

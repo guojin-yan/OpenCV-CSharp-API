@@ -29,6 +29,7 @@ namespace JYPPX.OpenCvSharp.Dnn
 
         /// <summary>Writes an OpenCV-compatible PBTXT representation to a UTF-8 path.</summary>
         /// <param name="path">Destination path. Embedded null characters are rejected.</param>
+        /// <remarks>OpenCV 5.1 ONNX graphs use the new engine. This operation raises an OpenCV exception before the incompatible upstream exporter can alter the graph. Use <see cref="DumpToFile"/> for its textual graph representation.</remarks>
         public void DumpToPbtxt(string path)
         {
             byte[] nativePath = DnnStringConvert.ToNullTerminatedUtf8(path, nameof(path));
@@ -166,7 +167,7 @@ namespace JYPPX.OpenCvSharp.Dnn
         }
 
         /// <summary>Gets the model format retained by this network.</summary>
-        /// <remarks>Classic-engine ONNX loaders may report <see cref="DnnModelFormat.Generic"/>; the value describes OpenCV's retained graph metadata.</remarks>
+        /// <remarks>OpenCV 5.1 ONNX loaders report <see cref="DnnModelFormat.Onnx"/>. OpenCV 5.0 classic-engine loaders may report <see cref="DnnModelFormat.Generic"/>.</remarks>
         public DnnModelFormat ModelFormat
         {
             get

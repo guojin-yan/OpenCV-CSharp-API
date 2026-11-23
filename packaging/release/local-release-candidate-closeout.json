@@ -1,12 +1,24 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/77ef20cc2879c61f",
-  "SourceIdentity": "sha256:77ef20cc2879c61fbe6cb55124671ee600527bc7fc1a069a0d4410ce2119ce7e",
-  "OpenCvRevision": "5.0.0",
+  "CandidateId": "local-closeout/sha256/3332d0aa41d0d4de",
+  "SourceIdentity": "sha256:3332d0aa41d0d4de9f475d3e78ed8d19d4e65c40be75c107f227144cb7a98b89",
+  "OpenCvRevision": "5.1.0",
+  "RevisionValidation": {
+    "CurrentBuildEvidence": {
+      "Path": "packaging/runtime/opencv-5.1.0-source-build-evidence.json",
+      "Sha256": "197841da5a8b840466a4bf25a0fb44b30bfdcd84489229f2953fa0df56799aae",
+      "Length": 35864
+    },
+    "LocalBuildRid": "win-x64",
+    "HistoricalUpstreamMapRevision": "5.0.0",
+    "HistoricalSupportEvidenceRevision": "5.0.0",
+    "CurrentRevisionMultiRidValidated": false,
+    "CurrentRevisionUpstreamParityClaimed": false
+  },
   "SourceSet": {
-    "FileCount": 2494,
-    "Sha256": "77ef20cc2879c61fbe6cb55124671ee600527bc7fc1a069a0d4410ce2119ce7e",
+    "FileCount": 2501,
+    "Sha256": "3332d0aa41d0d4de9f475d3e78ed8d19d4e65c40be75c107f227144cb7a98b89",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -104,7 +116,7 @@
     "Managed": {
       "Path": "compatibility/managed-public-api.txt",
       "SummaryPath": "compatibility/managed-public-api-summary.json",
-      "Sha256": "d8de86430b08e158f0850c6a985c1b758b75d66296641617aeb58ab60cba1f3f",
+      "Sha256": "b0fe57a0c53b8c1da50b373f95b1f879b412e47d5759018eb09ae6927d581f2f",
       "TypeCount": 647,
       "MemberCount": 7010,
       "NamespaceCount": 41,
@@ -1408,12 +1420,12 @@
   "EvidenceReferences": [
     {
       "Path": ".github/workflows/generic-linux-arm64-preview.yml",
-      "Sha256": "d20a92af2180b50b27eb99a13de67c7b1b2f5eb6dd82b4acab18dd6ccc1cb37b",
+      "Sha256": "5d9a6c0388c757dc2f8c387e390aebe91b0123e441f329053104e2ae1f7e3405",
       "Length": 9329
     },
     {
       "Path": ".github/workflows/pack.yml",
-      "Sha256": "23cc7341619606b9a50283c34b4a776d0ba9dbed328c571f4d7f20577eadf861",
+      "Sha256": "28f9c9797bbfb793fdb9f30bc6a364eb6938c25e98442bdb8568829a793de0d6",
       "Length": 295931
     },
     {
@@ -1423,13 +1435,13 @@
     },
     {
       "Path": ".github/workflows/runtime-input.yml",
-      "Sha256": "ce253a1a5e9009ff6d07ebe654aa739ff0529661843b5c12f63b67265668cc39",
-      "Length": 213551
+      "Sha256": "0dbb289b83ad383d8e1f722a320a2b2926305562450988a342b6779c511d9d02",
+      "Length": 213597
     },
     {
       "Path": "CHANGELOG.md",
-      "Sha256": "7ca5f33b291c4e2db9a8f6d062c249539ef92865ed23de7b1933931feb32aade",
-      "Length": 1663
+      "Sha256": "e29707a7018ae6dbd258c9043c5a88ad38b36fb1b9bb667871f1f2381f83d3d5",
+      "Length": 2323
     },
     {
       "Path": "CONTRIBUTING.md",
@@ -1438,13 +1450,13 @@
     },
     {
       "Path": "README.md",
-      "Sha256": "27a172258a57022ab5dab2e01c702511ac82e8dc899f75edcd2e94dc027f780b",
-      "Length": 39368
+      "Sha256": "5877cdf0ae87562c5890e62fabcfaf51b55938ed9448988ef0c56e18fbe3c529",
+      "Length": 39558
     },
     {
       "Path": "README_cn.md",
-      "Sha256": "cf84de5edb10f2b7cd7fde122ec64380deb62bba36e72e3c745fb659c3c20ad9",
-      "Length": 35806
+      "Sha256": "d3c4d357b8789eddce4f8e81a92d025d0ae2684e6dc7d3223bd9060d1718b44e",
+      "Length": 35973
     },
     {
       "Path": "compatibility/alphamat-implemented-families.json",
@@ -1473,7 +1485,7 @@
     },
     {
       "Path": "compatibility/api-gap-inventory.json",
-      "Sha256": "dd8c18126f3add58c20849f3ab8e30236ef207b0b306628586330f4547d80c1b",
+      "Sha256": "5433d6697c64e83b81def4d8e94ddde590ba2d41793d65230ec7b29ffc6f13ef",
       "Length": 22299
     },
     {
@@ -2328,12 +2340,12 @@
     },
     {
       "Path": "compatibility/managed-public-api-summary.json",
-      "Sha256": "2c5ab5c53d0de7dff05242aa8342308e8ab872c75fcc7aef08e2696a950c663e",
+      "Sha256": "9facfa4d6eb8043e15aeb66fff1a968eb05d13e39a0390d514c1d4781cd29b8c",
       "Length": 4653
     },
     {
       "Path": "compatibility/managed-public-api.txt",
-      "Sha256": "d8de86430b08e158f0850c6a985c1b758b75d66296641617aeb58ab60cba1f3f",
+      "Sha256": "b0fe57a0c53b8c1da50b373f95b1f879b412e47d5759018eb09ae6927d581f2f",
       "Length": 1145397
     },
     {
@@ -2942,13 +2954,13 @@
       "Length": 6301
     },
     {
-      "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "76050ba41914cdf65cc5661a922dc3a8e18d2004f82285902e7376d0ca3495f5",
-      "Length": 110973
+      "Path": "compatibility/v5.1.0-change-ledger.json",
+      "Sha256": "ee8f2e4bd934c8d0450869efa7ef3fb72fbdaa8317a1815cbbb0f15d3160bb6f",
+      "Length": 112107
     },
     {
-      "Path": "compatibility/v5.0.1-change-ledger.schema.json",
-      "Sha256": "00bbfde6cfa04bf91df305415b6c63c6e70e1b2a51c348fa7b0b43becef458e4",
+      "Path": "compatibility/v5.1.0-change-ledger.schema.json",
+      "Sha256": "89b58df5b5439102e661891988498dbc19679574bcbef46891ecfd8864fe0266",
       "Length": 1862
     },
     {
@@ -3208,8 +3220,8 @@
     },
     {
       "Path": "docs/articles/api-abi-compatibility-policy.md",
-      "Sha256": "b58fe3db6e1561ebc3c397ee1f1ad518c0c9b70769da930bc09be3ff3918da32",
-      "Length": 18434
+      "Sha256": "bd0f9d9e8331fe2a0f3e753b59eb0cc8ab866ccf54dbfe297514f03f60331bd0",
+      "Length": 18812
     },
     {
       "Path": "docs/articles/async-video-owner-adr.md",
@@ -3762,14 +3774,19 @@
       "Length": 2985
     },
     {
+      "Path": "docs/releases/5.1.0.md",
+      "Sha256": "be9f2881f915e8c8f7947fd269c59c1c2fc9c4bae1006f721d38c7f3d9ff9ffb",
+      "Length": 4635
+    },
+    {
       "Path": "docs/releases/README.md",
-      "Sha256": "906ae89eacfeac61336baf20a263eb4b7b9da9aa37ef653006c7510f3d2e0158",
-      "Length": 1650
+      "Sha256": "9356f4c4a0c1642fd72aa4b786cb373aae8a142118d559b35b5701e96f313a89",
+      "Length": 1738
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "1bd3785591962038874a4d1ab2bb4322a433f78655244c230f76489e644dab50",
-      "Length": 19887
+      "Sha256": "9b524e23681bccc1bf25ac952a3e3d20c0729230516f43739250eaae0b94f03a",
+      "Length": 19955
     },
     {
       "Path": "nuget/logo.jpg",
@@ -3957,7 +3974,17 @@
       "Length": 3826
     },
     {
+      "Path": "packaging/runtime/opencv-5.1.0-source-build-evidence.json",
+      "Sha256": "197841da5a8b840466a4bf25a0fb44b30bfdcd84489229f2953fa0df56799aae",
+      "Length": 35864
+    },
+    {
       "Path": "packaging/runtime/patches/opencv-5.0.0-photo-ccm-instance-color-space.patch",
+      "Sha256": "f0512bdb79e16e49595362e702159b5e3ca7445baa157bb19e6974b6b2928ba1",
+      "Length": 333
+    },
+    {
+      "Path": "packaging/runtime/patches/opencv-5.1.0-photo-ccm-instance-color-space.patch",
       "Sha256": "f0512bdb79e16e49595362e702159b5e3ca7445baa157bb19e6974b6b2928ba1",
       "Length": 333
     },
@@ -4093,18 +4120,18 @@
     },
     {
       "Path": "scripts/Apply-OpenCvSourcePatches.ps1",
-      "Sha256": "c136ede2397e25764b084e4934736b98d835dc8a2de083e843c516487dd8120d",
-      "Length": 2445
+      "Sha256": "9d16a28cdd6d8c9a36bebd9bb9c1ecb56aefe205dde144ddd504c71ff8cf89a4",
+      "Length": 2479
     },
     {
       "Path": "scripts/Build-AndroidRuntimeInput.ps1",
-      "Sha256": "d5ef3927c15af4e8bcb1a9d9ee730830654b85f83db63af5e326de06088f3a19",
+      "Sha256": "5d5045b27828875b88d622a507484a737f302cbf038f18f582cdce02622d3a8f",
       "Length": 16423
     },
     {
       "Path": "scripts/Build-OpenCV.ps1",
-      "Sha256": "dba403df713f8873da3bf3d21cbb6ae4b216f3b274c245755c94cc8e4c964d61",
-      "Length": 20497
+      "Sha256": "fbb098b3f347d06bb0c4b608f0beef72d07b6c843d7281b97c42b34dc4d75a67",
+      "Length": 20503
     },
     {
       "Path": "scripts/Generate-AlphaMatUpstreamMap.ps1",
@@ -4553,18 +4580,18 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "949eca62c9eac5837be756bcc894f694e4cb482545ed162bd280734b47482f75",
-      "Length": 190617
+      "Sha256": "743edc30e71a5a4228711ce303e6af427c9f27102ac446742da3d9be87bf9290",
+      "Length": 191631
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
-      "Sha256": "bd5eb216d1cad672087a61bd3cb3bec400342be62a7079e6a5cdbbf6c976a06b",
+      "Sha256": "cfecf2bb7645d26c01a549ff8fd841f7812cc5129f53305a5e0ba0398f1fe2e2",
       "Length": 20243
     },
     {
       "Path": "scripts/New-RuntimeInputArtifact.ps1",
-      "Sha256": "a143a1a53b6a271a34d45134c8a14579975fba7af74b6ed6c91b5d7e9666b1b3",
-      "Length": 22025
+      "Sha256": "1de04069109365b807c80785fcb03acdadadc9a0e7decee438a3a65dd5c30d99",
+      "Length": 22046
     },
     {
       "Path": "scripts/New-UpstreamMapCatalog.ps1",
@@ -5038,8 +5065,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "e5d0a3ab6a5a05149609073b6e44aaf15b5e7d801f4ac3b6a16bc60cf3dcfd6f",
-      "Length": 162291
+      "Sha256": "fbb9276f3d5687afd583c59172af2c6b66c9316385b4462dccd0b8bb717b859f",
+      "Length": 163839
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -5063,8 +5090,8 @@
     },
     {
       "Path": "scripts/Test-ReleasePackageSbom.ps1",
-      "Sha256": "a3b02ef903bc5eff74248fc6d903c69855feac8efdd8a9e18d47b07ca5669448",
-      "Length": 21674
+      "Sha256": "039eb96054b558e107751546223814730670c997c1076284d5aa9d050872ee9f",
+      "Length": 21709
     },
     {
       "Path": "scripts/Test-ReleaseReadinessContract.ps1",
@@ -5172,9 +5199,9 @@
       "Length": 16624
     },
     {
-      "Path": "scripts/Test-V501ChangeLedger.ps1",
-      "Sha256": "17645659c41a1becb07c778a7fbcc4f833a102e890f2b6e116528599cf361afb",
-      "Length": 1729
+      "Path": "scripts/Test-V510ChangeLedger.ps1",
+      "Sha256": "7249e3465f47a01b5f296f63ad248483b203680d279270662607c27b72cce5c9",
+      "Length": 5899
     },
     {
       "Path": "scripts/Test-VideoDnnBenchmarkEvidence.ps1",
@@ -6933,7 +6960,7 @@
     "GitHubPackagesRepository": "guojin-yan/OpenCV-CSharp-API",
     "RequiredPublicVisibility": "public",
     "RequiredFeedCount": 2,
-    "CandidatePackage": "https://api.nuget.org/v3-flatcontainer/jyppx.opencv.csharp.api/5.0.0/jyppx.opencv.csharp.api.5.0.0.nupkg",
+    "CandidatePackage": "https://api.nuget.org/v3-flatcontainer/jyppx.opencv.csharp.api/5.1.0/jyppx.opencv.csharp.api.5.1.0.nupkg",
     "Methods": [
       "GET",
       "HEAD"
@@ -6969,6 +6996,11 @@
       "Evidence": "macOS is outside the declared matrix until an explicit decision and native/consumer evidence exist."
     },
     {
+      "Id": "opencv-5.1-evidence-refresh",
+      "Status": "new-revision-evidence-pending",
+      "Evidence": "Windows x64 OpenCV 5.1.0 source and Full/Mini wrapper builds passed local native tests. The inherited 5.0.0 maps and multi-RID/hosted support records remain historical; new 5.1.0 parser, platform, optional-module package closure and independent package-consumer evidence must be refreshed before promotion."
+    },
+    {
       "Id": "publication-authorization",
       "Status": "not-authorized",
       "Evidence": "No publish, tag, release, or mutable feed operation is authorized in the current quota state."
@@ -6976,7 +7008,7 @@
     {
       "Id": "release-approval",
       "Status": "candidate-token-required",
-      "Evidence": "The owner accepted the version-bounded stable 5.0.0 single-maintainer risk exception; exact candidate bytes still require the dry-run authorization token."
+      "Evidence": "OpenCV 5.1.0 requires new candidate review and authorization; the stable 5.0.0 exception does not apply to this version."
     },
     {
       "Id": "repository-signing-verification",

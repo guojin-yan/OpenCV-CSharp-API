@@ -11,9 +11,9 @@ namespace JYPPX.OpenCvSharp.Tests.Core
         {
             string value = OpenCvSharpBuildInfo.GetDisplayString();
 
-            Assert.Contains("5.0.0", value);
-            Assert.Equal("5.0.0", OpenCvSharpBuildInfo.OpenCvVersion);
-            Assert.Equal("5.0.0", OpenCvSharpBuildInfo.NuGetPackageVersion);
+            Assert.Contains("5.1.0", value);
+            Assert.Equal("5.1.0", OpenCvSharpBuildInfo.OpenCvVersion);
+            Assert.Equal("5.1.0", OpenCvSharpBuildInfo.NuGetPackageVersion);
             Assert.Equal(OpenCvSharpBuildInfo.NuGetPackageVersion, OpenCvSharpBuildInfo.PackageVersion);
             Assert.Equal(1, OpenCvSharpBuildInfo.NativeAbiVersion);
             Assert.Contains("native ABI 1", value, StringComparison.Ordinal);

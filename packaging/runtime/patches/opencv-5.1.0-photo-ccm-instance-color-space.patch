@@ -1,0 +1,10 @@
+diff --git a/modules/photo/src/ccm/ccm.cpp b/modules/photo/src/ccm/ccm.cpp
+--- a/modules/photo/src/ccm/ccm.cpp
++++ b/modules/photo/src/ccm/ccm.cpp
+@@ -20,5 +20,5 @@ public:
+     Color ref = Color();
+     Mat dist;
+-    RGBBase_& cs;
++    RGBBase_ cs;
+     // Track initialization parameters for serialization
+     ColorSpace csEnum;

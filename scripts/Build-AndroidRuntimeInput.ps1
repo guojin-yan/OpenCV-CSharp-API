@@ -4,7 +4,7 @@ param(
     [string]$Rid = "android-arm64",
     [ValidateSet("full", "mini")]
     [string]$RuntimeProfile = "mini",
-    [string]$OpenCvVersion = "5.0.0",
+    [string]$OpenCvVersion = "5.1.0",
     [string]$AndroidNdkRoot = "",
     [string]$AndroidNdkVersion = "28.2.13676358",
     [string]$AndroidApiLevel = "24",

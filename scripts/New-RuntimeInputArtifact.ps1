@@ -1,7 +1,7 @@
 param(
     [string]$Rid = "ubuntu.24.04-x64",
     [string]$RuntimeProfile = "full",
-    [string]$OpenCvVersion = "5.0.0",
+    [string]$OpenCvVersion = "5.1.0",
     [string]$NativeRuntimeDir,
     [string]$OpenCvRuntimeDir,
     [string]$OpenCvSourceDir,
@@ -303,8 +303,8 @@ $openCvContribSourcePath = if ([string]::IsNullOrWhiteSpace($OpenCvContribSource
 $openCvInstallPath = if ([string]::IsNullOrWhiteSpace($OpenCvInstallDir)) { "" } else { Resolve-InputDirectory -Name "OpenCvInstallDir" -Value $OpenCvInstallDir }
 
 $auditedSourcePatches = [System.Collections.Generic.List[object]]::new()
-if ($OpenCvVersion -eq "5.0.0") {
-    $patchRelativePath = "packaging/runtime/patches/opencv-5.0.0-photo-ccm-instance-color-space.patch"
+if ($OpenCvVersion -in @("5.0.0", "5.1.0")) {
+    $patchRelativePath = "packaging/runtime/patches/opencv-$OpenCvVersion-photo-ccm-instance-color-space.patch"
     $patchPath = Join-Path $repoRoot $patchRelativePath
     $targetRelativePath = "modules/photo/src/ccm/ccm.cpp"
     $targetPath = Join-Path $openCvSourcePath $targetRelativePath

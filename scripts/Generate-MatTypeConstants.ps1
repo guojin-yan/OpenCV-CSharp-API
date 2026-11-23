@@ -1,5 +1,5 @@
 param(
-    [string]$OpenCvVersion = "5.0.0",
+    [string]$OpenCvVersion = "5.1.0",
     [string]$WorkspaceRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path,
     [string]$OpenCvSourceRoot = "",
     [string]$OutputPath = "",

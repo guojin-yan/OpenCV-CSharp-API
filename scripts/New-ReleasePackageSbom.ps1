@@ -8,7 +8,7 @@ param(
     [Parameter(Mandatory = $true)]
     [ValidatePattern('^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$')]
     [string]$Created,
-    [string]$OpenCvVersion = "5.0.0",
+    [string]$OpenCvVersion = "5.1.0",
     [string]$RepositoryUrl = "https://github.com/guojin-yan/OpenCV-CSharp-API",
     [string]$OutputPath = "",
     [switch]$Check

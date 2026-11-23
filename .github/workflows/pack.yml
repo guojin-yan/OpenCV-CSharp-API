@@ -6,7 +6,7 @@ on:
       opencv_version:
         description: OpenCV version aligned with package version
         required: true
-        default: 5.0.0
+        default: 5.1.0
       package_revision:
         description: Package revision for this OpenCV version
         required: true
@@ -14,7 +14,7 @@ on:
       package_version:
         description: Exact four-part package version with optional lowercase prerelease suffix
         required: true
-        default: 5.0.0.0
+        default: 5.1.0.0
       rid:
         description: Runtime identifier to pack; use all for the configured matrix
         required: true

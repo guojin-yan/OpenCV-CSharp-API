@@ -165,6 +165,7 @@ function Invoke-BuildPlan {
         "-NoProfile",
         "-File", $buildOpenCvPath,
         "-Rid", $Rid,
+        "-OpenCvVersion", "5.0.0",
         "-BuildList", $BuildList,
         "-DescribeOnly"
     )
@@ -244,6 +245,8 @@ function Invoke-StageCase {
             "-NoProfile",
             "-File", $stageRuntimePath,
             "-Rid", $Rid,
+            "-OpenCvVersion", "5.0.0",
+            "-PackageVersion", "5.0.0.0",
             "-RuntimeProfile", "mini",
             "-OpenCvNativeRuntimeDir", $nativeRuntimeDir,
             "-OpenCvInstallRoot", $installRoot,

@@ -8,7 +8,7 @@ namespace JYPPX.OpenCvSharp.Dnn
     {
         /// <summary>OpenCV auto selection. OpenCV 自动选择。</summary>
         Auto = 3,
-        /// <summary>Classic DNN engine. 经典 DNN engine。</summary>
+        /// <summary>Classic DNN engine request. OpenCV 5.1 ONNX import falls back to its unified OpenCV engine. 经典 engine 请求；5.1 ONNX 导入回退至统一 OpenCV engine。</summary>
         Classic = 1,
         /// <summary>New DNN engine. 新 DNN engine。</summary>
         New = 2,

@@ -424,8 +424,9 @@ function Get-ExpectedEvidencePaths {
         "compatibility/matlab-upstream-summary.json",
         "compatibility/matlab-source-reviewed-extensions.json",
         "compatibility/matlab-source-callables.json",
-        "compatibility/v5.0.1-change-ledger.json",
-        "compatibility/v5.0.1-change-ledger.schema.json",
+        "compatibility/v5.1.0-change-ledger.json",
+        "compatibility/v5.1.0-change-ledger.schema.json",
+        "packaging/runtime/opencv-5.1.0-source-build-evidence.json",
         "docs/articles/api-abi-compatibility-policy.md",
         "docs/articles/upstream-map-toolchain.md",
         "docs/articles/videostab-upstream-parity-guide.md",
@@ -663,6 +664,7 @@ function Get-ExpectedEvidencePaths {
         ".github/workflows/generic-linux-arm64-preview.yml",
         "scripts/Test-GitHubPackConsumerRestoreSurface.ps1",
           "packaging/runtime/patches/opencv-5.0.0-photo-ccm-instance-color-space.patch",
+          "packaging/runtime/patches/opencv-5.1.0-photo-ccm-instance-color-space.patch",
           "scripts/New-RuntimeInputArtifact.ps1",
         "scripts/Get-SampleModelAssets.ps1",
         "scripts/New-ReleaseCandidateFinalCloseout.ps1",
@@ -727,6 +729,7 @@ function Get-ExpectedEvidencePaths {
         "docs/releases/README.md",
         "docs/releases/5.0.0-preview.1.md",
         "docs/releases/5.0.0.md",
+        "docs/releases/5.1.0.md",
         "src/OpenCvSharp.Native/generated/native_abi_manifest.txt",
         "src/OpenCvSharp.Native/generated/native_abi_mini_manifest.txt",
         "src/OpenCvSharp.Native/include/open_cv_sharp/highgui/highgui.h",
@@ -1082,7 +1085,7 @@ function Get-ExpectedEvidencePaths {
         "scripts/Test-ImageFormatPolicy.ps1",
         "scripts/Test-ModernApiPreviewSamples.ps1",
         "scripts/Test-PlatformProbeSample.ps1",
-        "scripts/Test-V501ChangeLedger.ps1",
+        "scripts/Test-V510ChangeLedger.ps1",
         "scripts/New-UpstreamMapCatalog.ps1",
         "scripts/Test-UpstreamMapCatalog.ps1",
         "scripts/Generate-XPhotoUpstreamMap.ps1",
@@ -1173,13 +1176,14 @@ function Test-Record {
         [Parameter(Mandatory)][string]$ExpectedSourceHash
     )
 
-    $required = @("SchemaVersion","RecordKind","CandidateId","SourceIdentity","OpenCvRevision","SourceSet","PackageMatrix","LifecycleRefreshMatrix","SupportContract","ApiAbiBaseline","EvidenceReferences","LocalValidation","Signing","Sbom","Approval","PublicFeed","Rollback","ReleaseApproval","ExternalBlockers","PrivateKeyMaterialPresent","SecretMaterialPresent","Deterministic")
+    $required = @("SchemaVersion","RecordKind","CandidateId","SourceIdentity","OpenCvRevision","RevisionValidation","SourceSet","PackageMatrix","LifecycleRefreshMatrix","SupportContract","ApiAbiBaseline","EvidenceReferences","LocalValidation","Signing","Sbom","Approval","PublicFeed","Rollback","ReleaseApproval","ExternalBlockers","PrivateKeyMaterialPresent","SecretMaterialPresent","Deterministic")
     foreach ($field in $required) {
         Assert-True -List $List -Condition ($null -ne $Record.PSObject.Properties[$field]) -Issue "Final closeout record is missing required field" -Text $field
     }
+    if ($null -eq $Record.PSObject.Properties['RevisionValidation']) { return }
     if ($null -eq $Record.SourceSet -or $null -eq $Record.LifecycleRefreshMatrix -or $null -eq $Record.SupportContract -or $null -eq $Record.ApiAbiBaseline -or $null -eq $Record.LocalValidation) { return }
 
-    Assert-True -List $List -Condition ($Record.SchemaVersion -eq 2 -and $Record.RecordKind -eq "local-release-candidate-closeout" -and $Record.OpenCvRevision -eq "5.0.0") -Issue "Final closeout record identity drifted"
+    Assert-True -List $List -Condition ($Record.SchemaVersion -eq 2 -and $Record.RecordKind -eq "local-release-candidate-closeout" -and $Record.OpenCvRevision -eq "5.1.0") -Issue "Final closeout record identity drifted"
     $expectedCandidateId = "local-closeout/sha256/$(([string]$Record.SourceSet.Sha256).Substring(0, 16))"
     $expectedSourceIdentity = "sha256:$([string]$Record.SourceSet.Sha256)"
     Assert-True -List $List -Condition ($Record.CandidateId -eq $expectedCandidateId -and $Record.SourceIdentity -eq $expectedSourceIdentity) -Issue "Final closeout candidate identity is malformed or is not derived from the source-set digest"
@@ -1212,7 +1216,7 @@ function Test-Record {
     Assert-True -List $List -Condition ($null -ne $hostedEvidence -and $hostedEvidence.target -eq 'win-x86/full' -and $hostedEvidence.status -eq 'verified-hosted-evidence' -and $hostedEvidence.sourceCommit -eq '7f53e03e7d6ad5839711ba5ea32a0fcc02d8d5b8' -and [long]$hostedEvidence.runtimeInputRunId -eq 31162854992 -and [long]$hostedEvidence.packRunId -eq 31171822232 -and [long]$hostedEvidence.consumerRunId -eq 31171822232) -Issue 'Final closeout Windows x86 hosted promotion evidence drifted'
     Assert-True -List $List -Condition ($hostedEvidence.hostedCloseoutSha256 -eq '61f3ce0263fa41126c7ac857cde56ce6096147f0a1f9a3f3fa499fab1478bd81' -and $hostedEvidence.artifactDigestAuditSha256 -eq 'c0bf6886787fbbc105390ec8861acd6d608b60e9b86c63aef2c7456d436d9ded' -and $hostedEvidence.hostedPackageManifestSha256 -eq 'eedb212724a7f176bc913cc92b09ca086a4d7129f069a964c3195a3b8557c353' -and $hostedEvidence.hostedChangeControlSha256 -eq '69b1444692d389bb3452575a494035faddf5eb4c2f111bf3b60a686986841332') -Issue 'Final closeout Windows x86 hosted audit hashes drifted'
 
-    Assert-True -List $List -Condition ($Record.ApiAbiBaseline.Managed.Sha256 -eq "d8de86430b08e158f0850c6a985c1b758b75d66296641617aeb58ab60cba1f3f" -and $Record.ApiAbiBaseline.Managed.TypeCount -eq 647 -and $Record.ApiAbiBaseline.Managed.MemberCount -eq 7010 -and $Record.ApiAbiBaseline.Managed.NamespaceCount -eq 41 -and $Record.ApiAbiBaseline.Managed.TargetFramework -eq "net8.0") -Issue "Final closeout managed API baseline evidence drifted"
+    Assert-True -List $List -Condition ($Record.ApiAbiBaseline.Managed.Sha256 -eq "b0fe57a0c53b8c1da50b373f95b1f879b412e47d5759018eb09ae6927d581f2f" -and $Record.ApiAbiBaseline.Managed.TypeCount -eq 647 -and $Record.ApiAbiBaseline.Managed.MemberCount -eq 7010 -and $Record.ApiAbiBaseline.Managed.NamespaceCount -eq 41 -and $Record.ApiAbiBaseline.Managed.TargetFramework -eq "net8.0") -Issue "Final closeout managed API baseline evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.NativeFull.Sha256 -eq "991e8b88349bc012805a2506c89681a572cc650f0ea90fb9d3f0d37de7e5ccb9" -and $Record.ApiAbiBaseline.NativeFull.FunctionCount -eq 2669 -and $Record.ApiAbiBaseline.NativeMini.Sha256 -eq "aac22280e4b88aa45bbc3710ecf0633ba0658e0ba40a0c80a031bb1cf287a9ec" -and $Record.ApiAbiBaseline.NativeMini.FunctionCount -eq 527) -Issue "Final closeout native ABI baseline evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.NativeManagedBindingMap.Sha256 -eq "18f1b48a44860e06a1179db7020bd3dc93dd4b60c18cc3f1415b05a824d22733" -and $Record.ApiAbiBaseline.NativeManagedBindingMap.NativeFunctionCount -eq 2669 -and $Record.ApiAbiBaseline.NativeManagedBindingMap.ManagedBoundCount -eq 2669 -and $Record.ApiAbiBaseline.NativeManagedBindingMap.UnboundCount -eq 0 -and $Record.ApiAbiBaseline.NativeManagedBindingMap.ManagedOnlyCount -eq 0) -Issue "Final closeout native-to-managed binding evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.ImgProcUpstreamMap.Sha256 -eq "5b4bf38bfb2dd40868d8631b8d527bed1290c51f6a9f94bebc316f2526868b6a" -and $Record.ApiAbiBaseline.ImgProcUpstreamMap.DeclarationCount -eq 203 -and $Record.ApiAbiBaseline.ImgProcUpstreamMap.CallableCount -eq 167 -and $Record.ApiAbiBaseline.ImgProcUpstreamMap.ImplementedCount -eq 161 -and $Record.ApiAbiBaseline.ImgProcUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.ImgProcUpstreamMap.IntentionallyOmittedCount -eq 6 -and $Record.ApiAbiBaseline.ImgProcUpstreamMap.SelectedFamilyCount -eq 8 -and $Record.ApiAbiBaseline.ImgProcUpstreamMap.SelectedDeclarationCount -eq 90 -and $Record.ApiAbiBaseline.ImgProcUpstreamMap.ManagedPublicMemberAdditionCount -eq 174 -and -not [bool]$Record.ApiAbiBaseline.ImgProcUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout ImgProc upstream-map evidence drifted"
@@ -1347,13 +1351,17 @@ function Test-Record {
 
     $expectedMethods = @("GET", "HEAD")
     Assert-True -List $List -Condition ($Record.PublicFeed.Mode -eq "read-only" -and $Record.PublicFeed.ServiceIndex -eq "https://api.nuget.org/v3/index.json" -and $Record.PublicFeed.GitHubPackagesServiceIndex -eq "https://nuget.pkg.github.com/guojin-yan/index.json" -and $Record.PublicFeed.GitHubPackagesRepository -eq "guojin-yan/OpenCV-CSharp-API" -and $Record.PublicFeed.RequiredPublicVisibility -eq "public" -and [int]$Record.PublicFeed.RequiredFeedCount -eq 2) -Issue "Final closeout dual public-feed boundary drifted"
-    Assert-True -List $List -Condition ($Record.PublicFeed.CandidatePackage -eq "https://api.nuget.org/v3-flatcontainer/jyppx.opencv.csharp.api/5.0.0/jyppx.opencv.csharp.api.5.0.0.nupkg") -Issue "Final closeout public-feed candidate URL drifted" -Text $Record.PublicFeed.CandidatePackage
+    Assert-True -List $List -Condition ($Record.PublicFeed.CandidatePackage -eq "https://api.nuget.org/v3-flatcontainer/jyppx.opencv.csharp.api/5.1.0/jyppx.opencv.csharp.api.5.1.0.nupkg") -Issue "Final closeout public-feed candidate URL drifted" -Text $Record.PublicFeed.CandidatePackage
     Assert-True -List $List -Condition ((@($Record.PublicFeed.Methods) -join ",") -eq ($expectedMethods -join ",")) -Issue "Final closeout public-feed method list drifted"
     Assert-True -List $List -Condition (-not [bool]$Record.PublicFeed.Mutable -and $Record.PublicFeed.CandidateStatus -eq "not-published" -and -not [bool]$Record.PublicFeed.UploadAttempted) -Issue "Final closeout public-feed state is not immutable and not-published"
     Assert-True -List $List -Condition ($Record.Rollback.Status -eq "not-published" -and -not [bool]$Record.Rollback.PackageRemovalRequired -and $Record.ReleaseApproval.Status -eq "not-approved" -and -not [bool]$Record.ReleaseApproval.ReleaseReady -and $Record.ReleaseApproval.PublicationDecision -eq "do-not-publish") -Issue "Final closeout rollback or publication decision drifted"
     Assert-True -List $List -Condition (-not [bool]$Record.PrivateKeyMaterialPresent -and -not [bool]$Record.SecretMaterialPresent -and [bool]$Record.Deterministic) -Issue "Final closeout must exclude secrets and remain deterministic"
 
-    $expectedBlockers = @("android-arm-device-evidence","api-gap-implementation","macos-support-decision","publication-authorization","release-approval","repository-signing-verification","sbom-inputs")
+    $revision = $Record.RevisionValidation
+    Assert-True -List $List -Condition ($revision.LocalBuildRid -ceq 'win-x64' -and $revision.HistoricalUpstreamMapRevision -ceq '5.0.0' -and $revision.HistoricalSupportEvidenceRevision -ceq '5.0.0' -and -not $revision.CurrentRevisionMultiRidValidated -and -not $revision.CurrentRevisionUpstreamParityClaimed) -Issue 'Final closeout 5.1 revision evidence boundary drifted'
+    $currentBuildHash = (Get-FileHash -LiteralPath (Join-Path $repo 'packaging/runtime/opencv-5.1.0-source-build-evidence.json') -Algorithm SHA256).Hash.ToLowerInvariant()
+    Assert-True -List $List -Condition ($revision.CurrentBuildEvidence.Path -ceq 'packaging/runtime/opencv-5.1.0-source-build-evidence.json' -and $revision.CurrentBuildEvidence.Sha256 -ceq $currentBuildHash) -Issue 'Final closeout 5.1 source build evidence drifted'
+    $expectedBlockers = @("android-arm-device-evidence","api-gap-implementation","macos-support-decision","opencv-5.1-evidence-refresh","publication-authorization","release-approval","repository-signing-verification","sbom-inputs")
     $actualBlockers = @($Record.ExternalBlockers | ForEach-Object { [string]$_.Id })
     Assert-True -List $List -Condition (($actualBlockers -join ",") -eq ($expectedBlockers -join ",")) -Issue "Final closeout blocker ledger is missing, reordered, or incomplete"
     foreach ($blocker in $Record.ExternalBlockers) {
@@ -1398,6 +1406,12 @@ Assert-FixtureRejected -Name "source hash drift" -ExpectedIssue "source-set dige
     param($list)
     $fixture = $record | ConvertTo-Json -Depth 30 | ConvertFrom-Json
     $fixture.SourceSet.Sha256 = "0" * 64
+    Test-Record -Record $fixture -List $list -ExpectedSourceHash $expectedSourceHash
+}
+Assert-FixtureRejected -Name "historical evidence promoted to 5.1" -ExpectedIssue "5.1 revision evidence boundary" -Action {
+    param($list)
+    $fixture = $record | ConvertTo-Json -Depth 30 | ConvertFrom-Json
+    $fixture.RevisionValidation.CurrentRevisionMultiRidValidated = $true
     Test-Record -Record $fixture -List $list -ExpectedSourceHash $expectedSourceHash
 }
 Assert-FixtureRejected -Name "source identity drift" -ExpectedIssue "candidate identity" -Action {

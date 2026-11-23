@@ -7,7 +7,7 @@
 <h1 align="center">📷 OpenCV CSharp API</h1>
 
 <p align="center">
-  面向 C# 与 .NET 的版本中立 OpenCV 5.0 封装，提供 managed API 和经过验证的 native runtime 包。
+  面向 C# 与 .NET 的版本中立 OpenCV 5 封装，提供 managed API 和经过验证的 native runtime 包。
 </p>
 
 <p align="center">
@@ -27,31 +27,31 @@
 
 ## 📖 项目简介
 
-OpenCV CSharp API 通过熟悉的 `JYPPX.OpenCvSharp.*` 命名空间，将 [OpenCV 5.0](https://opencv.org/) 引入 C#。项目提供符合 .NET 使用习惯的 managed API、稳定的 native C ABI、明确的 native 资源所有权，以及面向已验证 Windows、Linux 和 Android 模拟器目标的 runtime NuGet 包。
+OpenCV CSharp API 通过熟悉的 `JYPPX.OpenCvSharp.*` 命名空间，将 [OpenCV 5](https://opencv.org/) 引入 C#。项目提供符合 .NET 使用习惯的 managed API、稳定的 native C ABI、明确的 native 资源所有权，以及面向已验证 Windows、Linux 和 Android 模拟器目标的 runtime NuGet 包。当前开发目标为 OpenCV 5.1.0，已发布的 5.0.0 平台证据保留为历史结果，须重新验证后才能用于新版本。
 
 当前公开版本由下方 NuGet 实时徽章显示。稳定版按照语义化版本规则维护已声明 managed API 与 native ABI 的兼容性，并持续增加兼容的计算机视觉能力。
 
 ## ✨ 版本亮点
 
 - 广泛覆盖 Core、ImgProc、ImgCodecs、VideoIO、Calib3D、DNN、Features、ObjDetect、Photo、Video、HighGui、Stitching、ML、Tracking 和部分 contrib API。
-- 一个 managed 包，以及面向 14 个已验证 Windows、Linux 和 Android 模拟器 RID 的 full 与 mini native runtime profile。
+- 已发布的 5.0.0 runtime 矩阵覆盖 14 个已验证 Windows、Linux 和 Android 模拟器 RID 的 full 与 mini profile；5.1.0 验证单独记录。
 - 支持 .NET Framework 4.6 至 4.8.1、.NET Core 3.1，以及 .NET 5 至 .NET 10。
 - 向 NuGet.org 与 GitHub Packages 发布确定性包，并提供 SPDX 2.3 SBOM、受保护的发布审批和经过验证的 GitHub Release 产物。
 - managed codec 预检可识别常见图像头，并在 native 解码前应用输入、尺寸、像素数和帧数预算。
 - 提供 23 个按功能分组的无头完整案例并生成可检查 PNG；模型 DNN 案例使用一次性哈希校验资产包，其余案例完全离线运行。
-- 兼容性基线覆盖 644 个 public managed type、6,965 个 public/protected member、`JYPPX.OpenCvSharp` 根下的 41 个 namespace 和已声明的 native ABI。
+- 当前开发兼容性基线覆盖 647 个 public managed type、7,010 个 public/protected member、`JYPPX.OpenCvSharp` 根下的 41 个 namespace 和 native ABI 1。
 
-## 📢 5.0.0 本次更新
+## 📢 5.1.0 本次更新
 
-- 新增精确包版本诊断、更完整的颜色转换、非连续 `Mat` 行/stride 安全访问、类型化像素向量和类型安全的图像编码参数。
-- 新增 `VideoCapture.TryRead`/`TryRetrieve`，以及由 OpenCV 原生实现的普通、按类别批量、旋转框和 Soft-NMS 检测后处理。
-- 完善 runtime/package 验证流程、分组案例、系列教程，以及 NuGet.org、GitHub Packages 和 GitHub Release 的 Repository signing 核验。
+- 源码与包元数据统一升级至 OpenCV、opencv_contrib 配套的 5.1.0 正式标签；当前处于开发中，尚未发布。
+- Windows x64 Full/Mini wrapper 已按既有 ABI 编译。TensorFlow 导入 API 对上游 5.1 移除的导入器返回明确错误及 ONNX 迁移提示。
+- 承接既有 codec 预检改进，包括全部既有存储位深的 Sun Raster byte-RLE 验证；继续应用已审计的 CCM 模型状态补丁。
 
-参见 [5.0.0 详细说明](docs/releases/5.0.0.md)或完整的[版本变更总览](CHANGELOG.md)。公开可用状态以 NuGet 实时徽章、GitHub Packages 页面和对应 GitHub Release 为准。
+参见 [5.1.0 详细说明](docs/releases/5.1.0.md)或完整的[版本变更总览](CHANGELOG.md)。既有多 RID 和上游映射证据仍绑定 5.0.0，后续按 5.1.0 单独刷新。
 
 ## 🔬 5.0.1 预览入口
 
-5.0.1 preview 在保留现有 managed API 和 package identity 的同时，让 capability、typed pixel、有界 codec、平台和 headless 边界可检查。完整命令契约与证据边界见 [5.0.1 现代 API 与平台预览指南](docs/articles/v501-modern-api-preview-guide.md)。
+原 5.0.1 preview 开发内容承接至 5.1.0，继续保留现有 managed API 和 package identity。capability、typed pixel、有界 codec、平台和 headless 的完整命令契约见继承的 [5.0.1 现代 API 与平台预览指南](docs/articles/v501-modern-api-preview-guide.md)；其中历史 runtime 证据不构成 5.1.0 支持声明。
 
 在 checkout 的仓库中运行以下机器可读 `ConsoleSamples` 命令：
 

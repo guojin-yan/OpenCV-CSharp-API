@@ -421,8 +421,8 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
-        Name = "v5.0.1 compatibility change ledger"
-        Script = Join-Path $repo "scripts/Test-V501ChangeLedger.ps1"
+        Name = "v5.1.0 compatibility change ledger"
+        Script = Join-Path $repo "scripts/Test-V510ChangeLedger.ps1"
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{

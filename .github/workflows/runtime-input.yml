@@ -6,7 +6,7 @@ on:
       opencv_version:
         description: OpenCV version used for real runtime input production
         required: true
-        default: 5.0.0
+        default: 5.1.0
       rid:
         description: Real producer target; exact Windows x64/ARM64 full/mini, approved Linux full targets, and independently proven Linux mini targets
         required: true
@@ -1392,7 +1392,7 @@ jobs:
           "$adb" shell am start -W -n io.github.guojinyan.opencvcsharp.smoke/io.github.guojinyan.opencvcsharp.smoke.MainActivity
           smoke=''
           for attempt in $(seq 1 60); do
-            smoke="$($adb logcat -d -s OpenCvSharpSmoke:I '*:S' | tr -d '\r' | grep 'PASS version=5.0.0 sum=448' || true)"
+            smoke="$($adb logcat -d -s OpenCvSharpSmoke:I '*:S' | tr -d '\r' | grep "PASS version=${{ inputs.opencv_version }} sum=448" || true)"
             if [ -n "$smoke" ]; then break; fi
             sleep 2
           done
@@ -1402,7 +1402,7 @@ jobs:
             exit 1
           fi
           printf '%s\n' "$smoke" | tee artifacts/android-proof/emulator-smoke.txt
-          echo 'ANDROID_EMULATOR_LOADING_OK rid=${{ matrix.rid }} abi=${{ matrix.abi }} profile=${{ matrix.profile }} native_call=Mat+Cv2.Sum version=5.0.0 sum=448'
+          echo 'ANDROID_EMULATOR_LOADING_OK rid=${{ matrix.rid }} abi=${{ matrix.abi }} profile=${{ matrix.profile }} native_call=Mat+Cv2.Sum version=${{ inputs.opencv_version }} sum=448'
           "$adb" emu kill || true
           wait "$emulator_pid" 2>/dev/null || true
       - name: Upload Android runtime input artifact

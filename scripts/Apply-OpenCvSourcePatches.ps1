@@ -1,7 +1,7 @@
 param(
     [Parameter(Mandatory = $true)]
     [string]$OpenCvSourceDir,
-    [string]$OpenCvVersion = "5.0.0"
+    [string]$OpenCvVersion = "5.1.0"
 )
 
 Set-StrictMode -Version Latest
@@ -9,13 +9,13 @@ $ErrorActionPreference = "Stop"
 
 $repoRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..")).Path
 $sourceDir = (Resolve-Path -LiteralPath $OpenCvSourceDir).Path
-$patchRelativePath = "packaging/runtime/patches/opencv-5.0.0-photo-ccm-instance-color-space.patch"
+$patchRelativePath = "packaging/runtime/patches/opencv-$OpenCvVersion-photo-ccm-instance-color-space.patch"
 $patchPath = Join-Path $repoRoot $patchRelativePath
 $targetRelativePath = "modules/photo/src/ccm/ccm.cpp"
 $targetPath = Join-Path $sourceDir $targetRelativePath
 
-if ($OpenCvVersion -ne "5.0.0") {
-    throw "The audited photo CCM source patch is only defined for OpenCV 5.0.0, not '$OpenCvVersion'."
+if ($OpenCvVersion -notin @("5.0.0", "5.1.0")) {
+    throw "The audited photo CCM source patch is only defined for OpenCV 5.0.0 and 5.1.0, not '$OpenCvVersion'."
 }
 if (-not (Test-Path -LiteralPath $patchPath -PathType Leaf)) {
     throw "OpenCV source patch was not found: $patchPath"

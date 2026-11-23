@@ -173,6 +173,8 @@ try {
         "-NoProfile",
         "-File", $stageRuntimePath,
         "-Rid", $rid,
+        "-OpenCvVersion", "5.0.0",
+        "-PackageVersion", "5.0.0.0",
         "-Configuration", "Release",
         "-OpenCvNativeRuntimeDir", $nativeWrapperRuntimeDir,
         "-OpenCvRuntimeDir", $openCvRuntimeDir,

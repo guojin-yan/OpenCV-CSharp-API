@@ -924,8 +924,13 @@ int jyppx_ocv_dnn_read_net_from_tensorflow(const char* model, const char* config
         if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
         status = path_from_utf8(api_name, config, "config", config_path);
         if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if CV_VERSION_MAJOR > 5 || (CV_VERSION_MAJOR == 5 && CV_VERSION_MINOR >= 1)
+        CV_Error(cv::Error::StsNotImplemented,
+            "TensorFlow importer was removed in OpenCV 5.1. Use an ONNX-converted model or OpenCV 5.0.");
+#else
         cv::dnn::Net native = cv::dnn::readNetFromTensorflow(model_path, config_path, engine);
         return create_net_handle(api_name, native, net);
+#endif
 #else
         (void)config; (void)engine; (void)net;
         return opencv_csharp_native::set_not_linked(api_name);
@@ -1920,12 +1925,17 @@ int jyppx_ocv_dnn_read_net_from_tensorflow_ex(
         if (status != OPENCV_CSHARP_STATUS_OK) return status;
         status = path_from_utf8(api_name, config, "config", config_path);
         if (status != OPENCV_CSHARP_STATUS_OK) return status;
+#if CV_VERSION_MAJOR > 5 || (CV_VERSION_MAJOR == 5 && CV_VERSION_MINOR >= 1)
+        CV_Error(cv::Error::StsNotImplemented,
+            "TensorFlow importer was removed in OpenCV 5.1. Use an ONNX-converted model or OpenCV 5.0.");
+#else
         cv::dnn::Net value = cv::dnn::readNetFromTensorflow(
             model_path,
             config_path,
             engine,
             to_string_vector(extra_outputs_buffer, extra_output_offsets, extra_output_count));
         return create_net_handle(api_name, value, net);
+#endif
 #else
         return opencv_csharp_native::set_not_linked(api_name);
 #endif
@@ -1960,12 +1970,17 @@ int jyppx_ocv_dnn_read_net_from_tensorflow_buffer(
         status = validate_string_array_buffer(api_name, extra_outputs_buffer, extra_output_offsets, extra_output_count);
         if (status != OPENCV_CSHARP_STATUS_OK) return status;
 #if defined(OPENCV_CSHARP_HAS_OPENCV)
+#if CV_VERSION_MAJOR > 5 || (CV_VERSION_MAJOR == 5 && CV_VERSION_MINOR >= 1)
+        CV_Error(cv::Error::StsNotImplemented,
+            "TensorFlow importer was removed in OpenCV 5.1. Use an ONNX-converted model or OpenCV 5.0.");
+#else
         cv::dnn::Net value = cv::dnn::readNetFromTensorflow(
             to_byte_vector(model_buffer, model_buffer_size),
             to_byte_vector(config_buffer, config_buffer_size),
             engine,
             to_string_vector(extra_outputs_buffer, extra_output_offsets, extra_output_count));
         return create_net_handle(api_name, value, net);
+#endif
 #else
         return opencv_csharp_native::set_not_linked(api_name);
 #endif
@@ -2128,6 +2143,13 @@ int jyppx_ocv_dnn_net_dump_to_pbtxt(jyppx_ocv_dnn_net* net, const char* path)
         std::string native_path;
         status = path_from_utf8(api_name, path, "path", native_path);
         if (status != OPENCV_CSHARP_STATUS_OK) return status;
+#if CV_VERSION_MAJOR > 5 || (CV_VERSION_MAJOR == 5 && CV_VERSION_MINOR >= 1)
+        // The legacy exporter calls clear() before failing on a new-engine graph.
+        // Reject it before that call so a failed export cannot destroy the loaded model.
+        if (net->value.getModelFormat() == cv::dnn::DNN_MODEL_ONNX)
+            CV_Error(cv::Error::StsNotImplemented,
+                "PBTXT export is unavailable for OpenCV 5.1 ONNX graphs. Use DumpToFile for a textual graph dump.");
+#endif
         net->value.dumpToPbtxt(native_path);
         return OPENCV_CSHARP_STATUS_OK;
 #else
@@ -3263,4 +3285,3 @@ int jyppx_ocv_dnn_soft_nms_boxes_rect(
     }
     catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
 }
-

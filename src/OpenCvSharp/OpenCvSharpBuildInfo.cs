@@ -33,7 +33,7 @@ namespace JYPPX.OpenCvSharp
         public const string RuntimePackageIdPrefix = "JYPPX.OpenCV.runtime";
 
         /// <summary>Gets the OpenCV version targeted by this managed package.</summary>
-        public const string OpenCvVersion = "5.0.0";
+        public const string OpenCvVersion = "5.1.0";
 
         /// <summary>
         /// Gets the native wrapper ABI version required by this managed package.

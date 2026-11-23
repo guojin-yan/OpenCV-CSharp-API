@@ -2,7 +2,7 @@ param(
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path,
     [string]$Rid = "win-x64",
     [string]$RuntimeProfile = "full",
-    [string]$OpenCvVersion = "5.0.0",
+    [string]$OpenCvVersion = "5.1.0",
     [string]$OutputRoot = "",
     [string]$RuntimePackageMatrix = "packaging/runtime/runtime-package-matrix.json"
 )

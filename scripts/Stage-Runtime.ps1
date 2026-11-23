@@ -2,7 +2,7 @@ param(
     [string]$Rid = "win-x64",
     [string]$Configuration = "Release",
     [string]$OpenCvNativeRuntimeDir = "",
-    [string]$OpenCvVersion = "5.0.0",
+    [string]$OpenCvVersion = "5.1.0",
     [string]$OpenCvRid = "",
     [string]$OpenCvRuntimeVersionSuffix = "",
     [string]$OpenCvSourceRoot = "",

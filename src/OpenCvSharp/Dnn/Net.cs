@@ -122,6 +122,7 @@ namespace JYPPX.OpenCvSharp.Dnn
         /// Reads a TensorFlow network from model/config file paths.
         /// 从模型/配置文件路径读取 TensorFlow 网络。
         /// </summary>
+        /// <remarks>OpenCV 5.1 removed this importer and reports an OpenCvException. Use an ONNX-converted model.</remarks>
         public static Net ReadNetFromTensorflow(string model, string config = "", DnnEngine engine = DnnEngine.Auto)
         {
             ValidateEngine(engine, nameof(engine));
@@ -132,6 +133,7 @@ namespace JYPPX.OpenCvSharp.Dnn
         }
 
         /// <summary>Reads a TensorFlow network from paths and explicitly named extra outputs.</summary>
+        /// <remarks>OpenCV 5.1 removed this importer and reports an OpenCvException. Use an ONNX-converted model.</remarks>
         public static Net ReadNetFromTensorflow(string model, string config, DnnEngine engine, string[] extraOutputs)
         {
             ValidateEngine(engine, nameof(engine));
@@ -144,6 +146,7 @@ namespace JYPPX.OpenCvSharp.Dnn
         }
 
         /// <summary>Reads a TensorFlow network from in-memory model/config buffers.</summary>
+        /// <remarks>OpenCV 5.1 removed this importer and reports an OpenCvException. Use an ONNX-converted model.</remarks>
         public static Net ReadNetFromTensorflow(byte[] modelBuffer, byte[]? configBuffer = null, DnnEngine engine = DnnEngine.Auto, string[]? extraOutputs = null)
         {
             ValidateEngine(engine, nameof(engine));
@@ -171,6 +174,7 @@ namespace JYPPX.OpenCvSharp.Dnn
         /// <param name="extraOutputs">Optional UTF-8 output names retained by the imported graph.</param>
         /// <returns>An independently owned network.</returns>
         /// <remarks>All spans and pinned pointers are borrowed only for the native call.</remarks>
+        /// <remarks>OpenCV 5.1 removed this importer and reports an OpenCvException. Use an ONNX-converted model.</remarks>
         public static Net ReadNetFromTensorflow(ReadOnlySpan<byte> modelBuffer, ReadOnlySpan<byte> configBuffer, DnnEngine engine = DnnEngine.Auto, string[]? extraOutputs = null)
         {
             ValidateEngine(engine, nameof(engine));

@@ -910,7 +910,7 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "OpenCvExtraCMakeArgs = `$OpenCvExtraCMakeArgs"; Issue = "Runtime input artifact provenance must record distro-specific OpenCV CMake arguments" },
         [pscustomobject]@{ Needle = "OpenCvSourcePatchEvidence = `$OpenCvSourcePatchEvidence"; Issue = "Runtime input artifact provenance must record audited OpenCV source patch evidence" },
         [pscustomobject]@{ Needle = "OpenCvSourcePatches = @(`$auditedSourcePatches)"; Issue = "Runtime input artifact provenance must retain the cross-platform audited source-patch set" },
-        [pscustomobject]@{ Needle = "opencv-5.0.0-photo-ccm-instance-color-space.patch"; Issue = "Runtime input artifact provenance must bind the OpenCV 5.0.0 photo CCM fix" },
+        [pscustomobject]@{ Needle = 'opencv-$OpenCvVersion-photo-ccm-instance-color-space.patch'; Issue = "Runtime input artifact provenance must bind the selected audited OpenCV photo CCM fix" },
         [pscustomobject]@{ Needle = "BuildList = Get-OptionalStringProperty"; Issue = "Runtime input artifact provenance must record the profile build list from the runtime matrix" },
         [pscustomobject]@{ Needle = '[string]$OpenCvContribSourceDir = ""'; Issue = "Runtime input artifact script must accept the profile-scoped OpenCV contrib source root" },
         [pscustomobject]@{ Needle = "OpenCvContribSourceDir is required because runtime profile"; Issue = "Runtime input artifact script must require contrib source whenever the selected profile requires ML" },

@@ -4,6 +4,14 @@ This file is the concise chronological index for package-visible changes. Detail
 
 本文件用于汇总所有影响使用者的版本变更。每个版本的中英文详细说明保存在 [`docs/releases`](docs/releases/README.md)。
 
+## [5.1.0] - In development / 开发中
+
+- Move the source, package metadata and development target to the official matching OpenCV/opencv_contrib 5.1.0 tags.
+- Preserve TensorFlow importer APIs with an explicit upstream-removal error; verify ONNX format diagnostics and inference against 5.1.0.
+- Carry forward bounded codec preflight improvements, including Sun Raster byte-RLE across 1/8/24/32-bit storage, and retain the audited CCM instance-state patch.
+- Windows x64 Full and Mini wrappers build with unchanged ABI 1; other 5.1.0 runtime and release evidence remains pending.
+- Details / 详细说明: [`docs/releases/5.1.0.md`](docs/releases/5.1.0.md)
+
 ## [5.0.0] - 2026-08-06
 
 - Expanded safe `Mat` access for non-contiguous images, typed rows, pixel vectors, two-dimensional element access, and external stride buffers.

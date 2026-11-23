@@ -23,7 +23,7 @@ int jyppx_ocv_get_version_minor(void)
 #if defined(OPENCV_CSHARP_HAS_OPENCV)
     return CV_VERSION_MINOR;
 #else
-    return 0;
+    return 1;
 #endif
 }
 
@@ -41,6 +41,6 @@ const char* jyppx_ocv_get_version_string(void)
 #if defined(OPENCV_CSHARP_HAS_OPENCV)
     return CV_VERSION;
 #else
-    return "5.0.0";
+    return "5.1.0";
 #endif
 }
