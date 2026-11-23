@@ -3,6 +3,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
     <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == ''">win-x64</RuntimeIdentifier>
+    <RuntimeFrameworkVersion>10.0.15</RuntimeFrameworkVersion>
     <SelfContained>true</SelfContained>
     <PublishAot Condition="'$(PublishAot)' == ''">true</PublishAot>
     <PublishTrimmed Condition="'$(PublishTrimmed)' == ''">true</PublishTrimmed>
@@ -14,6 +15,8 @@
     <IsPackable>false</IsPackable>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <NuGetAudit>true</NuGetAudit>
+    <WarningsAsErrors>$(WarningsAsErrors);NU1903</WarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="JYPPX.OpenCV.CSharp.API">
