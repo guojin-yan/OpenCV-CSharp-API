@@ -38,15 +38,17 @@ namespace JYPPX.OpenCvSharp.Tests.Features2D
             }
         }
 
-        [Fact]
-        public void PropertiesExposeConstructorSettingsWhenFeaturesModuleIsLinked()
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void PropertiesExposeConstructorSettingsWhenFeaturesModuleIsLinked(bool crossCheck)
         {
             if (!TestEnvironment.IsNativeSmokeEnabled())
             {
                 return;
             }
 
-            BFMatcher? matcher = TryCreateMatcher(NormTypes.L2, crossCheck: true);
+            BFMatcher? matcher = TryCreateMatcher(NormTypes.L2, crossCheck: crossCheck);
             if (matcher == null)
             {
                 return;
@@ -55,10 +57,10 @@ namespace JYPPX.OpenCvSharp.Tests.Features2D
             using (matcher)
             {
                 Assert.Equal(NormTypes.L2, matcher.NormType);
-                Assert.True(matcher.CrossCheck);
-                Assert.True(matcher.IsMaskSupported);
+                Assert.Equal(crossCheck, matcher.CrossCheck);
+                Assert.Equal(!crossCheck, matcher.IsMaskSupported);
                 Assert.True(matcher.Empty);
-                Assert.Equal("{NormType=L2,CrossCheck=True}", matcher.ToString());
+                Assert.Equal("{NormType=L2,CrossCheck=" + crossCheck + "}", matcher.ToString());
             }
         }
 

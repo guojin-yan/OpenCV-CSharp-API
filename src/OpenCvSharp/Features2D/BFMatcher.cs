@@ -58,6 +58,8 @@ namespace JYPPX.OpenCvSharp.Features2D
         /// <summary>
         /// Gets a value indicating whether descriptor masks are supported.
         /// 获取是否支持描述子掩码。
+        /// OpenCV 5.1 reports false when cross-check mode is enabled.
+        /// OpenCV 5.1 在启用 cross-check 模式时返回 false。
         /// </summary>
         public override bool IsMaskSupported
         {

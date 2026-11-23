@@ -126,8 +126,10 @@ namespace JYPPX.OpenCvSharp.Calib3D
         /// <summary>
         /// Disables Schur complement optimization.
         /// 禁用 Schur 补优化。
+        /// OpenCV 5.1 uses bit 27; rebuild callers that used the former bit-18 constant.
+        /// OpenCV 5.1 使用第 27 位；使用过旧第 18 位常量的调用方需要重新编译。
         /// </summary>
-        DisableSchurComplement = 1 << 18,
+        DisableSchurComplement = 1 << 27,
 
         /// <summary>
         /// Enables the tilted sensor model.
