@@ -550,12 +550,12 @@
   "limits": {
     "published": false,
     "multiRid51Validated": false,
-    "packageConsumer51Validated": false,
+    "packageConsumer51Validated": true,
     "upstreamMapVersion": "5.0.0",
     "upstream51ParityClaimed": false,
     "packagePeClosureValidated": false,
     "localPeClosureValidated": true,
-    "packagePeClosureNote": "The local Full and Mini binary payloads pass the PE gate with 43 and 7 DLLs, zero missing OpenCV imports and all 42/6 modules reachable. Full optional contrib modules are checked when present. Candidate NuGet package closure and consumer evidence remain pending.",
+    "packagePeClosureNote": "The local Full and Mini binary payloads pass the PE gate with 43 and 7 DLLs, zero missing OpenCV imports and all 42/6 modules reachable. Full optional contrib modules are checked when present. Local package restore/build/native smoke is verified separately; candidate package PE closure, cross-RID hosted evidence, signing and SBOM promotion remain pending.",
     "localBinaryConsumerValidated": true
   },
   "localBinaryConsumer": {
@@ -588,6 +588,20 @@
         "managedBinarySha256": "afaef6c66b530b351bf9418d04438ea7283d61b9fcba7d14f28c270e2051d95a"
       }
     ]
+  },
+  "packageConsumer51Evidence": {
+    "path": "packaging/runtime/opencv-5.1.0-package-consumer-evidence.json",
+    "sha256": "bc147a2398365a04ab621777ce15d8f3ce039db2ae8f34d389691c0d7826f28b",
+    "status": "verified-local-windows-x64",
+    "sourceCommit": "997fad9d6dd7e7d1a7f939d32cf86b0e6bd0f5ec",
+    "nativeBuildSourceCommit": "441888969629be34cce3c54c65d868b26fb615ee",
+    "packageCount": 3,
+    "consumerCount": 2,
+    "profiles": [
+      "full",
+      "mini"
+    ],
+    "guard": "scripts/Test-GitHubPackConsumerRestoreSurface.ps1"
   },
   "projectInvariants": {
     "status": "passed",

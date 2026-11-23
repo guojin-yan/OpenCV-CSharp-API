@@ -21,7 +21,38 @@ $buildEvidencePath = Join-Path $repo 'packaging/runtime/opencv-5.1.0-source-buil
 $build = Get-Content -LiteralPath $buildEvidencePath -Raw | ConvertFrom-Json
 if ($build.status -cne 'verified-local-source-build' -or $build.openCvVersion -cne '5.1.0' -or $build.packageVersion -cne '5.1.0' -or $build.rid -cne 'win-x64') { throw '5.1 source build evidence identity drifted.' }
 if ($build.upstream.openCv.commit -cne 'e4f78fbcf1a773fbed69e14500e8b734963eb585' -or $build.upstream.contrib.commit -cne 'b67a855188a3d683813731010f6d39ac614733a4') { throw '5.1 source evidence must retain both official tag commits.' }
-if ($build.limits.published -or $build.limits.multiRid51Validated -or $build.limits.packageConsumer51Validated -or $build.limits.upstream51ParityClaimed -or $build.limits.upstreamMapVersion -cne '5.0.0') { throw 'Historical 5.0 evidence cannot establish 5.1 publication, platform or parity claims.' }
+if ($build.limits.published -or $build.limits.multiRid51Validated -or -not $build.limits.packageConsumer51Validated -or $build.limits.upstream51ParityClaimed -or $build.limits.upstreamMapVersion -cne '5.0.0') { throw '5.1 evidence must keep publication, multi-RID and parity boundaries while recording the verified local package consumer.' }
+$packageConsumerEvidenceRel = 'packaging/runtime/opencv-5.1.0-package-consumer-evidence.json'
+$packageConsumerEvidencePath = Join-Path $repo $packageConsumerEvidenceRel
+if (-not (Test-Path -LiteralPath $packageConsumerEvidencePath -PathType Leaf)) { throw '5.1 package consumer evidence is missing.' }
+$packageConsumer = Get-Content -LiteralPath $packageConsumerEvidencePath -Raw | ConvertFrom-Json
+$packageConsumerHash = (Get-FileHash -LiteralPath $packageConsumerEvidencePath -Algorithm SHA256).Hash.ToLowerInvariant()
+$recordedPackageConsumer = $build.packageConsumer51Evidence
+if ($recordedPackageConsumer.path -cne $packageConsumerEvidenceRel -or $recordedPackageConsumer.sha256 -cne $packageConsumerHash -or
+    $recordedPackageConsumer.status -cne 'verified-local-windows-x64' -or $recordedPackageConsumer.packageCount -ne 3 -or
+    $recordedPackageConsumer.consumerCount -ne 2 -or (@($recordedPackageConsumer.profiles) -join '|') -cne 'full|mini' -or
+    $recordedPackageConsumer.guard -cne 'scripts/Test-GitHubPackConsumerRestoreSurface.ps1') { throw '5.1 package consumer evidence binding drifted.' }
+if ($packageConsumer.schemaVersion -ne 1 -or $packageConsumer.recordKind -cne 'opencv-5.1.0-package-consumer-evidence' -or
+    $packageConsumer.status -cne 'verified-local-windows-x64' -or $packageConsumer.openCvVersion -cne '5.1.0' -or
+    $packageConsumer.packageVersion -cne '5.1.0.0' -or $packageConsumer.rid -cne 'win-x64' -or
+    $packageConsumer.configuration -cne 'Release' -or $packageConsumer.runner -cne 'local-windows-x64' -or
+    $packageConsumer.sourceCommit -notmatch '^[0-9a-f]{40}$' -or $packageConsumer.nativeBuildSourceCommit -notmatch '^[0-9a-f]{40}$' -or
+    $packageConsumer.dotnetSdk -notmatch '^10\.0\.\d+$' -or $packageConsumer.guard -cne 'scripts/Test-GitHubPackConsumerRestoreSurface.ps1') { throw '5.1 package consumer identity is incomplete.' }
+foreach ($revision in @($packageConsumer.sourceCommit, $packageConsumer.nativeBuildSourceCommit)) {
+    & git -C $repo merge-base --is-ancestor $revision HEAD 2>$null
+    if ($LASTEXITCODE -ne 0) { throw "5.1 package consumer source revision is not an ancestor of HEAD: $revision" }
+}
+$packageLabels = @($packageConsumer.packages | ForEach-Object { [string]$_.label })
+if (($packageLabels -join '|') -cne 'managed|full|mini') { throw '5.1 package consumer package set drifted.' }
+foreach ($package in @($packageConsumer.packages)) {
+    if ($package.nugetVersion -cne '5.1.0' -or $package.packageVersion -cne '5.1.0.0' -or
+        $package.sha256 -notmatch '^[0-9a-f]{64}$' -or [int]$package.entryCount -le 0 -or [int]$package.nativeFiles -lt 0) { throw "5.1 package consumer package record is incomplete: $($package.label)" }
+}
+if ([int]$packageConsumer.packages[0].entryCount -ne 8 -or [int]$packageConsumer.packages[1].entryCount -ne 53 -or
+    [int]$packageConsumer.packages[1].nativeFiles -ne 43 -or [int]$packageConsumer.packages[2].entryCount -ne 17 -or
+    [int]$packageConsumer.packages[2].nativeFiles -ne 7) { throw '5.1 package entry/native asset counts drifted.' }
+if (@($packageConsumer.consumers).Count -ne 2 -or (@($packageConsumer.consumers.profile) -join '|') -cne 'full|mini' -or
+    @($packageConsumer.consumers | Where-Object { $_.rid -ne 'win-x64' -or $_.targetFramework -ne 'net8.0' -or $_.restore -ne 'passed' -or $_.build -ne 'passed' -or $_.nativeSmoke -ne 'passed' }).Count -ne 0) { throw '5.1 package consumer restore/build/native smoke evidence is incomplete.' }
 $expectedScopes = @('Directory.Build.props','src/OpenCvSharp.Native','src/OpenCvSharp','tests/OpenCvSharp.Tests','scripts/Build-OpenCV.ps1','scripts/Build-Native.ps1','scripts/Apply-OpenCvSourcePatches.ps1','scripts/New-RuntimeInputArtifact.ps1','scripts/Test-WindowsRuntimePeClosure.ps1')
 if (($build.sourceInputSet.paths -join '|') -cne ($expectedScopes -join '|')) { throw '5.1 source input scope drifted.' }
 $inputPaths = [string[]]@(& git -C $repo ls-files --cached --others --exclude-standard -- @expectedScopes | Sort-Object -Unique -CaseSensitive)

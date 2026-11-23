@@ -1,15 +1,21 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/ee4a35e8a6bc54ba",
-  "SourceIdentity": "sha256:ee4a35e8a6bc54bac2375e3543b5aaa30b90ea30ee70b5c34ce145c3fad2038c",
+  "CandidateId": "local-closeout/sha256/e3fbd4450a4e004d",
+  "SourceIdentity": "sha256:e3fbd4450a4e004dc1406f16ce8fea29ca78d0cac493f6566e42e78fa027b4aa",
   "OpenCvRevision": "5.1.0",
   "RevisionValidation": {
     "CurrentBuildEvidence": {
       "Path": "packaging/runtime/opencv-5.1.0-source-build-evidence.json",
-      "Sha256": "c8196711dfac47a041bdf1d95ed395133a3dbc49ed06fd849c7a29fec79fde91",
-      "Length": 64284
+      "Sha256": "bbe53b67bc7e01b1a33ef9e33fafbdfa02e0f7b32c6e1619bc02521dee420265",
+      "Length": 64922
     },
+    "CurrentPackageConsumerEvidence": {
+      "Path": "packaging/runtime/opencv-5.1.0-package-consumer-evidence.json",
+      "Sha256": "bc147a2398365a04ab621777ce15d8f3ce039db2ae8f34d389691c0d7826f28b",
+      "Length": 13032
+    },
+    "CurrentPackageConsumer51Validated": true,
     "LocalBuildRid": "win-x64",
     "HistoricalUpstreamMapRevision": "5.0.0",
     "CurrentDnnParserSlice": {
@@ -32,8 +38,8 @@
     "CurrentRevisionUpstreamParityClaimed": false
   },
   "SourceSet": {
-    "FileCount": 2972,
-    "Sha256": "ee4a35e8a6bc54bac2375e3543b5aaa30b90ea30ee70b5c34ce145c3fad2038c",
+    "FileCount": 2973,
+    "Sha256": "e3fbd4450a4e004dc1406f16ce8fea29ca78d0cac493f6566e42e78fa027b4aa",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -5195,8 +5201,8 @@
     },
     {
       "Path": "compatibility/v5.1.0-change-ledger.json",
-      "Sha256": "8097f2a1c9c3dd9ead9c6089620d9ed19918b5c9078df897d81520fa995c65c4",
-      "Length": 147971
+      "Sha256": "c0e409db930dea1e0fd2425991f0cced2d7d7e577fbe1abbb9ee332da0dec715",
+      "Length": 148671
     },
     {
       "Path": "compatibility/v5.1.0-change-ledger.schema.json",
@@ -6264,9 +6270,14 @@
       "Length": 3826
     },
     {
+      "Path": "packaging/runtime/opencv-5.1.0-package-consumer-evidence.json",
+      "Sha256": "bc147a2398365a04ab621777ce15d8f3ce039db2ae8f34d389691c0d7826f28b",
+      "Length": 13032
+    },
+    {
       "Path": "packaging/runtime/opencv-5.1.0-source-build-evidence.json",
-      "Sha256": "c8196711dfac47a041bdf1d95ed395133a3dbc49ed06fd849c7a29fec79fde91",
-      "Length": 64284
+      "Sha256": "bbe53b67bc7e01b1a33ef9e33fafbdfa02e0f7b32c6e1619bc02521dee420265",
+      "Length": 64922
     },
     {
       "Path": "packaging/runtime/patches/opencv-5.0.0-photo-ccm-instance-color-space.patch",
@@ -6885,8 +6896,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "de6d6d43e2f3f8daa0f5716a2d0fa3629c8802ea521eacee187ffc0c1001bbc2",
-      "Length": 224978
+      "Sha256": "1373f6910c4ab0884db2707145e68962fde4aa0422e43d9f6ec9e3ffd4d30d9f",
+      "Length": 225255
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -7375,8 +7386,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "664d6dc38c5931fe29a14e6c7239abe47957fa8f6ab513f0d1f5402c18225525",
-      "Length": 200357
+      "Sha256": "b5275cad87c5022c62e393aa1e4de7d7bbfeae44cdc0bae58c723700faf14bfe",
+      "Length": 200979
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -7515,8 +7526,8 @@
     },
     {
       "Path": "scripts/Test-V510ChangeLedger.ps1",
-      "Sha256": "7147b7e3ec9694b4ec7733ba08a7175e906b59e4b3db66a4f11f6da94edc366e",
-      "Length": 15727
+      "Sha256": "959f64bfc4f6ebc9ee1e19553aa35939b44c076f97ec1e493b4f9cf98ed41a70",
+      "Length": 19244
     },
     {
       "Path": "scripts/Test-VideoDnnBenchmarkEvidence.ps1",
@@ -9387,8 +9398,8 @@
     },
     {
       "Id": "opencv-5.1-evidence-refresh",
-      "Status": "new-revision-evidence-pending",
-      "Evidence": "Windows x64 OpenCV 5.1.0 source and Full/Mini wrapper builds passed local native tests. The inherited 5.0.0 maps and multi-RID/hosted support records remain historical; new 5.1.0 parser, platform, optional-module package closure and independent package-consumer evidence must be refreshed before promotion."
+      "Status": "cross-rid-and-promotion-evidence-pending",
+      "Evidence": "Windows x64 OpenCV 5.1.0 source, Full/Mini wrapper builds, and local Full/Mini package restore/build/native smoke are verified. The inherited 5.0.0 maps and multi-RID/hosted support records remain historical; cross-RID hosted evidence, candidate package PE closure, signing and SBOM promotion remain open."
     },
     {
       "Id": "publication-authorization",
