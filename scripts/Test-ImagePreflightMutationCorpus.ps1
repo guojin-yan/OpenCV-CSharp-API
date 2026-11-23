@@ -47,6 +47,8 @@ $pnmTestPath = Join-Path $repo 'tests/OpenCvSharp.Tests/ImgCodecs/PnmHeaderPrefl
 if (-not (Test-Path -LiteralPath $pnmTestPath -PathType Leaf)) { throw 'PNM text/raster admission tests are missing.' }
 $pfmTestPath = Join-Path $repo 'tests/OpenCvSharp.Tests/ImgCodecs/PfmHeaderPreflightTests.cs'
 if (-not (Test-Path -LiteralPath $pfmTestPath -PathType Leaf)) { throw 'PFM scale/raster admission tests are missing.' }
+$hdrTestPath = Join-Path $repo 'tests/OpenCvSharp.Tests/ImgCodecs/RadianceHdrPreflightTests.cs'
+if (-not (Test-Path -LiteralPath $hdrTestPath -PathType Leaf)) { throw 'Radiance HDR header/scanline admission tests are missing.' }
 if (@($manifest.frameworks).Count -ne 2 -or @($manifest.replacementBytes).Count -ne 5 -or @($manifest.fixtures).Count -lt 13) { throw 'Mutation corpus manifest dimensions drifted.' }
 
 $frameworks = @('net8.0', 'net10.0')
@@ -61,7 +63,7 @@ foreach ($framework in $frameworks) {
     $startInfo.RedirectStandardError = $true
     foreach ($argument in @(
             'test', $project, '-c', 'Release', '-f', $framework, '--no-restore',
-            '--filter', 'FullyQualifiedName~IdentifyDeterministicMutationCorpus|FullyQualifiedName~GifMetadataPreflightTests|FullyQualifiedName~AvifPrimaryItemPreflightTests|FullyQualifiedName~JpegMarkerPreflightTests|FullyQualifiedName~ApngFramePreflightTests|FullyQualifiedName~WebpContainerPreflightTests|FullyQualifiedName~TiffDirectoryPreflightTests|FullyQualifiedName~Jpeg2000HeaderPreflightTests|FullyQualifiedName~OpenExrHeaderPreflightTests|FullyQualifiedName~BmpHeaderPreflightTests|FullyQualifiedName~PngHeaderPreflightTests|FullyQualifiedName~PamHeaderPreflightTests|FullyQualifiedName~PnmHeaderPreflightTests|FullyQualifiedName~PfmHeaderPreflightTests',
+            '--filter', 'FullyQualifiedName~IdentifyDeterministicMutationCorpus|FullyQualifiedName~GifMetadataPreflightTests|FullyQualifiedName~AvifPrimaryItemPreflightTests|FullyQualifiedName~JpegMarkerPreflightTests|FullyQualifiedName~ApngFramePreflightTests|FullyQualifiedName~WebpContainerPreflightTests|FullyQualifiedName~TiffDirectoryPreflightTests|FullyQualifiedName~Jpeg2000HeaderPreflightTests|FullyQualifiedName~OpenExrHeaderPreflightTests|FullyQualifiedName~BmpHeaderPreflightTests|FullyQualifiedName~PngHeaderPreflightTests|FullyQualifiedName~PamHeaderPreflightTests|FullyQualifiedName~PnmHeaderPreflightTests|FullyQualifiedName~PfmHeaderPreflightTests|FullyQualifiedName~RadianceHdrPreflightTests',
             '--results-directory', $resultsDirectory, '--logger', 'trx;LogFileName=preflight.trx',
             '--logger', 'console;verbosity=minimal')) {
         [void]$startInfo.ArgumentList.Add($argument)
@@ -154,7 +156,18 @@ foreach ($framework in $frameworks) {
             'IdentifyPreservesEveryPfmFirstPayloadByteAfterEachSingleWhitespaceDelimiter',
             'IdentifyRequiresExactStandalonePfmPayloadAndPreservesProvenHeaders',
             'IdentifyScansLongPfmScaleAndCommentsWithoutTokenAllocation',
-            'IdentifyDeterministicMutationCorpusPfmNeverEscapesOrPublishesInconsistentFloatFacts')) {
+            'IdentifyDeterministicMutationCorpusPfmNeverEscapesOrPublishesInconsistentFloatFacts',
+            'RadianceHdrBudgetsRejectBeforeNativeDecodeAndPreserveStreams',
+            'RadianceHdrStrictPolicyRejectsUnknownHeaderOrMetadataBeforeNativeDecode',
+            'IdentifyScansLongRadianceHdrLinesWithoutTokenOrScanlineAllocation',
+            'IdentifyNeverMistakesOldRadianceHdrRunBytesForLiteralPixels',
+            'IdentifyResetsOldRadianceHdrRunShiftAfterEachLiteral',
+            'IdentifyBoundsLongZeroCarryChainsInOldRadianceHdrRuns',
+            'IdentifyReadsEveryModernRadianceHdrPacketLengthWithoutExpandingPixels',
+            'IdentifyUsesSecondRadianceHdrAxisAsRleScanlineLength',
+            'IdentifyRequiresExactRadianceHdrScanlinesAndPreservesProvenHeaders',
+            'IdentifyKeepsHugeRadianceHdrGeometryWithoutAllocatingScanlines',
+            'IdentifyDeterministicMutationCorpusRadianceHdrNeverEscapesOrPublishesInconsistentScanlineFacts')) {
         if (@($results | Where-Object { ([string]$_.testName).Contains($requiredTest) -and [string]$_.outcome -ceq 'Passed' }).Count -ne 1) { throw "Required image preflight test did not pass on ${framework}: $requiredTest" }
     }
     foreach ($requiredRegression in @(
@@ -178,6 +191,22 @@ foreach ($framework in $frameworks) {
             @{ Name = 'IdentifyRejectsOpenExrSamplingThatConflictsWithDataWindow'; Count = 4 },
             @{ Name = 'IdentifyReadsRealOpenExrFirstHeaderFixtures'; Count = 7 })) {
         if (@($results | Where-Object { ([string]$_.testName).Contains($regression.Name) -and [string]$_.outcome -ceq 'Passed' }).Count -ne $regression.Count) { throw "All $($regression.Count) OpenEXR cases must pass on ${framework}: $($regression.Name)" }
+    }
+    foreach ($regression in @(
+            @{ Name = 'IdentifyReadsRealRadianceHdrScanlineFixtures'; Count = 16 },
+            @{ Name = 'IdentifyReadsEveryRadianceHdrOrientationWithoutApplyingColorTransforms'; Count = 8 },
+            @{ Name = 'IdentifyReadsRadianceHdrSharedExponentStorageWithoutInferringNativeSupport'; Count = 2 },
+            @{ Name = 'IdentifyAcceptsRadianceHdrFormatValueWhitespace'; Count = 4 },
+            @{ Name = 'IdentifyRejectsDuplicateRadianceHdrFormatsEvenWhenValuesMatch'; Count = 8 },
+            @{ Name = 'IdentifyRequiresOneSupportedRadianceHdrFormatDeclaration'; Count = 8 },
+            @{ Name = 'IdentifyRejectsMalformedRadianceHdrResolutionAsOneHeader'; Count = 16 },
+            @{ Name = 'IdentifyAcceptsWhitespaceAndPositiveCountsInRadianceHdrResolution'; Count = 4 },
+            @{ Name = 'IdentifyPreservesRadianceHdrPayloadAfterTerminatedResolutionLine'; Count = 2 },
+            @{ Name = 'IdentifyCountsOldRadianceHdrRunsWithoutExpandingPixels'; Count = 6 },
+            @{ Name = 'IdentifyNeverCarriesOldRadianceHdrRunsAcrossScanlinesOrIntegerShifts'; Count = 7 },
+            @{ Name = 'IdentifyRejectsMalformedModernRadianceHdrPacketsButKeepsHeader'; Count = 7 },
+            @{ Name = 'IdentifyChecksEachRadianceHdrScanlineEncodingIndependently'; Count = 4 })) {
+        if (@($results | Where-Object { ([string]$_.testName).Contains($regression.Name) -and [string]$_.outcome -ceq 'Passed' }).Count -ne $regression.Count) { throw "All $($regression.Count) Radiance HDR cases must pass on ${framework}: $($regression.Name)" }
     }
     foreach ($regression in @(
             @{ Name = 'IdentifyReadsRealPfmFloatFixtures'; Count = 8 },

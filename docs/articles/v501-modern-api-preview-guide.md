@@ -108,6 +108,10 @@ PFM scans nonzero decimal scale syntax without token allocation or native range 
 
 PFM 扫描非零十进制 scale 语法，不分配 token，也不推断 native 表示范围。scale 仅以一个空白字节结束，CR 后的 LF 属于 float raster。checked 的精确 float32 长度决定帧/存储事实，负载失败可保留已证明的头部。8 份文件由 NumPy 独立核对样本/字节序，其中 6 份额外经 Netpbmfile 解码。PNM 风格注释保持为兼容扩展；scale 转换、样本/方向语义、native 支持/分配和最终 Mat 精度独立处理。
 
+Radiance HDR requires one RGBE/XYZE FORMAT and supports all eight signed axis orders. The second axis determines scanline length; exact flat/old-repeat/component-RLE records gate frame/storage facts without expanding pixels. Sixteen files have independent Radiance C sample checks, with eleven also checked by imagecodecs. The four encoded 8-bit components include a shared exponent, not alpha; exposure/color/orientation transforms, metadata lengths, native support/allocation and final Mat precision remain unknown.
+
+Radiance HDR 要求唯一 RGBE/XYZE FORMAT，支持全部八种有符号轴序。第二轴决定 scanline 长度，精确 flat/旧式重复/component-RLE record 决定帧/存储事实，不展开像素。16 份文件经独立 Radiance C 样本核对，其中 11 份另经 imagecodecs 验证。四个 8-bit 编码分量包含共享指数，而非 alpha；曝光/色彩/方向变换、metadata 长度、native 支持/分配和最终 Mat 精度仍未知。
+
 `ConsoleSamples` 的 `typed-mat` 与 `buffered-codec` 命令提供可运行的机器可读示例；没有 native runtime 时明确 skipped，不能把 skipped 当作能力已验证。
 
 ## Platform and headless boundaries / 平台与 headless 边界
