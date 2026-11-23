@@ -1,0 +1,5 @@
+# OpenCV 5.1.0 julia upstream-to-native-to-managed map
+claimed-slice=Historical julia parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only
+upstream-commit=e4f78fbcf1a773fbed69e14500e8b734963eb585
+repository-wide-upstream-parity=false
+000|cv.julia.initJulia(int argc;c_stc_string argv)->void|intentionally-omitted|OPENCV_CSHARP_HAS_OPENCV_JULIA=1|The Julia contrib surface exposes initJulia for an external Julia/libcxxwrap-julia/CxxWrap binding environment; the current package has no native Julia wrapper entrypoint or managed public owner, so the external runtime and binding ownership remain outside the current ABI/API and deterministic smoke contract.|review=Exact historical identity retained; evidence and managed validation remain the recorded binding scope.|native=|managed=

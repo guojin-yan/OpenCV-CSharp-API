@@ -2,7 +2,7 @@
 
 Eight historical parser scopes are refreshed against official opencv_contrib 5.1.0 commit b67a855188a3d683813731010f6d39ac614733a4, using the parser from OpenCV commit e4f78fbcf1a773fbed69e14500e8b734963eb585. The batch records 611 declarations and 511 callables across 61 contributing headers; 68 distinct source headers include the primary compatibility umbrellas. All 611 identities are retained. HoughPoint2Line has the only declaration change: Doxygen @retval/@remarks become @return/@note, with the signature and line-clipping descriptions unchanged.
 
-The [current inventory](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/compatibility/opencv-5.1.0/upstream-map-refresh-summary.json) now records 36 scopes and 3,171 declarations after the [image and geometry review](opencv-5.1-image-geometry-mapping.md). Another 37 historical maps need current-version review. See the [mapping overview](opencv-5.1-source-mapping.md) and [previous nine-module review](opencv-5.1-module-mapping.md) for earlier scope and behavior decisions.
+The [current inventory](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/compatibility/opencv-5.1.0/upstream-map-refresh-summary.json) now records 55 scopes and 4,051 declarations after the [public module review](opencv-5.1-public-module-mapping.md). Another 18 historical maps need current-version review. See the [mapping overview](opencv-5.1-source-mapping.md) and [previous nine-module review](opencv-5.1-module-mapping.md) for earlier scope and behavior decisions.
 
 | Module | Headers | Declarations | Callables | Implemented | Omitted | Metadata | Changed |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -32,7 +32,7 @@ The 445 implemented callables retain exact native and managed evidence. The rema
 
 Run scripts/Generate-UpstreamMap51.ps1 with an explicit PythonPath and RegenerateRaw, then scripts/Test-UpstreamMap51.ps1. The generator uses the pinned source/catalog hashes, historical classifications and exact declaration identities. Historical 5.0 files keep their original version.
 
-The shared generator now rejects 1,123 mutations across 35 scopes; DNN retains its separate 22-fixture guard. This batch adds 257 cases. Face, Quality and LineDescriptor have no emitted enum: their guards reject invented enum metadata without assuming that an enum exists. XPhoto's two inherited unordered managed-evidence lists are emitted in canonical ordinal string order while preserving every member; a real permutation fixture rejects noncanonical output. Existing slice artifacts remain byte-identical.
+The shared generator now rejects 1,753 mutations across 54 scopes; DNN retains its separate 22-fixture guard. This batch adds 257 cases. Face, Quality and LineDescriptor have no emitted enum: their guards reject invented enum metadata without assuming that an enum exists. XPhoto's two inherited unordered managed-evidence lists are emitted in canonical ordinal string order while preserving every member; a real permutation fixture rejects noncanonical output. Existing slice artifacts remain byte-identical.
 
 Unchanged scopes exercise missing, empty and incomplete change reviews through a controlled documentation delta. Official Git blobs, independent regeneration, LF/CRLF extraction, wrong-version rejection and CLI corruption checks provide separate source and artifact evidence.
 

@@ -2604,6 +2604,1040 @@
         "changed": 0,
         "retained": 63
       }
+    },
+    {
+      "id": "xstereo",
+      "claimedSlice": "Historical xstereo parser scope refreshed against official 5.1 sources: 2 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/xstereo-upstream-raw.json",
+      "historicalRawSha256": "28f446b1a27823ecc2943debfa2d4779fbf54fd254b129b6add77e98dedc51e6",
+      "historicalClassificationPath": "compatibility/xstereo-upstream-classifications.json",
+      "historicalClassificationSha256": "c040c01483dc4f0274f2921e1278792c45cb53bf03a2ce16d48713dbb51758f2",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/xstereo/include/opencv2/xstereo.hpp",
+        "sha256": "2ac54437426313afa3ea8ed451ea59d77c20f9b62618406e7989a3514c0dde91"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/xstereo/include/opencv2/xstereo/descriptor.hpp",
+          "sha256": "b15c8cc2028d93efe1497929d4ff7022403f611cf49297c0d425c6dd25984a18"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/xstereo/include/opencv2/xstereo/quasi_dense_stereo.hpp",
+          "sha256": "bdcbb5ec3b09e395e31d34ad55ebf23eb14d21d26492e60db7a5af1c11ab1dee"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "rawSha256": "4f679fbac1abbfb86602edde20e5f2be164d7b8ae335b79070783725f3aba1a6",
+      "declarationCount": 14,
+      "callableCount": 10,
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": [],
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 14
+      }
+    },
+    {
+      "id": "ptcloud",
+      "claimedSlice": "Historical ptcloud parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/ptcloud-upstream-raw.json",
+      "historicalRawSha256": "b78962d8c81eb4e0a03eb072684e4e5f0a1b8e7aea2d800d1c59f66de6c85e93",
+      "historicalClassificationPath": "compatibility/ptcloud-upstream-classifications.json",
+      "historicalClassificationSha256": "a4b685bd154fab4d3dbc6518fcb27e8f828e02882b40a12dd6aad4286fdc6597",
+      "primaryHeader": {
+        "path": "opencv-source/opencv-5.1.0/modules/ptcloud/include/opencv2/ptcloud.hpp",
+        "sha256": "d036992e51f910382f458b2f5f07eda2951326fd9037da506427647fe53fb803"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/ptcloud/include/opencv2/ptcloud/depth.hpp",
+          "sha256": "6c6fad996ec5271c00c0e549b972632da17835adfe2b7240603cc2a6b7a53106"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "compatibilityHeaders": [],
+      "excludedPublicHeaders": [
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/ptcloud/include/opencv2/ptcloud.hpp",
+          "sha256": "d036992e51f910382f458b2f5f07eda2951326fd9037da506427647fe53fb803",
+          "reason": "Umbrella includes volume/odometry/SLAM/visualization headers and point-cloud/mesh APIs outside the selected depth/RGB-D wrapper slice."
+        }
+      ],
+      "rawSha256": "96615b2f211612a333bc7e488cc8c03c88e04679cd3a9f3ffe09b4c22746cda9",
+      "declarationCount": 22,
+      "callableCount": 19,
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": [],
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 22
+      }
+    },
+    {
+      "id": "xobjdetect",
+      "claimedSlice": "Historical xobjdetect parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/xobjdetect-upstream-raw.json",
+      "historicalRawSha256": "5d96b5e6a268a23d81c4560208b604a9c2e743392ea7890c663b77731bd0df76",
+      "historicalClassificationPath": "compatibility/xobjdetect-upstream-classifications.json",
+      "historicalClassificationSha256": "814a3fc6f409ee6ed8964df755a218dcbea31fd45a51602e9d4347b636c6f87b",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+        "sha256": "94fa253853c1c3121c3daf064cadb0d9e8507681bdfb3de03af5714e2edd25c5"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/xobjdetect/include/opencv2/xobjdetect.hpp",
+          "sha256": "94fa253853c1c3121c3daf064cadb0d9e8507681bdfb3de03af5714e2edd25c5"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "rawSha256": "87c79d03d0beac800b25374342906c130057cc7fab8b125900dbe97d8f227251",
+      "declarationCount": 34,
+      "callableCount": 27,
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": [],
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 34
+      }
+    },
+    {
+      "id": "wechat_qrcode",
+      "claimedSlice": "Historical wechat_qrcode parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/wechat_qrcode-upstream-raw.json",
+      "historicalRawSha256": "fe5944e26c121bcd8df8faebfa3203fbf912071132e3ee34868f97a11eb8e96d",
+      "historicalClassificationPath": "compatibility/wechat_qrcode-upstream-classifications.json",
+      "historicalClassificationSha256": "d1c798b107b5bb4617d3d57adea0f6e8f332e4fe25ac293d23960537e296f1bc",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/wechat_qrcode/include/opencv2/wechat_qrcode.hpp",
+        "sha256": "34bae3e40b82687c649f6991f4393ff5edd78bbd6f49b63b9a915cf4e7528a6e"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/wechat_qrcode/include/opencv2/wechat_qrcode.hpp",
+          "sha256": "34bae3e40b82687c649f6991f4393ff5edd78bbd6f49b63b9a915cf4e7528a6e"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "rawSha256": "d4ef0ed57defeccc0d92cfe52bf077004daa946130fd968473bec16fa851b8c8",
+      "declarationCount": 5,
+      "callableCount": 4,
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": [],
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 5
+      }
+    },
+    {
+      "id": "dnn_superres",
+      "claimedSlice": "Historical dnn_superres parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/dnn_superres-upstream-raw.json",
+      "historicalRawSha256": "f8ed877d74370e6db98a1a156506f2e7a92e2c2ffd8c77d5c50dcf21905886d2",
+      "historicalClassificationPath": "compatibility/dnn_superres-upstream-classifications.json",
+      "historicalClassificationSha256": "123f6535dab6b653e22256afe7c7810bb0f2ceca2bbe4fbd7de60a3059132d0e",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/dnn_superres/include/opencv2/dnn_superres.hpp",
+        "sha256": "b1b764bcaf4f75b0dc8665155c5268bdc011641b3645235bb0a6e58a80c272e4"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/dnn_superres/include/opencv2/dnn_superres.hpp",
+          "sha256": "b1b764bcaf4f75b0dc8665155c5268bdc011641b3645235bb0a6e58a80c272e4"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "rawSha256": "ed63959c01dc1816ae092c0b2beb6a35edccc5f1491e8ec6728de23ba0305d3f",
+      "declarationCount": 10,
+      "callableCount": 9,
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": [],
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 10
+      }
+    },
+    {
+      "id": "cnn_3dobj",
+      "claimedSlice": "Historical cnn_3dobj parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/cnn_3dobj-upstream-raw.json",
+      "historicalRawSha256": "258b3e41e82846ce1ed069b1d8a35a8dc6c74fabd3a5f1947354ee7501b4e06d",
+      "historicalClassificationPath": "compatibility/cnn_3dobj-upstream-classifications.json",
+      "historicalClassificationSha256": "0804461ec418550de72cd4bd5aa96e677280ba42de7a36478302f630d0c1d5fe",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/cnn_3dobj/include/opencv2/cnn_3dobj.hpp",
+        "sha256": "60d8dd5c8c454c62efb23728a504b411f9acd419155ef3d1bd547f9134cd854e"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cnn_3dobj/include/opencv2/cnn_3dobj.hpp",
+          "sha256": "60d8dd5c8c454c62efb23728a504b411f9acd419155ef3d1bd547f9134cd854e"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "rawSha256": "43af1ac6d68a305933559c4d83455c837706c47b1d1ffe3f08f4963c25dcc260",
+      "declarationCount": 7,
+      "callableCount": 5,
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": [],
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 7
+      }
+    },
+    {
+      "id": "signal",
+      "claimedSlice": "Historical signal parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/signal-upstream-raw.json",
+      "historicalRawSha256": "556986f5c5cc9b2231812e4e5e919a1020110ffc4dda0d3719966819642ee1d8",
+      "historicalClassificationPath": "compatibility/signal-upstream-classifications.json",
+      "historicalClassificationSha256": "d0baaffcb1d7e74df6adab437bd34c7c1decbd0d4c3a6361eaef32f251fee0a7",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/signal/include/opencv2/signal.hpp",
+        "sha256": "30a5e4986320a13b91b6711142cd4242bac94db4a135235a2b5ca2aef911292a"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/signal/include/opencv2/signal/signal_resample.hpp",
+          "sha256": "b94eee8cd60eb57c1c07aaea370193f5230726d2651236884e57bbae8ce8a5ec"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "rawSha256": "b3e7b585708d7e833e8a6e6f3491c678cd7724e7ce7da266e276f0682509dd23",
+      "declarationCount": 1,
+      "callableCount": 1,
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": [],
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 1
+      }
+    },
+    {
+      "id": "dpm",
+      "claimedSlice": "Historical dpm parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/dpm-upstream-raw.json",
+      "historicalRawSha256": "dbf10f6f48fb3c19173d5a487460bf1717d8e5863a9de036c9a1bf4cdf7a080e",
+      "historicalClassificationPath": "compatibility/dpm-upstream-classifications.json",
+      "historicalClassificationSha256": "90aa4464adf837c6b0e024ce64e015f93c934fa17a815d9c249d6c50cdddfa2c",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/dpm/include/opencv2/dpm.hpp",
+        "sha256": "7fd81ecb13b05caef6d5157b6fd6ca23f4109db31c01d0fb243732484f7deebe"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/dpm/include/opencv2/dpm.hpp",
+          "sha256": "7fd81ecb13b05caef6d5157b6fd6ca23f4109db31c01d0fb243732484f7deebe"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "rawSha256": "a000b5c38e97190a4e931c96141bb88043726a735042504da546df5f6c49fc9f",
+      "declarationCount": 2,
+      "callableCount": 0,
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": [],
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 2
+      }
+    },
+    {
+      "id": "hdf",
+      "claimedSlice": "Historical hdf parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/hdf-upstream-raw.json",
+      "historicalRawSha256": "1389b8e7f1d672ceb9d240a3cc1dfe289b495836481f752147ba459a7ae343e9",
+      "historicalClassificationPath": "compatibility/hdf-upstream-classifications.json",
+      "historicalClassificationSha256": "dcad45984ec20532dba69958b553513c54d523a3cb23dff23d9d9bf3d4b1383e",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/hdf/include/opencv2/hdf.hpp",
+        "sha256": "7fe7c7793b7829efb5646fcaf9582f3595a11d2b1bd114f9d6db933a21952d18"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/hdf/include/opencv2/hdf/hdf5.hpp",
+          "sha256": "ebcefbd958fc2e05b845e2be73d344c97f444972a2221fd6febc35d04508d460"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "rawSha256": "e8d528bb14d30c7cb560376e1415ed54afc02233e8d6ade159eb83a410eccafe",
+      "declarationCount": 38,
+      "callableCount": 37,
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": [],
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 38
+      }
+    },
+    {
+      "id": "text",
+      "claimedSlice": "Historical text parser scope refreshed against official 5.1 sources: 4 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/text-upstream-raw.json",
+      "historicalRawSha256": "487983559b45219523baaaddf2535077221db8292e478cc1a5f641727981873e",
+      "historicalClassificationPath": "compatibility/text-upstream-classifications.json",
+      "historicalClassificationSha256": "25551f074b9e5491e84f5705019de29dd92e7ff2f000e6ea2444ff9d9d34a6aa",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/text/include/opencv2/text.hpp",
+        "sha256": "edc2fc32dfcd5f1359832e4366356fb00fb6b103a7c295d89d9334de909a6f3b"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/text/include/opencv2/text/erfilter.hpp",
+          "sha256": "9d6adc90b2db4ef309c42394c80faf28bf53379145c1ff21751a49f5c5644924"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/text/include/opencv2/text/ocr.hpp",
+          "sha256": "4791a6ab4e3a81f1174f88742bf8c297b8637d5df21ea5c7b2c5cc4c99d47678"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/text/include/opencv2/text/swt_text_detection.hpp",
+          "sha256": "d9d77cf03052a864bd536510c91a832ce0dd35990e5ccfd909a37f2d5d079887"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/text/include/opencv2/text/textDetector.hpp",
+          "sha256": "46c22a28d1d283214da48bf52c508f20af4a4c4cf097619d8551fe5a8cd46eb5"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "rawSha256": "7142f51e45be5866232daca90ef89becf722a9ed03d03a013138c6b91d30f401",
+      "declarationCount": 47,
+      "callableCount": 30,
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": [],
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 47
+      }
+    },
+    {
+      "id": "xfeatures2d",
+      "claimedSlice": "Historical xfeatures2d parser scope refreshed against official 5.1 sources: 2 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/xfeatures2d-upstream-raw.json",
+      "historicalRawSha256": "44e5991dadc1cfc14f431b23954582cab0946878f14553d4aec384c85aedb48c",
+      "historicalClassificationPath": "compatibility/xfeatures2d-upstream-classifications.json",
+      "historicalClassificationSha256": "611dc1ae2fe81f9ad3da52938dc11f3eacc30d6ec28a906b4df19d66a00d4014",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/xfeatures2d/include/opencv2/xfeatures2d.hpp",
+        "sha256": "e413c697411bbed768a1602ab0df3d1b35191eadc6d0e44a015eba41fc3b1ce8"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/xfeatures2d/include/opencv2/xfeatures2d/cuda.hpp",
+          "sha256": "23d8f8a214e9da6e3aabd9f4da6c3d7b9050eea918e5cb6af0cc087a48205565"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/xfeatures2d/include/opencv2/xfeatures2d/nonfree.hpp",
+          "sha256": "7e9665255e3a34536b36b51f17217d83d0c3ee1c6af6678ec91603d16ca915d4"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "rawSha256": "582eea2d83041e008e3e9492d8865b59661f65f6e81c27fac9ae81de3a07dcf0",
+      "declarationCount": 21,
+      "callableCount": 18,
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": [],
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 21
+      }
+    },
+    {
+      "id": "dnn_objdetect",
+      "claimedSlice": "Historical dnn_objdetect parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/dnn_objdetect-upstream-raw.json",
+      "historicalRawSha256": "ec7ae00e1cf96d4bb936b006b6da8ea6681e0d102852cdd8688e570714b74128",
+      "historicalClassificationPath": "compatibility/dnn_objdetect-upstream-classifications.json",
+      "historicalClassificationSha256": "95ea5e867e95f84ee871b7b786312c7def42adf4096e4b55d1c9e8beb3975d8b",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/dnn_objdetect/include/opencv2/core_detect.hpp",
+        "sha256": "03ecca193d1d1da1e8a531607d656339434d9c1edcbd9429a6fc4cc53a0ffbfa"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/dnn_objdetect/include/opencv2/core_detect.hpp",
+          "sha256": "03ecca193d1d1da1e8a531607d656339434d9c1edcbd9429a6fc4cc53a0ffbfa"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "parserMode": "non-wrapper-public-declarations",
+      "parserNormalization": "temporary parser-only normalization: name anonymous typedef struct object; annotate six field declarations (seven object members and InferBbox::detections) as CV_PROP_RW; protected -> private to exclude non-public methods; upstream source/hash unchanged",
+      "rawSha256": "e8c5f9815d477bb1d34b5ba80cf8f87768431a6f5b9000ddc3efbe44b0040008",
+      "declarationCount": 4,
+      "callableCount": 2,
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": [],
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 4
+      }
+    },
+    {
+      "id": "ccalib",
+      "claimedSlice": "Historical ccalib parser scope refreshed against official 5.1 sources: 3 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/ccalib-upstream-raw.json",
+      "historicalRawSha256": "eb75f4a7e96ba86b7fa32c8d6dfaf0493e6fea0e505b283c57c368d43dd8dfc4",
+      "historicalClassificationPath": "compatibility/ccalib-upstream-classifications.json",
+      "historicalClassificationSha256": "538bb9fbb5e5bef91b482de4185d2d877ec9fc03e29574c50ba0e145fbc558d5",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/ccalib/include/opencv2/ccalib.hpp",
+        "sha256": "c4e41eda55986eaa8b0cf5287a8fabc296545045bca59f502def3336d1f59a4a"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/ccalib/include/opencv2/ccalib/multicalib.hpp",
+          "sha256": "44a2ed8be750399b6d7e6769aa2dd9d2b688125e57a9ecfb387d5f852f5c4fb0"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/ccalib/include/opencv2/ccalib/omnidir.hpp",
+          "sha256": "b2f3bd9c90f185bfdbc7d837c170544ceae40ec3f8805311cc848544529c4def"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/ccalib/include/opencv2/ccalib/randpattern.hpp",
+          "sha256": "8fa34a2b2217e41231edf2c9cb7044307e01eddf02f074f640283cb1715fb706"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "rawSha256": "289cddf296c77331c50408e123f6cbc6d7858f7510e66da2c887cc90a395aea7",
+      "declarationCount": 12,
+      "callableCount": 8,
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": [],
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 12
+      }
+    },
+    {
+      "id": "superres",
+      "claimedSlice": "Historical superres parser scope refreshed against official 5.1 sources: 2 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/superres-upstream-raw.json",
+      "historicalRawSha256": "d3bbbd777b25f5f6c1fee3e876dbf53462ed49141e9b74eb9144c02b693497f6",
+      "historicalClassificationPath": "compatibility/superres-upstream-classifications.json",
+      "historicalClassificationSha256": "7e62ddb0c44a6ba8f243e1f47578807250dbc6e4bae6651887b132e9651cbee6",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/superres/include/opencv2/superres.hpp",
+        "sha256": "6bdc0d3ed0c3e89810c6c57eb25319b6340a47344f5526c6baf5c001ccbcbdac"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/superres/include/opencv2/superres.hpp",
+          "sha256": "6bdc0d3ed0c3e89810c6c57eb25319b6340a47344f5526c6baf5c001ccbcbdac"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+          "sha256": "9ffabc8c6efa08bc3ac0fe1e3da55c1c7a0ad415fab6c47beec641a1e922491a"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "parserMode": "non-wrapper-public-declarations",
+      "parserNormalization": "non-wrapper parser mode because superres uses CV_EXPORTS without CV_WRAP; exclude the three protected SuperResolution constructor/initImpl/processImpl declarations; upstream source/hash unchanged",
+      "rawSha256": "fe04bd2d9627d4b14e39697c43f17fdb284cfacc08dd96396d5a1626ce32f02c",
+      "declarationCount": 96,
+      "callableCount": 89,
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": [],
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 96
+      }
+    },
+    {
+      "id": "julia",
+      "claimedSlice": "Historical julia parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/julia-upstream-raw.json",
+      "historicalRawSha256": "441f03bae1286659fa11e3c073892826daf8d5bbb65ff27ee49582051d1de715",
+      "historicalClassificationPath": "compatibility/julia-upstream-classifications.json",
+      "historicalClassificationSha256": "7e3fdd437c85e9ab341226ee6819691a1ec9ca1a4ec67d928e22103121f0b9d1",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/julia/include/opencv2/julia.hpp",
+        "sha256": "80b6b2052b48082ec5f4de0573d01d10d3cc36060a4be9eb5ec6937acd43684d"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/julia/include/opencv2/julia.hpp",
+          "sha256": "80b6b2052b48082ec5f4de0573d01d10d3cc36060a4be9eb5ec6937acd43684d"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "rawSha256": "4510cd3b0d378c286679d25796f6872db61cac5351a1588e609893ace22bbd30",
+      "declarationCount": 1,
+      "callableCount": 1,
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": [],
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 1
+      }
+    },
+    {
+      "id": "rgbd",
+      "claimedSlice": "Historical rgbd parser scope refreshed against official 5.1 sources: 6 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/rgbd-upstream-raw.json",
+      "historicalRawSha256": "0d890c505ffb246a65aa566e8fb7fa201fdede4d6c9fbe235413d37185c1e84b",
+      "historicalClassificationPath": "compatibility/rgbd-upstream-classifications.json",
+      "historicalClassificationSha256": "fee7f17f184fd6c69679c49daa26518b86cc3be8711e67d9d68a61e94429085b",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/rgbd/include/opencv2/rgbd.hpp",
+        "sha256": "da3f7d86a1a12a275966c0fa1bf0f1b79b05d839d2cf98a61162bcaf80a08f15"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/rgbd/include/opencv2/rgbd.hpp",
+          "sha256": "da3f7d86a1a12a275966c0fa1bf0f1b79b05d839d2cf98a61162bcaf80a08f15"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/rgbd/include/opencv2/rgbd/colored_kinfu.hpp",
+          "sha256": "30546e1b8c335d30925910b84547ef83db51995d6c7d7214baf29471670e6757"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/rgbd/include/opencv2/rgbd/dynafu.hpp",
+          "sha256": "386ed80d31ca912ce61a980228d90d28da1e0630fc6bbda28e6ff0e70b9be9de"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/rgbd/include/opencv2/rgbd/kinfu.hpp",
+          "sha256": "281f9fed938ffe3515ca985e14e53f787833457a4d02744e92dd24e2544b43ec"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/rgbd/include/opencv2/rgbd/large_kinfu.hpp",
+          "sha256": "f6461aba7dd5f8cc943817eac9a19395236d7d7d59cb65bfbf5572380557be22"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/rgbd/include/opencv2/rgbd/linemod.hpp",
+          "sha256": "b6ae28343e1376e4b173aaddcd5df5f80a982008f0cb462780c29f8d22359310"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "rawSha256": "908dca89d09be2631022ab4797b0289c3b402dca839888014f215974f562b146",
+      "declarationCount": 105,
+      "callableCount": 88,
+      "addedReviews": [
+        {
+          "identity": "cv.colored_kinfu.ColoredKinFu.getCloud(Mat points[/O];Mat normals[/O];Mat colors=Mat()[/O])->void",
+          "classification": "intentionally-omitted",
+          "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_RGBD=1",
+          "reason": "OpenCV contrib 5.1 adds optional OutputArray colors = noArray() to ColoredKinFu::getCloud (the parser records Mat colors=Mat()[/O]). The old two-output signature is replaced. RGBD/ColoredKinFu has no native wrapper or managed owner; point, normal and color output buffers, KinFu state and sensor inputs remain outside the current ABI/API and deterministic runtime evidence."
+        }
+      ],
+      "removedReviews": [
+        {
+          "identity": "cv.colored_kinfu.ColoredKinFu.getCloud(Mat points[/O];Mat normals[/O])->void",
+          "reason": "Replaced upstream by ColoredKinFu::getCloud(points, normals, colors = noArray()) in 5.1. The old callable was intentionally omitted and had no binding evidence; this signature replacement removes no managed or C ABI member."
+        }
+      ],
+      "changedReviews": [],
+      "expectedDelta": {
+        "added": 1,
+        "removed": 1,
+        "changed": 0,
+        "retained": 104
+      }
+    },
+    {
+      "id": "videostab",
+      "claimedSlice": "Historical videostab parser scope refreshed against official 5.1 sources: 14 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/videostab-upstream-raw.json",
+      "historicalRawSha256": "8d1e3124061eb627b06b8faa15d793e3537809f56a58c683cf509b82ceddcda3",
+      "historicalClassificationPath": "compatibility/videostab-upstream-classifications.json",
+      "historicalClassificationSha256": "1b3b487fd12ffcf0c6de6aa54babccb07e6db70bba5b9344b4ea3e146d0149c6",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/videostab/include/opencv2/videostab.hpp",
+        "sha256": "cd83d1cfd491ac1f9352f6b0721c9b1d916bd84187945b89a4891ccbec43ce04"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/videostab/include/opencv2/videostab/deblurring.hpp",
+          "sha256": "eb6de0d78b5639bc740826fe69d0111fb2e5b7a4ae009c8246beacf1d038fc09"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/videostab/include/opencv2/videostab/fast_marching.hpp",
+          "sha256": "0046b83157984dc58b087d45daedc1955fb61a19eb6b73645c15ccc5a33be70f"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/videostab/include/opencv2/videostab/fast_marching_inl.hpp",
+          "sha256": "68e447cefb8e1cd736c65098acccbfa23c75c5768ce4120e7b445e86ae7765e7"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/videostab/include/opencv2/videostab/frame_source.hpp",
+          "sha256": "e2be29adbf92d779d238ef2cf64e450e2bec229c06ea11f644ff571e7e1aec96"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/videostab/include/opencv2/videostab/global_motion.hpp",
+          "sha256": "3840b0f172fe4da7ec1f26048e90d57c4bc225f24dbd7247d1203d1baeef82b2"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/videostab/include/opencv2/videostab/inpainting.hpp",
+          "sha256": "5aecb663b4a731bd6d7529e8aec698cbad19ea0b247c1fd2ef6d67ed6930517d"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/videostab/include/opencv2/videostab/log.hpp",
+          "sha256": "7bf72dd243d5508f638c0c0b3bd9f4d0bc3aa70b226dd7f3cb88a608b63670c0"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/videostab/include/opencv2/videostab/motion_core.hpp",
+          "sha256": "ddcba5788d59ca724107b8feac5a7a042ebf61e2520f212592a249147119f808"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp",
+          "sha256": "722b986a143f8c1fe44b44e4305f4285214142219aa8fdff9735e5540ccc2b4f"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/videostab/include/opencv2/videostab/optical_flow.hpp",
+          "sha256": "c1ec5dcd1038f7ed3391663c1d87ff86d056a98775dbe01b1027ea7f6dcf79a3"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/videostab/include/opencv2/videostab/outlier_rejection.hpp",
+          "sha256": "a1858d173bddfcf9da945849890b4ec35c0cbd84262fabccbcfe993461776022"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/videostab/include/opencv2/videostab/ring_buffer.hpp",
+          "sha256": "00608847b25889172025b0f4246a404fa686a6affc711734739580d131e39c17"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp",
+          "sha256": "712875083e7d153025e792bf48be691d4869cb3cb04ac44aa660174dbb461c83"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/videostab/include/opencv2/videostab/wobble_suppression.hpp",
+          "sha256": "88dd6ad6a750322ccf2dd65b43fa1d60006708085fcb92fa79007ddb5418274c"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "parserMode": "non-wrapper-public-declarations",
+      "parserNormalization": "temporary parser-only normalization: protected sections changed to private so non-public stabilizer hooks are excluded; upstream source/hash unchanged",
+      "moduleBuildCondition": "ocv_define_module(videostab opencv_imgproc opencv_features opencv_video opencv_photo opencv_geometry; OPTIONAL opencv_cudafeatures2d opencv_cudawarping opencv_cudaoptflow opencv_videoio)",
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/videostab/CMakeLists.txt",
+          "sha256": "c5f873f81a3559eb06f834993f29563b92fa82d144aab8ad493bf9d6fd1c1932",
+          "reason": "Upstream VideoStab required OpenCV module dependencies plus optional CUDA and VideoIO components; parser declarations are not gated in the public headers."
+        }
+      ],
+      "excludedPublicHeaders": [],
+      "deduplicateParserIdentities": true,
+      "rawSha256": "285bead6ff64476faaf21ba54f93a42c5df76bfbcf0c07d50b89fdf9ba0a3b80",
+      "declarationCount": 278,
+      "callableCount": 232,
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": [],
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 278
+      }
+    },
+    {
+      "id": "cvv",
+      "claimedSlice": "Historical cvv parser scope refreshed against official 5.1 sources: 7 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/cvv-upstream-raw.json",
+      "historicalRawSha256": "8af2146f28aae821b54a5d1c5561f2af28d64f64039f825d227afe2f2f55a54d",
+      "historicalClassificationPath": "compatibility/cvv-upstream-classifications.json",
+      "historicalClassificationSha256": "1769a704417bcb997e4dfc53dadc727a9a210a227f5012a6ee1807b54284e150",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/cvv/include/opencv2/cvv.hpp",
+        "sha256": "11833fced7aca3673e4fb0a0377535623ec349fb6d8eb4fc9c074693e1a76503"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cvv/include/opencv2/cvv/call_meta_data.hpp",
+          "sha256": "583ade09072fc82ec63a2a9462d00663da51f798d87ebf4dd8a26657fa54e3c3"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cvv/include/opencv2/cvv/cvv.hpp",
+          "sha256": "b08cb1cae1d21032248ceb62b3228c5da79468dd0bff9ffa5eb9d95a8cf8443e"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cvv/include/opencv2/cvv/debug_mode.hpp",
+          "sha256": "75cef73d3c81655771502d13c3779eaad0c639e644f354f102d7f0a12a32cc1f"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cvv/include/opencv2/cvv/dmatch.hpp",
+          "sha256": "2f0ec3010a6a3a8c2e3e95e76363b5c594dbfbb0c6d2af64c5fff5ebe5864deb"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cvv/include/opencv2/cvv/filter.hpp",
+          "sha256": "f2d9f0e39960ea20be7f332f852d89f0f9de38c6612a96a1bc08a14914aba28f"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cvv/include/opencv2/cvv/final_show.hpp",
+          "sha256": "64f2759f27948eff65e3dc6bb6abced90997b3c969f99eda3f91c9257ababfe4"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cvv/include/opencv2/cvv/show_image.hpp",
+          "sha256": "5427f66c90c4bec92ff6a5a7ab3178dc3ba0b8b54199ffacb9a67d5e462ab120"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "moduleBuildCondition": "HAVE_QT_GE_5",
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cvv/CMakeLists.txt",
+          "sha256": "d14a1630ae12759c07729736ab99e5d240c7d4c83c4652348dbfdb474482d9fc",
+          "reason": "Upstream CVV activation requires Qt 5 or later; the 5.1 module gate no longer tests HAVE_CXX11. Parser declarations are not gated in the public headers."
+        }
+      ],
+      "parserMode": "non-wrapper-public-declarations",
+      "rawSha256": "ae91cf602575c88a6e21e6ca7ccb8baeb7a42daa41262943c3c74689d043b663",
+      "declarationCount": 20,
+      "callableCount": 18,
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": [],
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 20
+      },
+      "buildConditionReview": {
+        "from": "HAVE_QT_GE_5_AND_CXX11",
+        "to": "HAVE_QT_GE_5",
+        "reason": "The official 5.1 CVV CMake gate removes NOT HAVE_CXX11 and retains NOT HAVE_QT OR QT_VERSION_MAJOR LESS 5. Update the recorded module condition for all retained parser declarations; Qt GUI state, callbacks and ownership remain unwrapped and no Qt runtime support is certified."
+      }
+    },
+    {
+      "id": "datasets",
+      "claimedSlice": "Historical datasets parser scope refreshed against official 5.1 sources: 32 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/datasets-upstream-raw.json",
+      "historicalRawSha256": "8383dcd5ee0dbdb90eaa595f2b6dca0d4a42329ab090b86d5def7ba6ad2b1679",
+      "historicalClassificationPath": "compatibility/datasets-upstream-classifications.json",
+      "historicalClassificationSha256": "e3218977d66e605ca8da6f87363aaba428a9f00c6b03e954f97c4d831bbd1dd4",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/dataset.hpp",
+        "sha256": "d5d7b7d2b54e97ace76aa1d2952de68bcbfbc8a690f00827e18422f0f314c577"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/ar_hmdb.hpp",
+          "sha256": "59b2ffd671487110e5e919ab42234319b75a583378aec6fc091ab947df878af4"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/ar_sports.hpp",
+          "sha256": "5a9cb321d7dd3987654720021a442c4ccb3d3cc5e58cdd8f8b4f9a7aafcb3b17"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/dataset.hpp",
+          "sha256": "d5d7b7d2b54e97ace76aa1d2952de68bcbfbc8a690f00827e18422f0f314c577"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/fr_adience.hpp",
+          "sha256": "979fd11260d716e6f44776f7c42604c033f211880096b35afc1b43e5b32a3793"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/fr_lfw.hpp",
+          "sha256": "7eb9b2eb8d3724a108ab2cd16e2161d87c91b359491b0661f2c5f41a80162c98"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/gr_chalearn.hpp",
+          "sha256": "798b021632cbe126be9b66e866d8cdfa0e0069260e77a48a4b21eadc6e2c4866"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/gr_skig.hpp",
+          "sha256": "94efd24c73a5e4cb6887b8c7ce83403993e8e0f8e26fe4fa3f9a6479d9d7e175"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/hpe_humaneva.hpp",
+          "sha256": "36780f8098e5e9555863cf3118126d55636a69a4c11fa04a7e8392105824c4dc"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/hpe_parse.hpp",
+          "sha256": "60efe6f92bfa83e726282e20b97e22a0be6e79d964ab80e21d8e0e4d2cdc10b5"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/ir_affine.hpp",
+          "sha256": "5d1d6110b246b1a3f2e3285b301be1de43ebe25eb0ded00f593d6a209d180be1"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/ir_robot.hpp",
+          "sha256": "478bb29f409d6e163c9b41a816882976116e8589ee0ba477a3990e16c109da67"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/is_bsds.hpp",
+          "sha256": "b94fd4a97a08aa873165f673e765c05c5f0822c8e78d9a67df19f05861a19e5f"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/is_weizmann.hpp",
+          "sha256": "fa3197dc96fb63d678c8db00d53d56c068a7d17fb22017ba09466dc4ff706cc9"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/msm_epfl.hpp",
+          "sha256": "04ea4c0c35d231146c7f84907a8fe39ff985397b9303df995e44f7ebbd4815af"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/msm_middlebury.hpp",
+          "sha256": "baf808ae617811f1104f676d68db4980a1c973e6e825147c1e3e9c2223e6a6da"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/or_imagenet.hpp",
+          "sha256": "ae54a22cfa173984997ae0ef3887ac3e85ed6cfa87fd08a3bfdcc7796ef6f0ec"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/or_mnist.hpp",
+          "sha256": "118861ba43bbf4a132e55c44126cf377b144532f09964939de9e45b7afe0bfc8"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/or_pascal.hpp",
+          "sha256": "24aeacf0213cbaaa909f0f06856d5548165f3f81e5a68e7f3deacdb131abf15b"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/or_sun.hpp",
+          "sha256": "631f83a4289b7883110d7263601f437a0200ffa3829bf81d9fdd2968e08b921d"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/pd_caltech.hpp",
+          "sha256": "e8ed1856581719d801e6635c9ae329b0494d9dbd7eaaacf8a71af8d6caf5ee51"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/pd_inria.hpp",
+          "sha256": "00eb5e13e8c92e8d0e2f83ea10457e38e908f333a0405330493436a82a7614c1"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/slam_kitti.hpp",
+          "sha256": "a60a72a75fb7ff61795724744836477db0b95ed3502d7f162dc1646579693468"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/slam_tumindoor.hpp",
+          "sha256": "60c2f6499cfcb3aa97a50f39346a70a5714ed700dc504426a6105b43c4fa2240"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/sr_bsds.hpp",
+          "sha256": "1d04fe693527641b813198156162129a7b0681c070a5f4c0ef53816fa1f429c7"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/sr_div2k.hpp",
+          "sha256": "69e21e14c9533cc1279e2cb805cc348fe7d664b82d7763c7e919671d6a7463e6"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/sr_general100.hpp",
+          "sha256": "a052d29dbb9ec2425fa2a97f175149abb264e0c34b0df4b5c22cff6cf027f52d"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/tr_chars.hpp",
+          "sha256": "1ccd98e7b0c43893df78a88622a2a0381e450916c20c7ee7332708635cbd124d"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/tr_icdar.hpp",
+          "sha256": "c1325d35e1340bd6e58c0334386430630cbe0208764e7fe67a1479b98b71f893"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/tr_svt.hpp",
+          "sha256": "2b7ab5e70d31c4d55b428b1376eb1b6a25f70977c89cfe25f815b0e2e5fa994c"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/track_alov.hpp",
+          "sha256": "09479d51fa58346cfad8fc4242fe40fe3ecd1450796de8dd701a59ea98fe117b"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/track_vot.hpp",
+          "sha256": "4779b82b29bd391b3a258a0c21d36d84a6c56cd7316ac95fd9b2ca8d017ba822"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/include/opencv2/datasets/util.hpp",
+          "sha256": "92d1ecabf3d45af715fc5260f6a1c884151d4dce938910f39562a4c4cfb16973"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "parserMode": "non-wrapper-public-declarations",
+      "parserNormalization": "non-wrapper parser mode is required because the datasets headers expose public classes and methods without a complete CV_WRAP closure; upstream source/hash remains unchanged",
+      "moduleBuildCondition": "OPENCV_CORE_IMGCODECS_ML_FLANN_OPTIONAL_TEXT",
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/datasets/CMakeLists.txt",
+          "sha256": "5e8872e8775ce0124e116c60d466895b4b9d3ef934c69f6a8e9f960fa0116934",
+          "reason": "Upstream datasets activation depends on core/imgcodecs/ml/flann and optionally text; parser declarations are not gated in the public headers."
+        }
+      ],
+      "rawSha256": "13cc8d6c3a591bd15db993409259d6b17c3539147e7c1008e8307a4e9f5f4553",
+      "declarationCount": 163,
+      "callableCount": 83,
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": [],
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 163
+      }
     }
   ],
   "repositoryWideUpstreamParityClaimed": false,

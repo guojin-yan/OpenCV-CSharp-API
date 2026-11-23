@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.1.0",
+  "module": "xstereo",
+  "claimedSlice": "Historical xstereo parser scope refreshed against official 5.1 sources: 2 contributing header(s); parser-emitted declarations only",
+  "completeCppParityClaimed": false,
+  "implemented": [
+    {
+      "ordinal": 6,
+      "identity": "cv.stereo.QuasiDenseStereo.loadParameters(String filepath[/PATH])-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit XStereo declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XSTEREO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xstereo_quasi_dense_load_parameters"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;instance|System.Int32 LoadParameters(System.String parameterFilePath)"
+      ],
+      "historicalOrdinal": 6,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.stereo.QuasiDenseStereo.saveParameters(String filepath[/PATH])-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit XStereo declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XSTEREO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xstereo_quasi_dense_save_parameters"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;instance|System.Int32 SaveParameters(System.String parameterFilePath)"
+      ],
+      "historicalOrdinal": 7,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.stereo.QuasiDenseStereo.getSparseMatches(vector_MatchQuasiDense sMatches[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XStereo declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XSTEREO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xstereo_quasi_dense_get_sparse_matches_count",
+        "jyppx_ocv_xstereo_quasi_dense_get_sparse_matches_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;instance|JYPPX.OpenCvSharp.XStereo.MatchQuasiDense[] GetSparseMatches()"
+      ],
+      "historicalOrdinal": 8,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.stereo.QuasiDenseStereo.getDenseMatches(vector_MatchQuasiDense denseMatches[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XStereo declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XSTEREO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xstereo_quasi_dense_get_dense_matches_count",
+        "jyppx_ocv_xstereo_quasi_dense_get_dense_matches_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;instance|JYPPX.OpenCvSharp.XStereo.MatchQuasiDense[] GetDenseMatches()"
+      ],
+      "historicalOrdinal": 9,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.stereo.QuasiDenseStereo.process(Mat imgLeft[/C,/Ref];Mat imgRight[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XStereo declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XSTEREO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xstereo_quasi_dense_process"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;instance|System.Void Process(JYPPX.OpenCvSharp.Core.Mat left,JYPPX.OpenCvSharp.Core.Mat right)"
+      ],
+      "historicalOrdinal": 10,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.stereo.QuasiDenseStereo.getMatch(int x[/C];int y[/C])-\u003Ecv::Point2f",
+      "classification": "implemented",
+      "reason": "Explicit XStereo declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XSTEREO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xstereo_quasi_dense_get_match"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;instance|JYPPX.OpenCvSharp.Core.Point2f GetMatch(System.Int32 x,System.Int32 y)"
+      ],
+      "historicalOrdinal": 11,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.stereo.QuasiDenseStereo.getDisparity()-\u003Ecv::Mat",
+      "classification": "implemented",
+      "reason": "Explicit XStereo declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XSTEREO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xstereo_quasi_dense_get_disparity"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetDisparity()",
+        "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;instance|System.Void GetDisparity(JYPPX.OpenCvSharp.Core.Mat disparity)"
+      ],
+      "historicalOrdinal": 12,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.stereo.QuasiDenseStereo.create(Size monoImgSize;String paramFilepath=cv::String())-\u003Ecv::Ptr\u003CQuasiDenseStereo\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XStereo declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XSTEREO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xstereo_quasi_dense_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo|method|public;static|JYPPX.OpenCvSharp.XStereo.QuasiDenseStereo Create(JYPPX.OpenCvSharp.Core.Size monoImageSize,System.String? parameterFilePath=null)"
+      ],
+      "historicalOrdinal": 13,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    }
+  ],
+  "limitation": "Implemented means the recorded managed/C ABI binding exists, subject to its documented validation. It does not certify wider 5.1 input domains, optional codecs/backends, or complete C\u002B\u002B coverage."
+}

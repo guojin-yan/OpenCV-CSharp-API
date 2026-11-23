@@ -1,0 +1,300 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.1.0",
+  "module": "ptcloud",
+  "claimedSlice": "Historical ptcloud parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+  "completeCppParityClaimed": false,
+  "implemented": [
+    {
+      "ordinal": 2,
+      "identity": "cv.RgbdNormals.create(int rows=0;int cols=0;int depth=0;Mat K=Mat();int window_size=5;float diff_threshold=50.f;RgbdNormals_RgbdNormalsMethod method=RgbdNormals::RgbdNormalsMethod::RGBD_NORMALS_METHOD_FALS)-\u003EPtr\u003CRgbdNormals\u003E",
+      "classification": "implemented",
+      "reason": "Explicit PtCloud declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|method|public;static|JYPPX.OpenCvSharp.PtCloud.RgbdNormals Create(System.Int32 rows=0,System.Int32 cols=0,System.Int32 depth=0,JYPPX.OpenCvSharp.Core.Mat? cameraMatrix=null,System.Int32 windowSize=5,System.Single diffThreshold=50,JYPPX.OpenCvSharp.PtCloud.RgbdNormalsMethod method=Fals)"
+      ],
+      "historicalOrdinal": 2,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.RgbdNormals.apply(Mat points;Mat normals[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_apply"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Apply(JYPPX.OpenCvSharp.Core.Mat points)",
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|method|public;instance|System.Void Apply(JYPPX.OpenCvSharp.Core.Mat points,JYPPX.OpenCvSharp.Core.Mat normals)"
+      ],
+      "historicalOrdinal": 3,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.RgbdNormals.cache()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_cache"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|method|public;instance|System.Void Cache()"
+      ],
+      "historicalOrdinal": 4,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.RgbdNormals.getRows()-\u003Eint",
+      "classification": "implemented",
+      "reason": "RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|property|instance;get:public;set:public|System.Int32 Rows"
+      ],
+      "historicalOrdinal": 5,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.RgbdNormals.setRows(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|property|instance;get:public;set:public|System.Int32 Rows"
+      ],
+      "historicalOrdinal": 6,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.RgbdNormals.getCols()-\u003Eint",
+      "classification": "implemented",
+      "reason": "RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|property|instance;get:public;set:public|System.Int32 Cols"
+      ],
+      "historicalOrdinal": 7,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.RgbdNormals.setCols(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|property|instance;get:public;set:public|System.Int32 Cols"
+      ],
+      "historicalOrdinal": 8,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.RgbdNormals.getWindowSize()-\u003Eint",
+      "classification": "implemented",
+      "reason": "RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|property|instance;get:public;set:public|System.Int32 WindowSize"
+      ],
+      "historicalOrdinal": 9,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.RgbdNormals.setWindowSize(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|property|instance;get:public;set:public|System.Int32 WindowSize"
+      ],
+      "historicalOrdinal": 10,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.RgbdNormals.getDepth()-\u003Eint",
+      "classification": "implemented",
+      "reason": "RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|property|instance;get:public|System.Int32 Depth"
+      ],
+      "historicalOrdinal": 11,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.RgbdNormals.getK(Mat val[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_get_k"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetK()",
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|method|public;instance|System.Void GetK(JYPPX.OpenCvSharp.Core.Mat cameraMatrix)"
+      ],
+      "historicalOrdinal": 12,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.RgbdNormals.setK(Mat val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_set_k"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|method|public;instance|System.Void SetK(JYPPX.OpenCvSharp.Core.Mat cameraMatrix)"
+      ],
+      "historicalOrdinal": 13,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.RgbdNormals.getMethod()-\u003ERgbdNormals::RgbdNormalsMethod",
+      "classification": "implemented",
+      "reason": "RgbdNormals is represented by the current opaque native handle and managed owner; property accessors and output overloads share the stable ABI transport for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_rgbd_normals_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.RgbdNormals|property|instance;get:public|JYPPX.OpenCvSharp.PtCloud.RgbdNormalsMethod Method"
+      ],
+      "historicalOrdinal": 14,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.registerDepth(Mat unregisteredCameraMatrix;Mat registeredCameraMatrix;Mat registeredDistCoeffs;Mat Rt;Mat unregisteredDepth;Size outputImagePlaneSize[/C,/Ref];Mat registeredDepth[/O];bool depthDilation=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit PtCloud declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ptcloud_register_depth"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|System.Void RegisterDepth(JYPPX.OpenCvSharp.Core.Mat unregisteredCameraMatrix,JYPPX.OpenCvSharp.Core.Mat registeredCameraMatrix,JYPPX.OpenCvSharp.Core.Mat registeredDistCoeffs,JYPPX.OpenCvSharp.Core.Mat rt,JYPPX.OpenCvSharp.Core.Mat unregisteredDepth,JYPPX.OpenCvSharp.Core.Size outputImagePlaneSize,JYPPX.OpenCvSharp.Core.Mat registeredDepth,System.Boolean depthDilation=false)"
+      ],
+      "historicalOrdinal": 15,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.depthTo3dSparse(Mat depth;Mat in_K;Mat in_points;Mat points3d[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit PtCloud declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ptcloud_depth_to_3d_sparse"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat DepthTo3dSparse(JYPPX.OpenCvSharp.Core.Mat depth,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat points)",
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|System.Void DepthTo3dSparse(JYPPX.OpenCvSharp.Core.Mat depth,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat points,JYPPX.OpenCvSharp.Core.Mat points3d)"
+      ],
+      "historicalOrdinal": 16,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.depthTo3d(Mat depth;Mat K;Mat points3d[/O];Mat mask=Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit PtCloud declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ptcloud_depth_to_3d"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat DepthTo3d(JYPPX.OpenCvSharp.Core.Mat depth,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat? mask=null)",
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|System.Void DepthTo3d(JYPPX.OpenCvSharp.Core.Mat depth,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat points3d,JYPPX.OpenCvSharp.Core.Mat? mask=null)"
+      ],
+      "historicalOrdinal": 17,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.rescaleDepth(Mat in;int type;Mat out[/O];double depth_factor=1000.0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit PtCloud declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ptcloud_rescale_depth"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat RescaleDepth(JYPPX.OpenCvSharp.Core.Mat src,System.Int32 type=5,System.Double depthFactor=1000)",
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|System.Void RescaleDepth(JYPPX.OpenCvSharp.Core.Mat src,System.Int32 type,JYPPX.OpenCvSharp.Core.Mat dst,System.Double depthFactor=1000)"
+      ],
+      "historicalOrdinal": 18,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.warpFrame(Mat depth;Mat image;Mat mask;Mat Rt;Mat cameraMatrix;Mat warpedDepth=Mat()[/O];Mat warpedImage=Mat()[/O];Mat warpedMask=Mat()[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit PtCloud declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ptcloud_warp_frame"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|System.Void WarpFrame(JYPPX.OpenCvSharp.Core.Mat depth,JYPPX.OpenCvSharp.Core.Mat? image,JYPPX.OpenCvSharp.Core.Mat? mask,JYPPX.OpenCvSharp.Core.Mat rt,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat? warpedDepth=null,JYPPX.OpenCvSharp.Core.Mat? warpedImage=null,JYPPX.OpenCvSharp.Core.Mat? warpedMask=null)"
+      ],
+      "historicalOrdinal": 19,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.findPlanes(Mat points3d;Mat normals;Mat mask[/O];Mat plane_coefficients[/O];int block_size=40;int min_size=40*40;double threshold=0.01;double sensor_error_a=0;double sensor_error_b=0;double sensor_error_c=0;RgbdPlaneMethod method=RGBD_PLANE_METHOD_DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit PtCloud declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PTCLOUD=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ptcloud_find_planes"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.PtCloud.PtCloudCv2|method|public;static|System.Void FindPlanes(JYPPX.OpenCvSharp.Core.Mat points3d,JYPPX.OpenCvSharp.Core.Mat? normals,JYPPX.OpenCvSharp.Core.Mat mask,JYPPX.OpenCvSharp.Core.Mat planeCoefficients,System.Int32 blockSize=40,System.Int32 minSize=1600,System.Double threshold=0.01,System.Double sensorErrorA=0,System.Double sensorErrorB=0,System.Double sensorErrorC=0,JYPPX.OpenCvSharp.PtCloud.RgbdPlaneMethod method=Default)"
+      ],
+      "historicalOrdinal": 21,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    }
+  ],
+  "limitation": "Implemented means the recorded managed/C ABI binding exists, subject to its documented validation. It does not certify wider 5.1 input domains, optional codecs/backends, or complete C\u002B\u002B coverage."
+}

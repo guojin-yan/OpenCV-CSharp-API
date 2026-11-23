@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.1.0",
+  "module": "julia",
+  "claimedSlice": "Historical julia parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+  "reviewStatus": "reviewed-parser-slice",
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "cv.julia.initJulia(int argc;c_stc_string argv)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The Julia contrib surface exposes initJulia for an external Julia/libcxxwrap-julia/CxxWrap binding environment; the current package has no native Julia wrapper entrypoint or managed public owner, so the external runtime and binding ownership remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_JULIA=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 0,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    }
+  ]
+}

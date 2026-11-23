@@ -2,7 +2,7 @@
 
 Fourteen historical contrib parser scopes are refreshed using official opencv_contrib 5.1.0 commit b67a855188a3d683813731010f6d39ac614733a4 and the parser from OpenCV commit e4f78fbcf1a773fbed69e14500e8b734963eb585. All 346 identities and parser declaration fields, including documentation, are unchanged from their historical snapshots. The 42 contributing headers and primary umbrellas provide 49 distinct pinned source inputs.
 
-This batch records 289 callables: 222 retain existing native/managed evidence and 67 retain explicit omissions. Another 57 declarations are class or enum metadata. The [current inventory](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/compatibility/opencv-5.1.0/upstream-map-refresh-summary.json) now contains 36 scopes and 3,171 declarations; 37 historical maps need current-version review. See the [mapping overview](opencv-5.1-source-mapping.md) and [previous contrib review](opencv-5.1-contrib-mapping.md).
+This batch records 289 callables: 222 retain existing native/managed evidence and 67 retain explicit omissions. Another 57 declarations are class or enum metadata. The [current inventory](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/compatibility/opencv-5.1.0/upstream-map-refresh-summary.json) now contains 55 scopes and 4,051 declarations after the [public module review](opencv-5.1-public-module-mapping.md); 18 historical maps need current-version review. See the [mapping overview](opencv-5.1-source-mapping.md) and [previous contrib review](opencv-5.1-contrib-mapping.md).
 
 | Module | Headers | Declarations | Callables | Implemented | Omitted | Metadata |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -35,7 +35,7 @@ This batch records 289 callables: 222 retain existing native/managed evidence an
 
 ## Validation and reproduction
 
-The shared generator rejects 1,123 mutations across 35 scopes. These fourteen scopes add 448 cases; DNN retains its independent 22-fixture guard. The singleton AlphaMat case tests duplicate identities with a consistent two-row count/partition, so duplicate rejection is exercised directly. Pure callable scopes test an incorrect metadata classification. Wholly omitted FreeType tests invented native/managed evidence and false promotion without assuming a working binding exists. Each case must fail for its expected reason.
+The shared generator now rejects 1,753 mutations across 54 scopes. These fourteen scopes add 448 cases; DNN retains its independent 22-fixture guard. The singleton AlphaMat case tests duplicate identities with a consistent two-row count/partition, so duplicate rejection is exercised directly. Pure callable scopes test an incorrect metadata classification. Wholly omitted FreeType tests invented native/managed evidence and false promotion without assuming a working binding exists. Each case must fail for its expected reason.
 
 Unchanged scopes still test missing/empty/incomplete reviews using a controlled documentation delta. Enum-free modules retain invented-enum rejection. Historical evidence and earlier 5.1 slices remain intact. Run scripts/Generate-UpstreamMap51.ps1 with RegenerateRaw and an explicit PythonPath, then scripts/Test-UpstreamMap51.ps1.
 

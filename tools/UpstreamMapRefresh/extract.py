@@ -7,6 +7,41 @@ import importlib.util
 import json
 from pathlib import Path
 import re
+import tempfile
+
+
+SCOPE_FIELDS = ("parserMode", "parserNormalization", "deduplicateParserIdentities",
+                "moduleBuildCondition", "excludedPublicHeaders")
+
+
+def parse_header(parser, path, module):
+    mode = module.get("parserMode", "wrapper-declarations")
+    if mode not in ("wrapper-declarations", "non-wrapper-public-declarations"):
+        raise ValueError("Unknown reviewed parser mode")
+    text = path.read_text(encoding="utf-8")
+    normalized = text
+    if module["id"] == "dnn_objdetect":
+        replacements = [("typedef struct\n    {", "struct object\n    {"),
+                        ("    } object;", "    };"),
+                        ("      protected:", "      private:")]
+        # Six field declarations describe seven object members plus detections.
+        for field in ("      int xmin, xmax;", "      int ymin, ymax;",
+                      "      size_t class_idx;", "      std::string label_name;",
+                      "      double class_prob;", "        std::vector<object> detections;"):
+            replacements.append((field, field.replace("      ", "      CV_PROP_RW ", 1)))
+        for before, after in replacements:
+            if normalized.count(before) != 1:
+                raise ValueError("Reviewed dnn_objdetect parser normalization drifted")
+            normalized = normalized.replace(before, after, 1)
+    elif module["id"] == "videostab":
+        normalized = text.replace("protected:", "private:")
+    if normalized == text:
+        return parser.parse(str(path), wmode=(mode == "wrapper-declarations"))
+    # Only temporary parser inputs change. Source hashes always bind upstream bytes.
+    with tempfile.TemporaryDirectory(prefix="opencv51_parser_") as directory:
+        temporary = Path(directory) / path.name
+        temporary.write_text(normalized, encoding="utf-8", newline="\n")
+        return parser.parse(str(temporary), wmode=(mode == "wrapper-declarations"))
 
 
 def sha(path):
@@ -35,13 +70,22 @@ def extract(repo, workspace, module, destination):
     convert = load(repo / "tools/CoreUpstreamMap/extract_core.py", "core_dto").convert
     headers = []
     rows = []
+    seen = set()
+    protected_superres = {"cv.superres.SuperResolution.SuperResolution",
+                          "cv.superres.SuperResolution.initImpl",
+                          "cv.superres.SuperResolution.processImpl"}
+    excluded_superres = set()
     for item in module["sourceHeaders"]:
         path = workspace / item["path"]
         if sha(path) != item["sha256"]:
             raise ValueError("Reviewed source hash drifted: " + item["path"])
-        parsed = parser.CppHeaderParser(preprocessor_definitions=dict(module["preprocessorDefinitions"])).parse(str(path))
+        instance = parser.CppHeaderParser(preprocessor_definitions=dict(module["preprocessorDefinitions"]))
+        parsed = parse_header(instance, path, module)
         start = len(rows)
         for value in parsed:
+            if module["id"] == "superres" and value[0] in protected_superres:
+                excluded_superres.add(value[0])
+                continue
             row = convert(value, len(rows), item["path"])
             if "surface" in item:
                 row["surface"] = item["surface"]
@@ -49,8 +93,13 @@ def extract(repo, workspace, module, destination):
             # Enum values are always retained in the DTO and reviewed in deltas.
             if row["kind"] != "callable" and module["identityPolicy"] == "named-enum":
                 row["identity"] = row["kind"] + " " + row["name"]
+            if module.get("deduplicateParserIdentities") and row["identity"] in seen:
+                continue
+            seen.add(row["identity"])
             rows.append(row)
-        headers.append(dict(item, startOrdinal=start, declarationCount=len(parsed)))
+        headers.append(dict(item, startOrdinal=start, declarationCount=len(rows) - start))
+    if module["id"] == "superres" and excluded_superres != protected_superres:
+        raise ValueError("Reviewed SuperResolution protected-method exclusions drifted")
     if len({row["identity"] for row in rows}) != len(rows):
         raise ValueError("Duplicate parser identity")
     raw = {
@@ -76,6 +125,12 @@ def extract(repo, workspace, module, destination):
             if sha(workspace / item["path"]) != item["sha256"]:
                 raise ValueError("Reviewed compatibility header hash drifted: " + item["path"])
         raw["compatibilityHeaders"] = module["compatibilityHeaders"]
+    for item in module.get("excludedPublicHeaders", []):
+        if sha(workspace / item["path"]) != item["sha256"]:
+            raise ValueError("Reviewed excluded header hash drifted: " + item["path"])
+    for key in SCOPE_FIELDS:
+        if key in module:
+            raw[key] = module[key]
     path = destination / (module["id"] + "-upstream-raw.json")
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(raw, ensure_ascii=True, indent=2) + "\n", encoding="utf-8", newline="\n")

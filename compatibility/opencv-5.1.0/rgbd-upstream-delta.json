@@ -1,0 +1,95 @@
+{
+  "fromVersion": "5.0.0",
+  "toVersion": "5.1.0",
+  "module": "rgbd",
+  "retainedIdentityCount": 104,
+  "added": [
+    {
+      "identity": "cv.colored_kinfu.ColoredKinFu.getCloud(Mat points[/O];Mat normals[/O];Mat colors=Mat()[/O])-\u003Evoid",
+      "review": "OpenCV contrib 5.1 adds optional OutputArray colors = noArray() to ColoredKinFu::getCloud (the parser records Mat colors=Mat()[/O]). The old two-output signature is replaced. RGBD/ColoredKinFu has no native wrapper or managed owner; point, normal and color output buffers, KinFu state and sensor inputs remain outside the current ABI/API and deterministic runtime evidence.",
+      "after": {
+        "ordinal": 14,
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/rgbd/include/opencv2/rgbd/colored_kinfu.hpp",
+        "kind": "callable",
+        "name": "cv.colored_kinfu.ColoredKinFu.getCloud",
+        "identity": "cv.colored_kinfu.ColoredKinFu.getCloud(Mat points[/O];Mat normals[/O];Mat colors=Mat()[/O])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [
+          "/C",
+          "/V",
+          "/PV"
+        ],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "points",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "Mat",
+            "name": "normals",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "Mat",
+            "name": "colors",
+            "default": "Mat()",
+            "modifiers": [
+              "/O"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Gets points, normals and colors of current 3d mesh\n\n      The order of normals corresponds to order of points.\n      The order of points is undefined.\n\n        @param points vector of points which are 4-float vectors\n        @param normals vector of normals which are 4-float vectors\n        @param colors vector of colors which are 4-float vectors"
+      }
+    }
+  ],
+  "removed": [
+    {
+      "identity": "cv.colored_kinfu.ColoredKinFu.getCloud(Mat points[/O];Mat normals[/O])-\u003Evoid",
+      "review": "Replaced upstream by ColoredKinFu::getCloud(points, normals, colors = noArray()) in 5.1. The old callable was intentionally omitted and had no binding evidence; this signature replacement removes no managed or C ABI member.",
+      "before": {
+        "ordinal": 14,
+        "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/rgbd/include/opencv2/rgbd/colored_kinfu.hpp",
+        "kind": "callable",
+        "name": "cv.colored_kinfu.ColoredKinFu.getCloud",
+        "identity": "cv.colored_kinfu.ColoredKinFu.getCloud(Mat points[/O];Mat normals[/O])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [
+          "/C",
+          "/V",
+          "/PV"
+        ],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "points",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "Mat",
+            "name": "normals",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Gets points and normals of current 3d mesh\n\n      The order of normals corresponds to order of points.\n      The order of points is undefined.\n\n        @param points vector of points which are 4-float vectors\n        @param normals vector of normals which are 4-float vectors"
+      }
+    }
+  ],
+  "changed": []
+}

@@ -101,8 +101,10 @@ $refresh51 = Get-Content -LiteralPath (Join-Path $repo 'compatibility/opencv-5.1
 foreach ($module in @($refresh51.modules)) {
     Add-RequiredFile -Path ([string]$module.primaryHeader.path) -Sha256 ([string]$module.primaryHeader.sha256)
     foreach ($header in @($module.sourceHeaders)) { Add-RequiredFile -Path ([string]$header.path) -Sha256 ([string]$header.sha256) }
-    if ($null -ne $module.PSObject.Properties['compatibilityHeaders']) {
-        foreach ($header in @($module.compatibilityHeaders)) { Add-RequiredFile -Path ([string]$header.path) -Sha256 ([string]$header.sha256) }
+    foreach ($propertyName in @('compatibilityHeaders', 'excludedPublicHeaders')) {
+        if ($null -ne $module.PSObject.Properties[$propertyName]) {
+            foreach ($header in @($module.$propertyName)) { Add-RequiredFile -Path ([string]$header.path) -Sha256 ([string]$header.sha256) }
+        }
     }
 }
 

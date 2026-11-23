@@ -75,8 +75,8 @@ $inventoryHash = (Get-FileHash -LiteralPath (Join-Path $repo $inventoryPath) -Al
 $catalogHash = (Get-FileHash -LiteralPath (Join-Path $repo $catalogPath) -Algorithm SHA256).Hash.ToLowerInvariant()
 if ($refresh.sourceBuildInputsChanged -or $refresh.buildSourceCommit -cne $build.sourceCommit -or
     $refresh.catalog.path -cne $catalogPath -or $refresh.catalog.sha256 -cne $catalogHash -or $refresh.inventory.path -cne $inventoryPath -or $refresh.inventory.sha256 -cne $inventoryHash -or
-    $refresh.refreshedParserSliceCount -ne 36 -or $refresh.pendingCatalogMapCount -ne 37 -or $refresh.historicalCatalogVersion -cne '5.0.0' -or
-    $refresh.newDeclarationCount -ne 346 -or $refresh.totalReviewedDeclarationCount -ne 3171 -or $refresh.sharedGeneratorNegativeFixtureCount -ne 1123 -or
+    $refresh.refreshedParserSliceCount -ne 55 -or $refresh.pendingCatalogMapCount -ne 18 -or $refresh.historicalCatalogVersion -cne '5.0.0' -or
+    $refresh.newDeclarationCount -ne 880 -or $refresh.totalReviewedDeclarationCount -ne 4051 -or $refresh.sharedGeneratorNegativeFixtureCount -ne 1753 -or
     $refresh.newManagedApiOrNativeAbiAdded -or $refresh.newRuntimeBehaviorCertified -or $refresh.repositoryWideUpstreamParityClaimed) { throw '5.1 shared parser refresh evidence drifted.' }
 $contribReview = $build.contribModule51Review
 if ($contribReview.status -cne 'verified-parser-review' -or
@@ -100,6 +100,18 @@ if ($imageReview.status -cne 'verified-parser-review' -or
     $imageReview.actualCliNegativeFixtures -ne 42 -or -not $imageReview.inheritedBindingSetsPreserved -or
     -not $imageReview.managedBinariesReusedUnchanged -or -not $imageReview.nativeBinariesReusedUnchanged -or
     $imageReview.newPublicMemberOrNativeExport -or $imageReview.newRuntimeBehaviorCertified) { throw '5.1 image/geometry parser review evidence drifted.' }
+$publicReview = $build.publicModules51Review
+if ($publicReview.status -cne 'verified-parser-review' -or
+    (@($publicReview.modules) -join '|') -cne 'xstereo|ptcloud|xobjdetect|wechat_qrcode|dnn_superres|cnn_3dobj|signal|dpm|hdf|text|xfeatures2d|dnn_objdetect|ccalib|superres|julia|rgbd|videostab|cvv|datasets' -or
+    $publicReview.newDeclarations -ne 880 -or $publicReview.newCallables -ne 681 -or
+    $publicReview.implemented -ne 47 -or $publicReview.omitted -ne 634 -or $publicReview.metadata -ne 199 -or
+    $publicReview.currentParserScopes -ne 55 -or $publicReview.totalDeclarations -ne 4051 -or $publicReview.remainingHistoricalCatalogMaps -ne 18 -or
+    $publicReview.newScopeNegativeFixtures -ne 630 -or $publicReview.sharedGeneratorNegativeFixtures -ne 1753 -or
+    $publicReview.regeneratedArtifacts -ne 325 -or $publicReview.unchangedPriorArtifacts -ne 216 -or $publicReview.officialSourceInputs -ne 274 -or
+    $publicReview.actualCliNegativeFixtures -ne 61 -or -not $publicReview.inheritedBindingSetsPreserved -or
+    -not $publicReview.cvvBuildConditionReviewed -or -not $publicReview.rgbdSignatureReplacementReviewed -or
+    -not $publicReview.managedBinariesReusedUnchanged -or -not $publicReview.nativeBinariesReusedUnchanged -or
+    $publicReview.newPublicMemberOrNativeExport -or $publicReview.newRuntimeBehaviorCertified) { throw '5.1 public module parser review evidence drifted.' }
 $calibration = $build.calibration51Correction
 $calibSummary = Get-Content -LiteralPath (Join-Path $repo 'compatibility/opencv-5.1.0/calib3d-upstream-summary.json') -Raw | ConvertFrom-Json
 if ($calibration.sourceCommit -cne $build.sourceCommit -or $calibration.disableSchurComplement -ne 134217728 -or $calibration.tiltedModel -ne 262144 -or
@@ -109,4 +121,4 @@ if ($calibration.sourceCommit -cne $build.sourceCommit -or $calibration.disableS
     $calibSummary.declarationCount -ne 208 -or $calibSummary.classificationCounts.implemented -ne 169 -or $calibSummary.classificationCounts.missing -ne 0 -or
     $calibSummary.reviewedExistingBindingCount -ne 3 -or $calibSummary.negativeFixtureCount -ne 37) { throw '5.1 calibration/matcher correction or reviewed binding evidence drifted.' }
 Write-Host "V510_CHANGE_LEDGER_OK entries=$(@($ledger.entries).Count) from=$($ledger.fromVersion) to=$($ledger.toVersion) native_abi=$($ledger.nativeAbiVersion)"
-Write-Host "OPENCV_510_SOURCE_BUILD_EVIDENCE_OK input_files=$($inputPaths.Count) full_exports=2669 mini_exports=527 native_ctest=6 managed=4180 historical_catalog=5.0.0 parser_slices=36 calibration_schur_bit=27"
+Write-Host "OPENCV_510_SOURCE_BUILD_EVIDENCE_OK input_files=$($inputPaths.Count) full_exports=2669 mini_exports=527 native_ctest=6 managed=4180 historical_catalog=5.0.0 parser_slices=55 calibration_schur_bit=27"

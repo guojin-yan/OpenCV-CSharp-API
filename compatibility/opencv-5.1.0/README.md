@@ -43,10 +43,32 @@ The historical catalog contains 73 OpenCV 5.0.0 source maps. Current-version evi
 | surface_matching | [summary](surface_matching-upstream-summary.json), [delta](surface_matching-upstream-delta.json), [classifications](surface_matching-upstream-classifications.json) | 5 contributing headers, 27 declarations, 32 negative fixtures |
 | reg | [summary](reg-upstream-summary.json), [delta](reg-upstream-delta.json), [classifications](reg-upstream-classifications.json) | 11 contributing headers, 63 declarations, 32 negative fixtures |
 
-The [shared catalog](upstream-map-refresh-catalog.json) and [inventory](upstream-map-refresh-summary.json) record 36 reviewed scopes (3,171 declarations) and 37 pending maps. This record does not establish complete C++ coverage, repository-wide parity or optional backend/codec runtime support. See the [source mapping guide](../../docs/articles/opencv-5.1-source-mapping.md), [calibration migration guide](../../docs/articles/calibration-5.1-migration.md), and [DNN migration guide](../../docs/articles/dnn-5.1-migration.md).
+| xstereo | [summary](xstereo-upstream-summary.json), [delta](xstereo-upstream-delta.json), [classifications](xstereo-upstream-classifications.json) | 2 contributing headers, 14 declarations, 32 negative fixtures |
+| ptcloud | [summary](ptcloud-upstream-summary.json), [delta](ptcloud-upstream-delta.json), [classifications](ptcloud-upstream-classifications.json) | 1 contributing headers, 22 declarations, 32 negative fixtures |
+| xobjdetect | [summary](xobjdetect-upstream-summary.json), [delta](xobjdetect-upstream-delta.json), [classifications](xobjdetect-upstream-classifications.json) | 1 contributing headers, 34 declarations, 32 negative fixtures |
+| wechat_qrcode | [summary](wechat_qrcode-upstream-summary.json), [delta](wechat_qrcode-upstream-delta.json), [classifications](wechat_qrcode-upstream-classifications.json) | 1 contributing headers, 5 declarations, 32 negative fixtures |
+| dnn_superres | [summary](dnn_superres-upstream-summary.json), [delta](dnn_superres-upstream-delta.json), [classifications](dnn_superres-upstream-classifications.json) | 1 contributing headers, 10 declarations, 32 negative fixtures |
+| cnn_3dobj | [summary](cnn_3dobj-upstream-summary.json), [delta](cnn_3dobj-upstream-delta.json), [classifications](cnn_3dobj-upstream-classifications.json) | 1 contributing headers, 7 declarations, 32 negative fixtures |
+| signal | [summary](signal-upstream-summary.json), [delta](signal-upstream-delta.json), [classifications](signal-upstream-classifications.json) | 1 contributing headers, 1 declarations, 32 negative fixtures |
+| dpm | [summary](dpm-upstream-summary.json), [delta](dpm-upstream-delta.json), [classifications](dpm-upstream-classifications.json) | 1 contributing headers, 2 declarations, 32 negative fixtures |
+| hdf | [summary](hdf-upstream-summary.json), [delta](hdf-upstream-delta.json), [classifications](hdf-upstream-classifications.json) | 1 contributing headers, 38 declarations, 32 negative fixtures |
+| text | [summary](text-upstream-summary.json), [delta](text-upstream-delta.json), [classifications](text-upstream-classifications.json) | 4 contributing headers, 47 declarations, 32 negative fixtures |
+| xfeatures2d | [summary](xfeatures2d-upstream-summary.json), [delta](xfeatures2d-upstream-delta.json), [classifications](xfeatures2d-upstream-classifications.json) | 2 contributing headers, 21 declarations, 32 negative fixtures |
+| dnn_objdetect | [summary](dnn_objdetect-upstream-summary.json), [delta](dnn_objdetect-upstream-delta.json), [classifications](dnn_objdetect-upstream-classifications.json) | 1 contributing headers, 4 declarations, 34 negative fixtures |
+| ccalib | [summary](ccalib-upstream-summary.json), [delta](ccalib-upstream-delta.json), [classifications](ccalib-upstream-classifications.json) | 3 contributing headers, 12 declarations, 32 negative fixtures |
+| superres | [summary](superres-upstream-summary.json), [delta](superres-upstream-delta.json), [classifications](superres-upstream-classifications.json) | 2 contributing headers, 96 declarations, 34 negative fixtures |
+| julia | [summary](julia-upstream-summary.json), [delta](julia-upstream-delta.json), [classifications](julia-upstream-classifications.json) | 1 contributing headers, 1 declarations, 32 negative fixtures |
+| rgbd | [summary](rgbd-upstream-summary.json), [delta](rgbd-upstream-delta.json), [classifications](rgbd-upstream-classifications.json) | 6 contributing headers, 105 declarations, 35 negative fixtures |
+| videostab | [summary](videostab-upstream-summary.json), [delta](videostab-upstream-delta.json), [classifications](videostab-upstream-classifications.json) | 14 contributing headers, 278 declarations, 38 negative fixtures |
+| cvv | [summary](cvv-upstream-summary.json), [delta](cvv-upstream-delta.json), [classifications](cvv-upstream-classifications.json) | 7 contributing headers, 20 declarations, 37 negative fixtures |
+| datasets | [summary](datasets-upstream-summary.json), [delta](datasets-upstream-delta.json), [classifications](datasets-upstream-classifications.json) | 32 contributing headers, 163 declarations, 36 negative fixtures |
+
+The [shared catalog](upstream-map-refresh-catalog.json) and [inventory](upstream-map-refresh-summary.json) record 55 reviewed scopes (4,051 declarations) and 18 pending maps. This record does not establish complete C++ coverage, repository-wide parity or optional backend/codec runtime support. See the [source mapping guide](../../docs/articles/opencv-5.1-source-mapping.md), [calibration migration guide](../../docs/articles/calibration-5.1-migration.md), and [DNN migration guide](../../docs/articles/dnn-5.1-migration.md).
 
 The [additional module review](../../docs/articles/opencv-5.1-module-mapping.md) explains the nine new scopes, fixed contrib revision, compatibility headers, new explicit omissions and unchanged-surface limits.
 
 The [contrib review](../../docs/articles/opencv-5.1-contrib-mapping.md) adds eight scopes and 611 declarations, including the enum-free and inherited evidence-order validation boundaries.
 
 The [image and geometry review](../../docs/articles/opencv-5.1-image-geometry-mapping.md) adds fourteen scopes and 346 declarations, including singleton, pure-callable and entirely omitted module validation.
+
+The [public module review](../../docs/articles/opencv-5.1-public-module-mapping.md) adds nineteen scopes and 880 declarations, including the ColoredKinFu optional-color signature replacement, CVV build-gate review and metadata-only DPM validation.

@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/UpstreamMapRefresh",
+  "upstreamOpenCvVersion": "5.1.0",
+  "upstreamCommit": "e4f78fbcf1a773fbed69e14500e8b734963eb585",
+  "module": "ptcloud",
+  "claimedSlice": "Historical ptcloud parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+  "sourceHashPolicy": "UTF-8 source with CRLF/CR normalized to LF; no trimming",
+  "rawExtractionPath": "compatibility/opencv-5.1.0/ptcloud-upstream-raw.json",
+  "classificationPath": "compatibility/opencv-5.1.0/ptcloud-upstream-classifications.json",
+  "mappingPath": "compatibility/opencv-5.1.0/ptcloud-upstream-map.txt",
+  "deltaPath": "compatibility/opencv-5.1.0/ptcloud-upstream-delta.json",
+  "familyInventoryPath": "compatibility/opencv-5.1.0/ptcloud-implemented-families.json",
+  "rawSha256": "96615b2f211612a333bc7e488cc8c03c88e04679cd3a9f3ffe09b4c22746cda9",
+  "classificationSha256": "6e41932aa4c4f0da183869df830d4af7850eb3c1492d41d63c364e66c13649ca",
+  "mappingSha256": "b0ffa4f029281703c0925f70ca4c1c8ff833ac8e50bc042a34cbfff83bdc42dc",
+  "deltaSha256": "69c9446aac9f4f11c8ad0b396dcd994db3b8ff21c4fc1673cb6bef26e857bcf6",
+  "familyInventorySha256": "457ad61b1dee41b8d8cc7b5a97bd5640b53bffc176dfc51dc8423949149b313c",
+  "historicalRawSha256": "b78962d8c81eb4e0a03eb072684e4e5f0a1b8e7aea2d800d1c59f66de6c85e93",
+  "historicalClassificationSha256": "a4b685bd154fab4d3dbc6518fcb27e8f828e02882b40a12dd6aad4286fdc6597",
+  "sourceHeaderCount": 1,
+  "declarationCount": 22,
+  "callableCount": 19,
+  "classCount": 1,
+  "enumCount": 2,
+  "classificationCounts": {
+    "implemented": 19,
+    "intentionally-omitted": 0,
+    "missing": 0,
+    "non-callable-metadata": 3,
+    "unsupported": 0,
+    "upstream-conditional": 0
+  },
+  "deltaCounts": {
+    "added": 0,
+    "removed": 0,
+    "changed": 0,
+    "retained": 22
+  },
+  "negativeFixtureCount": 32,
+  "nativeEvidenceCount": 13,
+  "managedEvidenceCount": 21,
+  "repositoryWideUpstreamParityClaimed": false,
+  "completeCppParityClaimed": false,
+  "newRuntimeBehaviorCertified": false,
+  "sourceRepository": "opencv",
+  "excludedPublicHeaders": [
+    {
+      "path": "opencv-source/opencv-5.1.0/modules/ptcloud/include/opencv2/ptcloud.hpp",
+      "sha256": "d036992e51f910382f458b2f5f07eda2951326fd9037da506427647fe53fb803",
+      "reason": "Umbrella includes volume/odometry/SLAM/visualization headers and point-cloud/mesh APIs outside the selected depth/RGB-D wrapper slice."
+    }
+  ]
+}

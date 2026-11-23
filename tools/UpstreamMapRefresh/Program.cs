@@ -13,8 +13,9 @@ internal static class Program
     private const string ContribCommit = "b67a855188a3d683813731010f6d39ac614733a4";
     private const string CatalogPath = "compatibility/opencv-5.1.0/upstream-map-refresh-catalog.json";
     // Updating a reviewed slice requires reviewing its source and decisions together.
-    private const string ReviewedCatalogSha256 = "eece9dad554db0663d5d1b4d76370991340a262254c32105393b3e1335604077";
+    private const string ReviewedCatalogSha256 = "af1b66a6d650c43a8ef5a47c4a3fe96e2b4b49b85bd82017264c93db3751880d";
     private static readonly string[] Classes = { "implemented", "intentionally-omitted", "missing", "non-callable-metadata", "unsupported", "upstream-conditional" };
+    private static readonly string[] ScopeFields = { "parserMode", "parserNormalization", "deduplicateParserIdentities", "moduleBuildCondition", "excludedPublicHeaders" };
     private static readonly JsonSerializerOptions Json = new() { WriteIndented = true };
     private sealed record Options(string Repository, string Workspace, string Output, bool Check);
 
@@ -73,6 +74,8 @@ internal static class Program
             foreach (JsonNode? header in Arr(module, "sourceHeaders")) Source(options, header!.AsObject());
             if (module["compatibilityHeaders"] is JsonArray compatibilityHeaders)
                 foreach (JsonNode? header in compatibilityHeaders) Source(options, header!.AsObject());
+            if (module["excludedPublicHeaders"] is JsonArray excludedHeaders)
+                foreach (JsonNode? header in excludedHeaders) Source(options, header!.AsObject());
             if (module["bindingSourceEvidence"] is JsonArray evidence)
                 foreach (JsonNode? input in evidence)
                 {
@@ -122,6 +125,9 @@ internal static class Program
                 summary["sourceRepository"] = module["sourceRepository"]!.DeepClone();
                 if (Str(module, "sourceRepository") == "opencv_contrib") summary["upstreamContribCommit"] = ContribCommit;
             }
+            foreach (string key in ScopeFields)
+                if (module[key] is not null) summary[key] = module[key]!.DeepClone();
+            if (module["buildConditionReview"] is not null) summary["buildConditionReview"] = module["buildConditionReview"]!.DeepClone();
             string summaryText = Serialize(summary);
             Write(options, stem + "classifications.json", classificationText);
             Write(options, stem + "delta.json", deltaText);
@@ -159,6 +165,8 @@ internal static class Program
             Require(repository != "opencv_contrib" || Str(raw, "upstreamContribCommit") == ContribCommit, "Raw contrib identity drifted.");
         }
         Require(JsonNode.DeepEquals(raw["compatibilityHeaders"], module["compatibilityHeaders"]), "Raw compatibility headers drifted.");
+        foreach (string key in ScopeFields)
+            Require(JsonNode.DeepEquals(raw[key], module[key]), "Raw scope " + key + " drifted.");
         Require(Str(raw, "headerPath") == Str(Obj(module, "primaryHeader"), "path") && Str(raw, "headerSha256") == Str(Obj(module, "primaryHeader"), "sha256") &&
             Str(raw, "parserPath") == Str(Obj(catalog, "parser"), "path") && Str(raw, "parserSha256") == Str(Obj(catalog, "parser"), "sha256"), "Raw source binding drifted.");
         Require(JsonNode.DeepEquals(raw["preprocessorDefinitions"], module["preprocessorDefinitions"]), "Raw parser defines drifted.");
@@ -219,6 +227,8 @@ internal static class Program
                 if (set.Key == "changed") Require(Strings(review!, "fields").SequenceEqual(ChangedFields(before[id], after[id])), "Review changed fields drifted.");
                 if (set.Key == "added")
                 {
+                    if (review!["buildCondition"] is not null)
+                        Require(!string.IsNullOrWhiteSpace(Str(review, "buildCondition")), "Review build condition is missing.");
                     string label = Str(review!, "classification");
                     if (Str(after[id], "kind") != "callable") Require(label == "non-callable-metadata", "Unimplemented addition was promoted.");
                     else if (label == "implemented")
@@ -257,6 +267,14 @@ internal static class Program
                 int ordinal = Int(original, "ordinal");
                 Require(Str(prior[ordinal]!, "identity") == id && Int(prior[ordinal]!, "ordinal") == ordinal, "Historical classification identity drifted.");
                 row = Copy(prior[ordinal]!.AsObject()); row["historicalOrdinal"] = ordinal;
+                if (module["buildConditionReview"] is JsonObject buildReview)
+                {
+                    Require(Str(row, "buildCondition") == Str(buildReview, "from"), "Historical build condition review drifted.");
+                    Require(!string.IsNullOrWhiteSpace(Str(buildReview, "reason")) &&
+                        Str(buildReview, "to") == Str(module, "moduleBuildCondition"), "Build condition review is incomplete.");
+                    row["buildCondition"] = Str(buildReview, "to");
+                    row["buildConditionReview"] = Str(buildReview, "reason");
+                }
                 // Preserve every inherited evidence identity in canonical ordinal order.
                 foreach (string key in new[] { "nativeEntrypoints", "managedMembers" })
                     row[key] = Array(Strings(row, key).Order(StringComparer.Ordinal).Select(value => JsonValue.Create(value)));
@@ -270,7 +288,7 @@ internal static class Program
                 JsonNode? review = Arr(module, "addedReviews").SingleOrDefault(item => Str(item!, "identity") == id);
                 Require(review is not null, "Unreviewed added declaration: " + id);
                 row = new JsonObject { ["identity"] = id, ["classification"] = Str(review!, "classification"), ["reason"] = Str(review!, "reason"),
-                    ["buildCondition"] = "unconditional-parser-surface", ["nativeEntrypoints"] = new JsonArray(), ["managedMembers"] = new JsonArray(),
+                    ["buildCondition"] = review!["buildCondition"] is not null ? Str(review, "buildCondition") : "unconditional-parser-surface", ["nativeEntrypoints"] = new JsonArray(), ["managedMembers"] = new JsonArray(),
                     ["historicalOrdinal"] = null, ["refreshReview"] = Str(review!, "reason") };
                 if (Str(review!, "classification") == "implemented")
                 {
@@ -362,16 +380,22 @@ internal static class Program
                 ValidateRaw(value, scope, catalog, trusted);
             });
         Raw("wrong source", "Raw declaration source scope", v => Arr(v, "declarations")[0]!["sourceHeader"] = "outside.hpp");
-        Raw("signature", "Raw signature identity", v => Arr(v, "declarations").First(row => Str(row!, "kind") == "callable")!["returnType"] = "unreviewed");
+        bool hasCallable = Arr(raw, "declarations").Any(row => Str(row!, "kind") == "callable");
+        JsonNode CallableOrMetadata(JsonObject value) =>
+            Arr(value, "declarations").FirstOrDefault(row => Str(row!, "kind") == "callable") ?? Arr(value, "declarations")[0]!;
+        if (hasCallable)
+            Raw("signature", "Raw signature identity", v => CallableOrMetadata(v)["returnType"] = "unreviewed");
+        else
+            Raw("metadata identity", "Raw signature identity", v => CallableOrMetadata(v)["name"] = "cv.Unreviewed");
         Raw("lost documentation", "Raw reviewed snapshot", v => Arr(v, "declarations").First(row => Str(row!, "documentation").Length > 0)!["documentation"] = "");
         if (Arr(raw, "declarations").Any(row => Str(row!, "kind") == "class" && Arr(row!, "arguments").Count > 0))
             Raw("lost class property", "Raw reviewed snapshot", v => Arr(Arr(v, "declarations").First(row => Str(row!, "kind") == "class" && Arr(row!, "arguments").Count > 0)!, "arguments").RemoveAt(0));
         else
-            Raw("false declaration qualifier", "Raw reviewed snapshot", v => Arr(Arr(v, "declarations").First(row => Str(row!, "kind") == "callable")!, "modifiers").Add("/unreviewed"));
+            Raw("false declaration qualifier", "Raw reviewed snapshot", v => Arr(CallableOrMetadata(v), "modifiers").Add("/unreviewed"));
         if (Arr(raw, "declarations").Any(row => Arr(row!, "enumValues").Count > 0))
             Raw("lost enum metadata", Str(module, "identityPolicy") == "full-enum" ? "Raw signature identity" : "Raw reviewed snapshot", v => Arr(Arr(v, "declarations").First(row => Arr(row!, "enumValues").Count > 0)!, "enumValues").RemoveAt(0));
         else
-            Raw("invented enum metadata", "Raw reviewed snapshot", v => Arr(Arr(v, "declarations").First(row => Str(row!, "kind") == "callable")!, "enumValues").Add(new JsonObject { ["name"] = "const cv.UNREVIEWED", ["value"] = "1" }));
+            Raw("invented enum metadata", "Raw reviewed snapshot", v => Arr(CallableOrMetadata(v), "enumValues").Add(new JsonObject { ["name"] = "const cv.UNREVIEWED", ["value"] = "1" }));
         Classification("missing classification", v => Arr(v, "declarations").RemoveAt(0));
         Classification("wrong order", v => Arr(v, "declarations")[0]!["ordinal"] = 1);
         JsonNode EvidenceRow(JsonObject value, string key) =>
@@ -384,8 +408,10 @@ internal static class Program
             Classification("callable relabeled as metadata", v => Arr(v, "declarations")[0]!["classification"] = "non-callable-metadata");
         if (Arr(classified, "declarations").Any(row => Str(row!, "classification") == "implemented"))
             Classification("binding erased", v => Arr(v, "declarations").First(row => Str(row!, "classification") == "implemented")!["classification"] = "intentionally-omitted");
-        else
+        else if (hasCallable)
             Classification("omitted callable promoted", v => Arr(v, "declarations").First(row => Str(row!, "classification") == "intentionally-omitted")!["classification"] = "implemented");
+        else
+            Classification("metadata relabeled as callable omission", v => Arr(v, "declarations")[0]!["classification"] = "intentionally-omitted");
         Classification("missing reason", v => Arr(v, "declarations")[0]!["reason"] = "");
         Classification("lost build condition", v => Arr(v, "declarations")[0]!["buildCondition"] = "unreviewed");
         if (Arr(previous, "declarations").Any(row => !Strings(row!, "managedMembers").SequenceEqual(Strings(row!, "managedMembers").Order(StringComparer.Ordinal))))
@@ -413,7 +439,7 @@ internal static class Program
         Reject("review empty", "Review reason", () => { var v = ReviewCase(); Arr(v.Module, "changedReviews")[0]!["reason"] = ""; ValidateReviews(v.Raw, old, v.Module); });
         Reject("lost enum/property change review", "Review changed fields", () => { var v = ReviewCase(); Arr(v.Module, "changedReviews")[0]!["fields"] = new JsonArray(); ValidateReviews(v.Raw, old, v.Module); });
         Reject("unreviewed removal", "Review identity closure", () => { var v = Copy(module); Arr(v, "removedReviews").Add(new JsonObject { ["identity"] = "unknown", ["reason"] = "unknown" }); ValidateReviews(raw, old, v); });
-        Reject("unreviewed new callable", "Unreviewed added declaration", () => { var v = Copy(raw); Arr(v, "declarations").First(row => Str(row!, "kind") == "callable")!["identity"] = "cv.unreviewed()->void"; Classify(v, old, previous, module); });
+        Reject("unreviewed new declaration", "Unreviewed added declaration", () => { var v = Copy(raw); CallableOrMetadata(v)["identity"] = hasCallable ? "cv.unreviewed()->void" : "class cv.Unreviewed"; Classify(v, old, previous, module); });
         Reject("lost delta", "Delta drift", () => { var v = Copy(delta); v["retainedIdentityCount"] = Int(v, "retainedIdentityCount") + 1; Require(JsonNode.DeepEquals(v, Delta(raw, old, module)), "Delta drift."); });
         if (module["sourceRepository"] is not null)
             Raw("false source repository", "Raw source repository", v => v["sourceRepository"] = "other");
@@ -421,6 +447,21 @@ internal static class Program
             Raw("false contrib revision", "Raw contrib identity", v => v["upstreamContribCommit"] = new string('0', 40));
         if (module["compatibilityHeaders"] is JsonArray { Count: > 0 })
             Raw("lost compatibility header", "Raw compatibility headers", v => Arr(v, "compatibilityHeaders").RemoveAt(0));
+        foreach (string key in ScopeFields)
+            if (module[key] is not null)
+                Raw("lost scope " + key, "Raw scope " + key, v => v.Remove(key));
+        if (Arr(module, "addedReviews").Any(row => Str(row!, "classification") == "intentionally-omitted" && row!["buildCondition"] is not null))
+        {
+            JsonNode ConditionalAddition(JsonObject v) => Arr(v, "addedReviews").First(row => row!["buildCondition"] is not null)!;
+            Reject("lost conditional addition review", "Review identity closure", () => { var v = Copy(module); Arr(v, "addedReviews").Clear(); ValidateReviews(raw, old, v); });
+            Reject("conditional omission promoted", "Unimplemented addition was promoted", () => { var v = Copy(module); ConditionalAddition(v)["classification"] = "upstream-conditional"; ValidateReviews(raw, old, v); });
+            Reject("conditional addition lost build condition", "Review build condition", () => { var v = Copy(module); ConditionalAddition(v)["buildCondition"] = ""; ValidateReviews(raw, old, v); });
+        }
+        if (module["buildConditionReview"] is JsonObject)
+        {
+            Reject("wrong historical build condition", "Historical build condition review", () => { var v = Copy(module); Obj(v, "buildConditionReview")["from"] = "unreviewed"; Classify(raw, old, previous, v); });
+            Reject("empty build condition review", "Build condition review is incomplete", () => { var v = Copy(module); Obj(v, "buildConditionReview")["reason"] = ""; Classify(raw, old, previous, v); });
+        }
         if (Arr(module, "sourceHeaders").Any(header => header!["surface"] is not null))
             Raw("false declaration surface", "Raw declaration surface", v => Arr(v, "declarations")[0]!["surface"] = "unreviewed");
         if (Arr(module, "addedReviews").Any(row => Str(row!, "classification") == "implemented"))

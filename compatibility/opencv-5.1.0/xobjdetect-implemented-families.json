@@ -1,0 +1,318 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.1.0",
+  "module": "xobjdetect",
+  "claimedSlice": "Historical xobjdetect parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+  "completeCppParityClaimed": false,
+  "implemented": [
+    {
+      "ordinal": 4,
+      "identity": "cv.CascadeClassifier.CascadeClassifier()-\u003E",
+      "classification": "implemented",
+      "reason": "The current XObjDetect wrapper covers this declaration through opaque handles, count/fill transport, and property transport; optional NOT_LINKED behavior remains part of the native boundary.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XOBJDETECT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_cascade_classifier_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XObjDetect.CascadeClassifier|constructor|public;instance|.ctor()"
+      ],
+      "historicalOrdinal": 4,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.CascadeClassifier.CascadeClassifier(String filename[/C,/Ref,/PATH])-\u003E",
+      "classification": "implemented",
+      "reason": "The current XObjDetect wrapper covers this declaration through opaque handles, count/fill transport, and property transport; optional NOT_LINKED behavior remains part of the native boundary.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XOBJDETECT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_cascade_classifier_create_from_file"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XObjDetect.CascadeClassifier|constructor|public;instance|.ctor(System.String filename)"
+      ],
+      "historicalOrdinal": 5,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.CascadeClassifier.empty()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The current XObjDetect wrapper covers this declaration through opaque handles, count/fill transport, and property transport; optional NOT_LINKED behavior remains part of the native boundary.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XOBJDETECT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_cascade_classifier_empty"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XObjDetect.CascadeClassifier|property|instance;get:public|System.Boolean Empty"
+      ],
+      "historicalOrdinal": 6,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.CascadeClassifier.load(String filename[/C,/Ref,/PATH])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The current XObjDetect wrapper covers this declaration through opaque handles, count/fill transport, and property transport; optional NOT_LINKED behavior remains part of the native boundary.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XOBJDETECT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_cascade_classifier_load"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XObjDetect.CascadeClassifier|method|public;instance|System.Boolean Load(System.String filename)"
+      ],
+      "historicalOrdinal": 7,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.CascadeClassifier.detectMultiScale(Mat image;vector_Rect objects[/O,/Ref];double scaleFactor=1.1;int minNeighbors=3;int flags=0;Size minSize=Size();Size maxSize=Size())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The current XObjDetect wrapper covers this declaration through opaque handles, count/fill transport, and property transport; optional NOT_LINKED behavior remains part of the native boundary.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XOBJDETECT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_cascade_classifier_detect_multi_scale_count",
+        "jyppx_ocv_cascade_classifier_detect_multi_scale_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XObjDetect.CascadeClassifier|method|public;instance|JYPPX.OpenCvSharp.Core.Rect[] DetectMultiScale(JYPPX.OpenCvSharp.Core.Mat image,System.Double scaleFactor=1.1,System.Int32 minNeighbors=3,JYPPX.OpenCvSharp.XObjDetect.CascadeClassifierFlags flags=None,JYPPX.OpenCvSharp.Core.Size minSize=null,JYPPX.OpenCvSharp.Core.Size maxSize=null)"
+      ],
+      "historicalOrdinal": 9,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.CascadeClassifier.detectMultiScale(Mat image;vector_Rect objects[/O,/Ref];vector_int numDetections[/O,/Ref];double scaleFactor=1.1;int minNeighbors=3;int flags=0;Size minSize=Size();Size maxSize=Size())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The current XObjDetect wrapper covers this declaration through opaque handles, count/fill transport, and property transport; optional NOT_LINKED behavior remains part of the native boundary.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XOBJDETECT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_cascade_classifier_detect_multi_scale2_count",
+        "jyppx_ocv_cascade_classifier_detect_multi_scale2_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XObjDetect.CascadeClassifier|method|public;instance|JYPPX.OpenCvSharp.XObjDetect.CascadeDetectionResult DetectMultiScale2(JYPPX.OpenCvSharp.Core.Mat image,System.Double scaleFactor=1.1,System.Int32 minNeighbors=3,JYPPX.OpenCvSharp.XObjDetect.CascadeClassifierFlags flags=None,JYPPX.OpenCvSharp.Core.Size minSize=null,JYPPX.OpenCvSharp.Core.Size maxSize=null)"
+      ],
+      "historicalOrdinal": 10,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.CascadeClassifier.detectMultiScale(Mat image;vector_Rect objects[/O,/Ref];vector_int rejectLevels[/O,/Ref];vector_double levelWeights[/O,/Ref];double scaleFactor=1.1;int minNeighbors=3;int flags=0;Size minSize=Size();Size maxSize=Size();bool outputRejectLevels=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The current XObjDetect wrapper covers this declaration through opaque handles, count/fill transport, and property transport; optional NOT_LINKED behavior remains part of the native boundary.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XOBJDETECT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_cascade_classifier_detect_multi_scale3_count",
+        "jyppx_ocv_cascade_classifier_detect_multi_scale3_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XObjDetect.CascadeClassifier|method|public;instance|JYPPX.OpenCvSharp.XObjDetect.CascadeDetectionResult DetectMultiScale3(JYPPX.OpenCvSharp.Core.Mat image,System.Double scaleFactor=1.1,System.Int32 minNeighbors=3,JYPPX.OpenCvSharp.XObjDetect.CascadeClassifierFlags flags=None,JYPPX.OpenCvSharp.Core.Size minSize=null,JYPPX.OpenCvSharp.Core.Size maxSize=null,System.Boolean outputRejectLevels=false)"
+      ],
+      "historicalOrdinal": 11,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.CascadeClassifier.isOldFormatCascade()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The current XObjDetect wrapper covers this declaration through opaque handles, count/fill transport, and property transport; optional NOT_LINKED behavior remains part of the native boundary.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XOBJDETECT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_cascade_classifier_is_old_format_cascade"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XObjDetect.CascadeClassifier|method|public;instance|System.Boolean IsOldFormatCascade()"
+      ],
+      "historicalOrdinal": 12,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.CascadeClassifier.getOriginalWindowSize()-\u003ESize",
+      "classification": "implemented",
+      "reason": "The current XObjDetect wrapper covers this declaration through opaque handles, count/fill transport, and property transport; optional NOT_LINKED behavior remains part of the native boundary.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XOBJDETECT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_cascade_classifier_get_original_window_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XObjDetect.CascadeClassifier|method|public;instance|JYPPX.OpenCvSharp.Core.Size GetOriginalWindowSize()"
+      ],
+      "historicalOrdinal": 13,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.CascadeClassifier.getFeatureType()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The current XObjDetect wrapper covers this declaration through opaque handles, count/fill transport, and property transport; optional NOT_LINKED behavior remains part of the native boundary.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XOBJDETECT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_cascade_classifier_get_feature_type"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XObjDetect.CascadeClassifier|method|public;instance|System.Int32 GetFeatureType()"
+      ],
+      "historicalOrdinal": 14,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.HOGDescriptor.HOGDescriptor(Size _winSize=Size(64, 128);Size _blockSize=Size(16, 16);Size _blockStride=Size(8, 8);Size _cellSize=Size(8, 8);int _nbins=9;int _derivAperture=1;double _winSigma=-1;HOGDescriptor_HistogramNormType _histogramNormType=HOGDescriptor::L2Hys;double _L2HysThreshold=0.2;bool _gammaCorrection=true;int _nlevels=HOGDescriptor::DEFAULT_NLEVELS;bool _signedGradient=false)-\u003E",
+      "classification": "implemented",
+      "reason": "The current XObjDetect wrapper covers this declaration through opaque handles, count/fill transport, and property transport; optional NOT_LINKED behavior remains part of the native boundary.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XOBJDETECT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hog_descriptor_create_with_params"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XObjDetect.HOGDescriptor|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.Core.Size winSize,JYPPX.OpenCvSharp.Core.Size blockSize,JYPPX.OpenCvSharp.Core.Size blockStride,JYPPX.OpenCvSharp.Core.Size cellSize,System.Int32 nbins,System.Int32 derivAperture=1,System.Double winSigma=-1,JYPPX.OpenCvSharp.XObjDetect.HOGDescriptorHistogramNormType histogramNormType=L2Hys,System.Double l2HysThreshold=0.2,System.Boolean gammaCorrection=true,System.Int32 nlevels=64,System.Boolean signedGradient=false)"
+      ],
+      "historicalOrdinal": 20,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.HOGDescriptor.HOGDescriptor(String filename[/C,/Ref,/PATH])-\u003E",
+      "classification": "implemented",
+      "reason": "The current XObjDetect wrapper covers this declaration through opaque handles, count/fill transport, and property transport; optional NOT_LINKED behavior remains part of the native boundary.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XOBJDETECT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hog_descriptor_create_from_file"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XObjDetect.HOGDescriptor|constructor|public;instance|.ctor(System.String filename)"
+      ],
+      "historicalOrdinal": 21,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.HOGDescriptor.getDescriptorSize()-\u003Esize_t",
+      "classification": "implemented",
+      "reason": "The current XObjDetect wrapper covers this declaration through opaque handles, count/fill transport, and property transport; optional NOT_LINKED behavior remains part of the native boundary.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XOBJDETECT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hog_descriptor_get_descriptor_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XObjDetect.HOGDescriptor|method|public;instance|System.UIntPtr GetDescriptorSize()"
+      ],
+      "historicalOrdinal": 22,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.HOGDescriptor.checkDetectorSize()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The current XObjDetect wrapper covers this declaration through opaque handles, count/fill transport, and property transport; optional NOT_LINKED behavior remains part of the native boundary.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XOBJDETECT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hog_descriptor_check_detector_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XObjDetect.HOGDescriptor|method|public;instance|System.Boolean CheckDetectorSize()"
+      ],
+      "historicalOrdinal": 23,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.HOGDescriptor.getWinSigma()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The current XObjDetect wrapper covers this declaration through opaque handles, count/fill transport, and property transport; optional NOT_LINKED behavior remains part of the native boundary.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XOBJDETECT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hog_descriptor_get_win_sigma"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XObjDetect.HOGDescriptor|method|public;instance|System.Double GetWinSigma()"
+      ],
+      "historicalOrdinal": 24,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.HOGDescriptor.setSVMDetector(Mat svmdetector)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The current XObjDetect wrapper covers this declaration through opaque handles, count/fill transport, and property transport; optional NOT_LINKED behavior remains part of the native boundary.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XOBJDETECT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hog_descriptor_set_svm_detector"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XObjDetect.HOGDescriptor|method|public;instance|System.Void SetSVMDetector(System.ReadOnlySpan\u003CSystem.Single\u003E values)",
+        "MEMBER|JYPPX.OpenCvSharp.XObjDetect.HOGDescriptor|method|public;instance|System.Void SetSVMDetector(System.Single[] values)"
+      ],
+      "historicalOrdinal": 25,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.HOGDescriptor.detect(Mat img;vector_Point foundLocations[/O,/Ref];vector_double weights[/O,/Ref];double hitThreshold=0;Size winStride=Size();Size padding=Size();vector_Point searchLocations=std::vector\u003CPoint\u003E()[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The current XObjDetect wrapper covers this declaration through opaque handles, count/fill transport, and property transport; optional NOT_LINKED behavior remains part of the native boundary.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XOBJDETECT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hog_descriptor_detect_count",
+        "jyppx_ocv_hog_descriptor_detect_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XObjDetect.HOGDescriptor|method|public;instance|JYPPX.OpenCvSharp.XObjDetect.HOGDetectionResult Detect(JYPPX.OpenCvSharp.Core.Mat image,System.Double hitThreshold=0,JYPPX.OpenCvSharp.Core.Size winStride=null,JYPPX.OpenCvSharp.Core.Size padding=null)"
+      ],
+      "historicalOrdinal": 29,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.HOGDescriptor.detectMultiScale(Mat img;vector_Rect foundLocations[/O,/Ref];vector_double foundWeights[/O,/Ref];double hitThreshold=0;Size winStride=Size();Size padding=Size();double scale=1.05;double groupThreshold=2.0;bool useMeanshiftGrouping=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The current XObjDetect wrapper covers this declaration through opaque handles, count/fill transport, and property transport; optional NOT_LINKED behavior remains part of the native boundary.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XOBJDETECT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hog_descriptor_detect_multi_scale_count",
+        "jyppx_ocv_hog_descriptor_detect_multi_scale_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XObjDetect.HOGDescriptor|method|public;instance|JYPPX.OpenCvSharp.XObjDetect.HOGDetectionResult DetectMultiScale(JYPPX.OpenCvSharp.Core.Mat image,System.Double hitThreshold=0,JYPPX.OpenCvSharp.Core.Size winStride=null,JYPPX.OpenCvSharp.Core.Size padding=null,System.Double scale=1.05,System.Double groupThreshold=2,System.Boolean useMeanshiftGrouping=false)"
+      ],
+      "historicalOrdinal": 30,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.HOGDescriptor.getDefaultPeopleDetector()-\u003Estd::vector\u003Cfloat\u003E",
+      "classification": "implemented",
+      "reason": "The current XObjDetect wrapper covers this declaration through opaque handles, count/fill transport, and property transport; optional NOT_LINKED behavior remains part of the native boundary.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XOBJDETECT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hog_descriptor_get_default_people_detector_count",
+        "jyppx_ocv_hog_descriptor_get_default_people_detector_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XObjDetect.HOGDescriptor|method|public;static|System.Single[] GetDefaultPeopleDetector()"
+      ],
+      "historicalOrdinal": 32,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.HOGDescriptor.getDaimlerPeopleDetector()-\u003Estd::vector\u003Cfloat\u003E",
+      "classification": "implemented",
+      "reason": "The current XObjDetect wrapper covers this declaration through opaque handles, count/fill transport, and property transport; optional NOT_LINKED behavior remains part of the native boundary.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XOBJDETECT=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_hog_descriptor_get_daimler_people_detector_count",
+        "jyppx_ocv_hog_descriptor_get_daimler_people_detector_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XObjDetect.HOGDescriptor|method|public;static|System.Single[] GetDaimlerPeopleDetector()"
+      ],
+      "historicalOrdinal": 33,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    }
+  ],
+  "limitation": "Implemented means the recorded managed/C ABI binding exists, subject to its documented validation. It does not certify wider 5.1 input domains, optional codecs/backends, or complete C\u002B\u002B coverage."
+}

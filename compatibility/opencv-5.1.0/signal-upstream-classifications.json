@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.1.0",
+  "module": "signal",
+  "claimedSlice": "Historical signal parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+  "reviewStatus": "reviewed-parser-slice",
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "cv.signal.resampleSignal(Mat inputSignal;Mat outSignal[/O];int inFreq[/C];int outFreq[/C])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The signal contrib surface exposes resampleSignal but the current package has no native Signal wrapper entrypoint or managed public owner; the optional module remains outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_SIGNAL=1",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 0,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    }
+  ]
+}
