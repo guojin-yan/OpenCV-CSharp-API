@@ -2,21 +2,21 @@
   "$schema": "typed-mat-owner-lifetime-matrix.schema.json",
   "schemaVersion": 1,
   "status": "reviewed",
-  "sourceCommit": "3ad5d51517fd68dd7944515f4447c85bd5d089ff",
+  "sourceCommit": "441888969629be34cce3c54c65d868b26fb615ee",
   "policy": {
     "previewStatus": "conditional-preview",
     "stablePromotionAllowed": false,
     "ownerModel": "borrowed-view-retains-mat-owner",
     "nativeLifetimeEvidenceFrameworks": [
       "net8.0",
+      "net9.0",
       "net10.0"
     ],
     "compileOnlyFrameworks": [
       "netcoreapp3.1",
       "net5.0",
       "net6.0",
-      "net7.0",
-      "net9.0"
+      "net7.0"
     ],
     "legacyExcludedFrameworks": [
       "net46",
@@ -100,7 +100,7 @@
       "compileEvidence": "release-build",
       "ownerReview": "reviewed",
       "lifetimeEvidence": "compile-only",
-      "rationale": "Conditional Span preview compiles on this TFM; native owner/lifetime execution remains unmeasured and cannot promote the preview."
+      "rationale": "Conditional Span preview compiles on this TFM; a matching .NET runtime is not installed for owner/lifetime execution."
     },
     {
       "framework": "net5.0",
@@ -108,7 +108,7 @@
       "compileEvidence": "release-build",
       "ownerReview": "reviewed",
       "lifetimeEvidence": "compile-only",
-      "rationale": "Conditional Span preview compiles on this TFM; native owner/lifetime execution remains unmeasured and cannot promote the preview."
+      "rationale": "Conditional Span preview compiles on this TFM; a matching .NET runtime is not installed for owner/lifetime execution."
     },
     {
       "framework": "net6.0",
@@ -116,7 +116,7 @@
       "compileEvidence": "release-build",
       "ownerReview": "reviewed",
       "lifetimeEvidence": "compile-only",
-      "rationale": "Conditional Span preview compiles on this TFM; native owner/lifetime execution remains unmeasured and cannot promote the preview."
+      "rationale": "Conditional Span preview compiles on this TFM; a matching .NET runtime is not installed for owner/lifetime execution."
     },
     {
       "framework": "net7.0",
@@ -124,7 +124,7 @@
       "compileEvidence": "release-build",
       "ownerReview": "reviewed",
       "lifetimeEvidence": "compile-only",
-      "rationale": "Conditional Span preview compiles on this TFM; native owner/lifetime execution remains unmeasured and cannot promote the preview."
+      "rationale": "Conditional Span preview compiles on this TFM; a matching .NET runtime is not installed for owner/lifetime execution."
     },
     {
       "framework": "net8.0",
@@ -132,15 +132,15 @@
       "compileEvidence": "release-build",
       "ownerReview": "native-verified",
       "lifetimeEvidence": "native-verified",
-      "rationale": "Conditional Span preview with native owner/header lifetime cases verified by MatViewTests on the exact full runtime package."
+      "rationale": "Conditional Span preview with native owner/header lifetime cases verified on the exact OpenCV 5.1.0 Windows x64 Full runtime artifact."
     },
     {
       "framework": "net9.0",
       "surface": "span-preview",
       "compileEvidence": "release-build",
-      "ownerReview": "reviewed",
-      "lifetimeEvidence": "compile-only",
-      "rationale": "Conditional Span preview compiles on this TFM; native owner/lifetime execution remains unmeasured and cannot promote the preview."
+      "ownerReview": "native-verified",
+      "lifetimeEvidence": "native-verified",
+      "rationale": "Conditional Span preview with native owner/header lifetime cases verified on the exact OpenCV 5.1.0 Windows x64 Full runtime artifact."
     },
     {
       "framework": "net10.0",
@@ -148,24 +148,25 @@
       "compileEvidence": "release-build",
       "ownerReview": "native-verified",
       "lifetimeEvidence": "native-verified",
-      "rationale": "Conditional Span preview with native owner/header lifetime cases verified by MatViewTests on the exact full runtime package."
+      "rationale": "Conditional Span preview with native owner/header lifetime cases verified on the exact OpenCV 5.1.0 Windows x64 Full runtime artifact."
     }
   ],
   "summary": {
     "frameworkCount": 15,
     "legacyExcludedCount": 8,
-    "compileOnlyCount": 5,
-    "nativeVerifiedCount": 2,
+    "compileOnlyCount": 4,
+    "nativeVerifiedCount": 3,
     "stablePromotionAllowed": false
   },
   "evidence": {
     "targetFrameworkCompilation": "packaging/performance/typed-mat-target-framework-evidence.json",
     "nativeLifetime": "packaging/performance/typed-mat-native-lifetime-evidence.json",
-    "benchmark": "packaging/performance/codec-typed-mat-benchmark-evidence.json"
+    "benchmark": "packaging/performance/codec-typed-mat-benchmark-evidence.json",
+    "nativeLifetime51": "packaging/performance/typed-mat-native-lifetime-evidence-5.1.0.json"
   },
   "limitations": [
     "All 15 package target frameworks have Release compilation evidence; legacy frameworks intentionally exclude the Span preview surface.",
-    "Native owner/lifetime execution is verified only on Windows x64 net8.0 and net10.0 with the exact full runtime package.",
-    "The matrix keeps MatView and ReadOnlyMatView conditional preview contracts; stable promotion remains false until the unmeasured preview TFMs and broader runner review are closed."
+    "Native owner/lifetime execution is verified only on Windows x64 net8.0, net9.0 and net10.0 against the exact OpenCV 5.1.0 Full runtime payload; remaining Span-preview TFMs are compile-only.",
+    "The matrix keeps MatView and ReadOnlyMatView conditional preview contracts; stable promotion remains false until remaining preview TFM and broader runner review are closed."
   ]
 }

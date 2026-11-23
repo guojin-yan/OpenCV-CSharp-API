@@ -1,14 +1,14 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/773e54b72a2abd0c",
-  "SourceIdentity": "sha256:773e54b72a2abd0c59ecb74e5ff4d910084cc21562e5da99f53711243d6fd685",
+  "CandidateId": "local-closeout/sha256/ee4a35e8a6bc54ba",
+  "SourceIdentity": "sha256:ee4a35e8a6bc54bac2375e3543b5aaa30b90ea30ee70b5c34ce145c3fad2038c",
   "OpenCvRevision": "5.1.0",
   "RevisionValidation": {
     "CurrentBuildEvidence": {
       "Path": "packaging/runtime/opencv-5.1.0-source-build-evidence.json",
-      "Sha256": "ff9b1cc83fa32b83905bc92cca67215d5e4b0ad174076beb2bd9baf7fe5757c4",
-      "Length": 63201
+      "Sha256": "c8196711dfac47a041bdf1d95ed395133a3dbc49ed06fd849c7a29fec79fde91",
+      "Length": 64284
     },
     "LocalBuildRid": "win-x64",
     "HistoricalUpstreamMapRevision": "5.0.0",
@@ -32,8 +32,8 @@
     "CurrentRevisionUpstreamParityClaimed": false
   },
   "SourceSet": {
-    "FileCount": 2969,
-    "Sha256": "773e54b72a2abd0c59ecb74e5ff4d910084cc21562e5da99f53711243d6fd685",
+    "FileCount": 2972,
+    "Sha256": "ee4a35e8a6bc54bac2375e3543b5aaa30b90ea30ee70b5c34ce145c3fad2038c",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -6184,6 +6184,16 @@
       "Length": 2960
     },
     {
+      "Path": "packaging/performance/typed-mat-native-lifetime-evidence-5.1.0.json",
+      "Sha256": "7219e549da30874a470a3d2c7202feab0a8717fade83925ea49c2eb1a20ac5f0",
+      "Length": 11807
+    },
+    {
+      "Path": "packaging/performance/typed-mat-native-lifetime-evidence-5.1.0.schema.json",
+      "Sha256": "ecde27388aac88d8f75b79195bd785d9d34780dc69bd334fde5ea12252e527bd",
+      "Length": 5863
+    },
+    {
       "Path": "packaging/performance/typed-mat-native-lifetime-evidence.json",
       "Sha256": "a32545922a13ad15326416926e66ea2fad4e37f2db4678fec16196a043f5ba13",
       "Length": 5973
@@ -6195,18 +6205,18 @@
     },
     {
       "Path": "packaging/performance/typed-mat-owner-lifetime-matrix.json",
-      "Sha256": "f1ea8f9983d2c2b061e0e41d8eb5da9d0046a49b73b9b2e996eb97569f085caa",
-      "Length": 6826
+      "Sha256": "6d8954b576e5300695b17216aea245e650b43960d216867b205248e62739c59c",
+      "Length": 6972
     },
     {
       "Path": "packaging/performance/typed-mat-owner-lifetime-matrix.schema.json",
-      "Sha256": "779baacc1849280c78838d6e442101a7b6d9af4c24866240a647b88e1c63b077",
-      "Length": 3514
+      "Sha256": "cbe22db4cfd88a6c3101a6225f07ff9310aee02f78653570e7c4dc8f6f3f041e",
+      "Length": 3646
     },
     {
       "Path": "packaging/performance/typed-mat-target-framework-evidence.json",
-      "Sha256": "a3e1dc76b3e3e1c8ce14c03e3eba0b8db37420228b743dd7e492169f736c0acb",
-      "Length": 745
+      "Sha256": "579dbddaa2815c8db7eccfb443630931db487875f6055b0ddb990181d4771a6a",
+      "Length": 766
     },
     {
       "Path": "packaging/performance/typed-mat-target-framework-evidence.schema.json",
@@ -6255,8 +6265,8 @@
     },
     {
       "Path": "packaging/runtime/opencv-5.1.0-source-build-evidence.json",
-      "Sha256": "ff9b1cc83fa32b83905bc92cca67215d5e4b0ad174076beb2bd9baf7fe5757c4",
-      "Length": 63201
+      "Sha256": "c8196711dfac47a041bdf1d95ed395133a3dbc49ed06fd849c7a29fec79fde91",
+      "Length": 64284
     },
     {
       "Path": "packaging/runtime/patches/opencv-5.0.0-photo-ccm-instance-color-space.patch",
@@ -6839,14 +6849,19 @@
       "Length": 8879
     },
     {
+      "Path": "scripts/Measure-TypedMat51NativeLifetime.ps1",
+      "Sha256": "40ff90e59af4a37658c6bd671f28a202ec74a81f253038a0097ddfb087c2cd95",
+      "Length": 12194
+    },
+    {
       "Path": "scripts/Measure-TypedMatNativeLifetime.ps1",
       "Sha256": "aaac73f605bd2be2e8afc30259dafb4ac553302b876aba13d95faeb50bf25918",
       "Length": 10357
     },
     {
       "Path": "scripts/Measure-TypedMatOwnerLifetimeMatrix.ps1",
-      "Sha256": "34c93cd559203dc55e1b2b701ef1e568b166a79b2f3e2e5506acbeefcc1e2a7d",
-      "Length": 5596
+      "Sha256": "99cff042aa8765e33ddfc058e49a7cec5b7586b8832b1ec73df97a7612c0e4fe",
+      "Length": 6381
     },
     {
       "Path": "scripts/Measure-VideoDnnBenchmark.ps1",
@@ -6870,8 +6885,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "3371a64b0ef59146b4578063b997592206d994d0b4ebf7bc7c65c8c3fd8f589a",
-      "Length": 224757
+      "Sha256": "de6d6d43e2f3f8daa0f5716a2d0fa3629c8802ea521eacee187ffc0c1001bbc2",
+      "Length": 224978
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -7360,8 +7375,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "499a8a008732176cee3d9bbeb294259c096ed3799b0fea0de597cb4812f3cd1e",
-      "Length": 200136
+      "Sha256": "664d6dc38c5931fe29a14e6c7239abe47957fa8f6ab513f0d1f5402c18225525",
+      "Length": 200357
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -7480,8 +7495,8 @@
     },
     {
       "Path": "scripts/Test-TypedMatOwnerLifetimeMatrix.ps1",
-      "Sha256": "d9e2d9ff257dd8d6eb309b12d8828437eb830e737f944d2ae0592a81a6a96b90",
-      "Length": 3642
+      "Sha256": "476673334b6320d833b62e9c387341d59eef02aa96adef52481792fc5bf4dc73",
+      "Length": 7229
     },
     {
       "Path": "scripts/Test-TypedMatTargetFrameworks.ps1",

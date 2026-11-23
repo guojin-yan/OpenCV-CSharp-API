@@ -18,8 +18,8 @@
         "previewStatus": { "const": "conditional-preview" },
         "stablePromotionAllowed": { "const": false },
         "ownerModel": { "const": "borrowed-view-retains-mat-owner" },
-        "nativeLifetimeEvidenceFrameworks": { "const": [ "net8.0", "net10.0" ] },
-        "compileOnlyFrameworks": { "const": [ "netcoreapp3.1", "net5.0", "net6.0", "net7.0", "net9.0" ] },
+        "nativeLifetimeEvidenceFrameworks": { "const": [ "net8.0", "net9.0", "net10.0" ] },
+        "compileOnlyFrameworks": { "const": [ "netcoreapp3.1", "net5.0", "net6.0", "net7.0" ] },
         "legacyExcludedFrameworks": { "const": [ "net46", "net461", "net462", "net47", "net471", "net472", "net48", "net481" ] }
       }
     },
@@ -48,18 +48,19 @@
       "properties": {
         "frameworkCount": { "const": 15 },
         "legacyExcludedCount": { "const": 8 },
-        "compileOnlyCount": { "const": 5 },
-        "nativeVerifiedCount": { "const": 2 },
+        "compileOnlyCount": { "const": 4 },
+        "nativeVerifiedCount": { "const": 3 },
         "stablePromotionAllowed": { "const": false }
       }
     },
     "evidence": {
       "type": "object",
       "additionalProperties": false,
-      "required": [ "targetFrameworkCompilation", "nativeLifetime", "benchmark" ],
+      "required": [ "targetFrameworkCompilation", "nativeLifetime", "nativeLifetime51", "benchmark" ],
       "properties": {
         "targetFrameworkCompilation": { "const": "packaging/performance/typed-mat-target-framework-evidence.json" },
         "nativeLifetime": { "const": "packaging/performance/typed-mat-native-lifetime-evidence.json" },
+        "nativeLifetime51": { "const": "packaging/performance/typed-mat-native-lifetime-evidence-5.1.0.json" },
         "benchmark": { "const": "packaging/performance/codec-typed-mat-benchmark-evidence.json" }
       }
     },

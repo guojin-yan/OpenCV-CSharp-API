@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/performance/typed-mat-native-lifetime-evidence-5.1.0.schema.json",
+  "title": "OpenCV 5.1.0 typed Mat native owner and lifetime evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schemaVersion", "status", "sourceCommit", "packageVersion", "runner", "artifact", "runtime", "test", "limitations"],
+  "properties": {
+    "$schema": { "const": "typed-mat-native-lifetime-evidence-5.1.0.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "status": { "const": "verified" },
+    "sourceCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "packageVersion": { "const": "5.1.0" },
+    "runner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["os", "dotnetSdk", "architecture", "configuration"],
+      "properties": {
+        "os": { "type": "string", "minLength": 1 },
+        "dotnetSdk": { "type": "string", "minLength": 1 },
+        "architecture": { "const": "x64" },
+        "configuration": { "const": "Release" }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "bytes", "sha256", "fullProfileEntryPrefix"],
+      "properties": {
+        "path": { "const": "artifacts/OpenCV-CSharp-API-5.1.0-win-x64-local.zip" },
+        "bytes": { "type": "integer", "minimum": 1 },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "fullProfileEntryPrefix": { "const": "opencv-5.1.0-win-x64/full/" }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["openCvVersion", "nativeAbiVersion", "nativeModuleFiles", "nativeRuntimeDirectory", "nativePayload", "wrapperLoaderSha256", "opencvCoreSha256", "opencvImgProcSha256", "opencvImgCodecsSha256"],
+      "properties": {
+        "openCvVersion": { "const": "5.1.0" },
+        "nativeAbiVersion": { "const": 1 },
+        "nativeModuleFiles": { "const": 42 },
+        "nativeRuntimeDirectory": { "const": "artifacts/opencv-5.1.0-win-x64/full" },
+        "nativePayload": {
+          "type": "array",
+          "minItems": 43,
+          "maxItems": 43,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "bytes", "sha256"],
+            "properties": {
+              "name": { "type": "string", "pattern": "^(JYPPX\\.OpenCV\\.Native|opencv_[A-Za-z0-9_]+510)\\.dll$" },
+              "bytes": { "type": "integer", "minimum": 1 },
+              "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+            }
+          }
+        },
+        "wrapperLoaderSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "opencvCoreSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "opencvImgProcSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "opencvImgCodecsSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "test": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["class", "filter", "nativeSmokeEnabled", "targetFrameworks", "verifiedCases"],
+      "properties": {
+        "class": { "const": "JYPPX.OpenCvSharp.Tests.Core.MatViewTests" },
+        "filter": { "const": "FullyQualifiedName~JYPPX.OpenCvSharp.Tests.Core.MatViewTests" },
+        "nativeSmokeEnabled": { "const": true },
+        "targetFrameworks": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["framework", "total", "executed", "passed", "failed", "skipped", "testAssemblySha256", "apiAssemblySha256", "trx"],
+            "properties": {
+              "framework": { "type": "string", "enum": ["net8.0", "net9.0", "net10.0"] },
+              "total": { "const": 9 },
+              "executed": { "const": 9 },
+              "passed": { "const": 9 },
+              "failed": { "const": 0 },
+              "skipped": { "const": 0 },
+              "testAssemblySha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+              "apiAssemblySha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+              "trx": { "$ref": "#/$defs/tempRecord" }
+            }
+          }
+        },
+        "verifiedCases": {
+          "const": [
+            "TypedViewReadsWritesAndCopiesRegisteredPixelsWhenNativeRuntimeIsAvailable",
+            "TypedViewSupportsRowsOfNonContinuousRoiWhenNativeRuntimeIsAvailable",
+            "TypedViewRejectsUnregisteredAndMismatchedTypesWhenNativeRuntimeIsAvailable",
+            "TypedViewAndOwnerDisposalInvalidateFutureAccessWhenNativeRuntimeIsAvailable",
+            "TypedViewDoesNotAllowMatrixHeaderChangesWhenNativeRuntimeIsAvailable",
+            "TypedViewCloneAndMatCopyPreserveTheViewedRoiWhenNativeRuntimeIsAvailable",
+            "TypedViewCopyToValidatesDestinationBeforeNativeRuntimeWhenNativeRuntimeIsAvailable",
+            "ReadOnlyTypedViewReadsAndCopiesWithoutWriteSurfaceWhenNativeRuntimeIsAvailable",
+            "ReadOnlyTypedViewRejectsDisposedOwnerAndHeaderChangesWhenNativeRuntimeIsAvailable"
+          ]
+        }
+      }
+    },
+    "limitations": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+  },
+  "$defs": {
+    "tempRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "length", "sha256"],
+      "properties": {
+        "path": { "type": "string", "pattern": "^%TEMP%/opencv-v510-typed-mat-lifetime-[a-f0-9]+/MatView-net(8|9|10)\\.0\\.trx$" },
+        "length": { "type": "integer", "minimum": 1 },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    }
+  }
+}
