@@ -1032,6 +1032,7 @@ function Get-Record {
         "compatibility/v5.1.0-change-ledger.json",
         "compatibility/v5.1.0-change-ledger.schema.json",
         "packaging/runtime/opencv-5.1.0-package-consumer-evidence.json",
+        "packaging/runtime/opencv-5.1.0-package-pe-closure-evidence.json",
         "packaging/runtime/opencv-5.1.0-source-build-evidence.json",
         "docs/articles/api-abi-compatibility-policy.md",
         "docs/articles/upstream-map-toolchain.md",
@@ -1266,6 +1267,7 @@ function Get-Record {
         "scripts/Test-CapabilityProfileEvidence.ps1",
         ".github/workflows/generic-linux-arm64-preview.yml",
         "scripts/Test-GitHubPackConsumerRestoreSurface.ps1",
+        "scripts/Test-PackagedWindowsRuntimePeClosure.ps1",
           "packaging/runtime/patches/opencv-5.0.0-photo-ccm-instance-color-space.patch",
           "packaging/runtime/patches/opencv-5.1.0-photo-ccm-instance-color-space.patch",
           "scripts/New-RuntimeInputArtifact.ps1",
@@ -1782,7 +1784,7 @@ function Get-Record {
         [ordered]@{ Id = "android-arm-device-evidence"; Status = "android-evidence-pending"; Evidence = "Android x64/x86 Full and Mini have authoritative single-loader emulator loading evidence. Android ARM/ARM64 NDK, ELF, same-run package, and APK evidence has passed; matching device loading evidence remains required before promotion." },
         [ordered]@{ Id = "api-gap-implementation"; Status = "open-local-follow-up"; Evidence = "The structured ImgProc, ImgCodecs, VideoIO, Calib3D, Core, DNN, Features, ObjDetect, main CPU Photo, and main Video slices are closed at zero missing callable declarations. Repository-wide upstream parity and prioritized ownership/marshalling work remain open." },
         [ordered]@{ Id = "macos-support-decision"; Status = "decision-deferred"; Evidence = "macOS is outside the declared matrix until an explicit decision and native/consumer evidence exist." },
-        [ordered]@{ Id = "opencv-5.1-evidence-refresh"; Status = "cross-rid-and-promotion-evidence-pending"; Evidence = "Windows x64 OpenCV 5.1.0 source, Full/Mini wrapper builds, and local Full/Mini package restore/build/native smoke are verified. The inherited 5.0.0 maps and multi-RID/hosted support records remain historical; cross-RID hosted evidence, candidate package PE closure, signing and SBOM promotion remain open." },
+        [ordered]@{ Id = "opencv-5.1-evidence-refresh"; Status = "cross-rid-and-promotion-evidence-pending"; Evidence = "Windows x64 OpenCV 5.1.0 source, Full/Mini wrapper builds, local Full/Mini package restore/build/native smoke, and local candidate package PE closure are verified. The inherited 5.0.0 maps and multi-RID/hosted support records remain historical; cross-RID hosted evidence, signing and SBOM promotion remain open." },
         [ordered]@{ Id = "publication-authorization"; Status = "not-authorized"; Evidence = "No publish, tag, release, or mutable feed operation is authorized in the current quota state." },
         [ordered]@{ Id = "release-approval"; Status = "candidate-token-required"; Evidence = "OpenCV 5.1.0 requires new candidate review and authorization; the stable 5.0.0 exception does not apply to this version." },
         [ordered]@{ Id = "repository-signing-verification"; Status = "post-publication-required"; Evidence = "NuGet.org must add a Repository primary signature and pass exact payload comparison; GitHub Packages must be public, repository-linked, and byte-identical to the reviewed candidate." },
@@ -1799,6 +1801,8 @@ function Get-Record {
             CurrentBuildEvidence = Get-FileEvidence -RelativePath "packaging/runtime/opencv-5.1.0-source-build-evidence.json"
             CurrentPackageConsumerEvidence = Get-FileEvidence -RelativePath "packaging/runtime/opencv-5.1.0-package-consumer-evidence.json"
             CurrentPackageConsumer51Validated = $true
+            CurrentPackagePeClosureEvidence = Get-FileEvidence -RelativePath "packaging/runtime/opencv-5.1.0-package-pe-closure-evidence.json"
+            CurrentPackagePeClosure51Validated = $true
             LocalBuildRid = "win-x64"
             HistoricalUpstreamMapRevision = "5.0.0"
             CurrentDnnParserSlice = Get-FileEvidence -RelativePath "compatibility/opencv-5.1.0/dnn-upstream-summary.json"

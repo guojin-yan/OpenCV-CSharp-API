@@ -553,9 +553,9 @@
     "packageConsumer51Validated": true,
     "upstreamMapVersion": "5.0.0",
     "upstream51ParityClaimed": false,
-    "packagePeClosureValidated": false,
+    "packagePeClosureValidated": true,
     "localPeClosureValidated": true,
-    "packagePeClosureNote": "The local Full and Mini binary payloads pass the PE gate with 43 and 7 DLLs, zero missing OpenCV imports and all 42/6 modules reachable. Full optional contrib modules are checked when present. Local package restore/build/native smoke is verified separately; candidate package PE closure, cross-RID hosted evidence, signing and SBOM promotion remain pending.",
+    "packagePeClosureNote": "The local Full and Mini 5.1.0 nupkg payloads were unpacked and passed the package-level PE gate with 43 and 7 DLLs, zero missing OpenCV imports and all 42/6 modules reachable. Full optional contrib modules are checked when present. The package hash and native payload hashes are bound in packaging/runtime/opencv-5.1.0-package-pe-closure-evidence.json; cross-RID hosted evidence, signing and SBOM promotion remain pending.",
     "localBinaryConsumerValidated": true
   },
   "localBinaryConsumer": {
@@ -591,7 +591,7 @@
   },
   "packageConsumer51Evidence": {
     "path": "packaging/runtime/opencv-5.1.0-package-consumer-evidence.json",
-    "sha256": "bc147a2398365a04ab621777ce15d8f3ce039db2ae8f34d389691c0d7826f28b",
+    "sha256": "b5e9041296c2b072e24df556cd66ba904cf8a4e794fe592f82be869ffb932d9c",
     "status": "verified-local-windows-x64",
     "sourceCommit": "997fad9d6dd7e7d1a7f939d32cf86b0e6bd0f5ec",
     "nativeBuildSourceCommit": "441888969629be34cce3c54c65d868b26fb615ee",
@@ -602,6 +602,19 @@
       "mini"
     ],
     "guard": "scripts/Test-GitHubPackConsumerRestoreSurface.ps1"
+  },
+  "packagePeClosure51Evidence": {
+    "path": "packaging/runtime/opencv-5.1.0-package-pe-closure-evidence.json",
+    "sha256": "59ce2cf7950fff34fd8800e894d437e0fbe99970a4f09550d0939112a671f6d1",
+    "status": "verified-local-windows-x64",
+    "sourceCommit": "997fad9d6dd7e7d1a7f939d32cf86b0e6bd0f5ec",
+    "nativeBuildSourceCommit": "441888969629be34cce3c54c65d868b26fb615ee",
+    "packageCount": 2,
+    "profiles": [
+      "full",
+      "mini"
+    ],
+    "guard": "scripts/Test-PackagedWindowsRuntimePeClosure.ps1"
   },
   "projectInvariants": {
     "status": "passed",

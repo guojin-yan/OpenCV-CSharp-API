@@ -21,7 +21,7 @@ $buildEvidencePath = Join-Path $repo 'packaging/runtime/opencv-5.1.0-source-buil
 $build = Get-Content -LiteralPath $buildEvidencePath -Raw | ConvertFrom-Json
 if ($build.status -cne 'verified-local-source-build' -or $build.openCvVersion -cne '5.1.0' -or $build.packageVersion -cne '5.1.0' -or $build.rid -cne 'win-x64') { throw '5.1 source build evidence identity drifted.' }
 if ($build.upstream.openCv.commit -cne 'e4f78fbcf1a773fbed69e14500e8b734963eb585' -or $build.upstream.contrib.commit -cne 'b67a855188a3d683813731010f6d39ac614733a4') { throw '5.1 source evidence must retain both official tag commits.' }
-if ($build.limits.published -or $build.limits.multiRid51Validated -or -not $build.limits.packageConsumer51Validated -or $build.limits.upstream51ParityClaimed -or $build.limits.upstreamMapVersion -cne '5.0.0') { throw '5.1 evidence must keep publication, multi-RID and parity boundaries while recording the verified local package consumer.' }
+if ($build.limits.published -or $build.limits.multiRid51Validated -or -not $build.limits.packageConsumer51Validated -or -not $build.limits.packagePeClosureValidated -or -not $build.limits.localPeClosureValidated -or $build.limits.upstream51ParityClaimed -or $build.limits.upstreamMapVersion -cne '5.0.0') { throw '5.1 evidence must keep publication, multi-RID and parity boundaries while recording the verified local package consumer and package PE closure.' }
 $packageConsumerEvidenceRel = 'packaging/runtime/opencv-5.1.0-package-consumer-evidence.json'
 $packageConsumerEvidencePath = Join-Path $repo $packageConsumerEvidenceRel
 if (-not (Test-Path -LiteralPath $packageConsumerEvidencePath -PathType Leaf)) { throw '5.1 package consumer evidence is missing.' }
@@ -53,6 +53,35 @@ if ([int]$packageConsumer.packages[0].entryCount -ne 8 -or [int]$packageConsumer
     [int]$packageConsumer.packages[2].nativeFiles -ne 7) { throw '5.1 package entry/native asset counts drifted.' }
 if (@($packageConsumer.consumers).Count -ne 2 -or (@($packageConsumer.consumers.profile) -join '|') -cne 'full|mini' -or
     @($packageConsumer.consumers | Where-Object { $_.rid -ne 'win-x64' -or $_.targetFramework -ne 'net8.0' -or $_.restore -ne 'passed' -or $_.build -ne 'passed' -or $_.nativeSmoke -ne 'passed' }).Count -ne 0) { throw '5.1 package consumer restore/build/native smoke evidence is incomplete.' }
+$packagePeClosureEvidenceRel = 'packaging/runtime/opencv-5.1.0-package-pe-closure-evidence.json'
+$packagePeClosureEvidencePath = Join-Path $repo $packagePeClosureEvidenceRel
+if (-not (Test-Path -LiteralPath $packagePeClosureEvidencePath -PathType Leaf)) { throw '5.1 package PE closure evidence is missing.' }
+$packagePeClosure = Get-Content -LiteralPath $packagePeClosureEvidencePath -Raw | ConvertFrom-Json
+$packagePeClosureHash = (Get-FileHash -LiteralPath $packagePeClosureEvidencePath -Algorithm SHA256).Hash.ToLowerInvariant()
+$recordedPackagePeClosure = $build.packagePeClosure51Evidence
+if ($recordedPackagePeClosure.path -cne $packagePeClosureEvidenceRel -or $recordedPackagePeClosure.sha256 -cne $packagePeClosureHash -or $recordedPackagePeClosure.status -cne 'verified-local-windows-x64' -or
+    $recordedPackagePeClosure.sourceCommit -cne $packageConsumer.sourceCommit -or $recordedPackagePeClosure.nativeBuildSourceCommit -cne $packageConsumer.nativeBuildSourceCommit -or
+    $recordedPackagePeClosure.packageCount -ne 2 -or (@($recordedPackagePeClosure.profiles) -join '|') -cne 'full|mini' -or
+    $recordedPackagePeClosure.guard -cne 'scripts/Test-PackagedWindowsRuntimePeClosure.ps1') { throw '5.1 package PE closure evidence binding drifted.' }
+if ($packagePeClosure.schemaVersion -ne 1 -or $packagePeClosure.recordKind -cne 'opencv-5.1.0-package-pe-closure-evidence' -or
+    $packagePeClosure.status -cne 'verified-local-windows-x64' -or $packagePeClosure.openCvVersion -cne '5.1.0' -or
+    $packagePeClosure.packageVersion -cne '5.1.0' -or $packagePeClosure.rid -ne 'win-x64' -or
+    $packagePeClosure.guard -cne 'scripts/Test-PackagedWindowsRuntimePeClosure.ps1' -or
+    $packagePeClosure.dependencyGuard -cne 'scripts/Test-WindowsRuntimePeClosure.ps1' -or
+    $packagePeClosure.sourceCommit -cne $packageConsumer.sourceCommit -or $packagePeClosure.nativeBuildSourceCommit -cne $packageConsumer.nativeBuildSourceCommit) { throw '5.1 package PE closure identity is incomplete.' }
+$packagePeRows = @($packagePeClosure.packages)
+if ($packagePeRows.Count -ne 2 -or (@($packagePeRows.label) -join '|') -cne 'full|mini') { throw '5.1 package PE closure package set drifted.' }
+foreach ($peRow in $packagePeRows) {
+    $consumerPackage = @($packageConsumer.packages | Where-Object { $_.label -ceq $peRow.label })
+    if ($consumerPackage.Count -ne 1 -or $peRow.packageId -cne $consumerPackage[0].packageId -or
+        $peRow.packageVersion -cne $consumerPackage[0].packageVersion -or $peRow.nugetVersion -cne $consumerPackage[0].nugetVersion -or
+        $peRow.nupkgSha256 -cne $consumerPackage[0].sha256 -or [int]$peRow.nativeFiles -ne [int]$consumerPackage[0].nativeFiles -or
+        @($peRow.nativeFilesSha256).Count -ne [int]$consumerPackage[0].nativeFiles) { throw "5.1 package PE closure payload binding drifted: $($peRow.label)" }
+    if ([string]$peRow.audit.machine -cne 'AMD64' -or [int]$peRow.audit.missingOpenCvImports -ne 0 -or
+        [int]$peRow.audit.files -ne [int]$peRow.nativeFiles -or [int]$peRow.audit.packagedModules -ne ([int]$consumerPackage[0].nativeFiles - 1) -or
+        [int]$peRow.audit.reachableModules -ne [int]$peRow.audit.packagedModules -or [int]$peRow.audit.loaderOpenCvImports -le 0 -or
+        [int]$peRow.audit.opencvImportEdges -le 0) { throw "5.1 package PE closure audit result is incomplete: $($peRow.label)" }
+}
 $expectedScopes = @('Directory.Build.props','src/OpenCvSharp.Native','src/OpenCvSharp','tests/OpenCvSharp.Tests','scripts/Build-OpenCV.ps1','scripts/Build-Native.ps1','scripts/Apply-OpenCvSourcePatches.ps1','scripts/New-RuntimeInputArtifact.ps1','scripts/Test-WindowsRuntimePeClosure.ps1')
 if (($build.sourceInputSet.paths -join '|') -cne ($expectedScopes -join '|')) { throw '5.1 source input scope drifted.' }
 $inputPaths = [string[]]@(& git -C $repo ls-files --cached --others --exclude-standard -- @expectedScopes | Sort-Object -Unique -CaseSensitive)

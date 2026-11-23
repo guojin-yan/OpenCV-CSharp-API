@@ -899,6 +899,7 @@ function Get-ExpectedEvidencePaths {
         "compatibility/v5.1.0-change-ledger.json",
         "compatibility/v5.1.0-change-ledger.schema.json",
         "packaging/runtime/opencv-5.1.0-package-consumer-evidence.json",
+        "packaging/runtime/opencv-5.1.0-package-pe-closure-evidence.json",
         "packaging/runtime/opencv-5.1.0-source-build-evidence.json",
         "docs/articles/api-abi-compatibility-policy.md",
         "docs/articles/upstream-map-toolchain.md",
@@ -1138,6 +1139,7 @@ function Get-ExpectedEvidencePaths {
         "scripts/Test-CapabilityProfileEvidence.ps1",
         ".github/workflows/generic-linux-arm64-preview.yml",
         "scripts/Test-GitHubPackConsumerRestoreSurface.ps1",
+        "scripts/Test-PackagedWindowsRuntimePeClosure.ps1",
           "packaging/runtime/patches/opencv-5.0.0-photo-ccm-instance-color-space.patch",
           "packaging/runtime/patches/opencv-5.1.0-photo-ccm-instance-color-space.patch",
           "scripts/New-RuntimeInputArtifact.ps1",
@@ -1838,6 +1840,7 @@ function Test-Record {
     Assert-True -List $List -Condition ($revision.LocalBuildRid -ceq 'win-x64' -and $revision.HistoricalUpstreamMapRevision -ceq '5.0.0' -and $revision.HistoricalSupportEvidenceRevision -ceq '5.0.0' -and -not $revision.CurrentRevisionMultiRidValidated -and -not $revision.CurrentRevisionUpstreamParityClaimed) -Issue 'Final closeout 5.1 revision evidence boundary drifted'
     $currentBuildHash = (Get-FileHash -LiteralPath (Join-Path $repo 'packaging/runtime/opencv-5.1.0-source-build-evidence.json') -Algorithm SHA256).Hash.ToLowerInvariant()
     $currentPackageConsumerHash = (Get-FileHash -LiteralPath (Join-Path $repo 'packaging/runtime/opencv-5.1.0-package-consumer-evidence.json') -Algorithm SHA256).Hash.ToLowerInvariant()
+    $currentPackagePeClosureHash = (Get-FileHash -LiteralPath (Join-Path $repo 'packaging/runtime/opencv-5.1.0-package-pe-closure-evidence.json') -Algorithm SHA256).Hash.ToLowerInvariant()
     $currentDnnHash = (Get-FileHash -LiteralPath (Join-Path $repo 'compatibility/opencv-5.1.0/dnn-upstream-summary.json') -Algorithm SHA256).Hash.ToLowerInvariant()
     Assert-True -List $List -Condition ($revision.CurrentDnnParserSlice.Path -ceq 'compatibility/opencv-5.1.0/dnn-upstream-summary.json' -and $revision.CurrentDnnParserSlice.Sha256 -ceq $currentDnnHash -and $revision.CurrentDnnParserDeclarationCount -eq 185 -and -not $revision.CurrentDnnCompleteCppParityClaimed -and $revision.HistoricalCatalogMapCount -eq 73) -Issue 'Final closeout 5.1 DNN parser refresh boundary drifted'
     $refresh51Path = Join-Path $repo 'compatibility/opencv-5.1.0/upstream-map-refresh-summary.json'
@@ -1849,6 +1852,7 @@ function Test-Record {
         $revision.CurrentRevisionRefreshedParserSliceCount -eq $refresh51.refreshedParserSliceCount -and $revision.CurrentRevisionPendingCatalogMapCount -eq $refresh51.pendingCatalogMapCount) -Issue 'Final closeout 5.1 shared parser refresh boundary drifted'
     Assert-True -List $List -Condition ($revision.CurrentBuildEvidence.Path -ceq 'packaging/runtime/opencv-5.1.0-source-build-evidence.json' -and $revision.CurrentBuildEvidence.Sha256 -ceq $currentBuildHash) -Issue 'Final closeout 5.1 source build evidence drifted'
     Assert-True -List $List -Condition ($revision.CurrentPackageConsumer51Validated -eq $true -and $revision.CurrentPackageConsumerEvidence.Path -ceq 'packaging/runtime/opencv-5.1.0-package-consumer-evidence.json' -and $revision.CurrentPackageConsumerEvidence.Sha256 -ceq $currentPackageConsumerHash) -Issue 'Final closeout 5.1 package consumer evidence drifted'
+    Assert-True -List $List -Condition ($revision.CurrentPackagePeClosure51Validated -eq $true -and $revision.CurrentPackagePeClosureEvidence.Path -ceq 'packaging/runtime/opencv-5.1.0-package-pe-closure-evidence.json' -and $revision.CurrentPackagePeClosureEvidence.Sha256 -ceq $currentPackagePeClosureHash) -Issue 'Final closeout 5.1 package PE closure evidence drifted'
     $expectedBlockers = @("android-arm-device-evidence","api-gap-implementation","macos-support-decision","opencv-5.1-evidence-refresh","publication-authorization","release-approval","repository-signing-verification","sbom-inputs")
     $actualBlockers = @($Record.ExternalBlockers | ForEach-Object { [string]$_.Id })
     Assert-True -List $List -Condition (($actualBlockers -join ",") -eq ($expectedBlockers -join ",")) -Issue "Final closeout blocker ledger is missing, reordered, or incomplete"

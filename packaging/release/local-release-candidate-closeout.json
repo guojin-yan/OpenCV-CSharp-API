@@ -1,21 +1,27 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/e3fbd4450a4e004d",
-  "SourceIdentity": "sha256:e3fbd4450a4e004dc1406f16ce8fea29ca78d0cac493f6566e42e78fa027b4aa",
+  "CandidateId": "local-closeout/sha256/8a6045837f8143a0",
+  "SourceIdentity": "sha256:8a6045837f8143a0f8414af9c04abdfebc4762da4da3dcc046a0545928bd0c93",
   "OpenCvRevision": "5.1.0",
   "RevisionValidation": {
     "CurrentBuildEvidence": {
       "Path": "packaging/runtime/opencv-5.1.0-source-build-evidence.json",
-      "Sha256": "bbe53b67bc7e01b1a33ef9e33fafbdfa02e0f7b32c6e1619bc02521dee420265",
-      "Length": 64922
+      "Sha256": "f904f8200e40df74038978f7f3b8015c2ea62c4af1abf82ada2b13c3920e33ab",
+      "Length": 65508
     },
     "CurrentPackageConsumerEvidence": {
       "Path": "packaging/runtime/opencv-5.1.0-package-consumer-evidence.json",
-      "Sha256": "bc147a2398365a04ab621777ce15d8f3ce039db2ae8f34d389691c0d7826f28b",
-      "Length": 13032
+      "Sha256": "b5e9041296c2b072e24df556cd66ba904cf8a4e794fe592f82be869ffb932d9c",
+      "Length": 14064
     },
     "CurrentPackageConsumer51Validated": true,
+    "CurrentPackagePeClosureEvidence": {
+      "Path": "packaging/runtime/opencv-5.1.0-package-pe-closure-evidence.json",
+      "Sha256": "59ce2cf7950fff34fd8800e894d437e0fbe99970a4f09550d0939112a671f6d1",
+      "Length": 12173
+    },
+    "CurrentPackagePeClosure51Validated": true,
     "LocalBuildRid": "win-x64",
     "HistoricalUpstreamMapRevision": "5.0.0",
     "CurrentDnnParserSlice": {
@@ -38,8 +44,8 @@
     "CurrentRevisionUpstreamParityClaimed": false
   },
   "SourceSet": {
-    "FileCount": 2973,
-    "Sha256": "e3fbd4450a4e004dc1406f16ce8fea29ca78d0cac493f6566e42e78fa027b4aa",
+    "FileCount": 2975,
+    "Sha256": "8a6045837f8143a0f8414af9c04abdfebc4762da4da3dcc046a0545928bd0c93",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -5201,8 +5207,8 @@
     },
     {
       "Path": "compatibility/v5.1.0-change-ledger.json",
-      "Sha256": "c0e409db930dea1e0fd2425991f0cced2d7d7e577fbe1abbb9ee332da0dec715",
-      "Length": 148671
+      "Sha256": "198540b948c3c4ac218b3f3735f56455b5c51be57e6c94b2850c7c38fd6a10ec",
+      "Length": 148849
     },
     {
       "Path": "compatibility/v5.1.0-change-ledger.schema.json",
@@ -6271,13 +6277,18 @@
     },
     {
       "Path": "packaging/runtime/opencv-5.1.0-package-consumer-evidence.json",
-      "Sha256": "bc147a2398365a04ab621777ce15d8f3ce039db2ae8f34d389691c0d7826f28b",
-      "Length": 13032
+      "Sha256": "b5e9041296c2b072e24df556cd66ba904cf8a4e794fe592f82be869ffb932d9c",
+      "Length": 14064
+    },
+    {
+      "Path": "packaging/runtime/opencv-5.1.0-package-pe-closure-evidence.json",
+      "Sha256": "59ce2cf7950fff34fd8800e894d437e0fbe99970a4f09550d0939112a671f6d1",
+      "Length": 12173
     },
     {
       "Path": "packaging/runtime/opencv-5.1.0-source-build-evidence.json",
-      "Sha256": "bbe53b67bc7e01b1a33ef9e33fafbdfa02e0f7b32c6e1619bc02521dee420265",
-      "Length": 64922
+      "Sha256": "f904f8200e40df74038978f7f3b8015c2ea62c4af1abf82ada2b13c3920e33ab",
+      "Length": 65508
     },
     {
       "Path": "packaging/runtime/patches/opencv-5.0.0-photo-ccm-instance-color-space.patch",
@@ -6896,8 +6907,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "1373f6910c4ab0884db2707145e68962fde4aa0422e43d9f6ec9e3ffd4d30d9f",
-      "Length": 225255
+      "Sha256": "359ddb0db36b360306e34ba7d4b5c5a6b36faa9a4637f348accf3f0b113c378f",
+      "Length": 225594
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -7335,6 +7346,11 @@
       "Length": 25794
     },
     {
+      "Path": "scripts/Test-PackagedWindowsRuntimePeClosure.ps1",
+      "Sha256": "146da9b04959c3a62ddb329d7ffb214953a419b5ddb7f8f68662d3e62bd09039",
+      "Length": 6063
+    },
+    {
       "Path": "scripts/Test-PerformanceBenchmarkEvidence.ps1",
       "Sha256": "86b7495b7b0a100494e232c92177967a8525d04cd6a0997cc5c36783a2cea7ee",
       "Length": 6210
@@ -7386,8 +7402,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "b5275cad87c5022c62e393aa1e4de7d7bbfeae44cdc0bae58c723700faf14bfe",
-      "Length": 200979
+      "Sha256": "7e64b55483826d3bdf30745a0f131d1fc79e560d5593f8b66b18303545f24670",
+      "Length": 201674
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -7526,8 +7542,8 @@
     },
     {
       "Path": "scripts/Test-V510ChangeLedger.ps1",
-      "Sha256": "959f64bfc4f6ebc9ee1e19553aa35939b44c076f97ec1e493b4f9cf98ed41a70",
-      "Length": 19244
+      "Sha256": "01cfaf2186510af88d7a104f5f3943969bcccead1761bf55bee47bf92469a3cd",
+      "Length": 22732
     },
     {
       "Path": "scripts/Test-VideoDnnBenchmarkEvidence.ps1",
@@ -9399,7 +9415,7 @@
     {
       "Id": "opencv-5.1-evidence-refresh",
       "Status": "cross-rid-and-promotion-evidence-pending",
-      "Evidence": "Windows x64 OpenCV 5.1.0 source, Full/Mini wrapper builds, and local Full/Mini package restore/build/native smoke are verified. The inherited 5.0.0 maps and multi-RID/hosted support records remain historical; cross-RID hosted evidence, candidate package PE closure, signing and SBOM promotion remain open."
+      "Evidence": "Windows x64 OpenCV 5.1.0 source, Full/Mini wrapper builds, local Full/Mini package restore/build/native smoke, and local candidate package PE closure are verified. The inherited 5.0.0 maps and multi-RID/hosted support records remain historical; cross-RID hosted evidence, signing and SBOM promotion remain open."
     },
     {
       "Id": "publication-authorization",

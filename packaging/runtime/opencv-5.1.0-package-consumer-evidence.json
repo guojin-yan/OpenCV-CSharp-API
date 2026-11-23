@@ -325,7 +325,37 @@
       "smoke": "core,imgproc,imgcodecs,videoio,not_linked"
     }
   ],
+  "peClosure": {
+    "status": "verified-local-windows-x64",
+    "evidencePath": "packaging/runtime/opencv-5.1.0-package-pe-closure-evidence.json",
+    "guard": "scripts/Test-PackagedWindowsRuntimePeClosure.ps1",
+    "dependencyGuard": "scripts/Test-WindowsRuntimePeClosure.ps1",
+    "profiles": [
+      {
+        "profile": "full",
+        "packageSha256": "d0b6898df70684c3a39da6091adcabaf43b7d184347e8db4aba2059e652949ec",
+        "machine": "AMD64",
+        "nativeFiles": 43,
+        "packagedModules": 42,
+        "reachableModules": 42,
+        "loaderOpenCvImports": 41,
+        "opencvImportEdges": 186,
+        "missingOpenCvImports": 0
+      },
+      {
+        "profile": "mini",
+        "packageSha256": "9787a637ede30c26db3af1ac40d0999f6ef1f8c6ba5e953e1b7f5a46c6e37ca7",
+        "machine": "AMD64",
+        "nativeFiles": 7,
+        "packagedModules": 6,
+        "reachableModules": 6,
+        "loaderOpenCvImports": 5,
+        "opencvImportEdges": 15,
+        "missingOpenCvImports": 0
+      }
+    ]
+  },
   "guard": "scripts/Test-GitHubPackConsumerRestoreSurface.ps1",
   "guardArguments": "-ExpectedPackageVersion 5.1.0.0 -ExpectedSyntheticRuntimeInputs false -SelectedRid win-x64 -SelectedRuntimeProfile full|mini -OpenCvVersion 5.1.0 -CompileNativeSmoke -RunNativeSmoke -ConsumerTargetFramework net8.0",
-  "scope": "Local real Windows x64 packages built from the OpenCV 5.1.0 Full/Mini runtime inputs. This closes local package restore/build/native smoke only; cross-RID hosted evidence, final NuGet consumer, signing and SBOM promotion remain open."
+  "scope": "Local real Windows x64 packages built from the OpenCV 5.1.0 Full/Mini runtime inputs. Restore/build/native smoke and package PE closure are verified locally; cross-RID hosted evidence, final NuGet consumer, signing and SBOM promotion remain open."
 }
