@@ -128,7 +128,8 @@ function Invoke-FuzzFramework {
                     'IdentifyDeterministicMutationCorpusPamNeverEscapesOrPublishesAmbiguousHeaderFacts',
                     'IdentifyDeterministicMutationCorpusPnmNeverEscapesOrPublishesInconsistentRasterFacts',
                     'IdentifyDeterministicMutationCorpusPfmNeverEscapesOrPublishesInconsistentFloatFacts',
-                    'IdentifyDeterministicMutationCorpusRadianceHdrNeverEscapesOrPublishesInconsistentScanlineFacts')) {
+                    'IdentifyDeterministicMutationCorpusRadianceHdrNeverEscapesOrPublishesInconsistentScanlineFacts',
+                    'IdentifyDeterministicMutationCorpusSunRasterNeverEscapesOrPublishesInconsistentStorageFacts')) {
                 if (@($results | Where-Object { ([string]$_.testName).Contains($requiredTest) -and [string]$_.outcome -ceq 'Passed' }).Count -ne 1) { $testsExecuted = $false }
             }
             if ($testsExecuted) { Write-Host "IMAGE_PREFLIGHT_FUZZ_TEST_RESULTS framework=$Framework tests_passed=$($counters.passed) trx=$trxPath" }
@@ -212,12 +213,13 @@ $evidence = [ordered]@{
     limitations = @(
         'The corpus is deterministic managed preflight coverage; it is not coverage-guided native fuzzing.',
         'The isolated dotnet test process distinguishes clean, managed failure, OOM, crash, and timeout outcomes.',
-        'A clean classification requires passing TRX execution evidence for both general corpus tests plus the GIF metadata, AVIF primary item, JPEG marker, APNG frame, WebP container, TIFF directory, JPEG 2000 header, OpenEXR first-header, BMP DIB/palette, PNG IHDR/chunk, PAM header, PNM text/raster, PFM scale/raster, and Radiance HDR header/scanline mutation tests; an empty dotnet test invocation fails.',
+        'A clean classification requires passing TRX execution evidence for both general corpus tests plus the GIF metadata, AVIF primary item, JPEG marker, APNG frame, WebP container, TIFF directory, JPEG 2000 header, OpenEXR first-header, BMP DIB/palette, PNG IHDR/chunk, PAM header, PNM text/raster, PFM scale/raster, Radiance HDR header/scanline, and Sun Raster byte-stream mutation tests; an empty dotnet test invocation fails.',
         'PNG completion checks core chunk, palette, transparency and ICC/Exif envelopes; CRC, zlib/ICC/text contents and other ancillary semantics remain unverified.',
         'PAM header facts use unique WIDTH/HEIGHT/DEPTH/MAXVAL and exact ENDHDR, with arbitrary encoded tuple depth; tuple meanings, sample values and native decoder channel support remain unverified.',
         'PNM standalone completion counts individual plain PBM bits, bounded plain samples or exact raw bytes after one delimiter; trailing junk, concatenated images, raw sample semantics and final/native allocation remain unverified.',
         'PFM header facts require a syntactically valid nonzero decimal scale scanned without token allocation; exact float32 bytes after one whitespace delimiter gate completion. Native scale range/conversion, decoder support, sample orientation/semantics and final/native allocation remain unverified.',
         'Radiance HDR requires one RGBE/XYZE FORMAT and two distinct signed axes; flat, old-repeat and component-RLE records are counted without expanding pixels. Color/exposure/orientation transforms, metadata lengths, native decoder support and final/native allocation remain unverified.',
+        'Sun Raster counts exact 16-bit-padded raw or byte-RLE storage at depths 1/8/24/32, including cross-row runs and Int64 expansion without decoded allocation; colormap contents, pixel/color order, native support and final/native allocation remain unverified.',
         'WorkingSet64 is sampled process RSS evidence for this runner; process teardown cannot prove absence of a long-lived native leak.',
         'No native runtime is required because the tested Identify paths stop before native decoding.'
     )

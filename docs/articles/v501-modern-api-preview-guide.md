@@ -112,6 +112,10 @@ Radiance HDR requires one RGBE/XYZE FORMAT and supports all eight signed axis or
 
 Radiance HDR 要求唯一 RGBE/XYZE FORMAT，支持全部八种有符号轴序。第二轴决定 scanline 长度，精确 flat/旧式重复/component-RLE record 决定帧/存储事实，不展开像素。16 份文件经独立 Radiance C 样本核对，其中 11 份另经 imagecodecs 验证。四个 8-bit 编码分量包含共享指数，而非 alpha；曝光/色彩/方向变换、metadata 长度、native 支持/分配和最终 Mat 精度仍未知。
 
+Sun Raster proves raw/old/RGB or byte-RLE completion at all supported 1/8/24/32-bit storage depths using exact 16-bit-padded rows and file ranges. RLE runs cross rows; Int64 expansion counts can exceed 2 GiB without allocating decoded pixels. Sixteen files have independent Netpbm C storage-byte checks, with ten also checked by Pillow. Header facts survive unknown completion; color maps, the 32-bit padding byte, native decoding/allocation and final Mat precision require separate evidence. The storage estimate rounds each sample up to a byte, including packed 1-bit input.
+
+Sun Raster 的 raw/old/RGB 或 byte-RLE 完整性覆盖支持的全部 1/8/24/32-bit 存储深度，使用精确 16-bit 对齐行和文件范围。RLE run 可跨行，Int64 展开计数可超过 2 GiB，无需分配解码像素。16 份文件经独立 Netpbm C 存储字节核对，其中 10 份另经 Pillow 验证。完整性未知时保留头部事实；色表、32-bit padding 字节、native 解码/分配和最终 Mat 精度需要单独证据。存储估算将每个样本向上取整到字节，也包括位打包的 1-bit 输入。
+
 `ConsoleSamples` 的 `typed-mat` 与 `buffered-codec` 命令提供可运行的机器可读示例；没有 native runtime 时明确 skipped，不能把 skipped 当作能力已验证。
 
 ## Platform and headless boundaries / 平台与 headless 边界

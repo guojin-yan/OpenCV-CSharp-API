@@ -49,6 +49,8 @@ $pfmTestPath = Join-Path $repo 'tests/OpenCvSharp.Tests/ImgCodecs/PfmHeaderPrefl
 if (-not (Test-Path -LiteralPath $pfmTestPath -PathType Leaf)) { throw 'PFM scale/raster admission tests are missing.' }
 $hdrTestPath = Join-Path $repo 'tests/OpenCvSharp.Tests/ImgCodecs/RadianceHdrPreflightTests.cs'
 if (-not (Test-Path -LiteralPath $hdrTestPath -PathType Leaf)) { throw 'Radiance HDR header/scanline admission tests are missing.' }
+$sunRasterTestPath = Join-Path $repo 'tests/OpenCvSharp.Tests/ImgCodecs/SunRasterPreflightTests.cs'
+if (-not (Test-Path -LiteralPath $sunRasterTestPath -PathType Leaf)) { throw 'Sun Raster byte-stream admission tests are missing.' }
 if (@($manifest.frameworks).Count -ne 2 -or @($manifest.replacementBytes).Count -ne 5 -or @($manifest.fixtures).Count -lt 13) { throw 'Mutation corpus manifest dimensions drifted.' }
 
 $frameworks = @('net8.0', 'net10.0')
@@ -63,7 +65,7 @@ foreach ($framework in $frameworks) {
     $startInfo.RedirectStandardError = $true
     foreach ($argument in @(
             'test', $project, '-c', 'Release', '-f', $framework, '--no-restore',
-            '--filter', 'FullyQualifiedName~IdentifyDeterministicMutationCorpus|FullyQualifiedName~GifMetadataPreflightTests|FullyQualifiedName~AvifPrimaryItemPreflightTests|FullyQualifiedName~JpegMarkerPreflightTests|FullyQualifiedName~ApngFramePreflightTests|FullyQualifiedName~WebpContainerPreflightTests|FullyQualifiedName~TiffDirectoryPreflightTests|FullyQualifiedName~Jpeg2000HeaderPreflightTests|FullyQualifiedName~OpenExrHeaderPreflightTests|FullyQualifiedName~BmpHeaderPreflightTests|FullyQualifiedName~PngHeaderPreflightTests|FullyQualifiedName~PamHeaderPreflightTests|FullyQualifiedName~PnmHeaderPreflightTests|FullyQualifiedName~PfmHeaderPreflightTests|FullyQualifiedName~RadianceHdrPreflightTests',
+            '--filter', 'FullyQualifiedName~IdentifyDeterministicMutationCorpus|FullyQualifiedName~GifMetadataPreflightTests|FullyQualifiedName~AvifPrimaryItemPreflightTests|FullyQualifiedName~JpegMarkerPreflightTests|FullyQualifiedName~ApngFramePreflightTests|FullyQualifiedName~WebpContainerPreflightTests|FullyQualifiedName~TiffDirectoryPreflightTests|FullyQualifiedName~Jpeg2000HeaderPreflightTests|FullyQualifiedName~OpenExrHeaderPreflightTests|FullyQualifiedName~BmpHeaderPreflightTests|FullyQualifiedName~PngHeaderPreflightTests|FullyQualifiedName~PamHeaderPreflightTests|FullyQualifiedName~PnmHeaderPreflightTests|FullyQualifiedName~PfmHeaderPreflightTests|FullyQualifiedName~RadianceHdrPreflightTests|FullyQualifiedName~SunRasterPreflightTests',
             '--results-directory', $resultsDirectory, '--logger', 'trx;LogFileName=preflight.trx',
             '--logger', 'console;verbosity=minimal')) {
         [void]$startInfo.ArgumentList.Add($argument)
@@ -167,7 +169,14 @@ foreach ($framework in $frameworks) {
             'IdentifyUsesSecondRadianceHdrAxisAsRleScanlineLength',
             'IdentifyRequiresExactRadianceHdrScanlinesAndPreservesProvenHeaders',
             'IdentifyKeepsHugeRadianceHdrGeometryWithoutAllocatingScanlines',
-            'IdentifyDeterministicMutationCorpusRadianceHdrNeverEscapesOrPublishesInconsistentScanlineFacts')) {
+            'IdentifyDeterministicMutationCorpusRadianceHdrNeverEscapesOrPublishesInconsistentScanlineFacts',
+            'SunRasterBudgetsRejectBeforeNativeDecodeAndPreserveStreams',
+            'SunRasterStrictPolicyRejectsUnknownHeaderOrMetadataBeforeNativeDecode',
+            'IdentifyReadsEverySunRasterRleCountAndLiteralByte',
+            'IdentifyRequiresExactSunRasterFileBoundaryAndPreservesProvenHeaders',
+            'IdentifyBoundsSunRasterMapsAndCheckedGeometryWithoutAllocating',
+            'IdentifyCountsSunRasterRleBeyondInt32WithoutAllocatingExpandedRaster',
+            'IdentifyDeterministicMutationCorpusSunRasterNeverEscapesOrPublishesInconsistentStorageFacts')) {
         if (@($results | Where-Object { ([string]$_.testName).Contains($requiredTest) -and [string]$_.outcome -ceq 'Passed' }).Count -ne 1) { throw "Required image preflight test did not pass on ${framework}: $requiredTest" }
     }
     foreach ($requiredRegression in @(
@@ -191,6 +200,17 @@ foreach ($framework in $frameworks) {
             @{ Name = 'IdentifyRejectsOpenExrSamplingThatConflictsWithDataWindow'; Count = 4 },
             @{ Name = 'IdentifyReadsRealOpenExrFirstHeaderFixtures'; Count = 7 })) {
         if (@($results | Where-Object { ([string]$_.testName).Contains($regression.Name) -and [string]$_.outcome -ceq 'Passed' }).Count -ne $regression.Count) { throw "All $($regression.Count) OpenEXR cases must pass on ${framework}: $($regression.Name)" }
+    }
+    foreach ($regression in @(
+            @{ Name = 'IdentifyReadsRealSunRasterStorageFixtures'; Count = 16 },
+            @{ Name = 'IdentifyCountsSunRasterRleAcrossRowsForEverySupportedDepth'; Count = 4 },
+            @{ Name = 'IdentifyRequiresSunRasterSixteenBitPaddedRows'; Count = 12 },
+            @{ Name = 'IdentifyPreservesSunRasterRawOldAndRgbLengthRules'; Count = 12 },
+            @{ Name = 'IdentifyRejectsIncompleteOrOverlongSunRasterEscapeStreams'; Count = 10 },
+            @{ Name = 'IdentifyKeepsSunRasterHeaderFactsWhenPayloadDeclarationsAreUnknown'; Count = 11 },
+            @{ Name = 'IdentifyLeavesUnsupportedSunRasterDepthUnknown'; Count = 5 },
+            @{ Name = 'IdentifyRejectsInvalidSunRasterGeometry'; Count = 6 })) {
+        if (@($results | Where-Object { ([string]$_.testName).Contains($regression.Name) -and [string]$_.outcome -ceq 'Passed' }).Count -ne $regression.Count) { throw "All $($regression.Count) Sun Raster cases must pass on ${framework}: $($regression.Name)" }
     }
     foreach ($regression in @(
             @{ Name = 'IdentifyReadsRealRadianceHdrScanlineFixtures'; Count = 16 },
