@@ -1,0 +1,111 @@
+{
+  "fromVersion": "5.0.0",
+  "toVersion": "5.1.0",
+  "module": "ximgproc",
+  "retainedIdentityCount": 249,
+  "added": [],
+  "removed": [],
+  "changed": [
+    {
+      "identity": "cv.ximgproc.HoughPoint2Line(Point houghPoint[/C,/Ref];Mat srcImgInfo;int angleRange=ARO_315_135;int makeSkew=HDO_DESKEW;int rules=RO_IGNORE_BORDERS)-\u003EVec4i",
+      "review": "Only Doxygen tags change: @retval becomes @return and @remarks becomes @note. The RO_STRICT border clipping and RO_WEAK nonintersection descriptions, Vec4i return value and exact signature are unchanged. Retain the existing HoughPoint2Line managed/C ABI binding and its validation; no new line-geometry or input-domain behavior is certified.",
+      "before": {
+        "ordinal": 103,
+        "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ximgproc/include/opencv2/ximgproc/fast_hough_transform.hpp",
+        "kind": "callable",
+        "name": "cv.ximgproc.HoughPoint2Line",
+        "identity": "cv.ximgproc.HoughPoint2Line(Point houghPoint[/C,/Ref];Mat srcImgInfo;int angleRange=ARO_315_135;int makeSkew=HDO_DESKEW;int rules=RO_IGNORE_BORDERS)-\u003EVec4i",
+        "returnType": "Vec4i",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Point",
+            "name": "houghPoint",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "Mat",
+            "name": "srcImgInfo",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "angleRange",
+            "default": "ARO_315_135",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "makeSkew",
+            "default": "HDO_DESKEW",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "rules",
+            "default": "RO_IGNORE_BORDERS",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "* @brief   Calculates coordinates of line segment corresponded by point in Hough space.\n* @param   houghPoint  Point in Hough space.\n* @param   srcImgInfo The source (input) image of Hough transform.\n* @param   angleRange  The part of Hough space where point is situated, see cv::AngleRangeOption\n* @param   makeSkew    Specifies to do or not to do image skewing, see cv::HoughDeskewOption\n* @param   rules       Specifies strictness of line segment calculating, see cv::RulesOption\n* @retval  [Vec4i]     Coordinates of line segment corresponded by point in Hough space.\n* @remarks If rules parameter set to RO_STRICT\n           then returned line cut along the border of source image.\n* @remarks If rules parameter set to RO_WEAK then in case of point, which belongs\n           the incorrect part of Hough image, returned line will not intersect source image.\n*\n* The function calculates coordinates of line segment corresponded by point in Hough space."
+      },
+      "after": {
+        "ordinal": 103,
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/ximgproc/include/opencv2/ximgproc/fast_hough_transform.hpp",
+        "kind": "callable",
+        "name": "cv.ximgproc.HoughPoint2Line",
+        "identity": "cv.ximgproc.HoughPoint2Line(Point houghPoint[/C,/Ref];Mat srcImgInfo;int angleRange=ARO_315_135;int makeSkew=HDO_DESKEW;int rules=RO_IGNORE_BORDERS)-\u003EVec4i",
+        "returnType": "Vec4i",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Point",
+            "name": "houghPoint",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "Mat",
+            "name": "srcImgInfo",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "angleRange",
+            "default": "ARO_315_135",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "makeSkew",
+            "default": "HDO_DESKEW",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "rules",
+            "default": "RO_IGNORE_BORDERS",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "* @brief   Calculates coordinates of line segment corresponded by point in Hough space.\n* @param   houghPoint  Point in Hough space.\n* @param   srcImgInfo The source (input) image of Hough transform.\n* @param   angleRange  The part of Hough space where point is situated, see cv::AngleRangeOption\n* @param   makeSkew    Specifies to do or not to do image skewing, see cv::HoughDeskewOption\n* @param   rules       Specifies strictness of line segment calculating, see cv::RulesOption\n* @return  [Vec4i]     Coordinates of line segment corresponded by point in Hough space.\n* @note If rules parameter set to RO_STRICT\n           then returned line cut along the border of source image.\n* @note If rules parameter set to RO_WEAK then in case of point, which belongs\n           the incorrect part of Hough image, returned line will not intersect source image.\n*\n* The function calculates coordinates of line segment corresponded by point in Hough space."
+      },
+      "fields": [
+        "documentation"
+      ]
+    }
+  ]
+}

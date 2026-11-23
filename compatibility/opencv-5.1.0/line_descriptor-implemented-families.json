@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.1.0",
+  "module": "line_descriptor",
+  "claimedSlice": "Historical line_descriptor parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+  "completeCppParityClaimed": false,
+  "implemented": [
+    {
+      "ordinal": 7,
+      "identity": "cv.line_descriptor.BinaryDescriptor.createBinaryDescriptor()-\u003EPtr\u003CBinaryDescriptor\u003E",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_binary_descriptor_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|method|public;static|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor Create()",
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|method|public;static|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor Create(JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptorParameters parameters)",
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|method|public;static|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor Create(System.Int32 numOfOctaves=1,System.Int32 widthOfBand=7,System.Int32 reductionRatio=2,System.Int32 ksize=5)"
+      ],
+      "historicalOrdinal": 7,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.line_descriptor.BinaryDescriptor.getNumOfOctaves()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_binary_descriptor_get_num_of_octaves"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|property|instance;get:public;set:public|System.Int32 NumOfOctaves"
+      ],
+      "historicalOrdinal": 8,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.line_descriptor.BinaryDescriptor.setNumOfOctaves(int octaves)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_binary_descriptor_set_num_of_octaves"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|property|instance;get:public;set:public|System.Int32 NumOfOctaves"
+      ],
+      "historicalOrdinal": 9,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.line_descriptor.BinaryDescriptor.getWidthOfBand()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_binary_descriptor_get_width_of_band"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|property|instance;get:public;set:public|System.Int32 WidthOfBand"
+      ],
+      "historicalOrdinal": 10,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.line_descriptor.BinaryDescriptor.setWidthOfBand(int width)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_binary_descriptor_set_width_of_band"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|property|instance;get:public;set:public|System.Int32 WidthOfBand"
+      ],
+      "historicalOrdinal": 11,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.line_descriptor.BinaryDescriptor.getReductionRatio()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_binary_descriptor_get_reduction_ratio"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|property|instance;get:public;set:public|System.Int32 ReductionRatio"
+      ],
+      "historicalOrdinal": 12,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.line_descriptor.BinaryDescriptor.setReductionRatio(int rRatio)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_binary_descriptor_set_reduction_ratio"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|property|instance;get:public;set:public|System.Int32 ReductionRatio"
+      ],
+      "historicalOrdinal": 13,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.line_descriptor.BinaryDescriptor.detect(Mat image[/C,/Ref];vector_KeyLine keypoints[/O,/Ref];Mat mask=Mat()[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_binary_descriptor_detect_count",
+        "jyppx_ocv_line_descriptor_binary_descriptor_detect_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|method|public;instance|JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] Detect(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat? mask=null)"
+      ],
+      "historicalOrdinal": 14,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.line_descriptor.BinaryDescriptor.compute(Mat image[/C,/Ref];vector_KeyLine keylines[/IO,/Ref];Mat descriptors[/O,/Ref];bool returnFloatDescr=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_binary_descriptor_compute"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Compute(JYPPX.OpenCvSharp.Core.Mat image,ref JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] keylines,System.Boolean returnFloatDescriptor=false)",
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|method|public;instance|JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] Compute(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] keylines,JYPPX.OpenCvSharp.Core.Mat descriptors,System.Boolean returnFloatDescriptor=false)",
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|method|public;instance|JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] Compute(JYPPX.OpenCvSharp.Core.Mat image,System.ReadOnlySpan\u003CJYPPX.OpenCvSharp.LineDescriptor.KeyLine\u003E keylines,JYPPX.OpenCvSharp.Core.Mat descriptors,System.Boolean returnFloatDescriptor=false)",
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptor|method|public;instance|System.Void Compute(JYPPX.OpenCvSharp.Core.Mat image,ref JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] keylines,JYPPX.OpenCvSharp.Core.Mat descriptors,System.Boolean returnFloatDescriptor=false)"
+      ],
+      "historicalOrdinal": 15,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.line_descriptor.BinaryDescriptorMatcher.match(Mat queryDescriptors[/C,/Ref];Mat trainDescriptors[/C,/Ref];vector_DMatch matches[/O,/Ref];Mat mask=Mat()[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_binary_descriptor_matcher_match_count",
+        "jyppx_ocv_line_descriptor_binary_descriptor_matcher_match_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptorMatcher|method|public;instance|JYPPX.OpenCvSharp.Features2D.DMatch[] Match(JYPPX.OpenCvSharp.Core.Mat queryDescriptors,JYPPX.OpenCvSharp.Core.Mat trainDescriptors,JYPPX.OpenCvSharp.Core.Mat? mask=null)"
+      ],
+      "historicalOrdinal": 26,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.line_descriptor.BinaryDescriptorMatcher.knnMatch(Mat queryDescriptors[/C,/Ref];Mat trainDescriptors[/C,/Ref];vector_vector_DMatch matches[/O,/Ref];int k;Mat mask=Mat()[/C,/Ref];bool compactResult=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_binary_descriptor_matcher_knn_match_count",
+        "jyppx_ocv_line_descriptor_binary_descriptor_matcher_knn_match_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptorMatcher|method|public;instance|JYPPX.OpenCvSharp.Features2D.DMatch[][] KnnMatch(JYPPX.OpenCvSharp.Core.Mat queryDescriptors,JYPPX.OpenCvSharp.Core.Mat trainDescriptors,System.Int32 k,JYPPX.OpenCvSharp.Core.Mat? mask=null,System.Boolean compactResult=false)"
+      ],
+      "historicalOrdinal": 28,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.line_descriptor.BinaryDescriptorMatcher.BinaryDescriptorMatcher()-\u003E",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_binary_descriptor_matcher_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptorMatcher|method|public;static|JYPPX.OpenCvSharp.LineDescriptor.BinaryDescriptorMatcher Create()"
+      ],
+      "historicalOrdinal": 30,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.line_descriptor.drawLineMatches(Mat img1[/C,/Ref];vector_KeyLine keylines1[/C,/Ref];Mat img2[/C,/Ref];vector_KeyLine keylines2[/C,/Ref];vector_DMatch matches1to2[/C,/Ref];Mat outImg[/O,/Ref];Scalar matchColor=Scalar::all( -1 )[/C,/Ref];Scalar singleLineColor=Scalar::all( -1 )[/C,/Ref];vector_char matchesMask=std::vector\u003Cchar\u003E()[/C,/Ref];int flags=DrawLinesMatchesFlags::DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_draw_line_matches"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.LineDescriptorCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat DrawLineMatches(JYPPX.OpenCvSharp.Core.Mat image1,JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] keylines1,JYPPX.OpenCvSharp.Core.Mat image2,JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] keylines2,JYPPX.OpenCvSharp.Features2D.DMatch[] matches,JYPPX.OpenCvSharp.Core.Scalar matchColor,JYPPX.OpenCvSharp.Core.Scalar singleLineColor,JYPPX.OpenCvSharp.LineDescriptor.DrawLinesMatchesFlags flags=Default)",
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.LineDescriptorCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat DrawLineMatches(JYPPX.OpenCvSharp.Core.Mat image1,JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] keylines1,JYPPX.OpenCvSharp.Core.Mat image2,JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] keylines2,JYPPX.OpenCvSharp.Features2D.DMatch[] matches,JYPPX.OpenCvSharp.LineDescriptor.DrawLinesMatchesFlags flags=Default)",
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.LineDescriptorCv2|method|public;static|System.Void DrawLineMatches(JYPPX.OpenCvSharp.Core.Mat image1,JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] keylines1,JYPPX.OpenCvSharp.Core.Mat image2,JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] keylines2,JYPPX.OpenCvSharp.Features2D.DMatch[] matches,JYPPX.OpenCvSharp.Core.Mat outImage,JYPPX.OpenCvSharp.Core.Scalar matchColor,JYPPX.OpenCvSharp.Core.Scalar singleLineColor,JYPPX.OpenCvSharp.LineDescriptor.DrawLinesMatchesFlags flags=Default)"
+      ],
+      "historicalOrdinal": 32,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.line_descriptor.drawKeylines(Mat image[/C,/Ref];vector_KeyLine keylines[/C,/Ref];Mat outImage[/O,/Ref];Scalar color=Scalar::all( -1 )[/C,/Ref];int flags=DrawLinesMatchesFlags::DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit LineDescriptor declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_LINE_DESCRIPTOR=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_line_descriptor_draw_keylines"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.LineDescriptorCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat DrawKeylines(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] keylines,JYPPX.OpenCvSharp.Core.Scalar color,JYPPX.OpenCvSharp.LineDescriptor.DrawLinesMatchesFlags flags=Default)",
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.LineDescriptorCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat DrawKeylines(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] keylines,JYPPX.OpenCvSharp.LineDescriptor.DrawLinesMatchesFlags flags=Default)",
+        "MEMBER|JYPPX.OpenCvSharp.LineDescriptor.LineDescriptorCv2|method|public;static|System.Void DrawKeylines(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.LineDescriptor.KeyLine[] keylines,JYPPX.OpenCvSharp.Core.Mat outImage,JYPPX.OpenCvSharp.Core.Scalar color,JYPPX.OpenCvSharp.LineDescriptor.DrawLinesMatchesFlags flags=Default)"
+      ],
+      "historicalOrdinal": 33,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    }
+  ],
+  "limitation": "Implemented means the recorded managed/C ABI binding exists, subject to its documented validation. It does not certify wider 5.1 input domains, optional codecs/backends, or complete C\u002B\u002B coverage."
+}

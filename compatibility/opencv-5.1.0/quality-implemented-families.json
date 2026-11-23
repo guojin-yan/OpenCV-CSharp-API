@@ -1,0 +1,447 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.1.0",
+  "module": "quality",
+  "claimedSlice": "Historical quality parser scope refreshed against official 5.1 sources: 7 contributing header(s); parser-emitted declarations only",
+  "completeCppParityClaimed": false,
+  "implemented": [
+    {
+      "ordinal": 1,
+      "identity": "cv.quality.QualityBase.compute(Mat img)-\u003Ecv::Scalar",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_compute"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|method|public;instance|JYPPX.OpenCvSharp.Core.Scalar Compute(JYPPX.OpenCvSharp.Core.Mat comparison)"
+      ],
+      "historicalOrdinal": 1,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.quality.QualityBase.getQualityMap(Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_get_quality_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetQualityMap()",
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|method|public;instance|System.Void GetQualityMap(JYPPX.OpenCvSharp.Core.Mat qualityMap)"
+      ],
+      "historicalOrdinal": 2,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.quality.QualityBase.clear()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_clear"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|method|public;instance|System.Void Clear()"
+      ],
+      "historicalOrdinal": 3,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.quality.QualityBase.empty()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_empty"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|property|instance;get:public|System.Boolean Empty"
+      ],
+      "historicalOrdinal": 4,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.quality.QualityBRISQUE.compute(Mat img)-\u003Ecv::Scalar",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_compute"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|method|public;instance|JYPPX.OpenCvSharp.Core.Scalar Compute(JYPPX.OpenCvSharp.Core.Mat comparison)"
+      ],
+      "historicalOrdinal": 6,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.quality.QualityBRISQUE.create(String model_file_path[/C,/Ref];String range_file_path[/C,/Ref])-\u003EPtr\u003CQualityBRISQUE\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present. BRISQUE operation requires caller-supplied model and range files; the repository bundles neither asset.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_brisque_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBRISQUE|method|public;static|JYPPX.OpenCvSharp.Quality.QualityBRISQUE Create(System.String modelFilePath,System.String rangeFilePath)"
+      ],
+      "historicalOrdinal": 7,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.quality.QualityBRISQUE.compute(Mat img;String model_file_path[/C,/Ref];String range_file_path[/C,/Ref])-\u003Ecv::Scalar",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present. BRISQUE operation requires caller-supplied model and range files; the repository bundles neither asset.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_brisque_compute_static"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBRISQUE|method|public;static|JYPPX.OpenCvSharp.Core.Scalar Compute(JYPPX.OpenCvSharp.Core.Mat image,System.String modelFilePath,System.String rangeFilePath)"
+      ],
+      "historicalOrdinal": 9,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.quality.QualityBRISQUE.computeFeatures(Mat img;Mat features[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_brisque_compute_features"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBRISQUE|method|public;static|JYPPX.OpenCvSharp.Core.Mat ComputeFeatures(JYPPX.OpenCvSharp.Core.Mat image)",
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBRISQUE|method|public;static|System.Void ComputeFeatures(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat features)"
+      ],
+      "historicalOrdinal": 10,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.quality.QualityGMSD.compute(Mat cmp)-\u003Ecv::Scalar",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_compute"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|method|public;instance|JYPPX.OpenCvSharp.Core.Scalar Compute(JYPPX.OpenCvSharp.Core.Mat comparison)"
+      ],
+      "historicalOrdinal": 12,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.quality.QualityGMSD.empty()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_empty"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|property|instance;get:public|System.Boolean Empty"
+      ],
+      "historicalOrdinal": 13,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.quality.QualityGMSD.clear()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_clear"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|method|public;instance|System.Void Clear()"
+      ],
+      "historicalOrdinal": 14,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.quality.QualityGMSD.create(Mat ref)-\u003EPtr\u003CQualityGMSD\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_gmsd_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityGMSD|method|public;static|JYPPX.OpenCvSharp.Quality.QualityGMSD Create(JYPPX.OpenCvSharp.Core.Mat reference)"
+      ],
+      "historicalOrdinal": 15,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.quality.QualityGMSD.compute(Mat ref;Mat cmp;Mat qualityMap[/O])-\u003Ecv::Scalar",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_gmsd_compute_static"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityGMSD|method|public;static|JYPPX.OpenCvSharp.Core.Scalar Compute(JYPPX.OpenCvSharp.Core.Mat reference,JYPPX.OpenCvSharp.Core.Mat comparison,JYPPX.OpenCvSharp.Core.Mat? qualityMap=null)"
+      ],
+      "historicalOrdinal": 16,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.quality.QualityMSE.empty()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_empty"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|property|instance;get:public|System.Boolean Empty"
+      ],
+      "historicalOrdinal": 19,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.quality.QualityMSE.clear()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_clear"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|method|public;instance|System.Void Clear()"
+      ],
+      "historicalOrdinal": 20,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.quality.QualityMSE.create(Mat ref)-\u003EPtr\u003CQualityMSE\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_mse_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityMSE|method|public;static|JYPPX.OpenCvSharp.Quality.QualityMSE Create(JYPPX.OpenCvSharp.Core.Mat reference)"
+      ],
+      "historicalOrdinal": 21,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.quality.QualityMSE.compute(Mat ref;Mat cmp;Mat qualityMap[/O])-\u003Ecv::Scalar",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_mse_compute_static"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityMSE|method|public;static|JYPPX.OpenCvSharp.Core.Scalar Compute(JYPPX.OpenCvSharp.Core.Mat reference,JYPPX.OpenCvSharp.Core.Mat comparison,JYPPX.OpenCvSharp.Core.Mat? qualityMap=null)"
+      ],
+      "historicalOrdinal": 22,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.quality.QualityPSNR.create(Mat ref;double maxPixelValue=QualityPSNR::MAX_PIXEL_VALUE_DEFAULT)-\u003EPtr\u003CQualityPSNR\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_psnr_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityPSNR|method|public;static|JYPPX.OpenCvSharp.Quality.QualityPSNR Create(JYPPX.OpenCvSharp.Core.Mat reference,System.Double maxPixelValue=255)"
+      ],
+      "historicalOrdinal": 24,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.quality.QualityPSNR.compute(Mat cmp)-\u003Ecv::Scalar",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_compute"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|method|public;instance|JYPPX.OpenCvSharp.Core.Scalar Compute(JYPPX.OpenCvSharp.Core.Mat comparison)"
+      ],
+      "historicalOrdinal": 25,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.quality.QualityPSNR.empty()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_empty"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|property|instance;get:public|System.Boolean Empty"
+      ],
+      "historicalOrdinal": 26,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.quality.QualityPSNR.clear()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_clear"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|method|public;instance|System.Void Clear()"
+      ],
+      "historicalOrdinal": 27,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.quality.QualityPSNR.compute(Mat ref;Mat cmp;Mat qualityMap[/O];double maxPixelValue=QualityPSNR::MAX_PIXEL_VALUE_DEFAULT)-\u003Ecv::Scalar",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_psnr_compute_static"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityPSNR|method|public;static|JYPPX.OpenCvSharp.Core.Scalar Compute(JYPPX.OpenCvSharp.Core.Mat reference,JYPPX.OpenCvSharp.Core.Mat comparison,JYPPX.OpenCvSharp.Core.Mat? qualityMap=null,System.Double maxPixelValue=255)"
+      ],
+      "historicalOrdinal": 28,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.quality.QualityPSNR.getMaxPixelValue()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_psnr_get_max_pixel_value"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityPSNR|property|instance;get:public;set:public|System.Double MaxPixelValue"
+      ],
+      "historicalOrdinal": 29,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.quality.QualityPSNR.setMaxPixelValue(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_psnr_set_max_pixel_value"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityPSNR|property|instance;get:public;set:public|System.Double MaxPixelValue"
+      ],
+      "historicalOrdinal": 30,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.quality.QualitySSIM.compute(Mat cmp)-\u003Ecv::Scalar",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_compute"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|method|public;instance|JYPPX.OpenCvSharp.Core.Scalar Compute(JYPPX.OpenCvSharp.Core.Mat comparison)"
+      ],
+      "historicalOrdinal": 32,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.quality.QualitySSIM.empty()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_empty"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|property|instance;get:public|System.Boolean Empty"
+      ],
+      "historicalOrdinal": 33,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.quality.QualitySSIM.clear()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_clear"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualityBase|method|public;instance|System.Void Clear()"
+      ],
+      "historicalOrdinal": 34,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.quality.QualitySSIM.create(Mat ref)-\u003EPtr\u003CQualitySSIM\u003E",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_ssim_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualitySSIM|method|public;static|JYPPX.OpenCvSharp.Quality.QualitySSIM Create(JYPPX.OpenCvSharp.Core.Mat reference)"
+      ],
+      "historicalOrdinal": 35,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.quality.QualitySSIM.compute(Mat ref;Mat cmp;Mat qualityMap[/O])-\u003Ecv::Scalar",
+      "classification": "implemented",
+      "reason": "Explicit Quality declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_QUALITY=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_quality_ssim_compute_static"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Quality.QualitySSIM|method|public;static|JYPPX.OpenCvSharp.Core.Scalar Compute(JYPPX.OpenCvSharp.Core.Mat reference,JYPPX.OpenCvSharp.Core.Mat comparison,JYPPX.OpenCvSharp.Core.Mat? qualityMap=null)"
+      ],
+      "historicalOrdinal": 36,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    }
+  ],
+  "limitation": "Implemented means the recorded managed/C ABI binding exists, subject to its documented validation. It does not certify wider 5.1 input domains, optional codecs/backends, or complete C\u002B\u002B coverage."
+}

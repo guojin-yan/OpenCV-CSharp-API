@@ -19,6 +19,17 @@ The historical catalog contains 73 OpenCV 5.0.0 source maps. Current-version evi
 | video | [summary](video-upstream-summary.json), [delta](video-upstream-delta.json), [classifications](video-upstream-classifications.json) | 2 contributing headers, 168 declarations, 32 negative fixtures |
 | videoio | [summary](videoio-upstream-summary.json), [delta](videoio-upstream-delta.json), [classifications](videoio-upstream-classifications.json) | 1 contributing headers, 74 declarations, 31 negative fixtures |
 
-The [shared catalog](upstream-map-refresh-catalog.json) and [inventory](upstream-map-refresh-summary.json) record 14 reviewed scopes (2,214 declarations) and 59 pending maps. This record does not establish complete C++ coverage, repository-wide parity or optional backend/codec runtime support. See the [source mapping guide](../../docs/articles/opencv-5.1-source-mapping.md), [calibration migration guide](../../docs/articles/calibration-5.1-migration.md), and [DNN migration guide](../../docs/articles/dnn-5.1-migration.md).
+| xphoto | [summary](xphoto-upstream-summary.json), [delta](xphoto-upstream-delta.json), [classifications](xphoto-upstream-classifications.json) | 6 contributing headers, 47 declarations, 33 negative fixtures |
+| ximgproc | [summary](ximgproc-upstream-summary.json), [delta](ximgproc-upstream-delta.json), [classifications](ximgproc-upstream-classifications.json) | 26 contributing headers, 249 declarations, 32 negative fixtures |
+| optflow | [summary](optflow-upstream-summary.json), [delta](optflow-upstream-delta.json), [classifications](optflow-upstream-classifications.json) | 4 contributing headers, 85 declarations, 32 negative fixtures |
+| bgsegm | [summary](bgsegm-upstream-summary.json), [delta](bgsegm-upstream-delta.json), [classifications](bgsegm-upstream-classifications.json) | 1 contributing headers, 66 declarations, 32 negative fixtures |
+| face | [summary](face-upstream-summary.json), [delta](face-upstream-delta.json), [classifications](face-upstream-classifications.json) | 9 contributing headers, 62 declarations, 32 negative fixtures |
+| quality | [summary](quality-upstream-summary.json), [delta](quality-upstream-delta.json), [classifications](quality-upstream-classifications.json) | 7 contributing headers, 37 declarations, 32 negative fixtures |
+| img_hash | [summary](img_hash-upstream-summary.json), [delta](img_hash-upstream-delta.json), [classifications](img_hash-upstream-classifications.json) | 7 contributing headers, 31 declarations, 32 negative fixtures |
+| line_descriptor | [summary](line_descriptor-upstream-summary.json), [delta](line_descriptor-upstream-delta.json), [classifications](line_descriptor-upstream-classifications.json) | 1 contributing headers, 34 declarations, 32 negative fixtures |
+
+The [shared catalog](upstream-map-refresh-catalog.json) and [inventory](upstream-map-refresh-summary.json) record 22 reviewed scopes (2,825 declarations) and 51 pending maps. This record does not establish complete C++ coverage, repository-wide parity or optional backend/codec runtime support. See the [source mapping guide](../../docs/articles/opencv-5.1-source-mapping.md), [calibration migration guide](../../docs/articles/calibration-5.1-migration.md), and [DNN migration guide](../../docs/articles/dnn-5.1-migration.md).
 
 The [additional module review](../../docs/articles/opencv-5.1-module-mapping.md) explains the nine new scopes, fixed contrib revision, compatibility headers, new explicit omissions and unchanged-surface limits.
+
+The [contrib review](../../docs/articles/opencv-5.1-contrib-mapping.md) adds eight scopes and 611 declarations, including the enum-free and inherited evidence-order validation boundaries.

@@ -4,12 +4,19 @@
   "upstreamCommit": "e4f78fbcf1a773fbed69e14500e8b734963eb585",
   "upstreamContribCommit": "b67a855188a3d683813731010f6d39ac614733a4",
   "catalogPath": "compatibility/opencv-5.1.0/upstream-map-refresh-catalog.json",
-  "catalogSha256": "2597e3ed13c8aba5ee0a88be9d9b2ebb8d3c84ad6207d22875f343ed51074e9d",
+  "catalogSha256": "4d0e132f129a001384e4880d415067f4991668b5b01158a5711b72e8972b545f",
   "historicalCatalogRevision": "5.0.0",
   "historicalCatalogMapCount": 73,
-  "refreshedParserSliceCount": 14,
-  "pendingCatalogMapCount": 59,
+  "refreshedParserSliceCount": 22,
+  "pendingCatalogMapCount": 51,
   "slices": [
+    {
+      "id": "bgsegm",
+      "summaryPath": "compatibility/opencv-5.1.0/bgsegm-upstream-summary.json",
+      "sha256": "2836bb91f23af821f76fe516ebe578ab957d054f8277a1428943fdfaac1c7be4",
+      "declarationCount": 66,
+      "completeCppParityClaimed": false
+    },
     {
       "id": "calib3d",
       "summaryPath": "compatibility/opencv-5.1.0/calib3d-upstream-summary.json",
@@ -32,6 +39,13 @@
       "completeCppParityClaimed": false
     },
     {
+      "id": "face",
+      "summaryPath": "compatibility/opencv-5.1.0/face-upstream-summary.json",
+      "sha256": "e93b4e8d2e27e483475ee42a34b8897cb5ca7f7dca1435210f48b96bd06fdfb3",
+      "declarationCount": 62,
+      "completeCppParityClaimed": false
+    },
+    {
       "id": "features",
       "summaryPath": "compatibility/opencv-5.1.0/features-upstream-summary.json",
       "sha256": "eb8b15f1132ff47b84323f6b58c2b8b174a3180a3a0ce1f64ce1e62fee287993",
@@ -43,6 +57,13 @@
       "summaryPath": "compatibility/opencv-5.1.0/highgui-upstream-summary.json",
       "sha256": "d74c5ec464bae4f4b186525cd80b75ba25a1649d2913953082aab8afc10d986c",
       "declarationCount": 35,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "img_hash",
+      "summaryPath": "compatibility/opencv-5.1.0/img_hash-upstream-summary.json",
+      "sha256": "9cb99eb9b43d5f9d780014b551436606523b3a6f53c2255dc255918336c1c96e",
+      "declarationCount": 31,
       "completeCppParityClaimed": false
     },
     {
@@ -60,6 +81,13 @@
       "completeCppParityClaimed": false
     },
     {
+      "id": "line_descriptor",
+      "summaryPath": "compatibility/opencv-5.1.0/line_descriptor-upstream-summary.json",
+      "sha256": "d1deb0faca876dc101e0406973adf6874d5e1803f05797bd30316dd4f55fe754",
+      "declarationCount": 34,
+      "completeCppParityClaimed": false
+    },
+    {
       "id": "ml",
       "summaryPath": "compatibility/opencv-5.1.0/ml-upstream-summary.json",
       "sha256": "93569b568904ab190897fe36a562d2226be984520907dacbfd06a1b275949954",
@@ -74,10 +102,24 @@
       "completeCppParityClaimed": false
     },
     {
+      "id": "optflow",
+      "summaryPath": "compatibility/opencv-5.1.0/optflow-upstream-summary.json",
+      "sha256": "79d0504559c1b481ce6131201f162d743010b6c0da4100177add6424979bf784",
+      "declarationCount": 85,
+      "completeCppParityClaimed": false
+    },
+    {
       "id": "photo",
       "summaryPath": "compatibility/opencv-5.1.0/photo-upstream-summary.json",
       "sha256": "dbff3f03af2478b510398c7ff7dad36a8971faf37d8a7019418e4203e7b0d537",
       "declarationCount": 145,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "quality",
+      "summaryPath": "compatibility/opencv-5.1.0/quality-upstream-summary.json",
+      "sha256": "62a1e94258ae58c16a6820310a37949d4d016f6e68f879cbfa33d19a74aae6b3",
+      "declarationCount": 37,
       "completeCppParityClaimed": false
     },
     {
@@ -107,11 +149,24 @@
       "sha256": "fc91e7b35d4828731ada269c65033901de048143ebf87e0e94a4767da0d6d19a",
       "declarationCount": 74,
       "completeCppParityClaimed": false
+    },
+    {
+      "id": "ximgproc",
+      "summaryPath": "compatibility/opencv-5.1.0/ximgproc-upstream-summary.json",
+      "sha256": "d407ca5442b6b64ee9b2267b5d8a473b6eb2e26bf2559b5df539d686f3f98ec5",
+      "declarationCount": 249,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "xphoto",
+      "summaryPath": "compatibility/opencv-5.1.0/xphoto-upstream-summary.json",
+      "sha256": "a6143ddb6cc21762ecf97df6f23783e00415db551123de1bd583f4c0310cebed",
+      "declarationCount": 47,
+      "completeCppParityClaimed": false
     }
   ],
   "pendingCatalogMaps": [
     "alphamat",
-    "bgsegm",
     "bioinspired",
     "cannops",
     "ccalib",
@@ -133,23 +188,18 @@
     "dnn_objdetect",
     "dnn_superres",
     "dpm",
-    "face",
     "fastcv",
     "freetype",
     "fuzzy",
     "hdf",
     "hfs",
-    "img_hash",
     "intensity_transform",
     "julia",
-    "line_descriptor",
     "matlab",
-    "optflow",
     "ovis",
     "phase_unwrapping",
     "plot",
     "ptcloud",
-    "quality",
     "rapid",
     "reg",
     "rgbd",
@@ -165,12 +215,10 @@
     "viz",
     "wechat_qrcode",
     "xfeatures2d",
-    "ximgproc",
     "xobjdetect",
-    "xphoto",
     "xstereo"
   ],
-  "sharedGeneratorNegativeFixtureCount": 418,
+  "sharedGeneratorNegativeFixtureCount": 675,
   "repositoryWideUpstreamParityClaimed": false,
   "completeCppParityClaimed": false,
   "limitation": "Only the recorded parser slices have been reviewed. Historical maps, complete C\u002B\u002B/template surfaces and runtime/platform certification retain separate evidence and version identities."

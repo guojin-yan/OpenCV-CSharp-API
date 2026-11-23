@@ -1,0 +1,774 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.1.0",
+  "module": "bgsegm",
+  "claimedSlice": "Historical bgsegm parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+  "completeCppParityClaimed": false,
+  "implemented": [
+    {
+      "ordinal": 1,
+      "identity": "cv.bgsegm.BackgroundSubtractorMOG.apply(Mat image;Mat fgmask[/O];double learningRate=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_apply"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BgSegmBackgroundSubtractor|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Apply(JYPPX.OpenCvSharp.Core.Mat image,System.Double learningRate=-1)",
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BgSegmBackgroundSubtractor|method|public;instance|System.Void Apply(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat fgmask,System.Double learningRate=-1)",
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BgSegmBackgroundSubtractor|method|public;instance|System.Void Apply(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat knownForegroundMask,JYPPX.OpenCvSharp.Core.Mat fgmask,System.Double learningRate=-1)"
+      ],
+      "historicalOrdinal": 1,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.bgsegm.BackgroundSubtractorMOG.apply(Mat image;Mat knownForegroundMask;Mat fgmask[/O];double learningRate=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_apply_with_known_foreground"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BgSegmBackgroundSubtractor|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Apply(JYPPX.OpenCvSharp.Core.Mat image,System.Double learningRate=-1)",
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BgSegmBackgroundSubtractor|method|public;instance|System.Void Apply(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat fgmask,System.Double learningRate=-1)",
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BgSegmBackgroundSubtractor|method|public;instance|System.Void Apply(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat knownForegroundMask,JYPPX.OpenCvSharp.Core.Mat fgmask,System.Double learningRate=-1)"
+      ],
+      "historicalOrdinal": 2,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.bgsegm.BackgroundSubtractorMOG.getHistory()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_mog_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorMOG|property|instance;get:public;set:public|System.Int32 History"
+      ],
+      "historicalOrdinal": 3,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.bgsegm.BackgroundSubtractorMOG.setHistory(int nframes)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_mog_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorMOG|property|instance;get:public;set:public|System.Int32 History"
+      ],
+      "historicalOrdinal": 4,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.bgsegm.BackgroundSubtractorMOG.getNMixtures()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_mog_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorMOG|property|instance;get:public;set:public|System.Int32 NMixtures"
+      ],
+      "historicalOrdinal": 5,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.bgsegm.BackgroundSubtractorMOG.setNMixtures(int nmix)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_mog_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorMOG|property|instance;get:public;set:public|System.Int32 NMixtures"
+      ],
+      "historicalOrdinal": 6,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.bgsegm.BackgroundSubtractorMOG.getBackgroundRatio()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_mog_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorMOG|property|instance;get:public;set:public|System.Double BackgroundRatio"
+      ],
+      "historicalOrdinal": 7,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.bgsegm.BackgroundSubtractorMOG.setBackgroundRatio(double backgroundRatio)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_mog_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorMOG|property|instance;get:public;set:public|System.Double BackgroundRatio"
+      ],
+      "historicalOrdinal": 8,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.bgsegm.BackgroundSubtractorMOG.getNoiseSigma()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_mog_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorMOG|property|instance;get:public;set:public|System.Double NoiseSigma"
+      ],
+      "historicalOrdinal": 9,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.bgsegm.BackgroundSubtractorMOG.setNoiseSigma(double noiseSigma)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_mog_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorMOG|property|instance;get:public;set:public|System.Double NoiseSigma"
+      ],
+      "historicalOrdinal": 10,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.bgsegm.createBackgroundSubtractorMOG(int history=200;int nmixtures=5;double backgroundRatio=0.7;double noiseSigma=0)-\u003EPtr\u003CBackgroundSubtractorMOG\u003E",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_mog_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorMOG|method|public;static|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorMOG Create(System.Int32 history=200,System.Int32 nmixtures=5,System.Double backgroundRatio=0.7,System.Double noiseSigma=0)"
+      ],
+      "historicalOrdinal": 11,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.apply(Mat image;Mat fgmask[/O];double learningRate=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_apply"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BgSegmBackgroundSubtractor|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Apply(JYPPX.OpenCvSharp.Core.Mat image,System.Double learningRate=-1)",
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BgSegmBackgroundSubtractor|method|public;instance|System.Void Apply(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat fgmask,System.Double learningRate=-1)",
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BgSegmBackgroundSubtractor|method|public;instance|System.Void Apply(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat knownForegroundMask,JYPPX.OpenCvSharp.Core.Mat fgmask,System.Double learningRate=-1)"
+      ],
+      "historicalOrdinal": 13,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.apply(Mat image;Mat knownForegroundMask;Mat fgmask[/O];double learningRate=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_apply_with_known_foreground"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BgSegmBackgroundSubtractor|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Apply(JYPPX.OpenCvSharp.Core.Mat image,System.Double learningRate=-1)",
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BgSegmBackgroundSubtractor|method|public;instance|System.Void Apply(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat fgmask,System.Double learningRate=-1)",
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BgSegmBackgroundSubtractor|method|public;instance|System.Void Apply(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat knownForegroundMask,JYPPX.OpenCvSharp.Core.Mat fgmask,System.Double learningRate=-1)"
+      ],
+      "historicalOrdinal": 14,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.getBackgroundImage(Mat backgroundImage[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_get_background_image"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BgSegmBackgroundSubtractor|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetBackgroundImage()",
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BgSegmBackgroundSubtractor|method|public;instance|System.Void GetBackgroundImage(JYPPX.OpenCvSharp.Core.Mat backgroundImage)"
+      ],
+      "historicalOrdinal": 15,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.getMaxFeatures()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_gmg_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorGMG|property|instance;get:public;set:public|System.Int32 MaxFeatures"
+      ],
+      "historicalOrdinal": 16,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.setMaxFeatures(int maxFeatures)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_gmg_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorGMG|property|instance;get:public;set:public|System.Int32 MaxFeatures"
+      ],
+      "historicalOrdinal": 17,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.getDefaultLearningRate()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_gmg_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorGMG|property|instance;get:public;set:public|System.Double DefaultLearningRate"
+      ],
+      "historicalOrdinal": 18,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.setDefaultLearningRate(double lr)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_gmg_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorGMG|property|instance;get:public;set:public|System.Double DefaultLearningRate"
+      ],
+      "historicalOrdinal": 19,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.getNumFrames()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_gmg_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorGMG|property|instance;get:public;set:public|System.Int32 NumFrames"
+      ],
+      "historicalOrdinal": 20,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.setNumFrames(int nframes)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_gmg_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorGMG|property|instance;get:public;set:public|System.Int32 NumFrames"
+      ],
+      "historicalOrdinal": 21,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.getQuantizationLevels()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_gmg_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorGMG|property|instance;get:public;set:public|System.Int32 QuantizationLevels"
+      ],
+      "historicalOrdinal": 22,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.setQuantizationLevels(int nlevels)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_gmg_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorGMG|property|instance;get:public;set:public|System.Int32 QuantizationLevels"
+      ],
+      "historicalOrdinal": 23,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.getBackgroundPrior()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_gmg_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorGMG|property|instance;get:public;set:public|System.Double BackgroundPrior"
+      ],
+      "historicalOrdinal": 24,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.setBackgroundPrior(double bgprior)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_gmg_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorGMG|property|instance;get:public;set:public|System.Double BackgroundPrior"
+      ],
+      "historicalOrdinal": 25,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.getSmoothingRadius()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_gmg_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorGMG|property|instance;get:public;set:public|System.Int32 SmoothingRadius"
+      ],
+      "historicalOrdinal": 26,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.setSmoothingRadius(int radius)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_gmg_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorGMG|property|instance;get:public;set:public|System.Int32 SmoothingRadius"
+      ],
+      "historicalOrdinal": 27,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.getDecisionThreshold()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_gmg_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorGMG|property|instance;get:public;set:public|System.Double DecisionThreshold"
+      ],
+      "historicalOrdinal": 28,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.setDecisionThreshold(double thresh)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_gmg_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorGMG|property|instance;get:public;set:public|System.Double DecisionThreshold"
+      ],
+      "historicalOrdinal": 29,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.getUpdateBackgroundModel()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_gmg_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorGMG|property|instance;get:public;set:public|System.Boolean UpdateBackgroundModel"
+      ],
+      "historicalOrdinal": 30,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.setUpdateBackgroundModel(bool update)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_gmg_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorGMG|property|instance;get:public;set:public|System.Boolean UpdateBackgroundModel"
+      ],
+      "historicalOrdinal": 31,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.getMinVal()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_gmg_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorGMG|property|instance;get:public;set:public|System.Double MinVal"
+      ],
+      "historicalOrdinal": 32,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.setMinVal(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_gmg_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorGMG|property|instance;get:public;set:public|System.Double MinVal"
+      ],
+      "historicalOrdinal": 33,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.getMaxVal()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_gmg_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorGMG|property|instance;get:public;set:public|System.Double MaxVal"
+      ],
+      "historicalOrdinal": 34,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.bgsegm.BackgroundSubtractorGMG.setMaxVal(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_gmg_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorGMG|property|instance;get:public;set:public|System.Double MaxVal"
+      ],
+      "historicalOrdinal": 35,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.bgsegm.createBackgroundSubtractorGMG(int initializationFrames=120;double decisionThreshold=0.8)-\u003EPtr\u003CBackgroundSubtractorGMG\u003E",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_gmg_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorGMG|method|public;static|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorGMG Create(System.Int32 initializationFrames=120,System.Double decisionThreshold=0.8)"
+      ],
+      "historicalOrdinal": 36,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.bgsegm.BackgroundSubtractorCNT.apply(Mat image;Mat fgmask[/O];double learningRate=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_apply"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BgSegmBackgroundSubtractor|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Apply(JYPPX.OpenCvSharp.Core.Mat image,System.Double learningRate=-1)",
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BgSegmBackgroundSubtractor|method|public;instance|System.Void Apply(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat fgmask,System.Double learningRate=-1)",
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BgSegmBackgroundSubtractor|method|public;instance|System.Void Apply(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat knownForegroundMask,JYPPX.OpenCvSharp.Core.Mat fgmask,System.Double learningRate=-1)"
+      ],
+      "historicalOrdinal": 38,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.bgsegm.BackgroundSubtractorCNT.apply(Mat image;Mat knownForegroundMask;Mat fgmask[/O];double learningRate=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_apply_with_known_foreground"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BgSegmBackgroundSubtractor|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Apply(JYPPX.OpenCvSharp.Core.Mat image,System.Double learningRate=-1)",
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BgSegmBackgroundSubtractor|method|public;instance|System.Void Apply(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat fgmask,System.Double learningRate=-1)",
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BgSegmBackgroundSubtractor|method|public;instance|System.Void Apply(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat knownForegroundMask,JYPPX.OpenCvSharp.Core.Mat fgmask,System.Double learningRate=-1)"
+      ],
+      "historicalOrdinal": 39,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.bgsegm.BackgroundSubtractorCNT.getBackgroundImage(Mat backgroundImage[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_get_background_image"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BgSegmBackgroundSubtractor|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetBackgroundImage()",
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BgSegmBackgroundSubtractor|method|public;instance|System.Void GetBackgroundImage(JYPPX.OpenCvSharp.Core.Mat backgroundImage)"
+      ],
+      "historicalOrdinal": 40,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.bgsegm.BackgroundSubtractorCNT.getMinPixelStability()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_cnt_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorCNT|property|instance;get:public;set:public|System.Int32 MinPixelStability"
+      ],
+      "historicalOrdinal": 41,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 42,
+      "identity": "cv.bgsegm.BackgroundSubtractorCNT.setMinPixelStability(int value)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_cnt_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorCNT|property|instance;get:public;set:public|System.Int32 MinPixelStability"
+      ],
+      "historicalOrdinal": 42,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.bgsegm.BackgroundSubtractorCNT.getMaxPixelStability()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_cnt_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorCNT|property|instance;get:public;set:public|System.Int32 MaxPixelStability"
+      ],
+      "historicalOrdinal": 43,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.bgsegm.BackgroundSubtractorCNT.setMaxPixelStability(int value)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_cnt_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorCNT|property|instance;get:public;set:public|System.Int32 MaxPixelStability"
+      ],
+      "historicalOrdinal": 44,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 45,
+      "identity": "cv.bgsegm.BackgroundSubtractorCNT.getUseHistory()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_cnt_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorCNT|property|instance;get:public;set:public|System.Boolean UseHistory"
+      ],
+      "historicalOrdinal": 45,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 46,
+      "identity": "cv.bgsegm.BackgroundSubtractorCNT.setUseHistory(bool value)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_cnt_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorCNT|property|instance;get:public;set:public|System.Boolean UseHistory"
+      ],
+      "historicalOrdinal": 46,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.bgsegm.BackgroundSubtractorCNT.getIsParallel()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_cnt_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorCNT|property|instance;get:public;set:public|System.Boolean IsParallel"
+      ],
+      "historicalOrdinal": 47,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 48,
+      "identity": "cv.bgsegm.BackgroundSubtractorCNT.setIsParallel(bool value)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_cnt_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorCNT|property|instance;get:public;set:public|System.Boolean IsParallel"
+      ],
+      "historicalOrdinal": 48,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.bgsegm.createBackgroundSubtractorCNT(int minPixelStability=15;bool useHistory=true;int maxPixelStability=15*60;bool isParallel=true)-\u003EPtr\u003CBackgroundSubtractorCNT\u003E",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_background_subtractor_cnt_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorCNT|method|public;static|JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorCNT Create(System.Int32 minPixelStability=15,System.Boolean useHistory=true,System.Int32 maxPixelStability=900,System.Boolean isParallel=true)"
+      ],
+      "historicalOrdinal": 49,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 63,
+      "identity": "cv.bgsegm.SyntheticSequenceGenerator.SyntheticSequenceGenerator(Mat background;Mat object;double amplitude;double wavelength;double wavespeed;double objspeed)-\u003E",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_synthetic_sequence_generator_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.SyntheticSequenceGenerator|method|public;static|JYPPX.OpenCvSharp.BgSegm.SyntheticSequenceGenerator Create(JYPPX.OpenCvSharp.Core.Mat background,JYPPX.OpenCvSharp.Core.Mat objectImage,System.Double amplitude=2,System.Double wavelength=20,System.Double wavespeed=0.2,System.Double objspeed=6)"
+      ],
+      "historicalOrdinal": 63,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 64,
+      "identity": "cv.bgsegm.SyntheticSequenceGenerator.getNextFrame(Mat frame[/O];Mat gtMask[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_synthetic_sequence_generator_get_next_frame"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.SyntheticSequenceGenerator|method|public;instance|System.Void GetNextFrame(JYPPX.OpenCvSharp.Core.Mat frame,JYPPX.OpenCvSharp.Core.Mat gtMask)"
+      ],
+      "historicalOrdinal": 64,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 65,
+      "identity": "cv.bgsegm.createSyntheticSequenceGenerator(Mat background;Mat object;double amplitude=2.0;double wavelength=20.0;double wavespeed=0.2;double objspeed=6.0)-\u003EPtr\u003CSyntheticSequenceGenerator\u003E",
+      "classification": "implemented",
+      "reason": "Explicit BgSegm declaration-to-symbol mapping and exact managed baseline evidence are present.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_BGSEGM=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_bgsegm_synthetic_sequence_generator_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.BgSegm.SyntheticSequenceGenerator|method|public;static|JYPPX.OpenCvSharp.BgSegm.SyntheticSequenceGenerator Create(JYPPX.OpenCvSharp.Core.Mat background,JYPPX.OpenCvSharp.Core.Mat objectImage,System.Double amplitude=2,System.Double wavelength=20,System.Double wavespeed=0.2,System.Double objspeed=6)"
+      ],
+      "historicalOrdinal": 65,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    }
+  ],
+  "limitation": "Implemented means the recorded managed/C ABI binding exists, subject to its documented validation. It does not certify wider 5.1 input domains, optional codecs/backends, or complete C\u002B\u002B coverage."
+}

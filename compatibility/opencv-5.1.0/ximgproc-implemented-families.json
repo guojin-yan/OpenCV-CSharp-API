@@ -1,0 +1,2864 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.1.0",
+  "module": "ximgproc",
+  "claimedSlice": "Historical ximgproc parser scope refreshed against official 5.1 sources: 26 contributing header(s); parser-emitted declarations only",
+  "completeCppParityClaimed": false,
+  "implemented": [
+    {
+      "ordinal": 0,
+      "identity": "cv.ximgproc.createQuaternionImage(Mat img;Mat qimg[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_create_quaternion_image"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void CreateQuaternionImage(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ],
+      "historicalOrdinal": 0,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.ximgproc.qconj(Mat qimg;Mat qcimg[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_qconj"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat QConj(JYPPX.OpenCvSharp.Core.Mat src)",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void QConj(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ],
+      "historicalOrdinal": 1,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.ximgproc.qunitary(Mat qimg;Mat qnimg[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_qunitary"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat QUnitary(JYPPX.OpenCvSharp.Core.Mat src)",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void QUnitary(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ],
+      "historicalOrdinal": 2,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.ximgproc.qmultiply(Mat src1;Mat src2;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_qmultiply"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat QMultiply(JYPPX.OpenCvSharp.Core.Mat src1,JYPPX.OpenCvSharp.Core.Mat src2)",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void QMultiply(JYPPX.OpenCvSharp.Core.Mat src1,JYPPX.OpenCvSharp.Core.Mat src2,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ],
+      "historicalOrdinal": 3,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.ximgproc.qdft(Mat img;Mat qimg[/O];int flags;bool sideLeft)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_qdft"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat QDft(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.DftFlags flags=None,System.Boolean sideLeft=true)",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void QDft(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,JYPPX.OpenCvSharp.Core.DftFlags flags=None,System.Boolean sideLeft=true)"
+      ],
+      "historicalOrdinal": 4,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.ximgproc.GradientDericheY(Mat op;Mat dst[/O];double alpha;double omega)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_gradient_deriche_y"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void GradientDericheY(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Double alpha,System.Double omega)"
+      ],
+      "historicalOrdinal": 6,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.ximgproc.GradientDericheX(Mat op;Mat dst[/O];double alpha;double omega)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_gradient_deriche_x"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void GradientDericheX(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Double alpha,System.Double omega)"
+      ],
+      "historicalOrdinal": 7,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.ximgproc.DisparityFilter.filter(Mat disparity_map_left;Mat left_view;Mat filtered_disparity_map[/O];Mat disparity_map_right=Mat();Rect ROI=Rect();Mat right_view=Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_disparity_filter_filter"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityFilter|method|public;instance;abstract|System.Void Filter(JYPPX.OpenCvSharp.Core.Mat disparityMapLeft,JYPPX.OpenCvSharp.Core.Mat leftView,JYPPX.OpenCvSharp.Core.Mat filteredDisparityMap,JYPPX.OpenCvSharp.Core.Mat? disparityMapRight=null,JYPPX.OpenCvSharp.Core.Rect? roi=null,JYPPX.OpenCvSharp.Core.Mat? rightView=null)"
+      ],
+      "historicalOrdinal": 9,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.ximgproc.DisparityWLSFilter.getLambda()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_disparity_wls_filter_get_lambda"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public;set:public|System.Double Lambda"
+      ],
+      "historicalOrdinal": 11,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.ximgproc.DisparityWLSFilter.setLambda(double _lambda)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_disparity_wls_filter_set_lambda"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public;set:public|System.Double Lambda"
+      ],
+      "historicalOrdinal": 12,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.ximgproc.DisparityWLSFilter.getSigmaColor()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_disparity_wls_filter_get_sigma_color"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public;set:public|System.Double SigmaColor"
+      ],
+      "historicalOrdinal": 13,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.ximgproc.DisparityWLSFilter.setSigmaColor(double _sigma_color)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_disparity_wls_filter_set_sigma_color"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public;set:public|System.Double SigmaColor"
+      ],
+      "historicalOrdinal": 14,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.ximgproc.DisparityWLSFilter.getLRCthresh()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_disparity_wls_filter_get_lrc_thresh"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public;set:public|System.Int32 LrcThreshold"
+      ],
+      "historicalOrdinal": 15,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.ximgproc.DisparityWLSFilter.setLRCthresh(int _LRC_thresh)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_disparity_wls_filter_set_lrc_thresh"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public;set:public|System.Int32 LrcThreshold"
+      ],
+      "historicalOrdinal": 16,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.ximgproc.DisparityWLSFilter.getDepthDiscontinuityRadius()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_disparity_wls_filter_get_depth_discontinuity_radius"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public;set:public|System.Int32 DepthDiscontinuityRadius"
+      ],
+      "historicalOrdinal": 17,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.ximgproc.DisparityWLSFilter.setDepthDiscontinuityRadius(int _disc_radius)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_disparity_wls_filter_set_depth_discontinuity_radius"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public;set:public|System.Int32 DepthDiscontinuityRadius"
+      ],
+      "historicalOrdinal": 18,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.ximgproc.DisparityWLSFilter.getConfidenceMap()-\u003EMat",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_disparity_wls_filter_get_confidence_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetConfidenceMap()"
+      ],
+      "historicalOrdinal": 19,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.ximgproc.DisparityWLSFilter.getROI()-\u003ERect",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_disparity_wls_filter_get_roi"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter|property|instance;get:public|JYPPX.OpenCvSharp.Core.Rect ROI"
+      ],
+      "historicalOrdinal": 20,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.ximgproc.createDisparityWLSFilter(Ptr_StereoMatcher matcher_left)-\u003EPtr\u003CDisparityWLSFilter\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_disparity_wls_filter_create_from_stereo_bm",
+        "jyppx_ocv_ximgproc_disparity_wls_filter_create_from_stereo_matcher",
+        "jyppx_ocv_ximgproc_disparity_wls_filter_create_from_stereo_sgbm"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter CreateDisparityWLSFilter(JYPPX.OpenCvSharp.Calib3D.StereoBM matcherLeft)",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter CreateDisparityWLSFilter(JYPPX.OpenCvSharp.Calib3D.StereoMatcher matcherLeft)",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter CreateDisparityWLSFilter(JYPPX.OpenCvSharp.Calib3D.StereoSGBM matcherLeft)"
+      ],
+      "historicalOrdinal": 21,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.ximgproc.createRightMatcher(Ptr_StereoMatcher matcher_left)-\u003EPtr\u003CStereoMatcher\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_create_right_matcher_from_stereo_bm",
+        "jyppx_ocv_ximgproc_create_right_matcher_from_stereo_matcher",
+        "jyppx_ocv_ximgproc_create_right_matcher_from_stereo_sgbm"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Calib3D.StereoMatcher CreateRightMatcher(JYPPX.OpenCvSharp.Calib3D.StereoBM matcherLeft)",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Calib3D.StereoMatcher CreateRightMatcher(JYPPX.OpenCvSharp.Calib3D.StereoMatcher matcherLeft)",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.Calib3D.StereoMatcher CreateRightMatcher(JYPPX.OpenCvSharp.Calib3D.StereoSGBM matcherLeft)"
+      ],
+      "historicalOrdinal": 22,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.ximgproc.createDisparityWLSFilterGeneric(bool use_confidence)-\u003EPtr\u003CDisparityWLSFilter\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_disparity_wls_filter_create_generic"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.DisparityWLSFilter CreateDisparityWLSFilterGeneric(System.Boolean useConfidence=false)"
+      ],
+      "historicalOrdinal": 23,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.ximgproc.computeMSE(Mat GT;Mat src;Rect ROI)-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_compute_mse"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Double ComputeMSE(JYPPX.OpenCvSharp.Core.Mat gt,JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Rect roi)"
+      ],
+      "historicalOrdinal": 25,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.ximgproc.computeBadPixelPercent(Mat GT;Mat src;Rect ROI;int thresh=24)-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_compute_bad_pixel_percent"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Double ComputeBadPixelPercent(JYPPX.OpenCvSharp.Core.Mat gt,JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Rect roi,System.Int32 thresh=24)"
+      ],
+      "historicalOrdinal": 26,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.ximgproc.getDisparityVis(Mat src;Mat dst[/O];double scale=1.0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_get_disparity_vis"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void GetDisparityVis(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Double scale=1)"
+      ],
+      "historicalOrdinal": 27,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.ximgproc.EdgeDrawing.detectEdges(Mat src)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_drawing_detect_edges"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|System.Void DetectEdges(JYPPX.OpenCvSharp.Core.Mat src)"
+      ],
+      "historicalOrdinal": 34,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.ximgproc.EdgeDrawing.getEdgeImage(Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_drawing_get_edge_image"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|System.Void GetEdgeImage(JYPPX.OpenCvSharp.Core.Mat dst)"
+      ],
+      "historicalOrdinal": 35,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.ximgproc.EdgeDrawing.getGradientImage(Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_drawing_get_gradient_image"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|System.Void GetGradientImage(JYPPX.OpenCvSharp.Core.Mat dst)"
+      ],
+      "historicalOrdinal": 36,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.ximgproc.EdgeDrawing.getSegments()-\u003Estd::vector\u003Cstd::vector\u003CPoint\u003E \u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_drawing_get_segments_count",
+        "jyppx_ocv_ximgproc_edge_drawing_get_segments_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|JYPPX.OpenCvSharp.Core.Point[][] GetSegments()"
+      ],
+      "historicalOrdinal": 37,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.ximgproc.EdgeDrawing.getSegmentIndicesOfLines()-\u003Estd::vector\u003Cint\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_drawing_get_segment_indices_of_lines_count",
+        "jyppx_ocv_ximgproc_edge_drawing_get_segment_indices_of_lines_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|System.Int32[] GetSegmentIndicesOfLines()"
+      ],
+      "historicalOrdinal": 38,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.ximgproc.EdgeDrawing.detectLines(Mat lines[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_drawing_detect_lines"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|System.Void DetectLines(JYPPX.OpenCvSharp.Core.Mat lines)"
+      ],
+      "historicalOrdinal": 39,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.ximgproc.EdgeDrawing.detectEllipses(Mat ellipses[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_drawing_detect_ellipses"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|method|public;instance|System.Void DetectEllipses(JYPPX.OpenCvSharp.Core.Mat ellipses)"
+      ],
+      "historicalOrdinal": 40,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.ximgproc.EdgeDrawing.setParams(EdgeDrawing_Params parameters[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_drawing_set_params"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing|property|instance;get:public;set:public|JYPPX.OpenCvSharp.XImgProc.EdgeDrawingParams Params"
+      ],
+      "historicalOrdinal": 41,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 42,
+      "identity": "cv.ximgproc.createEdgeDrawing()-\u003EPtr\u003CEdgeDrawing\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_drawing_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.EdgeDrawing CreateEdgeDrawing()"
+      ],
+      "historicalOrdinal": 42,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.ximgproc.dtFilter(Mat guide;Mat src;Mat dst[/O];double sigmaSpatial;double sigmaColor;int mode=DTF_NC;int numIters=3)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_dt_filter"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void DtFilter(JYPPX.OpenCvSharp.Core.Mat guide,JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Double sigmaSpatial,System.Double sigmaColor,JYPPX.OpenCvSharp.XImgProc.DomainTransformFilterMode mode=NormalizedConvolution,System.Int32 numIters=3)"
+      ],
+      "historicalOrdinal": 47,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.ximgproc.GuidedFilter.filter(Mat src;Mat dst[/O];int dDepth=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_guided_filter_filter"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.GuidedFilter|method|public;instance|System.Void Filter(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 dDepth=-1)"
+      ],
+      "historicalOrdinal": 49,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 50,
+      "identity": "cv.ximgproc.createGuidedFilter(Mat guide;int radius;double eps;double scale=1.0)-\u003EPtr\u003CGuidedFilter\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_guided_filter_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.GuidedFilter CreateGuidedFilter(JYPPX.OpenCvSharp.Core.Mat guide,System.Int32 radius,System.Double eps,System.Double scale=1)"
+      ],
+      "historicalOrdinal": 50,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 51,
+      "identity": "cv.ximgproc.guidedFilter(Mat guide;Mat src;Mat dst[/O];int radius;double eps;int dDepth=-1;double scale=1.0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_guided_filter_run"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void GuidedFilter(JYPPX.OpenCvSharp.Core.Mat guide,JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 radius,System.Double eps,System.Int32 dDepth=-1,System.Double scale=1)"
+      ],
+      "historicalOrdinal": 51,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 57,
+      "identity": "cv.ximgproc.amFilter(Mat joint;Mat src;Mat dst[/O];double sigma_s;double sigma_r;bool adjust_outliers=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_am_filter"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void AmFilter(JYPPX.OpenCvSharp.Core.Mat joint,JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Double sigmaS,System.Double sigmaR,System.Boolean adjustOutliers=false)"
+      ],
+      "historicalOrdinal": 57,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 58,
+      "identity": "cv.ximgproc.jointBilateralFilter(Mat joint;Mat src;Mat dst[/O];int d;double sigmaColor;double sigmaSpace;int borderType=BORDER_DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_joint_bilateral_filter"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void JointBilateralFilter(JYPPX.OpenCvSharp.Core.Mat joint,JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 d,System.Double sigmaColor,System.Double sigmaSpace,JYPPX.OpenCvSharp.ImgProc.BorderTypes borderType=Default)"
+      ],
+      "historicalOrdinal": 58,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 59,
+      "identity": "cv.ximgproc.bilateralTextureFilter(Mat src;Mat dst[/O];int fr=3;int numIter=1;double sigmaAlpha=-1.;double sigmaAvg=-1.)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_bilateral_texture_filter"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void BilateralTextureFilter(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 fr=3,System.Int32 numIter=1,System.Double sigmaAlpha=-1,System.Double sigmaAvg=-1)"
+      ],
+      "historicalOrdinal": 59,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 60,
+      "identity": "cv.ximgproc.rollingGuidanceFilter(Mat src;Mat dst[/O];int d=-1;double sigmaColor=25;double sigmaSpace=3;int numOfIter=4;int borderType=BORDER_DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_rolling_guidance_filter"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void RollingGuidanceFilter(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 d=-1,System.Double sigmaColor=25,System.Double sigmaSpace=3,System.Int32 numOfIter=4,JYPPX.OpenCvSharp.ImgProc.BorderTypes borderType=Default)"
+      ],
+      "historicalOrdinal": 60,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 62,
+      "identity": "cv.ximgproc.FastBilateralSolverFilter.filter(Mat src;Mat confidence;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_fast_bilateral_solver_filter_filter"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastBilateralSolverFilter|method|public;instance|System.Void Filter(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat confidence,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ],
+      "historicalOrdinal": 62,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 63,
+      "identity": "cv.ximgproc.createFastBilateralSolverFilter(Mat guide;double sigma_spatial;double sigma_luma;double sigma_chroma;double lambda=128.0;int num_iter=25;double max_tol=1e-5)-\u003EPtr\u003CFastBilateralSolverFilter\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_fast_bilateral_solver_filter_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.FastBilateralSolverFilter CreateFastBilateralSolverFilter(JYPPX.OpenCvSharp.Core.Mat guide,System.Double sigmaSpatial,System.Double sigmaLuma,System.Double sigmaChroma,System.Double lambda=128,System.Int32 numIter=25,System.Double maxTol=1E-05)"
+      ],
+      "historicalOrdinal": 63,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 64,
+      "identity": "cv.ximgproc.fastBilateralSolverFilter(Mat guide;Mat src;Mat confidence;Mat dst[/O];double sigma_spatial=8;double sigma_luma=8;double sigma_chroma=8;double lambda=128.0;int num_iter=25;double max_tol=1e-5)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_fast_bilateral_solver_filter_run"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void FastBilateralSolverFilter(JYPPX.OpenCvSharp.Core.Mat guide,JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat confidence,JYPPX.OpenCvSharp.Core.Mat dst,System.Double sigmaSpatial=8,System.Double sigmaLuma=8,System.Double sigmaChroma=8,System.Double lambda=128,System.Int32 numIter=25,System.Double maxTol=1E-05)"
+      ],
+      "historicalOrdinal": 64,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 66,
+      "identity": "cv.ximgproc.FastGlobalSmootherFilter.filter(Mat src;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_fast_global_smoother_filter_filter"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastGlobalSmootherFilter|method|public;instance|System.Void Filter(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ],
+      "historicalOrdinal": 66,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 67,
+      "identity": "cv.ximgproc.createFastGlobalSmootherFilter(Mat guide;double lambda;double sigma_color;double lambda_attenuation=0.25;int num_iter=3)-\u003EPtr\u003CFastGlobalSmootherFilter\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_fast_global_smoother_filter_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.FastGlobalSmootherFilter CreateFastGlobalSmootherFilter(JYPPX.OpenCvSharp.Core.Mat guide,System.Double lambda,System.Double sigmaColor,System.Double lambdaAttenuation=0.25,System.Int32 numIter=3)"
+      ],
+      "historicalOrdinal": 67,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 68,
+      "identity": "cv.ximgproc.fastGlobalSmootherFilter(Mat guide;Mat src;Mat dst[/O];double lambda;double sigma_color;double lambda_attenuation=0.25;int num_iter=3)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_fast_global_smoother_filter_run"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void FastGlobalSmootherFilter(JYPPX.OpenCvSharp.Core.Mat guide,JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Double lambda,System.Double sigmaColor,System.Double lambdaAttenuation=0.25,System.Int32 numIter=3)"
+      ],
+      "historicalOrdinal": 68,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 69,
+      "identity": "cv.ximgproc.l0Smooth(Mat src;Mat dst[/O];double lambda=0.02;double kappa=2.0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_l0_smooth"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void L0Smooth(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Double lambda=0.02,System.Double kappa=2)"
+      ],
+      "historicalOrdinal": 69,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 71,
+      "identity": "cv.ximgproc.EdgeBoxes.getBoundingBoxes(Mat edge_map;Mat orientation_map;vector_Rect boxes[/O,/Ref];Mat scores=Mat()[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_get_bounding_boxes_count",
+        "jyppx_ocv_ximgproc_edge_boxes_get_bounding_boxes_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|method|public;instance|JYPPX.OpenCvSharp.XImgProc.EdgeBox[] GetBoundingBoxes(JYPPX.OpenCvSharp.Core.Mat edgeMap,JYPPX.OpenCvSharp.Core.Mat orientationMap)"
+      ],
+      "historicalOrdinal": 71,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 72,
+      "identity": "cv.ximgproc.EdgeBoxes.getAlpha()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_get_alpha"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single Alpha"
+      ],
+      "historicalOrdinal": 72,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 73,
+      "identity": "cv.ximgproc.EdgeBoxes.setAlpha(float value)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_set_alpha"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single Alpha"
+      ],
+      "historicalOrdinal": 73,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 74,
+      "identity": "cv.ximgproc.EdgeBoxes.getBeta()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_get_beta"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single Beta"
+      ],
+      "historicalOrdinal": 74,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 75,
+      "identity": "cv.ximgproc.EdgeBoxes.setBeta(float value)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_set_beta"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single Beta"
+      ],
+      "historicalOrdinal": 75,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 76,
+      "identity": "cv.ximgproc.EdgeBoxes.getEta()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_get_eta"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single Eta"
+      ],
+      "historicalOrdinal": 76,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 77,
+      "identity": "cv.ximgproc.EdgeBoxes.setEta(float value)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_set_eta"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single Eta"
+      ],
+      "historicalOrdinal": 77,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 78,
+      "identity": "cv.ximgproc.EdgeBoxes.getMinScore()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_get_min_score"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single MinScore"
+      ],
+      "historicalOrdinal": 78,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 79,
+      "identity": "cv.ximgproc.EdgeBoxes.setMinScore(float value)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_set_min_score"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single MinScore"
+      ],
+      "historicalOrdinal": 79,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 80,
+      "identity": "cv.ximgproc.EdgeBoxes.getMaxBoxes()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_get_max_boxes"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Int32 MaxBoxes"
+      ],
+      "historicalOrdinal": 80,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 81,
+      "identity": "cv.ximgproc.EdgeBoxes.setMaxBoxes(int value)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_set_max_boxes"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Int32 MaxBoxes"
+      ],
+      "historicalOrdinal": 81,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 82,
+      "identity": "cv.ximgproc.EdgeBoxes.getEdgeMinMag()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_get_edge_min_mag"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single EdgeMinMag"
+      ],
+      "historicalOrdinal": 82,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 83,
+      "identity": "cv.ximgproc.EdgeBoxes.setEdgeMinMag(float value)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_set_edge_min_mag"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single EdgeMinMag"
+      ],
+      "historicalOrdinal": 83,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 84,
+      "identity": "cv.ximgproc.EdgeBoxes.getEdgeMergeThr()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_get_edge_merge_thr"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single EdgeMergeThr"
+      ],
+      "historicalOrdinal": 84,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 85,
+      "identity": "cv.ximgproc.EdgeBoxes.setEdgeMergeThr(float value)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_set_edge_merge_thr"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single EdgeMergeThr"
+      ],
+      "historicalOrdinal": 85,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 86,
+      "identity": "cv.ximgproc.EdgeBoxes.getClusterMinMag()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_get_cluster_min_mag"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single ClusterMinMag"
+      ],
+      "historicalOrdinal": 86,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 87,
+      "identity": "cv.ximgproc.EdgeBoxes.setClusterMinMag(float value)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_set_cluster_min_mag"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single ClusterMinMag"
+      ],
+      "historicalOrdinal": 87,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 88,
+      "identity": "cv.ximgproc.EdgeBoxes.getMaxAspectRatio()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_get_max_aspect_ratio"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single MaxAspectRatio"
+      ],
+      "historicalOrdinal": 88,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 89,
+      "identity": "cv.ximgproc.EdgeBoxes.setMaxAspectRatio(float value)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_set_max_aspect_ratio"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single MaxAspectRatio"
+      ],
+      "historicalOrdinal": 89,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 90,
+      "identity": "cv.ximgproc.EdgeBoxes.getMinBoxArea()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_get_min_box_area"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single MinBoxArea"
+      ],
+      "historicalOrdinal": 90,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 91,
+      "identity": "cv.ximgproc.EdgeBoxes.setMinBoxArea(float value)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_set_min_box_area"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single MinBoxArea"
+      ],
+      "historicalOrdinal": 91,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 92,
+      "identity": "cv.ximgproc.EdgeBoxes.getGamma()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_get_gamma"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single Gamma"
+      ],
+      "historicalOrdinal": 92,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 93,
+      "identity": "cv.ximgproc.EdgeBoxes.setGamma(float value)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_set_gamma"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single Gamma"
+      ],
+      "historicalOrdinal": 93,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 94,
+      "identity": "cv.ximgproc.EdgeBoxes.getKappa()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_get_kappa"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single Kappa"
+      ],
+      "historicalOrdinal": 94,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 95,
+      "identity": "cv.ximgproc.EdgeBoxes.setKappa(float value)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_set_kappa"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes|property|instance;get:public;set:public|System.Single Kappa"
+      ],
+      "historicalOrdinal": 95,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 96,
+      "identity": "cv.ximgproc.createEdgeBoxes(float alpha=0.65f;float beta=0.75f;float eta=1;float minScore=0.01f;int maxBoxes=10000;float edgeMinMag=0.1f;float edgeMergeThr=0.5f;float clusterMinMag=0.5f;float maxAspectRatio=3;float minBoxArea=1000;float gamma=2;float kappa=1.5f)-\u003EPtr\u003CEdgeBoxes\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_boxes_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.EdgeBoxes CreateEdgeBoxes(System.Single alpha=0.65,System.Single beta=0.75,System.Single eta=1,System.Single minScore=0.01,System.Int32 maxBoxes=10000,System.Single edgeMinMag=0.1,System.Single edgeMergeThr=0.5,System.Single clusterMinMag=0.5,System.Single maxAspectRatio=3,System.Single minBoxArea=1000,System.Single gamma=2,System.Single kappa=1.5)"
+      ],
+      "historicalOrdinal": 96,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 97,
+      "identity": "cv.ximgproc.edgePreservingFilter(Mat src;Mat dst[/O];int d;double threshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_preserving_filter"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void EdgePreservingFilter(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 d,System.Double threshold)"
+      ],
+      "historicalOrdinal": 97,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 98,
+      "identity": "cv.ximgproc.covarianceEstimation(Mat src;Mat dst[/O];int windowRows;int windowCols)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_covariance_estimation"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void CovarianceEstimation(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 windowRows,System.Int32 windowCols)"
+      ],
+      "historicalOrdinal": 98,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 102,
+      "identity": "cv.ximgproc.FastHoughTransform(Mat src;Mat dst[/O];int dstMatDepth;int angleRange=ARO_315_135;int op=FHT_ADD;int makeSkew=HDO_DESKEW)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_fast_hough_transform"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void FastHoughTransform(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 dstMatDepth,JYPPX.OpenCvSharp.XImgProc.AngleRangeOption angleRange=Aro315To135,JYPPX.OpenCvSharp.XImgProc.HoughOp op=Add,JYPPX.OpenCvSharp.XImgProc.HoughDeskewOption makeSkew=Deskew)"
+      ],
+      "historicalOrdinal": 102,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 103,
+      "identity": "cv.ximgproc.HoughPoint2Line(Point houghPoint[/C,/Ref];Mat srcImgInfo;int angleRange=ARO_315_135;int makeSkew=HDO_DESKEW;int rules=RO_IGNORE_BORDERS)-\u003EVec4i",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_hough_point_to_line"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.ImgProc.LineSegment HoughPointToLine(System.Int32 houghX,System.Int32 houghY,JYPPX.OpenCvSharp.Core.Mat srcImgInfo,JYPPX.OpenCvSharp.XImgProc.AngleRangeOption angleRange=Aro315To135,JYPPX.OpenCvSharp.XImgProc.HoughDeskewOption makeSkew=Deskew,JYPPX.OpenCvSharp.XImgProc.RulesOption rules=IgnoreBorders)"
+      ],
+      "historicalOrdinal": 103,
+      "refreshReview": "Only Doxygen tags change: @retval becomes @return and @remarks becomes @note. The RO_STRICT border clipping and RO_WEAK nonintersection descriptions, Vec4i return value and exact signature are unchanged. Retain the existing HoughPoint2Line managed/C ABI binding and its validation; no new line-geometry or input-domain behavior is certified."
+    },
+    {
+      "ordinal": 105,
+      "identity": "cv.ximgproc.FastLineDetector.detect(Mat image;Mat lines[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_fast_line_detector_detect"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastLineDetector|method|public;instance|System.Void Detect(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat lines)"
+      ],
+      "historicalOrdinal": 105,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 106,
+      "identity": "cv.ximgproc.FastLineDetector.drawSegments(Mat image[/IO];Mat lines;bool draw_arrow=false;Scalar linecolor=Scalar(0, 0, 255);int linethickness=1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_fast_line_detector_draw_segments"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastLineDetector|method|public;instance|System.Void DrawSegments(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat lines,System.Boolean drawArrow=false,JYPPX.OpenCvSharp.Core.Scalar? lineColor=null,System.Int32 lineThickness=1)",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.FastLineDetector|method|public;instance|System.Void DrawSegments(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.ImgProc.LineSegment[] lines,System.Boolean drawArrow=false,JYPPX.OpenCvSharp.Core.Scalar? lineColor=null,System.Int32 lineThickness=1)"
+      ],
+      "historicalOrdinal": 106,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 107,
+      "identity": "cv.ximgproc.createFastLineDetector(int length_threshold=10;float distance_threshold=1.414213562f;double canny_th1=50.0;double canny_th2=50.0;int canny_aperture_size=3;bool do_merge=false)-\u003EPtr\u003CFastLineDetector\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_fast_line_detector_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.FastLineDetector CreateFastLineDetector(System.Int32 lengthThreshold=10,System.Single distanceThreshold=1.4142135,System.Double cannyTh1=50,System.Double cannyTh2=50,System.Int32 cannyApertureSize=3,System.Boolean doMerge=false)"
+      ],
+      "historicalOrdinal": 107,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 110,
+      "identity": "cv.ximgproc.ContourFitting.estimateTransformation(Mat src;Mat dst;Mat alphaPhiST[/O];double dist[/O,/Ref];bool fdContour=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_contour_fitting_estimate_transformation"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.ContourFitting|method|public;instance|JYPPX.OpenCvSharp.Core.Mat EstimateTransformation(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,out System.Double distance,System.Boolean fdContour=false)",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.ContourFitting|method|public;instance|System.Double EstimateTransformation(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,JYPPX.OpenCvSharp.Core.Mat alphaPhiST,System.Boolean fdContour=false)"
+      ],
+      "historicalOrdinal": 110,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 111,
+      "identity": "cv.ximgproc.ContourFitting.setCtrSize(int n)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_contour_fitting_set_ctr_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.ContourFitting|property|instance;get:public;set:public|System.Int32 CtrSize"
+      ],
+      "historicalOrdinal": 111,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 112,
+      "identity": "cv.ximgproc.ContourFitting.setFDSize(int n)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_contour_fitting_set_fd_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.ContourFitting|property|instance;get:public;set:public|System.Int32 FDSize"
+      ],
+      "historicalOrdinal": 112,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 113,
+      "identity": "cv.ximgproc.ContourFitting.getCtrSize()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_contour_fitting_get_ctr_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.ContourFitting|property|instance;get:public;set:public|System.Int32 CtrSize"
+      ],
+      "historicalOrdinal": 113,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 114,
+      "identity": "cv.ximgproc.ContourFitting.getFDSize()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_contour_fitting_get_fd_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.ContourFitting|property|instance;get:public;set:public|System.Int32 FDSize"
+      ],
+      "historicalOrdinal": 114,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 115,
+      "identity": "cv.ximgproc.fourierDescriptor(Mat src;Mat dst[/O];int nbElt=-1;int nbFD=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_fourier_descriptor"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void FourierDescriptor(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 nbElt=-1,System.Int32 nbFD=-1)"
+      ],
+      "historicalOrdinal": 115,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 116,
+      "identity": "cv.ximgproc.transformFD(Mat src;Mat t;Mat dst[/O];bool fdContour=true)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_transform_fd"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void TransformFD(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat transform,JYPPX.OpenCvSharp.Core.Mat dst,System.Boolean fdContour=true)"
+      ],
+      "historicalOrdinal": 116,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 117,
+      "identity": "cv.ximgproc.contourSampling(Mat src;Mat out[/O];int nbElt)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_contour_sampling"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void ContourSampling(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 nbElt)"
+      ],
+      "historicalOrdinal": 117,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 118,
+      "identity": "cv.ximgproc.createContourFitting(int ctr=1024;int fd=16)-\u003EPtr\u003CContourFitting\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_contour_fitting_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.ContourFitting CreateContourFitting(System.Int32 ctr=1024,System.Int32 fd=16)"
+      ],
+      "historicalOrdinal": 118,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 120,
+      "identity": "cv.ximgproc.SuperpixelLSC.getNumberOfSuperpixels()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_superpixel_lsc_get_number"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelLSC|property|instance;get:public|System.Int32 NumberOfSuperpixels"
+      ],
+      "historicalOrdinal": 120,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 121,
+      "identity": "cv.ximgproc.SuperpixelLSC.iterate(int num_iterations=10)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_superpixel_lsc_iterate"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelLSC|method|public;instance|System.Void Iterate(System.Int32 numIterations=10)"
+      ],
+      "historicalOrdinal": 121,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 122,
+      "identity": "cv.ximgproc.SuperpixelLSC.getLabels(Mat labels_out[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_superpixel_lsc_get_labels"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelLSC|method|public;instance|System.Void GetLabels(JYPPX.OpenCvSharp.Core.Mat labels)"
+      ],
+      "historicalOrdinal": 122,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 123,
+      "identity": "cv.ximgproc.SuperpixelLSC.getLabelContourMask(Mat image[/O];bool thick_line=true)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_superpixel_lsc_get_label_contour_mask"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelLSC|method|public;instance|System.Void GetLabelContourMask(JYPPX.OpenCvSharp.Core.Mat image,System.Boolean thickLine=true)"
+      ],
+      "historicalOrdinal": 123,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 124,
+      "identity": "cv.ximgproc.SuperpixelLSC.enforceLabelConnectivity(int min_element_size=25)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_superpixel_lsc_enforce_label_connectivity"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelLSC|method|public;instance|System.Void EnforceLabelConnectivity(System.Int32 minElementSize=25)"
+      ],
+      "historicalOrdinal": 124,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 125,
+      "identity": "cv.ximgproc.createSuperpixelLSC(Mat image;int region_size=10;float ratio=0.075f)-\u003EPtr\u003CSuperpixelLSC\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_superpixel_lsc_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SuperpixelLSC CreateSuperpixelLSC(JYPPX.OpenCvSharp.Core.Mat image,System.Int32 regionSize=10,System.Single ratio=0.075)"
+      ],
+      "historicalOrdinal": 125,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 126,
+      "identity": "cv.ximgproc.PeiLinNormalization(Mat I;Mat T[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_pei_lin_normalization"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void PeiLinNormalization(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ],
+      "historicalOrdinal": 126,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 129,
+      "identity": "cv.ximgproc.RidgeDetectionFilter.create(int ddepth=CV_32FC1;int dx=1;int dy=1;int ksize=3;int out_dtype=CV_8UC1;double scale=1;double delta=0;int borderType=BORDER_DEFAULT)-\u003EPtr\u003CRidgeDetectionFilter\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ridge_detection_filter_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RidgeDetectionFilter|method|public;static|JYPPX.OpenCvSharp.XImgProc.RidgeDetectionFilter Create(System.Int32 ddepth=5,System.Int32 dx=1,System.Int32 dy=1,System.Int32 ksize=3,System.Int32 outDtype=0,System.Double scale=1,System.Double delta=0,JYPPX.OpenCvSharp.ImgProc.BorderTypes borderType=Default)"
+      ],
+      "historicalOrdinal": 129,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 130,
+      "identity": "cv.ximgproc.RidgeDetectionFilter.getRidgeFilteredImage(Mat _img;Mat out[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ridge_detection_filter_get_image"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RidgeDetectionFilter|method|public;instance|System.Void GetRidgeFilteredImage(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ],
+      "historicalOrdinal": 130,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 132,
+      "identity": "cv.ximgproc.ScanSegment.getNumberOfSuperpixels()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_scan_segment_get_number"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.ScanSegment|property|instance;get:public|System.Int32 NumberOfSuperpixels"
+      ],
+      "historicalOrdinal": 132,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 133,
+      "identity": "cv.ximgproc.ScanSegment.iterate(Mat img)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_scan_segment_iterate"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.ScanSegment|method|public;instance|System.Void Iterate(JYPPX.OpenCvSharp.Core.Mat image)"
+      ],
+      "historicalOrdinal": 133,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 134,
+      "identity": "cv.ximgproc.ScanSegment.getLabels(Mat labels_out[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_scan_segment_get_labels"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.ScanSegment|method|public;instance|System.Void GetLabels(JYPPX.OpenCvSharp.Core.Mat labels)"
+      ],
+      "historicalOrdinal": 134,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 135,
+      "identity": "cv.ximgproc.ScanSegment.getLabelContourMask(Mat image[/O];bool thick_line=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_scan_segment_get_label_contour_mask"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.ScanSegment|method|public;instance|System.Void GetLabelContourMask(JYPPX.OpenCvSharp.Core.Mat image,System.Boolean thickLine=true)"
+      ],
+      "historicalOrdinal": 135,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 136,
+      "identity": "cv.ximgproc.createScanSegment(int image_width;int image_height;int num_superpixels;int slices=8;bool merge_small=true)-\u003Ecv::Ptr\u003CScanSegment\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_scan_segment_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.ScanSegment CreateScanSegment(System.Int32 imageWidth,System.Int32 imageHeight,System.Int32 numSuperpixels,System.Int32 slices=8,System.Boolean mergeSmall=true)"
+      ],
+      "historicalOrdinal": 136,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 138,
+      "identity": "cv.ximgproc.SuperpixelSEEDS.getNumberOfSuperpixels()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_superpixel_seeds_get_number"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSEEDS|property|instance;get:public|System.Int32 NumberOfSuperpixels"
+      ],
+      "historicalOrdinal": 138,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 139,
+      "identity": "cv.ximgproc.SuperpixelSEEDS.iterate(Mat img;int num_iterations=4)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_superpixel_seeds_iterate"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSEEDS|method|public;instance|System.Void Iterate(JYPPX.OpenCvSharp.Core.Mat image,System.Int32 numIterations=4)"
+      ],
+      "historicalOrdinal": 139,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 140,
+      "identity": "cv.ximgproc.SuperpixelSEEDS.getLabels(Mat labels_out[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_superpixel_seeds_get_labels"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSEEDS|method|public;instance|System.Void GetLabels(JYPPX.OpenCvSharp.Core.Mat labels)"
+      ],
+      "historicalOrdinal": 140,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 141,
+      "identity": "cv.ximgproc.SuperpixelSEEDS.getLabelContourMask(Mat image[/O];bool thick_line=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_superpixel_seeds_get_label_contour_mask"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSEEDS|method|public;instance|System.Void GetLabelContourMask(JYPPX.OpenCvSharp.Core.Mat image,System.Boolean thickLine=false)"
+      ],
+      "historicalOrdinal": 141,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 142,
+      "identity": "cv.ximgproc.createSuperpixelSEEDS(int image_width;int image_height;int image_channels;int num_superpixels;int num_levels;int prior=2;int histogram_bins=5;bool double_step=false)-\u003EPtr\u003CSuperpixelSEEDS\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_superpixel_seeds_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SuperpixelSEEDS CreateSuperpixelSEEDS(System.Int32 imageWidth,System.Int32 imageHeight,System.Int32 imageChannels,System.Int32 numSuperpixels,System.Int32 numLevels,System.Int32 prior=2,System.Int32 histogramBins=5,System.Boolean doubleStep=false)"
+      ],
+      "historicalOrdinal": 142,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 144,
+      "identity": "cv.ximgproc.segmentation.GraphSegmentation.processImage(Mat src;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_graph_segmentation_process_image"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.GraphSegmentation|method|public;instance|System.Void ProcessImage(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ],
+      "historicalOrdinal": 144,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 145,
+      "identity": "cv.ximgproc.segmentation.GraphSegmentation.setSigma(double sigma)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_graph_segmentation_set_sigma"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.GraphSegmentation|property|instance;get:public;set:public|System.Double Sigma"
+      ],
+      "historicalOrdinal": 145,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 146,
+      "identity": "cv.ximgproc.segmentation.GraphSegmentation.getSigma()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_graph_segmentation_get_sigma"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.GraphSegmentation|property|instance;get:public;set:public|System.Double Sigma"
+      ],
+      "historicalOrdinal": 146,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 147,
+      "identity": "cv.ximgproc.segmentation.GraphSegmentation.setK(float k)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_graph_segmentation_set_k"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.GraphSegmentation|property|instance;get:public;set:public|System.Single K"
+      ],
+      "historicalOrdinal": 147,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 148,
+      "identity": "cv.ximgproc.segmentation.GraphSegmentation.getK()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_graph_segmentation_get_k"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.GraphSegmentation|property|instance;get:public;set:public|System.Single K"
+      ],
+      "historicalOrdinal": 148,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 149,
+      "identity": "cv.ximgproc.segmentation.GraphSegmentation.setMinSize(int min_size)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_graph_segmentation_set_min_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.GraphSegmentation|property|instance;get:public;set:public|System.Int32 MinSize"
+      ],
+      "historicalOrdinal": 149,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 150,
+      "identity": "cv.ximgproc.segmentation.GraphSegmentation.getMinSize()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_graph_segmentation_get_min_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.GraphSegmentation|property|instance;get:public;set:public|System.Int32 MinSize"
+      ],
+      "historicalOrdinal": 150,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 151,
+      "identity": "cv.ximgproc.segmentation.createGraphSegmentation(double sigma=0.5;float k=300;int min_size=100)-\u003EPtr\u003CGraphSegmentation\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_graph_segmentation_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.GraphSegmentation CreateGraphSegmentation(System.Double sigma=0.5,System.Single k=300,System.Int32 minSize=100)"
+      ],
+      "historicalOrdinal": 151,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 153,
+      "identity": "cv.ximgproc.segmentation.SelectiveSearchSegmentationStrategy.setImage(Mat img;Mat regions;Mat sizes;int image_id=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_selective_search_strategy_set_image"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy|method|public;instance|System.Void SetImage(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat regions,JYPPX.OpenCvSharp.Core.Mat sizes,System.Int32 imageId=-1)"
+      ],
+      "historicalOrdinal": 153,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 154,
+      "identity": "cv.ximgproc.segmentation.SelectiveSearchSegmentationStrategy.get(int r1;int r2)-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_selective_search_strategy_get"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy|method|public;instance|System.Single Get(System.Int32 r1,System.Int32 r2)"
+      ],
+      "historicalOrdinal": 154,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 155,
+      "identity": "cv.ximgproc.segmentation.SelectiveSearchSegmentationStrategy.merge(int r1;int r2)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_selective_search_strategy_merge"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy|method|public;instance|System.Void Merge(System.Int32 r1,System.Int32 r2)"
+      ],
+      "historicalOrdinal": 155,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 157,
+      "identity": "cv.ximgproc.segmentation.createSelectiveSearchSegmentationStrategyColor()-\u003EPtr\u003CSelectiveSearchSegmentationStrategyColor\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_selective_search_strategy_create_color"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy CreateSelectiveSearchSegmentationStrategyColor()"
+      ],
+      "historicalOrdinal": 157,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 159,
+      "identity": "cv.ximgproc.segmentation.createSelectiveSearchSegmentationStrategySize()-\u003EPtr\u003CSelectiveSearchSegmentationStrategySize\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_selective_search_strategy_create_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy CreateSelectiveSearchSegmentationStrategySize()"
+      ],
+      "historicalOrdinal": 159,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 161,
+      "identity": "cv.ximgproc.segmentation.createSelectiveSearchSegmentationStrategyTexture()-\u003EPtr\u003CSelectiveSearchSegmentationStrategyTexture\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_selective_search_strategy_create_texture"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy CreateSelectiveSearchSegmentationStrategyTexture()"
+      ],
+      "historicalOrdinal": 161,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 163,
+      "identity": "cv.ximgproc.segmentation.createSelectiveSearchSegmentationStrategyFill()-\u003EPtr\u003CSelectiveSearchSegmentationStrategyFill\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_selective_search_strategy_create_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy CreateSelectiveSearchSegmentationStrategyFill()"
+      ],
+      "historicalOrdinal": 163,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 165,
+      "identity": "cv.ximgproc.segmentation.SelectiveSearchSegmentationStrategyMultiple.addStrategy(Ptr_SelectiveSearchSegmentationStrategy g;float weight)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_selective_search_strategy_multiple_add"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategyMultiple|method|public;instance|System.Void AddStrategy(JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy strategy,System.Single weight)"
+      ],
+      "historicalOrdinal": 165,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 166,
+      "identity": "cv.ximgproc.segmentation.SelectiveSearchSegmentationStrategyMultiple.clearStrategies()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_selective_search_strategy_multiple_clear"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategyMultiple|method|public;instance|System.Void ClearStrategies()"
+      ],
+      "historicalOrdinal": 166,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 167,
+      "identity": "cv.ximgproc.segmentation.createSelectiveSearchSegmentationStrategyMultiple()-\u003EPtr\u003CSelectiveSearchSegmentationStrategyMultiple\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_selective_search_strategy_create_multiple"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategyMultiple CreateSelectiveSearchSegmentationStrategyMultiple()"
+      ],
+      "historicalOrdinal": 167,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 173,
+      "identity": "cv.ximgproc.segmentation.SelectiveSearchSegmentation.setBaseImage(Mat img)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_selective_search_segmentation_set_base_image"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void SetBaseImage(JYPPX.OpenCvSharp.Core.Mat image)"
+      ],
+      "historicalOrdinal": 173,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 174,
+      "identity": "cv.ximgproc.segmentation.SelectiveSearchSegmentation.switchToSingleStrategy(int k=200;float sigma=0.8f)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_selective_search_segmentation_switch_to_single_strategy"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void SwitchToSingleStrategy(System.Int32 k=200,System.Single sigma=0.8)"
+      ],
+      "historicalOrdinal": 174,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 175,
+      "identity": "cv.ximgproc.segmentation.SelectiveSearchSegmentation.switchToSelectiveSearchFast(int base_k=150;int inc_k=150;float sigma=0.8f)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_selective_search_segmentation_switch_to_fast"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void SwitchToSelectiveSearchFast(System.Int32 baseK=150,System.Int32 incK=150,System.Single sigma=0.8)"
+      ],
+      "historicalOrdinal": 175,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 176,
+      "identity": "cv.ximgproc.segmentation.SelectiveSearchSegmentation.switchToSelectiveSearchQuality(int base_k=150;int inc_k=150;float sigma=0.8f)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_selective_search_segmentation_switch_to_quality"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void SwitchToSelectiveSearchQuality(System.Int32 baseK=150,System.Int32 incK=150,System.Single sigma=0.8)"
+      ],
+      "historicalOrdinal": 176,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 177,
+      "identity": "cv.ximgproc.segmentation.SelectiveSearchSegmentation.addImage(Mat img)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_selective_search_segmentation_add_image"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void AddImage(JYPPX.OpenCvSharp.Core.Mat image)"
+      ],
+      "historicalOrdinal": 177,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 178,
+      "identity": "cv.ximgproc.segmentation.SelectiveSearchSegmentation.clearImages()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_selective_search_segmentation_clear_images"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void ClearImages()"
+      ],
+      "historicalOrdinal": 178,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 179,
+      "identity": "cv.ximgproc.segmentation.SelectiveSearchSegmentation.addGraphSegmentation(Ptr_GraphSegmentation g)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_selective_search_segmentation_add_graph_segmentation"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void AddGraphSegmentation(JYPPX.OpenCvSharp.XImgProc.GraphSegmentation graphSegmentation)"
+      ],
+      "historicalOrdinal": 179,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 180,
+      "identity": "cv.ximgproc.segmentation.SelectiveSearchSegmentation.clearGraphSegmentations()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_selective_search_segmentation_clear_graph_segmentations"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void ClearGraphSegmentations()"
+      ],
+      "historicalOrdinal": 180,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 181,
+      "identity": "cv.ximgproc.segmentation.SelectiveSearchSegmentation.addStrategy(Ptr_SelectiveSearchSegmentationStrategy s)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_selective_search_segmentation_add_strategy"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void AddStrategy(JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy strategy)"
+      ],
+      "historicalOrdinal": 181,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 182,
+      "identity": "cv.ximgproc.segmentation.SelectiveSearchSegmentation.clearStrategies()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_selective_search_segmentation_clear_strategies"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|System.Void ClearStrategies()"
+      ],
+      "historicalOrdinal": 182,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 183,
+      "identity": "cv.ximgproc.segmentation.SelectiveSearchSegmentation.process(vector_Rect rects[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_selective_search_segmentation_process_count",
+        "jyppx_ocv_ximgproc_selective_search_segmentation_process_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation|method|public;instance|JYPPX.OpenCvSharp.Core.Rect[] Process()"
+      ],
+      "historicalOrdinal": 183,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 184,
+      "identity": "cv.ximgproc.segmentation.createSelectiveSearchSegmentation()-\u003EPtr\u003CSelectiveSearchSegmentation\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_selective_search_segmentation_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SelectiveSearchSegmentation CreateSelectiveSearchSegmentation()"
+      ],
+      "historicalOrdinal": 184,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 187,
+      "identity": "cv.ximgproc.SuperpixelSLIC.getNumberOfSuperpixels()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_superpixel_slic_get_number"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSLIC|property|instance;get:public|System.Int32 NumberOfSuperpixels"
+      ],
+      "historicalOrdinal": 187,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 188,
+      "identity": "cv.ximgproc.SuperpixelSLIC.iterate(int num_iterations=10)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_superpixel_slic_iterate"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSLIC|method|public;instance|System.Void Iterate(System.Int32 numIterations=10)"
+      ],
+      "historicalOrdinal": 188,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 189,
+      "identity": "cv.ximgproc.SuperpixelSLIC.getLabels(Mat labels_out[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_superpixel_slic_get_labels"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSLIC|method|public;instance|System.Void GetLabels(JYPPX.OpenCvSharp.Core.Mat labels)"
+      ],
+      "historicalOrdinal": 189,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 190,
+      "identity": "cv.ximgproc.SuperpixelSLIC.getLabelContourMask(Mat image[/O];bool thick_line=true)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_superpixel_slic_get_label_contour_mask"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSLIC|method|public;instance|System.Void GetLabelContourMask(JYPPX.OpenCvSharp.Core.Mat image,System.Boolean thickLine=true)"
+      ],
+      "historicalOrdinal": 190,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 191,
+      "identity": "cv.ximgproc.SuperpixelSLIC.enforceLabelConnectivity(int min_element_size=25)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_superpixel_slic_enforce_label_connectivity"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SuperpixelSLIC|method|public;instance|System.Void EnforceLabelConnectivity(System.Int32 minElementSize=25)"
+      ],
+      "historicalOrdinal": 191,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 192,
+      "identity": "cv.ximgproc.createSuperpixelSLIC(Mat image;int algorithm=SLICO;int region_size=10;float ruler=10.0f)-\u003EPtr\u003CSuperpixelSLIC\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_superpixel_slic_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.SuperpixelSLIC CreateSuperpixelSLIC(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.XImgProc.SLICType algorithm=SLICO,System.Int32 regionSize=10,System.Single ruler=10)"
+      ],
+      "historicalOrdinal": 192,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 194,
+      "identity": "cv.ximgproc.SparseMatchInterpolator.interpolate(Mat from_image;Mat from_points;Mat to_image;Mat to_points;Mat dense_flow[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_sparse_match_interpolator_interpolate"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SparseMatchInterpolator|method|public;instance;abstract|System.Void Interpolate(JYPPX.OpenCvSharp.Core.Mat fromImage,JYPPX.OpenCvSharp.Core.Mat fromPoints,JYPPX.OpenCvSharp.Core.Mat toImage,JYPPX.OpenCvSharp.Core.Mat toPoints,JYPPX.OpenCvSharp.Core.Mat denseFlow)",
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.SparseMatchInterpolator|method|public;instance|System.Void Interpolate(JYPPX.OpenCvSharp.Core.Mat fromImage,JYPPX.OpenCvSharp.Core.Point2f[] fromPoints,JYPPX.OpenCvSharp.Core.Mat toImage,JYPPX.OpenCvSharp.Core.Point2f[] toPoints,JYPPX.OpenCvSharp.Core.Mat denseFlow)"
+      ],
+      "historicalOrdinal": 194,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 196,
+      "identity": "cv.ximgproc.EdgeAwareInterpolator.setCostMap(Mat _costMap[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_aware_interpolator_set_cost_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|method|public;instance|System.Void SetCostMap(JYPPX.OpenCvSharp.Core.Mat costMap)"
+      ],
+      "historicalOrdinal": 196,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 197,
+      "identity": "cv.ximgproc.EdgeAwareInterpolator.setK(int _k)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_aware_interpolator_set_k"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Int32 K"
+      ],
+      "historicalOrdinal": 197,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 198,
+      "identity": "cv.ximgproc.EdgeAwareInterpolator.getK()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_aware_interpolator_get_k"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Int32 K"
+      ],
+      "historicalOrdinal": 198,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 199,
+      "identity": "cv.ximgproc.EdgeAwareInterpolator.setSigma(float _sigma)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_aware_interpolator_set_sigma"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Single Sigma"
+      ],
+      "historicalOrdinal": 199,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 200,
+      "identity": "cv.ximgproc.EdgeAwareInterpolator.getSigma()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_aware_interpolator_get_sigma"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Single Sigma"
+      ],
+      "historicalOrdinal": 200,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 201,
+      "identity": "cv.ximgproc.EdgeAwareInterpolator.setLambda(float _lambda)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_aware_interpolator_set_lambda"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Single Lambda"
+      ],
+      "historicalOrdinal": 201,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 202,
+      "identity": "cv.ximgproc.EdgeAwareInterpolator.getLambda()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_aware_interpolator_get_lambda"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Single Lambda"
+      ],
+      "historicalOrdinal": 202,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 203,
+      "identity": "cv.ximgproc.EdgeAwareInterpolator.setUsePostProcessing(bool _use_post_proc)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_aware_interpolator_set_use_post_processing"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Boolean UsePostProcessing"
+      ],
+      "historicalOrdinal": 203,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 204,
+      "identity": "cv.ximgproc.EdgeAwareInterpolator.getUsePostProcessing()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_aware_interpolator_get_use_post_processing"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Boolean UsePostProcessing"
+      ],
+      "historicalOrdinal": 204,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 205,
+      "identity": "cv.ximgproc.EdgeAwareInterpolator.setFGSLambda(float _lambda)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_aware_interpolator_set_fgs_lambda"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Single FGSLambda"
+      ],
+      "historicalOrdinal": 205,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 206,
+      "identity": "cv.ximgproc.EdgeAwareInterpolator.getFGSLambda()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_aware_interpolator_get_fgs_lambda"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Single FGSLambda"
+      ],
+      "historicalOrdinal": 206,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 207,
+      "identity": "cv.ximgproc.EdgeAwareInterpolator.setFGSSigma(float _sigma)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_aware_interpolator_set_fgs_sigma"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Single FGSSigma"
+      ],
+      "historicalOrdinal": 207,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 208,
+      "identity": "cv.ximgproc.EdgeAwareInterpolator.getFGSSigma()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_aware_interpolator_get_fgs_sigma"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator|property|instance;get:public;set:public|System.Single FGSSigma"
+      ],
+      "historicalOrdinal": 208,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 209,
+      "identity": "cv.ximgproc.createEdgeAwareInterpolator()-\u003EPtr\u003CEdgeAwareInterpolator\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_edge_aware_interpolator_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.EdgeAwareInterpolator CreateEdgeAwareInterpolator()"
+      ],
+      "historicalOrdinal": 209,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 211,
+      "identity": "cv.ximgproc.RICInterpolator.setK(int k=32)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_set_k"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Int32 K"
+      ],
+      "historicalOrdinal": 211,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 212,
+      "identity": "cv.ximgproc.RICInterpolator.getK()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_get_k"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Int32 K"
+      ],
+      "historicalOrdinal": 212,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 213,
+      "identity": "cv.ximgproc.RICInterpolator.setCostMap(Mat costMap[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_set_cost_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|method|public;instance|System.Void SetCostMap(JYPPX.OpenCvSharp.Core.Mat costMap)"
+      ],
+      "historicalOrdinal": 213,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 214,
+      "identity": "cv.ximgproc.RICInterpolator.setSuperpixelSize(int spSize=15)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_set_superpixel_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Int32 SuperpixelSize"
+      ],
+      "historicalOrdinal": 214,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 215,
+      "identity": "cv.ximgproc.RICInterpolator.getSuperpixelSize()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_get_superpixel_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Int32 SuperpixelSize"
+      ],
+      "historicalOrdinal": 215,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 216,
+      "identity": "cv.ximgproc.RICInterpolator.setSuperpixelNNCnt(int spNN=150)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_set_superpixel_nn_count"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Int32 SuperpixelNNCount"
+      ],
+      "historicalOrdinal": 216,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 217,
+      "identity": "cv.ximgproc.RICInterpolator.getSuperpixelNNCnt()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_get_superpixel_nn_count"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Int32 SuperpixelNNCount"
+      ],
+      "historicalOrdinal": 217,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 218,
+      "identity": "cv.ximgproc.RICInterpolator.setSuperpixelRuler(float ruler=15.f)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_set_superpixel_ruler"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single SuperpixelRuler"
+      ],
+      "historicalOrdinal": 218,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 219,
+      "identity": "cv.ximgproc.RICInterpolator.getSuperpixelRuler()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_get_superpixel_ruler"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single SuperpixelRuler"
+      ],
+      "historicalOrdinal": 219,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 220,
+      "identity": "cv.ximgproc.RICInterpolator.setSuperpixelMode(int mode=100)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_set_superpixel_mode"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|JYPPX.OpenCvSharp.XImgProc.SLICType SuperpixelMode"
+      ],
+      "historicalOrdinal": 220,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 221,
+      "identity": "cv.ximgproc.RICInterpolator.getSuperpixelMode()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_get_superpixel_mode"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|JYPPX.OpenCvSharp.XImgProc.SLICType SuperpixelMode"
+      ],
+      "historicalOrdinal": 221,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 222,
+      "identity": "cv.ximgproc.RICInterpolator.setAlpha(float alpha=0.7f)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_set_alpha"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single Alpha"
+      ],
+      "historicalOrdinal": 222,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 223,
+      "identity": "cv.ximgproc.RICInterpolator.getAlpha()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_get_alpha"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single Alpha"
+      ],
+      "historicalOrdinal": 223,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 224,
+      "identity": "cv.ximgproc.RICInterpolator.setModelIter(int modelIter=4)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_set_model_iter"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Int32 ModelIter"
+      ],
+      "historicalOrdinal": 224,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 225,
+      "identity": "cv.ximgproc.RICInterpolator.getModelIter()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_get_model_iter"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Int32 ModelIter"
+      ],
+      "historicalOrdinal": 225,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 226,
+      "identity": "cv.ximgproc.RICInterpolator.setRefineModels(bool refineModles=true)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_set_refine_models"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Boolean RefineModels"
+      ],
+      "historicalOrdinal": 226,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 227,
+      "identity": "cv.ximgproc.RICInterpolator.getRefineModels()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_get_refine_models"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Boolean RefineModels"
+      ],
+      "historicalOrdinal": 227,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 228,
+      "identity": "cv.ximgproc.RICInterpolator.setMaxFlow(float maxFlow=250.f)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_set_max_flow"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single MaxFlow"
+      ],
+      "historicalOrdinal": 228,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 229,
+      "identity": "cv.ximgproc.RICInterpolator.getMaxFlow()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_get_max_flow"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single MaxFlow"
+      ],
+      "historicalOrdinal": 229,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 230,
+      "identity": "cv.ximgproc.RICInterpolator.setUseVariationalRefinement(bool use_variational_refinement=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_set_use_variational_refinement"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Boolean UseVariationalRefinement"
+      ],
+      "historicalOrdinal": 230,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 231,
+      "identity": "cv.ximgproc.RICInterpolator.getUseVariationalRefinement()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_get_use_variational_refinement"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Boolean UseVariationalRefinement"
+      ],
+      "historicalOrdinal": 231,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 232,
+      "identity": "cv.ximgproc.RICInterpolator.setUseGlobalSmootherFilter(bool use_FGS=true)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_set_use_global_smoother_filter"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Boolean UseGlobalSmootherFilter"
+      ],
+      "historicalOrdinal": 232,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 233,
+      "identity": "cv.ximgproc.RICInterpolator.getUseGlobalSmootherFilter()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_get_use_global_smoother_filter"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Boolean UseGlobalSmootherFilter"
+      ],
+      "historicalOrdinal": 233,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 234,
+      "identity": "cv.ximgproc.RICInterpolator.setFGSLambda(float lambda=500.f)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_set_fgs_lambda"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single FGSLambda"
+      ],
+      "historicalOrdinal": 234,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 235,
+      "identity": "cv.ximgproc.RICInterpolator.getFGSLambda()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_get_fgs_lambda"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single FGSLambda"
+      ],
+      "historicalOrdinal": 235,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 236,
+      "identity": "cv.ximgproc.RICInterpolator.setFGSSigma(float sigma=1.5f)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_set_fgs_sigma"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single FGSSigma"
+      ],
+      "historicalOrdinal": 236,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 237,
+      "identity": "cv.ximgproc.RICInterpolator.getFGSSigma()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_get_fgs_sigma"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.RICInterpolator|property|instance;get:public;set:public|System.Single FGSSigma"
+      ],
+      "historicalOrdinal": 237,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 238,
+      "identity": "cv.ximgproc.createRICInterpolator()-\u003EPtr\u003CRICInterpolator\u003E",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_ric_interpolator_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|JYPPX.OpenCvSharp.XImgProc.RICInterpolator CreateRICInterpolator()"
+      ],
+      "historicalOrdinal": 238,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 248,
+      "identity": "cv.ximgproc.weightedMedianFilter(Mat joint;Mat src;Mat dst[/O];int r;double sigma=25.5;int weightType=WMF_EXP;Mat mask=Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit XImgProc native manifest and managed baseline evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XIMGPROC=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ximgproc_weighted_median_filter"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XImgProc.XImgProcCv2|method|public;static|System.Void WeightedMedianFilter(JYPPX.OpenCvSharp.Core.Mat joint,JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 r,System.Double sigma=25.5,JYPPX.OpenCvSharp.XImgProc.WeightedMedianFilterWeightType weightType=Exp,JYPPX.OpenCvSharp.Core.Mat? mask=null)"
+      ],
+      "historicalOrdinal": 248,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    }
+  ],
+  "limitation": "Implemented means the recorded managed/C ABI binding exists, subject to its documented validation. It does not certify wider 5.1 input domains, optional codecs/backends, or complete C\u002B\u002B coverage."
+}

@@ -1,0 +1,510 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.1.0",
+  "module": "xphoto",
+  "claimedSlice": "Historical xphoto parser scope refreshed against official 5.1 sources: 6 contributing header(s); parser-emitted declarations only",
+  "completeCppParityClaimed": false,
+  "implemented": [
+    {
+      "ordinal": 2,
+      "identity": "cv.xphoto.bm3dDenoising(Mat src;Mat dstStep1[/IO];Mat dstStep2[/O];float h=1;int templateWindowSize=4;int searchWindowSize=16;int blockMatchingStep1=2500;int blockMatchingStep2=400;int groupSize=8;int slidingStep=1;float beta=2.0f;int normType=cv::NORM_L2;int step=cv::xphoto::BM3D_STEPALL;int transformType=cv::xphoto::HAAR)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_bm3d_denoising",
+        "jyppx_ocv_xphoto_bm3d_denoising_steps"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat Bm3dDenoising(JYPPX.OpenCvSharp.Core.Mat src,System.Single h=1,System.Int32 templateWindowSize=4,System.Int32 searchWindowSize=16,System.Int32 blockMatchingStep1=2500,System.Int32 blockMatchingStep2=400,System.Int32 groupSize=8,System.Int32 slidingStep=1,System.Single beta=2,JYPPX.OpenCvSharp.Core.NormTypes normType=L2,JYPPX.OpenCvSharp.XPhoto.Bm3dSteps step=StepAll,JYPPX.OpenCvSharp.XPhoto.TransformTypes transformType=Haar)",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|System.Void Bm3dDenoising(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Single h=1,System.Int32 templateWindowSize=4,System.Int32 searchWindowSize=16,System.Int32 blockMatchingStep1=2500,System.Int32 blockMatchingStep2=400,System.Int32 groupSize=8,System.Int32 slidingStep=1,System.Single beta=2,JYPPX.OpenCvSharp.Core.NormTypes normType=L2,JYPPX.OpenCvSharp.XPhoto.Bm3dSteps step=StepAll,JYPPX.OpenCvSharp.XPhoto.TransformTypes transformType=Haar)",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|System.Void Bm3dDenoising(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dstStep1,JYPPX.OpenCvSharp.Core.Mat dstStep2,System.Single h=1,System.Int32 templateWindowSize=4,System.Int32 searchWindowSize=16,System.Int32 blockMatchingStep1=2500,System.Int32 blockMatchingStep2=400,System.Int32 groupSize=8,System.Int32 slidingStep=1,System.Single beta=2,JYPPX.OpenCvSharp.Core.NormTypes normType=L2,JYPPX.OpenCvSharp.XPhoto.Bm3dSteps step=StepAll,JYPPX.OpenCvSharp.XPhoto.TransformTypes transformType=Haar)"
+      ],
+      "historicalOrdinal": 2,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.xphoto.bm3dDenoising(Mat src;Mat dst[/O];float h=1;int templateWindowSize=4;int searchWindowSize=16;int blockMatchingStep1=2500;int blockMatchingStep2=400;int groupSize=8;int slidingStep=1;float beta=2.0f;int normType=cv::NORM_L2;int step=cv::xphoto::BM3D_STEPALL;int transformType=cv::xphoto::HAAR)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_bm3d_denoising",
+        "jyppx_ocv_xphoto_bm3d_denoising_steps"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat Bm3dDenoising(JYPPX.OpenCvSharp.Core.Mat src,System.Single h=1,System.Int32 templateWindowSize=4,System.Int32 searchWindowSize=16,System.Int32 blockMatchingStep1=2500,System.Int32 blockMatchingStep2=400,System.Int32 groupSize=8,System.Int32 slidingStep=1,System.Single beta=2,JYPPX.OpenCvSharp.Core.NormTypes normType=L2,JYPPX.OpenCvSharp.XPhoto.Bm3dSteps step=StepAll,JYPPX.OpenCvSharp.XPhoto.TransformTypes transformType=Haar)",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|System.Void Bm3dDenoising(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Single h=1,System.Int32 templateWindowSize=4,System.Int32 searchWindowSize=16,System.Int32 blockMatchingStep1=2500,System.Int32 blockMatchingStep2=400,System.Int32 groupSize=8,System.Int32 slidingStep=1,System.Single beta=2,JYPPX.OpenCvSharp.Core.NormTypes normType=L2,JYPPX.OpenCvSharp.XPhoto.Bm3dSteps step=StepAll,JYPPX.OpenCvSharp.XPhoto.TransformTypes transformType=Haar)",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|System.Void Bm3dDenoising(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dstStep1,JYPPX.OpenCvSharp.Core.Mat dstStep2,System.Single h=1,System.Int32 templateWindowSize=4,System.Int32 searchWindowSize=16,System.Int32 blockMatchingStep1=2500,System.Int32 blockMatchingStep2=400,System.Int32 groupSize=8,System.Int32 slidingStep=1,System.Single beta=2,JYPPX.OpenCvSharp.Core.NormTypes normType=L2,JYPPX.OpenCvSharp.XPhoto.Bm3dSteps step=StepAll,JYPPX.OpenCvSharp.XPhoto.TransformTypes transformType=Haar)"
+      ],
+      "historicalOrdinal": 3,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.xphoto.dctDenoising(Mat src[/C,/Ref];Mat dst[/Ref];double sigma[/C];int psize=16[/C])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_dct_denoising"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat DctDenoising(JYPPX.OpenCvSharp.Core.Mat src,System.Double sigma,System.Int32 psize=16)",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|System.Void DctDenoising(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Double sigma,System.Int32 psize=16)"
+      ],
+      "historicalOrdinal": 4,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.xphoto.inpaint(Mat src[/C,/Ref];Mat mask[/C,/Ref];Mat dst[/Ref];int algorithmType[/C])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_inpaint"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat Inpaint(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat mask,JYPPX.OpenCvSharp.XPhoto.InpaintTypes algorithmType)",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|System.Void Inpaint(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat mask,JYPPX.OpenCvSharp.Core.Mat dst,JYPPX.OpenCvSharp.XPhoto.InpaintTypes algorithmType)"
+      ],
+      "historicalOrdinal": 6,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.xphoto.oilPainting(Mat src;Mat dst[/O];int size;int dynRatio;int code)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_oil_painting"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat OilPainting(JYPPX.OpenCvSharp.Core.Mat src,System.Int32 size,System.Int32 dynRatio)",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|System.Void OilPainting(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 size,System.Int32 dynRatio)",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|System.Void OilPainting(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 size,System.Int32 dynRatio,JYPPX.OpenCvSharp.ImgProc.ColorConversionCodes code)"
+      ],
+      "historicalOrdinal": 7,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.xphoto.oilPainting(Mat src;Mat dst[/O];int size;int dynRatio)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_oil_painting"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat OilPainting(JYPPX.OpenCvSharp.Core.Mat src,System.Int32 size,System.Int32 dynRatio)",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|System.Void OilPainting(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 size,System.Int32 dynRatio)",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|System.Void OilPainting(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Int32 size,System.Int32 dynRatio,JYPPX.OpenCvSharp.ImgProc.ColorConversionCodes code)"
+      ],
+      "historicalOrdinal": 8,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.xphoto.WhiteBalancer.balanceWhite(Mat src;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_white_balancer_balance_white"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.WhiteBalancer|method|protected;instance;virtual|System.Void ValidateBalanceWhiteSource(JYPPX.OpenCvSharp.Core.Mat src)",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.WhiteBalancer|method|public;instance|JYPPX.OpenCvSharp.Core.Mat BalanceWhite(JYPPX.OpenCvSharp.Core.Mat src)",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.WhiteBalancer|method|public;instance|System.Void BalanceWhite(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ],
+      "historicalOrdinal": 20,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.xphoto.SimpleWB.getInputMin()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_simple_wb_get_property",
+        "jyppx_ocv_xphoto_simple_wb_set_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.SimpleWB|property|instance;get:public;set:public|System.Single InputMin"
+      ],
+      "historicalOrdinal": 22,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.xphoto.SimpleWB.setInputMin(float val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_simple_wb_get_property",
+        "jyppx_ocv_xphoto_simple_wb_set_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.SimpleWB|property|instance;get:public;set:public|System.Single InputMin"
+      ],
+      "historicalOrdinal": 23,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.xphoto.SimpleWB.getInputMax()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_simple_wb_get_property",
+        "jyppx_ocv_xphoto_simple_wb_set_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.SimpleWB|property|instance;get:public;set:public|System.Single InputMax"
+      ],
+      "historicalOrdinal": 24,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.xphoto.SimpleWB.setInputMax(float val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_simple_wb_get_property",
+        "jyppx_ocv_xphoto_simple_wb_set_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.SimpleWB|property|instance;get:public;set:public|System.Single InputMax"
+      ],
+      "historicalOrdinal": 25,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.xphoto.SimpleWB.getOutputMin()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_simple_wb_get_property",
+        "jyppx_ocv_xphoto_simple_wb_set_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.SimpleWB|property|instance;get:public;set:public|System.Single OutputMin"
+      ],
+      "historicalOrdinal": 26,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.xphoto.SimpleWB.setOutputMin(float val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_simple_wb_get_property",
+        "jyppx_ocv_xphoto_simple_wb_set_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.SimpleWB|property|instance;get:public;set:public|System.Single OutputMin"
+      ],
+      "historicalOrdinal": 27,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.xphoto.SimpleWB.getOutputMax()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_simple_wb_get_property",
+        "jyppx_ocv_xphoto_simple_wb_set_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.SimpleWB|property|instance;get:public;set:public|System.Single OutputMax"
+      ],
+      "historicalOrdinal": 28,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.xphoto.SimpleWB.setOutputMax(float val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_simple_wb_get_property",
+        "jyppx_ocv_xphoto_simple_wb_set_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.SimpleWB|property|instance;get:public;set:public|System.Single OutputMax"
+      ],
+      "historicalOrdinal": 29,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.xphoto.SimpleWB.getP()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_simple_wb_get_property",
+        "jyppx_ocv_xphoto_simple_wb_set_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.SimpleWB|constructor|public;instance|.ctor()",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.SimpleWB|method|protected;instance;override|System.Void ValidateBalanceWhiteSource(JYPPX.OpenCvSharp.Core.Mat src)",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.SimpleWB|method|public;static|JYPPX.OpenCvSharp.XPhoto.SimpleWB Create()",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.SimpleWB|property|instance;get:public;set:public|System.Single InputMax",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.SimpleWB|property|instance;get:public;set:public|System.Single InputMin",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.SimpleWB|property|instance;get:public;set:public|System.Single OutputMax",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.SimpleWB|property|instance;get:public;set:public|System.Single OutputMin",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.SimpleWB|property|instance;get:public;set:public|System.Single P",
+        "TYPE|class|public;sealed|JYPPX.OpenCvSharp.XPhoto.SimpleWB|base=JYPPX.OpenCvSharp.XPhoto.WhiteBalancer|interfaces=System.IDisposable"
+      ],
+      "historicalOrdinal": 30,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.xphoto.SimpleWB.setP(float val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_simple_wb_get_property",
+        "jyppx_ocv_xphoto_simple_wb_set_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.SimpleWB|constructor|public;instance|.ctor()",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.SimpleWB|method|protected;instance;override|System.Void ValidateBalanceWhiteSource(JYPPX.OpenCvSharp.Core.Mat src)",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.SimpleWB|method|public;static|JYPPX.OpenCvSharp.XPhoto.SimpleWB Create()",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.SimpleWB|property|instance;get:public;set:public|System.Single InputMax",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.SimpleWB|property|instance;get:public;set:public|System.Single InputMin",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.SimpleWB|property|instance;get:public;set:public|System.Single OutputMax",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.SimpleWB|property|instance;get:public;set:public|System.Single OutputMin",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.SimpleWB|property|instance;get:public;set:public|System.Single P",
+        "TYPE|class|public;sealed|JYPPX.OpenCvSharp.XPhoto.SimpleWB|base=JYPPX.OpenCvSharp.XPhoto.WhiteBalancer|interfaces=System.IDisposable"
+      ],
+      "historicalOrdinal": 31,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.xphoto.createSimpleWB()-\u003EPtr\u003CSimpleWB\u003E",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_simple_wb_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|JYPPX.OpenCvSharp.XPhoto.SimpleWB CreateSimpleWB()"
+      ],
+      "historicalOrdinal": 32,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.xphoto.GrayworldWB.getSaturationThreshold()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_grayworld_wb_get_saturation_threshold",
+        "jyppx_ocv_xphoto_grayworld_wb_set_saturation_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.GrayworldWB|property|instance;get:public;set:public|System.Single SaturationThreshold"
+      ],
+      "historicalOrdinal": 34,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.xphoto.GrayworldWB.setSaturationThreshold(float val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_grayworld_wb_get_saturation_threshold",
+        "jyppx_ocv_xphoto_grayworld_wb_set_saturation_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.GrayworldWB|property|instance;get:public;set:public|System.Single SaturationThreshold"
+      ],
+      "historicalOrdinal": 35,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.xphoto.createGrayworldWB()-\u003EPtr\u003CGrayworldWB\u003E",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_grayworld_wb_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|JYPPX.OpenCvSharp.XPhoto.GrayworldWB CreateGrayworldWB()"
+      ],
+      "historicalOrdinal": 36,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.xphoto.LearningBasedWB.extractSimpleFeatures(Mat src;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_learning_based_wb_extract_simple_features"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.LearningBasedWB|method|public;instance|JYPPX.OpenCvSharp.Core.Mat ExtractSimpleFeatures(JYPPX.OpenCvSharp.Core.Mat src)",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.LearningBasedWB|method|public;instance|System.Void ExtractSimpleFeatures(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst)"
+      ],
+      "historicalOrdinal": 38,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.xphoto.LearningBasedWB.getRangeMaxVal()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_learning_based_wb_get_int_property",
+        "jyppx_ocv_xphoto_learning_based_wb_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.LearningBasedWB|property|instance;get:public;set:public|System.Int32 RangeMaxVal"
+      ],
+      "historicalOrdinal": 39,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.xphoto.LearningBasedWB.setRangeMaxVal(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_learning_based_wb_get_int_property",
+        "jyppx_ocv_xphoto_learning_based_wb_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.LearningBasedWB|property|instance;get:public;set:public|System.Int32 RangeMaxVal"
+      ],
+      "historicalOrdinal": 40,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.xphoto.LearningBasedWB.getSaturationThreshold()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_learning_based_wb_get_saturation_threshold",
+        "jyppx_ocv_xphoto_learning_based_wb_set_saturation_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.LearningBasedWB|property|instance;get:public;set:public|System.Single SaturationThreshold"
+      ],
+      "historicalOrdinal": 41,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 42,
+      "identity": "cv.xphoto.LearningBasedWB.setSaturationThreshold(float val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_learning_based_wb_get_saturation_threshold",
+        "jyppx_ocv_xphoto_learning_based_wb_set_saturation_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.LearningBasedWB|property|instance;get:public;set:public|System.Single SaturationThreshold"
+      ],
+      "historicalOrdinal": 42,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.xphoto.LearningBasedWB.getHistBinNum()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_learning_based_wb_get_int_property",
+        "jyppx_ocv_xphoto_learning_based_wb_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.LearningBasedWB|property|instance;get:public;set:public|System.Int32 HistBinNum"
+      ],
+      "historicalOrdinal": 43,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.xphoto.LearningBasedWB.setHistBinNum(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_learning_based_wb_get_int_property",
+        "jyppx_ocv_xphoto_learning_based_wb_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.LearningBasedWB|property|instance;get:public;set:public|System.Int32 HistBinNum"
+      ],
+      "historicalOrdinal": 44,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 45,
+      "identity": "cv.xphoto.createLearningBasedWB(String path_to_model=String()[/C,/Ref])-\u003EPtr\u003CLearningBasedWB\u003E",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_learning_based_wb_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|JYPPX.OpenCvSharp.XPhoto.LearningBasedWB CreateLearningBasedWB(System.String? modelPath=null)"
+      ],
+      "historicalOrdinal": 45,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 46,
+      "identity": "cv.xphoto.applyChannelGains(Mat src;Mat dst[/O];float gainB;float gainG;float gainR)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Explicit declaration-to-symbol mapping and managed XPhoto member evidence are present for this parser declaration.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_XPHOTO=1",
+      "nativeEntrypoints": [
+        "jyppx_ocv_xphoto_apply_channel_gains"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat ApplyChannelGains(JYPPX.OpenCvSharp.Core.Mat src,System.Single gainB,System.Single gainG,System.Single gainR)",
+        "MEMBER|JYPPX.OpenCvSharp.XPhoto.XPhotoCv2|method|public;static|System.Void ApplyChannelGains(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,System.Single gainB,System.Single gainG,System.Single gainR)"
+      ],
+      "historicalOrdinal": 46,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    }
+  ],
+  "limitation": "Implemented means the recorded managed/C ABI binding exists, subject to its documented validation. It does not certify wider 5.1 input domains, optional codecs/backends, or complete C\u002B\u002B coverage."
+}

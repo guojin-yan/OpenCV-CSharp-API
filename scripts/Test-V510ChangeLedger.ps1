@@ -75,9 +75,20 @@ $inventoryHash = (Get-FileHash -LiteralPath (Join-Path $repo $inventoryPath) -Al
 $catalogHash = (Get-FileHash -LiteralPath (Join-Path $repo $catalogPath) -Algorithm SHA256).Hash.ToLowerInvariant()
 if ($refresh.sourceBuildInputsChanged -or $refresh.buildSourceCommit -cne $build.sourceCommit -or
     $refresh.catalog.path -cne $catalogPath -or $refresh.catalog.sha256 -cne $catalogHash -or $refresh.inventory.path -cne $inventoryPath -or $refresh.inventory.sha256 -cne $inventoryHash -or
-    $refresh.refreshedParserSliceCount -ne 14 -or $refresh.pendingCatalogMapCount -ne 59 -or $refresh.historicalCatalogVersion -cne '5.0.0' -or
-    $refresh.newDeclarationCount -ne 1300 -or $refresh.totalReviewedDeclarationCount -ne 2214 -or $refresh.sharedGeneratorNegativeFixtureCount -ne 418 -or
+    $refresh.refreshedParserSliceCount -ne 22 -or $refresh.pendingCatalogMapCount -ne 51 -or $refresh.historicalCatalogVersion -cne '5.0.0' -or
+    $refresh.newDeclarationCount -ne 611 -or $refresh.totalReviewedDeclarationCount -ne 2825 -or $refresh.sharedGeneratorNegativeFixtureCount -ne 675 -or
     $refresh.newManagedApiOrNativeAbiAdded -or $refresh.newRuntimeBehaviorCertified -or $refresh.repositoryWideUpstreamParityClaimed) { throw '5.1 shared parser refresh evidence drifted.' }
+$contribReview = $build.contribModule51Review
+if ($contribReview.status -cne 'verified-parser-review' -or
+    (@($contribReview.modules) -join '|') -cne 'xphoto|ximgproc|optflow|bgsegm|face|quality|img_hash|line_descriptor' -or
+    $contribReview.newDeclarations -ne 611 -or $contribReview.newCallables -ne 511 -or
+    $contribReview.implemented -ne 445 -or $contribReview.omitted -ne 66 -or $contribReview.metadata -ne 100 -or
+    $contribReview.currentParserScopes -ne 22 -or $contribReview.totalDeclarations -ne 2825 -or $contribReview.remainingHistoricalCatalogMaps -ne 51 -or
+    $contribReview.newScopeNegativeFixtures -ne 257 -or $contribReview.sharedGeneratorNegativeFixtures -ne 675 -or
+    $contribReview.regeneratedArtifacts -ne 127 -or $contribReview.unchangedPriorArtifacts -ne 84 -or $contribReview.officialSourceInputs -ne 131 -or
+    $contribReview.actualCliNegativeFixtures -ne 28 -or -not $contribReview.inheritedBindingSetsPreserved -or
+    -not $contribReview.managedBinariesReusedUnchanged -or -not $contribReview.nativeBinariesReusedUnchanged -or
+    $contribReview.newPublicMemberOrNativeExport -or $contribReview.newRuntimeBehaviorCertified) { throw '5.1 contrib parser review evidence drifted.' }
 $calibration = $build.calibration51Correction
 $calibSummary = Get-Content -LiteralPath (Join-Path $repo 'compatibility/opencv-5.1.0/calib3d-upstream-summary.json') -Raw | ConvertFrom-Json
 if ($calibration.sourceCommit -cne $build.sourceCommit -or $calibration.disableSchurComplement -ne 134217728 -or $calibration.tiltedModel -ne 262144 -or
@@ -87,4 +98,4 @@ if ($calibration.sourceCommit -cne $build.sourceCommit -or $calibration.disableS
     $calibSummary.declarationCount -ne 208 -or $calibSummary.classificationCounts.implemented -ne 169 -or $calibSummary.classificationCounts.missing -ne 0 -or
     $calibSummary.reviewedExistingBindingCount -ne 3 -or $calibSummary.negativeFixtureCount -ne 37) { throw '5.1 calibration/matcher correction or reviewed binding evidence drifted.' }
 Write-Host "V510_CHANGE_LEDGER_OK entries=$(@($ledger.entries).Count) from=$($ledger.fromVersion) to=$($ledger.toVersion) native_abi=$($ledger.nativeAbiVersion)"
-Write-Host "OPENCV_510_SOURCE_BUILD_EVIDENCE_OK input_files=$($inputPaths.Count) full_exports=2669 mini_exports=527 native_ctest=6 managed=4180 historical_catalog=5.0.0 parser_slices=14 calibration_schur_bit=27"
+Write-Host "OPENCV_510_SOURCE_BUILD_EVIDENCE_OK input_files=$($inputPaths.Count) full_exports=2669 mini_exports=527 native_ctest=6 managed=4180 historical_catalog=5.0.0 parser_slices=22 calibration_schur_bit=27"

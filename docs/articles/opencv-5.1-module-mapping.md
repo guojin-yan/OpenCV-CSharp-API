@@ -1,6 +1,6 @@
 # Additional OpenCV 5.1 module mappings
 
-This review refreshes the historical parser scopes of Features, HighGui, ML, ObjDetect, Photo, Stitching, Tracking, Video and VideoIO. The nine scopes contribute 1,300 declarations; combined with the previous five scopes, the current inventory contains 14 scopes and 2,214 declarations. Another 59 historical catalog maps still require 5.1 review.
+This review refreshes the historical parser scopes of Features, HighGui, ML, ObjDetect, Photo, Stitching, Tracking, Video and VideoIO. The nine scopes contribute 1,300 declarations; that batch brought the inventory to 14 scopes and 2,214 declarations. The subsequent [contrib review](opencv-5.1-contrib-mapping.md) brings the current total to 22 scopes and 2,825 declarations, with 51 historical maps pending.
 
 OpenCV is pinned to `e4f78fbcf1a773fbed69e14500e8b734963eb585`; ML and Tracking use opencv_contrib `b67a855188a3d683813731010f6d39ac614733a4`. Both are official 5.1.0 sources. Forwarding/conditional compatibility headers are pinned separately from headers that contribute parser declarations. Tracking primary/legacy and Stitching detail surfaces retain their historical source labels.
 
@@ -31,6 +31,6 @@ OpenCV is pinned to `e4f78fbcf1a773fbed69e14500e8b734963eb585`; ML and Tracking 
 
 ## Verification
 
-The shared generator independently rejects 418 mutations across its 13 scopes; DNN retains its separate 22-fixture guard. New modules contribute 291 mutations, including source-repository identity, contrib revision, compatibility headers and primary/legacy surface loss. Unchanged scopes use a controlled documentation delta to test omitted/empty/incomplete review rejection. Every fixture must fail for its stated reason.
+The shared generator independently now rejects 675 mutations across its 21 scopes; DNN retains its separate 22-fixture guard. New modules contribute 291 mutations, including source-repository identity, contrib revision, compatibility headers and primary/legacy surface loss. Unchanged scopes use a controlled documentation delta to test omitted/empty/incomplete review rejection. Every fixture must fail for its stated reason.
 
 Generated artifacts preserve complete declarations and explicit before/after decisions. Historical 5.0 files remain unchanged. Source inputs are checked against both official Git commits, and raw extraction must match under LF and CRLF. This batch adds no public member, constant or native export and changes no managed/native runtime implementation. Optional models, backend/encoder combinations, complete C++/template coverage and other RIDs require separate evidence.

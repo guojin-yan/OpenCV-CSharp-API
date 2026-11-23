@@ -13,7 +13,7 @@ internal static class Program
     private const string ContribCommit = "b67a855188a3d683813731010f6d39ac614733a4";
     private const string CatalogPath = "compatibility/opencv-5.1.0/upstream-map-refresh-catalog.json";
     // Updating a reviewed slice requires reviewing its source and decisions together.
-    private const string ReviewedCatalogSha256 = "2597e3ed13c8aba5ee0a88be9d9b2ebb8d3c84ad6207d22875f343ed51074e9d";
+    private const string ReviewedCatalogSha256 = "4d0e132f129a001384e4880d415067f4991668b5b01158a5711b72e8972b545f";
     private static readonly string[] Classes = { "implemented", "intentionally-omitted", "missing", "non-callable-metadata", "unsupported", "upstream-conditional" };
     private static readonly JsonSerializerOptions Json = new() { WriteIndented = true };
     private sealed record Options(string Repository, string Workspace, string Output, bool Check);
@@ -257,6 +257,9 @@ internal static class Program
                 int ordinal = Int(original, "ordinal");
                 Require(Str(prior[ordinal]!, "identity") == id && Int(prior[ordinal]!, "ordinal") == ordinal, "Historical classification identity drifted.");
                 row = Copy(prior[ordinal]!.AsObject()); row["historicalOrdinal"] = ordinal;
+                // Preserve every inherited evidence identity in canonical ordinal order.
+                foreach (string key in new[] { "nativeEntrypoints", "managedMembers" })
+                    row[key] = Array(Strings(row, key).Order(StringComparer.Ordinal).Select(value => JsonValue.Create(value)));
                 row["buildCondition"] ??= "unconditional-parser-surface";
                 JsonNode? changed = Arr(module, "changedReviews").FirstOrDefault(item => Str(item!, "identity") == id);
                 row["refreshReview"] = changed is null ? "Exact historical identity retained; evidence and managed validation remain the recorded binding scope." : Str(changed, "reason");
@@ -354,7 +357,10 @@ internal static class Program
             Raw("lost class property", "Raw reviewed snapshot", v => Arr(Arr(v, "declarations").First(row => Str(row!, "kind") == "class" && Arr(row!, "arguments").Count > 0)!, "arguments").RemoveAt(0));
         else
             Raw("false declaration qualifier", "Raw reviewed snapshot", v => Arr(Arr(v, "declarations").First(row => Str(row!, "kind") == "callable")!, "modifiers").Add("/unreviewed"));
-        Raw("lost enum metadata", Str(module, "identityPolicy") == "full-enum" ? "Raw signature identity" : "Raw reviewed snapshot", v => Arr(Arr(v, "declarations").First(row => Arr(row!, "enumValues").Count > 0)!, "enumValues").RemoveAt(0));
+        if (Arr(raw, "declarations").Any(row => Arr(row!, "enumValues").Count > 0))
+            Raw("lost enum metadata", Str(module, "identityPolicy") == "full-enum" ? "Raw signature identity" : "Raw reviewed snapshot", v => Arr(Arr(v, "declarations").First(row => Arr(row!, "enumValues").Count > 0)!, "enumValues").RemoveAt(0));
+        else
+            Raw("invented enum metadata", "Raw reviewed snapshot", v => Arr(Arr(v, "declarations").First(row => Str(row!, "kind") == "callable")!, "enumValues").Add(new JsonObject { ["name"] = "const cv.UNREVIEWED", ["value"] = "1" }));
         Classification("missing classification", v => Arr(v, "declarations").RemoveAt(0));
         Classification("wrong order", v => Arr(v, "declarations")[0]!["ordinal"] = 1);
         Classification("false native", v => Arr(Arr(v, "declarations").First(row => Arr(row!, "nativeEntrypoints").Count > 0)!, "nativeEntrypoints")[0] = "jyppx_ocv_core_false");
@@ -363,6 +369,12 @@ internal static class Program
         Classification("binding erased", v => Arr(v, "declarations").First(row => Str(row!, "classification") == "implemented")!["classification"] = "intentionally-omitted");
         Classification("missing reason", v => Arr(v, "declarations")[0]!["reason"] = "");
         Classification("lost build condition", v => Arr(v, "declarations")[0]!["buildCondition"] = "unreviewed");
+        if (Arr(previous, "declarations").Any(row => !Strings(row!, "managedMembers").SequenceEqual(Strings(row!, "managedMembers").Order(StringComparer.Ordinal))))
+            Classification("noncanonical inherited evidence order", v =>
+            {
+                JsonNode row = Arr(v, "declarations").First(item => Arr(item!, "managedMembers").Count > 1)!;
+                row["managedMembers"] = Array(Strings(row, "managedMembers").Reverse().Select(value => JsonValue.Create(value)));
+            });
         // Unchanged slices still exercise the review contract with a controlled documentation delta.
         (JsonObject Raw, JsonObject Module) ReviewCase()
         {
