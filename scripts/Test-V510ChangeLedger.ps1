@@ -73,11 +73,11 @@ $inventoryPath = 'compatibility/opencv-5.1.0/upstream-map-refresh-summary.json'
 $catalogPath = 'compatibility/opencv-5.1.0/upstream-map-refresh-catalog.json'
 $inventoryHash = (Get-FileHash -LiteralPath (Join-Path $repo $inventoryPath) -Algorithm SHA256).Hash.ToLowerInvariant()
 $catalogHash = (Get-FileHash -LiteralPath (Join-Path $repo $catalogPath) -Algorithm SHA256).Hash.ToLowerInvariant()
-if (-not $refresh.sourceBuildInputsChanged -or $refresh.buildSourceCommit -cne $build.sourceCommit -or
+if ($refresh.sourceBuildInputsChanged -or $refresh.buildSourceCommit -cne $build.sourceCommit -or
     $refresh.catalog.path -cne $catalogPath -or $refresh.catalog.sha256 -cne $catalogHash -or $refresh.inventory.path -cne $inventoryPath -or $refresh.inventory.sha256 -cne $inventoryHash -or
-    $refresh.refreshedParserSliceCount -ne 5 -or $refresh.pendingCatalogMapCount -ne 68 -or $refresh.historicalCatalogVersion -cne '5.0.0' -or
-    $refresh.newDeclarationCount -ne 208 -or $refresh.totalReviewedDeclarationCount -ne 914 -or $refresh.sharedGeneratorNegativeFixtureCount -ne 127 -or
-    $refresh.newManagedApiOrNativeAbiAdded -or -not $refresh.newRuntimeBehaviorCertified -or $refresh.repositoryWideUpstreamParityClaimed) { throw '5.1 shared parser refresh evidence drifted.' }
+    $refresh.refreshedParserSliceCount -ne 14 -or $refresh.pendingCatalogMapCount -ne 59 -or $refresh.historicalCatalogVersion -cne '5.0.0' -or
+    $refresh.newDeclarationCount -ne 1300 -or $refresh.totalReviewedDeclarationCount -ne 2214 -or $refresh.sharedGeneratorNegativeFixtureCount -ne 418 -or
+    $refresh.newManagedApiOrNativeAbiAdded -or $refresh.newRuntimeBehaviorCertified -or $refresh.repositoryWideUpstreamParityClaimed) { throw '5.1 shared parser refresh evidence drifted.' }
 $calibration = $build.calibration51Correction
 $calibSummary = Get-Content -LiteralPath (Join-Path $repo 'compatibility/opencv-5.1.0/calib3d-upstream-summary.json') -Raw | ConvertFrom-Json
 if ($calibration.sourceCommit -cne $build.sourceCommit -or $calibration.disableSchurComplement -ne 134217728 -or $calibration.tiltedModel -ne 262144 -or
@@ -87,4 +87,4 @@ if ($calibration.sourceCommit -cne $build.sourceCommit -or $calibration.disableS
     $calibSummary.declarationCount -ne 208 -or $calibSummary.classificationCounts.implemented -ne 169 -or $calibSummary.classificationCounts.missing -ne 0 -or
     $calibSummary.reviewedExistingBindingCount -ne 3 -or $calibSummary.negativeFixtureCount -ne 37) { throw '5.1 calibration/matcher correction or reviewed binding evidence drifted.' }
 Write-Host "V510_CHANGE_LEDGER_OK entries=$(@($ledger.entries).Count) from=$($ledger.fromVersion) to=$($ledger.toVersion) native_abi=$($ledger.nativeAbiVersion)"
-Write-Host "OPENCV_510_SOURCE_BUILD_EVIDENCE_OK input_files=$($inputPaths.Count) full_exports=2669 mini_exports=527 native_ctest=6 managed=4180 historical_catalog=5.0.0 parser_slices=5 calibration_schur_bit=27"
+Write-Host "OPENCV_510_SOURCE_BUILD_EVIDENCE_OK input_files=$($inputPaths.Count) full_exports=2669 mini_exports=527 native_ctest=6 managed=4180 historical_catalog=5.0.0 parser_slices=14 calibration_schur_bit=27"

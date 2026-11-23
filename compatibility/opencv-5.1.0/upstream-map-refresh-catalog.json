@@ -631,8 +631,814 @@
         "changed": 8,
         "retained": 192
       }
+    },
+    {
+      "id": "features",
+      "claimedSlice": "Historical features parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/features-upstream-raw.json",
+      "historicalRawSha256": "b12d0068c2dcfb58826cb98e4a8f826cbaac836dcc222e80c2a78a115ec25155",
+      "historicalClassificationPath": "compatibility/features-upstream-classifications.json",
+      "historicalClassificationSha256": "5118cb93294097efb02fc65a3351693fbe2598e94fa6d5b3f0ef9f4c456e9cc4",
+      "primaryHeader": {
+        "path": "opencv-source/opencv-5.1.0/modules/features/include/opencv2/features2d.hpp",
+        "sha256": "4c983b74b48533275fd944005c07f1be9a401b2b6b7311cf4a2c175db1ba896b"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/features/include/opencv2/features.hpp",
+          "sha256": "19ae15c49a4b19290f66ed60830b24b32879bcc559655b12cae3e5516237acbc"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/features/include/opencv2/features2d.hpp",
+          "sha256": "4c983b74b48533275fd944005c07f1be9a401b2b6b7311cf4a2c175db1ba896b",
+          "includes": "opencv2/features.hpp"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/features/include/opencv2/features/features.hpp",
+          "sha256": "831e1f529e2e974bf41cb6621f4c57aaa84312c269f157fa6bb25dd0207c86a4",
+          "includes": "opencv2/features.hpp"
+        }
+      ],
+      "rawSha256": "e42801c412b63bee803ce94048a1ea13c888d36057e9a5acc4af4f51086344e8",
+      "declarationCount": 199,
+      "callableCount": 173,
+      "addedReviews": [
+        {
+          "identity": "class cv.XFeat",
+          "classification": "non-callable-metadata",
+          "reason": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission."
+        },
+        {
+          "identity": "cv.XFeat.create(String modelPath[/C,/Ref];int maxKeypoints=-1;float scoreThreshold=0.5f;Size inputSize=Size(640, 640)[/C,/Ref];int backendId=0;int targetId=0)->Ptr<XFeat>",
+          "classification": "intentionally-omitted",
+          "reason": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission."
+        },
+        {
+          "identity": "cv.XFeat.create(vector_uchar bufferModel[/C,/Ref];int maxKeypoints=-1;float scoreThreshold=0.5f;Size inputSize=Size(640, 640)[/C,/Ref];int backendId=0;int targetId=0)->Ptr<XFeat>",
+          "classification": "intentionally-omitted",
+          "reason": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission."
+        },
+        {
+          "identity": "cv.XFeat.setMaxKeypoints(int maxKeypoints)->void",
+          "classification": "intentionally-omitted",
+          "reason": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission."
+        },
+        {
+          "identity": "cv.XFeat.getMaxKeypoints()->int",
+          "classification": "intentionally-omitted",
+          "reason": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission."
+        },
+        {
+          "identity": "cv.XFeat.setScoreThreshold(float threshold)->void",
+          "classification": "intentionally-omitted",
+          "reason": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission."
+        },
+        {
+          "identity": "cv.XFeat.getScoreThreshold()->float",
+          "classification": "intentionally-omitted",
+          "reason": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission."
+        },
+        {
+          "identity": "cv.XFeat.setInputSize(Size inputSize[/C,/Ref])->void",
+          "classification": "intentionally-omitted",
+          "reason": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission."
+        },
+        {
+          "identity": "cv.XFeat.getInputSize()->Size",
+          "classification": "intentionally-omitted",
+          "reason": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission."
+        },
+        {
+          "identity": "cv.XFeat.getDefaultName()->String",
+          "classification": "intentionally-omitted",
+          "reason": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission."
+        },
+        {
+          "identity": "cv.DescriptorMatcher.setImagePairInfo(vector_KeyPoint queryKpts[/C,/Ref];vector_KeyPoint trainKpts[/C,/Ref];Size queryImageSize=Size();Size trainImageSize=Size())->void",
+          "classification": "intentionally-omitted",
+          "reason": "New virtual keypoint/image-pair context setter has no managed or C ABI binding. Existing descriptor matching does not transport the paired KeyPoint collections and image-size context required by learned matchers."
+        },
+        {
+          "identity": "enum cv.LightGlueType[const cv.LG_ALIKED=0;const cv.LG_DISK=1]",
+          "classification": "non-callable-metadata",
+          "reason": "Record LightGlue model type and keypoint-normalization values as upstream metadata only. No corresponding managed enum, model-backed matcher or inference support is exposed."
+        },
+        {
+          "identity": "enum cv.LightGlueNormalization[const cv.LG_NORM_MODEL=0;const cv.LG_NORM_MAX_SIDE=1]",
+          "classification": "non-callable-metadata",
+          "reason": "Record LightGlue model type and keypoint-normalization values as upstream metadata only. No corresponding managed enum, model-backed matcher or inference support is exposed."
+        },
+        {
+          "identity": "cv.LightGlueMatcher.create(String modelPath[/C,/Ref];float scoreThreshold=0.0f;int backend=0;int target=0;int type=LG_ALIKED)->Ptr<LightGlueMatcher>",
+          "classification": "intentionally-omitted",
+          "reason": "The 5.1 factory adds a LightGlueType selector (ALIKED or DISK). Both replaced factory signatures were already omitted. No managed LightGlue handle or C ABI/model provenance, normalization and inference contract exists; the new overload remains omitted."
+        },
+        {
+          "identity": "cv.LightGlueMatcher.create(vector_uchar modelData[/C,/Ref];float scoreThreshold=0.0f;int backend=0;int target=0;int type=LG_ALIKED)->Ptr<LightGlueMatcher>",
+          "classification": "intentionally-omitted",
+          "reason": "The 5.1 factory adds a LightGlueType selector (ALIKED or DISK). Both replaced factory signatures were already omitted. No managed LightGlue handle or C ABI/model provenance, normalization and inference contract exists; the new overload remains omitted."
+        },
+        {
+          "identity": "cv.LightGlueMatcher.setKeypointNormalization(int normalization)->void",
+          "classification": "intentionally-omitted",
+          "reason": "LightGlue normalization/image-pair context is unwrapped. There is no C ABI or managed LightGlue object/context transport; matching requires compatible descriptors, keypoints, image sizes and model-specific normalization. Standard BF/FLANN wrappers do not implement this operation."
+        },
+        {
+          "identity": "cv.LightGlueMatcher.getKeypointNormalization()->int",
+          "classification": "intentionally-omitted",
+          "reason": "LightGlue normalization/image-pair context is unwrapped. There is no C ABI or managed LightGlue object/context transport; matching requires compatible descriptors, keypoints, image sizes and model-specific normalization. Standard BF/FLANN wrappers do not implement this operation."
+        },
+        {
+          "identity": "cv.LightGlueMatcher.setImagePairInfo(vector_KeyPoint queryKpts[/C,/Ref];vector_KeyPoint trainKpts[/C,/Ref];Size queryImageSize=Size();Size trainImageSize=Size())->void",
+          "classification": "intentionally-omitted",
+          "reason": "LightGlue normalization/image-pair context is unwrapped. There is no C ABI or managed LightGlue object/context transport; matching requires compatible descriptors, keypoints, image sizes and model-specific normalization. Standard BF/FLANN wrappers do not implement this operation."
+        }
+      ],
+      "removedReviews": [
+        {
+          "identity": "cv.LightGlueMatcher.create(String modelPath[/C,/Ref];float scoreThreshold=0.0f;int backend=0;int target=0)->Ptr<LightGlueMatcher>",
+          "reason": "The LightGlue factory identity is replaced by a new overload with an explicit model-type argument; the historical factory was already omitted and no managed/C ABI member is removed."
+        },
+        {
+          "identity": "cv.LightGlueMatcher.create(vector_uchar modelData[/C,/Ref];float scoreThreshold=0.0f;int backend=0;int target=0)->Ptr<LightGlueMatcher>",
+          "reason": "The LightGlue factory identity is replaced by a new overload with an explicit model-type argument; the historical factory was already omitted and no managed/C ABI member is removed."
+        }
+      ],
+      "changedReviews": [
+        {
+          "identity": "class cv.LightGlueMatcher",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "Upstream now explicitly supports match and knnMatch(k=1), rejects radiusMatch and requires explicit pair context. The entire learned matcher remains unwrapped; ordinary DescriptorMatcher APIs do not establish LightGlue support."
+        },
+        {
+          "identity": "cv.LightGlueMatcher.setPairInfo(Mat queryKpts;Mat trainKpts;Size queryImageSize=Size();Size trainImageSize=Size())->void",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "The retained context setter documents model-dependent normalization, explicit setImagePairInfo as an alternative and empty Size for already-normalized keypoints. It remains intentionally omitted with the LightGlue object/model contract; no implicit ALIKED context or radius matching is claimed."
+        }
+      ],
+      "expectedDelta": {
+        "added": 18,
+        "removed": 2,
+        "changed": 2,
+        "retained": 181
+      }
+    },
+    {
+      "id": "highgui",
+      "claimedSlice": "Historical highgui parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/highgui-upstream-raw.json",
+      "historicalRawSha256": "8d21c928dc3edd89fd3f57ee8b43aafc415c55b59bccf8e817d01cc2c9b2ba82",
+      "historicalClassificationPath": "compatibility/highgui-upstream-classifications.json",
+      "historicalClassificationSha256": "bb89784103e081f28dbbf6506c726b15168b295c0071f26c1b652b4555837a6e",
+      "primaryHeader": {
+        "path": "opencv-source/opencv-5.1.0/modules/highgui/include/opencv2/highgui.hpp",
+        "sha256": "abd0eb8e822c81776db0769459e1fac4abd0b6217c4ea0707e12c0f4a98d8481"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/highgui/include/opencv2/highgui.hpp",
+          "sha256": "abd0eb8e822c81776db0769459e1fac4abd0b6217c4ea0707e12c0f4a98d8481"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500
+      },
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/highgui/include/opencv2/highgui.hpp",
+          "sha256": "abd0eb8e822c81776db0769459e1fac4abd0b6217c4ea0707e12c0f4a98d8481",
+          "includes": "main HighGui public declarations"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/highgui/include/opencv2/highgui/highgui.hpp",
+          "sha256": "2705134ada3002073de9d41704da25540f13248bbfc2325c3a597f117e63cf42",
+          "includes": "compatibility include forwarding to opencv2/highgui.hpp"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/highgui/include/opencv2/highgui/highgui_winrt.hpp",
+          "sha256": "e34ada0b5fe8f035f50419369b1167b54919a4a6ade1c38d5c0edd91bf3dae8c",
+          "includes": "WinRT-only source-reviewed conditional declaration; official parser emits zero rows"
+        }
+      ],
+      "rawSha256": "daefe94a9730201da7babd8e4f6a2443b49e7e24a86ea23a902ece9d4b9f5642",
+      "declarationCount": 35,
+      "callableCount": 28,
+      "addedReviews": [
+        {
+          "identity": "cv.saveWindowParameters(String windowName[/C,/Ref])->void",
+          "classification": "intentionally-omitted",
+          "reason": "The newly parser-visible Qt window-parameter persistence call is not exposed by a managed or C ABI entry point. Persisting/restoring geometry, trackbars and zoom requires a Qt/UI state contract and backend-specific tests; ordinary NamedWindow/trackbar operations are not this API."
+        },
+        {
+          "identity": "cv.loadWindowParameters(String windowName[/C,/Ref])->void",
+          "classification": "intentionally-omitted",
+          "reason": "The newly parser-visible Qt window-parameter persistence call is not exposed by a managed or C ABI entry point. Persisting/restoring geometry, trackbars and zoom requires a Qt/UI state contract and backend-specific tests; ordinary NamedWindow/trackbar operations are not this API."
+        }
+      ],
+      "removedReviews": [],
+      "changedReviews": [],
+      "expectedDelta": {
+        "added": 2,
+        "removed": 0,
+        "changed": 0,
+        "retained": 33
+      }
+    },
+    {
+      "id": "ml",
+      "claimedSlice": "Historical ml parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/ml-upstream-raw.json",
+      "historicalRawSha256": "b7c850093e07b04739bff28a81b0248d3a646933f1d51bf6cc25fcab47ab1001",
+      "historicalClassificationPath": "compatibility/ml-upstream-classifications.json",
+      "historicalClassificationSha256": "7f5a7840306a8da36557504037aa2286848c6db725664270b4076c0751881bbe",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/ml/include/opencv2/ml/ml.hpp",
+        "sha256": "ecd859e8d7208cd22381444201be96654bd21f4701e0e51e3a803a9f6b3fed73"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/ml/include/opencv2/ml.hpp",
+          "sha256": "c41f7f03931dbbd80ee8668ea782fa4d401effd3bc582d582b648221f85069dd"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500
+      },
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/ml/include/opencv2/ml/ml.hpp",
+          "sha256": "ecd859e8d7208cd22381444201be96654bd21f4701e0e51e3a803a9f6b3fed73",
+          "includes": "opencv2/ml.hpp"
+        }
+      ],
+      "rawSha256": "3a687d897bf80eb55e860e7a25bfd6ec1bfb25e4dd0796cc7ab62e6a8a5c4b19",
+      "declarationCount": 241,
+      "callableCount": 208,
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": [],
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 241
+      }
+    },
+    {
+      "id": "objdetect",
+      "claimedSlice": "Historical objdetect parser scope refreshed against official 5.1 sources: 9 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/objdetect-upstream-raw.json",
+      "historicalRawSha256": "e61cc23d241ae1582e45b085ffaabf066f1996d11ee188fcda6180820cb147e0",
+      "historicalClassificationPath": "compatibility/objdetect-upstream-classifications.json",
+      "historicalClassificationSha256": "ab9d8daa35c1b65343c7cb513eff8154a5a39fcd2602f8e2e51b833dfa0942ec",
+      "primaryHeader": {
+        "path": "opencv-source/opencv-5.1.0/modules/objdetect/include/opencv2/objdetect.hpp",
+        "sha256": "3f8261d3f0f78221bfa3d0e95418d8c1bf779149c1ecf58f57475f928d87dcc1"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/objdetect/include/opencv2/objdetect/aruco_dictionary.hpp",
+          "sha256": "6b14b87c13dd3629d3fcfd82e63829e41f01f7cc60c166216e0ae99851f6f42e"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/objdetect/include/opencv2/objdetect/aruco_board.hpp",
+          "sha256": "bd558e4f0e6ab0c4f99eca860e56106cda8f71aafa07970a2f293d2310d5cdc1"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/objdetect/include/opencv2/objdetect/aruco_detector.hpp",
+          "sha256": "9e2d5bae344e1bb8dc7636430cc63310f3a9fc4e4c6013bfdd95cbade295b54d"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/objdetect/include/opencv2/objdetect/graphical_code_detector.hpp",
+          "sha256": "c4b514e2fc49af7cfca7a634821036afb227ca24ea2d0109195423e9da218f4b"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/objdetect/include/opencv2/objdetect/mcc_checker_detector.hpp",
+          "sha256": "922cf2a5934e857f574d0542f19f10aee1236cd4bd3ac59914637b612c077d28"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/objdetect/include/opencv2/objdetect.hpp",
+          "sha256": "3f8261d3f0f78221bfa3d0e95418d8c1bf779149c1ecf58f57475f928d87dcc1"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/objdetect/include/opencv2/objdetect/face.hpp",
+          "sha256": "aee576e30fded70a57c56fd28eccfb08f8644fd6c446a09c2cfbc7a185e0d0e9"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/objdetect/include/opencv2/objdetect/charuco_detector.hpp",
+          "sha256": "0ba002b52c0366d72a5c11b861687c5e5f2246f2771a160f67208bb936f4ff08"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/objdetect/include/opencv2/objdetect/barcode.hpp",
+          "sha256": "b4fa84daac674a8d5d97587b67692cd4374330db7f5ee927bda37c230fd7d9a3"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/objdetect/include/opencv2/objdetect.hpp",
+          "sha256": "3f8261d3f0f78221bfa3d0e95418d8c1bf779149c1ecf58f57475f928d87dcc1",
+          "includes": "ObjDetect public declarations and owned public headers"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/objdetect/include/opencv2/objdetect/objdetect.hpp",
+          "sha256": "09989e76da51cb2f28b30dbd172e7f26cba9a79ec015ac32dfa4a3223419bba4",
+          "includes": "opencv2/objdetect.hpp"
+        }
+      ],
+      "rawSha256": "dd62d55391a170dfb11d0b16b4686faa285c6ed522805a0bc92d709de94ef277",
+      "declarationCount": 196,
+      "callableCount": 164,
+      "addedReviews": [
+        {
+          "identity": "cv.aruco.Dictionary.getDistanceToId(Mat onlyCellPixelRatio;int id;bool allRotations;float validBitIdThreshold)->int",
+          "classification": "intentionally-omitted",
+          "reason": "This additional Dictionary.getDistanceToId overload takes per-cell pixel ratios plus validBitIdThreshold. The existing GetDistanceToId/C ABI accepts a CV_8UC1 bit matrix and allRotations only; it cannot implement the ratio/threshold domain, which remains explicitly omitted."
+        }
+      ],
+      "removedReviews": [],
+      "changedReviews": [
+        {
+          "identity": "cv.aruco.Dictionary.identify(Mat onlyCellPixelRatio[/C,/Ref];int idx[/O,/Ref];int rotation[/O,/Ref];double maxCorrectionRate;float validBitIdThreshold)->bool",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "Documentation spelling/grammar is corrected for the retained pixel-ratio identify overload. The existing binding and its input validation are unchanged; this wording does not widen the managed dictionary domain."
+        },
+        {
+          "identity": "cv.aruco.CharucoBoard.setLegacyPattern(bool legacyPattern)->void",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "The legacy ChArUco layout differs only for even row counts. A mismatch can detect markers yet yield zero ChArUco corners, with only a debug log. Preserve the existing legacy-pattern setter and document explicit caller selection for pre-4.6/compatible third-party boards."
+        },
+        {
+          "identity": "cv.findChessboardCorners(Mat image;Size patternSize;Mat corners[/O];int flags=CALIB_CB_ADAPTIVE_THRESH + CALIB_CB_NORMALIZE_IMAGE)->bool",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "Ordering is repeatable only when interior-corner dimensions have different parity; equal parity allows a 180-degree ambiguity and square patterns allow 90-degree ambiguity. Existing binding remains, but this map does not promise a stable physical board origin across hand-eye views; use an oriented pattern/cue."
+        },
+        {
+          "identity": "cv.findCirclesGrid(Mat image;Size patternSize;Mat centers[/O];int flags;Ptr_FeatureDetector blobDetector[/C,/Ref];CirclesGridFinderParameters parameters[/C,/Ref])->bool",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "Upstream clarifies ordering ambiguity and that blob/ellipse image centers can differ from projected physical circle centers under perspective. Retain the existing binding and validation; high-accuracy corrected-center input and null blob-detector domains need separate managed evidence."
+        },
+        {
+          "identity": "cv.aruco.CharucoDetector.detectBoard(Mat image;Mat charucoCorners[/O];Mat charucoIds[/O];vector_Mat markerCorners=vector_Mat()[/IO];Mat markerIds=Mat()[/IO])->void",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "Documentation expands the even-row legacy-layout mismatch: marker detections may be present while ChArUco output is empty. Existing detection and board-legacy controls remain; no automatic board-layout inference or new accuracy claim is added."
+        }
+      ],
+      "expectedDelta": {
+        "added": 1,
+        "removed": 0,
+        "changed": 5,
+        "retained": 195
+      }
+    },
+    {
+      "id": "photo",
+      "claimedSlice": "Historical photo parser scope refreshed against official 5.1 sources: 3 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/photo-upstream-raw.json",
+      "historicalRawSha256": "ac887c44492de0fdd533555c11c043c418ce02698b2332ac0e93dda3d35f239a",
+      "historicalClassificationPath": "compatibility/photo-upstream-classifications.json",
+      "historicalClassificationSha256": "14e8532dce8d3c1d5aba97ff4b86351145960cb90bf225db5bfe09ba7718c067",
+      "primaryHeader": {
+        "path": "opencv-source/opencv-5.1.0/modules/photo/include/opencv2/photo.hpp",
+        "sha256": "590b2cb4c8be5e4b53561b82ce2e451a8b72e87d2f4f09b5049c32b8ca55ad77"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/photo/include/opencv2/photo.hpp",
+          "sha256": "590b2cb4c8be5e4b53561b82ce2e451a8b72e87d2f4f09b5049c32b8ca55ad77"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/photo/include/opencv2/photo/ccm.hpp",
+          "sha256": "5051730cfc0919dc2c458b1db15254a07f95079be9155f54aef862cb363007c3"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/photo/include/opencv2/photo/segmentation.hpp",
+          "sha256": "33feab6eea666a7035f744c15f11d435b642eaeb3ad2b9def2f2771bc3ad8fa5"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500
+      },
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/photo/include/opencv2/photo.hpp",
+          "sha256": "590b2cb4c8be5e4b53561b82ce2e451a8b72e87d2f4f09b5049c32b8ca55ad77",
+          "includes": "main Photo declarations, CCM, and segmentation"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/photo/include/opencv2/photo/photo.hpp",
+          "sha256": "18b6aed6db6c14d4295e89f7c9bb8931c44320d97195921fff3c16ea4174d67f",
+          "includes": "opencv2/photo.hpp"
+        }
+      ],
+      "rawSha256": "158374913ddc779ce49459fd71e9a8f5f6399f86c4cbc02b2fbe443324b4fbe8",
+      "declarationCount": 145,
+      "callableCount": 120,
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": [],
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 145
+      }
+    },
+    {
+      "id": "stitching",
+      "claimedSlice": "Historical stitching parser scope refreshed against official 5.1 sources: 14 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/stitching-upstream-raw.json",
+      "historicalRawSha256": "e712d4faed827e0c3e35ed584cde22fe11c60a9ca7589c3d87f6b840321399ad",
+      "historicalClassificationPath": "compatibility/stitching-upstream-classifications.json",
+      "historicalClassificationSha256": "e5187ec83dbf3524cc1663f42c77b11c75eab09aaa21073b227346516416f3ed",
+      "primaryHeader": {
+        "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching.hpp",
+        "sha256": "6f063406b40722b15de037d46222e51eb9614ed998b78ce32d37b52d240b4960"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching.hpp",
+          "sha256": "6f063406b40722b15de037d46222e51eb9614ed998b78ce32d37b52d240b4960",
+          "surface": "primary"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/warpers.hpp",
+          "sha256": "b90a62bc0aee06816c9296f3cff19f78375ffcf5b8bbde5ffffcef5b0232d47b",
+          "surface": "public-warpers"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/autocalib.hpp",
+          "sha256": "2c4107e72bf872061c41659e85914ff644778a0ecaac57f1252274aa54af8301",
+          "surface": "detail-autocalib"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+          "sha256": "ff361d24611c38f1963d1dd59c980f21cb514730baf1300ff5bfe23dde1805eb",
+          "surface": "detail-blenders"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/camera.hpp",
+          "sha256": "b1a5d84045121ddd6db63a2045679e58e21e83a5224214a71791420dd17b2c79",
+          "surface": "detail-camera"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+          "sha256": "fab533f94ff612868728bd5065cc01819a60540b967b7c0cdde9fae1c58fccf7",
+          "surface": "detail-exposure"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+          "sha256": "04bf8c6b8fc5dcad78bb17ea406d61feaa6846f7bd4934498cc7196a4e9b3798",
+          "surface": "detail-matchers"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+          "sha256": "2e34fe92b9a8cd37976e5623956f7bd137c55fe23e61f6f97e81b8760bb9c885",
+          "surface": "detail-motion-estimators"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp",
+          "sha256": "6327eeecd4707bc18925a22a047bb7a5bf4010b1f6bce9de4110466e6f0191ea",
+          "surface": "detail-seam-finders"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/timelapsers.hpp",
+          "sha256": "8e13a2225415e9e4a633b3d0ce539e038271aedaeb7242afc0dfb58e55aa6771",
+          "surface": "detail-timelapsers"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/util.hpp",
+          "sha256": "6dfdc25654c4363868f778e338f65ee8e530d6012567f722d5ea458b0d06725a",
+          "surface": "detail-util"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/util_inl.hpp",
+          "sha256": "1f4d9b3298d5843f8ab7b8213b237161aff809ceba9cf0be74b12efb7915e9fd"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/warpers.hpp",
+          "sha256": "b9ebe3c1b9a869a0c323a2f4b43ec8faf10f594c905360c2f54c9f4b39b50d3e",
+          "surface": "detail-warpers"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/warpers_inl.hpp",
+          "sha256": "40b095deb217b04ffe19971a12892d5f898a3a6e7eb0f25cfd93110d31e11fde"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500
+      },
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching.hpp",
+          "sha256": "6f063406b40722b15de037d46222e51eb9614ed998b78ce32d37b52d240b4960",
+          "includes": "opencv2/core.hpp;opencv2/features2d.hpp;opencv2/imgproc.hpp;opencv2/stitching/warpers.hpp"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/warpers.hpp",
+          "sha256": "b90a62bc0aee06816c9296f3cff19f78375ffcf5b8bbde5ffffcef5b0232d47b",
+          "includes": "opencv2/core.hpp;opencv2/imgproc.hpp;opencv2/stitching/detail/warpers.hpp"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/autocalib.hpp",
+          "sha256": "2c4107e72bf872061c41659e85914ff644778a0ecaac57f1252274aa54af8301",
+          "includes": "opencv2/core.hpp;opencv2/stitching/detail/camera.hpp"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+          "sha256": "ff361d24611c38f1963d1dd59c980f21cb514730baf1300ff5bfe23dde1805eb",
+          "includes": "opencv2/core.hpp"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/camera.hpp",
+          "sha256": "b1a5d84045121ddd6db63a2045679e58e21e83a5224214a71791420dd17b2c79",
+          "includes": "opencv2/core.hpp"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+          "sha256": "fab533f94ff612868728bd5065cc01819a60540b967b7c0cdde9fae1c58fccf7",
+          "includes": "opencv2/core.hpp"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+          "sha256": "04bf8c6b8fc5dcad78bb17ea406d61feaa6846f7bd4934498cc7196a4e9b3798",
+          "includes": "opencv2/core.hpp;opencv2/features2d.hpp;opencv2/stitching/detail/camera.hpp"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+          "sha256": "2e34fe92b9a8cd37976e5623956f7bd137c55fe23e61f6f97e81b8760bb9c885",
+          "includes": "opencv2/core.hpp;opencv2/stitching/detail/camera.hpp;opencv2/stitching/detail/matchers.hpp"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp",
+          "sha256": "6327eeecd4707bc18925a22a047bb7a5bf4010b1f6bce9de4110466e6f0191ea",
+          "includes": "opencv2/core.hpp"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/timelapsers.hpp",
+          "sha256": "8e13a2225415e9e4a633b3d0ce539e038271aedaeb7242afc0dfb58e55aa6771",
+          "includes": "opencv2/core.hpp"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/util.hpp",
+          "sha256": "6dfdc25654c4363868f778e338f65ee8e530d6012567f722d5ea458b0d06725a",
+          "includes": "opencv2/core.hpp"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/util_inl.hpp",
+          "sha256": "1f4d9b3298d5843f8ab7b8213b237161aff809ceba9cf0be74b12efb7915e9fd",
+          "includes": "opencv2/stitching/detail/util.hpp"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/warpers.hpp",
+          "sha256": "b9ebe3c1b9a869a0c323a2f4b43ec8faf10f594c905360c2f54c9f4b39b50d3e",
+          "includes": "opencv2/core.hpp;opencv2/imgproc.hpp"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/warpers_inl.hpp",
+          "sha256": "40b095deb217b04ffe19971a12892d5f898a3a6e7eb0f25cfd93110d31e11fde",
+          "includes": "opencv2/stitching/detail/warpers.hpp"
+        }
+      ],
+      "rawSha256": "6c1c1ace7f65b560e8c7f10af2c97175ed7dbe39dc19dd0f51ffe106f2821442",
+      "declarationCount": 207,
+      "callableCount": 158,
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": [
+        {
+          "identity": "class cv.detail.LightGlueFeaturesMatcher",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "The learned stitching matcher requires descriptors, keypoints and image sizes compatible with the wrapped LightGlue model and selected normalization. Its existing unsupported classification remains; no model-backed matching or inference support is promoted."
+        },
+        {
+          "identity": "class cv.detail.DpSeamFinder",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "Documentation adds the dynamic-programming seam-estimation reference. The existing DpSeamFinder managed/C ABI binding and numerical contract are unchanged."
+        }
+      ],
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 2,
+        "retained": 207
+      }
+    },
+    {
+      "id": "tracking",
+      "claimedSlice": "Historical tracking parser scope refreshed against official 5.1 sources: 2 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/tracking-upstream-raw.json",
+      "historicalRawSha256": "b4eb3792e5b20d98922568555557f3c77b8a10cee06a6a1cf1d46d628728a899",
+      "historicalClassificationPath": "compatibility/tracking-upstream-classifications.json",
+      "historicalClassificationSha256": "537dd73d5d6849abfdab939dda0553ed0116d52519e7dfef9956b576043256ed",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/tracking/include/opencv2/tracking.hpp",
+        "sha256": "5362366c9e9f96f9ffca16fc1d796b0eac4d5975e465d12e7018fa4aaad73170"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/tracking/include/opencv2/tracking.hpp",
+          "sha256": "5362366c9e9f96f9ffca16fc1d796b0eac4d5975e465d12e7018fa4aaad73170",
+          "surface": "primary"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+          "sha256": "428367783b37c8b9e864868d1ea79fbdb4d12db5490977908b325419ada909a1",
+          "surface": "legacy"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500
+      },
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/tracking/include/opencv2/tracking.hpp",
+          "sha256": "5362366c9e9f96f9ffca16fc1d796b0eac4d5975e465d12e7018fa4aaad73170",
+          "includes": "opencv2/core.hpp;opencv2/video/tracking.hpp"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+          "sha256": "428367783b37c8b9e864868d1ea79fbdb4d12db5490977908b325419ada909a1",
+          "includes": "opencv2/tracking.hpp;opencv2/tracking/tracking_internals.hpp"
+        }
+      ],
+      "rawSha256": "c33753a77e8cb3278dba4a928c3fe30878b8ec21471b1359ac7fa2a0f97649ef",
+      "declarationCount": 35,
+      "callableCount": 21,
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": [],
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 35
+      }
+    },
+    {
+      "id": "video",
+      "claimedSlice": "Historical video parser scope refreshed against official 5.1 sources: 2 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/video-upstream-raw.json",
+      "historicalRawSha256": "67921346dfbe6f8f2d6a1c850cb88b34bf6eb46a89c4aa6c788ff893f74596af",
+      "historicalClassificationPath": "compatibility/video-upstream-classifications.json",
+      "historicalClassificationSha256": "02a8edd0045ab8b068bd1e4d5c343fc4d660b535076251f51634c45c89afd7d0",
+      "primaryHeader": {
+        "path": "opencv-source/opencv-5.1.0/modules/video/include/opencv2/video.hpp",
+        "sha256": "5c1d80d5edbb3c681d4c17e01d34c541fa341f0a270ccd427e59601c5a4ed625"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/video/include/opencv2/video/tracking.hpp",
+          "sha256": "7ad962f7ff1c6e5a952d3014f95ef21e81dfc3d8bb3b5e73b01f16868919039e"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/video/include/opencv2/video/background_segm.hpp",
+          "sha256": "f544ebb11d693ebc3a22fad5df5b55185821e33c40080fd675bd7899d43ecfed"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500
+      },
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/video/include/opencv2/video.hpp",
+          "sha256": "5c1d80d5edbb3c681d4c17e01d34c541fa341f0a270ccd427e59601c5a4ed625",
+          "includes": "tracking.hpp and background_segm.hpp"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/video/include/opencv2/video/video.hpp",
+          "sha256": "67e31defa256825bb977d4126d7b00f53c90cb49638b8a9e43ec121568167e36",
+          "includes": "compatibility header with no parser-emitted declarations"
+        }
+      ],
+      "rawSha256": "62aaea9928b85af37b4049aa189180fe8146520a94dd4326a77415109ec4bac8",
+      "declarationCount": 168,
+      "callableCount": 145,
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": [],
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 168
+      }
+    },
+    {
+      "id": "videoio",
+      "claimedSlice": "Historical videoio parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+      "sourceRepository": "opencv",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/videoio-upstream-raw.json",
+      "historicalRawSha256": "4a6fe6f3894215bc8c921acda6a315fd28ce0ec22e41a484fed62518d707b222",
+      "historicalClassificationPath": "compatibility/videoio-upstream-classifications.json",
+      "historicalClassificationSha256": "27d23cafd80f42113181ce0cb1536fac60b08fe01a244ced9c6369a605570b74",
+      "primaryHeader": {
+        "path": "opencv-source/opencv-5.1.0/modules/videoio/include/opencv2/videoio.hpp",
+        "sha256": "bb063cb3e5ceef3f725397eadc65838a79299f9dc7a5070ccdf718043ecec9b6"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/videoio/include/opencv2/videoio.hpp",
+          "sha256": "bb063cb3e5ceef3f725397eadc65838a79299f9dc7a5070ccdf718043ecec9b6"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5
+      },
+      "rawSha256": "6d5aa0d064d8d166c45d554340509fab0c8cd6307ad0a0faad1cbe130edf1b76",
+      "declarationCount": 74,
+      "callableCount": 41,
+      "addedReviews": [
+        {
+          "identity": "enum cv.VideoWriterProperties[const cv.VIDEOWRITER_PROP_UNKNOWN=-1;const cv.VIDEOWRITER_PROP_QUALITY=1;const cv.VIDEOWRITER_PROP_FRAMEBYTES=2;const cv.VIDEOWRITER_PROP_NSTRIPES=3;const cv.VIDEOWRITER_PROP_IS_COLOR=4;const cv.VIDEOWRITER_PROP_DEPTH=5;const cv.VIDEOWRITER_PROP_HW_ACCELERATION=6;const cv.VIDEOWRITER_PROP_HW_DEVICE=7;const cv.VIDEOWRITER_PROP_HW_ACCELERATION_USE_OPENCL=8;const cv.VIDEOWRITER_PROP_RAW_VIDEO=9;const cv.VIDEOWRITER_PROP_KEY_INTERVAL=10;const cv.VIDEOWRITER_PROP_KEY_FLAG=11;const cv.VIDEOWRITER_PROP_PTS=12;const cv.VIDEOWRITER_PROP_DTS_DELAY=13;const cv.VIDEOWRITER_PROP_COLOR_SPACE=14;const cv.VIDEOWRITER_PROP_ENABLE_ALPHA=15;const cv.VIDEOWRITER_PROP_BITRATE=16;const cv.VIDEOWRITER_PROP_CRF=17;const cv.VIDEOWRITER_PROP_PRESET=18;const cv.VIDEOWRITER_PROP_GOP_SIZE=19]",
+          "classification": "non-callable-metadata",
+          "reason": "Preserve existing writer-property values and record new open-only BITRATE=16, CRF=17, PRESET=18 and GOP_SIZE=19 metadata. The managed enum remains unchanged; backend/encoder-specific support, CRF precedence and unsupported-option open failures are not certified by this map."
+        },
+        {
+          "identity": "enum cv.VideoWriterPresets[const cv.VIDEOWRITER_PRESET_ULTRAFAST=0;const cv.VIDEOWRITER_PRESET_SUPERFAST=1;const cv.VIDEOWRITER_PRESET_VERYFAST=2;const cv.VIDEOWRITER_PRESET_FASTER=3;const cv.VIDEOWRITER_PRESET_FAST=4;const cv.VIDEOWRITER_PRESET_MEDIUM=5;const cv.VIDEOWRITER_PRESET_SLOW=6;const cv.VIDEOWRITER_PRESET_SLOWER=7;const cv.VIDEOWRITER_PRESET_VERYSLOW=8;const cv.VIDEOWRITER_PRESET_PLACEBO=9]",
+          "classification": "non-callable-metadata",
+          "reason": "New encoder-speed preset values ULTRAFAST through PLACEBO (0..9) are upstream metadata only. No managed preset enum or FFmpeg/GStreamer encoder combination is validated here."
+        },
+        {
+          "identity": "class cv.VideoDeviceInfo",
+          "classification": "non-callable-metadata",
+          "reason": "VideoDeviceInfo is new parser-visible device-description metadata and a default constructor. No C ABI/managed device-info object or enumeration transport exists; existing VideoCapture index/path opening does not implement device discovery."
+        },
+        {
+          "identity": "cv.VideoDeviceInfo.VideoDeviceInfo()->",
+          "classification": "intentionally-omitted",
+          "reason": "VideoDeviceInfo is new parser-visible device-description metadata and a default constructor. No C ABI/managed device-info object or enumeration transport exists; existing VideoCapture index/path opening does not implement device discovery."
+        }
+      ],
+      "removedReviews": [
+        {
+          "identity": "enum cv.VideoWriterProperties[const cv.VIDEOWRITER_PROP_UNKNOWN=-1;const cv.VIDEOWRITER_PROP_QUALITY=1;const cv.VIDEOWRITER_PROP_FRAMEBYTES=2;const cv.VIDEOWRITER_PROP_NSTRIPES=3;const cv.VIDEOWRITER_PROP_IS_COLOR=4;const cv.VIDEOWRITER_PROP_DEPTH=5;const cv.VIDEOWRITER_PROP_HW_ACCELERATION=6;const cv.VIDEOWRITER_PROP_HW_DEVICE=7;const cv.VIDEOWRITER_PROP_HW_ACCELERATION_USE_OPENCL=8;const cv.VIDEOWRITER_PROP_RAW_VIDEO=9;const cv.VIDEOWRITER_PROP_KEY_INTERVAL=10;const cv.VIDEOWRITER_PROP_KEY_FLAG=11;const cv.VIDEOWRITER_PROP_PTS=12;const cv.VIDEOWRITER_PROP_DTS_DELAY=13;const cv.VIDEOWRITER_PROP_COLOR_SPACE=14;const cv.VIDEOWRITER_PROP_ENABLE_ALPHA=15]",
+          "reason": "The VideoWriterProperties full-enum identity changes because four values are appended; existing values and managed/C ABI bindings are retained."
+        }
+      ],
+      "changedReviews": [],
+      "expectedDelta": {
+        "added": 4,
+        "removed": 1,
+        "changed": 0,
+        "retained": 70
+      }
     }
   ],
   "repositoryWideUpstreamParityClaimed": false,
-  "completeCppParityClaimed": false
+  "completeCppParityClaimed": false,
+  "upstreamContribCommit": "b67a855188a3d683813731010f6d39ac614733a4"
 }

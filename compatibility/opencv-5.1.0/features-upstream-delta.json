@@ -1,0 +1,843 @@
+{
+  "fromVersion": "5.0.0",
+  "toVersion": "5.1.0",
+  "module": "features",
+  "retainedIdentityCount": 181,
+  "added": [
+    {
+      "identity": "class cv.XFeat",
+      "review": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "after": {
+        "ordinal": 122,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/features/include/opencv2/features.hpp",
+        "kind": "class",
+        "name": "cv.XFeat",
+        "identity": "class cv.XFeat",
+        "returnType": ": cv::Feature2D",
+        "modifiers": [],
+        "arguments": [],
+        "enumValues": [],
+        "baseDeclaration": ": cv::Feature2D",
+        "documentation": "@brief XFeat feature detector and descriptor, based on a DNN model.\n\nXFeat is a compact learned local-feature extractor. This class wraps an ONNX export through\ncv::dnn::Net and exposes score-map detections with 64-D float descriptors under the standard\ncv::Feature2D interface.\n\nThe class assumes the ONNX model has a single grayscale input tensor N\u00D71\u00D7H\u00D7W in [0, 1] and\nreturns descriptor and score maps. The descriptor map must have 64 channels, and the keypoint\nlogit map must have either 64 channels (no extra class) or 65 channels, where the last channel\nis treated as a dustbin/background class used only in softmax normalization. Images are resized\nwith preserved aspect ratio and padded to the configured network input size."
+      }
+    },
+    {
+      "identity": "cv.XFeat.create(String modelPath[/C,/Ref];int maxKeypoints=-1;float scoreThreshold=0.5f;Size inputSize=Size(640, 640)[/C,/Ref];int backendId=0;int targetId=0)-\u003EPtr\u003CXFeat\u003E",
+      "review": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "after": {
+        "ordinal": 123,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/features/include/opencv2/features.hpp",
+        "kind": "callable",
+        "name": "cv.XFeat.create",
+        "identity": "cv.XFeat.create(String modelPath[/C,/Ref];int maxKeypoints=-1;float scoreThreshold=0.5f;Size inputSize=Size(640, 640)[/C,/Ref];int backendId=0;int targetId=0)-\u003EPtr\u003CXFeat\u003E",
+        "returnType": "Ptr\u003CXFeat\u003E",
+        "modifiers": [
+          "/S"
+        ],
+        "arguments": [
+          {
+            "type": "String",
+            "name": "modelPath",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "maxKeypoints",
+            "default": "-1",
+            "modifiers": []
+          },
+          {
+            "type": "float",
+            "name": "scoreThreshold",
+            "default": "0.5f",
+            "modifiers": []
+          },
+          {
+            "type": "Size",
+            "name": "inputSize",
+            "default": "Size(640, 640)",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "backendId",
+            "default": "0",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "targetId",
+            "default": "0",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Creates an XFeat detector.\n    @param modelPath Path to the XFeat ONNX model.\n    @param maxKeypoints Maximum number of keypoints to return per image. The strongest\n                        responses are kept; -1 keeps all detections.\n    @param scoreThreshold Discard keypoints with network score not greater than this value.\n    @param inputSize Input size fed to the network, default Size(640, 640).\n    @param backendId DNN backend identifier (see cv::dnn::Backend); 0 = DNN_BACKEND_DEFAULT.\n    @param targetId  DNN target identifier (see cv::dnn::Target);  0 = DNN_TARGET_CPU."
+      }
+    },
+    {
+      "identity": "cv.XFeat.create(vector_uchar bufferModel[/C,/Ref];int maxKeypoints=-1;float scoreThreshold=0.5f;Size inputSize=Size(640, 640)[/C,/Ref];int backendId=0;int targetId=0)-\u003EPtr\u003CXFeat\u003E",
+      "review": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "after": {
+        "ordinal": 124,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/features/include/opencv2/features.hpp",
+        "kind": "callable",
+        "name": "cv.XFeat.create",
+        "identity": "cv.XFeat.create(vector_uchar bufferModel[/C,/Ref];int maxKeypoints=-1;float scoreThreshold=0.5f;Size inputSize=Size(640, 640)[/C,/Ref];int backendId=0;int targetId=0)-\u003EPtr\u003CXFeat\u003E",
+        "returnType": "Ptr\u003CXFeat\u003E",
+        "modifiers": [
+          "=createFromMemory",
+          "/S"
+        ],
+        "arguments": [
+          {
+            "type": "vector_uchar",
+            "name": "bufferModel",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "maxKeypoints",
+            "default": "-1",
+            "modifiers": []
+          },
+          {
+            "type": "float",
+            "name": "scoreThreshold",
+            "default": "0.5f",
+            "modifiers": []
+          },
+          {
+            "type": "Size",
+            "name": "inputSize",
+            "default": "Size(640, 640)",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "backendId",
+            "default": "0",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "targetId",
+            "default": "0",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Creates an XFeat detector from an in-memory model buffer."
+      }
+    },
+    {
+      "identity": "cv.XFeat.setMaxKeypoints(int maxKeypoints)-\u003Evoid",
+      "review": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "after": {
+        "ordinal": 125,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/features/include/opencv2/features.hpp",
+        "kind": "callable",
+        "name": "cv.XFeat.setMaxKeypoints",
+        "identity": "cv.XFeat.setMaxKeypoints(int maxKeypoints)-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [
+          "/V",
+          "/PV"
+        ],
+        "arguments": [
+          {
+            "type": "int",
+            "name": "maxKeypoints",
+            "default": "",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": ""
+      }
+    },
+    {
+      "identity": "cv.XFeat.getMaxKeypoints()-\u003Eint",
+      "review": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "after": {
+        "ordinal": 126,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/features/include/opencv2/features.hpp",
+        "kind": "callable",
+        "name": "cv.XFeat.getMaxKeypoints",
+        "identity": "cv.XFeat.getMaxKeypoints()-\u003Eint",
+        "returnType": "int",
+        "modifiers": [
+          "/C",
+          "/V",
+          "/PV"
+        ],
+        "arguments": [],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": ""
+      }
+    },
+    {
+      "identity": "cv.XFeat.setScoreThreshold(float threshold)-\u003Evoid",
+      "review": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "after": {
+        "ordinal": 127,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/features/include/opencv2/features.hpp",
+        "kind": "callable",
+        "name": "cv.XFeat.setScoreThreshold",
+        "identity": "cv.XFeat.setScoreThreshold(float threshold)-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [
+          "/V",
+          "/PV"
+        ],
+        "arguments": [
+          {
+            "type": "float",
+            "name": "threshold",
+            "default": "",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": ""
+      }
+    },
+    {
+      "identity": "cv.XFeat.getScoreThreshold()-\u003Efloat",
+      "review": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "after": {
+        "ordinal": 128,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/features/include/opencv2/features.hpp",
+        "kind": "callable",
+        "name": "cv.XFeat.getScoreThreshold",
+        "identity": "cv.XFeat.getScoreThreshold()-\u003Efloat",
+        "returnType": "float",
+        "modifiers": [
+          "/C",
+          "/V",
+          "/PV"
+        ],
+        "arguments": [],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": ""
+      }
+    },
+    {
+      "identity": "cv.XFeat.setInputSize(Size inputSize[/C,/Ref])-\u003Evoid",
+      "review": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "after": {
+        "ordinal": 129,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/features/include/opencv2/features.hpp",
+        "kind": "callable",
+        "name": "cv.XFeat.setInputSize",
+        "identity": "cv.XFeat.setInputSize(Size inputSize[/C,/Ref])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [
+          "/V",
+          "/PV"
+        ],
+        "arguments": [
+          {
+            "type": "Size",
+            "name": "inputSize",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": ""
+      }
+    },
+    {
+      "identity": "cv.XFeat.getInputSize()-\u003ESize",
+      "review": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "after": {
+        "ordinal": 130,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/features/include/opencv2/features.hpp",
+        "kind": "callable",
+        "name": "cv.XFeat.getInputSize",
+        "identity": "cv.XFeat.getInputSize()-\u003ESize",
+        "returnType": "Size",
+        "modifiers": [
+          "/C",
+          "/V",
+          "/PV"
+        ],
+        "arguments": [],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": ""
+      }
+    },
+    {
+      "identity": "cv.XFeat.getDefaultName()-\u003EString",
+      "review": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "after": {
+        "ordinal": 131,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/features/include/opencv2/features.hpp",
+        "kind": "callable",
+        "name": "cv.XFeat.getDefaultName",
+        "identity": "cv.XFeat.getDefaultName()-\u003EString",
+        "returnType": "String",
+        "modifiers": [
+          "/C",
+          "/V"
+        ],
+        "arguments": [],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": ""
+      }
+    },
+    {
+      "identity": "cv.DescriptorMatcher.setImagePairInfo(vector_KeyPoint queryKpts[/C,/Ref];vector_KeyPoint trainKpts[/C,/Ref];Size queryImageSize=Size();Size trainImageSize=Size())-\u003Evoid",
+      "review": "New virtual keypoint/image-pair context setter has no managed or C ABI binding. Existing descriptor matching does not transport the paired KeyPoint collections and image-size context required by learned matchers.",
+      "after": {
+        "ordinal": 151,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/features/include/opencv2/features.hpp",
+        "kind": "callable",
+        "name": "cv.DescriptorMatcher.setImagePairInfo",
+        "identity": "cv.DescriptorMatcher.setImagePairInfo(vector_KeyPoint queryKpts[/C,/Ref];vector_KeyPoint trainKpts[/C,/Ref];Size queryImageSize=Size();Size trainImageSize=Size())-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [
+          "/V"
+        ],
+        "arguments": [
+          {
+            "type": "vector_KeyPoint",
+            "name": "queryKpts",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "vector_KeyPoint",
+            "name": "trainKpts",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "Size",
+            "name": "queryImageSize",
+            "default": "Size()",
+            "modifiers": []
+          },
+          {
+            "type": "Size",
+            "name": "trainImageSize",
+            "default": "Size()",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Provides keypoint and image-size context for matchers that need it (e.g. LightGlueMatcher).\n\n    Must be called before match()/knnMatch()/radiusMatch() for matchers that require this context.\n    Matchers that don\u0027t need it (e.g. BFMatcher, FlannBasedMatcher) ignore the call.\n\n    @param queryKpts Query image keypoints.\n    @param trainKpts Train image keypoints.\n    @param queryImageSize Size of the query image (width, height).\n    @param trainImageSize Size of the train image (width, height)."
+      }
+    },
+    {
+      "identity": "enum cv.LightGlueType[const cv.LG_ALIKED=0;const cv.LG_DISK=1]",
+      "review": "Record LightGlue model type and keypoint-normalization values as upstream metadata only. No corresponding managed enum, model-backed matcher or inference support is exposed.",
+      "after": {
+        "ordinal": 172,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/features/include/opencv2/features.hpp",
+        "kind": "enum",
+        "name": "cv.LightGlueType",
+        "identity": "enum cv.LightGlueType[const cv.LG_ALIKED=0;const cv.LG_DISK=1]",
+        "returnType": "",
+        "modifiers": [],
+        "arguments": [],
+        "enumValues": [
+          {
+            "name": "const cv.LG_ALIKED",
+            "value": "0"
+          },
+          {
+            "name": "const cv.LG_DISK",
+            "value": "1"
+          }
+        ],
+        "baseDeclaration": "",
+        "documentation": ""
+      }
+    },
+    {
+      "identity": "enum cv.LightGlueNormalization[const cv.LG_NORM_MODEL=0;const cv.LG_NORM_MAX_SIDE=1]",
+      "review": "Record LightGlue model type and keypoint-normalization values as upstream metadata only. No corresponding managed enum, model-backed matcher or inference support is exposed.",
+      "after": {
+        "ordinal": 173,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/features/include/opencv2/features.hpp",
+        "kind": "enum",
+        "name": "cv.LightGlueNormalization",
+        "identity": "enum cv.LightGlueNormalization[const cv.LG_NORM_MODEL=0;const cv.LG_NORM_MAX_SIDE=1]",
+        "returnType": "",
+        "modifiers": [],
+        "arguments": [],
+        "enumValues": [
+          {
+            "name": "const cv.LG_NORM_MODEL",
+            "value": "0"
+          },
+          {
+            "name": "const cv.LG_NORM_MAX_SIDE",
+            "value": "1"
+          }
+        ],
+        "baseDeclaration": "",
+        "documentation": ""
+      }
+    },
+    {
+      "identity": "cv.LightGlueMatcher.create(String modelPath[/C,/Ref];float scoreThreshold=0.0f;int backend=0;int target=0;int type=LG_ALIKED)-\u003EPtr\u003CLightGlueMatcher\u003E",
+      "review": "The 5.1 factory adds a LightGlueType selector (ALIKED or DISK). Both replaced factory signatures were already omitted. No managed LightGlue handle or C ABI/model provenance, normalization and inference contract exists; the new overload remains omitted.",
+      "after": {
+        "ordinal": 175,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/features/include/opencv2/features.hpp",
+        "kind": "callable",
+        "name": "cv.LightGlueMatcher.create",
+        "identity": "cv.LightGlueMatcher.create(String modelPath[/C,/Ref];float scoreThreshold=0.0f;int backend=0;int target=0;int type=LG_ALIKED)-\u003EPtr\u003CLightGlueMatcher\u003E",
+        "returnType": "Ptr\u003CLightGlueMatcher\u003E",
+        "modifiers": [
+          "/S"
+        ],
+        "arguments": [
+          {
+            "type": "String",
+            "name": "modelPath",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "float",
+            "name": "scoreThreshold",
+            "default": "0.0f",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "backend",
+            "default": "0",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "target",
+            "default": "0",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "type",
+            "default": "LG_ALIKED",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Creates LightGlueMatcher from a model file path.\n    @param modelPath Path to the ONNX model file.\n    @param scoreThreshold Match confidence threshold.\n    @param backend DNN backend\n    @param target DNN target\n    @param type Model variant: LG_ALIKED (default) or LG_DISK."
+      }
+    },
+    {
+      "identity": "cv.LightGlueMatcher.create(vector_uchar modelData[/C,/Ref];float scoreThreshold=0.0f;int backend=0;int target=0;int type=LG_ALIKED)-\u003EPtr\u003CLightGlueMatcher\u003E",
+      "review": "The 5.1 factory adds a LightGlueType selector (ALIKED or DISK). Both replaced factory signatures were already omitted. No managed LightGlue handle or C ABI/model provenance, normalization and inference contract exists; the new overload remains omitted.",
+      "after": {
+        "ordinal": 176,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/features/include/opencv2/features.hpp",
+        "kind": "callable",
+        "name": "cv.LightGlueMatcher.create",
+        "identity": "cv.LightGlueMatcher.create(vector_uchar modelData[/C,/Ref];float scoreThreshold=0.0f;int backend=0;int target=0;int type=LG_ALIKED)-\u003EPtr\u003CLightGlueMatcher\u003E",
+        "returnType": "Ptr\u003CLightGlueMatcher\u003E",
+        "modifiers": [
+          "=createFromMemory",
+          "/S"
+        ],
+        "arguments": [
+          {
+            "type": "vector_uchar",
+            "name": "modelData",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "float",
+            "name": "scoreThreshold",
+            "default": "0.0f",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "backend",
+            "default": "0",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "target",
+            "default": "0",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "type",
+            "default": "LG_ALIKED",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Creates LightGlueMatcher from in-memory model data.\n    @param modelData Buffer containing the model data.\n    @param scoreThreshold Match confidence threshold.\n    @param backend DNN backend\n    @param target DNN target\n    @param type Model variant: LG_ALIKED (default) or LG_DISK."
+      }
+    },
+    {
+      "identity": "cv.LightGlueMatcher.setKeypointNormalization(int normalization)-\u003Evoid",
+      "review": "LightGlue normalization/image-pair context is unwrapped. There is no C ABI or managed LightGlue object/context transport; matching requires compatible descriptors, keypoints, image sizes and model-specific normalization. Standard BF/FLANN wrappers do not implement this operation.",
+      "after": {
+        "ordinal": 179,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/features/include/opencv2/features.hpp",
+        "kind": "callable",
+        "name": "cv.LightGlueMatcher.setKeypointNormalization",
+        "identity": "cv.LightGlueMatcher.setKeypointNormalization(int normalization)-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [
+          "/V",
+          "/PV"
+        ],
+        "arguments": [
+          {
+            "type": "int",
+            "name": "normalization",
+            "default": "",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Selects how pixel keypoints passed with an image size are normalized.\n\n    The default, LG_NORM_MODEL, keeps the per-axis mapping implied by the LightGlueType given at\n    creation. LG_NORM_MAX_SIDE applies the mapping of the LightGlue reference implementation, which\n    shifts by half the image size and divides both axes by half the longer side. Use it for models\n    exported from the reference forward without their own normalization, e.g. XFeat\u0027s LighterGlue.\n    For square images the two mappings coincide for LG_ALIKED.\n\n    The setting does not affect keypoints passed with an empty image size, and it is kept by clone().\n    @param normalization One of LightGlueNormalization."
+      }
+    },
+    {
+      "identity": "cv.LightGlueMatcher.getKeypointNormalization()-\u003Eint",
+      "review": "LightGlue normalization/image-pair context is unwrapped. There is no C ABI or managed LightGlue object/context transport; matching requires compatible descriptors, keypoints, image sizes and model-specific normalization. Standard BF/FLANN wrappers do not implement this operation.",
+      "after": {
+        "ordinal": 180,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/features/include/opencv2/features.hpp",
+        "kind": "callable",
+        "name": "cv.LightGlueMatcher.getKeypointNormalization",
+        "identity": "cv.LightGlueMatcher.getKeypointNormalization()-\u003Eint",
+        "returnType": "int",
+        "modifiers": [
+          "/C",
+          "/V",
+          "/PV"
+        ],
+        "arguments": [],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Returns the keypoint normalization, one of LightGlueNormalization."
+      }
+    },
+    {
+      "identity": "cv.LightGlueMatcher.setImagePairInfo(vector_KeyPoint queryKpts[/C,/Ref];vector_KeyPoint trainKpts[/C,/Ref];Size queryImageSize=Size();Size trainImageSize=Size())-\u003Evoid",
+      "review": "LightGlue normalization/image-pair context is unwrapped. There is no C ABI or managed LightGlue object/context transport; matching requires compatible descriptors, keypoints, image sizes and model-specific normalization. Standard BF/FLANN wrappers do not implement this operation.",
+      "after": {
+        "ordinal": 181,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/features/include/opencv2/features.hpp",
+        "kind": "callable",
+        "name": "cv.LightGlueMatcher.setImagePairInfo",
+        "identity": "cv.LightGlueMatcher.setImagePairInfo(vector_KeyPoint queryKpts[/C,/Ref];vector_KeyPoint trainKpts[/C,/Ref];Size queryImageSize=Size();Size trainImageSize=Size())-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "vector_KeyPoint",
+            "name": "queryKpts",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "vector_KeyPoint",
+            "name": "trainKpts",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "Size",
+            "name": "queryImageSize",
+            "default": "Size()",
+            "modifiers": []
+          },
+          {
+            "type": "Size",
+            "name": "trainImageSize",
+            "default": "Size()",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Convenience overload of setPairInfo() taking keypoints directly.\n    Uses the same model-specific normalization and image size convention as setPairInfo()."
+      }
+    }
+  ],
+  "removed": [
+    {
+      "identity": "cv.LightGlueMatcher.create(String modelPath[/C,/Ref];float scoreThreshold=0.0f;int backend=0;int target=0)-\u003EPtr\u003CLightGlueMatcher\u003E",
+      "review": "The LightGlue factory identity is replaced by a new overload with an explicit model-type argument; the historical factory was already omitted and no managed/C ABI member is removed.",
+      "before": {
+        "ordinal": 162,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+        "kind": "callable",
+        "name": "cv.LightGlueMatcher.create",
+        "identity": "cv.LightGlueMatcher.create(String modelPath[/C,/Ref];float scoreThreshold=0.0f;int backend=0;int target=0)-\u003EPtr\u003CLightGlueMatcher\u003E",
+        "returnType": "Ptr\u003CLightGlueMatcher\u003E",
+        "modifiers": [
+          "/S"
+        ],
+        "arguments": [
+          {
+            "type": "String",
+            "name": "modelPath",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "float",
+            "name": "scoreThreshold",
+            "default": "0.0f",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "backend",
+            "default": "0",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "target",
+            "default": "0",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Creates LightGlueMatcher from a model file path.\n    @param modelPath Path to the ONNX model file.\n    @param scoreThreshold Match confidence threshold.\n    @param backend DNN backend\n    @param target DNN target"
+      }
+    },
+    {
+      "identity": "cv.LightGlueMatcher.create(vector_uchar modelData[/C,/Ref];float scoreThreshold=0.0f;int backend=0;int target=0)-\u003EPtr\u003CLightGlueMatcher\u003E",
+      "review": "The LightGlue factory identity is replaced by a new overload with an explicit model-type argument; the historical factory was already omitted and no managed/C ABI member is removed.",
+      "before": {
+        "ordinal": 163,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+        "kind": "callable",
+        "name": "cv.LightGlueMatcher.create",
+        "identity": "cv.LightGlueMatcher.create(vector_uchar modelData[/C,/Ref];float scoreThreshold=0.0f;int backend=0;int target=0)-\u003EPtr\u003CLightGlueMatcher\u003E",
+        "returnType": "Ptr\u003CLightGlueMatcher\u003E",
+        "modifiers": [
+          "=createFromMemory",
+          "/S"
+        ],
+        "arguments": [
+          {
+            "type": "vector_uchar",
+            "name": "modelData",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "float",
+            "name": "scoreThreshold",
+            "default": "0.0f",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "backend",
+            "default": "0",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "target",
+            "default": "0",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Creates LightGlueMatcher from in-memory model data.\n    @param modelData Buffer containing the model data.\n    @param scoreThreshold Match confidence threshold.\n    @param backend DNN backend\n    @param target DNN target"
+      }
+    }
+  ],
+  "changed": [
+    {
+      "identity": "class cv.LightGlueMatcher",
+      "review": "Upstream now explicitly supports match and knnMatch(k=1), rejects radiusMatch and requires explicit pair context. The entire learned matcher remains unwrapped; ordinary DescriptorMatcher APIs do not establish LightGlue support.",
+      "before": {
+        "ordinal": 161,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+        "kind": "class",
+        "name": "cv.LightGlueMatcher",
+        "identity": "class cv.LightGlueMatcher",
+        "returnType": ": cv::DescriptorMatcher",
+        "modifiers": [],
+        "arguments": [],
+        "enumValues": [],
+        "baseDeclaration": ": cv::DescriptorMatcher",
+        "documentation": "@brief LightGlue feature matcher.\n\nLightGlue is a CNN-based feature matcher, as described in @cite Lindenberger23 . It takes\nkeypoint locations and descriptors from two images and directly predicts match pairs. Unlike\ntraditional matchers that compute descriptor distances, LightGlue uses attention mechanisms\nto produce confidence scores for each potential match pair.\n\nThe matcher extends DescriptorMatcher and supports the standard match(), knnMatch(), and\nradiusMatch() interfaces. Context (keypoints and image sizes) must be provided via\nsetPairInfo() before matching."
+      },
+      "after": {
+        "ordinal": 174,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/features/include/opencv2/features.hpp",
+        "kind": "class",
+        "name": "cv.LightGlueMatcher",
+        "identity": "class cv.LightGlueMatcher",
+        "returnType": ": cv::DescriptorMatcher",
+        "modifiers": [],
+        "arguments": [],
+        "enumValues": [],
+        "baseDeclaration": ": cv::DescriptorMatcher",
+        "documentation": "@brief LightGlue feature matcher.\n\nLightGlue is an attention-based feature matcher, as described in @cite Lindenberger23 . It takes\nkeypoint locations and descriptors from two images and directly predicts match pairs. Unlike\ntraditional matchers that compute descriptor distances, LightGlue produces confidence scores\nfor each potential match pair.\n\nThe matcher extends DescriptorMatcher and supports match() and knnMatch() with k=1.\nContext (keypoints and image sizes) must be provided via setPairInfo() or setImagePairInfo()\nbefore matching. radiusMatch() is not supported."
+      },
+      "fields": [
+        "documentation"
+      ]
+    },
+    {
+      "identity": "cv.LightGlueMatcher.setPairInfo(Mat queryKpts;Mat trainKpts;Size queryImageSize=Size();Size trainImageSize=Size())-\u003Evoid",
+      "review": "The retained context setter documents model-dependent normalization, explicit setImagePairInfo as an alternative and empty Size for already-normalized keypoints. It remains intentionally omitted with the LightGlue object/model contract; no implicit ALIKED context or radius matching is claimed.",
+      "before": {
+        "ordinal": 164,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+        "kind": "callable",
+        "name": "cv.LightGlueMatcher.setPairInfo",
+        "identity": "cv.LightGlueMatcher.setPairInfo(Mat queryKpts;Mat trainKpts;Size queryImageSize=Size();Size trainImageSize=Size())-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [
+          "/V",
+          "/PV"
+        ],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "queryKpts",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "trainKpts",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Size",
+            "name": "queryImageSize",
+            "default": "Size()",
+            "modifiers": []
+          },
+          {
+            "type": "Size",
+            "name": "trainImageSize",
+            "default": "Size()",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Sets the keypoint and image size context for the next match() call.\n\n    This provides the spatial context that LightGlue needs in addition to descriptors.\n    Must be called before match()/knnMatch()/radiusMatch() unless using automatic context\n    from in-process ALIKED instances.\n\n    @param queryKpts Query image keypoints (Nx2 float matrix with x,y coordinates).\n    @param trainKpts Train image keypoints (Nx2 float matrix with x,y coordinates).\n    @param queryImageSize Size of the query image (width, height).\n    @param trainImageSize Size of the train image (width, height)."
+      },
+      "after": {
+        "ordinal": 177,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/features/include/opencv2/features.hpp",
+        "kind": "callable",
+        "name": "cv.LightGlueMatcher.setPairInfo",
+        "identity": "cv.LightGlueMatcher.setPairInfo(Mat queryKpts;Mat trainKpts;Size queryImageSize=Size();Size trainImageSize=Size())-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [
+          "/V",
+          "/PV"
+        ],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "queryKpts",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "trainKpts",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Size",
+            "name": "queryImageSize",
+            "default": "Size()",
+            "modifiers": []
+          },
+          {
+            "type": "Size",
+            "name": "trainImageSize",
+            "default": "Size()",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Sets the keypoint and image size context for the next match() call.\n\n    This provides the spatial context that LightGlue needs in addition to descriptors.\n    Must be called before match()/knnMatch(), or use setImagePairInfo().\n    Pixel coordinates are normalized according to the LightGlueType selected at creation, or as\n    selected by setKeypointNormalization().\n    For keypoints already normalized for that model, leave the corresponding image size empty.\n\n    @param queryKpts Query image keypoints (Nx2 float matrix with x,y coordinates).\n    @param trainKpts Train image keypoints (Nx2 float matrix with x,y coordinates).\n    @param queryImageSize Size of the query image, or Size() for normalized query keypoints.\n    @param trainImageSize Size of the train image, or Size() for normalized train keypoints."
+      },
+      "fields": [
+        "documentation"
+      ]
+    }
+  ]
+}

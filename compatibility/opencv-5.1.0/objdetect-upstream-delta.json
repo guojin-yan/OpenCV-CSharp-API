@@ -1,0 +1,544 @@
+{
+  "fromVersion": "5.0.0",
+  "toVersion": "5.1.0",
+  "module": "objdetect",
+  "retainedIdentityCount": 195,
+  "added": [
+    {
+      "identity": "cv.aruco.Dictionary.getDistanceToId(Mat onlyCellPixelRatio;int id;bool allRotations;float validBitIdThreshold)-\u003Eint",
+      "review": "This additional Dictionary.getDistanceToId overload takes per-cell pixel ratios plus validBitIdThreshold. The existing GetDistanceToId/C ABI accepts a CV_8UC1 bit matrix and allRotations only; it cannot implement the ratio/threshold domain, which remains explicitly omitted.",
+      "after": {
+        "ordinal": 8,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/objdetect/include/opencv2/objdetect/aruco_dictionary.hpp",
+        "kind": "callable",
+        "name": "cv.aruco.Dictionary.getDistanceToId",
+        "identity": "cv.aruco.Dictionary.getDistanceToId(Mat onlyCellPixelRatio;int id;bool allRotations;float validBitIdThreshold)-\u003Eint",
+        "returnType": "int",
+        "modifiers": [
+          "/C"
+        ],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "onlyCellPixelRatio",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "id",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "bool",
+            "name": "allRotations",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "float",
+            "name": "validBitIdThreshold",
+            "default": "",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Returns number of cells that differ from the specific id.\n     *\n     * For each cell, the distance is increased when the difference between the detected\n     * cell pixel ratio and the dictionary bit value is greater than \u0060validBitIdThreshold\u0060.\n     * If \u0060allRotations\u0060 is set, the four possible marker rotations are considered.\n     *\n     * @param onlyCellPixelRatio markerSize x markerSize matrix (CV_32FC1) holding, for each cell,\n     * the ratio of white pixels ranging from 0 to 1\n     * @param id marker id in the dictionary to compute the distance to\n     * @param allRotations if set, the four possible marker rotations are considered and the\n     * smallest distance is returned\n     * @param validBitIdThreshold maximum allowed difference between a cell pixel ratio and the\n     * dictionary bit value; cells exceeding it are counted as differing"
+      }
+    }
+  ],
+  "removed": [],
+  "changed": [
+    {
+      "identity": "cv.aruco.Dictionary.identify(Mat onlyCellPixelRatio[/C,/Ref];int idx[/O,/Ref];int rotation[/O,/Ref];double maxCorrectionRate;float validBitIdThreshold)-\u003Ebool",
+      "review": "Documentation spelling/grammar is corrected for the retained pixel-ratio identify overload. The existing binding and its input validation are unchanged; this wording does not widen the managed dictionary domain.",
+      "before": {
+        "ordinal": 6,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/objdetect/include/opencv2/objdetect/aruco_dictionary.hpp",
+        "kind": "callable",
+        "name": "cv.aruco.Dictionary.identify",
+        "identity": "cv.aruco.Dictionary.identify(Mat onlyCellPixelRatio[/C,/Ref];int idx[/O,/Ref];int rotation[/O,/Ref];double maxCorrectionRate;float validBitIdThreshold)-\u003Ebool",
+        "returnType": "bool",
+        "modifiers": [
+          "/C"
+        ],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "onlyCellPixelRatio",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "idx",
+            "default": "",
+            "modifiers": [
+              "/O",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "rotation",
+            "default": "",
+            "modifiers": [
+              "/O",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "double",
+            "name": "maxCorrectionRate",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "float",
+            "name": "validBitIdThreshold",
+            "default": "",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Given a matrix of pixel ratio raging from 0 to 1. Returns whether if marker is identified or not.\n     *\n     * Returns reference to the marker id in the dictionary (if any) and its rotation."
+      },
+      "after": {
+        "ordinal": 6,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/objdetect/include/opencv2/objdetect/aruco_dictionary.hpp",
+        "kind": "callable",
+        "name": "cv.aruco.Dictionary.identify",
+        "identity": "cv.aruco.Dictionary.identify(Mat onlyCellPixelRatio[/C,/Ref];int idx[/O,/Ref];int rotation[/O,/Ref];double maxCorrectionRate;float validBitIdThreshold)-\u003Ebool",
+        "returnType": "bool",
+        "modifiers": [
+          "/C"
+        ],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "onlyCellPixelRatio",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "idx",
+            "default": "",
+            "modifiers": [
+              "/O",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "rotation",
+            "default": "",
+            "modifiers": [
+              "/O",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "double",
+            "name": "maxCorrectionRate",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "float",
+            "name": "validBitIdThreshold",
+            "default": "",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Given a matrix of pixel ratio ranging from 0 to 1. Returns whether the marker is identified or not.\n     *\n     * Returns reference to the marker id in the dictionary (if any) and its rotation."
+      },
+      "fields": [
+        "documentation"
+      ]
+    },
+    {
+      "identity": "cv.aruco.CharucoBoard.setLegacyPattern(bool legacyPattern)-\u003Evoid",
+      "review": "The legacy ChArUco layout differs only for even row counts. A mismatch can detect markers yet yield zero ChArUco corners, with only a debug log. Preserve the existing legacy-pattern setter and document explicit caller selection for pre-4.6/compatible third-party boards.",
+      "before": {
+        "ordinal": 30,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/objdetect/include/opencv2/objdetect/aruco_board.hpp",
+        "kind": "callable",
+        "name": "cv.aruco.CharucoBoard.setLegacyPattern",
+        "identity": "cv.aruco.CharucoBoard.setLegacyPattern(bool legacyPattern)-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "bool",
+            "name": "legacyPattern",
+            "default": "",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief set legacy chessboard pattern.\n     *\n     * Legacy setting creates chessboard patterns starting with a white box in the upper left corner\n     * if there is an even row count of chessboard boxes, otherwise it starts with a black box.\n     * This setting ensures compatibility to patterns created with OpenCV versions prior OpenCV 4.6.0.\n     * See https://github.com/opencv/opencv/issues/23152.\n     *\n     * Default value: false."
+      },
+      "after": {
+        "ordinal": 31,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/objdetect/include/opencv2/objdetect/aruco_board.hpp",
+        "kind": "callable",
+        "name": "cv.aruco.CharucoBoard.setLegacyPattern",
+        "identity": "cv.aruco.CharucoBoard.setLegacyPattern(bool legacyPattern)-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "bool",
+            "name": "legacyPattern",
+            "default": "",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief set legacy chessboard pattern.\n     *\n     * In OpenCV 4.6.0 the ChArUco pattern generation algorithm changed in an incompatible way for\n     * boards with an even number of rows. Enable this setting to interpret a board that was created\n     * with an OpenCV version older than 4.6.0, or with a third-party generator that follows the same\n     * convention; boards from calib.io, for example, use the legacy layout.\n     *\n     * The legacy layout starts the chessboard with a white box in the upper left corner when the row\n     * count is even, whereas the current layout starts with a black box. The two layouts differ only\n     * in that case: when \u0060size.height\u0060 is odd they are identical, so this setting has no effect on\n     * boards with an odd number of rows.\n     *\n     * @note Getting this wrong fails quietly. The ArUco markers are still detected normally, but the\n     * corners they imply do not match the board, so CharucoDetector::detectBoard() returns zero\n     * ChArUco corners while reporting a full set of marker detections. The only trace is a\n     * \u0060CV_LOG_DEBUG\u0060 message, which is not shown at the default log level. If you see detected\n     * markers and no corners on a board with an even row count, try toggling this setting before\n     * looking anywhere else.\n     *\n     * See https://github.com/opencv/opencv/issues/23152.\n     *\n     * Default value: false."
+      },
+      "fields": [
+        "documentation"
+      ]
+    },
+    {
+      "identity": "cv.findChessboardCorners(Mat image;Size patternSize;Mat corners[/O];int flags=CALIB_CB_ADAPTIVE_THRESH \u002B CALIB_CB_NORMALIZE_IMAGE)-\u003Ebool",
+      "review": "Ordering is repeatable only when interior-corner dimensions have different parity; equal parity allows a 180-degree ambiguity and square patterns allow 90-degree ambiguity. Existing binding remains, but this map does not promise a stable physical board origin across hand-eye views; use an oriented pattern/cue.",
+      "before": {
+        "ordinal": 137,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/objdetect/include/opencv2/objdetect.hpp",
+        "kind": "callable",
+        "name": "cv.findChessboardCorners",
+        "identity": "cv.findChessboardCorners(Mat image;Size patternSize;Mat corners[/O];int flags=CALIB_CB_ADAPTIVE_THRESH \u002B CALIB_CB_NORMALIZE_IMAGE)-\u003Ebool",
+        "returnType": "bool",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "image",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Size",
+            "name": "patternSize",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "corners",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "flags",
+            "default": "CALIB_CB_ADAPTIVE_THRESH \u002B CALIB_CB_NORMALIZE_IMAGE",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Finds the positions of internal corners of the chessboard.\n\n@param image Source chessboard view. It must be an 8-bit grayscale or color image.\n@param patternSize Number of inner corners per a chessboard row and column\n( patternSize = cv::Size(points_per_row,points_per_column) = cv::Size(columns,rows) ).\n@param corners Output array of detected corners.\n@param flags Various operation flags that can be zero or a combination of the following values:\n-   @ref CALIB_CB_ADAPTIVE_THRESH Use adaptive thresholding to convert the image to black\nand white, rather than a fixed threshold level (computed from the average image brightness).\n-   @ref CALIB_CB_NORMALIZE_IMAGE Normalize the image gamma with equalizeHist before\napplying fixed or adaptive thresholding.\n-   @ref CALIB_CB_FILTER_QUADS Use additional criteria (like contour area, perimeter,\nsquare-like shape) to filter out false quads extracted at the contour retrieval stage.\n-   @ref CALIB_CB_FAST_CHECK Run a fast check on the image that looks for chessboard corners,\nand shortcut the call if none is found. This can drastically speed up the call in the\ndegenerate condition when no chessboard is observed.\n-   @ref CALIB_CB_PLAIN All other flags are ignored. The input image is taken as is.\nNo image processing is done to improve to find the checkerboard. This has the effect of speeding up the\nexecution of the function but could lead to not recognizing the checkerboard if the image\nis not previously binarized in the appropriate manner.\n\n@return True if all of the corners are found and placed in a certain order (row by row,\nleft to right in every row). Otherwise, if the function fails to find all the corners or reorder them,\nit returns false.\n\nThe function attempts to determine whether the input image is a view of the chessboard pattern and\nlocate the internal chessboard corners. For example, a regular chessboard has 8 x 8 squares and\n7 x 7 internal corners, that is, points where the black squares touch each other. The detected\ncoordinates are approximate, and to determine their positions more accurately, the function\ncalls #cornerSubPix. You also may use the function #cornerSubPix with different parameters if\nreturned coordinates are not accurate enough.\n\nSample usage of detecting and drawing chessboard corners: :\n@code\n    Size patternsize(8,6); //interior number of corners\n    Mat gray = ....; //source image\n    vector\u003CPoint2f\u003E corners; //this will be filled by the detected corners\n\n    //CALIB_CB_FAST_CHECK saves a lot of time on images\n    //that do not contain any chessboard corners\n    bool patternfound = findChessboardCorners(gray, patternsize, corners,\n            CALIB_CB_ADAPTIVE_THRESH \u002B CALIB_CB_NORMALIZE_IMAGE\n            \u002B CALIB_CB_FAST_CHECK);\n\n    if(patternfound)\n      cornerSubPix(gray, corners, Size(11, 11), Size(-1, -1),\n        TermCriteria(CV_TERMCRIT_EPS \u002B CV_TERMCRIT_ITER, 30, 0.1));\n\n    drawChessboardCorners(img, patternsize, Mat(corners), patternfound);\n@endcode\n@note The function requires white space (like a square-thick border, the wider the better) around\nthe board to make the detection more robust in various environments. Otherwise, if there is no\nborder and the background is dark, the outer black squares cannot be segmented properly and so the\nsquare grouping and ordering algorithm fails.\n\nUse the \u0060generate_pattern.py\u0060 Python script (@ref tutorial_camera_calibration_pattern)\nto create the desired checkerboard pattern."
+      },
+      "after": {
+        "ordinal": 138,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/objdetect/include/opencv2/objdetect.hpp",
+        "kind": "callable",
+        "name": "cv.findChessboardCorners",
+        "identity": "cv.findChessboardCorners(Mat image;Size patternSize;Mat corners[/O];int flags=CALIB_CB_ADAPTIVE_THRESH \u002B CALIB_CB_NORMALIZE_IMAGE)-\u003Ebool",
+        "returnType": "bool",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "image",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Size",
+            "name": "patternSize",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "corners",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "flags",
+            "default": "CALIB_CB_ADAPTIVE_THRESH \u002B CALIB_CB_NORMALIZE_IMAGE",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Finds the positions of internal corners of the chessboard.\n\n@param image Source chessboard view. It must be an 8-bit grayscale or color image.\n@param patternSize Number of inner corners per a chessboard row and column\n( patternSize = cv::Size(points_per_row,points_per_column) = cv::Size(columns,rows) ).\n@param corners Output array of detected corners.\n@param flags Various operation flags that can be zero or a combination of the following values:\n-   @ref CALIB_CB_ADAPTIVE_THRESH Use adaptive thresholding to convert the image to black\nand white, rather than a fixed threshold level (computed from the average image brightness).\n-   @ref CALIB_CB_NORMALIZE_IMAGE Normalize the image gamma with equalizeHist before\napplying fixed or adaptive thresholding.\n-   @ref CALIB_CB_FILTER_QUADS Use additional criteria (like contour area, perimeter,\nsquare-like shape) to filter out false quads extracted at the contour retrieval stage.\n-   @ref CALIB_CB_FAST_CHECK Run a fast check on the image that looks for chessboard corners,\nand shortcut the call if none is found. This can drastically speed up the call in the\ndegenerate condition when no chessboard is observed.\n-   @ref CALIB_CB_PLAIN All other flags are ignored. The input image is taken as is.\nNo image processing is done to improve to find the checkerboard. This has the effect of speeding up the\nexecution of the function but could lead to not recognizing the checkerboard if the image\nis not previously binarized in the appropriate manner.\n\n@return True if all of the corners are found and placed in a certain order (row by row,\nleft to right in every row). Otherwise, if the function fails to find all the corners or reorder them,\nit returns false.\n\nThe function attempts to determine whether the input image is a view of the chessboard pattern and\nlocate the internal chessboard corners. For example, a regular chessboard has 8 x 8 squares and\n7 x 7 internal corners, that is, points where the black squares touch each other. The detected\ncoordinates are approximate, and to determine their positions more accurately, the function\ncalls #cornerSubPix. You also may use the function #cornerSubPix with different parameters if\nreturned coordinates are not accurate enough.\n\nSample usage of detecting and drawing chessboard corners: :\n@code\n    Size patternsize(8,6); //interior number of corners\n    Mat gray = ....; //source image\n    vector\u003CPoint2f\u003E corners; //this will be filled by the detected corners\n\n    //CALIB_CB_FAST_CHECK saves a lot of time on images\n    //that do not contain any chessboard corners\n    bool patternfound = findChessboardCorners(gray, patternsize, corners,\n            CALIB_CB_ADAPTIVE_THRESH \u002B CALIB_CB_NORMALIZE_IMAGE\n            \u002B CALIB_CB_FAST_CHECK);\n\n    if(patternfound)\n      cornerSubPix(gray, corners, Size(11, 11), Size(-1, -1),\n        TermCriteria(CV_TERMCRIT_EPS \u002B CV_TERMCRIT_ITER, 30, 0.1));\n\n    drawChessboardCorners(img, patternsize, Mat(corners), patternfound);\n@endcode\n@note The function requires white space (like a square-thick border, the wider the better) around\nthe board to make the detection more robust in various environments. Otherwise, if there is no\nborder and the background is dark, the outer black squares cannot be segmented properly and so the\nsquare grouping and ordering algorithm fails.\n\n@note The corners are returned row by row and left to right within each row, but whether that order\npins down a unique physical corner of the board depends on \u0060patternSize\u0060. The detector builds its\ngrid from the dark squares only, so it recognises a rotated board only when the rotation maps dark\nsquares onto dark squares. For a \u0060patternSize\u0060 of w x h interior corners the squares form a\n(w\u002B1) x (h\u002B1) grid, and a rotation by 180 degrees preserves that colouring exactly when w and h have\nthe same parity. Three cases follow. If w and h have different parity, as on the common 9x6 board,\nthe origin is unique and the ordering is repeatable across views. If w and h have the same parity\nbut differ, as on the 8x6 board used in the example above, the order is fixed only up to a rotation\nby 180 degrees. If w equals h, the detector cannot tell rows from columns either, and the order is\nfixed only up to a rotation by 90 degrees. Where the order is ambiguous, which one you get depends\non how the board happens to lie in the image. That does not affect camera calibration, since each\nview absorbs the rotation into its own pose and the intrinsics come out the same, but it breaks\nanything that assumes a fixed board coordinate frame across views, hand-eye calibration being the\nusual case, where a flipped view silently corrupts the estimated transform. A plain chessboard image\ndoes not carry the information needed to resolve the rotation, so it has to come from the pattern:\nchoose a board whose two dimensions have different parity, or use #findChessboardCornersSB with\n@ref CALIB_CB_MARKER, whose \u0060meta\u0060 output identifies the origin, or a ChArUco board, where the\nmarkers make the orientation unambiguous.\n\nUse the \u0060generate_pattern.py\u0060 Python script (@ref tutorial_camera_calibration_pattern)\nto create the desired checkerboard pattern."
+      },
+      "fields": [
+        "documentation"
+      ]
+    },
+    {
+      "identity": "cv.findCirclesGrid(Mat image;Size patternSize;Mat centers[/O];int flags;Ptr_FeatureDetector blobDetector[/C,/Ref];CirclesGridFinderParameters parameters[/C,/Ref])-\u003Ebool",
+      "review": "Upstream clarifies ordering ambiguity and that blob/ellipse image centers can differ from projected physical circle centers under perspective. Retain the existing binding and validation; high-accuracy corrected-center input and null blob-detector domains need separate managed evidence.",
+      "before": {
+        "ordinal": 147,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/objdetect/include/opencv2/objdetect.hpp",
+        "kind": "callable",
+        "name": "cv.findCirclesGrid",
+        "identity": "cv.findCirclesGrid(Mat image;Size patternSize;Mat centers[/O];int flags;Ptr_FeatureDetector blobDetector[/C,/Ref];CirclesGridFinderParameters parameters[/C,/Ref])-\u003Ebool",
+        "returnType": "bool",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "image",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Size",
+            "name": "patternSize",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "centers",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "flags",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Ptr_FeatureDetector",
+            "name": "blobDetector",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "CirclesGridFinderParameters",
+            "name": "parameters",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Finds centers in the grid of circles.\n\n@param image grid view of input circles; it must be an 8-bit grayscale or color image.\n@param patternSize number of circles per row and column\n( patternSize = Size(points_per_row, points_per_column) ).\n@param centers output array of detected centers.\n@param flags various operation flags that can be one of the following values:\n-   @ref CALIB_CB_SYMMETRIC_GRID uses symmetric pattern of circles.\n-   @ref CALIB_CB_ASYMMETRIC_GRID uses asymmetric pattern of circles.\n-   @ref CALIB_CB_CLUSTERING uses a special algorithm for grid detection. It is more robust to\nperspective distortions but much more sensitive to background clutter.\n@param blobDetector feature detector that finds blobs like dark circles on light background.\n                    If \u0060blobDetector\u0060 is NULL then \u0060image\u0060 represents Point2f array of candidates.\n@param parameters struct for finding circles in a grid pattern.\n\nreturn True if all of the centers have been found and they have been placed in a certain order\n(row by row, left to right in every row). Otherwise, if the function fails to find all the corners\nor reorder them, it returns false.\n\nThe function attempts to determine whether the input image contains a grid of circles. If it is, the\nfunction locates centers of the circles.\n\nSample usage of detecting and drawing the centers of circles: :\n@code\n    Size patternsize(7,7); //number of centers\n    Mat gray = ...; //source image\n    vector\u003CPoint2f\u003E centers; //this will be filled by the detected centers\n\n    bool patternfound = findCirclesGrid(gray, patternsize, centers);\n\n    drawChessboardCorners(img, patternsize, Mat(centers), patternfound);\n@endcode\n@note The function requires white space (like a square-thick border, the wider the better) around\nthe board to make the detection more robust in various environments."
+      },
+      "after": {
+        "ordinal": 148,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/objdetect/include/opencv2/objdetect.hpp",
+        "kind": "callable",
+        "name": "cv.findCirclesGrid",
+        "identity": "cv.findCirclesGrid(Mat image;Size patternSize;Mat centers[/O];int flags;Ptr_FeatureDetector blobDetector[/C,/Ref];CirclesGridFinderParameters parameters[/C,/Ref])-\u003Ebool",
+        "returnType": "bool",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "image",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Size",
+            "name": "patternSize",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "centers",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "flags",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Ptr_FeatureDetector",
+            "name": "blobDetector",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "CirclesGridFinderParameters",
+            "name": "parameters",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Finds centers in the grid of circles.\n\n@param image grid view of input circles; it must be an 8-bit grayscale or color image.\n@param patternSize number of circles per row and column\n( patternSize = Size(points_per_row, points_per_column) ).\n@param centers output array of detected centers.\n@param flags various operation flags that can be one of the following values:\n-   @ref CALIB_CB_SYMMETRIC_GRID uses symmetric pattern of circles.\n-   @ref CALIB_CB_ASYMMETRIC_GRID uses asymmetric pattern of circles.\n-   @ref CALIB_CB_CLUSTERING uses a special algorithm for grid detection. It is more robust to\nperspective distortions but much more sensitive to background clutter.\n@param blobDetector feature detector that finds blobs like dark circles on light background.\n                    If \u0060blobDetector\u0060 is NULL then \u0060image\u0060 represents Point2f array of candidates.\n@param parameters struct for finding circles in a grid pattern.\n\n@return True if all of the centers have been found and ordered, false if the function fails to find\nall of them or to reorder them.\n\nThe returned centers are ordered row by row and left to right within each row, but that order is\nrelative to the grid as it appears in the image, which need not match the physical board: depending\non how the board is held, the detected grid may be flipped or rotated by 180 degrees with respect to\nit. A symmetric pattern cannot resolve this ambiguity on its own, so if the correspondence to\nphysical board coordinates matters, fix the orientation yourself from an asymmetric pattern or from\nan external cue.\n\nThe function attempts to determine whether the input image contains a grid of circles. If it is, the\nfunction estimates the centers of the circles.\n\nSample usage of detecting and drawing the centers of circles: :\n@code\n    Size patternsize(7,7); //number of centers\n    Mat gray = ...; //source image\n    vector\u003CPoint2f\u003E centers; //this will be filled by the detected centers\n\n    bool patternfound = findCirclesGrid(gray, patternsize, centers);\n\n    drawChessboardCorners(img, patternsize, Mat(centers), patternfound);\n@endcode\n@note The function requires white space (like a square-thick border, the wider the better) around\nthe board to make the detection more robust in various environments.\n\n@note The returned points are not the exact projections of the circle centers. The function uses the\nkeypoint locations reported by \u0060blobDetector\u0060 as they are, without refining them; cv::SimpleBlobDetector\nis only the default choice. Any such detector locates a blob from the image region it occupies, which\ndescribes the circle as it appears in the image rather than the projection of its center. Under\nperspective projection the two need not coincide: the apparent center of a projected circle can be\ndisplaced from the projection of the physical center, by an amount that depends on the viewing\ngeometry and on the circle\u0027s size relative to its distance. The displacement vanishes when the board\nis parallel to the image plane, since the projection is then an exact scaled copy of the pattern.\nFitting an ellipse does not remove it, as the ellipse center is subject to the same effect. For\ncalibration at ordinary accuracy this bias is usually acceptable; for high-accuracy work, compute\ncorrected centers yourself and pass them in as a Point2f array of candidates with\n\u0060blobDetector = NULL\u0060."
+      },
+      "fields": [
+        "documentation"
+      ]
+    },
+    {
+      "identity": "cv.aruco.CharucoDetector.detectBoard(Mat image;Mat charucoCorners[/O];Mat charucoIds[/O];vector_Mat markerCorners=vector_Mat()[/IO];Mat markerIds=Mat()[/IO])-\u003Evoid",
+      "review": "Documentation expands the even-row legacy-layout mismatch: marker detections may be present while ChArUco output is empty. Existing detection and board-legacy controls remain; no automatic board-layout inference or new accuracy claim is added.",
+      "before": {
+        "ordinal": 180,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/objdetect/include/opencv2/objdetect/charuco_detector.hpp",
+        "kind": "callable",
+        "name": "cv.aruco.CharucoDetector.detectBoard",
+        "identity": "cv.aruco.CharucoDetector.detectBoard(Mat image;Mat charucoCorners[/O];Mat charucoIds[/O];vector_Mat markerCorners=vector_Mat()[/IO];Mat markerIds=Mat()[/IO])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [
+          "/C"
+        ],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "image",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "charucoCorners",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "Mat",
+            "name": "charucoIds",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "vector_Mat",
+            "name": "markerCorners",
+            "default": "vector_Mat()",
+            "modifiers": [
+              "/IO"
+            ]
+          },
+          {
+            "type": "Mat",
+            "name": "markerIds",
+            "default": "Mat()",
+            "modifiers": [
+              "/IO"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "* @brief detect aruco markers and interpolate position of ChArUco board corners\n     * @param image input image necessary for corner refinement. Note that markers are not detected and\n     * should be sent in corners and ids parameters.\n     * @param charucoCorners interpolated chessboard corners.\n     * @param charucoIds interpolated chessboard corners identifiers.\n     * @param markerCorners vector of already detected markers corners. For each marker, its four\n     * corners are provided, (e.g std::vector\u003Cstd::vector\u003Ccv::Point2f\u003E \u003E ). For N detected markers, the\n     * dimensions of this array should be Nx4. The order of the corners should be clockwise.\n     * If markerCorners and markerCorners are empty, the function detect aruco markers and ids.\n     * @param markerIds list of identifiers for each marker in corners.\n     *  If markerCorners and markerCorners are empty, the function detect aruco markers and ids.\n     *\n     * This function receives the detected markers and returns the 2D position of the chessboard corners\n     * from a ChArUco board using the detected Aruco markers.\n     *\n     * If markerCorners and markerCorners are empty, the detectMarkers() will run and detect aruco markers and ids.\n     *\n     * If camera parameters are provided, the process is based in an approximated pose estimation, else it is based on local homography.\n     * Only visible corners are returned. For each corner, its corresponding identifier is also returned in charucoIds.\n     * @sa findChessboardCorners\n     * @note After OpenCV 4.6.0, there was an incompatible change in the ChArUco pattern generation algorithm for even row counts.\n     * Use cv::aruco::CharucoBoard::setLegacyPattern() to ensure compatibility with patterns created using OpenCV versions prior to 4.6.0.\n     * For more information, see the issue: https://github.com/opencv/opencv/issues/23152"
+      },
+      "after": {
+        "ordinal": 181,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/objdetect/include/opencv2/objdetect/charuco_detector.hpp",
+        "kind": "callable",
+        "name": "cv.aruco.CharucoDetector.detectBoard",
+        "identity": "cv.aruco.CharucoDetector.detectBoard(Mat image;Mat charucoCorners[/O];Mat charucoIds[/O];vector_Mat markerCorners=vector_Mat()[/IO];Mat markerIds=Mat()[/IO])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [
+          "/C"
+        ],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "image",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "charucoCorners",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "Mat",
+            "name": "charucoIds",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "vector_Mat",
+            "name": "markerCorners",
+            "default": "vector_Mat()",
+            "modifiers": [
+              "/IO"
+            ]
+          },
+          {
+            "type": "Mat",
+            "name": "markerIds",
+            "default": "Mat()",
+            "modifiers": [
+              "/IO"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "* @brief detect aruco markers and interpolate position of ChArUco board corners\n     * @param image input image necessary for corner refinement. Note that markers are not detected and\n     * should be sent in corners and ids parameters.\n     * @param charucoCorners interpolated chessboard corners.\n     * @param charucoIds interpolated chessboard corners identifiers.\n     * @param markerCorners vector of already detected markers corners. For each marker, its four\n     * corners are provided, (e.g std::vector\u003Cstd::vector\u003Ccv::Point2f\u003E \u003E ). For N detected markers, the\n     * dimensions of this array should be Nx4. The order of the corners should be clockwise.\n     * If markerCorners and markerCorners are empty, the function detect aruco markers and ids.\n     * @param markerIds list of identifiers for each marker in corners.\n     *  If markerCorners and markerCorners are empty, the function detect aruco markers and ids.\n     *\n     * This function receives the detected markers and returns the 2D position of the chessboard corners\n     * from a ChArUco board using the detected Aruco markers.\n     *\n     * If markerCorners and markerCorners are empty, the detectMarkers() will run and detect aruco markers and ids.\n     *\n     * If camera parameters are provided, the process is based in an approximated pose estimation, else it is based on local homography.\n     * Only visible corners are returned. For each corner, its corresponding identifier is also returned in charucoIds.\n     * @sa findChessboardCorners\n     * @note In OpenCV 4.6.0 there was an incompatible change in the ChArUco pattern generation algorithm for even row counts.\n     * Use cv::aruco::CharucoBoard::setLegacyPattern() to ensure compatibility with patterns created using OpenCV versions\n     * older than 4.6.0, or with third-party generators such as calib.io that follow the same convention. Boards with an odd\n     * number of rows are unaffected. A mismatch is silent: the markers are still detected, but this function returns zero\n     * ChArUco corners and logs only a CV_LOG_DEBUG message.\n     * For more information, see the issue: https://github.com/opencv/opencv/issues/23152"
+      },
+      "fields": [
+        "documentation"
+      ]
+    }
+  ]
+}

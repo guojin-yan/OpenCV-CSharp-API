@@ -2,12 +2,13 @@
   "schemaVersion": 1,
   "upstreamOpenCvVersion": "5.1.0",
   "upstreamCommit": "e4f78fbcf1a773fbed69e14500e8b734963eb585",
+  "upstreamContribCommit": "b67a855188a3d683813731010f6d39ac614733a4",
   "catalogPath": "compatibility/opencv-5.1.0/upstream-map-refresh-catalog.json",
-  "catalogSha256": "3ecf0ac542c0bcaf96a1cc4c3d57c59002ed3e1f591d5b30e8bed3937fa5d5e4",
+  "catalogSha256": "2597e3ed13c8aba5ee0a88be9d9b2ebb8d3c84ad6207d22875f343ed51074e9d",
   "historicalCatalogRevision": "5.0.0",
   "historicalCatalogMapCount": 73,
-  "refreshedParserSliceCount": 5,
-  "pendingCatalogMapCount": 68,
+  "refreshedParserSliceCount": 14,
+  "pendingCatalogMapCount": 59,
   "slices": [
     {
       "id": "calib3d",
@@ -31,6 +32,20 @@
       "completeCppParityClaimed": false
     },
     {
+      "id": "features",
+      "summaryPath": "compatibility/opencv-5.1.0/features-upstream-summary.json",
+      "sha256": "eb8b15f1132ff47b84323f6b58c2b8b174a3180a3a0ce1f64ce1e62fee287993",
+      "declarationCount": 199,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "highgui",
+      "summaryPath": "compatibility/opencv-5.1.0/highgui-upstream-summary.json",
+      "sha256": "d74c5ec464bae4f4b186525cd80b75ba25a1649d2913953082aab8afc10d986c",
+      "declarationCount": 35,
+      "completeCppParityClaimed": false
+    },
+    {
       "id": "imgcodecs",
       "summaryPath": "compatibility/opencv-5.1.0/imgcodecs-upstream-summary.json",
       "sha256": "8ddec2ed5420311fb4b6a6088c8c87a0dc082ccf0df396812142a937067fccdd",
@@ -42,6 +57,55 @@
       "summaryPath": "compatibility/opencv-5.1.0/imgproc-upstream-summary.json",
       "sha256": "a51410ec02edd8e7db9274789f0ee22f6a01fcab957b96b432b651af445f0afb",
       "declarationCount": 206,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "ml",
+      "summaryPath": "compatibility/opencv-5.1.0/ml-upstream-summary.json",
+      "sha256": "93569b568904ab190897fe36a562d2226be984520907dacbfd06a1b275949954",
+      "declarationCount": 241,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "objdetect",
+      "summaryPath": "compatibility/opencv-5.1.0/objdetect-upstream-summary.json",
+      "sha256": "5518580285f310c9278696e532dc408594fdd3e5272696f3d7eb90eb305b5794",
+      "declarationCount": 196,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "photo",
+      "summaryPath": "compatibility/opencv-5.1.0/photo-upstream-summary.json",
+      "sha256": "dbff3f03af2478b510398c7ff7dad36a8971faf37d8a7019418e4203e7b0d537",
+      "declarationCount": 145,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "stitching",
+      "summaryPath": "compatibility/opencv-5.1.0/stitching-upstream-summary.json",
+      "sha256": "2a16bb288db8f08de037d7cbc16556f65aa4676e006194d33c4863fb3e3b1824",
+      "declarationCount": 207,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "tracking",
+      "summaryPath": "compatibility/opencv-5.1.0/tracking-upstream-summary.json",
+      "sha256": "ab743031390afc203f1695f86d3c7631caa09ad816dcc01f107e00544af0f348",
+      "declarationCount": 35,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "video",
+      "summaryPath": "compatibility/opencv-5.1.0/video-upstream-summary.json",
+      "sha256": "db0474b76dc506acc0ad3b36e9ad43965702c7a4265a48912a5e3f2bd68216c7",
+      "declarationCount": 168,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "videoio",
+      "summaryPath": "compatibility/opencv-5.1.0/videoio-upstream-summary.json",
+      "sha256": "fc91e7b35d4828731ada269c65033901de048143ebf87e0e94a4767da0d6d19a",
+      "declarationCount": 74,
       "completeCppParityClaimed": false
     }
   ],
@@ -71,23 +135,18 @@
     "dpm",
     "face",
     "fastcv",
-    "features",
     "freetype",
     "fuzzy",
     "hdf",
     "hfs",
-    "highgui",
     "img_hash",
     "intensity_transform",
     "julia",
     "line_descriptor",
     "matlab",
-    "ml",
-    "objdetect",
     "optflow",
     "ovis",
     "phase_unwrapping",
-    "photo",
     "plot",
     "ptcloud",
     "quality",
@@ -98,14 +157,10 @@
     "sfm",
     "shape",
     "signal",
-    "stitching",
     "structured_light",
     "superres",
     "surface_matching",
     "text",
-    "tracking",
-    "video",
-    "videoio",
     "videostab",
     "viz",
     "wechat_qrcode",
@@ -115,7 +170,7 @@
     "xphoto",
     "xstereo"
   ],
-  "sharedGeneratorNegativeFixtureCount": 127,
+  "sharedGeneratorNegativeFixtureCount": 418,
   "repositoryWideUpstreamParityClaimed": false,
   "completeCppParityClaimed": false,
   "limitation": "Only the recorded parser slices have been reviewed. Historical maps, complete C\u002B\u002B/template surfaces and runtime/platform certification retain separate evidence and version identities."

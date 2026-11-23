@@ -43,6 +43,8 @@ def extract(repo, workspace, module, destination):
         start = len(rows)
         for value in parsed:
             row = convert(value, len(rows), item["path"])
+            if "surface" in item:
+                row["surface"] = item["surface"]
             # Preserve each historical extractor's enum identity convention.
             # Enum values are always retained in the DTO and reviewed in deltas.
             if row["kind"] != "callable" and module["identityPolicy"] == "named-enum":
@@ -65,6 +67,15 @@ def extract(repo, workspace, module, destination):
         "declarationCount": len(rows),
         "declarations": rows,
     }
+    if "sourceRepository" in module:
+        raw["sourceRepository"] = module["sourceRepository"]
+        if module["sourceRepository"] == "opencv_contrib":
+            raw["upstreamContribCommit"] = "b67a855188a3d683813731010f6d39ac614733a4"
+    if "compatibilityHeaders" in module:
+        for item in module["compatibilityHeaders"]:
+            if sha(workspace / item["path"]) != item["sha256"]:
+                raise ValueError("Reviewed compatibility header hash drifted: " + item["path"])
+        raw["compatibilityHeaders"] = module["compatibilityHeaders"]
     path = destination / (module["id"] + "-upstream-raw.json")
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(raw, ensure_ascii=True, indent=2) + "\n", encoding="utf-8", newline="\n")

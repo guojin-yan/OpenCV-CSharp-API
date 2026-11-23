@@ -1,0 +1,2762 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.1.0",
+  "module": "features",
+  "claimedSlice": "Historical features parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+  "reviewStatus": "reviewed-parser-slice",
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "cv.goodFeaturesToTrack(Mat image;Mat corners[/O];int maxCorners;double qualityLevel;double minDistance;Mat mask=Mat();int blockSize=3;bool useHarrisDetector=false;double k=0.04)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES; full-profile; mini-returns-NOT_LINKED",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_good_features_to_track_count",
+        "jyppx_ocv_imgproc_good_features_to_track_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgProc.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Point2f[] GoodFeaturesToTrack(JYPPX.OpenCvSharp.Core.Mat image,System.Int32 maxCorners,System.Double qualityLevel,System.Double minDistance,JYPPX.OpenCvSharp.Core.Mat? mask=null,System.Int32 blockSize=3,System.Int32 gradientSize=3,System.Boolean useHarrisDetector=false,System.Double k=0.04)"
+      ],
+      "historicalOrdinal": 0,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.goodFeaturesToTrack(Mat image;Mat corners[/O];int maxCorners;double qualityLevel;double minDistance;Mat mask;int blockSize;int gradientSize;bool useHarrisDetector=false;double k=0.04)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES; full-profile; mini-returns-NOT_LINKED",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_good_features_to_track_count",
+        "jyppx_ocv_imgproc_good_features_to_track_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgProc.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Point2f[] GoodFeaturesToTrack(JYPPX.OpenCvSharp.Core.Mat image,System.Int32 maxCorners,System.Double qualityLevel,System.Double minDistance,JYPPX.OpenCvSharp.Core.Mat? mask=null,System.Int32 blockSize=3,System.Int32 gradientSize=3,System.Boolean useHarrisDetector=false,System.Double k=0.04)"
+      ],
+      "historicalOrdinal": 1,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.goodFeaturesToTrack(Mat image;Mat corners[/O];int maxCorners;double qualityLevel;double minDistance;Mat mask;Mat cornersQuality[/O];int blockSize=3;int gradientSize=3;bool useHarrisDetector=false;double k=0.04)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The cornersQuality output overload is not exposed by the current managed point-array result and is deferred until a paired quality result model is added.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES; full-profile; mini-returns-NOT_LINKED",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 2,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 3,
+      "identity": "class cv.Feature2D",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 3,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.Feature2D.detect(Mat image;vector_KeyPoint keypoints[/O,/Ref];Mat mask=Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_detect_count",
+        "jyppx_ocv_features2d_orb_detect_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.Feature2D|method|public;instance;abstract|JYPPX.OpenCvSharp.Features2D.KeyPoint[] Detect(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat? mask=null)"
+      ],
+      "historicalOrdinal": 4,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.Feature2D.detect(vector_Mat images;vector_vector_KeyPoint keypoints[/O,/Ref];vector_Mat masks=vector_Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_detect_count",
+        "jyppx_ocv_features2d_orb_detect_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.Feature2D|method|public;instance|JYPPX.OpenCvSharp.Features2D.KeyPoint[][] Detect(JYPPX.OpenCvSharp.Core.Mat[] images,JYPPX.OpenCvSharp.Core.Mat[]? masks)"
+      ],
+      "historicalOrdinal": 5,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.Feature2D.compute(Mat image;vector_KeyPoint keypoints[/IO,/Ref];Mat descriptors[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_compute"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ORB|method|public;instance|System.Void Compute(JYPPX.OpenCvSharp.Core.Mat image,ref JYPPX.OpenCvSharp.Features2D.KeyPoint[] keypoints,JYPPX.OpenCvSharp.Core.Mat descriptors)"
+      ],
+      "historicalOrdinal": 6,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.Feature2D.compute(vector_Mat images;vector_vector_KeyPoint keypoints[/IO,/Ref];vector_Mat descriptors[/O])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "Batch compute mutates nested keypoint collections and returns multiple descriptor matrices; it is deferred to a dedicated nested ownership result model while single-image compute remains implemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 7,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.Feature2D.detectAndCompute(Mat image;Mat mask;vector_KeyPoint keypoints[/O,/Ref];Mat descriptors[/O];bool useProvidedKeypoints=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_detect_and_compute_count",
+        "jyppx_ocv_features2d_orb_detect_and_compute_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ORB|method|public;instance|JYPPX.OpenCvSharp.Features2D.KeyPoint[] DetectAndCompute(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat? mask,JYPPX.OpenCvSharp.Features2D.KeyPoint[] keypoints,JYPPX.OpenCvSharp.Core.Mat descriptors,System.Boolean useProvidedKeypoints=true)"
+      ],
+      "historicalOrdinal": 8,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.Feature2D.descriptorSize()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_descriptor_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.Feature2D|property|instance;get:public|System.Int32 DescriptorSize"
+      ],
+      "historicalOrdinal": 9,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.Feature2D.descriptorType()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_descriptor_type"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.Feature2D|property|instance;get:public|System.Int32 DescriptorType"
+      ],
+      "historicalOrdinal": 10,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.Feature2D.defaultNorm()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_default_norm"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.Feature2D|property|instance;get:public|JYPPX.OpenCvSharp.Core.NormTypes DefaultNorm"
+      ],
+      "historicalOrdinal": 11,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.Feature2D.write(String fileName[/C,/Ref,/PATH])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "Polymorphic Algorithm persistence is deferred until every concrete Feature2D or DescriptorMatcher handle can safely participate in one FileStorage and FileNode ownership contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 12,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.Feature2D.read(String fileName[/C,/Ref,/PATH])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "Polymorphic Algorithm persistence is deferred until every concrete Feature2D or DescriptorMatcher handle can safely participate in one FileStorage and FileNode ownership contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 13,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.Feature2D.read(FileNode arg1[/C,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "Polymorphic Algorithm persistence is deferred until every concrete Feature2D or DescriptorMatcher handle can safely participate in one FileStorage and FileNode ownership contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 14,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.Feature2D.empty()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_empty"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.Feature2D|property|instance;get:public|System.Boolean Empty"
+      ],
+      "historicalOrdinal": 15,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.Feature2D.getDefaultName()-\u003EString",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_default_name_fill",
+        "jyppx_ocv_features2d_orb_default_name_length"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.Feature2D|property|instance;get:public|System.String DefaultName"
+      ],
+      "historicalOrdinal": 16,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.Feature2D.write(FileStorage fs[/Ref];String name[/C,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "Polymorphic Algorithm persistence is deferred until every concrete Feature2D or DescriptorMatcher handle can safely participate in one FileStorage and FileNode ownership contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 17,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 18,
+      "identity": "class cv.AffineFeature",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 18,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.AffineFeature.create(Ptr_Feature2D backend[/C,/Ref];int maxTilt=5;int minTilt=0;float tiltStep=1.4142135623730951f;float rotateStepBase=72)-\u003EPtr\u003CAffineFeature\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_affine_create_from_orb"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.AffineFeature|method|public;static|JYPPX.OpenCvSharp.Features2D.AffineFeature Create(JYPPX.OpenCvSharp.Features2D.AKAZE backend,System.Int32 maxTilt=5,System.Int32 minTilt=0,System.Single tiltStep=1.4142135,System.Single rotateStepBase=72)"
+      ],
+      "historicalOrdinal": 19,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.AffineFeature.setViewParams(vector_float tilts[/C,/Ref];vector_float rolls[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_affine_set_view_params"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.AffineFeature|method|public;instance|System.Void SetViewParams(System.ReadOnlySpan\u003CSystem.Single\u003E tilts,System.ReadOnlySpan\u003CSystem.Single\u003E rolls)"
+      ],
+      "historicalOrdinal": 20,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.AffineFeature.getViewParams(vector_float tilts[/Ref];vector_float rolls[/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_affine_get_view_params_count",
+        "jyppx_ocv_features2d_affine_get_view_params_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.AffineFeature|method|public;instance|System.Int32 GetViewParams(System.Span\u003CSystem.Single\u003E tilts,System.Span\u003CSystem.Single\u003E rolls)"
+      ],
+      "historicalOrdinal": 21,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.AffineFeature.getDefaultName()-\u003EString",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_affine_default_name_fill",
+        "jyppx_ocv_features2d_affine_default_name_length"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.AffineFeature|property|instance;get:public|System.String DefaultName"
+      ],
+      "historicalOrdinal": 22,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 23,
+      "identity": "class cv.SIFT",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 23,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.SIFT.create(int nfeatures=0;int nOctaveLayers=3;double contrastThreshold=0.04;double edgeThreshold=10;double sigma=1.6;bool enable_precise_upscale=false)-\u003EPtr\u003CSIFT\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.SIFT|method|public;static|JYPPX.OpenCvSharp.Features2D.SIFT Create(System.Int32 nFeatures=0,System.Int32 nOctaveLayers=3,System.Double contrastThreshold=0.04,System.Double edgeThreshold=10,System.Double sigma=1.6,System.Int32 descriptorType=5,System.Boolean enablePreciseUpscale=false)"
+      ],
+      "historicalOrdinal": 24,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.SIFT.create(int nfeatures;int nOctaveLayers;double contrastThreshold;double edgeThreshold;double sigma;int descriptorType;bool enable_precise_upscale=false)-\u003EPtr\u003CSIFT\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.SIFT|method|public;static|JYPPX.OpenCvSharp.Features2D.SIFT Create(System.Int32 nFeatures=0,System.Int32 nOctaveLayers=3,System.Double contrastThreshold=0.04,System.Double edgeThreshold=10,System.Double sigma=1.6,System.Int32 descriptorType=5,System.Boolean enablePreciseUpscale=false)"
+      ],
+      "historicalOrdinal": 25,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.SIFT.getDefaultName()-\u003EString",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_default_name_fill",
+        "jyppx_ocv_features2d_sift_default_name_length"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.SIFT|property|instance;get:public|System.String DefaultName"
+      ],
+      "historicalOrdinal": 26,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.SIFT.setNFeatures(int maxFeatures)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_set_nfeatures"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.SIFT|property|instance;get:public;set:public|System.Int32 NFeatures"
+      ],
+      "historicalOrdinal": 27,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.SIFT.getNFeatures()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_get_nfeatures"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.SIFT|property|instance;get:public;set:public|System.Int32 NFeatures"
+      ],
+      "historicalOrdinal": 28,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.SIFT.setNOctaveLayers(int nOctaveLayers)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_set_n_octave_layers"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.SIFT|property|instance;get:public;set:public|System.Int32 NOctaveLayers"
+      ],
+      "historicalOrdinal": 29,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.SIFT.getNOctaveLayers()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_get_n_octave_layers"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.SIFT|property|instance;get:public;set:public|System.Int32 NOctaveLayers"
+      ],
+      "historicalOrdinal": 30,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.SIFT.setContrastThreshold(double contrastThreshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_set_contrast_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.SIFT|property|instance;get:public;set:public|System.Double ContrastThreshold"
+      ],
+      "historicalOrdinal": 31,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.SIFT.getContrastThreshold()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_get_contrast_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.SIFT|property|instance;get:public;set:public|System.Double ContrastThreshold"
+      ],
+      "historicalOrdinal": 32,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.SIFT.setEdgeThreshold(double edgeThreshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_set_edge_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.SIFT|property|instance;get:public;set:public|System.Double EdgeThreshold"
+      ],
+      "historicalOrdinal": 33,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.SIFT.getEdgeThreshold()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_get_edge_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.SIFT|property|instance;get:public;set:public|System.Double EdgeThreshold"
+      ],
+      "historicalOrdinal": 34,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.SIFT.setSigma(double sigma)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_set_sigma"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.SIFT|property|instance;get:public;set:public|System.Double Sigma"
+      ],
+      "historicalOrdinal": 35,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.SIFT.getSigma()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_get_sigma"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.SIFT|property|instance;get:public;set:public|System.Double Sigma"
+      ],
+      "historicalOrdinal": 36,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 37,
+      "identity": "class cv.ORB",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 37,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 38,
+      "identity": "enum cv.ORB.ScoreType[const cv.ORB.HARRIS_SCORE=0;const cv.ORB.FAST_SCORE=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 38,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.ORB.create(int nfeatures=500;float scaleFactor=1.2f;int nlevels=8;int edgeThreshold=31;int firstLevel=0;int WTA_K=2;ORB_ScoreType scoreType=ORB::HARRIS_SCORE;int patchSize=31;int fastThreshold=20)-\u003EPtr\u003CORB\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ORB|method|public;static|JYPPX.OpenCvSharp.Features2D.ORB Create(System.Int32 maxFeatures=500,System.Single scaleFactor=1.2,System.Int32 nLevels=8,System.Int32 edgeThreshold=31,System.Int32 firstLevel=0,System.Int32 wtaK=2,JYPPX.OpenCvSharp.Features2D.OrbScoreType scoreType=HarrisScore,System.Int32 patchSize=31,System.Int32 fastThreshold=20)"
+      ],
+      "historicalOrdinal": 39,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.ORB.setMaxFeatures(int maxFeatures)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_set_max_features"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 MaxFeatures"
+      ],
+      "historicalOrdinal": 40,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.ORB.getMaxFeatures()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_get_max_features"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 MaxFeatures"
+      ],
+      "historicalOrdinal": 41,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 42,
+      "identity": "cv.ORB.setScaleFactor(double scaleFactor)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_set_scale_factor"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Double ScaleFactor"
+      ],
+      "historicalOrdinal": 42,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.ORB.getScaleFactor()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_get_scale_factor"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Double ScaleFactor"
+      ],
+      "historicalOrdinal": 43,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.ORB.setNLevels(int nlevels)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_set_nlevels"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 NLevels"
+      ],
+      "historicalOrdinal": 44,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 45,
+      "identity": "cv.ORB.getNLevels()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_get_nlevels"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 NLevels"
+      ],
+      "historicalOrdinal": 45,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 46,
+      "identity": "cv.ORB.setEdgeThreshold(int edgeThreshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_set_edge_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 EdgeThreshold"
+      ],
+      "historicalOrdinal": 46,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.ORB.getEdgeThreshold()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_get_edge_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 EdgeThreshold"
+      ],
+      "historicalOrdinal": 47,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 48,
+      "identity": "cv.ORB.setFirstLevel(int firstLevel)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_set_first_level"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 FirstLevel"
+      ],
+      "historicalOrdinal": 48,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.ORB.getFirstLevel()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_get_first_level"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 FirstLevel"
+      ],
+      "historicalOrdinal": 49,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 50,
+      "identity": "cv.ORB.setWTA_K(int wta_k)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_set_wta_k"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 WtaK"
+      ],
+      "historicalOrdinal": 50,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 51,
+      "identity": "cv.ORB.getWTA_K()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_get_wta_k"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 WtaK"
+      ],
+      "historicalOrdinal": 51,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 52,
+      "identity": "cv.ORB.setScoreType(ORB_ScoreType scoreType)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_set_score_type"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Features2D.OrbScoreType ScoreType"
+      ],
+      "historicalOrdinal": 52,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 53,
+      "identity": "cv.ORB.getScoreType()-\u003EORB::ScoreType",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_get_score_type"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Features2D.OrbScoreType ScoreType"
+      ],
+      "historicalOrdinal": 53,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 54,
+      "identity": "cv.ORB.setPatchSize(int patchSize)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_set_patch_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 PatchSize"
+      ],
+      "historicalOrdinal": 54,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 55,
+      "identity": "cv.ORB.getPatchSize()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_get_patch_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 PatchSize"
+      ],
+      "historicalOrdinal": 55,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 56,
+      "identity": "cv.ORB.setFastThreshold(int fastThreshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_set_fast_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 FastThreshold"
+      ],
+      "historicalOrdinal": 56,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 57,
+      "identity": "cv.ORB.getFastThreshold()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_get_fast_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 FastThreshold"
+      ],
+      "historicalOrdinal": 57,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 58,
+      "identity": "cv.ORB.getDefaultName()-\u003EString",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_default_name_fill",
+        "jyppx_ocv_features2d_orb_default_name_length"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ORB|property|instance;get:public|System.String DefaultName"
+      ],
+      "historicalOrdinal": 58,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 59,
+      "identity": "class cv.MSER",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 59,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 60,
+      "identity": "cv.MSER.create(int delta=5;int min_area=60;int max_area=14400;double max_variation=0.25;double min_diversity=.2;int max_evolution=200;double area_threshold=1.01;double min_margin=0.003;int edge_blur_size=5)-\u003EPtr\u003CMSER\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.MSER|method|public;static|JYPPX.OpenCvSharp.Features2D.MSER Create(System.Int32 delta=5,System.Int32 minArea=60,System.Int32 maxArea=14400,System.Double maxVariation=0.25,System.Double minDiversity=0.2,System.Int32 maxEvolution=200,System.Double areaThreshold=1.01,System.Double minMargin=0.003,System.Int32 edgeBlurSize=5)"
+      ],
+      "historicalOrdinal": 60,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 61,
+      "identity": "cv.MSER.detectRegions(Mat image;vector_vector_Point msers[/O,/Ref];vector_Rect bboxes[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_detect_regions_count",
+        "jyppx_ocv_features2d_mser_detect_regions_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.MSER|method|public;instance|JYPPX.OpenCvSharp.Features2D.MserRegion[] DetectRegions(JYPPX.OpenCvSharp.Core.Mat image)"
+      ],
+      "historicalOrdinal": 61,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 62,
+      "identity": "cv.MSER.setDelta(int delta)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_set_delta"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Int32 Delta"
+      ],
+      "historicalOrdinal": 62,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 63,
+      "identity": "cv.MSER.getDelta()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_get_delta"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Int32 Delta"
+      ],
+      "historicalOrdinal": 63,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 64,
+      "identity": "cv.MSER.setMinArea(int minArea)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_set_min_area"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Int32 MinArea"
+      ],
+      "historicalOrdinal": 64,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 65,
+      "identity": "cv.MSER.getMinArea()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_get_min_area"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Int32 MinArea"
+      ],
+      "historicalOrdinal": 65,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 66,
+      "identity": "cv.MSER.setMaxArea(int maxArea)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_set_max_area"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Int32 MaxArea"
+      ],
+      "historicalOrdinal": 66,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 67,
+      "identity": "cv.MSER.getMaxArea()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_get_max_area"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Int32 MaxArea"
+      ],
+      "historicalOrdinal": 67,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 68,
+      "identity": "cv.MSER.setMaxVariation(double maxVariation)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_set_max_variation"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Double MaxVariation"
+      ],
+      "historicalOrdinal": 68,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 69,
+      "identity": "cv.MSER.getMaxVariation()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_get_max_variation"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Double MaxVariation"
+      ],
+      "historicalOrdinal": 69,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 70,
+      "identity": "cv.MSER.setMinDiversity(double minDiversity)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_set_min_diversity"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Double MinDiversity"
+      ],
+      "historicalOrdinal": 70,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 71,
+      "identity": "cv.MSER.getMinDiversity()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_get_min_diversity"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Double MinDiversity"
+      ],
+      "historicalOrdinal": 71,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 72,
+      "identity": "cv.MSER.setMaxEvolution(int maxEvolution)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_set_max_evolution"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Int32 MaxEvolution"
+      ],
+      "historicalOrdinal": 72,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 73,
+      "identity": "cv.MSER.getMaxEvolution()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_get_max_evolution"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Int32 MaxEvolution"
+      ],
+      "historicalOrdinal": 73,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 74,
+      "identity": "cv.MSER.setAreaThreshold(double areaThreshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_set_area_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Double AreaThreshold"
+      ],
+      "historicalOrdinal": 74,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 75,
+      "identity": "cv.MSER.getAreaThreshold()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_get_area_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Double AreaThreshold"
+      ],
+      "historicalOrdinal": 75,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 76,
+      "identity": "cv.MSER.setMinMargin(double min_margin)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_set_min_margin"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Double MinMargin"
+      ],
+      "historicalOrdinal": 76,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 77,
+      "identity": "cv.MSER.getMinMargin()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_get_min_margin"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Double MinMargin"
+      ],
+      "historicalOrdinal": 77,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 78,
+      "identity": "cv.MSER.setEdgeBlurSize(int edge_blur_size)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_set_edge_blur_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Int32 EdgeBlurSize"
+      ],
+      "historicalOrdinal": 78,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 79,
+      "identity": "cv.MSER.getEdgeBlurSize()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_get_edge_blur_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Int32 EdgeBlurSize"
+      ],
+      "historicalOrdinal": 79,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 80,
+      "identity": "cv.MSER.setPass2Only(bool f)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_set_pass2_only"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Boolean Pass2Only"
+      ],
+      "historicalOrdinal": 80,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 81,
+      "identity": "cv.MSER.getPass2Only()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_get_pass2_only"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Boolean Pass2Only"
+      ],
+      "historicalOrdinal": 81,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 82,
+      "identity": "cv.MSER.getDefaultName()-\u003EString",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_default_name_fill",
+        "jyppx_ocv_features2d_mser_default_name_length"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.MSER|property|instance;get:public|System.String DefaultName"
+      ],
+      "historicalOrdinal": 82,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 83,
+      "identity": "class cv.FastFeatureDetector",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 83,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 84,
+      "identity": "enum cv.FastFeatureDetector.DetectorType[const cv.FastFeatureDetector.TYPE_5_8=0;const cv.FastFeatureDetector.TYPE_7_12=1;const cv.FastFeatureDetector.TYPE_9_16=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 84,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 85,
+      "identity": "enum cv.FastFeatureDetector.\u003Cunnamed\u003E[const cv.FastFeatureDetector.THRESHOLD=10000;const cv.FastFeatureDetector.NONMAX_SUPPRESSION=10001;const cv.FastFeatureDetector.FAST_N=10002]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 85,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 86,
+      "identity": "cv.FastFeatureDetector.create(int threshold=10;bool nonmaxSuppression=true;FastFeatureDetector_DetectorType type=FastFeatureDetector::TYPE_9_16)-\u003EPtr\u003CFastFeatureDetector\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_fast_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.FastFeatureDetector|method|public;static|JYPPX.OpenCvSharp.Features2D.FastFeatureDetector Create(System.Int32 threshold=10,System.Boolean nonmaxSuppression=true,JYPPX.OpenCvSharp.Features2D.FastFeatureDetectorType type=Type9_16)"
+      ],
+      "historicalOrdinal": 86,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 87,
+      "identity": "cv.FastFeatureDetector.setThreshold(int threshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_fast_set_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.FastFeatureDetector|property|instance;get:public;set:public|System.Int32 Threshold"
+      ],
+      "historicalOrdinal": 87,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 88,
+      "identity": "cv.FastFeatureDetector.getThreshold()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_fast_get_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.FastFeatureDetector|property|instance;get:public;set:public|System.Int32 Threshold"
+      ],
+      "historicalOrdinal": 88,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 89,
+      "identity": "cv.FastFeatureDetector.setNonmaxSuppression(bool f)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_fast_set_nonmax_suppression"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.FastFeatureDetector|property|instance;get:public;set:public|System.Boolean NonmaxSuppression"
+      ],
+      "historicalOrdinal": 89,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 90,
+      "identity": "cv.FastFeatureDetector.getNonmaxSuppression()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_fast_get_nonmax_suppression"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.FastFeatureDetector|property|instance;get:public;set:public|System.Boolean NonmaxSuppression"
+      ],
+      "historicalOrdinal": 90,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 91,
+      "identity": "cv.FastFeatureDetector.setType(FastFeatureDetector_DetectorType type)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_fast_set_type"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.FastFeatureDetector|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Features2D.FastFeatureDetectorType Type"
+      ],
+      "historicalOrdinal": 91,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 92,
+      "identity": "cv.FastFeatureDetector.getType()-\u003EFastFeatureDetector::DetectorType",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_fast_get_type"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.FastFeatureDetector|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Features2D.FastFeatureDetectorType Type"
+      ],
+      "historicalOrdinal": 92,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 93,
+      "identity": "cv.FastFeatureDetector.getDefaultName()-\u003EString",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_fast_default_name_fill",
+        "jyppx_ocv_features2d_fast_default_name_length"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.FastFeatureDetector|property|instance;get:public|System.String DefaultName"
+      ],
+      "historicalOrdinal": 93,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 94,
+      "identity": "class cv.GFTTDetector",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 94,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 95,
+      "identity": "cv.GFTTDetector.create(int maxCorners=1000;double qualityLevel=0.01;double minDistance=1;int blockSize=3;bool useHarrisDetector=false;double k=0.04)-\u003EPtr\u003CGFTTDetector\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.GFTTDetector|method|public;static|JYPPX.OpenCvSharp.Features2D.GFTTDetector Create(System.Int32 maxCorners=1000,System.Double qualityLevel=0.01,System.Double minDistance=1,System.Int32 blockSize=3,System.Int32 gradientSize=3,System.Boolean useHarrisDetector=false,System.Double k=0.04)"
+      ],
+      "historicalOrdinal": 95,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 96,
+      "identity": "cv.GFTTDetector.create(int maxCorners;double qualityLevel;double minDistance;int blockSize;int gradientSize;bool useHarrisDetector=false;double k=0.04)-\u003EPtr\u003CGFTTDetector\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.GFTTDetector|method|public;static|JYPPX.OpenCvSharp.Features2D.GFTTDetector Create(System.Int32 maxCorners=1000,System.Double qualityLevel=0.01,System.Double minDistance=1,System.Int32 blockSize=3,System.Int32 gradientSize=3,System.Boolean useHarrisDetector=false,System.Double k=0.04)"
+      ],
+      "historicalOrdinal": 96,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 97,
+      "identity": "cv.GFTTDetector.setMaxFeatures(int maxFeatures)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_set_max_features"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Int32 MaxFeatures"
+      ],
+      "historicalOrdinal": 97,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 98,
+      "identity": "cv.GFTTDetector.getMaxFeatures()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_get_max_features"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Int32 MaxFeatures"
+      ],
+      "historicalOrdinal": 98,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 99,
+      "identity": "cv.GFTTDetector.setQualityLevel(double qlevel)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_set_quality_level"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Double QualityLevel"
+      ],
+      "historicalOrdinal": 99,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 100,
+      "identity": "cv.GFTTDetector.getQualityLevel()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_get_quality_level"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Double QualityLevel"
+      ],
+      "historicalOrdinal": 100,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 101,
+      "identity": "cv.GFTTDetector.setMinDistance(double minDistance)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_set_min_distance"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Double MinDistance"
+      ],
+      "historicalOrdinal": 101,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 102,
+      "identity": "cv.GFTTDetector.getMinDistance()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_get_min_distance"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Double MinDistance"
+      ],
+      "historicalOrdinal": 102,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 103,
+      "identity": "cv.GFTTDetector.setBlockSize(int blockSize)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_set_block_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Int32 BlockSize"
+      ],
+      "historicalOrdinal": 103,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 104,
+      "identity": "cv.GFTTDetector.getBlockSize()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_get_block_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Int32 BlockSize"
+      ],
+      "historicalOrdinal": 104,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 105,
+      "identity": "cv.GFTTDetector.setGradientSize(int gradientSize_)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_set_gradient_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Int32 GradientSize"
+      ],
+      "historicalOrdinal": 105,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 106,
+      "identity": "cv.GFTTDetector.getGradientSize()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_get_gradient_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Int32 GradientSize"
+      ],
+      "historicalOrdinal": 106,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 107,
+      "identity": "cv.GFTTDetector.setHarrisDetector(bool val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_set_harris_detector"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Boolean HarrisDetector"
+      ],
+      "historicalOrdinal": 107,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 108,
+      "identity": "cv.GFTTDetector.getHarrisDetector()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_get_harris_detector"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Boolean HarrisDetector"
+      ],
+      "historicalOrdinal": 108,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 109,
+      "identity": "cv.GFTTDetector.setK(double k)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_set_k"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Double K"
+      ],
+      "historicalOrdinal": 109,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 110,
+      "identity": "cv.GFTTDetector.getK()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_get_k"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Double K"
+      ],
+      "historicalOrdinal": 110,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 111,
+      "identity": "cv.GFTTDetector.getDefaultName()-\u003EString",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_default_name_fill",
+        "jyppx_ocv_features2d_gftt_default_name_length"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public|System.String DefaultName"
+      ],
+      "historicalOrdinal": 111,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 112,
+      "identity": "class cv.DISK",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 112,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 113,
+      "identity": "cv.DISK.create(String modelPath[/C,/Ref];int maxKeypoints=-1;float scoreThreshold=0.0f;Size imageSize=Size()[/C,/Ref];int backendId=0;int targetId=0)-\u003EPtr\u003CDISK\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 113,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 114,
+      "identity": "cv.DISK.create(vector_uchar bufferModel[/C,/Ref];int maxKeypoints=-1;float scoreThreshold=0.0f;Size imageSize=Size()[/C,/Ref];int backendId=0;int targetId=0)-\u003EPtr\u003CDISK\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 114,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 115,
+      "identity": "cv.DISK.setMaxKeypoints(int maxKeypoints)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 115,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 116,
+      "identity": "cv.DISK.getMaxKeypoints()-\u003Eint",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 116,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 117,
+      "identity": "cv.DISK.setScoreThreshold(float threshold)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 117,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 118,
+      "identity": "cv.DISK.getScoreThreshold()-\u003Efloat",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 118,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 119,
+      "identity": "cv.DISK.setImageSize(Size size[/C,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 119,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 120,
+      "identity": "cv.DISK.getImageSize()-\u003ESize",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 120,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 121,
+      "identity": "cv.DISK.getDefaultName()-\u003EString",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 121,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "identity": "class cv.XFeat",
+      "classification": "non-callable-metadata",
+      "reason": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": null,
+      "refreshReview": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "ordinal": 122
+    },
+    {
+      "identity": "cv.XFeat.create(String modelPath[/C,/Ref];int maxKeypoints=-1;float scoreThreshold=0.5f;Size inputSize=Size(640, 640)[/C,/Ref];int backendId=0;int targetId=0)-\u003EPtr\u003CXFeat\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": null,
+      "refreshReview": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "ordinal": 123
+    },
+    {
+      "identity": "cv.XFeat.create(vector_uchar bufferModel[/C,/Ref];int maxKeypoints=-1;float scoreThreshold=0.5f;Size inputSize=Size(640, 640)[/C,/Ref];int backendId=0;int targetId=0)-\u003EPtr\u003CXFeat\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": null,
+      "refreshReview": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "ordinal": 124
+    },
+    {
+      "identity": "cv.XFeat.setMaxKeypoints(int maxKeypoints)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": null,
+      "refreshReview": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "ordinal": 125
+    },
+    {
+      "identity": "cv.XFeat.getMaxKeypoints()-\u003Eint",
+      "classification": "intentionally-omitted",
+      "reason": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": null,
+      "refreshReview": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "ordinal": 126
+    },
+    {
+      "identity": "cv.XFeat.setScoreThreshold(float threshold)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": null,
+      "refreshReview": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "ordinal": 127
+    },
+    {
+      "identity": "cv.XFeat.getScoreThreshold()-\u003Efloat",
+      "classification": "intentionally-omitted",
+      "reason": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": null,
+      "refreshReview": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "ordinal": 128
+    },
+    {
+      "identity": "cv.XFeat.setInputSize(Size inputSize[/C,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": null,
+      "refreshReview": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "ordinal": 129
+    },
+    {
+      "identity": "cv.XFeat.getInputSize()-\u003ESize",
+      "classification": "intentionally-omitted",
+      "reason": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": null,
+      "refreshReview": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "ordinal": 130
+    },
+    {
+      "identity": "cv.XFeat.getDefaultName()-\u003EString",
+      "classification": "intentionally-omitted",
+      "reason": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": null,
+      "refreshReview": "XFeat requires a model-backed Feature2D handle, grayscale ONNX input/output contract, ownership, preprocessing and backend/runtime tests. Existing classical detector wrappers do not bind this type or its factories/properties; retain metadata or an explicit callable omission.",
+      "ordinal": 131
+    },
+    {
+      "ordinal": 132,
+      "identity": "class cv.SimpleBlobDetector",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 122,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 133,
+      "identity": "class cv.SimpleBlobDetector.Params",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 123,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 134,
+      "identity": "cv.SimpleBlobDetector.Params.Params()-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_simple_blob_create_default"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.SimpleBlobDetectorParams|constructor|public;instance|.ctor()"
+      ],
+      "historicalOrdinal": 124,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 135,
+      "identity": "cv.SimpleBlobDetector.create(SimpleBlobDetector_Params parameters=SimpleBlobDetector::Params()[/C,/Ref])-\u003EPtr\u003CSimpleBlobDetector\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_simple_blob_create",
+        "jyppx_ocv_features2d_simple_blob_create_default"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.SimpleBlobDetector|method|public;static|JYPPX.OpenCvSharp.Features2D.SimpleBlobDetector Create(JYPPX.OpenCvSharp.Features2D.SimpleBlobDetectorParams parameters)"
+      ],
+      "historicalOrdinal": 125,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 136,
+      "identity": "cv.SimpleBlobDetector.setParams(SimpleBlobDetector_Params params[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_simple_blob_set_params"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.SimpleBlobDetector|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Features2D.SimpleBlobDetectorParams Parameters"
+      ],
+      "historicalOrdinal": 126,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 137,
+      "identity": "cv.SimpleBlobDetector.getParams()-\u003ESimpleBlobDetector::Params",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_simple_blob_get_params"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.SimpleBlobDetector|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Features2D.SimpleBlobDetectorParams Parameters"
+      ],
+      "historicalOrdinal": 127,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 138,
+      "identity": "cv.SimpleBlobDetector.getDefaultName()-\u003EString",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_simple_blob_default_name_fill",
+        "jyppx_ocv_features2d_simple_blob_default_name_length"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.SimpleBlobDetector|property|instance;get:public|System.String DefaultName"
+      ],
+      "historicalOrdinal": 128,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 139,
+      "identity": "cv.SimpleBlobDetector.getBlobContours()-\u003Estd::vector\u003Cstd::vector\u003Ccv::Point\u003E \u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_simple_blob_get_blob_contours_count",
+        "jyppx_ocv_features2d_simple_blob_get_blob_contours_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.SimpleBlobDetector|method|public;instance|JYPPX.OpenCvSharp.Core.Point[][] GetBlobContours()"
+      ],
+      "historicalOrdinal": 129,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 140,
+      "identity": "class cv.ALIKED",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 130,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 141,
+      "identity": "class cv.ALIKED.Params",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 131,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 142,
+      "identity": "cv.ALIKED.Params.Params()-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 132,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 143,
+      "identity": "cv.ALIKED.create(String modelPath[/C,/Ref];ALIKED_Params params=ALIKED::Params()[/C,/Ref])-\u003EPtr\u003CALIKED\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 133,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 144,
+      "identity": "class cv.DescriptorMatcher",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 134,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 145,
+      "identity": "enum cv.DescriptorMatcher.MatcherType[const cv.DescriptorMatcher.FLANNBASED=1;const cv.DescriptorMatcher.BRUTEFORCE=2;const cv.DescriptorMatcher.BRUTEFORCE_L1=3;const cv.DescriptorMatcher.BRUTEFORCE_HAMMING=4;const cv.DescriptorMatcher.BRUTEFORCE_HAMMINGLUT=5;const cv.DescriptorMatcher.BRUTEFORCE_SL2=6]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 135,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 146,
+      "identity": "cv.DescriptorMatcher.add(vector_Mat descriptors)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_add"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.DescriptorMatcher|method|public;instance;abstract|System.Void Add(JYPPX.OpenCvSharp.Core.Mat[] descriptors)"
+      ],
+      "historicalOrdinal": 136,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 147,
+      "identity": "cv.DescriptorMatcher.getTrainDescriptors()-\u003Estd::vector\u003CMat\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_get_train_descriptor_clone",
+        "jyppx_ocv_features2d_descriptor_matcher_get_train_descriptors_count"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.DescriptorMatcher|method|public;instance;abstract|JYPPX.OpenCvSharp.Core.Mat[] GetTrainDescriptors()"
+      ],
+      "historicalOrdinal": 137,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 148,
+      "identity": "cv.DescriptorMatcher.clear()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_clear"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.DescriptorMatcher|method|public;instance;abstract|System.Void Clear()"
+      ],
+      "historicalOrdinal": 138,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 149,
+      "identity": "cv.DescriptorMatcher.empty()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_empty"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.DescriptorMatcher|property|instance;get:public|System.Boolean Empty"
+      ],
+      "historicalOrdinal": 139,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 150,
+      "identity": "cv.DescriptorMatcher.isMaskSupported()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_is_mask_supported"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.DescriptorMatcher|property|instance;get:public|System.Boolean IsMaskSupported"
+      ],
+      "historicalOrdinal": 140,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "identity": "cv.DescriptorMatcher.setImagePairInfo(vector_KeyPoint queryKpts[/C,/Ref];vector_KeyPoint trainKpts[/C,/Ref];Size queryImageSize=Size();Size trainImageSize=Size())-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "New virtual keypoint/image-pair context setter has no managed or C ABI binding. Existing descriptor matching does not transport the paired KeyPoint collections and image-size context required by learned matchers.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": null,
+      "refreshReview": "New virtual keypoint/image-pair context setter has no managed or C ABI binding. Existing descriptor matching does not transport the paired KeyPoint collections and image-size context required by learned matchers.",
+      "ordinal": 151
+    },
+    {
+      "ordinal": 152,
+      "identity": "cv.DescriptorMatcher.train()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_train"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.DescriptorMatcher|method|public;instance;abstract|System.Void Train()"
+      ],
+      "historicalOrdinal": 141,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 153,
+      "identity": "cv.DescriptorMatcher.match(Mat queryDescriptors;Mat trainDescriptors;vector_DMatch matches[/O,/Ref];Mat mask=Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_match_count",
+        "jyppx_ocv_features2d_descriptor_matcher_match_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.DescriptorMatcher|method|public;instance;abstract|JYPPX.OpenCvSharp.Features2D.DMatch[] Match(JYPPX.OpenCvSharp.Core.Mat queryDescriptors)"
+      ],
+      "historicalOrdinal": 142,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 154,
+      "identity": "cv.DescriptorMatcher.knnMatch(Mat queryDescriptors;Mat trainDescriptors;vector_vector_DMatch matches[/O,/Ref];int k;Mat mask=Mat();bool compactResult=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_knn_match_count",
+        "jyppx_ocv_features2d_descriptor_matcher_knn_match_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.DescriptorMatcher|method|public;instance;abstract|JYPPX.OpenCvSharp.Features2D.DMatch[][] KnnMatch(JYPPX.OpenCvSharp.Core.Mat queryDescriptors,JYPPX.OpenCvSharp.Core.Mat trainDescriptors,System.Int32 k,JYPPX.OpenCvSharp.Core.Mat? mask=null,System.Boolean compactResult=false)"
+      ],
+      "historicalOrdinal": 143,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 155,
+      "identity": "cv.DescriptorMatcher.radiusMatch(Mat queryDescriptors;Mat trainDescriptors;vector_vector_DMatch matches[/O,/Ref];float maxDistance;Mat mask=Mat();bool compactResult=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_radius_match_count",
+        "jyppx_ocv_features2d_descriptor_matcher_radius_match_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.DescriptorMatcher|method|public;instance;abstract|JYPPX.OpenCvSharp.Features2D.DMatch[][] RadiusMatch(JYPPX.OpenCvSharp.Core.Mat queryDescriptors,JYPPX.OpenCvSharp.Core.Mat trainDescriptors,System.Single maxDistance,JYPPX.OpenCvSharp.Core.Mat? mask=null,System.Boolean compactResult=false)"
+      ],
+      "historicalOrdinal": 144,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 156,
+      "identity": "cv.DescriptorMatcher.match(Mat queryDescriptors;vector_DMatch matches[/O,/Ref];vector_Mat masks=vector_Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_match_train_count",
+        "jyppx_ocv_features2d_descriptor_matcher_match_train_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.DescriptorMatcher|method|public;instance;abstract|JYPPX.OpenCvSharp.Features2D.DMatch[] Match(JYPPX.OpenCvSharp.Core.Mat queryDescriptors)"
+      ],
+      "historicalOrdinal": 145,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 157,
+      "identity": "cv.DescriptorMatcher.knnMatch(Mat queryDescriptors;vector_vector_DMatch matches[/O,/Ref];int k;vector_Mat masks=vector_Mat();bool compactResult=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_knn_match_train_count",
+        "jyppx_ocv_features2d_descriptor_matcher_knn_match_train_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.DescriptorMatcher|method|public;instance;abstract|JYPPX.OpenCvSharp.Features2D.DMatch[][] KnnMatch(JYPPX.OpenCvSharp.Core.Mat queryDescriptors,JYPPX.OpenCvSharp.Core.Mat trainDescriptors,System.Int32 k,JYPPX.OpenCvSharp.Core.Mat? mask=null,System.Boolean compactResult=false)"
+      ],
+      "historicalOrdinal": 146,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 158,
+      "identity": "cv.DescriptorMatcher.radiusMatch(Mat queryDescriptors;vector_vector_DMatch matches[/O,/Ref];float maxDistance;vector_Mat masks=vector_Mat();bool compactResult=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_radius_match_train_count",
+        "jyppx_ocv_features2d_descriptor_matcher_radius_match_train_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.DescriptorMatcher|method|public;instance;abstract|JYPPX.OpenCvSharp.Features2D.DMatch[][] RadiusMatch(JYPPX.OpenCvSharp.Core.Mat queryDescriptors,JYPPX.OpenCvSharp.Core.Mat trainDescriptors,System.Single maxDistance,JYPPX.OpenCvSharp.Core.Mat? mask=null,System.Boolean compactResult=false)"
+      ],
+      "historicalOrdinal": 147,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 159,
+      "identity": "cv.DescriptorMatcher.write(String fileName[/C,/Ref,/PATH])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "Polymorphic Algorithm persistence is deferred until every concrete Feature2D or DescriptorMatcher handle can safely participate in one FileStorage and FileNode ownership contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 148,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 160,
+      "identity": "cv.DescriptorMatcher.read(String fileName[/C,/Ref,/PATH])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "Polymorphic Algorithm persistence is deferred until every concrete Feature2D or DescriptorMatcher handle can safely participate in one FileStorage and FileNode ownership contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 149,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 161,
+      "identity": "cv.DescriptorMatcher.read(FileNode arg1[/C,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "Polymorphic Algorithm persistence is deferred until every concrete Feature2D or DescriptorMatcher handle can safely participate in one FileStorage and FileNode ownership contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 150,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 162,
+      "identity": "cv.DescriptorMatcher.clone(bool emptyTrainData=false)-\u003EPtr\u003CDescriptorMatcher\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_clone"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.DescriptorMatcher|method|public;instance;abstract|JYPPX.OpenCvSharp.Features2D.DescriptorMatcher Clone(System.Boolean emptyTrainData=false)"
+      ],
+      "historicalOrdinal": 151,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 163,
+      "identity": "cv.DescriptorMatcher.create(String descriptorMatcherType[/C,/Ref])-\u003EPtr\u003CDescriptorMatcher\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_create_by_name"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.DescriptorMatcher|method|public;static|JYPPX.OpenCvSharp.Features2D.DescriptorMatcher Create(System.String matcherName)"
+      ],
+      "historicalOrdinal": 152,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 164,
+      "identity": "cv.DescriptorMatcher.create(DescriptorMatcher_MatcherType matcherType[/C,/Ref])-\u003EPtr\u003CDescriptorMatcher\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_create_by_type"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.DescriptorMatcher|method|public;static|JYPPX.OpenCvSharp.Features2D.DescriptorMatcher Create(JYPPX.OpenCvSharp.Features2D.DescriptorMatcherType matcherType)"
+      ],
+      "historicalOrdinal": 153,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 165,
+      "identity": "cv.DescriptorMatcher.write(FileStorage fs[/Ref];String name[/C,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "Polymorphic Algorithm persistence is deferred until every concrete Feature2D or DescriptorMatcher handle can safely participate in one FileStorage and FileNode ownership contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 154,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 166,
+      "identity": "class cv.BFMatcher",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 155,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 167,
+      "identity": "cv.BFMatcher.BFMatcher(int normType=NORM_L2;bool crossCheck=false)-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_bf_matcher_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.BFMatcher|method|public;static|JYPPX.OpenCvSharp.Features2D.BFMatcher Create(JYPPX.OpenCvSharp.Core.NormTypes normType=L2,System.Boolean crossCheck=false)"
+      ],
+      "historicalOrdinal": 156,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 168,
+      "identity": "cv.BFMatcher.create(int normType=NORM_L2;bool crossCheck=false)-\u003EPtr\u003CBFMatcher\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_bf_matcher_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.BFMatcher|method|public;static|JYPPX.OpenCvSharp.Features2D.BFMatcher Create(JYPPX.OpenCvSharp.Core.NormTypes normType=L2,System.Boolean crossCheck=false)"
+      ],
+      "historicalOrdinal": 157,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 169,
+      "identity": "class cv.FlannBasedMatcher",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "HAVE_OPENCV_FLANN=1; OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 158,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 170,
+      "identity": "cv.FlannBasedMatcher.FlannBasedMatcher(Ptr_flann_IndexParams indexParams=makePtr\u003Cflann::KDTreeIndexParams\u003E()[/C,/Ref];Ptr_flann_SearchParams searchParams=makePtr\u003Cflann::SearchParams\u003E()[/C,/Ref])-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "HAVE_OPENCV_FLANN=1; OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_flann_matcher_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.FlannBasedMatcher|method|public;static|JYPPX.OpenCvSharp.Features2D.FlannBasedMatcher Create()"
+      ],
+      "historicalOrdinal": 159,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 171,
+      "identity": "cv.FlannBasedMatcher.create()-\u003EPtr\u003CFlannBasedMatcher\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "HAVE_OPENCV_FLANN=1; OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_flann_matcher_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.FlannBasedMatcher|method|public;static|JYPPX.OpenCvSharp.Features2D.FlannBasedMatcher Create()"
+      ],
+      "historicalOrdinal": 160,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "identity": "enum cv.LightGlueType[const cv.LG_ALIKED=0;const cv.LG_DISK=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Record LightGlue model type and keypoint-normalization values as upstream metadata only. No corresponding managed enum, model-backed matcher or inference support is exposed.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": null,
+      "refreshReview": "Record LightGlue model type and keypoint-normalization values as upstream metadata only. No corresponding managed enum, model-backed matcher or inference support is exposed.",
+      "ordinal": 172
+    },
+    {
+      "identity": "enum cv.LightGlueNormalization[const cv.LG_NORM_MODEL=0;const cv.LG_NORM_MAX_SIDE=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Record LightGlue model type and keypoint-normalization values as upstream metadata only. No corresponding managed enum, model-backed matcher or inference support is exposed.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": null,
+      "refreshReview": "Record LightGlue model type and keypoint-normalization values as upstream metadata only. No corresponding managed enum, model-backed matcher or inference support is exposed.",
+      "ordinal": 173
+    },
+    {
+      "ordinal": 174,
+      "identity": "class cv.LightGlueMatcher",
+      "classification": "non-callable-metadata",
+      "reason": "Upstream now explicitly supports match and knnMatch(k=1), rejects radiusMatch and requires explicit pair context. The entire learned matcher remains unwrapped; ordinary DescriptorMatcher APIs do not establish LightGlue support.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 161,
+      "refreshReview": "Upstream now explicitly supports match and knnMatch(k=1), rejects radiusMatch and requires explicit pair context. The entire learned matcher remains unwrapped; ordinary DescriptorMatcher APIs do not establish LightGlue support."
+    },
+    {
+      "identity": "cv.LightGlueMatcher.create(String modelPath[/C,/Ref];float scoreThreshold=0.0f;int backend=0;int target=0;int type=LG_ALIKED)-\u003EPtr\u003CLightGlueMatcher\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "The 5.1 factory adds a LightGlueType selector (ALIKED or DISK). Both replaced factory signatures were already omitted. No managed LightGlue handle or C ABI/model provenance, normalization and inference contract exists; the new overload remains omitted.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": null,
+      "refreshReview": "The 5.1 factory adds a LightGlueType selector (ALIKED or DISK). Both replaced factory signatures were already omitted. No managed LightGlue handle or C ABI/model provenance, normalization and inference contract exists; the new overload remains omitted.",
+      "ordinal": 175
+    },
+    {
+      "identity": "cv.LightGlueMatcher.create(vector_uchar modelData[/C,/Ref];float scoreThreshold=0.0f;int backend=0;int target=0;int type=LG_ALIKED)-\u003EPtr\u003CLightGlueMatcher\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "The 5.1 factory adds a LightGlueType selector (ALIKED or DISK). Both replaced factory signatures were already omitted. No managed LightGlue handle or C ABI/model provenance, normalization and inference contract exists; the new overload remains omitted.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": null,
+      "refreshReview": "The 5.1 factory adds a LightGlueType selector (ALIKED or DISK). Both replaced factory signatures were already omitted. No managed LightGlue handle or C ABI/model provenance, normalization and inference contract exists; the new overload remains omitted.",
+      "ordinal": 176
+    },
+    {
+      "ordinal": 177,
+      "identity": "cv.LightGlueMatcher.setPairInfo(Mat queryKpts;Mat trainKpts;Size queryImageSize=Size();Size trainImageSize=Size())-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 164,
+      "refreshReview": "The retained context setter documents model-dependent normalization, explicit setImagePairInfo as an alternative and empty Size for already-normalized keypoints. It remains intentionally omitted with the LightGlue object/model contract; no implicit ALIKED context or radius matching is claimed."
+    },
+    {
+      "ordinal": 178,
+      "identity": "cv.LightGlueMatcher.clearPairInfo()-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 165,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "identity": "cv.LightGlueMatcher.setKeypointNormalization(int normalization)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "LightGlue normalization/image-pair context is unwrapped. There is no C ABI or managed LightGlue object/context transport; matching requires compatible descriptors, keypoints, image sizes and model-specific normalization. Standard BF/FLANN wrappers do not implement this operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": null,
+      "refreshReview": "LightGlue normalization/image-pair context is unwrapped. There is no C ABI or managed LightGlue object/context transport; matching requires compatible descriptors, keypoints, image sizes and model-specific normalization. Standard BF/FLANN wrappers do not implement this operation.",
+      "ordinal": 179
+    },
+    {
+      "identity": "cv.LightGlueMatcher.getKeypointNormalization()-\u003Eint",
+      "classification": "intentionally-omitted",
+      "reason": "LightGlue normalization/image-pair context is unwrapped. There is no C ABI or managed LightGlue object/context transport; matching requires compatible descriptors, keypoints, image sizes and model-specific normalization. Standard BF/FLANN wrappers do not implement this operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": null,
+      "refreshReview": "LightGlue normalization/image-pair context is unwrapped. There is no C ABI or managed LightGlue object/context transport; matching requires compatible descriptors, keypoints, image sizes and model-specific normalization. Standard BF/FLANN wrappers do not implement this operation.",
+      "ordinal": 180
+    },
+    {
+      "identity": "cv.LightGlueMatcher.setImagePairInfo(vector_KeyPoint queryKpts[/C,/Ref];vector_KeyPoint trainKpts[/C,/Ref];Size queryImageSize=Size();Size trainImageSize=Size())-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "LightGlue normalization/image-pair context is unwrapped. There is no C ABI or managed LightGlue object/context transport; matching requires compatible descriptors, keypoints, image sizes and model-specific normalization. Standard BF/FLANN wrappers do not implement this operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": null,
+      "refreshReview": "LightGlue normalization/image-pair context is unwrapped. There is no C ABI or managed LightGlue object/context transport; matching requires compatible descriptors, keypoints, image sizes and model-specific normalization. Standard BF/FLANN wrappers do not implement this operation.",
+      "ordinal": 181
+    },
+    {
+      "ordinal": 182,
+      "identity": "enum struct cv.DrawMatchesFlags[const cv.DrawMatchesFlags.DEFAULT=0;const cv.DrawMatchesFlags.DRAW_OVER_OUTIMG=1;const cv.DrawMatchesFlags.NOT_DRAW_SINGLE_POINTS=2;const cv.DrawMatchesFlags.DRAW_RICH_KEYPOINTS=4]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 166,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 183,
+      "identity": "cv.drawKeypoints(Mat image;vector_KeyPoint keypoints[/C,/Ref];Mat outImage[/IO];Scalar color=Scalar::all(-1)[/C,/Ref];DrawMatchesFlags flags=DrawMatchesFlags::DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_draw_keypoints"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.Cv2|method|public;static|System.Void DrawKeypoints(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Features2D.KeyPoint[] keypoints,JYPPX.OpenCvSharp.Core.Mat outImage,JYPPX.OpenCvSharp.Core.Scalar? color=null,JYPPX.OpenCvSharp.Features2D.DrawMatchesFlags flags=Default)"
+      ],
+      "historicalOrdinal": 167,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 184,
+      "identity": "cv.drawMatches(Mat img1;vector_KeyPoint keypoints1[/C,/Ref];Mat img2;vector_KeyPoint keypoints2[/C,/Ref];vector_DMatch matches1to2[/C,/Ref];Mat outImg[/IO];Scalar matchColor=Scalar::all(-1)[/C,/Ref];Scalar singlePointColor=Scalar::all(-1)[/C,/Ref];vector_char matchesMask=std::vector\u003Cchar\u003E()[/C,/Ref];DrawMatchesFlags flags=DrawMatchesFlags::DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_draw_matches"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.Cv2|method|public;static|System.Void DrawMatches(JYPPX.OpenCvSharp.Core.Mat img1,JYPPX.OpenCvSharp.Features2D.KeyPoint[] keypoints1,JYPPX.OpenCvSharp.Core.Mat img2,JYPPX.OpenCvSharp.Features2D.KeyPoint[] keypoints2,JYPPX.OpenCvSharp.Features2D.DMatch[] matches,JYPPX.OpenCvSharp.Core.Mat outImage,JYPPX.OpenCvSharp.Core.Scalar? matchColor=null,JYPPX.OpenCvSharp.Core.Scalar? singlePointColor=null,JYPPX.OpenCvSharp.Features2D.DrawMatchesFlags flags=Default)"
+      ],
+      "historicalOrdinal": 168,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 185,
+      "identity": "cv.drawMatches(Mat img1;vector_KeyPoint keypoints1[/C,/Ref];Mat img2;vector_KeyPoint keypoints2[/C,/Ref];vector_DMatch matches1to2[/C,/Ref];Mat outImg[/IO];int matchesThickness[/C];Scalar matchColor=Scalar::all(-1)[/C,/Ref];Scalar singlePointColor=Scalar::all(-1)[/C,/Ref];vector_char matchesMask=std::vector\u003Cchar\u003E()[/C,/Ref];DrawMatchesFlags flags=DrawMatchesFlags::DEFAULT)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The matchesThickness drawing overload is a convenience variant not present in the current managed drawing contract; the standard flat and nested match overloads remain implemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 169,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 186,
+      "identity": "cv.drawMatches(Mat img1;vector_KeyPoint keypoints1[/C,/Ref];Mat img2;vector_KeyPoint keypoints2[/C,/Ref];vector_vector_DMatch matches1to2[/C,/Ref];Mat outImg[/IO];Scalar matchColor=Scalar::all(-1)[/C,/Ref];Scalar singlePointColor=Scalar::all(-1)[/C,/Ref];vector_vector_char matchesMask=std::vector\u003Cstd::vector\u003Cchar\u003E \u003E()[/C,/Ref];DrawMatchesFlags flags=DrawMatchesFlags::DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_draw_matches_knn"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.Cv2|method|public;static|System.Void DrawMatchesKnn(JYPPX.OpenCvSharp.Core.Mat img1,JYPPX.OpenCvSharp.Features2D.KeyPoint[] keypoints1,JYPPX.OpenCvSharp.Core.Mat img2,JYPPX.OpenCvSharp.Features2D.KeyPoint[] keypoints2,JYPPX.OpenCvSharp.Features2D.DMatch[][] matches,JYPPX.OpenCvSharp.Core.Mat outImage,JYPPX.OpenCvSharp.Core.Scalar? matchColor=null,JYPPX.OpenCvSharp.Core.Scalar? singlePointColor=null,JYPPX.OpenCvSharp.Features2D.DrawMatchesFlags flags=Default)"
+      ],
+      "historicalOrdinal": 170,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 187,
+      "identity": "class cv.ANNIndex",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [
+        "TYPE|class|public;sealed|JYPPX.OpenCvSharp.Features2D.ANNIndex|base=|interfaces=System.IDisposable"
+      ],
+      "historicalOrdinal": 171,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 188,
+      "identity": "enum cv.ANNIndex.Distance[const cv.ANNIndex.DIST_EUCLIDEAN=0;const cv.ANNIndex.DIST_MANHATTAN=1;const cv.ANNIndex.DIST_ANGULAR=2;const cv.ANNIndex.DIST_HAMMING=3;const cv.ANNIndex.DIST_DOTPRODUCT=4]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [
+        "TYPE|enum|public|JYPPX.OpenCvSharp.Features2D.ANNIndexDistance|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable"
+      ],
+      "historicalOrdinal": 172,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 189,
+      "identity": "cv.ANNIndex.addItems(Mat features)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANNIndex family has a version-neutral opaque C ABI, SafeHandle ownership, caller-owned Mat outputs, strict validation, UTF-8 persistence, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_ann_index_add_items"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ANNIndex|method|public;instance|System.Void AddItems(JYPPX.OpenCvSharp.Core.Mat features)"
+      ],
+      "historicalOrdinal": 173,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 190,
+      "identity": "cv.ANNIndex.build(int trees=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANNIndex family has a version-neutral opaque C ABI, SafeHandle ownership, caller-owned Mat outputs, strict validation, UTF-8 persistence, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_ann_index_build"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ANNIndex|method|public;instance|System.Void Build(System.Int32 trees=-1)"
+      ],
+      "historicalOrdinal": 174,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 191,
+      "identity": "cv.ANNIndex.knnSearch(Mat query;Mat indices[/O];Mat dists[/O];int knn;int search_k=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANNIndex family has a version-neutral opaque C ABI, SafeHandle ownership, caller-owned Mat outputs, strict validation, UTF-8 persistence, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_ann_index_knn_search"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ANNIndex|method|public;instance|System.Void KnnSearch(JYPPX.OpenCvSharp.Core.Mat query,JYPPX.OpenCvSharp.Core.Mat indices,JYPPX.OpenCvSharp.Core.Mat distances,System.Int32 knn,System.Int32 searchK=-1)"
+      ],
+      "historicalOrdinal": 175,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 192,
+      "identity": "cv.ANNIndex.save(String filename[/C,/Ref,/PATH];bool prefault=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANNIndex family has a version-neutral opaque C ABI, SafeHandle ownership, caller-owned Mat outputs, strict validation, UTF-8 persistence, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_ann_index_save"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ANNIndex|method|public;instance|System.Void Save(System.String filename,System.Boolean prefault=false)"
+      ],
+      "historicalOrdinal": 176,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 193,
+      "identity": "cv.ANNIndex.load(String filename[/C,/Ref,/PATH];bool prefault=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANNIndex family has a version-neutral opaque C ABI, SafeHandle ownership, caller-owned Mat outputs, strict validation, UTF-8 persistence, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_ann_index_load"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ANNIndex|method|public;instance|System.Void Load(System.String filename,System.Boolean prefault=false)"
+      ],
+      "historicalOrdinal": 177,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 194,
+      "identity": "cv.ANNIndex.getTreeNumber()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected ANNIndex family has a version-neutral opaque C ABI, SafeHandle ownership, caller-owned Mat outputs, strict validation, UTF-8 persistence, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_ann_index_get_tree_number"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ANNIndex|property|instance;get:public|System.Int32 TreeNumber"
+      ],
+      "historicalOrdinal": 178,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 195,
+      "identity": "cv.ANNIndex.getItemNumber()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected ANNIndex family has a version-neutral opaque C ABI, SafeHandle ownership, caller-owned Mat outputs, strict validation, UTF-8 persistence, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_ann_index_get_item_number"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ANNIndex|property|instance;get:public|System.Int32 ItemNumber"
+      ],
+      "historicalOrdinal": 179,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 196,
+      "identity": "cv.ANNIndex.setOnDiskBuild(String filename[/C,/Ref,/PATH])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected ANNIndex family has a version-neutral opaque C ABI, SafeHandle ownership, caller-owned Mat outputs, strict validation, UTF-8 persistence, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_ann_index_set_on_disk_build"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ANNIndex|method|public;instance|System.Boolean SetOnDiskBuild(System.String filename)"
+      ],
+      "historicalOrdinal": 180,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 197,
+      "identity": "cv.ANNIndex.setSeed(int seed)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANNIndex family has a version-neutral opaque C ABI, SafeHandle ownership, caller-owned Mat outputs, strict validation, UTF-8 persistence, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_ann_index_set_seed"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ANNIndex|method|public;instance|System.Void SetSeed(System.Int32 seed)"
+      ],
+      "historicalOrdinal": 181,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 198,
+      "identity": "cv.ANNIndex.create(int dim;ANNIndex_Distance distType=ANNIndex::DIST_EUCLIDEAN)-\u003EPtr\u003CANNIndex\u003E",
+      "classification": "implemented",
+      "reason": "The selected ANNIndex family has a version-neutral opaque C ABI, SafeHandle ownership, caller-owned Mat outputs, strict validation, UTF-8 persistence, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_ann_index_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Features2D.ANNIndex|method|public;static|JYPPX.OpenCvSharp.Features2D.ANNIndex Create(System.Int32 dimension,JYPPX.OpenCvSharp.Features2D.ANNIndexDistance distance=Euclidean)"
+      ],
+      "historicalOrdinal": 182,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    }
+  ]
+}

@@ -9,9 +9,11 @@ internal static class Program
     private const string Version = "5.1.0";
     private const string Commit = "e4f78fbcf1a773fbed69e14500e8b734963eb585";
     private const string Prefix = "opencv-source/opencv-5.1.0/";
+    private const string ContribPrefix = "opencv-source/opencv_contrib-5.1.0/";
+    private const string ContribCommit = "b67a855188a3d683813731010f6d39ac614733a4";
     private const string CatalogPath = "compatibility/opencv-5.1.0/upstream-map-refresh-catalog.json";
     // Updating a reviewed slice requires reviewing its source and decisions together.
-    private const string ReviewedCatalogSha256 = "3ecf0ac542c0bcaf96a1cc4c3d57c59002ed3e1f591d5b30e8bed3937fa5d5e4";
+    private const string ReviewedCatalogSha256 = "2597e3ed13c8aba5ee0a88be9d9b2ebb8d3c84ad6207d22875f343ed51074e9d";
     private static readonly string[] Classes = { "implemented", "intentionally-omitted", "missing", "non-callable-metadata", "unsupported", "upstream-conditional" };
     private static readonly JsonSerializerOptions Json = new() { WriteIndented = true };
     private sealed record Options(string Repository, string Workspace, string Output, bool Check);
@@ -28,6 +30,7 @@ internal static class Program
         Require(FileSha(Path.Combine(options.Repository, CatalogPath)) == ReviewedCatalogSha256, "Reviewed 5.1 catalog hash drifted.");
         Require(Int(catalog, "schemaVersion") == 1 && Str(catalog, "upstreamOpenCvVersion") == Version && Str(catalog, "upstreamCommit") == Commit,
             "Catalog upstream identity drifted.");
+        Require(Str(catalog, "upstreamContribCommit") == ContribCommit, "Catalog contrib identity drifted.");
         Require(!Bool(catalog, "repositoryWideUpstreamParityClaimed") && !Bool(catalog, "completeCppParityClaimed"), "Catalog overstates coverage.");
         foreach (string key in new[] { "parser", "versionHeader" }) Source(options, Obj(catalog, key));
         Require(Str(Obj(catalog, "parser"), "sha256") == "867e3de5ad45fd3996e8c9097ffc47f13c8651e20dda2318d70e273262c8dcee" &&
@@ -68,6 +71,8 @@ internal static class Program
             ValidateRaw(raw, module, catalog, trusted);
             Source(options, Obj(module, "primaryHeader"));
             foreach (JsonNode? header in Arr(module, "sourceHeaders")) Source(options, header!.AsObject());
+            if (module["compatibilityHeaders"] is JsonArray compatibilityHeaders)
+                foreach (JsonNode? header in compatibilityHeaders) Source(options, header!.AsObject());
             if (module["bindingSourceEvidence"] is JsonArray evidence)
                 foreach (JsonNode? input in evidence)
                 {
@@ -112,6 +117,11 @@ internal static class Program
                 ["repositoryWideUpstreamParityClaimed"] = false, ["completeCppParityClaimed"] = false, ["newRuntimeBehaviorCertified"] = false };
             if (module["bindingSourceEvidence"] is JsonArray)
                 summary["reviewedExistingBindingCount"] = Arr(module, "addedReviews").Count(row => Str(row!, "classification") == "implemented");
+            if (module["sourceRepository"] is not null)
+            {
+                summary["sourceRepository"] = module["sourceRepository"]!.DeepClone();
+                if (Str(module, "sourceRepository") == "opencv_contrib") summary["upstreamContribCommit"] = ContribCommit;
+            }
             string summaryText = Serialize(summary);
             Write(options, stem + "classifications.json", classificationText);
             Write(options, stem + "delta.json", deltaText);
@@ -125,6 +135,7 @@ internal static class Program
         string[] refreshed = slices.Select(row => Str(row, "id")).ToArray();
         Require(refreshed.Distinct(StringComparer.Ordinal).Count() == refreshed.Length && refreshed.All(historicalModules.Contains), "Refreshed slice membership drifted.");
         var aggregate = new JsonObject { ["schemaVersion"] = 1, ["upstreamOpenCvVersion"] = Version, ["upstreamCommit"] = Commit,
+            ["upstreamContribCommit"] = ContribCommit,
             ["catalogPath"] = CatalogPath, ["catalogSha256"] = ReviewedCatalogSha256, ["historicalCatalogRevision"] = "5.0.0", ["historicalCatalogMapCount"] = historicalModules.Length,
             ["refreshedParserSliceCount"] = refreshed.Length, ["pendingCatalogMapCount"] = historicalModules.Length - refreshed.Length,
             ["slices"] = Array(slices.OrderBy(row => Str(row, "id"), StringComparer.Ordinal)),
@@ -139,6 +150,15 @@ internal static class Program
     {
         Require(Int(raw, "schemaVersion") == 1 && Str(raw, "upstreamOpenCvVersion") == Version, "Raw version drifted.");
         Require(Str(raw, "generator") == "tools/UpstreamMapRefresh/extract.py" && Str(raw, "module") == Str(module, "id"), "Raw generator/module drifted.");
+        Require(JsonNode.DeepEquals(raw["sourceRepository"], module["sourceRepository"]), "Raw source repository drifted.");
+        if (module["sourceRepository"] is not null)
+        {
+            string repository = Str(module, "sourceRepository");
+            Require((repository is "opencv" or "opencv_contrib") &&
+                Str(Obj(module, "primaryHeader"), "path").StartsWith(repository == "opencv" ? Prefix : ContribPrefix, StringComparison.Ordinal), "Raw source repository root drifted.");
+            Require(repository != "opencv_contrib" || Str(raw, "upstreamContribCommit") == ContribCommit, "Raw contrib identity drifted.");
+        }
+        Require(JsonNode.DeepEquals(raw["compatibilityHeaders"], module["compatibilityHeaders"]), "Raw compatibility headers drifted.");
         Require(Str(raw, "headerPath") == Str(Obj(module, "primaryHeader"), "path") && Str(raw, "headerSha256") == Str(Obj(module, "primaryHeader"), "sha256") &&
             Str(raw, "parserPath") == Str(Obj(catalog, "parser"), "path") && Str(raw, "parserSha256") == Str(Obj(catalog, "parser"), "sha256"), "Raw source binding drifted.");
         Require(JsonNode.DeepEquals(raw["preprocessorDefinitions"], module["preprocessorDefinitions"]), "Raw parser defines drifted.");
@@ -159,6 +179,7 @@ internal static class Program
             Require(Int(row, "ordinal") == i, "Raw ordinals drifted.");
             JsonNode header = headers.Single(h => i >= Int(h!, "startOrdinal") && i < Int(h!, "startOrdinal") + Int(h!, "declarationCount"))!;
             Require(Str(row, "sourceHeader") == Str(header, "path"), "Raw declaration source scope drifted.");
+            Require(JsonNode.DeepEquals(row["surface"], header["surface"]), "Raw declaration surface drifted.");
             Require(Str(row, "identity") == Identity(row, Str(module, "identityPolicy")), "Raw signature identity drifted.");
         }
         Require(rows.Count(row => Str(row!, "kind") == "callable") == Int(module, "callableCount"), "Raw callable partition drifted.");
@@ -329,7 +350,10 @@ internal static class Program
         Raw("wrong source", "Raw declaration source scope", v => Arr(v, "declarations")[0]!["sourceHeader"] = "outside.hpp");
         Raw("signature", "Raw signature identity", v => Arr(v, "declarations").First(row => Str(row!, "kind") == "callable")!["returnType"] = "unreviewed");
         Raw("lost documentation", "Raw reviewed snapshot", v => Arr(v, "declarations").First(row => Str(row!, "documentation").Length > 0)!["documentation"] = "");
-        Raw("lost class property", "Raw reviewed snapshot", v => Arr(Arr(v, "declarations").First(row => Str(row!, "kind") == "class" && Arr(row!, "arguments").Count > 0)!, "arguments").RemoveAt(0));
+        if (Arr(raw, "declarations").Any(row => Str(row!, "kind") == "class" && Arr(row!, "arguments").Count > 0))
+            Raw("lost class property", "Raw reviewed snapshot", v => Arr(Arr(v, "declarations").First(row => Str(row!, "kind") == "class" && Arr(row!, "arguments").Count > 0)!, "arguments").RemoveAt(0));
+        else
+            Raw("false declaration qualifier", "Raw reviewed snapshot", v => Arr(Arr(v, "declarations").First(row => Str(row!, "kind") == "callable")!, "modifiers").Add("/unreviewed"));
         Raw("lost enum metadata", Str(module, "identityPolicy") == "full-enum" ? "Raw signature identity" : "Raw reviewed snapshot", v => Arr(Arr(v, "declarations").First(row => Arr(row!, "enumValues").Count > 0)!, "enumValues").RemoveAt(0));
         Classification("missing classification", v => Arr(v, "declarations").RemoveAt(0));
         Classification("wrong order", v => Arr(v, "declarations")[0]!["ordinal"] = 1);
@@ -339,12 +363,35 @@ internal static class Program
         Classification("binding erased", v => Arr(v, "declarations").First(row => Str(row!, "classification") == "implemented")!["classification"] = "intentionally-omitted");
         Classification("missing reason", v => Arr(v, "declarations")[0]!["reason"] = "");
         Classification("lost build condition", v => Arr(v, "declarations")[0]!["buildCondition"] = "unreviewed");
-        Reject("review omitted", "Review identity closure", () => { var v = Copy(module); Arr(v, "changedReviews").RemoveAt(0); ValidateReviews(raw, old, v); });
-        Reject("review empty", "Review reason", () => { var v = Copy(module); Arr(v, "changedReviews")[0]!["reason"] = ""; ValidateReviews(raw, old, v); });
-        Reject("lost enum/property change review", "Review changed fields", () => { var v = Copy(module); Arr(v, "changedReviews")[0]!["fields"] = new JsonArray(); ValidateReviews(raw, old, v); });
+        // Unchanged slices still exercise the review contract with a controlled documentation delta.
+        (JsonObject Raw, JsonObject Module) ReviewCase()
+        {
+            var r = Copy(raw); var m = Copy(module);
+            if (Arr(m, "changedReviews").Count == 0)
+            {
+                var historical = Rows(old);
+                JsonNode row = Arr(r, "declarations").First(item => historical.ContainsKey(Str(item!, "identity")))!;
+                row["documentation"] = Str(row, "documentation") + "\nreview fixture";
+                Arr(m, "changedReviews").Add(new JsonObject { ["identity"] = Str(row, "identity"), ["fields"] = new JsonArray("documentation"), ["reason"] = "Controlled review fixture." });
+                Obj(m, "expectedDelta")["changed"] = 1;
+            }
+            ValidateReviews(r, old, m);
+            return (r, m);
+        }
+        Reject("review omitted", "Review identity closure", () => { var v = ReviewCase(); Arr(v.Module, "changedReviews").RemoveAt(0); ValidateReviews(v.Raw, old, v.Module); });
+        Reject("review empty", "Review reason", () => { var v = ReviewCase(); Arr(v.Module, "changedReviews")[0]!["reason"] = ""; ValidateReviews(v.Raw, old, v.Module); });
+        Reject("lost enum/property change review", "Review changed fields", () => { var v = ReviewCase(); Arr(v.Module, "changedReviews")[0]!["fields"] = new JsonArray(); ValidateReviews(v.Raw, old, v.Module); });
         Reject("unreviewed removal", "Review identity closure", () => { var v = Copy(module); Arr(v, "removedReviews").Add(new JsonObject { ["identity"] = "unknown", ["reason"] = "unknown" }); ValidateReviews(raw, old, v); });
         Reject("unreviewed new callable", "Unreviewed added declaration", () => { var v = Copy(raw); Arr(v, "declarations").First(row => Str(row!, "kind") == "callable")!["identity"] = "cv.unreviewed()->void"; Classify(v, old, previous, module); });
-        Reject("lost delta", "Delta drift", () => { var v = Copy(delta); Arr(v, "changed").RemoveAt(0); Require(JsonNode.DeepEquals(v, Delta(raw, old, module)), "Delta drift."); });
+        Reject("lost delta", "Delta drift", () => { var v = Copy(delta); v["retainedIdentityCount"] = Int(v, "retainedIdentityCount") + 1; Require(JsonNode.DeepEquals(v, Delta(raw, old, module)), "Delta drift."); });
+        if (module["sourceRepository"] is not null)
+            Raw("false source repository", "Raw source repository", v => v["sourceRepository"] = "other");
+        if (module["sourceRepository"] is not null && Str(module, "sourceRepository") == "opencv_contrib")
+            Raw("false contrib revision", "Raw contrib identity", v => v["upstreamContribCommit"] = new string('0', 40));
+        if (module["compatibilityHeaders"] is JsonArray { Count: > 0 })
+            Raw("lost compatibility header", "Raw compatibility headers", v => Arr(v, "compatibilityHeaders").RemoveAt(0));
+        if (Arr(module, "sourceHeaders").Any(header => header!["surface"] is not null))
+            Raw("false declaration surface", "Raw declaration surface", v => Arr(v, "declarations")[0]!["surface"] = "unreviewed");
         if (Arr(module, "addedReviews").Any(row => Str(row!, "classification") == "implemented"))
         {
             JsonNode Binding(JsonObject v) => Arr(v, "addedReviews").First(row => Str(row!, "classification") == "implemented")!;
@@ -374,7 +421,7 @@ internal static class Program
     }
     private static void Source(Options options, JsonObject input)
     {
-        string path = Str(input, "path"); Require(path.StartsWith(Prefix, StringComparison.Ordinal) &&
+        string path = Str(input, "path"); Require((path.StartsWith(Prefix, StringComparison.Ordinal) || path.StartsWith(ContribPrefix, StringComparison.Ordinal)) &&
             !path.Contains("..", StringComparison.Ordinal) && !path.Contains('\\'), "Source path is outside the pinned root.");
         string text = new UTF8Encoding(false, true).GetString(File.ReadAllBytes(Path.Combine(options.Workspace, path)));
         Require(Sha(text.Replace("\r\n", "\n", StringComparison.Ordinal).Replace('\r', '\n')) == Str(input, "sha256"), "Official source hash drifted: " + path);

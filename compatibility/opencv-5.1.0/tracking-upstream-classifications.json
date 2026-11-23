@@ -1,0 +1,517 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.1.0",
+  "module": "tracking",
+  "claimedSlice": "Historical tracking parser scope refreshed against official 5.1 sources: 2 contributing header(s); parser-emitted declarations only",
+  "reviewStatus": "reviewed-parser-slice",
+  "declarations": [
+    {
+      "ordinal": 0,
+      "surface": "primary",
+      "identity": "class cv.TrackerCSRT",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 0,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 1,
+      "surface": "primary",
+      "identity": "class cv.TrackerCSRT.Params",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 1,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 2,
+      "surface": "primary",
+      "identity": "cv.TrackerCSRT.Params.Params()-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_tracker_csrt_get_default_params"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.TrackerCSRTParams|constructor|public;instance|.ctor(System.Boolean useHog,System.Boolean useColorNames,System.Boolean useGray,System.Boolean useRgb,System.Boolean useChannelWeights,System.Boolean useSegmentation,System.String windowFunction,System.Single kaiserAlpha,System.Single chebAttenuation,System.Single templateSize,System.Single gslSigma,System.Single hogOrientations,System.Single hogClip,System.Single padding,System.Single filterLr,System.Single weightsLr,System.Int32 numHogChannelsUsed,System.Int32 admmIterations,System.Int32 histogramBins,System.Single histogramLr,System.Int32 backgroundRatio,System.Int32 numberOfScales,System.Single scaleSigmaFactor,System.Single scaleModelMaxArea,System.Single scaleLr,System.Single scaleStep,System.Single psrThreshold)"
+      ],
+      "historicalOrdinal": 2,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 3,
+      "surface": "primary",
+      "identity": "cv.TrackerCSRT.create(TrackerCSRT_Params parameters=TrackerCSRT::Params()[/C,/Ref])-\u003EPtr\u003CTrackerCSRT\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_tracker_csrt_create",
+        "jyppx_ocv_tracking_tracker_csrt_create_default"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.TrackerCSRT|method|public;static|JYPPX.OpenCvSharp.Tracking.TrackerCSRT Create()"
+      ],
+      "historicalOrdinal": 3,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 4,
+      "surface": "primary",
+      "identity": "cv.TrackerCSRT.setInitialMask(Mat mask)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_tracker_csrt_set_initial_mask"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.TrackerCSRT|method|public;instance|System.Void SetInitialMask(JYPPX.OpenCvSharp.Core.Mat mask)"
+      ],
+      "historicalOrdinal": 4,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 5,
+      "surface": "primary",
+      "identity": "class cv.TrackerKCF",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 5,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 6,
+      "surface": "primary",
+      "identity": "enum cv.TrackerKCF.MODE[const cv.TrackerKCF.GRAY=(1 \u003C\u003C 0);const cv.TrackerKCF.CN=(1 \u003C\u003C 1);const cv.TrackerKCF.CUSTOM=(1 \u003C\u003C 2)]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 6,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 7,
+      "surface": "primary",
+      "identity": "class cv.TrackerKCF.Params",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 7,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 8,
+      "surface": "primary",
+      "identity": "cv.TrackerKCF.Params.Params()-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_tracker_kcf_get_default_params"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.TrackerKCFParams|constructor|public;instance|.ctor(System.Single detectThresh,System.Single sigma,System.Single lambda,System.Single interpFactor,System.Single outputSigmaFactor,System.Single pcaLearningRate,System.Boolean resize,System.Boolean splitCoeff,System.Boolean wrapKernel,System.Boolean compressFeature,System.Int32 maxPatchSize,System.Int32 compressedSize,JYPPX.OpenCvSharp.Tracking.TrackerKCFMode descPca,JYPPX.OpenCvSharp.Tracking.TrackerKCFMode descNpca)"
+      ],
+      "historicalOrdinal": 8,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 9,
+      "surface": "primary",
+      "identity": "cv.TrackerKCF.create(TrackerKCF_Params parameters=TrackerKCF::Params()[/C,/Ref])-\u003EPtr\u003CTrackerKCF\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_tracker_kcf_create",
+        "jyppx_ocv_tracking_tracker_kcf_create_default"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.TrackerKCF|method|public;static|JYPPX.OpenCvSharp.Tracking.TrackerKCF Create()"
+      ],
+      "historicalOrdinal": 9,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 10,
+      "surface": "legacy",
+      "identity": "class cv.legacy.Tracker",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 10,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 11,
+      "surface": "legacy",
+      "identity": "cv.legacy.Tracker.init(Mat image;Rect2d boundingBox[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_tracker_init"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.LegacyTracker|method|public;instance|System.Void Init(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Rect2d boundingBox)"
+      ],
+      "historicalOrdinal": 11,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 12,
+      "surface": "legacy",
+      "identity": "cv.legacy.Tracker.update(Mat image;Rect2d boundingBox[/O,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_tracker_update"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.LegacyTracker|method|public;instance|System.Boolean Update(JYPPX.OpenCvSharp.Core.Mat image,ref JYPPX.OpenCvSharp.Core.Rect2d boundingBox)"
+      ],
+      "historicalOrdinal": 12,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 13,
+      "surface": "legacy",
+      "identity": "class cv.legacy.TrackerMIL",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 13,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 14,
+      "surface": "legacy",
+      "identity": "cv.legacy.TrackerMIL.create()-\u003EPtr\u003Clegacy::TrackerMIL\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_tracker_mil_create_default"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerMIL|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerMIL Create()"
+      ],
+      "historicalOrdinal": 14,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 15,
+      "surface": "legacy",
+      "identity": "class cv.legacy.TrackerBoosting",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 15,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 16,
+      "surface": "legacy",
+      "identity": "cv.legacy.TrackerBoosting.create()-\u003EPtr\u003Clegacy::TrackerBoosting\u003E",
+      "classification": "implemented",
+      "reason": "The selected public legacy model-free completion batch provides opaque ownership, guarded lifecycle behavior, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_tracker_boosting_create_default"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerBoosting|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerBoosting Create()"
+      ],
+      "historicalOrdinal": 16,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 17,
+      "surface": "legacy",
+      "identity": "class cv.legacy.TrackerMedianFlow",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 17,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 18,
+      "surface": "legacy",
+      "identity": "cv.legacy.TrackerMedianFlow.create()-\u003EPtr\u003Clegacy::TrackerMedianFlow\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_tracker_median_flow_create_default"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerMedianFlow|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerMedianFlow Create()"
+      ],
+      "historicalOrdinal": 18,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 19,
+      "surface": "legacy",
+      "identity": "class cv.legacy.TrackerTLD",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 19,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 20,
+      "surface": "legacy",
+      "identity": "cv.legacy.TrackerTLD.create()-\u003EPtr\u003Clegacy::TrackerTLD\u003E",
+      "classification": "implemented",
+      "reason": "The selected public legacy model-free completion batch provides opaque ownership, guarded lifecycle behavior, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_tracker_tld_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerTLD|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerTLD Create()"
+      ],
+      "historicalOrdinal": 20,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 21,
+      "surface": "legacy",
+      "identity": "class cv.legacy.TrackerKCF",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 21,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 22,
+      "surface": "legacy",
+      "identity": "cv.legacy.TrackerKCF.create()-\u003EPtr\u003Clegacy::TrackerKCF\u003E",
+      "classification": "implemented",
+      "reason": "The selected public legacy model-free completion batch provides opaque ownership, guarded lifecycle behavior, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_tracker_kcf_create_default"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerKCF|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerKCF Create()"
+      ],
+      "historicalOrdinal": 22,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 23,
+      "surface": "legacy",
+      "identity": "class cv.legacy.TrackerMOSSE",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 23,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 24,
+      "surface": "legacy",
+      "identity": "cv.legacy.TrackerMOSSE.create()-\u003EPtr\u003Clegacy::TrackerMOSSE\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_tracker_mosse_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerMOSSE|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerMOSSE Create()"
+      ],
+      "historicalOrdinal": 24,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 25,
+      "surface": "legacy",
+      "identity": "class cv.legacy.MultiTracker",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 25,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 26,
+      "surface": "legacy",
+      "identity": "cv.legacy.MultiTracker.MultiTracker()-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_multi_tracker_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.MultiTracker Create()"
+      ],
+      "historicalOrdinal": 26,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 27,
+      "surface": "legacy",
+      "identity": "cv.legacy.MultiTracker.add(Ptr_legacy_Tracker newTracker;Mat image;Rect2d boundingBox[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_multi_tracker_add"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;instance|System.Boolean Add(JYPPX.OpenCvSharp.Tracking.Legacy.LegacyTracker tracker,JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Rect2d boundingBox)"
+      ],
+      "historicalOrdinal": 27,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 28,
+      "surface": "legacy",
+      "identity": "cv.legacy.MultiTracker.update(Mat image;vector_Rect2d boundingBox[/O,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_multi_tracker_update_count",
+        "jyppx_ocv_tracking_legacy_multi_tracker_update_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;instance|JYPPX.OpenCvSharp.Tracking.Legacy.LegacyMultiTrackerUpdateResult Update(JYPPX.OpenCvSharp.Core.Mat image)"
+      ],
+      "historicalOrdinal": 28,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 29,
+      "surface": "legacy",
+      "identity": "cv.legacy.MultiTracker.getObjects()-\u003Estd::vector\u003CRect2d\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_multi_tracker_get_objects_count",
+        "jyppx_ocv_tracking_legacy_multi_tracker_get_objects_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;instance|JYPPX.OpenCvSharp.Core.Rect2d[] GetObjects()"
+      ],
+      "historicalOrdinal": 29,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 30,
+      "surface": "legacy",
+      "identity": "cv.legacy.MultiTracker.create()-\u003EPtr\u003Clegacy::MultiTracker\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_multi_tracker_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.MultiTracker Create()"
+      ],
+      "historicalOrdinal": 30,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 31,
+      "surface": "legacy",
+      "identity": "class cv.legacy.TrackerCSRT",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 31,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 32,
+      "surface": "legacy",
+      "identity": "cv.legacy.TrackerCSRT.create()-\u003EPtr\u003Clegacy::TrackerCSRT\u003E",
+      "classification": "implemented",
+      "reason": "The selected public legacy model-free completion batch provides opaque ownership, guarded lifecycle behavior, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_tracker_csrt_create_default"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerCSRT|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerCSRT Create()"
+      ],
+      "historicalOrdinal": 32,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 33,
+      "surface": "legacy",
+      "identity": "cv.legacy.TrackerCSRT.setInitialMask(Mat mask)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected public legacy model-free completion batch provides opaque ownership, guarded lifecycle behavior, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_tracker_csrt_set_initial_mask"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerCSRT|method|public;instance|System.Void SetInitialMask(JYPPX.OpenCvSharp.Core.Mat mask)"
+      ],
+      "historicalOrdinal": 33,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 34,
+      "surface": "legacy",
+      "identity": "cv.legacy.upgradeTrackingAPI(Ptr_legacy_Tracker legacy_tracker[/C,/Ref])-\u003EPtr\u003Ccv::Tracker\u003E",
+      "classification": "implemented",
+      "reason": "The selected public legacy model-free completion batch provides opaque ownership, guarded lifecycle behavior, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_upgrade"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.LegacyTracker|method|public;instance|JYPPX.OpenCvSharp.Tracking.Tracker Upgrade()"
+      ],
+      "historicalOrdinal": 34,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    }
+  ]
+}

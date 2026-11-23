@@ -1,0 +1,3496 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.1.0",
+  "module": "ml",
+  "claimedSlice": "Historical ml parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+  "reviewStatus": "reviewed-parser-slice",
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "enum cv.ml.VariableTypes[const cv.ml.VAR_NUMERICAL=0;const cv.ml.VAR_ORDERED=0;const cv.ml.VAR_CATEGORICAL=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 0,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 1,
+      "identity": "enum cv.ml.ErrorTypes[const cv.ml.TEST_ERROR=0;const cv.ml.TRAIN_ERROR=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 1,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 2,
+      "identity": "enum cv.ml.SampleTypes[const cv.ml.ROW_SAMPLE=0;const cv.ml.COL_SAMPLE=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 2,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 3,
+      "identity": "class cv.ml.ParamGrid",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 3,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.ml.ParamGrid.create(double minVal=0.;double maxVal=0.;double logstep=1.)-\u003EPtr\u003CParamGrid\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_param_grid_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ParamGrid|constructor|public;instance|.ctor(System.Double minVal=0,System.Double maxVal=0,System.Double logStep=1)"
+      ],
+      "historicalOrdinal": 4,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 5,
+      "identity": "class cv.ml.TrainData",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 5,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.ml.TrainData.getLayout()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|property|instance;get:public|JYPPX.OpenCvSharp.ML.SampleTypes Layout"
+      ],
+      "historicalOrdinal": 6,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.ml.TrainData.getNTrainSamples()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|property|instance;get:public|System.Int32 NTrainSamples"
+      ],
+      "historicalOrdinal": 7,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.ml.TrainData.getNTestSamples()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|property|instance;get:public|System.Int32 NTestSamples"
+      ],
+      "historicalOrdinal": 8,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.ml.TrainData.getNSamples()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|property|instance;get:public|System.Int32 NSamples"
+      ],
+      "historicalOrdinal": 9,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.ml.TrainData.getNVars()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|property|instance;get:public|System.Int32 NVars"
+      ],
+      "historicalOrdinal": 10,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.ml.TrainData.getNAllVars()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|property|instance;get:public|System.Int32 NAllVars"
+      ],
+      "historicalOrdinal": 11,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.ml.TrainData.getSample(Mat varIdx;int sidx;float* buf)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected TrainData buffer batch copies sample and variable values through exact-length count/fill C ABI operations with ordered optional indexes, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_sample_count",
+        "jyppx_ocv_ml_train_data_get_sample_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|System.Single[] GetSample(System.Int32 sampleIndex,JYPPX.OpenCvSharp.Core.Mat? variableIndices=null)"
+      ],
+      "historicalOrdinal": 12,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.ml.TrainData.getSamples()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetSamples()"
+      ],
+      "historicalOrdinal": 13,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.ml.TrainData.getMissing()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetMissing()"
+      ],
+      "historicalOrdinal": 14,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.ml.TrainData.getTrainSamples(int layout=ROW_SAMPLE;bool compressSamples=true;bool compressVars=true)-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetTrainSamples(JYPPX.OpenCvSharp.ML.SampleTypes layout=RowSample,System.Boolean compressSamples=true,System.Boolean compressVars=true)"
+      ],
+      "historicalOrdinal": 15,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.ml.TrainData.getTrainResponses()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetTrainResponses()"
+      ],
+      "historicalOrdinal": 16,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.ml.TrainData.getTrainNormCatResponses()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetTrainNormCatResponses()"
+      ],
+      "historicalOrdinal": 17,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.ml.TrainData.getTestResponses()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetTestResponses()"
+      ],
+      "historicalOrdinal": 18,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.ml.TrainData.getTestNormCatResponses()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetTestNormCatResponses()"
+      ],
+      "historicalOrdinal": 19,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.ml.TrainData.getResponses()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetResponses()"
+      ],
+      "historicalOrdinal": 20,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.ml.TrainData.getNormCatResponses()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetNormCatResponses()"
+      ],
+      "historicalOrdinal": 21,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.ml.TrainData.getSampleWeights()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetSampleWeights()"
+      ],
+      "historicalOrdinal": 22,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.ml.TrainData.getTrainSampleWeights()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetTrainSampleWeights()"
+      ],
+      "historicalOrdinal": 23,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.ml.TrainData.getTestSampleWeights()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetTestSampleWeights()"
+      ],
+      "historicalOrdinal": 24,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.ml.TrainData.getVarIdx()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetVarIdx()"
+      ],
+      "historicalOrdinal": 25,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.ml.TrainData.getVarType()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetVarType()"
+      ],
+      "historicalOrdinal": 26,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.ml.TrainData.getVarSymbolFlags()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetVarSymbolFlags()"
+      ],
+      "historicalOrdinal": 27,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.ml.TrainData.getResponseType()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|property|instance;get:public|JYPPX.OpenCvSharp.ML.MlVariableType ResponseType"
+      ],
+      "historicalOrdinal": 28,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.ml.TrainData.getTrainSampleIdx()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetTrainSampleIdx()"
+      ],
+      "historicalOrdinal": 29,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.ml.TrainData.getTestSampleIdx()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetTestSampleIdx()"
+      ],
+      "historicalOrdinal": 30,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.ml.TrainData.getValues(int vi;Mat sidx;float* values)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected TrainData buffer batch copies sample and variable values through exact-length count/fill C ABI operations with ordered optional indexes, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_values_count",
+        "jyppx_ocv_ml_train_data_get_values_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|System.Single[] GetValues(System.Int32 variableIndex,JYPPX.OpenCvSharp.Core.Mat? sampleIndices=null)"
+      ],
+      "historicalOrdinal": 31,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.ml.TrainData.getDefaultSubstValues()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetDefaultSubstValues()"
+      ],
+      "historicalOrdinal": 32,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.ml.TrainData.getCatCount(int vi)-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|System.Int32 GetCatCount(System.Int32 variableIndex)"
+      ],
+      "historicalOrdinal": 33,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.ml.TrainData.getClassLabels()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetClassLabels()"
+      ],
+      "historicalOrdinal": 34,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.ml.TrainData.getCatOfs()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetCatOfs()"
+      ],
+      "historicalOrdinal": 35,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.ml.TrainData.getCatMap()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetCatMap()"
+      ],
+      "historicalOrdinal": 36,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.ml.TrainData.setTrainTestSplit(int count;bool shuffle=true)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_set_train_test_split"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|System.Void SetTrainTestSplit(System.Int32 count,System.Boolean shuffle=true)"
+      ],
+      "historicalOrdinal": 37,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.ml.TrainData.setTrainTestSplitRatio(double ratio;bool shuffle=true)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_set_train_test_split_ratio"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|System.Void SetTrainTestSplitRatio(System.Double ratio,System.Boolean shuffle=true)"
+      ],
+      "historicalOrdinal": 38,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.ml.TrainData.shuffleTrainTest()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_shuffle_train_test"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|System.Void ShuffleTrainTest()"
+      ],
+      "historicalOrdinal": 39,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.ml.TrainData.getTestSamples()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetTestSamples()"
+      ],
+      "historicalOrdinal": 40,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.ml.TrainData.getNames(vector_String names[/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_names_count",
+        "jyppx_ocv_ml_train_data_get_names_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|System.String[] GetNames()"
+      ],
+      "historicalOrdinal": 41,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 42,
+      "identity": "cv.ml.TrainData.getSubVector(Mat vec[/C,/Ref];Mat idx[/C,/Ref])-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_sub_vector"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;static|JYPPX.OpenCvSharp.Core.Mat GetSubVector(JYPPX.OpenCvSharp.Core.Mat vec,JYPPX.OpenCvSharp.Core.Mat idx)"
+      ],
+      "historicalOrdinal": 42,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.ml.TrainData.getSubMatrix(Mat matrix[/C,/Ref];Mat idx[/C,/Ref];int layout)-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_sub_matrix"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;static|JYPPX.OpenCvSharp.Core.Mat GetSubMatrix(JYPPX.OpenCvSharp.Core.Mat matrix,JYPPX.OpenCvSharp.Core.Mat idx,JYPPX.OpenCvSharp.ML.SampleTypes layout)"
+      ],
+      "historicalOrdinal": 43,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.ml.TrainData.create(Mat samples;int layout;Mat responses;Mat varIdx=Mat();Mat sampleIdx=Mat();Mat sampleWeights=Mat();Mat varType=Mat())-\u003EPtr\u003CTrainData\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;static|JYPPX.OpenCvSharp.ML.TrainData Create(JYPPX.OpenCvSharp.Core.Mat samples,JYPPX.OpenCvSharp.ML.SampleTypes layout,JYPPX.OpenCvSharp.Core.Mat responses,JYPPX.OpenCvSharp.Core.Mat? varIdx=null,JYPPX.OpenCvSharp.Core.Mat? sampleIdx=null,JYPPX.OpenCvSharp.Core.Mat? sampleWeights=null,JYPPX.OpenCvSharp.Core.Mat? varType=null)"
+      ],
+      "historicalOrdinal": 44,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 45,
+      "identity": "class cv.ml.StatModel",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 45,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 46,
+      "identity": "enum cv.ml.StatModel.Flags[const cv.ml.StatModel.UPDATE_MODEL=1;const cv.ml.StatModel.RAW_OUTPUT=1;const cv.ml.StatModel.COMPRESSED_INPUT=2;const cv.ml.StatModel.PREPROCESSED_INPUT=4]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 46,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.ml.StatModel.getVarCount()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_stat_model_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.StatModel|property|instance;get:public|System.Int32 VarCount"
+      ],
+      "historicalOrdinal": 47,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 48,
+      "identity": "cv.ml.StatModel.empty()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_stat_model_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.StatModel|property|instance;get:public|System.Boolean Empty"
+      ],
+      "historicalOrdinal": 48,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.ml.StatModel.isTrained()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_stat_model_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.StatModel|property|instance;get:public|System.Boolean IsTrained"
+      ],
+      "historicalOrdinal": 49,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 50,
+      "identity": "cv.ml.StatModel.isClassifier()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_stat_model_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.StatModel|property|instance;get:public|System.Boolean IsClassifier"
+      ],
+      "historicalOrdinal": 50,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 51,
+      "identity": "cv.ml.StatModel.train(Ptr_TrainData trainData[/C,/Ref];int flags=0)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_stat_model_train_data"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.StatModel|method|public;instance|System.Boolean Train(JYPPX.OpenCvSharp.ML.TrainData trainData,JYPPX.OpenCvSharp.ML.StatModelFlags flags=None)"
+      ],
+      "historicalOrdinal": 51,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 52,
+      "identity": "cv.ml.StatModel.train(Mat samples;int layout;Mat responses)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_stat_model_train_samples"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.StatModel|method|public;instance|System.Boolean Train(JYPPX.OpenCvSharp.Core.Mat samples,JYPPX.OpenCvSharp.ML.SampleTypes layout,JYPPX.OpenCvSharp.Core.Mat responses)"
+      ],
+      "historicalOrdinal": 52,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 53,
+      "identity": "cv.ml.StatModel.calcError(Ptr_TrainData data[/C,/Ref];bool test;Mat resp[/O])-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_stat_model_calc_error"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.StatModel|method|public;instance|System.Single CalcError(JYPPX.OpenCvSharp.ML.TrainData data,System.Boolean test,JYPPX.OpenCvSharp.Core.Mat? responses=null)"
+      ],
+      "historicalOrdinal": 53,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 54,
+      "identity": "cv.ml.StatModel.predict(Mat samples;Mat results=Mat()[/O];int flags=0)-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_stat_model_predict"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.StatModel|method|public;instance|System.Single Predict(JYPPX.OpenCvSharp.Core.Mat samples,JYPPX.OpenCvSharp.Core.Mat? results=null,JYPPX.OpenCvSharp.ML.StatModelFlags flags=None)"
+      ],
+      "historicalOrdinal": 54,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 55,
+      "identity": "class cv.ml.NormalBayesClassifier",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 55,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 56,
+      "identity": "cv.ml.NormalBayesClassifier.predictProb(Mat inputs;Mat outputs[/O];Mat outputProbs[/O];int flags=0)-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_normal_bayes_classifier_predict_prob"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.NormalBayesClassifier|method|public;instance|System.Single PredictProb(JYPPX.OpenCvSharp.Core.Mat inputs,JYPPX.OpenCvSharp.Core.Mat outputs,JYPPX.OpenCvSharp.Core.Mat outputProbs,JYPPX.OpenCvSharp.ML.StatModelFlags flags=None)"
+      ],
+      "historicalOrdinal": 56,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 57,
+      "identity": "cv.ml.NormalBayesClassifier.create()-\u003EPtr\u003CNormalBayesClassifier\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_normal_bayes_classifier_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.NormalBayesClassifier|method|public;static|JYPPX.OpenCvSharp.ML.NormalBayesClassifier Create()"
+      ],
+      "historicalOrdinal": 57,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 58,
+      "identity": "cv.ml.NormalBayesClassifier.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])-\u003EPtr\u003CNormalBayesClassifier\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_normal_bayes_classifier_load"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.NormalBayesClassifier|method|public;static|JYPPX.OpenCvSharp.ML.NormalBayesClassifier Load(System.String filepath,System.String? nodeName=null)"
+      ],
+      "historicalOrdinal": 58,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 59,
+      "identity": "class cv.ml.KNearest",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 59,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 60,
+      "identity": "cv.ml.KNearest.getDefaultK()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_knearest_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.KNearest|property|instance;get:public;set:public|System.Int32 DefaultK"
+      ],
+      "historicalOrdinal": 60,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 61,
+      "identity": "cv.ml.KNearest.setDefaultK(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_knearest_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.KNearest|property|instance;get:public;set:public|System.Int32 DefaultK"
+      ],
+      "historicalOrdinal": 61,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 62,
+      "identity": "cv.ml.KNearest.getIsClassifier()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_knearest_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.KNearest|property|instance;get:public;set:public|System.Boolean IsClassifierModel"
+      ],
+      "historicalOrdinal": 62,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 63,
+      "identity": "cv.ml.KNearest.setIsClassifier(bool val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_knearest_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.KNearest|property|instance;get:public;set:public|System.Boolean IsClassifierModel"
+      ],
+      "historicalOrdinal": 63,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 64,
+      "identity": "cv.ml.KNearest.getEmax()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_knearest_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.KNearest|property|instance;get:public;set:public|System.Int32 Emax"
+      ],
+      "historicalOrdinal": 64,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 65,
+      "identity": "cv.ml.KNearest.setEmax(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_knearest_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.KNearest|property|instance;get:public;set:public|System.Int32 Emax"
+      ],
+      "historicalOrdinal": 65,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 66,
+      "identity": "cv.ml.KNearest.getAlgorithmType()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_knearest_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.KNearest|property|instance;get:public;set:public|JYPPX.OpenCvSharp.ML.KNearestTypes AlgorithmType"
+      ],
+      "historicalOrdinal": 66,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 67,
+      "identity": "cv.ml.KNearest.setAlgorithmType(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_knearest_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.KNearest|property|instance;get:public;set:public|JYPPX.OpenCvSharp.ML.KNearestTypes AlgorithmType"
+      ],
+      "historicalOrdinal": 67,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 68,
+      "identity": "cv.ml.KNearest.findNearest(Mat samples;int k;Mat results[/O];Mat neighborResponses=Mat()[/O];Mat dist=Mat()[/O])-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_knearest_find_nearest"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.KNearest|method|public;instance|System.Single FindNearest(JYPPX.OpenCvSharp.Core.Mat samples,System.Int32 k,JYPPX.OpenCvSharp.Core.Mat results,JYPPX.OpenCvSharp.Core.Mat? neighborResponses=null,JYPPX.OpenCvSharp.Core.Mat? dist=null)"
+      ],
+      "historicalOrdinal": 68,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 69,
+      "identity": "enum cv.ml.KNearest.Types[const cv.ml.KNearest.BRUTE_FORCE=1;const cv.ml.KNearest.KDTREE=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 69,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 70,
+      "identity": "cv.ml.KNearest.create()-\u003EPtr\u003CKNearest\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_knearest_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.KNearest|method|public;static|JYPPX.OpenCvSharp.ML.KNearest Create()"
+      ],
+      "historicalOrdinal": 70,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 71,
+      "identity": "cv.ml.KNearest.load(String filepath[/C,/Ref,/PATH])-\u003EPtr\u003CKNearest\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_knearest_load"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.KNearest|method|public;static|JYPPX.OpenCvSharp.ML.KNearest Load(System.String filepath)"
+      ],
+      "historicalOrdinal": 71,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 72,
+      "identity": "class cv.ml.SVM",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 72,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 73,
+      "identity": "cv.ml.SVM.getType()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|property|instance;get:public;set:public|JYPPX.OpenCvSharp.ML.SVMTypes Type"
+      ],
+      "historicalOrdinal": 73,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 74,
+      "identity": "cv.ml.SVM.setType(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|property|instance;get:public;set:public|JYPPX.OpenCvSharp.ML.SVMTypes Type"
+      ],
+      "historicalOrdinal": 74,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 75,
+      "identity": "cv.ml.SVM.getGamma()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double Gamma"
+      ],
+      "historicalOrdinal": 75,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 76,
+      "identity": "cv.ml.SVM.setGamma(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double Gamma"
+      ],
+      "historicalOrdinal": 76,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 77,
+      "identity": "cv.ml.SVM.getCoef0()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double Coef0"
+      ],
+      "historicalOrdinal": 77,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 78,
+      "identity": "cv.ml.SVM.setCoef0(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double Coef0"
+      ],
+      "historicalOrdinal": 78,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 79,
+      "identity": "cv.ml.SVM.getDegree()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double Degree"
+      ],
+      "historicalOrdinal": 79,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 80,
+      "identity": "cv.ml.SVM.setDegree(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double Degree"
+      ],
+      "historicalOrdinal": 80,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 81,
+      "identity": "cv.ml.SVM.getC()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double C"
+      ],
+      "historicalOrdinal": 81,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 82,
+      "identity": "cv.ml.SVM.setC(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double C"
+      ],
+      "historicalOrdinal": 82,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 83,
+      "identity": "cv.ml.SVM.getNu()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double Nu"
+      ],
+      "historicalOrdinal": 83,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 84,
+      "identity": "cv.ml.SVM.setNu(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double Nu"
+      ],
+      "historicalOrdinal": 84,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 85,
+      "identity": "cv.ml.SVM.getP()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double P"
+      ],
+      "historicalOrdinal": 85,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 86,
+      "identity": "cv.ml.SVM.setP(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double P"
+      ],
+      "historicalOrdinal": 86,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 87,
+      "identity": "cv.ml.SVM.getClassWeights()-\u003Ecv::Mat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_class_weights"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetClassWeights()"
+      ],
+      "historicalOrdinal": 87,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 88,
+      "identity": "cv.ml.SVM.setClassWeights(Mat val[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_set_class_weights"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|method|public;instance|System.Void SetClassWeights(JYPPX.OpenCvSharp.Core.Mat weights)"
+      ],
+      "historicalOrdinal": 88,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 89,
+      "identity": "cv.ml.SVM.getTermCriteria()-\u003Ecv::TermCriteria",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.TermCriteria TermCriteria"
+      ],
+      "historicalOrdinal": 89,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 90,
+      "identity": "cv.ml.SVM.setTermCriteria(TermCriteria val[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_set_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.TermCriteria TermCriteria"
+      ],
+      "historicalOrdinal": 90,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 91,
+      "identity": "cv.ml.SVM.getKernelType()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|property|instance;get:public|JYPPX.OpenCvSharp.ML.SVMKernelTypes KernelType"
+      ],
+      "historicalOrdinal": 91,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 92,
+      "identity": "cv.ml.SVM.setKernel(int kernelType)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|method|public;instance|System.Void SetKernel(JYPPX.OpenCvSharp.ML.SVMKernelTypes kernelType)"
+      ],
+      "historicalOrdinal": 92,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 93,
+      "identity": "enum cv.ml.SVM.Types[const cv.ml.SVM.C_SVC=100;const cv.ml.SVM.NU_SVC=101;const cv.ml.SVM.ONE_CLASS=102;const cv.ml.SVM.EPS_SVR=103;const cv.ml.SVM.NU_SVR=104]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 93,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 94,
+      "identity": "enum cv.ml.SVM.KernelTypes[const cv.ml.SVM.CUSTOM=-1;const cv.ml.SVM.LINEAR=0;const cv.ml.SVM.POLY=1;const cv.ml.SVM.RBF=2;const cv.ml.SVM.SIGMOID=3;const cv.ml.SVM.CHI2=4;const cv.ml.SVM.INTER=5]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 94,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 95,
+      "identity": "enum cv.ml.SVM.ParamTypes[const cv.ml.SVM.C=0;const cv.ml.SVM.GAMMA=1;const cv.ml.SVM.P=2;const cv.ml.SVM.NU=3;const cv.ml.SVM.COEF=4;const cv.ml.SVM.DEGREE=5]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 95,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 96,
+      "identity": "cv.ml.SVM.trainAuto(Mat samples;int layout;Mat responses;int kFold=10;Ptr_ParamGrid Cgrid=SVM::getDefaultGridPtr(SVM::C);Ptr_ParamGrid gammaGrid=SVM::getDefaultGridPtr(SVM::GAMMA);Ptr_ParamGrid pGrid=SVM::getDefaultGridPtr(SVM::P);Ptr_ParamGrid nuGrid=SVM::getDefaultGridPtr(SVM::NU);Ptr_ParamGrid coeffGrid=SVM::getDefaultGridPtr(SVM::COEF);Ptr_ParamGrid degreeGrid=SVM::getDefaultGridPtr(SVM::DEGREE);bool balanced=false)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_train_auto"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|method|public;instance|System.Boolean TrainAuto(JYPPX.OpenCvSharp.Core.Mat samples,JYPPX.OpenCvSharp.ML.SampleTypes layout,JYPPX.OpenCvSharp.Core.Mat responses,System.Int32 kFold=10,JYPPX.OpenCvSharp.ML.ParamGrid? cGrid=null,JYPPX.OpenCvSharp.ML.ParamGrid? gammaGrid=null,JYPPX.OpenCvSharp.ML.ParamGrid? pGrid=null,JYPPX.OpenCvSharp.ML.ParamGrid? nuGrid=null,JYPPX.OpenCvSharp.ML.ParamGrid? coeffGrid=null,JYPPX.OpenCvSharp.ML.ParamGrid? degreeGrid=null,System.Boolean balanced=false)"
+      ],
+      "historicalOrdinal": 96,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 97,
+      "identity": "cv.ml.SVM.getSupportVectors()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_support_vectors"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetSupportVectors()"
+      ],
+      "historicalOrdinal": 97,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 98,
+      "identity": "cv.ml.SVM.getUncompressedSupportVectors()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_uncompressed_support_vectors"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetUncompressedSupportVectors()"
+      ],
+      "historicalOrdinal": 98,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 99,
+      "identity": "cv.ml.SVM.getDecisionFunction(int i;Mat alpha[/O];Mat svidx[/O])-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_decision_function"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|method|public;instance|System.Double GetDecisionFunction(System.Int32 index,JYPPX.OpenCvSharp.Core.Mat? alpha=null,JYPPX.OpenCvSharp.Core.Mat? svidx=null)"
+      ],
+      "historicalOrdinal": 99,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 100,
+      "identity": "cv.ml.SVM.getDefaultGridPtr(int param_id)-\u003EPtr\u003CParamGrid\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_default_grid"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|method|public;static|JYPPX.OpenCvSharp.ML.ParamGrid GetDefaultGrid(JYPPX.OpenCvSharp.ML.SVMParamTypes paramType)"
+      ],
+      "historicalOrdinal": 100,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 101,
+      "identity": "cv.ml.SVM.create()-\u003EPtr\u003CSVM\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|method|public;static|JYPPX.OpenCvSharp.ML.SVM Create()"
+      ],
+      "historicalOrdinal": 101,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 102,
+      "identity": "cv.ml.SVM.load(String filepath[/C,/Ref,/PATH])-\u003EPtr\u003CSVM\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_load"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVM|method|public;static|JYPPX.OpenCvSharp.ML.SVM Load(System.String filepath)"
+      ],
+      "historicalOrdinal": 102,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 103,
+      "identity": "class cv.ml.EM",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 103,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 104,
+      "identity": "enum cv.ml.EM.Types[const cv.ml.EM.COV_MAT_SPHERICAL=0;const cv.ml.EM.COV_MAT_DIAGONAL=1;const cv.ml.EM.COV_MAT_GENERIC=2;const cv.ml.EM.COV_MAT_DEFAULT=COV_MAT_DIAGONAL]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 104,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 105,
+      "identity": "enum cv.ml.EM.\u003Cunnamed\u003E[const cv.ml.EM.DEFAULT_NCLUSTERS=5;const cv.ml.EM.DEFAULT_MAX_ITERS=100]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 105,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 106,
+      "identity": "enum cv.ml.EM.\u003Cunnamed\u003E[const cv.ml.EM.START_E_STEP=1;const cv.ml.EM.START_M_STEP=2;const cv.ml.EM.START_AUTO_STEP=0]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 106,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 107,
+      "identity": "cv.ml.EM.getClustersNumber()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.EM|property|instance;get:public;set:public|System.Int32 ClustersNumber"
+      ],
+      "historicalOrdinal": 107,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 108,
+      "identity": "cv.ml.EM.setClustersNumber(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.EM|property|instance;get:public;set:public|System.Int32 ClustersNumber"
+      ],
+      "historicalOrdinal": 108,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 109,
+      "identity": "cv.ml.EM.getCovarianceMatrixType()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.EM|property|instance;get:public;set:public|JYPPX.OpenCvSharp.ML.EMCovarianceMatrixTypes CovarianceMatrixType"
+      ],
+      "historicalOrdinal": 109,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 110,
+      "identity": "cv.ml.EM.setCovarianceMatrixType(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.EM|property|instance;get:public;set:public|JYPPX.OpenCvSharp.ML.EMCovarianceMatrixTypes CovarianceMatrixType"
+      ],
+      "historicalOrdinal": 110,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 111,
+      "identity": "cv.ml.EM.getTermCriteria()-\u003ETermCriteria",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_get_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.EM|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.TermCriteria TermCriteria"
+      ],
+      "historicalOrdinal": 111,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 112,
+      "identity": "cv.ml.EM.setTermCriteria(TermCriteria val[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_set_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.EM|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.TermCriteria TermCriteria"
+      ],
+      "historicalOrdinal": 112,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 113,
+      "identity": "cv.ml.EM.getWeights()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_get_weights"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.EM|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetWeights()"
+      ],
+      "historicalOrdinal": 113,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 114,
+      "identity": "cv.ml.EM.getMeans()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_get_means"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.EM|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetMeans()"
+      ],
+      "historicalOrdinal": 114,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 115,
+      "identity": "cv.ml.EM.getCovs(vector_Mat covs[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_get_covariances_count",
+        "jyppx_ocv_ml_em_get_covariances_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.EM|method|public;instance|JYPPX.OpenCvSharp.Core.Mat[] GetCovariances()"
+      ],
+      "historicalOrdinal": 115,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 116,
+      "identity": "cv.ml.EM.predict(Mat samples;Mat results=Mat()[/O];int flags=0)-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_stat_model_predict"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.StatModel|method|public;instance|System.Single Predict(JYPPX.OpenCvSharp.Core.Mat samples,JYPPX.OpenCvSharp.Core.Mat? results=null,JYPPX.OpenCvSharp.ML.StatModelFlags flags=None)"
+      ],
+      "historicalOrdinal": 116,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 117,
+      "identity": "cv.ml.EM.predict2(Mat sample;Mat probs[/O])-\u003EVec2d",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_predict2"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.EM|method|public;instance|JYPPX.OpenCvSharp.ML.EMPredictionResult Predict2(JYPPX.OpenCvSharp.Core.Mat sample,JYPPX.OpenCvSharp.Core.Mat? probabilities=null)"
+      ],
+      "historicalOrdinal": 117,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 118,
+      "identity": "cv.ml.EM.trainEM(Mat samples;Mat logLikelihoods=Mat()[/O];Mat labels=Mat()[/O];Mat probs=Mat()[/O])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_train_em"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.EM|method|public;instance|System.Boolean TrainEM(JYPPX.OpenCvSharp.Core.Mat samples,JYPPX.OpenCvSharp.Core.Mat? logLikelihoods=null,JYPPX.OpenCvSharp.Core.Mat? labels=null,JYPPX.OpenCvSharp.Core.Mat? probabilities=null)"
+      ],
+      "historicalOrdinal": 118,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 119,
+      "identity": "cv.ml.EM.trainE(Mat samples;Mat means0;Mat covs0=Mat();Mat weights0=Mat();Mat logLikelihoods=Mat()[/O];Mat labels=Mat()[/O];Mat probs=Mat()[/O])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_train_e"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.EM|method|public;instance|System.Boolean TrainE(JYPPX.OpenCvSharp.Core.Mat samples,JYPPX.OpenCvSharp.Core.Mat initialMeans,JYPPX.OpenCvSharp.Core.Mat[]? initialCovariances=null,JYPPX.OpenCvSharp.Core.Mat? initialWeights=null,JYPPX.OpenCvSharp.Core.Mat? logLikelihoods=null,JYPPX.OpenCvSharp.Core.Mat? labels=null,JYPPX.OpenCvSharp.Core.Mat? probabilities=null)"
+      ],
+      "historicalOrdinal": 119,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 120,
+      "identity": "cv.ml.EM.trainM(Mat samples;Mat probs0;Mat logLikelihoods=Mat()[/O];Mat labels=Mat()[/O];Mat probs=Mat()[/O])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_train_m"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.EM|method|public;instance|System.Boolean TrainM(JYPPX.OpenCvSharp.Core.Mat samples,JYPPX.OpenCvSharp.Core.Mat initialProbabilities,JYPPX.OpenCvSharp.Core.Mat? logLikelihoods=null,JYPPX.OpenCvSharp.Core.Mat? labels=null,JYPPX.OpenCvSharp.Core.Mat? probabilities=null)"
+      ],
+      "historicalOrdinal": 120,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 121,
+      "identity": "cv.ml.EM.create()-\u003EPtr\u003CEM\u003E",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.EM|method|public;static|JYPPX.OpenCvSharp.ML.EM Create()"
+      ],
+      "historicalOrdinal": 121,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 122,
+      "identity": "cv.ml.EM.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])-\u003EPtr\u003CEM\u003E",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_load"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.EM|method|public;static|JYPPX.OpenCvSharp.ML.EM Load(System.String filepath,System.String? nodeName=null)"
+      ],
+      "historicalOrdinal": 122,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 123,
+      "identity": "class cv.ml.DTrees",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 123,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 124,
+      "identity": "enum cv.ml.DTrees.Flags[const cv.ml.DTrees.PREDICT_AUTO=0;const cv.ml.DTrees.PREDICT_SUM=(1\u003C\u003C8);const cv.ml.DTrees.PREDICT_MAX_VOTE=(2\u003C\u003C8);const cv.ml.DTrees.PREDICT_MASK=(3\u003C\u003C8)]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 124,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 125,
+      "identity": "cv.ml.DTrees.getMaxCategories()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_dtrees_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Int32 MaxCategories"
+      ],
+      "historicalOrdinal": 125,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 126,
+      "identity": "cv.ml.DTrees.setMaxCategories(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_dtrees_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Int32 MaxCategories"
+      ],
+      "historicalOrdinal": 126,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 127,
+      "identity": "cv.ml.DTrees.getMaxDepth()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_dtrees_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Int32 MaxDepth"
+      ],
+      "historicalOrdinal": 127,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 128,
+      "identity": "cv.ml.DTrees.setMaxDepth(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_dtrees_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Int32 MaxDepth"
+      ],
+      "historicalOrdinal": 128,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 129,
+      "identity": "cv.ml.DTrees.getMinSampleCount()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_dtrees_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Int32 MinSampleCount"
+      ],
+      "historicalOrdinal": 129,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 130,
+      "identity": "cv.ml.DTrees.setMinSampleCount(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_dtrees_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Int32 MinSampleCount"
+      ],
+      "historicalOrdinal": 130,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 131,
+      "identity": "cv.ml.DTrees.getCVFolds()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_dtrees_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Int32 CVFolds"
+      ],
+      "historicalOrdinal": 131,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 132,
+      "identity": "cv.ml.DTrees.setCVFolds(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_dtrees_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Int32 CVFolds"
+      ],
+      "historicalOrdinal": 132,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 133,
+      "identity": "cv.ml.DTrees.getUseSurrogates()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_dtrees_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Boolean UseSurrogates"
+      ],
+      "historicalOrdinal": 133,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 134,
+      "identity": "cv.ml.DTrees.setUseSurrogates(bool val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_dtrees_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Boolean UseSurrogates"
+      ],
+      "historicalOrdinal": 134,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 135,
+      "identity": "cv.ml.DTrees.getUse1SERule()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_dtrees_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Boolean Use1SERule"
+      ],
+      "historicalOrdinal": 135,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 136,
+      "identity": "cv.ml.DTrees.setUse1SERule(bool val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_dtrees_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Boolean Use1SERule"
+      ],
+      "historicalOrdinal": 136,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 137,
+      "identity": "cv.ml.DTrees.getTruncatePrunedTree()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_dtrees_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Boolean TruncatePrunedTree"
+      ],
+      "historicalOrdinal": 137,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 138,
+      "identity": "cv.ml.DTrees.setTruncatePrunedTree(bool val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_dtrees_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Boolean TruncatePrunedTree"
+      ],
+      "historicalOrdinal": 138,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 139,
+      "identity": "cv.ml.DTrees.getRegressionAccuracy()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_dtrees_get_regression_accuracy"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Single RegressionAccuracy"
+      ],
+      "historicalOrdinal": 139,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 140,
+      "identity": "cv.ml.DTrees.setRegressionAccuracy(float val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_dtrees_set_regression_accuracy"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Single RegressionAccuracy"
+      ],
+      "historicalOrdinal": 140,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 141,
+      "identity": "cv.ml.DTrees.getPriors()-\u003Ecv::Mat",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_dtrees_get_priors"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.DTrees|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetPriors()"
+      ],
+      "historicalOrdinal": 141,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 142,
+      "identity": "cv.ml.DTrees.setPriors(Mat val[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_dtrees_set_priors"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.DTrees|method|public;instance|System.Void SetPriors(JYPPX.OpenCvSharp.Core.Mat priors)"
+      ],
+      "historicalOrdinal": 142,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 143,
+      "identity": "cv.ml.DTrees.create()-\u003EPtr\u003CDTrees\u003E",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_dtrees_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.DTrees|method|public;static|JYPPX.OpenCvSharp.ML.DTrees Create()"
+      ],
+      "historicalOrdinal": 143,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 144,
+      "identity": "cv.ml.DTrees.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])-\u003EPtr\u003CDTrees\u003E",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_dtrees_load"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.DTrees|method|public;static|JYPPX.OpenCvSharp.ML.DTrees Load(System.String filepath,System.String? nodeName=null)"
+      ],
+      "historicalOrdinal": 144,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 145,
+      "identity": "class cv.ml.RTrees",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 145,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 146,
+      "identity": "cv.ml.RTrees.getCalculateVarImportance()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_rtrees_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.RTrees|property|instance;get:public;set:public|System.Boolean CalculateVarImportance"
+      ],
+      "historicalOrdinal": 146,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 147,
+      "identity": "cv.ml.RTrees.setCalculateVarImportance(bool val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_rtrees_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.RTrees|property|instance;get:public;set:public|System.Boolean CalculateVarImportance"
+      ],
+      "historicalOrdinal": 147,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 148,
+      "identity": "cv.ml.RTrees.getActiveVarCount()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_rtrees_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.RTrees|property|instance;get:public;set:public|System.Int32 ActiveVarCount"
+      ],
+      "historicalOrdinal": 148,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 149,
+      "identity": "cv.ml.RTrees.setActiveVarCount(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_rtrees_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.RTrees|property|instance;get:public;set:public|System.Int32 ActiveVarCount"
+      ],
+      "historicalOrdinal": 149,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 150,
+      "identity": "cv.ml.RTrees.getTermCriteria()-\u003ETermCriteria",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_rtrees_get_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.RTrees|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.TermCriteria TermCriteria"
+      ],
+      "historicalOrdinal": 150,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 151,
+      "identity": "cv.ml.RTrees.setTermCriteria(TermCriteria val[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_rtrees_set_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.RTrees|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.TermCriteria TermCriteria"
+      ],
+      "historicalOrdinal": 151,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 152,
+      "identity": "cv.ml.RTrees.getVarImportance()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_rtrees_get_var_importance"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.RTrees|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetVarImportance()"
+      ],
+      "historicalOrdinal": 152,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 153,
+      "identity": "cv.ml.RTrees.getVotes(Mat samples;Mat results[/O];int flags)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_rtrees_get_votes"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.RTrees|method|public;instance|System.Void GetVotes(JYPPX.OpenCvSharp.Core.Mat samples,JYPPX.OpenCvSharp.Core.Mat results,JYPPX.OpenCvSharp.ML.DTreesPredictionFlags treeFlags=Auto,JYPPX.OpenCvSharp.ML.StatModelFlags flags=None)"
+      ],
+      "historicalOrdinal": 153,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 154,
+      "identity": "cv.ml.RTrees.create()-\u003EPtr\u003CRTrees\u003E",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_rtrees_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.RTrees|method|public;static|JYPPX.OpenCvSharp.ML.RTrees Create()"
+      ],
+      "historicalOrdinal": 154,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 155,
+      "identity": "cv.ml.RTrees.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])-\u003EPtr\u003CRTrees\u003E",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_rtrees_load"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.RTrees|method|public;static|JYPPX.OpenCvSharp.ML.RTrees Load(System.String filepath,System.String? nodeName=null)"
+      ],
+      "historicalOrdinal": 155,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 156,
+      "identity": "class cv.ml.Boost",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 156,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 157,
+      "identity": "cv.ml.Boost.getBoostType()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_boost_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.Boost|property|instance;get:public;set:public|JYPPX.OpenCvSharp.ML.BoostTypes BoostType"
+      ],
+      "historicalOrdinal": 157,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 158,
+      "identity": "cv.ml.Boost.setBoostType(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_boost_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.Boost|property|instance;get:public;set:public|JYPPX.OpenCvSharp.ML.BoostTypes BoostType"
+      ],
+      "historicalOrdinal": 158,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 159,
+      "identity": "cv.ml.Boost.getWeakCount()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_boost_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.Boost|property|instance;get:public;set:public|System.Int32 WeakCount"
+      ],
+      "historicalOrdinal": 159,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 160,
+      "identity": "cv.ml.Boost.setWeakCount(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_boost_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.Boost|property|instance;get:public;set:public|System.Int32 WeakCount"
+      ],
+      "historicalOrdinal": 160,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 161,
+      "identity": "cv.ml.Boost.getWeightTrimRate()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_boost_get_weight_trim_rate"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.Boost|property|instance;get:public;set:public|System.Double WeightTrimRate"
+      ],
+      "historicalOrdinal": 161,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 162,
+      "identity": "cv.ml.Boost.setWeightTrimRate(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_boost_set_weight_trim_rate"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.Boost|property|instance;get:public;set:public|System.Double WeightTrimRate"
+      ],
+      "historicalOrdinal": 162,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 163,
+      "identity": "enum cv.ml.Boost.Types[const cv.ml.Boost.DISCRETE=0;const cv.ml.Boost.REAL=1;const cv.ml.Boost.LOGIT=2;const cv.ml.Boost.GENTLE=3]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 163,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 164,
+      "identity": "cv.ml.Boost.create()-\u003EPtr\u003CBoost\u003E",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_boost_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.Boost|method|public;static|JYPPX.OpenCvSharp.ML.Boost Create()"
+      ],
+      "historicalOrdinal": 164,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 165,
+      "identity": "cv.ml.Boost.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])-\u003EPtr\u003CBoost\u003E",
+      "classification": "implemented",
+      "reason": "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_boost_load"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.Boost|method|public;static|JYPPX.OpenCvSharp.ML.Boost Load(System.String filepath,System.String? nodeName=null)"
+      ],
+      "historicalOrdinal": 165,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 166,
+      "identity": "class cv.ml.ANN_MLP",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 166,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 167,
+      "identity": "enum cv.ml.ANN_MLP.TrainingMethods[const cv.ml.ANN_MLP.BACKPROP=0;const cv.ml.ANN_MLP.RPROP=1;const cv.ml.ANN_MLP.ANNEAL=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 167,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 168,
+      "identity": "cv.ml.ANN_MLP.setTrainMethod(int method;double param1=0;double param2=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_train_method"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|method|public;instance|System.Void SetTrainMethod(JYPPX.OpenCvSharp.ML.ANN_MLPTrainingMethods method,System.Double param1=0,System.Double param2=0)"
+      ],
+      "historicalOrdinal": 168,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 169,
+      "identity": "cv.ml.ANN_MLP.getTrainMethod()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public|JYPPX.OpenCvSharp.ML.ANN_MLPTrainingMethods TrainingMethod"
+      ],
+      "historicalOrdinal": 169,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 170,
+      "identity": "cv.ml.ANN_MLP.setActivationFunction(int type;double param1=0;double param2=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_activation_function"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|method|public;instance|System.Void SetActivationFunction(JYPPX.OpenCvSharp.ML.ANN_MLPActivationFunctions type,System.Double param1=0,System.Double param2=0)"
+      ],
+      "historicalOrdinal": 170,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 171,
+      "identity": "cv.ml.ANN_MLP.setLayerSizes(Mat _layer_sizes)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_layer_sizes"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|method|public;instance|System.Void SetLayerSizes(JYPPX.OpenCvSharp.Core.Mat layerSizes)"
+      ],
+      "historicalOrdinal": 171,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 172,
+      "identity": "cv.ml.ANN_MLP.getLayerSizes()-\u003Ecv::Mat",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_layer_sizes"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetLayerSizes()"
+      ],
+      "historicalOrdinal": 172,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 173,
+      "identity": "cv.ml.ANN_MLP.getTermCriteria()-\u003ETermCriteria",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.TermCriteria TermCriteria"
+      ],
+      "historicalOrdinal": 173,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 174,
+      "identity": "cv.ml.ANN_MLP.setTermCriteria(TermCriteria val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.TermCriteria TermCriteria"
+      ],
+      "historicalOrdinal": 174,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 175,
+      "identity": "cv.ml.ANN_MLP.getBackpropWeightScale()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double BackpropWeightScale"
+      ],
+      "historicalOrdinal": 175,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 176,
+      "identity": "cv.ml.ANN_MLP.setBackpropWeightScale(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double BackpropWeightScale"
+      ],
+      "historicalOrdinal": 176,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 177,
+      "identity": "cv.ml.ANN_MLP.getBackpropMomentumScale()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double BackpropMomentumScale"
+      ],
+      "historicalOrdinal": 177,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 178,
+      "identity": "cv.ml.ANN_MLP.setBackpropMomentumScale(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double BackpropMomentumScale"
+      ],
+      "historicalOrdinal": 178,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 179,
+      "identity": "cv.ml.ANN_MLP.getRpropDW0()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDW0"
+      ],
+      "historicalOrdinal": 179,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 180,
+      "identity": "cv.ml.ANN_MLP.setRpropDW0(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDW0"
+      ],
+      "historicalOrdinal": 180,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 181,
+      "identity": "cv.ml.ANN_MLP.getRpropDWPlus()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWPlus"
+      ],
+      "historicalOrdinal": 181,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 182,
+      "identity": "cv.ml.ANN_MLP.setRpropDWPlus(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWPlus"
+      ],
+      "historicalOrdinal": 182,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 183,
+      "identity": "cv.ml.ANN_MLP.getRpropDWMinus()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWMinus"
+      ],
+      "historicalOrdinal": 183,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 184,
+      "identity": "cv.ml.ANN_MLP.setRpropDWMinus(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWMinus"
+      ],
+      "historicalOrdinal": 184,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 185,
+      "identity": "cv.ml.ANN_MLP.getRpropDWMin()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWMin"
+      ],
+      "historicalOrdinal": 185,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 186,
+      "identity": "cv.ml.ANN_MLP.setRpropDWMin(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWMin"
+      ],
+      "historicalOrdinal": 186,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 187,
+      "identity": "cv.ml.ANN_MLP.getRpropDWMax()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWMax"
+      ],
+      "historicalOrdinal": 187,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 188,
+      "identity": "cv.ml.ANN_MLP.setRpropDWMax(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWMax"
+      ],
+      "historicalOrdinal": 188,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 189,
+      "identity": "cv.ml.ANN_MLP.getAnnealInitialT()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double AnnealInitialT"
+      ],
+      "historicalOrdinal": 189,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 190,
+      "identity": "cv.ml.ANN_MLP.setAnnealInitialT(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double AnnealInitialT"
+      ],
+      "historicalOrdinal": 190,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 191,
+      "identity": "cv.ml.ANN_MLP.getAnnealFinalT()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double AnnealFinalT"
+      ],
+      "historicalOrdinal": 191,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 192,
+      "identity": "cv.ml.ANN_MLP.setAnnealFinalT(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double AnnealFinalT"
+      ],
+      "historicalOrdinal": 192,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 193,
+      "identity": "cv.ml.ANN_MLP.getAnnealCoolingRatio()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double AnnealCoolingRatio"
+      ],
+      "historicalOrdinal": 193,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 194,
+      "identity": "cv.ml.ANN_MLP.setAnnealCoolingRatio(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double AnnealCoolingRatio"
+      ],
+      "historicalOrdinal": 194,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 195,
+      "identity": "cv.ml.ANN_MLP.getAnnealItePerStep()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Int32 AnnealIterationsPerStep"
+      ],
+      "historicalOrdinal": 195,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 196,
+      "identity": "cv.ml.ANN_MLP.setAnnealItePerStep(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Int32 AnnealIterationsPerStep"
+      ],
+      "historicalOrdinal": 196,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 197,
+      "identity": "enum cv.ml.ANN_MLP.ActivationFunctions[const cv.ml.ANN_MLP.IDENTITY=0;const cv.ml.ANN_MLP.SIGMOID_SYM=1;const cv.ml.ANN_MLP.GAUSSIAN=2;const cv.ml.ANN_MLP.RELU=3;const cv.ml.ANN_MLP.LEAKYRELU=4]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 197,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 198,
+      "identity": "enum cv.ml.ANN_MLP.TrainFlags[const cv.ml.ANN_MLP.UPDATE_WEIGHTS=1;const cv.ml.ANN_MLP.NO_INPUT_SCALE=2;const cv.ml.ANN_MLP.NO_OUTPUT_SCALE=4]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 198,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 199,
+      "identity": "cv.ml.ANN_MLP.getWeights(int layerIdx)-\u003EMat",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_weights"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetWeights(System.Int32 layerIndex)"
+      ],
+      "historicalOrdinal": 199,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 200,
+      "identity": "cv.ml.ANN_MLP.create()-\u003EPtr\u003CANN_MLP\u003E",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|method|public;static|JYPPX.OpenCvSharp.ML.ANN_MLP Create()"
+      ],
+      "historicalOrdinal": 200,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 201,
+      "identity": "cv.ml.ANN_MLP.load(String filepath[/C,/Ref,/PATH])-\u003EPtr\u003CANN_MLP\u003E",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_load"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|method|public;static|JYPPX.OpenCvSharp.ML.ANN_MLP Load(System.String filepath)"
+      ],
+      "historicalOrdinal": 201,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 202,
+      "identity": "class cv.ml.LogisticRegression",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 202,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 203,
+      "identity": "cv.ml.LogisticRegression.getLearningRate()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_get_learning_rate"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|System.Double LearningRate"
+      ],
+      "historicalOrdinal": 203,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 204,
+      "identity": "cv.ml.LogisticRegression.setLearningRate(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_set_learning_rate"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|System.Double LearningRate"
+      ],
+      "historicalOrdinal": 204,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 205,
+      "identity": "cv.ml.LogisticRegression.getIterations()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|System.Int32 Iterations"
+      ],
+      "historicalOrdinal": 205,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 206,
+      "identity": "cv.ml.LogisticRegression.setIterations(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|System.Int32 Iterations"
+      ],
+      "historicalOrdinal": 206,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 207,
+      "identity": "cv.ml.LogisticRegression.getRegularization()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|JYPPX.OpenCvSharp.ML.LogisticRegressionRegularizationKinds Regularization"
+      ],
+      "historicalOrdinal": 207,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 208,
+      "identity": "cv.ml.LogisticRegression.setRegularization(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|JYPPX.OpenCvSharp.ML.LogisticRegressionRegularizationKinds Regularization"
+      ],
+      "historicalOrdinal": 208,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 209,
+      "identity": "cv.ml.LogisticRegression.getTrainMethod()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|JYPPX.OpenCvSharp.ML.LogisticRegressionTrainingMethods TrainingMethod"
+      ],
+      "historicalOrdinal": 209,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 210,
+      "identity": "cv.ml.LogisticRegression.setTrainMethod(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|JYPPX.OpenCvSharp.ML.LogisticRegressionTrainingMethods TrainingMethod"
+      ],
+      "historicalOrdinal": 210,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 211,
+      "identity": "cv.ml.LogisticRegression.getMiniBatchSize()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|System.Int32 MiniBatchSize"
+      ],
+      "historicalOrdinal": 211,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 212,
+      "identity": "cv.ml.LogisticRegression.setMiniBatchSize(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|System.Int32 MiniBatchSize"
+      ],
+      "historicalOrdinal": 212,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 213,
+      "identity": "cv.ml.LogisticRegression.getTermCriteria()-\u003ETermCriteria",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_get_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.TermCriteria TermCriteria"
+      ],
+      "historicalOrdinal": 213,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 214,
+      "identity": "cv.ml.LogisticRegression.setTermCriteria(TermCriteria val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_set_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.TermCriteria TermCriteria"
+      ],
+      "historicalOrdinal": 214,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 215,
+      "identity": "enum cv.ml.LogisticRegression.RegKinds[const cv.ml.LogisticRegression.REG_DISABLE=-1;const cv.ml.LogisticRegression.REG_L1=0;const cv.ml.LogisticRegression.REG_L2=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 215,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 216,
+      "identity": "enum cv.ml.LogisticRegression.Methods[const cv.ml.LogisticRegression.BATCH=0;const cv.ml.LogisticRegression.MINI_BATCH=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 216,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 217,
+      "identity": "cv.ml.LogisticRegression.predict(Mat samples;Mat results=Mat()[/O];int flags=0)-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_stat_model_predict"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.StatModel|method|public;instance|System.Single Predict(JYPPX.OpenCvSharp.Core.Mat samples,JYPPX.OpenCvSharp.Core.Mat? results=null,JYPPX.OpenCvSharp.ML.StatModelFlags flags=None)"
+      ],
+      "historicalOrdinal": 217,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 218,
+      "identity": "cv.ml.LogisticRegression.get_learnt_thetas()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_get_learnt_thetas"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.LogisticRegression|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetLearntThetas()"
+      ],
+      "historicalOrdinal": 218,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 219,
+      "identity": "cv.ml.LogisticRegression.create()-\u003EPtr\u003CLogisticRegression\u003E",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.LogisticRegression|method|public;static|JYPPX.OpenCvSharp.ML.LogisticRegression Create()"
+      ],
+      "historicalOrdinal": 219,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 220,
+      "identity": "cv.ml.LogisticRegression.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])-\u003EPtr\u003CLogisticRegression\u003E",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_load"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.LogisticRegression|method|public;static|JYPPX.OpenCvSharp.ML.LogisticRegression Load(System.String filepath,System.String? nodeName=null)"
+      ],
+      "historicalOrdinal": 220,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 221,
+      "identity": "class cv.ml.SVMSGD",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 221,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 222,
+      "identity": "enum cv.ml.SVMSGD.SvmsgdType[const cv.ml.SVMSGD.SGD=0;const cv.ml.SVMSGD.ASGD=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 222,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 223,
+      "identity": "enum cv.ml.SVMSGD.MarginType[const cv.ml.SVMSGD.SOFT_MARGIN=0;const cv.ml.SVMSGD.HARD_MARGIN=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 223,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 224,
+      "identity": "cv.ml.SVMSGD.getWeights()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_get_weights"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVMSGD|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetWeights()"
+      ],
+      "historicalOrdinal": 224,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 225,
+      "identity": "cv.ml.SVMSGD.getShift()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_get_shift"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVMSGD|property|instance;get:public|System.Single Shift"
+      ],
+      "historicalOrdinal": 225,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 226,
+      "identity": "cv.ml.SVMSGD.create()-\u003EPtr\u003CSVMSGD\u003E",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVMSGD|method|public;static|JYPPX.OpenCvSharp.ML.SVMSGD Create()"
+      ],
+      "historicalOrdinal": 226,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 227,
+      "identity": "cv.ml.SVMSGD.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])-\u003EPtr\u003CSVMSGD\u003E",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_load"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVMSGD|method|public;static|JYPPX.OpenCvSharp.ML.SVMSGD Load(System.String filepath,System.String? nodeName=null)"
+      ],
+      "historicalOrdinal": 227,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 228,
+      "identity": "cv.ml.SVMSGD.setOptimalParameters(int svmsgdType=SVMSGD::ASGD;int marginType=SVMSGD::SOFT_MARGIN)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_set_optimal_parameters"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVMSGD|method|public;instance|System.Void SetOptimalParameters(JYPPX.OpenCvSharp.ML.SVMSGDTypes type=Asgd,JYPPX.OpenCvSharp.ML.SVMSGDMarginTypes marginType=SoftMargin)"
+      ],
+      "historicalOrdinal": 228,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 229,
+      "identity": "cv.ml.SVMSGD.getSvmsgdType()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|JYPPX.OpenCvSharp.ML.SVMSGDTypes Type"
+      ],
+      "historicalOrdinal": 229,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 230,
+      "identity": "cv.ml.SVMSGD.setSvmsgdType(int svmsgdType)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|JYPPX.OpenCvSharp.ML.SVMSGDTypes Type"
+      ],
+      "historicalOrdinal": 230,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 231,
+      "identity": "cv.ml.SVMSGD.getMarginType()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|JYPPX.OpenCvSharp.ML.SVMSGDMarginTypes MarginType"
+      ],
+      "historicalOrdinal": 231,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 232,
+      "identity": "cv.ml.SVMSGD.setMarginType(int marginType)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|JYPPX.OpenCvSharp.ML.SVMSGDMarginTypes MarginType"
+      ],
+      "historicalOrdinal": 232,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 233,
+      "identity": "cv.ml.SVMSGD.getMarginRegularization()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_get_float"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|System.Single MarginRegularization"
+      ],
+      "historicalOrdinal": 233,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 234,
+      "identity": "cv.ml.SVMSGD.setMarginRegularization(float marginRegularization)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_set_float"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|System.Single MarginRegularization"
+      ],
+      "historicalOrdinal": 234,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 235,
+      "identity": "cv.ml.SVMSGD.getInitialStepSize()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_get_float"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|System.Single InitialStepSize"
+      ],
+      "historicalOrdinal": 235,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 236,
+      "identity": "cv.ml.SVMSGD.setInitialStepSize(float InitialStepSize)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_set_float"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|System.Single InitialStepSize"
+      ],
+      "historicalOrdinal": 236,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 237,
+      "identity": "cv.ml.SVMSGD.getStepDecreasingPower()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_get_float"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|System.Single StepDecreasingPower"
+      ],
+      "historicalOrdinal": 237,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 238,
+      "identity": "cv.ml.SVMSGD.setStepDecreasingPower(float stepDecreasingPower)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_set_float"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|System.Single StepDecreasingPower"
+      ],
+      "historicalOrdinal": 238,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 239,
+      "identity": "cv.ml.SVMSGD.getTermCriteria()-\u003ETermCriteria",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_get_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.TermCriteria TermCriteria"
+      ],
+      "historicalOrdinal": 239,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 240,
+      "identity": "cv.ml.SVMSGD.setTermCriteria(TermCriteria val[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_set_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.TermCriteria TermCriteria"
+      ],
+      "historicalOrdinal": 240,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    }
+  ]
+}

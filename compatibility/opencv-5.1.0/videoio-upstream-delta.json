@@ -1,0 +1,309 @@
+{
+  "fromVersion": "5.0.0",
+  "toVersion": "5.1.0",
+  "module": "videoio",
+  "retainedIdentityCount": 70,
+  "added": [
+    {
+      "identity": "enum cv.VideoWriterProperties[const cv.VIDEOWRITER_PROP_UNKNOWN=-1;const cv.VIDEOWRITER_PROP_QUALITY=1;const cv.VIDEOWRITER_PROP_FRAMEBYTES=2;const cv.VIDEOWRITER_PROP_NSTRIPES=3;const cv.VIDEOWRITER_PROP_IS_COLOR=4;const cv.VIDEOWRITER_PROP_DEPTH=5;const cv.VIDEOWRITER_PROP_HW_ACCELERATION=6;const cv.VIDEOWRITER_PROP_HW_DEVICE=7;const cv.VIDEOWRITER_PROP_HW_ACCELERATION_USE_OPENCL=8;const cv.VIDEOWRITER_PROP_RAW_VIDEO=9;const cv.VIDEOWRITER_PROP_KEY_INTERVAL=10;const cv.VIDEOWRITER_PROP_KEY_FLAG=11;const cv.VIDEOWRITER_PROP_PTS=12;const cv.VIDEOWRITER_PROP_DTS_DELAY=13;const cv.VIDEOWRITER_PROP_COLOR_SPACE=14;const cv.VIDEOWRITER_PROP_ENABLE_ALPHA=15;const cv.VIDEOWRITER_PROP_BITRATE=16;const cv.VIDEOWRITER_PROP_CRF=17;const cv.VIDEOWRITER_PROP_PRESET=18;const cv.VIDEOWRITER_PROP_GOP_SIZE=19]",
+      "review": "Preserve existing writer-property values and record new open-only BITRATE=16, CRF=17, PRESET=18 and GOP_SIZE=19 metadata. The managed enum remains unchanged; backend/encoder-specific support, CRF precedence and unsupported-option open failures are not certified by this map.",
+      "after": {
+        "ordinal": 2,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/videoio/include/opencv2/videoio.hpp",
+        "kind": "enum",
+        "name": "cv.VideoWriterProperties",
+        "identity": "enum cv.VideoWriterProperties[const cv.VIDEOWRITER_PROP_UNKNOWN=-1;const cv.VIDEOWRITER_PROP_QUALITY=1;const cv.VIDEOWRITER_PROP_FRAMEBYTES=2;const cv.VIDEOWRITER_PROP_NSTRIPES=3;const cv.VIDEOWRITER_PROP_IS_COLOR=4;const cv.VIDEOWRITER_PROP_DEPTH=5;const cv.VIDEOWRITER_PROP_HW_ACCELERATION=6;const cv.VIDEOWRITER_PROP_HW_DEVICE=7;const cv.VIDEOWRITER_PROP_HW_ACCELERATION_USE_OPENCL=8;const cv.VIDEOWRITER_PROP_RAW_VIDEO=9;const cv.VIDEOWRITER_PROP_KEY_INTERVAL=10;const cv.VIDEOWRITER_PROP_KEY_FLAG=11;const cv.VIDEOWRITER_PROP_PTS=12;const cv.VIDEOWRITER_PROP_DTS_DELAY=13;const cv.VIDEOWRITER_PROP_COLOR_SPACE=14;const cv.VIDEOWRITER_PROP_ENABLE_ALPHA=15;const cv.VIDEOWRITER_PROP_BITRATE=16;const cv.VIDEOWRITER_PROP_CRF=17;const cv.VIDEOWRITER_PROP_PRESET=18;const cv.VIDEOWRITER_PROP_GOP_SIZE=19]",
+        "returnType": "",
+        "modifiers": [],
+        "arguments": [],
+        "enumValues": [
+          {
+            "name": "const cv.VIDEOWRITER_PROP_UNKNOWN",
+            "value": "-1"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_QUALITY",
+            "value": "1"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_FRAMEBYTES",
+            "value": "2"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_NSTRIPES",
+            "value": "3"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_IS_COLOR",
+            "value": "4"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_DEPTH",
+            "value": "5"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_HW_ACCELERATION",
+            "value": "6"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_HW_DEVICE",
+            "value": "7"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_HW_ACCELERATION_USE_OPENCL",
+            "value": "8"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_RAW_VIDEO",
+            "value": "9"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_KEY_INTERVAL",
+            "value": "10"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_KEY_FLAG",
+            "value": "11"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_PTS",
+            "value": "12"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_DTS_DELAY",
+            "value": "13"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_COLOR_SPACE",
+            "value": "14"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_ENABLE_ALPHA",
+            "value": "15"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_BITRATE",
+            "value": "16"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_CRF",
+            "value": "17"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_PRESET",
+            "value": "18"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_GOP_SIZE",
+            "value": "19"
+          }
+        ],
+        "baseDeclaration": "",
+        "documentation": ""
+      }
+    },
+    {
+      "identity": "enum cv.VideoWriterPresets[const cv.VIDEOWRITER_PRESET_ULTRAFAST=0;const cv.VIDEOWRITER_PRESET_SUPERFAST=1;const cv.VIDEOWRITER_PRESET_VERYFAST=2;const cv.VIDEOWRITER_PRESET_FASTER=3;const cv.VIDEOWRITER_PRESET_FAST=4;const cv.VIDEOWRITER_PRESET_MEDIUM=5;const cv.VIDEOWRITER_PRESET_SLOW=6;const cv.VIDEOWRITER_PRESET_SLOWER=7;const cv.VIDEOWRITER_PRESET_VERYSLOW=8;const cv.VIDEOWRITER_PRESET_PLACEBO=9]",
+      "review": "New encoder-speed preset values ULTRAFAST through PLACEBO (0..9) are upstream metadata only. No managed preset enum or FFmpeg/GStreamer encoder combination is validated here.",
+      "after": {
+        "ordinal": 3,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/videoio/include/opencv2/videoio.hpp",
+        "kind": "enum",
+        "name": "cv.VideoWriterPresets",
+        "identity": "enum cv.VideoWriterPresets[const cv.VIDEOWRITER_PRESET_ULTRAFAST=0;const cv.VIDEOWRITER_PRESET_SUPERFAST=1;const cv.VIDEOWRITER_PRESET_VERYFAST=2;const cv.VIDEOWRITER_PRESET_FASTER=3;const cv.VIDEOWRITER_PRESET_FAST=4;const cv.VIDEOWRITER_PRESET_MEDIUM=5;const cv.VIDEOWRITER_PRESET_SLOW=6;const cv.VIDEOWRITER_PRESET_SLOWER=7;const cv.VIDEOWRITER_PRESET_VERYSLOW=8;const cv.VIDEOWRITER_PRESET_PLACEBO=9]",
+        "returnType": "",
+        "modifiers": [],
+        "arguments": [],
+        "enumValues": [
+          {
+            "name": "const cv.VIDEOWRITER_PRESET_ULTRAFAST",
+            "value": "0"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PRESET_SUPERFAST",
+            "value": "1"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PRESET_VERYFAST",
+            "value": "2"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PRESET_FASTER",
+            "value": "3"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PRESET_FAST",
+            "value": "4"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PRESET_MEDIUM",
+            "value": "5"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PRESET_SLOW",
+            "value": "6"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PRESET_SLOWER",
+            "value": "7"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PRESET_VERYSLOW",
+            "value": "8"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PRESET_PLACEBO",
+            "value": "9"
+          }
+        ],
+        "baseDeclaration": "",
+        "documentation": ""
+      }
+    },
+    {
+      "identity": "class cv.VideoDeviceInfo",
+      "review": "VideoDeviceInfo is new parser-visible device-description metadata and a default constructor. No C ABI/managed device-info object or enumeration transport exists; existing VideoCapture index/path opening does not implement device discovery.",
+      "after": {
+        "ordinal": 29,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/videoio/include/opencv2/videoio.hpp",
+        "kind": "class",
+        "name": "cv.VideoDeviceInfo",
+        "identity": "class cv.VideoDeviceInfo",
+        "returnType": "",
+        "modifiers": [
+          "/Simple"
+        ],
+        "arguments": [
+          {
+            "type": "int",
+            "name": "cam_idx",
+            "default": "",
+            "modifiers": [
+              "/RW"
+            ]
+          },
+          {
+            "type": "string",
+            "name": "cam_name",
+            "default": "",
+            "modifiers": [
+              "/RW"
+            ]
+          },
+          {
+            "type": "VideoCaptureAPIs",
+            "name": "backend",
+            "default": "",
+            "modifiers": [
+              "/RW"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Camera device reported by a videoio backend"
+      }
+    },
+    {
+      "identity": "cv.VideoDeviceInfo.VideoDeviceInfo()-\u003E",
+      "review": "VideoDeviceInfo is new parser-visible device-description metadata and a default constructor. No C ABI/managed device-info object or enumeration transport exists; existing VideoCapture index/path opening does not implement device discovery.",
+      "after": {
+        "ordinal": 30,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/videoio/include/opencv2/videoio.hpp",
+        "kind": "callable",
+        "name": "cv.VideoDeviceInfo.VideoDeviceInfo",
+        "identity": "cv.VideoDeviceInfo.VideoDeviceInfo()-\u003E",
+        "returnType": "",
+        "modifiers": [],
+        "arguments": [],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": ""
+      }
+    }
+  ],
+  "removed": [
+    {
+      "identity": "enum cv.VideoWriterProperties[const cv.VIDEOWRITER_PROP_UNKNOWN=-1;const cv.VIDEOWRITER_PROP_QUALITY=1;const cv.VIDEOWRITER_PROP_FRAMEBYTES=2;const cv.VIDEOWRITER_PROP_NSTRIPES=3;const cv.VIDEOWRITER_PROP_IS_COLOR=4;const cv.VIDEOWRITER_PROP_DEPTH=5;const cv.VIDEOWRITER_PROP_HW_ACCELERATION=6;const cv.VIDEOWRITER_PROP_HW_DEVICE=7;const cv.VIDEOWRITER_PROP_HW_ACCELERATION_USE_OPENCL=8;const cv.VIDEOWRITER_PROP_RAW_VIDEO=9;const cv.VIDEOWRITER_PROP_KEY_INTERVAL=10;const cv.VIDEOWRITER_PROP_KEY_FLAG=11;const cv.VIDEOWRITER_PROP_PTS=12;const cv.VIDEOWRITER_PROP_DTS_DELAY=13;const cv.VIDEOWRITER_PROP_COLOR_SPACE=14;const cv.VIDEOWRITER_PROP_ENABLE_ALPHA=15]",
+      "review": "The VideoWriterProperties full-enum identity changes because four values are appended; existing values and managed/C ABI bindings are retained.",
+      "before": {
+        "ordinal": 2,
+        "kind": "enum",
+        "name": "cv.VideoWriterProperties",
+        "identity": "enum cv.VideoWriterProperties[const cv.VIDEOWRITER_PROP_UNKNOWN=-1;const cv.VIDEOWRITER_PROP_QUALITY=1;const cv.VIDEOWRITER_PROP_FRAMEBYTES=2;const cv.VIDEOWRITER_PROP_NSTRIPES=3;const cv.VIDEOWRITER_PROP_IS_COLOR=4;const cv.VIDEOWRITER_PROP_DEPTH=5;const cv.VIDEOWRITER_PROP_HW_ACCELERATION=6;const cv.VIDEOWRITER_PROP_HW_DEVICE=7;const cv.VIDEOWRITER_PROP_HW_ACCELERATION_USE_OPENCL=8;const cv.VIDEOWRITER_PROP_RAW_VIDEO=9;const cv.VIDEOWRITER_PROP_KEY_INTERVAL=10;const cv.VIDEOWRITER_PROP_KEY_FLAG=11;const cv.VIDEOWRITER_PROP_PTS=12;const cv.VIDEOWRITER_PROP_DTS_DELAY=13;const cv.VIDEOWRITER_PROP_COLOR_SPACE=14;const cv.VIDEOWRITER_PROP_ENABLE_ALPHA=15]",
+        "returnType": "",
+        "modifiers": [],
+        "arguments": [],
+        "enumValues": [
+          {
+            "name": "const cv.VIDEOWRITER_PROP_UNKNOWN",
+            "value": "-1"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_QUALITY",
+            "value": "1"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_FRAMEBYTES",
+            "value": "2"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_NSTRIPES",
+            "value": "3"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_IS_COLOR",
+            "value": "4"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_DEPTH",
+            "value": "5"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_HW_ACCELERATION",
+            "value": "6"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_HW_DEVICE",
+            "value": "7"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_HW_ACCELERATION_USE_OPENCL",
+            "value": "8"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_RAW_VIDEO",
+            "value": "9"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_KEY_INTERVAL",
+            "value": "10"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_KEY_FLAG",
+            "value": "11"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_PTS",
+            "value": "12"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_DTS_DELAY",
+            "value": "13"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_COLOR_SPACE",
+            "value": "14"
+          },
+          {
+            "name": "const cv.VIDEOWRITER_PROP_ENABLE_ALPHA",
+            "value": "15"
+          }
+        ],
+        "baseDeclaration": "",
+        "documentation": ""
+      }
+    }
+  ],
+  "changed": []
+}

@@ -1,0 +1,80 @@
+{
+  "fromVersion": "5.0.0",
+  "toVersion": "5.1.0",
+  "module": "stitching",
+  "retainedIdentityCount": 207,
+  "added": [],
+  "removed": [],
+  "changed": [
+    {
+      "identity": "class cv.detail.LightGlueFeaturesMatcher",
+      "review": "The learned stitching matcher requires descriptors, keypoints and image sizes compatible with the wrapped LightGlue model and selected normalization. Its existing unsupported classification remains; no model-backed matching or inference support is promoted.",
+      "before": {
+        "ordinal": 141,
+        "surface": "detail-matchers",
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+        "kind": "class",
+        "name": "cv.detail.LightGlueFeaturesMatcher",
+        "identity": "class cv.detail.LightGlueFeaturesMatcher",
+        "returnType": ": cv::detail::FeaturesMatcher",
+        "modifiers": [],
+        "arguments": [],
+        "enumValues": [],
+        "baseDeclaration": ": cv::detail::FeaturesMatcher",
+        "documentation": "@brief Features matcher that adapts LightGlueMatcher (DescriptorMatcher) to the\nstitching pipeline\u0027s FeaturesMatcher interface.\n\nThis matcher uses DNN-based LightGlue for feature matching, requiring ALIKED-style\nkeypoints with spatial context for positional encoding.\n\n@sa cv::detail::FeaturesMatcher cv::LightGlueMatcher"
+      },
+      "after": {
+        "ordinal": 141,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+        "kind": "class",
+        "name": "cv.detail.LightGlueFeaturesMatcher",
+        "identity": "class cv.detail.LightGlueFeaturesMatcher",
+        "returnType": ": cv::detail::FeaturesMatcher",
+        "modifiers": [],
+        "arguments": [],
+        "enumValues": [],
+        "baseDeclaration": ": cv::detail::FeaturesMatcher",
+        "documentation": "@brief Features matcher that adapts LightGlueMatcher (DescriptorMatcher) to the\nstitching pipeline\u0027s FeaturesMatcher interface.\n\nThis matcher uses DNN-based LightGlue for feature matching. The wrapped\nLightGlueMatcher controls which feature type and keypoint normalization are used.\nImageFeatures must contain compatible descriptors, keypoints, and image sizes for\nthe selected LightGlue model.\n\n@sa cv::detail::FeaturesMatcher cv::LightGlueMatcher",
+        "surface": "detail-matchers"
+      },
+      "fields": [
+        "documentation"
+      ]
+    },
+    {
+      "identity": "class cv.detail.DpSeamFinder",
+      "review": "Documentation adds the dynamic-programming seam-estimation reference. The existing DpSeamFinder managed/C ABI binding and numerical contract are unchanged.",
+      "before": {
+        "ordinal": 181,
+        "surface": "detail-seam-finders",
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp",
+        "kind": "class",
+        "name": "cv.detail.DpSeamFinder",
+        "identity": "class cv.detail.DpSeamFinder",
+        "returnType": ": cv::detail::SeamFinder",
+        "modifiers": [],
+        "arguments": [],
+        "enumValues": [],
+        "baseDeclaration": ": cv::detail::SeamFinder",
+        "documentation": ""
+      },
+      "after": {
+        "ordinal": 181,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp",
+        "kind": "class",
+        "name": "cv.detail.DpSeamFinder",
+        "identity": "class cv.detail.DpSeamFinder",
+        "returnType": ": cv::detail::SeamFinder",
+        "modifiers": [],
+        "arguments": [],
+        "enumValues": [],
+        "baseDeclaration": ": cv::detail::SeamFinder",
+        "documentation": "@brief Dynamic programming-based seam estimator. See @cite MillsD09 for a related approach.",
+        "surface": "detail-seam-finders"
+      },
+      "fields": [
+        "documentation"
+      ]
+    }
+  ]
+}

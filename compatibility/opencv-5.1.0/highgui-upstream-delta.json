@@ -1,0 +1,64 @@
+{
+  "fromVersion": "5.0.0",
+  "toVersion": "5.1.0",
+  "module": "highgui",
+  "retainedIdentityCount": 33,
+  "added": [
+    {
+      "identity": "cv.saveWindowParameters(String windowName[/C,/Ref])-\u003Evoid",
+      "review": "The newly parser-visible Qt window-parameter persistence call is not exposed by a managed or C ABI entry point. Persisting/restoring geometry, trackbars and zoom requires a Qt/UI state contract and backend-specific tests; ordinary NamedWindow/trackbar operations are not this API.",
+      "after": {
+        "ordinal": 33,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/highgui/include/opencv2/highgui.hpp",
+        "kind": "callable",
+        "name": "cv.saveWindowParameters",
+        "identity": "cv.saveWindowParameters(String windowName[/C,/Ref])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "String",
+            "name": "windowName",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Saves parameters of the specified window.\n\nThe function saveWindowParameters saves size, location, flags, trackbars value, zoom and panning\nlocation of the window windowName.\n\n@param windowName Name of the window."
+      }
+    },
+    {
+      "identity": "cv.loadWindowParameters(String windowName[/C,/Ref])-\u003Evoid",
+      "review": "The newly parser-visible Qt window-parameter persistence call is not exposed by a managed or C ABI entry point. Persisting/restoring geometry, trackbars and zoom requires a Qt/UI state contract and backend-specific tests; ordinary NamedWindow/trackbar operations are not this API.",
+      "after": {
+        "ordinal": 34,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/highgui/include/opencv2/highgui.hpp",
+        "kind": "callable",
+        "name": "cv.loadWindowParameters",
+        "identity": "cv.loadWindowParameters(String windowName[/C,/Ref])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "String",
+            "name": "windowName",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Loads parameters of the specified window.\n\nThe function loadWindowParameters loads size, location, flags, trackbars value, zoom and panning\nlocation of the window windowName.\n\n@param windowName Name of the window."
+      }
+    }
+  ],
+  "removed": [],
+  "changed": []
+}

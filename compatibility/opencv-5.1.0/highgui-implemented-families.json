@@ -1,0 +1,311 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.1.0",
+  "module": "highgui",
+  "claimedSlice": "Historical highgui parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+  "completeCppParityClaimed": false,
+  "implemented": [
+    {
+      "ordinal": 7,
+      "identity": "cv.namedWindow(String winname[/C,/Ref];int flags=WINDOW_AUTOSIZE)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_named_window"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.HighGui.Cv2|method|public;static|System.Void NamedWindow(System.String winname,JYPPX.OpenCvSharp.HighGui.WindowFlags flags=AutoSize)"
+      ],
+      "historicalOrdinal": 7,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.destroyWindow(String winname[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_destroy_window"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.HighGui.Cv2|method|public;static|System.Void DestroyWindow(System.String winname)"
+      ],
+      "historicalOrdinal": 8,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.destroyAllWindows()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_destroy_all_windows"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.HighGui.Cv2|method|public;static|System.Void DestroyAllWindows()"
+      ],
+      "historicalOrdinal": 9,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.currentUIFramework()-\u003Estd::string",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_current_ui_framework_fill",
+        "jyppx_ocv_highgui_current_ui_framework_length"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.HighGui.Cv2|method|public;static|System.String GetCurrentUIFramework()"
+      ],
+      "historicalOrdinal": 10,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.startWindowThread()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_start_window_thread"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.HighGui.Cv2|method|public;static|System.Int32 StartWindowThread()"
+      ],
+      "historicalOrdinal": 11,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.waitKeyEx(int delay=0)-\u003Eint",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_wait_key_ex"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.HighGui.Cv2|method|public;static|System.Int32 WaitKeyEx(System.Int32 delay=0)"
+      ],
+      "historicalOrdinal": 12,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.waitKey(int delay=0)-\u003Eint",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_wait_key"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.HighGui.Cv2|method|public;static|System.Int32 WaitKey(System.Int32 delay=0)"
+      ],
+      "historicalOrdinal": 13,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.pollKey()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_poll_key"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.HighGui.Cv2|method|public;static|System.Int32 PollKey()"
+      ],
+      "historicalOrdinal": 14,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.imshow(String winname[/C,/Ref];Mat mat)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_imshow"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.HighGui.Cv2|method|public;static|System.Void ImShow(System.String winname,JYPPX.OpenCvSharp.Core.Mat mat)"
+      ],
+      "historicalOrdinal": 15,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.resizeWindow(String winname[/C,/Ref];int width;int height)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_resize_window"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.HighGui.Cv2|method|public;static|System.Void ResizeWindow(System.String winname,System.Int32 width,System.Int32 height)"
+      ],
+      "historicalOrdinal": 16,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.resizeWindow(String winname[/C,/Ref];Size size[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_resize_window"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.HighGui.Cv2|method|public;static|System.Void ResizeWindow(System.String winname,JYPPX.OpenCvSharp.Core.Size size)"
+      ],
+      "historicalOrdinal": 17,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.moveWindow(String winname[/C,/Ref];int x;int y)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_move_window"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.HighGui.Cv2|method|public;static|System.Void MoveWindow(System.String winname,System.Int32 x,System.Int32 y)"
+      ],
+      "historicalOrdinal": 18,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.setWindowProperty(String winname[/C,/Ref];int prop_id;double prop_value)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_set_window_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.HighGui.Cv2|method|public;static|System.Void SetWindowProperty(System.String winname,JYPPX.OpenCvSharp.HighGui.WindowPropertyFlags propId,System.Double propValue)"
+      ],
+      "historicalOrdinal": 19,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.setWindowTitle(String winname[/C,/Ref];String title[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_set_window_title"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.HighGui.Cv2|method|public;static|System.Void SetWindowTitle(System.String winname,System.String title)"
+      ],
+      "historicalOrdinal": 20,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.getWindowProperty(String winname[/C,/Ref];int prop_id)-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_get_window_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.HighGui.Cv2|method|public;static|System.Double GetWindowProperty(System.String winname,JYPPX.OpenCvSharp.HighGui.WindowPropertyFlags propId)"
+      ],
+      "historicalOrdinal": 21,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.getWindowImageRect(String winname[/C,/Ref])-\u003ERect",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_get_window_image_rect"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.HighGui.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Rect GetWindowImageRect(System.String winname)"
+      ],
+      "historicalOrdinal": 22,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.getTrackbarPos(String trackbarname[/C,/Ref];String winname[/C,/Ref])-\u003Eint",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_get_trackbar_pos"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.HighGui.Cv2|method|public;static|System.Int32 GetTrackbarPos(System.String trackbarname,System.String winname)"
+      ],
+      "historicalOrdinal": 26,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.setTrackbarPos(String trackbarname[/C,/Ref];String winname[/C,/Ref];int pos)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_set_trackbar_pos"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.HighGui.Cv2|method|public;static|System.Void SetTrackbarPos(System.String trackbarname,System.String winname,System.Int32 pos)"
+      ],
+      "historicalOrdinal": 27,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.setTrackbarMax(String trackbarname[/C,/Ref];String winname[/C,/Ref];int maxval)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_set_trackbar_max"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.HighGui.Cv2|method|public;static|System.Void SetTrackbarMax(System.String trackbarname,System.String winname,System.Int32 maxval)"
+      ],
+      "historicalOrdinal": 28,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.setTrackbarMin(String trackbarname[/C,/Ref];String winname[/C,/Ref];int minval)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_set_trackbar_min"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.HighGui.Cv2|method|public;static|System.Void SetTrackbarMin(System.String trackbarname,System.String winname,System.Int32 minval)"
+      ],
+      "historicalOrdinal": 29,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    }
+  ],
+  "limitation": "Implemented means the recorded managed/C ABI binding exists, subject to its documented validation. It does not certify wider 5.1 input domains, optional codecs/backends, or complete C\u002B\u002B coverage."
+}

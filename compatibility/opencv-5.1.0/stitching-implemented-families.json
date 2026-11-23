@@ -1,0 +1,2539 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.1.0",
+  "module": "stitching",
+  "claimedSlice": "Historical stitching parser scope refreshed against official 5.1 sources: 14 contributing header(s); parser-emitted declarations only",
+  "completeCppParityClaimed": false,
+  "implemented": [
+    {
+      "ordinal": 3,
+      "surface": "primary",
+      "identity": "cv.Stitcher.create(Mode mode=Stitcher::PANORAMA)-\u003EPtr\u003CStitcher\u003E",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Stitcher|method|public;static|JYPPX.OpenCvSharp.Stitching.Stitcher Create(JYPPX.OpenCvSharp.Stitching.StitcherMode mode=Panorama)"
+      ],
+      "historicalOrdinal": 3,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 4,
+      "surface": "primary",
+      "identity": "cv.Stitcher.registrationResol()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|System.Double RegistrationResol"
+      ],
+      "historicalOrdinal": 4,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 5,
+      "surface": "primary",
+      "identity": "cv.Stitcher.setRegistrationResol(double resol_mpx)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|System.Double RegistrationResol"
+      ],
+      "historicalOrdinal": 5,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 6,
+      "surface": "primary",
+      "identity": "cv.Stitcher.seamEstimationResol()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|System.Double SeamEstimationResol"
+      ],
+      "historicalOrdinal": 6,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 7,
+      "surface": "primary",
+      "identity": "cv.Stitcher.setSeamEstimationResol(double resol_mpx)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|System.Double SeamEstimationResol"
+      ],
+      "historicalOrdinal": 7,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 8,
+      "surface": "primary",
+      "identity": "cv.Stitcher.compositingResol()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|System.Double CompositingResol"
+      ],
+      "historicalOrdinal": 8,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 9,
+      "surface": "primary",
+      "identity": "cv.Stitcher.setCompositingResol(double resol_mpx)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|System.Double CompositingResol"
+      ],
+      "historicalOrdinal": 9,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 10,
+      "surface": "primary",
+      "identity": "cv.Stitcher.panoConfidenceThresh()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|System.Double PanoConfidenceThresh"
+      ],
+      "historicalOrdinal": 10,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 11,
+      "surface": "primary",
+      "identity": "cv.Stitcher.setPanoConfidenceThresh(double conf_thresh)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|System.Double PanoConfidenceThresh"
+      ],
+      "historicalOrdinal": 11,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 12,
+      "surface": "primary",
+      "identity": "cv.Stitcher.waveCorrection()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|System.Boolean WaveCorrection"
+      ],
+      "historicalOrdinal": 12,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 13,
+      "surface": "primary",
+      "identity": "cv.Stitcher.setWaveCorrection(bool flag)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|System.Boolean WaveCorrection"
+      ],
+      "historicalOrdinal": 13,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 14,
+      "surface": "primary",
+      "identity": "cv.Stitcher.interpolationFlags()-\u003EInterpolationFlags",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|JYPPX.OpenCvSharp.ImgProc.InterpolationFlags InterpolationFlags"
+      ],
+      "historicalOrdinal": 14,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 15,
+      "surface": "primary",
+      "identity": "cv.Stitcher.setInterpolationFlags(InterpolationFlags interp_flags)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|JYPPX.OpenCvSharp.ImgProc.InterpolationFlags InterpolationFlags"
+      ],
+      "historicalOrdinal": 15,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 16,
+      "surface": "primary",
+      "identity": "cv.Stitcher.estimateTransform(vector_Mat images;vector_Mat masks=vector_Mat())-\u003EStatus",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_estimate_transform"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Stitcher|method|public;instance|JYPPX.OpenCvSharp.Stitching.StitcherStatus EstimateTransform(JYPPX.OpenCvSharp.Core.Mat[] images,JYPPX.OpenCvSharp.Core.Mat[]? masks)"
+      ],
+      "historicalOrdinal": 16,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 17,
+      "surface": "primary",
+      "identity": "cv.Stitcher.composePanorama(Mat pano[/O])-\u003EStatus",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_compose_panorama"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Stitcher|method|public;instance|JYPPX.OpenCvSharp.Stitching.StitcherStatus ComposePanorama(JYPPX.OpenCvSharp.Core.Mat pano)"
+      ],
+      "historicalOrdinal": 17,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 18,
+      "surface": "primary",
+      "identity": "cv.Stitcher.composePanorama(vector_Mat images;Mat pano[/O])-\u003EStatus",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_compose_panorama_images"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Stitcher|method|public;instance|JYPPX.OpenCvSharp.Stitching.StitcherStatus ComposePanorama(JYPPX.OpenCvSharp.Core.Mat[] images,JYPPX.OpenCvSharp.Core.Mat pano)"
+      ],
+      "historicalOrdinal": 18,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 19,
+      "surface": "primary",
+      "identity": "cv.Stitcher.stitch(vector_Mat images;Mat pano[/O])-\u003EStatus",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_stitch"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Stitcher|method|public;instance|JYPPX.OpenCvSharp.Stitching.StitcherStatus Stitch(JYPPX.OpenCvSharp.Core.Mat[] images,JYPPX.OpenCvSharp.Core.Mat pano)"
+      ],
+      "historicalOrdinal": 19,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 20,
+      "surface": "primary",
+      "identity": "cv.Stitcher.stitch(vector_Mat images;vector_Mat masks;Mat pano[/O])-\u003EStatus",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_stitch"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Stitcher|method|public;instance|JYPPX.OpenCvSharp.Stitching.StitcherStatus Stitch(JYPPX.OpenCvSharp.Core.Mat[] images,JYPPX.OpenCvSharp.Core.Mat[]? masks,JYPPX.OpenCvSharp.Core.Mat pano)"
+      ],
+      "historicalOrdinal": 20,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 21,
+      "surface": "primary",
+      "identity": "cv.Stitcher.component()-\u003Estd::vector\u003Cint\u003E",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_get_component_count",
+        "jyppx_ocv_stitcher_get_component_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Stitcher|method|public;instance|System.Int32[] GetComponent()"
+      ],
+      "historicalOrdinal": 21,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 22,
+      "surface": "primary",
+      "identity": "cv.Stitcher.cameras()-\u003Estd::vector\u003Ccv::detail::CameraParams\u003E",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_get_cameras_count",
+        "jyppx_ocv_stitcher_get_cameras_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Stitcher|method|public;instance|JYPPX.OpenCvSharp.Stitching.StitcherCameraParams[] GetCameras()"
+      ],
+      "historicalOrdinal": 22,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 23,
+      "surface": "primary",
+      "identity": "cv.Stitcher.workScale()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Stitcher|property|instance;get:public|System.Double WorkScale"
+      ],
+      "historicalOrdinal": 23,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 25,
+      "surface": "public-warpers",
+      "identity": "cv.PyRotationWarper.PyRotationWarper(String type;float scale)-\u003E",
+      "classification": "implemented",
+      "reason": "The complete public PyRotationWarper family is implemented with owned lifetime, strict projector/K/R contracts, caller-owned maps and images, safe default state, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_py_rotation_warper_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.PyRotationWarper|constructor|public;instance|.ctor(System.String type,System.Single scale)"
+      ],
+      "historicalOrdinal": 25,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 26,
+      "surface": "public-warpers",
+      "identity": "cv.PyRotationWarper.PyRotationWarper()-\u003E",
+      "classification": "implemented",
+      "reason": "The complete public PyRotationWarper family is implemented with owned lifetime, strict projector/K/R contracts, caller-owned maps and images, safe default state, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_py_rotation_warper_create_default"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.PyRotationWarper|constructor|public;instance|.ctor()"
+      ],
+      "historicalOrdinal": 26,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 27,
+      "surface": "public-warpers",
+      "identity": "cv.PyRotationWarper.warpPoint(Point2f pt[/C,/Ref];Mat K;Mat R)-\u003EPoint2f",
+      "classification": "implemented",
+      "reason": "The complete public PyRotationWarper family is implemented with owned lifetime, strict projector/K/R contracts, caller-owned maps and images, safe default state, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_py_rotation_warper_warp_point"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|JYPPX.OpenCvSharp.Core.Point2f WarpPoint(JYPPX.OpenCvSharp.Core.Point2f point,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat rotationMatrix)"
+      ],
+      "historicalOrdinal": 27,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 28,
+      "surface": "public-warpers",
+      "identity": "cv.PyRotationWarper.warpPointBackward(Point2f pt[/C,/Ref];Mat K;Mat R)-\u003EPoint2f",
+      "classification": "implemented",
+      "reason": "The complete public PyRotationWarper family is implemented with owned lifetime, strict projector/K/R contracts, caller-owned maps and images, safe default state, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_py_rotation_warper_warp_point_backward"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|JYPPX.OpenCvSharp.Core.Point2f WarpPointBackward(JYPPX.OpenCvSharp.Core.Point2f point,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat rotationMatrix)"
+      ],
+      "historicalOrdinal": 28,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 29,
+      "surface": "public-warpers",
+      "identity": "cv.PyRotationWarper.buildMaps(Size src_size;Mat K;Mat R;Mat xmap[/O];Mat ymap[/O])-\u003ERect",
+      "classification": "implemented",
+      "reason": "The complete public PyRotationWarper family is implemented with owned lifetime, strict projector/K/R contracts, caller-owned maps and images, safe default state, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_py_rotation_warper_build_maps"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|JYPPX.OpenCvSharp.Core.Rect BuildMaps(JYPPX.OpenCvSharp.Core.Size sourceSize,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat rotationMatrix,JYPPX.OpenCvSharp.Core.Mat xMap,JYPPX.OpenCvSharp.Core.Mat yMap)"
+      ],
+      "historicalOrdinal": 29,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 30,
+      "surface": "public-warpers",
+      "identity": "cv.PyRotationWarper.warp(Mat src;Mat K;Mat R;int interp_mode;int border_mode;Mat dst[/O,/O])-\u003EPoint",
+      "classification": "implemented",
+      "reason": "The complete public PyRotationWarper family is implemented with owned lifetime, strict projector/K/R contracts, caller-owned maps and images, safe default state, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_py_rotation_warper_warp"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|JYPPX.OpenCvSharp.Core.Point Warp(JYPPX.OpenCvSharp.Core.Mat source,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat rotationMatrix,JYPPX.OpenCvSharp.ImgProc.InterpolationFlags interpolationMode,JYPPX.OpenCvSharp.ImgProc.BorderTypes borderMode,JYPPX.OpenCvSharp.Core.Mat destination)"
+      ],
+      "historicalOrdinal": 30,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 31,
+      "surface": "public-warpers",
+      "identity": "cv.PyRotationWarper.warpBackward(Mat src;Mat K;Mat R;int interp_mode;int border_mode;Size dst_size;Mat dst[/O,/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete public PyRotationWarper family is implemented with owned lifetime, strict projector/K/R contracts, caller-owned maps and images, safe default state, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_py_rotation_warper_warp_backward"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|System.Void WarpBackward(JYPPX.OpenCvSharp.Core.Mat source,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat rotationMatrix,JYPPX.OpenCvSharp.ImgProc.InterpolationFlags interpolationMode,JYPPX.OpenCvSharp.ImgProc.BorderTypes borderMode,JYPPX.OpenCvSharp.Core.Size destinationSize,JYPPX.OpenCvSharp.Core.Mat destination)"
+      ],
+      "historicalOrdinal": 31,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 32,
+      "surface": "public-warpers",
+      "identity": "cv.PyRotationWarper.warpRoi(Size src_size;Mat K;Mat R)-\u003ERect",
+      "classification": "implemented",
+      "reason": "The complete public PyRotationWarper family is implemented with owned lifetime, strict projector/K/R contracts, caller-owned maps and images, safe default state, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_py_rotation_warper_warp_roi"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|JYPPX.OpenCvSharp.Core.Rect WarpRoi(JYPPX.OpenCvSharp.Core.Size sourceSize,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat rotationMatrix)"
+      ],
+      "historicalOrdinal": 32,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 33,
+      "surface": "public-warpers",
+      "identity": "cv.PyRotationWarper.getScale()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The complete public PyRotationWarper family is implemented with owned lifetime, strict projector/K/R contracts, caller-owned maps and images, safe default state, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_py_rotation_warper_get_scale"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.PyRotationWarper|property|instance;get:public;set:public|System.Single Scale"
+      ],
+      "historicalOrdinal": 33,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 34,
+      "surface": "public-warpers",
+      "identity": "cv.PyRotationWarper.setScale(float arg1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete public PyRotationWarper family is implemented with owned lifetime, strict projector/K/R contracts, caller-owned maps and images, safe default state, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_py_rotation_warper_set_scale"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.PyRotationWarper|property|instance;get:public;set:public|System.Single Scale"
+      ],
+      "historicalOrdinal": 34,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 36,
+      "surface": "detail-autocalib",
+      "identity": "cv.detail.focalsFromHomography(Mat H[/C,/Ref];double f0[/Ref];double f1[/Ref];bool f0_ok[/Ref];bool f1_ok[/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_focals_from_homography"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.StitchingMotion|method|public;static|System.Void FocalsFromHomography(JYPPX.OpenCvSharp.Core.Mat homography,out System.Double focalX,out System.Double focalY,out System.Boolean focalXEstimated,out System.Boolean focalYEstimated)"
+      ],
+      "historicalOrdinal": 36,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 37,
+      "surface": "detail-autocalib",
+      "identity": "cv.detail.calibrateRotatingCamera(vector_Mat Hs[/C,/Ref];Mat K[/O,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_calibrate_rotating_camera"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.StitchingMotion|method|public;static|System.Boolean CalibrateRotatingCamera(JYPPX.OpenCvSharp.Core.Mat[] homographies,JYPPX.OpenCvSharp.Core.Mat cameraMatrix)"
+      ],
+      "historicalOrdinal": 37,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 40,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.Blender.createDefault(int type;bool try_gpu=false)-\u003EPtr\u003CBlender\u003E",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_create_default",
+        "jyppx_ocv_stitching_blender_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Blender|method|public;static|JYPPX.OpenCvSharp.Stitching.Blender CreateDefault(JYPPX.OpenCvSharp.Stitching.BlenderType type,System.Boolean tryGpu=false)"
+      ],
+      "historicalOrdinal": 40,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 41,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.Blender.prepare(vector_Point corners[/C,/Ref];vector_Size sizes[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_prepare"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Prepare(JYPPX.OpenCvSharp.Core.Point[] corners,JYPPX.OpenCvSharp.Core.Size[] sizes)"
+      ],
+      "historicalOrdinal": 41,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 42,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.Blender.prepare(Rect dst_roi)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_prepare_roi"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Prepare(JYPPX.OpenCvSharp.Core.Rect destinationRoi)"
+      ],
+      "historicalOrdinal": 42,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 43,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.Blender.feed(Mat img;Mat mask;Point tl)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_feed"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Feed(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat mask,JYPPX.OpenCvSharp.Core.Point topLeft)"
+      ],
+      "historicalOrdinal": 43,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 44,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.Blender.blend(Mat dst[/IO,/IO];Mat dst_mask[/IO,/IO])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_blend"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Blend(JYPPX.OpenCvSharp.Core.Mat destination,JYPPX.OpenCvSharp.Core.Mat destinationMask)"
+      ],
+      "historicalOrdinal": 44,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 46,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.FeatherBlender.FeatherBlender(float sharpness=0.02f)-\u003E",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_create_feather",
+        "jyppx_ocv_stitching_blender_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.FeatherBlender|constructor|public;instance|.ctor(System.Single sharpness=0.02)"
+      ],
+      "historicalOrdinal": 46,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 47,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.FeatherBlender.sharpness()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_get_sharpness"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.FeatherBlender|property|instance;get:public;set:public|System.Single Sharpness"
+      ],
+      "historicalOrdinal": 47,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 48,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.FeatherBlender.setSharpness(float val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_set_sharpness"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.FeatherBlender|property|instance;get:public;set:public|System.Single Sharpness"
+      ],
+      "historicalOrdinal": 48,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 49,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.FeatherBlender.prepare(Rect dst_roi)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_prepare_roi"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Prepare(JYPPX.OpenCvSharp.Core.Rect destinationRoi)"
+      ],
+      "historicalOrdinal": 49,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 50,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.FeatherBlender.feed(Mat img;Mat mask;Point tl)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_feed"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Feed(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat mask,JYPPX.OpenCvSharp.Core.Point topLeft)"
+      ],
+      "historicalOrdinal": 50,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 51,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.FeatherBlender.blend(Mat dst[/IO];Mat dst_mask[/IO])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_blend"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Blend(JYPPX.OpenCvSharp.Core.Mat destination,JYPPX.OpenCvSharp.Core.Mat destinationMask)"
+      ],
+      "historicalOrdinal": 51,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 52,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.FeatherBlender.createWeightMaps(vector_UMat masks[/C,/Ref];vector_Point corners[/C,/Ref];vector_UMat weight_maps[/IO,/Ref])-\u003ERect",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_create_weight_maps"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.FeatherBlender|method|public;instance|JYPPX.OpenCvSharp.Core.Mat[] CreateWeightMaps(JYPPX.OpenCvSharp.Core.Mat[] masks,JYPPX.OpenCvSharp.Core.Point[] corners,out JYPPX.OpenCvSharp.Core.Rect destinationRoi)"
+      ],
+      "historicalOrdinal": 52,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 54,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.MultiBandBlender.MultiBandBlender(int try_gpu=false;int num_bands=5;int weight_type=CV_32F)-\u003E",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_create_multi_band",
+        "jyppx_ocv_stitching_blender_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.MultiBandBlender|constructor|public;instance|.ctor(System.Boolean tryGpu=false,System.Int32 numberOfBands=5,System.Int32 weightType=5)"
+      ],
+      "historicalOrdinal": 54,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 55,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.MultiBandBlender.numBands()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_get_number_of_bands"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.MultiBandBlender|property|instance;get:public;set:public|System.Int32 NumberOfBands"
+      ],
+      "historicalOrdinal": 55,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 56,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.MultiBandBlender.setNumBands(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_set_number_of_bands"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.MultiBandBlender|property|instance;get:public;set:public|System.Int32 NumberOfBands"
+      ],
+      "historicalOrdinal": 56,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 57,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.MultiBandBlender.prepare(Rect dst_roi)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_prepare_roi"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Prepare(JYPPX.OpenCvSharp.Core.Rect destinationRoi)"
+      ],
+      "historicalOrdinal": 57,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 58,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.MultiBandBlender.feed(Mat img;Mat mask;Point tl)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_feed"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Feed(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat mask,JYPPX.OpenCvSharp.Core.Point topLeft)"
+      ],
+      "historicalOrdinal": 58,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 59,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.MultiBandBlender.blend(Mat dst[/IO,/IO];Mat dst_mask[/IO,/IO])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_blend"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Blend(JYPPX.OpenCvSharp.Core.Mat destination,JYPPX.OpenCvSharp.Core.Mat destinationMask)"
+      ],
+      "historicalOrdinal": 59,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 60,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.normalizeUsingWeightMap(Mat weight;Mat src[/IO,/IO])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_normalize_using_weight_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Blender|method|public;static|System.Void NormalizeUsingWeightMap(JYPPX.OpenCvSharp.Core.Mat weight,JYPPX.OpenCvSharp.Core.Mat source)"
+      ],
+      "historicalOrdinal": 60,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 61,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.createWeightMap(Mat mask;float sharpness;Mat weight[/IO,/IO])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_create_weight_map"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Blender|method|public;static|System.Void CreateWeightMap(JYPPX.OpenCvSharp.Core.Mat mask,System.Single sharpness,JYPPX.OpenCvSharp.Core.Mat weight)"
+      ],
+      "historicalOrdinal": 61,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 62,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.createLaplacePyr(Mat img;int num_levels;vector_UMat pyr[/IO,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_create_laplace_pyramid"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Blender|method|public;static|JYPPX.OpenCvSharp.Core.Mat[] CreateLaplacePyramid(JYPPX.OpenCvSharp.Core.Mat image,System.Int32 numberOfLevels)"
+      ],
+      "historicalOrdinal": 62,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 63,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.createLaplacePyrGpu(Mat img;int num_levels;vector_UMat pyr[/IO,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_create_laplace_pyramid_gpu"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Blender|method|public;static|JYPPX.OpenCvSharp.Core.Mat[] CreateLaplacePyramidGpu(JYPPX.OpenCvSharp.Core.Mat image,System.Int32 numberOfLevels)"
+      ],
+      "historicalOrdinal": 63,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 64,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.restoreImageFromLaplacePyr(vector_UMat pyr[/IO,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_restore_image_from_laplace_pyramid"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Blender|method|public;static|System.Void RestoreImageFromLaplacePyramid(JYPPX.OpenCvSharp.Core.Mat[] pyramid)"
+      ],
+      "historicalOrdinal": 64,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 65,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.restoreImageFromLaplacePyrGpu(vector_UMat pyr[/IO,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_restore_image_from_laplace_pyramid_gpu"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Blender|method|public;static|System.Void RestoreImageFromLaplacePyramidGpu(JYPPX.OpenCvSharp.Core.Mat[] pyramid)"
+      ],
+      "historicalOrdinal": 65,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 67,
+      "surface": "detail-camera",
+      "identity": "cv.detail.CameraParams.K()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_camera_params_get_k"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.StitcherCameraParams|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetCameraMatrix()"
+      ],
+      "historicalOrdinal": 67,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 70,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ExposureCompensator.createDefault(int type)-\u003EPtr\u003CExposureCompensator\u003E",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_create_default"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ExposureCompensator|method|public;static|JYPPX.OpenCvSharp.Stitching.ExposureCompensator CreateDefault(JYPPX.OpenCvSharp.Stitching.ExposureCompensatorType type)"
+      ],
+      "historicalOrdinal": 70,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 71,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ExposureCompensator.feed(vector_Point corners[/C,/Ref];vector_UMat images[/C,/Ref];vector_UMat masks[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_feed"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void Feed(JYPPX.OpenCvSharp.Core.Point[] corners,JYPPX.OpenCvSharp.Core.Mat[] images,JYPPX.OpenCvSharp.Core.Mat[] masks)"
+      ],
+      "historicalOrdinal": 71,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 72,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ExposureCompensator.apply(int index;Point corner;Mat image[/IO];Mat mask)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_apply"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void Apply(System.Int32 index,JYPPX.OpenCvSharp.Core.Point corner,JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat mask)"
+      ],
+      "historicalOrdinal": 72,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 73,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ExposureCompensator.getMatGains(vector_Mat arg1[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_mat_gains_count",
+        "jyppx_ocv_stitching_exposure_get_mat_gains_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|JYPPX.OpenCvSharp.Core.Mat[] GetMatGains()"
+      ],
+      "historicalOrdinal": 73,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 74,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ExposureCompensator.setMatGains(vector_Mat arg1[/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_mat_gains"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void SetMatGains(JYPPX.OpenCvSharp.Core.Mat[] gains)"
+      ],
+      "historicalOrdinal": 74,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 75,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ExposureCompensator.setUpdateGain(bool b)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_update_gain"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ExposureCompensator|property|instance;get:public;set:public|System.Boolean UpdateGain"
+      ],
+      "historicalOrdinal": 75,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 76,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ExposureCompensator.getUpdateGain()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_update_gain"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ExposureCompensator|property|instance;get:public;set:public|System.Boolean UpdateGain"
+      ],
+      "historicalOrdinal": 76,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 78,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.NoExposureCompensator.apply(int arg1;Point arg2;Mat arg3[/IO];Mat arg4)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_apply"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void Apply(System.Int32 index,JYPPX.OpenCvSharp.Core.Point corner,JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat mask)"
+      ],
+      "historicalOrdinal": 78,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 79,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.NoExposureCompensator.getMatGains(vector_Mat umv[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_mat_gains_count",
+        "jyppx_ocv_stitching_exposure_get_mat_gains_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|JYPPX.OpenCvSharp.Core.Mat[] GetMatGains()"
+      ],
+      "historicalOrdinal": 79,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 80,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.NoExposureCompensator.setMatGains(vector_Mat umv[/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_mat_gains"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void SetMatGains(JYPPX.OpenCvSharp.Core.Mat[] gains)"
+      ],
+      "historicalOrdinal": 80,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 82,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.GainCompensator.GainCompensator()-\u003E",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_create_gain"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.GainCompensator|constructor|public;instance|.ctor(System.Int32 numberOfFeeds=1)"
+      ],
+      "historicalOrdinal": 82,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 83,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.GainCompensator.GainCompensator(int nr_feeds)-\u003E",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_create_gain"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.GainCompensator|constructor|public;instance|.ctor(System.Int32 numberOfFeeds=1)"
+      ],
+      "historicalOrdinal": 83,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 84,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.GainCompensator.apply(int index;Point corner;Mat image[/IO];Mat mask)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_apply"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void Apply(System.Int32 index,JYPPX.OpenCvSharp.Core.Point corner,JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat mask)"
+      ],
+      "historicalOrdinal": 84,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 85,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.GainCompensator.getMatGains(vector_Mat umv[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_mat_gains_count",
+        "jyppx_ocv_stitching_exposure_get_mat_gains_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|JYPPX.OpenCvSharp.Core.Mat[] GetMatGains()"
+      ],
+      "historicalOrdinal": 85,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 86,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.GainCompensator.setMatGains(vector_Mat umv[/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_mat_gains"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void SetMatGains(JYPPX.OpenCvSharp.Core.Mat[] gains)"
+      ],
+      "historicalOrdinal": 86,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 87,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.GainCompensator.setNrFeeds(int nr_feeds)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_number_of_feeds"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.GainCompensator|property|instance;get:public;set:public|System.Int32 NumberOfFeeds"
+      ],
+      "historicalOrdinal": 87,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 88,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.GainCompensator.getNrFeeds()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_number_of_feeds"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.GainCompensator|property|instance;get:public;set:public|System.Int32 NumberOfFeeds"
+      ],
+      "historicalOrdinal": 88,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 89,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.GainCompensator.setSimilarityThreshold(double similarity_threshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_similarity_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.GainCompensator|property|instance;get:public;set:public|System.Double SimilarityThreshold"
+      ],
+      "historicalOrdinal": 89,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 90,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.GainCompensator.getSimilarityThreshold()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_similarity_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.GainCompensator|property|instance;get:public;set:public|System.Double SimilarityThreshold"
+      ],
+      "historicalOrdinal": 90,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 92,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ChannelsCompensator.ChannelsCompensator(int nr_feeds=1)-\u003E",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_create_channels"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ChannelsCompensator|constructor|public;instance|.ctor(System.Int32 numberOfFeeds=1)"
+      ],
+      "historicalOrdinal": 92,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 93,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ChannelsCompensator.apply(int index;Point corner;Mat image[/IO];Mat mask)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_apply"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void Apply(System.Int32 index,JYPPX.OpenCvSharp.Core.Point corner,JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat mask)"
+      ],
+      "historicalOrdinal": 93,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 94,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ChannelsCompensator.getMatGains(vector_Mat umv[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_mat_gains_count",
+        "jyppx_ocv_stitching_exposure_get_mat_gains_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|JYPPX.OpenCvSharp.Core.Mat[] GetMatGains()"
+      ],
+      "historicalOrdinal": 94,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 95,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ChannelsCompensator.setMatGains(vector_Mat umv[/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_mat_gains"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void SetMatGains(JYPPX.OpenCvSharp.Core.Mat[] gains)"
+      ],
+      "historicalOrdinal": 95,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 96,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ChannelsCompensator.setNrFeeds(int nr_feeds)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_number_of_feeds"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ChannelsCompensator|property|instance;get:public;set:public|System.Int32 NumberOfFeeds"
+      ],
+      "historicalOrdinal": 96,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 97,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ChannelsCompensator.getNrFeeds()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_number_of_feeds"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ChannelsCompensator|property|instance;get:public;set:public|System.Int32 NumberOfFeeds"
+      ],
+      "historicalOrdinal": 97,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 98,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ChannelsCompensator.setSimilarityThreshold(double similarity_threshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_similarity_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ChannelsCompensator|property|instance;get:public;set:public|System.Double SimilarityThreshold"
+      ],
+      "historicalOrdinal": 98,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 99,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ChannelsCompensator.getSimilarityThreshold()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_similarity_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ChannelsCompensator|property|instance;get:public;set:public|System.Double SimilarityThreshold"
+      ],
+      "historicalOrdinal": 99,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 101,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksCompensator.apply(int index;Point corner;Mat image[/IO];Mat mask)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_apply"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void Apply(System.Int32 index,JYPPX.OpenCvSharp.Core.Point corner,JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat mask)"
+      ],
+      "historicalOrdinal": 101,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 102,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksCompensator.getMatGains(vector_Mat umv[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_mat_gains_count",
+        "jyppx_ocv_stitching_exposure_get_mat_gains_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|JYPPX.OpenCvSharp.Core.Mat[] GetMatGains()"
+      ],
+      "historicalOrdinal": 102,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 103,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksCompensator.setMatGains(vector_Mat umv[/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_mat_gains"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void SetMatGains(JYPPX.OpenCvSharp.Core.Mat[] gains)"
+      ],
+      "historicalOrdinal": 103,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 104,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksCompensator.setNrFeeds(int nr_feeds)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_number_of_feeds"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|System.Int32 NumberOfFeeds"
+      ],
+      "historicalOrdinal": 104,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 105,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksCompensator.getNrFeeds()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_number_of_feeds"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|System.Int32 NumberOfFeeds"
+      ],
+      "historicalOrdinal": 105,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 106,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksCompensator.setSimilarityThreshold(double similarity_threshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_similarity_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|System.Double SimilarityThreshold"
+      ],
+      "historicalOrdinal": 106,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 107,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksCompensator.getSimilarityThreshold()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_similarity_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|System.Double SimilarityThreshold"
+      ],
+      "historicalOrdinal": 107,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 108,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksCompensator.setBlockSize(int width;int height)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_block_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.Size BlockSize"
+      ],
+      "historicalOrdinal": 108,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 109,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksCompensator.setBlockSize(Size size)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_block_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.Size BlockSize"
+      ],
+      "historicalOrdinal": 109,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 110,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksCompensator.getBlockSize()-\u003ESize",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_block_size"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.Size BlockSize"
+      ],
+      "historicalOrdinal": 110,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 111,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksCompensator.setNrGainsFilteringIterations(int nr_iterations)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_filtering_iterations"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|System.Int32 FilteringIterations"
+      ],
+      "historicalOrdinal": 111,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 112,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksCompensator.getNrGainsFilteringIterations()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_filtering_iterations"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|System.Int32 FilteringIterations"
+      ],
+      "historicalOrdinal": 112,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 114,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksGainCompensator.BlocksGainCompensator(int bl_width=32;int bl_height=32)-\u003E",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_create_blocks_gain"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.BlocksGainCompensator|constructor|public;instance|.ctor(System.Int32 blockWidth=32,System.Int32 blockHeight=32,System.Int32 numberOfFeeds=1)"
+      ],
+      "historicalOrdinal": 114,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 115,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksGainCompensator.BlocksGainCompensator(int bl_width;int bl_height;int nr_feeds)-\u003E",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_create_blocks_gain"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.BlocksGainCompensator|constructor|public;instance|.ctor(System.Int32 blockWidth=32,System.Int32 blockHeight=32,System.Int32 numberOfFeeds=1)"
+      ],
+      "historicalOrdinal": 115,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 116,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksGainCompensator.apply(int index;Point corner;Mat image[/IO];Mat mask)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_apply"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void Apply(System.Int32 index,JYPPX.OpenCvSharp.Core.Point corner,JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat mask)"
+      ],
+      "historicalOrdinal": 116,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 117,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksGainCompensator.getMatGains(vector_Mat umv[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_mat_gains_count",
+        "jyppx_ocv_stitching_exposure_get_mat_gains_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|JYPPX.OpenCvSharp.Core.Mat[] GetMatGains()"
+      ],
+      "historicalOrdinal": 117,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 118,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksGainCompensator.setMatGains(vector_Mat umv[/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_mat_gains"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void SetMatGains(JYPPX.OpenCvSharp.Core.Mat[] gains)"
+      ],
+      "historicalOrdinal": 118,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 120,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksChannelsCompensator.BlocksChannelsCompensator(int bl_width=32;int bl_height=32;int nr_feeds=1)-\u003E",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_create_blocks_channels"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.BlocksChannelsCompensator|constructor|public;instance|.ctor(System.Int32 blockWidth=32,System.Int32 blockHeight=32,System.Int32 numberOfFeeds=1)"
+      ],
+      "historicalOrdinal": 120,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 122,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.ImageFeatures.getKeypoints()-\u003Estd::vector\u003CKeyPoint\u003E",
+      "classification": "implemented",
+      "reason": "The selected detail matcher family is implemented with owned ImageFeatures and MatchesInfo value handles, copied descriptor/homography outputs, exact N-squared batch results, Feature2D finder bridging, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_image_features_get_keypoints_count",
+        "jyppx_ocv_stitching_image_features_get_keypoints_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ImageFeatures|property|instance;get:public|JYPPX.OpenCvSharp.Features2D.KeyPoint[] Keypoints"
+      ],
+      "historicalOrdinal": 122,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 123,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.computeImageFeatures(Ptr_Feature2D featuresFinder[/C,/Ref];vector_Mat images;vector_ImageFeatures features[/O,/Ref];vector_Mat masks=vector_Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected detail matcher family is implemented with owned ImageFeatures and MatchesInfo value handles, copied descriptor/homography outputs, exact N-squared batch results, Feature2D finder bridging, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_compute_image_features_batch"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ImageFeatures|method|public;static|JYPPX.OpenCvSharp.Stitching.ImageFeatures[] Compute(JYPPX.OpenCvSharp.Features2D.Feature2D finder,JYPPX.OpenCvSharp.Core.Mat[] images,JYPPX.OpenCvSharp.Core.Mat[]? masks=null)"
+      ],
+      "historicalOrdinal": 123,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 124,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.computeImageFeatures(Ptr_Feature2D featuresFinder[/C,/Ref];Mat image;ImageFeatures features[/O,/Ref];Mat mask=Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected detail matcher family is implemented with owned ImageFeatures and MatchesInfo value handles, copied descriptor/homography outputs, exact N-squared batch results, Feature2D finder bridging, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_compute_image_features"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.ImageFeatures|method|public;static|JYPPX.OpenCvSharp.Stitching.ImageFeatures Compute(JYPPX.OpenCvSharp.Features2D.Feature2D finder,JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat? mask=null)"
+      ],
+      "historicalOrdinal": 124,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 126,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.MatchesInfo.getMatches()-\u003Estd::vector\u003CDMatch\u003E",
+      "classification": "implemented",
+      "reason": "The selected detail matcher family is implemented with owned ImageFeatures and MatchesInfo value handles, copied descriptor/homography outputs, exact N-squared batch results, Feature2D finder bridging, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_matches_info_get_matches_count",
+        "jyppx_ocv_stitching_matches_info_get_matches_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.MatchesInfo|property|instance;get:public|JYPPX.OpenCvSharp.Features2D.DMatch[] Matches"
+      ],
+      "historicalOrdinal": 126,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 127,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.MatchesInfo.getInliers()-\u003Estd::vector\u003Cuchar\u003E",
+      "classification": "implemented",
+      "reason": "The selected detail matcher family is implemented with owned ImageFeatures and MatchesInfo value handles, copied descriptor/homography outputs, exact N-squared batch results, Feature2D finder bridging, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_matches_info_get_inliers_count",
+        "jyppx_ocv_stitching_matches_info_get_inliers_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.MatchesInfo|property|instance;get:public|System.Byte[] Inliers"
+      ],
+      "historicalOrdinal": 127,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 129,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.FeaturesMatcher.operator ()(ImageFeatures features1[/C,/Ref];ImageFeatures features2[/C,/Ref];MatchesInfo matches_info[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected detail matcher family is implemented with owned ImageFeatures and MatchesInfo value handles, copied descriptor/homography outputs, exact N-squared batch results, Feature2D finder bridging, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_features_matcher_match_pair"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.FeaturesMatcher|method|public;instance|JYPPX.OpenCvSharp.Stitching.MatchesInfo Match(JYPPX.OpenCvSharp.Stitching.ImageFeatures first,JYPPX.OpenCvSharp.Stitching.ImageFeatures second)"
+      ],
+      "historicalOrdinal": 129,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 130,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.FeaturesMatcher.operator ()(vector_ImageFeatures features[/C,/Ref];vector_MatchesInfo pairwise_matches[/O,/Ref];UMat mask=cv::UMat()[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected detail matcher family is implemented with owned ImageFeatures and MatchesInfo value handles, copied descriptor/homography outputs, exact N-squared batch results, Feature2D finder bridging, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_features_matcher_match_batch"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.FeaturesMatcher|method|public;instance|JYPPX.OpenCvSharp.Stitching.MatchesInfo[] Match(JYPPX.OpenCvSharp.Stitching.ImageFeatures[] features,JYPPX.OpenCvSharp.Core.Mat? mask=null)"
+      ],
+      "historicalOrdinal": 130,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 131,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.FeaturesMatcher.isThreadSafe()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected detail matcher family is implemented with owned ImageFeatures and MatchesInfo value handles, copied descriptor/homography outputs, exact N-squared batch results, Feature2D finder bridging, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_features_matcher_is_thread_safe"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.FeaturesMatcher|property|instance;get:public|System.Boolean IsThreadSafe"
+      ],
+      "historicalOrdinal": 131,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 132,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.FeaturesMatcher.collectGarbage()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected detail matcher family is implemented with owned ImageFeatures and MatchesInfo value handles, copied descriptor/homography outputs, exact N-squared batch results, Feature2D finder bridging, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_features_matcher_collect_garbage"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.FeaturesMatcher|method|public;instance|System.Void CollectGarbage()"
+      ],
+      "historicalOrdinal": 132,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 134,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.BestOf2NearestMatcher.BestOf2NearestMatcher(bool try_use_gpu=false;float match_conf=0.3f;int num_matches_thresh1=6;int num_matches_thresh2=6;double matches_confidence_thresh=3.)-\u003E",
+      "classification": "implemented",
+      "reason": "The selected detail matcher family is implemented with owned ImageFeatures and MatchesInfo value handles, copied descriptor/homography outputs, exact N-squared batch results, Feature2D finder bridging, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_features_matcher_create_best_of_two_nearest",
+        "jyppx_ocv_stitching_features_matcher_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.BestOf2NearestMatcher|constructor|public;instance|.ctor(System.Boolean tryGpu=false,System.Single matchConfidence=0.3,System.Int32 numberOfMatchesThreshold1=6,System.Int32 numberOfMatchesThreshold2=6,System.Double matchesConfidenceThreshold=3)"
+      ],
+      "historicalOrdinal": 134,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 135,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.BestOf2NearestMatcher.collectGarbage()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected detail matcher family is implemented with owned ImageFeatures and MatchesInfo value handles, copied descriptor/homography outputs, exact N-squared batch results, Feature2D finder bridging, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_features_matcher_collect_garbage"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.FeaturesMatcher|method|public;instance|System.Void CollectGarbage()"
+      ],
+      "historicalOrdinal": 135,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 136,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.BestOf2NearestMatcher.create(bool try_use_gpu=false;float match_conf=0.3f;int num_matches_thresh1=6;int num_matches_thresh2=6;double matches_confidence_thresh=3.)-\u003EPtr\u003CBestOf2NearestMatcher\u003E",
+      "classification": "implemented",
+      "reason": "The selected detail matcher family is implemented with owned ImageFeatures and MatchesInfo value handles, copied descriptor/homography outputs, exact N-squared batch results, Feature2D finder bridging, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_features_matcher_factory_best_of_two_nearest",
+        "jyppx_ocv_stitching_features_matcher_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.BestOf2NearestMatcher|method|public;static|JYPPX.OpenCvSharp.Stitching.BestOf2NearestMatcher Create(System.Boolean tryGpu=false,System.Single matchConfidence=0.3,System.Int32 numberOfMatchesThreshold1=6,System.Int32 numberOfMatchesThreshold2=6,System.Double matchesConfidenceThreshold=3)"
+      ],
+      "historicalOrdinal": 136,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 138,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.BestOf2NearestRangeMatcher.BestOf2NearestRangeMatcher(int range_width=5;bool try_use_gpu=false;float match_conf=0.3f;int num_matches_thresh1=6;int num_matches_thresh2=6)-\u003E",
+      "classification": "implemented",
+      "reason": "The selected detail matcher family is implemented with owned ImageFeatures and MatchesInfo value handles, copied descriptor/homography outputs, exact N-squared batch results, Feature2D finder bridging, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_features_matcher_create_range",
+        "jyppx_ocv_stitching_features_matcher_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.BestOf2NearestRangeMatcher|constructor|public;instance|.ctor(System.Int32 rangeWidth=5,System.Boolean tryGpu=false,System.Single matchConfidence=0.3,System.Int32 numberOfMatchesThreshold1=6,System.Int32 numberOfMatchesThreshold2=6)"
+      ],
+      "historicalOrdinal": 138,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 140,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.AffineBestOf2NearestMatcher.AffineBestOf2NearestMatcher(bool full_affine=false;bool try_use_gpu=false;float match_conf=0.3f;int num_matches_thresh1=6)-\u003E",
+      "classification": "implemented",
+      "reason": "The selected detail matcher family is implemented with owned ImageFeatures and MatchesInfo value handles, copied descriptor/homography outputs, exact N-squared batch results, Feature2D finder bridging, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_features_matcher_create_affine",
+        "jyppx_ocv_stitching_features_matcher_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.AffineBestOf2NearestMatcher|constructor|public;instance|.ctor(System.Boolean fullAffine=false,System.Boolean tryGpu=false,System.Single matchConfidence=0.3,System.Int32 numberOfMatchesThreshold1=6)"
+      ],
+      "historicalOrdinal": 140,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 145,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.Estimator.operator ()(vector_ImageFeatures features[/C,/Ref];vector_MatchesInfo pairwise_matches[/C,/Ref];vector_CameraParams cameras[/IO,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_estimator_apply"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Estimator|method|public;instance|System.Boolean Apply(JYPPX.OpenCvSharp.Stitching.ImageFeatures[] features,JYPPX.OpenCvSharp.Stitching.MatchesInfo[] pairwiseMatches,JYPPX.OpenCvSharp.Stitching.StitcherCameraParams[]? initialCameras,out JYPPX.OpenCvSharp.Stitching.StitcherCameraParams[] cameras)"
+      ],
+      "historicalOrdinal": 145,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 147,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.HomographyBasedEstimator.HomographyBasedEstimator(bool is_focals_estimated=false)-\u003E",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_estimator_create_homography",
+        "jyppx_ocv_stitching_estimator_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.HomographyBasedEstimator|constructor|public;instance|.ctor(System.Boolean focalLengthsEstimated=false)"
+      ],
+      "historicalOrdinal": 147,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 149,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.AffineBasedEstimator.AffineBasedEstimator()-\u003E",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_estimator_create_affine",
+        "jyppx_ocv_stitching_estimator_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.AffineBasedEstimator|constructor|public;instance|.ctor()"
+      ],
+      "historicalOrdinal": 149,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 151,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.BundleAdjusterBase.refinementMask()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_bundle_adjuster_copy_refinement_mask"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.BundleAdjusterBase|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.Mat RefinementMask"
+      ],
+      "historicalOrdinal": 151,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 152,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.BundleAdjusterBase.setRefinementMask(Mat mask[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_bundle_adjuster_set_refinement_mask"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.BundleAdjusterBase|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.Mat RefinementMask"
+      ],
+      "historicalOrdinal": 152,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 153,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.BundleAdjusterBase.confThresh()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_bundle_adjuster_get_confidence_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.BundleAdjusterBase|property|instance;get:public;set:public|System.Double ConfidenceThreshold"
+      ],
+      "historicalOrdinal": 153,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 154,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.BundleAdjusterBase.setConfThresh(double conf_thresh)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_bundle_adjuster_set_confidence_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.BundleAdjusterBase|property|instance;get:public;set:public|System.Double ConfidenceThreshold"
+      ],
+      "historicalOrdinal": 154,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 155,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.BundleAdjusterBase.termCriteria()-\u003ETermCriteria",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_bundle_adjuster_get_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.BundleAdjusterBase|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.TermCriteria TerminationCriteria"
+      ],
+      "historicalOrdinal": 155,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 156,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.BundleAdjusterBase.setTermCriteria(TermCriteria term_criteria[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_bundle_adjuster_set_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.BundleAdjusterBase|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.TermCriteria TerminationCriteria"
+      ],
+      "historicalOrdinal": 156,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 158,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.NoBundleAdjuster.NoBundleAdjuster()-\u003E",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_estimator_create_no_bundle_adjuster",
+        "jyppx_ocv_stitching_estimator_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.NoBundleAdjuster|constructor|public;instance|.ctor()"
+      ],
+      "historicalOrdinal": 158,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 160,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.BundleAdjusterReproj.BundleAdjusterReproj()-\u003E",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_estimator_create_bundle_adjuster_reproj",
+        "jyppx_ocv_stitching_estimator_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.BundleAdjusterReproj|constructor|public;instance|.ctor()"
+      ],
+      "historicalOrdinal": 160,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 162,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.BundleAdjusterRay.BundleAdjusterRay()-\u003E",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_estimator_create_bundle_adjuster_ray",
+        "jyppx_ocv_stitching_estimator_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.BundleAdjusterRay|constructor|public;instance|.ctor()"
+      ],
+      "historicalOrdinal": 162,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 164,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.BundleAdjusterAffine.BundleAdjusterAffine()-\u003E",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_estimator_create_bundle_adjuster_affine",
+        "jyppx_ocv_stitching_estimator_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.BundleAdjusterAffine|constructor|public;instance|.ctor()"
+      ],
+      "historicalOrdinal": 164,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 166,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.BundleAdjusterAffinePartial.BundleAdjusterAffinePartial()-\u003E",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_estimator_create_bundle_adjuster_affine_partial",
+        "jyppx_ocv_stitching_estimator_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.BundleAdjusterAffinePartial|constructor|public;instance|.ctor()"
+      ],
+      "historicalOrdinal": 166,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 168,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.waveCorrect(vector_Mat rmats[/IO,/Ref];WaveCorrectKind kind)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_wave_correct"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.StitchingMotion|method|public;static|System.Void WaveCorrect(JYPPX.OpenCvSharp.Core.Mat[] rotationMatrices,JYPPX.OpenCvSharp.Stitching.WaveCorrectKind correctionKind)"
+      ],
+      "historicalOrdinal": 168,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 169,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.matchesGraphAsString(vector_String paths[/Ref];vector_MatchesInfo pairwise_matches[/Ref];float conf_threshold)-\u003EString",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_matches_graph_as_string"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.StitchingMotion|method|public;static|System.String MatchesGraphAsString(System.String[] paths,JYPPX.OpenCvSharp.Stitching.MatchesInfo[] pairwiseMatches,System.Single confidenceThreshold)"
+      ],
+      "historicalOrdinal": 169,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 170,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.leaveBiggestComponent(vector_ImageFeatures features[/Ref];vector_MatchesInfo pairwise_matches[/Ref];float conf_threshold)-\u003Estd::vector\u003Cint\u003E",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_leave_biggest_component"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.StitchingMotion|method|public;static|System.Int32[] LeaveBiggestComponent(JYPPX.OpenCvSharp.Stitching.ImageFeatures[] features,JYPPX.OpenCvSharp.Stitching.MatchesInfo[] pairwiseMatches,System.Single confidenceThreshold,out JYPPX.OpenCvSharp.Stitching.ImageFeatures[] componentFeatures,out JYPPX.OpenCvSharp.Stitching.MatchesInfo[] componentMatches)"
+      ],
+      "historicalOrdinal": 170,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 173,
+      "surface": "detail-seam-finders",
+      "identity": "cv.detail.SeamFinder.find(vector_UMat src[/C,/Ref];vector_Point corners[/C,/Ref];vector_UMat masks[/IO,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete seam-finder family uses owned strategy handles, strongly typed costs, temporary UMat inputs, and transactional mask commits.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_seam_finder_find"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.SeamFinder|method|public;instance|System.Void Find(JYPPX.OpenCvSharp.Core.Mat[] images,JYPPX.OpenCvSharp.Core.Point[] corners,JYPPX.OpenCvSharp.Core.Mat[] masks)"
+      ],
+      "historicalOrdinal": 173,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 174,
+      "surface": "detail-seam-finders",
+      "identity": "cv.detail.SeamFinder.createDefault(int type)-\u003EPtr\u003CSeamFinder\u003E",
+      "classification": "implemented",
+      "reason": "The complete seam-finder family uses owned strategy handles, strongly typed costs, temporary UMat inputs, and transactional mask commits.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_seam_finder_create_default",
+        "jyppx_ocv_stitching_seam_finder_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.SeamFinder|method|public;static|JYPPX.OpenCvSharp.Stitching.SeamFinder CreateDefault(JYPPX.OpenCvSharp.Stitching.SeamFinderType type)"
+      ],
+      "historicalOrdinal": 174,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 176,
+      "surface": "detail-seam-finders",
+      "identity": "cv.detail.NoSeamFinder.find(vector_UMat arg1[/C,/Ref];vector_Point arg2[/C,/Ref];vector_UMat arg3[/IO,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete seam-finder family uses owned strategy handles, strongly typed costs, temporary UMat inputs, and transactional mask commits.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_seam_finder_find"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.SeamFinder|method|public;instance|System.Void Find(JYPPX.OpenCvSharp.Core.Mat[] images,JYPPX.OpenCvSharp.Core.Point[] corners,JYPPX.OpenCvSharp.Core.Mat[] masks)"
+      ],
+      "historicalOrdinal": 176,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 178,
+      "surface": "detail-seam-finders",
+      "identity": "cv.detail.PairwiseSeamFinder.find(vector_UMat src[/C,/Ref];vector_Point corners[/C,/Ref];vector_UMat masks[/IO,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete seam-finder family uses owned strategy handles, strongly typed costs, temporary UMat inputs, and transactional mask commits.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_seam_finder_find"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.SeamFinder|method|public;instance|System.Void Find(JYPPX.OpenCvSharp.Core.Mat[] images,JYPPX.OpenCvSharp.Core.Point[] corners,JYPPX.OpenCvSharp.Core.Mat[] masks)"
+      ],
+      "historicalOrdinal": 178,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 180,
+      "surface": "detail-seam-finders",
+      "identity": "cv.detail.VoronoiSeamFinder.find(vector_UMat src[/C,/Ref];vector_Point corners[/C,/Ref];vector_UMat masks[/IO,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete seam-finder family uses owned strategy handles, strongly typed costs, temporary UMat inputs, and transactional mask commits.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_seam_finder_find"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.SeamFinder|method|public;instance|System.Void Find(JYPPX.OpenCvSharp.Core.Mat[] images,JYPPX.OpenCvSharp.Core.Point[] corners,JYPPX.OpenCvSharp.Core.Mat[] masks)"
+      ],
+      "historicalOrdinal": 180,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 183,
+      "surface": "detail-seam-finders",
+      "identity": "cv.detail.DpSeamFinder.DpSeamFinder(String costFunc)-\u003E",
+      "classification": "implemented",
+      "reason": "The complete seam-finder family uses owned strategy handles, strongly typed costs, temporary UMat inputs, and transactional mask commits.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_seam_finder_create_dp",
+        "jyppx_ocv_stitching_seam_finder_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.DpSeamFinder|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.Stitching.DpSeamCost cost=Color)"
+      ],
+      "historicalOrdinal": 183,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 184,
+      "surface": "detail-seam-finders",
+      "identity": "cv.detail.DpSeamFinder.setCostFunction(String val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete seam-finder family uses owned strategy handles, strongly typed costs, temporary UMat inputs, and transactional mask commits.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_seam_finder_set_dp_cost"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.DpSeamFinder|method|public;instance|System.Void SetCostFunction(JYPPX.OpenCvSharp.Stitching.DpSeamCost cost)"
+      ],
+      "historicalOrdinal": 184,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 187,
+      "surface": "detail-seam-finders",
+      "identity": "cv.detail.GraphCutSeamFinder.GraphCutSeamFinder(String cost_type;float terminal_cost=10000.f;float bad_region_penalty=1000.f)-\u003E",
+      "classification": "implemented",
+      "reason": "The complete seam-finder family uses owned strategy handles, strongly typed costs, temporary UMat inputs, and transactional mask commits.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_seam_finder_create_graph_cut",
+        "jyppx_ocv_stitching_seam_finder_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.GraphCutSeamFinder|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.Stitching.GraphCutSeamCost cost=ColorGradient,System.Single terminalCost=10000,System.Single badRegionPenalty=1000)"
+      ],
+      "historicalOrdinal": 187,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 188,
+      "surface": "detail-seam-finders",
+      "identity": "cv.detail.GraphCutSeamFinder.find(vector_UMat src[/C,/Ref];vector_Point corners[/C,/Ref];vector_UMat masks[/IO,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete seam-finder family uses owned strategy handles, strongly typed costs, temporary UMat inputs, and transactional mask commits.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_seam_finder_find"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.SeamFinder|method|public;instance|System.Void Find(JYPPX.OpenCvSharp.Core.Mat[] images,JYPPX.OpenCvSharp.Core.Point[] corners,JYPPX.OpenCvSharp.Core.Mat[] masks)"
+      ],
+      "historicalOrdinal": 188,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 191,
+      "surface": "detail-timelapsers",
+      "identity": "cv.detail.Timelapser.createDefault(int type)-\u003EPtr\u003CTimelapser\u003E",
+      "classification": "implemented",
+      "reason": "The complete timelapser family uses owned state, validated placements, borrowed process inputs, and independent CPU destination copies.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_timelapser_create_default",
+        "jyppx_ocv_stitching_timelapser_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Timelapser|method|public;static|JYPPX.OpenCvSharp.Stitching.Timelapser CreateDefault(JYPPX.OpenCvSharp.Stitching.TimelapserType type)"
+      ],
+      "historicalOrdinal": 191,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 192,
+      "surface": "detail-timelapsers",
+      "identity": "cv.detail.Timelapser.initialize(vector_Point corners[/C,/Ref];vector_Size sizes[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete timelapser family uses owned state, validated placements, borrowed process inputs, and independent CPU destination copies.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_timelapser_initialize"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Timelapser|method|public;instance|System.Void Initialize(JYPPX.OpenCvSharp.Core.Point[] corners,JYPPX.OpenCvSharp.Core.Size[] sizes)"
+      ],
+      "historicalOrdinal": 192,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 193,
+      "surface": "detail-timelapsers",
+      "identity": "cv.detail.Timelapser.process(Mat img;Mat mask;Point tl)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete timelapser family uses owned state, validated placements, borrowed process inputs, and independent CPU destination copies.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_timelapser_process"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Timelapser|method|public;instance|System.Void Process(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat? mask,JYPPX.OpenCvSharp.Core.Point topLeft)"
+      ],
+      "historicalOrdinal": 193,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 194,
+      "surface": "detail-timelapsers",
+      "identity": "cv.detail.Timelapser.getDst()-\u003EUMat",
+      "classification": "implemented",
+      "reason": "The complete timelapser family uses owned state, validated placements, borrowed process inputs, and independent CPU destination copies.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_timelapser_get_dst"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.Timelapser|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetDestination()"
+      ],
+      "historicalOrdinal": 194,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 196,
+      "surface": "detail-util",
+      "identity": "cv.detail.overlapRoi(Point tl1;Point tl2;Size sz1;Size sz2;Rect roi[/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The complete detail utility family uses checked geometry collections, bounded subset output, and a read-only process-global log query.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_overlap_roi"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.StitchingUtilities|method|public;static|System.Boolean TryOverlapRoi(JYPPX.OpenCvSharp.Core.Rect first,JYPPX.OpenCvSharp.Core.Rect second,out JYPPX.OpenCvSharp.Core.Rect roi)"
+      ],
+      "historicalOrdinal": 196,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 197,
+      "surface": "detail-util",
+      "identity": "cv.detail.resultRoi(vector_Point corners[/C,/Ref];vector_UMat images[/C,/Ref])-\u003ERect",
+      "classification": "implemented",
+      "reason": "The complete detail utility family uses checked geometry collections, bounded subset output, and a read-only process-global log query.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_result_roi_images"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.StitchingUtilities|method|public;static|JYPPX.OpenCvSharp.Core.Rect ResultRoi(JYPPX.OpenCvSharp.Core.Point[] corners,JYPPX.OpenCvSharp.Core.Mat[] images)"
+      ],
+      "historicalOrdinal": 197,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 198,
+      "surface": "detail-util",
+      "identity": "cv.detail.resultRoi(vector_Point corners[/C,/Ref];vector_Size sizes[/C,/Ref])-\u003ERect",
+      "classification": "implemented",
+      "reason": "The complete detail utility family uses checked geometry collections, bounded subset output, and a read-only process-global log query.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_result_roi_sizes"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.StitchingUtilities|method|public;static|JYPPX.OpenCvSharp.Core.Rect ResultRoi(JYPPX.OpenCvSharp.Core.Point[] corners,JYPPX.OpenCvSharp.Core.Size[] sizes)"
+      ],
+      "historicalOrdinal": 198,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 199,
+      "surface": "detail-util",
+      "identity": "cv.detail.resultRoiIntersection(vector_Point corners[/C,/Ref];vector_Size sizes[/C,/Ref])-\u003ERect",
+      "classification": "implemented",
+      "reason": "The complete detail utility family uses checked geometry collections, bounded subset output, and a read-only process-global log query.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_result_roi_intersection"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.StitchingUtilities|method|public;static|JYPPX.OpenCvSharp.Core.Rect ResultRoiIntersection(JYPPX.OpenCvSharp.Core.Point[] corners,JYPPX.OpenCvSharp.Core.Size[] sizes)"
+      ],
+      "historicalOrdinal": 199,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 200,
+      "surface": "detail-util",
+      "identity": "cv.detail.resultTl(vector_Point corners[/C,/Ref])-\u003EPoint",
+      "classification": "implemented",
+      "reason": "The complete detail utility family uses checked geometry collections, bounded subset output, and a read-only process-global log query.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_result_tl"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.StitchingUtilities|method|public;static|JYPPX.OpenCvSharp.Core.Point ResultTopLeft(JYPPX.OpenCvSharp.Core.Point[] corners)"
+      ],
+      "historicalOrdinal": 200,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 201,
+      "surface": "detail-util",
+      "identity": "cv.detail.selectRandomSubset(int count;int size;vector_int subset[/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The complete detail utility family uses checked geometry collections, bounded subset output, and a read-only process-global log query.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_select_random_subset"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.StitchingUtilities|method|public;static|System.Int32[] SelectRandomSubset(System.Int32 count,System.Int32 size)"
+      ],
+      "historicalOrdinal": 201,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 202,
+      "surface": "detail-util",
+      "identity": "cv.detail.stitchingLogLevel()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The complete detail utility family uses checked geometry collections, bounded subset output, and a read-only process-global log query.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_log_level"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.StitchingUtilities|property|static;get:public|System.Int32 LogLevel"
+      ],
+      "historicalOrdinal": 202,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 205,
+      "surface": "detail-warpers",
+      "identity": "cv.detail.SphericalProjector.mapForward(float x;float y;float u[/Ref];float v[/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The parser-visible spherical mapping methods use an owned source-reviewed camera configuration and copied projector state.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_spherical_projector_create",
+        "jyppx_ocv_stitching_spherical_projector_map_forward",
+        "jyppx_ocv_stitching_spherical_projector_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.SphericalProjector|method|public;instance|JYPPX.OpenCvSharp.Core.Point2f MapForward(JYPPX.OpenCvSharp.Core.Point2f point)"
+      ],
+      "historicalOrdinal": 205,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 206,
+      "surface": "detail-warpers",
+      "identity": "cv.detail.SphericalProjector.mapBackward(float u;float v;float x[/Ref];float y[/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The parser-visible spherical mapping methods use an owned source-reviewed camera configuration and copied projector state.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_spherical_projector_create",
+        "jyppx_ocv_stitching_spherical_projector_map_backward",
+        "jyppx_ocv_stitching_spherical_projector_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Stitching.SphericalProjector|method|public;instance|JYPPX.OpenCvSharp.Core.Point2f MapBackward(JYPPX.OpenCvSharp.Core.Point2f point)"
+      ],
+      "historicalOrdinal": 206,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    }
+  ],
+  "limitation": "Implemented means the recorded managed/C ABI binding exists, subject to its documented validation. It does not certify wider 5.1 input domains, optional codecs/backends, or complete C\u002B\u002B coverage."
+}

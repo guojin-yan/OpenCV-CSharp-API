@@ -1,0 +1,622 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.1.0",
+  "module": "videoio",
+  "claimedSlice": "Historical videoio parser scope refreshed against official 5.1 sources: 1 contributing header(s); parser-emitted declarations only",
+  "completeCppParityClaimed": false,
+  "implemented": [
+    {
+      "ordinal": 32,
+      "identity": "cv.IStreamReader.read(c_string buffer;long long size)-\u003Elong long",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_stream_reader_read"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoStreamReader|method|public;instance|System.Int32 Read(System.Byte[] buffer,System.Int32 offset,System.Int32 count)"
+      ],
+      "historicalOrdinal": 29,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.IStreamReader.seek(long long offset;int origin)-\u003Elong long",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_stream_reader_seek"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoStreamReader|method|public;instance|System.Int64 Seek(System.Int64 offset,System.IO.SeekOrigin origin)"
+      ],
+      "historicalOrdinal": 30,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.VideoCapture.VideoCapture()-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|constructor|public;instance|.ctor()"
+      ],
+      "historicalOrdinal": 32,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.VideoCapture.VideoCapture(String filename[/C,/Ref,/PATH];int apiPreference=CAP_ANY)-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_create",
+        "jyppx_ocv_video_capture_open_file"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|constructor|public;instance|.ctor(System.String filename,JYPPX.OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference=Any)"
+      ],
+      "historicalOrdinal": 33,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.VideoCapture.VideoCapture(String filename[/C,/Ref,/PATH];int apiPreference;vector_int params[/C,/Ref])-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_create",
+        "jyppx_ocv_video_capture_open_file_params"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|constructor|public;instance|.ctor(System.String filename,JYPPX.OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference,params System.Int32[] parameters)"
+      ],
+      "historicalOrdinal": 34,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.VideoCapture.VideoCapture(int index;int apiPreference=CAP_ANY)-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_create",
+        "jyppx_ocv_video_capture_open_index"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|constructor|public;instance|.ctor(System.Int32 index,JYPPX.OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference=Any)"
+      ],
+      "historicalOrdinal": 35,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.VideoCapture.VideoCapture(int index;int apiPreference;vector_int params[/C,/Ref])-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_create",
+        "jyppx_ocv_video_capture_open_index_params"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|constructor|public;instance|.ctor(System.Int32 index,JYPPX.OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference,params System.Int32[] parameters)"
+      ],
+      "historicalOrdinal": 36,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.VideoCapture.VideoCapture(Ptr_IStreamReader source[/C,/Ref];int apiPreference;vector_int params[/C,/Ref])-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_create",
+        "jyppx_ocv_video_capture_open_stream"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.VideoIO.VideoStreamReader reader,JYPPX.OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference,params System.Int32[] parameters)"
+      ],
+      "historicalOrdinal": 37,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.VideoCapture.open(String filename[/C,/Ref,/PATH];int apiPreference=CAP_ANY)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_open_file"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Boolean Open(System.String filename,JYPPX.OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference=Any)"
+      ],
+      "historicalOrdinal": 38,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 42,
+      "identity": "cv.VideoCapture.open(String filename[/C,/Ref,/PATH];int apiPreference;vector_int params[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_open_file_params"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Boolean Open(System.String filename,JYPPX.OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference,params System.Int32[] parameters)"
+      ],
+      "historicalOrdinal": 39,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.VideoCapture.open(int index;int apiPreference=CAP_ANY)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_open_index"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Boolean Open(System.Int32 index,JYPPX.OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference=Any)"
+      ],
+      "historicalOrdinal": 40,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.VideoCapture.open(int index;int apiPreference;vector_int params[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_open_index_params"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Boolean Open(System.Int32 index,JYPPX.OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference,params System.Int32[] parameters)"
+      ],
+      "historicalOrdinal": 41,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 45,
+      "identity": "cv.VideoCapture.open(Ptr_IStreamReader source[/C,/Ref];int apiPreference;vector_int params[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_open_stream"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCaptureExtensions|method|public;static|System.Boolean Open(JYPPX.OpenCvSharp.VideoIO.VideoCapture capture,JYPPX.OpenCvSharp.VideoIO.VideoStreamReader reader,JYPPX.OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference=Any,params System.Int32[] parameters)"
+      ],
+      "historicalOrdinal": 42,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 46,
+      "identity": "cv.VideoCapture.isOpened()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_is_opened"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|property|instance;get:public|System.Boolean IsOpened"
+      ],
+      "historicalOrdinal": 43,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.VideoCapture.release()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_release"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Void Release()"
+      ],
+      "historicalOrdinal": 44,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 48,
+      "identity": "cv.VideoCapture.grab()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_grab"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Boolean Grab()"
+      ],
+      "historicalOrdinal": 45,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.VideoCapture.retrieve(Mat image[/O];int flag=0)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_retrieve"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Boolean Retrieve(JYPPX.OpenCvSharp.Core.Mat image,System.Int32 flag=0)"
+      ],
+      "historicalOrdinal": 46,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 50,
+      "identity": "cv.VideoCapture.read(Mat image[/O])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_read"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Boolean Read(JYPPX.OpenCvSharp.Core.Mat image)"
+      ],
+      "historicalOrdinal": 47,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 51,
+      "identity": "cv.VideoCapture.set(int propId;double value)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_set"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Boolean Set(JYPPX.OpenCvSharp.VideoIO.VideoCaptureProperties propertyId,System.Double value)"
+      ],
+      "historicalOrdinal": 48,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 52,
+      "identity": "cv.VideoCapture.get(int propId)-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_get"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Double Get(JYPPX.OpenCvSharp.VideoIO.VideoCaptureProperties propertyId)"
+      ],
+      "historicalOrdinal": 49,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 53,
+      "identity": "cv.VideoCapture.getBackendName()-\u003EString",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_backend_name_fill",
+        "jyppx_ocv_video_capture_backend_name_length"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.String GetBackendName()"
+      ],
+      "historicalOrdinal": 50,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 54,
+      "identity": "cv.VideoCapture.setExceptionMode(bool enable)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_set_exception_mode"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|property|instance;get:public;set:public|System.Boolean ExceptionMode"
+      ],
+      "historicalOrdinal": 51,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 55,
+      "identity": "cv.VideoCapture.getExceptionMode()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_get_exception_mode"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|property|instance;get:public;set:public|System.Boolean ExceptionMode"
+      ],
+      "historicalOrdinal": 52,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 56,
+      "identity": "cv.VideoCapture.waitAny(vector_VideoCapture streams[/C,/Ref];vector_int readyIndex[/O,/Ref];int64 timeoutNs=0)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_wait_any"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|method|public;static|System.Boolean WaitAny(System.Collections.Generic.IReadOnlyList\u003CJYPPX.OpenCvSharp.VideoIO.VideoCapture\u003E streams,out System.Int32[] readyIndices,System.Int64 timeoutNs=0)"
+      ],
+      "historicalOrdinal": 53,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 58,
+      "identity": "cv.VideoWriter.VideoWriter()-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_create",
+        "jyppx_ocv_video_writer_open"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoWriter|constructor|public;instance|.ctor()"
+      ],
+      "historicalOrdinal": 55,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 59,
+      "identity": "cv.VideoWriter.VideoWriter(String filename[/C,/Ref,/PATH];int fourcc;double fps;Size frameSize;bool isColor=true)-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_create",
+        "jyppx_ocv_video_writer_open"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoWriter|constructor|public;instance|.ctor(System.String filename,System.Int32 fourcc,System.Double fps,JYPPX.OpenCvSharp.Core.Size frameSize,System.Boolean isColor=true)"
+      ],
+      "historicalOrdinal": 56,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 60,
+      "identity": "cv.VideoWriter.VideoWriter(String filename[/C,/Ref,/PATH];int apiPreference;int fourcc;double fps;Size frameSize;bool isColor=true)-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_create",
+        "jyppx_ocv_video_writer_open"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoWriter|constructor|public;instance|.ctor(System.String filename,JYPPX.OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference,System.Int32 fourcc,System.Double fps,JYPPX.OpenCvSharp.Core.Size frameSize,System.Boolean isColor=true)"
+      ],
+      "historicalOrdinal": 57,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 61,
+      "identity": "cv.VideoWriter.VideoWriter(String filename[/C,/Ref,/PATH];int fourcc;double fps;Size frameSize[/C,/Ref];vector_int params[/C,/Ref])-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_create",
+        "jyppx_ocv_video_writer_open_params"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoWriter|constructor|public;instance|.ctor(System.String filename,System.Int32 fourcc,System.Double fps,JYPPX.OpenCvSharp.Core.Size frameSize,params System.Int32[] parameters)"
+      ],
+      "historicalOrdinal": 58,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 62,
+      "identity": "cv.VideoWriter.VideoWriter(String filename[/C,/Ref,/PATH];int apiPreference;int fourcc;double fps;Size frameSize[/C,/Ref];vector_int params[/C,/Ref])-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_create",
+        "jyppx_ocv_video_writer_open_api_params"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoWriter|constructor|public;instance|.ctor(System.String filename,JYPPX.OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference,System.Int32 fourcc,System.Double fps,JYPPX.OpenCvSharp.Core.Size frameSize,params System.Int32[] parameters)"
+      ],
+      "historicalOrdinal": 59,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 63,
+      "identity": "cv.VideoWriter.open(String filename[/C,/Ref,/PATH];int fourcc;double fps;Size frameSize;bool isColor=true)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_open"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoWriter|method|public;instance|System.Boolean Open(System.String filename,System.Int32 fourcc,System.Double fps,JYPPX.OpenCvSharp.Core.Size frameSize,System.Boolean isColor=true)"
+      ],
+      "historicalOrdinal": 60,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 64,
+      "identity": "cv.VideoWriter.open(String filename[/C,/Ref,/PATH];int apiPreference;int fourcc;double fps;Size frameSize;bool isColor=true)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_open"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoWriter|method|public;instance|System.Boolean Open(System.String filename,JYPPX.OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference,System.Int32 fourcc,System.Double fps,JYPPX.OpenCvSharp.Core.Size frameSize,System.Boolean isColor=true)"
+      ],
+      "historicalOrdinal": 61,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 65,
+      "identity": "cv.VideoWriter.open(String filename[/C,/Ref,/PATH];int fourcc;double fps;Size frameSize[/C,/Ref];vector_int params[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_open_params"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoWriter|method|public;instance|System.Boolean Open(System.String filename,System.Int32 fourcc,System.Double fps,JYPPX.OpenCvSharp.Core.Size frameSize,params System.Int32[] parameters)"
+      ],
+      "historicalOrdinal": 62,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 66,
+      "identity": "cv.VideoWriter.open(String filename[/C,/Ref,/PATH];int apiPreference;int fourcc;double fps;Size frameSize[/C,/Ref];vector_int params[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_open_api_params"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoWriter|method|public;instance|System.Boolean Open(System.String filename,JYPPX.OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference,System.Int32 fourcc,System.Double fps,JYPPX.OpenCvSharp.Core.Size frameSize,params System.Int32[] parameters)"
+      ],
+      "historicalOrdinal": 63,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 67,
+      "identity": "cv.VideoWriter.isOpened()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_is_opened"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoWriter|property|instance;get:public|System.Boolean IsOpened"
+      ],
+      "historicalOrdinal": 64,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 68,
+      "identity": "cv.VideoWriter.release()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_release"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoWriter|method|public;instance|System.Void Release()"
+      ],
+      "historicalOrdinal": 65,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 69,
+      "identity": "cv.VideoWriter.write(Mat image)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_write"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoWriter|method|public;instance|System.Boolean Write(JYPPX.OpenCvSharp.Core.Mat image)"
+      ],
+      "historicalOrdinal": 66,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 70,
+      "identity": "cv.VideoWriter.set(int propId;double value)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_set"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoWriter|method|public;instance|System.Boolean Set(JYPPX.OpenCvSharp.VideoIO.VideoWriterProperties propertyId,System.Double value)"
+      ],
+      "historicalOrdinal": 67,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 71,
+      "identity": "cv.VideoWriter.get(int propId)-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_get"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoWriter|method|public;instance|System.Double Get(JYPPX.OpenCvSharp.VideoIO.VideoWriterProperties propertyId)"
+      ],
+      "historicalOrdinal": 68,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 72,
+      "identity": "cv.VideoWriter.fourcc(char c1;char c2;char c3;char c4)-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_fourcc"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoWriter|method|public;static|System.Int32 FourCC(System.Char c1,System.Char c2,System.Char c3,System.Char c4)"
+      ],
+      "historicalOrdinal": 69,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 73,
+      "identity": "cv.VideoWriter.getBackendName()-\u003EString",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_backend_name_fill",
+        "jyppx_ocv_video_writer_backend_name_length"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoWriter|method|public;instance|System.String GetBackendName()"
+      ],
+      "historicalOrdinal": 70,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    }
+  ],
+  "limitation": "Implemented means the recorded managed/C ABI binding exists, subject to its documented validation. It does not certify wider 5.1 input domains, optional codecs/backends, or complete C\u002B\u002B coverage."
+}

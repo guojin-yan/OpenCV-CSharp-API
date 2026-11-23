@@ -14,6 +14,8 @@ $sourcePrefix = "opencv-source/opencv-5.0.0/"
 $contribSourcePrefix = "opencv-source/opencv_contrib-5.0.0/"
 $source51Prefix = "opencv-source/opencv-5.1.0/"
 $openCv51Commit = "e4f78fbcf1a773fbed69e14500e8b734963eb585"
+$contrib51Prefix = "opencv-source/opencv_contrib-5.1.0/"
+$contrib51Commit = "b67a855188a3d683813731010f6d39ac614733a4"
 $rawNames = @("imgproc", "imgcodecs", "videoio", "calib3d", "core", "dnn", "features", "highgui", "objdetect", "photo", "video") + @("ml", "tracking", "stitching")
 $rawNames += @("structured_light")
 $rawNames += @("saliency")
@@ -53,7 +55,8 @@ function Add-RequiredFile {
 
     if (-not $Path.StartsWith($sourcePrefix, [StringComparison]::Ordinal) -and
         -not $Path.StartsWith($contribSourcePrefix, [StringComparison]::Ordinal) -and
-        -not $Path.StartsWith($source51Prefix, [StringComparison]::Ordinal)) {
+        -not $Path.StartsWith($source51Prefix, [StringComparison]::Ordinal) -and
+        -not $Path.StartsWith($contrib51Prefix, [StringComparison]::Ordinal)) {
         throw "Upstream map evidence path is outside the exact OpenCV or OpenCV contrib source roots: $Path"
     }
     if ($Sha256 -notmatch "^[0-9a-f]{64}$") {
@@ -98,6 +101,9 @@ $refresh51 = Get-Content -LiteralPath (Join-Path $repo 'compatibility/opencv-5.1
 foreach ($module in @($refresh51.modules)) {
     Add-RequiredFile -Path ([string]$module.primaryHeader.path) -Sha256 ([string]$module.primaryHeader.sha256)
     foreach ($header in @($module.sourceHeaders)) { Add-RequiredFile -Path ([string]$header.path) -Sha256 ([string]$header.sha256) }
+    if ($null -ne $module.PSObject.Properties['compatibilityHeaders']) {
+        foreach ($header in @($module.compatibilityHeaders)) { Add-RequiredFile -Path ([string]$header.path) -Sha256 ([string]$header.sha256) }
+    }
 }
 
 $registry = Get-Content -LiteralPath $registryPath -Raw | ConvertFrom-Json
@@ -109,6 +115,11 @@ foreach ($entry in @($required.GetEnumerator() | Sort-Object Key)) {
         $relativePath = $entry.Key.Substring($contribSourcePrefix.Length)
         $repositoryName = "opencv_contrib"
         $commit = $openCvContribCommit
+    }
+    elseif ($entry.Key.StartsWith($contrib51Prefix, [StringComparison]::Ordinal)) {
+        $relativePath = $entry.Key.Substring($contrib51Prefix.Length)
+        $repositoryName = "opencv_contrib"
+        $commit = $contrib51Commit
     }
     elseif ($entry.Key.StartsWith($source51Prefix, [StringComparison]::Ordinal)) {
         $relativePath = $entry.Key.Substring($source51Prefix.Length)
@@ -122,7 +133,7 @@ foreach ($entry in @($required.GetEnumerator() | Sort-Object Key)) {
     }
     $destination = Join-Path $workspace ($entry.Key -replace '/', [IO.Path]::DirectorySeparatorChar)
     if (Test-Path -LiteralPath $destination -PathType Leaf) {
-        if ($entry.Key.StartsWith($source51Prefix, [StringComparison]::Ordinal)) {
+        if ($entry.Key.StartsWith($source51Prefix, [StringComparison]::Ordinal) -or $entry.Key.StartsWith($contrib51Prefix, [StringComparison]::Ordinal)) {
             $sourceText = [IO.File]::ReadAllText($destination).Replace("`r`n", "`n").Replace("`r", "`n")
             $actualSha256 = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($sourceText))).ToLowerInvariant()
         }
@@ -165,4 +176,4 @@ foreach ($entry in @($required.GetEnumerator() | Sort-Object Key)) {
     }
 }
 
-Write-Host "UPSTREAM_MAP_SOURCE_EVIDENCE_OK opencvCommit=$openCvCommit contribCommit=$openCvContribCommit opencv51Commit=$openCv51Commit files=$($required.Count) downloaded=$downloaded root=$(Join-Path $workspace 'opencv-source')"
+Write-Host "UPSTREAM_MAP_SOURCE_EVIDENCE_OK opencvCommit=$openCvCommit contribCommit=$openCvContribCommit opencv51Commit=$openCv51Commit contrib51Commit=$contrib51Commit files=$($required.Count) downloaded=$downloaded root=$(Join-Path $workspace 'opencv-source')"
