@@ -12,6 +12,10 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             metadataFacts = default(MetadataFacts);
             MetadataFacts stored = new MetadataFacts();
             bool sawStartOfFrame = false;
+            bool dnlHeightPending = false;
+            bool sawDnlHeight = false;
+            int framePrecision = 0;
+            int frameChannels = 0;
             bool arithmeticCoding = false;
             bool inEntropyData = false;
             bool iccValid = true;
@@ -36,12 +40,14 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                 if (offset == data.Length) break;
                 int marker = data[offset++];
                 if (inEntropyData && (marker == 0 || (marker >= 0xD0 && marker <= 0xD7) || marker == 0x01)) continue;
+                bool markerWasInEntropyData = inEntropyData;
                 inEntropyData = false;
 
                 if (marker == 0xD9)
                 {
                     if (offset != data.Length) break;
-                    frameCountKnown = sawStartOfFrame;
+                    if (dnlHeightPending) break;
+                    frameCountKnown = sawStartOfFrame && width > 0 && height > 0 && !dnlHeightPending;
                     if (iccValid && iccSegmentsSeen == iccSegmentCount)
                     {
                         stored.MetadataSizeKnown = true;
@@ -74,7 +80,8 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                     int channels = data[offset + 7];
                     int frameHeight = (data[offset + 3] << 8) | data[offset + 4];
                     int frameWidth = (data[offset + 5] << 8) | data[offset + 6];
-                    if (channels == 0 || length != 8 + 3 * channels || frameWidth == 0 || frameHeight == 0 ||
+                    if (channels == 0 || length != 8 + 3 * channels || frameWidth == 0 ||
+                        (frameHeight == 0 && !IsJpegNonHierarchicalFrame(marker)) ||
                         !IsJpegPrecisionSupported(marker, precision)) break;
                     components = new bool[256];
                     bool validComponents = true;
@@ -94,10 +101,17 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                     if (!validComponents) break;
                     width = frameWidth;
                     height = frameHeight;
-                    pixelFacts.BitDepth = precision;
-                    pixelFacts.BitDepthKnown = true;
-                    pixelFacts.Channels = channels;
-                    pixelFacts.ChannelsKnown = true;
+                    dnlHeightPending = frameHeight == 0;
+                    sawDnlHeight = false;
+                    framePrecision = precision;
+                    frameChannels = channels;
+                    if (!dnlHeightPending)
+                    {
+                        pixelFacts.BitDepth = precision;
+                        pixelFacts.BitDepthKnown = true;
+                        pixelFacts.Channels = channels;
+                        pixelFacts.ChannelsKnown = true;
+                    }
                     arithmeticCoding = marker >= 0xC9;
                     sawStartOfFrame = true;
                 }
@@ -120,8 +134,22 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                 }
                 else if (marker == 0xDC)
                 {
-                    // Height supplied by DNL, including resuming entropy after DNL, is not implemented.
-                    break;
+                    // DNL is valid only inside entropy data and only resolves a zero-height SOF.
+                    if (!markerWasInEntropyData || !dnlHeightPending || sawDnlHeight || length != 4 ||
+                        data[offset + 2] == 0 && data[offset + 3] == 0)
+                    {
+                        break;
+                    }
+
+                    height = (data[offset + 2] << 8) | data[offset + 3];
+                    if (height == 0) break;
+                    dnlHeightPending = false;
+                    sawDnlHeight = true;
+                    pixelFacts.BitDepth = framePrecision;
+                    pixelFacts.BitDepthKnown = true;
+                    pixelFacts.Channels = frameChannels;
+                    pixelFacts.ChannelsKnown = true;
+                    inEntropyData = true;
                 }
                 else if ((marker >= 0xE0 && marker <= 0xEF) || marker == 0xFE)
                 {
@@ -153,7 +181,7 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                 }
                 offset += length;
             }
-            return sawStartOfFrame;
+            return sawStartOfFrame && width > 0 && height > 0 && !dnlHeightPending;
         }
 
         private static bool IsJpegStartOfFrame(int marker)

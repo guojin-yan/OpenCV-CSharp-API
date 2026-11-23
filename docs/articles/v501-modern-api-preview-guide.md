@@ -54,7 +54,7 @@ Complete GIF containers now expose stored extension and ICC payload lengths. Exa
 
 AVIF dimensions and encoded pixel facts require `pitm`/`ipma` associations to the primary item. Thumbnail and unassociated `ispe/pixi` properties cannot supply those facts. Missing or malformed associations remain unknown and fail the relevant strict-known options.
 
-JPEG checks any present SOF/SOS component tables and requires a marker walk ending exactly at EOI for frame/metadata completion. A frame fact also requires one supported SOF. APPn/COM payloads cannot supply EOI markers. ICC fragments may arrive in any order; missing, duplicate, or inconsistent fragments keep metadata/ICC lengths unknown and fail strict-known options. These checks do not validate entropy coding or decoded color/precision.
+JPEG checks any present SOF/SOS component tables and requires a marker walk ending exactly at EOI for frame/metadata completion. A zero-height non-hierarchical SOF may resolve its height from one length-four DNL marker inside entropy data; DNL outside a scan or repeated/ambiguous DNL keeps size and completion facts unknown. A frame fact also requires one supported SOF. APPn/COM payloads cannot supply EOI markers. ICC fragments may arrive in any order; missing, duplicate, or inconsistent fragments keep metadata/ICC lengths unknown and fail strict-known options. These checks do not validate entropy coding or decoded color/precision.
 
 APNG frame counts require bounded frame rectangles, valid operations, and consistent default-image/IDAT/fdAT transitions. A separate default still image is excluded from the animation count. Cropped frames use the full canvas for cumulative-pixel and encoded-storage limits; malformed animation boundaries keep those facts unknown.
 
@@ -72,7 +72,7 @@ Untrusted decode policy is documented in [Codec Preflight And Limits](codec-pref
 
 AVIF 尺寸和编码像素事实要求通过 `pitm`/`ipma` 关联到主图，缩略图或未关联的 `ispe/pixi` 不能提供这些事实；缺失或损坏的关联保持未知，启用相应 strict-known 选项时拒绝。
 
-JPEG 检查出现的 SOF/SOS 组件表，并要求标记遍历精确止于 EOI 才能证明帧或 metadata 闭合；帧事实还要求存在单一受支持 SOF。APPn/COM 负载中的 EOI 字节不计为结束标记。ICC 分片允许任意顺序，缺失、重复或数量不一致使 metadata/ICC 长度未知，并触发相应 strict-known 拒绝。这些检查不验证熵编码或解码颜色/精度。
+JPEG 检查出现的 SOF/SOS 组件表，并要求标记遍历精确止于 EOI 才能证明帧或 metadata 闭合。非层次 SOF 高度为零时，只有熵数据中的一个长度为 4 的 DNL 标记可以补充高度；扫描外或重复/有歧义的 DNL 会使尺寸和完整性事实保持未知。帧事实还要求存在单一受支持 SOF。APPn/COM 负载中的 EOI 字节不计为结束标记。ICC 分片允许任意顺序，缺失、重复或数量不一致使 metadata/ICC 长度未知，并触发相应 strict-known 拒绝。这些检查不验证熵编码或解码颜色/精度。
 
 APNG 帧数要求帧矩形有界、操作值有效，且默认图像与 IDAT/fdAT 转换一致；独立默认静态图不计入动画帧数。裁剪帧的累计像素与编码存储限制按完整画布计算，损坏的动画边界使这些事实保持未知。
 

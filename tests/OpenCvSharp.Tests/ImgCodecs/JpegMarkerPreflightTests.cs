@@ -95,6 +95,47 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         }
 
         [Fact]
+        public void IdentifyResolvesJpegDnlHeightOnlyInsideEntropyData()
+        {
+            ImageIdentifyResult result = ImgCodecsCv2.Identify(Join(
+                Soi, Sof(height: 0), Sos(), new byte[] { 0x12, 0x34 }, Dnl(3), new byte[] { 0x56 }, Eoi));
+
+            AssertHeader(result, 8, 1);
+            Assert.True(result.IsFrameCountKnown);
+            Assert.Equal(1, result.FrameCount);
+            Assert.Equal(6, result.CumulativePixelCount);
+            Assert.True(result.IsMetadataSizeKnown);
+            Assert.Equal(0, result.MetadataBytes);
+        }
+
+        [Fact]
+        public void IdentifyRejectsJpegDnlOutsideEntropyOrWithAmbiguousHeight()
+        {
+            ImageIdentifyResult beforeScan = ImgCodecsCv2.Identify(Join(Soi, Sof(height: 0), Dnl(3), Eoi));
+            Assert.False(beforeScan.IsSizeKnown);
+            Assert.False(beforeScan.IsPixelFormatKnown);
+            Assert.False(beforeScan.IsFrameCountKnown);
+
+            foreach (byte[] invalid in new[]
+            {
+                Dnl(0), Segment(0xDC, 0, 3, 0), Segment(0xDC, 0, 0, 0, 3),
+                Join(Dnl(3), Dnl(3))
+            })
+            {
+                ImageIdentifyResult result = ImgCodecsCv2.Identify(
+                    Join(Soi, Sof(height: 0), Sos(), new byte[] { 0x12 }, invalid, Eoi));
+                Assert.False(result.IsFrameCountKnown);
+                AssertUnknownMetadata(result);
+            }
+
+            ImageIdentifyResult knownHeight = ImgCodecsCv2.Identify(
+                Join(Soi, Sof(), Sos(), new byte[] { 0x12 }, Dnl(3), Eoi));
+            Assert.True(knownHeight.IsSizeKnown);
+            Assert.False(knownHeight.IsFrameCountKnown);
+            AssertUnknownMetadata(knownHeight);
+        }
+
+        [Fact]
         public void IdentifyKeepsInvalidJpegFrameHeadersUnknown()
         {
             byte[] frame = { 8, 0, 3, 0, 2, 1, 1, 0x11, 0 };
@@ -430,11 +471,12 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             Assert.Equal(0, result.IccProfileBytes);
         }
 
-        private static byte[] Sof(byte marker = 0xC0, byte precision = 8, int channels = 1)
+        private static byte[] Sof(byte marker = 0xC0, byte precision = 8, int channels = 1, int height = 3)
         {
             byte[] payload = new byte[6 + 3 * channels];
             payload[0] = precision;
-            payload[2] = 3;
+            payload[1] = (byte)(height >> 8);
+            payload[2] = (byte)height;
             payload[4] = 2;
             payload[5] = (byte)channels;
             for (int index = 0; index < channels; ++index)
@@ -443,6 +485,11 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
                 payload[7 + 3 * index] = 0x11;
             }
             return Segment(marker, payload);
+        }
+
+        private static byte[] Dnl(int height)
+        {
+            return Segment(0xDC, (byte)(height >> 8), (byte)height);
         }
 
         private static byte[] Sos()
