@@ -93,6 +93,32 @@ function Get-ExpectedEvidencePaths {
         "compatibility/dnn-upstream-raw.json",
         "compatibility/dnn-upstream-summary.json",
         "compatibility/opencv-5.1.0/README.md",
+        "compatibility/opencv-5.1.0/upstream-map-refresh-catalog.json",
+        "compatibility/opencv-5.1.0/upstream-map-refresh-summary.json",
+        "compatibility/opencv-5.1.0/core-upstream-raw.json",
+        "compatibility/opencv-5.1.0/core-upstream-classifications.json",
+        "compatibility/opencv-5.1.0/core-upstream-map.txt",
+        "compatibility/opencv-5.1.0/core-upstream-summary.json",
+        "compatibility/opencv-5.1.0/core-upstream-delta.json",
+        "compatibility/opencv-5.1.0/core-implemented-families.json",
+        "compatibility/opencv-5.1.0/imgproc-upstream-raw.json",
+        "compatibility/opencv-5.1.0/imgproc-upstream-classifications.json",
+        "compatibility/opencv-5.1.0/imgproc-upstream-map.txt",
+        "compatibility/opencv-5.1.0/imgproc-upstream-summary.json",
+        "compatibility/opencv-5.1.0/imgproc-upstream-delta.json",
+        "compatibility/opencv-5.1.0/imgproc-implemented-families.json",
+        "compatibility/opencv-5.1.0/imgcodecs-upstream-raw.json",
+        "compatibility/opencv-5.1.0/imgcodecs-upstream-classifications.json",
+        "compatibility/opencv-5.1.0/imgcodecs-upstream-map.txt",
+        "compatibility/opencv-5.1.0/imgcodecs-upstream-summary.json",
+        "compatibility/opencv-5.1.0/imgcodecs-upstream-delta.json",
+        "compatibility/opencv-5.1.0/imgcodecs-implemented-families.json",
+        "tools/UpstreamMapRefresh/UpstreamMapRefresh.csproj",
+        "tools/UpstreamMapRefresh/Program.cs",
+        "tools/UpstreamMapRefresh/extract.py",
+        "scripts/Generate-UpstreamMap51.ps1",
+        "scripts/Test-UpstreamMap51.ps1",
+        "docs/articles/opencv-5.1-source-mapping.md",
         "compatibility/opencv-5.1.0/dnn-upstream-raw.json",
         "compatibility/opencv-5.1.0/dnn-upstream-classifications.json",
         "compatibility/opencv-5.1.0/dnn-upstream-map.txt",
@@ -1360,7 +1386,8 @@ function Test-Record {
 
     $expectedChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
     $sdkPolicyValid = ($Record.LocalValidation.SdkPolicy -eq ".NET 10 (any installed feature band)") -or ($Record.LocalValidation.ExactSdk -match '^10\.0\.\d+$')
-    Assert-True -List $List -Condition ($Record.LocalValidation.Status -eq "locally-validated" -and $Record.LocalValidation.InvariantGuardCount -eq 105 -and $sdkPolicyValid -and -not [bool]$Record.LocalValidation.PublicationAllowed -and (@($Record.LocalValidation.RequiredChecks) -join ",") -eq ($expectedChecks -join ",")) -Issue "Final closeout local validation state or check list drifted"
+    $guardCount = [regex]::Matches([IO.File]::ReadAllText((Join-Path $repo 'scripts/Test-ProjectInvariants.ps1')), '(?m)^\s+Name = "[^"]+"\s*$').Count
+    Assert-True -List $List -Condition ($Record.LocalValidation.Status -eq "locally-validated" -and $Record.LocalValidation.InvariantGuardCount -eq $guardCount -and $sdkPolicyValid -and -not [bool]$Record.LocalValidation.PublicationAllowed -and (@($Record.LocalValidation.RequiredChecks) -join ",") -eq ($expectedChecks -join ",")) -Issue "Final closeout local validation state or check list drifted"
     Assert-True -List $List -Condition ($Record.Signing.Status -eq "repository-signing-pending" -and $Record.Signing.Strategy -eq "nuget.org-repository-signing" -and $Record.Signing.NormalizedInputRequired -and -not [bool]$Record.Signing.AuthorCertificateRequired -and -not [bool]$Record.Signing.PrivateKeyRequired -and -not [bool]$Record.Signing.PrivateKeyMaterialPresent -and $Record.Signing.ServiceIndex -eq "https://api.nuget.org/v3/index.json" -and $Record.Signing.ExpectedSignatureType -eq "Repository" -and $Record.Signing.ExpectedOwner -eq "GuojinYan" -and $Record.Signing.VerificationScript -eq "scripts/Test-NuGetRepositorySignedPackage.ps1" -and $Record.Signing.Verification -eq "post-publication-required") -Issue "Final closeout repository-signing state drifted"
     Assert-True -List $List -Condition ($Record.Sbom.Status -eq "not-ready" -and $Record.Sbom.Format -eq "SPDX-2.3" -and $Record.Sbom.Generator -eq "scripts/New-ReleasePackageSbom.ps1" -and $Record.Sbom.Guard -eq "scripts/Test-ReleasePackageSbom.ps1" -and [bool]$Record.Sbom.Deterministic -and -not [bool]$Record.Sbom.FinalCandidateDocumentGenerated -and $Record.Sbom.Verification -eq "generator-verified-final-candidate-not-generated") -Issue "Final closeout SBOM state must retain a verified generator without claiming final-candidate output"
     Assert-True -List $List -Condition ($Record.Approval.Status -eq "not-approved" -and $Record.Approval.Reviewer -eq "automated-local-preflight" -and $Record.Approval.Approver -eq "unassigned" -and $Record.Approval.EvidenceKind -eq "local-source-and-offline-fixture" -and -not [bool]$Record.Approval.RemoteMutationAllowed) -Issue "Final closeout approval state drifted"
@@ -1377,7 +1404,14 @@ function Test-Record {
     Assert-True -List $List -Condition ($revision.LocalBuildRid -ceq 'win-x64' -and $revision.HistoricalUpstreamMapRevision -ceq '5.0.0' -and $revision.HistoricalSupportEvidenceRevision -ceq '5.0.0' -and -not $revision.CurrentRevisionMultiRidValidated -and -not $revision.CurrentRevisionUpstreamParityClaimed) -Issue 'Final closeout 5.1 revision evidence boundary drifted'
     $currentBuildHash = (Get-FileHash -LiteralPath (Join-Path $repo 'packaging/runtime/opencv-5.1.0-source-build-evidence.json') -Algorithm SHA256).Hash.ToLowerInvariant()
     $currentDnnHash = (Get-FileHash -LiteralPath (Join-Path $repo 'compatibility/opencv-5.1.0/dnn-upstream-summary.json') -Algorithm SHA256).Hash.ToLowerInvariant()
-    Assert-True -List $List -Condition ($revision.CurrentDnnParserSlice.Path -ceq 'compatibility/opencv-5.1.0/dnn-upstream-summary.json' -and $revision.CurrentDnnParserSlice.Sha256 -ceq $currentDnnHash -and $revision.CurrentDnnParserDeclarationCount -eq 185 -and -not $revision.CurrentDnnCompleteCppParityClaimed -and $revision.HistoricalCatalogMapCount -eq 73 -and $revision.CurrentRevisionRefreshedParserSliceCount -eq 1 -and $revision.CurrentRevisionPendingCatalogMapCount -eq 72) -Issue 'Final closeout 5.1 DNN parser refresh boundary drifted'
+    Assert-True -List $List -Condition ($revision.CurrentDnnParserSlice.Path -ceq 'compatibility/opencv-5.1.0/dnn-upstream-summary.json' -and $revision.CurrentDnnParserSlice.Sha256 -ceq $currentDnnHash -and $revision.CurrentDnnParserDeclarationCount -eq 185 -and -not $revision.CurrentDnnCompleteCppParityClaimed -and $revision.HistoricalCatalogMapCount -eq 73) -Issue 'Final closeout 5.1 DNN parser refresh boundary drifted'
+    $refresh51Path = Join-Path $repo 'compatibility/opencv-5.1.0/upstream-map-refresh-summary.json'
+    $refresh51 = Get-Content -LiteralPath $refresh51Path -Raw | ConvertFrom-Json
+    $refresh51Hash = (Get-FileHash -LiteralPath $refresh51Path -Algorithm SHA256).Hash.ToLowerInvariant()
+    Assert-True -List $List -Condition ($revision.CurrentParserRefreshInventory.Path -ceq 'compatibility/opencv-5.1.0/upstream-map-refresh-summary.json' -and
+        $revision.CurrentParserRefreshInventory.Sha256 -ceq $refresh51Hash -and $refresh51.refreshedParserSliceCount -eq 4 -and $refresh51.pendingCatalogMapCount -eq 69 -and
+        (@($refresh51.slices.id) -join '|') -ceq 'core|dnn|imgcodecs|imgproc' -and -not $refresh51.repositoryWideUpstreamParityClaimed -and -not $refresh51.completeCppParityClaimed -and
+        $revision.CurrentRevisionRefreshedParserSliceCount -eq $refresh51.refreshedParserSliceCount -and $revision.CurrentRevisionPendingCatalogMapCount -eq $refresh51.pendingCatalogMapCount) -Issue 'Final closeout 5.1 shared parser refresh boundary drifted'
     Assert-True -List $List -Condition ($revision.CurrentBuildEvidence.Path -ceq 'packaging/runtime/opencv-5.1.0-source-build-evidence.json' -and $revision.CurrentBuildEvidence.Sha256 -ceq $currentBuildHash) -Issue 'Final closeout 5.1 source build evidence drifted'
     $expectedBlockers = @("android-arm-device-evidence","api-gap-implementation","macos-support-decision","opencv-5.1-evidence-refresh","publication-authorization","release-approval","repository-signing-verification","sbom-inputs")
     $actualBlockers = @($Record.ExternalBlockers | ForEach-Object { [string]$_.Id })
@@ -1443,6 +1477,25 @@ Assert-FixtureRejected -Name "DNN parser slice promoted to full mapping set" -Ex
     $fixture = $record | ConvertTo-Json -Depth 30 | ConvertFrom-Json
     $fixture.RevisionValidation.CurrentRevisionRefreshedParserSliceCount = 73
     $fixture.RevisionValidation.CurrentDnnCompleteCppParityClaimed = $true
+    Test-Record -Record $fixture -List $list -ExpectedSourceHash $expectedSourceHash
+}
+Assert-FixtureRejected -Name "shared parser slices promoted to all modules" -ExpectedIssue "shared parser refresh boundary" -Action {
+    param($list)
+    $fixture = $record | ConvertTo-Json -Depth 30 | ConvertFrom-Json
+    $fixture.RevisionValidation.CurrentRevisionRefreshedParserSliceCount = 73
+    $fixture.RevisionValidation.CurrentRevisionPendingCatalogMapCount = 0
+    Test-Record -Record $fixture -List $list -ExpectedSourceHash $expectedSourceHash
+}
+Assert-FixtureRejected -Name "shared parser inventory hash drift" -ExpectedIssue "shared parser refresh boundary" -Action {
+    param($list)
+    $fixture = $record | ConvertTo-Json -Depth 30 | ConvertFrom-Json
+    $fixture.RevisionValidation.CurrentParserRefreshInventory.Sha256 = '0' * 64
+    Test-Record -Record $fixture -List $list -ExpectedSourceHash $expectedSourceHash
+}
+Assert-FixtureRejected -Name "stale invariant guard count" -ExpectedIssue "local validation state" -Action {
+    param($list)
+    $fixture = $record | ConvertTo-Json -Depth 30 | ConvertFrom-Json
+    $fixture.LocalValidation.InvariantGuardCount = 105
     Test-Record -Record $fixture -List $list -ExpectedSourceHash $expectedSourceHash
 }
 Assert-FixtureRejected -Name "support count drift" -ExpectedIssue "support partition" -Action {

@@ -1,0 +1,464 @@
+{
+  "fromVersion": "5.0.0",
+  "toVersion": "5.1.0",
+  "module": "imgcodecs",
+  "retainedIdentityCount": 39,
+  "added": [],
+  "removed": [],
+  "changed": [
+    {
+      "identity": "enum cv.ImwriteFlags",
+      "review": "Upstream adds TIFF_COMPRESSION_LEVEL=260 and AVIF_ALPHA_QUALITY=515. This is enum metadata, not new managed options or codec availability; existing public flags retain their values.",
+      "before": {
+        "ordinal": 1,
+        "kind": "enum",
+        "name": "cv.ImwriteFlags",
+        "identity": "enum cv.ImwriteFlags",
+        "returnType": "",
+        "modifiers": [],
+        "arguments": [],
+        "enumValues": [
+          {
+            "name": "const cv.IMWRITE_JPEG_QUALITY",
+            "value": "1"
+          },
+          {
+            "name": "const cv.IMWRITE_JPEG_PROGRESSIVE",
+            "value": "2"
+          },
+          {
+            "name": "const cv.IMWRITE_JPEG_OPTIMIZE",
+            "value": "3"
+          },
+          {
+            "name": "const cv.IMWRITE_JPEG_RST_INTERVAL",
+            "value": "4"
+          },
+          {
+            "name": "const cv.IMWRITE_JPEG_LUMA_QUALITY",
+            "value": "5"
+          },
+          {
+            "name": "const cv.IMWRITE_JPEG_CHROMA_QUALITY",
+            "value": "6"
+          },
+          {
+            "name": "const cv.IMWRITE_JPEG_SAMPLING_FACTOR",
+            "value": "7"
+          },
+          {
+            "name": "const cv.IMWRITE_PNG_COMPRESSION",
+            "value": "16"
+          },
+          {
+            "name": "const cv.IMWRITE_PNG_STRATEGY",
+            "value": "17"
+          },
+          {
+            "name": "const cv.IMWRITE_PNG_BILEVEL",
+            "value": "18"
+          },
+          {
+            "name": "const cv.IMWRITE_PNG_FILTER",
+            "value": "19"
+          },
+          {
+            "name": "const cv.IMWRITE_PNG_ZLIBBUFFER_SIZE",
+            "value": "20"
+          },
+          {
+            "name": "const cv.IMWRITE_PXM_BINARY",
+            "value": "32"
+          },
+          {
+            "name": "const cv.IMWRITE_EXR_TYPE",
+            "value": "(3 \u003C\u003C 4) \u002B 0"
+          },
+          {
+            "name": "const cv.IMWRITE_EXR_COMPRESSION",
+            "value": "(3 \u003C\u003C 4) \u002B 1"
+          },
+          {
+            "name": "const cv.IMWRITE_EXR_DWA_COMPRESSION_LEVEL",
+            "value": "(3 \u003C\u003C 4) \u002B 2"
+          },
+          {
+            "name": "const cv.IMWRITE_WEBP_QUALITY",
+            "value": "64"
+          },
+          {
+            "name": "const cv.IMWRITE_WEBP_LOSSLESS_MODE",
+            "value": "65"
+          },
+          {
+            "name": "const cv.IMWRITE_HDR_COMPRESSION",
+            "value": "(5 \u003C\u003C 4) \u002B 0"
+          },
+          {
+            "name": "const cv.IMWRITE_PAM_TUPLETYPE",
+            "value": "128"
+          },
+          {
+            "name": "const cv.IMWRITE_TIFF_RESUNIT",
+            "value": "256"
+          },
+          {
+            "name": "const cv.IMWRITE_TIFF_XDPI",
+            "value": "257"
+          },
+          {
+            "name": "const cv.IMWRITE_TIFF_YDPI",
+            "value": "258"
+          },
+          {
+            "name": "const cv.IMWRITE_TIFF_COMPRESSION",
+            "value": "259"
+          },
+          {
+            "name": "const cv.IMWRITE_TIFF_ROWSPERSTRIP",
+            "value": "278"
+          },
+          {
+            "name": "const cv.IMWRITE_TIFF_PREDICTOR",
+            "value": "317"
+          },
+          {
+            "name": "const cv.IMWRITE_JPEG2000_COMPRESSION_X1000",
+            "value": "272"
+          },
+          {
+            "name": "const cv.IMWRITE_AVIF_QUALITY",
+            "value": "512"
+          },
+          {
+            "name": "const cv.IMWRITE_AVIF_DEPTH",
+            "value": "513"
+          },
+          {
+            "name": "const cv.IMWRITE_AVIF_SPEED",
+            "value": "514"
+          },
+          {
+            "name": "const cv.IMWRITE_JPEGXL_QUALITY",
+            "value": "640"
+          },
+          {
+            "name": "const cv.IMWRITE_JPEGXL_EFFORT",
+            "value": "641"
+          },
+          {
+            "name": "const cv.IMWRITE_JPEGXL_DISTANCE",
+            "value": "642"
+          },
+          {
+            "name": "const cv.IMWRITE_JPEGXL_DECODING_SPEED",
+            "value": "643"
+          },
+          {
+            "name": "const cv.IMWRITE_BMP_COMPRESSION",
+            "value": "768"
+          },
+          {
+            "name": "const cv.IMWRITE_GIF_LOOP",
+            "value": "1024"
+          },
+          {
+            "name": "const cv.IMWRITE_GIF_SPEED",
+            "value": "1025"
+          },
+          {
+            "name": "const cv.IMWRITE_GIF_QUALITY",
+            "value": "1026"
+          },
+          {
+            "name": "const cv.IMWRITE_GIF_DITHER",
+            "value": "1027"
+          },
+          {
+            "name": "const cv.IMWRITE_GIF_TRANSPARENCY",
+            "value": "1028"
+          },
+          {
+            "name": "const cv.IMWRITE_GIF_COLORTABLE",
+            "value": "1029"
+          }
+        ],
+        "baseDeclaration": "",
+        "documentation": ""
+      },
+      "after": {
+        "ordinal": 1,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/imgcodecs/include/opencv2/imgcodecs.hpp",
+        "kind": "enum",
+        "name": "cv.ImwriteFlags",
+        "identity": "enum cv.ImwriteFlags",
+        "returnType": "",
+        "modifiers": [],
+        "arguments": [],
+        "enumValues": [
+          {
+            "name": "const cv.IMWRITE_JPEG_QUALITY",
+            "value": "1"
+          },
+          {
+            "name": "const cv.IMWRITE_JPEG_PROGRESSIVE",
+            "value": "2"
+          },
+          {
+            "name": "const cv.IMWRITE_JPEG_OPTIMIZE",
+            "value": "3"
+          },
+          {
+            "name": "const cv.IMWRITE_JPEG_RST_INTERVAL",
+            "value": "4"
+          },
+          {
+            "name": "const cv.IMWRITE_JPEG_LUMA_QUALITY",
+            "value": "5"
+          },
+          {
+            "name": "const cv.IMWRITE_JPEG_CHROMA_QUALITY",
+            "value": "6"
+          },
+          {
+            "name": "const cv.IMWRITE_JPEG_SAMPLING_FACTOR",
+            "value": "7"
+          },
+          {
+            "name": "const cv.IMWRITE_PNG_COMPRESSION",
+            "value": "16"
+          },
+          {
+            "name": "const cv.IMWRITE_PNG_STRATEGY",
+            "value": "17"
+          },
+          {
+            "name": "const cv.IMWRITE_PNG_BILEVEL",
+            "value": "18"
+          },
+          {
+            "name": "const cv.IMWRITE_PNG_FILTER",
+            "value": "19"
+          },
+          {
+            "name": "const cv.IMWRITE_PNG_ZLIBBUFFER_SIZE",
+            "value": "20"
+          },
+          {
+            "name": "const cv.IMWRITE_PXM_BINARY",
+            "value": "32"
+          },
+          {
+            "name": "const cv.IMWRITE_EXR_TYPE",
+            "value": "(3 \u003C\u003C 4) \u002B 0"
+          },
+          {
+            "name": "const cv.IMWRITE_EXR_COMPRESSION",
+            "value": "(3 \u003C\u003C 4) \u002B 1"
+          },
+          {
+            "name": "const cv.IMWRITE_EXR_DWA_COMPRESSION_LEVEL",
+            "value": "(3 \u003C\u003C 4) \u002B 2"
+          },
+          {
+            "name": "const cv.IMWRITE_WEBP_QUALITY",
+            "value": "64"
+          },
+          {
+            "name": "const cv.IMWRITE_WEBP_LOSSLESS_MODE",
+            "value": "65"
+          },
+          {
+            "name": "const cv.IMWRITE_HDR_COMPRESSION",
+            "value": "(5 \u003C\u003C 4) \u002B 0"
+          },
+          {
+            "name": "const cv.IMWRITE_PAM_TUPLETYPE",
+            "value": "128"
+          },
+          {
+            "name": "const cv.IMWRITE_TIFF_RESUNIT",
+            "value": "256"
+          },
+          {
+            "name": "const cv.IMWRITE_TIFF_XDPI",
+            "value": "257"
+          },
+          {
+            "name": "const cv.IMWRITE_TIFF_YDPI",
+            "value": "258"
+          },
+          {
+            "name": "const cv.IMWRITE_TIFF_COMPRESSION",
+            "value": "259"
+          },
+          {
+            "name": "const cv.IMWRITE_TIFF_COMPRESSION_LEVEL",
+            "value": "260"
+          },
+          {
+            "name": "const cv.IMWRITE_TIFF_ROWSPERSTRIP",
+            "value": "278"
+          },
+          {
+            "name": "const cv.IMWRITE_TIFF_PREDICTOR",
+            "value": "317"
+          },
+          {
+            "name": "const cv.IMWRITE_JPEG2000_COMPRESSION_X1000",
+            "value": "272"
+          },
+          {
+            "name": "const cv.IMWRITE_AVIF_QUALITY",
+            "value": "512"
+          },
+          {
+            "name": "const cv.IMWRITE_AVIF_DEPTH",
+            "value": "513"
+          },
+          {
+            "name": "const cv.IMWRITE_AVIF_SPEED",
+            "value": "514"
+          },
+          {
+            "name": "const cv.IMWRITE_AVIF_ALPHA_QUALITY",
+            "value": "515"
+          },
+          {
+            "name": "const cv.IMWRITE_JPEGXL_QUALITY",
+            "value": "640"
+          },
+          {
+            "name": "const cv.IMWRITE_JPEGXL_EFFORT",
+            "value": "641"
+          },
+          {
+            "name": "const cv.IMWRITE_JPEGXL_DISTANCE",
+            "value": "642"
+          },
+          {
+            "name": "const cv.IMWRITE_JPEGXL_DECODING_SPEED",
+            "value": "643"
+          },
+          {
+            "name": "const cv.IMWRITE_BMP_COMPRESSION",
+            "value": "768"
+          },
+          {
+            "name": "const cv.IMWRITE_GIF_LOOP",
+            "value": "1024"
+          },
+          {
+            "name": "const cv.IMWRITE_GIF_SPEED",
+            "value": "1025"
+          },
+          {
+            "name": "const cv.IMWRITE_GIF_QUALITY",
+            "value": "1026"
+          },
+          {
+            "name": "const cv.IMWRITE_GIF_DITHER",
+            "value": "1027"
+          },
+          {
+            "name": "const cv.IMWRITE_GIF_TRANSPARENCY",
+            "value": "1028"
+          },
+          {
+            "name": "const cv.IMWRITE_GIF_COLORTABLE",
+            "value": "1029"
+          }
+        ],
+        "baseDeclaration": "",
+        "documentation": ""
+      },
+      "fields": [
+        "enumValues"
+      ]
+    },
+    {
+      "identity": "cv.imwrite(String filename[/C,/Ref,/PATH];Mat img;vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+      "review": "AVIF 16-bit output is conditional on libavif 1.4.0\u002B, and opaque alpha can be omitted by libavif. Retain the existing writer binding without claiming this codec/dependency combination or guaranteed alpha preservation.",
+      "before": {
+        "ordinal": 28,
+        "kind": "callable",
+        "name": "cv.imwrite",
+        "identity": "cv.imwrite(String filename[/C,/Ref,/PATH];Mat img;vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+        "returnType": "bool",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "String",
+            "name": "filename",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref",
+              "/PATH"
+            ]
+          },
+          {
+            "type": "Mat",
+            "name": "img",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "vector_int",
+            "name": "params",
+            "default": "std::vector\u003Cint\u003E()",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Saves an image to a specified file.\n\nThe function imwrite saves the image to the specified file. The image format is chosen based on the\nfilename extension (see cv::imread for the list of extensions). In general, only 8-bit unsigned (CV_8U)\nsingle-channel or 3-channel (with \u0027BGR\u0027 channel order) images\ncan be saved using this function, with these exceptions:\n\n- With BMP encoder, 8-bit unsigned (CV_8U) images can be saved.\n  - BMP images with an alpha channel can be saved using this function.\n    To achieve this, create an 8-bit 4-channel (CV_8UC4) BGRA image, ensuring the alpha channel is the last component.\n    Fully transparent pixels should have an alpha value of 0, while fully opaque pixels should have an alpha value of 255.\n    OpenCV v4.13.0 or later use BI_BITFIELDS compression as default. See IMWRITE_BMP_COMPRESSION.\n- With OpenEXR encoder, only 32-bit float (CV_32F) images can be saved. More than 4 channels can be saved. (imread can load it then.)\n  - 8-bit unsigned (CV_8U) images are not supported.\n- With Radiance HDR encoder, non 64-bit float (CV_64F) images can be saved.\n  - All images will be converted to 32-bit float (CV_32F).\n- With JPEG 2000 encoder, 8-bit unsigned (CV_8U) and 16-bit unsigned (CV_16U) images can be saved.\n- With JPEG XL encoder, 8-bit unsigned (CV_8U), 16-bit unsigned (CV_16U) and 32-bit float(CV_32F) images can be saved.\n  - JPEG XL images with an alpha channel can be saved using this function.\n    To achieve this, create an 8-bit 4-channel (CV_8UC4) / 16-bit 4-channel (CV_16UC4) / 32-bit float 4-channel (CV_32FC4) BGRA image, ensuring the alpha channel is the last component.\n    Fully transparent pixels should have an alpha value of 0, while fully opaque pixels should have an alpha value of 255/65535/1.0.\n- With PAM encoder, 8-bit unsigned (CV_8U) and 16-bit unsigned (CV_16U) images can be saved.\n- With PNG encoder, 8-bit unsigned (CV_8U) and 16-bit unsigned (CV_16U) images can be saved.\n  - PNG images with an alpha channel can be saved using this function.\n    To achieve this, create an 8-bit 4-channel (CV_8UC4) / 16-bit 4-channel (CV_16UC4) BGRA image, ensuring the alpha channel is the last component.\n    Fully transparent pixels should have an alpha value of 0, while fully opaque pixels should have an alpha value of 255/65535(see the code sample below).\n- With PGM/PPM encoder, 8-bit unsigned (CV_8U) and 16-bit unsigned (CV_16U) images can be saved.\n- With TIFF encoder, 8-bit unsigned (CV_8U), 8-bit signed (CV_8S),\n                     16-bit unsigned (CV_16U), 16-bit signed (CV_16S),\n                     32-bit unsigned (CV_32U), 32-bit signed (CV_32S),\n                     64-bit unsigned (CV_64U), 64-bit signed (CV_64S),\n                     32-bit float (CV_32F) and 64-bit float (CV_64F) images can be saved.\n  - Multiple images (vector of Mat) can be saved in TIFF format (see the code sample below).\n  - 32-bit float 3-channel (CV_32FC3) TIFF images can be saved\n    using the LogLuv high dynamic range encoding (4 bytes per pixel) through TIFF_COMPRESSION_SGILOG or\n    (3 bytes per pixel) through TIFF_COMPRESSION_SGILOG24.\n  - Other compression schemes (LZW...) are supported as well for 32F depth, but the efficiency might not\n    be very good for the floating-point representation bit patterns.\n- With GIF encoder, 8-bit unsigned (CV_8U) images can be saved.\n  - GIF images with an alpha channel can be saved using this function.\n    To achieve this, create an 8-bit 4-channel (CV_8UC4) BGRA image, ensuring the alpha channel is the last component.\n    Fully transparent pixels should have an alpha value of 0, while fully opaque pixels should have an alpha value of 255.\n  - 8-bit single-channel images (CV_8UC1) are not supported due to GIF\u0027s limitation to indexed color formats.\n- With AVIF encoder, 8-bit unsigned (CV_8U) and 16-bit unsigned (CV_16U) images can be saved.\n  - CV_16U images can be saved as only 10-bit or 12-bit (not 16-bit). See IMWRITE_AVIF_DEPTH.\n  - AVIF images with an alpha channel can be saved using this function.\n    To achieve this, create an 8-bit 4-channel (CV_8UC4) / 16-bit 4-channel (CV_16UC4) BGRA image, ensuring the alpha channel is the last component.\n    Fully transparent pixels should have an alpha value of 0, while fully opaque pixels should have an alpha value of 255 (8-bit) / 1023 (10-bit) / 4095 (12-bit) (see the code sample below).\n\nIf the image format is not supported, the image will be converted to 8-bit unsigned (CV_8U) and saved that way.\n\nIf the format, depth or channel order is different, use\nMat::convertTo and cv::cvtColor to convert it before saving. Or, use the universal FileStorage I/O\nfunctions to save the image to XML or YAML format.\n\nThe sample below shows how to create a BGRA image, how to set custom compression parameters and save it to a PNG file.\nIt also demonstrates how to save multiple images in a TIFF file:\n@include snippets/imgcodecs_imwrite.cpp\n@param filename Name of the file.\n@param img (Mat or vector of Mat) Image or Images to be saved.\n@param params Format-specific parameters encoded as pairs (paramId_1, paramValue_1, paramId_2, paramValue_2, ... .) see cv::ImwriteFlags\n@return true if the image is successfully written to the specified file; false otherwise."
+      },
+      "after": {
+        "ordinal": 28,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/imgcodecs/include/opencv2/imgcodecs.hpp",
+        "kind": "callable",
+        "name": "cv.imwrite",
+        "identity": "cv.imwrite(String filename[/C,/Ref,/PATH];Mat img;vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+        "returnType": "bool",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "String",
+            "name": "filename",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref",
+              "/PATH"
+            ]
+          },
+          {
+            "type": "Mat",
+            "name": "img",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "vector_int",
+            "name": "params",
+            "default": "std::vector\u003Cint\u003E()",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Saves an image to a specified file.\n\nThe function imwrite saves the image to the specified file. The image format is chosen based on the\nfilename extension (see cv::imread for the list of extensions). In general, only 8-bit unsigned (CV_8U)\nsingle-channel or 3-channel (with \u0027BGR\u0027 channel order) images\ncan be saved using this function, with these exceptions:\n\n- With BMP encoder, 8-bit unsigned (CV_8U) images can be saved.\n  - BMP images with an alpha channel can be saved using this function.\n    To achieve this, create an 8-bit 4-channel (CV_8UC4) BGRA image, ensuring the alpha channel is the last component.\n    Fully transparent pixels should have an alpha value of 0, while fully opaque pixels should have an alpha value of 255.\n    OpenCV v4.13.0 or later use BI_BITFIELDS compression as default. See IMWRITE_BMP_COMPRESSION.\n- With OpenEXR encoder, only 32-bit float (CV_32F) images can be saved. More than 4 channels can be saved. (imread can load it then.)\n  - 8-bit unsigned (CV_8U) images are not supported.\n- With Radiance HDR encoder, non 64-bit float (CV_64F) images can be saved.\n  - All images will be converted to 32-bit float (CV_32F).\n- With JPEG 2000 encoder, 8-bit unsigned (CV_8U) and 16-bit unsigned (CV_16U) images can be saved.\n- With JPEG XL encoder, 8-bit unsigned (CV_8U), 16-bit unsigned (CV_16U) and 32-bit float(CV_32F) images can be saved.\n  - JPEG XL images with an alpha channel can be saved using this function.\n    To achieve this, create an 8-bit 4-channel (CV_8UC4) / 16-bit 4-channel (CV_16UC4) / 32-bit float 4-channel (CV_32FC4) BGRA image, ensuring the alpha channel is the last component.\n    Fully transparent pixels should have an alpha value of 0, while fully opaque pixels should have an alpha value of 255/65535/1.0.\n- With PAM encoder, 8-bit unsigned (CV_8U) and 16-bit unsigned (CV_16U) images can be saved.\n- With PNG encoder, 8-bit unsigned (CV_8U) and 16-bit unsigned (CV_16U) images can be saved.\n  - PNG images with an alpha channel can be saved using this function.\n    To achieve this, create an 8-bit 4-channel (CV_8UC4) / 16-bit 4-channel (CV_16UC4) BGRA image, ensuring the alpha channel is the last component.\n    Fully transparent pixels should have an alpha value of 0, while fully opaque pixels should have an alpha value of 255/65535(see the code sample below).\n- With PGM/PPM encoder, 8-bit unsigned (CV_8U) and 16-bit unsigned (CV_16U) images can be saved.\n- With TIFF encoder, 8-bit unsigned (CV_8U), 8-bit signed (CV_8S),\n                     16-bit unsigned (CV_16U), 16-bit signed (CV_16S),\n                     32-bit unsigned (CV_32U), 32-bit signed (CV_32S),\n                     64-bit unsigned (CV_64U), 64-bit signed (CV_64S),\n                     32-bit float (CV_32F) and 64-bit float (CV_64F) images can be saved.\n  - Multiple images (vector of Mat) can be saved in TIFF format (see the code sample below).\n  - 32-bit float 3-channel (CV_32FC3) TIFF images can be saved\n    using the LogLuv high dynamic range encoding (4 bytes per pixel) through TIFF_COMPRESSION_SGILOG or\n    (3 bytes per pixel) through TIFF_COMPRESSION_SGILOG24.\n  - Other compression schemes (LZW...) are supported as well for 32F depth, but the efficiency might not\n    be very good for the floating-point representation bit patterns.\n- With GIF encoder, 8-bit unsigned (CV_8U) images can be saved.\n  - GIF images with an alpha channel can be saved using this function.\n    To achieve this, create an 8-bit 4-channel (CV_8UC4) BGRA image, ensuring the alpha channel is the last component.\n    Fully transparent pixels should have an alpha value of 0, while fully opaque pixels should have an alpha value of 255.\n  - 8-bit single-channel images (CV_8UC1) are not supported due to GIF\u0027s limitation to indexed color formats.\n- With AVIF encoder, 8-bit unsigned (CV_8U) and 16-bit unsigned (CV_16U) images can be saved.\n  - CV_16U images can be saved as only 10-bit or 12-bit (and 16-bit with libavif 1.4.0\u002B). See @ref IMWRITE_AVIF_DEPTH.\n  - AVIF images with an alpha channel can be saved using this function.\n    To achieve this, create an 8-bit 4-channel (CV_8UC4) / 16-bit 4-channel (CV_16UC4) BGRA image, ensuring the alpha channel is the last component.\n    Fully transparent pixels should have an alpha value of 0, while fully opaque pixels should have an alpha value of 255 (8-bit) / 1023 (10-bit) / 4095 (12-bit) / 65535 (16-bit) (see the code sample below).\n    Note that if the alpha plane contains only fully opaque pixels, the destination saves only color channels due to a libavif limitation.\n\nIf the image format is not supported, the image will be converted to 8-bit unsigned (CV_8U) and saved that way.\n\nIf the format, depth or channel order is different, use\nMat::convertTo and cv::cvtColor to convert it before saving. Or, use the universal FileStorage I/O\nfunctions to save the image to XML or YAML format.\n\nThe sample below shows how to create a BGRA image, how to set custom compression parameters and save it to a PNG file.\nIt also demonstrates how to save multiple images in a TIFF file:\n@include snippets/imgcodecs_imwrite.cpp\n@param filename Name of the file.\n@param img (Mat or vector of Mat) Image or Images to be saved.\n@param params Format-specific parameters encoded as pairs (paramId_1, paramValue_1, paramId_2, paramValue_2, ... .) see cv::ImwriteFlags\n@return true if the image is successfully written to the specified file; false otherwise."
+      },
+      "fields": [
+        "documentation"
+      ]
+    }
+  ]
+}

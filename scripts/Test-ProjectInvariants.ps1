@@ -451,6 +451,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo, "-DotNetPath", $DotNetPath)
     },
     [pscustomobject]@{
+        Name = "OpenCV 5.1 shared upstream map refresh"
+        Script = Join-Path $repo "scripts/Test-UpstreamMap51.ps1"
+        Arguments = @("-RepositoryRoot", $repo, "-DotNetPath", $DotNetPath)
+    },
+    [pscustomobject]@{
         Name = "VideoIO registry surface"
         Script = Join-Path $repo "scripts/Test-VideoIORegistrySurface.ps1"
         Arguments = @("-RepositoryRoot", $repo)

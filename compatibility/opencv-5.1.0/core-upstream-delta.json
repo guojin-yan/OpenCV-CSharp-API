@@ -1,0 +1,1481 @@
+{
+  "fromVersion": "5.0.0",
+  "toVersion": "5.1.0",
+  "module": "core",
+  "retainedIdentityCount": 257,
+  "added": [
+    {
+      "identity": "cv.MatShape.squeeze(vector_int axes=std::vector\u003Cint\u003E()[/C,/Ref])-\u003EMatShape",
+      "review": "The new MatShape transform returns a shape value. There is no managed MatShape value transport or matching C ABI; Mat.Reshape is a different ownership and data-view API.",
+      "after": {
+        "ordinal": 44,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core/mat.hpp",
+        "kind": "callable",
+        "name": "cv.MatShape.squeeze",
+        "identity": "cv.MatShape.squeeze(vector_int axes=std::vector\u003Cint\u003E()[/C,/Ref])-\u003EMatShape",
+        "returnType": "MatShape",
+        "modifiers": [
+          "/C"
+        ],
+        "arguments": [
+          {
+            "type": "vector_int",
+            "name": "axes",
+            "default": "std::vector\u003Cint\u003E()",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": ""
+      }
+    },
+    {
+      "identity": "cv.MatShape.unsqueeze(vector_int axes[/C,/Ref])-\u003EMatShape",
+      "review": "The new MatShape transform returns a shape value. There is no managed MatShape value transport or matching C ABI; Mat.Reshape is a different ownership and data-view API.",
+      "after": {
+        "ordinal": 45,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core/mat.hpp",
+        "kind": "callable",
+        "name": "cv.MatShape.unsqueeze",
+        "identity": "cv.MatShape.unsqueeze(vector_int axes[/C,/Ref])-\u003EMatShape",
+        "returnType": "MatShape",
+        "modifiers": [
+          "/C"
+        ],
+        "arguments": [
+          {
+            "type": "vector_int",
+            "name": "axes",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": ""
+      }
+    },
+    {
+      "identity": "cv.MatShape.flatten(int startAxis=0;int endAxis=-1)-\u003EMatShape",
+      "review": "The new MatShape transform returns a shape value. There is no managed MatShape value transport or matching C ABI; Mat.Reshape is a different ownership and data-view API.",
+      "after": {
+        "ordinal": 46,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core/mat.hpp",
+        "kind": "callable",
+        "name": "cv.MatShape.flatten",
+        "identity": "cv.MatShape.flatten(int startAxis=0;int endAxis=-1)-\u003EMatShape",
+        "returnType": "MatShape",
+        "modifiers": [
+          "/C"
+        ],
+        "arguments": [
+          {
+            "type": "int",
+            "name": "startAxis",
+            "default": "0",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "endAxis",
+            "default": "-1",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": ""
+      }
+    },
+    {
+      "identity": "cv.MatShape.reshape(MatShape newShape[/C,/Ref];bool allowZero=false)-\u003EMatShape",
+      "review": "The new MatShape transform returns a shape value. There is no managed MatShape value transport or matching C ABI; Mat.Reshape is a different ownership and data-view API.",
+      "after": {
+        "ordinal": 47,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core/mat.hpp",
+        "kind": "callable",
+        "name": "cv.MatShape.reshape",
+        "identity": "cv.MatShape.reshape(MatShape newShape[/C,/Ref];bool allowZero=false)-\u003EMatShape",
+        "returnType": "MatShape",
+        "modifiers": [
+          "/C"
+        ],
+        "arguments": [
+          {
+            "type": "MatShape",
+            "name": "newShape",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "bool",
+            "name": "allowZero",
+            "default": "false",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": ""
+      }
+    },
+    {
+      "identity": "enum cv.ReduceTypes[const cv.REDUCE_SUM=0;const cv.REDUCE_AVG=1;const cv.REDUCE_MAX=2;const cv.REDUCE_MIN=3;const cv.REDUCE_SUM2=4;const cv.REDUCE_PROD=5;const cv.REDUCE_L1=6;const cv.REDUCE_L2=7;const cv.REDUCE_LOG_SUM=8;const cv.REDUCE_LOG_SUM_EXP=9]",
+      "review": "New or extended 5.1 parser type/enum metadata. No corresponding managed type, additional enum members, or complete input-domain coverage is claimed.",
+      "after": {
+        "ordinal": 104,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core.hpp",
+        "kind": "enum",
+        "name": "cv.ReduceTypes",
+        "identity": "enum cv.ReduceTypes[const cv.REDUCE_SUM=0;const cv.REDUCE_AVG=1;const cv.REDUCE_MAX=2;const cv.REDUCE_MIN=3;const cv.REDUCE_SUM2=4;const cv.REDUCE_PROD=5;const cv.REDUCE_L1=6;const cv.REDUCE_L2=7;const cv.REDUCE_LOG_SUM=8;const cv.REDUCE_LOG_SUM_EXP=9]",
+        "returnType": "",
+        "modifiers": [],
+        "arguments": [],
+        "enumValues": [
+          {
+            "name": "const cv.REDUCE_SUM",
+            "value": "0"
+          },
+          {
+            "name": "const cv.REDUCE_AVG",
+            "value": "1"
+          },
+          {
+            "name": "const cv.REDUCE_MAX",
+            "value": "2"
+          },
+          {
+            "name": "const cv.REDUCE_MIN",
+            "value": "3"
+          },
+          {
+            "name": "const cv.REDUCE_SUM2",
+            "value": "4"
+          },
+          {
+            "name": "const cv.REDUCE_PROD",
+            "value": "5"
+          },
+          {
+            "name": "const cv.REDUCE_L1",
+            "value": "6"
+          },
+          {
+            "name": "const cv.REDUCE_L2",
+            "value": "7"
+          },
+          {
+            "name": "const cv.REDUCE_LOG_SUM",
+            "value": "8"
+          },
+          {
+            "name": "const cv.REDUCE_LOG_SUM_EXP",
+            "value": "9"
+          }
+        ],
+        "baseDeclaration": "",
+        "documentation": ""
+      }
+    },
+    {
+      "identity": "class cv.ReduceParams",
+      "review": "New or extended 5.1 parser type/enum metadata. No corresponding managed type, additional enum members, or complete input-domain coverage is claimed.",
+      "after": {
+        "ordinal": 131,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core.hpp",
+        "kind": "class",
+        "name": "cv.ReduceParams",
+        "identity": "class cv.ReduceParams",
+        "returnType": "",
+        "modifiers": [
+          "/Simple"
+        ],
+        "arguments": [
+          {
+            "type": "int",
+            "name": "rtype",
+            "default": "",
+            "modifiers": [
+              "/RW"
+            ]
+          },
+          {
+            "type": "vector_int",
+            "name": "axes",
+            "default": "",
+            "modifiers": [
+              "/RW"
+            ]
+          },
+          {
+            "type": "bool",
+            "name": "keepdims",
+            "default": "",
+            "modifiers": [
+              "/RW"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "dtype",
+            "default": "",
+            "modifiers": [
+              "/RW"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief The reduction that the n-dimensional #reduce performs.\n\nEverything the call needs besides the input and the output arrays, in one struct, so that further\noptions can be added without changing the signature.\n\n@sa reduce"
+      }
+    },
+    {
+      "identity": "cv.ReduceParams.ReduceParams(int rtype=REDUCE_SUM;vector_int axes=std::vector\u003Cint\u003E()[/C,/Ref];bool keepdims=true;int dtype=-1)-\u003E",
+      "review": "The new ReduceParams/tensor overload needs axes, keepdims, dtype and reduction-domain contracts. The existing dim-based 2D Reduce binding is not this overload.",
+      "after": {
+        "ordinal": 132,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.ReduceParams.ReduceParams",
+        "identity": "cv.ReduceParams.ReduceParams(int rtype=REDUCE_SUM;vector_int axes=std::vector\u003Cint\u003E()[/C,/Ref];bool keepdims=true;int dtype=-1)-\u003E",
+        "returnType": "",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "int",
+            "name": "rtype",
+            "default": "REDUCE_SUM",
+            "modifiers": []
+          },
+          {
+            "type": "vector_int",
+            "name": "axes",
+            "default": "std::vector\u003Cint\u003E()",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "bool",
+            "name": "keepdims",
+            "default": "true",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "dtype",
+            "default": "-1",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": ""
+      }
+    },
+    {
+      "identity": "cv.reduce(Mat src;Mat dst[/O];ReduceParams params[/C,/Ref])-\u003Evoid",
+      "review": "The new ReduceParams/tensor overload needs axes, keepdims, dtype and reduction-domain contracts. The existing dim-based 2D Reduce binding is not this overload.",
+      "after": {
+        "ordinal": 133,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.reduce",
+        "identity": "cv.reduce(Mat src;Mat dst[/O];ReduceParams params[/C,/Ref])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "src",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "dst",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "ReduceParams",
+            "name": "params",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Reduces an n-dimensional array over the given axes.\n\nEvery output element is the reduction (see #ReduceTypes) of the input elements that differ only in\nthe reduced axes. The channels are reduced independently, so the output has as many channels as the\ninput. The input may be non-continuous (e.g. a sub-array) and of any depth.\n\nThe accumulation is done in the source type for #REDUCE_MAX and #REDUCE_MIN (in float for 16-bit\nfloating-point types) and in float or double for the other operations (double for 32- and 64-bit\nintegers, for CV_64F, and when the output depth is CV_64F).\n\n@code{.cpp}\n    Mat blob(std::vector\u003Cint\u003E{1, 256, 80, 80}, CV_32F), channelMeans;\n    cv::reduce(blob, channelMeans, {REDUCE_AVG, {2, 3}});   // -\u003E 1x256x1x1\n@endcode\n\n@param src input array.\n@param dst output array. With ReduceParams::keepdims, it has the shape of src with the reduced axes\nset to 1; otherwise the reduced axes are removed (reducing all the axes then gives a 0-dimensional\narray).\n@param params the reduction operation and the axes to reduce over, see cv::ReduceParams.\n@sa ReduceParams, sum, mean, minMaxIdx"
+      }
+    },
+    {
+      "identity": "cv.squeeze(Mat src;Mat dst[/O];vector_int axes=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Evoid",
+      "review": "This new tensor overload requires explicit axis/shape, allocation, stride/aliasing and output ownership contracts. Existing 2D/channel operations or Mat header reshapes are not equivalent to this declaration.",
+      "after": {
+        "ordinal": 141,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.squeeze",
+        "identity": "cv.squeeze(Mat src;Mat dst[/O];vector_int axes=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "src",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "dst",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "vector_int",
+            "name": "axes",
+            "default": "std::vector\u003Cint\u003E()",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Removes axes of size 1 from an n-dimensional array.\n *\n * The elements are not changed. When called in place (dst is src) on a continuous array, only the\n * header changes; otherwise the elements are copied into dst (Mat::reshape gives a view without\n * copying). The channels of the elements are kept, the axes are the array dimensions. The same holds\n * for unsqueeze, flatten and reshape.\n * @param src input array\n * @param dst output array\n * @param axes axes to remove, each of size 1; negative values count from the end.\n * When empty, all the axes of size 1 are removed.\n * @sa unsqueeze, MatShape::squeeze"
+      }
+    },
+    {
+      "identity": "cv.unsqueeze(Mat src;Mat dst[/O];vector_int axes[/C,/Ref])-\u003Evoid",
+      "review": "This new tensor overload requires explicit axis/shape, allocation, stride/aliasing and output ownership contracts. Existing 2D/channel operations or Mat header reshapes are not equivalent to this declaration.",
+      "after": {
+        "ordinal": 142,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.unsqueeze",
+        "identity": "cv.unsqueeze(Mat src;Mat dst[/O];vector_int axes[/C,/Ref])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "src",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "dst",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "vector_int",
+            "name": "axes",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Inserts axes of size 1 into an n-dimensional array.\n * @param src input array\n * @param dst output array with src.dims \u002B axes.size() dimensions\n * @param axes positions of the new axes in dst; negative values count from the end of dst.\n * @sa squeeze, MatShape::unsqueeze"
+      }
+    },
+    {
+      "identity": "cv.flatten(Mat src;Mat dst[/O];int startAxis=0;int endAxis=-1)-\u003Evoid",
+      "review": "This new tensor overload requires explicit axis/shape, allocation, stride/aliasing and output ownership contracts. Existing 2D/channel operations or Mat header reshapes are not equivalent to this declaration.",
+      "after": {
+        "ordinal": 143,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.flatten",
+        "identity": "cv.flatten(Mat src;Mat dst[/O];int startAxis=0;int endAxis=-1)-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "src",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "dst",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "startAxis",
+            "default": "0",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "endAxis",
+            "default": "-1",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Merges consecutive axes of an n-dimensional array into one.\n *\n * With the default arguments the result is 1-dimensional.\n * @param src input array\n * @param dst output array\n * @param startAxis first axis to merge; negative values count from the end.\n * @param endAxis last axis to merge (inclusive); negative values count from the end.\n * @sa MatShape::flatten"
+      }
+    },
+    {
+      "identity": "cv.reshape(Mat src;Mat dst[/O];vector_int newShape[/C,/Ref];bool allowZero=false)-\u003Evoid",
+      "review": "This new tensor overload requires explicit axis/shape, allocation, stride/aliasing and output ownership contracts. Existing 2D/channel operations or Mat header reshapes are not equivalent to this declaration.",
+      "after": {
+        "ordinal": 144,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.reshape",
+        "identity": "cv.reshape(Mat src;Mat dst[/O];vector_int newShape[/C,/Ref];bool allowZero=false)-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "src",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "dst",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "vector_int",
+            "name": "newShape",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "bool",
+            "name": "allowZero",
+            "default": "false",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Changes the shape of an n-dimensional array.\n *\n * One element of newShape may be -1, it is then inferred from the number of elements. An element\n * equal to 0 copies the corresponding axis of src, unless allowZero is set, in which case it is a\n * zero-size axis (the ONNX Reshape convention).\n * @param src input array\n * @param dst output array\n * @param newShape the new shape\n * @param allowZero treat 0 in newShape as a size instead of \u0022same as src\u0022\n * @sa MatShape::reshape, Mat::reshape"
+      }
+    },
+    {
+      "identity": "cv.concat(vector_Mat src;int axis;Mat dst[/O])-\u003Evoid",
+      "review": "This new tensor overload requires explicit axis/shape, allocation, stride/aliasing and output ownership contracts. Existing 2D/channel operations or Mat header reshapes are not equivalent to this declaration.",
+      "after": {
+        "ordinal": 145,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.concat",
+        "identity": "cv.concat(vector_Mat src;int axis;Mat dst[/O])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "vector_Mat",
+            "name": "src",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "axis",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "dst",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Concatenates n-dimensional arrays along the given axis.\n *\n * All the arrays must have the same type and number of dimensions, and the same size along every\n * axis except @p axis. The arrays may be multi-channel and non-continuous; the channels of each\n * element are kept together, so @p axis refers to the array dimensions, not to the channels.\n * For 2D arrays concat(src, 0, dst) is equivalent to vconcat() and concat(src, 1, dst) to hconcat().\n * @param src input arrays\n * @param axis axis to concatenate along; -dims \u003C= axis \u003C dims\n * @param dst output array\n * @sa split, hconcat, vconcat"
+      }
+    },
+    {
+      "identity": "cv.split(Mat src;int axis;vector_int sizes[/C,/Ref];vector_Mat dst[/O])-\u003Evoid",
+      "review": "This new tensor overload requires explicit axis/shape, allocation, stride/aliasing and output ownership contracts. Existing 2D/channel operations or Mat header reshapes are not equivalent to this declaration.",
+      "after": {
+        "ordinal": 146,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.split",
+        "identity": "cv.split(Mat src;int axis;vector_int sizes[/C,/Ref];vector_Mat dst[/O])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "src",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "axis",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "vector_int",
+            "name": "sizes",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "vector_Mat",
+            "name": "dst",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Splits an n-dimensional array into several arrays along the given axis.\n *\n * This is the inverse of concat(). The two-argument split() is a different operation: it separates\n * the channels of the elements, while this one cuts the array along one of its dimensions.\n * @param src input array; may be multi-channel and non-continuous\n * @param axis axis to split along; -src.dims \u003C= axis \u003C src.dims\n * @param sizes size of each output array along @p axis; the values must sum up to src.size[axis]\n * @param dst output arrays, one per element of @p sizes\n * @sa concat"
+      }
+    },
+    {
+      "identity": "cv.slice(Mat src;vector_int starts[/C,/Ref];vector_int ends[/C,/Ref];vector_int steps[/C,/Ref];Mat dst[/O])-\u003Evoid",
+      "review": "This new tensor overload requires explicit axis/shape, allocation, stride/aliasing and output ownership contracts. Existing 2D/channel operations or Mat header reshapes are not equivalent to this declaration.",
+      "after": {
+        "ordinal": 147,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.slice",
+        "identity": "cv.slice(Mat src;vector_int starts[/C,/Ref];vector_int ends[/C,/Ref];vector_int steps[/C,/Ref];Mat dst[/O])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "src",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "vector_int",
+            "name": "starts",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "vector_int",
+            "name": "ends",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "vector_int",
+            "name": "steps",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "Mat",
+            "name": "dst",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Copies a strided slice of an n-dimensional array.\n *\n * Along axis i the output takes the elements src[starts[i]], src[starts[i] \u002B steps[i]], ...\n * up to, but not including, ends[i]. Axes past starts.size() are copied whole.\n * Unlike Python, the indices are absolute: negative values are not counted from the end.\n * For a positive step, 0 \u003C= start, end \u003C= src.size[i]. For a negative step,\n * -1 \u003C= start, end \u003C src.size[i], and end == -1 means \u0022down to and including element 0\u0022.\n * When all the steps are 1, \u0060Mat(src, ranges)\u0060 gives the same result without copying.\n * @param src input array; may be multi-channel and non-continuous\n * @param starts first index along each sliced axis\n * @param ends end index (exclusive) along each sliced axis\n * @param steps step along each sliced axis (non-zero, may be negative); empty means all ones\n * @param dst output array of the same type as src"
+      }
+    },
+    {
+      "identity": "cv.texpr(String expr[/C,/Ref];vector_Mat inputs;vector_Mat outputs[/O])-\u003Evoid",
+      "review": "This new tensor overload requires explicit axis/shape, allocation, stride/aliasing and output ownership contracts. Existing 2D/channel operations or Mat header reshapes are not equivalent to this declaration.",
+      "after": {
+        "ordinal": 149,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.texpr",
+        "identity": "cv.texpr(String expr[/C,/Ref];vector_Mat inputs;vector_Mat outputs[/O])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "String",
+            "name": "expr",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "vector_Mat",
+            "name": "inputs",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "vector_Mat",
+            "name": "outputs",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Evaluate a broadcasting element-wise expression over the input arrays.\n\nThe expression is a small std::format-like string over placeholders \u0060{0}\u0060, \u0060{1}\u0060, ... (the entries of\n@p inputs), C-style arithmetic / comparison / bitwise operators, type-cast and math function calls\n(\u0060uint8(...)\u0060, \u0060min\u0060, \u0060max\u0060, \u0060absdiff\u0060, \u0060pow\u0060, ...), \u0060;\u0060-separated named temporaries and a\nparenthesized tuple for multiple results. All operands broadcast against each other (numpy rules,\nchannels innermost) and the whole expression is fused into a single traversal of the data.\n\n@param expr the expression string, e.g. \u0060\u0022{0} * 2.5 \u002B {1}\u0022\u0060 or \u0060\u0022({0} \u002B {1}, {0} - {1})\u0022\u0060.\n@param inputs the arrays bound to \u0060{0}\u0060, \u0060{1}\u0060, ...\n@param outputs receives one array per top-level result (one entry, or several for a tuple)."
+      }
+    },
+    {
+      "identity": "cv.repeat(Mat src;vector_int repeats[/C,/Ref];Mat dst[/O])-\u003Evoid",
+      "review": "This new tensor overload requires explicit axis/shape, allocation, stride/aliasing and output ownership contracts. Existing 2D/channel operations or Mat header reshapes are not equivalent to this declaration.",
+      "after": {
+        "ordinal": 153,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.repeat",
+        "identity": "cv.repeat(Mat src;vector_int repeats[/C,/Ref];Mat dst[/O])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "src",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "vector_int",
+            "name": "repeats",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "Mat",
+            "name": "dst",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Repeats an n-dimensional array along each axis.\n *\n * dst.size[i] == src.size[i]*repeats[i], the n-dimensional counterpart of the two-axis form above.\n * It matches numpy.tile and ONNX Tile for arrays of the same rank.\n * @param src input array; may be multi-channel and non-continuous\n * @param repeats number of copies along each axis; must have src.dims non-negative elements\n * @param dst output array of the same type as src"
+      }
+    },
+    {
+      "identity": "cv.transpose(Mat src;vector_int order[/C,/Ref];Mat dst[/O])-\u003Evoid",
+      "review": "This new tensor overload requires explicit axis/shape, allocation, stride/aliasing and output ownership contracts. Existing 2D/channel operations or Mat header reshapes are not equivalent to this declaration.",
+      "after": {
+        "ordinal": 180,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.transpose",
+        "identity": "cv.transpose(Mat src;vector_int order[/C,/Ref];Mat dst[/O])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "src",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "vector_int",
+            "name": "order",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "Mat",
+            "name": "dst",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Transpose for n-dimensional matrices.\n *\n * The input may be multi-channel and non-continuous (e.g. a sub-array); the channels of each\n * element are kept together, so @p order permutes the array dimensions only.\n * @param src input array.\n * @param order a permutation of [0,1,..,N-1] where N is the number of axes of src.\n * The i\u0027th axis of dst will correspond to the axis numbered order[i] of the input.\n * @param dst output array of the same type as src."
+      }
+    },
+    {
+      "identity": "cv.linearAssignment(Mat cost;vector_int assignment[/O,/Ref];double costThreshold=DBL_MAX)-\u003Edouble",
+      "review": "This new assignment solver needs assignment-vector output transport, threshold/infeasibility semantics and numerical tests; no matching managed/C ABI exists.",
+      "after": {
+        "ordinal": 275,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core/optim.hpp",
+        "kind": "callable",
+        "name": "cv.linearAssignment",
+        "identity": "cv.linearAssignment(Mat cost;vector_int assignment[/O,/Ref];double costThreshold=DBL_MAX)-\u003Edouble",
+        "returnType": "double",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "cost",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "vector_int",
+            "name": "assignment",
+            "default": "",
+            "modifiers": [
+              "/O",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "double",
+            "name": "costThreshold",
+            "default": "DBL_MAX",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Solves the rectangular linear assignment problem.\n\nPairs the rows of a cost matrix with its columns at the lowest total cost, each row taking at most\none column and each column at most one row. Costs may be negative.\n\n@p costThreshold is the price of leaving a row unmatched, not a filter applied afterwards. The\nfunction minimises\n\n\\f[\\sum_{(i,j)\\,\\in\\,\\mathcal{M}}\\texttt{cost}(i,j)\\;\u002B\\;\\texttt{costThreshold}\\cdot\\bigl(\\min(M,N)-|\\mathcal{M}|\\bigr)\\f]\n\nso a pair is made only when it costs less than leaving it unmade, and any pair above the threshold\nis forbidden. The default threshold forbids nothing and gives the plain optimal assignment.\n\nA cell that is infinite or NaN marks a pair that may not be matched, whatever @p costThreshold is.\nBoth are treated the same way and for the same reason: neither is a cost the solver can compare, so\nthe pair is excluded rather than guessed at. Infinity is the natural way for a caller to say \u0022these\ntwo cannot go together\u0022; NaN usually means the cost could not be computed, and excluding it keeps\none bad cell from turning the whole result into NaN. A row left with no usable cell simply reports\n-1, and a matrix of nothing but non-finite cells returns an empty matching with a total of 0.\n\nSeveral matchings can share the lowest total, as in a matrix of repeated columns. Any one of them\nmay be returned, so tests should compare the total rather than the pairing.\n\n@param cost \u0060M\u0060-by-\u0060N\u0060 cost matrix, CV_32FC1, CV_64FC1 or CV_32SC1. Must not be empty. Infinite\nand NaN cells are forbidden pairs; an integer matrix has none, so only @p costThreshold can forbid\na pair there.\n@param assignment Output vector of size \u0060M\u0060. Element \u0060i\u0060 is the column matched to row \u0060i\u0060, or -1.\n@param costThreshold Maximum cost of a pair, and the price of each pair left unmade.\n@return Sum of @p cost over the matched pairs only, without the unassignment term; 0 if no pair was\nmade.\n\n@note Implemented from @cite Crouse2016, which extends @cite Jonker1987 to rectangular matrices."
+      }
+    }
+  ],
+  "removed": [
+    {
+      "identity": "enum cv.ReduceTypes[const cv.REDUCE_SUM=0;const cv.REDUCE_AVG=1;const cv.REDUCE_MAX=2;const cv.REDUCE_MIN=3;const cv.REDUCE_SUM2=4]",
+      "review": "The enum identity includes its values, so the expanded ReduceTypes replaces this 5.0 metadata identity. Existing public ReduceTypes values and the 2D validation contract are retained.",
+      "before": {
+        "ordinal": 100,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/core/include/opencv2/core.hpp",
+        "kind": "enum",
+        "name": "cv.ReduceTypes",
+        "identity": "enum cv.ReduceTypes[const cv.REDUCE_SUM=0;const cv.REDUCE_AVG=1;const cv.REDUCE_MAX=2;const cv.REDUCE_MIN=3;const cv.REDUCE_SUM2=4]",
+        "returnType": "",
+        "modifiers": [],
+        "arguments": [],
+        "enumValues": [
+          {
+            "name": "const cv.REDUCE_SUM",
+            "value": "0"
+          },
+          {
+            "name": "const cv.REDUCE_AVG",
+            "value": "1"
+          },
+          {
+            "name": "const cv.REDUCE_MAX",
+            "value": "2"
+          },
+          {
+            "name": "const cv.REDUCE_MIN",
+            "value": "3"
+          },
+          {
+            "name": "const cv.REDUCE_SUM2",
+            "value": "4"
+          }
+        ],
+        "baseDeclaration": "",
+        "documentation": ""
+      }
+    }
+  ],
+  "changed": [
+    {
+      "identity": "cv.minMaxLoc(Mat src;double* minVal[/O];double* maxVal=0[/O];Point* minLoc=0[/O];Point* maxLoc=0[/O];Mat mask=Mat())-\u003Evoid",
+      "review": "The upstream note excluding additional depths was removed. This map retains the existing binding and its managed validation; it does not certify newly supported depths.",
+      "before": {
+        "ordinal": 123,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.minMaxLoc",
+        "identity": "cv.minMaxLoc(Mat src;double* minVal[/O];double* maxVal=0[/O];Point* minLoc=0[/O];Point* maxLoc=0[/O];Mat mask=Mat())-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "src",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "double*",
+            "name": "minVal",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "double*",
+            "name": "maxVal",
+            "default": "0",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "Point*",
+            "name": "minLoc",
+            "default": "0",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "Point*",
+            "name": "maxLoc",
+            "default": "0",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "Mat",
+            "name": "mask",
+            "default": "Mat()",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Finds the global minimum and maximum in an array.\n\nThe function cv::minMaxLoc finds the minimum and maximum element values and their positions. The\nextremums are searched across the whole array or, if mask is not an empty array, in the specified\narray region.\n\nIn C\u002B\u002B, if the input is multi-channel, you should omit the minLoc, maxLoc, and mask arguments\n(i.e. leave them as NULL, NULL, and noArray() respectively). These arguments are not\nsupported for multi-channel input arrays. If working with multi-channel input and you\nneed the minLoc, maxLoc, or mask arguments, then use Mat::reshape first to reinterpret\nthe array as single-channel. Alternatively, you can extract the particular channel using either\nextractImageCOI, mixChannels, or split.\n\nIn Python, multi-channel input is not supported at all due to a limitation in the\nbinding generation process (there is no way to set minLoc and maxLoc to NULL). A\nworkaround is to operate on each channel individually or to use NumPy to achieve the same\nfunctionality.\n@note CV_16F/CV_16BF/CV_Bool/CV_64U/CV_64S/CV_32U are not supported for src.\n@param src input single-channel array.\n@param minVal pointer to the returned minimum value; NULL is used if not required.\n@param maxVal pointer to the returned maximum value; NULL is used if not required.\n@param minLoc pointer to the returned minimum location (in 2D case); NULL is used if not required.\n@param maxLoc pointer to the returned maximum location (in 2D case); NULL is used if not required.\n@param mask optional mask used to select a sub-array of type CV_8U, CV_8S or CV_Bool.\n@sa max, min, reduceArgMin, reduceArgMax, compare, inRange, extractImageCOI, mixChannels, split, Mat::reshape"
+      },
+      "after": {
+        "ordinal": 127,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.minMaxLoc",
+        "identity": "cv.minMaxLoc(Mat src;double* minVal[/O];double* maxVal=0[/O];Point* minLoc=0[/O];Point* maxLoc=0[/O];Mat mask=Mat())-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "src",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "double*",
+            "name": "minVal",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "double*",
+            "name": "maxVal",
+            "default": "0",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "Point*",
+            "name": "minLoc",
+            "default": "0",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "Point*",
+            "name": "maxLoc",
+            "default": "0",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "Mat",
+            "name": "mask",
+            "default": "Mat()",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Finds the global minimum and maximum in an array.\n\nThe function cv::minMaxLoc finds the minimum and maximum element values and their positions. The\nextremums are searched across the whole array or, if mask is not an empty array, in the specified\narray region.\n\nIn C\u002B\u002B, if the input is multi-channel, you should omit the minLoc, maxLoc, and mask arguments\n(i.e. leave them as NULL, NULL, and noArray() respectively). These arguments are not\nsupported for multi-channel input arrays. If working with multi-channel input and you\nneed the minLoc, maxLoc, or mask arguments, then use Mat::reshape first to reinterpret\nthe array as single-channel. Alternatively, you can extract the particular channel using either\nextractImageCOI, mixChannels, or split.\n\nIn Python, multi-channel input is not supported at all due to a limitation in the\nbinding generation process (there is no way to set minLoc and maxLoc to NULL). A\nworkaround is to operate on each channel individually or to use NumPy to achieve the same\nfunctionality.\n@param src input single-channel array.\n@param minVal pointer to the returned minimum value; NULL is used if not required.\n@param maxVal pointer to the returned maximum value; NULL is used if not required.\n@param minLoc pointer to the returned minimum location (in 2D case); NULL is used if not required.\n@param maxLoc pointer to the returned maximum location (in 2D case); NULL is used if not required.\n@param mask optional mask used to select a sub-array of type CV_8U, CV_8S or CV_Bool.\n@sa max, min, reduceArgMin, reduceArgMax, compare, inRange, extractImageCOI, mixChannels, split, Mat::reshape"
+      },
+      "fields": [
+        "documentation"
+      ]
+    },
+    {
+      "identity": "cv.reduce(Mat src;Mat dst[/O];int dim;int rtype;int dtype=-1)-\u003Evoid",
+      "review": "Upstream widened the existing overload to N-D input. The current managed API deliberately retains its at-most-2D input and Sum/Avg/Max/Min validation; N-D and new reduction operations are outside this implemented binding slice.",
+      "before": {
+        "ordinal": 126,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.reduce",
+        "identity": "cv.reduce(Mat src;Mat dst[/O];int dim;int rtype;int dtype=-1)-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "src",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "dst",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "dim",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "rtype",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "dtype",
+            "default": "-1",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Reduces a matrix to a vector.\n\nThe function #reduce reduces the matrix to a vector by treating the matrix rows/columns as a set of\n1D vectors and performing the specified operation on the vectors until a single row/column is\nobtained. For example, the function can be used to compute horizontal and vertical projections of a\nraster image. In case of #REDUCE_MAX and #REDUCE_MIN, the output image should have the same type as the source one.\nIn case of #REDUCE_SUM, #REDUCE_SUM2 and #REDUCE_AVG, the output may have a larger element bit-depth to preserve accuracy.\nAnd multi-channel arrays are also supported in these two reduction modes.\n\nThe following code demonstrates its usage for a single channel matrix.\n@snippet snippets/core_reduce.cpp example\n\nAnd the following code demonstrates its usage for a two-channel matrix.\n@snippet snippets/core_reduce.cpp example2\n\n@param src input 2D matrix.\n@param dst output vector. Its size and type is defined by dim and dtype parameters.\n@param dim dimension index along which the matrix is reduced. 0 means that the matrix is reduced to\na single row. 1 means that the matrix is reduced to a single column.\n@param rtype reduction operation that could be one of #ReduceTypes\n@param dtype when negative, the output vector will have the same type as the input matrix,\notherwise, its type will be CV_MAKE_TYPE(CV_MAT_DEPTH(dtype), src.channels()).\n@sa repeat, reduceArgMin, reduceArgMax"
+      },
+      "after": {
+        "ordinal": 130,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.reduce",
+        "identity": "cv.reduce(Mat src;Mat dst[/O];int dim;int rtype;int dtype=-1)-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "src",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "dst",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "dim",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "rtype",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "dtype",
+            "default": "-1",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Reduces a matrix to a vector.\n\nThe function #reduce reduces the matrix to a vector by treating the matrix rows/columns as a set of\n1D vectors and performing the specified operation on the vectors until a single row/column is\nobtained. For example, the function can be used to compute horizontal and vertical projections of a\nraster image. In case of #REDUCE_MAX and #REDUCE_MIN, the output image should have the same type as the source one.\nIn case of #REDUCE_SUM, #REDUCE_SUM2 and #REDUCE_AVG, the output may have a larger element bit-depth to preserve accuracy.\nAnd multi-channel arrays are also supported in these two reduction modes.\n\nThe following code demonstrates its usage for a single channel matrix.\n@snippet snippets/core_reduce.cpp example\n\nAnd the following code demonstrates its usage for a two-channel matrix.\n@snippet snippets/core_reduce.cpp example2\n\n@param src input matrix. It may also be n-dimensional, then @p dim is the axis to reduce and the\noutput keeps it with size 1 (see the cv::ReduceParams overload).\n@param dst output vector. Its size and type is defined by dim and dtype parameters.\n@param dim dimension index along which the matrix is reduced. 0 means that the matrix is reduced to\na single row. 1 means that the matrix is reduced to a single column.\n@param rtype reduction operation that could be one of #ReduceTypes\n@param dtype when negative, the output vector will have the same type as the input matrix,\notherwise, its type will be CV_MAKE_TYPE(CV_MAT_DEPTH(dtype), src.channels()).\n@sa repeat, reduceArgMin, reduceArgMax"
+      },
+      "fields": [
+        "documentation"
+      ]
+    },
+    {
+      "identity": "cv.flipND(Mat src;Mat dst[/O];int axis)-\u003Evoid",
+      "review": "The revised documentation explicitly permits negative axes, channels, non-contiguous data and in-place output. The managed axis range already permits negative axes; broader runtime combinations require their own tests and are not certified by this map.",
+      "before": {
+        "ordinal": 133,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.flipND",
+        "identity": "cv.flipND(Mat src;Mat dst[/O];int axis)-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "src",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "dst",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "axis",
+            "default": "",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Flips a n-dimensional at given axis\n *  @param src input array\n *  @param dst output array that has the same shape of src\n *  @param axis axis that performs a flip on. 0 \u003C= axis \u003C src.dims."
+      },
+      "after": {
+        "ordinal": 140,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.flipND",
+        "identity": "cv.flipND(Mat src;Mat dst[/O];int axis)-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "src",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "dst",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "axis",
+            "default": "",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Flips a n-dimensional at given axis\n *\n * The input may be multi-channel and non-continuous (e.g. a sub-array); the channels of each\n * element are kept together. In-place operation (src and dst sharing data) is supported.\n *  @param src input array\n *  @param dst output array that has the same shape of src\n *  @param axis axis that performs a flip on. -src.dims \u003C= axis \u003C src.dims."
+      },
+      "fields": [
+        "documentation"
+      ]
+    },
+    {
+      "identity": "cv.patchNaNs(Mat a[/IO];double val=0)-\u003Evoid",
+      "review": "Upstream added CV_16F/CV_16BF. Managed validation still admits CV_32F/CV_64F only; the historical binding does not claim the new half/bfloat input domain.",
+      "before": {
+        "ordinal": 159,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.patchNaNs",
+        "identity": "cv.patchNaNs(Mat a[/IO];double val=0)-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "a",
+            "default": "",
+            "modifiers": [
+              "/IO"
+            ]
+          },
+          {
+            "type": "double",
+            "name": "val",
+            "default": "0",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Replaces NaNs (Not-a-Number values) in a matrix with the specified value.\n\nThis function modifies the input matrix in-place.\nThe input matrix must be of type \u0060CV_32F\u0060 or \u0060CV_64F\u0060; other types are not supported.\n\n@param a Input/output matrix (CV_32F or CV_64F type).\n@param val Value used to replace NaNs (defaults to 0)."
+      },
+      "after": {
+        "ordinal": 175,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.patchNaNs",
+        "identity": "cv.patchNaNs(Mat a[/IO];double val=0)-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "a",
+            "default": "",
+            "modifiers": [
+              "/IO"
+            ]
+          },
+          {
+            "type": "double",
+            "name": "val",
+            "default": "0",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Replaces NaNs (Not-a-Number values) in a matrix with the specified value.\n\nThis function modifies the input matrix in-place.\nThe input matrix must be of type \u0060CV_16F\u0060, \u0060CV_16BF\u0060, \u0060CV_32F\u0060 or \u0060CV_64F\u0060; other types are not supported.\n\n@param a Input/output matrix (CV_16F, CV_16BF, CV_32F or CV_64F type).\n@param val Value used to replace NaNs (defaults to 0)."
+      },
+      "fields": [
+        "documentation"
+      ]
+    },
+    {
+      "identity": "cv.finiteMask(Mat src;Mat mask[/O])-\u003Evoid",
+      "review": "Documentation typo only; the finite float/double mask binding and validation remain the reviewed scope.",
+      "before": {
+        "ordinal": 160,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.finiteMask",
+        "identity": "cv.finiteMask(Mat src;Mat mask[/O])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "src",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "mask",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Generates a mask of finite float values, i.e. not NaNs nor Infs.\n\nAn element is set to to 255 (all 1-bits) if all channels are finite.\n@param src Input matrix, should contain float or double elements of 1 to 4 channels\n@param mask Output matrix of the same size as input of type CV_8UC1"
+      },
+      "after": {
+        "ordinal": 176,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.finiteMask",
+        "identity": "cv.finiteMask(Mat src;Mat mask[/O])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "src",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "mask",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Generates a mask of finite float values, i.e. not NaNs nor Infs.\n\nAn element is set to 255 (all 1-bits) if all channels are finite.\n@param src Input matrix, should contain float or double elements of 1 to 4 channels\n@param mask Output matrix of the same size as input of type CV_8UC1"
+      },
+      "fields": [
+        "documentation"
+      ]
+    },
+    {
+      "identity": "cv.transposeND(Mat src;vector_int order[/C,/Ref];Mat dst[/O])-\u003Evoid",
+      "review": "Upstream deprecated this symbol in favor of a new transpose overload. Keep the existing managed/C ABI and its continuous single-channel, distinct-output contract; do not claim the new overload.",
+      "before": {
+        "ordinal": 164,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.transposeND",
+        "identity": "cv.transposeND(Mat src;vector_int order[/C,/Ref];Mat dst[/O])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "src",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "vector_int",
+            "name": "order",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "Mat",
+            "name": "dst",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Transpose for n-dimensional matrices.\n *\n * @note Input should be continuous single-channel matrix.\n * @param src input array.\n * @param order a permutation of [0,1,..,N-1] where N is the number of axes of src.\n * The i\u0027th axis of dst will correspond to the axis numbered order[i] of the input.\n * @param dst output array of the same type as src."
+      },
+      "after": {
+        "ordinal": 181,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.transposeND",
+        "identity": "cv.transposeND(Mat src;vector_int order[/C,/Ref];Mat dst[/O])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "src",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "vector_int",
+            "name": "order",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "Mat",
+            "name": "dst",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@deprecated Use transpose(InputArray, const std::vector\u003Cint\u003E\u0026, OutputArray) instead."
+      },
+      "fields": [
+        "documentation"
+      ]
+    },
+    {
+      "identity": "cv.kmeans(Mat data;int K;Mat bestLabels[/IO];TermCriteria criteria;int attempts;int flags;Mat centers=Mat()[/O])-\u003Edouble",
+      "review": "Upstream now documents a negative failure result for NaN/Inf. The double result is forwarded; this map adds no guarantee that non-finite input succeeds.",
+      "before": {
+        "ordinal": 204,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.kmeans",
+        "identity": "cv.kmeans(Mat data;int K;Mat bestLabels[/IO];TermCriteria criteria;int attempts;int flags;Mat centers=Mat()[/O])-\u003Edouble",
+        "returnType": "double",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "data",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "K",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "bestLabels",
+            "default": "",
+            "modifiers": [
+              "/IO"
+            ]
+          },
+          {
+            "type": "TermCriteria",
+            "name": "criteria",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "attempts",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "flags",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "centers",
+            "default": "Mat()",
+            "modifiers": [
+              "/O"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Finds centers of clusters and groups input samples around the clusters.\n\nThe function kmeans implements a k-means algorithm that finds the centers of cluster_count clusters\nand groups the input samples around the clusters. As an output, \\f$\\texttt{bestLabels}_i\\f$ contains a\n0-based cluster index for the sample stored in the \\f$i^{th}\\f$ row of the samples matrix.\n\n@note\n-   (Python) An example on k-means clustering can be found at\n    opencv_source_code/samples/python/kmeans.py\n@param data Data for clustering. An array of N-Dimensional points with float coordinates is needed.\nExamples of this array can be:\n-   Mat points(count, 2, CV_32F);\n-   Mat points(count, 1, CV_32FC2);\n-   Mat points(1, count, CV_32FC2);\n-   std::vector\\\u003Ccv::Point2f\\\u003E points(sampleCount);\n@param K Number of clusters to split the set by.\n@param bestLabels Input/output integer array that stores the cluster indices for every sample.\n@param criteria The algorithm termination criteria, that is, the maximum number of iterations and/or\nthe desired accuracy. The accuracy is specified as criteria.epsilon. As soon as each of the cluster\ncenters moves by less than criteria.epsilon on some iteration, the algorithm stops.\n@param attempts Flag to specify the number of times the algorithm is executed using different\ninitial labellings. The algorithm returns the labels that yield the best compactness (see the last\nfunction parameter).\n@param flags Flag that can take values of cv::KmeansFlags\n@param centers Output matrix of the cluster centers, one row per each cluster center.\n@return The function returns the compactness measure that is computed as\n\\f[\\sum _i  \\| \\texttt{samples} _i -  \\texttt{centers} _{ \\texttt{labels} _i} \\| ^2\\f]\nafter every attempt. The best (minimum) value is chosen and the corresponding labels and the\ncompactness value are returned by the function. Basically, you can use only the core of the\nfunction, set the number of attempts to 1, initialize labels each time using a custom algorithm,\npass them with the ( flags = #KMEANS_USE_INITIAL_LABELS ) flag, and then choose the best\n(most-compact) clustering."
+      },
+      "after": {
+        "ordinal": 221,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core.hpp",
+        "kind": "callable",
+        "name": "cv.kmeans",
+        "identity": "cv.kmeans(Mat data;int K;Mat bestLabels[/IO];TermCriteria criteria;int attempts;int flags;Mat centers=Mat()[/O])-\u003Edouble",
+        "returnType": "double",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "data",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "K",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "bestLabels",
+            "default": "",
+            "modifiers": [
+              "/IO"
+            ]
+          },
+          {
+            "type": "TermCriteria",
+            "name": "criteria",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "attempts",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "flags",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "centers",
+            "default": "Mat()",
+            "modifiers": [
+              "/O"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Finds centers of clusters and groups input samples around the clusters.\n\nThe function kmeans implements a k-means algorithm that finds the centers of cluster_count clusters\nand groups the input samples around the clusters. As an output, \\f$\\texttt{bestLabels}_i\\f$ contains a\n0-based cluster index for the sample stored in the \\f$i^{th}\\f$ row of the samples matrix.\n\n@note\n-   (Python) An example on k-means clustering can be found at\n    opencv_source_code/samples/python/kmeans.py\n@param data Data for clustering. An array of N-Dimensional points with float coordinates is needed.\nExamples of this array can be:\n-   Mat points(count, 2, CV_32F);\n-   Mat points(count, 1, CV_32FC2);\n-   Mat points(1, count, CV_32FC2);\n-   std::vector\\\u003Ccv::Point2f\\\u003E points(sampleCount);\n@param K Number of clusters to split the set by.\n@param bestLabels Input/output integer array that stores the cluster indices for every sample.\n@param criteria The algorithm termination criteria, that is, the maximum number of iterations and/or\nthe desired accuracy. The accuracy is specified as criteria.epsilon. As soon as each of the cluster\ncenters moves by less than criteria.epsilon on some iteration, the algorithm stops.\n@param attempts Flag to specify the number of times the algorithm is executed using different\ninitial labellings. The algorithm returns the labels that yield the best compactness (see the last\nfunction parameter).\n@param flags Flag that can take values of cv::KmeansFlags\n@param centers Output matrix of the cluster centers, one row per each cluster center.\n@return The function returns the compactness measure that is computed as\n\\f[\\sum _i  \\| \\texttt{samples} _i -  \\texttt{centers} _{ \\texttt{labels} _i} \\| ^2\\f]\nafter every attempt. The best (minimum) value is chosen and the corresponding labels and the\ncompactness value are returned by the function. Basically, you can use only the core of the\nfunction, set the number of attempts to 1, initialize labels each time using a custom algorithm,\npass them with the ( flags = #KMEANS_USE_INITIAL_LABELS ) flag, and then choose the best\n(most-compact) clustering. If the value is negative, the algorithm did not succeed, most likely\nbecause the input contains NaN or Inf."
+      },
+      "fields": [
+        "documentation"
+      ]
+    }
+  ]
+}

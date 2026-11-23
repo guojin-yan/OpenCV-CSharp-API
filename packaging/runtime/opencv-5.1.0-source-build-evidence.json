@@ -1114,5 +1114,28 @@
       }
     },
     "upstreamBuildReused": "The official OpenCV 5.1 installation is unchanged; Full/Mini wrappers and native smoke were rebuilt after the ABI projection correction."
+  },
+  "upstream51ParserRefresh": {
+    "recordedDate": "2026-11-23",
+    "sourceBuildInputsChanged": false,
+    "buildSourceCommit": "4e9017e4e780771e92c493947c347c20e88b5432",
+    "catalog": {
+      "path": "compatibility/opencv-5.1.0/upstream-map-refresh-catalog.json",
+      "sha256": "930fba0814ab4aac1e842702c36bf1ba669f0d399d4eea164b60ad7859edf6de"
+    },
+    "inventory": {
+      "path": "compatibility/opencv-5.1.0/upstream-map-refresh-summary.json",
+      "sha256": "845948c29b21aa0faf18d77552a4251e75714959c3045efb8cdd357f599c2efe"
+    },
+    "refreshedParserSliceCount": 4,
+    "pendingCatalogMapCount": 69,
+    "historicalCatalogVersion": "5.0.0",
+    "newDeclarationCount": 521,
+    "totalReviewedDeclarationCount": 706,
+    "sharedGeneratorNegativeFixtureCount": 90,
+    "newManagedApiOrNativeAbiAdded": false,
+    "newRuntimeBehaviorCertified": false,
+    "repositoryWideUpstreamParityClaimed": false,
+    "scope": "Core eleven-header parser closure plus imgproc.hpp and imgcodecs.hpp. DNN remains a separate reviewed three-header slice. Implemented means existing bindings subject to managed validation; new 5.1 tensor/alpha/font APIs, enum members and widened input domains are not promoted."
   }
 }

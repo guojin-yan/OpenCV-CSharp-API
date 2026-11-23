@@ -1,0 +1,392 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.1.0",
+  "upstreamCommit": "e4f78fbcf1a773fbed69e14500e8b734963eb585",
+  "generator": "tools/UpstreamMapRefresh",
+  "sourceHashPolicy": "UTF-8 source with CRLF/CR normalized to LF; no trimming",
+  "versionHeader": {
+    "path": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core/version.hpp",
+    "sha256": "bc436bd455e88946523bd83d441320b44ecc9cdd6e65718cd4fc78f4cd6defb7"
+  },
+  "parser": {
+    "path": "opencv-source/opencv-5.1.0/modules/python/src2/hdr_parser.py",
+    "sha256": "867e3de5ad45fd3996e8c9097ffc47f13c8651e20dda2318d70e273262c8dcee"
+  },
+  "historicalCatalogPath": "compatibility/upstream-map-catalog.json",
+  "historicalCatalogSha256": "e3c457176be250b02a45fb2abc67756e2142919eeab063c39853a9f36b1d8616",
+  "externalSlices": [
+    {
+      "id": "dnn",
+      "summaryPath": "compatibility/opencv-5.1.0/dnn-upstream-summary.json",
+      "sha256": "57d3a007192f6fd052b137961b800565e286e9012efb12d0b42761967bd52382"
+    }
+  ],
+  "modules": [
+    {
+      "id": "core",
+      "claimedSlice": "opencv2/core.hpp public compatibility include closure across 11 parser-reviewed contributing headers",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/core-upstream-raw.json",
+      "historicalRawSha256": "423984c7bdabe5988b76b2c010caeb44126dfbee9ab3bf9d6f456e1cfef7d97d",
+      "historicalClassificationPath": "compatibility/core-upstream-classifications.json",
+      "historicalClassificationSha256": "88914f99d5e6795108cc3fba81002f0a53ede6e0fe4f70e6c9bf18fd5c894096",
+      "primaryHeader": {
+        "path": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core.hpp",
+        "sha256": "97ebb5a0fc48fa2f12589e54bf97f2794d313cb95b2d47938d6afceaebbd8aa2"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core/base.hpp",
+          "sha256": "934804339a2c35451465e606879ec0448eaf39dbfffde23f9e645cf2be0b221b"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core/cvstd.hpp",
+          "sha256": "f556166a0c9061f301b18c92d941d868e42bf201ca856f1fcd8eb02b87918179"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core/traits.hpp",
+          "sha256": "6b720d4bfbbaf4a9203d6f6b494cd5448363e15d6707db80e8c506eb1c80ac6c"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core/matx.hpp",
+          "sha256": "4c7a39944dfa6a476e42ccadd3679e573e13ada3c1eba74ccbe599aa3806b113"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core/types.hpp",
+          "sha256": "bf1fe8a89d5c034be385fe3aaa29874394895bb83535e16fe5e78c92d0e2daff"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core/mat.hpp",
+          "sha256": "924ab2485b3acd6ca379d263455fe6884346bd37deed657b7d776ffbe2f8085c"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core/persistence.hpp",
+          "sha256": "9f26154b21c028df8f600bc3b7a21a1aaa12e97231f8b00cac049c1667117717"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core.hpp",
+          "sha256": "97ebb5a0fc48fa2f12589e54bf97f2794d313cb95b2d47938d6afceaebbd8aa2"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core/operations.hpp",
+          "sha256": "bfcbcbed1dad581f0c7e887319b9be656cb27df6479366ddea68b48bb26804a1"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core/utility.hpp",
+          "sha256": "b42cf7c99624d6546e886b257168fb8fe84d0fb1d8ed49a71201b14b14c3dc9c"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/core/include/opencv2/core/optim.hpp",
+          "sha256": "91f156576d5a93fb6dd310268e08b77dcb1c3faec48e7470ee6c13f793ea3496"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500
+      },
+      "rawSha256": "556a905fbbdd75ccef8b5a3d388e3ea115b5d3b667f6b122455d94fa791e403b",
+      "declarationCount": 276,
+      "callableCount": 232,
+      "addedReviews": [
+        {
+          "identity": "cv.MatShape.squeeze(vector_int axes=std::vector<int>()[/C,/Ref])->MatShape",
+          "classification": "intentionally-omitted",
+          "reason": "The new MatShape transform returns a shape value. There is no managed MatShape value transport or matching C ABI; Mat.Reshape is a different ownership and data-view API."
+        },
+        {
+          "identity": "cv.MatShape.unsqueeze(vector_int axes[/C,/Ref])->MatShape",
+          "classification": "intentionally-omitted",
+          "reason": "The new MatShape transform returns a shape value. There is no managed MatShape value transport or matching C ABI; Mat.Reshape is a different ownership and data-view API."
+        },
+        {
+          "identity": "cv.MatShape.flatten(int startAxis=0;int endAxis=-1)->MatShape",
+          "classification": "intentionally-omitted",
+          "reason": "The new MatShape transform returns a shape value. There is no managed MatShape value transport or matching C ABI; Mat.Reshape is a different ownership and data-view API."
+        },
+        {
+          "identity": "cv.MatShape.reshape(MatShape newShape[/C,/Ref];bool allowZero=false)->MatShape",
+          "classification": "intentionally-omitted",
+          "reason": "The new MatShape transform returns a shape value. There is no managed MatShape value transport or matching C ABI; Mat.Reshape is a different ownership and data-view API."
+        },
+        {
+          "identity": "enum cv.ReduceTypes[const cv.REDUCE_SUM=0;const cv.REDUCE_AVG=1;const cv.REDUCE_MAX=2;const cv.REDUCE_MIN=3;const cv.REDUCE_SUM2=4;const cv.REDUCE_PROD=5;const cv.REDUCE_L1=6;const cv.REDUCE_L2=7;const cv.REDUCE_LOG_SUM=8;const cv.REDUCE_LOG_SUM_EXP=9]",
+          "classification": "non-callable-metadata",
+          "reason": "New or extended 5.1 parser type/enum metadata. No corresponding managed type, additional enum members, or complete input-domain coverage is claimed."
+        },
+        {
+          "identity": "class cv.ReduceParams",
+          "classification": "non-callable-metadata",
+          "reason": "New or extended 5.1 parser type/enum metadata. No corresponding managed type, additional enum members, or complete input-domain coverage is claimed."
+        },
+        {
+          "identity": "cv.ReduceParams.ReduceParams(int rtype=REDUCE_SUM;vector_int axes=std::vector<int>()[/C,/Ref];bool keepdims=true;int dtype=-1)->",
+          "classification": "intentionally-omitted",
+          "reason": "The new ReduceParams/tensor overload needs axes, keepdims, dtype and reduction-domain contracts. The existing dim-based 2D Reduce binding is not this overload."
+        },
+        {
+          "identity": "cv.reduce(Mat src;Mat dst[/O];ReduceParams params[/C,/Ref])->void",
+          "classification": "intentionally-omitted",
+          "reason": "The new ReduceParams/tensor overload needs axes, keepdims, dtype and reduction-domain contracts. The existing dim-based 2D Reduce binding is not this overload."
+        },
+        {
+          "identity": "cv.squeeze(Mat src;Mat dst[/O];vector_int axes=std::vector<int>()[/C,/Ref])->void",
+          "classification": "intentionally-omitted",
+          "reason": "This new tensor overload requires explicit axis/shape, allocation, stride/aliasing and output ownership contracts. Existing 2D/channel operations or Mat header reshapes are not equivalent to this declaration."
+        },
+        {
+          "identity": "cv.unsqueeze(Mat src;Mat dst[/O];vector_int axes[/C,/Ref])->void",
+          "classification": "intentionally-omitted",
+          "reason": "This new tensor overload requires explicit axis/shape, allocation, stride/aliasing and output ownership contracts. Existing 2D/channel operations or Mat header reshapes are not equivalent to this declaration."
+        },
+        {
+          "identity": "cv.flatten(Mat src;Mat dst[/O];int startAxis=0;int endAxis=-1)->void",
+          "classification": "intentionally-omitted",
+          "reason": "This new tensor overload requires explicit axis/shape, allocation, stride/aliasing and output ownership contracts. Existing 2D/channel operations or Mat header reshapes are not equivalent to this declaration."
+        },
+        {
+          "identity": "cv.reshape(Mat src;Mat dst[/O];vector_int newShape[/C,/Ref];bool allowZero=false)->void",
+          "classification": "intentionally-omitted",
+          "reason": "This new tensor overload requires explicit axis/shape, allocation, stride/aliasing and output ownership contracts. Existing 2D/channel operations or Mat header reshapes are not equivalent to this declaration."
+        },
+        {
+          "identity": "cv.concat(vector_Mat src;int axis;Mat dst[/O])->void",
+          "classification": "intentionally-omitted",
+          "reason": "This new tensor overload requires explicit axis/shape, allocation, stride/aliasing and output ownership contracts. Existing 2D/channel operations or Mat header reshapes are not equivalent to this declaration."
+        },
+        {
+          "identity": "cv.split(Mat src;int axis;vector_int sizes[/C,/Ref];vector_Mat dst[/O])->void",
+          "classification": "intentionally-omitted",
+          "reason": "This new tensor overload requires explicit axis/shape, allocation, stride/aliasing and output ownership contracts. Existing 2D/channel operations or Mat header reshapes are not equivalent to this declaration."
+        },
+        {
+          "identity": "cv.slice(Mat src;vector_int starts[/C,/Ref];vector_int ends[/C,/Ref];vector_int steps[/C,/Ref];Mat dst[/O])->void",
+          "classification": "intentionally-omitted",
+          "reason": "This new tensor overload requires explicit axis/shape, allocation, stride/aliasing and output ownership contracts. Existing 2D/channel operations or Mat header reshapes are not equivalent to this declaration."
+        },
+        {
+          "identity": "cv.texpr(String expr[/C,/Ref];vector_Mat inputs;vector_Mat outputs[/O])->void",
+          "classification": "intentionally-omitted",
+          "reason": "This new tensor overload requires explicit axis/shape, allocation, stride/aliasing and output ownership contracts. Existing 2D/channel operations or Mat header reshapes are not equivalent to this declaration."
+        },
+        {
+          "identity": "cv.repeat(Mat src;vector_int repeats[/C,/Ref];Mat dst[/O])->void",
+          "classification": "intentionally-omitted",
+          "reason": "This new tensor overload requires explicit axis/shape, allocation, stride/aliasing and output ownership contracts. Existing 2D/channel operations or Mat header reshapes are not equivalent to this declaration."
+        },
+        {
+          "identity": "cv.transpose(Mat src;vector_int order[/C,/Ref];Mat dst[/O])->void",
+          "classification": "intentionally-omitted",
+          "reason": "This new tensor overload requires explicit axis/shape, allocation, stride/aliasing and output ownership contracts. Existing 2D/channel operations or Mat header reshapes are not equivalent to this declaration."
+        },
+        {
+          "identity": "cv.linearAssignment(Mat cost;vector_int assignment[/O,/Ref];double costThreshold=DBL_MAX)->double",
+          "classification": "intentionally-omitted",
+          "reason": "This new assignment solver needs assignment-vector output transport, threshold/infeasibility semantics and numerical tests; no matching managed/C ABI exists."
+        }
+      ],
+      "changedReviews": [
+        {
+          "identity": "cv.minMaxLoc(Mat src;double* minVal[/O];double* maxVal=0[/O];Point* minLoc=0[/O];Point* maxLoc=0[/O];Mat mask=Mat())->void",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "The upstream note excluding additional depths was removed. This map retains the existing binding and its managed validation; it does not certify newly supported depths."
+        },
+        {
+          "identity": "cv.reduce(Mat src;Mat dst[/O];int dim;int rtype;int dtype=-1)->void",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "Upstream widened the existing overload to N-D input. The current managed API deliberately retains its at-most-2D input and Sum/Avg/Max/Min validation; N-D and new reduction operations are outside this implemented binding slice."
+        },
+        {
+          "identity": "cv.flipND(Mat src;Mat dst[/O];int axis)->void",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "The revised documentation explicitly permits negative axes, channels, non-contiguous data and in-place output. The managed axis range already permits negative axes; broader runtime combinations require their own tests and are not certified by this map."
+        },
+        {
+          "identity": "cv.patchNaNs(Mat a[/IO];double val=0)->void",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "Upstream added CV_16F/CV_16BF. Managed validation still admits CV_32F/CV_64F only; the historical binding does not claim the new half/bfloat input domain."
+        },
+        {
+          "identity": "cv.finiteMask(Mat src;Mat mask[/O])->void",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "Documentation typo only; the finite float/double mask binding and validation remain the reviewed scope."
+        },
+        {
+          "identity": "cv.transposeND(Mat src;vector_int order[/C,/Ref];Mat dst[/O])->void",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "Upstream deprecated this symbol in favor of a new transpose overload. Keep the existing managed/C ABI and its continuous single-channel, distinct-output contract; do not claim the new overload."
+        },
+        {
+          "identity": "cv.kmeans(Mat data;int K;Mat bestLabels[/IO];TermCriteria criteria;int attempts;int flags;Mat centers=Mat()[/O])->double",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "Upstream now documents a negative failure result for NaN/Inf. The double result is forwarded; this map adds no guarantee that non-finite input succeeds."
+        }
+      ],
+      "removedReviews": [
+        {
+          "identity": "enum cv.ReduceTypes[const cv.REDUCE_SUM=0;const cv.REDUCE_AVG=1;const cv.REDUCE_MAX=2;const cv.REDUCE_MIN=3;const cv.REDUCE_SUM2=4]",
+          "reason": "The enum identity includes its values, so the expanded ReduceTypes replaces this 5.0 metadata identity. Existing public ReduceTypes values and the 2D validation contract are retained."
+        }
+      ],
+      "expectedDelta": {
+        "added": 19,
+        "removed": 1,
+        "changed": 7,
+        "retained": 257
+      }
+    },
+    {
+      "id": "imgproc",
+      "claimedSlice": "opencv2/imgproc.hpp declarations emitted by OpenCV hdr_parser.py",
+      "identityPolicy": "named-enum",
+      "historicalRawPath": "compatibility/imgproc-upstream-raw.json",
+      "historicalRawSha256": "0e8a25d5cada7fb5ac9bd3d53a7748e142e043c2176bb0e62d5bbaeb3ca08db3",
+      "historicalClassificationPath": "compatibility/imgproc-upstream-classifications.json",
+      "historicalClassificationSha256": "d40146a88c270ac04f3e5819fd1412c64c85a3eb6d4233edb2395f5791ad4f38",
+      "primaryHeader": {
+        "path": "opencv-source/opencv-5.1.0/modules/imgproc/include/opencv2/imgproc.hpp",
+        "sha256": "3cd23b6fa2a312fa4120ddab0dda0b520a2ff5ee7a0fc1e1130f5e74ab3f5591"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/imgproc/include/opencv2/imgproc.hpp",
+          "sha256": "3cd23b6fa2a312fa4120ddab0dda0b520a2ff5ee7a0fc1e1130f5e74ab3f5591"
+        }
+      ],
+      "preprocessorDefinitions": {},
+      "rawSha256": "bb2cb8ac6e6cdab806103c4df3870661ea9dd0c7b687f85e2f8289b635f1e387",
+      "declarationCount": 206,
+      "callableCount": 169,
+      "addedReviews": [
+        {
+          "identity": "enum cv.AlphaCompositeOperations",
+          "classification": "non-callable-metadata",
+          "reason": "New or extended 5.1 parser type/enum metadata. No corresponding managed type, additional enum members, or complete input-domain coverage is claimed."
+        },
+        {
+          "identity": "cv.alphaComposite(Mat overlay;Mat background;Mat dst[/O];int op=ALPHA_COMPOSITE_OVER;bool premultiplied=false)->void",
+          "classification": "intentionally-omitted",
+          "reason": "Porter-Duff operators, 3/4-channel backgrounds, straight/premultiplied alpha and saturation need a dedicated ABI/API and pixel tests. AddWeighted and alpha conversion codes are not equivalent wrappers."
+        },
+        {
+          "identity": "cv.FontFace.setBuiltinFont(String fontName[/C,/Ref];String fontPath[/C,/Ref])->bool",
+          "classification": "intentionally-omitted",
+          "reason": "Registration changes global font slots for subsequently created FontFace objects across threads; a separate registration/lifetime/fallback contract is needed. Existing Load is instance-specific."
+        }
+      ],
+      "changedReviews": [
+        {
+          "identity": "enum cv.ColorConversionCodes",
+          "fields": [
+            "enumValues"
+          ],
+          "reason": "Upstream added Oklab codes 155-158 and changed COLOR_COLORCVT_MAX to 159. Existing managed enum values, including ColorCvtMax=155, remain a historical public contract; the four new names and new sentinel are not exposed or certified."
+        },
+        {
+          "identity": "cv.Canny(Mat image;Mat edges[/O];double threshold1;double threshold2;int apertureSize=3;bool L2gradient=false)->void",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "Documentation explains comparing squared L2 gradients and thresholds; the two existing overload bindings are unchanged and this makes no performance claim."
+        },
+        {
+          "identity": "cv.Canny(Mat dx;Mat dy;Mat edges[/O];double threshold1;double threshold2;bool L2gradient=false)->void",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "Documentation explains comparing squared L2 gradients and thresholds; the two existing overload bindings are unchanged and this makes no performance claim."
+        },
+        {
+          "identity": "cv.remap(Mat src;Mat dst[/O];Mat map1;Mat map2;int interpolation;int borderMode=BORDER_CONSTANT;Scalar borderValue=Scalar()[/C,/Ref];AlgorithmHint hint=cv::ALGO_HINT_DEFAULT)->void",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "Upstream replaced an approximately 2x speed claim with hardware-dependent, usually modest gains. The binding remains unchanged and no fixed-point speedup is promised."
+        },
+        {
+          "identity": "cv.initInverseRectificationMap(Mat cameraMatrix;Mat distCoeffs;Mat R;Mat newCameraMatrix;Size size[/C,/Ref];int m1type;Mat map1[/O];Mat map2[/O])->void",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "Documentation whitespace only; the existing input/output map binding remains unchanged."
+        },
+        {
+          "identity": "cv.FontFace.FontFace(String fontPathOrName[/C,/Ref])->",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "Upstream clarifies optional italic/CJK slots, fallback order and font-file formats. The existing constructor binding does not certify optional compiled fonts or global registration."
+        }
+      ],
+      "removedReviews": [],
+      "expectedDelta": {
+        "added": 3,
+        "removed": 0,
+        "changed": 6,
+        "retained": 203
+      }
+    },
+    {
+      "id": "imgcodecs",
+      "claimedSlice": "opencv2/imgcodecs.hpp declarations emitted by OpenCV hdr_parser.py",
+      "identityPolicy": "named-enum",
+      "historicalRawPath": "compatibility/imgcodecs-upstream-raw.json",
+      "historicalRawSha256": "fb478948e69245bf15b76def1bc2e3429040f69cac7ac8c0d547fd7346875973",
+      "historicalClassificationPath": "compatibility/imgcodecs-upstream-classifications.json",
+      "historicalClassificationSha256": "8af70e905874b8c01fc3c9b43b3219e711fb2d105dfb1a794c23c48e91cc7b74",
+      "primaryHeader": {
+        "path": "opencv-source/opencv-5.1.0/modules/imgcodecs/include/opencv2/imgcodecs.hpp",
+        "sha256": "36b21dddf7866f2a394d1d4bbedc9547bbcde14461151b320b95ae3fbe03e2c5"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/imgcodecs/include/opencv2/imgcodecs.hpp",
+          "sha256": "36b21dddf7866f2a394d1d4bbedc9547bbcde14461151b320b95ae3fbe03e2c5"
+        }
+      ],
+      "preprocessorDefinitions": {},
+      "rawSha256": "f7999c1c4c4d3d37a90beafe34113e19a26c073d16d97ae279f571c1dd5e38be",
+      "declarationCount": 39,
+      "callableCount": 22,
+      "addedReviews": [],
+      "changedReviews": [
+        {
+          "identity": "enum cv.ImwriteFlags",
+          "fields": [
+            "enumValues"
+          ],
+          "reason": "Upstream adds TIFF_COMPRESSION_LEVEL=260 and AVIF_ALPHA_QUALITY=515. This is enum metadata, not new managed options or codec availability; existing public flags retain their values."
+        },
+        {
+          "identity": "cv.imwrite(String filename[/C,/Ref,/PATH];Mat img;vector_int params=std::vector<int>()[/C,/Ref])->bool",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "AVIF 16-bit output is conditional on libavif 1.4.0+, and opaque alpha can be omitted by libavif. Retain the existing writer binding without claiming this codec/dependency combination or guaranteed alpha preservation."
+        }
+      ],
+      "removedReviews": [],
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 2,
+        "retained": 39
+      }
+    }
+  ],
+  "repositoryWideUpstreamParityClaimed": false,
+  "completeCppParityClaimed": false
+}

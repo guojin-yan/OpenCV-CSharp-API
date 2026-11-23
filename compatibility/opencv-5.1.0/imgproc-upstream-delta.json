@@ -1,0 +1,2935 @@
+{
+  "fromVersion": "5.0.0",
+  "toVersion": "5.1.0",
+  "module": "imgproc",
+  "retainedIdentityCount": 203,
+  "added": [
+    {
+      "identity": "enum cv.AlphaCompositeOperations",
+      "review": "New or extended 5.1 parser type/enum metadata. No corresponding managed type, additional enum members, or complete input-domain coverage is claimed.",
+      "after": {
+        "ordinal": 13,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/imgproc/include/opencv2/imgproc.hpp",
+        "kind": "enum",
+        "name": "cv.AlphaCompositeOperations",
+        "identity": "enum cv.AlphaCompositeOperations",
+        "returnType": "",
+        "modifiers": [],
+        "arguments": [],
+        "enumValues": [
+          {
+            "name": "const cv.ALPHA_COMPOSITE_CLEAR",
+            "value": "0"
+          },
+          {
+            "name": "const cv.ALPHA_COMPOSITE_SOURCE",
+            "value": "1"
+          },
+          {
+            "name": "const cv.ALPHA_COMPOSITE_DEST",
+            "value": "2"
+          },
+          {
+            "name": "const cv.ALPHA_COMPOSITE_OVER",
+            "value": "3"
+          },
+          {
+            "name": "const cv.ALPHA_COMPOSITE_DEST_OVER",
+            "value": "4"
+          },
+          {
+            "name": "const cv.ALPHA_COMPOSITE_IN",
+            "value": "5"
+          },
+          {
+            "name": "const cv.ALPHA_COMPOSITE_DEST_IN",
+            "value": "6"
+          },
+          {
+            "name": "const cv.ALPHA_COMPOSITE_OUT",
+            "value": "7"
+          },
+          {
+            "name": "const cv.ALPHA_COMPOSITE_DEST_OUT",
+            "value": "8"
+          },
+          {
+            "name": "const cv.ALPHA_COMPOSITE_ATOP",
+            "value": "9"
+          },
+          {
+            "name": "const cv.ALPHA_COMPOSITE_DEST_ATOP",
+            "value": "10"
+          },
+          {
+            "name": "const cv.ALPHA_COMPOSITE_XOR",
+            "value": "11"
+          },
+          {
+            "name": "const cv.ALPHA_COMPOSITE_PLUS",
+            "value": "12"
+          }
+        ],
+        "baseDeclaration": "",
+        "documentation": ""
+      }
+    },
+    {
+      "identity": "cv.alphaComposite(Mat overlay;Mat background;Mat dst[/O];int op=ALPHA_COMPOSITE_OVER;bool premultiplied=false)-\u003Evoid",
+      "review": "Porter-Duff operators, 3/4-channel backgrounds, straight/premultiplied alpha and saturation need a dedicated ABI/API and pixel tests. AddWeighted and alpha conversion codes are not equivalent wrappers.",
+      "after": {
+        "ordinal": 159,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/imgproc/include/opencv2/imgproc.hpp",
+        "kind": "callable",
+        "name": "cv.alphaComposite",
+        "identity": "cv.alphaComposite(Mat overlay;Mat background;Mat dst[/O];int op=ALPHA_COMPOSITE_OVER;bool premultiplied=false)-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "overlay",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "background",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "dst",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "op",
+            "default": "ALPHA_COMPOSITE_OVER",
+            "modifiers": []
+          },
+          {
+            "type": "bool",
+            "name": "premultiplied",
+            "default": "false",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Composites two images according to their alpha channels, using a Porter-Duff operator.\n\nThe default operator, #ALPHA_COMPOSITE_OVER, draws overlay on top of background and blends the two\naccording to overlay\u0027s alpha channel, so that partially-transparent pixels mix smoothly into the\nbackground with no fringing at the edges. This is what is usually wanted when pasting an RGBA\nsprite, an antialiased glyph or a segmentation mask onto a picture. The other operators of\n#AlphaCompositeOperations select the rest of the Porter-Duff set, for instance\n#ALPHA_COMPOSITE_ATOP to clip the overlay to the background\u0027s shape, or #ALPHA_COMPOSITE_DEST_OUT\nto punch a hole in the background.\n\nOnly the compositing operator is configurable. The blend mode is always *normal*: the overlay\u0027s\ncolor is taken as-is and is never mixed with the background\u0027s color the way the separable blend\nmodes of the same specification (multiply, screen, overlay, darken, and so on) do. Blend modes are\na separate axis and are not implemented here.\n\nAll operators are evaluated in premultiplied alpha space, where each one reduces to a pair of\nper-pixel weights \\f$F_a\\f$, \\f$F_b\\f$ listed in #AlphaCompositeOperations:\n\\f[C_o = C_s F_a \u002B C_b F_b, \\qquad \\alpha_o = \\alpha_s F_a \u002B \\alpha_b F_b\\f]\nwith \\f$C_s, \\alpha_s\\f$ taken from overlay and \\f$C_b, \\alpha_b\\f$ from background. Inputs that\ncarry straight (unassociated) alpha are premultiplied on entry and the result is un-premultiplied\non exit. Both steps reuse #cvtColor with #COLOR_RGBA2mRGBA and #COLOR_mRGBA2RGBA, so alphaComposite\nfollows exactly the same alpha conventions as those conversions.\n\n@param overlay 8-bit 4-channel image (RGBA or BGRA; channel order does not matter as long as it\nmatches background) acting as the source of the operator; must be the same size as background.\n@param background 8-bit 3-channel or 4-channel image acting as the destination of the operator. A\n4-channel background contributes its own alpha to the blend, using the same straight/premultiplied\nconvention as overlay, and dst has 4 channels holding the composited alpha \\f$\\alpha_o\\f$. A\n3-channel background is taken to be fully opaque (\\f$\\alpha_b = 1\\f$) and dst has 3 channels;\nsince such a dst cannot store \\f$\\alpha_o\\f$, the alpha is dropped and the premultiplied color is\nwritten, which is what Cairo does when the target surface has no alpha channel. Operators whose\nresult is not opaque (#ALPHA_COMPOSITE_CLEAR, #ALPHA_COMPOSITE_OUT, #ALPHA_COMPOSITE_XOR and\nothers) therefore darken toward black on a 3-channel background; pass a 4-channel background to\nkeep the alpha.\n@param dst output image, created with the same size and type as background. It may be the same\narray as background.\n@param op compositing operator, one of #AlphaCompositeOperations.\n@param premultiplied false (the default) if overlay\u0027s alpha (and background\u0027s, when it has one) is\nstraight/unassociated, as produced by e.g. \u0060imread(..., IMREAD_UNCHANGED)\u0060; true if it is already\npremultiplied, which skips the internal conversion.\n\n@sa cvtColor, COLOR_RGBA2mRGBA, COLOR_mRGBA2RGBA, blendLinear, addWeighted"
+      }
+    },
+    {
+      "identity": "cv.FontFace.setBuiltinFont(String fontName[/C,/Ref];String fontPath[/C,/Ref])-\u003Ebool",
+      "review": "Registration changes global font slots for subsequently created FontFace objects across threads; a separate registration/lifetime/fallback contract is needed. Existing Load is instance-specific.",
+      "after": {
+        "ordinal": 202,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/imgproc/include/opencv2/imgproc.hpp",
+        "kind": "callable",
+        "name": "cv.FontFace.setBuiltinFont",
+        "identity": "cv.FontFace.setBuiltinFont(String fontName[/C,/Ref];String fontPath[/C,/Ref])-\u003Ebool",
+        "returnType": "bool",
+        "modifiers": [
+          "/S"
+        ],
+        "arguments": [
+          {
+            "type": "String",
+            "name": "fontName",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "String",
+            "name": "fontPath",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Provides or replaces one of the built-in font slots with an external font file.\n        @param fontName the slot: \u0022sans\u0022, \u0022italic\u0022 or \u0022uni\u0022.\n        @param fontPath path to a .ttf/.otf font (optionally gzip-compressed, e.g. \u0060.ttf.gz\u0060).\n          An empty path restores the compiled-in font of that slot (if any), otherwise the slot\n          becomes empty.\n        @return false if the slot name is unknown or the font file cannot be loaded (the\n          registry is left unchanged).\n\n        This is the way to get CJK text or a true italic when OpenCV is built without\n        WITH_UNIFONT / WITH_ITALICFONT (the defaults), e.g.\n        \u0060cv::FontFace::setBuiltinFont(\u0022uni\u0022, \u0022/usr/share/fonts/NotoSansCJK-Regular.ttc\u0022)\u0060.\n        The registered font participates in the automatic fallback chain like the compiled-in\n        one would. The change is global (all threads) and applies to FontFace objects created\n        afterwards; existing FontFace objects keep the font they were created with."
+      }
+    }
+  ],
+  "removed": [],
+  "changed": [
+    {
+      "identity": "enum cv.ColorConversionCodes",
+      "review": "Upstream added Oklab codes 155-158 and changed COLOR_COLORCVT_MAX to 159. Existing managed enum values, including ColorCvtMax=155, remain a historical public contract; the four new names and new sentinel are not exposed or certified.",
+      "before": {
+        "ordinal": 21,
+        "kind": "enum",
+        "name": "cv.ColorConversionCodes",
+        "identity": "enum cv.ColorConversionCodes",
+        "returnType": "",
+        "modifiers": [],
+        "arguments": [],
+        "enumValues": [
+          {
+            "name": "const cv.COLOR_BGR2BGRA",
+            "value": "0"
+          },
+          {
+            "name": "const cv.COLOR_RGB2RGBA",
+            "value": "COLOR_BGR2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2BGR",
+            "value": "1"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2RGB",
+            "value": "COLOR_BGRA2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BGR2RGBA",
+            "value": "2"
+          },
+          {
+            "name": "const cv.COLOR_RGB2BGRA",
+            "value": "COLOR_BGR2RGBA"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2BGR",
+            "value": "3"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2RGB",
+            "value": "COLOR_RGBA2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BGR2RGB",
+            "value": "4"
+          },
+          {
+            "name": "const cv.COLOR_RGB2BGR",
+            "value": "COLOR_BGR2RGB"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2RGBA",
+            "value": "5"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2BGRA",
+            "value": "COLOR_BGRA2RGBA"
+          },
+          {
+            "name": "const cv.COLOR_BGR2GRAY",
+            "value": "6"
+          },
+          {
+            "name": "const cv.COLOR_RGB2GRAY",
+            "value": "7"
+          },
+          {
+            "name": "const cv.COLOR_GRAY2BGR",
+            "value": "8"
+          },
+          {
+            "name": "const cv.COLOR_GRAY2RGB",
+            "value": "COLOR_GRAY2BGR"
+          },
+          {
+            "name": "const cv.COLOR_GRAY2BGRA",
+            "value": "9"
+          },
+          {
+            "name": "const cv.COLOR_GRAY2RGBA",
+            "value": "COLOR_GRAY2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2GRAY",
+            "value": "10"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2GRAY",
+            "value": "11"
+          },
+          {
+            "name": "const cv.COLOR_BGR2BGR565",
+            "value": "12"
+          },
+          {
+            "name": "const cv.COLOR_RGB2BGR565",
+            "value": "13"
+          },
+          {
+            "name": "const cv.COLOR_BGR5652BGR",
+            "value": "14"
+          },
+          {
+            "name": "const cv.COLOR_BGR5652RGB",
+            "value": "15"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2BGR565",
+            "value": "16"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2BGR565",
+            "value": "17"
+          },
+          {
+            "name": "const cv.COLOR_BGR5652BGRA",
+            "value": "18"
+          },
+          {
+            "name": "const cv.COLOR_BGR5652RGBA",
+            "value": "19"
+          },
+          {
+            "name": "const cv.COLOR_GRAY2BGR565",
+            "value": "20"
+          },
+          {
+            "name": "const cv.COLOR_BGR5652GRAY",
+            "value": "21"
+          },
+          {
+            "name": "const cv.COLOR_BGR2BGR555",
+            "value": "22"
+          },
+          {
+            "name": "const cv.COLOR_RGB2BGR555",
+            "value": "23"
+          },
+          {
+            "name": "const cv.COLOR_BGR5552BGR",
+            "value": "24"
+          },
+          {
+            "name": "const cv.COLOR_BGR5552RGB",
+            "value": "25"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2BGR555",
+            "value": "26"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2BGR555",
+            "value": "27"
+          },
+          {
+            "name": "const cv.COLOR_BGR5552BGRA",
+            "value": "28"
+          },
+          {
+            "name": "const cv.COLOR_BGR5552RGBA",
+            "value": "29"
+          },
+          {
+            "name": "const cv.COLOR_GRAY2BGR555",
+            "value": "30"
+          },
+          {
+            "name": "const cv.COLOR_BGR5552GRAY",
+            "value": "31"
+          },
+          {
+            "name": "const cv.COLOR_BGR2XYZ",
+            "value": "32"
+          },
+          {
+            "name": "const cv.COLOR_RGB2XYZ",
+            "value": "33"
+          },
+          {
+            "name": "const cv.COLOR_XYZ2BGR",
+            "value": "34"
+          },
+          {
+            "name": "const cv.COLOR_XYZ2RGB",
+            "value": "35"
+          },
+          {
+            "name": "const cv.COLOR_BGR2YCrCb",
+            "value": "36"
+          },
+          {
+            "name": "const cv.COLOR_RGB2YCrCb",
+            "value": "37"
+          },
+          {
+            "name": "const cv.COLOR_YCrCb2BGR",
+            "value": "38"
+          },
+          {
+            "name": "const cv.COLOR_YCrCb2RGB",
+            "value": "39"
+          },
+          {
+            "name": "const cv.COLOR_BGR2HSV",
+            "value": "40"
+          },
+          {
+            "name": "const cv.COLOR_RGB2HSV",
+            "value": "41"
+          },
+          {
+            "name": "const cv.COLOR_BGR2Lab",
+            "value": "44"
+          },
+          {
+            "name": "const cv.COLOR_RGB2Lab",
+            "value": "45"
+          },
+          {
+            "name": "const cv.COLOR_BGR2Luv",
+            "value": "50"
+          },
+          {
+            "name": "const cv.COLOR_RGB2Luv",
+            "value": "51"
+          },
+          {
+            "name": "const cv.COLOR_BGR2HLS",
+            "value": "52"
+          },
+          {
+            "name": "const cv.COLOR_RGB2HLS",
+            "value": "53"
+          },
+          {
+            "name": "const cv.COLOR_HSV2BGR",
+            "value": "54"
+          },
+          {
+            "name": "const cv.COLOR_HSV2RGB",
+            "value": "55"
+          },
+          {
+            "name": "const cv.COLOR_Lab2BGR",
+            "value": "56"
+          },
+          {
+            "name": "const cv.COLOR_Lab2RGB",
+            "value": "57"
+          },
+          {
+            "name": "const cv.COLOR_Luv2BGR",
+            "value": "58"
+          },
+          {
+            "name": "const cv.COLOR_Luv2RGB",
+            "value": "59"
+          },
+          {
+            "name": "const cv.COLOR_HLS2BGR",
+            "value": "60"
+          },
+          {
+            "name": "const cv.COLOR_HLS2RGB",
+            "value": "61"
+          },
+          {
+            "name": "const cv.COLOR_BGR2HSV_FULL",
+            "value": "66"
+          },
+          {
+            "name": "const cv.COLOR_RGB2HSV_FULL",
+            "value": "67"
+          },
+          {
+            "name": "const cv.COLOR_BGR2HLS_FULL",
+            "value": "68"
+          },
+          {
+            "name": "const cv.COLOR_RGB2HLS_FULL",
+            "value": "69"
+          },
+          {
+            "name": "const cv.COLOR_HSV2BGR_FULL",
+            "value": "70"
+          },
+          {
+            "name": "const cv.COLOR_HSV2RGB_FULL",
+            "value": "71"
+          },
+          {
+            "name": "const cv.COLOR_HLS2BGR_FULL",
+            "value": "72"
+          },
+          {
+            "name": "const cv.COLOR_HLS2RGB_FULL",
+            "value": "73"
+          },
+          {
+            "name": "const cv.COLOR_LBGR2Lab",
+            "value": "74"
+          },
+          {
+            "name": "const cv.COLOR_LRGB2Lab",
+            "value": "75"
+          },
+          {
+            "name": "const cv.COLOR_LBGR2Luv",
+            "value": "76"
+          },
+          {
+            "name": "const cv.COLOR_LRGB2Luv",
+            "value": "77"
+          },
+          {
+            "name": "const cv.COLOR_Lab2LBGR",
+            "value": "78"
+          },
+          {
+            "name": "const cv.COLOR_Lab2LRGB",
+            "value": "79"
+          },
+          {
+            "name": "const cv.COLOR_Luv2LBGR",
+            "value": "80"
+          },
+          {
+            "name": "const cv.COLOR_Luv2LRGB",
+            "value": "81"
+          },
+          {
+            "name": "const cv.COLOR_BGR2YUV",
+            "value": "82"
+          },
+          {
+            "name": "const cv.COLOR_RGB2YUV",
+            "value": "83"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR",
+            "value": "84"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB",
+            "value": "85"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB_NV12",
+            "value": "90"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR_NV12",
+            "value": "91"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB_NV21",
+            "value": "92"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR_NV21",
+            "value": "93"
+          },
+          {
+            "name": "const cv.COLOR_YUV420sp2RGB",
+            "value": "COLOR_YUV2RGB_NV21"
+          },
+          {
+            "name": "const cv.COLOR_YUV420sp2BGR",
+            "value": "COLOR_YUV2BGR_NV21"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGBA_NV12",
+            "value": "94"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGRA_NV12",
+            "value": "95"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGBA_NV21",
+            "value": "96"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGRA_NV21",
+            "value": "97"
+          },
+          {
+            "name": "const cv.COLOR_YUV420sp2RGBA",
+            "value": "COLOR_YUV2RGBA_NV21"
+          },
+          {
+            "name": "const cv.COLOR_YUV420sp2BGRA",
+            "value": "COLOR_YUV2BGRA_NV21"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB_YV12",
+            "value": "98"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR_YV12",
+            "value": "99"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB_IYUV",
+            "value": "100"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR_IYUV",
+            "value": "101"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB_I420",
+            "value": "COLOR_YUV2RGB_IYUV"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR_I420",
+            "value": "COLOR_YUV2BGR_IYUV"
+          },
+          {
+            "name": "const cv.COLOR_YUV420p2RGB",
+            "value": "COLOR_YUV2RGB_YV12"
+          },
+          {
+            "name": "const cv.COLOR_YUV420p2BGR",
+            "value": "COLOR_YUV2BGR_YV12"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGBA_YV12",
+            "value": "102"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGRA_YV12",
+            "value": "103"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGBA_IYUV",
+            "value": "104"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGRA_IYUV",
+            "value": "105"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGBA_I420",
+            "value": "COLOR_YUV2RGBA_IYUV"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGRA_I420",
+            "value": "COLOR_YUV2BGRA_IYUV"
+          },
+          {
+            "name": "const cv.COLOR_YUV420p2RGBA",
+            "value": "COLOR_YUV2RGBA_YV12"
+          },
+          {
+            "name": "const cv.COLOR_YUV420p2BGRA",
+            "value": "COLOR_YUV2BGRA_YV12"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_420",
+            "value": "106"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_NV21",
+            "value": "COLOR_YUV2GRAY_420"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_NV12",
+            "value": "COLOR_YUV2GRAY_420"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_YV12",
+            "value": "COLOR_YUV2GRAY_420"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_IYUV",
+            "value": "COLOR_YUV2GRAY_420"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_I420",
+            "value": "COLOR_YUV2GRAY_420"
+          },
+          {
+            "name": "const cv.COLOR_YUV420sp2GRAY",
+            "value": "COLOR_YUV2GRAY_420"
+          },
+          {
+            "name": "const cv.COLOR_YUV420p2GRAY",
+            "value": "COLOR_YUV2GRAY_420"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB_UYVY",
+            "value": "107"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR_UYVY",
+            "value": "108"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB_Y422",
+            "value": "COLOR_YUV2RGB_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR_Y422",
+            "value": "COLOR_YUV2BGR_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB_UYNV",
+            "value": "COLOR_YUV2RGB_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR_UYNV",
+            "value": "COLOR_YUV2BGR_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGBA_UYVY",
+            "value": "111"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGRA_UYVY",
+            "value": "112"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGBA_Y422",
+            "value": "COLOR_YUV2RGBA_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGRA_Y422",
+            "value": "COLOR_YUV2BGRA_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGBA_UYNV",
+            "value": "COLOR_YUV2RGBA_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGRA_UYNV",
+            "value": "COLOR_YUV2BGRA_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB_YUY2",
+            "value": "115"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR_YUY2",
+            "value": "116"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB_YVYU",
+            "value": "117"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR_YVYU",
+            "value": "118"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB_YUYV",
+            "value": "COLOR_YUV2RGB_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR_YUYV",
+            "value": "COLOR_YUV2BGR_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB_YUNV",
+            "value": "COLOR_YUV2RGB_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR_YUNV",
+            "value": "COLOR_YUV2BGR_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGBA_YUY2",
+            "value": "119"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGRA_YUY2",
+            "value": "120"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGBA_YVYU",
+            "value": "121"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGRA_YVYU",
+            "value": "122"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGBA_YUYV",
+            "value": "COLOR_YUV2RGBA_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGRA_YUYV",
+            "value": "COLOR_YUV2BGRA_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGBA_YUNV",
+            "value": "COLOR_YUV2RGBA_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGRA_YUNV",
+            "value": "COLOR_YUV2BGRA_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_UYVY",
+            "value": "123"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_YUY2",
+            "value": "124"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_Y422",
+            "value": "COLOR_YUV2GRAY_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_UYNV",
+            "value": "COLOR_YUV2GRAY_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_YVYU",
+            "value": "COLOR_YUV2GRAY_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_YUYV",
+            "value": "COLOR_YUV2GRAY_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_YUNV",
+            "value": "COLOR_YUV2GRAY_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2mRGBA",
+            "value": "125"
+          },
+          {
+            "name": "const cv.COLOR_mRGBA2RGBA",
+            "value": "126"
+          },
+          {
+            "name": "const cv.COLOR_RGB2YUV_I420",
+            "value": "127"
+          },
+          {
+            "name": "const cv.COLOR_BGR2YUV_I420",
+            "value": "128"
+          },
+          {
+            "name": "const cv.COLOR_RGB2YUV_IYUV",
+            "value": "COLOR_RGB2YUV_I420"
+          },
+          {
+            "name": "const cv.COLOR_BGR2YUV_IYUV",
+            "value": "COLOR_BGR2YUV_I420"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2YUV_I420",
+            "value": "129"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2YUV_I420",
+            "value": "130"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2YUV_IYUV",
+            "value": "COLOR_RGBA2YUV_I420"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2YUV_IYUV",
+            "value": "COLOR_BGRA2YUV_I420"
+          },
+          {
+            "name": "const cv.COLOR_RGB2YUV_YV12",
+            "value": "131"
+          },
+          {
+            "name": "const cv.COLOR_BGR2YUV_YV12",
+            "value": "132"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2YUV_YV12",
+            "value": "133"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2YUV_YV12",
+            "value": "134"
+          },
+          {
+            "name": "const cv.COLOR_BayerBG2BGR",
+            "value": "46"
+          },
+          {
+            "name": "const cv.COLOR_BayerGB2BGR",
+            "value": "47"
+          },
+          {
+            "name": "const cv.COLOR_BayerRG2BGR",
+            "value": "48"
+          },
+          {
+            "name": "const cv.COLOR_BayerGR2BGR",
+            "value": "49"
+          },
+          {
+            "name": "const cv.COLOR_BayerRGGB2BGR",
+            "value": "COLOR_BayerBG2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BayerGRBG2BGR",
+            "value": "COLOR_BayerGB2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BayerBGGR2BGR",
+            "value": "COLOR_BayerRG2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BayerGBRG2BGR",
+            "value": "COLOR_BayerGR2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BayerRGGB2RGB",
+            "value": "COLOR_BayerBGGR2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BayerGRBG2RGB",
+            "value": "COLOR_BayerGBRG2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BayerBGGR2RGB",
+            "value": "COLOR_BayerRGGB2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BayerGBRG2RGB",
+            "value": "COLOR_BayerGRBG2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BayerBG2RGB",
+            "value": "COLOR_BayerRG2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BayerGB2RGB",
+            "value": "COLOR_BayerGR2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BayerRG2RGB",
+            "value": "COLOR_BayerBG2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BayerGR2RGB",
+            "value": "COLOR_BayerGB2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BayerBG2GRAY",
+            "value": "86"
+          },
+          {
+            "name": "const cv.COLOR_BayerGB2GRAY",
+            "value": "87"
+          },
+          {
+            "name": "const cv.COLOR_BayerRG2GRAY",
+            "value": "88"
+          },
+          {
+            "name": "const cv.COLOR_BayerGR2GRAY",
+            "value": "89"
+          },
+          {
+            "name": "const cv.COLOR_BayerRGGB2GRAY",
+            "value": "COLOR_BayerBG2GRAY"
+          },
+          {
+            "name": "const cv.COLOR_BayerGRBG2GRAY",
+            "value": "COLOR_BayerGB2GRAY"
+          },
+          {
+            "name": "const cv.COLOR_BayerBGGR2GRAY",
+            "value": "COLOR_BayerRG2GRAY"
+          },
+          {
+            "name": "const cv.COLOR_BayerGBRG2GRAY",
+            "value": "COLOR_BayerGR2GRAY"
+          },
+          {
+            "name": "const cv.COLOR_BayerBG2BGR_VNG",
+            "value": "62"
+          },
+          {
+            "name": "const cv.COLOR_BayerGB2BGR_VNG",
+            "value": "63"
+          },
+          {
+            "name": "const cv.COLOR_BayerRG2BGR_VNG",
+            "value": "64"
+          },
+          {
+            "name": "const cv.COLOR_BayerGR2BGR_VNG",
+            "value": "65"
+          },
+          {
+            "name": "const cv.COLOR_BayerRGGB2BGR_VNG",
+            "value": "COLOR_BayerBG2BGR_VNG"
+          },
+          {
+            "name": "const cv.COLOR_BayerGRBG2BGR_VNG",
+            "value": "COLOR_BayerGB2BGR_VNG"
+          },
+          {
+            "name": "const cv.COLOR_BayerBGGR2BGR_VNG",
+            "value": "COLOR_BayerRG2BGR_VNG"
+          },
+          {
+            "name": "const cv.COLOR_BayerGBRG2BGR_VNG",
+            "value": "COLOR_BayerGR2BGR_VNG"
+          },
+          {
+            "name": "const cv.COLOR_BayerRGGB2RGB_VNG",
+            "value": "COLOR_BayerBGGR2BGR_VNG"
+          },
+          {
+            "name": "const cv.COLOR_BayerGRBG2RGB_VNG",
+            "value": "COLOR_BayerGBRG2BGR_VNG"
+          },
+          {
+            "name": "const cv.COLOR_BayerBGGR2RGB_VNG",
+            "value": "COLOR_BayerRGGB2BGR_VNG"
+          },
+          {
+            "name": "const cv.COLOR_BayerGBRG2RGB_VNG",
+            "value": "COLOR_BayerGRBG2BGR_VNG"
+          },
+          {
+            "name": "const cv.COLOR_BayerBG2RGB_VNG",
+            "value": "COLOR_BayerRG2BGR_VNG"
+          },
+          {
+            "name": "const cv.COLOR_BayerGB2RGB_VNG",
+            "value": "COLOR_BayerGR2BGR_VNG"
+          },
+          {
+            "name": "const cv.COLOR_BayerRG2RGB_VNG",
+            "value": "COLOR_BayerBG2BGR_VNG"
+          },
+          {
+            "name": "const cv.COLOR_BayerGR2RGB_VNG",
+            "value": "COLOR_BayerGB2BGR_VNG"
+          },
+          {
+            "name": "const cv.COLOR_BayerBG2BGR_EA",
+            "value": "135"
+          },
+          {
+            "name": "const cv.COLOR_BayerGB2BGR_EA",
+            "value": "136"
+          },
+          {
+            "name": "const cv.COLOR_BayerRG2BGR_EA",
+            "value": "137"
+          },
+          {
+            "name": "const cv.COLOR_BayerGR2BGR_EA",
+            "value": "138"
+          },
+          {
+            "name": "const cv.COLOR_BayerRGGB2BGR_EA",
+            "value": "COLOR_BayerBG2BGR_EA"
+          },
+          {
+            "name": "const cv.COLOR_BayerGRBG2BGR_EA",
+            "value": "COLOR_BayerGB2BGR_EA"
+          },
+          {
+            "name": "const cv.COLOR_BayerBGGR2BGR_EA",
+            "value": "COLOR_BayerRG2BGR_EA"
+          },
+          {
+            "name": "const cv.COLOR_BayerGBRG2BGR_EA",
+            "value": "COLOR_BayerGR2BGR_EA"
+          },
+          {
+            "name": "const cv.COLOR_BayerRGGB2RGB_EA",
+            "value": "COLOR_BayerBGGR2BGR_EA"
+          },
+          {
+            "name": "const cv.COLOR_BayerGRBG2RGB_EA",
+            "value": "COLOR_BayerGBRG2BGR_EA"
+          },
+          {
+            "name": "const cv.COLOR_BayerBGGR2RGB_EA",
+            "value": "COLOR_BayerRGGB2BGR_EA"
+          },
+          {
+            "name": "const cv.COLOR_BayerGBRG2RGB_EA",
+            "value": "COLOR_BayerGRBG2BGR_EA"
+          },
+          {
+            "name": "const cv.COLOR_BayerBG2RGB_EA",
+            "value": "COLOR_BayerRG2BGR_EA"
+          },
+          {
+            "name": "const cv.COLOR_BayerGB2RGB_EA",
+            "value": "COLOR_BayerGR2BGR_EA"
+          },
+          {
+            "name": "const cv.COLOR_BayerRG2RGB_EA",
+            "value": "COLOR_BayerBG2BGR_EA"
+          },
+          {
+            "name": "const cv.COLOR_BayerGR2RGB_EA",
+            "value": "COLOR_BayerGB2BGR_EA"
+          },
+          {
+            "name": "const cv.COLOR_BayerBG2BGRA",
+            "value": "139"
+          },
+          {
+            "name": "const cv.COLOR_BayerGB2BGRA",
+            "value": "140"
+          },
+          {
+            "name": "const cv.COLOR_BayerRG2BGRA",
+            "value": "141"
+          },
+          {
+            "name": "const cv.COLOR_BayerGR2BGRA",
+            "value": "142"
+          },
+          {
+            "name": "const cv.COLOR_BayerRGGB2BGRA",
+            "value": "COLOR_BayerBG2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BayerGRBG2BGRA",
+            "value": "COLOR_BayerGB2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BayerBGGR2BGRA",
+            "value": "COLOR_BayerRG2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BayerGBRG2BGRA",
+            "value": "COLOR_BayerGR2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BayerRGGB2RGBA",
+            "value": "COLOR_BayerBGGR2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BayerGRBG2RGBA",
+            "value": "COLOR_BayerGBRG2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BayerBGGR2RGBA",
+            "value": "COLOR_BayerRGGB2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BayerGBRG2RGBA",
+            "value": "COLOR_BayerGRBG2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BayerBG2RGBA",
+            "value": "COLOR_BayerRG2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BayerGB2RGBA",
+            "value": "COLOR_BayerGR2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BayerRG2RGBA",
+            "value": "COLOR_BayerBG2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BayerGR2RGBA",
+            "value": "COLOR_BayerGB2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_RGB2YUV_UYVY",
+            "value": "143"
+          },
+          {
+            "name": "const cv.COLOR_BGR2YUV_UYVY",
+            "value": "144"
+          },
+          {
+            "name": "const cv.COLOR_RGB2YUV_Y422",
+            "value": "COLOR_RGB2YUV_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_BGR2YUV_Y422",
+            "value": "COLOR_BGR2YUV_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_RGB2YUV_UYNV",
+            "value": "COLOR_RGB2YUV_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_BGR2YUV_UYNV",
+            "value": "COLOR_BGR2YUV_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2YUV_UYVY",
+            "value": "145"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2YUV_UYVY",
+            "value": "146"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2YUV_Y422",
+            "value": "COLOR_RGBA2YUV_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2YUV_Y422",
+            "value": "COLOR_BGRA2YUV_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2YUV_UYNV",
+            "value": "COLOR_RGBA2YUV_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2YUV_UYNV",
+            "value": "COLOR_BGRA2YUV_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_RGB2YUV_YUY2",
+            "value": "147"
+          },
+          {
+            "name": "const cv.COLOR_BGR2YUV_YUY2",
+            "value": "148"
+          },
+          {
+            "name": "const cv.COLOR_RGB2YUV_YVYU",
+            "value": "149"
+          },
+          {
+            "name": "const cv.COLOR_BGR2YUV_YVYU",
+            "value": "150"
+          },
+          {
+            "name": "const cv.COLOR_RGB2YUV_YUYV",
+            "value": "COLOR_RGB2YUV_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_BGR2YUV_YUYV",
+            "value": "COLOR_BGR2YUV_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_RGB2YUV_YUNV",
+            "value": "COLOR_RGB2YUV_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_BGR2YUV_YUNV",
+            "value": "COLOR_BGR2YUV_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2YUV_YUY2",
+            "value": "151"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2YUV_YUY2",
+            "value": "152"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2YUV_YVYU",
+            "value": "153"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2YUV_YVYU",
+            "value": "154"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2YUV_YUYV",
+            "value": "COLOR_RGBA2YUV_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2YUV_YUYV",
+            "value": "COLOR_BGRA2YUV_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2YUV_YUNV",
+            "value": "COLOR_RGBA2YUV_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2YUV_YUNV",
+            "value": "COLOR_BGRA2YUV_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_COLORCVT_MAX",
+            "value": "155"
+          }
+        ],
+        "baseDeclaration": "",
+        "documentation": ""
+      },
+      "after": {
+        "ordinal": 22,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/imgproc/include/opencv2/imgproc.hpp",
+        "kind": "enum",
+        "name": "cv.ColorConversionCodes",
+        "identity": "enum cv.ColorConversionCodes",
+        "returnType": "",
+        "modifiers": [],
+        "arguments": [],
+        "enumValues": [
+          {
+            "name": "const cv.COLOR_BGR2BGRA",
+            "value": "0"
+          },
+          {
+            "name": "const cv.COLOR_RGB2RGBA",
+            "value": "COLOR_BGR2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2BGR",
+            "value": "1"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2RGB",
+            "value": "COLOR_BGRA2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BGR2RGBA",
+            "value": "2"
+          },
+          {
+            "name": "const cv.COLOR_RGB2BGRA",
+            "value": "COLOR_BGR2RGBA"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2BGR",
+            "value": "3"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2RGB",
+            "value": "COLOR_RGBA2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BGR2RGB",
+            "value": "4"
+          },
+          {
+            "name": "const cv.COLOR_RGB2BGR",
+            "value": "COLOR_BGR2RGB"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2RGBA",
+            "value": "5"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2BGRA",
+            "value": "COLOR_BGRA2RGBA"
+          },
+          {
+            "name": "const cv.COLOR_BGR2GRAY",
+            "value": "6"
+          },
+          {
+            "name": "const cv.COLOR_RGB2GRAY",
+            "value": "7"
+          },
+          {
+            "name": "const cv.COLOR_GRAY2BGR",
+            "value": "8"
+          },
+          {
+            "name": "const cv.COLOR_GRAY2RGB",
+            "value": "COLOR_GRAY2BGR"
+          },
+          {
+            "name": "const cv.COLOR_GRAY2BGRA",
+            "value": "9"
+          },
+          {
+            "name": "const cv.COLOR_GRAY2RGBA",
+            "value": "COLOR_GRAY2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2GRAY",
+            "value": "10"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2GRAY",
+            "value": "11"
+          },
+          {
+            "name": "const cv.COLOR_BGR2BGR565",
+            "value": "12"
+          },
+          {
+            "name": "const cv.COLOR_RGB2BGR565",
+            "value": "13"
+          },
+          {
+            "name": "const cv.COLOR_BGR5652BGR",
+            "value": "14"
+          },
+          {
+            "name": "const cv.COLOR_BGR5652RGB",
+            "value": "15"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2BGR565",
+            "value": "16"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2BGR565",
+            "value": "17"
+          },
+          {
+            "name": "const cv.COLOR_BGR5652BGRA",
+            "value": "18"
+          },
+          {
+            "name": "const cv.COLOR_BGR5652RGBA",
+            "value": "19"
+          },
+          {
+            "name": "const cv.COLOR_GRAY2BGR565",
+            "value": "20"
+          },
+          {
+            "name": "const cv.COLOR_BGR5652GRAY",
+            "value": "21"
+          },
+          {
+            "name": "const cv.COLOR_BGR2BGR555",
+            "value": "22"
+          },
+          {
+            "name": "const cv.COLOR_RGB2BGR555",
+            "value": "23"
+          },
+          {
+            "name": "const cv.COLOR_BGR5552BGR",
+            "value": "24"
+          },
+          {
+            "name": "const cv.COLOR_BGR5552RGB",
+            "value": "25"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2BGR555",
+            "value": "26"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2BGR555",
+            "value": "27"
+          },
+          {
+            "name": "const cv.COLOR_BGR5552BGRA",
+            "value": "28"
+          },
+          {
+            "name": "const cv.COLOR_BGR5552RGBA",
+            "value": "29"
+          },
+          {
+            "name": "const cv.COLOR_GRAY2BGR555",
+            "value": "30"
+          },
+          {
+            "name": "const cv.COLOR_BGR5552GRAY",
+            "value": "31"
+          },
+          {
+            "name": "const cv.COLOR_BGR2XYZ",
+            "value": "32"
+          },
+          {
+            "name": "const cv.COLOR_RGB2XYZ",
+            "value": "33"
+          },
+          {
+            "name": "const cv.COLOR_XYZ2BGR",
+            "value": "34"
+          },
+          {
+            "name": "const cv.COLOR_XYZ2RGB",
+            "value": "35"
+          },
+          {
+            "name": "const cv.COLOR_BGR2YCrCb",
+            "value": "36"
+          },
+          {
+            "name": "const cv.COLOR_RGB2YCrCb",
+            "value": "37"
+          },
+          {
+            "name": "const cv.COLOR_YCrCb2BGR",
+            "value": "38"
+          },
+          {
+            "name": "const cv.COLOR_YCrCb2RGB",
+            "value": "39"
+          },
+          {
+            "name": "const cv.COLOR_BGR2HSV",
+            "value": "40"
+          },
+          {
+            "name": "const cv.COLOR_RGB2HSV",
+            "value": "41"
+          },
+          {
+            "name": "const cv.COLOR_BGR2Lab",
+            "value": "44"
+          },
+          {
+            "name": "const cv.COLOR_RGB2Lab",
+            "value": "45"
+          },
+          {
+            "name": "const cv.COLOR_BGR2Luv",
+            "value": "50"
+          },
+          {
+            "name": "const cv.COLOR_RGB2Luv",
+            "value": "51"
+          },
+          {
+            "name": "const cv.COLOR_BGR2HLS",
+            "value": "52"
+          },
+          {
+            "name": "const cv.COLOR_RGB2HLS",
+            "value": "53"
+          },
+          {
+            "name": "const cv.COLOR_HSV2BGR",
+            "value": "54"
+          },
+          {
+            "name": "const cv.COLOR_HSV2RGB",
+            "value": "55"
+          },
+          {
+            "name": "const cv.COLOR_Lab2BGR",
+            "value": "56"
+          },
+          {
+            "name": "const cv.COLOR_Lab2RGB",
+            "value": "57"
+          },
+          {
+            "name": "const cv.COLOR_Luv2BGR",
+            "value": "58"
+          },
+          {
+            "name": "const cv.COLOR_Luv2RGB",
+            "value": "59"
+          },
+          {
+            "name": "const cv.COLOR_HLS2BGR",
+            "value": "60"
+          },
+          {
+            "name": "const cv.COLOR_HLS2RGB",
+            "value": "61"
+          },
+          {
+            "name": "const cv.COLOR_BGR2HSV_FULL",
+            "value": "66"
+          },
+          {
+            "name": "const cv.COLOR_RGB2HSV_FULL",
+            "value": "67"
+          },
+          {
+            "name": "const cv.COLOR_BGR2HLS_FULL",
+            "value": "68"
+          },
+          {
+            "name": "const cv.COLOR_RGB2HLS_FULL",
+            "value": "69"
+          },
+          {
+            "name": "const cv.COLOR_HSV2BGR_FULL",
+            "value": "70"
+          },
+          {
+            "name": "const cv.COLOR_HSV2RGB_FULL",
+            "value": "71"
+          },
+          {
+            "name": "const cv.COLOR_HLS2BGR_FULL",
+            "value": "72"
+          },
+          {
+            "name": "const cv.COLOR_HLS2RGB_FULL",
+            "value": "73"
+          },
+          {
+            "name": "const cv.COLOR_LBGR2Lab",
+            "value": "74"
+          },
+          {
+            "name": "const cv.COLOR_LRGB2Lab",
+            "value": "75"
+          },
+          {
+            "name": "const cv.COLOR_LBGR2Luv",
+            "value": "76"
+          },
+          {
+            "name": "const cv.COLOR_LRGB2Luv",
+            "value": "77"
+          },
+          {
+            "name": "const cv.COLOR_Lab2LBGR",
+            "value": "78"
+          },
+          {
+            "name": "const cv.COLOR_Lab2LRGB",
+            "value": "79"
+          },
+          {
+            "name": "const cv.COLOR_Luv2LBGR",
+            "value": "80"
+          },
+          {
+            "name": "const cv.COLOR_Luv2LRGB",
+            "value": "81"
+          },
+          {
+            "name": "const cv.COLOR_BGR2YUV",
+            "value": "82"
+          },
+          {
+            "name": "const cv.COLOR_RGB2YUV",
+            "value": "83"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR",
+            "value": "84"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB",
+            "value": "85"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB_NV12",
+            "value": "90"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR_NV12",
+            "value": "91"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB_NV21",
+            "value": "92"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR_NV21",
+            "value": "93"
+          },
+          {
+            "name": "const cv.COLOR_YUV420sp2RGB",
+            "value": "COLOR_YUV2RGB_NV21"
+          },
+          {
+            "name": "const cv.COLOR_YUV420sp2BGR",
+            "value": "COLOR_YUV2BGR_NV21"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGBA_NV12",
+            "value": "94"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGRA_NV12",
+            "value": "95"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGBA_NV21",
+            "value": "96"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGRA_NV21",
+            "value": "97"
+          },
+          {
+            "name": "const cv.COLOR_YUV420sp2RGBA",
+            "value": "COLOR_YUV2RGBA_NV21"
+          },
+          {
+            "name": "const cv.COLOR_YUV420sp2BGRA",
+            "value": "COLOR_YUV2BGRA_NV21"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB_YV12",
+            "value": "98"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR_YV12",
+            "value": "99"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB_IYUV",
+            "value": "100"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR_IYUV",
+            "value": "101"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB_I420",
+            "value": "COLOR_YUV2RGB_IYUV"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR_I420",
+            "value": "COLOR_YUV2BGR_IYUV"
+          },
+          {
+            "name": "const cv.COLOR_YUV420p2RGB",
+            "value": "COLOR_YUV2RGB_YV12"
+          },
+          {
+            "name": "const cv.COLOR_YUV420p2BGR",
+            "value": "COLOR_YUV2BGR_YV12"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGBA_YV12",
+            "value": "102"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGRA_YV12",
+            "value": "103"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGBA_IYUV",
+            "value": "104"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGRA_IYUV",
+            "value": "105"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGBA_I420",
+            "value": "COLOR_YUV2RGBA_IYUV"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGRA_I420",
+            "value": "COLOR_YUV2BGRA_IYUV"
+          },
+          {
+            "name": "const cv.COLOR_YUV420p2RGBA",
+            "value": "COLOR_YUV2RGBA_YV12"
+          },
+          {
+            "name": "const cv.COLOR_YUV420p2BGRA",
+            "value": "COLOR_YUV2BGRA_YV12"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_420",
+            "value": "106"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_NV21",
+            "value": "COLOR_YUV2GRAY_420"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_NV12",
+            "value": "COLOR_YUV2GRAY_420"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_YV12",
+            "value": "COLOR_YUV2GRAY_420"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_IYUV",
+            "value": "COLOR_YUV2GRAY_420"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_I420",
+            "value": "COLOR_YUV2GRAY_420"
+          },
+          {
+            "name": "const cv.COLOR_YUV420sp2GRAY",
+            "value": "COLOR_YUV2GRAY_420"
+          },
+          {
+            "name": "const cv.COLOR_YUV420p2GRAY",
+            "value": "COLOR_YUV2GRAY_420"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB_UYVY",
+            "value": "107"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR_UYVY",
+            "value": "108"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB_Y422",
+            "value": "COLOR_YUV2RGB_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR_Y422",
+            "value": "COLOR_YUV2BGR_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB_UYNV",
+            "value": "COLOR_YUV2RGB_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR_UYNV",
+            "value": "COLOR_YUV2BGR_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGBA_UYVY",
+            "value": "111"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGRA_UYVY",
+            "value": "112"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGBA_Y422",
+            "value": "COLOR_YUV2RGBA_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGRA_Y422",
+            "value": "COLOR_YUV2BGRA_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGBA_UYNV",
+            "value": "COLOR_YUV2RGBA_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGRA_UYNV",
+            "value": "COLOR_YUV2BGRA_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB_YUY2",
+            "value": "115"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR_YUY2",
+            "value": "116"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB_YVYU",
+            "value": "117"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR_YVYU",
+            "value": "118"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB_YUYV",
+            "value": "COLOR_YUV2RGB_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR_YUYV",
+            "value": "COLOR_YUV2BGR_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGB_YUNV",
+            "value": "COLOR_YUV2RGB_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGR_YUNV",
+            "value": "COLOR_YUV2BGR_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGBA_YUY2",
+            "value": "119"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGRA_YUY2",
+            "value": "120"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGBA_YVYU",
+            "value": "121"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGRA_YVYU",
+            "value": "122"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGBA_YUYV",
+            "value": "COLOR_YUV2RGBA_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGRA_YUYV",
+            "value": "COLOR_YUV2BGRA_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_YUV2RGBA_YUNV",
+            "value": "COLOR_YUV2RGBA_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_YUV2BGRA_YUNV",
+            "value": "COLOR_YUV2BGRA_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_UYVY",
+            "value": "123"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_YUY2",
+            "value": "124"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_Y422",
+            "value": "COLOR_YUV2GRAY_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_UYNV",
+            "value": "COLOR_YUV2GRAY_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_YVYU",
+            "value": "COLOR_YUV2GRAY_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_YUYV",
+            "value": "COLOR_YUV2GRAY_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_YUV2GRAY_YUNV",
+            "value": "COLOR_YUV2GRAY_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2mRGBA",
+            "value": "125"
+          },
+          {
+            "name": "const cv.COLOR_mRGBA2RGBA",
+            "value": "126"
+          },
+          {
+            "name": "const cv.COLOR_RGB2YUV_I420",
+            "value": "127"
+          },
+          {
+            "name": "const cv.COLOR_BGR2YUV_I420",
+            "value": "128"
+          },
+          {
+            "name": "const cv.COLOR_RGB2YUV_IYUV",
+            "value": "COLOR_RGB2YUV_I420"
+          },
+          {
+            "name": "const cv.COLOR_BGR2YUV_IYUV",
+            "value": "COLOR_BGR2YUV_I420"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2YUV_I420",
+            "value": "129"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2YUV_I420",
+            "value": "130"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2YUV_IYUV",
+            "value": "COLOR_RGBA2YUV_I420"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2YUV_IYUV",
+            "value": "COLOR_BGRA2YUV_I420"
+          },
+          {
+            "name": "const cv.COLOR_RGB2YUV_YV12",
+            "value": "131"
+          },
+          {
+            "name": "const cv.COLOR_BGR2YUV_YV12",
+            "value": "132"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2YUV_YV12",
+            "value": "133"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2YUV_YV12",
+            "value": "134"
+          },
+          {
+            "name": "const cv.COLOR_BayerBG2BGR",
+            "value": "46"
+          },
+          {
+            "name": "const cv.COLOR_BayerGB2BGR",
+            "value": "47"
+          },
+          {
+            "name": "const cv.COLOR_BayerRG2BGR",
+            "value": "48"
+          },
+          {
+            "name": "const cv.COLOR_BayerGR2BGR",
+            "value": "49"
+          },
+          {
+            "name": "const cv.COLOR_BayerRGGB2BGR",
+            "value": "COLOR_BayerBG2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BayerGRBG2BGR",
+            "value": "COLOR_BayerGB2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BayerBGGR2BGR",
+            "value": "COLOR_BayerRG2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BayerGBRG2BGR",
+            "value": "COLOR_BayerGR2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BayerRGGB2RGB",
+            "value": "COLOR_BayerBGGR2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BayerGRBG2RGB",
+            "value": "COLOR_BayerGBRG2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BayerBGGR2RGB",
+            "value": "COLOR_BayerRGGB2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BayerGBRG2RGB",
+            "value": "COLOR_BayerGRBG2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BayerBG2RGB",
+            "value": "COLOR_BayerRG2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BayerGB2RGB",
+            "value": "COLOR_BayerGR2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BayerRG2RGB",
+            "value": "COLOR_BayerBG2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BayerGR2RGB",
+            "value": "COLOR_BayerGB2BGR"
+          },
+          {
+            "name": "const cv.COLOR_BayerBG2GRAY",
+            "value": "86"
+          },
+          {
+            "name": "const cv.COLOR_BayerGB2GRAY",
+            "value": "87"
+          },
+          {
+            "name": "const cv.COLOR_BayerRG2GRAY",
+            "value": "88"
+          },
+          {
+            "name": "const cv.COLOR_BayerGR2GRAY",
+            "value": "89"
+          },
+          {
+            "name": "const cv.COLOR_BayerRGGB2GRAY",
+            "value": "COLOR_BayerBG2GRAY"
+          },
+          {
+            "name": "const cv.COLOR_BayerGRBG2GRAY",
+            "value": "COLOR_BayerGB2GRAY"
+          },
+          {
+            "name": "const cv.COLOR_BayerBGGR2GRAY",
+            "value": "COLOR_BayerRG2GRAY"
+          },
+          {
+            "name": "const cv.COLOR_BayerGBRG2GRAY",
+            "value": "COLOR_BayerGR2GRAY"
+          },
+          {
+            "name": "const cv.COLOR_BayerBG2BGR_VNG",
+            "value": "62"
+          },
+          {
+            "name": "const cv.COLOR_BayerGB2BGR_VNG",
+            "value": "63"
+          },
+          {
+            "name": "const cv.COLOR_BayerRG2BGR_VNG",
+            "value": "64"
+          },
+          {
+            "name": "const cv.COLOR_BayerGR2BGR_VNG",
+            "value": "65"
+          },
+          {
+            "name": "const cv.COLOR_BayerRGGB2BGR_VNG",
+            "value": "COLOR_BayerBG2BGR_VNG"
+          },
+          {
+            "name": "const cv.COLOR_BayerGRBG2BGR_VNG",
+            "value": "COLOR_BayerGB2BGR_VNG"
+          },
+          {
+            "name": "const cv.COLOR_BayerBGGR2BGR_VNG",
+            "value": "COLOR_BayerRG2BGR_VNG"
+          },
+          {
+            "name": "const cv.COLOR_BayerGBRG2BGR_VNG",
+            "value": "COLOR_BayerGR2BGR_VNG"
+          },
+          {
+            "name": "const cv.COLOR_BayerRGGB2RGB_VNG",
+            "value": "COLOR_BayerBGGR2BGR_VNG"
+          },
+          {
+            "name": "const cv.COLOR_BayerGRBG2RGB_VNG",
+            "value": "COLOR_BayerGBRG2BGR_VNG"
+          },
+          {
+            "name": "const cv.COLOR_BayerBGGR2RGB_VNG",
+            "value": "COLOR_BayerRGGB2BGR_VNG"
+          },
+          {
+            "name": "const cv.COLOR_BayerGBRG2RGB_VNG",
+            "value": "COLOR_BayerGRBG2BGR_VNG"
+          },
+          {
+            "name": "const cv.COLOR_BayerBG2RGB_VNG",
+            "value": "COLOR_BayerRG2BGR_VNG"
+          },
+          {
+            "name": "const cv.COLOR_BayerGB2RGB_VNG",
+            "value": "COLOR_BayerGR2BGR_VNG"
+          },
+          {
+            "name": "const cv.COLOR_BayerRG2RGB_VNG",
+            "value": "COLOR_BayerBG2BGR_VNG"
+          },
+          {
+            "name": "const cv.COLOR_BayerGR2RGB_VNG",
+            "value": "COLOR_BayerGB2BGR_VNG"
+          },
+          {
+            "name": "const cv.COLOR_BayerBG2BGR_EA",
+            "value": "135"
+          },
+          {
+            "name": "const cv.COLOR_BayerGB2BGR_EA",
+            "value": "136"
+          },
+          {
+            "name": "const cv.COLOR_BayerRG2BGR_EA",
+            "value": "137"
+          },
+          {
+            "name": "const cv.COLOR_BayerGR2BGR_EA",
+            "value": "138"
+          },
+          {
+            "name": "const cv.COLOR_BayerRGGB2BGR_EA",
+            "value": "COLOR_BayerBG2BGR_EA"
+          },
+          {
+            "name": "const cv.COLOR_BayerGRBG2BGR_EA",
+            "value": "COLOR_BayerGB2BGR_EA"
+          },
+          {
+            "name": "const cv.COLOR_BayerBGGR2BGR_EA",
+            "value": "COLOR_BayerRG2BGR_EA"
+          },
+          {
+            "name": "const cv.COLOR_BayerGBRG2BGR_EA",
+            "value": "COLOR_BayerGR2BGR_EA"
+          },
+          {
+            "name": "const cv.COLOR_BayerRGGB2RGB_EA",
+            "value": "COLOR_BayerBGGR2BGR_EA"
+          },
+          {
+            "name": "const cv.COLOR_BayerGRBG2RGB_EA",
+            "value": "COLOR_BayerGBRG2BGR_EA"
+          },
+          {
+            "name": "const cv.COLOR_BayerBGGR2RGB_EA",
+            "value": "COLOR_BayerRGGB2BGR_EA"
+          },
+          {
+            "name": "const cv.COLOR_BayerGBRG2RGB_EA",
+            "value": "COLOR_BayerGRBG2BGR_EA"
+          },
+          {
+            "name": "const cv.COLOR_BayerBG2RGB_EA",
+            "value": "COLOR_BayerRG2BGR_EA"
+          },
+          {
+            "name": "const cv.COLOR_BayerGB2RGB_EA",
+            "value": "COLOR_BayerGR2BGR_EA"
+          },
+          {
+            "name": "const cv.COLOR_BayerRG2RGB_EA",
+            "value": "COLOR_BayerBG2BGR_EA"
+          },
+          {
+            "name": "const cv.COLOR_BayerGR2RGB_EA",
+            "value": "COLOR_BayerGB2BGR_EA"
+          },
+          {
+            "name": "const cv.COLOR_BayerBG2BGRA",
+            "value": "139"
+          },
+          {
+            "name": "const cv.COLOR_BayerGB2BGRA",
+            "value": "140"
+          },
+          {
+            "name": "const cv.COLOR_BayerRG2BGRA",
+            "value": "141"
+          },
+          {
+            "name": "const cv.COLOR_BayerGR2BGRA",
+            "value": "142"
+          },
+          {
+            "name": "const cv.COLOR_BayerRGGB2BGRA",
+            "value": "COLOR_BayerBG2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BayerGRBG2BGRA",
+            "value": "COLOR_BayerGB2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BayerBGGR2BGRA",
+            "value": "COLOR_BayerRG2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BayerGBRG2BGRA",
+            "value": "COLOR_BayerGR2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BayerRGGB2RGBA",
+            "value": "COLOR_BayerBGGR2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BayerGRBG2RGBA",
+            "value": "COLOR_BayerGBRG2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BayerBGGR2RGBA",
+            "value": "COLOR_BayerRGGB2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BayerGBRG2RGBA",
+            "value": "COLOR_BayerGRBG2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BayerBG2RGBA",
+            "value": "COLOR_BayerRG2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BayerGB2RGBA",
+            "value": "COLOR_BayerGR2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BayerRG2RGBA",
+            "value": "COLOR_BayerBG2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_BayerGR2RGBA",
+            "value": "COLOR_BayerGB2BGRA"
+          },
+          {
+            "name": "const cv.COLOR_RGB2YUV_UYVY",
+            "value": "143"
+          },
+          {
+            "name": "const cv.COLOR_BGR2YUV_UYVY",
+            "value": "144"
+          },
+          {
+            "name": "const cv.COLOR_RGB2YUV_Y422",
+            "value": "COLOR_RGB2YUV_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_BGR2YUV_Y422",
+            "value": "COLOR_BGR2YUV_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_RGB2YUV_UYNV",
+            "value": "COLOR_RGB2YUV_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_BGR2YUV_UYNV",
+            "value": "COLOR_BGR2YUV_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2YUV_UYVY",
+            "value": "145"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2YUV_UYVY",
+            "value": "146"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2YUV_Y422",
+            "value": "COLOR_RGBA2YUV_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2YUV_Y422",
+            "value": "COLOR_BGRA2YUV_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2YUV_UYNV",
+            "value": "COLOR_RGBA2YUV_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2YUV_UYNV",
+            "value": "COLOR_BGRA2YUV_UYVY"
+          },
+          {
+            "name": "const cv.COLOR_RGB2YUV_YUY2",
+            "value": "147"
+          },
+          {
+            "name": "const cv.COLOR_BGR2YUV_YUY2",
+            "value": "148"
+          },
+          {
+            "name": "const cv.COLOR_RGB2YUV_YVYU",
+            "value": "149"
+          },
+          {
+            "name": "const cv.COLOR_BGR2YUV_YVYU",
+            "value": "150"
+          },
+          {
+            "name": "const cv.COLOR_RGB2YUV_YUYV",
+            "value": "COLOR_RGB2YUV_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_BGR2YUV_YUYV",
+            "value": "COLOR_BGR2YUV_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_RGB2YUV_YUNV",
+            "value": "COLOR_RGB2YUV_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_BGR2YUV_YUNV",
+            "value": "COLOR_BGR2YUV_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2YUV_YUY2",
+            "value": "151"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2YUV_YUY2",
+            "value": "152"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2YUV_YVYU",
+            "value": "153"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2YUV_YVYU",
+            "value": "154"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2YUV_YUYV",
+            "value": "COLOR_RGBA2YUV_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2YUV_YUYV",
+            "value": "COLOR_BGRA2YUV_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_RGBA2YUV_YUNV",
+            "value": "COLOR_RGBA2YUV_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_BGRA2YUV_YUNV",
+            "value": "COLOR_BGRA2YUV_YUY2"
+          },
+          {
+            "name": "const cv.COLOR_BGR2Oklab",
+            "value": "155"
+          },
+          {
+            "name": "const cv.COLOR_RGB2Oklab",
+            "value": "156"
+          },
+          {
+            "name": "const cv.COLOR_Oklab2BGR",
+            "value": "157"
+          },
+          {
+            "name": "const cv.COLOR_Oklab2RGB",
+            "value": "158"
+          },
+          {
+            "name": "const cv.COLOR_COLORCVT_MAX",
+            "value": "159"
+          }
+        ],
+        "baseDeclaration": "",
+        "documentation": ""
+      },
+      "fields": [
+        "enumValues"
+      ]
+    },
+    {
+      "identity": "cv.Canny(Mat image;Mat edges[/O];double threshold1;double threshold2;int apertureSize=3;bool L2gradient=false)-\u003Evoid",
+      "review": "Documentation explains comparing squared L2 gradients and thresholds; the two existing overload bindings are unchanged and this makes no performance claim.",
+      "before": {
+        "ordinal": 103,
+        "kind": "callable",
+        "name": "cv.Canny",
+        "identity": "cv.Canny(Mat image;Mat edges[/O];double threshold1;double threshold2;int apertureSize=3;bool L2gradient=false)-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "image",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "edges",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "double",
+            "name": "threshold1",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "double",
+            "name": "threshold2",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "apertureSize",
+            "default": "3",
+            "modifiers": []
+          },
+          {
+            "type": "bool",
+            "name": "L2gradient",
+            "default": "false",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Finds edges in an image using the Canny algorithm @cite Canny86 .\n\nThe function finds edges in the input image and marks them in the output map edges using the\nCanny algorithm. The smallest value between threshold1 and threshold2 is used for edge linking. The\nlargest value is used to find initial segments of strong edges. See\n\u003Chttps://en.wikipedia.org/wiki/Canny_edge_detector\u003E\n\n@param image 8-bit input image.\n@param edges output edge map; single channels 8-bit image, which has the same size as image .\n@param threshold1 first threshold for the hysteresis procedure.\n@param threshold2 second threshold for the hysteresis procedure.\n@param apertureSize aperture size for the Sobel operator.\n@param L2gradient a flag, indicating whether a more accurate \\f$L_2\\f$ norm\n\\f$=\\sqrt{(dI/dx)^2 \u002B (dI/dy)^2}\\f$ should be used to calculate the image gradient magnitude (\nL2gradient=true ), or whether the default \\f$L_1\\f$ norm \\f$=|dI/dx|\u002B|dI/dy|\\f$ is enough (\nL2gradient=false )."
+      },
+      "after": {
+        "ordinal": 104,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/imgproc/include/opencv2/imgproc.hpp",
+        "kind": "callable",
+        "name": "cv.Canny",
+        "identity": "cv.Canny(Mat image;Mat edges[/O];double threshold1;double threshold2;int apertureSize=3;bool L2gradient=false)-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "image",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "edges",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "double",
+            "name": "threshold1",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "double",
+            "name": "threshold2",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "apertureSize",
+            "default": "3",
+            "modifiers": []
+          },
+          {
+            "type": "bool",
+            "name": "L2gradient",
+            "default": "false",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Finds edges in an image using the Canny algorithm @cite Canny86 .\n\nThe function finds edges in the input image and marks them in the output map edges using the\nCanny algorithm. The smallest value between threshold1 and threshold2 is used for edge linking. The\nlargest value is used to find initial segments of strong edges. See\n\u003Chttps://en.wikipedia.org/wiki/Canny_edge_detector\u003E\n\n@param image 8-bit input image.\n@param edges output edge map; single channels 8-bit image, which has the same size as image .\n@param threshold1 first threshold for the hysteresis procedure.\n@param threshold2 second threshold for the hysteresis procedure.\n@param apertureSize aperture size for the Sobel operator.\n@param L2gradient a flag, indicating whether a more accurate \\f$L_2\\f$ norm\n\\f$=\\sqrt{(dI/dx)^2 \u002B (dI/dy)^2}\\f$ should be used to calculate the image gradient magnitude (\nL2gradient=true ), or whether the default \\f$L_1\\f$ norm \\f$=|dI/dx|\u002B|dI/dy|\\f$ is enough (\nL2gradient=false ).\nFor efficiency, when L2gradient=true the implementation compares the squared\ngradient magnitude \\f$(dI/dx)^2 \u002B (dI/dy)^2\\f$ against the squared thresholds\ninstead of computing the square root; the resulting edge map is the same as if\nthe \\f$L_2\\f$ norm were computed directly."
+      },
+      "fields": [
+        "documentation"
+      ]
+    },
+    {
+      "identity": "cv.Canny(Mat dx;Mat dy;Mat edges[/O];double threshold1;double threshold2;bool L2gradient=false)-\u003Evoid",
+      "review": "Documentation explains comparing squared L2 gradients and thresholds; the two existing overload bindings are unchanged and this makes no performance claim.",
+      "before": {
+        "ordinal": 104,
+        "kind": "callable",
+        "name": "cv.Canny",
+        "identity": "cv.Canny(Mat dx;Mat dy;Mat edges[/O];double threshold1;double threshold2;bool L2gradient=false)-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "dx",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "dy",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "edges",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "double",
+            "name": "threshold1",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "double",
+            "name": "threshold2",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "bool",
+            "name": "L2gradient",
+            "default": "false",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "\\overload\n\nFinds edges in an image using the Canny algorithm with custom image gradient.\n\n@param dx 16-bit x derivative of input image (CV_16SC1 or CV_16SC3).\n@param dy 16-bit y derivative of input image (same type as dx).\n@param edges output edge map; single channels 8-bit image, which has the same size as image .\n@param threshold1 first threshold for the hysteresis procedure.\n@param threshold2 second threshold for the hysteresis procedure.\n@param L2gradient a flag, indicating whether a more accurate \\f$L_2\\f$ norm\n\\f$=\\sqrt{(dI/dx)^2 \u002B (dI/dy)^2}\\f$ should be used to calculate the image gradient magnitude (\nL2gradient=true ), or whether the default \\f$L_1\\f$ norm \\f$=|dI/dx|\u002B|dI/dy|\\f$ is enough (\nL2gradient=false )."
+      },
+      "after": {
+        "ordinal": 105,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/imgproc/include/opencv2/imgproc.hpp",
+        "kind": "callable",
+        "name": "cv.Canny",
+        "identity": "cv.Canny(Mat dx;Mat dy;Mat edges[/O];double threshold1;double threshold2;bool L2gradient=false)-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "dx",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "dy",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "edges",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "double",
+            "name": "threshold1",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "double",
+            "name": "threshold2",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "bool",
+            "name": "L2gradient",
+            "default": "false",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "\\overload\n\nFinds edges in an image using the Canny algorithm with custom image gradient.\n\n@param dx 16-bit x derivative of input image (CV_16SC1 or CV_16SC3).\n@param dy 16-bit y derivative of input image (same type as dx).\n@param edges output edge map; single channels 8-bit image, which has the same size as image .\n@param threshold1 first threshold for the hysteresis procedure.\n@param threshold2 second threshold for the hysteresis procedure.\n@param L2gradient a flag, indicating whether a more accurate \\f$L_2\\f$ norm\n\\f$=\\sqrt{(dI/dx)^2 \u002B (dI/dy)^2}\\f$ should be used to calculate the image gradient magnitude (\nL2gradient=true ), or whether the default \\f$L_1\\f$ norm \\f$=|dI/dx|\u002B|dI/dy|\\f$ is enough (\nL2gradient=false ).\nFor efficiency, when L2gradient=true the implementation compares the squared\ngradient magnitude \\f$(dI/dx)^2 \u002B (dI/dy)^2\\f$ against the squared thresholds\ninstead of computing the square root; the resulting edge map is the same as if\nthe \\f$L_2\\f$ norm were computed directly."
+      },
+      "fields": [
+        "documentation"
+      ]
+    },
+    {
+      "identity": "cv.remap(Mat src;Mat dst[/O];Mat map1;Mat map2;int interpolation;int borderMode=BORDER_CONSTANT;Scalar borderValue=Scalar()[/C,/Ref];AlgorithmHint hint=cv::ALGO_HINT_DEFAULT)-\u003Evoid",
+      "review": "Upstream replaced an approximately 2x speed claim with hardware-dependent, usually modest gains. The binding remains unchanged and no fixed-point speedup is promised.",
+      "before": {
+        "ordinal": 120,
+        "kind": "callable",
+        "name": "cv.remap",
+        "identity": "cv.remap(Mat src;Mat dst[/O];Mat map1;Mat map2;int interpolation;int borderMode=BORDER_CONSTANT;Scalar borderValue=Scalar()[/C,/Ref];AlgorithmHint hint=cv::ALGO_HINT_DEFAULT)-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "src",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "dst",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "Mat",
+            "name": "map1",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "map2",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "interpolation",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "borderMode",
+            "default": "BORDER_CONSTANT",
+            "modifiers": []
+          },
+          {
+            "type": "Scalar",
+            "name": "borderValue",
+            "default": "Scalar()",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "AlgorithmHint",
+            "name": "hint",
+            "default": "cv::ALGO_HINT_DEFAULT",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Applies a generic geometrical transformation to an image.\n\nThe function remap transforms the source image using the specified map:\n\n\\f[\\texttt{dst} (x,y) =  \\texttt{src} (map_x(x,y),map_y(x,y))\\f]\n\nwith the WARP_RELATIVE_MAP flag :\n\n\\f[\\texttt{dst} (x,y) =  \\texttt{src} (x\u002Bmap_x(x,y),y\u002Bmap_y(x,y))\\f]\n\nwhere values of pixels with non-integer coordinates are computed using one of available\ninterpolation methods. \\f$map_x\\f$ and \\f$map_y\\f$ can be encoded as separate floating-point maps\nin \\f$map_1\\f$ and \\f$map_2\\f$ respectively, or interleaved floating-point maps of \\f$(x,y)\\f$ in\n\\f$map_1\\f$, or fixed-point maps created by using #convertMaps. The reason you might want to\nconvert from floating to fixed-point representations of a map is that they can yield much faster\n(\\~2x) remapping operations. In the converted case, \\f$map_1\\f$ contains pairs (cvFloor(x),\ncvFloor(y)) and \\f$map_2\\f$ contains indices in a table of interpolation coefficients.\n\nThis function cannot operate in-place.\n\n@param src Source image.\n@param dst Destination image. It has the same size as map1 and the same type as src .\n@param map1 The first map of either (x,y) points or just x values having the type CV_16SC2 ,\nCV_32FC1, or CV_32FC2. See #convertMaps for details on converting a floating point\nrepresentation to fixed-point for speed.\n@param map2 The second map of y values having the type CV_16UC1, CV_32FC1, or none (empty map\nif map1 is (x,y) points), respectively.\n@param interpolation Interpolation method (see #InterpolationFlags). The methods #INTER_AREA\n#INTER_LINEAR_EXACT and #INTER_NEAREST_EXACT are not supported by this function.\nThe extra flag WARP_RELATIVE_MAP can be ORed to the interpolation method\n(e.g. INTER_LINEAR | WARP_RELATIVE_MAP)\n@param borderMode Pixel extrapolation method (see #BorderTypes). When\nborderMode=#BORDER_TRANSPARENT, it means that the pixels in the destination image that\ncorresponds to the \u0022outliers\u0022 in the source image are not modified by the function.\n@param borderValue Value used in case of a constant border. By default, it is 0.\n@param hint Implementation modification flags. Set #ALGO_HINT_APPROX to use FP16 precision (if available)\nfor linear calculation for faster speed. See #AlgorithmHint.\n@note\nDue to current implementation limitations the size of an input and output images should be less than 32767x32767."
+      },
+      "after": {
+        "ordinal": 121,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/imgproc/include/opencv2/imgproc.hpp",
+        "kind": "callable",
+        "name": "cv.remap",
+        "identity": "cv.remap(Mat src;Mat dst[/O];Mat map1;Mat map2;int interpolation;int borderMode=BORDER_CONSTANT;Scalar borderValue=Scalar()[/C,/Ref];AlgorithmHint hint=cv::ALGO_HINT_DEFAULT)-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "src",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "dst",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "Mat",
+            "name": "map1",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "map2",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "interpolation",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "borderMode",
+            "default": "BORDER_CONSTANT",
+            "modifiers": []
+          },
+          {
+            "type": "Scalar",
+            "name": "borderValue",
+            "default": "Scalar()",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "AlgorithmHint",
+            "name": "hint",
+            "default": "cv::ALGO_HINT_DEFAULT",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Applies a generic geometrical transformation to an image.\n\nThe function remap transforms the source image using the specified map:\n\n\\f[\\texttt{dst} (x,y) =  \\texttt{src} (map_x(x,y),map_y(x,y))\\f]\n\nwith the WARP_RELATIVE_MAP flag :\n\n\\f[\\texttt{dst} (x,y) =  \\texttt{src} (x\u002Bmap_x(x,y),y\u002Bmap_y(x,y))\\f]\n\nwhere values of pixels with non-integer coordinates are computed using one of available\ninterpolation methods. \\f$map_x\\f$ and \\f$map_y\\f$ can be encoded as separate floating-point maps\nin \\f$map_1\\f$ and \\f$map_2\\f$ respectively, or interleaved floating-point maps of \\f$(x,y)\\f$ in\n\\f$map_1\\f$, or fixed-point maps created by using #convertMaps. Fixed-point maps\nuse a more compact representation, which can reduce memory bandwidth and benefit\nrepeated remap calls that reuse the same map. Performance gains vary by hardware\nand are typically modest; measure before converting. In the converted case,\n\\f$map_1\\f$ contains pairs (cvFloor(x),\ncvFloor(y)) and \\f$map_2\\f$ contains indices in a table of interpolation coefficients.\n\nThis function cannot operate in-place.\n\n@param src Source image.\n@param dst Destination image. It has the same size as map1 and the same type as src .\n@param map1 The first map of either (x,y) points or just x values having the type CV_16SC2 ,\nCV_32FC1, or CV_32FC2. See #convertMaps for details on converting a floating point\nrepresentation to fixed-point.\n@param map2 The second map of y values having the type CV_16UC1, CV_32FC1, or none (empty map\nif map1 is (x,y) points), respectively.\n@param interpolation Interpolation method (see #InterpolationFlags). The methods #INTER_AREA\n#INTER_LINEAR_EXACT and #INTER_NEAREST_EXACT are not supported by this function.\nThe extra flag WARP_RELATIVE_MAP can be ORed to the interpolation method\n(e.g. INTER_LINEAR | WARP_RELATIVE_MAP)\n@param borderMode Pixel extrapolation method (see #BorderTypes). When\nborderMode=#BORDER_TRANSPARENT, it means that the pixels in the destination image that\ncorresponds to the \u0022outliers\u0022 in the source image are not modified by the function.\n@param borderValue Value used in case of a constant border. By default, it is 0.\n@param hint Implementation modification flags. Set #ALGO_HINT_APPROX to use FP16 precision (if available)\nfor linear calculation for faster speed. See #AlgorithmHint.\n@note\nDue to current implementation limitations the size of an input and output images should be less than 32767x32767."
+      },
+      "fields": [
+        "documentation"
+      ]
+    },
+    {
+      "identity": "cv.initInverseRectificationMap(Mat cameraMatrix;Mat distCoeffs;Mat R;Mat newCameraMatrix;Size size[/C,/Ref];int m1type;Mat map1[/O];Mat map2[/O])-\u003Evoid",
+      "review": "Documentation whitespace only; the existing input/output map binding remains unchanged.",
+      "before": {
+        "ordinal": 125,
+        "kind": "callable",
+        "name": "cv.initInverseRectificationMap",
+        "identity": "cv.initInverseRectificationMap(Mat cameraMatrix;Mat distCoeffs;Mat R;Mat newCameraMatrix;Size size[/C,/Ref];int m1type;Mat map1[/O];Mat map2[/O])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "cameraMatrix",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "distCoeffs",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "R",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "newCameraMatrix",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Size",
+            "name": "size",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "m1type",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "map1",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "Mat",
+            "name": "map2",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Computes the projection and inverse-rectification transformation map. In essense, this is the inverse of\n#initUndistortRectifyMap to accomodate stereo-rectification of projectors (\u0027inverse-cameras\u0027) in projector-camera pairs.\n\nThe function computes the joint projection and inverse rectification transformation and represents the\nresult in the form of maps for #remap. The projected image looks like a distorted version of the original which,\nonce projected by a projector, should visually match the original. In case of a monocular camera, newCameraMatrix\nis usually equal to cameraMatrix, or it can be computed by\n#getOptimalNewCameraMatrix for a better control over scaling. In case of a projector-camera pair,\nnewCameraMatrix is normally set to P1 or P2 computed by #stereoRectify .\n\nThe projector is oriented differently in the coordinate space, according to R. In case of projector-camera pairs,\nthis helps align the projector (in the same manner as #initUndistortRectifyMap for the camera) to create a stereo-rectified pair. This\nallows epipolar lines on both images to become horizontal and have the same y-coordinate (in case of a horizontally aligned projector-camera pair).\n\nThe function builds the maps for the inverse mapping algorithm that is used by #remap. That\nis, for each pixel \\f$(u, v)\\f$ in the destination (projected and inverse-rectified) image, the function\ncomputes the corresponding coordinates in the source image (that is, in the original digital image). The following process is applied:\n\n\\f[\n\\begin{array}{l}\n\\text{newCameraMatrix}\\\\\nx  \\leftarrow (u - {c\u0027}_x)/{f\u0027}_x  \\\\\ny  \\leftarrow (v - {c\u0027}_y)/{f\u0027}_y  \\\\\n\n\\\\\\text{Undistortion}\n\\\\\\scriptsize{\\textit{though equation shown is for radial undistortion, function implements cv::undistortPoints()}}\\\\\nr^2  \\leftarrow x^2 \u002B y^2 \\\\\n\\theta \\leftarrow \\frac{1 \u002B k_1 r^2 \u002B k_2 r^4 \u002B k_3 r^6}{1 \u002B k_4 r^2 \u002B k_5 r^4 \u002B k_6 r^6}\\\\\nx\u0027 \\leftarrow \\frac{x}{\\theta} \\\\\ny\u0027  \\leftarrow \\frac{y}{\\theta} \\\\\n\n\\\\\\text{Rectification}\\\\\n{[X\\,Y\\,W]} ^T  \\leftarrow R*[x\u0027 \\, y\u0027 \\, 1]^T  \\\\\nx\u0027\u0027  \\leftarrow X/W  \\\\\ny\u0027\u0027  \\leftarrow Y/W  \\\\\n\n\\\\\\text{cameraMatrix}\\\\\nmap_x(u,v)  \\leftarrow x\u0027\u0027 f_x \u002B c_x  \\\\\nmap_y(u,v)  \\leftarrow y\u0027\u0027 f_y \u002B c_y\n\\end{array}\n\\f]\nwhere \\f$(k_1, k_2, p_1, p_2[, k_3[, k_4, k_5, k_6[, s_1, s_2, s_3, s_4[, \\tau_x, \\tau_y]]]])\\f$\nare the distortion coefficients vector distCoeffs.\n\nIn case of a stereo-rectified projector-camera pair, this function is called for the projector while #initUndistortRectifyMap is called for the camera head.\nThis is done after #stereoRectify, which in turn is called after #stereoCalibrate. If the projector-camera pair\nis not calibrated, it is still possible to compute the rectification transformations directly from\nthe fundamental matrix using #stereoRectifyUncalibrated. For the projector and camera, the function computes\nhomography H as the rectification transformation in a pixel domain, not a rotation matrix R in 3D\nspace. R can be computed from H as\n\\f[\\texttt{R} = \\texttt{cameraMatrix} ^{-1} \\cdot \\texttt{H} \\cdot \\texttt{cameraMatrix}\\f]\nwhere cameraMatrix can be chosen arbitrarily.\n\n@param cameraMatrix Input camera matrix \\f$A=\\vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{1}\\f$ .\n@param distCoeffs Input vector of distortion coefficients\n\\f$(k_1, k_2, p_1, p_2[, k_3[, k_4, k_5, k_6[, s_1, s_2, s_3, s_4[, \\tau_x, \\tau_y]]]])\\f$\nof 4, 5, 8, 12 or 14 elements. If the vector is NULL/empty, the zero distortion coefficients are assumed.\n@param R Optional rectification transformation in the object space (3x3 matrix). R1 or R2,\ncomputed by #stereoRectify can be passed here. If the matrix is empty, the identity transformation\nis assumed.\n@param newCameraMatrix New camera matrix \\f$A\u0027=\\vecthreethree{f_x\u0027}{0}{c_x\u0027}{0}{f_y\u0027}{c_y\u0027}{0}{0}{1}\\f$.\n@param size Distorted image size.\n@param m1type Type of the first output map. Can be CV_32FC1, CV_32FC2 or CV_16SC2, see #convertMaps\n@param map1 The first output map for #remap.\n@param map2 The second output map for #remap."
+      },
+      "after": {
+        "ordinal": 126,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/imgproc/include/opencv2/imgproc.hpp",
+        "kind": "callable",
+        "name": "cv.initInverseRectificationMap",
+        "identity": "cv.initInverseRectificationMap(Mat cameraMatrix;Mat distCoeffs;Mat R;Mat newCameraMatrix;Size size[/C,/Ref];int m1type;Mat map1[/O];Mat map2[/O])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Mat",
+            "name": "cameraMatrix",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "distCoeffs",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "R",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "newCameraMatrix",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Size",
+            "name": "size",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "m1type",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "map1",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          },
+          {
+            "type": "Mat",
+            "name": "map2",
+            "default": "",
+            "modifiers": [
+              "/O"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Computes the projection and inverse-rectification transformation map. In essense, this is the inverse of\n#initUndistortRectifyMap to accomodate stereo-rectification of projectors (\u0027inverse-cameras\u0027) in projector-camera pairs.\n\nThe function computes the joint projection and inverse rectification transformation and represents the\nresult in the form of maps for #remap. The projected image looks like a distorted version of the original which,\nonce projected by a projector, should visually match the original. In case of a monocular camera, newCameraMatrix\nis usually equal to cameraMatrix, or it can be computed by\n#getOptimalNewCameraMatrix for a better control over scaling. In case of a projector-camera pair,\nnewCameraMatrix is normally set to P1 or P2 computed by #stereoRectify .\n\nThe projector is oriented differently in the coordinate space, according to R. In case of projector-camera pairs,\nthis helps align the projector (in the same manner as #initUndistortRectifyMap for the camera) to create a stereo-rectified pair. This\nallows epipolar lines on both images to become horizontal and have the same y-coordinate (in case of a horizontally aligned projector-camera pair).\n\nThe function builds the maps for the inverse mapping algorithm that is used by #remap. That\nis, for each pixel \\f$(u, v)\\f$ in the destination (projected and inverse-rectified) image, the function\ncomputes the corresponding coordinates in the source image (that is, in the original digital image). The following process is applied:\n\n\\f[\n\\begin{array}{l}\n\\text{newCameraMatrix}\\\\\nx  \\leftarrow (u - {c\u0027}_x)/{f\u0027}_x  \\\\\ny  \\leftarrow (v - {c\u0027}_y)/{f\u0027}_y  \\\\\n\\\\\\text{Undistortion}\n\\\\\\scriptsize{\\textit{though equation shown is for radial undistortion, function implements cv::undistortPoints()}}\\\\\nr^2  \\leftarrow x^2 \u002B y^2 \\\\\n\\theta \\leftarrow \\frac{1 \u002B k_1 r^2 \u002B k_2 r^4 \u002B k_3 r^6}{1 \u002B k_4 r^2 \u002B k_5 r^4 \u002B k_6 r^6}\\\\\nx\u0027 \\leftarrow \\frac{x}{\\theta} \\\\\ny\u0027  \\leftarrow \\frac{y}{\\theta} \\\\\n\\\\\\text{Rectification}\\\\\n{[X\\,Y\\,W]} ^T  \\leftarrow R*[x\u0027 \\, y\u0027 \\, 1]^T  \\\\\nx\u0027\u0027  \\leftarrow X/W  \\\\\ny\u0027\u0027  \\leftarrow Y/W  \\\\\n\\\\\\text{cameraMatrix}\\\\\nmap_x(u,v)  \\leftarrow x\u0027\u0027 f_x \u002B c_x  \\\\\nmap_y(u,v)  \\leftarrow y\u0027\u0027 f_y \u002B c_y\n\\end{array}\n\\f]\nwhere \\f$(k_1, k_2, p_1, p_2[, k_3[, k_4, k_5, k_6[, s_1, s_2, s_3, s_4[, \\tau_x, \\tau_y]]]])\\f$\nare the distortion coefficients vector distCoeffs.\n\nIn case of a stereo-rectified projector-camera pair, this function is called for the projector while #initUndistortRectifyMap is called for the camera head.\nThis is done after #stereoRectify, which in turn is called after #stereoCalibrate. If the projector-camera pair\nis not calibrated, it is still possible to compute the rectification transformations directly from\nthe fundamental matrix using #stereoRectifyUncalibrated. For the projector and camera, the function computes\nhomography H as the rectification transformation in a pixel domain, not a rotation matrix R in 3D\nspace. R can be computed from H as\n\\f[\\texttt{R} = \\texttt{cameraMatrix} ^{-1} \\cdot \\texttt{H} \\cdot \\texttt{cameraMatrix}\\f]\nwhere cameraMatrix can be chosen arbitrarily.\n\n@param cameraMatrix Input camera matrix \\f$A=\\vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{1}\\f$ .\n@param distCoeffs Input vector of distortion coefficients\n\\f$(k_1, k_2, p_1, p_2[, k_3[, k_4, k_5, k_6[, s_1, s_2, s_3, s_4[, \\tau_x, \\tau_y]]]])\\f$\nof 4, 5, 8, 12 or 14 elements. If the vector is NULL/empty, the zero distortion coefficients are assumed.\n@param R Optional rectification transformation in the object space (3x3 matrix). R1 or R2,\ncomputed by #stereoRectify can be passed here. If the matrix is empty, the identity transformation\nis assumed.\n@param newCameraMatrix New camera matrix \\f$A\u0027=\\vecthreethree{f_x\u0027}{0}{c_x\u0027}{0}{f_y\u0027}{c_y\u0027}{0}{0}{1}\\f$.\n@param size Distorted image size.\n@param m1type Type of the first output map. Can be CV_32FC1, CV_32FC2 or CV_16SC2, see #convertMaps\n@param map1 The first output map for #remap.\n@param map2 The second output map for #remap."
+      },
+      "fields": [
+        "documentation"
+      ]
+    },
+    {
+      "identity": "cv.FontFace.FontFace(String fontPathOrName[/C,/Ref])-\u003E",
+      "review": "Upstream clarifies optional italic/CJK slots, fallback order and font-file formats. The existing constructor binding does not certify optional compiled fonts or global registration.",
+      "before": {
+        "ordinal": 195,
+        "kind": "callable",
+        "name": "cv.FontFace.FontFace",
+        "identity": "cv.FontFace.FontFace(String fontPathOrName[/C,/Ref])-\u003E",
+        "returnType": "",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "String",
+            "name": "fontPathOrName",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief loads font at the specified path or with specified name.\n       @param fontPathOrName either path to the custom font or the name of embedded font: \u0022sans\u0022, \u0022italic\u0022 or \u0022uni\u0022.\n          Empty fontPathOrName means the default embedded font."
+      },
+      "after": {
+        "ordinal": 197,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/imgproc/include/opencv2/imgproc.hpp",
+        "kind": "callable",
+        "name": "cv.FontFace.FontFace",
+        "identity": "cv.FontFace.FontFace(String fontPathOrName[/C,/Ref])-\u003E",
+        "returnType": "",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "String",
+            "name": "fontPathOrName",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief loads font at the specified path or with specified name.\n       @param fontPathOrName either path to a custom font file (.ttf/.otf, optionally gzip-compressed)\n          or the name of one of the built-in font slots:\n          - \u0022sans\u0022: the default font (Rubik, always compiled in);\n          - \u0022italic\u0022: Rubik Italic, compiled in only if OpenCV was built with WITH_ITALICFONT=ON;\n            otherwise it can be provided with setBuiltinFont(), and if it is not available,\n            \u0022italic\u0022 silently resolves to \u0022sans\u0022;\n          - \u0022uni\u0022: WenQuanYi Micro Hei (CJK), compiled in only with WITH_UNIFONT=ON; otherwise\n            provide it with setBuiltinFont(), or loading fails.\n          The built-in slots also serve as the fallback chain: characters missing from the\n          user\u0027s font are taken from \u0022sans\u0022, then \u0022italic\u0022, then \u0022uni\u0022.\n          Empty fontPathOrName means the default embedded font (\u0022sans\u0022)."
+      },
+      "fields": [
+        "documentation"
+      ]
+    }
+  ]
+}

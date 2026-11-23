@@ -1,0 +1,351 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.1.0",
+  "module": "imgcodecs",
+  "claimedSlice": "opencv2/imgcodecs.hpp declarations emitted by OpenCV hdr_parser.py",
+  "completeCppParityClaimed": false,
+  "implemented": [
+    {
+      "ordinal": 17,
+      "identity": "cv.Animation.Animation(int loopCount=0;Scalar bgColor=Scalar())-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_animation_create"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Animation|constructor|public;instance|.ctor(System.Int32 loopCount,JYPPX.OpenCvSharp.Core.Scalar backgroundColor)",
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Animation|constructor|public;instance|.ctor(System.Int32 loopCount=0)"
+      ],
+      "historicalOrdinal": 17,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.imread(String filename[/C,/Ref,/PATH];int flags=IMREAD_COLOR_BGR)-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imread"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat ImRead(System.String filename,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)",
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Void ImRead(System.String filename,JYPPX.OpenCvSharp.Core.Mat destination,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)"
+      ],
+      "historicalOrdinal": 18,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.imread(String filename[/C,/Ref,/PATH];Mat dst[/O];int flags=IMREAD_COLOR_BGR)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imread_into"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat ImRead(System.String filename,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)",
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Void ImRead(System.String filename,JYPPX.OpenCvSharp.Core.Mat destination,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)"
+      ],
+      "historicalOrdinal": 19,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.imreadWithMetadata(String filename[/C,/Ref,/PATH];vector_int metadataTypes[/O,/Ref];vector_Mat metadata[/O];int flags)-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imread_with_metadata"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.ImgCodecs.ImageMetadataResult ImReadWithMetadata(System.String filename,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Unchanged)"
+      ],
+      "historicalOrdinal": 20,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.imreadmulti(String filename[/C,/Ref,/PATH];vector_Mat mats[/O,/Ref];int flags=IMREAD_COLOR_BGR)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imread_multi"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImReadMulti(System.String filename,System.Int32 start,System.Int32 count,out JYPPX.OpenCvSharp.Core.Mat[] images,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=AnyColor)",
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImReadMulti(System.String filename,out JYPPX.OpenCvSharp.Core.Mat[] images,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)"
+      ],
+      "historicalOrdinal": 21,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.imreadmulti(String filename[/C,/Ref,/PATH];vector_Mat mats[/O,/Ref];int start;int count;int flags=IMREAD_ANYCOLOR)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imread_multi"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImReadMulti(System.String filename,System.Int32 start,System.Int32 count,out JYPPX.OpenCvSharp.Core.Mat[] images,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=AnyColor)",
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImReadMulti(System.String filename,out JYPPX.OpenCvSharp.Core.Mat[] images,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)"
+      ],
+      "historicalOrdinal": 22,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.imreadanimation(String filename[/C,/Ref,/PATH];Animation animation[/O,/Ref];int start=0;int count=INT16_MAX)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imread_animation"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImReadAnimation(System.String filename,JYPPX.OpenCvSharp.ImgCodecs.Animation animation,System.Int32 start=0,System.Int32 count=32767)"
+      ],
+      "historicalOrdinal": 23,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.imdecodeanimation(Mat buf;Animation animation[/O,/Ref];int start=0;int count=INT16_MAX)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imdecode_animation"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImDecodeAnimation(System.Byte[] buffer,JYPPX.OpenCvSharp.ImgCodecs.Animation animation,System.Int32 start=0,System.Int32 count=32767)"
+      ],
+      "historicalOrdinal": 24,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.imwriteanimation(String filename[/C,/Ref,/PATH];Animation animation[/C,/Ref];vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imwrite_animation"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImWriteAnimation(System.String filename,JYPPX.OpenCvSharp.ImgCodecs.Animation animation,System.Int32[]? parameters=null)"
+      ],
+      "historicalOrdinal": 25,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.imencodeanimation(String ext[/C,/Ref];Animation animation[/C,/Ref];vector_uchar buf[/O,/Ref];vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imencode_animation"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncodeAnimation(System.String ext,JYPPX.OpenCvSharp.ImgCodecs.Animation animation,System.Int32[]? parameters=null)"
+      ],
+      "historicalOrdinal": 26,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.imcount(String filename[/C,/Ref,/PATH];int flags=IMREAD_COLOR_BGR)-\u003Esize_t",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imcount"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Int32 ImCount(System.String filename,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)"
+      ],
+      "historicalOrdinal": 27,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.imwrite(String filename[/C,/Ref,/PATH];Mat img;vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imwrite",
+        "jyppx_ocv_imgcodecs_imwrite_with_params"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImWrite(System.String filename,JYPPX.OpenCvSharp.Core.Mat image)",
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImWrite(System.String filename,JYPPX.OpenCvSharp.Core.Mat image,System.Int32[] parameters)"
+      ],
+      "historicalOrdinal": 28,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "AVIF 16-bit output is conditional on libavif 1.4.0\u002B, and opaque alpha can be omitted by libavif. Retain the existing writer binding without claiming this codec/dependency combination or guaranteed alpha preservation."
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.imwriteWithMetadata(String filename[/C,/Ref,/PATH];Mat img;vector_int metadataTypes[/C,/Ref];vector_Mat metadata[/Ref];vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imwrite_with_metadata"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImWriteWithMetadata(System.String filename,JYPPX.OpenCvSharp.Core.Mat image,System.Collections.Generic.IReadOnlyList\u003CJYPPX.OpenCvSharp.ImgCodecs.ImageMetadataChunk\u003E metadata,System.Int32[]? parameters=null)"
+      ],
+      "historicalOrdinal": 29,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.imwritemulti(String filename[/C,/Ref,/PATH];vector_Mat img;vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imwrite_multi"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImWriteMulti(System.String filename,System.Collections.Generic.IReadOnlyList\u003CJYPPX.OpenCvSharp.Core.Mat\u003E images,System.Int32[]? parameters=null)"
+      ],
+      "historicalOrdinal": 30,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.imdecode(Mat buf;int flags)-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imdecode"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat ImDecode(System.Byte[] buffer,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)",
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat ImDecode(System.ReadOnlySpan\u003CSystem.Byte\u003E buffer,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)"
+      ],
+      "historicalOrdinal": 31,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.imdecodeWithMetadata(Mat buf;vector_int metadataTypes[/O,/Ref];vector_Mat metadata[/O];int flags)-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imdecode_with_metadata"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.ImgCodecs.ImageMetadataResult ImDecodeWithMetadata(System.Byte[] buffer,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Unchanged)"
+      ],
+      "historicalOrdinal": 32,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.imdecodemulti(Mat buf;int flags;vector_Mat mats[/O,/Ref];Range range=Range::all()[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imdecode_multi"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImDecodeMulti(System.Byte[] buffer,System.Int32 start,System.Int32 end,out JYPPX.OpenCvSharp.Core.Mat[] images,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=AnyColor)",
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImDecodeMulti(System.Byte[] buffer,out JYPPX.OpenCvSharp.Core.Mat[] images,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=AnyColor)"
+      ],
+      "historicalOrdinal": 33,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.imencode(String ext[/C,/Ref];Mat img;vector_uchar buf[/O,/Ref];vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imencode",
+        "jyppx_ocv_imgcodecs_imencode_with_params"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncode(System.String ext,JYPPX.OpenCvSharp.Core.Mat image)",
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncode(System.String ext,JYPPX.OpenCvSharp.Core.Mat image,System.Int32[] parameters)"
+      ],
+      "historicalOrdinal": 34,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.imencodeWithMetadata(String ext[/C,/Ref];Mat img;vector_int metadataTypes[/C,/Ref];vector_Mat metadata;vector_uchar buf[/O,/Ref];vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imencode_with_metadata"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncodeWithMetadata(System.String ext,JYPPX.OpenCvSharp.Core.Mat image,System.Collections.Generic.IReadOnlyList\u003CJYPPX.OpenCvSharp.ImgCodecs.ImageMetadataChunk\u003E metadata,System.Int32[]? parameters=null)"
+      ],
+      "historicalOrdinal": 35,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.imencodemulti(String ext[/C,/Ref];vector_Mat imgs;vector_uchar buf[/O,/Ref];vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imencode_multi"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncodeMulti(System.String ext,System.Collections.Generic.IReadOnlyList\u003CJYPPX.OpenCvSharp.Core.Mat\u003E images,System.Int32[]? parameters=null)"
+      ],
+      "historicalOrdinal": 36,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.haveImageReader(String filename[/C,/Ref,/PATH])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_have_image_reader"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean HaveImageReader(System.String filename)"
+      ],
+      "historicalOrdinal": 37,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.haveImageWriter(String filename[/C,/Ref,/PATH])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_have_image_writer"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean HaveImageWriter(System.String filenameOrExtension)"
+      ],
+      "historicalOrdinal": 38,
+      "buildCondition": "unconditional-parser-surface",
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    }
+  ],
+  "limitation": "Implemented means the recorded managed/C ABI binding exists, subject to its documented validation. It does not certify wider 5.1 input domains, optional codecs/backends, or complete C\u002B\u002B coverage."
+}

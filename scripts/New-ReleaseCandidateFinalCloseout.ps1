@@ -125,6 +125,7 @@ function Get-Record {
     $calib3DSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/calib3d-upstream-summary.json") -Raw | ConvertFrom-Json
     $coreSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/core-upstream-summary.json") -Raw | ConvertFrom-Json
     $dnnSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/dnn-upstream-summary.json") -Raw | ConvertFrom-Json
+    $refresh51Summary = Get-Content -LiteralPath (Join-Path $repo "compatibility/opencv-5.1.0/upstream-map-refresh-summary.json") -Raw | ConvertFrom-Json
     $dnnSuperresRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/dnn_superres-upstream-raw.json") -Raw | ConvertFrom-Json
     $dnnSuperresSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/dnn_superres-upstream-summary.json") -Raw | ConvertFrom-Json
     $dnnObjDetectRaw = Get-Content -LiteralPath (Join-Path $repo "compatibility/dnn_objdetect-upstream-raw.json") -Raw | ConvertFrom-Json
@@ -225,6 +226,32 @@ function Get-Record {
         "compatibility/dnn-upstream-raw.json",
         "compatibility/dnn-upstream-summary.json",
         "compatibility/opencv-5.1.0/README.md",
+        "compatibility/opencv-5.1.0/upstream-map-refresh-catalog.json",
+        "compatibility/opencv-5.1.0/upstream-map-refresh-summary.json",
+        "compatibility/opencv-5.1.0/core-upstream-raw.json",
+        "compatibility/opencv-5.1.0/core-upstream-classifications.json",
+        "compatibility/opencv-5.1.0/core-upstream-map.txt",
+        "compatibility/opencv-5.1.0/core-upstream-summary.json",
+        "compatibility/opencv-5.1.0/core-upstream-delta.json",
+        "compatibility/opencv-5.1.0/core-implemented-families.json",
+        "compatibility/opencv-5.1.0/imgproc-upstream-raw.json",
+        "compatibility/opencv-5.1.0/imgproc-upstream-classifications.json",
+        "compatibility/opencv-5.1.0/imgproc-upstream-map.txt",
+        "compatibility/opencv-5.1.0/imgproc-upstream-summary.json",
+        "compatibility/opencv-5.1.0/imgproc-upstream-delta.json",
+        "compatibility/opencv-5.1.0/imgproc-implemented-families.json",
+        "compatibility/opencv-5.1.0/imgcodecs-upstream-raw.json",
+        "compatibility/opencv-5.1.0/imgcodecs-upstream-classifications.json",
+        "compatibility/opencv-5.1.0/imgcodecs-upstream-map.txt",
+        "compatibility/opencv-5.1.0/imgcodecs-upstream-summary.json",
+        "compatibility/opencv-5.1.0/imgcodecs-upstream-delta.json",
+        "compatibility/opencv-5.1.0/imgcodecs-implemented-families.json",
+        "tools/UpstreamMapRefresh/UpstreamMapRefresh.csproj",
+        "tools/UpstreamMapRefresh/Program.cs",
+        "tools/UpstreamMapRefresh/extract.py",
+        "scripts/Generate-UpstreamMap51.ps1",
+        "scripts/Test-UpstreamMap51.ps1",
+        "docs/articles/opencv-5.1-source-mapping.md",
         "compatibility/opencv-5.1.0/dnn-upstream-raw.json",
         "compatibility/opencv-5.1.0/dnn-upstream-classifications.json",
         "compatibility/opencv-5.1.0/dnn-upstream-map.txt",
@@ -1342,8 +1369,9 @@ function Get-Record {
             CurrentDnnParserDeclarationCount = 185
             CurrentDnnCompleteCppParityClaimed = $false
             HistoricalCatalogMapCount = 73
-            CurrentRevisionRefreshedParserSliceCount = 1
-            CurrentRevisionPendingCatalogMapCount = 72
+            CurrentParserRefreshInventory = Get-FileEvidence -RelativePath "compatibility/opencv-5.1.0/upstream-map-refresh-summary.json"
+            CurrentRevisionRefreshedParserSliceCount = [int]$refresh51Summary.refreshedParserSliceCount
+            CurrentRevisionPendingCatalogMapCount = [int]$refresh51Summary.pendingCatalogMapCount
             HistoricalSupportEvidenceRevision = "5.0.0"
             CurrentRevisionMultiRidValidated = $false
             CurrentRevisionUpstreamParityClaimed = $false
@@ -2643,7 +2671,7 @@ function Get-Record {
         EvidenceReferences = $evidence
         LocalValidation = [ordered]@{
             Status = "locally-validated"
-            InvariantGuardCount = 105
+            InvariantGuardCount = [regex]::Matches([IO.File]::ReadAllText((Join-Path $repo 'scripts/Test-ProjectInvariants.ps1')), '(?m)^\s+Name = "[^"]+"\s*$').Count
             RequiredChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
             SdkPolicy = ".NET 10 (any installed feature band)"
             PublicationAllowed = $false

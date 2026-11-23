@@ -64,5 +64,15 @@ if ($dnn.sourceCommit -cne $build.sourceCommit -or -not $dnn.abiValuesUnchanged 
     throw '5.1 DNN correction or parser-slice evidence drifted.'
 }
 if ($patchHash -cne $build.patch.sha256 -or -not $build.patch.actualSourceIdempotencePassed -or $build.patch.negativeFixtureCount -ne 2 -or $build.runtimeInput.openCvVersion -cne '5.1.0' -or -not $build.runtimeInput.versionedPatchRecorded) { throw '5.1 CCM patch or runtime input provenance evidence drifted.' }
+$refresh = $build.upstream51ParserRefresh
+$inventoryPath = 'compatibility/opencv-5.1.0/upstream-map-refresh-summary.json'
+$catalogPath = 'compatibility/opencv-5.1.0/upstream-map-refresh-catalog.json'
+$inventoryHash = (Get-FileHash -LiteralPath (Join-Path $repo $inventoryPath) -Algorithm SHA256).Hash.ToLowerInvariant()
+$catalogHash = (Get-FileHash -LiteralPath (Join-Path $repo $catalogPath) -Algorithm SHA256).Hash.ToLowerInvariant()
+if ($refresh.sourceBuildInputsChanged -or $refresh.buildSourceCommit -cne $build.sourceCommit -or
+    $refresh.catalog.path -cne $catalogPath -or $refresh.catalog.sha256 -cne $catalogHash -or $refresh.inventory.path -cne $inventoryPath -or $refresh.inventory.sha256 -cne $inventoryHash -or
+    $refresh.refreshedParserSliceCount -ne 4 -or $refresh.pendingCatalogMapCount -ne 69 -or $refresh.historicalCatalogVersion -cne '5.0.0' -or
+    $refresh.newDeclarationCount -ne 521 -or $refresh.totalReviewedDeclarationCount -ne 706 -or $refresh.sharedGeneratorNegativeFixtureCount -ne 90 -or
+    $refresh.newManagedApiOrNativeAbiAdded -or $refresh.newRuntimeBehaviorCertified -or $refresh.repositoryWideUpstreamParityClaimed) { throw '5.1 shared parser refresh evidence drifted.' }
 Write-Host "V510_CHANGE_LEDGER_OK entries=$(@($ledger.entries).Count) from=$($ledger.fromVersion) to=$($ledger.toVersion) native_abi=$($ledger.nativeAbiVersion)"
 Write-Host "OPENCV_510_SOURCE_BUILD_EVIDENCE_OK input_files=$($inputPaths.Count) full_exports=2669 mini_exports=527 native_ctest=6 managed=2520 historical_catalog=5.0.0 dnn_parser_slice=5.1.0"

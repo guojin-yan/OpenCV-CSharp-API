@@ -94,6 +94,11 @@ Add-RequiredFile -Path ($source51Prefix + 'modules/core/include/opencv2/core/ver
 Add-RequiredFile -Path ([string]$dnn51.headerPath) -Sha256 ([string]$dnn51.headerSha256)
 Add-RequiredFile -Path ([string]$dnn51.parserPath) -Sha256 ([string]$dnn51.parserSha256)
 foreach ($header in @($dnn51.sourceHeaders)) { Add-RequiredFile -Path ([string]$header.path) -Sha256 ([string]$header.sha256) }
+$refresh51 = Get-Content -LiteralPath (Join-Path $repo 'compatibility/opencv-5.1.0/upstream-map-refresh-catalog.json') -Raw | ConvertFrom-Json
+foreach ($module in @($refresh51.modules)) {
+    Add-RequiredFile -Path ([string]$module.primaryHeader.path) -Sha256 ([string]$module.primaryHeader.sha256)
+    foreach ($header in @($module.sourceHeaders)) { Add-RequiredFile -Path ([string]$header.path) -Sha256 ([string]$header.sha256) }
+}
 
 $registry = Get-Content -LiteralPath $registryPath -Raw | ConvertFrom-Json
 Add-RequiredFile -Path ([string]$registry.headerPath) -Sha256 ([string]$registry.headerSha256)
