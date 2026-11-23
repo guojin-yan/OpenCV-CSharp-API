@@ -3638,6 +3638,2153 @@
         "changed": 0,
         "retained": 163
       }
+    },
+    {
+      "id": "cannops",
+      "claimedSlice": "Historical cannops parser scope refreshed against official 5.1 sources: parser-emitted declarations only; external backends, templates and runtime remain separately scoped",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/cannops-upstream-raw.json",
+      "historicalRawSha256": "41331dbaf8ed33884a86f5c97f9654f6d47f77a779f004d5d911a7cbb9cb0584",
+      "historicalClassificationPath": "compatibility/cannops-upstream-classifications.json",
+      "historicalClassificationSha256": "2876d8ed075a47d285805b8a1f1b227a74f07996f566dd838efc694d467f08f2",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/cannops/include/opencv2/cann.hpp",
+        "sha256": "0eea669daf1b24f78742b8ba4721ea304f6eed9c2e505fcb4c9a98d7ed6d32a2"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cannops/include/opencv2/ascendc_kernels.hpp",
+          "sha256": "137eb88743cbac6bc8e38b3805b2e50b7e8330dfb9c9ddce1a538ce18e5d7854",
+          "parserDeclarationCount": 0
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cannops/include/opencv2/cann.hpp",
+          "sha256": "0eea669daf1b24f78742b8ba4721ea304f6eed9c2e505fcb4c9a98d7ed6d32a2",
+          "parserDeclarationCount": 61
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cannops/include/opencv2/cann.inl.hpp",
+          "sha256": "0d4df6136113d77bd46b3875188f8d5d504f678b1aa8f6d5c9d8d90aaf3248dd",
+          "parserDeclarationCount": 18
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cannops/include/opencv2/cann_call.hpp",
+          "sha256": "7619334330fabe4db25566d9da41272dd171df28e84398e168450f2786cb27c5",
+          "parserDeclarationCount": 41
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cannops/include/opencv2/cann_interface.hpp",
+          "sha256": "02cf044d0b777b50f0dcc44e32304b3b103846d56bf04473b0ff83e87c2ac2b6",
+          "parserDeclarationCount": 61
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cannops/include/opencv2/cann_private.hpp",
+          "sha256": "1bb6e60d6a78cf198e1c8d3abeba6a006f62335f3c7f0490acaeab84ee38acc4",
+          "parserDeclarationCount": 10
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cannops/include/opencv2/dvpp_call.hpp",
+          "sha256": "d4524f797a6d1155fa1ab3e0e4f2d064580f84c7053040c1bf5950676699b43e",
+          "parserDeclarationCount": 22
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cannops/include/opencv2/stream_accessor.hpp",
+          "sha256": "1d7e02858b2489ddddda1c4352beaee289bafb5fd9e3b4d52f70b0b9cfe31cb0",
+          "parserDeclarationCount": 6
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_CANN": 1
+      },
+      "parserMode": "non-wrapper-public-declarations",
+      "parserNormalization": "All eight installed headers remain in source scope, including implementation helpers. Qualified AscendStream::Impl and AscendEvent::Impl class/constructor spellings are renamed only in a temporary parser copy and restored in identities. Sixteen inline definitions are reconciled to existing declarations by name and argument types; two inline definitions of private constructors remain explicitly excluded. NEVER_DEFINED binding-only placeholders are inactive. No upstream source file is modified.",
+      "moduleBuildCondition": "HAVE_CANN_AND_SUPPORTED_UNIX_X86_64_OR_AARCH64_AND_NOT_IOS_WINRT_ANDROID_APPLE_WIN32_AND_ASCENDC_TOOLCHAIN",
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cannops/CMakeLists.txt",
+          "sha256": "1d5a7ea5194d764f4c3bd72efec3b3a6cf8d80f8e21f58b9182fe9938288d367",
+          "reason": "Module platform exclusions, HAVE_CANN gate, OpenCV core and CANN library dependencies, and AscendC kernel integration."
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cannops/ascendc_kernels/CMakeLists.txt",
+          "sha256": "b877dbdbce1ab090446fc96139720b517ff6e0d8400ea3af847dd7a678c24008",
+          "reason": "External AscendC compiler package, SOC_VERSION, RUN_MODE and threshold kernel build contract."
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/cmake/OpenCVFindCANN.cmake",
+          "sha256": "24827103dc438b9465f5cd5d1d2c919518e7bdb72f2c77c9ab854aff2b299e07",
+          "reason": "UNIX/x86_64/amd64/aarch64, external toolkit/shared libraries and VALID_ASCENDCL compile probe."
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cannops/tutorials/ascend_npu_image_processing.markdown",
+          "sha256": "b198435b466a1e85ca095f215ef8ddb762c9b4e9dcaae3f1cf8331933b5d6915",
+          "reason": "External Ascend NPU/CANN execution and stream/event synchronization ownership."
+        }
+      ],
+      "parserEvidence": {
+        "qualifiedImplementationClasses": [
+          "cv.cann.AscendStream.Impl",
+          "cv.cann.AscendEvent.Impl"
+        ],
+        "inlineDefinitionIdentities": [
+          "cv.cann.AscendMat.AscendMat(AscendMat::Allocator* allocator_=AscendMat::defaultAllocator())->",
+          "cv.cann.AscendMat.AscendMat(int rows;int cols;int type;AscendMat::Allocator* allocator=AscendMat::defaultAllocator())->",
+          "cv.cann.AscendMat.AscendMat(Size size;int type;AscendMat::Allocator* allocator=AscendMat::defaultAllocator())->",
+          "cv.cann.AscendMat.AscendMat(InputArray arr;AscendStream& stream;AscendMat::Allocator* allocator=AscendMat::defaultAllocator())->",
+          "cv.cann.AscendMat.AscendMat(const AscendMat& m)->",
+          "cv.cann.AscendMat.operator=(const AscendMat& m)->AscendMat&",
+          "cv.cann.AscendMat.swap(AscendMat& mat)->void",
+          "cv.cann.AscendMat.isContinuous()->bool",
+          "cv.cann.AscendMat.elemSize()->size_t",
+          "cv.cann.AscendMat.elemSize1()->size_t",
+          "cv.cann.AscendMat.type()->int",
+          "cv.cann.AscendMat.depth()->int",
+          "cv.cann.AscendMat.channels()->int",
+          "cv.cann.AscendMat.step1()->size_t",
+          "cv.cann.AscendMat.size()->Size",
+          "cv.cann.AscendMat.empty()->bool"
+        ],
+        "excludedPrivateInlineDefinitions": [
+          "cv.cann.AscendStream.AscendStream(const Ptr<AscendStream::Impl>& impl)->",
+          "cv.cann.AscendEvent.AscendEvent(const Ptr<AscendEvent::Impl>& impl)->"
+        ],
+        "bindingOnlyPlaceholderBlockCount": 7,
+        "parserDuplicateIdentities": [],
+        "moduleDependencies": [
+          "opencv_core"
+        ],
+        "externalLibraries": "CANN_LIBRARIES"
+      },
+      "declarationCount": 201,
+      "callableCount": 188,
+      "rawSha256": "11e5b65deed6a7f0c028baed4d1dba3b4579480e46f26a54915a78b5b74d00e2",
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 201
+      },
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": []
+    },
+    {
+      "id": "cudaarithm",
+      "claimedSlice": "Historical cudaarithm parser scope refreshed against official 5.1 sources: parser-emitted declarations only; external backends, templates and runtime remain separately scoped",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/cudaarithm-upstream-raw.json",
+      "historicalRawSha256": "aaf909b1fe0e07510efb34899ec828ae29c646e13f9c7516a0e958c81440800a",
+      "historicalClassificationPath": "compatibility/cudaarithm-upstream-classifications.json",
+      "historicalClassificationSha256": "a547ab621a848862537f208c5886c6a9658770d0ee886ef652309cd8ae08f836",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+        "sha256": "db28b57a339e2e3e22cf4ea51bc780daa0aebeb1a4eb8dc90c6754a8f14cdd0e"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudaarithm/include/opencv2/cudaarithm.hpp",
+          "sha256": "db28b57a339e2e3e22cf4ea51bc780daa0aebeb1a4eb8dc90c6754a8f14cdd0e"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "moduleBuildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudaarithm/CMakeLists.txt",
+          "sha256": "328e3ad715f2f02909007fee2c83b708a3a0707320db80fb2722ceb00da337a7",
+          "reason": "Upstream module activation and CUDA/NPP/optional cuBLAS/cuFFT dependency contract; parser declarations are not gated in the public header."
+        }
+      ],
+      "declarationCount": 89,
+      "callableCount": 86,
+      "rawSha256": "0a7ef89d280c2673f838508fe1dcc8e614ffa5a24945a76b7e5ec657be382ad7",
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 89
+      },
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": []
+    },
+    {
+      "id": "cudabgsegm",
+      "claimedSlice": "Historical cudabgsegm parser scope refreshed against official 5.1 sources: parser-emitted declarations only; external backends, templates and runtime remain separately scoped",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/cudabgsegm-upstream-raw.json",
+      "historicalRawSha256": "c36d664a83247368b239871a9af4ba06f03abc8959c98f169ae6f90868bc8303",
+      "historicalClassificationPath": "compatibility/cudabgsegm-upstream-classifications.json",
+      "historicalClassificationSha256": "50137086a724080d8088356155f14b34c456dcb628077fb77e0240f6520bc731",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/cudabgsegm/include/opencv2/cudabgsegm.hpp",
+        "sha256": "f13781593040b547a6e773516fa31b24e24e68ae51377a499f4e94c298a2782a"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudabgsegm/include/opencv2/cudabgsegm.hpp",
+          "sha256": "f13781593040b547a6e773516fa31b24e24e68ae51377a499f4e94c298a2782a"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "moduleBuildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudabgsegm/CMakeLists.txt",
+          "sha256": "6717aa128d815fbb1608e077aa07aa2e9cc78c017eb6c1dc1853d3542e231b30",
+          "reason": "Upstream module activation and optional CUDA runtime dependency contract; parser declarations are not gated in the public header."
+        }
+      ],
+      "declarationCount": 18,
+      "callableCount": 16,
+      "rawSha256": "78f7d5a34af7c13dd9bfdbc9768ef6b1bbef93d760b980df26ebc8afcd6dae79",
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 18
+      },
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": []
+    },
+    {
+      "id": "cudacodec",
+      "claimedSlice": "Historical cudacodec parser scope refreshed against official 5.1 sources: parser-emitted declarations only; external backends, templates and runtime remain separately scoped",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/cudacodec-upstream-raw.json",
+      "historicalRawSha256": "8cded6dfa28d5467c9e27ab506c6a68e21cedc2937cb5beef475cf252d8d1c9b",
+      "historicalClassificationPath": "compatibility/cudacodec-upstream-classifications.json",
+      "historicalClassificationSha256": "7202c2ad815a4360b0c5564cd51949781d30fd13600a48026d9af8b18a6dc8c7",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/cudacodec/include/opencv2/cudacodec.hpp",
+        "sha256": "e8033941faf7019d9a6b31c81429231fac1024eb5d5fb3735b059b488fb6ca6a"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudacodec/include/opencv2/cudacodec.hpp",
+          "sha256": "e8033941faf7019d9a6b31c81429231fac1024eb5d5fb3735b059b488fb6ca6a"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "moduleBuildCondition": "NOT_IOS_AND_NOT_APPLE_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudacodec/CMakeLists.txt",
+          "sha256": "65494cc7c2a8c1067378466fbe1c7d28b2e3a622abd61e71a8770c4c1301fe81",
+          "reason": "Upstream module activation, CUDA/videoio/cudaarithm/cudawarping dependency, and optional NVIDIA Video Codec SDK dependency contract; parser declarations are not gated in the public header."
+        }
+      ],
+      "declarationCount": 45,
+      "callableCount": 23,
+      "rawSha256": "922027c7f37516bb17fac7cb8218aa5a72b43d50c5ee4d37130933afa7569a58",
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 45
+      },
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": []
+    },
+    {
+      "id": "cudafeatures2d",
+      "claimedSlice": "Historical cudafeatures2d parser scope refreshed against official 5.1 sources: parser-emitted declarations only; external backends, templates and runtime remain separately scoped",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/cudafeatures2d-upstream-raw.json",
+      "historicalRawSha256": "2965ffead409726c9ff60dabf930c1c09db9fad382d221a3170db3bc8f418811",
+      "historicalClassificationPath": "compatibility/cudafeatures2d-upstream-classifications.json",
+      "historicalClassificationSha256": "501138f46c16ad2c571e225218638718d8796729d6e8dcb329b0e3e18546359b",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+        "sha256": "1e00a3dd22bf1b03d714dd387fcb93fec0af4d148639cf8f0d871fadb55fd640"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudafeatures2d/include/opencv2/cudafeatures2d.hpp",
+          "sha256": "1e00a3dd22bf1b03d714dd387fcb93fec0af4d148639cf8f0d871fadb55fd640"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "moduleBuildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudafeatures2d/CMakeLists.txt",
+          "sha256": "9a85df97da9b13d5786766557c7c0ae2c11279a223dbcc9adbb30aa209614650",
+          "reason": "Upstream module activation and CUDA feature-detection dependency contract; parser declarations are not gated in the public header."
+        }
+      ],
+      "declarationCount": 64,
+      "callableCount": 58,
+      "rawSha256": "244ce71337c4df3247aeda79baf9efc139a1a55823406c31ab4fa547893fa1b5",
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 64
+      },
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": []
+    },
+    {
+      "id": "cudafilters",
+      "claimedSlice": "Historical cudafilters parser scope refreshed against official 5.1 sources: parser-emitted declarations only; external backends, templates and runtime remain separately scoped",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/cudafilters-upstream-raw.json",
+      "historicalRawSha256": "3293f95a38efcb107ea1fb92122d3a6224d38807e0babe89368a95974ed6ceaa",
+      "historicalClassificationPath": "compatibility/cudafilters-upstream-classifications.json",
+      "historicalClassificationSha256": "fd81dadc19ed6f269ddbb201b48c192aac3ef7a5f5d26ce8a951f01c07291b20",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/cudafilters/include/opencv2/cudafilters.hpp",
+        "sha256": "3daf69bb6f7d260c90478b18697e64d622e77b3a483dace76e3f768f86ce70be"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudafilters/include/opencv2/cudafilters.hpp",
+          "sha256": "3daf69bb6f7d260c90478b18697e64d622e77b3a483dace76e3f768f86ce70be"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "moduleBuildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudafilters/CMakeLists.txt",
+          "sha256": "e498766a5d3ac834615b433744c0333b56574ad6987840107dd7b580bfcdcc0c",
+          "reason": "Upstream module activation, OpenCV dependency, and CUDA/NPP image-filter dependency contract; parser declarations are not gated in the public header."
+        }
+      ],
+      "declarationCount": 16,
+      "callableCount": 15,
+      "rawSha256": "6e43cc05cdf33bae0ec8c1f6d6c5e8d57f53f825c3e8ffc5c88ba26c6b8ba7a9",
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 16
+      },
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": []
+    },
+    {
+      "id": "cudaimgproc",
+      "claimedSlice": "Historical cudaimgproc parser scope refreshed against official 5.1 sources: parser-emitted declarations only; external backends, templates and runtime remain separately scoped",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/cudaimgproc-upstream-raw.json",
+      "historicalRawSha256": "6269e39d355671720a26b361301cd757d3eeccf7bbab155523a8e15df6539e50",
+      "historicalClassificationPath": "compatibility/cudaimgproc-upstream-classifications.json",
+      "historicalClassificationSha256": "d710562131aba21a60cc47dc6db40319e0ba933d48c0fd40edee5655a998477a",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/cudaimgproc/include/opencv2/cudaimgproc.hpp",
+        "sha256": "94c851e9ea17da630fce9a0133c85467548637bedff9e1b38ead2aa72819e356"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudaimgproc/include/opencv2/cudaimgproc.hpp",
+          "sha256": "94c851e9ea17da630fce9a0133c85467548637bedff9e1b38ead2aa72819e356"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "moduleBuildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudaimgproc/CMakeLists.txt",
+          "sha256": "32a2d00d0101aecb1658016b729daa6bb99b4733103a1c0938a50046434d8c0d",
+          "reason": "Upstream module activation, image-processing dependency, and CUDA/NPP image-processing dependency contract; parser declarations are not gated in the public header."
+        }
+      ],
+      "declarationCount": 93,
+      "callableCount": 83,
+      "rawSha256": "86443dcc303b73bfb756886aa94c3f2198353530bfb239a325702699742b8574",
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 93
+      },
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": []
+    },
+    {
+      "id": "cudalegacy",
+      "claimedSlice": "Historical cudalegacy parser scope refreshed against official 5.1 sources: parser-emitted declarations only; external backends, templates and runtime remain separately scoped",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/cudalegacy-upstream-raw.json",
+      "historicalRawSha256": "a77633b9152783bc154cf6f6c9b97fbf4b504251aa3b36077c7b839f81841c37",
+      "historicalClassificationPath": "compatibility/cudalegacy-upstream-classifications.json",
+      "historicalClassificationSha256": "bf6c832a434a130ea21730164d04e71f0e5afd8ecbe938e967569dbcc8f8bc63",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/cudalegacy/include/opencv2/cudalegacy.hpp",
+        "sha256": "c8e6499a7e63d130952bdef8195abeacfe8d7912d23de9d19a2280c31460d2d4"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudalegacy/include/opencv2/cudalegacy.hpp",
+          "sha256": "c8e6499a7e63d130952bdef8195abeacfe8d7912d23de9d19a2280c31460d2d4"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudalegacy/include/opencv2/cudalegacy/NCV.hpp",
+          "sha256": "9ef6726de65c7a31dba72643d5d003819798b0403c138ea00fa56a7834ed1829"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudalegacy/include/opencv2/cudalegacy/NCVBroxOpticalFlow.hpp",
+          "sha256": "1e3e1a4326e0658178c1693e303cb07251e75e0b02969bb826325e1d451b8c0c"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudalegacy/include/opencv2/cudalegacy/NCVHaarObjectDetection.hpp",
+          "sha256": "084a9a672c9b695f027a72e8f7524d9cf0b70cf03505ddbf9b3b267762d37e7f"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudalegacy/include/opencv2/cudalegacy/NCVPyramid.hpp",
+          "sha256": "f2425ef602b494ac2dc8b19d4f3b1957f68991bb48e5895a7ec3630ebde25cdc"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudalegacy/include/opencv2/cudalegacy/NPP_staging.hpp",
+          "sha256": "35ae0b1dda11d553aed97014076f805d4f0173c7090388a177481f5724a6dc50"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudalegacy/include/opencv2/cudalegacy/private.hpp",
+          "sha256": "fb9f4e8f5ea34a0d813abaeb7d745f1007b536013aab9e0af64b5ea76a26562a"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "moduleBuildCondition": "HAVE_CUDA",
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudalegacy/CMakeLists.txt",
+          "sha256": "fd06474459601e77046c1949f39e5118b9bde08723edbf0fc9f40d0a2c494659",
+          "reason": "Upstream legacy CUDA module activation, OpenCV dependency, and first-class CUDA runtime dependency contract; parser declarations are not gated in the public headers."
+        }
+      ],
+      "parserMode": "non-wrapper-public-declarations",
+      "deduplicateParserIdentities": true,
+      "declarationCount": 221,
+      "callableCount": 191,
+      "rawSha256": "62a38f77ba250979b06c7f8c32dd00098f4e017966d8ebf27d0f7ccdb9e03e1c",
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 221
+      },
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": []
+    },
+    {
+      "id": "cudaobjdetect",
+      "claimedSlice": "Historical cudaobjdetect parser scope refreshed against official 5.1 sources: parser-emitted declarations only; external backends, templates and runtime remain separately scoped",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/cudaobjdetect-upstream-raw.json",
+      "historicalRawSha256": "39ffff631f31f732d16aa2c36bbc77e980f00958a6154944099421f25eedb5fe",
+      "historicalClassificationPath": "compatibility/cudaobjdetect-upstream-classifications.json",
+      "historicalClassificationSha256": "2d7b83350fe327306f1e00262bbe1ed9a4130d35ed8c05fcc3c870ce0bad9f6e",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+        "sha256": "b34494e768fbedd8cdbafdb4095bcc373c558785dfe7342688d4537273ce69ee"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudaobjdetect/include/opencv2/cudaobjdetect.hpp",
+          "sha256": "b34494e768fbedd8cdbafdb4095bcc373c558785dfe7342688d4537273ce69ee"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "moduleBuildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudaobjdetect/CMakeLists.txt",
+          "sha256": "f492ec89071339e6d4753dc66bc93fd9554957853751db4a646f8e8765059091",
+          "reason": "Upstream module activation, object-detection dependency, and CUDA runtime dependency contract; parser declarations are not gated in the public header."
+        }
+      ],
+      "declarationCount": 46,
+      "callableCount": 44,
+      "rawSha256": "10e0a7d17a191e43613956e746f6eb3bf79da1a1369b434648c07daf50fb004f",
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 46
+      },
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": []
+    },
+    {
+      "id": "cudaoptflow",
+      "claimedSlice": "Historical cudaoptflow parser scope refreshed against official 5.1 sources: parser-emitted declarations only; external backends, templates and runtime remain separately scoped",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/cudaoptflow-upstream-raw.json",
+      "historicalRawSha256": "69b7827bc02c8cf6590100b423938dba254647e04b129fe671ca1639b2469692",
+      "historicalClassificationPath": "compatibility/cudaoptflow-upstream-classifications.json",
+      "historicalClassificationSha256": "b24e3b0f90d9361016a7f9c47fae029b933c2c79a0213c8ef09d814256c96a10",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/cudaoptflow/include/opencv2/cudaoptflow.hpp",
+        "sha256": "97cc9528b32bb441c1eb7ac84b4b73bc11e460142d398a5b9b2a2b33fdc079a1"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudaoptflow/include/opencv2/cudaoptflow.hpp",
+          "sha256": "97cc9528b32bb441c1eb7ac84b4b73bc11e460142d398a5b9b2a2b33fdc079a1"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "moduleBuildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudaoptflow/CMakeLists.txt",
+          "sha256": "78c5ab06b0428fc4d422b1700d7a7335f7d24b3ee56efcdd60d25424309f0942",
+          "reason": "Upstream module activation, optical-flow dependency, CUDA runtime, and optional NVIDIA Optical Flow SDK dependency contract; parser declarations are not gated in the public header."
+        }
+      ],
+      "declarationCount": 93,
+      "callableCount": 79,
+      "rawSha256": "5ce7eb7ff26b85c6715bb118db2bcea5bf75642452628261f14f180d67b38215",
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 93
+      },
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": []
+    },
+    {
+      "id": "cudastereo",
+      "claimedSlice": "Historical cudastereo parser scope refreshed against official 5.1 sources: parser-emitted declarations only; external backends, templates and runtime remain separately scoped",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/cudastereo-upstream-raw.json",
+      "historicalRawSha256": "46c89c9e1a6e025092e62c7d82a6bad2be6c8c9526ac9d0f40e15b8586c0cf55",
+      "historicalClassificationPath": "compatibility/cudastereo-upstream-classifications.json",
+      "historicalClassificationSha256": "c09ef542ee3b666772afc6bf1a1e9b0c395c1fdd01edd66fa7bc7b08587e568c",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+        "sha256": "15d4a78fc69cb60c1fc11525388f688d01e4b7ab355041ee51dc68e538dd5534"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudastereo/include/opencv2/cudastereo.hpp",
+          "sha256": "15d4a78fc69cb60c1fc11525388f688d01e4b7ab355041ee51dc68e538dd5534"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "moduleBuildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudastereo/CMakeLists.txt",
+          "sha256": "84b1128921e1ffe5de4c942fd285e0b2c00ee7bda1dcd7e5d943e817391f6749",
+          "reason": "Upstream module activation, stereo/geometry dependency, optional cudev, and CUDA runtime dependency contract; parser declarations are not gated in the public header."
+        }
+      ],
+      "declarationCount": 50,
+      "callableCount": 45,
+      "rawSha256": "339599401103016568355e47c87a094f0ebd7fe549cea9e19ba1cb09c54fb97f",
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 50
+      },
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": []
+    },
+    {
+      "id": "cudawarping",
+      "claimedSlice": "Historical cudawarping parser scope refreshed against official 5.1 sources: parser-emitted declarations only; external backends, templates and runtime remain separately scoped",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/cudawarping-upstream-raw.json",
+      "historicalRawSha256": "28d4774d3640a974081a470c65416e926bc8ea8b9f8c9d075db624333c932870",
+      "historicalClassificationPath": "compatibility/cudawarping-upstream-classifications.json",
+      "historicalClassificationSha256": "fc81d2697021491a2f53cbb343de033db320dcc27648af7261634f4cd8cbc43e",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/cudawarping/include/opencv2/cudawarping.hpp",
+        "sha256": "3b0cc2a008c932ac6c1cb3b6adf972a919a1f5a5135f09277e5dc25b24679807"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudawarping/include/opencv2/cudawarping.hpp",
+          "sha256": "3b0cc2a008c932ac6c1cb3b6adf972a919a1f5a5135f09277e5dc25b24679807"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "moduleBuildCondition": "NOT_IOS_AND_NOT_WINRT_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudawarping/CMakeLists.txt",
+          "sha256": "91934e75b3aae4cf246783004d4b5dcbd87dd948bc4919cf85d23ed6d2dc11d3",
+          "reason": "Upstream module activation, core/imgproc/geometry dependency, and CUDA/NPP image-warping dependency contract; parser declarations are not gated in the public header."
+        }
+      ],
+      "declarationCount": 13,
+      "callableCount": 13,
+      "rawSha256": "ef40dc1f6cdc16912d31b7b59c1ab120a2b5c8510470a6164f22df27d6648e46",
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 13
+      },
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": []
+    },
+    {
+      "id": "cudev",
+      "claimedSlice": "Historical cudev parser scope refreshed against official 5.1 sources: parser-emitted declarations only; external backends, templates and runtime remain separately scoped",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/cudev-upstream-raw.json",
+      "historicalRawSha256": "8531bec0873c26d47b098664b02f371950a75722c658a6cbf7696ff4be94b588",
+      "historicalClassificationPath": "compatibility/cudev-upstream-classifications.json",
+      "historicalClassificationSha256": "2effdf5b6d6acf7ca0c9d1f4c25bfab55e0652e77eb3cb839460ced7419b6ce3",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev.hpp",
+        "sha256": "a1cac9bc839b596a46ed6724adfb22e7578da1311a7f8945b20c93b952f4ae87"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/block/block.hpp",
+          "sha256": "20ef363751988a3f49bd0229c2045be435b8d562ff7e2155a78343d91b5fba30"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/block/detail/reduce.hpp",
+          "sha256": "e5a039b5760eeca7eb308249ac090304b700bdfee83d8c6cef21160ade13b97a"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/block/detail/reduce_key_val.hpp",
+          "sha256": "5209633fcae242311d0754686e7730fdaa3cc4a112b1100725108590056cbfcf"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/block/dynamic_smem.hpp",
+          "sha256": "67b751f6f8a63f83cb2de8ff1432e0fbe22e31b4d0dce0702ab8eab4a6334906"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/block/reduce.hpp",
+          "sha256": "3e4a59d2cbc4af5f17303bde259b3996dfb4ba8ff4edcc75e63e48686d6e352e"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/block/scan.hpp",
+          "sha256": "c72fac2438d08d2c58b1b97966b20104bddbf9d4b347ecab0f54291799e67419"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/block/vec_distance.hpp",
+          "sha256": "5998f94efa05c591669b170a06d74034f95c65fae6e269fd7622dd8b6851aa21"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/common.hpp",
+          "sha256": "ffce8a11163a1efcdfe597002515a4d6e4c284b66865543a6b431048c00544a9"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/expr/binary_func.hpp",
+          "sha256": "a87c9984171f47d480904c995d8a52a5187bf3128f87a55f2c405c62a062df19"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/expr/binary_op.hpp",
+          "sha256": "77a2de98bf74d5521e63825d212c35be3e9b3c2ed654318537b886be19271f6a"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/expr/color.hpp",
+          "sha256": "3013c1f903f5168725927b573d686ca0fe53242b2642c78db0227e317e49e102"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/expr/deriv.hpp",
+          "sha256": "44f439399d6244322cbcb3c2cbe41233f5e466db2c3cf9f098aca37d03417a2c"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/expr/expr.hpp",
+          "sha256": "b3a36559710f165afed7f702ce90d84c289e8d959e69d954bea2d01cc85c8eed"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/expr/per_element_func.hpp",
+          "sha256": "aa974e6d20e6a8b589c2d8095b2f8dddefef8300351b59ea1bb1e1a98decaabd"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/expr/reduction.hpp",
+          "sha256": "484eb7d42c0357574ac4d59e780c62e3b20823167806215103e56b81420cebe8"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/expr/unary_func.hpp",
+          "sha256": "5913369d225c01912c3ef57ed446854601d1162d77bb944477567b7254e3cc3d"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/expr/unary_op.hpp",
+          "sha256": "5741484701117ac6c6d8c796b077fbe9548229ee752590653406886f49a85574"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/expr/warping.hpp",
+          "sha256": "7239f913c2c10e4463e1788a33099f211d3794ccf105949058e8656989d267da"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/functional/color_cvt.hpp",
+          "sha256": "23b447955cdea458fcdaab040a25ee201a56684392ec0cc378aff8ba791cfc1a"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/functional/detail/color_cvt.hpp",
+          "sha256": "9657a04388e5c60cb07eee6a199988d4c7364a8b4bb766290dea4301b2934f3d"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/functional/functional.hpp",
+          "sha256": "cffa399f8af66ebd99b419e5785ee45813b0cd23315c3858eb2b3104384862d9"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/functional/tuple_adapter.hpp",
+          "sha256": "a1ca76c8ace8c284fb77f721455cb2f09213bf045a0046af72dd3b4d43ad9979"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/copy.hpp",
+          "sha256": "9a0e3f9263dd740828c224a98269db4c8a7cf337d6e57e5452646e3b6cc9256e"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/detail/copy.hpp",
+          "sha256": "4991d986289f7e495d4efc5bd676e2e3fbc559f9f729bcd2aad439d775d306d4"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/detail/histogram.hpp",
+          "sha256": "52a304212684ed853d5d3d364562309a2bbf25d47575b210b836c8debd1c1ba0"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/detail/integral.hpp",
+          "sha256": "2f70d896f96d752b4c4c9bc26ef96cf7a4e18194f7d5b4069da9cc69fc59b841"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/detail/minmaxloc.hpp",
+          "sha256": "8ab36352c8c59b41bc00ebfc36476d0acedb15cb6d305a38ae826d8ddaca6d88"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/detail/pyr_down.hpp",
+          "sha256": "d46cc935f7e9697ff36e4c6f51ef3a233807e06ee0eadbb9a2e6a4492bddb701"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/detail/pyr_up.hpp",
+          "sha256": "1555de9bbb107c0dfd132c24c531c9af701476c8c85c22c214f0bb4d4c3dd9fc"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/detail/reduce.hpp",
+          "sha256": "0ca4c354381b6f0aa18c642e2a559c5956e8ea9df1d1094d394aa40cc95ce90a"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/detail/reduce_to_column.hpp",
+          "sha256": "ea7096b75c6b47553cde950db251bb7e63356f5729bf143e9907e00045dd5534"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/detail/reduce_to_row.hpp",
+          "sha256": "4deac0be81cffc22da45a6eaad549ab0794e284c5e96ecf6774a8a78fdbb05cc"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/detail/split_merge.hpp",
+          "sha256": "c70f3c4d5e92a11d30b1652664ac7077fc69d8a84f20e1ddb502e3a976129783"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/detail/transform.hpp",
+          "sha256": "fe07c3e347a5720f6efc4efa10aa62fc871d8ad417d55a812e864673672d154d"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/detail/transpose.hpp",
+          "sha256": "89b110fc6955ac724e7fd8ede0b35d2fb9e32ac6e2fd51dca51df2f409a728c8"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/histogram.hpp",
+          "sha256": "94e4c294363a048290a504479aff2b4f85cb731a052e3bbae3fdb5ca3163caa8"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/integral.hpp",
+          "sha256": "733e9ea4b3877a03c94a75dd0f39ac2efaee29a7a1a11f632b06125c65937084"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/pyramids.hpp",
+          "sha256": "50648be72425dcc5572f7283f1cc1815b371bdca8a409d41607acbd21c73fd71"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/reduce.hpp",
+          "sha256": "85e2757b0f2049290160b9e20d39bf5f2fe44bd5bfebc8b48f1714a2d56b1784"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/reduce_to_vec.hpp",
+          "sha256": "aaa589ba856388c5e9f0af7e09befe511b9ebd6791d65c1e6d369d0edb024c73"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/split_merge.hpp",
+          "sha256": "b578f659ead1cc09b6d66e63707332a4ed51fa56d12507759f66df846b90a896"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/transform.hpp",
+          "sha256": "14a8d708193f27214950ef4bc04601f87a7d510599ce8c2a3b64a4341b9403b9"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/transpose.hpp",
+          "sha256": "1fe421ae97c23423705ee39169bc2b32d3819dd3466f3b01e8f311f828a57e07"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/ptr2d/constant.hpp",
+          "sha256": "63c7a48008c046b17aad1593b7606589686c1c14644748edbf64ec59a71daa15"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/ptr2d/deriv.hpp",
+          "sha256": "cdbe363c06c6fb48170429e9026b32626535dd3740823c7053ad320c33c47df7"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/ptr2d/detail/gpumat.hpp",
+          "sha256": "b0a0ccc540b75c8c7fcc8d1bc6059b188ae8637eccfdda9e7b6e21f880945c06"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/ptr2d/extrapolation.hpp",
+          "sha256": "00a5091edab88260fe7a48d08b26e8270e4c0915b382a0a0ca37e7471ee7176d"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/ptr2d/glob.hpp",
+          "sha256": "cdf0fb9534054d03de907d006cce2a8ad78555fd3c7828d2e24c7f274ea2b825"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/ptr2d/gpumat.hpp",
+          "sha256": "6b2f6976ac599e7a7017ba697a245a3e7773cacc2c25c07fb7b735ff59e9fa9b"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/ptr2d/interpolation.hpp",
+          "sha256": "d699a0442c78f5800d65f4510efd48c24e0b0998b201bb787bc20283b953b35b"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/ptr2d/lut.hpp",
+          "sha256": "f937e51d01c1f1359db3a50dcfea995e9d2339c4524e7302b30fcebc0fc35f07"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/ptr2d/mask.hpp",
+          "sha256": "8a3c6cf7f566ad89af6375ae2986952ee6195bdb17bd96ad7aea433c761eda4c"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/ptr2d/remap.hpp",
+          "sha256": "092a73d3b12286e5a193f33e9b21a7075895d5aee70a1c6dfa3c16dfb838f981"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/ptr2d/resize.hpp",
+          "sha256": "cf38c4d7bd3abf250745642f7c4b1d3c44c14ac7a1a082beb1618c269ec6e79a"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/ptr2d/texture.hpp",
+          "sha256": "deb405918aa0580ce601e3f9abf516508d840318d84977ec692094f5f82dcbd0"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/ptr2d/traits.hpp",
+          "sha256": "932fba7dbeaa281dc7b1e6a7e7c52f779388094b923bef17fdb8b63660f84a00"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/ptr2d/transform.hpp",
+          "sha256": "707da07ab71e464fd0f99deedaad24af3a82cff26a83a50d258e5b35d717f286"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/ptr2d/warping.hpp",
+          "sha256": "f1f7da641c911348da044133d81e5be256dade5407b34128111ca2f1decb95ba"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/ptr2d/zip.hpp",
+          "sha256": "e6065052850cfb35ef379e4d5c2a153c0efb22713cbd044c54cbf935e02f945b"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+          "sha256": "a114d1b8b6d55035299ed38d356476ad78307427aabf98d0f316865be9a1fa78"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/util/detail/tuple.hpp",
+          "sha256": "975f1f60cfc69d7fd45fdaabb981acb7ca35b9e3130e71055135d923262f7415"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/util/detail/type_traits.hpp",
+          "sha256": "26d8a350868319041416d98b73364fe0e0c07d06d7d3b8b14fa10259679d2630"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/util/limits.hpp",
+          "sha256": "5c30625941b41a4d1ddf3a32117a11e4b54805927fea3fb71008a35bfd99e0ad"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/util/saturate_cast.hpp",
+          "sha256": "69365c6027868ae7b9a41be0c5a7f3e13984fb2716ad78ab250db7a8460828ac"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp",
+          "sha256": "1707318b4b3c032c31128dd1f4f9fe0afc3473533c25b539b15da003b5ea964e"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/util/tuple.hpp",
+          "sha256": "eb826fed941f015f778bfe6f66bd6bd8846497fffc7095c0d90c19bc4de876c2"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/util/type_traits.hpp",
+          "sha256": "d335a2c1b79d14f8bcb086de2fd8ce3435fbdee67d7615fdda33294acd00418a"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/util/vec_math.hpp",
+          "sha256": "7b416c6957d60c2f477c5575c248473a2744cc5e0e47c7f8bc8b6a3cc0474322"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/util/vec_traits.hpp",
+          "sha256": "71cb1c80fcb92b539492205d5bbedfb6e7f18ee7c87c003c10b8813175734adf"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/warp/detail/reduce.hpp",
+          "sha256": "1dd1720e87eb3692fb8c48a5d8be2c5f1fa56d4ed5d41eb28d33bd523c0b3eb7"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/warp/detail/reduce_key_val.hpp",
+          "sha256": "1aaee45203718b379664fd44deecc13490f7e933828d329eb9c8d4f544e80d6d"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/warp/reduce.hpp",
+          "sha256": "e2a84c5ee5337a151f6137932d4c212299c781b582bfda4d4ff7b39514af41a6"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/warp/scan.hpp",
+          "sha256": "78ff5490b467ef992ac7f68176498957af23f8213f221175c72aab4a47034668"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp",
+          "sha256": "90fc8bbfdd2d7b35fb70afef7bf1b379747fcc2ec18cd9195000d98b88dce9d0"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/warp/warp.hpp",
+          "sha256": "14c26acb7bcca1fab1462868cd4024545d3d95e2e97bd53ef42c25640c45a087"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev.hpp",
+          "sha256": "a1cac9bc839b596a46ed6724adfb22e7578da1311a7f8945b20c93b952f4ae87"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "__CUDACC__": 1,
+        "CUDART_VERSION": 12040,
+        "__CUDACC_VER_MAJOR__": 12,
+        "__CUDACC_VER_MINOR__": 4,
+        "__CUDA_ARCH__": 750,
+        "CV_CUDEV_ARCH": 750
+      },
+      "parserMode": "non-wrapper-non-template-subset",
+      "parserNormalization": "CUDA attribute tokens are removed only in temporary copies. Thirteen namespace-scope static parser names have return-type contamination repaired after parsing; /S metadata is retained. Static/const qualifiers, operators and upstream source hashes are retained. Templates and declaration macros remain outside the pinned parser subset.",
+      "moduleBuildCondition": "HAVE_CUDA",
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/cudev/CMakeLists.txt",
+          "sha256": "b6c4d49f9b7bc656048635e1b181528a6514c55ae60a72596024322a596c70c0",
+          "reason": "HAVE_CUDA module disable; recursive installed-header scope; opencv_core include dependency and conditional CUDA tests."
+        }
+      ],
+      "parserEvidence": {
+        "staticParserNameRepairs": [
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/functional/detail/color_cvt.hpp",
+            "parserName": "cv.cudev.color_cvt_detail.int LabCbrt_b",
+            "correctedName": "cv.cudev.color_cvt_detail.LabCbrt_b"
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/functional/detail/color_cvt.hpp",
+            "parserName": "cv.cudev.color_cvt_detail.float splineInterpolate",
+            "correctedName": "cv.cudev.color_cvt_detail.splineInterpolate"
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/detail/integral.hpp",
+            "parserName": "cv.cudev.integral_detail.uchar4 int_to_uchar4",
+            "correctedName": "cv.cudev.integral_detail.int_to_uchar4"
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/detail/integral.hpp",
+            "parserName": "cv.cudev.integral_detail.void horisontal_pass_8u_shfl_kernel",
+            "correctedName": "cv.cudev.integral_detail.horisontal_pass_8u_shfl_kernel"
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/detail/integral.hpp",
+            "parserName": "cv.cudev.integral_detail.void horisontal_pass_8u_shfl",
+            "correctedName": "cv.cudev.integral_detail.horisontal_pass_8u_shfl"
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/detail/integral.hpp",
+            "parserName": "cv.cudev.integral_detail.void integral",
+            "correctedName": "cv.cudev.integral_detail.integral"
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/ptr2d/warping.hpp",
+            "parserName": "cv.cudev.AffineMapPtrSz affineMap",
+            "correctedName": "cv.cudev.affineMap"
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/ptr2d/warping.hpp",
+            "parserName": "cv.cudev.PerspectiveMapPtrSz perspectiveMap",
+            "correctedName": "cv.cudev.perspectiveMap"
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+            "parserName": "cv.cudev.double atomicAdd",
+            "correctedName": "cv.cudev.atomicAdd"
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+            "parserName": "cv.cudev.float atomicMin",
+            "correctedName": "cv.cudev.atomicMin"
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+            "parserName": "cv.cudev.double atomicMin",
+            "correctedName": "cv.cudev.atomicMin"
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+            "parserName": "cv.cudev.float atomicMax",
+            "correctedName": "cv.cudev.atomicMax"
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+            "parserName": "cv.cudev.double atomicMax",
+            "correctedName": "cv.cudev.atomicMax"
+          }
+        ],
+        "parserDuplicateIdentities": [],
+        "parserConfigurationProbes": [
+          {
+            "configuration": "source-arch-0",
+            "preprocessorDefinitions": {
+              "CV_VERSION_MAJOR": 5,
+              "OPENCV_ABI_COMPATIBILITY": 500,
+              "__CUDACC__": 1,
+              "CUDART_VERSION": 12040,
+              "__CUDACC_VER_MAJOR__": 12,
+              "__CUDACC_VER_MINOR__": 4,
+              "CV_CUDEV_ARCH": 0
+            },
+            "headerDeclarationCounts": {
+              "warp/shuffle.hpp": 0,
+              "util/atomic.hpp": 12,
+              "util/simd_functions.hpp": 38
+            }
+          },
+          {
+            "configuration": "source-arch-120",
+            "preprocessorDefinitions": {
+              "CV_VERSION_MAJOR": 5,
+              "OPENCV_ABI_COMPATIBILITY": 500,
+              "__CUDACC__": 1,
+              "CUDART_VERSION": 12040,
+              "__CUDACC_VER_MAJOR__": 12,
+              "__CUDACC_VER_MINOR__": 4,
+              "__CUDA_ARCH__": 120,
+              "CV_CUDEV_ARCH": 120
+            },
+            "headerDeclarationCounts": {
+              "warp/shuffle.hpp": 0,
+              "util/atomic.hpp": 12,
+              "util/simd_functions.hpp": 38
+            }
+          },
+          {
+            "configuration": "source-arch-200",
+            "preprocessorDefinitions": {
+              "CV_VERSION_MAJOR": 5,
+              "OPENCV_ABI_COMPATIBILITY": 500,
+              "__CUDACC__": 1,
+              "CUDART_VERSION": 12040,
+              "__CUDACC_VER_MAJOR__": 12,
+              "__CUDACC_VER_MINOR__": 4,
+              "__CUDA_ARCH__": 200,
+              "CV_CUDEV_ARCH": 200
+            },
+            "headerDeclarationCounts": {
+              "warp/shuffle.hpp": 0,
+              "util/atomic.hpp": 12,
+              "util/simd_functions.hpp": 38
+            }
+          },
+          {
+            "configuration": "source-arch-300",
+            "preprocessorDefinitions": {
+              "CV_VERSION_MAJOR": 5,
+              "OPENCV_ABI_COMPATIBILITY": 500,
+              "__CUDACC__": 1,
+              "CUDART_VERSION": 12040,
+              "__CUDACC_VER_MAJOR__": 12,
+              "__CUDACC_VER_MINOR__": 4,
+              "__CUDA_ARCH__": 300,
+              "CV_CUDEV_ARCH": 300
+            },
+            "headerDeclarationCounts": {
+              "warp/shuffle.hpp": 25,
+              "util/atomic.hpp": 12,
+              "util/simd_functions.hpp": 38
+            }
+          },
+          {
+            "configuration": "source-arch-750",
+            "preprocessorDefinitions": {
+              "CV_VERSION_MAJOR": 5,
+              "OPENCV_ABI_COMPATIBILITY": 500,
+              "__CUDACC__": 1,
+              "CUDART_VERSION": 12040,
+              "__CUDACC_VER_MAJOR__": 12,
+              "__CUDACC_VER_MINOR__": 4,
+              "__CUDA_ARCH__": 750,
+              "CV_CUDEV_ARCH": 750
+            },
+            "headerDeclarationCounts": {
+              "warp/shuffle.hpp": 25,
+              "util/atomic.hpp": 12,
+              "util/simd_functions.hpp": 38
+            }
+          }
+        ],
+        "sourceReviewedExtensionPath": "compatibility/opencv-5.1.0/cudev-source-reviewed-extensions.json",
+        "sourceReviewedExtensionSha256": "978cb742727262ae2095ae3926832b9df2133c4f0efa7b37dc80c475c12c5a37",
+        "sourceInventoryCounts": {
+          "templatesCount": 1100,
+          "templateParametersCount": 11,
+          "macroDefinitionsCount": 49,
+          "macroInvocationsCount": 1210,
+          "conditionalDirectivesCount": 405,
+          "macroBodyTemplateKeywordCount": 92
+        },
+        "sourceInventoryLimitation": "The pinned hdr_parser skips template declarations and does not expand declaration macros. Its declaration/callable counts cover only the non-template parser subset under the recorded source configuration. The companion source inventory records template definitions (including nested template-template parameters), function-like macro definitions/invocations and every conditional directive across all installed headers. These lexical source units overlap and are not concrete callable counts. A linked C++ CST inventory separately enumerates source function declarations, class-template members and the 44 finite local declaration generators. External using/include closure and concrete template instantiations are not semantically enumerated. No CUDA compilation, linking, device/runtime validation or complete callable parity is claimed.",
+        "completeCallableCoverageClaimed": false,
+        "cudaExecutionVerified": false,
+        "moduleDependencies": [
+          "opencv_core"
+        ],
+        "externalDependencies": [
+          "CUDA toolkit/runtime and compatible NVIDIA driver/device",
+          "CUDA/Thrust headers including tuple",
+          "OpenCV core CUDA GpuMat and Stream infrastructure"
+        ],
+        "sourceConditionBoundaries": [
+          "CV_CUDEV_ARCH >= 120",
+          "CV_CUDEV_ARCH >= 200",
+          "CV_CUDEV_ARCH >= 300",
+          "__CUDACC_VER_MAJOR__ >= 9",
+          "CUDART_VERSION < 12040"
+        ],
+        "configurationLimitation": "The recorded CUDA 12.4 / source architecture 750 defines are extraction inputs, not measured compiler or device capabilities. Header visibility does not establish build, package or runtime availability.",
+        "sourceCallableInventory": {
+          "path": "compatibility/opencv-5.1.0/cudev-source-callables.json",
+          "sha256": "26c99a8898cd975ca52844a9efbf0aa2c85ec777b38875270265d98b26f25607",
+          "counts": {
+            "callableDeclarationCount": 5463,
+            "directCallableCount": 1096,
+            "macroGeneratedCallableCount": 4367,
+            "templateContextCallableCount": 2009,
+            "definitionCount": 5412,
+            "declarationOnlyCount": 51,
+            "declarationMacroDefinitionCount": 44,
+            "expandedMacroInvocationCount": 1092,
+            "nonCallableExpansionCount": 215,
+            "reconciledParserCallableCount": 110,
+            "declarationErrorCount": 0,
+            "bodyParseDiagnosticCount": 28
+          }
+        }
+      },
+      "declarationCount": 144,
+      "callableCount": 110,
+      "rawSha256": "7af90be3fce30e0a0b15758328f92da840cc28a6bdd68dc4332af14683e9148d",
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 144
+      },
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": [],
+      "sourceInventories": [
+        {
+          "kind": "lexical",
+          "path": "compatibility/opencv-5.1.0/cudev-source-reviewed-extensions.json",
+          "sha256": "978cb742727262ae2095ae3926832b9df2133c4f0efa7b37dc80c475c12c5a37",
+          "counts": {
+            "templatesCount": 1100,
+            "templateParametersCount": 11,
+            "macroDefinitionsCount": 49,
+            "macroInvocationsCount": 1210,
+            "conditionalDirectivesCount": 405,
+            "macroBodyTemplateKeywordCount": 92
+          }
+        },
+        {
+          "kind": "callables",
+          "path": "compatibility/opencv-5.1.0/cudev-source-callables.json",
+          "sha256": "26c99a8898cd975ca52844a9efbf0aa2c85ec777b38875270265d98b26f25607",
+          "counts": {
+            "callableDeclarationCount": 5463,
+            "directCallableCount": 1096,
+            "macroGeneratedCallableCount": 4367,
+            "templateContextCallableCount": 2009,
+            "definitionCount": 5412,
+            "declarationOnlyCount": 51,
+            "declarationMacroDefinitionCount": 44,
+            "expandedMacroInvocationCount": 1092,
+            "nonCallableExpansionCount": 215,
+            "reconciledParserCallableCount": 110,
+            "declarationErrorCount": 0,
+            "bodyParseDiagnosticCount": 28
+          }
+        }
+      ]
+    },
+    {
+      "id": "fastcv",
+      "claimedSlice": "Historical fastcv parser scope refreshed against official 5.1 sources: parser-emitted declarations only; external backends, templates and runtime remain separately scoped",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/fastcv-upstream-raw.json",
+      "historicalRawSha256": "7d17c55522ea474ea041fcc46da021bbecb866791ab85e2d5333263979bcdedc",
+      "historicalClassificationPath": "compatibility/fastcv-upstream-classifications.json",
+      "historicalClassificationSha256": "214ea4195c1eaf29959aaee782c5f08908b81bdfaabab283a4ad664a443b3d9a",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv.hpp",
+        "sha256": "670037fcfc97bf12fc15adfa5b49ad99a923d8db930992a1408824bc60cf41ff"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/allocator.hpp",
+          "sha256": "fde9260931d3fb7ee0c55dff73584cad1a3b2b8959fa4178183b3eeb278b51c3"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/arithm.hpp",
+          "sha256": "385b57b86c50607f9011546c561eefe2b913d0c89351cbc882ec5e45f4ceac7b"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/bilateralFilter.hpp",
+          "sha256": "b07baf391bfa8feeb0984b862aeca9802b97e8e65353ea2e74f804f3a0a3b4da"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/blur.hpp",
+          "sha256": "54980f9d799f158a3543fa26b374c6552ce805886ebc536e3882bfaed4851457"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/blur_dsp.hpp",
+          "sha256": "3a8c210962e44fe0c4351dc6fff0b55fcc965d0538b16e6ac47e9b0fd012e7c3"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/channel.hpp",
+          "sha256": "f401a258d7f0d696397ea811380ae905b7a68b4da1d0db9d4cfc855723e3833b"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/cluster.hpp",
+          "sha256": "ab7d12ed72694562c6d5b6f5bc12e53bc0888f6ce16dced1d57d6835adb8dfe4"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/color.hpp",
+          "sha256": "51ca141ff3005e343624026817a9c217b77c3671dc18d9a5d31df0126983c8fe"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/draw.hpp",
+          "sha256": "9db09fc5cf82a1f8ab87125b621a7ed1da28358f7d20a027a90dd0e169513089"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/dsp_init.hpp",
+          "sha256": "96076ed8e1f35446d1fae80ce47d75733dd1ca70e447cb93d9f537519549580e"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/edges.hpp",
+          "sha256": "1ac6954f75cefc64ace7e3cf8013a369b37a3fd2d910b00e5e50bbf17902130d"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/edges_dsp.hpp",
+          "sha256": "1be8e71ab9d4e96e4073b91ecc867f58581dfcaefc37ea5845cb0545be0f1caf"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/fast10.hpp",
+          "sha256": "f345fd1c033d90d211b4aa3b2360cc09fd9b52c669b93a24a87ef9af5f96f070"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/fft.hpp",
+          "sha256": "bd5599c120ddf9fafe4ef30664340b516c816365774f8eb09b33cd210469836d"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/fft_dsp.hpp",
+          "sha256": "60a00822ffb338d7cb1ee38357ae5dfa78c745865cc0686b669b51091c40f29c"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/histogram.hpp",
+          "sha256": "c8031b29c283ad81062fe997a8002603a3edca80cafa10d5019ebd9662aa4733"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/hough.hpp",
+          "sha256": "02fbb6cae272268feef1fed2f64caf40b4675e33dfe72195bc817e4e435639d1"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/ipptransform.hpp",
+          "sha256": "768a40e5125de35f4f9a149c950380f7e1a8007d63a8a73529694dc8e8a37c6a"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/moments.hpp",
+          "sha256": "b05b42187ddd3928b2bf63935e8c740559bfe32b33009d0cc2f80f7eeb35e1b0"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/mser.hpp",
+          "sha256": "fc7540f9cd5e427284b1f20bae61867cb91069110950ed7c9baa31144ada3b8f"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/pyramid.hpp",
+          "sha256": "767e1d8f413eda8e42089468fb2b2e801b22ef7c237e7107f1b362aa665f006d"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/remap.hpp",
+          "sha256": "42e8bfdc45f8bf23481785d2ae1d6c940c090c38d903e8f240cbc4719cb56972"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/sad_dsp.hpp",
+          "sha256": "28fa65ede6710056a8033487061399ebe88ac3881cfc2f4273d2f6c4a0e7c11a"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/scale.hpp",
+          "sha256": "0a318f1588888bcb1eefecb7c361a3d3b2624fef6d8a2b50679e25393a02c7cc"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/shift.hpp",
+          "sha256": "b64ee19b1bcddbc84568f4b14510b972678bdf8e3d8cb61cc976614e360c6b5a"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/smooth.hpp",
+          "sha256": "003d0d4ab6e20c53e2b6bc73ae530798b3184a8553d890959d067320f06a0797"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/thresh.hpp",
+          "sha256": "6c9e3a6f664431871fa42d77b25a0a5d9204c631b99c627c0500f597e65757ee"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/thresh_dsp.hpp",
+          "sha256": "e28ffcded60047ef904f1aa88c3651015620bc02e1dea5e05ff940ae8be1ded1"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/tracking.hpp",
+          "sha256": "857ac8f91ea9ad29779e6c99b98dc6b7c226a7a31d35b881c56da107b576a520"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/warp.hpp",
+          "sha256": "7f435a248565fe7e5249b7b96103acf0c936493642671ee628ec1324ae110c09"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "parserMode": "non-wrapper-public-declarations",
+      "parserNormalization": "The broad public declaration pass is deduplicated by full exact signature; a separate hdr_parser wmode=True pass marks upstream CV_EXPORTS_W/CV_WRAP declarations by fully qualified name plus arity because the wrapper parser normalizes InputArray/OutputArray and vector types. This is upstream Python/Java wrapper annotation evidence, not a claim of a C# wrapper or bundled FastCV runtime.",
+      "moduleBuildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/CMakeLists.txt",
+          "sha256": "ba4ac76da7fb1bdb0b8e0b1cde482ef378a380fb3d04dcbf1af96c1884230ce1",
+          "reason": "Upstream fastcv is disabled unless HAVE_FASTCV is enabled; the CMake target requires an external FastCV library and OpenCV core/geometry/imgproc/features/video modules."
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/README.md",
+          "sha256": "b762ec458db78bb999248cadd0cea6eec7eecf6ec263cd4130886f2fb58567e0",
+          "reason": "The pinned upstream module documents ARM-only support and says the module cannot configure or build on x86; no Qualcomm FastCV runtime is bundled by this package."
+        }
+      ],
+      "parserEvidence": {
+        "parserDuplicateIdentities": [],
+        "parserDeclarationCountBeforeExactDeduplication": 71,
+        "upstreamWrapperAnnotatedDeclarationCount": 48,
+        "upstreamWrapperAnnotatedCallableCount": 46,
+        "umbrellaIncludes": [
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/arithm.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/bilateralFilter.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/blur.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/channel.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/cluster.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/draw.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/edges.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/fast10.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/fft.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/histogram.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/hough.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/ipptransform.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/moments.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/mser.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/pyramid.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/remap.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/scale.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/shift.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/smooth.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/thresh.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/tracking.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/warp.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/allocator.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/dsp_init.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/sad_dsp.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/thresh_dsp.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/fft_dsp.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/edges_dsp.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/blur_dsp.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/color.hpp"
+        ],
+        "moduleDependencies": [
+          "opencv_core",
+          "opencv_geometry",
+          "opencv_imgproc",
+          "opencv_features",
+          "opencv_video"
+        ],
+        "externalLibrary": "FASTCV_LIBRARY"
+      },
+      "declarationCount": 71,
+      "callableCount": 66,
+      "rawSha256": "1c5d8aaaef34577e9b9afc699c5c71bc8ccaab714a5fc0f02205e185959feadc",
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 71
+      },
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": []
+    },
+    {
+      "id": "matlab",
+      "claimedSlice": "Historical matlab parser scope refreshed against official 5.1 sources: parser-emitted declarations only; external backends, templates and runtime remain separately scoped",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/matlab-upstream-raw.json",
+      "historicalRawSha256": "6f6c82a4ff2a644c8f5421bc3cecee2593d72d5ca29794d4de7b51bd113fee56",
+      "historicalClassificationPath": "compatibility/matlab-upstream-classifications.json",
+      "historicalClassificationSha256": "77a9f2259b47246998b74041909409a0ac0ce120103028d65997067fc8dfdbc0",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+        "sha256": "312ac0f7df5406498d82909a505e3709240e0ad1947a7ca9c1e08f24dd1dd252"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+          "sha256": "312ac0f7df5406498d82909a505e3709240e0ad1947a7ca9c1e08f24dd1dd252"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/map.hpp",
+          "sha256": "81dd56dec0f4b250e46047b53e4bedf05d9762d826e1cfad0774c3de44d59daa"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+          "sha256": "1ff1e2372af3ea1ef81ac41de2c6d88809574d1b59c152ebdcee20c0f4b9a9d8"
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/transpose.hpp",
+          "sha256": "2b730a66f83ed727021e9539a8ffc6e08d6386e8cd7bc102e5f87f58d008716c"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "MATLAB_SOURCE_CPLUSPLUS": 201103
+      },
+      "parserMode": "non-wrapper-non-template-subset",
+      "parserNormalization": "Temporary copies rename __cplusplus to MATLAB_SOURCE_CPLUSPLUS=201103 and remove the L integer suffix only in its two >= 201103L directives for the Python expression evaluator. Two static names lose parser-injected return-type text; qualified conversion operators regain Bridge ownership and C++ target spelling. Two inline definitions reconcile to their class declarations. /S and /C metadata remain unchanged; upstream source files remain untouched.",
+      "moduleBuildCondition": "MATLAB_FOUND_AND_PYTHON_AND_JINJA2_AND_MATCHING_BITNESS_AND_MEX_PROBES_AND_NOT_ANDROID_APPLE_FRAMEWORK",
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/matlab/CMakeLists.txt",
+          "sha256": "e4d856a4e6f1232e415d7bb8f28632530dcac4c2a7eeafd5c7d51e3f2440eb1f",
+          "reason": "BINDINGS module; MATLAB/Python/Jinja2/platform/bitness and generator/MEX probes; optional OpenCV inputs and installed headers/+cv gateways."
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/matlab/cmake/init.cmake",
+          "sha256": "26d25243dff9cc661db7a07098a09e266c6548f285c5955fb71234dcf93ca60a",
+          "reason": "Registers the external MATLAB discovery script."
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/matlab/cmake/OpenCVFindMatlab.cmake",
+          "sha256": "cdef09543322e57819d21d5947325a1be3a0065c2cda08bfa6ade78cecaba9bb",
+          "reason": "External MATLAB installation, mex.h, mx/mex/mat libraries, MEX executable/extension and architecture discovery."
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/matlab/compile.cmake",
+          "sha256": "a43ebe566a17702f5eb87c15f59c5fe777e8b011f0092496ef7968cab937f4a4",
+          "reason": "Invokes MEX for generated gateway sources and unconditionally skips Debug configurations, despite the preceding MSVC-only comment."
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/matlab/README.md",
+          "sha256": "ae5b6382f65aa172975e4c68c5cc9cef578024c8b4aba557edb9e140aff0af14",
+          "reason": "MATLAB generator, MEX usage, scoped mxArray ownership and generated-binding installation."
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/matlab/generator/gen_matlab.py",
+          "sha256": "248019a1b1ae5c8d412cbe9c663999b35f9c54d7c4109f8e77b28f67f3a74a86",
+          "reason": "Parses available module headers and renders generated binding templates; not this installed-helper declaration map."
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/matlab/generator/parse_tree.py",
+          "sha256": "9b8df7502f6f7c95b765804aa32d30d06c4c0f754adaaeff17b41929f4cecc91",
+          "reason": "Transforms parser declarations into generator namespaces/classes/functions."
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/matlab/generator/templates/functional.cpp",
+          "sha256": "17e9e8dfa94ecfedd62819288de6b671bf234b61802d682d0e2c3098a408c61a",
+          "reason": "Generated MEX entrypoint, argument transport, exception and returned mxArray ownership boundary."
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/matlab/generator/templates/template_class_base.cpp",
+          "sha256": "e917ec60a995fc5e736281cb631add5e324acede8c8afc16289afa43e9a8b4be",
+          "reason": "Generated object dispatch and instance storage boundary."
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/matlab/generator/templates/template_function_base.cpp",
+          "sha256": "2daaeaf781fbf0815cd7a96bb9d2fe5f51180f96a5c6154db843455f9ef8d956",
+          "reason": "Generated per-function MEX gateway template."
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/matlab/test/test_compiler.cpp",
+          "sha256": "142e62c451021f58fc578eab98a2f43c18f36e431153cee14a9e7d1b43c0a428",
+          "reason": "Upstream configure-time MEX compile fixture; pinned source is not an executed probe here."
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/matlab/test/test_generator.hpp",
+          "sha256": "12b3bd069501dd2e7431241bbd8f8db80a6a776e69812e24daad67013275e0ac",
+          "reason": "Upstream configure-time generator fixture; pinned source is not executed MATLAB evidence."
+        }
+      ],
+      "parserEvidence": {
+        "parserNameRepairs": [
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+            "parserName": "cv.bridge.operator cv.Mat",
+            "correctedName": "cv.bridge.Bridge.operator cv::Mat"
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+            "parserName": "cv.bridge.operator std.string",
+            "correctedName": "cv.bridge.Bridge.operator std::string"
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+            "parserName": "cv.bridge.operator cv.Point",
+            "correctedName": "cv.bridge.Bridge.operator cv::Point"
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+            "parserName": "cv.bridge.operator cv.Point2f",
+            "correctedName": "cv.bridge.Bridge.operator cv::Point2f"
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+            "parserName": "cv.bridge.operator cv.Point2d",
+            "correctedName": "cv.bridge.Bridge.operator cv::Point2d"
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+            "parserName": "cv.bridge.operator cv.Size",
+            "correctedName": "cv.bridge.Bridge.operator cv::Size"
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+            "parserName": "cv.bridge.operator cv.Moments",
+            "correctedName": "cv.bridge.Bridge.operator cv::Moments"
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+            "parserName": "cv.bridge.operator cv.Scalar",
+            "correctedName": "cv.bridge.Bridge.operator cv::Scalar"
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+            "parserName": "cv.bridge.operator cv.Rect",
+            "correctedName": "cv.bridge.Bridge.operator cv::Rect"
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+            "parserName": "cv.bridge.operator cv.RotatedRect",
+            "correctedName": "cv.bridge.Bridge.operator cv::RotatedRect"
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+            "parserName": "cv.bridge.operator cv.TermCriteria",
+            "correctedName": "cv.bridge.Bridge.operator cv::TermCriteria"
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+            "parserName": "cv.bridge.operator cv.RNG",
+            "correctedName": "cv.bridge.Bridge.operator cv::RNG"
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+            "parserName": "matlab.void conditionalError",
+            "correctedName": "matlab.conditionalError"
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+            "parserName": "matlab.void error",
+            "correctedName": "matlab.error"
+          }
+        ],
+        "reconciledInlineDefinitions": [
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+            "identity": "cv.bridge.Bridge.operator=(const cv::Mat& mat)->Bridge&",
+            "retainedOrdinal": 9,
+            "reason": "Out-of-class inline definition reconciled to the existing class declaration; const/operator metadata is identical."
+          },
+          {
+            "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+            "identity": "cv.bridge.Bridge.toMat()->cv::Mat",
+            "retainedOrdinal": 10,
+            "reason": "Out-of-class inline definition reconciled to the existing class declaration; const/operator metadata is identical."
+          }
+        ],
+        "parserConfigurationProbes": [
+          {
+            "configuration": "source-cplusplus-199711",
+            "cplusplus": 199711,
+            "originalMxarrayDeclarationCount": 36,
+            "normalizedMxarrayDeclarationCount": 35,
+            "normalizedMapDeclarationCount": 0
+          },
+          {
+            "configuration": "source-cplusplus-201103",
+            "cplusplus": 201103,
+            "originalMxarrayDeclarationCount": 36,
+            "normalizedMxarrayDeclarationCount": 36,
+            "normalizedMapDeclarationCount": 0
+          },
+          {
+            "configuration": "source-cplusplus-201703",
+            "cplusplus": 201703,
+            "originalMxarrayDeclarationCount": 36,
+            "normalizedMxarrayDeclarationCount": 36,
+            "normalizedMapDeclarationCount": 0
+          }
+        ],
+        "sourceReviewedExtensionPath": "compatibility/opencv-5.1.0/matlab-source-reviewed-extensions.json",
+        "sourceReviewedExtensionSha256": "097910f54f9dfbc6db2b40308336d37e3cde67a5434cbeba62d76f0e45eefe59",
+        "sourceInventoryCounts": {
+          "templatesCount": 38,
+          "templateParametersCount": 0,
+          "macroDefinitionsCount": 0,
+          "conditionalDirectivesCount": 22,
+          "templateKindCounts": {
+            "alias-template": 1,
+            "class-template": 15,
+            "function-template": 22
+          }
+        },
+        "sourceInventoryLimitation": "This is the pinned hdr_parser non-template public subset, not complete MATLAB callable coverage. All four installed headers and every lexical template/conditional branch remain in a linked source inventory. The parser ignores __cplusplus checks, so temporary copies rename that identifier to a recorded numeric input. Templates, class-template members, specializations and generated +cv gateways are not enumerated as concrete APIs. A linked C++ CST separately enumerates uninstantiated source functions, class-template members and specializations, reconciles the parser callables and retains friend scope, constructor initializers and body diagnostics. External mex.h/standard-library/OpenCV include closure, C++ type checking, MATLAB/MEX build/link/runtime and complete callable parity remain unverified; the package has no MATLAB native or managed wrapper.",
+        "completeCallableCoverageClaimed": false,
+        "matlabExecutionVerified": false,
+        "optionalGeneratorModuleDependencies": [
+          "opencv_core",
+          "opencv_imgproc",
+          "opencv_ml",
+          "opencv_imgcodecs",
+          "opencv_videoio",
+          "opencv_highgui",
+          "opencv_objdetect",
+          "opencv_flann",
+          "opencv_features",
+          "opencv_photo",
+          "opencv_video",
+          "opencv_videostab",
+          "opencv_calib",
+          "opencv_geometry",
+          "opencv_stitching",
+          "opencv_superres",
+          "opencv_xfeatures2d",
+          "opencv_optflow",
+          "opencv_xphoto"
+        ],
+        "ownershipBoundaries": [
+          "MxArray from const mxArray* borrows and does not destroy the input.",
+          "MxArray copy construction duplicates the array; owned destruction calls mxDestroyArray.",
+          "releaseOwnership clears ownership before the pointer is returned to MATLAB.",
+          "Bridge Mat conversion uses deepCopyAndTranspose; generated object pointers and MEX exception handling require their own lifetime contract."
+        ],
+        "generatedBindingSurfaceIncluded": false,
+        "upstreamPlaceholderBoundaries": {
+          "noOpAssignmentDefinitionCount": 48,
+          "boolConversionReturnsZero": true,
+          "limitation": "Several Bridge conversions are upstream placeholder bodies. Header declarations and parser identities are not conversion correctness or MATLAB runtime evidence."
+        },
+        "sourceCallableInventory": {
+          "path": "compatibility/opencv-5.1.0/matlab-source-callables.json",
+          "sha256": "61ad11fbf1757d3e64d38635b31153395827851c8a75217d38ee941e8025a775",
+          "counts": {
+            "callableDeclarationCount": 242,
+            "directCallableCount": 242,
+            "templateContextCallableCount": 39,
+            "definitionCount": 238,
+            "declarationOnlyCount": 4,
+            "friendFunctionCount": 1,
+            "conditionalScopeBoundaryCount": 1,
+            "constructorInitializerCount": 10,
+            "reconciledParserCallableCount": 185,
+            "declarationErrorCount": 0,
+            "bodyParseDiagnosticCount": 1
+          }
+        }
+      },
+      "declarationCount": 190,
+      "callableCount": 185,
+      "rawSha256": "94640ffdecf734fd14351afc9d0c202169a0a6a5e797c41def77ad18009cec12",
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 190
+      },
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": [],
+      "sourceInventories": [
+        {
+          "kind": "lexical",
+          "path": "compatibility/opencv-5.1.0/matlab-source-reviewed-extensions.json",
+          "sha256": "097910f54f9dfbc6db2b40308336d37e3cde67a5434cbeba62d76f0e45eefe59",
+          "counts": {
+            "templatesCount": 38,
+            "templateParametersCount": 0,
+            "macroDefinitionsCount": 0,
+            "conditionalDirectivesCount": 22,
+            "templateKindCounts": {
+              "alias-template": 1,
+              "class-template": 15,
+              "function-template": 22
+            }
+          }
+        },
+        {
+          "kind": "callables",
+          "path": "compatibility/opencv-5.1.0/matlab-source-callables.json",
+          "sha256": "61ad11fbf1757d3e64d38635b31153395827851c8a75217d38ee941e8025a775",
+          "counts": {
+            "callableDeclarationCount": 242,
+            "directCallableCount": 242,
+            "templateContextCallableCount": 39,
+            "definitionCount": 238,
+            "declarationOnlyCount": 4,
+            "friendFunctionCount": 1,
+            "conditionalScopeBoundaryCount": 1,
+            "constructorInitializerCount": 10,
+            "reconciledParserCallableCount": 185,
+            "declarationErrorCount": 0,
+            "bodyParseDiagnosticCount": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "ovis",
+      "claimedSlice": "Historical ovis parser scope refreshed against official 5.1 sources: parser-emitted declarations only; external backends, templates and runtime remain separately scoped",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/ovis-upstream-raw.json",
+      "historicalRawSha256": "b8bdb0604139c6951a336a7a160c1e703d5c6aa67cba7efa915bdec2f2cef415",
+      "historicalClassificationPath": "compatibility/ovis-upstream-classifications.json",
+      "historicalClassificationSha256": "b380c19abf43b5d3780ebfbcb78b8a15c7608660849f18b146dbb8eb4e668820",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/ovis/include/opencv2/ovis.hpp",
+        "sha256": "8c05eb1a877c8f6603b5a1122ac437b065a9916f8b49433d215f9e0035c838d6"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/ovis/include/opencv2/ovis.hpp",
+          "sha256": "8c05eb1a877c8f6603b5a1122ac437b065a9916f8b49433d215f9e0035c838d6"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "moduleBuildCondition": "HAVE_OGRE_GE_1_11_5_AND_REQUIRED_OPENCV_MODULES_PRESENT",
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/ovis/CMakeLists.txt",
+          "sha256": "2757e492286d58019ac47d4d1035010d20b39df2410a7c2d0ec95dc251edcf6e",
+          "reason": "Upstream OVIS activation requires the external OGRE package at version 1.11.5 or later; parser declarations are not gated in the public header."
+        }
+      ],
+      "declarationCount": 42,
+      "callableCount": 38,
+      "rawSha256": "4b9195b2fdad5ffc6e5ec209b39e4a68831302c8fed333b9bf1bc3000d20db58",
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 42
+      },
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": []
+    },
+    {
+      "id": "sfm",
+      "claimedSlice": "Historical sfm parser scope refreshed against official 5.1 sources: parser-emitted declarations only; external backends, templates and runtime remain separately scoped",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/sfm-upstream-raw.json",
+      "historicalRawSha256": "98ba41469d78fc24b38e0720d84aa134a8d6c33b3ceb2dba3b9080d7d8b61766",
+      "historicalClassificationPath": "compatibility/sfm-upstream-classifications.json",
+      "historicalClassificationSha256": "0dbcb672260361601004eaf682e72b72b3eb3b6047aafd9f52b0f9942dc7c58e",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/sfm/include/opencv2/sfm.hpp",
+        "sha256": "2bc9c796ed0ca8c1d6c182529bcb61d6185342194cb51b848992eb25e1553c87"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/sfm/include/opencv2/sfm.hpp",
+          "sha256": "2bc9c796ed0ca8c1d6c182529bcb61d6185342194cb51b848992eb25e1553c87",
+          "requiresCeres": false
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/sfm/include/opencv2/sfm/conditioning.hpp",
+          "sha256": "0b829e796758bbbf480fe3b2cea4465b0c40f210d5c4da743c3700d51dfc7662",
+          "requiresCeres": false
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/sfm/include/opencv2/sfm/fundamental.hpp",
+          "sha256": "1a6225be19eb41284bfea1baf89cad9c30dde2ab7b3697f494280310c59cf19e",
+          "requiresCeres": false
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/sfm/include/opencv2/sfm/io.hpp",
+          "sha256": "8cb26ffd8932d70a383a1703959c6d96692d3f3f6d039ab13aa77491028c147c",
+          "requiresCeres": false
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/sfm/include/opencv2/sfm/numeric.hpp",
+          "sha256": "c6ef38431e3d5600a7a34fd9e7b28b6dd595d175ac478bc95f7baa8d2ea257dd",
+          "requiresCeres": false
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/sfm/include/opencv2/sfm/projection.hpp",
+          "sha256": "265ea5b13dc1e5202c53f97fa51e525629b0c66ba3c87bd18a5c3a35e4574e53",
+          "requiresCeres": false
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/sfm/include/opencv2/sfm/reconstruct.hpp",
+          "sha256": "db18afe6ddbefadbdfa62cb9c4e00d11d5c76fedc9c512ce7bfabd7406213cb3",
+          "requiresCeres": true
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/sfm/include/opencv2/sfm/robust.hpp",
+          "sha256": "925a99d0fa04e02ca4b45e80a13ee2c6be15e6f4c4e698524056803f4cefbecf",
+          "requiresCeres": false
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp",
+          "sha256": "636046f1fcd231a8911eafffd919e48a0a21d24d95bd94ee18bf70bbc0335532",
+          "requiresCeres": true
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/sfm/include/opencv2/sfm/triangulation.hpp",
+          "sha256": "7d6930852c730f217a2ec64e235ece022a410962c16caceba5acd76d799aea41",
+          "requiresCeres": false
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "CERES_FOUND": 1
+      },
+      "parserMode": "non-wrapper-public-declarations",
+      "parserNormalization": "No source normalization or identity deduplication is needed. All ten installed headers remain in scope, including standalone robust.hpp and the optional Ceres headers. Anonymous enums retain exact parser identities and value lists.",
+      "moduleBuildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK",
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/sfm/CMakeLists.txt",
+          "sha256": "bf96f2606119b940146cba0cb5701f07b9f9077ba9d7d3429f9667fd180b6d6d",
+          "reason": "Eigen and Glog/Gflags compile/link probe; optional Ceres definition and module dependencies."
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/sfm/src/libmv_light/libmv/CMakeLists.txt",
+          "sha256": "088bbd395b7f4a38c595a3a52b67a32775ec6e293bc6cb6be67971d443f20925",
+          "reason": "simple_pipeline subdirectory is built only when Ceres_FOUND is true."
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/sfm/src/libmv_light/libmv/simple_pipeline/CMakeLists.txt",
+          "sha256": "673479d17c930e85444b40037be241f203a185832d8d22401e767e2c49e6ed3d",
+          "reason": "External CERES_LIBRARIES linkage for the reconstruction pipeline."
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/sfm/src/reconstruct.cpp",
+          "sha256": "3f85036e2f062979cb6db4c35c33b7b40176743fd59b728e5bf4ade25078c077",
+          "reason": "Reconstruction definitions require CERES_FOUND; all four affine branches raise StsNotImplemented."
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/sfm/src/simple_pipeline.cpp",
+          "sha256": "2b37f41ef49bd2a10fc2001a05ae57a8306e73093aec017776c435293ccd28ba",
+          "reason": "Pipeline implementation definitions require CERES_FOUND even though its direct header is unguarded."
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/sfm/src/fundamental.cpp",
+          "sha256": "53a6e8a55d4daa31bc3a701fbb7eb649ad583b8337a24b10fb9f02c62203260f",
+          "reason": "The computeOrientation implementation retains an upstream TODO: finish implementation."
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/sfm/README.md",
+          "sha256": "0e760ff7c527ab7b0356666536f81f6349072ff0698db6920013e0bbdfea6b79",
+          "reason": "Documentary Linux/GNU platform advice, external dependencies and caller image/track data."
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/sfm/tutorials/sfm_installation/sfm_installation.markdown",
+          "sha256": "3f6fb494eba777e59c029db5738b24eeff69cc72fc8c5c6ee9955a7c2563e344",
+          "reason": "Eigen/Glog/Gflags installation and Ceres reconstruction requirement."
+        }
+      ],
+      "parserEvidence": {
+        "umbrellaIncludes": [
+          "opencv-source/opencv_contrib-5.1.0/modules/sfm/include/opencv2/sfm/conditioning.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/sfm/include/opencv2/sfm/fundamental.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/sfm/include/opencv2/sfm/io.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/sfm/include/opencv2/sfm/numeric.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/sfm/include/opencv2/sfm/projection.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/sfm/include/opencv2/sfm/triangulation.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/sfm/include/opencv2/sfm/reconstruct.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp"
+        ],
+        "standaloneInstalledHeaders": [
+          "opencv-source/opencv_contrib-5.1.0/modules/sfm/include/opencv2/sfm/robust.hpp"
+        ],
+        "ceresConditionalHeaders": [
+          "opencv-source/opencv_contrib-5.1.0/modules/sfm/include/opencv2/sfm/reconstruct.hpp",
+          "opencv-source/opencv_contrib-5.1.0/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp"
+        ],
+        "ceresHeaderGuardProbes": [
+          {
+            "configuration": "undefined",
+            "preprocessorDefinitions": {
+              "CV_VERSION_MAJOR": 5,
+              "OPENCV_ABI_COMPATIBILITY": 500
+            },
+            "reconstructHeaderDeclarationCount": 0
+          },
+          {
+            "configuration": "defined-zero",
+            "preprocessorDefinitions": {
+              "CV_VERSION_MAJOR": 5,
+              "OPENCV_ABI_COMPATIBILITY": 500,
+              "CERES_FOUND": 0
+            },
+            "reconstructHeaderDeclarationCount": 4
+          },
+          {
+            "configuration": "defined-one",
+            "preprocessorDefinitions": {
+              "CV_VERSION_MAJOR": 5,
+              "OPENCV_ABI_COMPATIBILITY": 500,
+              "CERES_FOUND": 1
+            },
+            "reconstructHeaderDeclarationCount": 4
+          }
+        ],
+        "ceresHeaderGuardLimitation": "reconstruct.hpp tests defined(CERES_FOUND), so defining the macro as zero still emits declarations. sfm.hpp and implementation files test its value; direct header visibility is not linkable Ceres support. simple_pipeline.hpp has no Ceres guard of its own.",
+        "parserDuplicateIdentities": [],
+        "baseDeclarationCount": 28,
+        "ceresDeclarationCount": 34,
+        "ceresCallableCount": 28,
+        "moduleDependencies": [
+          "opencv_core",
+          "opencv_geometry",
+          "opencv_features",
+          "opencv_xfeatures2d",
+          "opencv_imgcodecs"
+        ],
+        "ceresBuildCondition": "HAVE_EIGEN_AND_SFM_DEPS_OK_AND_CERES_FOUND",
+        "readmePlatformAdvice": "The pinned README says Linux/GNU systems only; CMake has no corresponding unconditional platform disable and contains Windows-specific handling. Neither establishes verified package platform support.",
+        "affineReconstructionNotImplementedBranchCount": 4,
+        "upstreamRuntimeLimitations": [
+          "The upstream computeOrientation implementation is unfinished.",
+          "The four reconstruct overloads reject their affine reconstruction branch with StsNotImplemented."
+        ]
+      },
+      "declarationCount": 62,
+      "callableCount": 55,
+      "rawSha256": "e194a17ee5e444a063b535b4a8fee8eef6cffe7fcbc4e6240dc9254a46e8d90e",
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 62
+      },
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": []
+    },
+    {
+      "id": "viz",
+      "claimedSlice": "Historical viz parser scope refreshed against official 5.1 sources: parser-emitted declarations only; external backends, templates and runtime remain separately scoped",
+      "sourceRepository": "opencv_contrib",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/viz-upstream-raw.json",
+      "historicalRawSha256": "5c232834a9a957797d281e247406efb216e5386cec6ae7e35183783b5ae54a6e",
+      "historicalClassificationPath": "compatibility/viz-upstream-classifications.json",
+      "historicalClassificationSha256": "7d6380b8a5d2f3f13f939a90507ce2ec6170580279ded68fab6025825cb203c7",
+      "primaryHeader": {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/viz/include/opencv2/viz.hpp",
+        "sha256": "f1e9aedb81fe0967ebb0a2b524706f89ba548d8b14a3d883373f1df53efe685d"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/viz/include/opencv2/viz/types.hpp",
+          "sha256": "a7f7851da62a2d0168139df69f9562feac2140992602cc7d8b6e3e12f9d4531d",
+          "parserDeclarationCount": 108
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/viz/include/opencv2/viz/viz3d.hpp",
+          "sha256": "f487e03ff244d55d582028b1ba40e8a3fa0ca11125ef75a431a4fd4c0b9a030e",
+          "parserDeclarationCount": 44
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/viz/include/opencv2/viz/vizcore.hpp",
+          "sha256": "1a7e30f880adb8b61f085ffb22e985d12e0c0af39b19d48e1e6e9ad4024ebdcb",
+          "parserDeclarationCount": 15
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/viz/include/opencv2/viz/widget_accessor.hpp",
+          "sha256": "a63e171e411037a14c380cc0e21aa6b939fe292d92c8732134fb920fbf87c93d",
+          "parserDeclarationCount": 3
+        },
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/viz/include/opencv2/viz/widgets.hpp",
+          "sha256": "06c57cb3e2728b3ce68b1264fb69710c54403bf2a2ce576ca66f1cf1a06971b5",
+          "parserDeclarationCount": 101
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5,
+        "OPENCV_ABI_COMPATIBILITY": 500,
+        "HAVE_OPENCV_FLANN": 1,
+        "HAVE_OPENCV_DNN": 1
+      },
+      "parserMode": "non-wrapper-public-declarations",
+      "parserNormalization": "non-wrapper parser mode retains public viz classes and methods using CV_EXPORTS; the two inline Color constructor definitions duplicated by hdr_parser are deduplicated by exact identity; source/header hashes remain pinned",
+      "moduleBuildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+      "compatibilityHeaders": [
+        {
+          "path": "opencv-source/opencv_contrib-5.1.0/modules/viz/CMakeLists.txt",
+          "sha256": "73757b86d1a8f4d1626c76e9d752e620709f240b1d009fdbb415b30e6b19d3bd",
+          "reason": "Upstream viz activation requires an external VTK installation and may be disabled for static-library dependency conflicts; parser declarations are not gated in the public headers."
+        }
+      ],
+      "parserEvidence": {
+        "parserDuplicateIdentities": [
+          "cv.viz.Color.Color()->",
+          "cv.viz.Color.Color(const Scalar& color)->"
+        ],
+        "parserHeaderPartitionsBeforeExactDeduplication": [
+          {
+            "path": "opencv-source/opencv_contrib-5.1.0/modules/viz/include/opencv2/viz/types.hpp",
+            "sha256": "a7f7851da62a2d0168139df69f9562feac2140992602cc7d8b6e3e12f9d4531d",
+            "startOrdinal": 0,
+            "declarationCount": 108
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.1.0/modules/viz/include/opencv2/viz/viz3d.hpp",
+            "sha256": "f487e03ff244d55d582028b1ba40e8a3fa0ca11125ef75a431a4fd4c0b9a030e",
+            "startOrdinal": 108,
+            "declarationCount": 44
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.1.0/modules/viz/include/opencv2/viz/vizcore.hpp",
+            "sha256": "1a7e30f880adb8b61f085ffb22e985d12e0c0af39b19d48e1e6e9ad4024ebdcb",
+            "startOrdinal": 152,
+            "declarationCount": 15
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.1.0/modules/viz/include/opencv2/viz/widget_accessor.hpp",
+            "sha256": "a63e171e411037a14c380cc0e21aa6b939fe292d92c8732134fb920fbf87c93d",
+            "startOrdinal": 167,
+            "declarationCount": 3
+          },
+          {
+            "path": "opencv-source/opencv_contrib-5.1.0/modules/viz/include/opencv2/viz/widgets.hpp",
+            "sha256": "06c57cb3e2728b3ce68b1264fb69710c54403bf2a2ce576ca66f1cf1a06971b5",
+            "startOrdinal": 170,
+            "declarationCount": 101
+          }
+        ]
+      },
+      "declarationCount": 269,
+      "callableCount": 225,
+      "rawSha256": "a33346320518722099d34bdb117713ad5b89ad7c6edd116f6ff62dec45c99878",
+      "expectedDelta": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "retained": 269
+      },
+      "addedReviews": [],
+      "removedReviews": [],
+      "changedReviews": []
     }
   ],
   "repositoryWideUpstreamParityClaimed": false,

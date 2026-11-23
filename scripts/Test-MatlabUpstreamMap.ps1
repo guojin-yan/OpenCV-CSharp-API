@@ -1,15 +1,37 @@
-param([string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path)
+param(
+    [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
+    [ValidateSet('5.0.0','5.1.0')][string]$UpstreamVersion = '5.0.0',
+    [string]$EvidenceDirectory = ''
+)
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-& (Join-Path $PSScriptRoot 'Generate-MatlabUpstreamMap.ps1') -RepositoryRoot $repo -Check
-$raw = Get-Content (Join-Path $repo 'compatibility/matlab-upstream-raw.json') -Raw | ConvertFrom-Json
-$summary = Get-Content (Join-Path $repo 'compatibility/matlab-upstream-summary.json') -Raw | ConvertFrom-Json
-$map = Get-Content (Join-Path $repo 'compatibility/matlab-upstream-classifications.json') -Raw | ConvertFrom-Json
-$extensionPath = Join-Path $repo 'compatibility/matlab-source-reviewed-extensions.json'
+$evidencePrefix = if ($UpstreamVersion -eq '5.1.0') { 'compatibility/opencv-5.1.0/' } else { 'compatibility/' }
+if ([string]::IsNullOrWhiteSpace($EvidenceDirectory)) { $EvidenceDirectory = Join-Path $repo $evidencePrefix }
+if ($UpstreamVersion -eq '5.0.0') { & (Join-Path $PSScriptRoot 'Generate-MatlabUpstreamMap.ps1') -RepositoryRoot $repo -Check }
+$raw = Get-Content (Join-Path $EvidenceDirectory 'matlab-upstream-raw.json') -Raw | ConvertFrom-Json
+$summary = Get-Content (Join-Path $EvidenceDirectory 'matlab-upstream-summary.json') -Raw | ConvertFrom-Json
+$map = Get-Content (Join-Path $EvidenceDirectory 'matlab-upstream-classifications.json') -Raw | ConvertFrom-Json
+if ([string]$raw.upstreamOpenCvVersion -cne $UpstreamVersion -or [string]$summary.upstreamOpenCvVersion -cne $UpstreamVersion -or [string]$map.upstreamOpenCvVersion -cne $UpstreamVersion) { throw 'Source contract revision drifted.' }
+if ($UpstreamVersion -eq '5.1.0') {
+    # Adapt only supplemental schema fields; current rows and decisions remain
+    # the shared generator's actual output, checked independently below.
+    foreach ($pair in @(@{ Target = $summary; Path = 'compatibility/matlab-upstream-summary.json' }, @{ Target = $map; Path = 'compatibility/matlab-upstream-classifications.json' })) {
+        $legacy = Get-Content (Join-Path $repo $pair.Path) -Raw | ConvertFrom-Json
+        foreach ($property in $legacy.PSObject.Properties) {
+            if ($null -eq $pair.Target.PSObject.Properties[$property.Name]) { $pair.Target | Add-Member -NotePropertyName $property.Name -NotePropertyValue $property.Value }
+        }
+    }
+    foreach ($property in $raw.parserEvidence.PSObject.Properties) {
+        $raw | Add-Member -NotePropertyName $property.Name -NotePropertyValue $property.Value -Force
+        $summary | Add-Member -NotePropertyName $property.Name -NotePropertyValue $property.Value -Force
+    }
+}
+$expectedParserSha = if ($UpstreamVersion -eq '5.1.0') { '867e3de5ad45fd3996e8c9097ffc47f13c8651e20dda2318d70e273262c8dcee' } else { '619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702' }
+$extensionPath = Join-Path $EvidenceDirectory 'matlab-source-reviewed-extensions.json'
 $extension = Get-Content $extensionPath -Raw | ConvertFrom-Json
-$prefix = 'opencv-source/opencv_contrib-5.0.0/modules/matlab/'
+$prefix = "opencv-source/opencv_contrib-$UpstreamVersion/modules/matlab/"
 $modulePath = Join-Path $repo "../$prefix"
 $includePath = Join-Path $modulePath 'include/opencv2/matlab'
 $cmake = Get-Content (Join-Path $modulePath 'CMakeLists.txt') -Raw
@@ -26,6 +48,10 @@ $directivePattern = '(?m)^[ \t]*#(?:[^\n]*\\\n)*[^\n]*(?:\n|$)'
 
 function Hash-Text([string]$Text) {
     [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($Text))).ToLowerInvariant()
+}
+function Hash-Source([string]$Path) {
+    if ($UpstreamVersion -eq '5.1.0') { return Hash-Text ([IO.File]::ReadAllText($Path).Replace("`r`n", "`n").Replace("`r", "`n")) }
+    (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant()
 }
 function Mask-Text([string]$Text, [bool]$Literals = $true) {
     [regex]::Replace($Text, $lexemePattern.Trim(), [Text.RegularExpressions.MatchEvaluator]{ param($match)
@@ -80,7 +106,7 @@ function Assert-MatlabData {
 
     $installed = @(Get-ChildItem -LiteralPath $includePath -Recurse -File -Filter '*.hpp' | ForEach-Object Name | Sort-Object)
     if (($installed -join '|') -cne ($names -join '|') -or @($Raw.sourceHeaders).Count -ne 4 -or @($Extension.headers).Count -ne 4 -or [int]$Raw.declarationCount -ne 190 -or @($Raw.declarations).Count -ne 190 -or @($Map.declarations).Count -ne 190) { throw 'MATLAB installed-header/parser subset scope drifted.' }
-    if ([string]$Raw.headerPath -cne "${prefix}include/opencv2/matlab/bridge.hpp" -or [string]$Raw.parserMode -cne 'non-wrapper-non-template-subset' -or [string]$Raw.parserPath -cne 'opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py' -or [string]$Raw.parserSha256 -cne '619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702') { throw 'MATLAB pinned parser identity drifted.' }
+    if ([string]$Raw.headerPath -cne "${prefix}include/opencv2/matlab/bridge.hpp" -or [string]$Raw.parserMode -cne 'non-wrapper-non-template-subset' -or [string]$Raw.parserPath -cne "opencv-source/opencv-$UpstreamVersion/modules/python/src2/hdr_parser.py" -or [string]$Raw.parserSha256 -cne $expectedParserSha) { throw 'MATLAB pinned parser identity drifted.' }
     if (@($Raw.preprocessorDefinitions.PSObject.Properties).Count -ne 3 -or [int]$Raw.preprocessorDefinitions.MATLAB_SOURCE_CPLUSPLUS -ne 201103 -or [int]$Raw.preprocessorDefinitions.CV_VERSION_MAJOR -ne 5 -or [int]$Raw.preprocessorDefinitions.OPENCV_ABI_COMPATIBILITY -ne 500 -or [string]$Raw.parserNormalization -notmatch 'L integer suffix') { throw 'MATLAB temporary C++ source configuration drifted.' }
     $counts, $callableCounts, $templateCounts, $conditionCounts = @(154,0,36,0), @(153,0,32,0), @(9,2,23,4), @(2,5,11,4)
     $ordinal = 0
@@ -110,12 +136,12 @@ function Assert-MatlabData {
     $compatibilityNames = @('CMakeLists.txt','cmake/init.cmake','cmake/OpenCVFindMatlab.cmake','compile.cmake','README.md','generator/gen_matlab.py','generator/parse_tree.py','generator/templates/functional.cpp','generator/templates/template_class_base.cpp','generator/templates/template_function_base.cpp','test/test_compiler.cpp','test/test_generator.hpp')
     if ((@($Raw.compatibilityHeaders | ForEach-Object path) -join '|') -cne (@($compatibilityNames | ForEach-Object { "$prefix$_" }) -join '|')) { throw 'MATLAB build/generator compatibility source closure drifted.' }
     foreach ($source in @(@{ path = $Raw.headerPath; sha256 = $Raw.headerSha256 }, @{ path = $Raw.parserPath; sha256 = $Raw.parserSha256 }) + @($Raw.sourceHeaders) + @($Raw.compatibilityHeaders)) {
-        if ([string]$source.sha256 -cne (Get-FileHash -LiteralPath (Join-Path $repo "../$($source.path)") -Algorithm SHA256).Hash.ToLowerInvariant()) { throw 'MATLAB upstream source hash drifted.' }
+        if ([string]$source.sha256 -cne (Hash-Source (Join-Path $repo "../$($source.path)"))) { throw 'MATLAB upstream source hash drifted.' }
     }
     foreach ($countObject in @($Raw.sourceInventoryCounts, $Summary.sourceInventoryCounts, $Extension.counts)) {
         if ([int]$countObject.templatesCount -ne 38 -or [int]$countObject.templateParametersCount -ne 0 -or [int]$countObject.macroDefinitionsCount -ne 0 -or [int]$countObject.conditionalDirectivesCount -ne 22 -or [int]$countObject.templateKindCounts.'class-template' -ne 15 -or [int]$countObject.templateKindCounts.'function-template' -ne 22 -or [int]$countObject.templateKindCounts.'alias-template' -ne 1) { throw 'MATLAB source inventory totals drifted.' }
     }
-    if ([string]$Raw.sourceReviewedExtensionPath -cne 'compatibility/matlab-source-reviewed-extensions.json' -or [string]$Summary.sourceReviewedExtensionPath -cne [string]$Raw.sourceReviewedExtensionPath -or [string]$Raw.sourceReviewedExtensionSha256 -cne (Get-FileHash $extensionPath -Algorithm SHA256).Hash.ToLowerInvariant() -or [string]$Summary.sourceReviewedExtensionSha256 -cne [string]$Raw.sourceReviewedExtensionSha256) { throw 'MATLAB lexical hash binding drifted.' }
+    if ([string]$Raw.sourceReviewedExtensionPath -cne "${evidencePrefix}matlab-source-reviewed-extensions.json" -or [string]$Summary.sourceReviewedExtensionPath -cne [string]$Raw.sourceReviewedExtensionPath -or [string]$Raw.sourceReviewedExtensionSha256 -cne (Get-FileHash $extensionPath -Algorithm SHA256).Hash.ToLowerInvariant() -or [string]$Summary.sourceReviewedExtensionSha256 -cne [string]$Raw.sourceReviewedExtensionSha256) { throw 'MATLAB lexical hash binding drifted.' }
     $targets = @('cv::Mat','std::string','cv::Point','cv::Point2f','cv::Point2d','cv::Size','cv::Moments','cv::Scalar','cv::Rect','cv::RotatedRect','cv::TermCriteria','cv::RNG')
     if (@($Raw.parserNameRepairs).Count -ne 14) { throw 'MATLAB parser name repair count drifted.' }
     for ($i = 0; $i -lt 12; $i++) {
@@ -183,6 +209,6 @@ foreach ($fixture in $fixtures) {
     try { Assert-MatlabData $value.raw $value.summary $value.map $value.extension } catch { $rejected = $true }
     if (-not $rejected) { throw "MATLAB guard accepted negative fixture: $($fixture.Name)" }
 }
-$sourceFixtureCount = & (Join-Path $PSScriptRoot 'Test-MatlabSourceCallables.ps1') -RepositoryRoot $repo -SourceCache $sourceCache -Extension $extension -Raw $raw -Summary $summary
-if ($fixtures.Count + $sourceFixtureCount -ne [int]$summary.negativeFixtureCount) { throw 'MATLAB negative fixture evidence count drifted.' }
+$sourceFixtureCount = & (Join-Path $PSScriptRoot 'Test-MatlabSourceCallables.ps1') -RepositoryRoot $repo -SourceCache $sourceCache -Extension $extension -Raw $raw -Summary $summary -UpstreamVersion $UpstreamVersion -EvidenceDirectory $EvidenceDirectory
+if ($fixtures.Count + $sourceFixtureCount -ne $(if ($UpstreamVersion -eq '5.0.0') { [int]$summary.negativeFixtureCount } else { 36 })) { throw 'MATLAB negative fixture evidence count drifted.' }
 Write-Host "MATLAB_UPSTREAM_MAP_CONTRACT_OK parserDeclarations=190 parserCallable=185 omitted=185 missing=0 headers=4 templates=38 conditionals=22 fixtures=$($fixtures.Count + $sourceFixtureCount) completeCallableCoverage=false matlabVerified=false"

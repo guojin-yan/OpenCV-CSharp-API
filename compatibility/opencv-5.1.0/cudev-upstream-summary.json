@@ -1,0 +1,293 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/UpstreamMapRefresh",
+  "upstreamOpenCvVersion": "5.1.0",
+  "upstreamCommit": "e4f78fbcf1a773fbed69e14500e8b734963eb585",
+  "module": "cudev",
+  "claimedSlice": "Historical cudev parser scope refreshed against official 5.1 sources: parser-emitted declarations only; external backends, templates and runtime remain separately scoped",
+  "sourceHashPolicy": "UTF-8 source with CRLF/CR normalized to LF; no trimming",
+  "rawExtractionPath": "compatibility/opencv-5.1.0/cudev-upstream-raw.json",
+  "classificationPath": "compatibility/opencv-5.1.0/cudev-upstream-classifications.json",
+  "mappingPath": "compatibility/opencv-5.1.0/cudev-upstream-map.txt",
+  "deltaPath": "compatibility/opencv-5.1.0/cudev-upstream-delta.json",
+  "familyInventoryPath": "compatibility/opencv-5.1.0/cudev-implemented-families.json",
+  "rawSha256": "7af90be3fce30e0a0b15758328f92da840cc28a6bdd68dc4332af14683e9148d",
+  "classificationSha256": "48e7e58a6863ca65f4a5e4a4a6d8a2a48335784c0e18bea83fb71849738585b5",
+  "mappingSha256": "229f87b0bb3310e8db71a31921e76d1afa8eb0e52c011d6f4bfdff69a83d525c",
+  "deltaSha256": "5a2bcb2efc065a117af37922565fb81268b735bac5cd57f9789eab3f78aa7b4d",
+  "familyInventorySha256": "810a890c20f39e11b66c30580681830e494094613c48e862b5ca1788dd9e601c",
+  "historicalRawSha256": "8531bec0873c26d47b098664b02f371950a75722c658a6cbf7696ff4be94b588",
+  "historicalClassificationSha256": "2effdf5b6d6acf7ca0c9d1f4c25bfab55e0652e77eb3cb839460ced7419b6ce3",
+  "sourceHeaderCount": 76,
+  "declarationCount": 144,
+  "callableCount": 110,
+  "classCount": 24,
+  "enumCount": 10,
+  "classificationCounts": {
+    "implemented": 0,
+    "intentionally-omitted": 110,
+    "missing": 0,
+    "non-callable-metadata": 34,
+    "unsupported": 0,
+    "upstream-conditional": 0
+  },
+  "deltaCounts": {
+    "added": 0,
+    "removed": 0,
+    "changed": 0,
+    "retained": 144
+  },
+  "negativeFixtureCount": 50,
+  "nativeEvidenceCount": 0,
+  "managedEvidenceCount": 0,
+  "repositoryWideUpstreamParityClaimed": false,
+  "completeCppParityClaimed": false,
+  "newRuntimeBehaviorCertified": false,
+  "sourceRepository": "opencv_contrib",
+  "upstreamContribCommit": "b67a855188a3d683813731010f6d39ac614733a4",
+  "parserMode": "non-wrapper-non-template-subset",
+  "parserNormalization": "CUDA attribute tokens are removed only in temporary copies. Thirteen namespace-scope static parser names have return-type contamination repaired after parsing; /S metadata is retained. Static/const qualifiers, operators and upstream source hashes are retained. Templates and declaration macros remain outside the pinned parser subset.",
+  "moduleBuildCondition": "HAVE_CUDA",
+  "parserEvidence": {
+    "staticParserNameRepairs": [
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/functional/detail/color_cvt.hpp",
+        "parserName": "cv.cudev.color_cvt_detail.int LabCbrt_b",
+        "correctedName": "cv.cudev.color_cvt_detail.LabCbrt_b"
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/functional/detail/color_cvt.hpp",
+        "parserName": "cv.cudev.color_cvt_detail.float splineInterpolate",
+        "correctedName": "cv.cudev.color_cvt_detail.splineInterpolate"
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/detail/integral.hpp",
+        "parserName": "cv.cudev.integral_detail.uchar4 int_to_uchar4",
+        "correctedName": "cv.cudev.integral_detail.int_to_uchar4"
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/detail/integral.hpp",
+        "parserName": "cv.cudev.integral_detail.void horisontal_pass_8u_shfl_kernel",
+        "correctedName": "cv.cudev.integral_detail.horisontal_pass_8u_shfl_kernel"
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/detail/integral.hpp",
+        "parserName": "cv.cudev.integral_detail.void horisontal_pass_8u_shfl",
+        "correctedName": "cv.cudev.integral_detail.horisontal_pass_8u_shfl"
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/grid/detail/integral.hpp",
+        "parserName": "cv.cudev.integral_detail.void integral",
+        "correctedName": "cv.cudev.integral_detail.integral"
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/ptr2d/warping.hpp",
+        "parserName": "cv.cudev.AffineMapPtrSz affineMap",
+        "correctedName": "cv.cudev.affineMap"
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/ptr2d/warping.hpp",
+        "parserName": "cv.cudev.PerspectiveMapPtrSz perspectiveMap",
+        "correctedName": "cv.cudev.perspectiveMap"
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+        "parserName": "cv.cudev.double atomicAdd",
+        "correctedName": "cv.cudev.atomicAdd"
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+        "parserName": "cv.cudev.float atomicMin",
+        "correctedName": "cv.cudev.atomicMin"
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+        "parserName": "cv.cudev.double atomicMin",
+        "correctedName": "cv.cudev.atomicMin"
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+        "parserName": "cv.cudev.float atomicMax",
+        "correctedName": "cv.cudev.atomicMax"
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/cudev/include/opencv2/cudev/util/atomic.hpp",
+        "parserName": "cv.cudev.double atomicMax",
+        "correctedName": "cv.cudev.atomicMax"
+      }
+    ],
+    "parserDuplicateIdentities": [],
+    "parserConfigurationProbes": [
+      {
+        "configuration": "source-arch-0",
+        "preprocessorDefinitions": {
+          "CV_VERSION_MAJOR": 5,
+          "OPENCV_ABI_COMPATIBILITY": 500,
+          "__CUDACC__": 1,
+          "CUDART_VERSION": 12040,
+          "__CUDACC_VER_MAJOR__": 12,
+          "__CUDACC_VER_MINOR__": 4,
+          "CV_CUDEV_ARCH": 0
+        },
+        "headerDeclarationCounts": {
+          "warp/shuffle.hpp": 0,
+          "util/atomic.hpp": 12,
+          "util/simd_functions.hpp": 38
+        }
+      },
+      {
+        "configuration": "source-arch-120",
+        "preprocessorDefinitions": {
+          "CV_VERSION_MAJOR": 5,
+          "OPENCV_ABI_COMPATIBILITY": 500,
+          "__CUDACC__": 1,
+          "CUDART_VERSION": 12040,
+          "__CUDACC_VER_MAJOR__": 12,
+          "__CUDACC_VER_MINOR__": 4,
+          "__CUDA_ARCH__": 120,
+          "CV_CUDEV_ARCH": 120
+        },
+        "headerDeclarationCounts": {
+          "warp/shuffle.hpp": 0,
+          "util/atomic.hpp": 12,
+          "util/simd_functions.hpp": 38
+        }
+      },
+      {
+        "configuration": "source-arch-200",
+        "preprocessorDefinitions": {
+          "CV_VERSION_MAJOR": 5,
+          "OPENCV_ABI_COMPATIBILITY": 500,
+          "__CUDACC__": 1,
+          "CUDART_VERSION": 12040,
+          "__CUDACC_VER_MAJOR__": 12,
+          "__CUDACC_VER_MINOR__": 4,
+          "__CUDA_ARCH__": 200,
+          "CV_CUDEV_ARCH": 200
+        },
+        "headerDeclarationCounts": {
+          "warp/shuffle.hpp": 0,
+          "util/atomic.hpp": 12,
+          "util/simd_functions.hpp": 38
+        }
+      },
+      {
+        "configuration": "source-arch-300",
+        "preprocessorDefinitions": {
+          "CV_VERSION_MAJOR": 5,
+          "OPENCV_ABI_COMPATIBILITY": 500,
+          "__CUDACC__": 1,
+          "CUDART_VERSION": 12040,
+          "__CUDACC_VER_MAJOR__": 12,
+          "__CUDACC_VER_MINOR__": 4,
+          "__CUDA_ARCH__": 300,
+          "CV_CUDEV_ARCH": 300
+        },
+        "headerDeclarationCounts": {
+          "warp/shuffle.hpp": 25,
+          "util/atomic.hpp": 12,
+          "util/simd_functions.hpp": 38
+        }
+      },
+      {
+        "configuration": "source-arch-750",
+        "preprocessorDefinitions": {
+          "CV_VERSION_MAJOR": 5,
+          "OPENCV_ABI_COMPATIBILITY": 500,
+          "__CUDACC__": 1,
+          "CUDART_VERSION": 12040,
+          "__CUDACC_VER_MAJOR__": 12,
+          "__CUDACC_VER_MINOR__": 4,
+          "__CUDA_ARCH__": 750,
+          "CV_CUDEV_ARCH": 750
+        },
+        "headerDeclarationCounts": {
+          "warp/shuffle.hpp": 25,
+          "util/atomic.hpp": 12,
+          "util/simd_functions.hpp": 38
+        }
+      }
+    ],
+    "sourceReviewedExtensionPath": "compatibility/opencv-5.1.0/cudev-source-reviewed-extensions.json",
+    "sourceReviewedExtensionSha256": "978cb742727262ae2095ae3926832b9df2133c4f0efa7b37dc80c475c12c5a37",
+    "sourceInventoryCounts": {
+      "templatesCount": 1100,
+      "templateParametersCount": 11,
+      "macroDefinitionsCount": 49,
+      "macroInvocationsCount": 1210,
+      "conditionalDirectivesCount": 405,
+      "macroBodyTemplateKeywordCount": 92
+    },
+    "sourceInventoryLimitation": "The pinned hdr_parser skips template declarations and does not expand declaration macros. Its declaration/callable counts cover only the non-template parser subset under the recorded source configuration. The companion source inventory records template definitions (including nested template-template parameters), function-like macro definitions/invocations and every conditional directive across all installed headers. These lexical source units overlap and are not concrete callable counts. A linked C\u002B\u002B CST inventory separately enumerates source function declarations, class-template members and the 44 finite local declaration generators. External using/include closure and concrete template instantiations are not semantically enumerated. No CUDA compilation, linking, device/runtime validation or complete callable parity is claimed.",
+    "completeCallableCoverageClaimed": false,
+    "cudaExecutionVerified": false,
+    "moduleDependencies": [
+      "opencv_core"
+    ],
+    "externalDependencies": [
+      "CUDA toolkit/runtime and compatible NVIDIA driver/device",
+      "CUDA/Thrust headers including tuple",
+      "OpenCV core CUDA GpuMat and Stream infrastructure"
+    ],
+    "sourceConditionBoundaries": [
+      "CV_CUDEV_ARCH \u003E= 120",
+      "CV_CUDEV_ARCH \u003E= 200",
+      "CV_CUDEV_ARCH \u003E= 300",
+      "__CUDACC_VER_MAJOR__ \u003E= 9",
+      "CUDART_VERSION \u003C 12040"
+    ],
+    "configurationLimitation": "The recorded CUDA 12.4 / source architecture 750 defines are extraction inputs, not measured compiler or device capabilities. Header visibility does not establish build, package or runtime availability.",
+    "sourceCallableInventory": {
+      "path": "compatibility/opencv-5.1.0/cudev-source-callables.json",
+      "sha256": "26c99a8898cd975ca52844a9efbf0aa2c85ec777b38875270265d98b26f25607",
+      "counts": {
+        "callableDeclarationCount": 5463,
+        "directCallableCount": 1096,
+        "macroGeneratedCallableCount": 4367,
+        "templateContextCallableCount": 2009,
+        "definitionCount": 5412,
+        "declarationOnlyCount": 51,
+        "declarationMacroDefinitionCount": 44,
+        "expandedMacroInvocationCount": 1092,
+        "nonCallableExpansionCount": 215,
+        "reconciledParserCallableCount": 110,
+        "declarationErrorCount": 0,
+        "bodyParseDiagnosticCount": 28
+      }
+    }
+  },
+  "sourceInventories": [
+    {
+      "kind": "lexical",
+      "path": "compatibility/opencv-5.1.0/cudev-source-reviewed-extensions.json",
+      "sha256": "978cb742727262ae2095ae3926832b9df2133c4f0efa7b37dc80c475c12c5a37",
+      "counts": {
+        "templatesCount": 1100,
+        "templateParametersCount": 11,
+        "macroDefinitionsCount": 49,
+        "macroInvocationsCount": 1210,
+        "conditionalDirectivesCount": 405,
+        "macroBodyTemplateKeywordCount": 92
+      }
+    },
+    {
+      "kind": "callables",
+      "path": "compatibility/opencv-5.1.0/cudev-source-callables.json",
+      "sha256": "26c99a8898cd975ca52844a9efbf0aa2c85ec777b38875270265d98b26f25607",
+      "counts": {
+        "callableDeclarationCount": 5463,
+        "directCallableCount": 1096,
+        "macroGeneratedCallableCount": 4367,
+        "templateContextCallableCount": 2009,
+        "definitionCount": 5412,
+        "declarationOnlyCount": 51,
+        "declarationMacroDefinitionCount": 44,
+        "expandedMacroInvocationCount": 1092,
+        "nonCallableExpansionCount": 215,
+        "reconciledParserCallableCount": 110,
+        "declarationErrorCount": 0,
+        "bodyParseDiagnosticCount": 28
+      }
+    }
+  ]
+}

@@ -4,11 +4,11 @@
   "upstreamCommit": "e4f78fbcf1a773fbed69e14500e8b734963eb585",
   "upstreamContribCommit": "b67a855188a3d683813731010f6d39ac614733a4",
   "catalogPath": "compatibility/opencv-5.1.0/upstream-map-refresh-catalog.json",
-  "catalogSha256": "af1b66a6d650c43a8ef5a47c4a3fe96e2b4b49b85bd82017264c93db3751880d",
+  "catalogSha256": "98ca65d767ded70018eb888cbc1c51a0460bdbabddcfa86e1c0762f86c67fdeb",
   "historicalCatalogRevision": "5.0.0",
   "historicalCatalogMapCount": 73,
-  "refreshedParserSliceCount": 55,
-  "pendingCatalogMapCount": 18,
+  "refreshedParserSliceCount": 73,
+  "pendingCatalogMapCount": 0,
   "slices": [
     {
       "id": "alphamat",
@@ -39,6 +39,13 @@
       "completeCppParityClaimed": false
     },
     {
+      "id": "cannops",
+      "summaryPath": "compatibility/opencv-5.1.0/cannops-upstream-summary.json",
+      "sha256": "af63492c63472aa0dca6ffb5a64cc0f33f715cc4342e40d667e7fa9d631771f9",
+      "declarationCount": 201,
+      "completeCppParityClaimed": false
+    },
+    {
       "id": "ccalib",
       "summaryPath": "compatibility/opencv-5.1.0/ccalib-upstream-summary.json",
       "sha256": "31c93bc1ee9568e3c4cee8b9e34e1492ec53fb4c3e7e5869897bfc87ae7aad03",
@@ -57,6 +64,90 @@
       "summaryPath": "compatibility/opencv-5.1.0/core-upstream-summary.json",
       "sha256": "1840f91f65e560f8ea47b631a2c03101532ea1dd3fd7112529c441220727722f",
       "declarationCount": 276,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "cudaarithm",
+      "summaryPath": "compatibility/opencv-5.1.0/cudaarithm-upstream-summary.json",
+      "sha256": "7f3a99bad33115b44efb9d1d520ca8a6fc1525e58267e67cb0ae22668cac55e5",
+      "declarationCount": 89,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "cudabgsegm",
+      "summaryPath": "compatibility/opencv-5.1.0/cudabgsegm-upstream-summary.json",
+      "sha256": "a18ce0306a71f9ecdd1ffd4879bbec0f694c6b1ea7be168e40085c8bcffde43b",
+      "declarationCount": 18,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "cudacodec",
+      "summaryPath": "compatibility/opencv-5.1.0/cudacodec-upstream-summary.json",
+      "sha256": "b993a3e294db88360d6067c72387ccfe75ae10c1e8fc1bf0acf6d494373cb08a",
+      "declarationCount": 45,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "cudafeatures2d",
+      "summaryPath": "compatibility/opencv-5.1.0/cudafeatures2d-upstream-summary.json",
+      "sha256": "f9b9ff7c1fe5eda250b90bdb2281be385cf34b31b7161571cdd1c44c340ac00a",
+      "declarationCount": 64,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "cudafilters",
+      "summaryPath": "compatibility/opencv-5.1.0/cudafilters-upstream-summary.json",
+      "sha256": "2fe3f9298b6238f173951cd6886869602e603323040388f2cb35fd66481c6334",
+      "declarationCount": 16,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "cudaimgproc",
+      "summaryPath": "compatibility/opencv-5.1.0/cudaimgproc-upstream-summary.json",
+      "sha256": "1ac1162068157d6ee7321083684059b719463c7fbbe252bea0902ddf2bc1498f",
+      "declarationCount": 93,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "cudalegacy",
+      "summaryPath": "compatibility/opencv-5.1.0/cudalegacy-upstream-summary.json",
+      "sha256": "42ff394216594734bb007b776e6a0e3f529259f3a4c7cd1350d813927bbd2f85",
+      "declarationCount": 221,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "cudaobjdetect",
+      "summaryPath": "compatibility/opencv-5.1.0/cudaobjdetect-upstream-summary.json",
+      "sha256": "c4358dec579623aa9ae8604a91c4f436218c1da2594c7cbe25c52a83818380b3",
+      "declarationCount": 46,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "cudaoptflow",
+      "summaryPath": "compatibility/opencv-5.1.0/cudaoptflow-upstream-summary.json",
+      "sha256": "c134e8e0b23ac9f9586cfdf35e32c9abc96695870eca1550d7e0866a2de3febc",
+      "declarationCount": 93,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "cudastereo",
+      "summaryPath": "compatibility/opencv-5.1.0/cudastereo-upstream-summary.json",
+      "sha256": "9c46919490d50941ab8fec7cd8da53ef16c3131c8794625f023a3c21b0ffb05b",
+      "declarationCount": 50,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "cudawarping",
+      "summaryPath": "compatibility/opencv-5.1.0/cudawarping-upstream-summary.json",
+      "sha256": "d51556744b41839a1b752b6d664232bd91844ac1708a44a38712a3f99e0d54b7",
+      "declarationCount": 13,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "cudev",
+      "summaryPath": "compatibility/opencv-5.1.0/cudev-upstream-summary.json",
+      "sha256": "e0f0dc12a64108c125d2c2e27a4b7453c8c01fc691c01ab9d7155cd8e549a9bd",
+      "declarationCount": 144,
       "completeCppParityClaimed": false
     },
     {
@@ -106,6 +197,13 @@
       "summaryPath": "compatibility/opencv-5.1.0/face-upstream-summary.json",
       "sha256": "e93b4e8d2e27e483475ee42a34b8897cb5ca7f7dca1435210f48b96bd06fdfb3",
       "declarationCount": 62,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "fastcv",
+      "summaryPath": "compatibility/opencv-5.1.0/fastcv-upstream-summary.json",
+      "sha256": "087624f2b378d15f4dcb5fda547fb14e857289d3c8f83579510382e6a9bd15f3",
+      "declarationCount": 71,
       "completeCppParityClaimed": false
     },
     {
@@ -193,6 +291,13 @@
       "completeCppParityClaimed": false
     },
     {
+      "id": "matlab",
+      "summaryPath": "compatibility/opencv-5.1.0/matlab-upstream-summary.json",
+      "sha256": "04834548d32ec1bf90f9afedc681e5768d0e22b3c424446586d902ca5f11b270",
+      "declarationCount": 190,
+      "completeCppParityClaimed": false
+    },
+    {
       "id": "ml",
       "summaryPath": "compatibility/opencv-5.1.0/ml-upstream-summary.json",
       "sha256": "93569b568904ab190897fe36a562d2226be984520907dacbfd06a1b275949954",
@@ -211,6 +316,13 @@
       "summaryPath": "compatibility/opencv-5.1.0/optflow-upstream-summary.json",
       "sha256": "79d0504559c1b481ce6131201f162d743010b6c0da4100177add6424979bf784",
       "declarationCount": 85,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "ovis",
+      "summaryPath": "compatibility/opencv-5.1.0/ovis-upstream-summary.json",
+      "sha256": "ef6fa1907e347eda21bca97f1efad059fe627b82e65408d13557015aa2b33d5d",
+      "declarationCount": 42,
       "completeCppParityClaimed": false
     },
     {
@@ -274,6 +386,13 @@
       "summaryPath": "compatibility/opencv-5.1.0/saliency-upstream-summary.json",
       "sha256": "eccdba71b697327f033dbd2a4b5b4a0e3242c08c8cdfa440984572f9459bc0db",
       "declarationCount": 39,
+      "completeCppParityClaimed": false
+    },
+    {
+      "id": "sfm",
+      "summaryPath": "compatibility/opencv-5.1.0/sfm-upstream-summary.json",
+      "sha256": "51ca6cba30b5b0bc6499bdf37abfcf6976cf86b0f91f8efb231e5c5babd39716",
+      "declarationCount": 62,
       "completeCppParityClaimed": false
     },
     {
@@ -354,6 +473,13 @@
       "completeCppParityClaimed": false
     },
     {
+      "id": "viz",
+      "summaryPath": "compatibility/opencv-5.1.0/viz-upstream-summary.json",
+      "sha256": "f09b9f222fbce77e768672b0e741e0e736dc471e21de761a416afe301650d842",
+      "declarationCount": 269,
+      "completeCppParityClaimed": false
+    },
+    {
       "id": "wechat_qrcode",
       "summaryPath": "compatibility/opencv-5.1.0/wechat_qrcode-upstream-summary.json",
       "sha256": "18676e4423169da51305eb517676910a47116433ee0b0febebd74d1575d50434",
@@ -396,27 +522,8 @@
       "completeCppParityClaimed": false
     }
   ],
-  "pendingCatalogMaps": [
-    "cannops",
-    "cudaarithm",
-    "cudabgsegm",
-    "cudacodec",
-    "cudafeatures2d",
-    "cudafilters",
-    "cudaimgproc",
-    "cudalegacy",
-    "cudaobjdetect",
-    "cudaoptflow",
-    "cudastereo",
-    "cudawarping",
-    "cudev",
-    "fastcv",
-    "matlab",
-    "ovis",
-    "sfm",
-    "viz"
-  ],
-  "sharedGeneratorNegativeFixtureCount": 1753,
+  "pendingCatalogMaps": [],
+  "sharedGeneratorNegativeFixtureCount": 2420,
   "repositoryWideUpstreamParityClaimed": false,
   "completeCppParityClaimed": false,
   "limitation": "Only the recorded parser slices have been reviewed. Historical maps, complete C\u002B\u002B/template surfaces and runtime/platform certification retain separate evidence and version identities."

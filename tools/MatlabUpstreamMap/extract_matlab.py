@@ -69,8 +69,8 @@ def parse_header(hdr, path, cpp=201103, normalize=True):
         return hdr.CppHeaderParser(preprocessor_definitions=definitions).parse(str(temporary), wmode=False)
 
 
-def extract(workspace, root, output):
-    module = workspace / "opencv-source/opencv_contrib-5.0.0/modules/matlab"
+def extract(workspace, root, output, upstream_version="5.0.0"):
+    module = workspace / f"opencv-source/opencv_contrib-{upstream_version}/modules/matlab"
     include = module / "include/opencv2/matlab"
     if sorted(path.relative_to(include).as_posix() for path in include.rglob("*.hpp")) != HEADERS:
         raise RuntimeError("MATLAB installed header inventory drifted")
@@ -117,7 +117,7 @@ def extract(workspace, root, output):
               for field in ("templates", "templateParameters", "macroDefinitions", "conditionalDirectives")}
     counts["templateKindCounts"] = dict(sorted(Counter(unit["kind"] for header in reviews for unit in header["templates"]).items()))
     extension = {
-        "schemaVersion": 1, "generator": "tools/CudevUpstreamMap/source_inventory.py", "upstreamOpenCvVersion": "5.0.0",
+        "schemaVersion": 1, "generator": "tools/CudevUpstreamMap/source_inventory.py", "upstreamOpenCvVersion": upstream_version,
         "scope": "All four installed opencv2/matlab/*.hpp headers with every source conditional branch retained.",
         "coordinateSystem": "Zero-based Unicode offsets, exclusive end, UTF-8 source normalized to LF; line numbers are one-based.",
         "reviewDisposition": "intentionally-omitted-unwrapped-matlab-source", "limitation": LIMITATION,
@@ -133,14 +133,14 @@ def extract(workspace, root, output):
                        "normalizedMxarrayDeclarationCount": len(parse_header(hdr, include / "mxarray.hpp", cpp)),
                        "normalizedMapDeclarationCount": len(parse_header(hdr, include / "map.hpp", cpp))})
     result = {
-        "schemaVersion": 1, "generator": "tools/MatlabUpstreamMap/extract_matlab.py", "upstreamOpenCvVersion": "5.0.0",
+        "schemaVersion": 1, "generator": "tools/MatlabUpstreamMap/extract_matlab.py", "upstreamOpenCvVersion": upstream_version,
         "headerPath": rel(include / "bridge.hpp", workspace), "headerSha256": sha256(include / "bridge.hpp"),
         "parserPath": rel(parser_path, workspace), "parserSha256": sha256(parser_path),
         "parserMode": "non-wrapper-non-template-subset", "preprocessorDefinitions": DEFINITIONS,
         "parserNormalization": "Temporary copies rename __cplusplus to MATLAB_SOURCE_CPLUSPLUS=201103 and remove the L integer suffix only in its two >= 201103L directives for the Python expression evaluator. Two static names lose parser-injected return-type text; qualified conversion operators regain Bridge ownership and C++ target spelling. Two inline definitions reconcile to their class declarations. /S and /C metadata remain unchanged; upstream source files remain untouched.",
         "parserNameRepairs": repairs, "reconciledInlineDefinitions": duplicates, "parserConfigurationProbes": probes,
         "sourceHeaders": sources, "declarationCount": len(declarations), "declarations": declarations,
-        "sourceReviewedExtensionPath": "compatibility/matlab-source-reviewed-extensions.json",
+        "sourceReviewedExtensionPath": ("compatibility/" if upstream_version == "5.0.0" else "compatibility/opencv-5.1.0/") + "matlab-source-reviewed-extensions.json",
         "sourceReviewedExtensionSha256": sha256(extension_path), "sourceInventoryCounts": counts,
         "sourceInventoryLimitation": LIMITATION, "completeCallableCoverageClaimed": False, "matlabExecutionVerified": False,
         "compatibilityHeaders": [{"path": rel(module / name, workspace), "sha256": sha256(module / name), "reason": reason}
@@ -167,5 +167,6 @@ if __name__ == "__main__":
     parser.add_argument("--workspace", required=True)
     parser.add_argument("--opencv-root", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument("--upstream-version", choices=("5.0.0", "5.1.0"), default="5.0.0")
     arguments = parser.parse_args()
-    extract(*(Path(value).resolve() for value in (arguments.workspace, arguments.opencv_root, arguments.output)))
+    extract(*(Path(value).resolve() for value in (arguments.workspace, arguments.opencv_root, arguments.output)), upstream_version=arguments.upstream_version)

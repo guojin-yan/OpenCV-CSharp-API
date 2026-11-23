@@ -42,9 +42,10 @@ def main():
     parser.add_argument("--workspace", required=True)
     parser.add_argument("--opencv-root", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument("--upstream-version", choices=("5.0.0", "5.1.0"), default="5.0.0")
     args = parser.parse_args()
     workspace, root, output = (Path(value).resolve() for value in (args.workspace, args.opencv_root, args.output))
-    module = workspace / "opencv-source/opencv_contrib-5.0.0/modules/cudev"
+    module = workspace / f"opencv-source/opencv_contrib-{args.upstream_version}/modules/cudev"
     include = module / "include/opencv2"
     files = sorted(include.rglob("*.hpp"))
     if len(files) != 76:
@@ -109,7 +110,7 @@ def main():
         review["macroInvocations"] = macro_invocations(file.read_text(encoding="utf-8"), token_sets[source], spans[source], definitions)
     counts = {field + "Count": sum(len(row[field]) for row in reviews) for field in ("templates", "templateParameters", "macroDefinitions", "macroInvocations", "conditionalDirectives")}
     counts["macroBodyTemplateKeywordCount"] = sum(item["templateKeywordCount"] for row in reviews for item in row["macroDefinitions"])
-    extension = {"schemaVersion": 1, "generator": "tools/CudevUpstreamMap/source_inventory.py", "upstreamOpenCvVersion": "5.0.0",
+    extension = {"schemaVersion": 1, "generator": "tools/CudevUpstreamMap/source_inventory.py", "upstreamOpenCvVersion": args.upstream_version,
                  "scope": "All 76 installed cudev .hpp files, including detail headers, with all source conditional branches retained.",
                  "coordinateSystem": "Zero-based Unicode offsets, exclusive end, UTF-8 source normalized to LF; line numbers are one-based.",
                  "reviewDisposition": "intentionally-omitted-unwrapped-device-source", "limitation": LIMITATION,
@@ -119,14 +120,14 @@ def main():
     output.parent.mkdir(parents=True, exist_ok=True)
     write_json(extension_path, extension)
     umbrella = include / "cudev.hpp"
-    result = {"schemaVersion": 1, "generator": "tools/CudevUpstreamMap/extract_cudev.py", "upstreamOpenCvVersion": "5.0.0",
+    result = {"schemaVersion": 1, "generator": "tools/CudevUpstreamMap/extract_cudev.py", "upstreamOpenCvVersion": args.upstream_version,
               "headerPath": rel(umbrella, workspace), "headerSha256": sha256(umbrella), "parserPath": rel(parser_path, workspace), "parserSha256": sha256(parser_path),
               "preprocessorDefinitions": DEFINITIONS, "parserMode": "non-wrapper-non-template-subset",
               "parserNormalization": "CUDA attribute tokens are removed only in temporary copies. Thirteen namespace-scope static parser names have return-type contamination repaired after parsing; /S metadata is retained. Static/const qualifiers, operators and upstream source hashes are retained. Templates and declaration macros remain outside the pinned parser subset.",
               "staticParserNameRepairs": static_name_repairs,
               "sourceHeaders": source_headers, "declarationCount": len(declarations), "declarations": declarations,
               "parserDuplicateIdentities": duplicate, "parserConfigurationProbes": probes,
-              "sourceReviewedExtensionPath": "compatibility/cudev-source-reviewed-extensions.json", "sourceReviewedExtensionSha256": sha256(extension_path),
+              "sourceReviewedExtensionPath": ("compatibility/" if args.upstream_version == "5.0.0" else "compatibility/opencv-5.1.0/") + "cudev-source-reviewed-extensions.json", "sourceReviewedExtensionSha256": sha256(extension_path),
               "sourceInventoryCounts": counts, "sourceInventoryLimitation": LIMITATION,
               "completeCallableCoverageClaimed": False, "cudaExecutionVerified": False,
               "compatibilityHeaders": [{"path": rel(module / "CMakeLists.txt", workspace), "sha256": sha256(module / "CMakeLists.txt"), "reason": "HAVE_CUDA module disable; recursive installed-header scope; opencv_core include dependency and conditional CUDA tests."}],

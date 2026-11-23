@@ -69,13 +69,14 @@ def main():
     parser.add_argument("--workspace", required=True)
     parser.add_argument("--opencv-root", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument("--upstream-version", choices=("5.0.0", "5.1.0"), default="5.0.0")
     args = parser.parse_args()
 
     workspace = Path(args.workspace).resolve()
     root = Path(args.opencv_root).resolve()
     output = Path(args.output).resolve()
     parser_path = root / "modules/python/src2/hdr_parser.py"
-    include = root.parent.parent / "opencv-source/opencv_contrib-5.0.0/modules/viz/include/opencv2"
+    include = root.parent.parent / f"opencv-source/opencv_contrib-{args.upstream_version}/modules/viz/include/opencv2"
     umbrella = include / "viz.hpp"
     files = sorted((include / "viz").glob("*.hpp"))
     if len(files) != 5:
@@ -102,11 +103,11 @@ def main():
     for ordinal, item in enumerate(declarations):
         item["ordinal"] = ordinal
 
-    cmake = root.parent.parent / "opencv-source/opencv_contrib-5.0.0/modules/viz/CMakeLists.txt"
+    cmake = root.parent.parent / f"opencv-source/opencv_contrib-{args.upstream_version}/modules/viz/CMakeLists.txt"
     result = {
         "schemaVersion": 1,
         "generator": "tools/VizUpstreamMap/extract_viz.py",
-        "upstreamOpenCvVersion": "5.0.0",
+        "upstreamOpenCvVersion": args.upstream_version,
         "headerPath": rel(umbrella, workspace),
         "headerSha256": sha256(umbrella),
         "parserPath": rel(parser_path, workspace),

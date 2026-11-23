@@ -28,9 +28,10 @@ def main():
     parser.add_argument("--workspace", required=True)
     parser.add_argument("--opencv-root", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument("--upstream-version", choices=("5.0.0", "5.1.0"), default="5.0.0")
     args = parser.parse_args()
     workspace, root, output = (Path(value).resolve() for value in (args.workspace, args.opencv_root, args.output))
-    module = workspace / "opencv-source/opencv_contrib-5.0.0/modules/sfm"
+    module = workspace / f"opencv-source/opencv_contrib-{args.upstream_version}/modules/sfm"
     include = module / "include/opencv2"
     if sorted(path.relative_to(include).as_posix() for path in include.rglob("*.hpp")) != HEADERS:
         raise RuntimeError("SFM installed header inventory drifted")
@@ -81,7 +82,7 @@ def main():
         ("tutorials/sfm_installation/sfm_installation.markdown", "Eigen/Glog/Gflags installation and Ceres reconstruction requirement."),
     ]
     result = {
-        "schemaVersion": 1, "generator": "tools/SfmUpstreamMap/extract_sfm.py", "upstreamOpenCvVersion": "5.0.0",
+        "schemaVersion": 1, "generator": "tools/SfmUpstreamMap/extract_sfm.py", "upstreamOpenCvVersion": args.upstream_version,
         "headerPath": rel(umbrella, workspace), "headerSha256": sha256(umbrella),
         "parserPath": rel(parser_path, workspace), "parserSha256": sha256(parser_path),
         "preprocessorDefinitions": DEFINITIONS, "parserMode": "non-wrapper-public-declarations",

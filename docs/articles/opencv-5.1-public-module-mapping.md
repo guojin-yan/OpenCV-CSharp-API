@@ -1,8 +1,10 @@
 # OpenCV 5.1 public module mappings
 
+Current totals after the [backend and dependency review](opencv-5.1-backend-mapping.md): 73 parser scopes, 5,778 declarations, zero historical parser maps pending, and 2,420 shared-generator negative fixtures. The batch-specific counts below describe the earlier review.
+
 Nineteen historical parser scopes are reviewed against official OpenCV 5.1.0 commit e4f78fbcf1a773fbed69e14500e8b734963eb585 and opencv_contrib commit b67a855188a3d683813731010f6d39ac614733a4. PtCloud belongs to OpenCV; the other eighteen scopes belong to contrib. The 82 contributing headers, primary umbrellas, build files and one excluded umbrella add 94 distinct pinned inputs. All 879 retained identities preserve their declaration fields, including documentation. RGBD replaces one callable signature, reviewed below.
 
-This batch contains 880 declarations: 681 callables (47 existing bindings and 634 intentional omissions) and 199 class/enum metadata declarations. The current inventory contains 55 parser scopes and 4,051 declarations; 18 historical maps remain pending. See the [mapping overview](opencv-5.1-source-mapping.md), [previous image and geometry review](opencv-5.1-image-geometry-mapping.md) and [versioned inventory](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/compatibility/opencv-5.1.0/upstream-map-refresh-summary.json).
+This batch contains 880 declarations: 681 callables (47 existing bindings and 634 intentional omissions) and 199 class/enum metadata declarations. At the end of this batch the inventory contained 55 scopes and 4,051 declarations; the final 18 scopes are now refreshed. See the [mapping overview](opencv-5.1-source-mapping.md), [previous image and geometry review](opencv-5.1-image-geometry-mapping.md) and [versioned inventory](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/compatibility/opencv-5.1.0/upstream-map-refresh-summary.json).
 
 | Module | Headers | Declarations | Callables | Implemented | Omitted | Metadata |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |

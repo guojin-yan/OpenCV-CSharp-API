@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/UpstreamMapRefresh",
+  "upstreamOpenCvVersion": "5.1.0",
+  "upstreamCommit": "e4f78fbcf1a773fbed69e14500e8b734963eb585",
+  "module": "cannops",
+  "claimedSlice": "Historical cannops parser scope refreshed against official 5.1 sources: parser-emitted declarations only; external backends, templates and runtime remain separately scoped",
+  "sourceHashPolicy": "UTF-8 source with CRLF/CR normalized to LF; no trimming",
+  "rawExtractionPath": "compatibility/opencv-5.1.0/cannops-upstream-raw.json",
+  "classificationPath": "compatibility/opencv-5.1.0/cannops-upstream-classifications.json",
+  "mappingPath": "compatibility/opencv-5.1.0/cannops-upstream-map.txt",
+  "deltaPath": "compatibility/opencv-5.1.0/cannops-upstream-delta.json",
+  "familyInventoryPath": "compatibility/opencv-5.1.0/cannops-implemented-families.json",
+  "rawSha256": "11e5b65deed6a7f0c028baed4d1dba3b4579480e46f26a54915a78b5b74d00e2",
+  "classificationSha256": "197073b05b995e3583e0fc8eccad10c1c250e9b2d8bf441ea087c4849002a659",
+  "mappingSha256": "7944808a42f061a1b3ca5ec06549b8a89afb202e41b6e4ecaa2d2c41f7f9fb28",
+  "deltaSha256": "7087eaa36c62667339995cf48c96589820e676c56dd1aa8524834f7be241eb98",
+  "familyInventorySha256": "2be8d531b34bb3ce1872a7ca8f72a82121fb8f3070fcb45c3143b8c09e1ea5f9",
+  "historicalRawSha256": "41331dbaf8ed33884a86f5c97f9654f6d47f77a779f004d5d911a7cbb9cb0584",
+  "historicalClassificationSha256": "2876d8ed075a47d285805b8a1f1b227a74f07996f566dd838efc694d467f08f2",
+  "sourceHeaderCount": 8,
+  "declarationCount": 201,
+  "callableCount": 188,
+  "classCount": 12,
+  "enumCount": 1,
+  "classificationCounts": {
+    "implemented": 0,
+    "intentionally-omitted": 188,
+    "missing": 0,
+    "non-callable-metadata": 13,
+    "unsupported": 0,
+    "upstream-conditional": 0
+  },
+  "deltaCounts": {
+    "added": 0,
+    "removed": 0,
+    "changed": 0,
+    "retained": 201
+  },
+  "negativeFixtureCount": 39,
+  "nativeEvidenceCount": 0,
+  "managedEvidenceCount": 0,
+  "repositoryWideUpstreamParityClaimed": false,
+  "completeCppParityClaimed": false,
+  "newRuntimeBehaviorCertified": false,
+  "sourceRepository": "opencv_contrib",
+  "upstreamContribCommit": "b67a855188a3d683813731010f6d39ac614733a4",
+  "parserMode": "non-wrapper-public-declarations",
+  "parserNormalization": "All eight installed headers remain in source scope, including implementation helpers. Qualified AscendStream::Impl and AscendEvent::Impl class/constructor spellings are renamed only in a temporary parser copy and restored in identities. Sixteen inline definitions are reconciled to existing declarations by name and argument types; two inline definitions of private constructors remain explicitly excluded. NEVER_DEFINED binding-only placeholders are inactive. No upstream source file is modified.",
+  "moduleBuildCondition": "HAVE_CANN_AND_SUPPORTED_UNIX_X86_64_OR_AARCH64_AND_NOT_IOS_WINRT_ANDROID_APPLE_WIN32_AND_ASCENDC_TOOLCHAIN",
+  "parserEvidence": {
+    "qualifiedImplementationClasses": [
+      "cv.cann.AscendStream.Impl",
+      "cv.cann.AscendEvent.Impl"
+    ],
+    "inlineDefinitionIdentities": [
+      "cv.cann.AscendMat.AscendMat(AscendMat::Allocator* allocator_=AscendMat::defaultAllocator())-\u003E",
+      "cv.cann.AscendMat.AscendMat(int rows;int cols;int type;AscendMat::Allocator* allocator=AscendMat::defaultAllocator())-\u003E",
+      "cv.cann.AscendMat.AscendMat(Size size;int type;AscendMat::Allocator* allocator=AscendMat::defaultAllocator())-\u003E",
+      "cv.cann.AscendMat.AscendMat(InputArray arr;AscendStream\u0026 stream;AscendMat::Allocator* allocator=AscendMat::defaultAllocator())-\u003E",
+      "cv.cann.AscendMat.AscendMat(const AscendMat\u0026 m)-\u003E",
+      "cv.cann.AscendMat.operator=(const AscendMat\u0026 m)-\u003EAscendMat\u0026",
+      "cv.cann.AscendMat.swap(AscendMat\u0026 mat)-\u003Evoid",
+      "cv.cann.AscendMat.isContinuous()-\u003Ebool",
+      "cv.cann.AscendMat.elemSize()-\u003Esize_t",
+      "cv.cann.AscendMat.elemSize1()-\u003Esize_t",
+      "cv.cann.AscendMat.type()-\u003Eint",
+      "cv.cann.AscendMat.depth()-\u003Eint",
+      "cv.cann.AscendMat.channels()-\u003Eint",
+      "cv.cann.AscendMat.step1()-\u003Esize_t",
+      "cv.cann.AscendMat.size()-\u003ESize",
+      "cv.cann.AscendMat.empty()-\u003Ebool"
+    ],
+    "excludedPrivateInlineDefinitions": [
+      "cv.cann.AscendStream.AscendStream(const Ptr\u003CAscendStream::Impl\u003E\u0026 impl)-\u003E",
+      "cv.cann.AscendEvent.AscendEvent(const Ptr\u003CAscendEvent::Impl\u003E\u0026 impl)-\u003E"
+    ],
+    "bindingOnlyPlaceholderBlockCount": 7,
+    "parserDuplicateIdentities": [],
+    "moduleDependencies": [
+      "opencv_core"
+    ],
+    "externalLibraries": "CANN_LIBRARIES"
+  }
+}

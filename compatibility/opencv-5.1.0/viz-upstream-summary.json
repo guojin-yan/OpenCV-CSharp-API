@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/UpstreamMapRefresh",
+  "upstreamOpenCvVersion": "5.1.0",
+  "upstreamCommit": "e4f78fbcf1a773fbed69e14500e8b734963eb585",
+  "module": "viz",
+  "claimedSlice": "Historical viz parser scope refreshed against official 5.1 sources: parser-emitted declarations only; external backends, templates and runtime remain separately scoped",
+  "sourceHashPolicy": "UTF-8 source with CRLF/CR normalized to LF; no trimming",
+  "rawExtractionPath": "compatibility/opencv-5.1.0/viz-upstream-raw.json",
+  "classificationPath": "compatibility/opencv-5.1.0/viz-upstream-classifications.json",
+  "mappingPath": "compatibility/opencv-5.1.0/viz-upstream-map.txt",
+  "deltaPath": "compatibility/opencv-5.1.0/viz-upstream-delta.json",
+  "familyInventoryPath": "compatibility/opencv-5.1.0/viz-implemented-families.json",
+  "rawSha256": "a33346320518722099d34bdb117713ad5b89ad7c6edd116f6ff62dec45c99878",
+  "classificationSha256": "046bc43d32977d6317ad93ad121ba8ebebaccd01ecfe88ea975394ca9a637a2e",
+  "mappingSha256": "50493b0ea3a9942d507ac02e594fd1273fed2ef938271bb75bb39ecf2da47e21",
+  "deltaSha256": "9b52db504af2aa2064efced1f094ec55451409f5d14f19cab0d7d1662b5cf591",
+  "familyInventorySha256": "7c40eff6d65a411ab87bebc86eb30ed77b9772698fdfaba71b00ca7b02f00a39",
+  "historicalRawSha256": "5c232834a9a957797d281e247406efb216e5386cec6ae7e35183783b5ae54a6e",
+  "historicalClassificationSha256": "7d6380b8a5d2f3f13f939a90507ce2ec6170580279ded68fab6025825cb203c7",
+  "sourceHeaderCount": 5,
+  "declarationCount": 269,
+  "callableCount": 225,
+  "classCount": 35,
+  "enumCount": 9,
+  "classificationCounts": {
+    "implemented": 0,
+    "intentionally-omitted": 225,
+    "missing": 0,
+    "non-callable-metadata": 44,
+    "unsupported": 0,
+    "upstream-conditional": 0
+  },
+  "deltaCounts": {
+    "added": 0,
+    "removed": 0,
+    "changed": 0,
+    "retained": 269
+  },
+  "negativeFixtureCount": 39,
+  "nativeEvidenceCount": 0,
+  "managedEvidenceCount": 0,
+  "repositoryWideUpstreamParityClaimed": false,
+  "completeCppParityClaimed": false,
+  "newRuntimeBehaviorCertified": false,
+  "sourceRepository": "opencv_contrib",
+  "upstreamContribCommit": "b67a855188a3d683813731010f6d39ac614733a4",
+  "parserMode": "non-wrapper-public-declarations",
+  "parserNormalization": "non-wrapper parser mode retains public viz classes and methods using CV_EXPORTS; the two inline Color constructor definitions duplicated by hdr_parser are deduplicated by exact identity; source/header hashes remain pinned",
+  "moduleBuildCondition": "HAVE_VTK_AND_NO_STATIC_VTK_BUILTIN_CONFLICT",
+  "parserEvidence": {
+    "parserDuplicateIdentities": [
+      "cv.viz.Color.Color()-\u003E",
+      "cv.viz.Color.Color(const Scalar\u0026 color)-\u003E"
+    ],
+    "parserHeaderPartitionsBeforeExactDeduplication": [
+      {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/viz/include/opencv2/viz/types.hpp",
+        "sha256": "a7f7851da62a2d0168139df69f9562feac2140992602cc7d8b6e3e12f9d4531d",
+        "startOrdinal": 0,
+        "declarationCount": 108
+      },
+      {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/viz/include/opencv2/viz/viz3d.hpp",
+        "sha256": "f487e03ff244d55d582028b1ba40e8a3fa0ca11125ef75a431a4fd4c0b9a030e",
+        "startOrdinal": 108,
+        "declarationCount": 44
+      },
+      {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/viz/include/opencv2/viz/vizcore.hpp",
+        "sha256": "1a7e30f880adb8b61f085ffb22e985d12e0c0af39b19d48e1e6e9ad4024ebdcb",
+        "startOrdinal": 152,
+        "declarationCount": 15
+      },
+      {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/viz/include/opencv2/viz/widget_accessor.hpp",
+        "sha256": "a63e171e411037a14c380cc0e21aa6b939fe292d92c8732134fb920fbf87c93d",
+        "startOrdinal": 167,
+        "declarationCount": 3
+      },
+      {
+        "path": "opencv-source/opencv_contrib-5.1.0/modules/viz/include/opencv2/viz/widgets.hpp",
+        "sha256": "06c57cb3e2728b3ce68b1264fb69710c54403bf2a2ce576ca66f1cf1a06971b5",
+        "startOrdinal": 170,
+        "declarationCount": 101
+      }
+    ]
+  }
+}

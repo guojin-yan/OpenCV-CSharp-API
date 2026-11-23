@@ -3,19 +3,23 @@ param(
     [hashtable]$SourceCache,
     [object]$Extension,
     [object]$Raw,
-    [object]$Summary
+    [object]$Summary,
+    [ValidateSet('5.0.0','5.1.0')][string]$UpstreamVersion = '5.0.0',
+    [string]$EvidenceDirectory = ''
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 if ($null -eq $SourceCache) {
-    & (Join-Path $PSScriptRoot 'Test-CudevUpstreamMap.ps1') -RepositoryRoot $RepositoryRoot
+    & (Join-Path $PSScriptRoot 'Test-CudevUpstreamMap.ps1') -RepositoryRoot $RepositoryRoot -UpstreamVersion $UpstreamVersion -EvidenceDirectory $EvidenceDirectory
     return
 }
 # The parent independently validates the lexical inventory and supplies its
 # source/branch cache. No Python, tree-sitter, CUDA SDK or device is used here.
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-$syntaxPath = Join-Path $repo 'compatibility/cudev-source-callables.json'
+$evidencePrefix = if ($UpstreamVersion -eq '5.1.0') { 'compatibility/opencv-5.1.0/' } else { 'compatibility/' }
+if ([string]::IsNullOrWhiteSpace($EvidenceDirectory)) { $EvidenceDirectory = Join-Path $repo $evidencePrefix }
+$syntaxPath = Join-Path $EvidenceDirectory 'cudev-source-callables.json'
 $syntax = Get-Content -LiteralPath $syntaxPath -Raw | ConvertFrom-Json
 $syntaxHash = (Get-FileHash -LiteralPath $syntaxPath -Algorithm SHA256).Hash.ToLowerInvariant()
 $expectedCounts = [ordered]@{
@@ -25,8 +29,16 @@ $expectedCounts = [ordered]@{
     nonCallableExpansionCount = 213
     reconciledParserCallableCount = 110; declarationErrorCount = 0; bodyParseDiagnosticCount = 28
 }
+if ($UpstreamVersion -eq '5.1.0') {
+    $expectedCounts.callableDeclarationCount = 5463
+    $expectedCounts.macroGeneratedCallableCount = 4367
+    $expectedCounts.templateContextCallableCount = 2009
+    $expectedCounts.definitionCount = 5412
+    $expectedCounts.expandedMacroInvocationCount = 1092
+    $expectedCounts.nonCallableExpansionCount = 215
+}
 foreach ($link in @($Extension.sourceCallableInventory, $Summary.sourceCallableInventory)) {
-    if ([string]$link.path -cne 'compatibility/cudev-source-callables.json' -or [string]$link.sha256 -cne $syntaxHash) { throw 'Cudev source callable hash chain drifted.' }
+    if ([string]$link.path -cne "${evidencePrefix}cudev-source-callables.json" -or [string]$link.sha256 -cne $syntaxHash) { throw 'Cudev source callable hash chain drifted.' }
     foreach ($key in $expectedCounts.Keys) { if ([int]$link.counts.$key -ne $expectedCounts[$key]) { throw "Cudev source callable linked count drifted: $key" } }
 }
 $syntaxBytes = [IO.File]::ReadAllBytes($syntaxPath)
@@ -143,8 +155,8 @@ foreach ($header in $Extension.headers) {
 }
 
 function Assert-CudevSyntax([object]$Data) {
-    if ([int]$Data.schemaVersion -ne 1 -or [string]$Data.upstreamOpenCvVersion -cne '5.0.0' -or [string]$Data.generator -cne 'tools/CudevUpstreamMap/extract_source_callables.py' -or [string]$Data.syntaxParser.treeSitterVersion -cne '0.25.2' -or [string]$Data.syntaxParser.cppGrammarVersion -cne '0.23.4' -or [int]$Data.syntaxParser.languageAbi -ne 14) { throw 'Cudev syntax parser identity drifted.' }
-    if (-not [bool]$Data.localDeclarationMacroExpansionClaimed -or [bool]$Data.concreteTemplateInstantiationsClaimed -or [bool]$Data.externalDeclarationClosureClaimed -or [bool]$Data.cudaExecutionVerified -or [string]$Data.reviewDisposition -cne 'intentionally-omitted-unwrapped-device-source' -or [string]$Data.sourceInventoryPath -cne 'compatibility/cudev-source-reviewed-extensions.json' -or [string]$Data.limitation -notmatch 'uninstantiated source declaration occurrences' -or [string]$Data.limitation -notmatch 'C\+\+ type checking, linking and CUDA execution remain outside') { throw 'Cudev syntax evidence overstates its source scope.' }
+    if ([int]$Data.schemaVersion -ne 1 -or [string]$Data.upstreamOpenCvVersion -cne $UpstreamVersion -or [string]$Data.generator -cne 'tools/CudevUpstreamMap/extract_source_callables.py' -or [string]$Data.syntaxParser.treeSitterVersion -cne '0.25.2' -or [string]$Data.syntaxParser.cppGrammarVersion -cne '0.23.4' -or [int]$Data.syntaxParser.languageAbi -ne 14) { throw 'Cudev syntax parser identity drifted.' }
+    if (-not [bool]$Data.localDeclarationMacroExpansionClaimed -or [bool]$Data.concreteTemplateInstantiationsClaimed -or [bool]$Data.externalDeclarationClosureClaimed -or [bool]$Data.cudaExecutionVerified -or [string]$Data.reviewDisposition -cne 'intentionally-omitted-unwrapped-device-source' -or [string]$Data.sourceInventoryPath -cne "${evidencePrefix}cudev-source-reviewed-extensions.json" -or [string]$Data.limitation -notmatch 'uninstantiated source declaration occurrences' -or [string]$Data.limitation -notmatch 'C\+\+ type checking, linking and CUDA execution remain outside') { throw 'Cudev syntax evidence overstates its source scope.' }
     foreach ($key in $expectedCounts.Keys) { if ([int]$Data.counts.$key -ne $expectedCounts[$key]) { throw "Cudev source callable count drifted: $key" } }
     if ((@($Data.headers.path) -join '|') -cne (@($Extension.headers.path) -join '|')) { throw 'Cudev syntax inventory lost/reordered an installed header.' }
     $counts = @{}
@@ -305,5 +317,5 @@ foreach ($fixture in $fixtures) {
     try { Assert-CudevSyntax $value } catch { $rejected = $true }
     if (-not $rejected) { throw "Cudev source callable guard accepted negative fixture: $($fixture.Name)" }
 }
-Write-Host "CUDEV_SOURCE_CALLABLE_CONTRACT_OK declarations=5433 direct=1096 macroGenerated=4337 templates=1979 expansions=1088 reconciled=110 declarationErrors=0 bodyDiagnostics=28 fixtures=$($fixtures.Count)"
+Write-Host "CUDEV_SOURCE_CALLABLE_CONTRACT_OK declarations=$($syntax.counts.callableDeclarationCount) direct=1096 macroGenerated=$($syntax.counts.macroGeneratedCallableCount) templates=$($syntax.counts.templateContextCallableCount) expansions=$($syntax.counts.expandedMacroInvocationCount) reconciled=110 declarationErrors=0 bodyDiagnostics=28 fixtures=$($fixtures.Count)"
 return $fixtures.Count

@@ -1,0 +1,264 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/UpstreamMapRefresh",
+  "upstreamOpenCvVersion": "5.1.0",
+  "upstreamCommit": "e4f78fbcf1a773fbed69e14500e8b734963eb585",
+  "module": "matlab",
+  "claimedSlice": "Historical matlab parser scope refreshed against official 5.1 sources: parser-emitted declarations only; external backends, templates and runtime remain separately scoped",
+  "sourceHashPolicy": "UTF-8 source with CRLF/CR normalized to LF; no trimming",
+  "rawExtractionPath": "compatibility/opencv-5.1.0/matlab-upstream-raw.json",
+  "classificationPath": "compatibility/opencv-5.1.0/matlab-upstream-classifications.json",
+  "mappingPath": "compatibility/opencv-5.1.0/matlab-upstream-map.txt",
+  "deltaPath": "compatibility/opencv-5.1.0/matlab-upstream-delta.json",
+  "familyInventoryPath": "compatibility/opencv-5.1.0/matlab-implemented-families.json",
+  "rawSha256": "94640ffdecf734fd14351afc9d0c202169a0a6a5e797c41def77ad18009cec12",
+  "classificationSha256": "5017ae8a00cebbc97eea2f6bd447bdf7d3fd9100b6986a132b927817490a40f8",
+  "mappingSha256": "4b04530bcdcd27979cb2a7567d9cd0ea92571c67b28b1a0b9e79947732dc446a",
+  "deltaSha256": "71124a4e52427dfc8d7125db274c24762345747c991d0c3263d0732e6d6d390b",
+  "familyInventorySha256": "99f6eee85d8ceb1b377f8c4fe05ea66dad42d030462fc5f6cc6c340fee48280d",
+  "historicalRawSha256": "6f6c82a4ff2a644c8f5421bc3cecee2593d72d5ca29794d4de7b51bd113fee56",
+  "historicalClassificationSha256": "77a9f2259b47246998b74041909409a0ac0ce120103028d65997067fc8dfdbc0",
+  "sourceHeaderCount": 4,
+  "declarationCount": 190,
+  "callableCount": 185,
+  "classCount": 5,
+  "enumCount": 0,
+  "classificationCounts": {
+    "implemented": 0,
+    "intentionally-omitted": 185,
+    "missing": 0,
+    "non-callable-metadata": 5,
+    "unsupported": 0,
+    "upstream-conditional": 0
+  },
+  "deltaCounts": {
+    "added": 0,
+    "removed": 0,
+    "changed": 0,
+    "retained": 190
+  },
+  "negativeFixtureCount": 51,
+  "nativeEvidenceCount": 0,
+  "managedEvidenceCount": 0,
+  "repositoryWideUpstreamParityClaimed": false,
+  "completeCppParityClaimed": false,
+  "newRuntimeBehaviorCertified": false,
+  "sourceRepository": "opencv_contrib",
+  "upstreamContribCommit": "b67a855188a3d683813731010f6d39ac614733a4",
+  "parserMode": "non-wrapper-non-template-subset",
+  "parserNormalization": "Temporary copies rename __cplusplus to MATLAB_SOURCE_CPLUSPLUS=201103 and remove the L integer suffix only in its two \u003E= 201103L directives for the Python expression evaluator. Two static names lose parser-injected return-type text; qualified conversion operators regain Bridge ownership and C\u002B\u002B target spelling. Two inline definitions reconcile to their class declarations. /S and /C metadata remain unchanged; upstream source files remain untouched.",
+  "moduleBuildCondition": "MATLAB_FOUND_AND_PYTHON_AND_JINJA2_AND_MATCHING_BITNESS_AND_MEX_PROBES_AND_NOT_ANDROID_APPLE_FRAMEWORK",
+  "parserEvidence": {
+    "parserNameRepairs": [
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+        "parserName": "cv.bridge.operator cv.Mat",
+        "correctedName": "cv.bridge.Bridge.operator cv::Mat"
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+        "parserName": "cv.bridge.operator std.string",
+        "correctedName": "cv.bridge.Bridge.operator std::string"
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+        "parserName": "cv.bridge.operator cv.Point",
+        "correctedName": "cv.bridge.Bridge.operator cv::Point"
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+        "parserName": "cv.bridge.operator cv.Point2f",
+        "correctedName": "cv.bridge.Bridge.operator cv::Point2f"
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+        "parserName": "cv.bridge.operator cv.Point2d",
+        "correctedName": "cv.bridge.Bridge.operator cv::Point2d"
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+        "parserName": "cv.bridge.operator cv.Size",
+        "correctedName": "cv.bridge.Bridge.operator cv::Size"
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+        "parserName": "cv.bridge.operator cv.Moments",
+        "correctedName": "cv.bridge.Bridge.operator cv::Moments"
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+        "parserName": "cv.bridge.operator cv.Scalar",
+        "correctedName": "cv.bridge.Bridge.operator cv::Scalar"
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+        "parserName": "cv.bridge.operator cv.Rect",
+        "correctedName": "cv.bridge.Bridge.operator cv::Rect"
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+        "parserName": "cv.bridge.operator cv.RotatedRect",
+        "correctedName": "cv.bridge.Bridge.operator cv::RotatedRect"
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+        "parserName": "cv.bridge.operator cv.TermCriteria",
+        "correctedName": "cv.bridge.Bridge.operator cv::TermCriteria"
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+        "parserName": "cv.bridge.operator cv.RNG",
+        "correctedName": "cv.bridge.Bridge.operator cv::RNG"
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+        "parserName": "matlab.void conditionalError",
+        "correctedName": "matlab.conditionalError"
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/mxarray.hpp",
+        "parserName": "matlab.void error",
+        "correctedName": "matlab.error"
+      }
+    ],
+    "reconciledInlineDefinitions": [
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+        "identity": "cv.bridge.Bridge.operator=(const cv::Mat\u0026 mat)-\u003EBridge\u0026",
+        "retainedOrdinal": 9,
+        "reason": "Out-of-class inline definition reconciled to the existing class declaration; const/operator metadata is identical."
+      },
+      {
+        "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/matlab/include/opencv2/matlab/bridge.hpp",
+        "identity": "cv.bridge.Bridge.toMat()-\u003Ecv::Mat",
+        "retainedOrdinal": 10,
+        "reason": "Out-of-class inline definition reconciled to the existing class declaration; const/operator metadata is identical."
+      }
+    ],
+    "parserConfigurationProbes": [
+      {
+        "configuration": "source-cplusplus-199711",
+        "cplusplus": 199711,
+        "originalMxarrayDeclarationCount": 36,
+        "normalizedMxarrayDeclarationCount": 35,
+        "normalizedMapDeclarationCount": 0
+      },
+      {
+        "configuration": "source-cplusplus-201103",
+        "cplusplus": 201103,
+        "originalMxarrayDeclarationCount": 36,
+        "normalizedMxarrayDeclarationCount": 36,
+        "normalizedMapDeclarationCount": 0
+      },
+      {
+        "configuration": "source-cplusplus-201703",
+        "cplusplus": 201703,
+        "originalMxarrayDeclarationCount": 36,
+        "normalizedMxarrayDeclarationCount": 36,
+        "normalizedMapDeclarationCount": 0
+      }
+    ],
+    "sourceReviewedExtensionPath": "compatibility/opencv-5.1.0/matlab-source-reviewed-extensions.json",
+    "sourceReviewedExtensionSha256": "097910f54f9dfbc6db2b40308336d37e3cde67a5434cbeba62d76f0e45eefe59",
+    "sourceInventoryCounts": {
+      "templatesCount": 38,
+      "templateParametersCount": 0,
+      "macroDefinitionsCount": 0,
+      "conditionalDirectivesCount": 22,
+      "templateKindCounts": {
+        "alias-template": 1,
+        "class-template": 15,
+        "function-template": 22
+      }
+    },
+    "sourceInventoryLimitation": "This is the pinned hdr_parser non-template public subset, not complete MATLAB callable coverage. All four installed headers and every lexical template/conditional branch remain in a linked source inventory. The parser ignores __cplusplus checks, so temporary copies rename that identifier to a recorded numeric input. Templates, class-template members, specializations and generated \u002Bcv gateways are not enumerated as concrete APIs. A linked C\u002B\u002B CST separately enumerates uninstantiated source functions, class-template members and specializations, reconciles the parser callables and retains friend scope, constructor initializers and body diagnostics. External mex.h/standard-library/OpenCV include closure, C\u002B\u002B type checking, MATLAB/MEX build/link/runtime and complete callable parity remain unverified; the package has no MATLAB native or managed wrapper.",
+    "completeCallableCoverageClaimed": false,
+    "matlabExecutionVerified": false,
+    "optionalGeneratorModuleDependencies": [
+      "opencv_core",
+      "opencv_imgproc",
+      "opencv_ml",
+      "opencv_imgcodecs",
+      "opencv_videoio",
+      "opencv_highgui",
+      "opencv_objdetect",
+      "opencv_flann",
+      "opencv_features",
+      "opencv_photo",
+      "opencv_video",
+      "opencv_videostab",
+      "opencv_calib",
+      "opencv_geometry",
+      "opencv_stitching",
+      "opencv_superres",
+      "opencv_xfeatures2d",
+      "opencv_optflow",
+      "opencv_xphoto"
+    ],
+    "ownershipBoundaries": [
+      "MxArray from const mxArray* borrows and does not destroy the input.",
+      "MxArray copy construction duplicates the array; owned destruction calls mxDestroyArray.",
+      "releaseOwnership clears ownership before the pointer is returned to MATLAB.",
+      "Bridge Mat conversion uses deepCopyAndTranspose; generated object pointers and MEX exception handling require their own lifetime contract."
+    ],
+    "generatedBindingSurfaceIncluded": false,
+    "upstreamPlaceholderBoundaries": {
+      "noOpAssignmentDefinitionCount": 48,
+      "boolConversionReturnsZero": true,
+      "limitation": "Several Bridge conversions are upstream placeholder bodies. Header declarations and parser identities are not conversion correctness or MATLAB runtime evidence."
+    },
+    "sourceCallableInventory": {
+      "path": "compatibility/opencv-5.1.0/matlab-source-callables.json",
+      "sha256": "61ad11fbf1757d3e64d38635b31153395827851c8a75217d38ee941e8025a775",
+      "counts": {
+        "callableDeclarationCount": 242,
+        "directCallableCount": 242,
+        "templateContextCallableCount": 39,
+        "definitionCount": 238,
+        "declarationOnlyCount": 4,
+        "friendFunctionCount": 1,
+        "conditionalScopeBoundaryCount": 1,
+        "constructorInitializerCount": 10,
+        "reconciledParserCallableCount": 185,
+        "declarationErrorCount": 0,
+        "bodyParseDiagnosticCount": 1
+      }
+    }
+  },
+  "sourceInventories": [
+    {
+      "kind": "lexical",
+      "path": "compatibility/opencv-5.1.0/matlab-source-reviewed-extensions.json",
+      "sha256": "097910f54f9dfbc6db2b40308336d37e3cde67a5434cbeba62d76f0e45eefe59",
+      "counts": {
+        "templatesCount": 38,
+        "templateParametersCount": 0,
+        "macroDefinitionsCount": 0,
+        "conditionalDirectivesCount": 22,
+        "templateKindCounts": {
+          "alias-template": 1,
+          "class-template": 15,
+          "function-template": 22
+        }
+      }
+    },
+    {
+      "kind": "callables",
+      "path": "compatibility/opencv-5.1.0/matlab-source-callables.json",
+      "sha256": "61ad11fbf1757d3e64d38635b31153395827851c8a75217d38ee941e8025a775",
+      "counts": {
+        "callableDeclarationCount": 242,
+        "directCallableCount": 242,
+        "templateContextCallableCount": 39,
+        "definitionCount": 238,
+        "declarationOnlyCount": 4,
+        "friendFunctionCount": 1,
+        "conditionalScopeBoundaryCount": 1,
+        "constructorInitializerCount": 10,
+        "reconciledParserCallableCount": 185,
+        "declarationErrorCount": 0,
+        "bodyParseDiagnosticCount": 1
+      }
+    }
+  ]
+}

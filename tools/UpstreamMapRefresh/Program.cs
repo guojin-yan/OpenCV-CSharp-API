@@ -4,7 +4,7 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
 
-internal static class Program
+internal static partial class Program
 {
     private const string Version = "5.1.0";
     private const string Commit = "e4f78fbcf1a773fbed69e14500e8b734963eb585";
@@ -13,9 +13,9 @@ internal static class Program
     private const string ContribCommit = "b67a855188a3d683813731010f6d39ac614733a4";
     private const string CatalogPath = "compatibility/opencv-5.1.0/upstream-map-refresh-catalog.json";
     // Updating a reviewed slice requires reviewing its source and decisions together.
-    private const string ReviewedCatalogSha256 = "af1b66a6d650c43a8ef5a47c4a3fe96e2b4b49b85bd82017264c93db3751880d";
+    private const string ReviewedCatalogSha256 = "98ca65d767ded70018eb888cbc1c51a0460bdbabddcfa86e1c0762f86c67fdeb";
     private static readonly string[] Classes = { "implemented", "intentionally-omitted", "missing", "non-callable-metadata", "unsupported", "upstream-conditional" };
-    private static readonly string[] ScopeFields = { "parserMode", "parserNormalization", "deduplicateParserIdentities", "moduleBuildCondition", "excludedPublicHeaders" };
+    private static readonly string[] ScopeFields = { "parserMode", "parserNormalization", "deduplicateParserIdentities", "moduleBuildCondition", "excludedPublicHeaders", "parserEvidence" };
     private static readonly JsonSerializerOptions Json = new() { WriteIndented = true };
     private sealed record Options(string Repository, string Workspace, string Output, bool Check);
 
@@ -70,6 +70,7 @@ internal static class Program
             JsonObject previous = Read(Path.Combine(options.Repository, Str(module, "historicalClassificationPath")));
             Require(Str(old, "upstreamOpenCvVersion") == "5.0.0" && Str(previous, "upstreamOpenCvVersion") == "5.0.0", "Historical slice was relabeled.");
             ValidateRaw(raw, module, catalog, trusted);
+            int sourceFixtures = ValidateSourceInventories(options, raw, module);
             Source(options, Obj(module, "primaryHeader"));
             foreach (JsonNode? header in Arr(module, "sourceHeaders")) Source(options, header!.AsObject());
             if (module["compatibilityHeaders"] is JsonArray compatibilityHeaders)
@@ -88,7 +89,7 @@ internal static class Program
             JsonObject classified = Classify(raw, old, previous, module);
             ValidateClassification(raw, classified, old, previous, module, native, managed);
             JsonObject delta = Delta(raw, old, module);
-            int fixtures = Fixtures(raw, old, previous, module, catalog, trusted, classified, delta, native, managed);
+            int fixtures = Fixtures(raw, old, previous, module, catalog, trusted, classified, delta, native, managed) + sourceFixtures;
             fixtureTotal += fixtures;
             string classificationText = Serialize(classified), deltaText = Serialize(delta);
             var map = new StringBuilder($"# OpenCV {Version} {id} upstream-to-native-to-managed map\n");
@@ -128,6 +129,7 @@ internal static class Program
             foreach (string key in ScopeFields)
                 if (module[key] is not null) summary[key] = module[key]!.DeepClone();
             if (module["buildConditionReview"] is not null) summary["buildConditionReview"] = module["buildConditionReview"]!.DeepClone();
+            if (module["sourceInventories"] is not null) summary["sourceInventories"] = module["sourceInventories"]!.DeepClone();
             string summaryText = Serialize(summary);
             Write(options, stem + "classifications.json", classificationText);
             Write(options, stem + "delta.json", deltaText);
@@ -177,6 +179,8 @@ internal static class Program
         {
             Require(Str(headers[i]!, "path") == Str(expectedHeaders[i]!, "path") && Str(headers[i]!, "sha256") == Str(expectedHeaders[i]!, "sha256"), "Raw header closure drifted.");
             Require(Int(headers[i]!, "startOrdinal") == next && Int(headers[i]!, "declarationCount") >= 0, "Raw header partition drifted.");
+            foreach (string field in new[] { "parserDeclarationCount", "requiresCeres" })
+                Require(JsonNode.DeepEquals(headers[i]![field], expectedHeaders[i]![field]), "Raw header parser evidence drifted.");
             next += Int(headers[i]!, "declarationCount");
         }
         Require(next == rows.Count && rows.Count == Int(module, "declarationCount") && rows.Count == Int(raw, "declarationCount"), "Raw declaration count drifted.");
@@ -188,6 +192,7 @@ internal static class Program
             JsonNode header = headers.Single(h => i >= Int(h!, "startOrdinal") && i < Int(h!, "startOrdinal") + Int(h!, "declarationCount"))!;
             Require(Str(row, "sourceHeader") == Str(header, "path"), "Raw declaration source scope drifted.");
             Require(JsonNode.DeepEquals(row["surface"], header["surface"]), "Raw declaration surface drifted.");
+            Require(JsonNode.DeepEquals(row["requiresCeres"], header["requiresCeres"]), "Raw Ceres declaration partition drifted.");
             Require(Str(row, "identity") == Identity(row, Str(module, "identityPolicy")), "Raw signature identity drifted.");
         }
         Require(rows.Count(row => Str(row!, "kind") == "callable") == Int(module, "callableCount"), "Raw callable partition drifted.");
@@ -203,7 +208,7 @@ internal static class Program
             (Str(a!, "default").Length > 0 ? "=" + Str(a!, "default") : "") + (Arr(a!, "modifiers").Count > 0 ? "[" + string.Join(',', Strings(a!, "modifiers")) + "]" : ""))) + ")->" + Str(row, "returnType");
     }
 
-    private static string[] ChangedFields(JsonNode before, JsonNode after) => new[] { "kind", "name", "identity", "returnType", "modifiers", "arguments", "enumValues", "baseDeclaration", "documentation" }
+    private static string[] ChangedFields(JsonNode before, JsonNode after) => new[] { "kind", "name", "identity", "returnType", "modifiers", "arguments", "enumValues", "baseDeclaration", "documentation", "requiresCeres", "requiresCpp11", "upstreamWrapperAnnotated" }
         .Where(key => !JsonNode.DeepEquals(before[key], after[key])).ToArray();
 
     private static void ValidateReviews(JsonObject raw, JsonObject old, JsonObject module)
@@ -387,7 +392,10 @@ internal static class Program
             Raw("signature", "Raw signature identity", v => CallableOrMetadata(v)["returnType"] = "unreviewed");
         else
             Raw("metadata identity", "Raw signature identity", v => CallableOrMetadata(v)["name"] = "cv.Unreviewed");
-        Raw("lost documentation", "Raw reviewed snapshot", v => Arr(v, "declarations").First(row => Str(row!, "documentation").Length > 0)!["documentation"] = "");
+        if (Arr(raw, "declarations").Any(row => Str(row!, "documentation").Length > 0))
+            Raw("lost documentation", "Raw reviewed snapshot", v => Arr(v, "declarations").First(row => Str(row!, "documentation").Length > 0)!["documentation"] = "");
+        else
+            Raw("invented documentation", "Raw reviewed snapshot", v => Arr(v, "declarations")[0]!["documentation"] = "unreviewed");
         if (Arr(raw, "declarations").Any(row => Str(row!, "kind") == "class" && Arr(row!, "arguments").Count > 0))
             Raw("lost class property", "Raw reviewed snapshot", v => Arr(Arr(v, "declarations").First(row => Str(row!, "kind") == "class" && Arr(row!, "arguments").Count > 0)!, "arguments").RemoveAt(0));
         else
@@ -450,6 +458,11 @@ internal static class Program
         foreach (string key in ScopeFields)
             if (module[key] is not null)
                 Raw("lost scope " + key, "Raw scope " + key, v => v.Remove(key));
+        if (Arr(raw, "sourceHeaders").Any(row => row!["parserDeclarationCount"] is not null))
+            Raw("false parser declaration count", "Raw header parser evidence", v => Arr(v, "sourceHeaders").First(row => row!["parserDeclarationCount"] is not null)!["parserDeclarationCount"] = -1);
+        foreach (string key in new[] { "requiresCeres", "requiresCpp11", "upstreamWrapperAnnotated" })
+            if (Arr(raw, "declarations").Any(row => row![key] is not null))
+                Raw("false " + key, key == "requiresCeres" ? "Raw Ceres declaration partition" : "Raw reviewed snapshot", v => Arr(v, "declarations")[0]![key] = !Bool(Arr(v, "declarations")[0]!, key));
         if (Arr(module, "addedReviews").Any(row => Str(row!, "classification") == "intentionally-omitted" && row!["buildCondition"] is not null))
         {
             JsonNode ConditionalAddition(JsonObject v) => Arr(v, "addedReviews").First(row => row!["buildCondition"] is not null)!;

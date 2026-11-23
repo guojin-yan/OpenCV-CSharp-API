@@ -3,19 +3,23 @@ param(
     [hashtable]$SourceCache,
     [object]$Extension,
     [object]$Raw,
-    [object]$Summary
+    [object]$Summary,
+    [ValidateSet('5.0.0','5.1.0')][string]$UpstreamVersion = '5.0.0',
+    [string]$EvidenceDirectory = ''
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 if ($null -eq $SourceCache) {
-    & (Join-Path $PSScriptRoot 'Test-MatlabUpstreamMap.ps1') -RepositoryRoot $RepositoryRoot
+    & (Join-Path $PSScriptRoot 'Test-MatlabUpstreamMap.ps1') -RepositoryRoot $RepositoryRoot -UpstreamVersion $UpstreamVersion -EvidenceDirectory $EvidenceDirectory
     return
 }
 # The parent supplies independently checked lexical/source/branch witnesses.
 # Checked-in CST evidence needs neither Python nor a MATLAB installation.
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-$syntaxPath = Join-Path $repo 'compatibility/matlab-source-callables.json'
+$evidencePrefix = if ($UpstreamVersion -eq '5.1.0') { 'compatibility/opencv-5.1.0/' } else { 'compatibility/' }
+if ([string]::IsNullOrWhiteSpace($EvidenceDirectory)) { $EvidenceDirectory = Join-Path $repo $evidencePrefix }
+$syntaxPath = Join-Path $EvidenceDirectory 'matlab-source-callables.json'
 $syntax = Get-Content -LiteralPath $syntaxPath -Raw | ConvertFrom-Json
 $expectedCounts = [ordered]@{
     callableDeclarationCount = 242; directCallableCount = 242; templateContextCallableCount = 39
@@ -24,7 +28,7 @@ $expectedCounts = [ordered]@{
 }
 $syntaxHash = (Get-FileHash -LiteralPath $syntaxPath -Algorithm SHA256).Hash.ToLowerInvariant()
 foreach ($link in @($Extension.sourceCallableInventory, $Summary.sourceCallableInventory)) {
-    if ([string]$link.path -cne 'compatibility/matlab-source-callables.json' -or [string]$link.sha256 -cne $syntaxHash) { throw 'MATLAB source callable hash chain drifted.' }
+    if ([string]$link.path -cne "${evidencePrefix}matlab-source-callables.json" -or [string]$link.sha256 -cne $syntaxHash) { throw 'MATLAB source callable hash chain drifted.' }
     foreach ($key in $expectedCounts.Keys) { if ([int]$link.counts.$key -ne $expectedCounts[$key]) { throw "MATLAB linked source callable count drifted: $key" } }
 }
 if ([string]$Summary.coverageStatus -cne 'parser-subset-with-expanded-source-callable-inventory') { throw 'MATLAB source callable coverage status drifted.' }
@@ -71,9 +75,9 @@ foreach ($header in $Extension.headers) {
 }
 
 function Assert-MatlabSyntax([object]$Data) {
-    if ([int]$Data.schemaVersion -ne 1 -or [string]$Data.upstreamOpenCvVersion -cne '5.0.0' -or [string]$Data.generator -cne 'tools/MatlabUpstreamMap/extract_matlab_callables.py' -or [string]$Data.syntaxParser.treeSitterVersion -cne '0.25.2' -or [string]$Data.syntaxParser.cppGrammarVersion -cne '0.23.4' -or [int]$Data.syntaxParser.languageAbi -ne 14) { throw 'MATLAB source syntax parser identity drifted.' }
+    if ([int]$Data.schemaVersion -ne 1 -or [string]$Data.upstreamOpenCvVersion -cne $UpstreamVersion -or [string]$Data.generator -cne 'tools/MatlabUpstreamMap/extract_matlab_callables.py' -or [string]$Data.syntaxParser.treeSitterVersion -cne '0.25.2' -or [string]$Data.syntaxParser.cppGrammarVersion -cne '0.23.4' -or [int]$Data.syntaxParser.languageAbi -ne 14) { throw 'MATLAB source syntax parser identity drifted.' }
     foreach ($flag in @('completeCallableCoverageClaimed','concreteTemplateInstantiationsClaimed','externalDeclarationClosureClaimed','generatedBindingSurfaceIncluded','matlabExecutionVerified')) { if ([bool]$Data.$flag) { throw "MATLAB syntax evidence overstates coverage: $flag" } }
-    if ([string]$Data.reviewDisposition -cne 'intentionally-omitted-unwrapped-matlab-source' -or [string]$Data.sourceInventoryPath -cne 'compatibility/matlab-source-reviewed-extensions.json' -or [string]$Data.limitation -notmatch 'uninstantiated source function declaration occurrences' -or [string]$Data.limitation -notmatch 'C\+\+ type checking' -or [string]$Data.limitation -notmatch 'MATLAB/MEX execution remain outside') { throw 'MATLAB syntax inventory lost its scope limitations.' }
+    if ([string]$Data.reviewDisposition -cne 'intentionally-omitted-unwrapped-matlab-source' -or [string]$Data.sourceInventoryPath -cne "${evidencePrefix}matlab-source-reviewed-extensions.json" -or [string]$Data.limitation -notmatch 'uninstantiated source function declaration occurrences' -or [string]$Data.limitation -notmatch 'C\+\+ type checking' -or [string]$Data.limitation -notmatch 'MATLAB/MEX execution remain outside') { throw 'MATLAB syntax inventory lost its scope limitations.' }
     foreach ($key in $expectedCounts.Keys) { if ([int]$Data.counts.$key -ne $expectedCounts[$key]) { throw "MATLAB source callable count drifted: $key" } }
     if ((@($Data.headers.path) -join '|') -cne (@($Extension.headers.path) -join '|')) { throw 'MATLAB source callable inventory lost/reordered a header.' }
     $counts, $byOrdinal, $parameterCache = @{}, @{}, @{}

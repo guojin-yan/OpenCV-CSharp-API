@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.1.0",
+  "module": "cudabgsegm",
+  "claimedSlice": "Historical cudabgsegm parser scope refreshed against official 5.1 sources: parser-emitted declarations only; external backends, templates and runtime remain separately scoped",
+  "reviewStatus": "reviewed-parser-slice",
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.cuda.BackgroundSubtractorMOG",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 0,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.cuda.BackgroundSubtractorMOG.apply(Mat image;Mat fgmask[/O];double learningRate;Stream stream[/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA background-segmentation surface in cv::cuda has no native CudaBgSegm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while execution requires an external CUDA toolkit/runtime. GpuMat/Stream ownership, asynchronous execution, and background-model state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 1,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.cuda.BackgroundSubtractorMOG.apply(Mat image;Mat knownForegroundMask;Mat fgmask[/O];double learningRate;Stream stream[/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA background-segmentation surface in cv::cuda has no native CudaBgSegm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while execution requires an external CUDA toolkit/runtime. GpuMat/Stream ownership, asynchronous execution, and background-model state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 2,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.cuda.BackgroundSubtractorMOG.getBackgroundImage(GpuMat backgroundImage[/O,/Ref];Stream stream[/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA background-segmentation surface in cv::cuda has no native CudaBgSegm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while execution requires an external CUDA toolkit/runtime. GpuMat/Stream ownership, asynchronous execution, and background-model state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 3,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.cuda.BackgroundSubtractorMOG.getHistory()-\u003Eint",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA background-segmentation surface in cv::cuda has no native CudaBgSegm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while execution requires an external CUDA toolkit/runtime. GpuMat/Stream ownership, asynchronous execution, and background-model state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 4,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.cuda.BackgroundSubtractorMOG.setHistory(int nframes)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA background-segmentation surface in cv::cuda has no native CudaBgSegm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while execution requires an external CUDA toolkit/runtime. GpuMat/Stream ownership, asynchronous execution, and background-model state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 5,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.cuda.BackgroundSubtractorMOG.getNMixtures()-\u003Eint",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA background-segmentation surface in cv::cuda has no native CudaBgSegm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while execution requires an external CUDA toolkit/runtime. GpuMat/Stream ownership, asynchronous execution, and background-model state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 6,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.cuda.BackgroundSubtractorMOG.setNMixtures(int nmix)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA background-segmentation surface in cv::cuda has no native CudaBgSegm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while execution requires an external CUDA toolkit/runtime. GpuMat/Stream ownership, asynchronous execution, and background-model state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 7,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.cuda.BackgroundSubtractorMOG.getBackgroundRatio()-\u003Edouble",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA background-segmentation surface in cv::cuda has no native CudaBgSegm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while execution requires an external CUDA toolkit/runtime. GpuMat/Stream ownership, asynchronous execution, and background-model state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 8,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.cuda.BackgroundSubtractorMOG.setBackgroundRatio(double backgroundRatio)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA background-segmentation surface in cv::cuda has no native CudaBgSegm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while execution requires an external CUDA toolkit/runtime. GpuMat/Stream ownership, asynchronous execution, and background-model state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 9,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.cuda.BackgroundSubtractorMOG.getNoiseSigma()-\u003Edouble",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA background-segmentation surface in cv::cuda has no native CudaBgSegm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while execution requires an external CUDA toolkit/runtime. GpuMat/Stream ownership, asynchronous execution, and background-model state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 10,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.cuda.BackgroundSubtractorMOG.setNoiseSigma(double noiseSigma)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA background-segmentation surface in cv::cuda has no native CudaBgSegm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while execution requires an external CUDA toolkit/runtime. GpuMat/Stream ownership, asynchronous execution, and background-model state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 11,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.cuda.createBackgroundSubtractorMOG(int history=200;int nmixtures=5;double backgroundRatio=0.7;double noiseSigma=0)-\u003EPtr\u003Ccuda::BackgroundSubtractorMOG\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA background-segmentation surface in cv::cuda has no native CudaBgSegm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while execution requires an external CUDA toolkit/runtime. GpuMat/Stream ownership, asynchronous execution, and background-model state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 12,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 13,
+      "identity": "class cv.cuda.BackgroundSubtractorMOG2",
+      "classification": "non-callable-metadata",
+      "reason": "Enum and class declarations are retained as parser metadata; callable evidence is classified independently.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 13,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.cuda.BackgroundSubtractorMOG2.apply(Mat image;Mat fgmask[/O];double learningRate;Stream stream[/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA background-segmentation surface in cv::cuda has no native CudaBgSegm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while execution requires an external CUDA toolkit/runtime. GpuMat/Stream ownership, asynchronous execution, and background-model state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 14,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.cuda.BackgroundSubtractorMOG2.apply(Mat image;Mat knownForegroundMask;Mat fgmask[/O];double learningRate;Stream stream[/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA background-segmentation surface in cv::cuda has no native CudaBgSegm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while execution requires an external CUDA toolkit/runtime. GpuMat/Stream ownership, asynchronous execution, and background-model state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 15,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.cuda.BackgroundSubtractorMOG2.getBackgroundImage(GpuMat backgroundImage[/O,/Ref];Stream stream[/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA background-segmentation surface in cv::cuda has no native CudaBgSegm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while execution requires an external CUDA toolkit/runtime. GpuMat/Stream ownership, asynchronous execution, and background-model state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 16,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.cuda.createBackgroundSubtractorMOG2(int history=500;double varThreshold=16;bool detectShadows=true)-\u003EPtr\u003Ccuda::BackgroundSubtractorMOG2\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "The CUDA background-segmentation surface in cv::cuda has no native CudaBgSegm wrapper entrypoint or managed public owner in the current package; OpenCV disables the module on iOS and unless CUDA or CUDA stubs are enabled, while execution requires an external CUDA toolkit/runtime. GpuMat/Stream ownership, asynchronous execution, and background-model state remain outside the current ABI/API and deterministic smoke contract.",
+      "buildCondition": "NOT_IOS_AND_(HAVE_CUDA_OR_BUILD_CUDA_STUBS)",
+      "nativeEntrypoints": [],
+      "managedMembers": [],
+      "historicalOrdinal": 17,
+      "refreshReview": "Exact historical identity retained; evidence and managed validation remain the recorded binding scope."
+    }
+  ]
+}

@@ -328,6 +328,7 @@ def main():
     parser.add_argument("--workspace", required=True)
     parser.add_argument("--output", required=True)
     parser.add_argument("--syntax-parser-root", required=True)
+    parser.add_argument("--upstream-version", choices=("5.0.0", "5.1.0"), default="5.0.0")
     args = parser.parse_args()
     workspace, output, syntax_root = (Path(value).resolve() for value in (args.workspace, args.output, args.syntax_parser_root))
     sys.path.insert(0, str(syntax_root))
@@ -399,14 +400,14 @@ def main():
               "nonCallableExpansionCount": sum(expansion["callableCount"] == 0 for header in headers for expansion in header["macroExpansions"]),
               "reconciledParserCallableCount": len(reconciled), "declarationErrorCount": 0,
               "bodyParseDiagnosticCount": sum(len(header["bodyParseDiagnostics"]) for header in headers)}
-    result = {"schemaVersion": 1, "upstreamOpenCvVersion": "5.0.0", "generator": "tools/CudevUpstreamMap/extract_source_callables.py",
+    result = {"schemaVersion": 1, "upstreamOpenCvVersion": args.upstream_version, "generator": "tools/CudevUpstreamMap/extract_source_callables.py",
               "syntaxParser": {"treeSitterVersion": "0.25.2", "cppGrammarVersion": "0.23.4", "languageAbi": language.abi_version},
-              "sourceInventoryPath": "compatibility/cudev-source-reviewed-extensions.json", "reviewDisposition": "intentionally-omitted-unwrapped-device-source",
+              "sourceInventoryPath": ("compatibility/" if args.upstream_version == "5.0.0" else "compatibility/opencv-5.1.0/") + "cudev-source-reviewed-extensions.json", "reviewDisposition": "intentionally-omitted-unwrapped-device-source",
               "localDeclarationMacroExpansionClaimed": True, "concreteTemplateInstantiationsClaimed": False,
               "externalDeclarationClosureClaimed": False, "cudaExecutionVerified": False, "limitation": LIMITATION,
               "counts": counts, "parserCallableReconciliation": reconciled, "headers": headers}
     write_json(output, result)
-    lexical["sourceCallableInventory"] = {"path": "compatibility/cudev-source-callables.json", "sha256": sha256(output), "counts": counts}
+    lexical["sourceCallableInventory"] = {"path": ("compatibility/" if args.upstream_version == "5.0.0" else "compatibility/opencv-5.1.0/") + "cudev-source-callables.json", "sha256": sha256(output), "counts": counts}
     write_json(lexical_path, lexical)
     raw_map["sourceReviewedExtensionSha256"] = sha256(lexical_path)
     write_json(raw_path, raw_map)

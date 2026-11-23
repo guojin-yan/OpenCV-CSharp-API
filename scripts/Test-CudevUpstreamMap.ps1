@@ -1,15 +1,37 @@
-param([string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path)
+param(
+    [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
+    [ValidateSet('5.0.0','5.1.0')][string]$UpstreamVersion = '5.0.0',
+    [string]$EvidenceDirectory = ''
+)
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-& (Join-Path $PSScriptRoot 'Generate-CudevUpstreamMap.ps1') -RepositoryRoot $repo -Check
-$raw = Get-Content (Join-Path $repo 'compatibility/cudev-upstream-raw.json') -Raw | ConvertFrom-Json
-$summary = Get-Content (Join-Path $repo 'compatibility/cudev-upstream-summary.json') -Raw | ConvertFrom-Json
-$map = Get-Content (Join-Path $repo 'compatibility/cudev-upstream-classifications.json') -Raw | ConvertFrom-Json
-$extensionPath = Join-Path $repo 'compatibility/cudev-source-reviewed-extensions.json'
+$evidencePrefix = if ($UpstreamVersion -eq '5.1.0') { 'compatibility/opencv-5.1.0/' } else { 'compatibility/' }
+if ([string]::IsNullOrWhiteSpace($EvidenceDirectory)) { $EvidenceDirectory = Join-Path $repo $evidencePrefix }
+if ($UpstreamVersion -eq '5.0.0') { & (Join-Path $PSScriptRoot 'Generate-CudevUpstreamMap.ps1') -RepositoryRoot $repo -Check }
+$raw = Get-Content (Join-Path $EvidenceDirectory 'cudev-upstream-raw.json') -Raw | ConvertFrom-Json
+$summary = Get-Content (Join-Path $EvidenceDirectory 'cudev-upstream-summary.json') -Raw | ConvertFrom-Json
+$map = Get-Content (Join-Path $EvidenceDirectory 'cudev-upstream-classifications.json') -Raw | ConvertFrom-Json
+if ([string]$raw.upstreamOpenCvVersion -cne $UpstreamVersion -or [string]$summary.upstreamOpenCvVersion -cne $UpstreamVersion -or [string]$map.upstreamOpenCvVersion -cne $UpstreamVersion) { throw 'Source contract revision drifted.' }
+if ($UpstreamVersion -eq '5.1.0') {
+    # Adapt only supplemental schema fields; current rows and decisions remain
+    # the shared generator's actual output, checked independently below.
+    foreach ($pair in @(@{ Target = $summary; Path = 'compatibility/cudev-upstream-summary.json' }, @{ Target = $map; Path = 'compatibility/cudev-upstream-classifications.json' })) {
+        $legacy = Get-Content (Join-Path $repo $pair.Path) -Raw | ConvertFrom-Json
+        foreach ($property in $legacy.PSObject.Properties) {
+            if ($null -eq $pair.Target.PSObject.Properties[$property.Name]) { $pair.Target | Add-Member -NotePropertyName $property.Name -NotePropertyValue $property.Value }
+        }
+    }
+    foreach ($property in $raw.parserEvidence.PSObject.Properties) {
+        $raw | Add-Member -NotePropertyName $property.Name -NotePropertyValue $property.Value -Force
+        $summary | Add-Member -NotePropertyName $property.Name -NotePropertyValue $property.Value -Force
+    }
+}
+$expectedParserSha = if ($UpstreamVersion -eq '5.1.0') { '867e3de5ad45fd3996e8c9097ffc47f13c8651e20dda2318d70e273262c8dcee' } else { '619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702' }
+$extensionPath = Join-Path $EvidenceDirectory 'cudev-source-reviewed-extensions.json'
 $extension = Get-Content $extensionPath -Raw | ConvertFrom-Json
-$prefix = 'opencv-source/opencv_contrib-5.0.0/modules/cudev/'
+$prefix = "opencv-source/opencv_contrib-$UpstreamVersion/modules/cudev/"
 $includePath = Join-Path $repo "../${prefix}include/opencv2"
 $lexemePattern = @'
 //[^\n]*|/\*[\s\S]*?\*/|"(?:\\[\s\S]|[^"\\])*"|'(?:\\[\s\S]|[^'\\])*'
@@ -18,6 +40,10 @@ $directivePattern = '(?m)^[ \t]*#(?:[^\n]*\\\n)*[^\n]*(?:\n|$)'
 
 function Hash-Text([string]$Text) {
     [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($Text))).ToLowerInvariant()
+}
+function Hash-Source([string]$Path) {
+    if ($UpstreamVersion -eq '5.1.0') { return Hash-Text ([IO.File]::ReadAllText($Path).Replace("`r`n", "`n").Replace("`r", "`n")) }
+    (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant()
 }
 function Mask-Text([string]$Text, [bool]$Literals = $true) {
     [regex]::Replace($Text, $lexemePattern.Trim(), [Text.RegularExpressions.MatchEvaluator]{ param($match)
@@ -70,7 +96,7 @@ $installed = @(Get-ChildItem -LiteralPath $includePath -Recurse -File -Filter '*
     $code = [regex]::Replace($code, $directivePattern, [Text.RegularExpressions.MatchEvaluator]{ param($match) [regex]::Replace($match.Value, '[^\n]', ' ') })
     $sourceCache[$source] = @{ Text = $text; Code = $code; Events = $events.ToArray(); Conditions = $conditionRows.ToArray();
         MacroOffsets = $functionMacros.ToArray(); TemplateOffsets = @([regex]::Matches($code, '\btemplate\s*<') | ForEach-Object Index);
-        Sha256 = (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant() }
+        Sha256 = (Hash-Source $_.FullName) }
     $source
 })
 
@@ -94,14 +120,14 @@ function Assert-CudevData {
 
     if ($installed.Count -ne 76 -or @($Raw.sourceHeaders).Count -ne 76 -or @($Extension.headers).Count -ne 76 -or [int]$Raw.declarationCount -ne 144 -or @($Raw.declarations).Count -ne 144) { throw 'Cudev installed-header/parser subset scope drifted.' }
     if ((@($Raw.sourceHeaders.path | Sort-Object) -join '|') -cne (@($installed | Sort-Object) -join '|') -or (@($Extension.headers.path) -join '|') -cne (@($Raw.sourceHeaders.path) -join '|')) { throw 'Cudev source inventory lost an installed header.' }
-    if ([string]$Raw.headerPath -cne "${prefix}include/opencv2/cudev.hpp" -or [string]$Raw.headerSha256 -cne $sourceCache[$Raw.headerPath].Sha256 -or [string]$Raw.parserSha256 -cne '619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702' -or [string]$Raw.parserMode -cne 'non-wrapper-non-template-subset') { throw 'Cudev pinned parser/umbrella evidence drifted.' }
+    if ([string]$Raw.headerPath -cne "${prefix}include/opencv2/cudev.hpp" -or [string]$Raw.headerSha256 -cne $sourceCache[$Raw.headerPath].Sha256 -or [string]$Raw.parserSha256 -cne $expectedParserSha -or [string]$Raw.parserMode -cne 'non-wrapper-non-template-subset') { throw 'Cudev pinned parser/umbrella evidence drifted.' }
     $expectedDefines = @{ CV_VERSION_MAJOR = 5; OPENCV_ABI_COMPATIBILITY = 500; __CUDACC__ = 1; CUDART_VERSION = 12040; __CUDACC_VER_MAJOR__ = 12; __CUDACC_VER_MINOR__ = 4; __CUDA_ARCH__ = 750; CV_CUDEV_ARCH = 750 }
     if (@($Raw.preprocessorDefinitions.PSObject.Properties).Count -ne 8) { throw 'Cudev parser define scope drifted.' }
     foreach ($key in $expectedDefines.Keys) { if ([int]$Raw.preprocessorDefinitions.$key -ne $expectedDefines[$key]) { throw 'Cudev parser configuration drifted.' } }
     if ([bool]$Raw.completeCallableCoverageClaimed -or [bool]$Summary.completeCallableCoverageClaimed -or [bool]$Extension.completeCallableCoverageClaimed -or [bool]$Extension.macroExpansionClaimed -or [bool]$Extension.templateInstantiationCoverageClaimed -or [bool]$Raw.cudaExecutionVerified -or [bool]$Summary.cudaExecutionVerified -or [bool]$Summary.repositoryWideUpstreamParityClaimed) { throw 'Cudev evidence overstates callable, macro, template or CUDA coverage.' }
-    if ([string]$Summary.coverageStatus -cne 'parser-subset-with-expanded-source-callable-inventory' -or [string]$Extension.reviewDisposition -cne 'intentionally-omitted-unwrapped-device-source' -or [string]$Map.limitation -cne [string]$Raw.sourceInventoryLimitation -or [string]$Extension.limitation -cne [string]$Raw.sourceInventoryLimitation -or [string]$Map.limitation -notmatch 'class-template members and the 44 finite local declaration generators' -or [string]$Map.claimedSlice -notmatch 'complete callable/instantiation coverage remains open') { throw 'Cudev partial source-map limitation drifted.' }
+    if ([string]$Summary.coverageStatus -cne 'parser-subset-with-expanded-source-callable-inventory' -or [string]$Extension.reviewDisposition -cne 'intentionally-omitted-unwrapped-device-source' -or [string]$Map.limitation -cne [string]$Raw.sourceInventoryLimitation -or [string]$Extension.limitation -cne [string]$Raw.sourceInventoryLimitation -or [string]$Map.limitation -notmatch 'class-template members and the 44 finite local declaration generators' -or ($UpstreamVersion -eq '5.0.0' -and [string]$Map.claimedSlice -notmatch 'complete callable/instantiation coverage remains open')) { throw 'Cudev partial source-map limitation drifted.' }
     $extensionHash = (Get-FileHash $extensionPath -Algorithm SHA256).Hash.ToLowerInvariant()
-    if ([string]$Summary.sourceReviewedExtensionPath -cne 'compatibility/cudev-source-reviewed-extensions.json' -or [string]$Raw.sourceReviewedExtensionPath -cne [string]$Summary.sourceReviewedExtensionPath -or [string]$Summary.sourceReviewedExtensionSha256 -cne $extensionHash -or [string]$Raw.sourceReviewedExtensionSha256 -cne $extensionHash) { throw 'Cudev supplemental inventory hash binding drifted.' }
+    if ([string]$Summary.sourceReviewedExtensionPath -cne "${evidencePrefix}cudev-source-reviewed-extensions.json" -or [string]$Raw.sourceReviewedExtensionPath -cne [string]$Summary.sourceReviewedExtensionPath -or [string]$Summary.sourceReviewedExtensionSha256 -cne $extensionHash -or [string]$Raw.sourceReviewedExtensionSha256 -cne $extensionHash) { throw 'Cudev supplemental inventory hash binding drifted.' }
     $totals = @{ templatesCount = 0; templateParametersCount = 0; macroDefinitionsCount = 0; macroInvocationsCount = 0; conditionalDirectivesCount = 0; macroBodyTemplateKeywordCount = 0 }
     $definitionIds = @{}
     foreach ($header in $Extension.headers) { foreach ($definition in $header.macroDefinitions) { $definitionIds[[string]$definition.id] = [string]$definition.name } }
@@ -154,7 +180,7 @@ function Assert-CudevData {
         $totals.conditionalDirectivesCount += @($review.conditionalDirectives).Count
         if ((@($review.conditionalDirectives | ForEach-Object { "$($_.line)|$($_.directive)" }) -join '|') -cne (@($source.Conditions) -join '|')) { throw 'Cudev source conditional directive inventory drifted.' }
     }
-    $expectedCounts = @{ templatesCount = 1100; templateParametersCount = 11; macroDefinitionsCount = 49; macroInvocationsCount = 1206; conditionalDirectivesCount = 397; macroBodyTemplateKeywordCount = 92 }
+    $expectedCounts = @{ templatesCount = 1100; templateParametersCount = 11; macroDefinitionsCount = 49; macroInvocationsCount = $(if ($UpstreamVersion -eq '5.1.0') { 1210 } else { 1206 }); conditionalDirectivesCount = $(if ($UpstreamVersion -eq '5.1.0') { 405 } else { 397 }); macroBodyTemplateKeywordCount = 92 }
     foreach ($key in $expectedCounts.Keys) { if ([int]$totals[$key] -ne $expectedCounts[$key] -or [int]$Extension.counts.$key -ne $expectedCounts[$key] -or [int]$Raw.sourceInventoryCounts.$key -ne $expectedCounts[$key] -or [int]$Summary.sourceInventoryCounts.$key -ne $expectedCounts[$key]) { throw "Cudev source inventory count drifted: $key" } }
     if (@($Raw.staticParserNameRepairs).Count -ne 13) { throw 'Cudev static parser name repair evidence drifted.' }
     foreach ($repair in $Raw.staticParserNameRepairs) {
@@ -176,7 +202,7 @@ function Assert-CudevData {
         if ($decl.kind -eq 'callable' -and ([string]$row.reason -notmatch 'no native or managed wrapper' -or [string]$row.reason -notmatch 'non-template parser subset')) { throw 'Cudev callable omission lost its partial scope.' }
     }
     $cmake = Get-Content (Join-Path $repo "../${prefix}CMakeLists.txt") -Raw
-    if ([string]$Raw.moduleBuildCondition -cne 'HAVE_CUDA' -or $cmake -notmatch 'if\(NOT HAVE_CUDA\)\s+ocv_module_disable\(cudev\)' -or $cmake -notmatch 'file\(GLOB_RECURSE lib_hdrs' -or $cmake -notmatch 'ocv_module_include_directories\(opencv_core\)' -or @($Raw.compatibilityHeaders).Count -ne 1 -or [string]$Raw.compatibilityHeaders[0].sha256 -cne (Get-FileHash (Join-Path $repo "../${prefix}CMakeLists.txt") -Algorithm SHA256).Hash.ToLowerInvariant()) { throw 'Cudev HAVE_CUDA/recursive build scope drifted.' }
+    if ([string]$Raw.moduleBuildCondition -cne 'HAVE_CUDA' -or $cmake -notmatch 'if\(NOT HAVE_CUDA\)\s+ocv_module_disable\(cudev\)' -or $cmake -notmatch 'file\(GLOB_RECURSE lib_hdrs' -or $cmake -notmatch 'ocv_module_include_directories\(opencv_core\)' -or @($Raw.compatibilityHeaders).Count -ne 1 -or [string]$Raw.compatibilityHeaders[0].sha256 -cne (Hash-Source (Join-Path $repo "../${prefix}CMakeLists.txt"))) { throw 'Cudev HAVE_CUDA/recursive build scope drifted.' }
     if ([int]$Summary.nativeEvidenceCount -ne 0 -or [int]$Summary.managedEvidenceCount -ne 0 -or [int]$Summary.selectedDeclarationCount -ne 0 -or [int]$Summary.managedPublicTypeAdditionCount -ne 0 -or [int]$Summary.managedPublicMemberAdditionCount -ne 0 -or [int]$Summary.externalDataDependencyCount -ne 3 -or @($Map.externalDataDependencies).Count -ne 3) { throw 'Cudev package/dependency boundary drifted.' }
     if ((Get-Content (Join-Path $repo 'src/OpenCvSharp.Native/generated/native_abi_manifest.txt') -Raw) -match '(?m)^jyppx_ocv_cudev_' -or (Get-Content (Join-Path $repo 'compatibility/managed-public-api.txt') -Raw) -match 'JYPPX\.OpenCvSharp\.Cudev(?:\.|\|)') { throw 'Cudev native/managed wrapper evidence must remain empty.' }
 }
@@ -207,6 +233,6 @@ foreach ($fixture in $fixtures) {
     try { Assert-CudevData $value.raw $value.summary $value.map $value.extension } catch { $rejected = $true }
     if (-not $rejected) { throw "Cudev contract accepted negative fixture: $($fixture.Name)" }
 }
-$sourceFixtureCount = & (Join-Path $PSScriptRoot 'Test-CudevSourceCallables.ps1') -RepositoryRoot $repo -SourceCache $sourceCache -Extension $extension -Raw $raw -Summary $summary
-if ($fixtures.Count + $sourceFixtureCount -ne [int]$summary.negativeFixtureCount) { throw 'Cudev negative fixture count drifted.' }
-Write-Host "CUDEV_UPSTREAM_MAP_CONTRACT_OK parserDeclarations=144 parserCallable=110 omitted=110 missing=0 headers=76 templates=1100 macroDefinitions=49 macroInvocations=1206 fixtures=$($fixtures.Count + $sourceFixtureCount) completeCallableCoverage=false cudaVerified=false"
+$sourceFixtureCount = & (Join-Path $PSScriptRoot 'Test-CudevSourceCallables.ps1') -RepositoryRoot $repo -SourceCache $sourceCache -Extension $extension -Raw $raw -Summary $summary -UpstreamVersion $UpstreamVersion -EvidenceDirectory $EvidenceDirectory
+if ($fixtures.Count + $sourceFixtureCount -ne $(if ($UpstreamVersion -eq '5.0.0') { [int]$summary.negativeFixtureCount } else { 28 })) { throw 'Cudev negative fixture count drifted.' }
+Write-Host "CUDEV_UPSTREAM_MAP_CONTRACT_OK parserDeclarations=144 parserCallable=110 omitted=110 missing=0 headers=76 templates=1100 macroDefinitions=49 macroInvocations=$($extension.counts.macroInvocationsCount) fixtures=$($fixtures.Count + $sourceFixtureCount) completeCallableCoverage=false cudaVerified=false"

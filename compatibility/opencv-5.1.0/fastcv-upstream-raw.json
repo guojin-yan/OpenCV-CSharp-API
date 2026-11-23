@@ -1,0 +1,2731 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/UpstreamMapRefresh/extract.py",
+  "upstreamOpenCvVersion": "5.1.0",
+  "headerPath": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv.hpp",
+  "headerSha256": "670037fcfc97bf12fc15adfa5b49ad99a923d8db930992a1408824bc60cf41ff",
+  "parserPath": "opencv-source/opencv-5.1.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "867e3de5ad45fd3996e8c9097ffc47f13c8651e20dda2318d70e273262c8dcee",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "parserMode": "non-wrapper-public-declarations",
+  "parserNormalization": "The broad public declaration pass is deduplicated by full exact signature; a separate hdr_parser wmode=True pass marks upstream CV_EXPORTS_W/CV_WRAP declarations by fully qualified name plus arity because the wrapper parser normalizes InputArray/OutputArray and vector types. This is upstream Python/Java wrapper annotation evidence, not a claim of a C# wrapper or bundled FastCV runtime.",
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/allocator.hpp",
+      "sha256": "fde9260931d3fb7ee0c55dff73584cad1a3b2b8959fa4178183b3eeb278b51c3",
+      "startOrdinal": 0,
+      "declarationCount": 11
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/arithm.hpp",
+      "sha256": "385b57b86c50607f9011546c561eefe2b913d0c89351cbc882ec5e45f4ceac7b",
+      "startOrdinal": 11,
+      "declarationCount": 4
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/bilateralFilter.hpp",
+      "sha256": "b07baf391bfa8feeb0984b862aeca9802b97e8e65353ea2e74f804f3a0a3b4da",
+      "startOrdinal": 15,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/blur.hpp",
+      "sha256": "54980f9d799f158a3543fa26b374c6552ce805886ebc536e3882bfaed4851457",
+      "startOrdinal": 16,
+      "declarationCount": 4
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/blur_dsp.hpp",
+      "sha256": "3a8c210962e44fe0c4351dc6fff0b55fcc965d0538b16e6ac47e9b0fd012e7c3",
+      "startOrdinal": 20,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/channel.hpp",
+      "sha256": "f401a258d7f0d696397ea811380ae905b7a68b4da1d0db9d4cfc855723e3833b",
+      "startOrdinal": 21,
+      "declarationCount": 2
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/cluster.hpp",
+      "sha256": "ab7d12ed72694562c6d5b6f5bc12e53bc0888f6ce16dced1d57d6835adb8dfe4",
+      "startOrdinal": 23,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/color.hpp",
+      "sha256": "51ca141ff3005e343624026817a9c217b77c3671dc18d9a5d31df0126983c8fe",
+      "startOrdinal": 24,
+      "declarationCount": 2
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/draw.hpp",
+      "sha256": "9db09fc5cf82a1f8ab87125b621a7ed1da28358f7d20a027a90dd0e169513089",
+      "startOrdinal": 26,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/dsp_init.hpp",
+      "sha256": "96076ed8e1f35446d1fae80ce47d75733dd1ca70e447cb93d9f537519549580e",
+      "startOrdinal": 27,
+      "declarationCount": 2
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/edges.hpp",
+      "sha256": "1ac6954f75cefc64ace7e3cf8013a369b37a3fd2d910b00e5e50bbf17902130d",
+      "startOrdinal": 29,
+      "declarationCount": 2
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/edges_dsp.hpp",
+      "sha256": "1be8e71ab9d4e96e4073b91ecc867f58581dfcaefc37ea5845cb0545be0f1caf",
+      "startOrdinal": 31,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/fast10.hpp",
+      "sha256": "f345fd1c033d90d211b4aa3b2360cc09fd9b52c669b93a24a87ef9af5f96f070",
+      "startOrdinal": 32,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/fft.hpp",
+      "sha256": "bd5599c120ddf9fafe4ef30664340b516c816365774f8eb09b33cd210469836d",
+      "startOrdinal": 33,
+      "declarationCount": 2
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/fft_dsp.hpp",
+      "sha256": "60a00822ffb338d7cb1ee38357ae5dfa78c745865cc0686b669b51091c40f29c",
+      "startOrdinal": 35,
+      "declarationCount": 2
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/histogram.hpp",
+      "sha256": "c8031b29c283ad81062fe997a8002603a3edca80cafa10d5019ebd9662aa4733",
+      "startOrdinal": 37,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/hough.hpp",
+      "sha256": "02fbb6cae272268feef1fed2f64caf40b4675e33dfe72195bc817e4e435639d1",
+      "startOrdinal": 38,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/ipptransform.hpp",
+      "sha256": "768a40e5125de35f4f9a149c950380f7e1a8007d63a8a73529694dc8e8a37c6a",
+      "startOrdinal": 39,
+      "declarationCount": 2
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/moments.hpp",
+      "sha256": "b05b42187ddd3928b2bf63935e8c740559bfe32b33009d0cc2f80f7eeb35e1b0",
+      "startOrdinal": 41,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/mser.hpp",
+      "sha256": "fc7540f9cd5e427284b1f20bae61867cb91069110950ed7c9baa31144ada3b8f",
+      "startOrdinal": 42,
+      "declarationCount": 14
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/pyramid.hpp",
+      "sha256": "767e1d8f413eda8e42089468fb2b2e801b22ef7c237e7107f1b362aa665f006d",
+      "startOrdinal": 56,
+      "declarationCount": 2
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/remap.hpp",
+      "sha256": "42e8bfdc45f8bf23481785d2ae1d6c940c090c38d903e8f240cbc4719cb56972",
+      "startOrdinal": 58,
+      "declarationCount": 2
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/sad_dsp.hpp",
+      "sha256": "28fa65ede6710056a8033487061399ebe88ac3881cfc2f4273d2f6c4a0e7c11a",
+      "startOrdinal": 60,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/scale.hpp",
+      "sha256": "0a318f1588888bcb1eefecb7c361a3d3b2624fef6d8a2b50679e25393a02c7cc",
+      "startOrdinal": 61,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/shift.hpp",
+      "sha256": "b64ee19b1bcddbc84568f4b14510b972678bdf8e3d8cb61cc976614e360c6b5a",
+      "startOrdinal": 62,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/smooth.hpp",
+      "sha256": "003d0d4ab6e20c53e2b6bc73ae530798b3184a8553d890959d067320f06a0797",
+      "startOrdinal": 63,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/thresh.hpp",
+      "sha256": "6c9e3a6f664431871fa42d77b25a0a5d9204c631b99c627c0500f597e65757ee",
+      "startOrdinal": 64,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/thresh_dsp.hpp",
+      "sha256": "e28ffcded60047ef904f1aa88c3651015620bc02e1dea5e05ff940ae8be1ded1",
+      "startOrdinal": 65,
+      "declarationCount": 1
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/tracking.hpp",
+      "sha256": "857ac8f91ea9ad29779e6c99b98dc6b7c226a7a31d35b881c56da107b576a520",
+      "startOrdinal": 66,
+      "declarationCount": 2
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/warp.hpp",
+      "sha256": "7f435a248565fe7e5249b7b96103acf0c936493642671ee628ec1324ae110c09",
+      "startOrdinal": 68,
+      "declarationCount": 3
+    }
+  ],
+  "declarationCount": 71,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/allocator.hpp",
+      "kind": "class",
+      "name": "cv.fastcv.QcResourceManager",
+      "identity": "class cv.fastcv.QcResourceManager",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": false,
+      "documentation": "* @brief Resource manager for FastCV allocations.\n * This class manages active allocations."
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/allocator.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.QcResourceManager.getInstance",
+      "identity": "cv.fastcv.QcResourceManager.getInstance()->QcResourceManager&",
+      "returnType": "QcResourceManager&",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": false,
+      "documentation": ""
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/allocator.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.QcResourceManager.addAllocation",
+      "identity": "cv.fastcv.QcResourceManager.addAllocation(void* ptr)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "void*",
+          "name": "ptr",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": false,
+      "documentation": ""
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/allocator.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.QcResourceManager.removeAllocation",
+      "identity": "cv.fastcv.QcResourceManager.removeAllocation(void* ptr)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "void*",
+          "name": "ptr",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": false,
+      "documentation": ""
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/allocator.hpp",
+      "kind": "class",
+      "name": "cv.fastcv.QcAllocator",
+      "identity": "class cv.fastcv.QcAllocator",
+      "returnType": ": cv::MatAllocator",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::MatAllocator",
+      "upstreamWrapperAnnotated": false,
+      "documentation": "* @brief Qualcomm's custom allocator.\n * This allocator uses Qualcomm's memory management functions.\n *\n * Note: The userdata field of cv::UMatData is used to store the file descriptor (fd) of the allocated memory.\n *"
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/allocator.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.QcAllocator.QcAllocator",
+      "identity": "cv.fastcv.QcAllocator.QcAllocator()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": false,
+      "documentation": ""
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/allocator.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.QcAllocator.~QcAllocator",
+      "identity": "cv.fastcv.QcAllocator.~QcAllocator()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": false,
+      "documentation": ""
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/allocator.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.QcAllocator.allocate",
+      "identity": "cv.fastcv.QcAllocator.allocate(int dims;const int* sizes;int type;void* data0;size_t* step;cv::AccessFlag flags;cv::UMatUsageFlags usageFlags)->cv::UMatData*",
+      "returnType": "cv::UMatData*",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "dims",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const int*",
+          "name": "sizes",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "type",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "void*",
+          "name": "data0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "size_t*",
+          "name": "step",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "cv::AccessFlag",
+          "name": "flags",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "cv::UMatUsageFlags",
+          "name": "usageFlags",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": false,
+      "documentation": ""
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/allocator.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.QcAllocator.allocate",
+      "identity": "cv.fastcv.QcAllocator.allocate(cv::UMatData* u;cv::AccessFlag accessFlags;cv::UMatUsageFlags usageFlags)->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "cv::UMatData*",
+          "name": "u",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "cv::AccessFlag",
+          "name": "accessFlags",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "cv::UMatUsageFlags",
+          "name": "usageFlags",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": false,
+      "documentation": ""
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/allocator.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.QcAllocator.deallocate",
+      "identity": "cv.fastcv.QcAllocator.deallocate(cv::UMatData* u)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "cv::UMatData*",
+          "name": "u",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": false,
+      "documentation": ""
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/allocator.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.getQcAllocator",
+      "identity": "cv.fastcv.getQcAllocator()->cv::MatAllocator*",
+      "returnType": "cv::MatAllocator*",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": false,
+      "documentation": "* @brief Gets the default Qualcomm's allocator.\n * This function returns a pointer to the default Qualcomm's allocator, which is optimized\n * for use with DSP.\n *\n * @return Pointer to the default FastCV allocator."
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/arithm.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.matmuls8s32",
+      "identity": "cv.fastcv.matmuls8s32(InputArray src1;InputArray src2;OutputArray dst)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "dst",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Matrix multiplication of two int8_t type matrices\n *\t\t  uses signed integer input/output whereas cv::gemm uses floating point input/output\n *        matmuls8s32 provides enhanced speed on Qualcomm's processors\n * @param src1 First source matrix of type CV_8S\n * @param src2 Second source matrix of type CV_8S\n * @param dst Resulting matrix of type CV_32S"
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/arithm.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.arithmetic_op",
+      "identity": "cv.fastcv.arithmetic_op(InputArray src1;InputArray src2;OutputArray dst;int op)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "dst",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "op",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Arithmetic add and subtract operations for two matrices\n *        It is optimized for Qualcomm's processors\n * @param src1 First source matrix, can be of type CV_8U, CV_16S, CV_32F.\n *             Note: CV_32F not supported for subtract\n * @param src2 Second source matrix of same type and size as src1\n * @param dst Resulting matrix of type as src mats\n * @param op  type of operation - 0 for add and 1 for subtract"
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/arithm.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.gemm",
+      "identity": "cv.fastcv.gemm(InputArray src1;InputArray src2;OutputArray dst;float alpha=1.0;InputArray src3=noArray();float beta=0.0)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "dst",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "alpha",
+          "default": "1.0",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "src3",
+          "default": "noArray()",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "beta",
+          "default": "0.0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Matrix multiplication of two float type matrices\n *        R = a*A*B + b*C where A,B,C,R are matrices and a,b are constants\n *        It is optimized for Qualcomm's processors\n * @param src1 First source matrix of type CV_32F\n * @param src2 Second source matrix of type CV_32F with same rows as src1 cols\n * @param dst Resulting matrix of type CV_32F\n * @param alpha multiplying factor for src1 and src2\n * @param src3 Optional third matrix of type CV_32F to be added to matrix product\n * @param beta multiplying factor for src3"
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/arithm.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.integrateYUV",
+      "identity": "cv.fastcv.integrateYUV(InputArray Y;InputArray CbCr;OutputArray IY;OutputArray ICb;OutputArray ICr)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "Y",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "CbCr",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "IY",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "ICb",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "ICr",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Integral of a YCbCr420 image.\n *        Note: Input height should be multiple of 2. Input width and stride should be multiple of 16.\n *              Output stride should be multiple of 8.\n *              It is optimized for Qualcomm's processors\n * @param Y Input Y component of 8UC1 YCbCr420 image.\n * @param CbCr Input CbCr component(interleaved) of 8UC1 YCbCr420 image.\n * @param IY Output Y integral of CV_32S one channel, size (Y height + 1)*(Y width + 1)\n * @param ICb Output Cb integral of CV_32S one channel, size (Y height/2 + 1)*(Y width/2 + 1)\n * @param ICr Output Cr integral of CV_32S one channel, size (Y height/2 + 1)*(Y width/2 + 1)"
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/bilateralFilter.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.bilateralFilter",
+      "identity": "cv.fastcv.bilateralFilter(InputArray _src;OutputArray _dst;int d;float sigmaColor;float sigmaSpace;int borderType=BORDER_DEFAULT)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "_src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "_dst",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "d",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "sigmaColor",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "sigmaSpace",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "borderType",
+          "default": "BORDER_DEFAULT",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Applies Bilateral filter to an image considering d-pixel diameter of each pixel's neighborhood.\n          This filter does not work inplace.\n\n * @param _src Intput image with type CV_8UC1\n * @param _dst Destination image with same type as _src\n * @param d kernel size (can be 5, 7 or 9)\n * @param sigmaColor Filter sigma in the color space.\n                     Typical value is 50.0f.\n                     Increasing this value means increasing the influence of the neighboring pixels of more different color to the smoothing result.\n * @param sigmaSpace Filter sigma in the coordinate space.\n                     Typical value is 1.0f.\n                     Increasing this value means increasing the influence of farther neighboring pixels within the kernel size distance to the smoothing result.\n * @param borderType border mode used to extrapolate pixels outside of the image"
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/blur.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.gaussianBlur",
+      "identity": "cv.fastcv.gaussianBlur(InputArray _src;OutputArray _dst;int kernel_size=3;bool blur_border=true)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "_src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "_dst",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "kernel_size",
+          "default": "3",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "blur_border",
+          "default": "true",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Gaussian blur with sigma = 0 and square kernel size. The way of handling borders is different with cv::GaussianBlur,\n *        leading to slight variations in the output.\n * @param _src Intput image with type CV_8UC1\n * @param _dst Output image with type CV_8UC1\n * @param kernel_size Filer kernel size. One of 3, 5, 11\n * @param blur_border If set to true, border is blurred by 0-padding adjacent values.(A variant of the constant border)\n *                    If set to false, borders up to half-kernel width are ignored (e.g. 1 pixel in the 3x3 case).\n *\n * @sa GaussianBlur"
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/blur.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.filter2D",
+      "identity": "cv.fastcv.filter2D(InputArray _src;OutputArray _dst;int ddepth;InputArray _kernel)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "_src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "_dst",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "ddepth",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "_kernel",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief NxN correlation with non-separable kernel. Borders up to half-kernel width are ignored\n * @param _src Intput image with type CV_8UC1\n * @param _dst Output image with type CV_8UC1, CV_16SC1 or CV_32FC1\n * @param ddepth The depth of output image\n * @param _kernel Filer kernel data\n *\n * @sa Filter2D"
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/blur.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.sepFilter2D",
+      "identity": "cv.fastcv.sepFilter2D(InputArray _src;OutputArray _dst;int ddepth;InputArray _kernelX;InputArray _kernelY)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "_src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "_dst",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "ddepth",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "_kernelX",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "_kernelY",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief NxN correlation with separable kernel. If srcImg and dstImg point to the same address and srcStride equals to dstStride,\n *        it will do in-place. Borders up to half-kernel width are ignored.\n *        The way of handling overflow is different with OpenCV, this function will do right shift for\n *        the intermediate results and final result.\n * @param _src Intput image with type CV_8UC1\n * @param _dst Output image with type CV_8UC1, CV_16SC1\n * @param ddepth The depth of output image\n * @param _kernelX Filer kernel data in x direction\n * @param _kernelY Filer kernel data in Y direction (For CV_16SC1, the kernelX and kernelY should be same)\n *\n * @sa sepFilter2D"
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/blur.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.normalizeLocalBox",
+      "identity": "cv.fastcv.normalizeLocalBox(InputArray _src;OutputArray _dst;Size pSize;bool useStdDev)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "_src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "_dst",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "pSize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "useStdDev",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Calculates the local subtractive and contrastive normalization of the image.\n *        Each pixel of the image is normalized by the mean and standard deviation of the patch centred at the pixel.\n *        It is optimized for Qualcomm's processors.\n * @param _src Input image, should have one channel CV_8U or CV_32F\n * @param _dst Output array, should be one channel, CV_8S if src of type CV_8U, or CV_32F if src of CV_32F\n * @param pSize Patch size for mean and std dev calculation\n * @param useStdDev If 1, bot mean and std dev will be used for normalization, if 0, only mean used"
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/blur_dsp.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.dsp.filter2D",
+      "identity": "cv.fastcv.dsp.filter2D(InputArray _src;OutputArray _dst;int ddepth;InputArray _kernel)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "_src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "_dst",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "ddepth",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "_kernel",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": false,
+      "documentation": "* @brief Filter an image with non-separable kernel\n * @param _src Intput image with type CV_8UC1, src size should be greater than 176*144\n * @param _dst Output image with type CV_8UC1, CV_16SC1 or CV_32FC1\n * @param ddepth The depth of output image\n * @param _kernel Filer kernel data"
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/channel.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.merge",
+      "identity": "cv.fastcv.merge(InputArrayOfArrays mv;OutputArray dst)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArrayOfArrays",
+          "name": "mv",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "dst",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Creates one multi-channel mat out of several single-channel CV_8U mats.\n *        Optimized for Qualcomm's processors\n * @param mv input vector of matrices to be merged; all the matrices in mv must be of CV_8UC1 and have the same size\n *           Note: numbers of mats can be 2,3 or 4.\n * @param dst output array of depth CV_8U and same size as mv[0]; The number of channels\n *            will be the total number of matrices in the matrix array"
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/channel.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.split",
+      "identity": "cv.fastcv.split(InputArray src;OutputArrayOfArrays mv)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArrayOfArrays",
+          "name": "mv",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Splits an CV_8U multi-channel mat into several CV_8UC1 mats\n *        Optimized for Qualcomm's processors\n * @param src input 2,3 or 4 channel mat of depth CV_8U\n * @param mv  output vector of size src.channels() of CV_8UC1 mats"
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/cluster.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.clusterEuclidean",
+      "identity": "cv.fastcv.clusterEuclidean(InputArray points;InputArray clusterCenters;OutputArray newClusterCenters;OutputArray clusterSizes;OutputArray clusterBindings;OutputArray clusterSumDists;int numPointsUsed=-1)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "points",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "clusterCenters",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "newClusterCenters",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "clusterSizes",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "clusterBindings",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "clusterSumDists",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "numPointsUsed",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Clusterizes N input points in D-dimensional space into K clusters\n *        Accepts 8-bit unsigned integer points\n *        Provides faster execution time than cv::kmeans on Qualcomm's processors\n * @param points            Points array of type 8u, each row represets a point.\n *                          Size is N rows by D columns, can be non-continuous.\n * @param clusterCenters    Initial cluster centers array of type 32f, each row represents a center.\n *                          Size is K rows by D columns, can be non-continuous.\n * @param newClusterCenters Resulting cluster centers array of type 32f, each row represents found center.\n *                          Size is set to be K rows by D columns.\n * @param clusterSizes      Resulting cluster member counts array of type uint32, size is set to be 1 row by K columns.\n * @param clusterBindings   Resulting points indices array of type uint32, each index tells to which cluster the corresponding point belongs to.\n *                          Size is set to be 1 row by numPointsUsed columns.\n * @param clusterSumDists   Resulting distance sums array of type 32f, each number is a sum of distances between each cluster center to its belonging points.\n *                          Size is set to be 1 row by K columns\n * @param numPointsUsed     Number of points to clusterize starting from 0 to numPointsUsed-1 inclusively. Sets to N if negative."
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/color.hpp",
+      "kind": "enum",
+      "name": "cv.fastcv.ColorConversionCodes",
+      "identity": "enum cv.fastcv.ColorConversionCodes[const cv.fastcv.COLOR_YUV2YUV444sp_NV12=156;const cv.fastcv.COLOR_YUV2YUV422sp_NV12=157;const cv.fastcv.COLOR_YUV422sp2YUV444sp=158;const cv.fastcv.COLOR_YUV422sp2YUV_NV12=159;const cv.fastcv.COLOR_YUV444sp2YUV422sp=160;const cv.fastcv.COLOR_YUV444sp2YUV_NV12=161;const cv.fastcv.COLOR_YUV2RGB565_NV12=162;const cv.fastcv.COLOR_YUV422sp2RGB565=163;const cv.fastcv.COLOR_YUV422sp2RGB=164;const cv.fastcv.COLOR_YUV422sp2RGBA=165;const cv.fastcv.COLOR_YUV444sp2RGB565=166;const cv.fastcv.COLOR_YUV444sp2RGB=167;const cv.fastcv.COLOR_YUV444sp2RGBA=168;const cv.fastcv.COLOR_RGB2YUV_NV12=169;const cv.fastcv.COLOR_RGB5652YUV444sp=170;const cv.fastcv.COLOR_RGB5652YUV422sp=171;const cv.fastcv.COLOR_RGB5652YUV_NV12=172;const cv.fastcv.COLOR_RGB2YUV444sp=173;const cv.fastcv.COLOR_RGB2YUV422sp=174]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.fastcv.COLOR_YUV2YUV444sp_NV12",
+          "value": "156"
+        },
+        {
+          "name": "const cv.fastcv.COLOR_YUV2YUV422sp_NV12",
+          "value": "157"
+        },
+        {
+          "name": "const cv.fastcv.COLOR_YUV422sp2YUV444sp",
+          "value": "158"
+        },
+        {
+          "name": "const cv.fastcv.COLOR_YUV422sp2YUV_NV12",
+          "value": "159"
+        },
+        {
+          "name": "const cv.fastcv.COLOR_YUV444sp2YUV422sp",
+          "value": "160"
+        },
+        {
+          "name": "const cv.fastcv.COLOR_YUV444sp2YUV_NV12",
+          "value": "161"
+        },
+        {
+          "name": "const cv.fastcv.COLOR_YUV2RGB565_NV12",
+          "value": "162"
+        },
+        {
+          "name": "const cv.fastcv.COLOR_YUV422sp2RGB565",
+          "value": "163"
+        },
+        {
+          "name": "const cv.fastcv.COLOR_YUV422sp2RGB",
+          "value": "164"
+        },
+        {
+          "name": "const cv.fastcv.COLOR_YUV422sp2RGBA",
+          "value": "165"
+        },
+        {
+          "name": "const cv.fastcv.COLOR_YUV444sp2RGB565",
+          "value": "166"
+        },
+        {
+          "name": "const cv.fastcv.COLOR_YUV444sp2RGB",
+          "value": "167"
+        },
+        {
+          "name": "const cv.fastcv.COLOR_YUV444sp2RGBA",
+          "value": "168"
+        },
+        {
+          "name": "const cv.fastcv.COLOR_RGB2YUV_NV12",
+          "value": "169"
+        },
+        {
+          "name": "const cv.fastcv.COLOR_RGB5652YUV444sp",
+          "value": "170"
+        },
+        {
+          "name": "const cv.fastcv.COLOR_RGB5652YUV422sp",
+          "value": "171"
+        },
+        {
+          "name": "const cv.fastcv.COLOR_RGB5652YUV_NV12",
+          "value": "172"
+        },
+        {
+          "name": "const cv.fastcv.COLOR_RGB2YUV444sp",
+          "value": "173"
+        },
+        {
+          "name": "const cv.fastcv.COLOR_RGB2YUV422sp",
+          "value": "174"
+        }
+      ],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": ""
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/color.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.cvtColor",
+      "identity": "cv.fastcv.cvtColor(InputArray src;OutputArray dst;int code)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "dst",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "code",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": ""
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/draw.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.fillConvexPoly",
+      "identity": "cv.fastcv.fillConvexPoly(InputOutputArray img;InputArray pts;Scalar color)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputOutputArray",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "pts",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "color",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Draw convex polygon\n          This function fills the interior of a convex polygon with the specified color.\n          Requires the width and stride to be multple of 8.\n * @param img Image to draw on. Should have up to 4 8-bit channels\n * @param pts Array of polygon points coordinates. Should contain N two-channel or 2*N one-channel 32-bit integer elements\n * @param color Color of drawn polygon stored as B,G,R and A(if supported)"
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/dsp_init.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.dsp.fcvdspinit",
+      "identity": "cv.fastcv.dsp.fcvdspinit()->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": false,
+      "documentation": "* @brief Initializes the FastCV DSP environment.\n * \n * This function sets up the necessary environment and resources for the DSP to operate.\n * It must be called once at the very beginning of the use case or program to ensure that \n * the DSP is properly initialized before any DSP-related operations are performed.\n *\n * @note This function must be called at the start of the use case or program, before any \n *       DSP-related operations.\n * \n * @return int Returns 0 on success, and a non-zero value on failure."
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/dsp_init.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.dsp.fcvdspdeinit",
+      "identity": "cv.fastcv.dsp.fcvdspdeinit()->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": false,
+      "documentation": "* @brief Deinitializes the FastCV DSP environment.\n * \n * This function releases the resources and environment set up by the 'fcvdspinit' function.\n * It should be called before the use case or program exits to ensure that all DSP resources \n * are properly cleaned up and no memory leaks occur.\n *\n * @note This function must be called at the end of the use case or program, after all DSP-related \n *       operations are complete."
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/edges.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.sobel",
+      "identity": "cv.fastcv.sobel(InputArray _src;OutputArray _dx;OutputArray _dy;int kernel_size;int borderType;int borderValue)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "_src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "_dx",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "_dy",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "kernel_size",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "borderType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "borderValue",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Creates a 2D gradient image from source luminance data without normalization.\n *        Calculate X direction 1 order derivative or Y direction 1 order derivative or both at the same time, .\n * @param _src          Input image with type CV_8UC1\n * @param _dx           Buffer to store horizontal gradient. Must be (dxyStride)*(height) bytes in size.\n *                      If NULL, the horizontal gradient will not be calculated.\n * @param _dy           Buffer to store vertical gradient. Must be (dxyStride)*(height) bytes in size.\n *                      If NULL, the vertical gradient will not be calculated\n * @param kernel_size   Sobel kernel size, support 3x3, 5x5, 7x7\n * @param borderType    Border type, support BORDER_CONSTANT, BORDER_REPLICATE\n * @param borderValue   Border value for constant border"
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/edges.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.sobel3x3u8",
+      "identity": "cv.fastcv.sobel3x3u8(InputArray _src;OutputArray _dst;OutputArray _dsty=noArray();int ddepth=CV_8U;bool normalization=false)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "_src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "_dst",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "_dsty",
+          "default": "noArray()",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "ddepth",
+          "default": "CV_8U",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "normalization",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Creates a 2D gradient image from source luminance data without normalization.\n *        This function computes central differences on 3x3 neighborhood and then convolves the result with Sobel kernel,\n *        borders up to half-kernel width are ignored.\n * @param _src          Input image with type CV_8UC1\n * @param _dst          If _dsty is given, buffer to store horizontal gradient, otherwise, output 8-bit image of |dx|+|dy|.\n *                      Size of buffer is (srcwidth)*(srcheight) bytes\n * @param _dsty         (Optional)Buffer to store vertical gradient. Must be (srcwidth)*(srcheight) in size.\n * @param ddepth        The depth of output image CV_8SC1,CV_16SC1,CV_32FC1,\n * @param normalization If do normalization for the result"
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/edges_dsp.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.dsp.Canny",
+      "identity": "cv.fastcv.dsp.Canny(InputArray _src;OutputArray _dst;int lowThreshold;int highThreshold;int apertureSize=3;bool L2gradient=false)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "_src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "_dst",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "lowThreshold",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "highThreshold",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "apertureSize",
+          "default": "3",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "L2gradient",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": false,
+      "documentation": "* @brief Canny edge detector applied to a 8 bit grayscale image\n * @param _src          Input image with type CV_8UC1\n * @param _dst          Output 8-bit image containing the edge detection results\n * @param lowThreshold  First threshold\n * @param highThreshold Second threshold\n * @param apertureSize  The Sobel kernel size for calculating gradient. Supported sizes are 3, 5 and 7.\n * @param L2gradient    L2 Gradient or L1 Gradient"
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/fast10.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.FAST10",
+      "identity": "cv.fastcv.FAST10(InputArray src;InputArray mask;OutputArray coords;OutputArray scores;int barrier;int border;bool nmsEnabled)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "coords",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "scores",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "barrier",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "border",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "nmsEnabled",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Extracts FAST10 corners and scores from the image based on the mask.\n *        The mask specifies pixels to be ignored by the detector\n *        designed for corner detection on Qualcomm's processors, provides enhanced speed.\n *\n * @param src 8-bit grayscale image\n * @param mask Optional mask indicating which pixels should be omited from corner dection.\n               Its size should be k times image width and height, where k = 1/2, 1/4 , 1/8 , 1, 2, 4 and 8\n               For more details see documentation to `fcvCornerFast9InMaskScoreu8` function in FastCV\n * @param coords Output array of CV_32S containing interleave x, y positions of detected corners\n * @param scores Optional output array containing the scores of the detected corners.\n                 The score is the highest threshold that can still validate the detected corner.\n                 A higher score value indicates a stronger corner feature.\n                 For example, a corner of score 108 is stronger than a corner of score 50\n * @param barrier FAST threshold. The threshold is used to compare difference between intensity value\n                  of the central pixel and pixels on a circle surrounding this pixel\n * @param border Number for pixels to ignore from top,bottom,right,left of the image. Defaults to 4 if it's below 4\n * @param nmsEnabled Enable non-maximum suppresion to prune weak key points"
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/fft.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.FFT",
+      "identity": "cv.fastcv.FFT(InputArray src;OutputArray dst)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "dst",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Computes the 1D or 2D Fast Fourier Transform of a real valued matrix.\n          For the 2D case, the width and height of the input and output matrix must be powers of 2.\n          For the 1D case, the height of the matrices must be 1, while the width must be a power of 2.\n          Accepts 8-bit unsigned integer array, whereas cv::dft accepts floating-point or complex array.\n * @param src Input array of CV_8UC1. The dimensions of the matrix must be powers of 2 for the 2D case,\n              and in the 1D case, the height must be 1, while the width must be a power of 2.\n * @param dst The computed FFT matrix of type CV_32FC2. The FFT Re and Im coefficients are stored in different channels.\n              Hence the dimensions of the dst are (srcWidth, srcHeight)"
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/fft.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.IFFT",
+      "identity": "cv.fastcv.IFFT(InputArray src;OutputArray dst)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "dst",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Computes the 1D or 2D Inverse Fast Fourier Transform of a complex valued matrix.\n          For the 2D case, The width and height of the input and output matrix must be powers of 2.\n          For the 1D case, the height of the matrices must be 1, while the width must be a power of 2.\n\n * @param src Input array of type CV_32FC2 containing FFT Re and Im coefficients stored in separate channels.\n              The dimensions of the matrix must be powers of 2 for the 2D case, and in the 1D case, the height must be 1,\n              while the width must be a power of 2.\n * @param dst The computed IFFT matrix of type CV_8U. The matrix is real valued and has no imaginary components.\n              Hence the dimensions of the dst are (srcWidth , srcHeight)"
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/fft_dsp.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.dsp.FFT",
+      "identity": "cv.fastcv.dsp.FFT(InputArray src;OutputArray dst)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "dst",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": false,
+      "documentation": "* @brief Computes the 1D or 2D Fast Fourier Transform of a real valued matrix.\n        For the 2D case, the width and height of the input and output matrix must be powers of 2.\n        For the 1D case, the height of the matrices must be 1, while the width must be a power of 2.\n\n* @param src Input array of CV_8UC1. The dimensions of the matrix must be powers of 2 for the 2D case,\n            and in the 1D case, the height must be 1, while the width must be a power of 2.\n* @param dst The computed FFT matrix of type CV_32FC2. The FFT Re and Im coefficients are stored in different channels.\n            Hence the dimensions of the dst are (srcWidth, srcHeight)"
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/fft_dsp.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.dsp.IFFT",
+      "identity": "cv.fastcv.dsp.IFFT(InputArray src;OutputArray dst)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "dst",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": false,
+      "documentation": "* @brief Computes the 1D or 2D Inverse Fast Fourier Transform of a complex valued matrix.\n        For the 2D case, The width and height of the input and output matrix must be powers of 2.\n        For the 1D case, the height of the matrices must be 1, while the width must be a power of 2.\n\n* @param src Input array of type CV_32FC2 containing FFT Re and Im coefficients stored in separate channels.\n            The dimensions of the matrix must be powers of 2 for the 2D case, and in the 1D case, the height must be 1,\n            while the width must be a power of 2.\n* @param dst The computed IFFT matrix of type CV_8U. The matrix is real valued and has no imaginary components.\n            Hence the dimensions of the dst are (srcWidth , srcHeight)"
+    },
+    {
+      "ordinal": 37,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/histogram.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.calcHist",
+      "identity": "cv.fastcv.calcHist(InputArray _src;OutputArray _hist)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "_src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "_hist",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Calculates histogram of input image. This function implements specific use case of\n *        256-bin histogram calculation for 8u single channel images in an optimized way.\n * @param _src Intput image with type CV_8UC1\n * @param _hist Output histogram of type int of 256 bins"
+    },
+    {
+      "ordinal": 38,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/hough.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.houghLines",
+      "identity": "cv.fastcv.houghLines(InputArray src;OutputArray lines;double threshold=0.25)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "lines",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "threshold",
+          "default": "0.25",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Performs Hough Line detection\n *\n * @param src Input 8-bit image containing binary contour. Width and step should be divisible by 8\n * @param lines Output array containing detected lines in a form of (x1, y1, x2, y2) where all numbers are 32-bit floats\n * @param threshold Controls the minimal length of a detected line. Value must be between 0.0 and 1.0\n *                  Values close to 1.0 reduces the number of detected lines. Values close to 0.0\n *                  detect more lines, but may be noisy. Recommended value is 0.25."
+    },
+    {
+      "ordinal": 39,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/ipptransform.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.DCT",
+      "identity": "cv.fastcv.DCT(InputArray src;OutputArray dst)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "dst",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief This function performs 8x8 forward discrete Cosine transform on input image\n * \t\t  accepts input of type 8-bit unsigned integer and produces output of type 16-bit signed integer\n *\t\t  provides faster execution time than cv::dct on Qualcomm's processor\n * @param src Input image of type CV_8UC1\n * @param dst Output image of type CV_16SC1"
+    },
+    {
+      "ordinal": 40,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/ipptransform.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.IDCT",
+      "identity": "cv.fastcv.IDCT(InputArray src;OutputArray dst)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "dst",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief This function performs 8x8 inverse discrete Cosine transform on input image\n * provides faster execution time than cv::dct in inverse case on Qualcomm's processor\n * @param src Input image of type CV_16SC1\n * @param dst Output image of type CV_8UC1"
+    },
+    {
+      "ordinal": 41,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/moments.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.moments",
+      "identity": "cv.fastcv.moments(InputArray _src;bool binary)->cv::Moments",
+      "returnType": "cv::Moments",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "_src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "binary",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": false,
+      "documentation": "* @brief Calculates all of the moments up to the third order of the image pixels' intensities\n *         The results are returned in the structure cv::Moments. This function cv::fastcv::moments()\n *         calculate the moments using floating point calculations whereas cv::moments() calculate moments using double.\n * @param _src      Input image with type CV_8UC1, CV_32SC1, CV_32FC1\n * @param binary    If true, assumes the image to be binary (0x00 for black, 0xff for white), otherwise assumes the image to be\n *                  grayscale."
+    },
+    {
+      "ordinal": 42,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/mser.hpp",
+      "kind": "class",
+      "name": "cv.fastcv.FCVMSER",
+      "identity": "class cv.fastcv.FCVMSER",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief MSER blob detector for grayscale images\n *"
+    },
+    {
+      "ordinal": 43,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/mser.hpp",
+      "kind": "class",
+      "name": "cv.fastcv.FCVMSER.ContourData",
+      "identity": "class cv.fastcv.FCVMSER.ContourData",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": false,
+      "documentation": "* @brief Structure containing additional information about found contour\n     *"
+    },
+    {
+      "ordinal": 44,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/mser.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.FCVMSER.create",
+      "identity": "cv.fastcv.FCVMSER.create(const cv::Size& imgSize;int numNeighbors=4;int delta=2;int minArea=30;int maxArea=14400;float maxVariation=0.15f;float minDiversity=0.2f)->Ptr<FCVMSER>",
+      "returnType": "Ptr<FCVMSER>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "const cv::Size&",
+          "name": "imgSize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "numNeighbors",
+          "default": "4",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "delta",
+          "default": "2",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "minArea",
+          "default": "30",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "maxArea",
+          "default": "14400",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "maxVariation",
+          "default": "0.15f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "minDiversity",
+          "default": "0.2f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Creates MSER detector\n     *\n     * @param imgSize Image size. Image width has to be greater than 50, and image height has to be greater than 5.\n     * @param numNeighbors Number of neighbors in contours, can be 4 or 8\n     * @param delta Delta to be used in MSER algorithm (the difference in grayscale values\n                    within which the region is stable ).\n                    Typical value range [0.8 8], typical value 2\n     * @param minArea Minimum area (number of pixels) of a mser contour.\n                      Typical value range [10 50], typical value 30\n     * @param maxArea Maximum area (number of pixels) of a  mser contour.\n                      Typical value 14400 or 0.25*width*height\n     * @param maxVariation Maximum variation in grayscale between 2 levels allowed.\n                           Typical value range [0.1 1.0], typical value 0.15\n     * @param minDiversity Minimum diversity in grayscale between 2 levels allowed.\n                           Typical value range [0.1 1.0], typical value 0.2\n     * @return Feature detector object ready for detection"
+    },
+    {
+      "ordinal": 45,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/mser.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.FCVMSER.detect",
+      "identity": "cv.fastcv.FCVMSER.detect(InputArray src;std::vector<std::vector<Point>>& contours)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "std::vector<std::vector<Point>>&",
+          "name": "contours",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief This is an overload for detect() function\n     *\n     * @param src Source image of type CV_8UC1. Image width has to be greater than 50, and image height has to be greater than 5.\n                 Pixels at the image boundary are not processed. If boundary pixels are important\n                for a particular application, please consider padding the input image with dummy\n                pixels of one pixel wide.\n    * @param contours Array containing found contours"
+    },
+    {
+      "ordinal": 46,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/mser.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.FCVMSER.detect",
+      "identity": "cv.fastcv.FCVMSER.detect(InputArray src;std::vector<std::vector<Point>>& contours;std::vector<cv::Rect>& boundingBoxes)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "std::vector<std::vector<Point>>&",
+          "name": "contours",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "std::vector<cv::Rect>&",
+          "name": "boundingBoxes",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief This is an overload for detect() function\n     *\n     * @param src Source image of type CV_8UC1. Image width has to be greater than 50, and image height has to be greater than 5.\n                 Pixels at the image boundary are not processed. If boundary pixels are important\n                for a particular application, please consider padding the input image with dummy\n                pixels of one pixel wide.\n    * @param contours Array containing found contours\n    * @param boundingBoxes Array containing bounding boxes of found contours"
+    },
+    {
+      "ordinal": 47,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/mser.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.FCVMSER.detect",
+      "identity": "cv.fastcv.FCVMSER.detect(InputArray src;std::vector<std::vector<Point>>& contours;std::vector<cv::Rect>& boundingBoxes;std::vector<ContourData>& contourData)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "std::vector<std::vector<Point>>&",
+          "name": "contours",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "std::vector<cv::Rect>&",
+          "name": "boundingBoxes",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "std::vector<ContourData>&",
+          "name": "contourData",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": false,
+      "documentation": "* @brief Runs MSER blob detector on the grayscale image\n     *\n     * @param src Source image of type CV_8UC1. Image width has to be greater than 50, and image height has to be greater than 5.\n                 Pixels at the image boundary are not processed. If boundary pixels are important\n                for a particular application, please consider padding the input image with dummy\n                pixels of one pixel wide.\n    * @param contours Array containing found contours\n    * @param boundingBoxes Array containing bounding boxes of found contours\n    * @param contourData Array containing additional information about found contours"
+    },
+    {
+      "ordinal": 48,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/mser.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.FCVMSER.getImgSize",
+      "identity": "cv.fastcv.FCVMSER.getImgSize()->cv::Size",
+      "returnType": "cv::Size",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": ""
+    },
+    {
+      "ordinal": 49,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/mser.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.FCVMSER.getNumNeighbors",
+      "identity": "cv.fastcv.FCVMSER.getNumNeighbors()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": ""
+    },
+    {
+      "ordinal": 50,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/mser.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.FCVMSER.getDelta",
+      "identity": "cv.fastcv.FCVMSER.getDelta()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": ""
+    },
+    {
+      "ordinal": 51,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/mser.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.FCVMSER.getMinArea",
+      "identity": "cv.fastcv.FCVMSER.getMinArea()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": ""
+    },
+    {
+      "ordinal": 52,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/mser.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.FCVMSER.getMaxArea",
+      "identity": "cv.fastcv.FCVMSER.getMaxArea()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": ""
+    },
+    {
+      "ordinal": 53,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/mser.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.FCVMSER.getMaxVariation",
+      "identity": "cv.fastcv.FCVMSER.getMaxVariation()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": ""
+    },
+    {
+      "ordinal": 54,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/mser.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.FCVMSER.getMinDiversity",
+      "identity": "cv.fastcv.FCVMSER.getMinDiversity()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/A"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": ""
+    },
+    {
+      "ordinal": 55,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/mser.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.FCVMSER.~FCVMSER",
+      "identity": "cv.fastcv.FCVMSER.~FCVMSER()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": false,
+      "documentation": ""
+    },
+    {
+      "ordinal": 56,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/pyramid.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.sobelPyramid",
+      "identity": "cv.fastcv.sobelPyramid(InputArrayOfArrays pyr;OutputArrayOfArrays dx;OutputArrayOfArrays dy;int outType=CV_8S)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArrayOfArrays",
+          "name": "pyr",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArrayOfArrays",
+          "name": "dx",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArrayOfArrays",
+          "name": "dy",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "outType",
+          "default": "CV_8S",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Creates a gradient pyramid from an image pyramid\n *        Note: The borders are ignored during gradient calculation.\n * @param pyr Input pyramid of 1-channel 8-bit images. Only continuous images are supported.\n * @param dx Horizontal Sobel gradient pyramid of the same size as pyr\n * @param dy Verical Sobel gradient pyramid of the same size as pyr\n * @param outType Type of output data, can be CV_8S, CV_16S or CV_32F"
+    },
+    {
+      "ordinal": 57,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/pyramid.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.buildPyramid",
+      "identity": "cv.fastcv.buildPyramid(InputArray src;OutputArrayOfArrays pyr;int nLevels;bool scaleBy2=true;int borderType=cv::BORDER_REFLECT;uint8_t borderValue=0)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArrayOfArrays",
+          "name": "pyr",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "nLevels",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "scaleBy2",
+          "default": "true",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "borderType",
+          "default": "cv::BORDER_REFLECT",
+          "modifiers": []
+        },
+        {
+          "type": "uint8_t",
+          "name": "borderValue",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Builds an image pyramid of float32 arising from a single\n    original image - that are successively downscaled w.r.t. the\n    pre-set levels. This API supports both ORB scaling and scale down by half. \n *\n * @param src Input single-channel image of type 8U or 32F\n * @param pyr Output array containing nLevels downscaled image copies\n * @param nLevels Number of pyramid levels to produce\n * @param scaleBy2 to scale images 2x down or by a factor of 1/(2)^(1/4) which is approximated as 0.8408964 (ORB downscaling),\n *                 ORB scaling is not supported for float point images\n * @param borderType how to process border, the options are BORDER_REFLECT (maps to FASTCV_BORDER_REFLECT),\n *                   BORDER_REFLECT_101 (maps to FASTCV_BORDER_REFLECT_V2) and BORDER_REPLICATE (maps to FASTCV_BORDER_REPLICATE).\n *                   Other border types are mapped to FASTCV_BORDER_UNDEFINED(border pixels are ignored). Currently, borders only\n *                   supported for downscaling by half, ignored for ORB scaling. Also ignored for float point images\n * @param borderValue what value should be used to fill border, ignored for float point images"
+    },
+    {
+      "ordinal": 58,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/remap.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.remap",
+      "identity": "cv.fastcv.remap(InputArray src;OutputArray dst;InputArray map1;InputArray map2;int interpolation;int borderValue=0)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "dst",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "map1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "map2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "interpolation",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "borderValue",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Applies a generic geometrical transformation to a greyscale CV_8UC1 image.\n * @param src The first input image data, type CV_8UC1\n * @param dst The output image data, type CV_8UC1\n * @param map1 Floating-point CV_32FC1 matrix with each element as the column coordinate of the mapped location in the source image\n * @param map2 Floating-point CV_32FC1 matrix with each element as the row coordinate of the mapped location in the source image.\n * @param interpolation Only INTER_NEAREST and INTER_LINEAR interpolation is supported\n * @param borderValue constant pixel value"
+    },
+    {
+      "ordinal": 59,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/remap.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.remapRGBA",
+      "identity": "cv.fastcv.remapRGBA(InputArray src;OutputArray dst;InputArray map1;InputArray map2;int interpolation)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "dst",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "map1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "map2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "interpolation",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Applies a generic geometrical transformation to a 4-channel CV_8UC4 image with bilinear or nearest neighbor interpolation\n * @param src The first input image data, type CV_8UC4\n * @param dst The output image data, type CV_8UC4\n * @param map1 Floating-point CV_32FC1 matrix with each element as the column coordinate of the mapped location in the source image\n * @param map2 Floating-point CV_32FC1 matrix with each element as the row coordinate of the mapped location in the source image.\n * @param interpolation Only INTER_NEAREST and INTER_LINEAR interpolation is supported"
+    },
+    {
+      "ordinal": 60,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/sad_dsp.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.dsp.sumOfAbsoluteDiffs",
+      "identity": "cv.fastcv.dsp.sumOfAbsoluteDiffs(cv::InputArray _patch;cv::InputArray _src;cv::OutputArray _dst)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "cv::InputArray",
+          "name": "_patch",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "cv::InputArray",
+          "name": "_src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "cv::OutputArray",
+          "name": "_dst",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": false,
+      "documentation": "* @brief Sum of absolute differences of an image against an 8x8 template.\n * @param _patch The first input image data, type CV_8UC1\n * @param _src The input image data, type CV_8UC1\n * @param _dst The output image data, type CV_16UC1"
+    },
+    {
+      "ordinal": 61,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/scale.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.resizeDown",
+      "identity": "cv.fastcv.resizeDown(cv::InputArray _src;cv::OutputArray _dst;Size dsize;double inv_scale_x;double inv_scale_y)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "cv::InputArray",
+          "name": "_src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "cv::OutputArray",
+          "name": "_dst",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "dsize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "inv_scale_x",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "inv_scale_y",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Down-scales the image using specified scaling factors or dimensions.\n *        This function supports both single-channel (CV_8UC1) and two-channel (CV_8UC2) images.\n * \n * @param _src The input image data, type CV_8UC1 or CV_8UC2.\n * @param _dst The output image data, type CV_8UC1 or CV_8UC2.\n * @param dsize The desired size of the output image. If empty, it is calculated using inv_scale_x and inv_scale_y.\n * @param inv_scale_x The inverse scaling factor for the width. If dsize is provided, this parameter is ignored.\n * @param inv_scale_y The inverse scaling factor for the height. If dsize is provided, this parameter is ignored.\n * \n * @note If dsize is not specified, inv_scale_x and inv_scale_y must be strictly positive."
+    },
+    {
+      "ordinal": 62,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/shift.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.meanShift",
+      "identity": "cv.fastcv.meanShift(InputArray src;Rect& rect;TermCriteria termCrit)->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Rect&",
+          "name": "rect",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "TermCriteria",
+          "name": "termCrit",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Applies the meanshift procedure and obtains the final converged position.\n          This function applies the meanshift procedure to an original image (usually a probability image)\n          and obtains the final converged position. The converged position search will stop either it has reached\n          the required accuracy or the maximum number of iterations. Moments used in the algorithm are calculated\n          in floating point.\n          This function isn't bit-exact with cv::meanShift but provides improved latency on Snapdragon processors.\n\n * @param src 8-bit, 32-bit int or 32-bit float grayscale image which is usually a probability image\n *            computed based on object histogram\n * @param rect Initial search window position which also returns the final converged window position\n * @param termCrit The criteria used to finish the MeanShift which consists of two termination criteria:\n *                 1) epsilon: required accuracy; 2) max_iter: maximum number of iterations\n * @return Iteration number at which the loop stopped"
+    },
+    {
+      "ordinal": 63,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/smooth.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.bilateralRecursive",
+      "identity": "cv.fastcv.bilateralRecursive(cv::InputArray src;cv::OutputArray dst;float sigmaColor=0.03f;float sigmaSpace=0.1f)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "cv::InputArray",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "cv::OutputArray",
+          "name": "dst",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "sigmaColor",
+          "default": "0.03f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "sigmaSpace",
+          "default": "0.1f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Recursive Bilateral Filtering\n\nDifferent from traditional bilateral filtering, here the smoothing is actually performed in gradient domain.\nThe algorithm claims that it's more efficient than the original bilateral filtering in both image quality and computation.\nSee algorithm description in the paper Recursive Bilateral Filtering, ECCV2012 by Prof Yang Qingxiong\nThis function isn't bit-exact with cv::bilateralFilter but provides improved latency on Snapdragon processors.\n * @param src Input image, should have one CV_8U channel\n * @param dst Output array having one CV_8U channel\n * @param sigmaColor Sigma in the color space, the bigger the value the more color difference is smoothed by the algorithm\n * @param sigmaSpace Sigma in the coordinate space, the bigger the value the more distant pixels are smoothed"
+    },
+    {
+      "ordinal": 64,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/thresh.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.thresholdRange",
+      "identity": "cv.fastcv.thresholdRange(InputArray src;OutputArray dst;int lowThresh;int highThresh;int trueValue;int falseValue)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "dst",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "lowThresh",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "highThresh",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "trueValue",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "falseValue",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Binarizes a grayscale image based on a pair of threshold values. The binarized image will be in the two values\n *        selected by user\n *        this function provides improved latency on Snapdragon processor.\n * @param src 8-bit grayscale image\n * @param dst Output image of the same size and type as input image, can be the same as input image\n * @param lowThresh The lower threshold value for binarization\n * @param highThresh The higher threshold value for binarization\n * @param trueValue The value assigned to the destination pixel if the source is within the range inclusively defined by the\n *                  pair of threshold values\n * @param falseValue The value assigned to the destination pixel if the source is out of the range inclusively defined by the\n *                   pair of threshold values"
+    },
+    {
+      "ordinal": 65,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/thresh_dsp.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.dsp.thresholdOtsu",
+      "identity": "cv.fastcv.dsp.thresholdOtsu(InputArray _src;OutputArray _dst;bool type)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "_src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "_dst",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "type",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": false,
+      "documentation": "* @brief Binarizes a grayscale image using Otsu's method.\n *        Sets the pixel to max(255) if it's value is greater than the threshold;\n *        else, set the pixel to min(0). The threshold is searched that minimizes\n *        the intra-class variance (the variance within the class).\n * \n * @param _src Input 8-bit grayscale image. Size of buffer is srcStride*srcHeight bytes.\n * @param _dst Output 8-bit binarized image. Size of buffer is dstStride*srcHeight bytes.\n * @param type Threshold type that can be either 0 or 1.\n *             NOTE: For threshold type=0, the pixel is set as\n *             maxValue if it's value is greater than the threshold; else, it is set as zero.\n *             For threshold type=1, the pixel is set as zero if it's\n *             value is greater than the threshold; else, it is set as maxValue."
+    },
+    {
+      "ordinal": 66,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.trackOpticalFlowLK",
+      "identity": "cv.fastcv.trackOpticalFlowLK(InputArray src;InputArray dst;InputArrayOfArrays srcPyr;InputArrayOfArrays dstPyr;InputArray ptsIn;OutputArray ptsOut;InputArray ptsEst;OutputArray statusVec;cv::Size winSize=cv::Size(7, 7);cv::TermCriteria termCriteria=cv::TermCriteria(cv::TermCriteria::MAX_ITER | cv::TermCriteria::EPS, 7, 0.03f * 0.03f))->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "dst",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArrayOfArrays",
+          "name": "srcPyr",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArrayOfArrays",
+          "name": "dstPyr",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "ptsIn",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "ptsOut",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "ptsEst",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "statusVec",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "cv::Size",
+          "name": "winSize",
+          "default": "cv::Size(7, 7)",
+          "modifiers": []
+        },
+        {
+          "type": "cv::TermCriteria",
+          "name": "termCriteria",
+          "default": "cv::TermCriteria(cv::TermCriteria::MAX_ITER | cv::TermCriteria::EPS, 7, 0.03f * 0.03f)",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Calculates sparse optical flow using Lucas-Kanade algorithm\n *\t\t  accepts 8-bit unsigned integer image\n *\t\t  Provides faster execution time on Qualcomm's processor \n * @param src Input single-channel image of type 8U, initial motion frame\n * @param dst Input single-channel image of type 8U, final motion frame, should have the same size and stride as initial frame\n * @param srcPyr Pyramid built from intial motion frame\n * @param dstPyr Pyramid built from final motion frame\n * @param ptsIn Array of initial subpixel coordinates of starting points, should contain 32F 2D elements\n * @param ptsOut Output array of calculated final points, should contain 32F 2D elements\n * @param ptsEst Input array of estimations for final points, should contain 32F 2D elements, can be empty\n * @param statusVec Output array of int32 values indicating status of each feature, can be empty\n * @param winSize Size of window for optical flow searching. Width and height ust be odd numbers. Suggested values are 5, 7 or 9\n * @param termCriteria Termination criteria containing max number of iterations, max epsilon and stop condition"
+    },
+    {
+      "ordinal": 67,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.trackOpticalFlowLK",
+      "identity": "cv.fastcv.trackOpticalFlowLK(InputArray src;InputArray dst;InputArrayOfArrays srcPyr;InputArrayOfArrays dstPyr;InputArrayOfArrays srcDxPyr;InputArrayOfArrays srcDyPyr;InputArray ptsIn;OutputArray ptsOut;OutputArray statusVec;cv::Size winSize=cv::Size(7, 7);int maxIterations=7)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "dst",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArrayOfArrays",
+          "name": "srcPyr",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArrayOfArrays",
+          "name": "dstPyr",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArrayOfArrays",
+          "name": "srcDxPyr",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArrayOfArrays",
+          "name": "srcDyPyr",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "ptsIn",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "ptsOut",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "statusVec",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "cv::Size",
+          "name": "winSize",
+          "default": "cv::Size(7, 7)",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "maxIterations",
+          "default": "7",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Overload for v1 of the LK tracking function\n *\n * @param src Input single-channel image of type 8U, initial motion frame\n * @param dst Input single-channel image of type 8U, final motion frame, should have the same size and stride as initial frame\n * @param srcPyr Pyramid built from intial motion frame\n * @param dstPyr Pyramid built from final motion frame\n * @param srcDxPyr Pyramid of Sobel derivative by X of srcPyr\n * @param srcDyPyr Pyramid of Sobel derivative by Y of srcPyr\n * @param ptsIn Array of initial subpixel coordinates of starting points, should contain 32F 2D elements\n * @param ptsOut Output array of calculated final points, should contain 32F 2D elements\n * @param statusVec Output array of int32 values indicating status of each feature, can be empty\n * @param winSize Size of window for optical flow searching. Width and height ust be odd numbers. Suggested values are 5, 7 or 9\n * @param maxIterations Maximum number of iterations to try"
+    },
+    {
+      "ordinal": 68,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/warp.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.warpPerspective",
+      "identity": "cv.fastcv.warpPerspective(InputArray _src;OutputArray _dst;InputArray _M0;Size dsize;int interpolation;int borderType;const Scalar& borderValue)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "_src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "_dst",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "_M0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "dsize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "interpolation",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "borderType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "const Scalar&",
+          "name": "borderValue",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief   Transform an image using perspective transformation, same as cv::warpPerspective but not bit-exact.\n * @param _src          Input 8-bit image.\n * @param _dst          Output 8-bit image.\n * @param _M0           3x3 perspective transformation matrix.\n * @param dsize         Size of the output image.\n * @param interpolation Interpolation method. Only cv::INTER_NEAREST, cv::INTER_LINEAR and cv::INTER_AREA are supported.\n * @param borderType    Pixel extrapolation method. Only cv::BORDER_CONSTANT, cv::BORDER_REPLICATE and cv::BORDER_TRANSPARENT\n *                      are supported.\n * @param borderValue   Value used in case of a constant border."
+    },
+    {
+      "ordinal": 69,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/warp.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.warpPerspective2Plane",
+      "identity": "cv.fastcv.warpPerspective2Plane(InputArray _src1;InputArray _src2;OutputArray _dst1;OutputArray _dst2;InputArray _M0;Size dsize)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "_src1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "_src2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "_dst1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "_dst2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "_M0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "dsize",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Perspective warp two images using the same transformation. Bi-linear interpolation is used where applicable.\n *        For example, to warp a grayscale image and an alpha image at the same time, or warp two color channels.\n * @param _src1     First input 8-bit image. Size of buffer is src1Stride*srcHeight bytes.\n * @param _src2     Second input 8-bit image. Size of buffer is src2Stride*srcHeight bytes.\n * @param _dst1     First warped output image (correspond to src1). Size of buffer is dst1Stride*dstHeight bytes, type CV_8UC1\n * @param _dst2     Second warped output image (correspond to src2). Size of buffer is dst2Stride*dstHeight bytes, type CV_8UC1\n * @param _M0       The 3x3 perspective transformation matrix (inversed map)\n * @param dsize     The output image size"
+    },
+    {
+      "ordinal": 70,
+      "sourceHeader": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/warp.hpp",
+      "kind": "callable",
+      "name": "cv.fastcv.warpAffine",
+      "identity": "cv.fastcv.warpAffine(InputArray _src;OutputArray _dst;InputArray _M;Size dsize;int interpolation=INTER_LINEAR;int borderValue=0)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InputArray",
+          "name": "_src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "OutputArray",
+          "name": "_dst",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "InputArray",
+          "name": "_M",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "dsize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "interpolation",
+          "default": "INTER_LINEAR",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "borderValue",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "upstreamWrapperAnnotated": true,
+      "documentation": "* @brief Performs an affine transformation on an input image using a provided transformation matrix.\n * \n * This function performs two types of operations based on the transformation matrix:\n * \n * 1. Standard Affine Transformation (2x3 matrix):\n *    - Transforms the entire input image using the affine matrix\n *    - Supports both CV_8UC1 and CV_8UC3 types\n * \n * 2. Patch Extraction with Transformation (2x2 matrix):\n *    - Extracts and transforms a patch from the input image\n *    - Only supports CV_8UC1 type\n *    - If input is a ROI: patch is extracted from ROI center in the original image\n *    - If input is full image: patch is extracted from image center\n * \n * @param _src              Input image. Supported formats:\n *                          - CV_8UC1: 8-bit single-channel\n *                          - CV_8UC3: 8-bit three-channel - only for 2x3 matrix \n * @param _dst              Output image. Will have the same type as src and size specified by dsize\n * @param _M                2x2/2x3 affine transformation matrix (inversed map)\n * @param dsize             Output size:\n *                          - For 2x3 matrix: Size of the output image\n *                          - For 2x2 matrix: Size of the extracted patch\n * @param interpolation     Interpolation method. Only applicable for 2x3 transformation with CV_8UC1 input.\n *                          Options:\n *                          - INTER_NEAREST: Nearest-neighbor interpolation\n *                          - INTER_LINEAR: Bilinear interpolation (default)\n *                          - INTER_AREA: Area-based interpolation\n *                          - INTER_CUBIC: Bicubic interpolation\n *                          Note: CV_8UC3 input always use bicubic interpolation internally\n * @param borderValue       Constant pixel value for border pixels. Only applicable for 2x3 transformations \n *                          with single-channel input.\n *\n * @note                    The affine matrix follows the inverse mapping convention, applied to destination coordinates\n *                          to produce corresponding source coordinates.\n * @note                    The function uses 'FASTCV_BORDER_CONSTANT' for border handling, with the specified 'borderValue'."
+    }
+  ],
+  "compatibilityHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/CMakeLists.txt",
+      "sha256": "ba4ac76da7fb1bdb0b8e0b1cde482ef378a380fb3d04dcbf1af96c1884230ce1",
+      "reason": "Upstream fastcv is disabled unless HAVE_FASTCV is enabled; the CMake target requires an external FastCV library and OpenCV core/geometry/imgproc/features/video modules."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.1.0/modules/fastcv/README.md",
+      "sha256": "b762ec458db78bb999248cadd0cea6eec7eecf6ec263cd4130886f2fb58567e0",
+      "reason": "The pinned upstream module documents ARM-only support and says the module cannot configure or build on x86; no Qualcomm FastCV runtime is bundled by this package."
+    }
+  ],
+  "moduleBuildCondition": "HAVE_FASTCV_AND_SUPPORTED_ARM_ARCHITECTURE_AND_EXTERNAL_FASTCV_LIBRARY",
+  "parserEvidence": {
+    "parserDuplicateIdentities": [],
+    "parserDeclarationCountBeforeExactDeduplication": 71,
+    "upstreamWrapperAnnotatedDeclarationCount": 48,
+    "upstreamWrapperAnnotatedCallableCount": 46,
+    "umbrellaIncludes": [
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/arithm.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/bilateralFilter.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/blur.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/channel.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/cluster.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/draw.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/edges.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/fast10.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/fft.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/histogram.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/hough.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/ipptransform.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/moments.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/mser.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/pyramid.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/remap.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/scale.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/shift.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/smooth.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/thresh.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/tracking.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/warp.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/allocator.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/dsp_init.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/sad_dsp.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/thresh_dsp.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/fft_dsp.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/edges_dsp.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/blur_dsp.hpp",
+      "opencv-source/opencv_contrib-5.1.0/modules/fastcv/include/opencv2/fastcv/color.hpp"
+    ],
+    "moduleDependencies": [
+      "opencv_core",
+      "opencv_geometry",
+      "opencv_imgproc",
+      "opencv_features",
+      "opencv_video"
+    ],
+    "externalLibrary": "FASTCV_LIBRARY"
+  },
+  "module": "fastcv",
+  "sourceRepository": "opencv_contrib",
+  "upstreamContribCommit": "b67a855188a3d683813731010f6d39ac614733a4"
+}

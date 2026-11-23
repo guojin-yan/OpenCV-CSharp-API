@@ -75,8 +75,8 @@ $inventoryHash = (Get-FileHash -LiteralPath (Join-Path $repo $inventoryPath) -Al
 $catalogHash = (Get-FileHash -LiteralPath (Join-Path $repo $catalogPath) -Algorithm SHA256).Hash.ToLowerInvariant()
 if ($refresh.sourceBuildInputsChanged -or $refresh.buildSourceCommit -cne $build.sourceCommit -or
     $refresh.catalog.path -cne $catalogPath -or $refresh.catalog.sha256 -cne $catalogHash -or $refresh.inventory.path -cne $inventoryPath -or $refresh.inventory.sha256 -cne $inventoryHash -or
-    $refresh.refreshedParserSliceCount -ne 55 -or $refresh.pendingCatalogMapCount -ne 18 -or $refresh.historicalCatalogVersion -cne '5.0.0' -or
-    $refresh.newDeclarationCount -ne 880 -or $refresh.totalReviewedDeclarationCount -ne 4051 -or $refresh.sharedGeneratorNegativeFixtureCount -ne 1753 -or
+    $refresh.refreshedParserSliceCount -ne 73 -or $refresh.pendingCatalogMapCount -ne 0 -or $refresh.historicalCatalogVersion -cne '5.0.0' -or
+    $refresh.newDeclarationCount -ne 1727 -or $refresh.totalReviewedDeclarationCount -ne 5778 -or $refresh.sharedGeneratorNegativeFixtureCount -ne 2420 -or
     $refresh.newManagedApiOrNativeAbiAdded -or $refresh.newRuntimeBehaviorCertified -or $refresh.repositoryWideUpstreamParityClaimed) { throw '5.1 shared parser refresh evidence drifted.' }
 $contribReview = $build.contribModule51Review
 if ($contribReview.status -cne 'verified-parser-review' -or
@@ -112,6 +112,17 @@ if ($publicReview.status -cne 'verified-parser-review' -or
     -not $publicReview.cvvBuildConditionReviewed -or -not $publicReview.rgbdSignatureReplacementReviewed -or
     -not $publicReview.managedBinariesReusedUnchanged -or -not $publicReview.nativeBinariesReusedUnchanged -or
     $publicReview.newPublicMemberOrNativeExport -or $publicReview.newRuntimeBehaviorCertified) { throw '5.1 public module parser review evidence drifted.' }
+$backendReview = $build.backendModules51Review
+if ($backendReview.status -cne 'verified-parser-review' -or
+    (@($backendReview.modules) -join '|') -cne 'cannops|cudaarithm|cudabgsegm|cudacodec|cudafeatures2d|cudafilters|cudaimgproc|cudalegacy|cudaobjdetect|cudaoptflow|cudastereo|cudawarping|cudev|fastcv|matlab|ovis|sfm|viz' -or
+    $backendReview.newDeclarations -ne 1727 -or $backendReview.newCallables -ne 1520 -or $backendReview.implemented -ne 0 -or $backendReview.omitted -ne 1520 -or $backendReview.metadata -ne 207 -or
+    $backendReview.currentParserScopes -ne 73 -or $backendReview.totalDeclarations -ne 5778 -or $backendReview.remainingHistoricalCatalogMaps -ne 0 -or
+    $backendReview.newScopeNegativeFixtures -ne 667 -or $backendReview.sharedGeneratorNegativeFixtures -ne 2420 -or $backendReview.sourceSemanticNegativeFixtures -ne 64 -or
+    $backendReview.regeneratedArtifacts -ne 437 -or $backendReview.unchangedPriorArtifacts -ne 330 -or $backendReview.officialSourceInputs -ne 467 -or
+    $backendReview.cudevSourceCallables -ne 5463 -or $backendReview.matlabSourceCallables -ne 242 -or
+    -not $backendReview.inheritedBindingSetsPreserved -or -not $backendReview.specializedStrategiesPreserved -or
+    -not $backendReview.managedBinariesReusedUnchanged -or -not $backendReview.nativeBinariesReusedUnchanged -or
+    $backendReview.newPublicMemberOrNativeExport -or $backendReview.newRuntimeBehaviorCertified) { throw '5.1 backend/dependency parser review evidence drifted.' }
 $calibration = $build.calibration51Correction
 $calibSummary = Get-Content -LiteralPath (Join-Path $repo 'compatibility/opencv-5.1.0/calib3d-upstream-summary.json') -Raw | ConvertFrom-Json
 if ($calibration.sourceCommit -cne $build.sourceCommit -or $calibration.disableSchurComplement -ne 134217728 -or $calibration.tiltedModel -ne 262144 -or
@@ -121,4 +132,4 @@ if ($calibration.sourceCommit -cne $build.sourceCommit -or $calibration.disableS
     $calibSummary.declarationCount -ne 208 -or $calibSummary.classificationCounts.implemented -ne 169 -or $calibSummary.classificationCounts.missing -ne 0 -or
     $calibSummary.reviewedExistingBindingCount -ne 3 -or $calibSummary.negativeFixtureCount -ne 37) { throw '5.1 calibration/matcher correction or reviewed binding evidence drifted.' }
 Write-Host "V510_CHANGE_LEDGER_OK entries=$(@($ledger.entries).Count) from=$($ledger.fromVersion) to=$($ledger.toVersion) native_abi=$($ledger.nativeAbiVersion)"
-Write-Host "OPENCV_510_SOURCE_BUILD_EVIDENCE_OK input_files=$($inputPaths.Count) full_exports=2669 mini_exports=527 native_ctest=6 managed=4180 historical_catalog=5.0.0 parser_slices=55 calibration_schur_bit=27"
+Write-Host "OPENCV_510_SOURCE_BUILD_EVIDENCE_OK input_files=$($inputPaths.Count) full_exports=2669 mini_exports=527 native_ctest=6 managed=4180 historical_catalog=5.0.0 parser_slices=73 calibration_schur_bit=27"

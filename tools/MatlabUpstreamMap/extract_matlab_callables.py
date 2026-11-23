@@ -166,7 +166,7 @@ using Callback = void (*)(int);
     print("MATLAB_SOURCE_CALLABLE_SELF_TEST_OK")
 
 
-def extract(workspace, output, syntax_root):
+def extract(workspace, output, syntax_root, upstream_version="5.0.0"):
     sys.path.insert(0, str(syntax_root))
     from tree_sitter import Language, Parser
     import tree_sitter
@@ -229,17 +229,17 @@ def extract(workspace, output, syntax_root):
               "constructorInitializerCount": sum(row["constructorInitializer"] is not None for row in rows),
               "reconciledParserCallableCount": len(reconciled), "declarationErrorCount": 0,
               "bodyParseDiagnosticCount": sum(len(header["bodyParseDiagnostics"]) for header in headers)}
-    result = {"schemaVersion": 1, "upstreamOpenCvVersion": "5.0.0",
+    result = {"schemaVersion": 1, "upstreamOpenCvVersion": upstream_version,
               "generator": "tools/MatlabUpstreamMap/extract_matlab_callables.py",
               "syntaxParser": {"treeSitterVersion": "0.25.2", "cppGrammarVersion": "0.23.4", "languageAbi": language.abi_version},
-              "sourceInventoryPath": "compatibility/matlab-source-reviewed-extensions.json",
+              "sourceInventoryPath": ("compatibility/" if upstream_version == "5.0.0" else "compatibility/opencv-5.1.0/") + "matlab-source-reviewed-extensions.json",
               "reviewDisposition": "intentionally-omitted-unwrapped-matlab-source",
               "completeCallableCoverageClaimed": False, "concreteTemplateInstantiationsClaimed": False,
               "externalDeclarationClosureClaimed": False, "generatedBindingSurfaceIncluded": False,
               "matlabExecutionVerified": False, "limitation": LIMITATION,
               "counts": counts, "parserCallableReconciliation": reconciled, "headers": headers}
     write_json(output, result)
-    lexical["sourceCallableInventory"] = {"path": "compatibility/matlab-source-callables.json", "sha256": sha256(output), "counts": counts}
+    lexical["sourceCallableInventory"] = {"path": ("compatibility/" if upstream_version == "5.0.0" else "compatibility/opencv-5.1.0/") + "matlab-source-callables.json", "sha256": sha256(output), "counts": counts}
     write_json(lexical_path, lexical)
     raw_map["sourceReviewedExtensionSha256"] = sha256(lexical_path)
     write_json(raw_path, raw_map)
@@ -251,5 +251,6 @@ if __name__ == "__main__":
     cli.add_argument("--workspace", required=True)
     cli.add_argument("--output", required=True)
     cli.add_argument("--syntax-parser-root", required=True)
+    cli.add_argument("--upstream-version", choices=("5.0.0", "5.1.0"), default="5.0.0")
     args = cli.parse_args()
-    extract(*(Path(value).resolve() for value in (args.workspace, args.output, args.syntax_parser_root)))
+    extract(*(Path(value).resolve() for value in (args.workspace, args.output, args.syntax_parser_root)), upstream_version=args.upstream_version)

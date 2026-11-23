@@ -56,9 +56,10 @@ def main():
     args_parser.add_argument("--workspace", required=True)
     args_parser.add_argument("--opencv-root", required=True)
     args_parser.add_argument("--output", required=True)
+    args_parser.add_argument("--upstream-version", choices=("5.0.0", "5.1.0"), default="5.0.0")
     args = args_parser.parse_args()
     workspace, root, output = (Path(value).resolve() for value in (args.workspace, args.opencv_root, args.output))
-    module = workspace / "opencv-source/opencv_contrib-5.0.0/modules/cannops"
+    module = workspace / f"opencv-source/opencv_contrib-{args.upstream_version}/modules/cannops"
     include = module / "include/opencv2"
     parser_path = root / "modules/python/src2/hdr_parser.py"
     if sorted(path.name for path in include.glob("*.hpp")) != HEADERS:
@@ -110,7 +111,7 @@ def main():
         (module / "tutorials/ascend_npu_image_processing.markdown", "External Ascend NPU/CANN execution and stream/event synchronization ownership."),
     ]
     result = {
-        "schemaVersion": 1, "generator": "tools/CannOpsUpstreamMap/extract_cannops.py", "upstreamOpenCvVersion": "5.0.0",
+        "schemaVersion": 1, "generator": "tools/CannOpsUpstreamMap/extract_cannops.py", "upstreamOpenCvVersion": args.upstream_version,
         "headerPath": rel(include / "cann.hpp", workspace), "headerSha256": sha256(include / "cann.hpp"),
         "parserPath": rel(parser_path, workspace), "parserSha256": sha256(parser_path),
         "preprocessorDefinitions": DEFINITIONS, "parserMode": "non-wrapper-public-declarations",

@@ -9,9 +9,11 @@ from pathlib import Path
 import re
 import tempfile
 
+import specialized
+
 
 SCOPE_FIELDS = ("parserMode", "parserNormalization", "deduplicateParserIdentities",
-                "moduleBuildCondition", "excludedPublicHeaders")
+                "moduleBuildCondition", "excludedPublicHeaders", "parserEvidence")
 
 
 def parse_header(parser, path, module):
@@ -57,7 +59,7 @@ def load(path, name):
     return module
 
 
-def extract(repo, workspace, module, destination):
+def extract(repo, workspace, module, destination, syntax_root=None):
     root = workspace / "opencv-source/opencv-5.1.0"
     version = (root / "modules/core/include/opencv2/core/version.hpp").read_text()
     for name, value in (("MAJOR", 5), ("MINOR", 1), ("REVISION", 0)):
@@ -67,6 +69,18 @@ def extract(repo, workspace, module, destination):
     if sha(parser_path) != "867e3de5ad45fd3996e8c9097ffc47f13c8651e20dda2318d70e273262c8dcee":
         raise ValueError("Official 5.1 parser hash drifted")
     parser = load(parser_path, "opencv_parser51")
+    if module["id"] in specialized.EXTRACTORS:
+        for item in [module["primaryHeader"]] + module["sourceHeaders"] + module.get("compatibilityHeaders", []):
+            if sha(workspace / item["path"]) != item["sha256"]:
+                raise ValueError("Reviewed source hash drifted: " + item["path"])
+        raw = specialized.extract(repo, workspace, module, destination, sha, syntax_root)
+        raw.update(generator="tools/UpstreamMapRefresh/extract.py", module=module["id"],
+                   sourceRepository=module["sourceRepository"],
+                   upstreamContribCommit="b67a855188a3d683813731010f6d39ac614733a4")
+        path = destination / (module["id"] + "-upstream-raw.json")
+        path.write_text(json.dumps(raw, ensure_ascii=True, indent=2) + "\n", encoding="utf-8", newline="\n")
+        print(f"UPSTREAM_510_EXTRACTION_OK module={module['id']} declarations={raw['declarationCount']} headers={len(raw['sourceHeaders'])} strategy=specialized")
+        return
     convert = load(repo / "tools/CoreUpstreamMap/extract_core.py", "core_dto").convert
     headers = []
     rows = []
@@ -143,11 +157,12 @@ def main():
     ap.add_argument("--workspace", required=True)
     ap.add_argument("--catalog", required=True)
     ap.add_argument("--output-directory", required=True)
+    ap.add_argument("--syntax-parser-root")
     args = ap.parse_args()
     repo = Path(args.repository).resolve()
     catalog = json.loads(Path(args.catalog).read_text(encoding="utf-8"))
     for module in catalog["modules"]:
-        extract(repo, Path(args.workspace).resolve(), module, Path(args.output_directory).resolve())
+        extract(repo, Path(args.workspace).resolve(), module, Path(args.output_directory).resolve(), args.syntax_parser_root)
 
 
 if __name__ == "__main__":
