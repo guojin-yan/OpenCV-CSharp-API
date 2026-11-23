@@ -1018,5 +1018,35 @@
       "length": 0,
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     }
+  },
+  "sourceCommit": "3646249ae9d1ef93d008cd599b850a806dcc0bec",
+  "sourceCommitBinding": "The committed source input scope has the exact sourceInputSet digest measured before commit; evidence updates are outside that scope.",
+  "managedPreflightMutation": {
+    "sourceCommit": "3646249ae9d1ef93d008cd599b850a806dcc0bec",
+    "path": "packaging/codec/image-preflight-fuzz-evidence.json",
+    "sha256": "085b65c7b81e7b3a27e789a4a08764c72bb53f5c395ac9d37a3099b92b0a44df",
+    "frameworks": [
+      {
+        "targetFramework": "net8.0",
+        "passed": 17,
+        "failed": 0,
+        "skipped": 0,
+        "trx": "C:\\Users\\guoji\\AppData\\Local\\Temp\\opencv-preflight-fuzz-d65b86c80853450f943d499e1947a54c\\preflight.trx",
+        "sha256": "c65aaad7b696d89d6c8a72bf57437d6eaa0ac00084f86ba15084587adac0d8b2"
+      },
+      {
+        "targetFramework": "net10.0",
+        "passed": 17,
+        "failed": 0,
+        "skipped": 0,
+        "trx": "C:\\Users\\guoji\\AppData\\Local\\Temp\\opencv-preflight-fuzz-c3459b1cdbc143c284915913e3304de5\\preflight.trx",
+        "sha256": "c32769f662b32610b7c3493ff95b8050fdf5edcf6fb42798b5109bbb56417a8b"
+      }
+    ],
+    "log": {
+      "path": "%TEMP%/opencv-v510-fuzz-measure.log",
+      "sha256": "626898b3b89f91dbf12d488a6aa6322013db40d2bc16998a30b9883d7cf95a63"
+    },
+    "scope": "isolated managed parser process outcomes and working-set budget; process exit is not proof of long-term native leak freedom"
   }
 }

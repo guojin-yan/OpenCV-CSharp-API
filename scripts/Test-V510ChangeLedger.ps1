@@ -36,6 +36,11 @@ $rows = foreach ($inputPath in $inputPaths) {
 }
 $digest = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.UTF8Encoding]::new($false).GetBytes(($rows -join "`n") + "`n"))).ToLowerInvariant()
 if ($inputPaths.Count -ne $build.sourceInputSet.fileCount -or $digest -cne $build.sourceInputSet.sha256) { throw '5.1 build evidence is stale for the current source input set.' }
+if ($build.sourceCommit -cnotmatch '^[0-9a-f]{40}$') { throw '5.1 build source commit is missing or invalid.' }
+& git -C $repo merge-base --is-ancestor $build.sourceCommit HEAD 2>$null
+if ($LASTEXITCODE -ne 0) { throw '5.1 build source commit is not an ancestor of HEAD.' }
+$sourceDrift = @(& git -C $repo diff --name-only $build.sourceCommit -- @expectedScopes)
+if ($LASTEXITCODE -ne 0 -or $sourceDrift.Count -ne 0) { throw '5.1 source input scope differs from the committed build source.' }
 if (@($build.wrapperProfiles).Count -ne 2) { throw '5.1 source build evidence requires Full and Mini wrappers.' }
 foreach ($profile in $build.wrapperProfiles) {
     $exports = if ($profile.profile -ceq 'full') { 2669 } elseif ($profile.profile -ceq 'mini') { 527 } else { throw 'Unknown build profile.' }
