@@ -1,5 +1,7 @@
 # DNN Structured Parity Guide
 
+For the current 5.1 runtime, see [DNN OpenCV 5.1 Migration](dnn-5.1-migration.md). The 5.0 mapping below remains historical evidence; a separate 5.1 parser slice and declaration delta record the new upstream shape and ABI enum projections.
+
 This guide covers the parser-selected OpenCV 5.0.0 DNN network, layer, model-loading, preprocessing, shape, memory, and profiling families exposed by `JYPPX.OpenCvSharp.Dnn`. The measured scope is module-specific and does not claim repository-wide OpenCV C++ parity.
 
 本指南说明 `JYPPX.OpenCvSharp.Dnn` 对 OpenCV 5.0.0 DNN 网络、层、模型加载、预处理、形状、内存和性能分析接口的结构化绑定。该范围仅针对已测量的 DNN 模块，不代表整个 OpenCV C++ API 已全部覆盖。

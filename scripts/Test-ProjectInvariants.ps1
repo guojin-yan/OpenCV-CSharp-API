@@ -446,6 +446,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "OpenCV 5.1 DNN upstream map"
+        Script = Join-Path $repo "scripts/Test-Dnn51UpstreamMap.ps1"
+        Arguments = @("-RepositoryRoot", $repo, "-DotNetPath", $DotNetPath)
+    },
+    [pscustomobject]@{
         Name = "VideoIO registry surface"
         Script = Join-Path $repo "scripts/Test-VideoIORegistrySurface.ps1"
         Arguments = @("-RepositoryRoot", $repo)

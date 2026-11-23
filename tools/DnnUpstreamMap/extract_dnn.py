@@ -5,11 +5,15 @@ import argparse
 import hashlib
 import importlib.util
 import json
+import re
 from pathlib import Path
 
 
-def sha256(path):
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+def sha256(path, canonical=False):
+    data = path.read_bytes()
+    if canonical:
+        data = data.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return hashlib.sha256(data).hexdigest()
 
 
 def rel(path, workspace):
@@ -80,11 +84,22 @@ def main():
     parser.add_argument("--workspace", required=True)
     parser.add_argument("--opencv-root", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument("--upstream-version", choices=("5.0.0", "5.1.0"), default="5.0.0")
     args = parser.parse_args()
 
     workspace = Path(args.workspace).resolve()
     root = Path(args.opencv_root).resolve()
     output = Path(args.output).resolve()
+    version_path = root / "modules/core/include/opencv2/core/version.hpp"
+    # Historical sparse source sets predate version.hpp provenance.
+    if args.upstream_version == "5.1.0" or version_path.is_file():
+        version_header = version_path.read_text(encoding="utf-8")
+        version = ".".join(re.search(r"#define\s+CV_VERSION_" + part + r"\s+(\d+)", version_header).group(1)
+                           for part in ("MAJOR", "MINOR", "REVISION"))
+        if version != args.upstream_version:
+            raise ValueError(f"Expected OpenCV {args.upstream_version}, found {version}")
+    def source_sha(path):
+        return sha256(path, canonical=args.upstream_version == "5.1.0")
     parser_path = root / "modules/python/src2/hdr_parser.py"
     umbrella = root / "modules/dnn/include/opencv2/dnn.hpp"
     relative_headers = [
@@ -112,7 +127,7 @@ def main():
         source_headers.append(
             {
                 "path": rel(path, workspace),
-                "sha256": sha256(path),
+                "sha256": source_sha(path),
                 "startOrdinal": start,
                 "declarationCount": len(parsed),
             }
@@ -130,11 +145,11 @@ def main():
     result = {
         "schemaVersion": 1,
         "generator": "tools/DnnUpstreamMap/extract_dnn.py",
-        "upstreamOpenCvVersion": "5.0.0",
+        "upstreamOpenCvVersion": args.upstream_version,
         "headerPath": rel(umbrella, workspace),
-        "headerSha256": sha256(umbrella),
+        "headerSha256": source_sha(umbrella),
         "parserPath": rel(parser_path, workspace),
-        "parserSha256": sha256(parser_path),
+        "parserSha256": source_sha(parser_path),
         "preprocessorDefinitions": definitions,
         "sourceHeaders": source_headers,
         "declarationCount": len(declarations),

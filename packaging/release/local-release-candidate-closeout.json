@@ -1,24 +1,34 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/6f8e6d66b93db31a",
-  "SourceIdentity": "sha256:6f8e6d66b93db31a560e90049479147844b4211d01e7cb425da40bd3432ddb16",
+  "CandidateId": "local-closeout/sha256/3ccf5aab5b555c87",
+  "SourceIdentity": "sha256:3ccf5aab5b555c877f70441caf23a9d4bf116c4ec66a7fd710690febb12c325a",
   "OpenCvRevision": "5.1.0",
   "RevisionValidation": {
     "CurrentBuildEvidence": {
       "Path": "packaging/runtime/opencv-5.1.0-source-build-evidence.json",
-      "Sha256": "d18e541a7675b4e1c367dfe4f160b6b2fff3ed8e3003ad917761f553344861d6",
-      "Length": 37323
+      "Sha256": "bfcaaac0164270acd04abe773b8b50347b8178e5a65de9c87c95a3633059dcce",
+      "Length": 41804
     },
     "LocalBuildRid": "win-x64",
     "HistoricalUpstreamMapRevision": "5.0.0",
+    "CurrentDnnParserSlice": {
+      "Path": "compatibility/opencv-5.1.0/dnn-upstream-summary.json",
+      "Sha256": "57d3a007192f6fd052b137961b800565e286e9012efb12d0b42761967bd52382",
+      "Length": 2727
+    },
+    "CurrentDnnParserDeclarationCount": 185,
+    "CurrentDnnCompleteCppParityClaimed": false,
+    "HistoricalCatalogMapCount": 73,
+    "CurrentRevisionRefreshedParserSliceCount": 1,
+    "CurrentRevisionPendingCatalogMapCount": 72,
     "HistoricalSupportEvidenceRevision": "5.0.0",
     "CurrentRevisionMultiRidValidated": false,
     "CurrentRevisionUpstreamParityClaimed": false
   },
   "SourceSet": {
-    "FileCount": 2501,
-    "Sha256": "6f8e6d66b93db31a560e90049479147844b4211d01e7cb425da40bd3432ddb16",
+    "FileCount": 2516,
+    "Sha256": "3ccf5aab5b555c877f70441caf23a9d4bf116c4ec66a7fd710690febb12c325a",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -1440,8 +1450,8 @@
     },
     {
       "Path": "CHANGELOG.md",
-      "Sha256": "e29707a7018ae6dbd258c9043c5a88ad38b36fb1b9bb667871f1f2381f83d3d5",
-      "Length": 2323
+      "Sha256": "f12211221c5308d24fddb6aa659553ba0ff2db344f07527da53c1bc72cfe44b1",
+      "Length": 2504
     },
     {
       "Path": "CONTRIBUTING.md",
@@ -2444,6 +2454,41 @@
       "Length": 1691
     },
     {
+      "Path": "compatibility/opencv-5.1.0/README.md",
+      "Sha256": "0bb85cc937daaa5bd6c9c2fe2bb40f7bf36495e6c0a53d6c49fbf6851718cd50",
+      "Length": 818
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/dnn-implemented-families.json",
+      "Sha256": "9af1f21f06cb7d85df9e9e4594fd43b38d612840b9328f08a737a83f5a6ebedb",
+      "Length": 47276
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/dnn-upstream-classifications.json",
+      "Sha256": "0206e4dc2909490f5efb1628a63455ce76aa6069259473467fb6b858940e6ad7",
+      "Length": 105900
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/dnn-upstream-delta.json",
+      "Sha256": "a76636cf1a0b20ad701035f1e2d35e2f32b008cf2d3e92617e4c8233ce3d92c6",
+      "Length": 62083
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/dnn-upstream-map.txt",
+      "Sha256": "84016f1bca962996d4416a979b3bc29b6233f4535c274b22ed9529c8214e54db",
+      "Length": 72443
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/dnn-upstream-raw.json",
+      "Sha256": "c1c90a0a61d0cdd86ad5e8633291cbd26ca93eed3db9313c9427124675bfaff0",
+      "Length": 187172
+    },
+    {
+      "Path": "compatibility/opencv-5.1.0/dnn-upstream-summary.json",
+      "Sha256": "57d3a007192f6fd052b137961b800565e286e9012efb12d0b42761967bd52382",
+      "Length": 2727
+    },
+    {
       "Path": "compatibility/optflow-implemented-families.json",
       "Sha256": "f22a45193c5208f57367941d8d562545b072d2f4bb55374a07aea3e6441f9690",
       "Length": 57442
@@ -2955,8 +3000,8 @@
     },
     {
       "Path": "compatibility/v5.1.0-change-ledger.json",
-      "Sha256": "ee8f2e4bd934c8d0450869efa7ef3fb72fbdaa8317a1815cbbb0f15d3160bb6f",
-      "Length": 112107
+      "Sha256": "f7349459c5e9ddc4ef09931fbe184d48d6d37490ea539e43f33e386afea4d115",
+      "Length": 114031
     },
     {
       "Path": "compatibility/v5.1.0-change-ledger.schema.json",
@@ -3319,6 +3364,11 @@
       "Length": 911
     },
     {
+      "Path": "docs/articles/dnn-5.1-migration.md",
+      "Sha256": "27442e7532c79f8f8e43ec93ce19ab57b0c84c572bf63340aac6bd7d75b9caa1",
+      "Length": 4028
+    },
+    {
       "Path": "docs/articles/dnn-model-wrapper-adr.md",
       "Sha256": "191d9d55184f89407bde2abbae44a8800ee52d4493cf94c395b45b85680d1c96",
       "Length": 3355
@@ -3340,8 +3390,8 @@
     },
     {
       "Path": "docs/articles/dnn-structured-parity-guide.md",
-      "Sha256": "97110bafc972fd61f23adc643afaf66e2b924c624d78e10f80a86cc7b31254c3",
-      "Length": 11043
+      "Sha256": "3e078b0edde247f0e2ed880cd5a2c18841cf698809e7e48c7f3482ac415a58f6",
+      "Length": 11284
     },
     {
       "Path": "docs/articles/dnn-superres-upstream-parity-guide.md",
@@ -3660,8 +3710,8 @@
     },
     {
       "Path": "docs/articles/upstream-map-toolchain.md",
-      "Sha256": "9c2f46b1e9d64ef52fd577f91ae43109feaf5df131298ef8ea0b8ef45fdd11d4",
-      "Length": 28902
+      "Sha256": "267f90e2009bc249ded08814a71b27d5ef5e8f805152bd9cac16ad224f18c01e",
+      "Length": 29319
     },
     {
       "Path": "docs/articles/v501-modern-api-preview-guide.md",
@@ -3775,8 +3825,8 @@
     },
     {
       "Path": "docs/releases/5.1.0.md",
-      "Sha256": "be9f2881f915e8c8f7947fd269c59c1c2fc9c4bae1006f721d38c7f3d9ff9ffb",
-      "Length": 4635
+      "Sha256": "67df4356b71cd2fc2eea4649f7fd152092a9ef5d6234e97738aa170d13d419e0",
+      "Length": 5265
     },
     {
       "Path": "docs/releases/README.md",
@@ -3785,8 +3835,8 @@
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "9b524e23681bccc1bf25ac952a3e3d20c0729230516f43739250eaae0b94f03a",
-      "Length": 19955
+      "Sha256": "4c3bfe0b406e6b1afae2769924e7db4543e8b3c1eafc57822742fde13c7dccf1",
+      "Length": 20034
     },
     {
       "Path": "nuget/logo.jpg",
@@ -3975,8 +4025,8 @@
     },
     {
       "Path": "packaging/runtime/opencv-5.1.0-source-build-evidence.json",
-      "Sha256": "d18e541a7675b4e1c367dfe4f160b6b2fff3ed8e3003ad917761f553344861d6",
-      "Length": 37323
+      "Sha256": "bfcaaac0164270acd04abe773b8b50347b8178e5a65de9c87c95a3633059dcce",
+      "Length": 41804
     },
     {
       "Path": "packaging/runtime/patches/opencv-5.0.0-photo-ccm-instance-color-space.patch",
@@ -4217,6 +4267,11 @@
       "Path": "scripts/Generate-DatasetsUpstreamMap.ps1",
       "Sha256": "4097a22bc7d445ac39983f3f30736e85d85e2fac0b928f23a2d0aa1aa0b764e5",
       "Length": 1003
+    },
+    {
+      "Path": "scripts/Generate-Dnn51UpstreamMap.ps1",
+      "Sha256": "ab24aaecb005d9382a1e734debc00a6044b0feba10bacd4c4a2516d5bc842469",
+      "Length": 1864
     },
     {
       "Path": "scripts/Generate-DnnObjDetectUpstreamMap.ps1",
@@ -4500,8 +4555,8 @@
     },
     {
       "Path": "scripts/Initialize-UpstreamMapSourceEvidence.ps1",
-      "Sha256": "833bea6e13fd30d0dce15ff74042d58f06de40d6c832838d0ad98a678aef0d8b",
-      "Length": 5875
+      "Sha256": "4d0dc0af9490fd79cc50ab3ca7838136d1188af28f6913e186c099063dff6892",
+      "Length": 7287
     },
     {
       "Path": "scripts/Invoke-LifecycleRefreshContainerProducer.ps1",
@@ -4580,8 +4635,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "743edc30e71a5a4228711ce303e6af427c9f27102ac446742da3d9be87bf9290",
-      "Length": 191631
+      "Sha256": "0117a1597d79c0f9c1000a9210345fa03721ce1bd9473f778caa648e9c60dae7",
+      "Length": 192985
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -4722,6 +4777,11 @@
       "Path": "scripts/Test-DatasetsUpstreamMap.ps1",
       "Sha256": "3a67919989418758cdef691f92a3298bca9408c08a864e50a3d74d54edd85532",
       "Length": 4734
+    },
+    {
+      "Path": "scripts/Test-Dnn51UpstreamMap.ps1",
+      "Sha256": "f83616a6ef988cb681a9732ce343c2455ecb3a446471a60ccdd362a0fa9679ba",
+      "Length": 939
     },
     {
       "Path": "scripts/Test-DnnDiagnosticsContract.ps1",
@@ -5065,8 +5125,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "fbb9276f3d5687afd583c59172af2c6b66c9316385b4462dccd0b8bb717b859f",
-      "Length": 163839
+      "Sha256": "0f1f7e78f696e75936bf7d7100fd31c5fc8b606eeecd64fd3befb10a2089161f",
+      "Length": 165980
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -5200,8 +5260,8 @@
     },
     {
       "Path": "scripts/Test-V510ChangeLedger.ps1",
-      "Sha256": "68fb12deb74a26daf0fc31a1c9ff1fe32f74f42b897f4de9c896784522192988",
-      "Length": 6392
+      "Sha256": "d3b5e7c04ae6f00ac55e30383a3c64cce34291bfaa6cf7bdc3551a8de43b1114",
+      "Length": 7519
     },
     {
       "Path": "scripts/Test-VideoDnnBenchmarkEvidence.ps1",
@@ -5319,6 +5379,11 @@
       "Length": 904
     },
     {
+      "Path": "src/OpenCvSharp.Native/src/dnn/dnn_contract_values.h",
+      "Sha256": "e3d78c1e7c227707d735174735375311bb7768cb9fcf5390baf4749cace94a16",
+      "Length": 439
+    },
+    {
       "Path": "src/OpenCvSharp.Native/src/fuzzy/fuzzy.cpp",
       "Sha256": "c3b9158d99890023ad5f0a44cfa1ec1c46b0b6aed4efd5f73dd57018e6e085ea",
       "Length": 18426
@@ -5385,8 +5450,8 @@
     },
     {
       "Path": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
-      "Sha256": "fc112da267b7693cf197b8892279bbee4f80704b7bf74bf4ce6615c2465769d4",
-      "Length": 311457
+      "Sha256": "e5654baaea7db2260d08b783f5186cb05c473c1a93340ef6be783ee1048858a2",
+      "Length": 312411
     },
     {
       "Path": "src/OpenCvSharp/BioInspired/BioInspiredCv2.cs",
@@ -5774,6 +5839,26 @@
       "Length": 5289
     },
     {
+      "Path": "tests/OpenCvSharp.Tests/Dnn/DnnUpstream51CompatibilityTests.cs",
+      "Sha256": "b1e1aecfb7970f94e0e526053eed6f6f6a06e6404fbc37414d3315d0301a1817",
+      "Length": 4916
+    },
+    {
+      "Path": "tests/OpenCvSharp.Tests/Dnn/Fixtures/README.md",
+      "Sha256": "b41248dcfdd2d4380c0776bd3cca6dd35f1e71243283a0200ec0af4ce5c8b2b3",
+      "Length": 1018
+    },
+    {
+      "Path": "tests/OpenCvSharp.Tests/Dnn/Fixtures/add-zero.tflite.base64",
+      "Sha256": "20a7247888393493c21f973be17c58c9f4cf8b2617fc44b9dca30fae0b3f7739",
+      "Length": 545
+    },
+    {
+      "Path": "tests/OpenCvSharp.Tests/Dnn/Fixtures/generate-add-zero-tflite.cpp",
+      "Sha256": "2b23d4245daaa62205ebd5af70aadf3d32099097a1e470dbe6537b448e2277e4",
+      "Length": 2149
+    },
+    {
       "Path": "tests/OpenCvSharp.Tests/Fuzzy/FuzzyTests.cs",
       "Sha256": "ddff5bd02286b462a29621ca686b0cfea51b0d22fd9bd135e8fea7b69465c7c2",
       "Length": 22493
@@ -6149,14 +6234,19 @@
       "Length": 238
     },
     {
+      "Path": "tools/DnnUpstreamMap/Program.Refresh51.cs",
+      "Sha256": "289fa32a203c07d225158b6c2f5814ed2ea090c1aa55c5c131cd4330ee0dff42",
+      "Length": 24506
+    },
+    {
       "Path": "tools/DnnUpstreamMap/Program.cs",
-      "Sha256": "a1322d78c112c53b45abd53ca00a6c56c042652e93659dcd74eecec175ea20b5",
-      "Length": 47611
+      "Sha256": "8bb212cf7b83103dff1ad8012d09f2422d42b8666da33ddb0dcfb8ad20bd345f",
+      "Length": 47767
     },
     {
       "Path": "tools/DnnUpstreamMap/extract_dnn.py",
-      "Sha256": "d02161f03f234adfa9e8ff91ba3d1729d50c5ebaaa0409e7db94c6ffe7460e67",
-      "Length": 5365
+      "Sha256": "453dea1528d33e4e3134847dbd03263dff8c2dccc3d7fe5b3d35a05c543f2e08",
+      "Length": 6297
     },
     {
       "Path": "tools/DpmUpstreamMap/DpmUpstreamMap.csproj",

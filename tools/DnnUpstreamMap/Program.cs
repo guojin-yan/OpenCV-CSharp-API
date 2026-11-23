@@ -3,7 +3,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
-internal static class Program
+internal static partial class Program
 {
     private static readonly StringComparer Ordinal = StringComparer.Ordinal;
     private static readonly string[] Classifications =
@@ -177,6 +177,8 @@ internal static class Program
     {
         try
         {
+            if (args.Contains("--refresh-5.1", Ordinal))
+                return Refresh51(args.Where(value => value != "--refresh-5.1").ToArray());
             Options options = Parse(args);
             var jsonOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
             RawDocument raw = Read<RawDocument>(options.Raw, jsonOptions);

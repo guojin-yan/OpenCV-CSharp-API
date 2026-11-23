@@ -224,6 +224,22 @@ function Get-Record {
         "compatibility/dnn-upstream-map.txt",
         "compatibility/dnn-upstream-raw.json",
         "compatibility/dnn-upstream-summary.json",
+        "compatibility/opencv-5.1.0/README.md",
+        "compatibility/opencv-5.1.0/dnn-upstream-raw.json",
+        "compatibility/opencv-5.1.0/dnn-upstream-classifications.json",
+        "compatibility/opencv-5.1.0/dnn-upstream-map.txt",
+        "compatibility/opencv-5.1.0/dnn-upstream-summary.json",
+        "compatibility/opencv-5.1.0/dnn-upstream-delta.json",
+        "compatibility/opencv-5.1.0/dnn-implemented-families.json",
+        "tools/DnnUpstreamMap/Program.Refresh51.cs",
+        "scripts/Generate-Dnn51UpstreamMap.ps1",
+        "scripts/Test-Dnn51UpstreamMap.ps1",
+        "docs/articles/dnn-5.1-migration.md",
+        "src/OpenCvSharp.Native/src/dnn/dnn_contract_values.h",
+        "tests/OpenCvSharp.Tests/Dnn/DnnUpstream51CompatibilityTests.cs",
+        "tests/OpenCvSharp.Tests/Dnn/Fixtures/add-zero.tflite.base64",
+        "tests/OpenCvSharp.Tests/Dnn/Fixtures/generate-add-zero-tflite.cpp",
+        "tests/OpenCvSharp.Tests/Dnn/Fixtures/README.md",
         "compatibility/dnn_superres-implemented-families.json",
         "compatibility/dnn_superres-upstream-classifications.json",
         "compatibility/dnn_superres-upstream-map.txt",
@@ -1322,6 +1338,12 @@ function Get-Record {
             CurrentBuildEvidence = Get-FileEvidence -RelativePath "packaging/runtime/opencv-5.1.0-source-build-evidence.json"
             LocalBuildRid = "win-x64"
             HistoricalUpstreamMapRevision = "5.0.0"
+            CurrentDnnParserSlice = Get-FileEvidence -RelativePath "compatibility/opencv-5.1.0/dnn-upstream-summary.json"
+            CurrentDnnParserDeclarationCount = 185
+            CurrentDnnCompleteCppParityClaimed = $false
+            HistoricalCatalogMapCount = 73
+            CurrentRevisionRefreshedParserSliceCount = 1
+            CurrentRevisionPendingCatalogMapCount = 72
             HistoricalSupportEvidenceRevision = "5.0.0"
             CurrentRevisionMultiRidValidated = $false
             CurrentRevisionUpstreamParityClaimed = $false

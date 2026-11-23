@@ -5,7 +5,7 @@
   "packageVersion": "5.1.0",
   "rid": "win-x64",
   "recordedDate": "2026-11-23",
-  "repositoryBaseCommit": "95b9adad982d7723ff0e8e8ea3225d5b00a487d9",
+  "repositoryBaseCommit": "df42e0dd4967f81360984e13d4c4ff4da21b6705",
   "worktreeChangesIncluded": true,
   "sourceInputSet": {
     "paths": [
@@ -19,8 +19,8 @@
       "scripts/New-RuntimeInputArtifact.ps1",
       "scripts/Test-WindowsRuntimePeClosure.ps1"
     ],
-    "fileCount": 1185,
-    "sha256": "73f2e8eb49112b0a693c9ca438006bc329fa0c9934378be39f37d8ee4889f8e1",
+    "fileCount": 1189,
+    "sha256": "bc280f9fe79ab7f6e80f0c31f46e96ea69d06faedbc3308a470d76043abdf854",
     "policy": "UTF-8 text normalized to LF, trailing whitespace at file end normalized to one newline; ordinal path|length|sha256 rows"
   },
   "upstream": {
@@ -111,7 +111,7 @@
       "wrapper": {
         "path": "%TEMP%/opencv-v510-build-workspace/native-full/Release/JYPPX.OpenCV.Native.dll",
         "length": 1894912,
-        "sha256": "6ccbaf0739d56d7cf8694812168130f3351c746ed5daba86c6874981cf53024c"
+        "sha256": "df3bb6b53e1d67d081eb984ff0e71817a892904808ff829533f43be2d7c66656"
       },
       "openCvInstallProfile": "full",
       "separateMinimalUpstreamBuild": false,
@@ -131,7 +131,7 @@
         {
           "name": "JYPPX.OpenCV.Native.dll",
           "length": 1894912,
-          "sha256": "6ccbaf0739d56d7cf8694812168130f3351c746ed5daba86c6874981cf53024c"
+          "sha256": "df3bb6b53e1d67d081eb984ff0e71817a892904808ff829533f43be2d7c66656"
         },
         {
           "name": "opencv_alphamat510.dll",
@@ -345,9 +345,9 @@
         }
       ],
       "log": {
-        "path": "%TEMP%/opencv-v510-wrapper-full-final.log",
-        "length": 5716,
-        "sha256": "4781c7d850b4e841794056d95b70e8bcfdbe49ac92c49882fbd6c6fa95ac27c0"
+        "path": "%TEMP%/opencv-v510-dnn-wrapper-full.log",
+        "length": 6063,
+        "sha256": "3bb0665d5ba18634fcc6ddacaad2b4383e61b41537e8e94ddfbdb05bcc6cb305"
       }
     },
     {
@@ -356,7 +356,7 @@
       "wrapper": {
         "path": "%TEMP%/opencv-v510-build-workspace/native-mini/Release/JYPPX.OpenCV.Native.dll",
         "length": 425984,
-        "sha256": "d343bd7964444a514e3f20c3825c8097d412b81ba6fbf7e8f3b45907630db53c"
+        "sha256": "16b0d302095ffc1d8619b2f6f08058eea6ae1290dcd01a6d5e39a9a33cfebef1"
       },
       "openCvInstallProfile": "full",
       "separateMinimalUpstreamBuild": false,
@@ -376,7 +376,7 @@
         {
           "name": "JYPPX.OpenCV.Native.dll",
           "length": 425984,
-          "sha256": "d343bd7964444a514e3f20c3825c8097d412b81ba6fbf7e8f3b45907630db53c"
+          "sha256": "16b0d302095ffc1d8619b2f6f08058eea6ae1290dcd01a6d5e39a9a33cfebef1"
         },
         {
           "name": "opencv_core510.dll",
@@ -410,9 +410,9 @@
         }
       ],
       "log": {
-        "path": "%TEMP%/opencv-v510-wrapper-mini.log",
-        "length": 4253,
-        "sha256": "1a682ffb1324e283b2b1bd365fe9c1b8f7ae0bee02d12525bc69df86d4369e48"
+        "path": "%TEMP%/opencv-v510-dnn-wrapper-mini.log",
+        "length": 3801,
+        "sha256": "8c2ed492c23743105b494d3a59503dc93b31ab31bd7537f8e892008892866f70"
       }
     }
   ],
@@ -421,46 +421,62 @@
       "targetFramework": "net8.0",
       "nativeSmokeEnabled": true,
       "nativeOpenCvVersion": "5.1.0",
-      "passed": 1252,
+      "passed": 1260,
       "failed": 0,
       "skipped": 0,
       "requiredPassedTests": [
         "JYPPX.OpenCvSharp.Tests.Core.BuildInfoTests.NativeOpenCvVersionMatchesManagedTargetWhenNativeRuntimeIsAvailable",
         "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.TensorFlowImportersRetainApiAndReportUpstreamRemoval",
-        "JYPPX.OpenCvSharp.Tests.Dnn.DnnStructuredParityTests.IdentityOnnxExercisesStructuredNetworkSurface"
+        "JYPPX.OpenCvSharp.Tests.Dnn.DnnStructuredParityTests.IdentityOnnxExercisesStructuredNetworkSurface",
+        "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.OnnxImportPathsKeepAbiEngineValues(engine: Ort)",
+        "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.OnnxImportPathsKeepAbiEngineValues(engine: Auto)",
+        "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.OnnxImportPathsKeepAbiEngineValues(engine: Classic)",
+        "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.OnnxImportPathsKeepAbiEngineValues(engine: New)",
+        "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.TFLiteImportReportsStableFormatAndRunsInference(engine: Auto)",
+        "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.TFLiteImportReportsStableFormatAndRunsInference(engine: New)",
+        "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.TFLiteImportReportsStableFormatAndRunsInference(engine: Ort)",
+        "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.TFLiteImportReportsStableFormatAndRunsInference(engine: Classic)"
       ],
       "photoTestCount": 48,
       "trx": {
-        "path": "%TEMP%/opencv-v510-native-net8.0/native510.trx",
-        "sha256": "9f494d4397223b1c3475f5c056e594cee8cfe868c56a6eb5c68cb02a018db714"
+        "path": "%TEMP%/opencv-v510-dnn-native-net8.0/native510.trx",
+        "sha256": "0e21e26d1fb2c7909b0f44e076136ffc6a275d2fab096fe73a7823a03a5593fe"
       },
       "log": {
-        "path": "%TEMP%/opencv-v510-native-net8.0.log",
-        "length": 923,
-        "sha256": "66ed2654126898cdc65c8613f12f5fb99ccf8adbdef06348fd3982248c3b6f69"
+        "path": "%TEMP%/opencv-v510-dnn-native-net8.0.log",
+        "length": 732,
+        "sha256": "2e4c1bb6110bfa9b0b0cd0cb38b70944908ec15e126270e7bc50f0acfcbe5eb7"
       }
     },
     {
       "targetFramework": "net10.0",
       "nativeSmokeEnabled": true,
       "nativeOpenCvVersion": "5.1.0",
-      "passed": 1252,
+      "passed": 1260,
       "failed": 0,
       "skipped": 0,
       "requiredPassedTests": [
         "JYPPX.OpenCvSharp.Tests.Core.BuildInfoTests.NativeOpenCvVersionMatchesManagedTargetWhenNativeRuntimeIsAvailable",
         "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.TensorFlowImportersRetainApiAndReportUpstreamRemoval",
-        "JYPPX.OpenCvSharp.Tests.Dnn.DnnStructuredParityTests.IdentityOnnxExercisesStructuredNetworkSurface"
+        "JYPPX.OpenCvSharp.Tests.Dnn.DnnStructuredParityTests.IdentityOnnxExercisesStructuredNetworkSurface",
+        "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.OnnxImportPathsKeepAbiEngineValues(engine: Auto)",
+        "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.OnnxImportPathsKeepAbiEngineValues(engine: Classic)",
+        "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.OnnxImportPathsKeepAbiEngineValues(engine: Ort)",
+        "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.OnnxImportPathsKeepAbiEngineValues(engine: New)",
+        "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.TFLiteImportReportsStableFormatAndRunsInference(engine: Classic)",
+        "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.TFLiteImportReportsStableFormatAndRunsInference(engine: Auto)",
+        "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.TFLiteImportReportsStableFormatAndRunsInference(engine: New)",
+        "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.TFLiteImportReportsStableFormatAndRunsInference(engine: Ort)"
       ],
       "photoTestCount": 48,
       "trx": {
-        "path": "%TEMP%/opencv-v510-native-net10.0/native510.trx",
-        "sha256": "868b8a9e27047b022ac3a56987977ce3c772e170e6a90d76107cdb6afcd6b727"
+        "path": "%TEMP%/opencv-v510-dnn-native-net10.0/native510.trx",
+        "sha256": "404761a6e391de8e978e58638a7a0787c2e706fa3c09eec317b44411334e5dd0"
       },
       "log": {
-        "path": "%TEMP%/opencv-v510-native-net10.0.log",
-        "length": 820,
-        "sha256": "389dfe3d1b917a2a295394cdb6f7421cfa3d0724dd32a9f4c7fa17f11f20d459"
+        "path": "%TEMP%/opencv-v510-dnn-native-net10.0.log",
+        "length": 738,
+        "sha256": "baefd7b8ab57ba24084451893f70b9dde3efe5fb48dd3cdc48e39ae52e3c92d1"
       }
     }
   ],
@@ -478,7 +494,7 @@
       "files": 43,
       "reachableModules": 42,
       "log": {
-        "path": "%TEMP%/opencv-v510-pe-full.log",
+        "path": "%TEMP%/opencv-v510-dnn-pe-full.log",
         "length": 184,
         "sha256": "328ba21c6d527f0ef5d79cfbfeb7c26076a312a19be720003f27100caedd0819"
       }
@@ -487,7 +503,7 @@
       "files": 7,
       "reachableModules": 6,
       "log": {
-        "path": "%TEMP%/opencv-v510-pe-mini.log",
+        "path": "%TEMP%/opencv-v510-dnn-pe-mini.log",
         "length": 179,
         "sha256": "789eda4ca360afd7b831a9b5e6d06ec40715a880cef128b81a3c8c6929d283ce"
       }
@@ -1019,7 +1035,7 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     }
   },
-  "sourceCommit": "3646249ae9d1ef93d008cd599b850a806dcc0bec",
+  "sourceCommit": "4e9017e4e780771e92c493947c347c20e88b5432",
   "sourceCommitBinding": "The committed source input scope has the exact sourceInputSet digest measured before commit; evidence updates are outside that scope.",
   "managedPreflightMutation": {
     "sourceCommit": "3646249ae9d1ef93d008cd599b850a806dcc0bec",
@@ -1047,6 +1063,56 @@
       "path": "%TEMP%/opencv-v510-fuzz-measure.log",
       "sha256": "626898b3b89f91dbf12d488a6aa6322013db40d2bc16998a30b9883d7cf95a63"
     },
-    "scope": "isolated managed parser process outcomes and working-set budget; process exit is not proof of long-term native leak freedom"
+    "scope": "isolated managed parser process outcomes and working-set budget; process exit is not proof of long-term native leak freedom; retained prior measurement, codec/preflight implementation unchanged by this DNN correction"
+  },
+  "dnn51Correction": {
+    "sourceCommit": "4e9017e4e780771e92c493947c347c20e88b5432",
+    "abiValuesUnchanged": true,
+    "projectionScope": "Every generic, ONNX, TFLite and retained historical TensorFlow model-reader engine boundary; TFLite model-format output.",
+    "nativeProjectionChecks": "Full native smoke checks all four ABI engine values for both upstream enum layouts, including ORT on a build without ORT; compile-time assertions bind the translation to OpenCV enum definitions.",
+    "ortBackendRuntimeValidated": false,
+    "beforeRegression": {
+      "total": 4,
+      "failed": 4,
+      "passed": 0,
+      "reason": "Expected TensorFlowLite, actual TensorFlow for all four engine selections.",
+      "trx": {
+        "path": "%TEMP%/opencv-v510-dnn-before-native/before-native.trx",
+        "sha256": "02940973f0e79d95c18b96442f244fa8f9e7c91852c4e51ba7cc198368a2bf23"
+      },
+      "log": {
+        "path": "%TEMP%/opencv-v510-dnn-before-native.log",
+        "length": 5583,
+        "sha256": "e718167638afb30fc727927abc28f4e598bf60aac2f5c2ff9f34e53c96cfeabc"
+      }
+    },
+    "syntheticTflite": {
+      "bytes": 408,
+      "sha256": "bfec1c8a625eabcb718538f14221ad821f4614e32d8e8031b3c179d3502c56c1",
+      "operation": "output = input + 0; FLOAT32 NHWC [1,2,2,1]",
+      "generator": "tests/OpenCvSharp.Tests/Dnn/Fixtures/generate-add-zero-tflite.cpp"
+    },
+    "parserSlice": {
+      "summary": "compatibility/opencv-5.1.0/dnn-upstream-summary.json",
+      "sha256": "57d3a007192f6fd052b137961b800565e286e9012efb12d0b42761967bd52382",
+      "declarations": 185,
+      "negativeFixtures": 22,
+      "isolatedRegenLog": {
+        "path": "%TEMP%/opencv-v510-dnn-regen.log",
+        "length": 1127,
+        "sha256": "4c94fb36a3633b5976ddfb2bd485de465a95c8e766bef1ae7564f81922e8635e"
+      },
+      "remainingHistoricalCatalogMaps": 72,
+      "completeDnnCppParityClaimed": false
+    },
+    "managedBuild": {
+      "targetFrameworkCount": 15,
+      "log": {
+        "path": "%TEMP%/opencv-v510-dnn-managed-build.log",
+        "length": 2174,
+        "sha256": "eddf26e183fbbb564cd186dad84122df92fa16e9c653b95975476195501bf5f6"
+      }
+    },
+    "upstreamBuildReused": "The official OpenCV 5.1 installation is unchanged; Full/Mini wrappers and native smoke were rebuilt after the ABI projection correction."
   }
 }

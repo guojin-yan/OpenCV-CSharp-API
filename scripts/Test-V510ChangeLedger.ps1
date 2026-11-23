@@ -49,9 +49,20 @@ foreach ($profile in $build.wrapperProfiles) {
 }
 if ((@($build.managedRegression.targetFramework) -join ',') -cne 'net8.0,net10.0') { throw '5.1 native-enabled managed evidence requires both frameworks.' }
 foreach ($run in $build.managedRegression) {
-    if (-not $run.nativeSmokeEnabled -or $run.nativeOpenCvVersion -cne '5.1.0' -or $run.passed -ne 1252 -or $run.failed -ne 0 -or $run.skipped -ne 0 -or @($run.requiredPassedTests).Count -ne 3) { throw '5.1 native-enabled regression evidence is incomplete.' }
+    if (-not $run.nativeSmokeEnabled -or $run.nativeOpenCvVersion -cne '5.1.0' -or $run.passed -ne 1260 -or $run.failed -ne 0 -or $run.skipped -ne 0 -or @($run.requiredPassedTests).Count -ne 11) { throw '5.1 native-enabled regression evidence is incomplete.' }
+    foreach ($name in @('OnnxImportPathsKeepAbiEngineValues','TFLiteImportReportsStableFormatAndRunsInference')) {
+        if (@($run.requiredPassedTests | Where-Object { $_ -like "*.$name(*)" }).Count -ne 4) { throw '5.1 enum projection requires all four engine choices for ONNX and TFLite.' }
+    }
 }
 $patchHash = (Get-FileHash -LiteralPath (Join-Path $repo $build.patch.path) -Algorithm SHA256).Hash.ToLowerInvariant()
+$dnn = $build.dnn51Correction
+$dnnSummaryHash = (Get-FileHash -LiteralPath (Join-Path $repo 'compatibility/opencv-5.1.0/dnn-upstream-summary.json') -Algorithm SHA256).Hash.ToLowerInvariant()
+if ($dnn.sourceCommit -cne $build.sourceCommit -or -not $dnn.abiValuesUnchanged -or $dnn.ortBackendRuntimeValidated -or
+    $dnn.parserSlice.sha256 -cne $dnnSummaryHash -or $dnn.parserSlice.declarations -ne 185 -or $dnn.parserSlice.negativeFixtures -ne 22 -or
+    $dnn.parserSlice.remainingHistoricalCatalogMaps -ne 72 -or $dnn.parserSlice.completeDnnCppParityClaimed -or
+    $dnn.beforeRegression.total -ne 4 -or $dnn.beforeRegression.failed -ne 4 -or $dnn.beforeRegression.passed -ne 0 -or $dnn.managedBuild.targetFrameworkCount -ne 15) {
+    throw '5.1 DNN correction or parser-slice evidence drifted.'
+}
 if ($patchHash -cne $build.patch.sha256 -or -not $build.patch.actualSourceIdempotencePassed -or $build.patch.negativeFixtureCount -ne 2 -or $build.runtimeInput.openCvVersion -cne '5.1.0' -or -not $build.runtimeInput.versionedPatchRecorded) { throw '5.1 CCM patch or runtime input provenance evidence drifted.' }
 Write-Host "V510_CHANGE_LEDGER_OK entries=$(@($ledger.entries).Count) from=$($ledger.fromVersion) to=$($ledger.toVersion) native_abi=$($ledger.nativeAbiVersion)"
-Write-Host "OPENCV_510_SOURCE_BUILD_EVIDENCE_OK input_files=$($inputPaths.Count) full_exports=2669 mini_exports=527 native_ctest=6 managed=2504 historical_maps=5.0.0"
+Write-Host "OPENCV_510_SOURCE_BUILD_EVIDENCE_OK input_files=$($inputPaths.Count) full_exports=2669 mini_exports=527 native_ctest=6 managed=2520 historical_catalog=5.0.0 dnn_parser_slice=5.1.0"

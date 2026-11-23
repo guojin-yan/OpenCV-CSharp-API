@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/DnnUpstreamMap --refresh-5.1",
+  "upstreamOpenCvVersion": "5.1.0",
+  "upstreamCommit": "e4f78fbcf1a773fbed69e14500e8b734963eb585",
+  "sourceHashPolicy": "UTF-8 source with CRLF/CR normalized to LF; no trimming",
+  "claimedSlice": "opencv2/dnn.hpp compatibility include closure: parser-emitted dict.hpp, dnn.hpp, and utils/inference_engine.hpp declarations",
+  "rawExtractionPath": "compatibility/opencv-5.1.0/dnn-upstream-raw.json",
+  "classificationPath": "compatibility/opencv-5.1.0/dnn-upstream-classifications.json",
+  "mappingPath": "compatibility/opencv-5.1.0/dnn-upstream-map.txt",
+  "familyInventoryPath": "compatibility/opencv-5.1.0/dnn-implemented-families.json",
+  "deltaPath": "compatibility/opencv-5.1.0/dnn-upstream-delta.json",
+  "mappingSha256": "84016f1bca962996d4416a979b3bc29b6233f4535c274b22ed9529c8214e54db",
+  "familyInventorySha256": "9af1f21f06cb7d85df9e9e4594fd43b38d612840b9328f08a737a83f5a6ebedb",
+  "deltaSha256": "a76636cf1a0b20ad701035f1e2d35e2f32b008cf2d3e92617e4c8233ce3d92c6",
+  "rawSha256": "c1c90a0a61d0cdd86ad5e8633291cbd26ca93eed3db9313c9427124675bfaff0",
+  "declarationSnapshotSha256": "c8e93297cee63d76eddfb37db94f4e85ccf5f61a58629cfd81784507cdfbb44a",
+  "historicalRawSha256": "1a9d121e7e06a8059612e368f9dfc83466a23b2ceafd3f505bb0aecb08be784a",
+  "historicalClassificationSha256": "64fec89890aba7733af902139cde29f3547cb07c99ecb1cd6f7f81228a85156c",
+  "declarationCount": 185,
+  "callableCount": 161,
+  "classCount": 15,
+  "enumCount": 9,
+  "sourceHeaderCount": 3,
+  "classificationCounts": {
+    "implemented": 68,
+    "intentionally-omitted": 85,
+    "missing": 0,
+    "non-callable-metadata": 24,
+    "unsupported": 2,
+    "upstream-conditional": 6
+  },
+  "nativeEvidenceCount": 80,
+  "managedEvidenceCount": 69,
+  "addedIdentityCount": 12,
+  "removedIdentityCount": 9,
+  "retainedIdentityCount": 173,
+  "changedRetainedIdentityCount": 18,
+  "negativeFixtureCount": 22,
+  "repositoryWideUpstreamParityClaimed": false,
+  "completeDnnCppParityClaimed": false,
+  "ortRuntimeValidated": false,
+  "abiEngineProjection": [
+    {
+      "name": "Auto",
+      "abiValue": 3,
+      "upstreamValue": 0
+    },
+    {
+      "name": "Classic",
+      "abiValue": 1,
+      "upstreamValue": 1
+    },
+    {
+      "name": "New",
+      "abiValue": 2,
+      "upstreamValue": 1
+    },
+    {
+      "name": "Ort",
+      "abiValue": 4,
+      "upstreamValue": 2
+    }
+  ],
+  "abiModelFormatProjection": [
+    {
+      "name": "Generic",
+      "upstreamValue": 0,
+      "abiValue": 0
+    },
+    {
+      "name": "Onnx",
+      "upstreamValue": 1,
+      "abiValue": 1
+    },
+    {
+      "name": "TensorFlowLite",
+      "upstreamValue": 2,
+      "abiValue": 3
+    }
+  ]
+}

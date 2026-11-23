@@ -1,5 +1,7 @@
 # Upstream Map Toolchain
 
+Current-version refreshes are tracked in [OpenCV 5.1 mapping evidence](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/compatibility/opencv-5.1.0/README.md). DNN's three-header parser slice is refreshed first; the 73-entry catalog documented below retains its historical OpenCV 5.0.0 identity. See [DNN 5.1 migration](dnn-5.1-migration.md) for declaration changes, remaining gaps and enum conversion.
+
 The upstream map catalog centralizes the source scope, parser identity, classification policy, output files, and semantic check command for 73 source maps, including the partial callable maps and lexical source inventories for Cudev and MATLAB. Its schema is `compatibility/upstream-map-catalog.schema.json`, and the checked catalog is `compatibility/upstream-map-catalog.json`.
 
 上游映射 catalog 集中记录 73 个源码映射（含 Cudev 与 MATLAB 的部分 callable map 及词法源清单）的源码范围、parser 身份、分类策略、输出文件和语义检查命令。其 schema 是 `compatibility/upstream-map-catalog.schema.json`，已审计的 catalog 是 `compatibility/upstream-map-catalog.json`。

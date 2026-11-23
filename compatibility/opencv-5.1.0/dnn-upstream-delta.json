@@ -1,0 +1,1462 @@
+{
+  "fromVersion": "5.0.0",
+  "toVersion": "5.1.0",
+  "added": [
+    "enum cv.dnn.ModelFormat[const cv.dnn.DNN_MODEL_GENERIC=0;const cv.dnn.DNN_MODEL_ONNX=1;const cv.dnn.DNN_MODEL_TFLITE=2]",
+    "class cv.dnn.LayerInfo",
+    "cv.dnn.LayerInfo.outputNameToIndex(String outputName[/C,/Ref])-\u003Eint",
+    "cv.dnn.Net.enableTF32(bool useTF32)-\u003Evoid",
+    "cv.dnn.Net.reserveKVCache(int maxSequenceLength)-\u003Evoid",
+    "enum cv.dnn.EngineType[const cv.dnn.ENGINE_AUTO=0;const cv.dnn.ENGINE_OPENCV=1;const cv.dnn.ENGINE_ORT=2]",
+    "cv.dnn.readNetFromONNX(String onnxFile[/PATH,/C,/Ref];int engine;bool mapExternalData)-\u003ENet",
+    "cv.dnn.blobFromImage(Mat image;double scalefactor=1.0;Size size=Size()[/C,/Ref];Scalar mean=Scalar()[/C,/Ref];bool swapRB=false;bool crop=false;int ddepth=CV_32F;int interpolation=cv::INTER_LINEAR)-\u003EMat",
+    "cv.dnn.blobFromImages(vector_Mat images;double scalefactor=1.0;Size size=Size();Scalar mean=Scalar()[/C,/Ref];bool swapRB=false;bool crop=false;int ddepth=CV_32F;int interpolation=cv::INTER_LINEAR)-\u003EMat",
+    "cv.dnn.Image2BlobParams.Image2BlobParams(Scalar scalefactor[/C,/Ref];Size size=Size()[/C,/Ref];Scalar mean=Scalar()[/C,/Ref];bool swapRB=false;int ddepth=CV_32F;DataLayout datalayout=DNN_LAYOUT_NCHW;ImagePaddingMode mode=dnn::DNN_PMODE_NULL;Scalar borderValue=0.0;int interpolation=cv::INTER_LINEAR)-\u003E",
+    "cv.dnn.Model.enableTF32(bool useTF32)-\u003EModel",
+    "cv.dnn.Tokenizer.encode(vector_string textChunks[/C,/Ref])-\u003Estd::vector\u003Cint\u003E"
+  ],
+  "removed": [
+    "enum cv.dnn.ModelFormat[const cv.dnn.DNN_MODEL_GENERIC=0;const cv.dnn.DNN_MODEL_ONNX=1;const cv.dnn.DNN_MODEL_TF=2;const cv.dnn.DNN_MODEL_TFLITE=3]",
+    "cv.dnn.Layer.outputNameToIndex(String outputName[/C,/Ref])-\u003Eint",
+    "enum cv.dnn.EngineType[const cv.dnn.ENGINE_CLASSIC=1;const cv.dnn.ENGINE_NEW=2;const cv.dnn.ENGINE_AUTO=3;const cv.dnn.ENGINE_ORT=4]",
+    "cv.dnn.readNetFromTensorflow(String model[/PATH,/C,/Ref];String config=String()[/PATH,/C,/Ref];int engine=ENGINE_AUTO;vector_String extraOutputs=std::vector\u003CString\u003E()[/C,/Ref])-\u003ENet",
+    "cv.dnn.readNetFromTensorflow(vector_uchar bufferModel[/C,/Ref];vector_uchar bufferConfig=std::vector\u003Cuchar\u003E()[/C,/Ref];int engine=ENGINE_AUTO;vector_String extraOutputs=std::vector\u003CString\u003E()[/C,/Ref])-\u003ENet",
+    "cv.dnn.blobFromImage(Mat image;double scalefactor=1.0;Size size=Size()[/C,/Ref];Scalar mean=Scalar()[/C,/Ref];bool swapRB=false;bool crop=false;int ddepth=CV_32F)-\u003EMat",
+    "cv.dnn.blobFromImages(vector_Mat images;double scalefactor=1.0;Size size=Size();Scalar mean=Scalar()[/C,/Ref];bool swapRB=false;bool crop=false;int ddepth=CV_32F)-\u003EMat",
+    "cv.dnn.Image2BlobParams.Image2BlobParams(Scalar scalefactor[/C,/Ref];Size size=Size()[/C,/Ref];Scalar mean=Scalar()[/C,/Ref];bool swapRB=false;int ddepth=CV_32F;DataLayout datalayout=DNN_LAYOUT_NCHW;ImagePaddingMode mode=dnn::DNN_PMODE_NULL;Scalar borderValue=0.0)-\u003E",
+    "cv.dnn.writeTextGraph(String model[/PATH,/C,/Ref];String output[/PATH,/C,/Ref])-\u003Evoid"
+  ],
+  "changed": [
+    {
+      "identity": "class cv.dnn.Layer",
+      "historicalOrdinal": 17,
+      "currentOrdinal": 19,
+      "fields": [
+        "arguments",
+        "baseDeclaration",
+        "documentation"
+      ],
+      "before": {
+        "ordinal": 17,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "class",
+        "name": "cv.dnn.Layer",
+        "identity": "class cv.dnn.Layer",
+        "returnType": ": cv::Algorithm",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "vector_Mat",
+            "name": "blobs",
+            "default": "",
+            "modifiers": [
+              "/RW"
+            ]
+          },
+          {
+            "type": "String",
+            "name": "name",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "String",
+            "name": "type",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "int",
+            "name": "preferableTarget",
+            "default": "",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": ": cv::Algorithm",
+        "documentation": "@brief This interface class allows to build new Layers - are building blocks of networks.\n     *\n     * Each class, derived from Layer, must implement forward() method to compute outputs.\n     * Also before using the new layer into networks you must register your layer by using one of @ref dnnLayerFactory \u0022LayerFactory\u0022 macros."
+      },
+      "after": {
+        "ordinal": 19,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "class",
+        "name": "cv.dnn.Layer",
+        "identity": "class cv.dnn.Layer",
+        "returnType": ": cv::dnn::LayerInfo",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "int",
+            "name": "preferableTarget",
+            "default": "",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": ": cv::dnn::LayerInfo",
+        "documentation": "@brief This interface class allows to build new Layers - are building blocks of networks.\n     *\n     * A %Layer is the *executable*, backend-specific counterpart of a LayerInfo node: it\n     * implements forward() (and finalize()) for a particular backend/target. In the new graph\n     * engine a %Layer is created from a LayerInfo by the executor factory; shape/type inference\n     * stays on the LayerInfo node.\n     *\n     * Each class, derived from Layer, must implement forward() method to compute outputs.\n     * Also before using the new layer into networks you must register your layer by using one of @ref dnnLayerFactory \u0022LayerFactory\u0022 macros."
+      }
+    },
+    {
+      "identity": "cv.dnn.Net.setInputShape(String inputName[/C,/Ref];MatShape shape[/C,/Ref])-\u003Evoid",
+      "historicalOrdinal": 39,
+      "currentOrdinal": 40,
+      "fields": [
+        "documentation"
+      ],
+      "before": {
+        "ordinal": 39,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.Net.setInputShape",
+        "identity": "cv.dnn.Net.setInputShape(String inputName[/C,/Ref];MatShape shape[/C,/Ref])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "String",
+            "name": "inputName",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "MatShape",
+            "name": "shape",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Specify shape of network input."
+      },
+      "after": {
+        "ordinal": 40,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.Net.setInputShape",
+        "identity": "cv.dnn.Net.setInputShape(String inputName[/C,/Ref];MatShape shape[/C,/Ref])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "String",
+            "name": "inputName",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "MatShape",
+            "name": "shape",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Specify shape of network input.\n         *\n         * Must be called before the first forward(). With the new engine, shape computations that depend\n         * on a pinned input are folded into constants; on the CUDA backend a model left with no dynamic\n         * shapes then runs each forward() as one replayed CUDA Graph instead of one launch per layer."
+      }
+    },
+    {
+      "identity": "cv.dnn.Net.forward(String outputName=String()[/C,/Ref])-\u003EMat",
+      "historicalOrdinal": 40,
+      "currentOrdinal": 41,
+      "fields": [
+        "documentation"
+      ],
+      "before": {
+        "ordinal": 40,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.Net.forward",
+        "identity": "cv.dnn.Net.forward(String outputName=String()[/C,/Ref])-\u003EMat",
+        "returnType": "Mat",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "String",
+            "name": "outputName",
+            "default": "String()",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Runs forward pass to compute output of layer with name @p outputName.\n         *  @param outputName name for layer which output is needed to get\n         *  @return blob for first output of specified layer.\n         *  @details By default runs forward pass for the whole network."
+      },
+      "after": {
+        "ordinal": 41,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.Net.forward",
+        "identity": "cv.dnn.Net.forward(String outputName=String()[/C,/Ref])-\u003EMat",
+        "returnType": "Mat",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "String",
+            "name": "outputName",
+            "default": "String()",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Runs forward pass to compute output of layer with name @p outputName.\n         *  @param outputName name for layer which output is needed to get\n         *  @return blob for first output of specified layer.\n         *  @details By default runs forward pass for the whole network.\n         *  @note In Python, CV_16BF / CV_8F_E4M3FN / CV_8F_E4M3FNUZ output blobs are\n         *  returned as NumPy float32 arrays by default. To preserve their exact dtypes,\n         *  import the optional ml_dtypes package and call\n         *  \u0060cv.setUseExactNumpyDtypes(True)\u0060 before forward(). This process-wide\n         *  setting affects outputs only; registered bfloat16 / float8 input arrays are\n         *  accepted regardless of it. It belongs to the application: libraries should not\n         *  change it. See @ref tutorial_py_bindings_basics for details."
+      }
+    },
+    {
+      "identity": "cv.dnn.Net.forward(vector_Mat outputBlobs[/ND,/O];String outputName=String()[/C,/Ref])-\u003Evoid",
+      "historicalOrdinal": 42,
+      "currentOrdinal": 43,
+      "fields": [
+        "documentation"
+      ],
+      "before": {
+        "ordinal": 42,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.Net.forward",
+        "identity": "cv.dnn.Net.forward(vector_Mat outputBlobs[/ND,/O];String outputName=String()[/C,/Ref])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "vector_Mat",
+            "name": "outputBlobs",
+            "default": "",
+            "modifiers": [
+              "/ND",
+              "/O"
+            ]
+          },
+          {
+            "type": "String",
+            "name": "outputName",
+            "default": "String()",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Runs forward pass to compute output of layer with name @p outputName.\n         *  @param outputBlobs contains all output blobs for specified layer.\n         *  @param outputName name for layer which output is needed to get\n         *  @details If @p outputName is empty, runs forward pass for the whole network."
+      },
+      "after": {
+        "ordinal": 43,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.Net.forward",
+        "identity": "cv.dnn.Net.forward(vector_Mat outputBlobs[/ND,/O];String outputName=String()[/C,/Ref])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "vector_Mat",
+            "name": "outputBlobs",
+            "default": "",
+            "modifiers": [
+              "/ND",
+              "/O"
+            ]
+          },
+          {
+            "type": "String",
+            "name": "outputName",
+            "default": "String()",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Runs forward pass to compute output of layer with name @p outputName.\n         *  @param outputBlobs contains all output blobs for specified layer.\n         *  @param outputName name for layer which output is needed to get\n         *  @details If @p outputName is empty, runs forward pass for the whole network.\n         *  @note Python output dtype handling is described in forward(const String\u0026)."
+      }
+    },
+    {
+      "identity": "cv.dnn.Net.forward(vector_Mat outputBlobs[/ND,/O];vector_String outBlobNames[/C,/Ref])-\u003Evoid",
+      "historicalOrdinal": 43,
+      "currentOrdinal": 44,
+      "fields": [
+        "documentation"
+      ],
+      "before": {
+        "ordinal": 43,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.Net.forward",
+        "identity": "cv.dnn.Net.forward(vector_Mat outputBlobs[/ND,/O];vector_String outBlobNames[/C,/Ref])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "vector_Mat",
+            "name": "outputBlobs",
+            "default": "",
+            "modifiers": [
+              "/ND",
+              "/O"
+            ]
+          },
+          {
+            "type": "vector_String",
+            "name": "outBlobNames",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Runs forward pass to compute outputs of layers listed in @p outBlobNames.\n         *  @param outputBlobs contains blobs for first outputs of specified layers.\n         *  @param outBlobNames names for layers which outputs are needed to get"
+      },
+      "after": {
+        "ordinal": 44,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.Net.forward",
+        "identity": "cv.dnn.Net.forward(vector_Mat outputBlobs[/ND,/O];vector_String outBlobNames[/C,/Ref])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "vector_Mat",
+            "name": "outputBlobs",
+            "default": "",
+            "modifiers": [
+              "/ND",
+              "/O"
+            ]
+          },
+          {
+            "type": "vector_String",
+            "name": "outBlobNames",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Runs forward pass to compute outputs of layers listed in @p outBlobNames.\n         *  @param outputBlobs contains blobs for first outputs of specified layers.\n         *  @param outBlobNames names for layers which outputs are needed to get\n         *  @note Python output dtype handling is described in forward(const String\u0026)."
+      }
+    },
+    {
+      "identity": "cv.dnn.Net.forward(vector_vector_Mat outputBlobs[/O,/Ref];vector_String outBlobNames[/C,/Ref])-\u003Evoid",
+      "historicalOrdinal": 44,
+      "currentOrdinal": 45,
+      "fields": [
+        "documentation"
+      ],
+      "before": {
+        "ordinal": 44,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.Net.forward",
+        "identity": "cv.dnn.Net.forward(vector_vector_Mat outputBlobs[/O,/Ref];vector_String outBlobNames[/C,/Ref])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [
+          "=forwardAndRetrieve"
+        ],
+        "arguments": [
+          {
+            "type": "vector_vector_Mat",
+            "name": "outputBlobs",
+            "default": "",
+            "modifiers": [
+              "/O",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "vector_String",
+            "name": "outBlobNames",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Runs forward pass to compute outputs of layers listed in @p outBlobNames.\n         *  @param outputBlobs contains all output blobs for each layer specified in @p outBlobNames.\n         *  @param outBlobNames names for layers which outputs are needed to get"
+      },
+      "after": {
+        "ordinal": 45,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.Net.forward",
+        "identity": "cv.dnn.Net.forward(vector_vector_Mat outputBlobs[/O,/Ref];vector_String outBlobNames[/C,/Ref])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [
+          "=forwardAndRetrieve"
+        ],
+        "arguments": [
+          {
+            "type": "vector_vector_Mat",
+            "name": "outputBlobs",
+            "default": "",
+            "modifiers": [
+              "/O",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "vector_String",
+            "name": "outBlobNames",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Runs forward pass to compute outputs of layers listed in @p outBlobNames.\n         *  @param outputBlobs contains all output blobs for each layer specified in @p outBlobNames.\n         *  @param outBlobNames names for layers which outputs are needed to get\n         *  @note Python output dtype handling is described in forward(const String\u0026)."
+      }
+    },
+    {
+      "identity": "cv.dnn.Net.setParam(String layerName[/C,/Ref];int numParam;Mat blob[/ND,/C,/Ref])-\u003Evoid",
+      "historicalOrdinal": 55,
+      "currentOrdinal": 56,
+      "fields": [
+        "documentation"
+      ],
+      "before": {
+        "ordinal": 55,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.Net.setParam",
+        "identity": "cv.dnn.Net.setParam(String layerName[/C,/Ref];int numParam;Mat blob[/ND,/C,/Ref])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "String",
+            "name": "layerName",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "numParam",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "blob",
+            "default": "",
+            "modifiers": [
+              "/ND",
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Sets the parameter blob of a layer identified by its name or output tensor name.\n         *  @param layerName layer name (classic engine) or raw ONNX output tensor name (ENGINE_NEW).\n         *  @param numParam index of the constant weight input to update (0 = kernel, 1 = bias, etc.).\n         *  @param blob the new parameter value."
+      },
+      "after": {
+        "ordinal": 56,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.Net.setParam",
+        "identity": "cv.dnn.Net.setParam(String layerName[/C,/Ref];int numParam;Mat blob[/ND,/C,/Ref])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "String",
+            "name": "layerName",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "numParam",
+            "default": "",
+            "modifiers": []
+          },
+          {
+            "type": "Mat",
+            "name": "blob",
+            "default": "",
+            "modifiers": [
+              "/ND",
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Sets the parameter blob of a layer identified by its name or output tensor name.\n         *  @param layerName raw ONNX output tensor name (ENGINE_OPENCV).\n         *  @param numParam index of the constant weight input to update (0 = kernel, 1 = bias, etc.).\n         *  @param blob the new parameter value."
+      }
+    },
+    {
+      "identity": "cv.dnn.readNetFromTFLite(String model[/PATH,/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+      "historicalOrdinal": 76,
+      "currentOrdinal": 77,
+      "fields": [
+        "documentation"
+      ],
+      "before": {
+        "ordinal": 76,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.readNetFromTFLite",
+        "identity": "cv.dnn.readNetFromTFLite(String model[/PATH,/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+        "returnType": "Net",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "String",
+            "name": "model",
+            "default": "",
+            "modifiers": [
+              "/PATH",
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "engine",
+            "default": "ENGINE_AUTO",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Reads a network model stored in \u003Ca href=\u0022https://www.tensorflow.org/lite\u0022\u003ETFLite\u003C/a\u003E framework\u0027s format.\n      * @param model  path to the .tflite file with binary flatbuffers description of the network architecture\n      * @param engine select DNN engine to be used. With auto selection the new engine is used first and falls back to classic.\n      * Please pay attention that the new DNN does not support non-CPU back-ends for now.\n      * @returns Net object."
+      },
+      "after": {
+        "ordinal": 77,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.readNetFromTFLite",
+        "identity": "cv.dnn.readNetFromTFLite(String model[/PATH,/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+        "returnType": "Net",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "String",
+            "name": "model",
+            "default": "",
+            "modifiers": [
+              "/PATH",
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "engine",
+            "default": "ENGINE_AUTO",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Reads a network model stored in \u003Ca href=\u0022https://www.tensorflow.org/lite\u0022\u003ETFLite\u003C/a\u003E framework\u0027s format.\n      * @param model  path to the .tflite file with binary flatbuffers description of the network architecture\n      * @param engine select DNN engine to be used. ENGINE_AUTO (the default) resolves to ENGINE_OPENCV; ENGINE_ORT selects the ONNX Runtime wrapper (ONNX models only, requires WITH_ONNXRUNTIME=ON).\n      * Please pay attention that the new DNN does not support non-CPU back-ends for now.\n      * @returns Net object."
+      }
+    },
+    {
+      "identity": "cv.dnn.readNetFromTFLite(vector_uchar bufferModel[/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+      "historicalOrdinal": 77,
+      "currentOrdinal": 78,
+      "fields": [
+        "documentation"
+      ],
+      "before": {
+        "ordinal": 77,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.readNetFromTFLite",
+        "identity": "cv.dnn.readNetFromTFLite(vector_uchar bufferModel[/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+        "returnType": "Net",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "vector_uchar",
+            "name": "bufferModel",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "engine",
+            "default": "ENGINE_AUTO",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Reads a network model stored in \u003Ca href=\u0022https://www.tensorflow.org/lite\u0022\u003ETFLite\u003C/a\u003E framework\u0027s format.\n      * @param bufferModel buffer containing the content of the tflite file\n      * @param engine select DNN engine to be used. With auto selection the new engine is used first and falls back to classic.\n      * Please pay attention that the new DNN does not support non-CPU back-ends for now.\n      * @returns Net object."
+      },
+      "after": {
+        "ordinal": 78,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.readNetFromTFLite",
+        "identity": "cv.dnn.readNetFromTFLite(vector_uchar bufferModel[/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+        "returnType": "Net",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "vector_uchar",
+            "name": "bufferModel",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "engine",
+            "default": "ENGINE_AUTO",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Reads a network model stored in \u003Ca href=\u0022https://www.tensorflow.org/lite\u0022\u003ETFLite\u003C/a\u003E framework\u0027s format.\n      * @param bufferModel buffer containing the content of the tflite file\n      * @param engine select DNN engine to be used. ENGINE_AUTO (the default) resolves to ENGINE_OPENCV; ENGINE_ORT selects the ONNX Runtime wrapper (ONNX models only, requires WITH_ONNXRUNTIME=ON).\n      * Please pay attention that the new DNN does not support non-CPU back-ends for now.\n      * @returns Net object."
+      }
+    },
+    {
+      "identity": "cv.dnn.readNet(String model[/PATH,/C,/Ref];String config=\u0022\u0022[/PATH,/C,/Ref];String framework=\u0022\u0022[/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+      "historicalOrdinal": 78,
+      "currentOrdinal": 79,
+      "fields": [
+        "documentation"
+      ],
+      "before": {
+        "ordinal": 78,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.readNet",
+        "identity": "cv.dnn.readNet(String model[/PATH,/C,/Ref];String config=\u0022\u0022[/PATH,/C,/Ref];String framework=\u0022\u0022[/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+        "returnType": "Net",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "String",
+            "name": "model",
+            "default": "",
+            "modifiers": [
+              "/PATH",
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "String",
+            "name": "config",
+            "default": "\u0022\u0022",
+            "modifiers": [
+              "/PATH",
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "String",
+            "name": "framework",
+            "default": "\u0022\u0022",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "engine",
+            "default": "ENGINE_AUTO",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "* @brief Read deep learning network represented in one of the supported formats.\n      * @param[in] model Binary file contains trained weights. The following file\n      *                  extensions are expected for models from different frameworks:\n      *                  * \u0060*.pb\u0060 (TensorFlow, https://www.tensorflow.org/)\n      *                  * \u0060*.bin\u0060 | \u0060*.onnx\u0060 (OpenVINO, https://software.intel.com/openvino-toolkit)\n      *                  * \u0060*.onnx\u0060 (ONNX, https://onnx.ai/)\n      * @param[in] config Text file contains network configuration. It could be a\n      *                   file with the following extensions:\n      *                  * \u0060*.pbtxt\u0060 (TensorFlow, https://www.tensorflow.org/)\n      *                  * \u0060*.xml\u0060 (OpenVINO, https://software.intel.com/openvino-toolkit)\n      * @param[in] framework Explicit framework name tag to determine a format.\n      * @param[in] engine select DNN engine to be used. With auto selection the new engine is used first and falls back to classic.\n      * Please pay attention that the new DNN does not support non-CPU back-ends for now.\n      * Use ENGINE_CLASSIC if you want to use other back-ends.\n      * @returns Net object.\n      *\n      * This function automatically detects an origin framework of trained model\n      * and calls an appropriate function such @ref readNetFromTensorflow, @ref readNetFromONNX.\n      * An order of @p model and @p config arguments does not matter."
+      },
+      "after": {
+        "ordinal": 79,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.readNet",
+        "identity": "cv.dnn.readNet(String model[/PATH,/C,/Ref];String config=\u0022\u0022[/PATH,/C,/Ref];String framework=\u0022\u0022[/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+        "returnType": "Net",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "String",
+            "name": "model",
+            "default": "",
+            "modifiers": [
+              "/PATH",
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "String",
+            "name": "config",
+            "default": "\u0022\u0022",
+            "modifiers": [
+              "/PATH",
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "String",
+            "name": "framework",
+            "default": "\u0022\u0022",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "engine",
+            "default": "ENGINE_AUTO",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "* @brief Read deep learning network represented in one of the supported formats.\n      * @param[in] model Binary file contains trained weights. The following file\n      *                  extensions are expected for models from different frameworks:\n      *                  * \u0060*.bin\u0060 | \u0060*.onnx\u0060 (OpenVINO, https://software.intel.com/openvino-toolkit)\n      *                  * \u0060*.onnx\u0060 (ONNX, https://onnx.ai/)\n      * @param[in] config Text file contains network configuration. It could be a\n      *                   file with the following extensions:\n      *                  * \u0060*.xml\u0060 (OpenVINO, https://software.intel.com/openvino-toolkit)\n      * @param[in] framework Explicit framework name tag to determine a format.\n      * @param engine select DNN engine to be used. ENGINE_AUTO (the default) resolves to ENGINE_OPENCV; ENGINE_ORT selects the ONNX Runtime wrapper (ONNX models only, requires WITH_ONNXRUNTIME=ON).\n      * Please pay attention that the new DNN does not support non-CPU back-ends for now.\n      * @returns Net object.\n      *\n      * This function automatically detects an origin framework of trained model\n      * and calls an appropriate function such @ref readNetFromONNX.\n      * An order of @p model and @p config arguments does not matter."
+      }
+    },
+    {
+      "identity": "cv.dnn.readNet(String framework[/C,/Ref];vector_uchar bufferModel[/C,/Ref];vector_uchar bufferConfig=std::vector\u003Cuchar\u003E()[/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+      "historicalOrdinal": 79,
+      "currentOrdinal": 80,
+      "fields": [
+        "documentation"
+      ],
+      "before": {
+        "ordinal": 79,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.readNet",
+        "identity": "cv.dnn.readNet(String framework[/C,/Ref];vector_uchar bufferModel[/C,/Ref];vector_uchar bufferConfig=std::vector\u003Cuchar\u003E()[/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+        "returnType": "Net",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "String",
+            "name": "framework",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "vector_uchar",
+            "name": "bufferModel",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "vector_uchar",
+            "name": "bufferConfig",
+            "default": "std::vector\u003Cuchar\u003E()",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "engine",
+            "default": "ENGINE_AUTO",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "* @brief Read deep learning network represented in one of the supported formats.\n      * @details This is an overloaded member function, provided for convenience.\n      *          It differs from the above function only in what argument(s) it accepts.\n      * @param[in] framework    Name of origin framework.\n      * @param[in] bufferModel  A buffer with a content of binary file with weights\n      * @param[in] bufferConfig A buffer with a content of text file contains network configuration.\n      * @param engine select DNN engine to be used. With auto selection the new engine is used first and falls back to classic.\n      * Please pay attention that the new DNN does not support non-CPU back-ends for now.\n      * Use ENGINE_CLASSIC if you want to use other back-ends.\n      * @returns Net object."
+      },
+      "after": {
+        "ordinal": 80,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.readNet",
+        "identity": "cv.dnn.readNet(String framework[/C,/Ref];vector_uchar bufferModel[/C,/Ref];vector_uchar bufferConfig=std::vector\u003Cuchar\u003E()[/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+        "returnType": "Net",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "String",
+            "name": "framework",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "vector_uchar",
+            "name": "bufferModel",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "vector_uchar",
+            "name": "bufferConfig",
+            "default": "std::vector\u003Cuchar\u003E()",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "engine",
+            "default": "ENGINE_AUTO",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "* @brief Read deep learning network represented in one of the supported formats.\n      * @details This is an overloaded member function, provided for convenience.\n      *          It differs from the above function only in what argument(s) it accepts.\n      * @param[in] framework    Name of origin framework.\n      * @param[in] bufferModel  A buffer with a content of binary file with weights\n      * @param[in] bufferConfig A buffer with a content of text file contains network configuration.\n      * @param engine select DNN engine to be used. ENGINE_AUTO (the default) resolves to ENGINE_OPENCV; ENGINE_ORT selects the ONNX Runtime wrapper (ONNX models only, requires WITH_ONNXRUNTIME=ON).\n      * Please pay attention that the new DNN does not support non-CPU back-ends for now.\n      * @returns Net object."
+      }
+    },
+    {
+      "identity": "cv.dnn.readNetFromONNX(String onnxFile[/PATH,/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+      "historicalOrdinal": 82,
+      "currentOrdinal": 83,
+      "fields": [
+        "documentation"
+      ],
+      "before": {
+        "ordinal": 82,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.readNetFromONNX",
+        "identity": "cv.dnn.readNetFromONNX(String onnxFile[/PATH,/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+        "returnType": "Net",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "String",
+            "name": "onnxFile",
+            "default": "",
+            "modifiers": [
+              "/PATH",
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "engine",
+            "default": "ENGINE_AUTO",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Reads a network model \u003Ca href=\u0022https://onnx.ai/\u0022\u003EONNX\u003C/a\u003E.\n     *  @param onnxFile path to the .onnx file with text description of the network architecture.\n     *  @param engine select DNN engine to be used. With auto selection the new engine is used first and falls back to classic.\n     *  Please pay attention that the new DNN does not support non-CPU back-ends for now.\n     *  @returns Network object that ready to do forward, throw an exception in failure cases."
+      },
+      "after": {
+        "ordinal": 83,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.readNetFromONNX",
+        "identity": "cv.dnn.readNetFromONNX(String onnxFile[/PATH,/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+        "returnType": "Net",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "String",
+            "name": "onnxFile",
+            "default": "",
+            "modifiers": [
+              "/PATH",
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "engine",
+            "default": "ENGINE_AUTO",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Reads a network model \u003Ca href=\u0022https://onnx.ai/\u0022\u003EONNX\u003C/a\u003E.\n     *  @param onnxFile path to the .onnx file with text description of the network architecture.\n     *  @param engine select DNN engine to be used. ENGINE_AUTO (the default) resolves to ENGINE_OPENCV; ENGINE_ORT selects the ONNX Runtime wrapper (ONNX models only, requires WITH_ONNXRUNTIME=ON).\n     *  Please pay attention that the new DNN does not support non-CPU back-ends for now.\n     *  @returns Network object that ready to do forward, throw an exception in failure cases."
+      }
+    },
+    {
+      "identity": "cv.dnn.readNetFromONNX(vector_uchar buffer[/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+      "historicalOrdinal": 83,
+      "currentOrdinal": 85,
+      "fields": [
+        "documentation"
+      ],
+      "before": {
+        "ordinal": 83,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.readNetFromONNX",
+        "identity": "cv.dnn.readNetFromONNX(vector_uchar buffer[/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+        "returnType": "Net",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "vector_uchar",
+            "name": "buffer",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "engine",
+            "default": "ENGINE_AUTO",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Reads a network model from \u003Ca href=\u0022https://onnx.ai/\u0022\u003EONNX\u003C/a\u003E\n     *         in-memory buffer.\n     *  @param buffer in-memory buffer that stores the ONNX model bytes.\n     *  @param engine select DNN engine to be used. With auto selection the new engine is used first and falls back to classic.\n     *  Please pay attention that the new DNN does not support non-CPU back-ends for now.\n     *  @returns Network object that ready to do forward, throw an exception\n     *        in failure cases."
+      },
+      "after": {
+        "ordinal": 85,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.readNetFromONNX",
+        "identity": "cv.dnn.readNetFromONNX(vector_uchar buffer[/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+        "returnType": "Net",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "vector_uchar",
+            "name": "buffer",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "engine",
+            "default": "ENGINE_AUTO",
+            "modifiers": []
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Reads a network model from \u003Ca href=\u0022https://onnx.ai/\u0022\u003EONNX\u003C/a\u003E\n     *         in-memory buffer.\n     *  @param buffer in-memory buffer that stores the ONNX model bytes.\n     *  @param engine select DNN engine to be used. ENGINE_AUTO (the default) resolves to ENGINE_OPENCV; ENGINE_ORT selects the ONNX Runtime wrapper (ONNX models only, requires WITH_ONNXRUNTIME=ON).\n     *  Please pay attention that the new DNN does not support non-CPU back-ends for now.\n     *  @returns Network object that ready to do forward, throw an exception\n     *        in failure cases."
+      }
+    },
+    {
+      "identity": "class cv.dnn.Image2BlobParams",
+      "historicalOrdinal": 88,
+      "currentOrdinal": 90,
+      "fields": [
+        "arguments"
+      ],
+      "before": {
+        "ordinal": 88,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "class",
+        "name": "cv.dnn.Image2BlobParams",
+        "identity": "class cv.dnn.Image2BlobParams",
+        "returnType": "",
+        "modifiers": [
+          "/Simple"
+        ],
+        "arguments": [
+          {
+            "type": "Scalar",
+            "name": "scalefactor",
+            "default": "",
+            "modifiers": [
+              "/RW"
+            ]
+          },
+          {
+            "type": "Size",
+            "name": "size",
+            "default": "",
+            "modifiers": [
+              "/RW"
+            ]
+          },
+          {
+            "type": "Scalar",
+            "name": "mean",
+            "default": "",
+            "modifiers": [
+              "/RW"
+            ]
+          },
+          {
+            "type": "bool",
+            "name": "swapRB",
+            "default": "",
+            "modifiers": [
+              "/RW"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "ddepth",
+            "default": "",
+            "modifiers": [
+              "/RW"
+            ]
+          },
+          {
+            "type": "DataLayout",
+            "name": "datalayout",
+            "default": "",
+            "modifiers": [
+              "/RW"
+            ]
+          },
+          {
+            "type": "dnn_ImagePaddingMode",
+            "name": "paddingmode",
+            "default": "",
+            "modifiers": [
+              "/RW"
+            ]
+          },
+          {
+            "type": "Scalar",
+            "name": "borderValue",
+            "default": "",
+            "modifiers": [
+              "/RW"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Processing params of image to blob.\n     *\n     * It includes all possible image processing operations and corresponding parameters.\n     *\n     * @see blobFromImageWithParams\n     *\n     * @note\n     * The order and usage of \u0060scalefactor\u0060 and \u0060mean\u0060 are (input - mean) * scalefactor.\n     * The order and usage of \u0060scalefactor\u0060, \u0060size\u0060, \u0060mean\u0060, \u0060swapRB\u0060, and \u0060ddepth\u0060 are consistent\n     * with the function of @ref blobFromImage."
+      },
+      "after": {
+        "ordinal": 90,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "class",
+        "name": "cv.dnn.Image2BlobParams",
+        "identity": "class cv.dnn.Image2BlobParams",
+        "returnType": "",
+        "modifiers": [
+          "/Simple"
+        ],
+        "arguments": [
+          {
+            "type": "Scalar",
+            "name": "scalefactor",
+            "default": "",
+            "modifiers": [
+              "/RW"
+            ]
+          },
+          {
+            "type": "Size",
+            "name": "size",
+            "default": "",
+            "modifiers": [
+              "/RW"
+            ]
+          },
+          {
+            "type": "Scalar",
+            "name": "mean",
+            "default": "",
+            "modifiers": [
+              "/RW"
+            ]
+          },
+          {
+            "type": "bool",
+            "name": "swapRB",
+            "default": "",
+            "modifiers": [
+              "/RW"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "ddepth",
+            "default": "",
+            "modifiers": [
+              "/RW"
+            ]
+          },
+          {
+            "type": "DataLayout",
+            "name": "datalayout",
+            "default": "",
+            "modifiers": [
+              "/RW"
+            ]
+          },
+          {
+            "type": "dnn_ImagePaddingMode",
+            "name": "paddingmode",
+            "default": "",
+            "modifiers": [
+              "/RW"
+            ]
+          },
+          {
+            "type": "Scalar",
+            "name": "borderValue",
+            "default": "",
+            "modifiers": [
+              "/RW"
+            ]
+          },
+          {
+            "type": "int",
+            "name": "interpolation",
+            "default": "",
+            "modifiers": [
+              "/RW"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Processing params of image to blob.\n     *\n     * It includes all possible image processing operations and corresponding parameters.\n     *\n     * @see blobFromImageWithParams\n     *\n     * @note\n     * The order and usage of \u0060scalefactor\u0060 and \u0060mean\u0060 are (input - mean) * scalefactor.\n     * The order and usage of \u0060scalefactor\u0060, \u0060size\u0060, \u0060mean\u0060, \u0060swapRB\u0060, and \u0060ddepth\u0060 are consistent\n     * with the function of @ref blobFromImage."
+      }
+    },
+    {
+      "identity": "cv.dnn.Image2BlobParams.blobRectToImageRect(Rect rBlob[/C,/Ref];Size size[/C,/Ref])-\u003ERect",
+      "historicalOrdinal": 91,
+      "currentOrdinal": 93,
+      "fields": [
+        "documentation"
+      ],
+      "before": {
+        "ordinal": 91,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.Image2BlobParams.blobRectToImageRect",
+        "identity": "cv.dnn.Image2BlobParams.blobRectToImageRect(Rect rBlob[/C,/Ref];Size size[/C,/Ref])-\u003ERect",
+        "returnType": "Rect",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Rect",
+            "name": "rBlob",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "Size",
+            "name": "size",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Get rectangle coordinates in original image system from rectangle in blob coordinates.\n         *  @param rBlob rect in blob coordinates.\n         *  @param size original input image size.\n         *  @returns rectangle in original image coordinates."
+      },
+      "after": {
+        "ordinal": 93,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.Image2BlobParams.blobRectToImageRect",
+        "identity": "cv.dnn.Image2BlobParams.blobRectToImageRect(Rect rBlob[/C,/Ref];Size size[/C,/Ref])-\u003ERect",
+        "returnType": "Rect",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "Rect",
+            "name": "rBlob",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "Size",
+            "name": "size",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Get rectangle coordinates in original image system from rectangle in blob coordinates.\n         *  @param rBlob rect in blob coordinates.\n         *  @param size original input image size.\n         *  @returns rectangle in original image coordinates.\n         *  @note If the \u0060size\u0060 member is empty, the @p size argument is used as the blob size, as in\n         *  @ref blobFromImagesWithParams. For a batch created with an empty \u0060size\u0060 member, the blob size is the size\n         *  of the first image, so set the member to that size before mapping rects of the other images."
+      }
+    },
+    {
+      "identity": "cv.dnn.Image2BlobParams.blobRectsToImageRects(vector_Rect rBlob[/C,/Ref];vector_Rect rImg[/O,/Ref];Size size[/C,/Ref])-\u003Evoid",
+      "historicalOrdinal": 92,
+      "currentOrdinal": 94,
+      "fields": [
+        "documentation"
+      ],
+      "before": {
+        "ordinal": 92,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.Image2BlobParams.blobRectsToImageRects",
+        "identity": "cv.dnn.Image2BlobParams.blobRectsToImageRects(vector_Rect rBlob[/C,/Ref];vector_Rect rImg[/O,/Ref];Size size[/C,/Ref])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "vector_Rect",
+            "name": "rBlob",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "vector_Rect",
+            "name": "rImg",
+            "default": "",
+            "modifiers": [
+              "/O",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "Size",
+            "name": "size",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Get rectangle coordinates in original image system from rectangle in blob coordinates.\n         *  @param rBlob rect in blob coordinates.\n         *  @param rImg result rect in image coordinates.\n         *  @param size original input image size."
+      },
+      "after": {
+        "ordinal": 94,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.Image2BlobParams.blobRectsToImageRects",
+        "identity": "cv.dnn.Image2BlobParams.blobRectsToImageRects(vector_Rect rBlob[/C,/Ref];vector_Rect rImg[/O,/Ref];Size size[/C,/Ref])-\u003Evoid",
+        "returnType": "void",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "vector_Rect",
+            "name": "rBlob",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "vector_Rect",
+            "name": "rImg",
+            "default": "",
+            "modifiers": [
+              "/O",
+              "/Ref"
+            ]
+          },
+          {
+            "type": "Size",
+            "name": "size",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "@brief Get rectangle coordinates in original image system from rectangle in blob coordinates.\n         *  @param rBlob rect in blob coordinates.\n         *  @param rImg result rect in image coordinates.\n         *  @param size original input image size.\n         *  @note If the \u0060size\u0060 member is empty, the @p size argument is used as the blob size, as in\n         *  @ref blobFromImagesWithParams. For a batch created with an empty \u0060size\u0060 member, the blob size is the size\n         *  of the first image, so set the member to that size before mapping rects of the other images."
+      }
+    },
+    {
+      "identity": "cv.dnn.Tokenizer.load(string model_config[/PATH,/C,/Ref])-\u003ETokenizer",
+      "historicalOrdinal": 173,
+      "currentOrdinal": 175,
+      "fields": [
+        "documentation"
+      ],
+      "before": {
+        "ordinal": 173,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.Tokenizer.load",
+        "identity": "cv.dnn.Tokenizer.load(string model_config[/PATH,/C,/Ref])-\u003ETokenizer",
+        "returnType": "Tokenizer",
+        "modifiers": [
+          "/S"
+        ],
+        "arguments": [
+          {
+            "type": "string",
+            "name": "model_config",
+            "default": "",
+            "modifiers": [
+              "/PATH",
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "* @brief Load a tokenizer from a model directory.\n     *\n     * Expects the directory to contain:\n     *  - \u0060config.json\u0060 with field \u0060model_type\u0060 with value \u0022gpt2\u0022 or \u0022gpt4\u0022.\n     *  - \u0060tokenizer.json\u0060 produced by the corresponding model family.\n     *\n     * The argument is a path prefix; this function concatenates file\n     * names directly (e.g. \u0060model_dir\u0060 \u002B \u0022config.json\u0022), so \u0060model_dir\u0060 must\n     * end with an appropriate path separator.\n     *\n     * @param model_config  Path to config.json for model.\n     * @return A Tokenizer ready for use. Throws cv::Exception if files are missing or \u0060model_type\u0060 is unsupported."
+      },
+      "after": {
+        "ordinal": 175,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.Tokenizer.load",
+        "identity": "cv.dnn.Tokenizer.load(string model_config[/PATH,/C,/Ref])-\u003ETokenizer",
+        "returnType": "Tokenizer",
+        "modifiers": [
+          "/S"
+        ],
+        "arguments": [
+          {
+            "type": "string",
+            "name": "model_config",
+            "default": "",
+            "modifiers": [
+              "/PATH",
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "* @brief Load a tokenizer from a model directory.\n     *\n     * Accepts either the model directory or the path to its \u0060config.json\u0060. The\n     * directory must contain:\n     *  - \u0060config.json\u0060. An optional \u0060method\u0060 field (one of: BPE, Gemma, SentencePiece,\n     *    Unigram, WordPiece) selects the family; without it the family is detected from\n     *    \u0060tokenizer.json\u0060, so a stock Hugging Face config works unmodified.\n     *  - \u0060tokenizer.json\u0060 produced by the corresponding model family.\n     *\n     * @param model_config  Model directory, or the path to its config.json.\n     * @return A Tokenizer ready for use. Throws cv::Exception if files are missing or \u0060method\u0060 is unsupported."
+      }
+    },
+    {
+      "identity": "cv.dnn.Tokenizer.encode(string text[/C,/Ref])-\u003Estd::vector\u003Cint\u003E",
+      "historicalOrdinal": 174,
+      "currentOrdinal": 176,
+      "fields": [
+        "documentation"
+      ],
+      "before": {
+        "ordinal": 174,
+        "sourceHeader": "opencv-source/opencv-5.0.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.Tokenizer.encode",
+        "identity": "cv.dnn.Tokenizer.encode(string text[/C,/Ref])-\u003Estd::vector\u003Cint\u003E",
+        "returnType": "std::vector\u003Cint\u003E",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "string",
+            "name": "text",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "* @brief Encode UTF-8 text to token ids (special tokens currently disabled).\n     *\n     * Calls the underlying \u0060CoreBPE::encode\u0060 with an empty allowed-special set.\n     *\n     * @param text  UTF-8 input string.\n     * @return Vector of token ids (32-bit ids narrowed to int for convenience)."
+      },
+      "after": {
+        "ordinal": 176,
+        "sourceHeader": "opencv-source/opencv-5.1.0/modules/dnn/include/opencv2/dnn/dnn.hpp",
+        "kind": "callable",
+        "name": "cv.dnn.Tokenizer.encode",
+        "identity": "cv.dnn.Tokenizer.encode(string text[/C,/Ref])-\u003Estd::vector\u003Cint\u003E",
+        "returnType": "std::vector\u003Cint\u003E",
+        "modifiers": [],
+        "arguments": [
+          {
+            "type": "string",
+            "name": "text",
+            "default": "",
+            "modifiers": [
+              "/C",
+              "/Ref"
+            ]
+          }
+        ],
+        "enumValues": [],
+        "baseDeclaration": "",
+        "documentation": "* @brief Encode UTF-8 text to token ids.\n     *\n     * Special-token text in @p text is recognized and mapped to its own id, and any\n     * wrapper the model\u0027s post_processor declares (e.g. BERT\u0027s \u0060[CLS]\u0060/\u0060[SEP]\u0060) is\n     * applied.\n     *\n     * @param text  UTF-8 input string.\n     * @return Vector of token ids (32-bit ids narrowed to int for convenience)."
+      }
+    }
+  ],
+  "retainedIdentityCount": 173
+}

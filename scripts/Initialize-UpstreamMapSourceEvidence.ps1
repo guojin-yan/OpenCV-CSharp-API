@@ -12,6 +12,8 @@ $openCvCommit = "40738fb16ceddb5fb3fea747585f7ce6abb0605b"
 $openCvContribCommit = "755e50675d97db9b7d449d8bd6b09888646f6c6e"
 $sourcePrefix = "opencv-source/opencv-5.0.0/"
 $contribSourcePrefix = "opencv-source/opencv_contrib-5.0.0/"
+$source51Prefix = "opencv-source/opencv-5.1.0/"
+$openCv51Commit = "e4f78fbcf1a773fbed69e14500e8b734963eb585"
 $rawNames = @("imgproc", "imgcodecs", "videoio", "calib3d", "core", "dnn", "features", "highgui", "objdetect", "photo", "video") + @("ml", "tracking", "stitching")
 $rawNames += @("structured_light")
 $rawNames += @("saliency")
@@ -50,7 +52,8 @@ function Add-RequiredFile {
     )
 
     if (-not $Path.StartsWith($sourcePrefix, [StringComparison]::Ordinal) -and
-        -not $Path.StartsWith($contribSourcePrefix, [StringComparison]::Ordinal)) {
+        -not $Path.StartsWith($contribSourcePrefix, [StringComparison]::Ordinal) -and
+        -not $Path.StartsWith($source51Prefix, [StringComparison]::Ordinal)) {
         throw "Upstream map evidence path is outside the exact OpenCV or OpenCV contrib source roots: $Path"
     }
     if ($Sha256 -notmatch "^[0-9a-f]{64}$") {
@@ -86,6 +89,12 @@ foreach ($name in $rawNames) {
 }
 
 $registryPath = Join-Path $repo "compatibility/videoio-registry-surface.json"
+$dnn51 = Get-Content -LiteralPath (Join-Path $repo 'compatibility/opencv-5.1.0/dnn-upstream-raw.json') -Raw | ConvertFrom-Json
+Add-RequiredFile -Path ($source51Prefix + 'modules/core/include/opencv2/core/version.hpp') -Sha256 'bc436bd455e88946523bd83d441320b44ecc9cdd6e65718cd4fc78f4cd6defb7'
+Add-RequiredFile -Path ([string]$dnn51.headerPath) -Sha256 ([string]$dnn51.headerSha256)
+Add-RequiredFile -Path ([string]$dnn51.parserPath) -Sha256 ([string]$dnn51.parserSha256)
+foreach ($header in @($dnn51.sourceHeaders)) { Add-RequiredFile -Path ([string]$header.path) -Sha256 ([string]$header.sha256) }
+
 $registry = Get-Content -LiteralPath $registryPath -Raw | ConvertFrom-Json
 Add-RequiredFile -Path ([string]$registry.headerPath) -Sha256 ([string]$registry.headerSha256)
 
@@ -96,6 +105,11 @@ foreach ($entry in @($required.GetEnumerator() | Sort-Object Key)) {
         $repositoryName = "opencv_contrib"
         $commit = $openCvContribCommit
     }
+    elseif ($entry.Key.StartsWith($source51Prefix, [StringComparison]::Ordinal)) {
+        $relativePath = $entry.Key.Substring($source51Prefix.Length)
+        $repositoryName = "opencv"
+        $commit = $openCv51Commit
+    }
     else {
         $relativePath = $entry.Key.Substring($sourcePrefix.Length)
         $repositoryName = "opencv"
@@ -103,7 +117,11 @@ foreach ($entry in @($required.GetEnumerator() | Sort-Object Key)) {
     }
     $destination = Join-Path $workspace ($entry.Key -replace '/', [IO.Path]::DirectorySeparatorChar)
     if (Test-Path -LiteralPath $destination -PathType Leaf) {
-        $actualSha256 = (Get-FileHash -LiteralPath $destination -Algorithm SHA256).Hash.ToLowerInvariant()
+        if ($entry.Key.StartsWith($source51Prefix, [StringComparison]::Ordinal)) {
+            $sourceText = [IO.File]::ReadAllText($destination).Replace("`r`n", "`n").Replace("`r", "`n")
+            $actualSha256 = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($sourceText))).ToLowerInvariant()
+        }
+        else { $actualSha256 = (Get-FileHash -LiteralPath $destination -Algorithm SHA256).Hash.ToLowerInvariant() }
         if ($actualSha256 -eq $entry.Value) {
             continue
         }
@@ -142,4 +160,4 @@ foreach ($entry in @($required.GetEnumerator() | Sort-Object Key)) {
     }
 }
 
-Write-Host "UPSTREAM_MAP_SOURCE_EVIDENCE_OK opencvCommit=$openCvCommit contribCommit=$openCvContribCommit files=$($required.Count) downloaded=$downloaded root=$(Join-Path $workspace 'opencv-source')"
+Write-Host "UPSTREAM_MAP_SOURCE_EVIDENCE_OK opencvCommit=$openCvCommit contribCommit=$openCvContribCommit opencv51Commit=$openCv51Commit files=$($required.Count) downloaded=$downloaded root=$(Join-Path $workspace 'opencv-source')"

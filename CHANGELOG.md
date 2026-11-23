@@ -6,6 +6,8 @@ This file is the concise chronological index for package-visible changes. Detail
 
 ## [5.1.0] - In development / 开发中
 
+- Corrected DNN engine and TFLite format enum translation for OpenCV 5.1 while keeping public and ABI 1 values stable; refreshed the DNN parser slice with explicit remaining gaps.
+
 - Move the source, package metadata and development target to the official matching OpenCV/opencv_contrib 5.1.0 tags.
 - Preserve TensorFlow importer APIs with an explicit upstream-removal error; verify ONNX format diagnostics and inference against 5.1.0.
 - Carry forward bounded codec preflight improvements, including Sun Raster byte-RLE across 1/8/24/32-bit storage, and retain the audited CCM instance-state patch.
