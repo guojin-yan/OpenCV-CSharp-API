@@ -5,7 +5,7 @@
   "packageVersion": "5.1.0",
   "rid": "win-x64",
   "recordedDate": "2026-11-23",
-  "repositoryBaseCommit": "df42e0dd4967f81360984e13d4c4ff4da21b6705",
+  "repositoryBaseCommit": "7fe6297dc1ff29b4c0a70bd2ec6815ec16e16ec4",
   "worktreeChangesIncluded": true,
   "sourceInputSet": {
     "paths": [
@@ -19,8 +19,8 @@
       "scripts/New-RuntimeInputArtifact.ps1",
       "scripts/Test-WindowsRuntimePeClosure.ps1"
     ],
-    "fileCount": 1189,
-    "sha256": "bc280f9fe79ab7f6e80f0c31f46e96ea69d06faedbc3308a470d76043abdf854",
+    "fileCount": 1190,
+    "sha256": "8aea82b5cb144ef620eb4c7c30bd990b0eb348bb0817cd595749bbd12208ffac",
     "policy": "UTF-8 text normalized to LF, trailing whitespace at file end normalized to one newline; ordinal path|length|sha256 rows"
   },
   "upstream": {
@@ -348,6 +348,11 @@
         "path": "%TEMP%/opencv-v510-dnn-wrapper-full.log",
         "length": 6063,
         "sha256": "3bb0665d5ba18634fcc6ddacaad2b4383e61b41537e8e94ddfbdb05bcc6cb305"
+      },
+      "currentSourceRetestLog": {
+        "path": "%TEMP%/opencv-v510-calib-ctest-full.log",
+        "length": 539,
+        "sha256": "d5178a98be408b7b3cba56cb9a9b7b13b787b4c87164882be17b958b58da78b5"
       }
     },
     {
@@ -413,6 +418,11 @@
         "path": "%TEMP%/opencv-v510-dnn-wrapper-mini.log",
         "length": 3801,
         "sha256": "8c2ed492c23743105b494d3a59503dc93b31ab31bd7537f8e892008892866f70"
+      },
+      "currentSourceRetestLog": {
+        "path": "%TEMP%/opencv-v510-calib-ctest-mini.log",
+        "length": 539,
+        "sha256": "2b620d83b83468bb35d79637c42b2173de75eb4dd8fb05dcd8de883d3f6b3ed7"
       }
     }
   ],
@@ -421,7 +431,7 @@
       "targetFramework": "net8.0",
       "nativeSmokeEnabled": true,
       "nativeOpenCvVersion": "5.1.0",
-      "passed": 1260,
+      "passed": 2090,
       "failed": 0,
       "skipped": 0,
       "requiredPassedTests": [
@@ -435,24 +445,33 @@
         "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.TFLiteImportReportsStableFormatAndRunsInference(engine: Auto)",
         "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.TFLiteImportReportsStableFormatAndRunsInference(engine: New)",
         "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.TFLiteImportReportsStableFormatAndRunsInference(engine: Ort)",
-        "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.TFLiteImportReportsStableFormatAndRunsInference(engine: Classic)"
+        "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.TFLiteImportReportsStableFormatAndRunsInference(engine: Classic)",
+        "JYPPX.OpenCvSharp.Tests.Calib3D.CalibrationFlags51Tests.SchurSolverSelectionPreservesDistortionModel(disableSchur: False, tiltedModel: False, coefficientCount: 5)",
+        "JYPPX.OpenCvSharp.Tests.Calib3D.CalibrationFlags51Tests.SchurSolverSelectionPreservesDistortionModel(disableSchur: False, tiltedModel: True, coefficientCount: 14)",
+        "JYPPX.OpenCvSharp.Tests.Calib3D.CalibrationFlags51Tests.SchurSolverSelectionPreservesDistortionModel(disableSchur: True, tiltedModel: False, coefficientCount: 5)",
+        "JYPPX.OpenCvSharp.Tests.Calib3D.CalibrationFlags51Tests.SchurSolverSelectionPreservesDistortionModel(disableSchur: True, tiltedModel: True, coefficientCount: 14)",
+        "JYPPX.OpenCvSharp.Tests.Features2D.BFMatcherTests.PropertiesExposeConstructorSettingsWhenFeaturesModuleIsLinked(crossCheck: False)",
+        "JYPPX.OpenCvSharp.Tests.Features2D.BFMatcherTests.PropertiesExposeConstructorSettingsWhenFeaturesModuleIsLinked(crossCheck: True)"
       ],
       "photoTestCount": 48,
       "trx": {
-        "path": "%TEMP%/opencv-v510-dnn-native-net8.0/native510.trx",
-        "sha256": "0e21e26d1fb2c7909b0f44e076136ffc6a275d2fab096fe73a7823a03a5593fe"
+        "path": "%TEMP%/opencv-v510-calib-delivery-native-net8.0/native510.trx",
+        "sha256": "1f933848e73a7a5a550d63cf79c72bb16007700be726aec7979901d2a1c461ba"
       },
       "log": {
-        "path": "%TEMP%/opencv-v510-dnn-native-net8.0.log",
-        "length": 732,
-        "sha256": "2e4c1bb6110bfa9b0b0cd0cb38b70944908ec15e126270e7bc50f0acfcbe5eb7"
-      }
+        "path": "%TEMP%/opencv-v510-calib-delivery-native-net8.0.log",
+        "length": 458,
+        "sha256": "11d8a4fa9cd39c23989a1beb3d1a052cff31b9027afc9b290907cc88057bcda8"
+      },
+      "testFilter": "All discovered tests; no filter. Native smoke explicitly enabled; optional model/GUI/unstable gates retain their own conditions.",
+      "managedBinarySha256": "afaef6c66b530b351bf9418d04438ea7283d61b9fcba7d14f28c270e2051d95a",
+      "testAssemblySha256": "fc05e1a329fac179338b046fb7f55da3c3127559643a8db0527708f63c51cc6c"
     },
     {
       "targetFramework": "net10.0",
       "nativeSmokeEnabled": true,
       "nativeOpenCvVersion": "5.1.0",
-      "passed": 1260,
+      "passed": 2090,
       "failed": 0,
       "skipped": 0,
       "requiredPassedTests": [
@@ -466,18 +485,27 @@
         "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.TFLiteImportReportsStableFormatAndRunsInference(engine: Classic)",
         "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.TFLiteImportReportsStableFormatAndRunsInference(engine: Auto)",
         "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.TFLiteImportReportsStableFormatAndRunsInference(engine: New)",
-        "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.TFLiteImportReportsStableFormatAndRunsInference(engine: Ort)"
+        "JYPPX.OpenCvSharp.Tests.Dnn.DnnUpstream51CompatibilityTests.TFLiteImportReportsStableFormatAndRunsInference(engine: Ort)",
+        "JYPPX.OpenCvSharp.Tests.Calib3D.CalibrationFlags51Tests.SchurSolverSelectionPreservesDistortionModel(disableSchur: False, tiltedModel: False, coefficientCount: 5)",
+        "JYPPX.OpenCvSharp.Tests.Calib3D.CalibrationFlags51Tests.SchurSolverSelectionPreservesDistortionModel(disableSchur: False, tiltedModel: True, coefficientCount: 14)",
+        "JYPPX.OpenCvSharp.Tests.Calib3D.CalibrationFlags51Tests.SchurSolverSelectionPreservesDistortionModel(disableSchur: True, tiltedModel: False, coefficientCount: 5)",
+        "JYPPX.OpenCvSharp.Tests.Calib3D.CalibrationFlags51Tests.SchurSolverSelectionPreservesDistortionModel(disableSchur: True, tiltedModel: True, coefficientCount: 14)",
+        "JYPPX.OpenCvSharp.Tests.Features2D.BFMatcherTests.PropertiesExposeConstructorSettingsWhenFeaturesModuleIsLinked(crossCheck: False)",
+        "JYPPX.OpenCvSharp.Tests.Features2D.BFMatcherTests.PropertiesExposeConstructorSettingsWhenFeaturesModuleIsLinked(crossCheck: True)"
       ],
       "photoTestCount": 48,
       "trx": {
-        "path": "%TEMP%/opencv-v510-dnn-native-net10.0/native510.trx",
-        "sha256": "404761a6e391de8e978e58638a7a0787c2e706fa3c09eec317b44411334e5dd0"
+        "path": "%TEMP%/opencv-v510-calib-delivery-native-net10.0/native510.trx",
+        "sha256": "ea60aaa6ec74091839ab5590a0d2a699a7761c0a4bb6c68ab2eea09af2c14eeb"
       },
       "log": {
-        "path": "%TEMP%/opencv-v510-dnn-native-net10.0.log",
-        "length": 738,
-        "sha256": "baefd7b8ab57ba24084451893f70b9dde3efe5fb48dd3cdc48e39ae52e3c92d1"
-      }
+        "path": "%TEMP%/opencv-v510-calib-delivery-native-net10.0.log",
+        "length": 462,
+        "sha256": "1e49129cae1d86101be017b6cca8be33507c2ecc51dfd31504b28a35734f2410"
+      },
+      "testFilter": "All discovered tests; no filter. Native smoke explicitly enabled; optional model/GUI/unstable gates retain their own conditions.",
+      "managedBinarySha256": "74e097d14bb2276bc3c7e48b86d06e9042e0697d33765520a0d6a97152b13cd3",
+      "testAssemblySha256": "2e6b70bb7ab47af61182d5dd9024862c487328a78d0eb24d5b3d89225df8692b"
     }
   ],
   "isolatedMiniSmoke": {
@@ -543,476 +571,482 @@
         "profile": "full",
         "exitCode": 0,
         "log": {
-          "path": "%TEMP%/opencv-v510-binary-consumer-full.log",
+          "path": "%TEMP%/opencv-v510-calib-binary-consumer-full.log",
           "length": 79,
           "sha256": "df3a45db3c698d1944e73712073d34192a1cafdfa2ab5e31b228493976d00dfa"
-        }
+        },
+        "managedBinarySha256": "afaef6c66b530b351bf9418d04438ea7283d61b9fcba7d14f28c270e2051d95a"
       },
       {
         "profile": "mini",
         "exitCode": 0,
         "log": {
-          "path": "%TEMP%/opencv-v510-binary-consumer-mini.log",
+          "path": "%TEMP%/opencv-v510-calib-binary-consumer-mini.log",
           "length": 79,
           "sha256": "9c2160f11465d504f125f147f216947cddbd51a58e8026bb7d48575f32d9ab2c"
-        }
+        },
+        "managedBinarySha256": "afaef6c66b530b351bf9418d04438ea7283d61b9fcba7d14f28c270e2051d95a"
       }
     ]
   },
   "projectInvariants": {
     "status": "passed",
-    "guardCount": 105,
-    "execution": "original aggregate guard list with resumed suffixes after explicit fixture-version and stale sample DLL corrections",
+    "guardCount": 107,
+    "execution": "Complete unfiltered aggregate suite in one process; exact ordered starts and passes independently audited against the current 107-guard inventory.",
     "segments": [
       {
-        "path": "%TEMP%/opencv-v510-invariants-20261123.log",
-        "length": 31019,
-        "sha256": "6a5262e5d052d8915857e34b5d0c3def102954cd0e05991278c579bfa693bace",
-        "passedGuardCount": 71
-      },
-      {
-        "path": "%TEMP%/opencv-v510-invariants-resumed.log",
-        "length": 8304,
-        "sha256": "cc8906667c8cee1ef77fd9e0a8081ec78a0b7c1008db78d8b497256ba7a028fa",
-        "passedGuardCount": 4
-      },
-      {
-        "path": "%TEMP%/opencv-v510-invariants-resumed2.log",
-        "length": 77619,
-        "sha256": "4238a370b3cc4e3e80edf1ac9b544821bbd24cd4b3e620f0711615e1b3c1ec69",
-        "passedGuardCount": 30
+        "path": "%TEMP%/opencv-v510-calib-invariants-20261123.log",
+        "length": 109888,
+        "sha256": "761d3d5b0a4f7ec66c4ee7570463e5dcce984c77e7f349f911be511cbcad5fb8",
+        "passedGuardCount": 107
       }
     ],
+    "executionAudit": {
+      "path": "%TEMP%/opencv-v510-calib-invariants-execution-audit.json",
+      "length": 5883,
+      "sha256": "ec5efbba096d8cb4ea3f9c3542107c8725c22abd4e81bcb12f3b01d5375e238a"
+    },
     "guards": [
       {
         "name": "Version-neutral naming",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Managed native interop neutrality",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Build-info/runtime metadata consistency",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Public API namespace neutrality",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Consumer-facing naming",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Package install consumer surface",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Package metadata neutrality",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Image adapter license gate",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Managed package isolated artifact surface",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Managed package representative API compile surface",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Release package artifact surface",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Path/artifact naming",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Documentation surface neutrality",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Release notes and changelog contract",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Documentation toolchain reproducibility",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Sample model asset contract",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": ".NET SDK toolchain reproducibility",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": ".NET installer supply-chain boundary",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Workflow container image supply-chain boundary",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Microsoft package-feed trust boundary",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "PowerShell toolchain reproducibility",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Workflow invariant coverage",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "GitHub Action supply-chain boundary",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "GitHub workflow permissions",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Workflow PowerShell syntax",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Workflow Bash syntax",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Runtime package neutrality",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Runtime RID package template scalability",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Runtime RID consumer selection surface",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Runtime package availability/fallback guidance",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Runtime fallback command/path consistency",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Runtime native copy property propagation",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Runtime staging dry-run isolation",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Runtime pack stage-forwarding isolation",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Runtime release-candidate preflight",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Release support contract",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Lifecycle refresh runtime matrix",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Lifecycle refresh candidate producer surface",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Lifecycle refresh candidate package surface",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Generic Linux RID feasibility contract",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Generic Linux preview matrix",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Generic Linux preview package surface",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Generic Linux ARM64 preview matrix",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Generic Linux ARM64 preview package surface",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Headless runtime profile contract",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Headless candidate evidence",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Generic Linux musl feasibility contract",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Domestic platform certification matrix",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "OpenCL T-API UMat boundary contract",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Capabilities JSON contract",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Capability profile evidence",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Codec writer native evidence",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Codec writer allocation evidence",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Codec benchmark harness",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Video/DNN scenario benchmark harness",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Image preflight mutation corpus",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Image preflight fuzz evidence",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Native codec mutation evidence",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Typed Mat benchmark harness",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "NativeAOT trim single-file smoke",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "NativeAOT smoke evidence",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "NativeAOT trim warning ledger",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Performance benchmark evidence",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Video/DNN benchmark evidence",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "PERF-001 relative regression baseline",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Typed Mat target-framework matrix",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Typed Mat native lifetime evidence",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Typed Mat owner/lifetime TFM matrix",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Async video owner contract",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "DNN diagnostics contract",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Image format policy",
-        "passedLog": "%TEMP%/opencv-v510-invariants-20261123.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Modern API preview samples",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Platform probe sample",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "v5.1.0 compatibility change ledger",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Codec buffer lease prototype boundary",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "API/ABI baseline contract",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Native-to-managed binding map",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Configured upstream map suite",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
+      },
+      {
+        "name": "OpenCV 5.1 DNN upstream map",
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
+      },
+      {
+        "name": "OpenCV 5.1 shared upstream map refresh",
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "VideoIO registry surface",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Release candidate provenance",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Release readiness contract",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Release package SPDX SBOM",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Release signing boundary",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "NuGet.org repository-signing boundary",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Public feed verification contract",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Release change-control record",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Final release candidate closeout",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Release package reproducibility",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Real runtime pack input boundary",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Real runtime input producer surface",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Native runtime profile boundary",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Runtime package local consumer restore",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Managed/runtime package-pair local consumer",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Targeted real pack consumer verification",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Runtime availability workflow/release surface",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Real native runtime build matrix coverage",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Runtime package docs discoverability",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Native header package boundary",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Native CMake target/export boundary",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Native CTest/output naming boundary",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Native ABI export audit boundary",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Native runtime-root/PATH copy boundary",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Runtime doc link integrity",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "No unpublished compatibility surface",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       },
       {
         "name": "Native ABI manifest generated-file freshness",
-        "passedLog": "%TEMP%/opencv-v510-invariants-resumed2.log"
+        "passedLog": "%TEMP%/opencv-v510-calib-invariants-20261123.log"
       }
     ],
     "historicalSemanticMapsPassed": 73,
-    "historicalSemanticMapVersion": "5.0.0"
+    "historicalSemanticMapVersion": "5.0.0",
+    "currentParserSlicesPassed": 5,
+    "sharedGeneratorNegativeFixtures": 127
   },
   "managedTargetFrameworks": {
     "count": 15,
     "allBuilt": true,
     "allPackageMetadata510": true,
-    "binaryAuditSha256": "443ab1dcaf0b0c89fc50a4b35fb51fe481c8d91ce4373bb7d80df7f682a4e34f"
+    "binaryAuditSha256": "5ff7464a7962f4965a02ad84480ebca53b54630e53908dc41c7790879386169b",
+    "informationalVersionSourceCommit": "fdbd7f8fbce84060c2bd6cd686be1f6905e56ea1"
   },
   "documentation": {
     "toolVersion": "2.78.5",
@@ -1021,9 +1055,9 @@
     "errors": 0,
     "newReleaseNoteWarnings": 0,
     "log": {
-      "path": "%TEMP%/opencv-v510-docfx.log",
-      "length": 9391,
-      "sha256": "96fde34bf06e6b5a897805b0582a393ca6dcc1e387ff0535a9f607d5bb8c7ccc"
+      "path": "%TEMP%/opencv-v510-calib-docfx.log",
+      "length": 9375,
+      "sha256": "d3dabb5bf459e05efb4ee87acb56d05697caf03c95cab9f492a58323766cfb67"
     }
   },
   "workflowLint": {
@@ -1035,8 +1069,8 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     }
   },
-  "sourceCommit": "4e9017e4e780771e92c493947c347c20e88b5432",
-  "sourceCommitBinding": "The committed source input scope has the exact sourceInputSet digest measured before commit; evidence updates are outside that scope.",
+  "sourceCommit": "fdbd7f8fbce84060c2bd6cd686be1f6905e56ea1",
+  "sourceCommitBinding": "Current managed/native/test source-input scope matches the recorded implementation commit. Native wrapper DLLs are reused unchanged from the earlier DNN correction because this increment changes managed code/tests only; native CTest was rerun.",
   "managedPreflightMutation": {
     "sourceCommit": "3646249ae9d1ef93d008cd599b850a806dcc0bec",
     "path": "packaging/codec/image-preflight-fuzz-evidence.json",
@@ -1117,25 +1151,70 @@
   },
   "upstream51ParserRefresh": {
     "recordedDate": "2026-11-23",
-    "sourceBuildInputsChanged": false,
-    "buildSourceCommit": "4e9017e4e780771e92c493947c347c20e88b5432",
+    "sourceBuildInputsChanged": true,
+    "buildSourceCommit": "fdbd7f8fbce84060c2bd6cd686be1f6905e56ea1",
     "catalog": {
       "path": "compatibility/opencv-5.1.0/upstream-map-refresh-catalog.json",
-      "sha256": "930fba0814ab4aac1e842702c36bf1ba669f0d399d4eea164b60ad7859edf6de"
+      "sha256": "3ecf0ac542c0bcaf96a1cc4c3d57c59002ed3e1f591d5b30e8bed3937fa5d5e4"
     },
     "inventory": {
       "path": "compatibility/opencv-5.1.0/upstream-map-refresh-summary.json",
-      "sha256": "845948c29b21aa0faf18d77552a4251e75714959c3045efb8cdd357f599c2efe"
+      "sha256": "a87eeb452a03ef8cc70e01355dc2b9c5308b479eb6d12ae31ac7a581a8bc1b50"
     },
-    "refreshedParserSliceCount": 4,
-    "pendingCatalogMapCount": 69,
+    "refreshedParserSliceCount": 5,
+    "pendingCatalogMapCount": 68,
     "historicalCatalogVersion": "5.0.0",
-    "newDeclarationCount": 521,
-    "totalReviewedDeclarationCount": 706,
-    "sharedGeneratorNegativeFixtureCount": 90,
+    "newDeclarationCount": 208,
+    "totalReviewedDeclarationCount": 914,
+    "sharedGeneratorNegativeFixtureCount": 127,
     "newManagedApiOrNativeAbiAdded": false,
-    "newRuntimeBehaviorCertified": false,
+    "newRuntimeBehaviorCertified": true,
     "repositoryWideUpstreamParityClaimed": false,
-    "scope": "Core eleven-header parser closure plus imgproc.hpp and imgcodecs.hpp. DNN remains a separate reviewed three-header slice. Implemented means existing bindings subject to managed validation; new 5.1 tensor/alpha/font APIs, enum members and widened input domains are not promoted."
+    "scope": "Calib3D four-header parser closure adds 208 reviewed declarations; current total is five scopes/914 declarations with 68 historical maps pending. Runtime behavior certification is limited to the corrected Schur/TiltedModel combinations and BFMatcher mask support. Double-point domains, optional backends and complete C++ parity remain unclaimed."
+  },
+  "calibration51Correction": {
+    "sourceCommit": "fdbd7f8fbce84060c2bd6cd686be1f6905e56ea1",
+    "disableSchurComplement": 134217728,
+    "tiltedModel": 262144,
+    "callerRecompileRequired": true,
+    "persistedNumericFlagsNeedExplicitMigration": true,
+    "publicConstantValueChanged": true,
+    "publicSignatureOrExportAdded": false,
+    "nativeBinariesReusedUnchanged": true,
+    "nativeBuildSourceCommit": "4e9017e4e780771e92c493947c347c20e88b5432",
+    "beforeRegression": {
+      "total": 4,
+      "failed": 1,
+      "passed": 3,
+      "reason": "DisableSchurComplement alone returned 14 tilted-model coefficients rather than the expected five. The other three combinations passed.",
+      "trx": {
+        "path": "%TEMP%/opencv-v510-standardmap-before/before.trx",
+        "sha256": "e2d839cac1fa726571a5f9c63a1afe8d261d3cd061c3cf0c3e3ae77a8f92dcb9"
+      },
+      "log": {
+        "path": "%TEMP%/opencv-v510-standardmap-before.log",
+        "length": 1887,
+        "sha256": "b54efcbd198917855e649efa56a02c6b0433f74b74164c187586d540c120a4f5"
+      }
+    },
+    "syntheticCalibration": "Ten views of a 7x6 board; assert distortion-vector length, reprojection error below 0.01 and recovered focal lengths through the real managed/C ABI path. All four solver/model combinations pass in both target frameworks.",
+    "bfMatcherMasksWithCrossCheck": false,
+    "bfMatcherMasksWithoutCrossCheck": true,
+    "bfMatcherImplementationChanged": false,
+    "managedBuildLog": {
+      "path": "%TEMP%/opencv-v510-calib-managed-build.log",
+      "length": 2174,
+      "sha256": "3ecf33a5795829333d1ba8411e7432dba81b1f4a313c339d1206fcbee8103d8b"
+    },
+    "independentParserAudit": {
+      "path": "%TEMP%/opencv-v510-calib-independent-audit.log",
+      "length": 314,
+      "sha256": "3eb696c3ab1ca186e87a7640da076c76b5a826b18daea54f7fc44d1c6e04fb18"
+    },
+    "binaryConstantsAudit": {
+      "path": "%TEMP%/opencv-v510-calib-binary-audit.log",
+      "length": 86,
+      "sha256": "411ce658d50b5aa55dcee687c604031e0908a51984a669b36311d07291250147"
+    }
   }
 }

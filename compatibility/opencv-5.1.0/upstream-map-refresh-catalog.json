@@ -385,6 +385,252 @@
         "changed": 2,
         "retained": 39
       }
+    },
+    {
+      "id": "calib3d",
+      "claimedSlice": "opencv2/calib3d.hpp public compatibility include closure across geometry, calib and stereo contributing headers; parser-emitted declarations only",
+      "identityPolicy": "full-enum",
+      "historicalRawPath": "compatibility/calib3d-upstream-raw.json",
+      "historicalRawSha256": "95de87f9e437fa46570ae94b298e1e2a123d96c69dd438c15649ead3e451014b",
+      "historicalClassificationPath": "compatibility/calib3d-upstream-classifications.json",
+      "historicalClassificationSha256": "020ab17beee3815d0d608d2a75fc2b4f2230c28a6b1e705bdb9964f5bab2d57e",
+      "primaryHeader": {
+        "path": "opencv-source/opencv-5.1.0/modules/calib/include/opencv2/calib3d.hpp",
+        "sha256": "f5838b7dd1e9d03a20eadcf387ffbb13c908b6316c0b5e2e51cfe4e26a36657e"
+      },
+      "sourceHeaders": [
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/geometry/include/opencv2/geometry/2d.hpp",
+          "sha256": "6853c3c0fed228da9a5055b9ec1d5f5f42d32c0d6c282abab28e8718da80c901"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/geometry/include/opencv2/geometry/3d.hpp",
+          "sha256": "3582764e934066d251d6653312c709c42c1bac1513f50ca2cb853d8eb694546e"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/stereo/include/opencv2/stereo.hpp",
+          "sha256": "cd8d4a03e97e143a2409da12f86d530be0be0f355acdc6cfb607b1bea6aaa423"
+        },
+        {
+          "path": "opencv-source/opencv-5.1.0/modules/calib/include/opencv2/calib.hpp",
+          "sha256": "ee5c1f8373efcd10fd5c19c294cc382f0e59cbc6c3afe00b66c32e3a257d8782"
+        }
+      ],
+      "preprocessorDefinitions": {
+        "CV_VERSION_MAJOR": 5
+      },
+      "rawSha256": "827e17bb80687c04c77e11e42c03b588fcde84f0882a552807560de8477bb193",
+      "declarationCount": 208,
+      "callableCount": 169,
+      "bindingSourceEvidence": [
+        {
+          "path": "src/OpenCvSharp.Native/src/calib3d.cpp",
+          "sha256": "07ad8ffddb2f04ad0752582b898a5fbb7c00c2db98f79db47a8302543937a0df"
+        },
+        {
+          "path": "src/OpenCvSharp/Calib3D/Cv2.UndistortImagePoints.cs",
+          "sha256": "38bf5ca549fd3ae99615542c3915110b100a848a4f89e7d3fe7d6d09adc0c149"
+        },
+        {
+          "path": "src/OpenCvSharp/Calib3D/Cv2.HandEye.cs",
+          "sha256": "d42a052178739f00219125d16e9a89267bf20c58f74819f5a7f5b573ae078a01"
+        },
+        {
+          "path": "tests/OpenCvSharp.Tests/Calib3D/UndistortImagePointsTests.cs",
+          "sha256": "a789b889d30a22bfd029c557361b03e3ac7aa49a6be39fdcfdaeb70e19adbfd8"
+        },
+        {
+          "path": "tests/OpenCvSharp.Tests/Calib3D/HandEyeCalibrationTests.cs",
+          "sha256": "1fe86bd3947c54292797a1e0f8bde4b03fcb06bd38eb320e2f5e9f42a663c1d3"
+        }
+      ],
+      "addedReviews": [
+        {
+          "identity": "cv.undistortImagePoints(Mat src;Mat dst[/O];Mat cameraMatrix;Mat distCoeffs;TermCriteria criteria=TermCriteria(TermCriteria::MAX_ITER, 5, 0.01))->void",
+          "classification": "implemented",
+          "reason": "Only the parser parameter name changes from arg1 to criteria; types, defaults, order and output modifiers are identical. Existing managed/C ABI overloads remain implemented under their input validation.",
+          "bindingReviewKind": "argument-rename",
+          "renamedFromIdentity": "cv.undistortImagePoints(Mat src;Mat dst[/O];Mat cameraMatrix;Mat distCoeffs;TermCriteria arg1=TermCriteria(TermCriteria::MAX_ITER, 5, 0.01))->void",
+          "nativeEntrypoints": [
+            "jyppx_ocv_calib3d_undistort_image_points"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Calib3D.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat UndistortImagePoints(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat distCoeffs,JYPPX.OpenCvSharp.Core.TermCriteria? criteria=null)",
+            "MEMBER|JYPPX.OpenCvSharp.Calib3D.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat UndistortImagePoints(JYPPX.OpenCvSharp.Core.Point2f[] src,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat distCoeffs,JYPPX.OpenCvSharp.Core.TermCriteria? criteria=null)",
+            "MEMBER|JYPPX.OpenCvSharp.Calib3D.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat UndistortImagePoints(System.ReadOnlySpan<JYPPX.OpenCvSharp.Core.Point2f> src,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat distCoeffs,JYPPX.OpenCvSharp.Core.TermCriteria? criteria=null)",
+            "MEMBER|JYPPX.OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void UndistortImagePoints(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat dst,JYPPX.OpenCvSharp.Core.Mat cameraMatrix,JYPPX.OpenCvSharp.Core.Mat distCoeffs,JYPPX.OpenCvSharp.Core.TermCriteria? criteria=null)"
+          ]
+        },
+        {
+          "identity": "enum cv.<unnamed>[const cv.CALIB_USE_INTRINSIC_GUESS=(1 << 0);const cv.CALIB_FIX_ASPECT_RATIO=(1 << 1);const cv.CALIB_FIX_PRINCIPAL_POINT=(1 << 2);const cv.CALIB_ZERO_TANGENT_DIST=(1 << 3);const cv.CALIB_FIX_FOCAL_LENGTH=(1 << 4);const cv.CALIB_FIX_K1=(1 << 5);const cv.CALIB_FIX_K2=(1 << 6);const cv.CALIB_FIX_K3=(1 << 7);const cv.CALIB_FIX_K4=(1 << 11);const cv.CALIB_FIX_K5=(1 << 12);const cv.CALIB_FIX_K6=(1 << 13);const cv.CALIB_RATIONAL_MODEL=(1 << 14);const cv.CALIB_THIN_PRISM_MODEL=(1 << 15);const cv.CALIB_FIX_S1_S2_S3_S4=(1 << 16);const cv.CALIB_TILTED_MODEL=(1 << 18);const cv.CALIB_FIX_TAUX_TAUY=(1 << 19);const cv.CALIB_USE_QR=(1 << 20);const cv.CALIB_FIX_TANGENT_DIST=(1 << 21);const cv.CALIB_FIX_INTRINSIC=(1 << 8);const cv.CALIB_SAME_FOCAL_LENGTH=(1 << 9);const cv.CALIB_ZERO_DISPARITY=(1 << 10);const cv.CALIB_USE_LU=(1 << 17);const cv.CALIB_DISABLE_SCHUR_COMPLEMENT=(1 << 27);const cv.CALIB_USE_EXTRINSIC_GUESS=(1 << 22);const cv.CALIB_RECOMPUTE_EXTRINSIC=(1 << 23);const cv.CALIB_CHECK_COND=(1 << 24);const cv.CALIB_FIX_SKEW=(1 << 25);const cv.CALIB_STEREO_REGISTRATION=(1 << 26)]",
+          "classification": "non-callable-metadata",
+          "reason": "5.1 calibration enum declarations and fisheye compatibility aliases remain parser metadata. No callable or value-level enum coverage is inferred; the managed CalibrationFlags value correction is tracked separately."
+        },
+        {
+          "identity": "cv.calibrateHandEye(vector_Mat R_gripper2base;vector_Mat t_gripper2base;vector_Mat R_target2cam;vector_Mat t_target2cam;Mat R_cam2gripper[/O];Mat t_cam2gripper[/O];HandEyeCalibrationMethod method=CALIB_HAND_EYE_TSAI)->void",
+          "classification": "implemented",
+          "reason": "The 5.1 parser now emits this existing native API. Existing C ABI and Mat-array/span wrappers marshal owned Mat handle vectors and output matrices; synthetic hand-eye tests already exercise the binding. No new callable implementation is added.",
+          "bindingReviewKind": "existing-wrapper",
+          "nativeEntrypoints": [
+            "jyppx_ocv_calib3d_calibrate_hand_eye"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Calib3D.Cv2|method|public;static|JYPPX.OpenCvSharp.Calib3D.HandEyeCalibrationResult CalibrateHandEye(JYPPX.OpenCvSharp.Core.Mat[] rGripper2Base,JYPPX.OpenCvSharp.Core.Mat[] tGripper2Base,JYPPX.OpenCvSharp.Core.Mat[] rTarget2Cam,JYPPX.OpenCvSharp.Core.Mat[] tTarget2Cam,JYPPX.OpenCvSharp.Calib3D.HandEyeCalibrationMethod method=Tsai)",
+            "MEMBER|JYPPX.OpenCvSharp.Calib3D.Cv2|method|public;static|JYPPX.OpenCvSharp.Calib3D.HandEyeCalibrationResult CalibrateHandEye(System.ReadOnlySpan<JYPPX.OpenCvSharp.Core.Mat> rGripper2Base,System.ReadOnlySpan<JYPPX.OpenCvSharp.Core.Mat> tGripper2Base,System.ReadOnlySpan<JYPPX.OpenCvSharp.Core.Mat> rTarget2Cam,System.ReadOnlySpan<JYPPX.OpenCvSharp.Core.Mat> tTarget2Cam,JYPPX.OpenCvSharp.Calib3D.HandEyeCalibrationMethod method=Tsai)",
+            "MEMBER|JYPPX.OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void CalibrateHandEye(JYPPX.OpenCvSharp.Core.Mat[] rGripper2Base,JYPPX.OpenCvSharp.Core.Mat[] tGripper2Base,JYPPX.OpenCvSharp.Core.Mat[] rTarget2Cam,JYPPX.OpenCvSharp.Core.Mat[] tTarget2Cam,JYPPX.OpenCvSharp.Core.Mat rCam2Gripper,JYPPX.OpenCvSharp.Core.Mat tCam2Gripper,JYPPX.OpenCvSharp.Calib3D.HandEyeCalibrationMethod method=Tsai)",
+            "MEMBER|JYPPX.OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void CalibrateHandEye(System.ReadOnlySpan<JYPPX.OpenCvSharp.Core.Mat> rGripper2Base,System.ReadOnlySpan<JYPPX.OpenCvSharp.Core.Mat> tGripper2Base,System.ReadOnlySpan<JYPPX.OpenCvSharp.Core.Mat> rTarget2Cam,System.ReadOnlySpan<JYPPX.OpenCvSharp.Core.Mat> tTarget2Cam,JYPPX.OpenCvSharp.Core.Mat rCam2Gripper,JYPPX.OpenCvSharp.Core.Mat tCam2Gripper,JYPPX.OpenCvSharp.Calib3D.HandEyeCalibrationMethod method=Tsai)"
+          ]
+        },
+        {
+          "identity": "cv.calibrateRobotWorldHandEye(vector_Mat R_world2cam;vector_Mat t_world2cam;vector_Mat R_base2gripper;vector_Mat t_base2gripper;Mat R_base2world[/O];Mat t_base2world[/O];Mat R_gripper2cam[/O];Mat t_gripper2cam[/O];RobotWorldHandEyeCalibrationMethod method=CALIB_ROBOT_WORLD_HAND_EYE_SHAH)->void",
+          "classification": "implemented",
+          "reason": "The 5.1 parser now emits this existing native API. Existing C ABI and managed array/span/output overloads and synthetic robot-world tests provide explicit binding evidence; no wrapper is inferred from its ordinal.",
+          "bindingReviewKind": "existing-wrapper",
+          "nativeEntrypoints": [
+            "jyppx_ocv_calib3d_calibrate_robot_world_hand_eye"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Calib3D.Cv2|method|public;static|JYPPX.OpenCvSharp.Calib3D.RobotWorldHandEyeCalibrationResult CalibrateRobotWorldHandEye(JYPPX.OpenCvSharp.Core.Mat[] rWorld2Cam,JYPPX.OpenCvSharp.Core.Mat[] tWorld2Cam,JYPPX.OpenCvSharp.Core.Mat[] rBase2Gripper,JYPPX.OpenCvSharp.Core.Mat[] tBase2Gripper,JYPPX.OpenCvSharp.Calib3D.RobotWorldHandEyeCalibrationMethod method=Shah)",
+            "MEMBER|JYPPX.OpenCvSharp.Calib3D.Cv2|method|public;static|JYPPX.OpenCvSharp.Calib3D.RobotWorldHandEyeCalibrationResult CalibrateRobotWorldHandEye(System.ReadOnlySpan<JYPPX.OpenCvSharp.Core.Mat> rWorld2Cam,System.ReadOnlySpan<JYPPX.OpenCvSharp.Core.Mat> tWorld2Cam,System.ReadOnlySpan<JYPPX.OpenCvSharp.Core.Mat> rBase2Gripper,System.ReadOnlySpan<JYPPX.OpenCvSharp.Core.Mat> tBase2Gripper,JYPPX.OpenCvSharp.Calib3D.RobotWorldHandEyeCalibrationMethod method=Shah)",
+            "MEMBER|JYPPX.OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void CalibrateRobotWorldHandEye(JYPPX.OpenCvSharp.Core.Mat[] rWorld2Cam,JYPPX.OpenCvSharp.Core.Mat[] tWorld2Cam,JYPPX.OpenCvSharp.Core.Mat[] rBase2Gripper,JYPPX.OpenCvSharp.Core.Mat[] tBase2Gripper,JYPPX.OpenCvSharp.Core.Mat rBase2World,JYPPX.OpenCvSharp.Core.Mat tBase2World,JYPPX.OpenCvSharp.Core.Mat rGripper2Cam,JYPPX.OpenCvSharp.Core.Mat tGripper2Cam,JYPPX.OpenCvSharp.Calib3D.RobotWorldHandEyeCalibrationMethod method=Shah)",
+            "MEMBER|JYPPX.OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void CalibrateRobotWorldHandEye(System.ReadOnlySpan<JYPPX.OpenCvSharp.Core.Mat> rWorld2Cam,System.ReadOnlySpan<JYPPX.OpenCvSharp.Core.Mat> tWorld2Cam,System.ReadOnlySpan<JYPPX.OpenCvSharp.Core.Mat> rBase2Gripper,System.ReadOnlySpan<JYPPX.OpenCvSharp.Core.Mat> tBase2Gripper,JYPPX.OpenCvSharp.Core.Mat rBase2World,JYPPX.OpenCvSharp.Core.Mat tBase2World,JYPPX.OpenCvSharp.Core.Mat rGripper2Cam,JYPPX.OpenCvSharp.Core.Mat tGripper2Cam,JYPPX.OpenCvSharp.Calib3D.RobotWorldHandEyeCalibrationMethod method=Shah)"
+          ]
+        },
+        {
+          "identity": "enum cv.fisheye.<unnamed>[const cv.fisheye.CALIB_USE_INTRINSIC_GUESS=(1 << 0)]",
+          "classification": "non-callable-metadata",
+          "reason": "5.1 calibration enum declarations and fisheye compatibility aliases remain parser metadata. No callable or value-level enum coverage is inferred; the managed CalibrationFlags value correction is tracked separately."
+        },
+        {
+          "identity": "enum cv.fisheye.<unnamed>[const cv.fisheye.CALIB_RECOMPUTE_EXTRINSIC=(1 << 23)]",
+          "classification": "non-callable-metadata",
+          "reason": "5.1 calibration enum declarations and fisheye compatibility aliases remain parser metadata. No callable or value-level enum coverage is inferred; the managed CalibrationFlags value correction is tracked separately."
+        },
+        {
+          "identity": "enum cv.fisheye.<unnamed>[const cv.fisheye.CALIB_CHECK_COND=(1 << 24)]",
+          "classification": "non-callable-metadata",
+          "reason": "5.1 calibration enum declarations and fisheye compatibility aliases remain parser metadata. No callable or value-level enum coverage is inferred; the managed CalibrationFlags value correction is tracked separately."
+        },
+        {
+          "identity": "enum cv.fisheye.<unnamed>[const cv.fisheye.CALIB_FIX_SKEW=(1 << 25)]",
+          "classification": "non-callable-metadata",
+          "reason": "5.1 calibration enum declarations and fisheye compatibility aliases remain parser metadata. No callable or value-level enum coverage is inferred; the managed CalibrationFlags value correction is tracked separately."
+        },
+        {
+          "identity": "enum cv.fisheye.<unnamed>[const cv.fisheye.CALIB_FIX_K1=(1 << 5)]",
+          "classification": "non-callable-metadata",
+          "reason": "5.1 calibration enum declarations and fisheye compatibility aliases remain parser metadata. No callable or value-level enum coverage is inferred; the managed CalibrationFlags value correction is tracked separately."
+        },
+        {
+          "identity": "enum cv.fisheye.<unnamed>[const cv.fisheye.CALIB_FIX_K2=(1 << 6)]",
+          "classification": "non-callable-metadata",
+          "reason": "5.1 calibration enum declarations and fisheye compatibility aliases remain parser metadata. No callable or value-level enum coverage is inferred; the managed CalibrationFlags value correction is tracked separately."
+        },
+        {
+          "identity": "enum cv.fisheye.<unnamed>[const cv.fisheye.CALIB_FIX_K3=(1 << 7)]",
+          "classification": "non-callable-metadata",
+          "reason": "5.1 calibration enum declarations and fisheye compatibility aliases remain parser metadata. No callable or value-level enum coverage is inferred; the managed CalibrationFlags value correction is tracked separately."
+        },
+        {
+          "identity": "enum cv.fisheye.<unnamed>[const cv.fisheye.CALIB_FIX_K4=(1 << 11)]",
+          "classification": "non-callable-metadata",
+          "reason": "5.1 calibration enum declarations and fisheye compatibility aliases remain parser metadata. No callable or value-level enum coverage is inferred; the managed CalibrationFlags value correction is tracked separately."
+        },
+        {
+          "identity": "enum cv.fisheye.<unnamed>[const cv.fisheye.CALIB_FIX_INTRINSIC=(1 << 8)]",
+          "classification": "non-callable-metadata",
+          "reason": "5.1 calibration enum declarations and fisheye compatibility aliases remain parser metadata. No callable or value-level enum coverage is inferred; the managed CalibrationFlags value correction is tracked separately."
+        },
+        {
+          "identity": "enum cv.fisheye.<unnamed>[const cv.fisheye.CALIB_FIX_PRINCIPAL_POINT=(1 << 2)]",
+          "classification": "non-callable-metadata",
+          "reason": "5.1 calibration enum declarations and fisheye compatibility aliases remain parser metadata. No callable or value-level enum coverage is inferred; the managed CalibrationFlags value correction is tracked separately."
+        },
+        {
+          "identity": "enum cv.fisheye.<unnamed>[const cv.fisheye.CALIB_ZERO_DISPARITY=(1 << 10)]",
+          "classification": "non-callable-metadata",
+          "reason": "5.1 calibration enum declarations and fisheye compatibility aliases remain parser metadata. No callable or value-level enum coverage is inferred; the managed CalibrationFlags value correction is tracked separately."
+        },
+        {
+          "identity": "enum cv.fisheye.<unnamed>[const cv.fisheye.CALIB_FIX_FOCAL_LENGTH=(1 << 4)]",
+          "classification": "non-callable-metadata",
+          "reason": "5.1 calibration enum declarations and fisheye compatibility aliases remain parser metadata. No callable or value-level enum coverage is inferred; the managed CalibrationFlags value correction is tracked separately."
+        }
+      ],
+      "changedReviews": [
+        {
+          "identity": "cv.boundingRect(Mat array)->Rect",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "5.1 documents saturation of nonrepresentable or infinite point coordinates and clamping of rectangle dimensions. Existing binding remains subject to managed input validation; no new extreme-coordinate runtime certification."
+        },
+        {
+          "identity": "cv.decomposeProjectionMatrix(Mat projMatrix;Mat cameraMatrix[/O];Mat rotMatrix[/O];Mat transVect[/O];Mat rotMatrixX=Mat()[/O];Mat rotMatrixY=Mat()[/O];Mat rotMatrixZ=Mat()[/O];Mat eulerAngles=Mat()[/O])->void",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "5.1 clarifies transVect as homogeneous camera position; translation is -R times the dehomogenized position. Existing output binding is retained without changing its numerical interpretation."
+        },
+        {
+          "identity": "cv.estimateTranslation2D(Mat from;Mat to;Mat inliers=Mat()[/O];int method=RANSAC;double ransacReprojThreshold=3;size_t maxIters=2000;double confidence=0.99;size_t refineIters=0)->cv::Vec2d",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "Only the C++ Mat initializer example changes; estimator signature and current binding remain identical."
+        },
+        {
+          "identity": "cv.undistortPoints(Mat src;Mat dst[/O];Mat cameraMatrix;Mat distCoeffs;Mat R=Mat();Mat P=Mat();TermCriteria criteria=TermCriteria(TermCriteria::MAX_ITER, 5, 0.01))->void",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "Default MAX_ITER criteria runs exactly five iterations; EPS must be requested for convergence and kept with an iteration limit. Existing criteria forwarding remains; no stronger convergence guarantee is inferred."
+        },
+        {
+          "identity": "cv.calibrateCamera(vector_Mat objectPoints;vector_Mat imagePoints;Size imageSize;Mat cameraMatrix[/IO];Mat distCoeffs[/IO];vector_Mat rvecs[/O];vector_Mat tvecs[/O];Mat stdDeviationsIntrinsics[/O];Mat stdDeviationsExtrinsics[/O];Mat perViewErrors[/O];int flags=0;TermCriteria criteria=TermCriteria( TermCriteria::COUNT + TermCriteria::EPS, 500, DBL_EPSILON))->double",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "5.1 documents float/double upstream point support and scheduling-dependent last-bit Schur accumulation. Current Point3f/Point2f validation is retained; double-point support and deterministic multithreading are not claimed."
+        },
+        {
+          "identity": "cv.calibrateCameraRO(vector_Mat objectPoints;vector_Mat imagePoints;Size imageSize;int iFixedPoint;Mat cameraMatrix[/IO];Mat distCoeffs[/IO];vector_Mat rvecs[/O];vector_Mat tvecs[/O];Mat newObjPoints[/O];Mat stdDeviationsIntrinsics[/O];Mat stdDeviationsExtrinsics[/O];Mat stdDeviationsObjPoints[/O];Mat perViewErrors[/O];int flags=0;TermCriteria criteria=TermCriteria( TermCriteria::COUNT + TermCriteria::EPS, 500, DBL_EPSILON))->double",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "5.1 specifies released object points have input point depth (CV_32F or CV_64F). Current float point wrappers do not certify widened double input."
+        },
+        {
+          "identity": "cv.fisheye.calibrate(vector_Mat objectPoints;vector_Mat imagePoints;Size image_size[/C,/Ref];Mat K[/IO];Mat D[/IO];vector_Mat rvecs[/O];vector_Mat tvecs[/O];int flags=0;TermCriteria criteria=TermCriteria(TermCriteria::COUNT + TermCriteria::EPS, 100, DBL_EPSILON))->double",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "5.1 clarifies complete K/D/skew initial guesses and max(width,height)/2 focal initialization. Current guess validation and forwarding remain; documentation does not widen managed inputs."
+        },
+        {
+          "identity": "cv.fisheye.stereoCalibrate(vector_Mat objectPoints;vector_Mat imagePoints1;vector_Mat imagePoints2;Mat K1[/IO];Mat D1[/IO];Mat K2[/IO];Mat D2[/IO];Size imageSize;Mat R[/O];Mat T[/O];vector_Mat rvecs[/O];vector_Mat tvecs[/O];int flags=CALIB_FIX_INTRINSIC;TermCriteria criteria=TermCriteria(TermCriteria::COUNT + TermCriteria::EPS, 100, DBL_EPSILON))->double",
+          "fields": [
+            "documentation"
+          ],
+          "reason": "5.1 clarifies complete intrinsic/distortion guesses, focal initialization and ignored fixed-distortion flags under FIX_INTRINSIC. Existing binding and matrix/flag validation remain."
+        }
+      ],
+      "removedReviews": [
+        {
+          "identity": "cv.undistortImagePoints(Mat src;Mat dst[/O];Mat cameraMatrix;Mat distCoeffs;TermCriteria arg1=TermCriteria(TermCriteria::MAX_ITER, 5, 0.01))->void",
+          "reason": "Parameter-only rename to criteria; explicitly matched to the retained existing binding rather than counted as lost implementation."
+        },
+        {
+          "identity": "enum cv.<unnamed>[const cv.CALIB_USE_INTRINSIC_GUESS=0x00001;const cv.CALIB_FIX_ASPECT_RATIO=0x00002;const cv.CALIB_FIX_PRINCIPAL_POINT=0x00004;const cv.CALIB_ZERO_TANGENT_DIST=0x00008;const cv.CALIB_FIX_FOCAL_LENGTH=0x00010;const cv.CALIB_FIX_K1=0x00020;const cv.CALIB_FIX_K2=0x00040;const cv.CALIB_FIX_K3=0x00080;const cv.CALIB_FIX_K4=0x00800;const cv.CALIB_FIX_K5=0x01000;const cv.CALIB_FIX_K6=0x02000;const cv.CALIB_RATIONAL_MODEL=0x04000;const cv.CALIB_THIN_PRISM_MODEL=0x08000;const cv.CALIB_FIX_S1_S2_S3_S4=0x10000;const cv.CALIB_TILTED_MODEL=0x40000;const cv.CALIB_FIX_TAUX_TAUY=0x80000;const cv.CALIB_USE_QR=0x100000;const cv.CALIB_FIX_TANGENT_DIST=0x200000;const cv.CALIB_FIX_INTRINSIC=0x00100;const cv.CALIB_SAME_FOCAL_LENGTH=0x00200;const cv.CALIB_ZERO_DISPARITY=0x00400;const cv.CALIB_USE_LU=(1 << 17);const cv.CALIB_DISABLE_SCHUR_COMPLEMENT=(1 << 18);const cv.CALIB_USE_EXTRINSIC_GUESS=(1 << 22);const cv.CALIB_RECOMPUTE_EXTRINSIC=(1 << 23);const cv.CALIB_CHECK_COND=(1 << 24);const cv.CALIB_FIX_SKEW=(1 << 25);const cv.CALIB_STEREO_REGISTRATION=(1 << 26)]",
+          "reason": "Anonymous enum full identity changes because literals become shifts and DisableSchurComplement moves from colliding bit 18 to independent bit 27. Names and values remain explicit in new metadata; caller recompilation is documented."
+        }
+      ],
+      "expectedDelta": {
+        "added": 16,
+        "removed": 2,
+        "changed": 8,
+        "retained": 192
+      }
     }
   ],
   "repositoryWideUpstreamParityClaimed": false,

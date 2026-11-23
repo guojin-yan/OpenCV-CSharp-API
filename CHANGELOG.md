@@ -6,7 +6,8 @@ This file is the concise chronological index for package-visible changes. Detail
 
 ## [5.1.0] - In development / 开发中
 
-- Refreshed Core, ImgProc and ImgCodecs against official 5.1 source with a shared review tool; four parser slices now cover 706 declarations, with 69 historical maps pending and new API/input-domain gaps recorded explicitly.
+- Correct `CalibrationFlags.DisableSchurComplement` to OpenCV 5.1 bit 27 so it no longer enables tilted distortion. Recompile callers that used the old constant; see the calibration migration guide. BFMatcher mask support now follows 5.1's CrossCheck-dependent result.
+- Refreshed Core, ImgProc and ImgCodecs against official 5.1 source with a shared review tool; five parser slices including Calib3D now cover 914 declarations, with 68 historical maps pending and new API/input-domain gaps recorded explicitly.
 - Corrected DNN engine and TFLite format enum translation for OpenCV 5.1 while keeping public and ABI 1 values stable; refreshed the DNN parser slice with explicit remaining gaps.
 
 - Move the source, package metadata and development target to the official matching OpenCV/opencv_contrib 5.1.0 tags.

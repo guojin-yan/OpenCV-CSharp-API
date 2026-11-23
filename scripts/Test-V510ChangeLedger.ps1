@@ -49,15 +49,19 @@ foreach ($profile in $build.wrapperProfiles) {
 }
 if ((@($build.managedRegression.targetFramework) -join ',') -cne 'net8.0,net10.0') { throw '5.1 native-enabled managed evidence requires both frameworks.' }
 foreach ($run in $build.managedRegression) {
-    if (-not $run.nativeSmokeEnabled -or $run.nativeOpenCvVersion -cne '5.1.0' -or $run.passed -ne 1260 -or $run.failed -ne 0 -or $run.skipped -ne 0 -or @($run.requiredPassedTests).Count -ne 11) { throw '5.1 native-enabled regression evidence is incomplete.' }
+    if (-not $run.nativeSmokeEnabled -or $run.nativeOpenCvVersion -cne '5.1.0' -or $run.passed -ne 2090 -or $run.failed -ne 0 -or $run.skipped -ne 0 -or @($run.requiredPassedTests).Count -ne 17) { throw '5.1 native-enabled regression evidence is incomplete.' }
     foreach ($name in @('OnnxImportPathsKeepAbiEngineValues','TFLiteImportReportsStableFormatAndRunsInference')) {
         if (@($run.requiredPassedTests | Where-Object { $_ -like "*.$name(*)" }).Count -ne 4) { throw '5.1 enum projection requires all four engine choices for ONNX and TFLite.' }
     }
+    if (@($run.requiredPassedTests | Where-Object { $_ -like '*.SchurSolverSelectionPreservesDistortionModel(*)' }).Count -ne 4 -or
+        @($run.requiredPassedTests | Where-Object { $_ -like '*.PropertiesExposeConstructorSettingsWhenFeaturesModuleIsLinked(*)' }).Count -ne 2) { throw '5.1 solver/model and BFMatcher property combinations are incomplete.' }
 }
 $patchHash = (Get-FileHash -LiteralPath (Join-Path $repo $build.patch.path) -Algorithm SHA256).Hash.ToLowerInvariant()
 $dnn = $build.dnn51Correction
 $dnnSummaryHash = (Get-FileHash -LiteralPath (Join-Path $repo 'compatibility/opencv-5.1.0/dnn-upstream-summary.json') -Algorithm SHA256).Hash.ToLowerInvariant()
-if ($dnn.sourceCommit -cne $build.sourceCommit -or -not $dnn.abiValuesUnchanged -or $dnn.ortBackendRuntimeValidated -or
+& git -C $repo merge-base --is-ancestor $dnn.sourceCommit $build.sourceCommit 2>$null
+if ($LASTEXITCODE -ne 0) { throw 'Historical DNN correction must be included in the current build source.' }
+if (-not $dnn.abiValuesUnchanged -or $dnn.ortBackendRuntimeValidated -or
     $dnn.parserSlice.sha256 -cne $dnnSummaryHash -or $dnn.parserSlice.declarations -ne 185 -or $dnn.parserSlice.negativeFixtures -ne 22 -or
     $dnn.parserSlice.remainingHistoricalCatalogMaps -ne 72 -or $dnn.parserSlice.completeDnnCppParityClaimed -or
     $dnn.beforeRegression.total -ne 4 -or $dnn.beforeRegression.failed -ne 4 -or $dnn.beforeRegression.passed -ne 0 -or $dnn.managedBuild.targetFrameworkCount -ne 15) {
@@ -69,10 +73,18 @@ $inventoryPath = 'compatibility/opencv-5.1.0/upstream-map-refresh-summary.json'
 $catalogPath = 'compatibility/opencv-5.1.0/upstream-map-refresh-catalog.json'
 $inventoryHash = (Get-FileHash -LiteralPath (Join-Path $repo $inventoryPath) -Algorithm SHA256).Hash.ToLowerInvariant()
 $catalogHash = (Get-FileHash -LiteralPath (Join-Path $repo $catalogPath) -Algorithm SHA256).Hash.ToLowerInvariant()
-if ($refresh.sourceBuildInputsChanged -or $refresh.buildSourceCommit -cne $build.sourceCommit -or
+if (-not $refresh.sourceBuildInputsChanged -or $refresh.buildSourceCommit -cne $build.sourceCommit -or
     $refresh.catalog.path -cne $catalogPath -or $refresh.catalog.sha256 -cne $catalogHash -or $refresh.inventory.path -cne $inventoryPath -or $refresh.inventory.sha256 -cne $inventoryHash -or
-    $refresh.refreshedParserSliceCount -ne 4 -or $refresh.pendingCatalogMapCount -ne 69 -or $refresh.historicalCatalogVersion -cne '5.0.0' -or
-    $refresh.newDeclarationCount -ne 521 -or $refresh.totalReviewedDeclarationCount -ne 706 -or $refresh.sharedGeneratorNegativeFixtureCount -ne 90 -or
-    $refresh.newManagedApiOrNativeAbiAdded -or $refresh.newRuntimeBehaviorCertified -or $refresh.repositoryWideUpstreamParityClaimed) { throw '5.1 shared parser refresh evidence drifted.' }
+    $refresh.refreshedParserSliceCount -ne 5 -or $refresh.pendingCatalogMapCount -ne 68 -or $refresh.historicalCatalogVersion -cne '5.0.0' -or
+    $refresh.newDeclarationCount -ne 208 -or $refresh.totalReviewedDeclarationCount -ne 914 -or $refresh.sharedGeneratorNegativeFixtureCount -ne 127 -or
+    $refresh.newManagedApiOrNativeAbiAdded -or -not $refresh.newRuntimeBehaviorCertified -or $refresh.repositoryWideUpstreamParityClaimed) { throw '5.1 shared parser refresh evidence drifted.' }
+$calibration = $build.calibration51Correction
+$calibSummary = Get-Content -LiteralPath (Join-Path $repo 'compatibility/opencv-5.1.0/calib3d-upstream-summary.json') -Raw | ConvertFrom-Json
+if ($calibration.sourceCommit -cne $build.sourceCommit -or $calibration.disableSchurComplement -ne 134217728 -or $calibration.tiltedModel -ne 262144 -or
+    -not $calibration.callerRecompileRequired -or -not $calibration.nativeBinariesReusedUnchanged -or $calibration.publicSignatureOrExportAdded -or
+    $calibration.beforeRegression.total -ne 4 -or $calibration.beforeRegression.failed -ne 1 -or $calibration.beforeRegression.passed -ne 3 -or
+    $calibration.bfMatcherMasksWithCrossCheck -or -not $calibration.bfMatcherMasksWithoutCrossCheck -or
+    $calibSummary.declarationCount -ne 208 -or $calibSummary.classificationCounts.implemented -ne 169 -or $calibSummary.classificationCounts.missing -ne 0 -or
+    $calibSummary.reviewedExistingBindingCount -ne 3 -or $calibSummary.negativeFixtureCount -ne 37) { throw '5.1 calibration/matcher correction or reviewed binding evidence drifted.' }
 Write-Host "V510_CHANGE_LEDGER_OK entries=$(@($ledger.entries).Count) from=$($ledger.fromVersion) to=$($ledger.toVersion) native_abi=$($ledger.nativeAbiVersion)"
-Write-Host "OPENCV_510_SOURCE_BUILD_EVIDENCE_OK input_files=$($inputPaths.Count) full_exports=2669 mini_exports=527 native_ctest=6 managed=2520 historical_catalog=5.0.0 dnn_parser_slice=5.1.0"
+Write-Host "OPENCV_510_SOURCE_BUILD_EVIDENCE_OK input_files=$($inputPaths.Count) full_exports=2669 mini_exports=527 native_ctest=6 managed=4180 historical_catalog=5.0.0 parser_slices=5 calibration_schur_bit=27"

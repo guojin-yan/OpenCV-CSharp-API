@@ -11,7 +11,7 @@ internal static class Program
     private const string Prefix = "opencv-source/opencv-5.1.0/";
     private const string CatalogPath = "compatibility/opencv-5.1.0/upstream-map-refresh-catalog.json";
     // Updating a reviewed slice requires reviewing its source and decisions together.
-    private const string ReviewedCatalogSha256 = "930fba0814ab4aac1e842702c36bf1ba669f0d399d4eea164b60ad7859edf6de";
+    private const string ReviewedCatalogSha256 = "3ecf0ac542c0bcaf96a1cc4c3d57c59002ed3e1f591d5b30e8bed3937fa5d5e4";
     private static readonly string[] Classes = { "implemented", "intentionally-omitted", "missing", "non-callable-metadata", "unsupported", "upstream-conditional" };
     private static readonly JsonSerializerOptions Json = new() { WriteIndented = true };
     private sealed record Options(string Repository, string Workspace, string Output, bool Check);
@@ -68,6 +68,14 @@ internal static class Program
             ValidateRaw(raw, module, catalog, trusted);
             Source(options, Obj(module, "primaryHeader"));
             foreach (JsonNode? header in Arr(module, "sourceHeaders")) Source(options, header!.AsObject());
+            if (module["bindingSourceEvidence"] is JsonArray evidence)
+                foreach (JsonNode? input in evidence)
+                {
+                    string path = Str(input!, "path");
+                    Require((path.StartsWith("src/", StringComparison.Ordinal) || path.StartsWith("tests/", StringComparison.Ordinal)) &&
+                        !path.Contains("..", StringComparison.Ordinal) && !path.Contains('\\'), "Binding source path is outside the repository evidence roots.");
+                    Require(Sha(File.ReadAllText(Path.Combine(options.Repository, path)).Replace("\r\n", "\n", StringComparison.Ordinal).Replace('\r', '\n')) == Str(input!, "sha256"), "Binding source evidence drifted: " + path);
+                }
             ValidateReviews(raw, old, module);
             JsonObject classified = Classify(raw, old, previous, module);
             ValidateClassification(raw, classified, old, previous, module, native, managed);
@@ -102,6 +110,8 @@ internal static class Program
                 ["nativeEvidenceCount"] = Arr(classified, "declarations").SelectMany(row => Strings(row!, "nativeEntrypoints")).Distinct(StringComparer.Ordinal).Count(),
                 ["managedEvidenceCount"] = Arr(classified, "declarations").SelectMany(row => Strings(row!, "managedMembers")).Distinct(StringComparer.Ordinal).Count(),
                 ["repositoryWideUpstreamParityClaimed"] = false, ["completeCppParityClaimed"] = false, ["newRuntimeBehaviorCertified"] = false };
+            if (module["bindingSourceEvidence"] is JsonArray)
+                summary["reviewedExistingBindingCount"] = Arr(module, "addedReviews").Count(row => Str(row!, "classification") == "implemented");
             string summaryText = Serialize(summary);
             Write(options, stem + "classifications.json", classificationText);
             Write(options, stem + "delta.json", deltaText);
@@ -186,7 +196,29 @@ internal static class Program
                 Require(!string.IsNullOrWhiteSpace(Str(review!, "reason")), "Review reason is missing.");
                 string id = Str(review!, "identity");
                 if (set.Key == "changed") Require(Strings(review!, "fields").SequenceEqual(ChangedFields(before[id], after[id])), "Review changed fields drifted.");
-                if (set.Key == "added") Require(Str(review!, "classification") == (Str(after[id], "kind") == "callable" ? "intentionally-omitted" : "non-callable-metadata"), "Unimplemented addition was promoted.");
+                if (set.Key == "added")
+                {
+                    string label = Str(review!, "classification");
+                    if (Str(after[id], "kind") != "callable") Require(label == "non-callable-metadata", "Unimplemented addition was promoted.");
+                    else if (label == "implemented")
+                    {
+                        string kind = Str(review!, "bindingReviewKind");
+                        Require(kind is "argument-rename" or "existing-wrapper", "Existing binding review kind drifted.");
+                        Require(Strings(review!, "nativeEntrypoints").Length > 0 && Strings(review!, "managedMembers").Length > 0 &&
+                            module["bindingSourceEvidence"] is JsonArray inputs && inputs.Count >= 3, "Existing binding review lacks evidence.");
+                        if (kind == "argument-rename")
+                        {
+                            string priorId = Str(review!, "renamedFromIdentity");
+                            Require(before.ContainsKey(priorId) && !after.ContainsKey(priorId), "Argument rename historical identity drifted.");
+                            JsonObject prior = Copy(before[priorId].AsObject()), current = Copy(after[id].AsObject());
+                            Require(!JsonNode.DeepEquals(prior["arguments"], current["arguments"]), "Argument rename has no renamed parameter.");
+                            foreach (JsonNode? arg in Arr(prior, "arguments")) arg!["name"] = "";
+                            foreach (JsonNode? arg in Arr(current, "arguments")) arg!["name"] = "";
+                            Require(ChangedFields(prior, current).All(field => field is "identity" or "documentation"), "Argument rename changed a non-name signature field.");
+                        }
+                    }
+                    else Require(label == "intentionally-omitted", "Unimplemented addition was promoted.");
+                }
             }
         }
         Require(Int(Obj(module, "expectedDelta"), "retained") == after.Keys.Intersect(before.Keys, StringComparer.Ordinal).Count(), "Review retained count drifted.");
@@ -216,6 +248,21 @@ internal static class Program
                 row = new JsonObject { ["identity"] = id, ["classification"] = Str(review!, "classification"), ["reason"] = Str(review!, "reason"),
                     ["buildCondition"] = "unconditional-parser-surface", ["nativeEntrypoints"] = new JsonArray(), ["managedMembers"] = new JsonArray(),
                     ["historicalOrdinal"] = null, ["refreshReview"] = Str(review!, "reason") };
+                if (Str(review!, "classification") == "implemented")
+                {
+                    row["nativeEntrypoints"] = review!["nativeEntrypoints"]!.DeepClone();
+                    row["managedMembers"] = review["managedMembers"]!.DeepClone();
+                    row["bindingReviewKind"] = Str(review, "bindingReviewKind");
+                    if (Str(review, "bindingReviewKind") == "argument-rename")
+                    {
+                        int ordinal = Int(historical[Str(review, "renamedFromIdentity")], "ordinal");
+                        Require(Str(prior[ordinal]!, "classification") == "implemented" &&
+                            JsonNode.DeepEquals(prior[ordinal]!["nativeEntrypoints"], review["nativeEntrypoints"]) &&
+                            JsonNode.DeepEquals(prior[ordinal]!["managedMembers"], review["managedMembers"]), "Argument rename binding evidence drifted.");
+                        row["historicalOrdinal"] = ordinal;
+                        row["renamedFromIdentity"] = Str(review, "renamedFromIdentity");
+                    }
+                }
             }
             row["ordinal"] = Int(declaration!, "ordinal"); rows.Add(row);
         }
@@ -250,6 +297,7 @@ internal static class Program
                 if (before.TryGetValue(id, out JsonNode? prior)) row["before"] = prior.DeepClone();
                 if (after.TryGetValue(id, out JsonNode? current)) row["after"] = current.DeepClone();
                 if (key == "changed") row["fields"] = review!["fields"]!.DeepClone();
+                if (review!["bindingReviewKind"] is not null) row["bindingReview"] = review.DeepClone();
                 return row;
             }));
         }
@@ -297,7 +345,17 @@ internal static class Program
         Reject("unreviewed removal", "Review identity closure", () => { var v = Copy(module); Arr(v, "removedReviews").Add(new JsonObject { ["identity"] = "unknown", ["reason"] = "unknown" }); ValidateReviews(raw, old, v); });
         Reject("unreviewed new callable", "Unreviewed added declaration", () => { var v = Copy(raw); Arr(v, "declarations").First(row => Str(row!, "kind") == "callable")!["identity"] = "cv.unreviewed()->void"; Classify(v, old, previous, module); });
         Reject("lost delta", "Delta drift", () => { var v = Copy(delta); Arr(v, "changed").RemoveAt(0); Require(JsonNode.DeepEquals(v, Delta(raw, old, module)), "Delta drift."); });
-        Require(count == 30, "Shared refresh fixture count drifted.");
+        if (Arr(module, "addedReviews").Any(row => Str(row!, "classification") == "implemented"))
+        {
+            JsonNode Binding(JsonObject v) => Arr(v, "addedReviews").First(row => Str(row!, "classification") == "implemented")!;
+            Reject("false binding review kind", "Existing binding review kind", () => { var v = Copy(module); Binding(v)["bindingReviewKind"] = "unreviewed"; ValidateReviews(raw, old, v); });
+            Reject("empty binding review", "Existing binding review lacks evidence", () => { var v = Copy(module); Binding(v)["nativeEntrypoints"] = new JsonArray(); ValidateReviews(raw, old, v); });
+            Reject("false new native evidence", "Classification references missing public evidence", () => { var v = Copy(module); Binding(v)["bindingReviewKind"] = "existing-wrapper"; Binding(v)["nativeEntrypoints"] = new JsonArray("jyppx_ocv_false"); var result = Classify(raw, old, previous, v); ValidateClassification(raw, result, old, previous, v, native, managed); });
+            Reject("false new managed evidence", "Classification references missing public evidence", () => { var v = Copy(module); Binding(v)["bindingReviewKind"] = "existing-wrapper"; Binding(v)["managedMembers"] = new JsonArray("false"); var result = Classify(raw, old, previous, v); ValidateClassification(raw, result, old, previous, v, native, managed); });
+            Reject("false rename source", "Argument rename historical identity", () => { var v = Copy(module); Binding(v)["bindingReviewKind"] = "argument-rename"; Binding(v)["renamedFromIdentity"] = "unknown"; ValidateReviews(raw, old, v); });
+            Reject("rename signature mutation", "Argument rename changed a non-name signature field", () => { var v = Copy(raw); Arr(v, "declarations").Single(row => Str(row!, "identity") == Str(Binding(module), "identity"))!["returnType"] = "unreviewed"; ValidateReviews(v, old, module); });
+            Reject("rename evidence mutation", "Argument rename binding evidence", () => { var v = Copy(module); Binding(v)["nativeEntrypoints"] = new JsonArray("jyppx_ocv_false"); Classify(raw, old, previous, v); });
+        }
         return count;
     }
 
@@ -316,7 +374,8 @@ internal static class Program
     }
     private static void Source(Options options, JsonObject input)
     {
-        string path = Str(input, "path"); Require(path.StartsWith(Prefix, StringComparison.Ordinal) && !path.Contains("..", StringComparison.Ordinal), "Source path is outside the pinned root.");
+        string path = Str(input, "path"); Require(path.StartsWith(Prefix, StringComparison.Ordinal) &&
+            !path.Contains("..", StringComparison.Ordinal) && !path.Contains('\\'), "Source path is outside the pinned root.");
         string text = new UTF8Encoding(false, true).GetString(File.ReadAllBytes(Path.Combine(options.Workspace, path)));
         Require(Sha(text.Replace("\r\n", "\n", StringComparison.Ordinal).Replace('\r', '\n')) == Str(input, "sha256"), "Official source hash drifted: " + path);
     }

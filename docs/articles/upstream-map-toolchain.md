@@ -1,6 +1,6 @@
 # Upstream Map Toolchain
 
-Current-version refreshes are tracked in [OpenCV 5.1 mapping evidence](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/compatibility/opencv-5.1.0/README.md). Core, DNN, ImgProc and ImgCodecs now have reviewed parser slices; 69 historical maps remain pending. The 73-entry catalog documented below retains its OpenCV 5.0.0 identity. See [5.1 source mapping](opencv-5.1-source-mapping.md) for the shared generator and API boundaries, and [DNN 5.1 migration](dnn-5.1-migration.md) for enum conversion and inference evidence.
+Current-version refreshes are tracked in [OpenCV 5.1 mapping evidence](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/compatibility/opencv-5.1.0/README.md). Calib3D, Core, DNN, ImgProc and ImgCodecs now have reviewed parser slices; 68 historical maps remain pending. The 73-entry catalog documented below retains its OpenCV 5.0.0 identity. See [5.1 source mapping](opencv-5.1-source-mapping.md) for the shared generator and API boundaries, and [DNN 5.1 migration](dnn-5.1-migration.md) for enum conversion and inference evidence.
 
 The upstream map catalog centralizes the source scope, parser identity, classification policy, output files, and semantic check command for 73 source maps, including the partial callable maps and lexical source inventories for Cudev and MATLAB. Its schema is `compatibility/upstream-map-catalog.schema.json`, and the checked catalog is `compatibility/upstream-map-catalog.json`.
 

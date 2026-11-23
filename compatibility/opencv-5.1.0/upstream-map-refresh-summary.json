@@ -3,12 +3,19 @@
   "upstreamOpenCvVersion": "5.1.0",
   "upstreamCommit": "e4f78fbcf1a773fbed69e14500e8b734963eb585",
   "catalogPath": "compatibility/opencv-5.1.0/upstream-map-refresh-catalog.json",
-  "catalogSha256": "930fba0814ab4aac1e842702c36bf1ba669f0d399d4eea164b60ad7859edf6de",
+  "catalogSha256": "3ecf0ac542c0bcaf96a1cc4c3d57c59002ed3e1f591d5b30e8bed3937fa5d5e4",
   "historicalCatalogRevision": "5.0.0",
   "historicalCatalogMapCount": 73,
-  "refreshedParserSliceCount": 4,
-  "pendingCatalogMapCount": 69,
+  "refreshedParserSliceCount": 5,
+  "pendingCatalogMapCount": 68,
   "slices": [
+    {
+      "id": "calib3d",
+      "summaryPath": "compatibility/opencv-5.1.0/calib3d-upstream-summary.json",
+      "sha256": "6c1c37f947f99cd651a5dfd0b961eb97ca90a2db80835fd304ea87c10ba15561",
+      "declarationCount": 208,
+      "completeCppParityClaimed": false
+    },
     {
       "id": "core",
       "summaryPath": "compatibility/opencv-5.1.0/core-upstream-summary.json",
@@ -42,7 +49,6 @@
     "alphamat",
     "bgsegm",
     "bioinspired",
-    "calib3d",
     "cannops",
     "ccalib",
     "cnn_3dobj",
@@ -109,7 +115,7 @@
     "xphoto",
     "xstereo"
   ],
-  "sharedGeneratorNegativeFixtureCount": 90,
+  "sharedGeneratorNegativeFixtureCount": 127,
   "repositoryWideUpstreamParityClaimed": false,
   "completeCppParityClaimed": false,
   "limitation": "Only the recorded parser slices have been reviewed. Historical maps, complete C\u002B\u002B/template surfaces and runtime/platform certification retain separate evidence and version identities."

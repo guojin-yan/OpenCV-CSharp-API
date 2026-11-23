@@ -113,6 +113,17 @@ function Get-ExpectedEvidencePaths {
         "compatibility/opencv-5.1.0/imgcodecs-upstream-summary.json",
         "compatibility/opencv-5.1.0/imgcodecs-upstream-delta.json",
         "compatibility/opencv-5.1.0/imgcodecs-implemented-families.json",
+        "compatibility/opencv-5.1.0/calib3d-upstream-raw.json",
+        "compatibility/opencv-5.1.0/calib3d-upstream-classifications.json",
+        "compatibility/opencv-5.1.0/calib3d-upstream-map.txt",
+        "compatibility/opencv-5.1.0/calib3d-upstream-summary.json",
+        "compatibility/opencv-5.1.0/calib3d-upstream-delta.json",
+        "compatibility/opencv-5.1.0/calib3d-implemented-families.json",
+        "docs/articles/calibration-5.1-migration.md",
+        "src/OpenCvSharp/Calib3D/CalibrationFlags.cs",
+        "src/OpenCvSharp/Features2D/BFMatcher.cs",
+        "tests/OpenCvSharp.Tests/Calib3D/CalibrationFlags51Tests.cs",
+        "tests/OpenCvSharp.Tests/Features2D/BFMatcherTests.cs",
         "tools/UpstreamMapRefresh/UpstreamMapRefresh.csproj",
         "tools/UpstreamMapRefresh/Program.cs",
         "tools/UpstreamMapRefresh/extract.py",
@@ -1258,7 +1269,7 @@ function Test-Record {
     Assert-True -List $List -Condition ($null -ne $hostedEvidence -and $hostedEvidence.target -eq 'win-x86/full' -and $hostedEvidence.status -eq 'verified-hosted-evidence' -and $hostedEvidence.sourceCommit -eq '7f53e03e7d6ad5839711ba5ea32a0fcc02d8d5b8' -and [long]$hostedEvidence.runtimeInputRunId -eq 31162854992 -and [long]$hostedEvidence.packRunId -eq 31171822232 -and [long]$hostedEvidence.consumerRunId -eq 31171822232) -Issue 'Final closeout Windows x86 hosted promotion evidence drifted'
     Assert-True -List $List -Condition ($hostedEvidence.hostedCloseoutSha256 -eq '61f3ce0263fa41126c7ac857cde56ce6096147f0a1f9a3f3fa499fab1478bd81' -and $hostedEvidence.artifactDigestAuditSha256 -eq 'c0bf6886787fbbc105390ec8861acd6d608b60e9b86c63aef2c7456d436d9ded' -and $hostedEvidence.hostedPackageManifestSha256 -eq 'eedb212724a7f176bc913cc92b09ca086a4d7129f069a964c3195a3b8557c353' -and $hostedEvidence.hostedChangeControlSha256 -eq '69b1444692d389bb3452575a494035faddf5eb4c2f111bf3b60a686986841332') -Issue 'Final closeout Windows x86 hosted audit hashes drifted'
 
-    Assert-True -List $List -Condition ($Record.ApiAbiBaseline.Managed.Sha256 -eq "b0fe57a0c53b8c1da50b373f95b1f879b412e47d5759018eb09ae6927d581f2f" -and $Record.ApiAbiBaseline.Managed.TypeCount -eq 647 -and $Record.ApiAbiBaseline.Managed.MemberCount -eq 7010 -and $Record.ApiAbiBaseline.Managed.NamespaceCount -eq 41 -and $Record.ApiAbiBaseline.Managed.TargetFramework -eq "net8.0") -Issue "Final closeout managed API baseline evidence drifted"
+    Assert-True -List $List -Condition ($Record.ApiAbiBaseline.Managed.Sha256 -eq "80635f6646045b27f868736dc7200270bdbba10426204bf5d0336b71f2777a6c" -and $Record.ApiAbiBaseline.Managed.TypeCount -eq 647 -and $Record.ApiAbiBaseline.Managed.MemberCount -eq 7010 -and $Record.ApiAbiBaseline.Managed.NamespaceCount -eq 41 -and $Record.ApiAbiBaseline.Managed.TargetFramework -eq "net8.0") -Issue "Final closeout managed API baseline evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.NativeFull.Sha256 -eq "991e8b88349bc012805a2506c89681a572cc650f0ea90fb9d3f0d37de7e5ccb9" -and $Record.ApiAbiBaseline.NativeFull.FunctionCount -eq 2669 -and $Record.ApiAbiBaseline.NativeMini.Sha256 -eq "aac22280e4b88aa45bbc3710ecf0633ba0658e0ba40a0c80a031bb1cf287a9ec" -and $Record.ApiAbiBaseline.NativeMini.FunctionCount -eq 527) -Issue "Final closeout native ABI baseline evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.NativeManagedBindingMap.Sha256 -eq "18f1b48a44860e06a1179db7020bd3dc93dd4b60c18cc3f1415b05a824d22733" -and $Record.ApiAbiBaseline.NativeManagedBindingMap.NativeFunctionCount -eq 2669 -and $Record.ApiAbiBaseline.NativeManagedBindingMap.ManagedBoundCount -eq 2669 -and $Record.ApiAbiBaseline.NativeManagedBindingMap.UnboundCount -eq 0 -and $Record.ApiAbiBaseline.NativeManagedBindingMap.ManagedOnlyCount -eq 0) -Issue "Final closeout native-to-managed binding evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.ImgProcUpstreamMap.Sha256 -eq "5b4bf38bfb2dd40868d8631b8d527bed1290c51f6a9f94bebc316f2526868b6a" -and $Record.ApiAbiBaseline.ImgProcUpstreamMap.DeclarationCount -eq 203 -and $Record.ApiAbiBaseline.ImgProcUpstreamMap.CallableCount -eq 167 -and $Record.ApiAbiBaseline.ImgProcUpstreamMap.ImplementedCount -eq 161 -and $Record.ApiAbiBaseline.ImgProcUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.ImgProcUpstreamMap.IntentionallyOmittedCount -eq 6 -and $Record.ApiAbiBaseline.ImgProcUpstreamMap.SelectedFamilyCount -eq 8 -and $Record.ApiAbiBaseline.ImgProcUpstreamMap.SelectedDeclarationCount -eq 90 -and $Record.ApiAbiBaseline.ImgProcUpstreamMap.ManagedPublicMemberAdditionCount -eq 174 -and -not [bool]$Record.ApiAbiBaseline.ImgProcUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout ImgProc upstream-map evidence drifted"
@@ -1409,8 +1420,8 @@ function Test-Record {
     $refresh51 = Get-Content -LiteralPath $refresh51Path -Raw | ConvertFrom-Json
     $refresh51Hash = (Get-FileHash -LiteralPath $refresh51Path -Algorithm SHA256).Hash.ToLowerInvariant()
     Assert-True -List $List -Condition ($revision.CurrentParserRefreshInventory.Path -ceq 'compatibility/opencv-5.1.0/upstream-map-refresh-summary.json' -and
-        $revision.CurrentParserRefreshInventory.Sha256 -ceq $refresh51Hash -and $refresh51.refreshedParserSliceCount -eq 4 -and $refresh51.pendingCatalogMapCount -eq 69 -and
-        (@($refresh51.slices.id) -join '|') -ceq 'core|dnn|imgcodecs|imgproc' -and -not $refresh51.repositoryWideUpstreamParityClaimed -and -not $refresh51.completeCppParityClaimed -and
+        $revision.CurrentParserRefreshInventory.Sha256 -ceq $refresh51Hash -and $refresh51.refreshedParserSliceCount -eq 5 -and $refresh51.pendingCatalogMapCount -eq 68 -and
+        (@($refresh51.slices.id) -join '|') -ceq 'calib3d|core|dnn|imgcodecs|imgproc' -and -not $refresh51.repositoryWideUpstreamParityClaimed -and -not $refresh51.completeCppParityClaimed -and
         $revision.CurrentRevisionRefreshedParserSliceCount -eq $refresh51.refreshedParserSliceCount -and $revision.CurrentRevisionPendingCatalogMapCount -eq $refresh51.pendingCatalogMapCount) -Issue 'Final closeout 5.1 shared parser refresh boundary drifted'
     Assert-True -List $List -Condition ($revision.CurrentBuildEvidence.Path -ceq 'packaging/runtime/opencv-5.1.0-source-build-evidence.json' -and $revision.CurrentBuildEvidence.Sha256 -ceq $currentBuildHash) -Issue 'Final closeout 5.1 source build evidence drifted'
     $expectedBlockers = @("android-arm-device-evidence","api-gap-implementation","macos-support-decision","opencv-5.1-evidence-refresh","publication-authorization","release-approval","repository-signing-verification","sbom-inputs")
