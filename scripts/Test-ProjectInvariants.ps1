@@ -386,6 +386,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "OpenCV 5.1 package-bound performance evidence"
+        Script = Join-Path $repo "scripts/Test-Performance51Evidence.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Typed Mat target-framework matrix"
         Script = Join-Path $repo "scripts/Test-TypedMatTargetFrameworks.ps1"
         Arguments = @("-RepositoryRoot", $repo)

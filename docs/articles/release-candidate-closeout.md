@@ -14,6 +14,10 @@ This is a local Windows x64 subset. It does not complete the release package set
 
 ## Local Checklist
 
+The [OpenCV 5.1 performance baseline](performance-5.1-baseline.md) adds twelve isolated harness runs and fourteen median metric groups bound to the current 43-DLL Full package. Its source, archive, DLL and output hashes are checked by `Test-Performance51Evidence.ps1` and included in the closeout. The older 5.0 measurements below remain historical; the new record initializes a 5.1 baseline without a cross-version regression claim.
+
+5.1 性能基线保存十二次隔离进程输出与十四组指标中位数，绑定当前 Full 包及全部 43 个 DLL，并接入 closeout。旧 5.0 记录保留为历史；本次不据此宣称跨版本性能无回归。
+
 - [x] Managed package and runtime package identities remain version-neutral.
 - [x] Native full/mini ABI manifests and managed API baseline are generated and checked for deterministic drift.
 - [x] The bounded OpenCV 5.0.0 ImgProc map classifies all 203 parsed declarations, with 161 implemented callables, zero measured gaps, 6 intentional omissions, and no repository-wide parity claim.

@@ -1,5 +1,7 @@
 # Video And DNN Benchmark Baseline / Video 与 DNN 基线
 
+Use the [5.1 performance baseline](performance-5.1-baseline.md) for the current runtime, including the unified ONNX engine's changed profile/memory diagnostics. The measurements below remain historical 5.0 evidence. 当前 5.1 实测及 DNN 诊断变化见上述链接，下文保持旧版范围。
+
 `tools/ScenarioBenchmark` measures two native-backed workflows that were missing from the 5.0.1 performance baseline: a fixed three-frame MJPG AVI round trip through `VideoWriter` and `VideoCapture`, and 100 CPU OpenCV DNN forwards through the 147-byte identity ONNX fixture. Each scenario records the fixed input identity, managed allocations, elapsed stopwatch ticks, output checksum, and sampled process working-set baseline/peak.
 
 `WorkingSet64` is the Windows process RSS-equivalent used by this evidence. It is sampled between operations and is a regression signal for the selected runner, not a portable memory guarantee. The video path exercises file-backed VideoIO and does not claim camera or network backend support. The DNN path exercises the OpenCV CPU backend and does not claim GPU acceleration or model coverage.

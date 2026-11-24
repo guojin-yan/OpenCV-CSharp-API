@@ -1,0 +1,586 @@
+{
+  "$schema": "perf-001-5.1.0-baseline.schema.json",
+  "schemaVersion": 1,
+  "status": "measured-baseline",
+  "openCvVersion": "5.1.0",
+  "sourceCommit": "0440b7daece3cf59dec554673b4fc6463fd41a08",
+  "sourceInputSet": {
+    "paths": [
+      "Directory.Build.props",
+      "src/OpenCvSharp",
+      "tools/CodecBenchmark",
+      "tools/TypedMatBenchmark",
+      "tools/ScenarioBenchmark",
+      "tests/OpenCvSharp.Tests/Dnn/Fixtures/identity-opset13.onnx.base64",
+      "scripts/ModernApi51Evidence.Common.ps1",
+      "scripts/LocalPackageSbom51.Common.ps1",
+      "scripts/Performance51.Common.ps1",
+      "scripts/Measure-Performance51Evidence.ps1"
+    ],
+    "fileCount": 884,
+    "sha256": "d30e081b07581c7b3f9a9bac19f9a6fa6363a5c654792b39560700b152b46fd4"
+  },
+  "measuredAtUtc": "2026-11-24T05:24:25Z",
+  "runner": {
+    "os": "Microsoft Windows 10.0.26200",
+    "architecture": "x64",
+    "configuration": "Release",
+    "dotnetSdk": "10.0.401",
+    "cpu": "AMD Ryzen 7 5800H with Radeon Graphics",
+    "logicalProcessors": 16,
+    "stopwatchFrequency": 10000000,
+    "dotnetRuntimes": [
+      "Microsoft.AspNetCore.App 3.1.32",
+      "Microsoft.AspNetCore.App 5.0.17",
+      "Microsoft.AspNetCore.App 6.0.36",
+      "Microsoft.AspNetCore.App 7.0.20",
+      "Microsoft.AspNetCore.App 8.0.27",
+      "Microsoft.AspNetCore.App 8.0.31",
+      "Microsoft.AspNetCore.App 9.0.16",
+      "Microsoft.AspNetCore.App 9.0.20",
+      "Microsoft.AspNetCore.App 10.0.12",
+      "Microsoft.NETCore.App 3.1.32",
+      "Microsoft.NETCore.App 5.0.17",
+      "Microsoft.NETCore.App 6.0.36",
+      "Microsoft.NETCore.App 7.0.20",
+      "Microsoft.NETCore.App 8.0.27",
+      "Microsoft.NETCore.App 8.0.31",
+      "Microsoft.NETCore.App 9.0.16",
+      "Microsoft.NETCore.App 9.0.20",
+      "Microsoft.NETCore.App 10.0.12",
+      "Microsoft.WindowsDesktop.App 3.1.32",
+      "Microsoft.WindowsDesktop.App 5.0.17",
+      "Microsoft.WindowsDesktop.App 6.0.36",
+      "Microsoft.WindowsDesktop.App 7.0.20",
+      "Microsoft.WindowsDesktop.App 8.0.27",
+      "Microsoft.WindowsDesktop.App 8.0.31",
+      "Microsoft.WindowsDesktop.App 9.0.16",
+      "Microsoft.WindowsDesktop.App 9.0.20",
+      "Microsoft.WindowsDesktop.App 10.0.12"
+    ]
+  },
+  "runtimePackage": {
+    "evidence": {
+      "path": "packaging/release/opencv-5.1.0-local-sbom-evidence.json",
+      "sha256": "0330bb4728b00f795c162c3ccf2e046be4d19617c0cc9098c7eaed9a3578d688"
+    },
+    "artifactPath": "artifacts/opencv-5.1.0-local-candidate/39c73be01bb1a568d9db4051f75ca1516bdfae51/nupkg-win-x64-full/JYPPX.OpenCV.runtime.win-x64.5.1.0.nupkg",
+    "fileName": "JYPPX.OpenCV.runtime.win-x64.5.1.0.nupkg",
+    "sourceCommit": "39c73be01bb1a568d9db4051f75ca1516bdfae51",
+    "bytes": 29088880,
+    "sha256": "fe58985b2909978a6e2d80cc6dec3df5e0e08c5f015019359f0d77ffd611f921",
+    "payload": [
+      {
+        "name": "JYPPX.OpenCV.Native.dll",
+        "bytes": 1894912,
+        "sha256": "df3bb6b53e1d67d081eb984ff0e71817a892904808ff829533f43be2d7c66656"
+      },
+      {
+        "name": "opencv_alphamat510.dll",
+        "bytes": 466944,
+        "sha256": "6d84d33cd04b583645b6326b3144cdc37c0cae06c83f323cf47d342c801c161d"
+      },
+      {
+        "name": "opencv_bgsegm510.dll",
+        "bytes": 410624,
+        "sha256": "338a2b66744291181ef7529201e837ea847813b4631127a4550928d221f406b4"
+      },
+      {
+        "name": "opencv_bioinspired510.dll",
+        "bytes": 275968,
+        "sha256": "3af58fc0b458d5096984c85b6bb46a2a06f49ce53bc151560039c625e3d231b4"
+      },
+      {
+        "name": "opencv_calib510.dll",
+        "bytes": 1124864,
+        "sha256": "ff19683bd993c15af40df58b0daa8ae75561029697ac203a9353801fe1df23d7"
+      },
+      {
+        "name": "opencv_core510.dll",
+        "bytes": 10464256,
+        "sha256": "6888f84e2b2ebe707e0a093ef2b3be9f500ea8bab1b60eea7a468060635be403"
+      },
+      {
+        "name": "opencv_dnn510.dll",
+        "bytes": 15418880,
+        "sha256": "6b1d0a3eee3ef20c57affaeb188b77a3ee81a3421b52927cbe6c608eb9c06efc"
+      },
+      {
+        "name": "opencv_face510.dll",
+        "bytes": 1117696,
+        "sha256": "00f950bb0083a5a6d7194a663ee549e3465be407ff0987db2f5c901817ab98ed"
+      },
+      {
+        "name": "opencv_features510.dll",
+        "bytes": 1451008,
+        "sha256": "f7c2098d547baa39567edc1f29d73a519bf0631b1b77bf31b99b3bed7b297413"
+      },
+      {
+        "name": "opencv_flann510.dll",
+        "bytes": 703488,
+        "sha256": "45d860283c0f8494bcdc5e6d495e0e6a13755a6108e8510b8a769763c4f3a549"
+      },
+      {
+        "name": "opencv_fuzzy510.dll",
+        "bytes": 171520,
+        "sha256": "e5ac5cf387a6dedfe7cb8af1909383497da109719b7f8bafb61ecb09e991f966"
+      },
+      {
+        "name": "opencv_geometry510.dll",
+        "bytes": 5060096,
+        "sha256": "a6b5a7f54568cee502d1ab36502ff50b2d915582f146fc8de2adc04ab0dcca8b"
+      },
+      {
+        "name": "opencv_hfs510.dll",
+        "bytes": 450560,
+        "sha256": "80b6f288e1647f11ebcc8ecaca6c308458e341898b9430e42b9c15e45c82d49e"
+      },
+      {
+        "name": "opencv_highgui510.dll",
+        "bytes": 695296,
+        "sha256": "3096edc4110df7fc5e2e0444e6da43fa894bab6ac1e1d931b87718a050b651e5"
+      },
+      {
+        "name": "opencv_img_hash510.dll",
+        "bytes": 234496,
+        "sha256": "54bb857911633adb6ba36156b31cc1d49fb1e26915761555f8d585303ad7b744"
+      },
+      {
+        "name": "opencv_imgcodecs510.dll",
+        "bytes": 3518976,
+        "sha256": "d64f7347a182b2a64817db661a74ff827ad97c72c040273501f946eb2d10e382"
+      },
+      {
+        "name": "opencv_imgproc510.dll",
+        "bytes": 10991104,
+        "sha256": "7a9e3c382f6013521f08e037810a2e7b5a8fe1cfd9c763c509a79fcd76198b1e"
+      },
+      {
+        "name": "opencv_intensity_transform510.dll",
+        "bytes": 403968,
+        "sha256": "74fb147fe3f98c633faa7d0cc6fc800fdb232a543a62ccaa7c4a0ed2557ebf0b"
+      },
+      {
+        "name": "opencv_line_descriptor510.dll",
+        "bytes": 395776,
+        "sha256": "648a5eeb941641273193205352499e481fd4271c6554d592743818997d438fdf"
+      },
+      {
+        "name": "opencv_ml510.dll",
+        "bytes": 1047040,
+        "sha256": "e52a4ef734a69a496a6ca17ad7d3ca7d5c7586b3b377bc467fa5cf56f246fa39"
+      },
+      {
+        "name": "opencv_objdetect510.dll",
+        "bytes": 2650624,
+        "sha256": "33cfde5e4c6632f343118e0bea50d8ff4f472e93e9ad0b59d48925182a6c6579"
+      },
+      {
+        "name": "opencv_optflow510.dll",
+        "bytes": 1091584,
+        "sha256": "c446e2eb0dd1797d448967d6b8b7e3f582e519e859754f75bff716aa4231bf68"
+      },
+      {
+        "name": "opencv_phase_unwrapping510.dll",
+        "bytes": 161792,
+        "sha256": "2412985667bb425abd8755611e49ef51a2febd3c50ce539083be489542f31b7a"
+      },
+      {
+        "name": "opencv_photo510.dll",
+        "bytes": 1440768,
+        "sha256": "75cdfabe2dab880da68d1096bcd4ca24625452db0c250d5540c62bb678d1332c"
+      },
+      {
+        "name": "opencv_plot510.dll",
+        "bytes": 141824,
+        "sha256": "df310dbcbcb457dfefda832e6d0ec677a658c72b4b0f96cf8ce383eb5377831b"
+      },
+      {
+        "name": "opencv_ptcloud510.dll",
+        "bytes": 2217472,
+        "sha256": "271c50525455600367099feebf0d997a78c99a15af3fcff4d32faa040d240bb5"
+      },
+      {
+        "name": "opencv_quality510.dll",
+        "bytes": 217600,
+        "sha256": "0f4bb129cd699c3d172def174399ac92e00779e5a899a5d9da4cb3021107b1b2"
+      },
+      {
+        "name": "opencv_rapid510.dll",
+        "bytes": 230912,
+        "sha256": "5eaaa901e1ac26ac651cf7b3770b5a92f11ebd331adebd0fa73566149182736c"
+      },
+      {
+        "name": "opencv_reg510.dll",
+        "bytes": 243712,
+        "sha256": "fdf9fafff7cb3bf012597fee79d424f7c3480501ea2b589485d44d1a9b86df74"
+      },
+      {
+        "name": "opencv_saliency510.dll",
+        "bytes": 325632,
+        "sha256": "b6d4c4ec48c38760b04c76fbdc1fbda130be5616b87c7c3a58a64db7ca33dace"
+      },
+      {
+        "name": "opencv_shape510.dll",
+        "bytes": 334848,
+        "sha256": "c5c009361fab5e9a27b01c1099a036915d1eae7a2557803391b706ccd5a0e182"
+      },
+      {
+        "name": "opencv_stereo510.dll",
+        "bytes": 334848,
+        "sha256": "58922e789a19989540b083401fe0cd3bb65c45fbb43738242f6c751282362a3f"
+      },
+      {
+        "name": "opencv_stitching510.dll",
+        "bytes": 1683456,
+        "sha256": "1c34321ef1a5775f199eae97d5eaaa090df766c932afa24530fb82ae925252be"
+      },
+      {
+        "name": "opencv_structured_light510.dll",
+        "bytes": 227840,
+        "sha256": "5d7d32217bcd822acd00b073ccb1d06036455704978a9a1edd262a5649c601f3"
+      },
+      {
+        "name": "opencv_surface_matching510.dll",
+        "bytes": 805376,
+        "sha256": "568ba584938bb88185407349f1edb09e2619a251d9ccd945a60484b260e4d4a0"
+      },
+      {
+        "name": "opencv_tracking510.dll",
+        "bytes": 2908672,
+        "sha256": "ac184d08d971a079fe9f53a6be443cb1fd850fad8c0ec3d3b66a7bdc6a6437a2"
+      },
+      {
+        "name": "opencv_video510.dll",
+        "bytes": 1256960,
+        "sha256": "5888b99835e548972ead58e732da8b8cf0bfe46c9c8065c7ee4b207d8d325f69"
+      },
+      {
+        "name": "opencv_videoio510.dll",
+        "bytes": 1007104,
+        "sha256": "4140341b2cd0599e283257a2bb23b10752f2f9854405ebfc34acc9a97a5f66b5"
+      },
+      {
+        "name": "opencv_xfeatures2d510.dll",
+        "bytes": 3503616,
+        "sha256": "63d6b6f471bc1973426d4e5b9abe04cf829da61e25ec06d7e6a234ba8f1f3af1"
+      },
+      {
+        "name": "opencv_ximgproc510.dll",
+        "bytes": 2313216,
+        "sha256": "693d752859c9adfc92b67d94be9c3ce8bec967c4c082323fd3f02b4ff09dedae"
+      },
+      {
+        "name": "opencv_xobjdetect510.dll",
+        "bytes": 571904,
+        "sha256": "65678a14328b84ef4ba2431a373a37b710c56e8230de47c7de65b47c573223b7"
+      },
+      {
+        "name": "opencv_xphoto510.dll",
+        "bytes": 1028608,
+        "sha256": "a53ac3f7360e30209cc711689821331c925fda4ee7b64b5f43e3d39e9dbb6440"
+      },
+      {
+        "name": "opencv_xstereo510.dll",
+        "bytes": 413696,
+        "sha256": "054e543e492b464e7fee1a3d7b26a6a414125b7c8175dab3449b57bb4b1a2de6"
+      }
+    ]
+  },
+  "runs": [
+    {
+      "round": 1,
+      "scenario": "codec",
+      "targetFramework": "net8.0",
+      "nativeDllCount": 43,
+      "apiAssemblySha256": "8c3f22f7a1bf8df61c327ab246c6c32a1a1de981396e71ff4dae1ab66a67ccb7",
+      "harnessSha256": "bfdb6824ce3035373dbc4492b4013d9a71624c5cc869efd62a52ff7e499c7e41",
+      "stdoutJson": "{\"status\":\"measured\",\"targetFramework\":\"net8.0\",\"packageVersion\":\"5.1.0\",\"openCvVersion\":\"5.1.0\",\"iterations\":100,\"rows\":64,\"columns\":64,\"inputBytes\":12288,\"inputSha256\":\"518f05b99bd5822f768487e0c9c969b3f6b5ba24f1b1531df4231f674413a0af\",\"encodedBytes\":320,\"encodedSha256\":\"6b6e6ecadaaf63226bc2c438ecd4c97aee334bce425ddee6e5185766646c2779\",\"encodeByteArray\":{\"managedAllocatedBytes\":37640,\"encodedBytes\":320,\"elapsedTicks\":27482},\"encodeBufferWriter\":{\"managedAllocatedBytes\":40840,\"encodedBytes\":320,\"elapsedTicks\":27079},\"encodeBufferWriterReused\":{\"managedAllocatedBytes\":3240,\"encodedBytes\":320,\"elapsedTicks\":27664,\"getSpanCalls\":100,\"advanceCalls\":100,\"writerCapacity\":4096,\"writerReused\":true},\"decodeByteArray\":{\"managedAllocatedBytes\":7240,\"decodedBytes\":12288,\"checksum\":156672000,\"elapsedTicks\":60061},\"decodeSpanWithPreflight\":{\"managedAllocatedBytes\":60840,\"decodedBytes\":12288,\"checksum\":156672000,\"elapsedTicks\":52714},\"decodeStreamWithPreflight\":{\"managedAllocatedBytes\":8296040,\"decodedBytes\":12288,\"checksum\":156672000,\"elapsedTicks\":75587}}",
+      "stdoutSha256": "db19da022533986c55c3049b59511fe34af4aa9b902d9279aa8598004ae7c9e0",
+      "stderr": "",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "isolation": {
+        "pathRestricted": true,
+        "runtimeOverridesRemoved": true,
+        "dotnetOverridesRemoved": true,
+        "payloadVerified": true
+      }
+    },
+    {
+      "round": 1,
+      "scenario": "typedMat",
+      "targetFramework": "net8.0",
+      "nativeDllCount": 43,
+      "apiAssemblySha256": "8c3f22f7a1bf8df61c327ab246c6c32a1a1de981396e71ff4dae1ab66a67ccb7",
+      "harnessSha256": "aac2a1799ae11fca77072fad6caed5b9e288b6a385b367126718ddca6863de2c",
+      "stdoutJson": "{\"status\":\"measured\",\"targetFramework\":\"net8.0\",\"iterations\":100,\"rows\":118,\"columns\":122,\"inputSha256\":\"70986737435b5f89e119558ba7d29e5bb8768dd18c16beaaaa09298bf586b275\",\"rowAccessor\":{\"managedAllocatedBytes\":40,\"elapsedTicks\":10123,\"checksum\":10077200},\"matView\":{\"managedAllocatedBytes\":10440,\"elapsedTicks\":62505,\"checksum\":10077200},\"readOnlyMatView\":{\"managedAllocatedBytes\":12840,\"elapsedTicks\":67370,\"checksum\":10077200}}",
+      "stdoutSha256": "b30628d057a82616539463f520ea6a0f50c1d424e167f8e9598ad8dc3d75f84e",
+      "stderr": "",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "isolation": {
+        "pathRestricted": true,
+        "runtimeOverridesRemoved": true,
+        "dotnetOverridesRemoved": true,
+        "payloadVerified": true
+      }
+    },
+    {
+      "round": 1,
+      "scenario": "typedMat",
+      "targetFramework": "net10.0",
+      "nativeDllCount": 43,
+      "apiAssemblySha256": "fcaeb1e9124ab05d6d8576c8bc4836a67fd78dbd5568616dee0f9f54f06b5984",
+      "harnessSha256": "98acd1c1e2043ceb5633d34f7544f0397f8b783d2645410e9698b6440bebba02",
+      "stdoutJson": "{\"status\":\"measured\",\"targetFramework\":\"net10.0\",\"iterations\":100,\"rows\":118,\"columns\":122,\"inputSha256\":\"70986737435b5f89e119558ba7d29e5bb8768dd18c16beaaaa09298bf586b275\",\"rowAccessor\":{\"managedAllocatedBytes\":40,\"elapsedTicks\":11626,\"checksum\":10077200},\"matView\":{\"managedAllocatedBytes\":10440,\"elapsedTicks\":57213,\"checksum\":10077200},\"readOnlyMatView\":{\"managedAllocatedBytes\":12840,\"elapsedTicks\":59660,\"checksum\":10077200}}",
+      "stdoutSha256": "b6a37d85355c895225919901ea1d3cda6514ccfbf4dcbcb4022eb9809a36c988",
+      "stderr": "",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "isolation": {
+        "pathRestricted": true,
+        "runtimeOverridesRemoved": true,
+        "dotnetOverridesRemoved": true,
+        "payloadVerified": true
+      }
+    },
+    {
+      "round": 1,
+      "scenario": "scenario",
+      "targetFramework": "net10.0",
+      "nativeDllCount": 43,
+      "apiAssemblySha256": "fcaeb1e9124ab05d6d8576c8bc4836a67fd78dbd5568616dee0f9f54f06b5984",
+      "harnessSha256": "3087a954da51833e6ce6b0846c2f55a048394d4d9529bfa2ff842c919dab1e71",
+      "stdoutJson": "{\"status\":\"measured\",\"targetFramework\":\"net10.0\",\"packageVersion\":\"5.1.0\",\"openCvVersion\":\"5.1.0\",\"iterations\":100,\"video\":{\"targetFramework\":\"net10.0\",\"iterations\":100,\"frameCount\":3,\"rows\":24,\"columns\":32,\"codec\":\"MJPG\",\"fileBytes\":6288,\"fileSha256\":\"3137a5dc45d1dadf29aee22d2eb140a55c31fe240a80fe66dd4cc069fe27fd56\",\"metric\":{\"managedAllocatedBytes\":1306496,\"elapsedTicks\":27202549,\"checksum\":46555200,\"baselineWorkingSetBytes\":41537536,\"peakWorkingSetBytes\":43069440}},\"dnn\":{\"targetFramework\":\"net10.0\",\"iterations\":100,\"modelBytes\":147,\"modelSha256\":\"326793cdb2fc2da739a715c3f3ff71d09779b389ad29e56bbfccc4313e900744\",\"outputName\":\"output\",\"outputChecksum\":1000000,\"profileTickCount\":1900,\"profileLayerCount\":1,\"weightsBytes\":0,\"blobBytes\":16,\"metric\":{\"managedAllocatedBytes\":383104,\"elapsedTicks\":6241565,\"checksum\":1000000,\"baselineWorkingSetBytes\":45170688,\"peakWorkingSetBytes\":45465600}},\"limitations\":[\"Elapsed ticks and process working-set values are runner-specific regression evidence.\",\"WorkingSet64 is the Windows process RSS-equivalent used by this benchmark; it is sampled between operations.\",\"The video path uses a temporary MJPG AVI and exercises file-backed VideoIO, not camera or network backends.\",\"The DNN path uses the fixed 147-byte identity ONNX fixture and the OpenCV CPU backend.\"]}",
+      "stdoutSha256": "6a1268a3a7c97365828e8b709201ff4a2e65d940a1d95e1546ce1627b46ef2bf",
+      "stderr": "[ WARN:0@2.909] global net_impl_backend.cpp:388 setPreferableTarget Targets are not supported by the new graph engine for now\r\n",
+      "stderrSha256": "fbf143a4945ced2e8a8d24576e7c2e797476cc362a8396316a47f0aa8b76ce4d",
+      "isolation": {
+        "pathRestricted": true,
+        "runtimeOverridesRemoved": true,
+        "dotnetOverridesRemoved": true,
+        "payloadVerified": true
+      }
+    },
+    {
+      "round": 2,
+      "scenario": "codec",
+      "targetFramework": "net8.0",
+      "nativeDllCount": 43,
+      "apiAssemblySha256": "8c3f22f7a1bf8df61c327ab246c6c32a1a1de981396e71ff4dae1ab66a67ccb7",
+      "harnessSha256": "bfdb6824ce3035373dbc4492b4013d9a71624c5cc869efd62a52ff7e499c7e41",
+      "stdoutJson": "{\"status\":\"measured\",\"targetFramework\":\"net8.0\",\"packageVersion\":\"5.1.0\",\"openCvVersion\":\"5.1.0\",\"iterations\":100,\"rows\":64,\"columns\":64,\"inputBytes\":12288,\"inputSha256\":\"518f05b99bd5822f768487e0c9c969b3f6b5ba24f1b1531df4231f674413a0af\",\"encodedBytes\":320,\"encodedSha256\":\"6b6e6ecadaaf63226bc2c438ecd4c97aee334bce425ddee6e5185766646c2779\",\"encodeByteArray\":{\"managedAllocatedBytes\":37640,\"encodedBytes\":320,\"elapsedTicks\":27355},\"encodeBufferWriter\":{\"managedAllocatedBytes\":40840,\"encodedBytes\":320,\"elapsedTicks\":28000},\"encodeBufferWriterReused\":{\"managedAllocatedBytes\":3240,\"encodedBytes\":320,\"elapsedTicks\":27367,\"getSpanCalls\":100,\"advanceCalls\":100,\"writerCapacity\":4096,\"writerReused\":true},\"decodeByteArray\":{\"managedAllocatedBytes\":7240,\"decodedBytes\":12288,\"checksum\":156672000,\"elapsedTicks\":61774},\"decodeSpanWithPreflight\":{\"managedAllocatedBytes\":60840,\"decodedBytes\":12288,\"checksum\":156672000,\"elapsedTicks\":51200},\"decodeStreamWithPreflight\":{\"managedAllocatedBytes\":8296040,\"decodedBytes\":12288,\"checksum\":156672000,\"elapsedTicks\":73447}}",
+      "stdoutSha256": "1bb3f0a43c16e77a5cb3975082e00b6213397fa5d9d4ea8fe0af88539d4e348d",
+      "stderr": "",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "isolation": {
+        "pathRestricted": true,
+        "runtimeOverridesRemoved": true,
+        "dotnetOverridesRemoved": true,
+        "payloadVerified": true
+      }
+    },
+    {
+      "round": 2,
+      "scenario": "typedMat",
+      "targetFramework": "net8.0",
+      "nativeDllCount": 43,
+      "apiAssemblySha256": "8c3f22f7a1bf8df61c327ab246c6c32a1a1de981396e71ff4dae1ab66a67ccb7",
+      "harnessSha256": "aac2a1799ae11fca77072fad6caed5b9e288b6a385b367126718ddca6863de2c",
+      "stdoutJson": "{\"status\":\"measured\",\"targetFramework\":\"net8.0\",\"iterations\":100,\"rows\":118,\"columns\":122,\"inputSha256\":\"70986737435b5f89e119558ba7d29e5bb8768dd18c16beaaaa09298bf586b275\",\"rowAccessor\":{\"managedAllocatedBytes\":40,\"elapsedTicks\":11755,\"checksum\":10077200},\"matView\":{\"managedAllocatedBytes\":10440,\"elapsedTicks\":63682,\"checksum\":10077200},\"readOnlyMatView\":{\"managedAllocatedBytes\":12840,\"elapsedTicks\":64904,\"checksum\":10077200}}",
+      "stdoutSha256": "9fddde0e691e4f9701e98384cb5a7fa5a9bfd52f00234efcf3c7ac39a30cff45",
+      "stderr": "",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "isolation": {
+        "pathRestricted": true,
+        "runtimeOverridesRemoved": true,
+        "dotnetOverridesRemoved": true,
+        "payloadVerified": true
+      }
+    },
+    {
+      "round": 2,
+      "scenario": "typedMat",
+      "targetFramework": "net10.0",
+      "nativeDllCount": 43,
+      "apiAssemblySha256": "fcaeb1e9124ab05d6d8576c8bc4836a67fd78dbd5568616dee0f9f54f06b5984",
+      "harnessSha256": "98acd1c1e2043ceb5633d34f7544f0397f8b783d2645410e9698b6440bebba02",
+      "stdoutJson": "{\"status\":\"measured\",\"targetFramework\":\"net10.0\",\"iterations\":100,\"rows\":118,\"columns\":122,\"inputSha256\":\"70986737435b5f89e119558ba7d29e5bb8768dd18c16beaaaa09298bf586b275\",\"rowAccessor\":{\"managedAllocatedBytes\":40,\"elapsedTicks\":10353,\"checksum\":10077200},\"matView\":{\"managedAllocatedBytes\":10440,\"elapsedTicks\":55024,\"checksum\":10077200},\"readOnlyMatView\":{\"managedAllocatedBytes\":12840,\"elapsedTicks\":59247,\"checksum\":10077200}}",
+      "stdoutSha256": "c33631d2fadc0bb3aa7323dc35a9bd991723333453d144af7790a696d28a4d28",
+      "stderr": "",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "isolation": {
+        "pathRestricted": true,
+        "runtimeOverridesRemoved": true,
+        "dotnetOverridesRemoved": true,
+        "payloadVerified": true
+      }
+    },
+    {
+      "round": 2,
+      "scenario": "scenario",
+      "targetFramework": "net10.0",
+      "nativeDllCount": 43,
+      "apiAssemblySha256": "fcaeb1e9124ab05d6d8576c8bc4836a67fd78dbd5568616dee0f9f54f06b5984",
+      "harnessSha256": "3087a954da51833e6ce6b0846c2f55a048394d4d9529bfa2ff842c919dab1e71",
+      "stdoutJson": "{\"status\":\"measured\",\"targetFramework\":\"net10.0\",\"packageVersion\":\"5.1.0\",\"openCvVersion\":\"5.1.0\",\"iterations\":100,\"video\":{\"targetFramework\":\"net10.0\",\"iterations\":100,\"frameCount\":3,\"rows\":24,\"columns\":32,\"codec\":\"MJPG\",\"fileBytes\":6288,\"fileSha256\":\"3137a5dc45d1dadf29aee22d2eb140a55c31fe240a80fe66dd4cc069fe27fd56\",\"metric\":{\"managedAllocatedBytes\":1306496,\"elapsedTicks\":27524745,\"checksum\":46555200,\"baselineWorkingSetBytes\":41259008,\"peakWorkingSetBytes\":42803200}},\"dnn\":{\"targetFramework\":\"net10.0\",\"iterations\":100,\"modelBytes\":147,\"modelSha256\":\"326793cdb2fc2da739a715c3f3ff71d09779b389ad29e56bbfccc4313e900744\",\"outputName\":\"output\",\"outputChecksum\":1000000,\"profileTickCount\":1900,\"profileLayerCount\":1,\"weightsBytes\":0,\"blobBytes\":16,\"metric\":{\"managedAllocatedBytes\":383360,\"elapsedTicks\":6249762,\"checksum\":1000000,\"baselineWorkingSetBytes\":44900352,\"peakWorkingSetBytes\":45191168}},\"limitations\":[\"Elapsed ticks and process working-set values are runner-specific regression evidence.\",\"WorkingSet64 is the Windows process RSS-equivalent used by this benchmark; it is sampled between operations.\",\"The video path uses a temporary MJPG AVI and exercises file-backed VideoIO, not camera or network backends.\",\"The DNN path uses the fixed 147-byte identity ONNX fixture and the OpenCV CPU backend.\"]}",
+      "stdoutSha256": "2ae77361bf1fe29e24d0270786d012edbeb505fcd4a4a413eb23ce257d7af144",
+      "stderr": "[ WARN:0@2.940] global net_impl_backend.cpp:388 setPreferableTarget Targets are not supported by the new graph engine for now\r\n",
+      "stderrSha256": "7030512638e9284f8336ef0bf12d96fd73b5062393c426a13af85f7183163a34",
+      "isolation": {
+        "pathRestricted": true,
+        "runtimeOverridesRemoved": true,
+        "dotnetOverridesRemoved": true,
+        "payloadVerified": true
+      }
+    },
+    {
+      "round": 3,
+      "scenario": "codec",
+      "targetFramework": "net8.0",
+      "nativeDllCount": 43,
+      "apiAssemblySha256": "8c3f22f7a1bf8df61c327ab246c6c32a1a1de981396e71ff4dae1ab66a67ccb7",
+      "harnessSha256": "bfdb6824ce3035373dbc4492b4013d9a71624c5cc869efd62a52ff7e499c7e41",
+      "stdoutJson": "{\"status\":\"measured\",\"targetFramework\":\"net8.0\",\"packageVersion\":\"5.1.0\",\"openCvVersion\":\"5.1.0\",\"iterations\":100,\"rows\":64,\"columns\":64,\"inputBytes\":12288,\"inputSha256\":\"518f05b99bd5822f768487e0c9c969b3f6b5ba24f1b1531df4231f674413a0af\",\"encodedBytes\":320,\"encodedSha256\":\"6b6e6ecadaaf63226bc2c438ecd4c97aee334bce425ddee6e5185766646c2779\",\"encodeByteArray\":{\"managedAllocatedBytes\":37640,\"encodedBytes\":320,\"elapsedTicks\":25178},\"encodeBufferWriter\":{\"managedAllocatedBytes\":40840,\"encodedBytes\":320,\"elapsedTicks\":25188},\"encodeBufferWriterReused\":{\"managedAllocatedBytes\":3240,\"encodedBytes\":320,\"elapsedTicks\":25029,\"getSpanCalls\":100,\"advanceCalls\":100,\"writerCapacity\":4096,\"writerReused\":true},\"decodeByteArray\":{\"managedAllocatedBytes\":7240,\"decodedBytes\":12288,\"checksum\":156672000,\"elapsedTicks\":59169},\"decodeSpanWithPreflight\":{\"managedAllocatedBytes\":60840,\"decodedBytes\":12288,\"checksum\":156672000,\"elapsedTicks\":51910},\"decodeStreamWithPreflight\":{\"managedAllocatedBytes\":8296040,\"decodedBytes\":12288,\"checksum\":156672000,\"elapsedTicks\":74228}}",
+      "stdoutSha256": "353639466275befe8ebdda86ced961dd6d0f6416fa8191c041b689b41c94b34f",
+      "stderr": "",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "isolation": {
+        "pathRestricted": true,
+        "runtimeOverridesRemoved": true,
+        "dotnetOverridesRemoved": true,
+        "payloadVerified": true
+      }
+    },
+    {
+      "round": 3,
+      "scenario": "typedMat",
+      "targetFramework": "net8.0",
+      "nativeDllCount": 43,
+      "apiAssemblySha256": "8c3f22f7a1bf8df61c327ab246c6c32a1a1de981396e71ff4dae1ab66a67ccb7",
+      "harnessSha256": "aac2a1799ae11fca77072fad6caed5b9e288b6a385b367126718ddca6863de2c",
+      "stdoutJson": "{\"status\":\"measured\",\"targetFramework\":\"net8.0\",\"iterations\":100,\"rows\":118,\"columns\":122,\"inputSha256\":\"70986737435b5f89e119558ba7d29e5bb8768dd18c16beaaaa09298bf586b275\",\"rowAccessor\":{\"managedAllocatedBytes\":40,\"elapsedTicks\":9621,\"checksum\":10077200},\"matView\":{\"managedAllocatedBytes\":10440,\"elapsedTicks\":63148,\"checksum\":10077200},\"readOnlyMatView\":{\"managedAllocatedBytes\":12840,\"elapsedTicks\":63549,\"checksum\":10077200}}",
+      "stdoutSha256": "f13f065e9f5c9079e7eb98633ce76793c877cac6f6d2c625207be9156d9f336c",
+      "stderr": "",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "isolation": {
+        "pathRestricted": true,
+        "runtimeOverridesRemoved": true,
+        "dotnetOverridesRemoved": true,
+        "payloadVerified": true
+      }
+    },
+    {
+      "round": 3,
+      "scenario": "typedMat",
+      "targetFramework": "net10.0",
+      "nativeDllCount": 43,
+      "apiAssemblySha256": "fcaeb1e9124ab05d6d8576c8bc4836a67fd78dbd5568616dee0f9f54f06b5984",
+      "harnessSha256": "98acd1c1e2043ceb5633d34f7544f0397f8b783d2645410e9698b6440bebba02",
+      "stdoutJson": "{\"status\":\"measured\",\"targetFramework\":\"net10.0\",\"iterations\":100,\"rows\":118,\"columns\":122,\"inputSha256\":\"70986737435b5f89e119558ba7d29e5bb8768dd18c16beaaaa09298bf586b275\",\"rowAccessor\":{\"managedAllocatedBytes\":40,\"elapsedTicks\":11473,\"checksum\":10077200},\"matView\":{\"managedAllocatedBytes\":10440,\"elapsedTicks\":55336,\"checksum\":10077200},\"readOnlyMatView\":{\"managedAllocatedBytes\":12840,\"elapsedTicks\":68066,\"checksum\":10077200}}",
+      "stdoutSha256": "320258b1d97d6a4be798574d95f7b3274e281bf4e1d429a55c48be9a82747eb1",
+      "stderr": "",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "isolation": {
+        "pathRestricted": true,
+        "runtimeOverridesRemoved": true,
+        "dotnetOverridesRemoved": true,
+        "payloadVerified": true
+      }
+    },
+    {
+      "round": 3,
+      "scenario": "scenario",
+      "targetFramework": "net10.0",
+      "nativeDllCount": 43,
+      "apiAssemblySha256": "fcaeb1e9124ab05d6d8576c8bc4836a67fd78dbd5568616dee0f9f54f06b5984",
+      "harnessSha256": "3087a954da51833e6ce6b0846c2f55a048394d4d9529bfa2ff842c919dab1e71",
+      "stdoutJson": "{\"status\":\"measured\",\"targetFramework\":\"net10.0\",\"packageVersion\":\"5.1.0\",\"openCvVersion\":\"5.1.0\",\"iterations\":100,\"video\":{\"targetFramework\":\"net10.0\",\"iterations\":100,\"frameCount\":3,\"rows\":24,\"columns\":32,\"codec\":\"MJPG\",\"fileBytes\":6288,\"fileSha256\":\"3137a5dc45d1dadf29aee22d2eb140a55c31fe240a80fe66dd4cc069fe27fd56\",\"metric\":{\"managedAllocatedBytes\":1306496,\"elapsedTicks\":26952374,\"checksum\":46555200,\"baselineWorkingSetBytes\":41275392,\"peakWorkingSetBytes\":42856448}},\"dnn\":{\"targetFramework\":\"net10.0\",\"iterations\":100,\"modelBytes\":147,\"modelSha256\":\"326793cdb2fc2da739a715c3f3ff71d09779b389ad29e56bbfccc4313e900744\",\"outputName\":\"output\",\"outputChecksum\":1000000,\"profileTickCount\":1900,\"profileLayerCount\":1,\"weightsBytes\":0,\"blobBytes\":16,\"metric\":{\"managedAllocatedBytes\":382976,\"elapsedTicks\":6334281,\"checksum\":1000000,\"baselineWorkingSetBytes\":44982272,\"peakWorkingSetBytes\":45223936}},\"limitations\":[\"Elapsed ticks and process working-set values are runner-specific regression evidence.\",\"WorkingSet64 is the Windows process RSS-equivalent used by this benchmark; it is sampled between operations.\",\"The video path uses a temporary MJPG AVI and exercises file-backed VideoIO, not camera or network backends.\",\"The DNN path uses the fixed 147-byte identity ONNX fixture and the OpenCV CPU backend.\"]}",
+      "stdoutSha256": "6bd9d22c062f9b334ec4618221b5b5f3ed4e5a4c23ccb17fcbe16da9e3388cb2",
+      "stderr": "[ WARN:0@2.880] global net_impl_backend.cpp:388 setPreferableTarget Targets are not supported by the new graph engine for now\r\n",
+      "stderrSha256": "fb32f2b6f7e83ca1659509aca725ac5f50867f35173b2bd2c785bf21958c23c0",
+      "isolation": {
+        "pathRestricted": true,
+        "runtimeOverridesRemoved": true,
+        "dotnetOverridesRemoved": true,
+        "payloadVerified": true
+      }
+    }
+  ],
+  "metrics": {
+    "codec/encodeByteArray": {
+      "managedAllocatedBytes": 37640,
+      "elapsedTicks": 27355
+    },
+    "codec/encodeBufferWriter": {
+      "managedAllocatedBytes": 40840,
+      "elapsedTicks": 27079
+    },
+    "codec/encodeBufferWriterReused": {
+      "managedAllocatedBytes": 3240,
+      "elapsedTicks": 27367
+    },
+    "codec/decodeByteArray": {
+      "managedAllocatedBytes": 7240,
+      "elapsedTicks": 60061
+    },
+    "codec/decodeSpanWithPreflight": {
+      "managedAllocatedBytes": 60840,
+      "elapsedTicks": 51910
+    },
+    "codec/decodeStreamWithPreflight": {
+      "managedAllocatedBytes": 8296040,
+      "elapsedTicks": 74228
+    },
+    "typedMat/net8.0/rowAccessor": {
+      "managedAllocatedBytes": 40,
+      "elapsedTicks": 10123
+    },
+    "typedMat/net8.0/matView": {
+      "managedAllocatedBytes": 10440,
+      "elapsedTicks": 63148
+    },
+    "typedMat/net8.0/readOnlyMatView": {
+      "managedAllocatedBytes": 12840,
+      "elapsedTicks": 64904
+    },
+    "typedMat/net10.0/rowAccessor": {
+      "managedAllocatedBytes": 40,
+      "elapsedTicks": 11473
+    },
+    "typedMat/net10.0/matView": {
+      "managedAllocatedBytes": 10440,
+      "elapsedTicks": 55336
+    },
+    "typedMat/net10.0/readOnlyMatView": {
+      "managedAllocatedBytes": 12840,
+      "elapsedTicks": 59660
+    },
+    "video/net10.0": {
+      "managedAllocatedBytes": 1306496,
+      "elapsedTicks": 27202549,
+      "peakWorkingSetBytes": 42856448
+    },
+    "dnn/net10.0": {
+      "managedAllocatedBytes": 383104,
+      "elapsedTicks": 6249762,
+      "peakWorkingSetBytes": 45223936
+    }
+  },
+  "thresholds": {
+    "elapsedTicksPercent": 20,
+    "managedAllocatedBytesPercent": 10,
+    "peakWorkingSetBytesPercent": 10
+  },
+  "limits": {
+    "historical50Comparison": false,
+    "crossRidValidated": false,
+    "stablePreviewApisPromoted": false,
+    "finalReleaseApproved": false
+  },
+  "limitations": [
+    "Three independent processes per harness, each with 100 warmed iterations; summaries are per-metric medians.",
+    "This initializes the OpenCV 5.1 Windows x64 Full baseline. Historical 5.0 measurements use different native bytes and are not a regression comparator.",
+    "Comparisons require identical runner, SDK/runtimes, workloads and exact runtime package/DLL hashes; thresholds are elapsed +20%, allocation +10%, sampled peak working set +10%.",
+    "Video uses a three-frame MJPG AVI, and DNN uses the fixed 147-byte identity ONNX model on CPU. Camera, network, GPU, large models and other RIDs remain unmeasured.",
+    "WorkingSet64 is sampled between operations, not a native allocator high-water mark; microbenchmark timings are runner-specific and do not establish stable API promotion."
+  ]
+}

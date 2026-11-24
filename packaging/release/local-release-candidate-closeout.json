@@ -1,8 +1,8 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/cd78ab4bd7d8eaf5",
-  "SourceIdentity": "sha256:cd78ab4bd7d8eaf55d79f2cd24186946826f23595db3b97381d27909e2b387c4",
+  "CandidateId": "local-closeout/sha256/1c2cc5fd9b425e67",
+  "SourceIdentity": "sha256:1c2cc5fd9b425e67bcde842e01dc5c91328b30f96e382a5eb0a317a96c50da4d",
   "OpenCvRevision": "5.1.0",
   "RevisionValidation": {
     "CurrentBuildEvidence": {
@@ -22,6 +22,13 @@
       "Length": 12173
     },
     "CurrentPackagePeClosure51Validated": true,
+    "CurrentPerformance51Baseline": {
+      "Path": "packaging/performance/perf-001-5.1.0-baseline.json",
+      "Sha256": "d840c91d69a6391524baaa40de437bfa3cdf5358cec33bead3633cbdfb144e30",
+      "Length": 32288
+    },
+    "HistoricalPerformanceRevision": "5.0.0",
+    "CurrentPerformanceHistoricalComparisonClaimed": false,
     "LocalBuildRid": "win-x64",
     "HistoricalUpstreamMapRevision": "5.0.0",
     "CurrentDnnParserSlice": {
@@ -44,8 +51,8 @@
     "CurrentRevisionUpstreamParityClaimed": false
   },
   "SourceSet": {
-    "FileCount": 2988,
-    "Sha256": "cd78ab4bd7d8eaf55d79f2cd24186946826f23595db3b97381d27909e2b387c4",
+    "FileCount": 2994,
+    "Sha256": "1c2cc5fd9b425e67bcde842e01dc5c91328b30f96e382a5eb0a317a96c50da4d",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -5512,8 +5519,8 @@
     },
     {
       "Path": "docs/articles/codec-benchmark-baseline.md",
-      "Sha256": "bdf8de48d449e1117a8f5f594f90274205fd8370029751e79ad845a99b01da90",
-      "Length": 4041
+      "Sha256": "759f8402b81460c50c4a3d112365a6832050cee0c5b09f471654467c74f5044c",
+      "Length": 4268
     },
     {
       "Path": "docs/articles/codec-buffer-and-owner-adr.md",
@@ -5782,8 +5789,13 @@
     },
     {
       "Path": "docs/articles/perf-001-regression-baseline.md",
-      "Sha256": "11092da16741d2ce11202b71049c99d03875f724eaa4fdef8c0d8d1bcfa29dfd",
-      "Length": 3264
+      "Sha256": "769dad499be2310e10bc4416cbcc2d468490b914fe7caee8602378c2697551e3",
+      "Length": 3603
+    },
+    {
+      "Path": "docs/articles/performance-5.1-baseline.md",
+      "Sha256": "3f1dc6269be1127f30fd26e74dba73bd1cc315aa679df06e0f9b2b1e7c5c5c08",
+      "Length": 4619
     },
     {
       "Path": "docs/articles/phase-unwrapping-guide.md",
@@ -5837,8 +5849,8 @@
     },
     {
       "Path": "docs/articles/release-candidate-closeout.md",
-      "Sha256": "ec7f98dcefbc9f610c9cfe21c4871fe7b2d4d65f3b307211e671a44a413921db",
-      "Length": 14108
+      "Sha256": "880ca7a7f20f4432d2f357f4baa926ef3dcead8c1743bcde129371c136f195b9",
+      "Length": 14769
     },
     {
       "Path": "docs/articles/rgbd-upstream-parity-guide.md",
@@ -5962,8 +5974,8 @@
     },
     {
       "Path": "docs/articles/video-dnn-benchmark-baseline.md",
-      "Sha256": "e07db9575bbd7d8cc78427bfe3c428c7fa4c3bdc1b5863292c6d040fe375ad33",
-      "Length": 2242
+      "Sha256": "28ee9ed17fb6fe599b4620d954cb6a2e04e39cfe5b4b5bc53ec21c58ee100232",
+      "Length": 2542
     },
     {
       "Path": "docs/articles/video-upstream-parity-guide.md",
@@ -6067,8 +6079,8 @@
     },
     {
       "Path": "docs/releases/5.1.0.md",
-      "Sha256": "053c403eefaf7f3b9b57e18f522d4f2a38cbef85ca2aa1f279ee4eba0d6476c3",
-      "Length": 7525
+      "Sha256": "4c7011321c953178b02a01e1367fe82168f4afabc649ae6209467711c63ec01a",
+      "Length": 8014
     },
     {
       "Path": "docs/releases/README.md",
@@ -6077,8 +6089,8 @@
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "6e07928710a2b40d600b54be1309707a21c50c7b2539e2cc758ca7bd23785840",
-      "Length": 20732
+      "Sha256": "005bc786692a26d58a46a0efa0f58b40d5eb63ab0e347bbe2ee5f136a66b7404",
+      "Length": 20825
     },
     {
       "Path": "nuget/logo.jpg",
@@ -6184,6 +6196,16 @@
       "Path": "packaging/performance/native-aot-trim-warning-ledger.schema.json",
       "Sha256": "53da8931948c8934e49f8562a4b9e59ebb649771b99314c7296f797fafe18e7a",
       "Length": 2796
+    },
+    {
+      "Path": "packaging/performance/perf-001-5.1.0-baseline.json",
+      "Sha256": "d840c91d69a6391524baaa40de437bfa3cdf5358cec33bead3633cbdfb144e30",
+      "Length": 32288
+    },
+    {
+      "Path": "packaging/performance/perf-001-5.1.0-baseline.schema.json",
+      "Sha256": "7569a8435a55fd0dc4b5a11f82c4cb3f9ee4c8774d14e43d61f3ab4f8a457e28",
+      "Length": 5629
     },
     {
       "Path": "packaging/performance/perf-001-regression-baseline.json",
@@ -6921,6 +6943,11 @@
       "Length": 13873
     },
     {
+      "Path": "scripts/Measure-Performance51Evidence.ps1",
+      "Sha256": "6d641609fa3d374ffe94bcd558987323b08bd02621b15766f26fad482d50e124",
+      "Length": 9877
+    },
+    {
       "Path": "scripts/Measure-TypedMat51NativeLifetime.ps1",
       "Sha256": "40ff90e59af4a37658c6bd671f28a202ec74a81f253038a0097ddfb087c2cd95",
       "Length": 12194
@@ -6962,8 +6989,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "f773f27d3d377c52bcb2f953d8ce3f8837ae5bfd09b3f3db1a7512719ec015b3",
-      "Length": 226595
+      "Sha256": "828accca32c4b0343773f0c46acf8d23a067216d3496aa4b5e0122e462293b99",
+      "Length": 227172
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -6979,6 +7006,11 @@
       "Path": "scripts/New-UpstreamMapCatalog.ps1",
       "Sha256": "5d0c5f2f3703e00dafd313db375eaf2fd539093ce6d0c3ab5c01577ba511b483",
       "Length": 13977
+    },
+    {
+      "Path": "scripts/Performance51.Common.ps1",
+      "Sha256": "7805041100f87b44637e96fe475a3c7e90ef691b5890f100b4a70e8e36db66b3",
+      "Length": 10452
     },
     {
       "Path": "scripts/Test-AlphaMatUpstreamMap.ps1",
@@ -7416,6 +7448,11 @@
       "Length": 6063
     },
     {
+      "Path": "scripts/Test-Performance51Evidence.ps1",
+      "Sha256": "f648d7556ac25a956f0869c699121c742f37973c84d05d3391c5ec0c6ac3ab08",
+      "Length": 11359
+    },
+    {
       "Path": "scripts/Test-PerformanceBenchmarkEvidence.ps1",
       "Sha256": "86b7495b7b0a100494e232c92177967a8525d04cd6a0997cc5c36783a2cea7ee",
       "Length": 6210
@@ -7467,8 +7504,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "9b94c5f24ea3cfba84f8b7aa3a64e68abd1d7b616ed1886cdfac6c173050f4e3",
-      "Length": 202621
+      "Sha256": "c6a6151cf4ea66003a24e4172296be07829309063c464202f693e8f708b36438",
+      "Length": 203972
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -9398,7 +9435,7 @@
   ],
   "LocalValidation": {
     "Status": "locally-validated",
-    "InvariantGuardCount": 109,
+    "InvariantGuardCount": 110,
     "RequiredChecks": [
       "actionlint-1.7.12",
       "api-abi-baseline",

@@ -12,6 +12,35 @@ $schema = Join-Path $repo 'packaging/performance/perf-001-5.1.0-baseline.schema.
 $baselineJson = Get-Content -LiteralPath (Join-Path $repo 'packaging/performance/perf-001-5.1.0-baseline.json') -Raw
 $baseline = $baselineJson | ConvertFrom-Json
 $sourceSet = Get-Performance51SourceSet -RepositoryRoot $repo
+$historicalSourceSets = @{}
+
+function Get-Performance51RecordedSourceSet {
+    param([string]$Commit)
+    if ($historicalSourceSets.ContainsKey($Commit)) { return $historicalSourceSets[$Commit] }
+    & git -C $repo diff --quiet $Commit -- @($sourceSet.paths)
+    if ($LASTEXITCODE -eq 0) { $historicalSourceSets[$Commit] = $sourceSet; return $sourceSet }
+    $archivePath = Join-Path ([IO.Path]::GetTempPath()) ('opencv-perf-source-' + [Guid]::NewGuid().ToString('N') + '.zip')
+    try {
+        & git -C $repo archive --format=zip "--output=$archivePath" $Commit -- @($sourceSet.paths)
+        if ($LASTEXITCODE -ne 0) { throw 'Cannot read historical benchmark source.' }
+        $archive = [IO.Compression.ZipFile]::OpenRead($archivePath)
+        try {
+            $entries = [object[]]@($archive.Entries | Where-Object { -not $_.FullName.EndsWith('/') })
+            $entryNames = [string[]]@($entries.FullName)
+            [Array]::Sort[string, object]($entryNames, $entries, [StringComparer]::Ordinal)
+            $rows = foreach ($entry in $entries) {
+                $reader = [IO.StreamReader]::new($entry.Open(), [Text.Encoding]::UTF8, $true)
+                try { $text = $reader.ReadToEnd() } finally { $reader.Dispose() }
+                $normalized = (($text -replace "`r`n", "`n") -replace "`r", "`n").TrimEnd() + "`n"
+                "$($entry.FullName)|$([Text.Encoding]::UTF8.GetByteCount($normalized))|$(Get-Performance51TextHash -Text $normalized)"
+            }
+            $historicalSourceSets[$Commit] = [ordered]@{ paths = $sourceSet.paths; fileCount = $entries.Count; sha256 = Get-Performance51TextHash -Text (($rows -join "`n") + "`n") }
+        }
+        finally { $archive.Dispose() }
+    }
+    finally { if ([IO.File]::Exists($archivePath)) { [IO.File]::Delete($archivePath) } }
+    return $historicalSourceSets[$Commit]
+}
 
 function Get-Performance51WorkloadIdentity {
     param([object]$Record)
@@ -29,6 +58,8 @@ function Assert-Performance51Record {
     if (-not (Test-Json -Json ($Record | ConvertTo-Json -Depth 16) -SchemaFile $schema -ErrorAction Stop)) { throw 'Performance 5.1 schema failed.' }
     & git -C $repo merge-base --is-ancestor ([string]$Record.sourceCommit) HEAD 2>$null
     if ($LASTEXITCODE -ne 0) { throw 'Performance source is not an ancestor of HEAD.' }
+    $recordedSource = Get-Performance51RecordedSourceSet -Commit $Record.sourceCommit
+    if (($Record.sourceInputSet | ConvertTo-Json -Depth 5 -Compress) -cne ($recordedSource | ConvertTo-Json -Depth 5 -Compress)) { throw 'Recorded performance source manifest drifted.' }
     if ($RequireCurrentSource) {
         & git -C $repo diff --quiet ([string]$Record.sourceCommit) -- @($sourceSet.paths)
         if ($LASTEXITCODE -ne 0 -or ($Record.sourceInputSet | ConvertTo-Json -Depth 5 -Compress) -cne ($sourceSet | ConvertTo-Json -Depth 5 -Compress)) { throw 'Performance source inputs drifted.' }
@@ -99,7 +130,7 @@ $negativeCases = [ordered]@{
 foreach ($fixture in $negativeCases.GetEnumerator()) {
     $mutant = $baselineJson | ConvertFrom-Json; & $fixture.Value $mutant
     $rejected = $false
-    try { Assert-Performance51Record -Record $mutant } catch { $rejected = $true }
+    try { Assert-Performance51Record -Record $mutant -RequireCurrentSource $false } catch { $rejected = $true }
     if (-not $rejected) { throw "Performance guard accepted negative fixture: $($fixture.Key)" }
 }
 Assert-Performance51Comparison -Baseline $baseline -Candidate $baseline -RepositoryRoot $repo

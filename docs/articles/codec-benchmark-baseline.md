@@ -1,5 +1,7 @@
 # Codec Benchmark Baseline / 编解码基线
 
+For OpenCV 5.1, use the [5.1 performance baseline](performance-5.1-baseline.md). The 18-DLL measurements below remain historical 5.0 evidence. 当前 5.1 的 43-DLL 实测见上述链接，下文旧版证据不自动继承。
+
 The repository contains a standalone net8.0 harness at `tools/CodecBenchmark`. It uses a fixed 64x64 `CV_8UC3` input, records its SHA256, warms each path five times, then measures 100 iterations of the existing `byte[]` PNG encoder, the preview `ImEncodeTo(..., IBufferWriter<byte>)` path with a new writer per iteration, the same API with one preallocated caller-owned writer reused for every iteration, and three decode paths: byte array, `ReadOnlySpan<byte>` with preflight, and seekable `Stream` with preflight. The decode paths must report identical decoded-byte counts and checksums; the reusable writer must receive exactly one `GetSpan` and one `Advance` per iteration.
 
 仓库提供独立的 net8.0 harness：`tools/CodecBenchmark`。它使用固定的 64x64 `CV_8UC3` 输入并记录 SHA256，分别预热五次，然后测量现有 `byte[]` PNG encoder、每次新建 writer 的 preview `ImEncodeTo(..., IBufferWriter<byte>)`、重复复用同一个预分配 caller-owned writer 的同一 API，以及 byte array、带 preflight 的 `ReadOnlySpan<byte>`、带 preflight 的 seekable `Stream` 三条 decode 路径各 100 次。三条 decode 路径必须报告相同的 decoded-byte 数量和 checksum；复用 writer 必须每次只收到一次 `GetSpan` 和一次 `Advance`。

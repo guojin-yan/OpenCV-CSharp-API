@@ -1,5 +1,7 @@
 # PERF-001 Regression Baseline / PERF-001 性能回归基线
 
+This report retains the 5.0 runtime baseline. The [5.1 performance baseline](performance-5.1-baseline.md) separately binds the current 43-DLL Full package and fourteen metrics, including the reused writer. Its initial measurements make no cross-version regression claim. 本页为 5.0 历史基线，5.1 实测单独绑定当前产物。
+
 `Measure-CodecTypedMatBenchmark.ps1` and `Measure-VideoDnnBenchmark.ps1` create the two evidence sets from one clean source commit, Windows x64 runner, .NET SDK, and exact full runtime package. Each script verifies the 18 DLL files against the `win-x64` payload inside the supplied NuGet package. Codec and typed Mat evidence covers the fixed PNG encode/decode and Mat-view inputs on net8.0/net10.0; the paired Video/DNN evidence covers the fixed MJPG file and identity ONNX model on net10.0.
 
 Run both measurement scripts without changing source between runs:

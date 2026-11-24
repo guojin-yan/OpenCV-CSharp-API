@@ -1139,6 +1139,7 @@ function Get-Record {
         "docs/articles/v501-modern-api-preview-guide.md",
         "docs/articles/video-dnn-benchmark-baseline.md",
         "docs/articles/perf-001-regression-baseline.md",
+        "docs/articles/performance-5.1-baseline.md",
         "docs/articles/native-aot-trim-single-file-adr.md",
         "nuget/logo.jpg",
         "packaging/runtime/JYPPX.OpenCV.runtime/buildTransitive/JYPPX.OpenCV.runtime.targets",
@@ -1181,6 +1182,8 @@ function Get-Record {
         "packaging/performance/video-dnn-benchmark-evidence.schema.json",
         "packaging/performance/perf-001-regression-baseline.json",
         "packaging/performance/perf-001-regression-baseline.schema.json",
+        "packaging/performance/perf-001-5.1.0-baseline.json",
+        "packaging/performance/perf-001-5.1.0-baseline.schema.json",
         "packaging/performance/native-aot-smoke-evidence.json",
         "packaging/performance/native-aot-smoke-evidence.schema.json",
         "packaging/performance/native-aot-trim-warning-ledger.json",
@@ -1697,6 +1700,9 @@ function Get-Record {
         "scripts/Test-VideoDnnBenchmarkEvidence.ps1",
         "scripts/New-PerformanceRegressionBaseline.ps1",
         "scripts/Test-PerformanceRegressionBaseline.ps1",
+        "scripts/Performance51.Common.ps1",
+        "scripts/Measure-Performance51Evidence.ps1",
+        "scripts/Test-Performance51Evidence.ps1",
         "scripts/Test-TypedMatTargetFrameworks.ps1",
         "scripts/Measure-TypedMatNativeLifetime.ps1",
         "scripts/Measure-TypedMat51NativeLifetime.ps1",
@@ -1817,6 +1823,9 @@ function Get-Record {
             CurrentPackageConsumer51Validated = $true
             CurrentPackagePeClosureEvidence = Get-FileEvidence -RelativePath "packaging/runtime/opencv-5.1.0-package-pe-closure-evidence.json"
             CurrentPackagePeClosure51Validated = $true
+            CurrentPerformance51Baseline = Get-FileEvidence -RelativePath "packaging/performance/perf-001-5.1.0-baseline.json"
+            HistoricalPerformanceRevision = "5.0.0"
+            CurrentPerformanceHistoricalComparisonClaimed = $false
             LocalBuildRid = "win-x64"
             HistoricalUpstreamMapRevision = "5.0.0"
             CurrentDnnParserSlice = Get-FileEvidence -RelativePath "compatibility/opencv-5.1.0/dnn-upstream-summary.json"

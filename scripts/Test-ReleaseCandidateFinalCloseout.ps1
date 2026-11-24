@@ -1010,6 +1010,7 @@ function Get-ExpectedEvidencePaths {
         "docs/articles/v501-modern-api-preview-guide.md",
         "docs/articles/video-dnn-benchmark-baseline.md",
         "docs/articles/perf-001-regression-baseline.md",
+        "docs/articles/performance-5.1-baseline.md",
         "docs/articles/native-aot-trim-single-file-adr.md",
         "nuget/logo.jpg",
         "packaging/runtime/android-runtime-evidence.json",
@@ -1051,6 +1052,8 @@ function Get-ExpectedEvidencePaths {
         "packaging/performance/video-dnn-benchmark-evidence.schema.json",
         "packaging/performance/perf-001-regression-baseline.json",
         "packaging/performance/perf-001-regression-baseline.schema.json",
+        "packaging/performance/perf-001-5.1.0-baseline.json",
+        "packaging/performance/perf-001-5.1.0-baseline.schema.json",
         "packaging/performance/native-aot-smoke-evidence.json",
         "packaging/performance/native-aot-smoke-evidence.schema.json",
         "packaging/performance/native-aot-trim-warning-ledger.json",
@@ -1566,6 +1569,9 @@ function Get-ExpectedEvidencePaths {
         "scripts/Test-VideoDnnBenchmarkEvidence.ps1",
         "scripts/New-PerformanceRegressionBaseline.ps1",
         "scripts/Test-PerformanceRegressionBaseline.ps1",
+        "scripts/Performance51.Common.ps1",
+        "scripts/Measure-Performance51Evidence.ps1",
+        "scripts/Test-Performance51Evidence.ps1",
         "scripts/Test-TypedMatTargetFrameworks.ps1",
         "scripts/Measure-TypedMatNativeLifetime.ps1",
         "scripts/Measure-TypedMat51NativeLifetime.ps1",
@@ -1855,6 +1861,10 @@ function Test-Record {
     $currentBuildHash = (Get-FileHash -LiteralPath (Join-Path $repo 'packaging/runtime/opencv-5.1.0-source-build-evidence.json') -Algorithm SHA256).Hash.ToLowerInvariant()
     $currentPackageConsumerHash = (Get-FileHash -LiteralPath (Join-Path $repo 'packaging/runtime/opencv-5.1.0-package-consumer-evidence.json') -Algorithm SHA256).Hash.ToLowerInvariant()
     $currentPackagePeClosureHash = (Get-FileHash -LiteralPath (Join-Path $repo 'packaging/runtime/opencv-5.1.0-package-pe-closure-evidence.json') -Algorithm SHA256).Hash.ToLowerInvariant()
+    $currentPerformanceHash = (Get-FileHash -LiteralPath (Join-Path $repo 'packaging/performance/perf-001-5.1.0-baseline.json') -Algorithm SHA256).Hash.ToLowerInvariant()
+    Assert-True -List $List -Condition ($revision.CurrentPerformance51Baseline.Path -ceq 'packaging/performance/perf-001-5.1.0-baseline.json' -and
+        $revision.CurrentPerformance51Baseline.Sha256 -ceq $currentPerformanceHash -and $revision.HistoricalPerformanceRevision -ceq '5.0.0' -and
+        -not $revision.CurrentPerformanceHistoricalComparisonClaimed) -Issue 'Final closeout 5.1 performance measurement boundary drifted'
     $currentDnnHash = (Get-FileHash -LiteralPath (Join-Path $repo 'compatibility/opencv-5.1.0/dnn-upstream-summary.json') -Algorithm SHA256).Hash.ToLowerInvariant()
     Assert-True -List $List -Condition ($revision.CurrentDnnParserSlice.Path -ceq 'compatibility/opencv-5.1.0/dnn-upstream-summary.json' -and $revision.CurrentDnnParserSlice.Sha256 -ceq $currentDnnHash -and $revision.CurrentDnnParserDeclarationCount -eq 185 -and -not $revision.CurrentDnnCompleteCppParityClaimed -and $revision.HistoricalCatalogMapCount -eq 73) -Issue 'Final closeout 5.1 DNN parser refresh boundary drifted'
     $refresh51Path = Join-Path $repo 'compatibility/opencv-5.1.0/upstream-map-refresh-summary.json'
@@ -1924,6 +1934,12 @@ Assert-FixtureRejected -Name "source identity drift" -ExpectedIssue "candidate i
     param($list)
     $fixture = $record | ConvertTo-Json -Depth 30 | ConvertFrom-Json
     $fixture.CandidateId = "local-closeout/sha256/$('0' * 16)"
+    Test-Record -Record $fixture -List $list -ExpectedSourceHash $expectedSourceHash
+}
+Assert-FixtureRejected -Name "initial performance baseline promoted to historical comparison" -ExpectedIssue "5.1 performance measurement boundary" -Action {
+    param($list)
+    $fixture = $record | ConvertTo-Json -Depth 30 | ConvertFrom-Json
+    $fixture.RevisionValidation.CurrentPerformanceHistoricalComparisonClaimed = $true
     Test-Record -Record $fixture -List $list -ExpectedSourceHash $expectedSourceHash
 }
 Assert-FixtureRejected -Name "DNN parser slice promoted to full mapping set" -ExpectedIssue "DNN parser refresh boundary" -Action {
