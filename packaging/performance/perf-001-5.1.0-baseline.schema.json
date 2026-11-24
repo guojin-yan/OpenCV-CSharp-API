@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OpenCV 5.1 local Windows x64 Full performance baseline",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schemaVersion", "status", "openCvVersion", "sourceCommit", "sourceInputSet", "measuredAtUtc", "runner", "runtimePackage", "runs", "metrics", "thresholds", "limits", "limitations"],
+  "properties": {
+    "$schema": {"const": "perf-001-5.1.0-baseline.schema.json"},
+    "schemaVersion": {"const": 1},
+    "status": {"const": "measured-baseline"},
+    "openCvVersion": {"const": "5.1.0"},
+    "sourceCommit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "measuredAtUtc": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"},
+    "sourceInputSet": {
+      "type": "object", "additionalProperties": false, "required": ["paths", "fileCount", "sha256"],
+      "properties": {"paths": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}, "fileCount": {"type": "integer", "minimum": 1}, "sha256": {"$ref": "#/$defs/hash"}}
+    },
+    "runner": {
+      "type": "object", "additionalProperties": false,
+      "required": ["os", "architecture", "configuration", "dotnetSdk", "cpu", "logicalProcessors", "stopwatchFrequency", "dotnetRuntimes"],
+      "properties": {
+        "os": {"type": "string", "pattern": "^Microsoft Windows "}, "architecture": {"const": "x64"}, "configuration": {"const": "Release"},
+        "dotnetSdk": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+"}, "cpu": {"type": "string", "minLength": 1},
+        "logicalProcessors": {"type": "integer", "minimum": 1}, "stopwatchFrequency": {"type": "integer", "minimum": 1},
+        "dotnetRuntimes": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "runtimePackage": {
+      "type": "object", "additionalProperties": false, "required": ["evidence", "artifactPath", "fileName", "sourceCommit", "bytes", "sha256", "payload"],
+      "properties": {
+        "evidence": {"type": "object", "additionalProperties": false, "required": ["path", "sha256"], "properties": {"path": {"const": "packaging/release/opencv-5.1.0-local-sbom-evidence.json"}, "sha256": {"$ref": "#/$defs/hash"}}},
+        "artifactPath": {"type": "string", "pattern": "^artifacts/opencv-5\\.1\\.0-local-candidate/[0-9a-f]{40}/nupkg-win-x64-full/JYPPX\\.OpenCV\\.runtime\\.win-x64\\.5\\.1\\.0\\.nupkg$"},
+        "fileName": {"const": "JYPPX.OpenCV.runtime.win-x64.5.1.0.nupkg"}, "sourceCommit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "bytes": {"type": "integer", "minimum": 1}, "sha256": {"$ref": "#/$defs/hash"},
+        "payload": {"type": "array", "minItems": 43, "maxItems": 43, "items": {"type": "object", "additionalProperties": false, "required": ["name", "bytes", "sha256"], "properties": {"name": {"type": "string", "pattern": "^(JYPPX\\.OpenCV\\.Native|opencv_[a-z0-9_]+510)\\.dll$"}, "bytes": {"type": "integer", "minimum": 1}, "sha256": {"$ref": "#/$defs/hash"}}}}
+      }
+    },
+    "runs": {
+      "type": "array", "minItems": 12, "maxItems": 12,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["round", "scenario", "targetFramework", "nativeDllCount", "apiAssemblySha256", "harnessSha256", "stdoutJson", "stdoutSha256", "stderr", "stderrSha256", "isolation"],
+        "properties": {
+          "round": {"type": "integer", "minimum": 1, "maximum": 3}, "scenario": {"enum": ["codec", "typedMat", "scenario"]}, "targetFramework": {"enum": ["net8.0", "net10.0"]}, "nativeDllCount": {"const": 43},
+          "apiAssemblySha256": {"$ref": "#/$defs/hash"}, "harnessSha256": {"$ref": "#/$defs/hash"}, "stdoutJson": {"type": "string", "minLength": 1}, "stdoutSha256": {"$ref": "#/$defs/hash"}, "stderr": {"type": "string"}, "stderrSha256": {"$ref": "#/$defs/hash"},
+          "isolation": {"type": "object", "additionalProperties": false, "required": ["pathRestricted", "runtimeOverridesRemoved", "dotnetOverridesRemoved", "payloadVerified"], "properties": {"pathRestricted": {"const": true}, "runtimeOverridesRemoved": {"const": true}, "dotnetOverridesRemoved": {"const": true}, "payloadVerified": {"const": true}}}
+        }
+      }
+    },
+    "metrics": {"type": "object", "minProperties": 14, "maxProperties": 14, "additionalProperties": {"$ref": "#/$defs/metric"}},
+    "thresholds": {"type": "object", "additionalProperties": false, "required": ["elapsedTicksPercent", "managedAllocatedBytesPercent", "peakWorkingSetBytesPercent"], "properties": {"elapsedTicksPercent": {"const": 20}, "managedAllocatedBytesPercent": {"const": 10}, "peakWorkingSetBytesPercent": {"const": 10}}},
+    "limits": {"type": "object", "additionalProperties": false, "required": ["historical50Comparison", "crossRidValidated", "stablePreviewApisPromoted", "finalReleaseApproved"], "properties": {"historical50Comparison": {"const": false}, "crossRidValidated": {"const": false}, "stablePreviewApisPromoted": {"const": false}, "finalReleaseApproved": {"const": false}}},
+    "limitations": {"type": "array", "minItems": 5, "maxItems": 5, "items": {"type": "string", "minLength": 1}}
+  },
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "metric": {"type": "object", "additionalProperties": false, "required": ["managedAllocatedBytes", "elapsedTicks"], "properties": {"managedAllocatedBytes": {"type": "integer", "minimum": 0}, "elapsedTicks": {"type": "integer", "minimum": 1}, "peakWorkingSetBytes": {"type": "integer", "minimum": 1}}}
+  }
+}
