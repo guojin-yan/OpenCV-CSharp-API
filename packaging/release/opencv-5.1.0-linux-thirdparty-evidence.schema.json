@@ -1,0 +1,611 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/guojin-yan/OpenCV-CSharp-API/packaging/release/opencv-5.1.0-linux-thirdparty-evidence.schema.json",
+  "title": "Build-bound Linux 5.1 third-party candidate supplement",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "evidenceKind",
+    "status",
+    "createdUtc",
+    "openCvVersion",
+    "sourceBaseCommit",
+    "worktreeChangesIncluded",
+    "execution",
+    "candidateOnly",
+    "publicationAllowed",
+    "hostedValidated",
+    "activeIdentityAdded",
+    "sourceInputs",
+    "references",
+    "kitManifest",
+    "producer",
+    "packages",
+    "consumers",
+    "coverage"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "evidenceKind": {
+      "const": "local-linux-5.1-third-party-supplement"
+    },
+    "status": {
+      "const": "verified-local-three-distro-x64-candidate"
+    },
+    "createdUtc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "openCvVersion": {
+      "const": "5.1.0"
+    },
+    "sourceBaseCommit": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "worktreeChangesIncluded": {
+      "const": true
+    },
+    "execution": {
+      "const": "local-docker"
+    },
+    "candidateOnly": {
+      "const": true
+    },
+    "publicationAllowed": {
+      "const": false
+    },
+    "hostedValidated": {
+      "const": false
+    },
+    "activeIdentityAdded": {
+      "const": false
+    },
+    "sourceInputs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/file"
+      },
+      "minItems": 11,
+      "maxItems": 11
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/file"
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "kitManifest": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/file"
+      },
+      "minItems": 16,
+      "maxItems": 16
+    },
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identity",
+        "outputDirectory",
+        "buildEvidence"
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/$defs/identity"
+        },
+        "outputDirectory": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?![/\\\\])(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[:\\\\]).+$"
+        },
+        "buildEvidence": {
+          "$ref": "#/$defs/blob"
+        }
+      }
+    },
+    "packages": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/package"
+      },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "consumers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/consumer"
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "coverage": {
+      "$ref": "#/$defs/coverage"
+    }
+  },
+  "$defs": {
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "bytes",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?![/\\\\])(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[:\\\\]).+$"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "blob": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "bytes",
+        "sha256",
+        "text"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?![/\\\\])(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[:\\\\]).+$"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "bytes",
+        "sha256",
+        "sha1"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?![/\\\\])(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[:\\\\]).+$"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "sha1": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        }
+      }
+    },
+    "mount": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "source",
+        "destination",
+        "writable"
+      ],
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "destination": {
+          "type": "string"
+        },
+        "writable": {
+          "type": "boolean"
+        }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "image",
+        "imageId",
+        "architecture",
+        "os",
+        "nanoCpus",
+        "memoryBytes",
+        "oomKilled",
+        "mounts"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "name": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "imageId": {
+          "type": "string"
+        },
+        "architecture": {
+          "const": "amd64"
+        },
+        "os": {
+          "const": "linux"
+        },
+        "nanoCpus": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "memoryBytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "oomKilled": {
+          "const": false
+        },
+        "mounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/mount"
+          }
+        }
+      }
+    },
+    "package": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "candidateOnly",
+        "publicationAllowed",
+        "packageId",
+        "packageVersion",
+        "sourceBaseCommit",
+        "flavor",
+        "profile",
+        "originalPackageVersion",
+        "originalPackageSha256",
+        "nativeBytesChanged",
+        "buildEvidenceSha256",
+        "modules",
+        "components",
+        "completeSourceLicenseReview",
+        "vulnerabilityReviewComplete",
+        "artifactPath",
+        "bytes",
+        "sha256",
+        "originalArtifactPath",
+        "addedEntries",
+        "entries",
+        "sbom"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "candidateOnly": {
+          "const": true
+        },
+        "publicationAllowed": {
+          "const": false
+        },
+        "packageId": {
+          "type": "string"
+        },
+        "packageVersion": {
+          "type": "string"
+        },
+        "sourceBaseCommit": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "flavor": {
+          "enum": [
+            "preview",
+            "headless"
+          ]
+        },
+        "profile": {
+          "enum": [
+            "full",
+            "mini"
+          ]
+        },
+        "originalPackageVersion": {
+          "type": "string"
+        },
+        "originalPackageSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "nativeBytesChanged": {
+          "const": false
+        },
+        "buildEvidenceSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "modules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "components": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "completeSourceLicenseReview": {
+          "const": false
+        },
+        "vulnerabilityReviewComplete": {
+          "const": false
+        },
+        "artifactPath": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?![/\\\\])(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[:\\\\]).+$"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "originalArtifactPath": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?![/\\\\])(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[:\\\\]).+$"
+        },
+        "addedEntries": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?![/\\\\])(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[:\\\\]).+$"
+          },
+          "uniqueItems": true
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/entry"
+          }
+        },
+        "sbom": {
+          "$ref": "#/$defs/file"
+        }
+      }
+    },
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "targetFramework",
+        "flavor",
+        "profile",
+        "packageId",
+        "packageVersion",
+        "sdkVersion",
+        "runtimeVersion",
+        "resultDirectory",
+        "freshPackageCache",
+        "restoredPayloadFiles",
+        "blobs",
+        "video"
+      ],
+      "properties": {
+        "targetFramework": {
+          "enum": [
+            "net8.0",
+            "net10.0"
+          ]
+        },
+        "flavor": {
+          "enum": [
+            "preview",
+            "headless"
+          ]
+        },
+        "profile": {
+          "enum": [
+            "full",
+            "mini"
+          ]
+        },
+        "packageId": {
+          "type": "string"
+        },
+        "packageVersion": {
+          "type": "string"
+        },
+        "sdkVersion": {
+          "type": "string"
+        },
+        "runtimeVersion": {
+          "type": "string"
+        },
+        "resultDirectory": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?![/\\\\])(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[:\\\\]).+$"
+        },
+        "freshPackageCache": {
+          "const": true
+        },
+        "restoredPayloadFiles": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "blobs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/blob"
+          },
+          "minItems": 12,
+          "maxItems": 12
+        },
+        "video": {
+          "$ref": "#/$defs/file"
+        }
+      }
+    },
+    "consumer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rid",
+        "identity",
+        "outputDirectory",
+        "blobs",
+        "runs"
+      ],
+      "properties": {
+        "rid": {
+          "enum": [
+            "ubuntu.22.04-x64",
+            "ubuntu.24.04-x64",
+            "debian.12-x64"
+          ]
+        },
+        "identity": {
+          "$ref": "#/$defs/identity"
+        },
+        "outputDirectory": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?![/\\\\])(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[:\\\\]).+$"
+        },
+        "blobs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/blob"
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "runs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/run"
+          },
+          "minItems": 8,
+          "maxItems": 8
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "upstreamModules",
+        "staticArchives",
+        "compilerObjects",
+        "observedFiles",
+        "officialGitObjects",
+        "namedComponents",
+        "candidatePackages",
+        "consumerExecutions",
+        "nativePayloadChanged",
+        "freshUpstreamBuild",
+        "completeSourceLicenseReview",
+        "vulnerabilityReviewComplete",
+        "arm64Validated",
+        "hostedValidated",
+        "releaseApproved"
+      ],
+      "properties": {
+        "upstreamModules": {
+          "const": 17
+        },
+        "staticArchives": {
+          "const": 8
+        },
+        "compilerObjects": {
+          "const": 1201
+        },
+        "observedFiles": {
+          "const": 3079
+        },
+        "officialGitObjects": {
+          "const": 2054
+        },
+        "namedComponents": {
+          "const": 15
+        },
+        "candidatePackages": {
+          "const": 4
+        },
+        "consumerExecutions": {
+          "const": 24
+        },
+        "nativePayloadChanged": {
+          "const": false
+        },
+        "freshUpstreamBuild": {
+          "const": false
+        },
+        "completeSourceLicenseReview": {
+          "const": false
+        },
+        "vulnerabilityReviewComplete": {
+          "const": false
+        },
+        "arm64Validated": {
+          "const": false
+        },
+        "hostedValidated": {
+          "const": false
+        },
+        "releaseApproved": {
+          "const": false
+        }
+      }
+    }
+  }
+}

@@ -1228,6 +1228,17 @@ function Get-Record {
         "packaging/runtime/opencv-5.1.0-local-linux-headless-evidence.schema.json",
         "packaging/release/opencv-5.1.0-local-headless-sbom/JYPPX.OpenCV.runtime.linux-x64.preview.5.1.0-headless.2963ce5.spdx.json",
         "packaging/release/opencv-5.1.0-local-headless-sbom/JYPPX.OpenCV.runtime.linux-x64.preview.mini.5.1.0-headless.2963ce5.spdx.json",
+        "scripts/Collect-Linux51ThirdPartyBuild.py",
+        "scripts/New-Linux51ThirdPartyCandidates.py",
+        "scripts/Invoke-Linux51ThirdPartyConsumer.ps1",
+        "scripts/Measure-Linux51ThirdPartyEvidence.py",
+        "scripts/Test-Linux51ThirdPartyEvidence.ps1",
+        "packaging/release/opencv-5.1.0-linux-thirdparty-evidence.json",
+        "packaging/release/opencv-5.1.0-linux-thirdparty-evidence.schema.json",
+        "packaging/release/opencv-5.1.0-linux-thirdparty-sbom/JYPPX.OpenCV.runtime.linux-x64.preview.5.1.0-licenses.53a4b3d.spdx.json",
+        "packaging/release/opencv-5.1.0-linux-thirdparty-sbom/JYPPX.OpenCV.runtime.linux-x64.preview.mini.5.1.0-licenses.53a4b3d.spdx.json",
+        "packaging/release/opencv-5.1.0-linux-thirdparty-sbom/JYPPX.OpenCV.runtime.linux-x64.preview.5.1.0-headless-licenses.53a4b3d.spdx.json",
+        "packaging/release/opencv-5.1.0-linux-thirdparty-sbom/JYPPX.OpenCV.runtime.linux-x64.preview.mini.5.1.0-headless-licenses.53a4b3d.spdx.json",
         "docs/articles/linux-5.1-local-preview.md",
         "scripts/Build-LocalLinux51Preview.ps1",
         "scripts/Audit-Linux51Runtime.py",
@@ -1890,6 +1901,9 @@ function Get-Record {
             CurrentLocalLinux51AotConsumersValidated = $true
             CurrentLocalLinux51HeadlessEvidence = Get-FileEvidence -RelativePath "packaging/runtime/opencv-5.1.0-local-linux-headless-evidence.json"
             CurrentLocalLinux51HeadlessCandidatesValidated = $true
+            CurrentLocalLinux51ThirdPartyEvidence = Get-FileEvidence -RelativePath "packaging/release/opencv-5.1.0-linux-thirdparty-evidence.json"
+            CurrentLocalLinux51ThirdPartyCandidatesValidated = $true
+            CurrentCompleteSourceLicenseReviewClaimed = $false
             CurrentHeadlessActiveIdentityPromoted = $false
             CurrentLinux51ThreeDistroGateComplete = $false
             HistoricalPerformanceRevision = "5.0.0"

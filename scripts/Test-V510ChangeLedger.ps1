@@ -197,5 +197,11 @@ if ($headlessEntry.Count -ne 1 -or $headlessEntry[0].evidence -cnotcontains 'scr
     $headless.status -cne 'verified-local-three-distro-x64-candidate' -or -not $headless.candidateOnly -or $headless.publicationAllowed -or $headless.activePackageIdentityAdded -or
     $headless.coverage.managedExecutions -ne 12 -or $headless.coverage.nativeCtestPassed -ne 6 -or $headless.coverage.freshMinimalUpstreamBuild -or
     $headless.coverage.cameraOrNetworkValidated -or $headless.coverage.hostedValidated) { throw '5.1 local headless candidate evidence/ledger scope drifted.' }
+$thirdParty = Get-Content (Join-Path $repo 'packaging/release/opencv-5.1.0-linux-thirdparty-evidence.json') -Raw | ConvertFrom-Json
+$thirdPartyEntry = @($ledger.entries | Where-Object id -CEQ 'V510-LOCAL-LINUX-THIRD-PARTY')
+if ($thirdPartyEntry.Count -ne 1 -or $thirdPartyEntry[0].evidence -cnotcontains 'scripts/Test-Linux51ThirdPartyEvidence.ps1' -or
+    $thirdParty.coverage.namedComponents -ne 15 -or $thirdParty.coverage.candidatePackages -ne 4 -or $thirdParty.coverage.consumerExecutions -ne 24 -or
+    -not $thirdParty.candidateOnly -or $thirdParty.publicationAllowed -or $thirdParty.activeIdentityAdded -or $thirdParty.coverage.nativePayloadChanged -or
+    $thirdParty.coverage.completeSourceLicenseReview -or $thirdParty.coverage.vulnerabilityReviewComplete -or $thirdParty.coverage.releaseApproved) { throw '5.1 third-party candidate supplement evidence/ledger scope drifted.' }
 Write-Host "V510_CHANGE_LEDGER_OK entries=$(@($ledger.entries).Count) from=$($ledger.fromVersion) to=$($ledger.toVersion) native_abi=$($ledger.nativeAbiVersion)"
 Write-Host "OPENCV_510_SOURCE_BUILD_EVIDENCE_OK input_files=$($inputPaths.Count) full_exports=2669 mini_exports=527 native_ctest=6 managed=4180 historical_catalog=5.0.0 parser_slices=73 calibration_schur_bit=27"

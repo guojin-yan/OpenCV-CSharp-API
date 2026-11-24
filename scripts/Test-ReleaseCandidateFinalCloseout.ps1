@@ -1098,6 +1098,17 @@ function Get-ExpectedEvidencePaths {
         "packaging/runtime/opencv-5.1.0-local-linux-headless-evidence.schema.json",
         "packaging/release/opencv-5.1.0-local-headless-sbom/JYPPX.OpenCV.runtime.linux-x64.preview.5.1.0-headless.2963ce5.spdx.json",
         "packaging/release/opencv-5.1.0-local-headless-sbom/JYPPX.OpenCV.runtime.linux-x64.preview.mini.5.1.0-headless.2963ce5.spdx.json",
+        "scripts/Collect-Linux51ThirdPartyBuild.py",
+        "scripts/New-Linux51ThirdPartyCandidates.py",
+        "scripts/Invoke-Linux51ThirdPartyConsumer.ps1",
+        "scripts/Measure-Linux51ThirdPartyEvidence.py",
+        "scripts/Test-Linux51ThirdPartyEvidence.ps1",
+        "packaging/release/opencv-5.1.0-linux-thirdparty-evidence.json",
+        "packaging/release/opencv-5.1.0-linux-thirdparty-evidence.schema.json",
+        "packaging/release/opencv-5.1.0-linux-thirdparty-sbom/JYPPX.OpenCV.runtime.linux-x64.preview.5.1.0-licenses.53a4b3d.spdx.json",
+        "packaging/release/opencv-5.1.0-linux-thirdparty-sbom/JYPPX.OpenCV.runtime.linux-x64.preview.mini.5.1.0-licenses.53a4b3d.spdx.json",
+        "packaging/release/opencv-5.1.0-linux-thirdparty-sbom/JYPPX.OpenCV.runtime.linux-x64.preview.5.1.0-headless-licenses.53a4b3d.spdx.json",
+        "packaging/release/opencv-5.1.0-linux-thirdparty-sbom/JYPPX.OpenCV.runtime.linux-x64.preview.mini.5.1.0-headless-licenses.53a4b3d.spdx.json",
         "docs/articles/linux-5.1-local-preview.md",
         "scripts/Build-LocalLinux51Preview.ps1",
         "scripts/Audit-Linux51Runtime.py",
@@ -1940,6 +1951,11 @@ function Test-Record {
     Assert-True -List $List -Condition ($revision.CurrentLocalLinux51HeadlessEvidence.Path -ceq 'packaging/runtime/opencv-5.1.0-local-linux-headless-evidence.json' -and
         $revision.CurrentLocalLinux51HeadlessEvidence.Sha256 -ceq $currentHeadlessHash -and $revision.CurrentLocalLinux51HeadlessCandidatesValidated -and
         -not $revision.CurrentHeadlessActiveIdentityPromoted -and -not $revision.CurrentLinux51ThreeDistroGateComplete) -Issue 'Final closeout headless candidates must retain the pending active-identity/hosted/release gates'
+    $currentThirdPartyHash = (Get-FileHash -LiteralPath (Join-Path $repo 'packaging/release/opencv-5.1.0-linux-thirdparty-evidence.json') -Algorithm SHA256).Hash.ToLowerInvariant()
+    Assert-True -List $List -Condition ($revision.CurrentLocalLinux51ThirdPartyEvidence.Path -ceq 'packaging/release/opencv-5.1.0-linux-thirdparty-evidence.json' -and
+        $revision.CurrentLocalLinux51ThirdPartyEvidence.Sha256 -ceq $currentThirdPartyHash -and $revision.CurrentLocalLinux51ThirdPartyCandidatesValidated -and
+        -not $revision.CurrentCompleteSourceLicenseReviewClaimed -and -not $revision.CurrentHeadlessActiveIdentityPromoted -and
+        -not $revision.CurrentLinux51ThreeDistroGateComplete) -Issue 'Final closeout third-party supplement must retain the pending complete-source/hosted/release gates'
     Assert-True -List $List -Condition ($revision.CurrentPerformance51Baseline.Path -ceq 'packaging/performance/perf-001-5.1.0-baseline.json' -and
         $revision.CurrentPerformance51Baseline.Sha256 -ceq $currentPerformanceHash -and $revision.HistoricalPerformanceRevision -ceq '5.0.0' -and
         -not $revision.CurrentPerformanceHistoricalComparisonClaimed) -Issue 'Final closeout 5.1 performance measurement boundary drifted'

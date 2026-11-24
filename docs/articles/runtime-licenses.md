@@ -67,3 +67,17 @@ For the current Windows x64 OpenCV 5.0.0 build, image codec related third-party 
 The exact list is determined by the OpenCV build configuration. CI packaging should always stage from the produced OpenCV install tree instead of relying on a hard-coded list.
 
 具体列表由 OpenCV 构建配置决定。CI 打包时应始终从产出的 OpenCV install tree 暂存许可证，而不是依赖硬编码列表。
+
+## OpenCV 5.1 Linux candidate supplements
+
+The retained Ubuntu 22.04 build's Ninja graph, valid compiler dependency records and actual static archive members identify 15 third-party components across the 17 upstream modules. The new [local supplement evidence](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/release/opencv-5.1.0-linux-thirdparty-evidence.json) records eight archives, 1,201 compiled objects, 3,079 observed input files and 2,054 checked official Git blobs. It also preserves 1,920 leading source notices. ADE is excluded because no linked archive or compiler input uses it in this build. System shared libraries remain distribution dependencies.
+
+The four isolated preview/headless Full/Mini candidates add original component licenses, the Independent JPEG Group acknowledgement, leading source notices and all 343 Eigen headers observed by the compiler. Their native payloads match the original packages byte for byte. Full includes 15 named components; Mini includes the ten reached by its six upstream modules. Each package has an SPDX 2.3 inventory containing every ZIP entry and build-derived component relationships. The NuGet license metadata points to `THIRD_PARTY_NOTICES.txt`; the original OpenCV/contrib license files are retained under `licenses/`.
+
+The components are Eigen 3.4.0, annoy, FLANN 1.6.10 OpenCV fork, FlatBuffers 25.9.23, HarfBuzz 14.2.1, libjpeg-turbo 3.1.2, libpng 1.6.57, libtiff 4.7.2, libwebp, MLAS, MSCR, OpenJPEG 2.5.4, Protobuf 3.19.1, SoftFloat/fdlibm and zlib 1.3.2. Versions without a vendored release declaration retain their source revision. License declarations are preliminary; libtiff remains `NOASSERTION` with its original license text. The shared leading-notice file also contains notices from source units outside an individual Mini/headless profile.
+
+Reproduce collection with `Collect-Linux51ThirdPartyBuild.py` against the retained producer, then `New-Linux51ThirdPartyCandidates.py` against the original packages. The collector verifies archive member bytes against actual objects, compiler dependency timestamps, official source blobs and the installed ELF's RUNPATH-only transformation. `Invoke-Linux51ThirdPartyConsumer.ps1` checks every restored native/notice/source file in independent package caches. `Measure-Linux51ThirdPartyEvidence.py` writes the package-bound records and SPDX documents; `Test-Linux51ThirdPartyEvidence.ps1 -RequireArtifacts` verifies retained artifacts and rejects 28 negative evidence fixtures.
+
+Ubuntu 22.04, Ubuntu 24.04 and Debian 12 complete 24 package-only executions over net8.0/net10.0, preview/headless and Full/Mini. PNG pixels, three-frame MJPG files, Full ONNX inference, Mini importer omission and headless GUI-failure recovery pass. The candidate versions are `5.1.0-licenses.53a4b3d` and `5.1.0-headless-licenses.53a4b3d`, using the existing preview package IDs. These local supplements do not update the active package matrix. Complete source-level license review, vulnerability assessment, final release SBOM promotion, hosted reproduction and publication remain open.
+
+本轮根据实际编译与链接输入补齐四份 Linux 候选包的第三方原文、JPEG 致谢及 Eigen 对应源，原生库字节保持不变。三发行版 24 组真实还原、编译与运行全部通过；该证据不代表完整源码许可证审查、漏洞审查或正式发布已经完成。
