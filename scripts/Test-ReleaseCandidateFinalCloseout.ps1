@@ -1056,6 +1056,8 @@ function Get-ExpectedEvidencePaths {
         "packaging/performance/perf-001-5.1.0-baseline.schema.json",
         "packaging/runtime/opencv-5.1.0-local-linux-preview-evidence.json",
         "packaging/runtime/opencv-5.1.0-local-linux-preview-evidence.schema.json",
+        "packaging/runtime/opencv-5.1.0-elf-workflow-evidence.json",
+        "packaging/runtime/opencv-5.1.0-elf-workflow-evidence.schema.json",
         "docs/articles/linux-5.1-local-preview.md",
         "scripts/Build-LocalLinux51Preview.ps1",
         "scripts/Audit-Linux51Runtime.py",
@@ -1063,6 +1065,9 @@ function Get-ExpectedEvidencePaths {
         "scripts/Measure-LocalLinux51Evidence.ps1",
         "scripts/Invoke-LocalLinux51Consumer.ps1",
         "scripts/Test-LocalLinux51Evidence.ps1",
+        "scripts/Get-OpenCvElfSoversion.ps1",
+        "scripts/Get-OpenCvElfSoversion.sh",
+        "scripts/Test-OpenCvElfSonameSurface.ps1",
         "packaging/performance/native-aot-smoke-evidence.json",
         "packaging/performance/native-aot-smoke-evidence.schema.json",
         "packaging/performance/native-aot-trim-warning-ledger.json",
@@ -1875,6 +1880,10 @@ function Test-Record {
     Assert-True -List $List -Condition ($revision.CurrentLocalLinux51Preview.Path -ceq 'packaging/runtime/opencv-5.1.0-local-linux-preview-evidence.json' -and
         $revision.CurrentLocalLinux51Preview.Sha256 -ceq $currentLinuxHash -and $revision.CurrentLocalLinux51PreviewValidated -and
         -not $revision.CurrentLinux51ThreeDistroGateComplete) -Issue 'Final closeout local Linux 5.1 preview scope drifted'
+    $currentElfWorkflowHash = (Get-FileHash -LiteralPath (Join-Path $repo 'packaging/runtime/opencv-5.1.0-elf-workflow-evidence.json') -Algorithm SHA256).Hash.ToLowerInvariant()
+    Assert-True -List $List -Condition ($revision.CurrentElfWorkflowEvidence.Path -ceq 'packaging/runtime/opencv-5.1.0-elf-workflow-evidence.json' -and
+        $revision.CurrentElfWorkflowEvidence.Sha256 -ceq $currentElfWorkflowHash -and $revision.CurrentElfWorkflowEvidenceValidated -and
+        -not $revision.CurrentLinux51ThreeDistroGateComplete) -Issue 'Final closeout local Linux ELF workflow audit scope drifted'
     Assert-True -List $List -Condition ($revision.CurrentPerformance51Baseline.Path -ceq 'packaging/performance/perf-001-5.1.0-baseline.json' -and
         $revision.CurrentPerformance51Baseline.Sha256 -ceq $currentPerformanceHash -and $revision.HistoricalPerformanceRevision -ceq '5.0.0' -and
         -not $revision.CurrentPerformanceHistoricalComparisonClaimed) -Issue 'Final closeout 5.1 performance measurement boundary drifted'

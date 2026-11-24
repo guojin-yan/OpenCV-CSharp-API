@@ -1,8 +1,8 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/b683cebec60b5d06",
-  "SourceIdentity": "sha256:b683cebec60b5d06de9a98b1c5ef832b860e62e6f094dfe3d9feafc85ef29849",
+  "CandidateId": "local-closeout/sha256/4295cd9364cb689d",
+  "SourceIdentity": "sha256:4295cd9364cb689d63568fafe4c8411f4f879442907de57bd35cbc629e44ba9a",
   "OpenCvRevision": "5.1.0",
   "RevisionValidation": {
     "CurrentBuildEvidence": {
@@ -33,6 +33,12 @@
       "Length": 108815
     },
     "CurrentLocalLinux51PreviewValidated": true,
+    "CurrentElfWorkflowEvidence": {
+      "Path": "packaging/runtime/opencv-5.1.0-elf-workflow-evidence.json",
+      "Sha256": "97ec22216c81aa4428265de5463088e28abe29597c17700a5a419e0eadcef8ab",
+      "Length": 19343
+    },
+    "CurrentElfWorkflowEvidenceValidated": true,
     "CurrentLinux51ThreeDistroGateComplete": false,
     "HistoricalPerformanceRevision": "5.0.0",
     "CurrentPerformanceHistoricalComparisonClaimed": false,
@@ -58,8 +64,8 @@
     "CurrentRevisionUpstreamParityClaimed": false
   },
   "SourceSet": {
-    "FileCount": 3003,
-    "Sha256": "b683cebec60b5d06de9a98b1c5ef832b860e62e6f094dfe3d9feafc85ef29849",
+    "FileCount": 3008,
+    "Sha256": "4295cd9364cb689d63568fafe4c8411f4f879442907de57bd35cbc629e44ba9a",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -1466,8 +1472,8 @@
     },
     {
       "Path": ".github/workflows/pack.yml",
-      "Sha256": "28f9c9797bbfb793fdb9f30bc6a364eb6938c25e98442bdb8568829a793de0d6",
-      "Length": 295931
+      "Sha256": "2c3a1fd18b975957c528ed680422d7455ee990b44f9d6d372053480a1f76a229",
+      "Length": 298452
     },
     {
       "Path": ".github/workflows/publish-nuget.yml",
@@ -1476,8 +1482,8 @@
     },
     {
       "Path": ".github/workflows/runtime-input.yml",
-      "Sha256": "0dbb289b83ad383d8e1f722a320a2b2926305562450988a342b6779c511d9d02",
-      "Length": 213597
+      "Sha256": "d52b31184249fb045904a7cd8f42da59599037889e54d9f2f70e72d7000745fb",
+      "Length": 214344
     },
     {
       "Path": "CHANGELOG.md",
@@ -5221,8 +5227,8 @@
     },
     {
       "Path": "compatibility/v5.1.0-change-ledger.json",
-      "Sha256": "ea84ef906479240edae4f09764c894ad2a2920104304102159ffc9efb67eda8f",
-      "Length": 153890
+      "Sha256": "7352719e685c37f4f5503002cdf2b3a666a294e590d01f68add99039c749b20a",
+      "Length": 154688
     },
     {
       "Path": "compatibility/v5.1.0-change-ledger.schema.json",
@@ -5731,8 +5737,8 @@
     },
     {
       "Path": "docs/articles/linux-5.1-local-preview.md",
-      "Sha256": "6447e965b74128e1fd75b5fc0e1e3477bf1b8da6c933a983809170c55d2c3344",
-      "Length": 5596
+      "Sha256": "cd93e6288d87d91f08becbaa583514d88004cd2c104bdc8e60460d98f987b74b",
+      "Length": 6808
     },
     {
       "Path": "docs/articles/matlab-upstream-parity-guide.md",
@@ -6091,8 +6097,8 @@
     },
     {
       "Path": "docs/releases/5.1.0.md",
-      "Sha256": "0c63dc465879fd12a9a0703cd2c9b13b9caee7e9a9b362842cfd1925f70659eb",
-      "Length": 8512
+      "Sha256": "321e3712b537a441bb71e04136bd9c0bd81287f51c232df6b2c45e6ea959e2a7",
+      "Length": 8965
     },
     {
       "Path": "docs/releases/README.md",
@@ -6343,6 +6349,16 @@
       "Path": "packaging/runtime/modern-api-5.1.0-evidence.schema.json",
       "Sha256": "3bb10a23bdf44955e8b22c43855ba90ff31b23e0f324e7f9f672a1eec1301d8f",
       "Length": 9216
+    },
+    {
+      "Path": "packaging/runtime/opencv-5.1.0-elf-workflow-evidence.json",
+      "Sha256": "97ec22216c81aa4428265de5463088e28abe29597c17700a5a419e0eadcef8ab",
+      "Length": 19343
+    },
+    {
+      "Path": "packaging/runtime/opencv-5.1.0-elf-workflow-evidence.schema.json",
+      "Sha256": "b82e9f240411216705c5093c5824f2b3b3640db524214be644c04bcbf7085c46",
+      "Length": 2701
     },
     {
       "Path": "packaging/runtime/opencv-5.1.0-local-linux-preview-evidence.json",
@@ -6900,6 +6916,16 @@
       "Length": 3083
     },
     {
+      "Path": "scripts/Get-OpenCvElfSoversion.ps1",
+      "Sha256": "df149ce6ed54efd52f08ce582aa6b6c5ccefb65cd0151fd28e883662f5bfa6ab",
+      "Length": 503
+    },
+    {
+      "Path": "scripts/Get-OpenCvElfSoversion.sh",
+      "Sha256": "74743614d2bb9fe73b4fa83ac984b56d92d0dcfbcfba83e4470317cb1070973f",
+      "Length": 612
+    },
+    {
       "Path": "scripts/Get-SampleModelAssets.ps1",
       "Sha256": "76857593666525b74ca24342b0c5863a311684263f4ed231541ccc4924d1049b",
       "Length": 4877
@@ -6921,8 +6947,8 @@
     },
     {
       "Path": "scripts/Invoke-LifecycleRefreshContainerProducer.sh",
-      "Sha256": "3d7779ad7d056d938d04608512406fef27e7d44dad9a9da039f6fd530783fbb3",
-      "Length": 15718
+      "Sha256": "30c5251ccb7863217d37a6955b78d037161d3b8c266297edb24a719ab1de25d3",
+      "Length": 15846
     },
     {
       "Path": "scripts/Invoke-LocalLinux51Consumer.ps1",
@@ -7036,8 +7062,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "5fd9f01fca83ec74cadd3fcb0fb16ebfcbc71f3948f0d486b8ea6f17fac975b1",
-      "Length": 227924
+      "Sha256": "b19b65a729e1ec3b658659f7badd13deddbb3a6b23900050fd5210b8fcf77048",
+      "Length": 228399
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -7480,6 +7506,11 @@
       "Length": 5420
     },
     {
+      "Path": "scripts/Test-OpenCvElfSonameSurface.ps1",
+      "Sha256": "a3b032a2c27f39e1cf3f687e38ff1b97c00cf73a3226437c3a0caff69d2db5c6",
+      "Length": 13815
+    },
+    {
       "Path": "scripts/Test-OptFlowUpstreamMap.ps1",
       "Sha256": "4a07815e0d87ea8470d63683113651802471a3b6db157daeb599d3ef2b367576",
       "Length": 3166
@@ -7556,8 +7587,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "044a688247f6a9cab425bd8b777175a9963855b2811646ec5f8ccfeb659aa505",
-      "Length": 205063
+      "Sha256": "5776a7bb8693ef0d92be986fbe5d5c47b568b02ee6b866aa3c5de6f8b4291288",
+      "Length": 205948
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -9487,7 +9518,7 @@
   ],
   "LocalValidation": {
     "Status": "locally-validated",
-    "InvariantGuardCount": 111,
+    "InvariantGuardCount": 112,
     "RequiredChecks": [
       "actionlint-1.7.12",
       "api-abi-baseline",

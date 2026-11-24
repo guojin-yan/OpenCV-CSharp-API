@@ -759,13 +759,14 @@ jobs:
           cp -a "$open_cv_runtime_dir"/libopencv_*.so* "$audit_dir/"
           cp build/native-linked/libJYPPX.OpenCV.Native.so "$audit_dir/"
 
+          opencv_elf_soversion="$(sh ./scripts/Get-OpenCvElfSoversion.sh '${{ inputs.opencv_version }}')"
           expected_names="$audit_dir/expected-runtime-files.txt"
           actual_names="$audit_dir/actual-runtime-files.txt"
           printf '%s\n' 'libJYPPX.OpenCV.Native.so' > "$expected_names"
           for module in "${required_modules[@]}"; do
             printf '%s\n' \
               "libopencv_${module}.so" \
-              "libopencv_${module}.so.500" \
+              "libopencv_${module}.so.${opencv_elf_soversion}" \
               "libopencv_${module}.so.${{ inputs.opencv_version }}" \
               >> "$expected_names"
           done
@@ -804,7 +805,7 @@ jobs:
             fi
           done
 
-          direct_opencv_dependencies="$(readelf -d "$audit_dir/libJYPPX.OpenCV.Native.so" | grep NEEDED | grep -c 'libopencv_.*so.500')"
+          direct_opencv_dependencies="$(readelf -d "$audit_dir/libJYPPX.OpenCV.Native.so" | grep NEEDED | grep -c "libopencv_.*[.]so[.]${opencv_elf_soversion}]")"
           test "$machine_count" -eq "$expected_canonical_count"
           test "$origin_count" -eq "$expected_canonical_count"
           test "$producer_path_count" -eq 0
@@ -839,13 +840,14 @@ jobs:
           cp -a "$open_cv_runtime_dir"/libopencv_*.so* "$audit_dir/"
           cp build/native-linked/libJYPPX.OpenCV.Native.so "$audit_dir/"
 
+          opencv_elf_soversion="$(sh ./scripts/Get-OpenCvElfSoversion.sh '${{ inputs.opencv_version }}')"
           expected_names="$audit_dir/expected-runtime-files.txt"
           actual_names="$audit_dir/actual-runtime-files.txt"
           printf '%s\n' 'libJYPPX.OpenCV.Native.so' > "$expected_names"
           for module in "${required_modules[@]}"; do
             printf '%s\n' \
               "libopencv_${module}.so" \
-              "libopencv_${module}.so.500" \
+              "libopencv_${module}.so.${opencv_elf_soversion}" \
               "libopencv_${module}.so.${{ inputs.opencv_version }}" \
               >> "$expected_names"
           done
@@ -884,7 +886,7 @@ jobs:
             fi
           done
 
-          direct_opencv_dependencies="$(readelf -d "$audit_dir/libJYPPX.OpenCV.Native.so" | grep NEEDED | grep -c 'libopencv_.*so.500')"
+          direct_opencv_dependencies="$(readelf -d "$audit_dir/libJYPPX.OpenCV.Native.so" | grep NEEDED | grep -c "libopencv_.*[.]so[.]${opencv_elf_soversion}]")"
           test "$machine_count" -eq 7
           test "$origin_count" -eq 7
           test "$producer_path_count" -eq 0
@@ -938,13 +940,14 @@ jobs:
           cp -a "$open_cv_runtime_dir"/libopencv_*.so* "$audit_dir/"
           cp build/native-linked/libJYPPX.OpenCV.Native.so "$audit_dir/"
 
+          opencv_elf_soversion="$(sh ./scripts/Get-OpenCvElfSoversion.sh '${{ inputs.opencv_version }}')"
           expected_names="$audit_dir/expected-runtime-files.txt"
           actual_names="$audit_dir/actual-runtime-files.txt"
           printf '%s\n' 'libJYPPX.OpenCV.Native.so' > "$expected_names"
           for module in "${required_modules[@]}"; do
             printf '%s\n' \
               "libopencv_${module}.so" \
-              "libopencv_${module}.so.500" \
+              "libopencv_${module}.so.${opencv_elf_soversion}" \
               "libopencv_${module}.so.${{ inputs.opencv_version }}" \
               >> "$expected_names"
           done
@@ -990,7 +993,7 @@ jobs:
             fi
           done
 
-          direct_opencv_dependencies="$(readelf -d "$audit_dir/libJYPPX.OpenCV.Native.so" | grep NEEDED | grep -c 'libopencv_.*so.500')"
+          direct_opencv_dependencies="$(readelf -d "$audit_dir/libJYPPX.OpenCV.Native.so" | grep NEEDED | grep -c "libopencv_.*[.]so[.]${opencv_elf_soversion}]")"
           test "$machine_count" -eq "$expected_canonical_count"
           test "$origin_count" -eq "$expected_canonical_count"
           test "$producer_path_count" -eq 0
@@ -3196,13 +3199,14 @@ jobs:
                  cp -a "$open_cv_runtime_audit_dir"/libopencv_*.so* "$audit_dir/"
                  cp build/native-linked/libJYPPX.OpenCV.Native.so "$audit_dir/"
 
+                 opencv_elf_soversion="$(sh ./scripts/Get-OpenCvElfSoversion.sh "$OPENCV_VERSION")"
                  expected_names="/tmp/alpine-$RUNTIME_PROFILE-expected-runtime-files.txt"
                  actual_names="/tmp/alpine-$RUNTIME_PROFILE-actual-runtime-files.txt"
                  printf "%s\n" "libJYPPX.OpenCV.Native.so" > "$expected_names"
                  for module in $modules; do
                    printf "%s\n" \
                      "libopencv_${module}.so" \
-                     "libopencv_${module}.so.500" \
+                     "libopencv_${module}.so.${opencv_elf_soversion}" \
                      "libopencv_${module}.so.$OPENCV_VERSION" \
                      >> "$expected_names"
                  done
@@ -3235,7 +3239,7 @@ jobs:
                      alpine_missing_dependency_count=$((alpine_missing_dependency_count + 1))
                    fi
                  done
-                 alpine_direct_opencv_dependencies="$(readelf -d "$audit_dir/libJYPPX.OpenCV.Native.so" | grep NEEDED | grep -c "libopencv_.*so.500")"
+                 alpine_direct_opencv_dependencies="$(readelf -d "$audit_dir/libJYPPX.OpenCV.Native.so" | grep NEEDED | grep -c "libopencv_.*[.]so[.]${opencv_elf_soversion}]")"
                  test "$alpine_opencv_count" -eq "$expected_opencv_count"
                  test "$alpine_elf_count" -eq "$expected_canonical_count"
                  test "$alpine_origin_count" -eq "$expected_canonical_count"
@@ -3283,13 +3287,14 @@ jobs:
                 cp -a "$open_cv_runtime_audit_dir"/libopencv_*.so* "$audit_dir/"
                 cp build/native-linked/libJYPPX.OpenCV.Native.so "$audit_dir/"
 
+                opencv_elf_soversion="$(sh ./scripts/Get-OpenCvElfSoversion.sh "$OPENCV_VERSION")"
                 expected_names="/tmp/$PRODUCER_RID-$RUNTIME_PROFILE-expected-runtime-files.txt"
                 actual_names="/tmp/$PRODUCER_RID-$RUNTIME_PROFILE-actual-runtime-files.txt"
                 printf "%s\n" "libJYPPX.OpenCV.Native.so" > "$expected_names"
                 for module in $modules; do
                   printf "%s\n" \
                     "libopencv_${module}.so" \
-                    "libopencv_${module}.so.500" \
+                    "libopencv_${module}.so.${opencv_elf_soversion}" \
                     "libopencv_${module}.so.$OPENCV_VERSION" \
                     >> "$expected_names"
                 done
@@ -3336,7 +3341,7 @@ jobs:
                   fi
                 done
 
-                direct_opencv_dependencies="$(readelf -d "$audit_dir/libJYPPX.OpenCV.Native.so" | grep NEEDED | grep -c "libopencv_.*so.500")"
+                direct_opencv_dependencies="$(readelf -d "$audit_dir/libJYPPX.OpenCV.Native.so" | grep NEEDED | grep -c "libopencv_.*[.]so[.]${opencv_elf_soversion}]")"
                 test "$machine_count" -eq "$expected_canonical_count"
                 test "$origin_count" -eq "$expected_canonical_count"
                 test "$producer_path_count" -eq 0

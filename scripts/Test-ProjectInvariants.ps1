@@ -391,6 +391,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "OpenCV ELF SONAME workflow compatibility"
+        Script = Join-Path $repo "scripts/Test-OpenCvElfSonameSurface.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "OpenCV 5.1 local Linux preview package/consumer evidence"
         Script = Join-Path $repo "scripts/Test-LocalLinux51Evidence.ps1"
         Arguments = @("-RepositoryRoot", $repo)

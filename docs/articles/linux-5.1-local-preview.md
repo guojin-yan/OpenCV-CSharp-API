@@ -9,7 +9,15 @@ The [local Linux evidence](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/
 
 Full follows the existing generic preview matrix. Its 17 modules include contrib `ml`; the additional 25 optional contrib modules enabled by the Windows Full build are outside this Linux preview build. Mini reuses the six required libraries from the Full upstream install and builds a separate wrapper. Its staged input and package contain only the Mini dependency closure; this is not an independent minimal upstream compilation. The repository-owned photo CCM instance-state patch is applied to the official OpenCV commit; contrib remains clean.
 
-OpenCV 5.1.0's actual ELF SONAME is `.so.501`, derived from upstream `OPENCV_SOVERSION` as major plus a two-digit minor. Its Windows DLL suffix is `510`, and its canonical Linux filename ends in `.so.5.1.0`. The shared package consumer now derives the ELF ABI name separately and checks 4.10.0, 5.0.0, 5.1.0 and 5.1.2 naming cases. Existing hosted workflow audits that still assume `.so.500` require their own migration and execution evidence before a 5.1 hosted release claim.
+OpenCV 5.1.0's actual ELF SONAME is `.so.501`, derived from upstream `OPENCV_SOVERSION` as major plus a two-digit minor. Its Windows DLL suffix is `510`, and its canonical Linux filename ends in `.so.5.1.0`. The shared package consumer derives the ELF ABI name separately. The producer, package-provenance and package-closure workflows now use the same upstream rule through dedicated PowerShell/POSIX helpers. This includes the lifecycle-refresh candidate producer. No live workflow pins `.so.500`; historical 5.0 fixtures retain their original names.
+
+The [workflow audit evidence](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/opencv-5.1.0-elf-workflow-evidence.json) binds the current workflow/helper bytes and the original Full/Mini package hashes. The exact generic producer audit body ran locally against both preserved runtime directories, with GitHub inputs resolved and paths relocated into temporary workspaces. Full validates 18 canonical ELFs/52 native files and Mini 7/19; dependency and loader checks pass. Restoring the old `.so.500` filename expectation fails for both profiles. This is a local workflow check on the existing Ubuntu producer.
+
+`Test-OpenCvElfSonameSurface.ps1` exercises seven version cases, rejects twelve invalid inputs and executes all nine PowerShell name blocks, thirteen shell name blocks and fourteen dependency-count expressions, including wrong-ABI negative controls. With the retained package artifacts, it also verifies the complete 52/19 native-entry sets and byte equality of each unversioned/SONAME/full-version triplet:
+
+```powershell
+./scripts/Test-OpenCvElfSonameSurface.ps1 -RequirePackageArtifacts
+```
 
 Each wrapper must pass all three native CTests, including ABI manifest consistency and actual exports. The isolated ELF audit checks every canonical binary and alias, x86_64 machine type, exact `$ORIGIN` runtime paths, direct required OpenCV links, resolved dependencies and package payload hashes. It rejects external codec/backend/protobuf SONAMEs and producer search paths. Symbol ceilings are GLIBC 2.35, GLIBCXX 3.4.30 and CXXABI 1.3.13. The recorded per-file floors are measured from `readelf --version-info`.
 

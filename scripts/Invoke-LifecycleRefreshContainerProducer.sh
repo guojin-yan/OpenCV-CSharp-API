@@ -50,6 +50,8 @@ case "$LIFECYCLE_REFRESH_OPENCV_VERSION" in
     ;;
 esac
 
+opencv_elf_soversion="$(sh ./scripts/Get-OpenCvElfSoversion.sh "$LIFECYCLE_REFRESH_OPENCV_VERSION")"
+
 case "$LIFECYCLE_REFRESH_RID" in
   fedora.44-x64)
     expected_distro="fedora"
@@ -280,7 +282,7 @@ for elf in \
     missing_dependency_count=$((missing_dependency_count + 1))
   fi
 done
-direct_opencv_dependencies="$(readelf -d "$audit_dir/libJYPPX.OpenCV.Native.so" | grep NEEDED | grep -c 'libopencv_.*so.500')"
+direct_opencv_dependencies="$(readelf -d "$audit_dir/libJYPPX.OpenCV.Native.so" | grep NEEDED | grep -c "libopencv_.*[.]so[.]${opencv_elf_soversion}]")"
 test "$opencv_elf_count" -eq "$expected_opencv_count"
 test "$machine_count" -eq "$expected_canonical_count"
 test "$origin_count" -eq "$expected_canonical_count"

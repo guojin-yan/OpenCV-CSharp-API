@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Local OpenCV 5.1 ELF workflow audit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "evidenceKind", "execution", "hosted", "publicationAllowed", "sourceBaseCommit", "worktreeChangesIncluded", "sourceInputs", "workflow", "step", "workflowFragmentSha256", "producerContainerId", "producerImage", "scope", "profiles"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "evidenceKind": {"const": "local-linux-5.1-elf-workflow-audit"},
+    "execution": {"const": "local-docker"},
+    "hosted": {"const": false},
+    "publicationAllowed": {"const": false},
+    "sourceBaseCommit": {"type": "string", "pattern": "^[a-f0-9]{40}$"},
+    "worktreeChangesIncluded": {"const": true},
+    "sourceInputs": {
+      "type": "array", "minItems": 5, "maxItems": 5,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {"path": {"type": "string"}, "sha256": {"$ref": "#/$defs/hash"}}
+      }
+    },
+    "workflow": {"const": ".github/workflows/runtime-input.yml"},
+    "step": {"const": "Audit generic Linux preview ELF dependency policy"},
+    "workflowFragmentSha256": {"$ref": "#/$defs/hash"},
+    "producerContainerId": {"$ref": "#/$defs/hash"},
+    "producerImage": {"type": "string", "pattern": "^ubuntu:22[.]04@sha256:[a-f0-9]{64}$"},
+    "scope": {"type": "string", "minLength": 100},
+    "profiles": {
+      "type": "array", "minItems": 2, "maxItems": 2,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["name", "packageSha256", "packageBytes", "runtimeDirectory", "script", "scriptSha256", "exitCode", "output", "outputSha256", "oldSuffixControlExitCode", "oldSuffixControlOutput", "oldSuffixControlOutputSha256"],
+        "properties": {
+          "name": {"enum": ["full", "mini"]},
+          "packageSha256": {"$ref": "#/$defs/hash"},
+          "packageBytes": {"type": "integer", "minimum": 1},
+          "runtimeDirectory": {"type": "string", "pattern": "^/workspace/linux51-output/(full|mini)-runtime$"},
+          "script": {"type": "string", "minLength": 100},
+          "scriptSha256": {"$ref": "#/$defs/hash"},
+          "exitCode": {"const": 0},
+          "output": {"type": "string", "minLength": 100},
+          "outputSha256": {"$ref": "#/$defs/hash"},
+          "oldSuffixControlExitCode": {"const": 1},
+          "oldSuffixControlOutput": {"type": "string", "minLength": 100},
+          "oldSuffixControlOutputSha256": {"$ref": "#/$defs/hash"}
+        }
+      }
+    }
+  },
+  "$defs": {"hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}
+}

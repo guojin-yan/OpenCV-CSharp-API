@@ -1186,6 +1186,8 @@ function Get-Record {
         "packaging/performance/perf-001-5.1.0-baseline.schema.json",
         "packaging/runtime/opencv-5.1.0-local-linux-preview-evidence.json",
         "packaging/runtime/opencv-5.1.0-local-linux-preview-evidence.schema.json",
+        "packaging/runtime/opencv-5.1.0-elf-workflow-evidence.json",
+        "packaging/runtime/opencv-5.1.0-elf-workflow-evidence.schema.json",
         "docs/articles/linux-5.1-local-preview.md",
         "scripts/Build-LocalLinux51Preview.ps1",
         "scripts/Audit-Linux51Runtime.py",
@@ -1193,6 +1195,9 @@ function Get-Record {
         "scripts/Measure-LocalLinux51Evidence.ps1",
         "scripts/Invoke-LocalLinux51Consumer.ps1",
         "scripts/Test-LocalLinux51Evidence.ps1",
+        "scripts/Get-OpenCvElfSoversion.ps1",
+        "scripts/Get-OpenCvElfSoversion.sh",
+        "scripts/Test-OpenCvElfSonameSurface.ps1",
         "packaging/performance/native-aot-smoke-evidence.json",
         "packaging/performance/native-aot-smoke-evidence.schema.json",
         "packaging/performance/native-aot-trim-warning-ledger.json",
@@ -1835,6 +1840,8 @@ function Get-Record {
             CurrentPerformance51Baseline = Get-FileEvidence -RelativePath "packaging/performance/perf-001-5.1.0-baseline.json"
             CurrentLocalLinux51Preview = Get-FileEvidence -RelativePath "packaging/runtime/opencv-5.1.0-local-linux-preview-evidence.json"
             CurrentLocalLinux51PreviewValidated = $true
+            CurrentElfWorkflowEvidence = Get-FileEvidence -RelativePath "packaging/runtime/opencv-5.1.0-elf-workflow-evidence.json"
+            CurrentElfWorkflowEvidenceValidated = $true
             CurrentLinux51ThreeDistroGateComplete = $false
             HistoricalPerformanceRevision = "5.0.0"
             CurrentPerformanceHistoricalComparisonClaimed = $false
