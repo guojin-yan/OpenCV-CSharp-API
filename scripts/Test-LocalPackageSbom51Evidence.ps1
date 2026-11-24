@@ -66,6 +66,19 @@ foreach ($package in $record.packages) {
     & (Join-Path $repo 'scripts/New-ReleasePackageSbom.ps1') -PackagePath $packagePath -SourceCommit $record.sourceCommit -Created $record.created -OpenCvVersion '5.1.0' -OutputPath (Join-Path $repo $package.sbom.path) -Check
     $artifactCount++
 }
+$consumerLogsChecked = 0
+foreach ($consumer in $record.consumers) {
+    $logPath = Join-Path (Join-Path $repo $record.artifactRoot) "logs/consumer-$($consumer.profile)-$($consumer.targetFramework).log"
+    if (-not (Test-Path -LiteralPath $logPath -PathType Leaf)) {
+        if ($RequirePackageArtifacts) { throw 'Required measured package consumer log is missing.' }
+        continue
+    }
+    $log = [IO.File]::ReadAllText($logPath)
+    if ((Get-ModernApi51Sha256 -Path $logPath) -cne $consumer.logSha256 -or
+        -not $log.Contains($consumer.marker, [StringComparison]::Ordinal) -or
+        -not $log.Contains('Consumer package pairs checked: 1.', [StringComparison]::Ordinal)) { throw 'Local consumer log hash or execution marker drifted.' }
+    $consumerLogsChecked++
+}
 
 $recordFixtures = [ordered]@{
     'source input drift' = { param($r) $r.sourceInputSet.sha256 = '0' * 64 }
@@ -105,4 +118,4 @@ foreach ($fixture in $documentFixtures.GetEnumerator()) {
     try { Assert-LocalPackageSbom51Document -Document $document -Package $record.packages[0] -SourceCommit $record.sourceCommit -Created $record.created } catch { $rejected = $true }
     if (-not $rejected) { throw "Local SBOM guard accepted negative SPDX fixture: $($fixture.Key)" }
 }
-Write-Host "LOCAL_SBOM_51_EVIDENCE_OK packages=3 documents=3 managed_tfms=15 native_dlls=50 consumers=4 artifacts_checked=$artifactCount negative_fixtures=$($recordFixtures.Count + $documentFixtures.Count) final_release_set=false approved=false"
+Write-Host "LOCAL_SBOM_51_EVIDENCE_OK packages=3 documents=3 managed_tfms=15 native_dlls=50 consumers=4 artifacts_checked=$artifactCount logs_checked=$consumerLogsChecked negative_fixtures=$($recordFixtures.Count + $documentFixtures.Count) final_release_set=false approved=false"

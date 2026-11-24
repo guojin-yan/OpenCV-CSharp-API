@@ -2,6 +2,16 @@
 
 The current candidate is a local, deterministic preflight only. The generated record is `packaging/release/local-release-candidate-closeout.json`; `scripts/Test-ReleaseCandidateFinalCloseout.ps1` verifies its source-set digest, evidence hashes, API/ABI baselines, support contract, and fail-closed release states. Candidate identity is derived only from the normalized source-set SHA-256, so committing an already verified source set does not invalidate the record through a changing Git HEAD.
 
+## OpenCV 5.1.0 Local SPDX Evidence
+
+The [5.1.0 local package evidence](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/release/opencv-5.1.0-local-sbom-evidence.json) binds one managed package covering all 15 target frameworks and Windows x64 Full/Mini packages to a clean source commit. The three SPDX-2.3 documents are stored under `packaging/release/opencv-5.1.0-local-sbom/`. Each document records the exact unsigned archive SHA256, per-entry SHA1/SHA256, package verification code, source provenance, packaged license files and OpenCV 5.1.0 dependency. Generation is repeated and checked byte-for-byte. Full/Mini native DLL bytes are compared with the verified local 5.1.0 package-consumer payload, and both packages run independent net8.0/net10.0 consumer smoke tests.
+
+Run `scripts/Test-LocalPackageSbom51Evidence.ps1` to check the committed records and documents. Add `-RequirePackageArtifacts` to require the original local `.nupkg` files, re-read every archive entry and rerun the generator in `-Check` mode. A clean checkout can validate the stored evidence without downloading or recreating measured packages.
+
+This is a local Windows x64 subset. It does not complete the release package set, transitive third-party component attribution, vulnerability review, hosted/cross-RID validation, signing or SBOM approval. Final source and package changes require fresh package-bound documents. The stable 5.0.0 procedures and owner exception below remain historical and do not authorize publication of 5.1.0.
+
+[5.1.0 本地包证据](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/release/opencv-5.1.0-local-sbom-evidence.json) 绑定干净源码提交、覆盖 15 个 TFM 的 managed 包与 Windows x64 Full/Mini 包。三个 SPDX-2.3 文档保存于 `packaging/release/opencv-5.1.0-local-sbom/`，包含归档、逐文件哈希、package verification code、源码与许可证证据；重复生成、逐字节检查和 net8/net10 四组消费者运行分别验证。`-RequirePackageArtifacts` 还要求读取原始本地包。该子集不关闭完整发布集合、第三方传递组件归属、漏洞审查、跨 RID、签名或审批；下述 5.0.0 发布流程及维护者例外属于历史，不能授权 5.1.0。
+
 ## Local Checklist
 
 - [x] Managed package and runtime package identities remain version-neutral.

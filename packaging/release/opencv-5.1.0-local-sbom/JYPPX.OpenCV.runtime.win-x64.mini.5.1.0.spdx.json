@@ -1,0 +1,1041 @@
+{
+  "spdxVersion": "SPDX-2.3",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "name": "JYPPX.OpenCV.runtime.win-x64.mini-5.1.0-sbom",
+  "documentNamespace": "https://github.com/guojin-yan/OpenCV-CSharp-API/sbom/JYPPX.OpenCV.runtime.win-x64.mini/5.1.0/234686c80f911dd834695fef2756f51448c4b22f1c5bb3324c765229e7f52dbc",
+  "creationInfo": {
+    "created": "2026-11-24T03:22:20Z",
+    "creators": [
+      "Tool: OpenCV-CSharp-API/scripts/New-ReleasePackageSbom.ps1@1.0.0"
+    ],
+    "comment": "Deterministic release SBOM for normalized package SHA256 234686c80f911dd834695fef2756f51448c4b22f1c5bb3324c765229e7f52dbc at source commit a1d1890ac716eebe641fc48d6af73cfa6384e760."
+  },
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "name": "JYPPX.OpenCV.runtime.win-x64.mini",
+      "versionInfo": "5.1.0",
+      "packageFileName": "JYPPX.OpenCV.runtime.win-x64.mini.5.1.0.nupkg",
+      "supplier": "Person: guojin-yan",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": true,
+      "packageVerificationCode": {
+        "packageVerificationCodeValue": "fb85f3bd44f5a21c670ef773e9c196d51c403f9e"
+      },
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "234686c80f911dd834695fef2756f51448c4b22f1c5bb3324c765229e7f52dbc"
+        }
+      ],
+      "homepage": "https://github.com/guojin-yan/OpenCV-CSharp-API",
+      "sourceInfo": "https://github.com/guojin-yan/OpenCV-CSharp-API commit a1d1890ac716eebe641fc48d6af73cfa6384e760; OpenCV 5.1.0.",
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "copyrightText": "Copyright (c) 2026 guojin-yan",
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:nuget/JYPPX.OpenCV.runtime.win-x64.mini@5.1.0"
+        }
+      ],
+      "comment": "Runtime RID/profile: win-x64/mini; strict source package version: 5.1.0.0; OpenCV modules: core,flann,geometry,imgcodecs,imgproc,videoio; synthetic inputs: false."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-OpenCV",
+      "name": "OpenCV",
+      "versionInfo": "5.1.0",
+      "supplier": "Organization: OpenCV",
+      "downloadLocation": "https://github.com/opencv/opencv/archive/refs/tags/5.1.0.tar.gz",
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "copyrightText": "NOASSERTION",
+      "primaryPackagePurpose": "LIBRARY",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:github/opencv/opencv@5.1.0"
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "SPDXID": "SPDXRef-File-0001-081298ae64f7",
+      "fileName": "./JYPPX.OpenCV.runtime.win-x64.mini.nuspec",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "62eafa398cd83ff508f29441e23365d92a7c2cf0"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "081298ae64f78f3d41e8ca2b4b37cc0337280987275cd673c84bcd739c7a4e26"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0002-5877cdf0ae87",
+      "fileName": "./README.md",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "433fafdfdbfe30a53bc6ecf0c46ed5d82ea48ae0"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "5877cdf0ae87562c5890e62fabcfaf51b55938ed9448988ef0c56e18fbe3c529"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0003-77e0af2b88e8",
+      "fileName": "./[Content_Types].xml",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "470db1279d1616b13e06ba60726eec9746194077"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "77e0af2b88e8e44a118890b6ba4d1f421214d7d88b8dcb500bdc10992e9fed92"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0004-70fc3abfddb0",
+      "fileName": "./_rels/.rels",
+      "fileTypes": [
+        "OTHER"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "ad0f5e2627da17feded0b031a24d348537b6e860"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "70fc3abfddb05d84d36a8851811e9492221e7e15ccb26787b439cd3f5150a182"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0005-6e53a066a6fc",
+      "fileName": "./build/JYPPX.OpenCV.runtime.provenance.json",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "6dccf5726071b9335ff1114df0a961bf7330a0ac"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "6e53a066a6fc6c8cceab5300718baf9b7e30768cfab575ffd93c51ff28988ee4"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0006-9dfc32941de2",
+      "fileName": "./build/runtime-distro-rid-graph.json",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "fe7a4f18c8548ec32d5f6716fd64f87ab41bc939"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "9dfc32941de2daebdee2f8a9bdebd9723627aaec07960bd82fd85939650af8de"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0007-3ddf9be5c28f",
+      "fileName": "./licenses/LICENSE",
+      "fileTypes": [
+        "OTHER"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "47b573e3824cd5e02a1a3ae99e2735b49e0256e4"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "3ddf9be5c28fe27dad143a5dc76eea25222ad1dd68934a047064e56ed2fa40c5"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0008-157c1095adca",
+      "fileName": "./licenses/opencv-3rdparty/SoftFloat-COPYING.txt",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "28334688f6896db6c7332184eaa76f4d0795a09e"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "157c1095adca585146eef6b36f654daff6ade2b4b40dad49aa6cd6b0aaee80ef"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0009-cfc7749b96f6",
+      "fileName": "./licenses/opencv-3rdparty/ade-LICENSE",
+      "fileTypes": [
+        "OTHER"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "2b8b815229aa8a61e483fb4ba0588b8b6c491890"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0010-fd2c451b56d3",
+      "fileName": "./licenses/opencv-3rdparty/annoylib-LICENSE",
+      "fileTypes": [
+        "OTHER"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "d36c365528168d3f528e887fdc2f43d98ddc8ba6"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "fd2c451b56d31cc5f62962bf470fc212b1161d91e7ce0e924562d38f36e4d3cf"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0011-c40f5754e72d",
+      "fileName": "./licenses/opencv-3rdparty/clapack-lapack_LICENSE",
+      "fileTypes": [
+        "OTHER"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "ceb4eeb5374578392d947fa7e6e548d5dace65d3"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "c40f5754e72de9812691410e966c434b1dcb43966110b526c8d7702e1b0d4c42"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0012-9bda2385fa32",
+      "fileName": "./licenses/opencv-3rdparty/dlpack-LICENSE",
+      "fileTypes": [
+        "OTHER"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "b26fa107020fb4defa7f633913eace365a875f57"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "9bda2385fa325d1df6dc39772eba3cc6d07bdfaf2c656cd644cd29f7509514fd"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0013-3ddf9be5c28f",
+      "fileName": "./licenses/opencv-3rdparty/flatbuffers-LICENSE.txt",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "47b573e3824cd5e02a1a3ae99e2735b49e0256e4"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "3ddf9be5c28fe27dad143a5dc76eea25222ad1dd68934a047064e56ed2fa40c5"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0014-866b7d06832b",
+      "fileName": "./licenses/opencv-3rdparty/fonts-Rubik_OFL.txt",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "90a340cad1d650f9659c949fd7f9485834ea8603"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "866b7d06832b2771802b53da1f5c5cdedce38607985e031fd4d3f687437ebce1"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0015-bd836c0ddca8",
+      "fileName": "./licenses/opencv-3rdparty/harfbuzz-COPYING",
+      "fileTypes": [
+        "OTHER"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "8a7158655237f69df0b296d5e5e2403ddcafbf01"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "bd836c0ddca8ea0bab54a03cd32b6ff7256cbb3840fca2edc1249a4ed92c5b02"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0016-f48ca8b3e595",
+      "fileName": "./licenses/opencv-3rdparty/ittnotify-BSD-3-Clause.txt",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "389e61cbf8a3ae13763f9a2b6412df7bf470f284"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "f48ca8b3e59598da8dbcabe6267d375014f9700a3e0c1513b5d7fbc1f53fa6af"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0017-48f45a278068",
+      "fileName": "./licenses/opencv-3rdparty/ittnotify-GPL-2.0-only.txt",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "5bcb280de8c6d7662e18c4a6c545d9c989b52fb2"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "48f45a2780683aa0b35b784974064a8d9274707f63ff714d04cd425d0f575801"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0018-be2b2b5ab168",
+      "fileName": "./licenses/opencv-3rdparty/libjpeg-turbo-LICENSE.md",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "d114846cfaba36553904892e1e0c94f78e01188b"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "be2b2b5ab168bce87bc3e31f2a5c5adba4b7f6e9e51d618e958d1d46972ebd95"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0019-db16a0412817",
+      "fileName": "./licenses/opencv-3rdparty/libjpeg-turbo-README.ijg",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "b595420ff1bafa2dc5827d12c373a9fce967f732"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "db16a04128171879c60708d171b88d97345a2dd20f9bfc173680a4497c73f704"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0020-7366abd36472",
+      "fileName": "./licenses/opencv-3rdparty/libjpeg-turbo-README.md",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "e8872456ff060f49c5cfc3ebab82764229d7b3bc"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "7366abd364726a619dec4ccc9b6175621352d350993b356e909f0a074d7497d1"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0021-1203c08d905d",
+      "fileName": "./licenses/opencv-3rdparty/libopenjp2-LICENSE",
+      "fileTypes": [
+        "OTHER"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "583e0e53d812322968c74f4c89a1265c75a74ac5"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "1203c08d905d7ea23de2efc40fbfb147d593c327cf72f0d55c1e13081798d48d"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0022-a82eefc115f4",
+      "fileName": "./licenses/opencv-3rdparty/libopenjp2-README.md",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "59bae479365f7cc4d1def2e61116070c9ebf5bae"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "a82eefc115f4b6c2c3510651cc656f487f713edfca2be9332e5f55dc4017478b"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0023-452390433ba0",
+      "fileName": "./licenses/opencv-3rdparty/libpng-LICENSE",
+      "fileTypes": [
+        "OTHER"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "3e7be243fa0e6e9f618e738a2c704c0fb6934a17"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "452390433ba0f88aa3e2b122c647741b72a0c117cd6ed7a329b49785aecb5511"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0024-c05a3c74879a",
+      "fileName": "./licenses/opencv-3rdparty/libpng-README",
+      "fileTypes": [
+        "OTHER"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "4b41a01b0356ef4f24549c2db829e479e400a568"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "c05a3c74879af866e08715fbb169be42950665f4d8ed5b7fd5c604b4ec7bca71"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0025-d31876347c51",
+      "fileName": "./licenses/opencv-3rdparty/libtiff-LICENSE.md",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "d8bb1de954e9bcfa985698b82692ced7aebf9f6a"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "d31876347c51d5777698b1e72414921c59344f20dc6f861ebf09403e2d4ea1df"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0026-3562b309154a",
+      "fileName": "./licenses/opencv-3rdparty/mscr-chi_table_LICENSE.txt",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "c89ab719b4d548a162a530ca064ff4467b48dfde"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "3562b309154acbd79175a8c9055897721c1a770f4f5208aa12d0e6284812c84d"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0027-f4df8b245769",
+      "fileName": "./licenses/opencv-3rdparty/protobuf-LICENSE",
+      "fileTypes": [
+        "OTHER"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "57919d5bf210193d05ba496a870832582f475559"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "f4df8b2457697851385d9ebb93267832c1dfa24e0e61881952f6b0c452663dc9"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0028-521eae82acd5",
+      "fileName": "./licenses/opencv-3rdparty/protobuf-README.md",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "942bcd157669db7b5739d828fb1f2712f5fa9cbd"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "521eae82acd5726bfc6b45aef1f91288054a60111426158c625d75aa02c2ed0a"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0029-5e496490f045",
+      "fileName": "./licenses/opencv-3rdparty/xfeatures2d-LICENSE.AKAZE",
+      "fileTypes": [
+        "OTHER"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "b4cf8ab6bb17d4698938c1d5aab8c3a03758a921"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "5e496490f0453c93ba1a021c9c3d6b9dc8c265f674968ac16ffbef98350759c4"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0030-6d66d0c28379",
+      "fileName": "./licenses/opencv-3rdparty/xfeatures2d-LICENSE.KAZE",
+      "fileTypes": [
+        "OTHER"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "6a8fcc2b8c41ad0aba517a34723b8e28dccb99da"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "6d66d0c283794e73e5909b7bc6dd1149edf2494ab49afeb0fb0fa6e57bbf3ff0"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0031-439c75ab12b3",
+      "fileName": "./licenses/opencv-3rdparty/zlib-LICENSE",
+      "fileTypes": [
+        "OTHER"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "19e690398893dde968a3266a70d37c0d3a125336"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "439c75ab12b340c5362b9d4b08ff05ec3a4d0eb7667a6fff49a9b16d8795c78e"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0032-f85de97828d9",
+      "fileName": "./logo.jpg",
+      "fileTypes": [
+        "OTHER"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "9e4824760a10cf1a2925118a09631b484a5e8184"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "f85de97828d9f152903c8b90e8ee89aa1575ff8d0ef1c3704526e27dfe0d54d0"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0033-138434e70bca",
+      "fileName": "./package/services/metadata/core-properties/core-properties.psmdcp",
+      "fileTypes": [
+        "TEXT"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "07e489b4784770659a1582845f136cd2fce2cf6c"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "138434e70bca1c8a50a954e3cb28eab89ab10a9dce647e8f10993be19526d3c8"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0034-16b0d302095f",
+      "fileName": "./runtimes/win-x64/native/JYPPX.OpenCV.Native.dll",
+      "fileTypes": [
+        "BINARY"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "370aa92394c51fa1a36afcd33f40638dd1e4df91"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "16b0d302095ffc1d8619b2f6f08058eea6ae1290dcd01a6d5e39a9a33cfebef1"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0035-6888f84e2b2e",
+      "fileName": "./runtimes/win-x64/native/opencv_core510.dll",
+      "fileTypes": [
+        "BINARY"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "02a2be89453233ecd90def911068648e7b986ed0"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "6888f84e2b2ebe707e0a093ef2b3be9f500ea8bab1b60eea7a468060635be403"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0036-45d860283c0f",
+      "fileName": "./runtimes/win-x64/native/opencv_flann510.dll",
+      "fileTypes": [
+        "BINARY"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "b2a0a551cfaa20ab98481b3749903ae40a4685e2"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "45d860283c0f8494bcdc5e6d495e0e6a13755a6108e8510b8a769763c4f3a549"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0037-a6b5a7f54568",
+      "fileName": "./runtimes/win-x64/native/opencv_geometry510.dll",
+      "fileTypes": [
+        "BINARY"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "06078c648ec20e64b23573a0687377260167909b"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "a6b5a7f54568cee502d1ab36502ff50b2d915582f146fc8de2adc04ab0dcca8b"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0038-d64f7347a182",
+      "fileName": "./runtimes/win-x64/native/opencv_imgcodecs510.dll",
+      "fileTypes": [
+        "BINARY"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "9c358858164ad22abb70699070178f4675a573eb"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "d64f7347a182b2a64817db661a74ff827ad97c72c040273501f946eb2d10e382"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0039-7a9e3c382f60",
+      "fileName": "./runtimes/win-x64/native/opencv_imgproc510.dll",
+      "fileTypes": [
+        "BINARY"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "dffd1db60ece9909c217187952c852f37105b00b"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "7a9e3c382f6013521f08e037810a2e7b5a8fe1cfd9c763c509a79fcd76198b1e"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "SPDXID": "SPDXRef-File-0040-4140341b2cd0",
+      "fileName": "./runtimes/win-x64/native/opencv_videoio510.dll",
+      "fileTypes": [
+        "BINARY"
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "da732927a8fa5e87a6e8a02afb939915914367a7"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "4140341b2cd0599e283257a2bb23b10752f2f9854405ebfc34acc9a97a5f66b5"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-Package-OpenCV"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0001-081298ae64f7"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0002-5877cdf0ae87"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0003-77e0af2b88e8"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0004-70fc3abfddb0"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0005-6e53a066a6fc"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0006-9dfc32941de2"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0007-3ddf9be5c28f"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0008-157c1095adca"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0009-cfc7749b96f6"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0010-fd2c451b56d3"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0011-c40f5754e72d"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0012-9bda2385fa32"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0013-3ddf9be5c28f"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0014-866b7d06832b"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0015-bd836c0ddca8"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0016-f48ca8b3e595"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0017-48f45a278068"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0018-be2b2b5ab168"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0019-db16a0412817"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0020-7366abd36472"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0021-1203c08d905d"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0022-a82eefc115f4"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0023-452390433ba0"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0024-c05a3c74879a"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0025-d31876347c51"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0026-3562b309154a"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0027-f4df8b245769"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0028-521eae82acd5"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0029-5e496490f045"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0030-6d66d0c28379"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0031-439c75ab12b3"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0032-f85de97828d9"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0033-138434e70bca"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0034-16b0d302095f"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0035-6888f84e2b2e"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0036-45d860283c0f"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0037-a6b5a7f54568"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0038-d64f7347a182"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0039-7a9e3c382f60"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64.mini",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-File-0040-4140341b2cd0"
+    }
+  ]
+}

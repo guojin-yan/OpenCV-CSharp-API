@@ -1,8 +1,8 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/5cc3b7e2305dc520",
-  "SourceIdentity": "sha256:5cc3b7e2305dc520e33b79baec139bab871d1d69b697e0795faf62dda1b64bb8",
+  "CandidateId": "local-closeout/sha256/1f3dcd317b086d27",
+  "SourceIdentity": "sha256:1f3dcd317b086d27f364633eab15a7a0e4f5597e769be33f79c5adc9ebda15f2",
   "OpenCvRevision": "5.1.0",
   "RevisionValidation": {
     "CurrentBuildEvidence": {
@@ -44,8 +44,8 @@
     "CurrentRevisionUpstreamParityClaimed": false
   },
   "SourceSet": {
-    "FileCount": 2980,
-    "Sha256": "5cc3b7e2305dc520e33b79baec139bab871d1d69b697e0795faf62dda1b64bb8",
+    "FileCount": 2988,
+    "Sha256": "1f3dcd317b086d27f364633eab15a7a0e4f5597e769be33f79c5adc9ebda15f2",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -5207,8 +5207,8 @@
     },
     {
       "Path": "compatibility/v5.1.0-change-ledger.json",
-      "Sha256": "5bd8a03faa68ece1ce3f496540a84c0084717f4dbaa2a49dd5e3e0d89f0cd622",
-      "Length": 150906
+      "Sha256": "db99491b1aa1aac1cbbf0f63719caed6016a7ccb484e3953be0907fb81524d69",
+      "Length": 152129
     },
     {
       "Path": "compatibility/v5.1.0-change-ledger.schema.json",
@@ -5837,8 +5837,8 @@
     },
     {
       "Path": "docs/articles/release-candidate-closeout.md",
-      "Sha256": "e35f6ab6eb36ccdc2f860d9b6889ffd72ba953e9c39abbd2a5b4194a78c55317",
-      "Length": 11830
+      "Sha256": "ec7f98dcefbc9f610c9cfe21c4871fe7b2d4d65f3b307211e671a44a413921db",
+      "Length": 14108
     },
     {
       "Path": "docs/articles/rgbd-upstream-parity-guide.md",
@@ -6254,6 +6254,31 @@
       "Path": "packaging/platform/domestic-platform-certification-matrix.schema.json",
       "Sha256": "66f7fed8ba089841b389702193f071740fea8a0be1bfc8ba655405279a5f8d12",
       "Length": 4065
+    },
+    {
+      "Path": "packaging/release/opencv-5.1.0-local-sbom-evidence.json",
+      "Sha256": "990d592aab310d96c3f9d0dbaffc2fa41213407558fd21e418465bd3ec442555",
+      "Length": 45630
+    },
+    {
+      "Path": "packaging/release/opencv-5.1.0-local-sbom-evidence.schema.json",
+      "Sha256": "351ba3d34a5c19ed5b2f13933c97ed55d0764600205e5a21d1b707f3c833e791",
+      "Length": 7610
+    },
+    {
+      "Path": "packaging/release/opencv-5.1.0-local-sbom/JYPPX.OpenCV.CSharp.API.5.1.0.spdx.json",
+      "Sha256": "86c71688ef8eafec3c4013d590d2804d76947f7f2085b40431c4a9f9d2bec19f",
+      "Length": 29114
+    },
+    {
+      "Path": "packaging/release/opencv-5.1.0-local-sbom/JYPPX.OpenCV.runtime.win-x64.5.1.0.spdx.json",
+      "Sha256": "7be63662326ea67152a9b4d0628203c3f3682fe87f9a9d60fe47c8d12f91fb21",
+      "Length": 59423
+    },
+    {
+      "Path": "packaging/release/opencv-5.1.0-local-sbom/JYPPX.OpenCV.runtime.win-x64.mini.5.1.0.spdx.json",
+      "Sha256": "9502e1b4f817130ba228678a7a946eafb1d5ce85ef7b81c6a7e58185f8a91c08",
+      "Length": 32716
     },
     {
       "Path": "packaging/runtime/JYPPX.OpenCV.runtime/buildTransitive/JYPPX.OpenCV.runtime.targets",
@@ -6846,6 +6871,11 @@
       "Length": 15717
     },
     {
+      "Path": "scripts/LocalPackageSbom51.Common.ps1",
+      "Sha256": "c40e9069afe2237e56faea5a88dd1714e02bf241b32ca9ae721fdee990a4ead2",
+      "Length": 10713
+    },
+    {
       "Path": "scripts/Measure-CapabilityProfileEvidence.ps1",
       "Sha256": "042bb7d459dd3ab763451c59096539b5fe45e78be85c72332fbc5de2bf834cc8",
       "Length": 11584
@@ -6874,6 +6904,11 @@
       "Path": "scripts/Measure-ImagePreflightFuzz.ps1",
       "Sha256": "6f67bac667bc02f0333371edbd18744d0a8f8d911addfaa2d4e74fb559f382d0",
       "Length": 14861
+    },
+    {
+      "Path": "scripts/Measure-LocalPackageSbom51Evidence.ps1",
+      "Sha256": "ec4a206601b017ce4f00419510ce78bae3753323559e87c16c743e247b46adfb",
+      "Length": 11329
     },
     {
       "Path": "scripts/Measure-ModernApi51Evidence.ps1",
@@ -6927,8 +6962,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "90ae2b52522d4252a8710f4292d74f7bd54ddbdf8d8558a72a0365c44e6ad7aa",
-      "Length": 225870
+      "Sha256": "2dc310e16ab1a3d163a4d77edbe1c0a3d7190d471b1ef5e2c56aae2ef5cfcafe",
+      "Length": 226521
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -7271,6 +7306,11 @@
       "Length": 3093
     },
     {
+      "Path": "scripts/Test-LocalPackageSbom51Evidence.ps1",
+      "Sha256": "caca18336020b70ca066ebb24283967b8f1e227575d157833f1607cac805edb3",
+      "Length": 9552
+    },
+    {
       "Path": "scripts/Test-ManagedPackageIsolatedArtifactSurface.ps1",
       "Sha256": "0fd4062cfce24dbd1d279e420ed657704d2f7737489c9ec283767b70acc1128e",
       "Length": 19112
@@ -7427,8 +7467,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "e8102eb7002677d941fb3e421974982d22ebd6df0f965d3565580ae044a5901f",
-      "Length": 201950
+      "Sha256": "c08f9b98b7bc0d2c8338a6ded1bcb3f04a800e79d8fdb2114fad57063bb11751",
+      "Length": 202547
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -9353,7 +9393,7 @@
   ],
   "LocalValidation": {
     "Status": "locally-validated",
-    "InvariantGuardCount": 108,
+    "InvariantGuardCount": 109,
     "RequiredChecks": [
       "actionlint-1.7.12",
       "api-abi-baseline",
@@ -9440,7 +9480,7 @@
     {
       "Id": "opencv-5.1-evidence-refresh",
       "Status": "cross-rid-and-promotion-evidence-pending",
-      "Evidence": "Windows x64 OpenCV 5.1.0 source, Full/Mini wrapper builds, local Full/Mini package restore/build/native smoke, and local candidate package PE closure are verified. The inherited 5.0.0 maps and multi-RID/hosted support records remain historical; cross-RID hosted evidence, signing and SBOM promotion remain open."
+      "Evidence": "Windows x64 OpenCV 5.1.0 source, Full/Mini wrapper builds, local Full/Mini package restore/build/native smoke, local candidate package PE closure, and a local package-bound SPDX subset are verified. The inherited 5.0.0 maps and multi-RID/hosted support records remain historical; cross-RID hosted evidence, final SBOM promotion, signing and publication remain open."
     },
     {
       "Id": "publication-authorization",
