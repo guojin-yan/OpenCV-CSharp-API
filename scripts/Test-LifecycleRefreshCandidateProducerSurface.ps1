@@ -57,6 +57,15 @@ foreach ($token in @(
     Assert-Contains -Text $workflow -Needle $token -Path $workflowRelativePath
 }
 
+$producerJobText = [regex]::Match(
+    $workflow,
+    '(?ms)^  produce-lifecycle-refresh-container:.*?(?=^  [A-Za-z0-9_-]+:|\z)'
+).Value
+if ([string]::IsNullOrWhiteSpace($producerJobText) -or
+    $producerJobText -notmatch '(?ms)^      - uses: actions/checkout@[^\r\n]*\r?\n        with:\r?\n          fetch-depth: 0(?:\r?\n|$)') {
+    throw "$workflowRelativePath lifecycle-refresh producer must check out complete Git history before running project invariants."
+}
+
 foreach ($token in @(
         "[ValidateSet('fedora.44-x64', 'alpine.3.23-x64')]",
         "[ValidateSet('full', 'mini')]",
