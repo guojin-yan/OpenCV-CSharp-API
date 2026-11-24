@@ -11,6 +11,8 @@ if (-not (Test-Path -LiteralPath $schemaPath -PathType Leaf)) { throw "Capabilit
 
 $dotnet = Get-Command dotnet -ErrorAction Stop
 $project = Join-Path $repo 'samples/ConsoleSamples/ConsoleSamples.csproj'
+$null = & $dotnet.Source restore $project 2>&1
+if ($LASTEXITCODE -ne 0) { throw "capabilities-json sample restore failed with exit code $LASTEXITCODE." }
 $output = @(& $dotnet.Source run --project $project -c Release --no-restore -- capabilities-json 2>&1)
 if ($LASTEXITCODE -ne 0) { throw "capabilities-json sample failed with exit code $LASTEXITCODE." }
 $jsonLines = @($output | ForEach-Object { [string]$_ } | Where-Object { $_.TrimStart().StartsWith('{') -and $_.TrimEnd().EndsWith('}') })
