@@ -1,0 +1,399 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/modern-api-5.1.0-evidence.schema.json",
+  "title": "OpenCV 5.1 modern API isolated runtime evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "status",
+    "sourceCommit",
+    "openCvVersion",
+    "managedPackageVersion",
+    "nativeAbiVersion",
+    "runner",
+    "sourceInputSet",
+    "packageConsumerEvidence",
+    "runtimePackages",
+    "capabilityProfiles",
+    "testRuns",
+    "limits",
+    "limitations"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "modern-api-5.1.0-evidence.schema.json"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "status": {
+      "const": "verified-local-windows-x64"
+    },
+    "sourceCommit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "openCvVersion": {
+      "const": "5.1.0"
+    },
+    "managedPackageVersion": {
+      "const": "5.1.0"
+    },
+    "nativeAbiVersion": {
+      "const": 1
+    },
+    "runner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "os",
+        "architecture",
+        "dotnetSdk",
+        "configuration"
+      ],
+      "properties": {
+        "os": {
+          "type": "string",
+          "minLength": 1
+        },
+        "architecture": {
+          "const": "x64"
+        },
+        "dotnetSdk": {
+          "type": "string",
+          "pattern": "^10\\.0\\.\\d+$"
+        },
+        "configuration": {
+          "const": "Release"
+        }
+      }
+    },
+    "sourceInputSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "paths",
+        "fileCount",
+        "sha256"
+      ],
+      "properties": {
+        "paths": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "fileCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "packageConsumerEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "const": "packaging/runtime/opencv-5.1.0-package-consumer-evidence.json"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "runtimePackages": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "profile",
+          "packageFileName",
+          "packageSha256",
+          "payload"
+        ],
+        "properties": {
+          "profile": {
+            "enum": [
+              "full",
+              "mini"
+            ]
+          },
+          "packageFileName": {
+            "type": "string",
+            "pattern": "^jyppx\\.opencv\\.runtime\\.win-x64(\\.mini)?\\.5\\.1\\.0\\.nupkg$"
+          },
+          "packageSha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "payload": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "name",
+                "bytes",
+                "sha256"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "pattern": "^(JYPPX\\.OpenCV\\.Native|opencv_[a-z0-9_]+510)\\.dll$"
+                },
+                "bytes": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "capabilityProfiles": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "profile",
+          "targetFramework",
+          "nativeDllCount",
+          "apiAssemblySha256",
+          "sampleAssemblySha256",
+          "isolation",
+          "snapshotJson",
+          "snapshotSha256"
+        ],
+        "properties": {
+          "profile": {
+            "enum": [
+              "none",
+              "full",
+              "mini"
+            ]
+          },
+          "targetFramework": {
+            "const": "net10.0"
+          },
+          "nativeDllCount": {
+            "enum": [
+              0,
+              43,
+              7
+            ]
+          },
+          "apiAssemblySha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "sampleAssemblySha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "isolation": {
+            "$ref": "#/$defs/isolation"
+          },
+          "snapshotJson": {
+            "type": "string",
+            "minLength": 2
+          },
+          "snapshotSha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "testRuns": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "profile",
+          "targetFramework",
+          "nativeDllCount",
+          "apiAssemblySha256",
+          "testAssemblySha256",
+          "isolation",
+          "total",
+          "passed",
+          "failed",
+          "skipped",
+          "testCases",
+          "trx",
+          "headlessOutput"
+        ],
+        "properties": {
+          "profile": {
+            "enum": [
+              "none",
+              "full",
+              "mini"
+            ]
+          },
+          "targetFramework": {
+            "enum": [
+              "net8.0",
+              "net10.0"
+            ]
+          },
+          "nativeDllCount": {
+            "enum": [
+              0,
+              43,
+              7
+            ]
+          },
+          "apiAssemblySha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "testAssemblySha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "isolation": {
+            "$ref": "#/$defs/isolation"
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "passed": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "failed": {
+            "const": 0
+          },
+          "skipped": {
+            "const": 0
+          },
+          "testCases": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "trx": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "bytes",
+              "sha256"
+            ],
+            "properties": {
+              "bytes": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            }
+          },
+          "headlessOutput": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stableCodecWriterPromoted",
+        "headlessPackageIdentityAllowed",
+        "crossRidValidated",
+        "absoluteAllocationGuarantee"
+      ],
+      "properties": {
+        "stableCodecWriterPromoted": {
+          "const": false
+        },
+        "headlessPackageIdentityAllowed": {
+          "const": false
+        },
+        "crossRidValidated": {
+          "const": false
+        },
+        "absoluteAllocationGuarantee": {
+          "const": false
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "$defs": {
+    "isolation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runtimeRootUnset",
+        "displayUnset",
+        "waylandDisplayUnset",
+        "pathRestricted",
+        "nativeSmokeEnabled",
+        "headlessSmokeEnabled"
+      ],
+      "properties": {
+        "runtimeRootUnset": {
+          "const": true
+        },
+        "displayUnset": {
+          "const": true
+        },
+        "waylandDisplayUnset": {
+          "const": true
+        },
+        "pathRestricted": {
+          "const": true
+        },
+        "nativeSmokeEnabled": {
+          "type": "boolean"
+        },
+        "headlessSmokeEnabled": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

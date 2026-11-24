@@ -311,6 +311,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "OpenCV 5.1 isolated modern API evidence"
+        Script = Join-Path $repo "scripts/Test-ModernApi51Evidence.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Codec writer native evidence"
         Script = Join-Path $repo "scripts/Test-CodecWriterNativeEvidence.ps1"
         Arguments = @("-RepositoryRoot", $repo)
