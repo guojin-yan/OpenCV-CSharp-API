@@ -3,13 +3,13 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "JYPPX.OpenCV.runtime.win-x64-5.1.0-sbom",
-  "documentNamespace": "https://github.com/guojin-yan/OpenCV-CSharp-API/sbom/JYPPX.OpenCV.runtime.win-x64/5.1.0/689f4b1418b717d772993ce8153f9c4bd18ccbf1aefa473180376f8c97a89048",
+  "documentNamespace": "https://github.com/guojin-yan/OpenCV-CSharp-API/sbom/JYPPX.OpenCV.runtime.win-x64/5.1.0/fe58985b2909978a6e2d80cc6dec3df5e0e08c5f015019359f0d77ffd611f921",
   "creationInfo": {
-    "created": "2026-11-24T03:22:20Z",
+    "created": "2026-11-24T04:22:51Z",
     "creators": [
       "Tool: OpenCV-CSharp-API/scripts/New-ReleasePackageSbom.ps1@1.0.0"
     ],
-    "comment": "Deterministic release SBOM for normalized package SHA256 689f4b1418b717d772993ce8153f9c4bd18ccbf1aefa473180376f8c97a89048 at source commit a1d1890ac716eebe641fc48d6af73cfa6384e760."
+    "comment": "Deterministic release SBOM for normalized package SHA256 fe58985b2909978a6e2d80cc6dec3df5e0e08c5f015019359f0d77ffd611f921 at source commit 39c73be01bb1a568d9db4051f75ca1516bdfae51."
   },
   "packages": [
     {
@@ -21,16 +21,16 @@
       "downloadLocation": "NOASSERTION",
       "filesAnalyzed": true,
       "packageVerificationCode": {
-        "packageVerificationCodeValue": "82d2273917c8a1401c932aca5e2ddd8a8b0049a0"
+        "packageVerificationCodeValue": "e7fe6c4bdc96aa308fad4f4cd29b60f4db2bb834"
       },
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "689f4b1418b717d772993ce8153f9c4bd18ccbf1aefa473180376f8c97a89048"
+          "checksumValue": "fe58985b2909978a6e2d80cc6dec3df5e0e08c5f015019359f0d77ffd611f921"
         }
       ],
       "homepage": "https://github.com/guojin-yan/OpenCV-CSharp-API",
-      "sourceInfo": "https://github.com/guojin-yan/OpenCV-CSharp-API commit a1d1890ac716eebe641fc48d6af73cfa6384e760; OpenCV 5.1.0.",
+      "sourceInfo": "https://github.com/guojin-yan/OpenCV-CSharp-API commit 39c73be01bb1a568d9db4051f75ca1516bdfae51; OpenCV 5.1.0.",
       "licenseConcluded": "Apache-2.0",
       "licenseDeclared": "Apache-2.0",
       "copyrightText": "Copyright (c) 2026 guojin-yan",
@@ -66,7 +66,7 @@
   ],
   "files": [
     {
-      "SPDXID": "SPDXRef-File-0001-8b1fca63ce11",
+      "SPDXID": "SPDXRef-File-0001-d9d9bd819428",
       "fileName": "./JYPPX.OpenCV.runtime.win-x64.nuspec",
       "fileTypes": [
         "TEXT"
@@ -74,11 +74,11 @@
       "checksums": [
         {
           "algorithm": "SHA1",
-          "checksumValue": "6062f4310ddf34dd5031ccd70b555500850742ad"
+          "checksumValue": "8b630577ec9f87df27ba4f346426e6f7e5eacfcb"
         },
         {
           "algorithm": "SHA256",
-          "checksumValue": "8b1fca63ce11ae1d51687828076e8f5e85cd56173e8dce9a0da7a564386b0765"
+          "checksumValue": "d9d9bd81942874cac63a5fffbec33e588e241b3e49947284e5538cadcd1bf560"
         }
       ],
       "licenseConcluded": "NOASSERTION",
@@ -142,7 +142,7 @@
       "copyrightText": "NOASSERTION"
     },
     {
-      "SPDXID": "SPDXRef-File-0005-adcdc3e24b68",
+      "SPDXID": "SPDXRef-File-0005-17b91eb227e4",
       "fileName": "./build/JYPPX.OpenCV.runtime.provenance.json",
       "fileTypes": [
         "TEXT"
@@ -150,11 +150,11 @@
       "checksums": [
         {
           "algorithm": "SHA1",
-          "checksumValue": "f13bdb6a9ac1882eb5c51183d37efae331c4cef9"
+          "checksumValue": "3a36cb67dfd92480219db80f7792518da1c45b91"
         },
         {
           "algorithm": "SHA256",
-          "checksumValue": "adcdc3e24b685892c93b9473ad67dde655362f4d68244bbe3a52b845d3c6319a"
+          "checksumValue": "17b91eb227e462c289dfa669f55edbb87ed0f7027f2975d5ed69bf864fdefff0"
         }
       ],
       "licenseConcluded": "NOASSERTION",
@@ -1524,7 +1524,7 @@
     {
       "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64",
       "relationshipType": "CONTAINS",
-      "relatedSpdxElement": "SPDXRef-File-0001-8b1fca63ce11"
+      "relatedSpdxElement": "SPDXRef-File-0001-d9d9bd819428"
     },
     {
       "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64",
@@ -1544,7 +1544,7 @@
     {
       "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64",
       "relationshipType": "CONTAINS",
-      "relatedSpdxElement": "SPDXRef-File-0005-adcdc3e24b68"
+      "relatedSpdxElement": "SPDXRef-File-0005-17b91eb227e4"
     },
     {
       "spdxElementId": "SPDXRef-Package-JYPPX.OpenCV.runtime.win-x64",
