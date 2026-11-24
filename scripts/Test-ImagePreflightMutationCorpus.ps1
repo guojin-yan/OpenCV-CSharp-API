@@ -95,7 +95,6 @@ foreach ($framework in $frameworks) {
             'IdentifyDeterministicMutationCorpusPreservesSeekAndConsumesNonSeekStreams',
             'GifMetadataBudgetsRejectBeforeNativeDecodeAndAcceptExactStoredLengths',
             'GifStrictMetadataPolicyRejectsUnknownLengthsWhilePermissiveIdentifyPreservesThem',
-            'IdentifyDoesNotPublishGifPixelFactsForInvalidVersionSignature',
             'IdentifyDoesNotUseUnassociatedAvifProperties',
             'IdentifyUsesOnlyPropertiesOfThePrimaryAvifItem',
             'AvifPrimaryItemLimitsRejectBeforeNativeDecodeAndPreserveStreamPosition',
@@ -179,6 +178,10 @@ foreach ($framework in $frameworks) {
             'IdentifyCountsSunRasterRleBeyondInt32WithoutAllocatingExpandedRaster',
             'IdentifyDeterministicMutationCorpusSunRasterNeverEscapesOrPublishesInconsistentStorageFacts')) {
         if (@($results | Where-Object { ([string]$_.testName).Contains($requiredTest) -and [string]$_.outcome -ceq 'Passed' }).Count -ne 1) { throw "Required image preflight test did not pass on ${framework}: $requiredTest" }
+    }
+    foreach ($signature in @('major: 48, minor: 57, suffix: 97', 'major: 56, minor: 56, suffix: 97', 'major: 56, minor: 57, suffix: 98')) {
+        $suffix = '.GifMetadataPreflightTests.IdentifyDoesNotPublishGifPixelFactsForInvalidVersionSignature(' + $signature + ')'
+        if (@($results | Where-Object { ([string]$_.testName).EndsWith($suffix, [StringComparison]::Ordinal) -and [string]$_.outcome -ceq 'Passed' }).Count -ne 1) { throw "Required GIF version regression did not pass on ${framework}: $signature" }
     }
     foreach ($requiredRegression in @(
             'IdentifyNeverLetsDuplicateTiffDimensionsOverrideTheAdmissionBudget',
