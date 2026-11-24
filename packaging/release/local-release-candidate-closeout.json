@@ -1,8 +1,8 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/77edb00dfd67fd2a",
-  "SourceIdentity": "sha256:77edb00dfd67fd2addfb52cb857ac68a4b98f177ea6a2b094491c2d94849e1fa",
+  "CandidateId": "local-closeout/sha256/4964b74b4b9b4936",
+  "SourceIdentity": "sha256:4964b74b4b9b49367e3e57d814afba00c0c3242a5d06a48b84b511c1fe0b16b4",
   "OpenCvRevision": "5.1.0",
   "RevisionValidation": {
     "CurrentBuildEvidence": {
@@ -51,6 +51,12 @@
       "Length": 582686
     },
     "CurrentLocalLinux51VideoOnnxConsumersValidated": true,
+    "CurrentLocalLinux51AotEvidence": {
+      "Path": "packaging/runtime/opencv-5.1.0-local-linux-aot-evidence.json",
+      "Sha256": "e57116bb9987ed0b7e3e826bbb00a178bd75fad56b6b3295df3b68d3888f706d",
+      "Length": 285464
+    },
+    "CurrentLocalLinux51AotConsumersValidated": true,
     "CurrentLinux51ThreeDistroGateComplete": false,
     "HistoricalPerformanceRevision": "5.0.0",
     "CurrentPerformanceHistoricalComparisonClaimed": false,
@@ -76,8 +82,8 @@
     "CurrentRevisionUpstreamParityClaimed": false
   },
   "SourceSet": {
-    "FileCount": 3025,
-    "Sha256": "77edb00dfd67fd2addfb52cb857ac68a4b98f177ea6a2b094491c2d94849e1fa",
+    "FileCount": 3036,
+    "Sha256": "4964b74b4b9b49367e3e57d814afba00c0c3242a5d06a48b84b511c1fe0b16b4",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -5239,8 +5245,8 @@
     },
     {
       "Path": "compatibility/v5.1.0-change-ledger.json",
-      "Sha256": "3cc9e20a0bc89e9e974eb69a2be580e6c33972477b7c18a4c1cb7bc686d15c45",
-      "Length": 156708
+      "Sha256": "367bb6ba4fdcfe0e14a6c6e00e71d67022749ade16abc569f6715a09b02aeb8b",
+      "Length": 157769
     },
     {
       "Path": "compatibility/v5.1.0-change-ledger.schema.json",
@@ -5749,8 +5755,8 @@
     },
     {
       "Path": "docs/articles/linux-5.1-local-preview.md",
-      "Sha256": "fe2d8e2744a71f8e914a66b15f10f9a6e33f19d8c0062f2935b727265bb1e6e4",
-      "Length": 12696
+      "Sha256": "93de91446580f7d73eb10de74c06d43a8bc0f6f241dd968fa38b16189d68468d",
+      "Length": 13871
     },
     {
       "Path": "docs/articles/matlab-upstream-parity-guide.md",
@@ -5764,8 +5770,8 @@
     },
     {
       "Path": "docs/articles/native-aot-trim-single-file-adr.md",
-      "Sha256": "48dac8fe19e1771f3be4474c29a9a84cae1ea7f037a8a8271cc045dc64a8118e",
-      "Length": 5167
+      "Sha256": "f19fe01e169dd8ca5d2c7b37bc35eb22b816a3721caad8bfdb78e3610fc02c8d",
+      "Length": 8575
     },
     {
       "Path": "docs/articles/objdetect-structured-parity-guide.md",
@@ -6373,6 +6379,16 @@
       "Length": 2701
     },
     {
+      "Path": "packaging/runtime/opencv-5.1.0-local-linux-aot-evidence.json",
+      "Sha256": "e57116bb9987ed0b7e3e826bbb00a178bd75fad56b6b3295df3b68d3888f706d",
+      "Length": 285464
+    },
+    {
+      "Path": "packaging/runtime/opencv-5.1.0-local-linux-aot-evidence.schema.json",
+      "Sha256": "a0590ca043cad4b812288b5a3dd8c3e0b8511e017b2bcb58851387cbd3769fcc",
+      "Length": 9523
+    },
+    {
       "Path": "packaging/runtime/opencv-5.1.0-local-linux-distro-consumer-evidence.json",
       "Sha256": "0c27d2da280b08bc5f6fb906cd25936f18754695853b65f0fcf1de753ceb4d57",
       "Length": 35039
@@ -6576,6 +6592,11 @@
       "Path": "scripts/Build-AndroidRuntimeInput.ps1",
       "Sha256": "5d5045b27828875b88d622a507484a737f302cbf038f18f582cdce02622d3a8f",
       "Length": 16423
+    },
+    {
+      "Path": "scripts/Build-LocalLinux51AotConsumer.ps1",
+      "Sha256": "b228085f19a6a656b2a643d682699e7df8e45285dffebd6360619f9c9877127d",
+      "Length": 8334
     },
     {
       "Path": "scripts/Build-LocalLinux51Preview.ps1",
@@ -6973,6 +6994,16 @@
       "Length": 1490
     },
     {
+      "Path": "scripts/Initialize-LocalLinux51AotConsumer.sh",
+      "Sha256": "a8e39a859f2a0e84e4543bf6d4a8eb810592fd883aa8a97de11979c3580aa9c9",
+      "Length": 1377
+    },
+    {
+      "Path": "scripts/Initialize-LocalLinux51AotProducer.sh",
+      "Sha256": "0ab19666d7660f19c5a75895fbf8b16b63b1d9c3133390be44d29188d7447856",
+      "Length": 1413
+    },
+    {
       "Path": "scripts/Initialize-LocalLinux51DistroConsumer.sh",
       "Sha256": "c3f06db986ee214135b471805b4b9164023cadf8ee02649dc5a642afecaeb0be",
       "Length": 2157
@@ -6998,6 +7029,11 @@
       "Length": 15846
     },
     {
+      "Path": "scripts/Invoke-LocalLinux51AotConsumer.sh",
+      "Sha256": "c386c65579ff76531750bb83d40dee74b92b9a20c608cd4a5de05d887984a32e",
+      "Length": 2214
+    },
+    {
       "Path": "scripts/Invoke-LocalLinux51Consumer.ps1",
       "Sha256": "cb0883c9b78fcbd3a47ea35b023a617c166aad6b98202c21b759d01303455954",
       "Length": 2335
@@ -7016,6 +7052,11 @@
       "Path": "scripts/LocalLinux51.Common.ps1",
       "Sha256": "0acd17a7d985a661cacc530669fadf3776f49193ea6e0eee394deded06e539c7",
       "Length": 4023
+    },
+    {
+      "Path": "scripts/LocalLinux51Aot.Common.ps1",
+      "Sha256": "2126184c05d3be931648282a55cc275273d1a5d095299f1af9900533b651bf79",
+      "Length": 3059
     },
     {
       "Path": "scripts/LocalLinux51Distro.Common.ps1",
@@ -7061,6 +7102,11 @@
       "Path": "scripts/Measure-ImagePreflightFuzz.ps1",
       "Sha256": "6f67bac667bc02f0333371edbd18744d0a8f8d911addfaa2d4e74fb559f382d0",
       "Length": 14861
+    },
+    {
+      "Path": "scripts/Measure-LocalLinux51AotEvidence.ps1",
+      "Sha256": "02a483f96d34e0faf6705b323b6beecdc952bb067930bbca791295539e95d131",
+      "Length": 6182
     },
     {
       "Path": "scripts/Measure-LocalLinux51DistroEvidence.ps1",
@@ -7139,8 +7185,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "b2d154422ce8b370cefc87a01240a5a28ff7353d3313aacde6a5a82e35b75ca1",
-      "Length": 229961
+      "Sha256": "216928ebe2c0bf444ef18f5d2953c0c460f74142324a8dd89cedd84da486c1ee",
+      "Length": 230791
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -7488,6 +7534,11 @@
       "Length": 3093
     },
     {
+      "Path": "scripts/Test-LocalLinux51AotEvidence.ps1",
+      "Sha256": "599d1d4dca668cc398a311f1c2ede9952d4325df38d0d554f251c5a0c5020baa",
+      "Length": 26285
+    },
+    {
       "Path": "scripts/Test-LocalLinux51DistroEvidence.ps1",
       "Sha256": "66e5354da1994bf9672962af6bfa94e7bb927939a95fe1bb3022585417e2d4b7",
       "Length": 18997
@@ -7674,8 +7725,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "e53463d5556b0eb616b355bd3b00a9875dfb058936c72c8a9b6ef92656cb176f",
-      "Length": 208458
+      "Sha256": "2246612da2faa6330be0c66fc08051f315f1b93d4fb9dff55998a99038ac19e5",
+      "Length": 209714
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -9053,6 +9104,16 @@
       "Length": 238
     },
     {
+      "Path": "tools/LinuxAotPackageSmoke/Program.cs",
+      "Sha256": "a6b2a1447e3145780934c3ddadcf0db2f6fd6139124715670f7a8b94b6f27641",
+      "Length": 8673
+    },
+    {
+      "Path": "tools/LinuxAotPackageSmoke/consumer.csproj.in",
+      "Sha256": "04e7936375075cb1933bdffe1b097fc8697649de00e36854446e19bc5b03896b",
+      "Length": 1001
+    },
+    {
       "Path": "tools/LinuxPackageModuleSmoke/Program.cs",
       "Sha256": "ac49669c4052622068a771a0edc0b88da6d0206ea5dbc4dd02b65436429a1d02",
       "Length": 9392
@@ -9615,7 +9676,7 @@
   ],
   "LocalValidation": {
     "Status": "locally-validated",
-    "InvariantGuardCount": 114,
+    "InvariantGuardCount": 115,
     "RequiredChecks": [
       "actionlint-1.7.12",
       "api-abi-baseline",

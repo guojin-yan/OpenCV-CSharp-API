@@ -1205,6 +1205,17 @@ function Get-Record {
         "scripts/Test-LocalLinux51ModuleEvidence.ps1",
         "packaging/runtime/opencv-5.1.0-local-linux-module-consumer-evidence.json",
         "packaging/runtime/opencv-5.1.0-local-linux-module-consumer-evidence.schema.json",
+        "tools/LinuxAotPackageSmoke/Program.cs",
+        "tools/LinuxAotPackageSmoke/consumer.csproj.in",
+        "scripts/Initialize-LocalLinux51AotProducer.sh",
+        "scripts/Build-LocalLinux51AotConsumer.ps1",
+        "scripts/Initialize-LocalLinux51AotConsumer.sh",
+        "scripts/Invoke-LocalLinux51AotConsumer.sh",
+        "scripts/LocalLinux51Aot.Common.ps1",
+        "scripts/Measure-LocalLinux51AotEvidence.ps1",
+        "scripts/Test-LocalLinux51AotEvidence.ps1",
+        "packaging/runtime/opencv-5.1.0-local-linux-aot-evidence.json",
+        "packaging/runtime/opencv-5.1.0-local-linux-aot-evidence.schema.json",
         "docs/articles/linux-5.1-local-preview.md",
         "scripts/Build-LocalLinux51Preview.ps1",
         "scripts/Audit-Linux51Runtime.py",
@@ -1863,6 +1874,8 @@ function Get-Record {
             CurrentLocalLinux51ThreeDistroConsumersValidated = $true
             CurrentLocalLinux51ModuleConsumerEvidence = Get-FileEvidence -RelativePath "packaging/runtime/opencv-5.1.0-local-linux-module-consumer-evidence.json"
             CurrentLocalLinux51VideoOnnxConsumersValidated = $true
+            CurrentLocalLinux51AotEvidence = Get-FileEvidence -RelativePath "packaging/runtime/opencv-5.1.0-local-linux-aot-evidence.json"
+            CurrentLocalLinux51AotConsumersValidated = $true
             CurrentLinux51ThreeDistroGateComplete = $false
             HistoricalPerformanceRevision = "5.0.0"
             CurrentPerformanceHistoricalComparisonClaimed = $false
