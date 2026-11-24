@@ -1,0 +1,313 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/release/opencv-5.1.0-local-sbom-evidence.schema.json",
+  "title": "OpenCV 5.1 local package-bound SPDX evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "status",
+    "openCvVersion",
+    "packageVersion",
+    "sourceCommit",
+    "created",
+    "dotnetSdk",
+    "sourceInputSet",
+    "nativePackageConsumerEvidence",
+    "artifactRoot",
+    "packages",
+    "consumers",
+    "limits",
+    "limitations"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "opencv-5.1.0-local-sbom-evidence.schema.json"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "status": {
+      "const": "verified-local-windows-x64"
+    },
+    "openCvVersion": {
+      "const": "5.1.0"
+    },
+    "packageVersion": {
+      "const": "5.1.0"
+    },
+    "sourceCommit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "created": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+    },
+    "dotnetSdk": {
+      "type": "string",
+      "pattern": "^10\\.0\\.\\d+$"
+    },
+    "sourceInputSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "paths",
+        "fileCount",
+        "sha256"
+      ],
+      "properties": {
+        "paths": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "fileCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "nativePackageConsumerEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "const": "packaging/runtime/opencv-5.1.0-package-consumer-evidence.json"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "artifactRoot": {
+      "type": "string",
+      "pattern": "^artifacts/opencv-5\\.1\\.0-local-candidate/[0-9a-f]{40}$"
+    },
+    "packages": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "role",
+          "packageId",
+          "fileName",
+          "artifactPath",
+          "bytes",
+          "sha256",
+          "entryCount",
+          "entries",
+          "sbom"
+        ],
+        "properties": {
+          "role": {
+            "enum": [
+              "managed",
+              "full",
+              "mini"
+            ]
+          },
+          "packageId": {
+            "enum": [
+              "JYPPX.OpenCV.CSharp.API",
+              "JYPPX.OpenCV.runtime.win-x64",
+              "JYPPX.OpenCV.runtime.win-x64.mini"
+            ]
+          },
+          "fileName": {
+            "type": "string",
+            "pattern": "^JYPPX\\.OpenCV\\.(CSharp\\.API|runtime\\.win-x64(\\.mini)?)\\.5\\.1\\.0\\.nupkg$"
+          },
+          "artifactPath": {
+            "type": "string",
+            "pattern": "^artifacts/opencv-5\\.1\\.0-local-candidate/[0-9a-f]{40}/nupkg-[a-z0-9-]+/JYPPX\\.OpenCV\\.[A-Za-z0-9.-]+\\.nupkg$"
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "entryCount": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "entries": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "path",
+                "bytes",
+                "sha1",
+                "sha256"
+              ],
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_\\[\\]./-]+$"
+                },
+                "bytes": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "sha1": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{40}$"
+                },
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              }
+            }
+          },
+          "sbom": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "bytes",
+              "sha256",
+              "regenerationIdentical",
+              "checkPassed"
+            ],
+            "properties": {
+              "path": {
+                "type": "string",
+                "pattern": "^packaging/release/opencv-5\\.1\\.0-local-sbom/JYPPX\\.OpenCV\\.[A-Za-z0-9.-]+\\.spdx\\.json$"
+              },
+              "bytes": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "regenerationIdentical": {
+                "const": true
+              },
+              "checkPassed": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "consumers": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "profile",
+          "targetFramework",
+          "restore",
+          "build",
+          "nativeSmoke",
+          "marker",
+          "logSha256"
+        ],
+        "properties": {
+          "profile": {
+            "enum": [
+              "full",
+              "mini"
+            ]
+          },
+          "targetFramework": {
+            "enum": [
+              "net8.0",
+              "net10.0"
+            ]
+          },
+          "restore": {
+            "const": "passed"
+          },
+          "build": {
+            "const": "passed"
+          },
+          "nativeSmoke": {
+            "const": "passed"
+          },
+          "marker": {
+            "type": "string",
+            "minLength": 1
+          },
+          "logSha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "localPackageSubset",
+        "published",
+        "signed",
+        "approved",
+        "finalReleaseSetComplete",
+        "crossRidValidated",
+        "transitiveComponentInventoryComplete"
+      ],
+      "properties": {
+        "localPackageSubset": {
+          "const": true
+        },
+        "published": {
+          "const": false
+        },
+        "signed": {
+          "const": false
+        },
+        "approved": {
+          "const": false
+        },
+        "finalReleaseSetComplete": {
+          "const": false
+        },
+        "crossRidValidated": {
+          "const": false
+        },
+        "transitiveComponentInventoryComplete": {
+          "const": false
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

@@ -481,6 +481,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "OpenCV 5.1 local package-bound SBOM evidence"
+        Script = Join-Path $repo "scripts/Test-LocalPackageSbom51Evidence.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Release signing boundary"
         Script = Join-Path $repo "scripts/Test-ReleaseSigningBoundary.ps1"
         Arguments = @("-RepositoryRoot", $repo)
