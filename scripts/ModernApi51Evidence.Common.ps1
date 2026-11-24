@@ -70,7 +70,7 @@ function Get-ModernApi51PackageBindings {
 function Assert-ModernApi51Payload {
     param([string]$Directory, [object[]]$Expected)
     $files = @(Get-ChildItem -LiteralPath $Directory -File -Recurse -Filter '*.dll' |
-        Where-Object { $_.Name -match '^JYPPX\.OpenCV\.Native\.dll$|^opencv.*\.dll$' } | Sort-Object Name)
+        Where-Object { $_.Name -match '^JYPPX\.OpenCV\.Native\.dll$|^opencv_.*\.dll$' } | Sort-Object Name)
     if ($files.Count -ne $Expected.Count) { throw "Isolated runtime DLL count differs: expected=$($Expected.Count) actual=$($files.Count)." }
     for ($index = 0; $index -lt $files.Count; $index++) {
         if ($files[$index].DirectoryName -cne $Directory -or $files[$index].Name -cne $Expected[$index].name -or
