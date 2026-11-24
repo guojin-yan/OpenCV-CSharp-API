@@ -1196,6 +1196,15 @@ function Get-Record {
         "scripts/LocalLinux51Distro.Common.ps1",
         "scripts/Measure-LocalLinux51DistroEvidence.ps1",
         "scripts/Test-LocalLinux51DistroEvidence.ps1",
+        "tools/LinuxPackageModuleSmoke/Program.cs",
+        "tools/LinuxPackageModuleSmoke/consumer.csproj.in",
+        "scripts/Initialize-LocalLinux51ModuleConsumer.sh",
+        "scripts/Invoke-LocalLinux51ModuleConsumer.ps1",
+        "scripts/LocalLinux51Module.Common.ps1",
+        "scripts/Measure-LocalLinux51ModuleEvidence.ps1",
+        "scripts/Test-LocalLinux51ModuleEvidence.ps1",
+        "packaging/runtime/opencv-5.1.0-local-linux-module-consumer-evidence.json",
+        "packaging/runtime/opencv-5.1.0-local-linux-module-consumer-evidence.schema.json",
         "docs/articles/linux-5.1-local-preview.md",
         "scripts/Build-LocalLinux51Preview.ps1",
         "scripts/Audit-Linux51Runtime.py",
@@ -1852,6 +1861,8 @@ function Get-Record {
             CurrentElfWorkflowEvidenceValidated = $true
             CurrentLocalLinux51DistroConsumerEvidence = Get-FileEvidence -RelativePath "packaging/runtime/opencv-5.1.0-local-linux-distro-consumer-evidence.json"
             CurrentLocalLinux51ThreeDistroConsumersValidated = $true
+            CurrentLocalLinux51ModuleConsumerEvidence = Get-FileEvidence -RelativePath "packaging/runtime/opencv-5.1.0-local-linux-module-consumer-evidence.json"
+            CurrentLocalLinux51VideoOnnxConsumersValidated = $true
             CurrentLinux51ThreeDistroGateComplete = $false
             HistoricalPerformanceRevision = "5.0.0"
             CurrentPerformanceHistoricalComparisonClaimed = $false

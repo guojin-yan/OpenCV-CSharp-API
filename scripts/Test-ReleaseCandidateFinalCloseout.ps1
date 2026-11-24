@@ -1066,6 +1066,15 @@ function Get-ExpectedEvidencePaths {
         "scripts/LocalLinux51Distro.Common.ps1",
         "scripts/Measure-LocalLinux51DistroEvidence.ps1",
         "scripts/Test-LocalLinux51DistroEvidence.ps1",
+        "tools/LinuxPackageModuleSmoke/Program.cs",
+        "tools/LinuxPackageModuleSmoke/consumer.csproj.in",
+        "scripts/Initialize-LocalLinux51ModuleConsumer.sh",
+        "scripts/Invoke-LocalLinux51ModuleConsumer.ps1",
+        "scripts/LocalLinux51Module.Common.ps1",
+        "scripts/Measure-LocalLinux51ModuleEvidence.ps1",
+        "scripts/Test-LocalLinux51ModuleEvidence.ps1",
+        "packaging/runtime/opencv-5.1.0-local-linux-module-consumer-evidence.json",
+        "packaging/runtime/opencv-5.1.0-local-linux-module-consumer-evidence.schema.json",
         "docs/articles/linux-5.1-local-preview.md",
         "scripts/Build-LocalLinux51Preview.ps1",
         "scripts/Audit-Linux51Runtime.py",
@@ -1896,6 +1905,10 @@ function Test-Record {
     Assert-True -List $List -Condition ($revision.CurrentLocalLinux51DistroConsumerEvidence.Path -ceq 'packaging/runtime/opencv-5.1.0-local-linux-distro-consumer-evidence.json' -and
         $revision.CurrentLocalLinux51DistroConsumerEvidence.Sha256 -ceq $currentDistroConsumerHash -and $revision.CurrentLocalLinux51ThreeDistroConsumersValidated -and
         -not $revision.CurrentLinux51ThreeDistroGateComplete) -Issue 'Final closeout local three-distro consumers must retain the pending hosted/release gate'
+    $currentModuleConsumerHash = (Get-FileHash -LiteralPath (Join-Path $repo 'packaging/runtime/opencv-5.1.0-local-linux-module-consumer-evidence.json') -Algorithm SHA256).Hash.ToLowerInvariant()
+    Assert-True -List $List -Condition ($revision.CurrentLocalLinux51ModuleConsumerEvidence.Path -ceq 'packaging/runtime/opencv-5.1.0-local-linux-module-consumer-evidence.json' -and
+        $revision.CurrentLocalLinux51ModuleConsumerEvidence.Sha256 -ceq $currentModuleConsumerHash -and $revision.CurrentLocalLinux51VideoOnnxConsumersValidated -and
+        -not $revision.CurrentLinux51ThreeDistroGateComplete) -Issue 'Final closeout local VideoIO/ONNX consumers must retain the pending hosted/release gate'
     Assert-True -List $List -Condition ($revision.CurrentPerformance51Baseline.Path -ceq 'packaging/performance/perf-001-5.1.0-baseline.json' -and
         $revision.CurrentPerformance51Baseline.Sha256 -ceq $currentPerformanceHash -and $revision.HistoricalPerformanceRevision -ceq '5.0.0' -and
         -not $revision.CurrentPerformanceHistoricalComparisonClaimed) -Issue 'Final closeout 5.1 performance measurement boundary drifted'
