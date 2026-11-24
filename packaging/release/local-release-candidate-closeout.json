@@ -1,8 +1,8 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/2656fce9f3827139",
-  "SourceIdentity": "sha256:2656fce9f38271396311636009c94f1c056aa9223c8c6d741b1452601fa4206c",
+  "CandidateId": "local-closeout/sha256/884d88274f88319d",
+  "SourceIdentity": "sha256:884d88274f88319da8331a0f05936cd1f7ff7f2d7f4c578f73c4aefe19e30e57",
   "OpenCvRevision": "5.1.0",
   "RevisionValidation": {
     "CurrentBuildEvidence": {
@@ -69,6 +69,13 @@
       "Length": 6614883
     },
     "CurrentLocalLinux51ThirdPartyCandidatesValidated": true,
+    "CurrentLocalFedora51Evidence": {
+      "Path": "packaging/runtime/opencv-5.1.0-local-fedora44-evidence.json",
+      "Sha256": "6f0235331cd944a02790e2fc6c119afad64d3d12989bc1346ec53a6bf6140d18",
+      "Length": 1282157
+    },
+    "CurrentLocalFedora51ProducerAndConsumersValidated": true,
+    "CurrentFedora44ActiveIdentityPromoted": false,
     "CurrentCompleteSourceLicenseReviewClaimed": false,
     "CurrentHeadlessActiveIdentityPromoted": false,
     "CurrentLinux51ThreeDistroGateComplete": false,
@@ -96,8 +103,8 @@
     "CurrentRevisionUpstreamParityClaimed": false
   },
   "SourceSet": {
-    "FileCount": 3059,
-    "Sha256": "2656fce9f38271396311636009c94f1c056aa9223c8c6d741b1452601fa4206c",
+    "FileCount": 3071,
+    "Sha256": "884d88274f88319da8331a0f05936cd1f7ff7f2d7f4c578f73c4aefe19e30e57",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -5259,8 +5266,8 @@
     },
     {
       "Path": "compatibility/v5.1.0-change-ledger.json",
-      "Sha256": "beebebd05cbb699276bf5357115e4da5738c7acedfeba18c79bab6ac29ee4d7e",
-      "Length": 160531
+      "Sha256": "246fbe8a9d4798afed6ffa9b50e97248a2a857649c39db97383d3b26805febb7",
+      "Length": 161674
     },
     {
       "Path": "compatibility/v5.1.0-change-ledger.schema.json",
@@ -5769,8 +5776,8 @@
     },
     {
       "Path": "docs/articles/linux-5.1-local-preview.md",
-      "Sha256": "1de32f779bc069801a2960a493deb6d8c16541b7ba6767fcc3c326476a2ba1b7",
-      "Length": 15144
+      "Sha256": "2aa61428739f358dcc9fd69b40997e049064f76cf31c79fa1d7aa294c277146d",
+      "Length": 17390
     },
     {
       "Path": "docs/articles/matlab-upstream-parity-guide.md",
@@ -6129,8 +6136,8 @@
     },
     {
       "Path": "docs/releases/5.1.0.md",
-      "Sha256": "42f2069b6d05f8691eeaf35012955867689f43aaa07c02f9c8d9b93a9097754d",
-      "Length": 10363
+      "Sha256": "5232be50afe085d817681d2fb2f30c463da87281da09ad36197ac0e6e8ef2142",
+      "Length": 10660
     },
     {
       "Path": "docs/releases/README.md",
@@ -6433,6 +6440,16 @@
       "Length": 2701
     },
     {
+      "Path": "packaging/runtime/opencv-5.1.0-local-fedora44-evidence.json",
+      "Sha256": "6f0235331cd944a02790e2fc6c119afad64d3d12989bc1346ec53a6bf6140d18",
+      "Length": 1282157
+    },
+    {
+      "Path": "packaging/runtime/opencv-5.1.0-local-fedora44-evidence.schema.json",
+      "Sha256": "9b5e312b03fa857a8696d6b1f07784ac7cd75d5fffaf814db6b4c2b29d09209d",
+      "Length": 4361
+    },
+    {
       "Path": "packaging/runtime/opencv-5.1.0-local-linux-aot-evidence.json",
       "Sha256": "e57116bb9987ed0b7e3e826bbb00a178bd75fad56b6b3295df3b68d3888f706d",
       "Length": 285464
@@ -6516,6 +6533,11 @@
       "Path": "packaging/runtime/runtime-distro-rid-graph.json",
       "Sha256": "9dfc32941de2daebdee2f8a9bdebd9723627aaec07960bd82fd85939650af8de",
       "Length": 1282
+    },
+    {
+      "Path": "packaging/runtime/runtime-fedora-5.1-local-consumer-rid-graph.json",
+      "Sha256": "5ea4d1f9aea04be1af48bff1bb8dd80d620d2acb2a312f9e0be20df65444e607",
+      "Length": 269
     },
     {
       "Path": "packaging/runtime/runtime-generic-linux-5.1-local-consumer-matrix.json",
@@ -6653,6 +6675,11 @@
       "Length": 4994
     },
     {
+      "Path": "scripts/Audit-LocalFedora51Runtime.py",
+      "Sha256": "01040d84fc2da86cac1fb73302ad1ae00a34a43378b010b1edefcfc855be3232",
+      "Length": 5875
+    },
+    {
       "Path": "scripts/Build-AndroidRuntimeInput.ps1",
       "Sha256": "5d5045b27828875b88d622a507484a737f302cbf038f18f582cdce02622d3a8f",
       "Length": 16423
@@ -6661,6 +6688,11 @@
       "Path": "scripts/Build-Linux51HeadlessCandidate.py",
       "Sha256": "e19556280d20a89c11a4ebf7cdf27875f6240cdefbf95ba020d63f583766b61e",
       "Length": 13850
+    },
+    {
+      "Path": "scripts/Build-LocalFedora51Candidate.py",
+      "Sha256": "87292d39fc384e2f5097f4d56481dca8f9701b061822abb3ba1274bf3a9d2dcd",
+      "Length": 8397
     },
     {
       "Path": "scripts/Build-LocalLinux51AotConsumer.ps1",
@@ -7073,6 +7105,11 @@
       "Length": 3324
     },
     {
+      "Path": "scripts/Initialize-LocalFedora51Producer.sh",
+      "Sha256": "2706f54369a8aeb0fdd09a23964dd47b4de457a0ea0b9515aaadd1b5f128d210",
+      "Length": 1549
+    },
+    {
       "Path": "scripts/Initialize-LocalLinux51AotConsumer.sh",
       "Sha256": "a8e39a859f2a0e84e4543bf6d4a8eb810592fd883aa8a97de11979c3580aa9c9",
       "Length": 1377
@@ -7118,6 +7155,11 @@
       "Length": 8145
     },
     {
+      "Path": "scripts/Invoke-LocalFedora51Consumer.ps1",
+      "Sha256": "7f6e327000321cced45a8e14caf309a141fcbd43905b264a63b94876f3bfcd2b",
+      "Length": 7382
+    },
+    {
       "Path": "scripts/Invoke-LocalLinux51AotConsumer.sh",
       "Sha256": "c386c65579ff76531750bb83d40dee74b92b9a20c608cd4a5de05d887984a32e",
       "Length": 2214
@@ -7141,6 +7183,11 @@
       "Path": "scripts/Linux51Headless.Common.ps1",
       "Sha256": "2cb3446a3af0655fed3853b697a6d4219d4f39f8c1634b54b8c4d86e1282f6d2",
       "Length": 3390
+    },
+    {
+      "Path": "scripts/LocalFedora51.Common.ps1",
+      "Sha256": "62cf629a8c8f3ed449b408074c7ac3a7cc41e524d899ea07730e0ee1fecdc2e2",
+      "Length": 3072
     },
     {
       "Path": "scripts/LocalLinux51.Common.ps1",
@@ -7206,6 +7253,11 @@
       "Path": "scripts/Measure-Linux51ThirdPartyEvidence.py",
       "Sha256": "7c6779207eabeeedcc1f643a043f573dac2d931d05a6ca4653155fe5abb1e185",
       "Length": 10359
+    },
+    {
+      "Path": "scripts/Measure-LocalFedora51Evidence.ps1",
+      "Sha256": "9893791ca98e29694e848640257b80dbfdcbfe483d44a25f8547e9b911a5f310",
+      "Length": 4531
     },
     {
       "Path": "scripts/Measure-LocalLinux51AotEvidence.ps1",
@@ -7283,6 +7335,11 @@
       "Length": 11817
     },
     {
+      "Path": "scripts/New-LocalFedora51Packages.ps1",
+      "Sha256": "e0462a3fd35801cb8e33c2f2b9db150b33b2610758142fe720876a0f22bf048d",
+      "Length": 2503
+    },
+    {
       "Path": "scripts/New-NuGetPublicationBundle.ps1",
       "Sha256": "49c49fff69fdac37091b26e3a193c3ce868f5e52cb0d80443203eaa98b6a0d83",
       "Length": 14508
@@ -7294,8 +7351,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "45d233248c109a387233d87bb6f9497cbc791d9959098c2aaeb50202f863936b",
-      "Length": 233210
+      "Sha256": "e165f8514f95930902613583a27329988c6e6256b73f2981dd13bcce5d9f6024",
+      "Length": 234172
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -7653,6 +7710,11 @@
       "Length": 30408
     },
     {
+      "Path": "scripts/Test-LocalFedora51Evidence.ps1",
+      "Sha256": "6ef7f125cc916bde40dc6c5d41f8b70e52da85d5e2df9905d1554126ddd14f0a",
+      "Length": 30172
+    },
+    {
       "Path": "scripts/Test-LocalLinux51AotEvidence.ps1",
       "Sha256": "599d1d4dca668cc398a311f1c2ede9952d4325df38d0d554f251c5a0c5020baa",
       "Length": 26285
@@ -7844,8 +7906,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "f0af57c4b74fb234b5475b13f90ff108780bc2ad28a5c5eef83a4b55ea5d10de",
-      "Length": 213116
+      "Sha256": "0ae797975b3e067adc6843a5c1eaf97ad32350ba55fc73d2b3b0cafb5e806a40",
+      "Length": 214858
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -7984,8 +8046,8 @@
     },
     {
       "Path": "scripts/Test-V510ChangeLedger.ps1",
-      "Sha256": "dda34082fd79d991160c0eaaacfbc3bf78676c240d1e314a7b7117fab5b1548c",
-      "Length": 24454
+      "Sha256": "3cf60bf44653d4216f86156eb266068e00e6d70a1b19fc3f7b24495c8859cde5",
+      "Length": 25338
     },
     {
       "Path": "scripts/Test-VideoDnnBenchmarkEvidence.ps1",
@@ -9253,6 +9315,11 @@
       "Length": 795
     },
     {
+      "Path": "tools/LinuxPackageModuleSmoke/fedora-consumer.csproj.in",
+      "Sha256": "590f6ff8f64bc5c98c3e2f2f85c4e20dcc9e7b9df43ec047bcfd3b46ec43950c",
+      "Length": 937
+    },
+    {
       "Path": "tools/MatlabUpstreamMap/MatlabUpstreamMap.csproj",
       "Sha256": "727d0721f11212e08035cc59275b0226c0092f3ea92492d621c3d25879ef974f",
       "Length": 273
@@ -9805,7 +9872,7 @@
   ],
   "LocalValidation": {
     "Status": "locally-validated",
-    "InvariantGuardCount": 117,
+    "InvariantGuardCount": 118,
     "RequiredChecks": [
       "actionlint-1.7.12",
       "api-abi-baseline",

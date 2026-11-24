@@ -1098,6 +1098,18 @@ function Get-ExpectedEvidencePaths {
         "packaging/runtime/opencv-5.1.0-local-linux-headless-evidence.schema.json",
         "packaging/release/opencv-5.1.0-local-headless-sbom/JYPPX.OpenCV.runtime.linux-x64.preview.5.1.0-headless.2963ce5.spdx.json",
         "packaging/release/opencv-5.1.0-local-headless-sbom/JYPPX.OpenCV.runtime.linux-x64.preview.mini.5.1.0-headless.2963ce5.spdx.json",
+        "scripts/Initialize-LocalFedora51Producer.sh",
+        "scripts/Build-LocalFedora51Candidate.py",
+        "scripts/Audit-LocalFedora51Runtime.py",
+        "scripts/New-LocalFedora51Packages.ps1",
+        "scripts/Invoke-LocalFedora51Consumer.ps1",
+        "scripts/LocalFedora51.Common.ps1",
+        "scripts/Measure-LocalFedora51Evidence.ps1",
+        "scripts/Test-LocalFedora51Evidence.ps1",
+        "tools/LinuxPackageModuleSmoke/fedora-consumer.csproj.in",
+        "packaging/runtime/runtime-fedora-5.1-local-consumer-rid-graph.json",
+        "packaging/runtime/opencv-5.1.0-local-fedora44-evidence.json",
+        "packaging/runtime/opencv-5.1.0-local-fedora44-evidence.schema.json",
         "scripts/Collect-Linux51ThirdPartyBuild.py",
         "scripts/New-Linux51ThirdPartyCandidates.py",
         "scripts/Invoke-Linux51ThirdPartyConsumer.ps1",
@@ -1956,6 +1968,10 @@ function Test-Record {
         $revision.CurrentLocalLinux51ThirdPartyEvidence.Sha256 -ceq $currentThirdPartyHash -and $revision.CurrentLocalLinux51ThirdPartyCandidatesValidated -and
         -not $revision.CurrentCompleteSourceLicenseReviewClaimed -and -not $revision.CurrentHeadlessActiveIdentityPromoted -and
         -not $revision.CurrentLinux51ThreeDistroGateComplete) -Issue 'Final closeout third-party supplement must retain the pending complete-source/hosted/release gates'
+    $currentFedoraHash = (Get-LogicalFileEvidence -Path (Join-Path $repo 'packaging/runtime/opencv-5.1.0-local-fedora44-evidence.json')).Sha256
+    Assert-True -List $List -Condition ($revision.CurrentLocalFedora51Evidence.Path -ceq 'packaging/runtime/opencv-5.1.0-local-fedora44-evidence.json' -and
+        $revision.CurrentLocalFedora51Evidence.Sha256 -ceq $currentFedoraHash -and $revision.CurrentLocalFedora51ProducerAndConsumersValidated -and
+        -not $revision.CurrentFedora44ActiveIdentityPromoted -and -not $revision.CurrentLinux51ThreeDistroGateComplete) -Issue 'Final closeout Fedora local build evidence must retain hosted and active identity gates'
     Assert-True -List $List -Condition ($revision.CurrentPerformance51Baseline.Path -ceq 'packaging/performance/perf-001-5.1.0-baseline.json' -and
         $revision.CurrentPerformance51Baseline.Sha256 -ceq $currentPerformanceHash -and $revision.HistoricalPerformanceRevision -ceq '5.0.0' -and
         -not $revision.CurrentPerformanceHistoricalComparisonClaimed) -Issue 'Final closeout 5.1 performance measurement boundary drifted'
@@ -2100,6 +2116,12 @@ Assert-FixtureRejected -Name "nondeterministic evidence ordering" -ExpectedIssue
     $first = $fixture.EvidenceReferences[0]
     $fixture.EvidenceReferences[0] = $fixture.EvidenceReferences[1]
     $fixture.EvidenceReferences[1] = $first
+    Test-Record -Record $fixture -List $list -ExpectedSourceHash $expectedSourceHash
+}
+Assert-FixtureRejected -Name "premature Fedora active identity promotion" -ExpectedIssue "Fedora local build evidence" -Action {
+    param($list)
+    $fixture = $record | ConvertTo-Json -Depth 30 | ConvertFrom-Json
+    $fixture.RevisionValidation.CurrentFedora44ActiveIdentityPromoted = $true
     Test-Record -Record $fixture -List $list -ExpectedSourceHash $expectedSourceHash
 }
 

@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Local Fedora 44 OpenCV 5.1 source, package and consumer evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "evidenceKind", "status", "openCvVersion", "sourceBaseCommit", "execution", "candidateOnly", "publicationAllowed", "hostedValidated", "activeIdentityPromoted", "artifactDirectory", "sourceInputs", "kitManifest", "managedSbom", "producer", "packages", "consumer", "artifactManifest", "coverage"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "evidenceKind": {"const": "local-fedora44-5.1-source-package-consumer"},
+    "status": {"const": "verified-local-fedora44-x64-candidate"},
+    "openCvVersion": {"const": "5.1.0"},
+    "sourceBaseCommit": {"const": "b7f8180c3949aa341bbdf2be97432fb08d1e85e2"},
+    "execution": {"const": "local-docker"},
+    "candidateOnly": {"const": true},
+    "publicationAllowed": {"const": false},
+    "hostedValidated": {"const": false},
+    "activeIdentityPromoted": {"const": false},
+    "artifactDirectory": {"type": "string", "pattern": "^artifacts/opencv-5\\.1\\.0-local-fedora44/"},
+    "sourceInputs": {"type": "array", "minItems": 100, "items": {"$ref": "#/$defs/file"}},
+    "kitManifest": {"type": "array", "minItems": 14, "maxItems": 14, "items": {"$ref": "#/$defs/file"}},
+    "managedSbom": {"$ref": "#/$defs/file"},
+    "producer": {
+      "type": "object", "additionalProperties": false,
+      "required": ["identity", "measurement", "blobs", "profiles"],
+      "properties": {
+        "identity": {"type": "object"}, "measurement": {"type": "object"},
+        "blobs": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"$ref": "#/$defs/blob"}},
+        "profiles": {"type": "array", "minItems": 2, "maxItems": 2, "items": {
+          "type": "object", "additionalProperties": false, "required": ["profile", "blobs"],
+          "properties": {"profile": {"enum": ["full", "mini"]}, "blobs": {"type": "array", "minItems": 6, "maxItems": 6, "items": {"$ref": "#/$defs/blob"}}}
+        }}
+      }
+    },
+    "packages": {"type": "array", "minItems": 2, "maxItems": 2, "items": {
+      "type": "object", "additionalProperties": false, "required": ["profile", "packageId", "version", "file", "entries"],
+      "properties": {"profile": {"enum": ["full", "mini"]}, "packageId": {"type": "string"}, "version": {"const": "5.1.0-fedora44.b7f8180"}, "file": {"$ref": "#/$defs/file"}, "entries": {"type": "array", "minItems": 20, "items": {"$ref": "#/$defs/file"}}}
+    }},
+    "consumer": {"type": "object"},
+    "artifactManifest": {"type": "array", "minItems": 80, "items": {"$ref": "#/$defs/file"}},
+    "coverage": {
+      "type": "object", "additionalProperties": false,
+      "required": ["independentUpstreamBuilds", "nativeCtestPassed", "packageCount", "managedExecutions", "fullOnnxRuns", "miniDnnOmissionRuns", "freshPackageCaches", "genericLinuxBaselineClaimed", "completeThirdPartyLicenseReview", "vulnerabilityReviewComplete", "cameraOrNetworkValidated", "arbitraryModelsValidated", "arm64Validated", "releaseApproved"],
+      "properties": {
+        "independentUpstreamBuilds": {"const": 2}, "nativeCtestPassed": {"const": 6}, "packageCount": {"const": 2}, "managedExecutions": {"const": 4},
+        "fullOnnxRuns": {"const": 2}, "miniDnnOmissionRuns": {"const": 2}, "freshPackageCaches": {"const": 4},
+        "genericLinuxBaselineClaimed": {"const": false}, "completeThirdPartyLicenseReview": {"const": false}, "vulnerabilityReviewComplete": {"const": false},
+        "cameraOrNetworkValidated": {"const": false}, "arbitraryModelsValidated": {"const": false}, "arm64Validated": {"const": false}, "releaseApproved": {"const": false}
+      }
+    }
+  },
+  "$defs": {
+    "file": {"type": "object", "additionalProperties": false, "required": ["path", "bytes", "sha256"], "properties": {
+      "path": {"type": "string", "minLength": 1}, "bytes": {"type": "integer", "minimum": 0}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    }},
+    "blob": {"type": "object", "additionalProperties": false, "required": ["name", "text", "bytes", "sha256"], "properties": {
+      "name": {"type": "string", "minLength": 1}, "text": {"type": "string"}, "bytes": {"type": "integer", "minimum": 0}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    }}
+  }
+}

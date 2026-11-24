@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>__TFM__</TargetFramework>
+    <RuntimeIdentifier>fedora.44-x64</RuntimeIdentifier>
+    <RuntimeIdentifierGraphPath>candidate-rid-graph.json</RuntimeIdentifierGraphPath>
+    <SelfContained>false</SelfContained>
+    <UseAppHost>false</UseAppHost>
+    <RollForward>Disable</RollForward>
+    <RuntimeFrameworkVersion>__RUNTIME_VERSION__</RuntimeFrameworkVersion>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <NuGetAudit>true</NuGetAudit>
+    <WarningsAsErrors>NU1903</WarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="JYPPX.OpenCV.CSharp.API" Version="5.1.0" />
+    <PackageReference Include="__RUNTIME_PACKAGE__" Version="5.1.0-fedora44.b7f8180" />
+    <None Include="identity-opset13.onnx.base64" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

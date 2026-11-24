@@ -87,3 +87,18 @@ The [Linux NativeAOT evidence](https://github.com/guojin-yan/OpenCV-CSharp-API/b
 The [Full/Mini headless candidate](headless-runtime-profile-adr.md#opencv-510-local-candidate-results) adds a separately rebuilt wrapper and isolated prerelease packages. Twelve new package-only net8/net10 executions pass on Ubuntu 22.04, Ubuntu 24.04 and Debian 12 with no display server, GUI libraries or producer paths. The original preview and AOT package bytes remain the basis of their original records. The headless record binds the separate candidate package hashes, generated ABI, GUI negative recovery, PNG/MJPG and Full ONNX results; active headless identity, hosted reproduction and camera/network coverage remain pending.
 
 The [third-party candidate supplement](runtime-licenses.md#opencv-51-linux-candidate-supplements) binds 15 components to the retained compiler/linker build and adds licenses, JPEG acknowledgement, leading source notices and the 343 observed Eigen headers. Four independently versioned preview/headless Full/Mini packages preserve all original native bytes. Twenty-four fresh-cache package consumers pass on Ubuntu 22.04, Ubuntu 24.04 and Debian 12 with net8.0/net10.0. The original preview/headless/AOT records retain their measured bytes; complete source license review, hosted reproduction and final release promotion remain pending.
+
+## Fedora 44 source builds
+
+The [Fedora source/package record](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/opencv-5.1.0-local-fedora44-evidence.json) adds native Fedora 44 x64 compilation from the official OpenCV and contrib 5.1.0 commits. Full and Mini use separate upstream build/install directories with exactly 17 and six modules. Their wrappers compile 49 and nine source files, match all 2,669 and 527 ABI entries, and pass three native CTest checks each. The compiler is Fedora GCC 16.2.1 with glibc 2.43; the ELF record retains each library's actual symbol requirements and `$ORIGIN` dependency resolution.
+
+The two local candidates use the lifecycle overlay identities `JYPPX.OpenCV.runtime.fedora.44-x64` and `.mini`, with version `5.1.0-fedora44.b7f8180`. The consumer uses the existing managed 5.1.0 package. A separate Fedora container has runtime dependencies, the verified .NET 8/10 SDKs and a read-only kit. It has no producer source, installation, compiler or native-loader override. Four fresh-cache package restores/builds/native executions verify all 52/19 native files against the new packages, exact PNG pixels, three MJPG frames and EOF, two fixed-model ONNX inferences per Full execution, and actual Mini importer omission.
+
+This evidence covers local Fedora builds and their matching consumers. The earlier Fedora tests retain their Ubuntu-built package hashes. The disposable consumer project imports `fedora.44-x64 -> linux-x64` from a separate candidate graph. Active package/support graphs, the generic Linux glibc baseline, hosted lifecycle validation and publication retain their existing status. Complete Fedora third-party license/source and vulnerability review, other architectures, optional backends/models and final release approval remain pending.
+
+The isolated build driver is `Build-LocalFedora51Candidate.py`; `New-LocalFedora51Packages.ps1` gives each profile a fresh packaging project. Retain `/workspace/output` and the independent `/consumer/artifacts`, then collect and check:
+
+```powershell
+./scripts/Measure-LocalFedora51Evidence.ps1 -ArtifactDirectory <fedora-artifacts> -KitRoot <read-only-kit>
+./scripts/Test-LocalFedora51Evidence.ps1 -RequireArtifacts
+```

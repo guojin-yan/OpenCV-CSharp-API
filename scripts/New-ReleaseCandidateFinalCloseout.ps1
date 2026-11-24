@@ -1228,6 +1228,18 @@ function Get-Record {
         "packaging/runtime/opencv-5.1.0-local-linux-headless-evidence.schema.json",
         "packaging/release/opencv-5.1.0-local-headless-sbom/JYPPX.OpenCV.runtime.linux-x64.preview.5.1.0-headless.2963ce5.spdx.json",
         "packaging/release/opencv-5.1.0-local-headless-sbom/JYPPX.OpenCV.runtime.linux-x64.preview.mini.5.1.0-headless.2963ce5.spdx.json",
+        "scripts/Initialize-LocalFedora51Producer.sh",
+        "scripts/Build-LocalFedora51Candidate.py",
+        "scripts/Audit-LocalFedora51Runtime.py",
+        "scripts/New-LocalFedora51Packages.ps1",
+        "scripts/Invoke-LocalFedora51Consumer.ps1",
+        "scripts/LocalFedora51.Common.ps1",
+        "scripts/Measure-LocalFedora51Evidence.ps1",
+        "scripts/Test-LocalFedora51Evidence.ps1",
+        "tools/LinuxPackageModuleSmoke/fedora-consumer.csproj.in",
+        "packaging/runtime/runtime-fedora-5.1-local-consumer-rid-graph.json",
+        "packaging/runtime/opencv-5.1.0-local-fedora44-evidence.json",
+        "packaging/runtime/opencv-5.1.0-local-fedora44-evidence.schema.json",
         "scripts/Collect-Linux51ThirdPartyBuild.py",
         "scripts/New-Linux51ThirdPartyCandidates.py",
         "scripts/Invoke-Linux51ThirdPartyConsumer.ps1",
@@ -1903,6 +1915,9 @@ function Get-Record {
             CurrentLocalLinux51HeadlessCandidatesValidated = $true
             CurrentLocalLinux51ThirdPartyEvidence = Get-FileEvidence -RelativePath "packaging/release/opencv-5.1.0-linux-thirdparty-evidence.json"
             CurrentLocalLinux51ThirdPartyCandidatesValidated = $true
+            CurrentLocalFedora51Evidence = Get-FileEvidence -RelativePath "packaging/runtime/opencv-5.1.0-local-fedora44-evidence.json"
+            CurrentLocalFedora51ProducerAndConsumersValidated = $true
+            CurrentFedora44ActiveIdentityPromoted = $false
             CurrentCompleteSourceLicenseReviewClaimed = $false
             CurrentHeadlessActiveIdentityPromoted = $false
             CurrentLinux51ThreeDistroGateComplete = $false
