@@ -1,5 +1,15 @@
 . (Join-Path $PSScriptRoot 'ModernApi51Evidence.Common.ps1')
 
+function ConvertFrom-LocalPackageSbom51Json {
+    param([string]$Json)
+    $arguments = @{ InputObject = $Json }
+    if ((Get-Command ConvertFrom-Json).Parameters.ContainsKey('DateKind')) { $arguments.DateKind = 'String' }
+    $value = ConvertFrom-Json @arguments
+    if ($value.PSObject.Properties['created'] -and $value.created -is [DateTime]) { $value.created = $value.created.ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss'Z'") }
+    if ($value.PSObject.Properties['creationInfo'] -and $value.creationInfo.created -is [DateTime]) { $value.creationInfo.created = $value.creationInfo.created.ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss'Z'") }
+    return $value
+}
+
 function Get-LocalPackageSbom51SourceSet {
     param([string]$RepositoryRoot)
     $scopes = @('Directory.Build.props', 'README.md', 'LICENSE', 'nuget/logo.jpg', 'src/OpenCvSharp',

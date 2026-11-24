@@ -10,7 +10,7 @@ $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $recordPath = Join-Path $repo 'packaging/release/opencv-5.1.0-local-sbom-evidence.json'
 $schemaPath = Join-Path $repo 'packaging/release/opencv-5.1.0-local-sbom-evidence.schema.json'
 $recordJson = Get-Content -LiteralPath $recordPath -Raw
-$record = $recordJson | ConvertFrom-Json
+$record = ConvertFrom-LocalPackageSbom51Json -Json $recordJson
 $expectedSource = Get-LocalPackageSbom51SourceSet -RepositoryRoot $repo
 $bindings = Get-ModernApi51PackageBindings -RepositoryRoot $repo -SourceCommit $record.sourceCommit
 $documents = @{}
@@ -24,6 +24,8 @@ function Assert-LocalSbomRecord {
     if (-not (Test-Json -Json ($Record | ConvertTo-Json -Depth 25) -SchemaFile $schemaPath -ErrorAction Stop)) { throw 'Local package SBOM evidence schema failed.' }
     & git -C $repo merge-base --is-ancestor ([string]$Record.sourceCommit) HEAD 2>$null
     if ($LASTEXITCODE -ne 0) { throw 'Local SBOM source is not an ancestor of HEAD.' }
+    & git -C $repo diff --quiet ([string]$Record.sourceCommit) -- @($expectedSource.paths)
+    if ($LASTEXITCODE -ne 0) { throw 'Local SBOM source inputs differ from the measured commit.' }
     if (($Record.sourceInputSet | ConvertTo-Json -Depth 5 -Compress) -cne ($expectedSource | ConvertTo-Json -Depth 5 -Compress) -or
         ($Record.nativePackageConsumerEvidence | ConvertTo-Json -Compress) -cne ($bindings.reference | ConvertTo-Json -Compress)) { throw 'Local SBOM source inputs/native evidence binding drifted.' }
     if ($Record.artifactRoot -cne "artifacts/opencv-5.1.0-local-candidate/$($Record.sourceCommit)" -or
@@ -41,7 +43,7 @@ function Assert-LocalSbomRecord {
         $bytes = [Text.UTF8Encoding]::new($false).GetBytes($json)
         $hash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($bytes)).ToLowerInvariant()
         if ($hash -cne $package.sbom.sha256 -or [int64]$bytes.Length -ne [int64]$package.sbom.bytes) { throw 'Local SPDX document bytes drifted.' }
-        Assert-LocalPackageSbom51Document -Document ($json | ConvertFrom-Json) -Package $package -SourceCommit $Record.sourceCommit -Created $Record.created
+        Assert-LocalPackageSbom51Document -Document (ConvertFrom-LocalPackageSbom51Json -Json $json) -Package $package -SourceCommit $Record.sourceCommit -Created $Record.created
     }
     $keys = @($Record.consumers | ForEach-Object { "$($_.profile)/$($_.targetFramework)" })
     if (($keys -join '|') -cne 'full/net8.0|mini/net8.0|full/net10.0|mini/net10.0') { throw 'Local package consumer matrix drifted.' }
@@ -82,7 +84,7 @@ $recordFixtures = [ordered]@{
     'document bytes drift' = { param($r) $r.packages[0].sbom.sha256 = '0' * 64 }
 }
 foreach ($fixture in $recordFixtures.GetEnumerator()) {
-    $mutant = $recordJson | ConvertFrom-Json; & $fixture.Value $mutant
+    $mutant = ConvertFrom-LocalPackageSbom51Json -Json $recordJson; & $fixture.Value $mutant
     $rejected = $false
     try { Assert-LocalSbomRecord -Record $mutant -Documents $documents } catch { $rejected = $true }
     if (-not $rejected) { throw "Local SBOM guard accepted negative record fixture: $($fixture.Key)" }
@@ -98,7 +100,7 @@ $documentFixtures = [ordered]@{
     'creation timestamp drift' = { param($d) $d.creationInfo.created = '2000-01-01T00:00:00Z' }
 }
 foreach ($fixture in $documentFixtures.GetEnumerator()) {
-    $document = $documents.managed | ConvertFrom-Json; & $fixture.Value $document
+    $document = ConvertFrom-LocalPackageSbom51Json -Json $documents.managed; & $fixture.Value $document
     $rejected = $false
     try { Assert-LocalPackageSbom51Document -Document $document -Package $record.packages[0] -SourceCommit $record.sourceCommit -Created $record.created } catch { $rejected = $true }
     if (-not $rejected) { throw "Local SBOM guard accepted negative SPDX fixture: $($fixture.Key)" }

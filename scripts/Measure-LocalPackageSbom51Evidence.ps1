@@ -89,7 +89,7 @@ foreach ($role in @('managed', 'full', 'mini')) {
     [void](Invoke-LocalSbomStep -Name "sbom-$role-repeat" -Script 'scripts/New-ReleasePackageSbom.ps1' -Arguments $argsForSbom)
     if ($firstHash -cne (Get-ModernApi51Sha256 -Path $sbomPath)) { throw 'Repeated SPDX generation changed bytes.' }
     [void](Invoke-LocalSbomStep -Name "sbom-$role-check" -Script 'scripts/New-ReleasePackageSbom.ps1' -Arguments ($argsForSbom + '-Check'))
-    Assert-LocalPackageSbom51Document -Document (Get-Content -LiteralPath $sbomPath -Raw | ConvertFrom-Json) -Package $row -SourceCommit $sourceCommit -Created $created
+    Assert-LocalPackageSbom51Document -Document (ConvertFrom-LocalPackageSbom51Json -Json (Get-Content -LiteralPath $sbomPath -Raw)) -Package $row -SourceCommit $sourceCommit -Created $created
     $row.sbom = [ordered]@{ path = "$sbomRelative/$id.5.1.0.spdx.json"; bytes = (Get-Item -LiteralPath $sbomPath).Length; sha256 = $firstHash; regenerationIdentical = $true; checkPassed = $true }
     if ($role -cne 'managed') {
         $audit = Invoke-LocalSbomStep -Name "pe-$role" -Script 'scripts/Test-PackagedWindowsRuntimePeClosure.ps1' -Arguments @('-PackagePath', $packagePath, '-RuntimeProfile', $role)
