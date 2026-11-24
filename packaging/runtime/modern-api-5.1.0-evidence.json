@@ -1,0 +1,596 @@
+{
+  "$schema": "modern-api-5.1.0-evidence.schema.json",
+  "schemaVersion": 1,
+  "status": "verified-local-windows-x64",
+  "sourceCommit": "e42563f430710730084fb4647a5fdaa0e9f0a30e",
+  "openCvVersion": "5.1.0",
+  "managedPackageVersion": "5.1.0",
+  "nativeAbiVersion": 1,
+  "runner": {
+    "os": "Microsoft Windows 10.0.26200",
+    "architecture": "x64",
+    "dotnetSdk": "10.0.401",
+    "configuration": "Release"
+  },
+  "sourceInputSet": {
+    "paths": [
+      "Directory.Build.props",
+      "src/OpenCvSharp",
+      "tests/OpenCvSharp.Tests",
+      "samples/ConsoleSamples",
+      "scripts/ModernApi51Evidence.Common.ps1",
+      "scripts/Measure-ModernApi51Evidence.ps1"
+    ],
+    "fileCount": 1052,
+    "sha256": "eea81757222cc4768218bd38a84a1f4bf843a4a17d912aaacdb5de9d76943653"
+  },
+  "packageConsumerEvidence": {
+    "path": "packaging/runtime/opencv-5.1.0-package-consumer-evidence.json",
+    "sha256": "b5e9041296c2b072e24df556cd66ba904cf8a4e794fe592f82be869ffb932d9c"
+  },
+  "runtimePackages": [
+    {
+      "profile": "full",
+      "packageFileName": "jyppx.opencv.runtime.win-x64.5.1.0.nupkg",
+      "packageSha256": "d0b6898df70684c3a39da6091adcabaf43b7d184347e8db4aba2059e652949ec",
+      "payload": [
+        {
+          "name": "JYPPX.OpenCV.Native.dll",
+          "bytes": 1894912,
+          "sha256": "df3bb6b53e1d67d081eb984ff0e71817a892904808ff829533f43be2d7c66656"
+        },
+        {
+          "name": "opencv_alphamat510.dll",
+          "bytes": 466944,
+          "sha256": "6d84d33cd04b583645b6326b3144cdc37c0cae06c83f323cf47d342c801c161d"
+        },
+        {
+          "name": "opencv_bgsegm510.dll",
+          "bytes": 410624,
+          "sha256": "338a2b66744291181ef7529201e837ea847813b4631127a4550928d221f406b4"
+        },
+        {
+          "name": "opencv_bioinspired510.dll",
+          "bytes": 275968,
+          "sha256": "3af58fc0b458d5096984c85b6bb46a2a06f49ce53bc151560039c625e3d231b4"
+        },
+        {
+          "name": "opencv_calib510.dll",
+          "bytes": 1124864,
+          "sha256": "ff19683bd993c15af40df58b0daa8ae75561029697ac203a9353801fe1df23d7"
+        },
+        {
+          "name": "opencv_core510.dll",
+          "bytes": 10464256,
+          "sha256": "6888f84e2b2ebe707e0a093ef2b3be9f500ea8bab1b60eea7a468060635be403"
+        },
+        {
+          "name": "opencv_dnn510.dll",
+          "bytes": 15418880,
+          "sha256": "6b1d0a3eee3ef20c57affaeb188b77a3ee81a3421b52927cbe6c608eb9c06efc"
+        },
+        {
+          "name": "opencv_face510.dll",
+          "bytes": 1117696,
+          "sha256": "00f950bb0083a5a6d7194a663ee549e3465be407ff0987db2f5c901817ab98ed"
+        },
+        {
+          "name": "opencv_features510.dll",
+          "bytes": 1451008,
+          "sha256": "f7c2098d547baa39567edc1f29d73a519bf0631b1b77bf31b99b3bed7b297413"
+        },
+        {
+          "name": "opencv_flann510.dll",
+          "bytes": 703488,
+          "sha256": "45d860283c0f8494bcdc5e6d495e0e6a13755a6108e8510b8a769763c4f3a549"
+        },
+        {
+          "name": "opencv_fuzzy510.dll",
+          "bytes": 171520,
+          "sha256": "e5ac5cf387a6dedfe7cb8af1909383497da109719b7f8bafb61ecb09e991f966"
+        },
+        {
+          "name": "opencv_geometry510.dll",
+          "bytes": 5060096,
+          "sha256": "a6b5a7f54568cee502d1ab36502ff50b2d915582f146fc8de2adc04ab0dcca8b"
+        },
+        {
+          "name": "opencv_hfs510.dll",
+          "bytes": 450560,
+          "sha256": "80b6f288e1647f11ebcc8ecaca6c308458e341898b9430e42b9c15e45c82d49e"
+        },
+        {
+          "name": "opencv_highgui510.dll",
+          "bytes": 695296,
+          "sha256": "3096edc4110df7fc5e2e0444e6da43fa894bab6ac1e1d931b87718a050b651e5"
+        },
+        {
+          "name": "opencv_img_hash510.dll",
+          "bytes": 234496,
+          "sha256": "54bb857911633adb6ba36156b31cc1d49fb1e26915761555f8d585303ad7b744"
+        },
+        {
+          "name": "opencv_imgcodecs510.dll",
+          "bytes": 3518976,
+          "sha256": "d64f7347a182b2a64817db661a74ff827ad97c72c040273501f946eb2d10e382"
+        },
+        {
+          "name": "opencv_imgproc510.dll",
+          "bytes": 10991104,
+          "sha256": "7a9e3c382f6013521f08e037810a2e7b5a8fe1cfd9c763c509a79fcd76198b1e"
+        },
+        {
+          "name": "opencv_intensity_transform510.dll",
+          "bytes": 403968,
+          "sha256": "74fb147fe3f98c633faa7d0cc6fc800fdb232a543a62ccaa7c4a0ed2557ebf0b"
+        },
+        {
+          "name": "opencv_line_descriptor510.dll",
+          "bytes": 395776,
+          "sha256": "648a5eeb941641273193205352499e481fd4271c6554d592743818997d438fdf"
+        },
+        {
+          "name": "opencv_ml510.dll",
+          "bytes": 1047040,
+          "sha256": "e52a4ef734a69a496a6ca17ad7d3ca7d5c7586b3b377bc467fa5cf56f246fa39"
+        },
+        {
+          "name": "opencv_objdetect510.dll",
+          "bytes": 2650624,
+          "sha256": "33cfde5e4c6632f343118e0bea50d8ff4f472e93e9ad0b59d48925182a6c6579"
+        },
+        {
+          "name": "opencv_optflow510.dll",
+          "bytes": 1091584,
+          "sha256": "c446e2eb0dd1797d448967d6b8b7e3f582e519e859754f75bff716aa4231bf68"
+        },
+        {
+          "name": "opencv_phase_unwrapping510.dll",
+          "bytes": 161792,
+          "sha256": "2412985667bb425abd8755611e49ef51a2febd3c50ce539083be489542f31b7a"
+        },
+        {
+          "name": "opencv_photo510.dll",
+          "bytes": 1440768,
+          "sha256": "75cdfabe2dab880da68d1096bcd4ca24625452db0c250d5540c62bb678d1332c"
+        },
+        {
+          "name": "opencv_plot510.dll",
+          "bytes": 141824,
+          "sha256": "df310dbcbcb457dfefda832e6d0ec677a658c72b4b0f96cf8ce383eb5377831b"
+        },
+        {
+          "name": "opencv_ptcloud510.dll",
+          "bytes": 2217472,
+          "sha256": "271c50525455600367099feebf0d997a78c99a15af3fcff4d32faa040d240bb5"
+        },
+        {
+          "name": "opencv_quality510.dll",
+          "bytes": 217600,
+          "sha256": "0f4bb129cd699c3d172def174399ac92e00779e5a899a5d9da4cb3021107b1b2"
+        },
+        {
+          "name": "opencv_rapid510.dll",
+          "bytes": 230912,
+          "sha256": "5eaaa901e1ac26ac651cf7b3770b5a92f11ebd331adebd0fa73566149182736c"
+        },
+        {
+          "name": "opencv_reg510.dll",
+          "bytes": 243712,
+          "sha256": "fdf9fafff7cb3bf012597fee79d424f7c3480501ea2b589485d44d1a9b86df74"
+        },
+        {
+          "name": "opencv_saliency510.dll",
+          "bytes": 325632,
+          "sha256": "b6d4c4ec48c38760b04c76fbdc1fbda130be5616b87c7c3a58a64db7ca33dace"
+        },
+        {
+          "name": "opencv_shape510.dll",
+          "bytes": 334848,
+          "sha256": "c5c009361fab5e9a27b01c1099a036915d1eae7a2557803391b706ccd5a0e182"
+        },
+        {
+          "name": "opencv_stereo510.dll",
+          "bytes": 334848,
+          "sha256": "58922e789a19989540b083401fe0cd3bb65c45fbb43738242f6c751282362a3f"
+        },
+        {
+          "name": "opencv_stitching510.dll",
+          "bytes": 1683456,
+          "sha256": "1c34321ef1a5775f199eae97d5eaaa090df766c932afa24530fb82ae925252be"
+        },
+        {
+          "name": "opencv_structured_light510.dll",
+          "bytes": 227840,
+          "sha256": "5d7d32217bcd822acd00b073ccb1d06036455704978a9a1edd262a5649c601f3"
+        },
+        {
+          "name": "opencv_surface_matching510.dll",
+          "bytes": 805376,
+          "sha256": "568ba584938bb88185407349f1edb09e2619a251d9ccd945a60484b260e4d4a0"
+        },
+        {
+          "name": "opencv_tracking510.dll",
+          "bytes": 2908672,
+          "sha256": "ac184d08d971a079fe9f53a6be443cb1fd850fad8c0ec3d3b66a7bdc6a6437a2"
+        },
+        {
+          "name": "opencv_video510.dll",
+          "bytes": 1256960,
+          "sha256": "5888b99835e548972ead58e732da8b8cf0bfe46c9c8065c7ee4b207d8d325f69"
+        },
+        {
+          "name": "opencv_videoio510.dll",
+          "bytes": 1007104,
+          "sha256": "4140341b2cd0599e283257a2bb23b10752f2f9854405ebfc34acc9a97a5f66b5"
+        },
+        {
+          "name": "opencv_xfeatures2d510.dll",
+          "bytes": 3503616,
+          "sha256": "63d6b6f471bc1973426d4e5b9abe04cf829da61e25ec06d7e6a234ba8f1f3af1"
+        },
+        {
+          "name": "opencv_ximgproc510.dll",
+          "bytes": 2313216,
+          "sha256": "693d752859c9adfc92b67d94be9c3ce8bec967c4c082323fd3f02b4ff09dedae"
+        },
+        {
+          "name": "opencv_xobjdetect510.dll",
+          "bytes": 571904,
+          "sha256": "65678a14328b84ef4ba2431a373a37b710c56e8230de47c7de65b47c573223b7"
+        },
+        {
+          "name": "opencv_xphoto510.dll",
+          "bytes": 1028608,
+          "sha256": "a53ac3f7360e30209cc711689821331c925fda4ee7b64b5f43e3d39e9dbb6440"
+        },
+        {
+          "name": "opencv_xstereo510.dll",
+          "bytes": 413696,
+          "sha256": "054e543e492b464e7fee1a3d7b26a6a414125b7c8175dab3449b57bb4b1a2de6"
+        }
+      ]
+    },
+    {
+      "profile": "mini",
+      "packageFileName": "jyppx.opencv.runtime.win-x64.mini.5.1.0.nupkg",
+      "packageSha256": "9787a637ede30c26db3af1ac40d0999f6ef1f8c6ba5e953e1b7f5a46c6e37ca7",
+      "payload": [
+        {
+          "name": "JYPPX.OpenCV.Native.dll",
+          "bytes": 425984,
+          "sha256": "16b0d302095ffc1d8619b2f6f08058eea6ae1290dcd01a6d5e39a9a33cfebef1"
+        },
+        {
+          "name": "opencv_core510.dll",
+          "bytes": 10464256,
+          "sha256": "6888f84e2b2ebe707e0a093ef2b3be9f500ea8bab1b60eea7a468060635be403"
+        },
+        {
+          "name": "opencv_flann510.dll",
+          "bytes": 703488,
+          "sha256": "45d860283c0f8494bcdc5e6d495e0e6a13755a6108e8510b8a769763c4f3a549"
+        },
+        {
+          "name": "opencv_geometry510.dll",
+          "bytes": 5060096,
+          "sha256": "a6b5a7f54568cee502d1ab36502ff50b2d915582f146fc8de2adc04ab0dcca8b"
+        },
+        {
+          "name": "opencv_imgcodecs510.dll",
+          "bytes": 3518976,
+          "sha256": "d64f7347a182b2a64817db661a74ff827ad97c72c040273501f946eb2d10e382"
+        },
+        {
+          "name": "opencv_imgproc510.dll",
+          "bytes": 10991104,
+          "sha256": "7a9e3c382f6013521f08e037810a2e7b5a8fe1cfd9c763c509a79fcd76198b1e"
+        },
+        {
+          "name": "opencv_videoio510.dll",
+          "bytes": 1007104,
+          "sha256": "4140341b2cd0599e283257a2bb23b10752f2f9854405ebfc34acc9a97a5f66b5"
+        }
+      ]
+    }
+  ],
+  "capabilityProfiles": [
+    {
+      "profile": "none",
+      "targetFramework": "net10.0",
+      "nativeDllCount": 0,
+      "apiAssemblySha256": "a8587ea85ceadb6bbcb02c97f7f538c2f11e67e05b556a03db6d497e5ffc5edc",
+      "sampleAssemblySha256": "7c9ea897a29f42bc41e0bcb3e0887517379fa9b00895ba7175493c575790a8c0",
+      "isolation": {
+        "runtimeRootUnset": true,
+        "displayUnset": true,
+        "waylandDisplayUnset": true,
+        "pathRestricted": true,
+        "nativeSmokeEnabled": false,
+        "headlessSmokeEnabled": false
+      },
+      "snapshotJson": "{\"managedPackageVersion\":\"5.1.0\",\"openCvVersion\":\"5.1.0\",\"nativeAbiVersion\":1,\"targetFramework\":\"net10.0\",\"processBitness\":64,\"operatingSystem\":\"Win32NT\",\"operatingSystemDescription\":\"Microsoft Windows 10.0.26200\",\"runtimeFrameworkDescription\":\".NET 10.0.12\",\"processArchitecture\":\"X64\",\"runtimeIdentifier\":\"win-x64\",\"nativeRuntime\":{\"name\":\"native-runtime\",\"state\":\"Unknown\",\"reason\":\"ABI/version verification did not complete.\"},\"nativeOpenCvVersion\":\"\",\"loadedNativeAbiVersion\":null,\"cpuFeaturesLine\":\"\",\"logicalCpuCount\":null,\"useOptimized\":null,\"modules\":[{\"name\":\"core\",\"state\":\"Unknown\",\"reason\":\"Required module state is unknown because native ABI/version verification did not complete.\"},{\"name\":\"imgproc\",\"state\":\"Unknown\",\"reason\":\"Required module state is unknown because native ABI/version verification did not complete.\"},{\"name\":\"imgcodecs\",\"state\":\"Unknown\",\"reason\":\"Required module state is unknown because native ABI/version verification did not complete.\"},{\"name\":\"videoio\",\"state\":\"Unknown\",\"reason\":\"Required module state is unknown because native ABI/version verification did not complete.\"}],\"optionalModules\":[{\"name\":\"xfeatures2d\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"xobjdetect\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"quality\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"xphoto\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"img_hash\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"ximgproc\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"optflow\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"bgsegm\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"tracking\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"face\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"saliency\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"plot\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"shape\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"line_descriptor\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"phase_unwrapping\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"structured_light\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"intensity_transform\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"fuzzy\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"hfs\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"reg\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"surface_matching\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"rapid\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"alphamat\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"bioinspired\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"xstereo\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"}],\"guiBackend\":{\"name\":\"highgui-ui\",\"state\":\"Unavailable\",\"reason\":\"Native library was not found.\"},\"codecs\":[{\"extension\":\".png\",\"reader\":{\"name\":\"reader\",\"state\":\"Declared\",\"reason\":\"Reader support requires sample bytes and is not inferred from an extension alone.\"},\"writer\":{\"name\":\"writer\",\"state\":\"Unavailable\",\"reason\":\"Native library was not found.\"}},{\"extension\":\".jpg\",\"reader\":{\"name\":\"reader\",\"state\":\"Declared\",\"reason\":\"Reader support requires sample bytes and is not inferred from an extension alone.\"},\"writer\":{\"name\":\"writer\",\"state\":\"Unavailable\",\"reason\":\"Native library was not found.\"}},{\"extension\":\".webp\",\"reader\":{\"name\":\"reader\",\"state\":\"Declared\",\"reason\":\"Reader support requires sample bytes and is not inferred from an extension alone.\"},\"writer\":{\"name\":\"writer\",\"state\":\"Unavailable\",\"reason\":\"Native library was not found.\"}},{\"extension\":\".tiff\",\"reader\":{\"name\":\"reader\",\"state\":\"Declared\",\"reason\":\"Reader support requires sample bytes and is not inferred from an extension alone.\"},\"writer\":{\"name\":\"writer\",\"state\":\"Unavailable\",\"reason\":\"Native library was not found.\"}},{\"extension\":\".bmp\",\"reader\":{\"name\":\"reader\",\"state\":\"Declared\",\"reason\":\"Reader support requires sample bytes and is not inferred from an extension alone.\"},\"writer\":{\"name\":\"writer\",\"state\":\"Unavailable\",\"reason\":\"Native library was not found.\"}},{\"extension\":\".gif\",\"reader\":{\"name\":\"reader\",\"state\":\"Declared\",\"reason\":\"Reader support requires sample bytes and is not inferred from an extension alone.\"},\"writer\":{\"name\":\"writer\",\"state\":\"Unavailable\",\"reason\":\"Native library was not found.\"}},{\"extension\":\".exr\",\"reader\":{\"name\":\"reader\",\"state\":\"Declared\",\"reason\":\"Reader support requires sample bytes and is not inferred from an extension alone.\"},\"writer\":{\"name\":\"writer\",\"state\":\"Unavailable\",\"reason\":\"Native library was not found.\"}},{\"extension\":\".jp2\",\"reader\":{\"name\":\"reader\",\"state\":\"Declared\",\"reason\":\"Reader support requires sample bytes and is not inferred from an extension alone.\"},\"writer\":{\"name\":\"writer\",\"state\":\"Unavailable\",\"reason\":\"Native library was not found.\"}}],\"videoIoBackends\":[],\"dnnBackends\":[{\"backend\":\"Default\",\"state\":\"Unavailable\",\"targets\":[],\"reason\":\"Native library was not found.\"},{\"backend\":\"InferenceEngine\",\"state\":\"Unavailable\",\"targets\":[],\"reason\":\"Native library was not found.\"},{\"backend\":\"OpenCV\",\"state\":\"Unavailable\",\"targets\":[],\"reason\":\"Native library was not found.\"},{\"backend\":\"VkCom\",\"state\":\"Unavailable\",\"targets\":[],\"reason\":\"Native library was not found.\"},{\"backend\":\"Cuda\",\"state\":\"Unavailable\",\"targets\":[],\"reason\":\"Native library was not found.\"},{\"backend\":\"WebNN\",\"state\":\"Unavailable\",\"targets\":[],\"reason\":\"Native library was not found.\"},{\"backend\":\"TimVx\",\"state\":\"Unavailable\",\"targets\":[],\"reason\":\"Native library was not found.\"},{\"backend\":\"Cann\",\"state\":\"Unavailable\",\"targets\":[],\"reason\":\"Native library was not found.\"}],\"accelerators\":[{\"name\":\"opencl-tapi\",\"state\":\"Unknown\",\"reason\":\"No public UMat/OpenCL execution probe is currently exposed.\"},{\"name\":\"cuda\",\"state\":\"Unknown\",\"reason\":\"No public CUDA execution probe is currently exposed.\"}],\"warnings\":[\"Native ABI probe unavailable: Native library was not found.\",\"Native OpenCV version probe unavailable: Native library was not found.\",\"CPU feature probe unavailable: Native library was not found.\",\"CPU count probe unavailable: Native library was not found.\",\"Optimization probe unavailable: Native library was not found.\",\"VideoIO registry probe unavailable: Native library was not found.\",\"DNN backend probe failed for Default: Native library was not found.\",\"DNN backend probe failed for InferenceEngine: Native library was not found.\",\"DNN backend probe failed for OpenCV: Native library was not found.\",\"DNN backend probe failed for VkCom: Native library was not found.\",\"DNN backend probe failed for Cuda: Native library was not found.\",\"DNN backend probe failed for WebNN: Native library was not found.\",\"DNN backend probe failed for TimVx: Native library was not found.\",\"DNN backend probe failed for Cann: Native library was not found.\",\"HighGUI backend probe unavailable: Native library was not found.\",\"Codec writer probe failed for .png: Native library was not found.\",\"Codec writer probe failed for .jpg: Native library was not found.\",\"Codec writer probe failed for .webp: Native library was not found.\",\"Codec writer probe failed for .tiff: Native library was not found.\",\"Codec writer probe failed for .bmp: Native library was not found.\",\"Codec writer probe failed for .gif: Native library was not found.\",\"Codec writer probe failed for .exr: Native library was not found.\",\"Codec writer probe failed for .jp2: Native library was not found.\"]}",
+      "snapshotSha256": "c871e889e98ad629e74e223df4d71b35650e3d572a31b87767ff1b2e3c5fddc1"
+    },
+    {
+      "profile": "full",
+      "targetFramework": "net10.0",
+      "nativeDllCount": 43,
+      "apiAssemblySha256": "a8587ea85ceadb6bbcb02c97f7f538c2f11e67e05b556a03db6d497e5ffc5edc",
+      "sampleAssemblySha256": "7c9ea897a29f42bc41e0bcb3e0887517379fa9b00895ba7175493c575790a8c0",
+      "isolation": {
+        "runtimeRootUnset": true,
+        "displayUnset": true,
+        "waylandDisplayUnset": true,
+        "pathRestricted": true,
+        "nativeSmokeEnabled": true,
+        "headlessSmokeEnabled": false
+      },
+      "snapshotJson": "{\"managedPackageVersion\":\"5.1.0\",\"openCvVersion\":\"5.1.0\",\"nativeAbiVersion\":1,\"targetFramework\":\"net10.0\",\"processBitness\":64,\"operatingSystem\":\"Win32NT\",\"operatingSystemDescription\":\"Microsoft Windows 10.0.26200\",\"runtimeFrameworkDescription\":\".NET 10.0.12\",\"processArchitecture\":\"X64\",\"runtimeIdentifier\":\"win-x64\",\"nativeRuntime\":{\"name\":\"native-runtime\",\"state\":\"Verified\",\"reason\":\"ABI and OpenCV version match.\"},\"nativeOpenCvVersion\":\"5.1.0\",\"loadedNativeAbiVersion\":1,\"cpuFeaturesLine\":\"SSE SSE2 SSE3 *SSE4.1 *SSE4.2 *AVX *FP16 *AVX2 *AVX512-SKX? *AVX512-CLX?\",\"logicalCpuCount\":16,\"useOptimized\":true,\"modules\":[{\"name\":\"core\",\"state\":\"Verified\",\"reason\":\"Required module is covered by the verified native ABI and OpenCV version probes.\"},{\"name\":\"imgproc\",\"state\":\"Verified\",\"reason\":\"Required module is covered by the verified native ABI and OpenCV version probes.\"},{\"name\":\"imgcodecs\",\"state\":\"Verified\",\"reason\":\"Required module is covered by the verified native ABI and OpenCV version probes.\"},{\"name\":\"videoio\",\"state\":\"Verified\",\"reason\":\"Required module is covered by the verified native ABI and OpenCV version probes.\"}],\"optionalModules\":[{\"name\":\"xfeatures2d\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"xobjdetect\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"quality\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"xphoto\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"img_hash\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"ximgproc\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"optflow\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"bgsegm\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"tracking\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"face\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"saliency\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"plot\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"shape\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"line_descriptor\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"phase_unwrapping\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"structured_light\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"intensity_transform\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"fuzzy\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"hfs\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"reg\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"surface_matching\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"rapid\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"alphamat\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"bioinspired\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"xstereo\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"}],\"guiBackend\":{\"name\":\"highgui-ui\",\"state\":\"Verified\",\"reason\":\"Active HighGUI backend reported: WIN32.\"},\"codecs\":[{\"extension\":\".png\",\"reader\":{\"name\":\"reader\",\"state\":\"Declared\",\"reason\":\"Reader support requires sample bytes and is not inferred from an extension alone.\"},\"writer\":{\"name\":\"writer\",\"state\":\"Verified\",\"reason\":\"Linked runtime reports a writer for this extension.\"}},{\"extension\":\".jpg\",\"reader\":{\"name\":\"reader\",\"state\":\"Declared\",\"reason\":\"Reader support requires sample bytes and is not inferred from an extension alone.\"},\"writer\":{\"name\":\"writer\",\"state\":\"Verified\",\"reason\":\"Linked runtime reports a writer for this extension.\"}},{\"extension\":\".webp\",\"reader\":{\"name\":\"reader\",\"state\":\"Declared\",\"reason\":\"Reader support requires sample bytes and is not inferred from an extension alone.\"},\"writer\":{\"name\":\"writer\",\"state\":\"Verified\",\"reason\":\"Linked runtime reports a writer for this extension.\"}},{\"extension\":\".tiff\",\"reader\":{\"name\":\"reader\",\"state\":\"Declared\",\"reason\":\"Reader support requires sample bytes and is not inferred from an extension alone.\"},\"writer\":{\"name\":\"writer\",\"state\":\"Verified\",\"reason\":\"Linked runtime reports a writer for this extension.\"}},{\"extension\":\".bmp\",\"reader\":{\"name\":\"reader\",\"state\":\"Declared\",\"reason\":\"Reader support requires sample bytes and is not inferred from an extension alone.\"},\"writer\":{\"name\":\"writer\",\"state\":\"Verified\",\"reason\":\"Linked runtime reports a writer for this extension.\"}},{\"extension\":\".gif\",\"reader\":{\"name\":\"reader\",\"state\":\"Declared\",\"reason\":\"Reader support requires sample bytes and is not inferred from an extension alone.\"},\"writer\":{\"name\":\"writer\",\"state\":\"Verified\",\"reason\":\"Linked runtime reports a writer for this extension.\"}},{\"extension\":\".exr\",\"reader\":{\"name\":\"reader\",\"state\":\"Declared\",\"reason\":\"Reader support requires sample bytes and is not inferred from an extension alone.\"},\"writer\":{\"name\":\"writer\",\"state\":\"Unavailable\",\"reason\":\"Linked runtime reports no writer for this extension.\"}},{\"extension\":\".jp2\",\"reader\":{\"name\":\"reader\",\"state\":\"Declared\",\"reason\":\"Reader support requires sample bytes and is not inferred from an extension alone.\"},\"writer\":{\"name\":\"writer\",\"state\":\"Verified\",\"reason\":\"Linked runtime reports a writer for this extension.\"}}],\"videoIoBackends\":[{\"api\":\"FFmpeg\",\"name\":\"FFMPEG\",\"state\":\"Verified\",\"isBuiltIn\":false,\"reason\":\"Backend registry probe succeeded.\"},{\"api\":\"GStreamer\",\"name\":\"GSTREAMER\",\"state\":\"Verified\",\"isBuiltIn\":false,\"reason\":\"Backend registry probe succeeded.\"},{\"api\":\"IntelMfx\",\"name\":\"INTEL_MFX\",\"state\":\"Verified\",\"isBuiltIn\":false,\"reason\":\"Backend registry probe succeeded.\"},{\"api\":\"MSMF\",\"name\":\"MSMF\",\"state\":\"Verified\",\"isBuiltIn\":false,\"reason\":\"Backend registry probe succeeded.\"},{\"api\":\"FFmpeg\",\"name\":\"FFMPEG\",\"state\":\"Verified\",\"isBuiltIn\":false,\"reason\":\"Backend registry probe succeeded.\"},{\"api\":\"Images\",\"name\":\"CV_IMAGES\",\"state\":\"Verified\",\"isBuiltIn\":true,\"reason\":\"Backend registry probe succeeded.\"},{\"api\":\"OpenCVMjpeg\",\"name\":\"CV_MJPEG\",\"state\":\"Verified\",\"isBuiltIn\":true,\"reason\":\"Backend registry probe succeeded.\"},{\"api\":\"UEye\",\"name\":\"UEYE\",\"state\":\"Verified\",\"isBuiltIn\":false,\"reason\":\"Backend registry probe succeeded.\"},{\"api\":\"OBSensor\",\"name\":\"OBSENSOR\",\"state\":\"Verified\",\"isBuiltIn\":true,\"reason\":\"Backend registry probe succeeded.\"}],\"dnnBackends\":[{\"backend\":\"Default\",\"state\":\"Verified\",\"targets\":[\"Cpu\"],\"reason\":\"Target probe succeeded.\"},{\"backend\":\"InferenceEngine\",\"state\":\"Unavailable\",\"targets\":[],\"reason\":\"No usable target was reported.\"},{\"backend\":\"OpenCV\",\"state\":\"Verified\",\"targets\":[\"Cpu\"],\"reason\":\"Target probe succeeded.\"},{\"backend\":\"VkCom\",\"state\":\"Unavailable\",\"targets\":[],\"reason\":\"No usable target was reported.\"},{\"backend\":\"Cuda\",\"state\":\"Unavailable\",\"targets\":[],\"reason\":\"No usable target was reported.\"},{\"backend\":\"WebNN\",\"state\":\"Unavailable\",\"targets\":[],\"reason\":\"No usable target was reported.\"},{\"backend\":\"TimVx\",\"state\":\"Unavailable\",\"targets\":[],\"reason\":\"No usable target was reported.\"},{\"backend\":\"Cann\",\"state\":\"Unavailable\",\"targets\":[],\"reason\":\"No usable target was reported.\"}],\"accelerators\":[{\"name\":\"opencl-tapi\",\"state\":\"Unknown\",\"reason\":\"No public UMat/OpenCL execution probe is currently exposed.\"},{\"name\":\"cuda\",\"state\":\"Unknown\",\"reason\":\"No public CUDA execution probe is currently exposed.\"}],\"warnings\":[]}",
+      "snapshotSha256": "2e2d592dfcc84189afc2b24cbc1fa26a89c93a6961c262bd55bf5bd746358149"
+    },
+    {
+      "profile": "mini",
+      "targetFramework": "net10.0",
+      "nativeDllCount": 7,
+      "apiAssemblySha256": "a8587ea85ceadb6bbcb02c97f7f538c2f11e67e05b556a03db6d497e5ffc5edc",
+      "sampleAssemblySha256": "7c9ea897a29f42bc41e0bcb3e0887517379fa9b00895ba7175493c575790a8c0",
+      "isolation": {
+        "runtimeRootUnset": true,
+        "displayUnset": true,
+        "waylandDisplayUnset": true,
+        "pathRestricted": true,
+        "nativeSmokeEnabled": true,
+        "headlessSmokeEnabled": true
+      },
+      "snapshotJson": "{\"managedPackageVersion\":\"5.1.0\",\"openCvVersion\":\"5.1.0\",\"nativeAbiVersion\":1,\"targetFramework\":\"net10.0\",\"processBitness\":64,\"operatingSystem\":\"Win32NT\",\"operatingSystemDescription\":\"Microsoft Windows 10.0.26200\",\"runtimeFrameworkDescription\":\".NET 10.0.12\",\"processArchitecture\":\"X64\",\"runtimeIdentifier\":\"win-x64\",\"nativeRuntime\":{\"name\":\"native-runtime\",\"state\":\"Verified\",\"reason\":\"ABI and OpenCV version match.\"},\"nativeOpenCvVersion\":\"5.1.0\",\"loadedNativeAbiVersion\":1,\"cpuFeaturesLine\":\"SSE SSE2 SSE3 *SSE4.1 *SSE4.2 *AVX *FP16 *AVX2 *AVX512-SKX? *AVX512-CLX?\",\"logicalCpuCount\":16,\"useOptimized\":true,\"modules\":[{\"name\":\"core\",\"state\":\"Verified\",\"reason\":\"Required module is covered by the verified native ABI and OpenCV version probes.\"},{\"name\":\"imgproc\",\"state\":\"Verified\",\"reason\":\"Required module is covered by the verified native ABI and OpenCV version probes.\"},{\"name\":\"imgcodecs\",\"state\":\"Verified\",\"reason\":\"Required module is covered by the verified native ABI and OpenCV version probes.\"},{\"name\":\"videoio\",\"state\":\"Verified\",\"reason\":\"Required module is covered by the verified native ABI and OpenCV version probes.\"}],\"optionalModules\":[{\"name\":\"xfeatures2d\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"xobjdetect\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"quality\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"xphoto\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"img_hash\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"ximgproc\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"optflow\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"bgsegm\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"tracking\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"face\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"saliency\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"plot\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"shape\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"line_descriptor\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"phase_unwrapping\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"structured_light\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"intensity_transform\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"fuzzy\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"hfs\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"reg\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"surface_matching\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"rapid\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"alphamat\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"bioinspired\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"},{\"name\":\"xstereo\",\"state\":\"Declared\",\"reason\":\"Managed wrapper surface declares this optional module; native profile availability is not inferred.\"}],\"guiBackend\":{\"name\":\"highgui-ui\",\"state\":\"Unavailable\",\"reason\":\"Required native entry point was not found.\"},\"codecs\":[{\"extension\":\".png\",\"reader\":{\"name\":\"reader\",\"state\":\"Declared\",\"reason\":\"Reader support requires sample bytes and is not inferred from an extension alone.\"},\"writer\":{\"name\":\"writer\",\"state\":\"Verified\",\"reason\":\"Linked runtime reports a writer for this extension.\"}},{\"extension\":\".jpg\",\"reader\":{\"name\":\"reader\",\"state\":\"Declared\",\"reason\":\"Reader support requires sample bytes and is not inferred from an extension alone.\"},\"writer\":{\"name\":\"writer\",\"state\":\"Verified\",\"reason\":\"Linked runtime reports a writer for this extension.\"}},{\"extension\":\".webp\",\"reader\":{\"name\":\"reader\",\"state\":\"Declared\",\"reason\":\"Reader support requires sample bytes and is not inferred from an extension alone.\"},\"writer\":{\"name\":\"writer\",\"state\":\"Verified\",\"reason\":\"Linked runtime reports a writer for this extension.\"}},{\"extension\":\".tiff\",\"reader\":{\"name\":\"reader\",\"state\":\"Declared\",\"reason\":\"Reader support requires sample bytes and is not inferred from an extension alone.\"},\"writer\":{\"name\":\"writer\",\"state\":\"Verified\",\"reason\":\"Linked runtime reports a writer for this extension.\"}},{\"extension\":\".bmp\",\"reader\":{\"name\":\"reader\",\"state\":\"Declared\",\"reason\":\"Reader support requires sample bytes and is not inferred from an extension alone.\"},\"writer\":{\"name\":\"writer\",\"state\":\"Verified\",\"reason\":\"Linked runtime reports a writer for this extension.\"}},{\"extension\":\".gif\",\"reader\":{\"name\":\"reader\",\"state\":\"Declared\",\"reason\":\"Reader support requires sample bytes and is not inferred from an extension alone.\"},\"writer\":{\"name\":\"writer\",\"state\":\"Verified\",\"reason\":\"Linked runtime reports a writer for this extension.\"}},{\"extension\":\".exr\",\"reader\":{\"name\":\"reader\",\"state\":\"Declared\",\"reason\":\"Reader support requires sample bytes and is not inferred from an extension alone.\"},\"writer\":{\"name\":\"writer\",\"state\":\"Unavailable\",\"reason\":\"Linked runtime reports no writer for this extension.\"}},{\"extension\":\".jp2\",\"reader\":{\"name\":\"reader\",\"state\":\"Declared\",\"reason\":\"Reader support requires sample bytes and is not inferred from an extension alone.\"},\"writer\":{\"name\":\"writer\",\"state\":\"Verified\",\"reason\":\"Linked runtime reports a writer for this extension.\"}}],\"videoIoBackends\":[{\"api\":\"FFmpeg\",\"name\":\"FFMPEG\",\"state\":\"Verified\",\"isBuiltIn\":false,\"reason\":\"Backend registry probe succeeded.\"},{\"api\":\"GStreamer\",\"name\":\"GSTREAMER\",\"state\":\"Verified\",\"isBuiltIn\":false,\"reason\":\"Backend registry probe succeeded.\"},{\"api\":\"IntelMfx\",\"name\":\"INTEL_MFX\",\"state\":\"Verified\",\"isBuiltIn\":false,\"reason\":\"Backend registry probe succeeded.\"},{\"api\":\"MSMF\",\"name\":\"MSMF\",\"state\":\"Verified\",\"isBuiltIn\":false,\"reason\":\"Backend registry probe succeeded.\"},{\"api\":\"FFmpeg\",\"name\":\"FFMPEG\",\"state\":\"Verified\",\"isBuiltIn\":false,\"reason\":\"Backend registry probe succeeded.\"},{\"api\":\"Images\",\"name\":\"CV_IMAGES\",\"state\":\"Verified\",\"isBuiltIn\":true,\"reason\":\"Backend registry probe succeeded.\"},{\"api\":\"OpenCVMjpeg\",\"name\":\"CV_MJPEG\",\"state\":\"Verified\",\"isBuiltIn\":true,\"reason\":\"Backend registry probe succeeded.\"},{\"api\":\"UEye\",\"name\":\"UEYE\",\"state\":\"Verified\",\"isBuiltIn\":false,\"reason\":\"Backend registry probe succeeded.\"},{\"api\":\"OBSensor\",\"name\":\"OBSENSOR\",\"state\":\"Verified\",\"isBuiltIn\":true,\"reason\":\"Backend registry probe succeeded.\"}],\"dnnBackends\":[{\"backend\":\"Default\",\"state\":\"Unavailable\",\"targets\":[],\"reason\":\"Required native entry point was not found.\"},{\"backend\":\"InferenceEngine\",\"state\":\"Unavailable\",\"targets\":[],\"reason\":\"Required native entry point was not found.\"},{\"backend\":\"OpenCV\",\"state\":\"Unavailable\",\"targets\":[],\"reason\":\"Required native entry point was not found.\"},{\"backend\":\"VkCom\",\"state\":\"Unavailable\",\"targets\":[],\"reason\":\"Required native entry point was not found.\"},{\"backend\":\"Cuda\",\"state\":\"Unavailable\",\"targets\":[],\"reason\":\"Required native entry point was not found.\"},{\"backend\":\"WebNN\",\"state\":\"Unavailable\",\"targets\":[],\"reason\":\"Required native entry point was not found.\"},{\"backend\":\"TimVx\",\"state\":\"Unavailable\",\"targets\":[],\"reason\":\"Required native entry point was not found.\"},{\"backend\":\"Cann\",\"state\":\"Unavailable\",\"targets\":[],\"reason\":\"Required native entry point was not found.\"}],\"accelerators\":[{\"name\":\"opencl-tapi\",\"state\":\"Unknown\",\"reason\":\"No public UMat/OpenCL execution probe is currently exposed.\"},{\"name\":\"cuda\",\"state\":\"Unknown\",\"reason\":\"No public CUDA execution probe is currently exposed.\"}],\"warnings\":[\"DNN backend probe failed for Default: Required native entry point was not found.\",\"DNN backend probe failed for InferenceEngine: Required native entry point was not found.\",\"DNN backend probe failed for OpenCV: Required native entry point was not found.\",\"DNN backend probe failed for VkCom: Required native entry point was not found.\",\"DNN backend probe failed for Cuda: Required native entry point was not found.\",\"DNN backend probe failed for WebNN: Required native entry point was not found.\",\"DNN backend probe failed for TimVx: Required native entry point was not found.\",\"DNN backend probe failed for Cann: Required native entry point was not found.\",\"HighGUI backend probe unavailable: Required native entry point was not found.\"]}",
+      "snapshotSha256": "eeafa944cd81786df162a249e1dbb5652cb3232a189a482b800052a52abd04a9"
+    }
+  ],
+  "testRuns": [
+    {
+      "profile": "none",
+      "targetFramework": "net8.0",
+      "nativeDllCount": 0,
+      "apiAssemblySha256": "0077e8f390b6e17d2c72a1c483c697107770d9649f1acb599af4031999ff8e01",
+      "testAssemblySha256": "e6174d72b79a46884c986ff22d7829991b34881f1f66f1ef0342f52422bcf971",
+      "isolation": {
+        "runtimeRootUnset": true,
+        "displayUnset": true,
+        "waylandDisplayUnset": true,
+        "pathRestricted": true,
+        "nativeSmokeEnabled": false,
+        "headlessSmokeEnabled": false
+      },
+      "total": 7,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "testCases": [
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.ProbeResultHasStableStateAndAvailabilitySemantics",
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.SnapshotDoesNotExposeMutableCollections",
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.SnapshotIsSafeToReadWithoutNativeSmoke",
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.SnapshotJsonIsDeterministicAndOmitsMachinePaths",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImDecodeRejectsManagedInvalidInputsBeforeNativeCall",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeRejectsManagedInvalidInputsBeforeNativeCall",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeRejectsOddParameterCount"
+      ],
+      "trx": {
+        "bytes": 11588,
+        "sha256": "e201f3117c76a38452fdcdec76252d0edc32d17d7859239c2d95a6737d10d2bf"
+      },
+      "headlessOutput": ""
+    },
+    {
+      "profile": "full",
+      "targetFramework": "net8.0",
+      "nativeDllCount": 43,
+      "apiAssemblySha256": "0077e8f390b6e17d2c72a1c483c697107770d9649f1acb599af4031999ff8e01",
+      "testAssemblySha256": "e6174d72b79a46884c986ff22d7829991b34881f1f66f1ef0342f52422bcf971",
+      "isolation": {
+        "runtimeRootUnset": true,
+        "displayUnset": true,
+        "waylandDisplayUnset": true,
+        "pathRestricted": true,
+        "nativeSmokeEnabled": true,
+        "headlessSmokeEnabled": false
+      },
+      "total": 15,
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0,
+      "testCases": [
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.NativeSmokeSnapshotVerifiesExistingProbes",
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.ProbeResultHasStableStateAndAvailabilitySemantics",
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.SnapshotDoesNotExposeMutableCollections",
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.SnapshotIsSafeToReadWithoutNativeSmoke",
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.SnapshotJsonIsDeterministicAndOmitsMachinePaths",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.CodecWriterAllocationTests.AdvanceFaultCanBeRepeatedWithoutPoisoningTheNextEncode",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.CodecWriterAllocationTests.ReusedCallerOwnedWriterMaintainsPayloadAcrossNativeEncodes",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImDecodeRejectsManagedInvalidInputsBeforeNativeCall",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeAcceptsPngAndJpegParametersWhenNativeRuntimeIsAvailable",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeAndImDecodeRoundTripPngWhenNativeRuntimeIsAvailable",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeRejectsManagedInvalidInputsBeforeNativeCall",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeRejectsOddParameterCount",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeToWriterAdvancesOnceAndDoesNotRetryWriterFaultsWhenNativeRuntimeIsAvailable",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeToWritesOneExactCallerOwnedSegmentWhenNativeRuntimeIsAvailable",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.TypeSafeEncodingParametersRoundTripPngWhenNativeRuntimeIsAvailable"
+      ],
+      "trx": {
+        "bytes": 23468,
+        "sha256": "ac061bbaa492693c945e757e40a9c574a5aaafddd8b70b91204546137f237ffa"
+      },
+      "headlessOutput": ""
+    },
+    {
+      "profile": "mini",
+      "targetFramework": "net8.0",
+      "nativeDllCount": 7,
+      "apiAssemblySha256": "0077e8f390b6e17d2c72a1c483c697107770d9649f1acb599af4031999ff8e01",
+      "testAssemblySha256": "e6174d72b79a46884c986ff22d7829991b34881f1f66f1ef0342f52422bcf971",
+      "isolation": {
+        "runtimeRootUnset": true,
+        "displayUnset": true,
+        "waylandDisplayUnset": true,
+        "pathRestricted": true,
+        "nativeSmokeEnabled": true,
+        "headlessSmokeEnabled": true
+      },
+      "total": 16,
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0,
+      "testCases": [
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.NativeSmokeSnapshotVerifiesExistingProbes",
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.ProbeResultHasStableStateAndAvailabilitySemantics",
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.SnapshotDoesNotExposeMutableCollections",
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.SnapshotIsSafeToReadWithoutNativeSmoke",
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.SnapshotJsonIsDeterministicAndOmitsMachinePaths",
+        "JYPPX.OpenCvSharp.Tests.Headless.HeadlessRuntimeCandidateTests.MiniProfileRejectsHighGuiAndKeepsCodecUsable",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.CodecWriterAllocationTests.AdvanceFaultCanBeRepeatedWithoutPoisoningTheNextEncode",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.CodecWriterAllocationTests.ReusedCallerOwnedWriterMaintainsPayloadAcrossNativeEncodes",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImDecodeRejectsManagedInvalidInputsBeforeNativeCall",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeAcceptsPngAndJpegParametersWhenNativeRuntimeIsAvailable",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeAndImDecodeRoundTripPngWhenNativeRuntimeIsAvailable",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeRejectsManagedInvalidInputsBeforeNativeCall",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeRejectsOddParameterCount",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeToWriterAdvancesOnceAndDoesNotRetryWriterFaultsWhenNativeRuntimeIsAvailable",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeToWritesOneExactCallerOwnedSegmentWhenNativeRuntimeIsAvailable",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.TypeSafeEncodingParametersRoundTripPngWhenNativeRuntimeIsAvailable"
+      ],
+      "trx": {
+        "bytes": 25471,
+        "sha256": "9e29a985a1647afde04747e769ad9e6a0da150769c877e2a2f03344b0ca4874b"
+      },
+      "headlessOutput": "HEADLESS_DNN_STATUS=omitted-deterministic-unavailable\r\nHEADLESS_VIDEOIO_BACKENDS=1900:FFMPEG:plugin|1800:GSTREAMER:plugin|2300:INTEL_MFX:plugin|1400:MSMF:plugin|1900:FFMPEG:plugin|2000:CV_IMAGES:built-in|2200:CV_MJPEG:built-in|2500:UEYE:plugin|2600:OBSENSOR:built-in\r\nHEADLESS_VIDEOIO_CAMERA_BACKENDS=1800:GSTREAMER:plugin|1400:MSMF:plugin|1900:FFMPEG:plugin|2500:UEYE:plugin|2600:OBSENSOR:built-in\r\nHEADLESS_VIDEOIO_MISSING_FILE_OPEN=returned-false"
+    },
+    {
+      "profile": "none",
+      "targetFramework": "net10.0",
+      "nativeDllCount": 0,
+      "apiAssemblySha256": "a8587ea85ceadb6bbcb02c97f7f538c2f11e67e05b556a03db6d497e5ffc5edc",
+      "testAssemblySha256": "48ac85df903ccfc1ae7e3bf5157dceee45a2fbcd5b156196fbf3421e21a1e2c6",
+      "isolation": {
+        "runtimeRootUnset": true,
+        "displayUnset": true,
+        "waylandDisplayUnset": true,
+        "pathRestricted": true,
+        "nativeSmokeEnabled": false,
+        "headlessSmokeEnabled": false
+      },
+      "total": 7,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "testCases": [
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.ProbeResultHasStableStateAndAvailabilitySemantics",
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.SnapshotDoesNotExposeMutableCollections",
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.SnapshotIsSafeToReadWithoutNativeSmoke",
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.SnapshotJsonIsDeterministicAndOmitsMachinePaths",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImDecodeRejectsManagedInvalidInputsBeforeNativeCall",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeRejectsManagedInvalidInputsBeforeNativeCall",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeRejectsOddParameterCount"
+      ],
+      "trx": {
+        "bytes": 11603,
+        "sha256": "db314e052c52662deb206865916bab023586fef7d255771c31f98a44a6f8fda4"
+      },
+      "headlessOutput": ""
+    },
+    {
+      "profile": "full",
+      "targetFramework": "net10.0",
+      "nativeDllCount": 43,
+      "apiAssemblySha256": "a8587ea85ceadb6bbcb02c97f7f538c2f11e67e05b556a03db6d497e5ffc5edc",
+      "testAssemblySha256": "48ac85df903ccfc1ae7e3bf5157dceee45a2fbcd5b156196fbf3421e21a1e2c6",
+      "isolation": {
+        "runtimeRootUnset": true,
+        "displayUnset": true,
+        "waylandDisplayUnset": true,
+        "pathRestricted": true,
+        "nativeSmokeEnabled": true,
+        "headlessSmokeEnabled": false
+      },
+      "total": 15,
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0,
+      "testCases": [
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.NativeSmokeSnapshotVerifiesExistingProbes",
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.ProbeResultHasStableStateAndAvailabilitySemantics",
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.SnapshotDoesNotExposeMutableCollections",
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.SnapshotIsSafeToReadWithoutNativeSmoke",
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.SnapshotJsonIsDeterministicAndOmitsMachinePaths",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.CodecWriterAllocationTests.AdvanceFaultCanBeRepeatedWithoutPoisoningTheNextEncode",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.CodecWriterAllocationTests.ReusedCallerOwnedWriterMaintainsPayloadAcrossNativeEncodes",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImDecodeRejectsManagedInvalidInputsBeforeNativeCall",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeAcceptsPngAndJpegParametersWhenNativeRuntimeIsAvailable",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeAndImDecodeRoundTripPngWhenNativeRuntimeIsAvailable",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeRejectsManagedInvalidInputsBeforeNativeCall",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeRejectsOddParameterCount",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeToWriterAdvancesOnceAndDoesNotRetryWriterFaultsWhenNativeRuntimeIsAvailable",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeToWritesOneExactCallerOwnedSegmentWhenNativeRuntimeIsAvailable",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.TypeSafeEncodingParametersRoundTripPngWhenNativeRuntimeIsAvailable"
+      ],
+      "trx": {
+        "bytes": 23499,
+        "sha256": "ec78d7e96614c80381b01da0fc72dfee91ff13cb17d553dc7199f6cbc6512543"
+      },
+      "headlessOutput": ""
+    },
+    {
+      "profile": "mini",
+      "targetFramework": "net10.0",
+      "nativeDllCount": 7,
+      "apiAssemblySha256": "a8587ea85ceadb6bbcb02c97f7f538c2f11e67e05b556a03db6d497e5ffc5edc",
+      "testAssemblySha256": "48ac85df903ccfc1ae7e3bf5157dceee45a2fbcd5b156196fbf3421e21a1e2c6",
+      "isolation": {
+        "runtimeRootUnset": true,
+        "displayUnset": true,
+        "waylandDisplayUnset": true,
+        "pathRestricted": true,
+        "nativeSmokeEnabled": true,
+        "headlessSmokeEnabled": true
+      },
+      "total": 16,
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0,
+      "testCases": [
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.NativeSmokeSnapshotVerifiesExistingProbes",
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.ProbeResultHasStableStateAndAvailabilitySemantics",
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.SnapshotDoesNotExposeMutableCollections",
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.SnapshotIsSafeToReadWithoutNativeSmoke",
+        "JYPPX.OpenCvSharp.Tests.Core.OpenCvCapabilitiesTests.SnapshotJsonIsDeterministicAndOmitsMachinePaths",
+        "JYPPX.OpenCvSharp.Tests.Headless.HeadlessRuntimeCandidateTests.MiniProfileRejectsHighGuiAndKeepsCodecUsable",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.CodecWriterAllocationTests.AdvanceFaultCanBeRepeatedWithoutPoisoningTheNextEncode",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.CodecWriterAllocationTests.ReusedCallerOwnedWriterMaintainsPayloadAcrossNativeEncodes",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImDecodeRejectsManagedInvalidInputsBeforeNativeCall",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeAcceptsPngAndJpegParametersWhenNativeRuntimeIsAvailable",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeAndImDecodeRoundTripPngWhenNativeRuntimeIsAvailable",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeRejectsManagedInvalidInputsBeforeNativeCall",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeRejectsOddParameterCount",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeToWriterAdvancesOnceAndDoesNotRetryWriterFaultsWhenNativeRuntimeIsAvailable",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.ImEncodeToWritesOneExactCallerOwnedSegmentWhenNativeRuntimeIsAvailable",
+        "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests.TypeSafeEncodingParametersRoundTripPngWhenNativeRuntimeIsAvailable"
+      ],
+      "trx": {
+        "bytes": 25504,
+        "sha256": "e809252c349d9f2f8d17387b2a4f080d6b2c2ac2acc30c0d255643ae0dac9ab8"
+      },
+      "headlessOutput": "HEADLESS_DNN_STATUS=omitted-deterministic-unavailable\r\nHEADLESS_VIDEOIO_BACKENDS=1900:FFMPEG:plugin|1800:GSTREAMER:plugin|2300:INTEL_MFX:plugin|1400:MSMF:plugin|1900:FFMPEG:plugin|2000:CV_IMAGES:built-in|2200:CV_MJPEG:built-in|2500:UEYE:plugin|2600:OBSENSOR:built-in\r\nHEADLESS_VIDEOIO_CAMERA_BACKENDS=1800:GSTREAMER:plugin|1400:MSMF:plugin|1900:FFMPEG:plugin|2500:UEYE:plugin|2600:OBSENSOR:built-in\r\nHEADLESS_VIDEOIO_MISSING_FILE_OPEN=returned-false"
+    }
+  ],
+  "limits": {
+    "stableCodecWriterPromoted": false,
+    "headlessPackageIdentityAllowed": false,
+    "crossRidValidated": false,
+    "absoluteAllocationGuarantee": false
+  },
+  "limitations": [
+    "Current-source consumers execute exact Full/Mini native DLL bytes bound to the local OpenCV 5.1.0 package-consumer evidence; this run does not restore a NuGet package.",
+    "Capability snapshots cover net10.0; the explicit capability/writer/reuse/fault test inventory covers net8.0 and net10.0 in isolated none/full/mini processes.",
+    "Reusable-writer and fault recovery tests prove payload/cleanup behavior without promising a cross-runner allocation threshold or stable preview promotion.",
+    "Mini headless evidence covers omitted HighGUI/DNN entrypoints and a bounded missing-file VideoIO case; Full headless, camera/network execution, ARM64 and hosted/cross-RID validation remain open."
+  ]
+}

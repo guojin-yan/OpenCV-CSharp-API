@@ -1,8 +1,12 @@
-# 5.0.1 Modern API And Platform Preview Guide / 5.0.1 现代 API 与平台预览指南
+# 5.1.0 Modern API And Platform Preview Guide / 5.1.0 现代 API 与平台预览指南
 
-This guide is the entry point for the 5.0.1 capability, typed-pixel, bounded-codec, and platform-boundary work. It groups the current contracts without turning preview evidence into a stable support claim.
+This guide is the entry point for the 5.1.0 capability, typed-pixel, bounded-codec, and platform-boundary work inherited from the unpublished 5.0.1 preview. It groups the current contracts without turning preview evidence into a stable support claim.
 
-本文是 5.0.1 capability、typed pixel、bounded codec 和平台边界工作的入口。它汇总当前契约，但不会把 preview 证据升级为稳定支持声明。
+本文是 5.1.0 capability、typed pixel、bounded codec 和平台边界工作的入口，承接尚未发布的 5.0.1 preview。它汇总当前契约，但不会把 preview 证据升级为稳定支持声明。
+
+The [OpenCV 5.1.0 local evidence](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/modern-api-5.1.0-evidence.json) records three isolated capability snapshots and 76 passing tests across net8.0/net10.0 and no-runtime/Full/Mini profiles. Full's 43 native DLLs and Mini's 7 native DLLs match the verified local package-consumer payload hashes. Writer segment, reuse and fault recovery, plus Mini HighGUI/DNN omission and missing-file VideoIO behavior, are covered. Allocation thresholds, stable writer promotion, a headless package and cross-RID support retain their separate gates.
+
+[OpenCV 5.1.0 本地证据](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/modern-api-5.1.0-evidence.json) 包含三个隔离能力快照，以及 net8.0/net10.0 与无 runtime/Full/Mini 六组共 76 项通过的测试。Full 的 43 个及 Mini 的 7 个 native DLL 与已验证的本地包消费者负载哈希一致；覆盖 writer segment、复用、fault recovery，以及 Mini 的 HighGUI/DNN 省略和 VideoIO 缺失文件行为。分配阈值、writer 稳定晋升、headless 包和跨 RID 支持仍按各自门槛验收。
 
 ## Capability snapshot / 能力快照
 
@@ -44,7 +48,7 @@ With no native runtime they return `status=skipped` and `reason=native-runtime-r
 
 `headless-smoke` is the `HeadlessServer` sample boundary. It performs a file-based Mat encode/decode pipeline without calling HighGUI and reports whether `DISPLAY`/`WAYLAND_DISPLAY` are unset. It is an application smoke example; it does not promote the candidate-only headless runtime profile or create a `.headless` package identity.
 
-The `platform-probe` command is the `PlatformProbe` sample boundary for 5.0.1 certification evidence.
+The `platform-probe` command is the `PlatformProbe` sample boundary for 5.1.0 certification evidence.
 
 ## Bounded codec paths / 有界编解码
 
@@ -130,6 +134,7 @@ The headless profile is candidate-only. It keeps the managed API shape, omits th
 
 ```powershell
 pwsh -NoProfile -File .\scripts\Test-CapabilitiesJsonContract.ps1
+pwsh -NoProfile -File .\scripts\Test-ModernApi51Evidence.ps1
 pwsh -NoProfile -File .\scripts\Test-GenericLinuxArm64PreviewMatrix.ps1
 pwsh -NoProfile -File .\scripts\Test-HeadlessRuntimeProfileContract.ps1
 dotnet test .\tests\OpenCvSharp.Tests\OpenCvSharp.Tests.csproj -c Release -f net8.0 --filter "FullyQualifiedName~ImagePreflightTests|FullyQualifiedName~GifMetadataPreflightTests|FullyQualifiedName~AvifPrimaryItemPreflightTests"
