@@ -31,6 +31,19 @@ if ($ridRows.Count -ne 1 -or $profileRows.Count -ne 1) {
 }
 $ridRow = $ridRows[0]
 $profileRow = $profileRows[0]
+$expectedImage = [string]$ridRow.producer.containerImage
+$imageParts = $expectedImage.Split('@', 2)
+if ($imageParts.Length -ne 2 -or $imageParts[1] -notmatch '^sha256:[0-9a-f]{64}$') {
+    throw "Lifecycle-refresh candidate matrix image is not digest-pinned: $Rid"
+}
+$expectedDigest = $imageParts[1]
+$repository = $imageParts[0] -replace ':[^/:]+$', ''
+$expectedRepoDigest = "$repository@$expectedDigest"
+$expectedDistroVersionPattern = '^' + [regex]::Escape([string]$ridRow.distroVersion) + '(?:\.\d+)?$'
+$allowedAlpineRepositoryBases = @(
+    'https://dl-cdn.alpinelinux.org/alpine',
+    'https://mirrors.ustc.edu.cn/alpine'
+)
 if (@($ridRow.producer.profiles) -notcontains $RuntimeProfile -or [string]$ridRow.producer.kind -cne 'container') {
     throw "Candidate producer does not approve the selected target/profile: $Rid/$RuntimeProfile"
 }
@@ -45,8 +58,6 @@ foreach ($requiredFile in @($provenancePath, $evidencePath)) {
 $provenance = Get-Content -LiteralPath $provenancePath -Raw | ConvertFrom-Json
 $evidence = Get-Content -LiteralPath $evidencePath -Raw | ConvertFrom-Json
 
-$expectedImage = [string]$ridRow.producer.containerImage
-$expectedDigest = [string]$ridRow.producer.containerRepoDigest
 $expectedSourceCount = if ($RuntimeProfile -ceq 'full') { 49 } else { 9 }
 $expectedAbiCount = if ($RuntimeProfile -ceq 'full') { 2669 } else { 527 }
 $expectedRuntimeFileCount = if ($RuntimeProfile -ceq 'full') { 51 } else { 18 }
@@ -58,9 +69,9 @@ if ([string]$provenance.Rid -cne $Rid -or
     [string]$provenance.OpenCvVersion -cne $OpenCvVersion -or
     [bool]$provenance.SyntheticRuntimeInputs -or
     [string]$provenance.ContainerImage -cne $expectedImage -or
-    [string]$provenance.ContainerImageDigest -cne $expectedDigest -or
+    [string]$provenance.ContainerImageDigest -cne $expectedRepoDigest -or
     [string]$provenance.ContainerDistro -cne [string]$ridRow.distro -or
-    [string]$provenance.ContainerDistroVersion -cne [string]$ridRow.distroVersion -or
+    [string]$provenance.ContainerDistroVersion -notmatch $expectedDistroVersionPattern -or
     [int]$provenance.NativeWrapperSourceCount -ne $expectedSourceCount -or
     [int]$provenance.NativeAbiFunctionCount -ne $expectedAbiCount -or
     @($provenance.RequiredModules).Count -ne $expectedModuleCount -or
@@ -74,7 +85,9 @@ if ([string]$evidence.Rid -cne $Rid -or
     [string]$evidence.OpenCvVersion -cne $OpenCvVersion -or
     [bool]$evidence.PublicationAllowed -or
     [string]$evidence.ContainerImage -cne $expectedImage -or
-    [string]$evidence.ContainerImageDigest -cne $expectedDigest -or
+    [string]$evidence.ContainerImageDigest -cne $expectedRepoDigest -or
+    ($Rid -ceq 'alpine.3.23-x64' -and [string]$evidence.AlpineRepositoryBase -notin $allowedAlpineRepositoryBases) -or
+    ($Rid -cne 'alpine.3.23-x64' -and [string]$evidence.AlpineRepositoryBase -cne '') -or
     [string]$evidence.RuntimeInputProvenanceSha256 -cne (Get-FileHash -LiteralPath $provenancePath -Algorithm SHA256).Hash.ToLowerInvariant() -or
     [string]$evidence.CandidateMatrixSha256 -cne (Get-FileHash -LiteralPath $matrixPath -Algorithm SHA256).Hash.ToLowerInvariant() -or
     [int]$evidence.HostDotNetSdkMajor -ne 10) {

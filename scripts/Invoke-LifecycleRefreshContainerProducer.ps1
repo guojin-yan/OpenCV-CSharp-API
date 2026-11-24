@@ -9,6 +9,8 @@ param(
     [string]$OpenCvVersion,
     [Parameter(Mandatory = $true)]
     [string]$ContainerImage,
+    [ValidateSet('https://dl-cdn.alpinelinux.org/alpine', 'https://mirrors.ustc.edu.cn/alpine')]
+    [string]$AlpineRepositoryBase = 'https://dl-cdn.alpinelinux.org/alpine',
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [string]$CandidateMatrix = 'packaging/runtime/runtime-lifecycle-refresh-matrix.json',
     [string]$OutputRoot = 'artifacts/lifecycle-refresh-runtime-inputs'
@@ -83,8 +85,8 @@ if ($supportRows.Count -ne 1 -or
     throw "Lifecycle-refresh support-contract candidate does not match the selected matrix row: $Rid"
 }
 
-$dotnetCommand = Get-Command dotnet -CommandType Application -ErrorAction Stop
-$dotnetVersion = (& $dotnetCommand.Source --version | Select-Object -Last 1).Trim()
+$dotnetCommand = Get-Command dotnet -CommandType Application -ErrorAction Stop | Select-Object -First 1
+$dotnetVersion = (& $dotnetCommand.Path --version | Select-Object -Last 1).Trim()
 $parsedDotNetVersion = [version]$null
 if ($LASTEXITCODE -ne 0 -or -not [version]::TryParse($dotnetVersion, [ref]$parsedDotNetVersion)) {
     throw 'Unable to read the host .NET SDK version.'
@@ -93,14 +95,16 @@ if ($parsedDotNetVersion.Major -ne 10) {
     throw "Lifecycle-refresh orchestration requires any .NET 10 SDK, not a fixed feature band: $dotnetVersion"
 }
 
-$dockerCommand = Get-Command docker -CommandType Application -ErrorAction Stop
-$dockerArchitecture = (& $dockerCommand.Source info --format '{{.Architecture}}' | Select-Object -Last 1).Trim()
+$dockerCommandName = if ($IsWindows) { 'docker.exe' } else { 'docker' }
+$dockerCommand = Get-Command $dockerCommandName -CommandType Application -ErrorAction Stop | Select-Object -First 1
+$dockerPath = [string]$dockerCommand.Path
+$dockerArchitecture = (& $dockerPath info --format '{{.Architecture}}' | Select-Object -Last 1).Trim()
 if ($LASTEXITCODE -ne 0 -or $dockerArchitecture -notin @('x86_64', 'amd64')) {
     throw "Lifecycle-refresh containers require an x64 Docker host: $dockerArchitecture"
 }
 
-Invoke-CheckedCommand $dockerCommand.Source pull $expectedImage
-$imageJson = (& $dockerCommand.Source image inspect --format '{{json .}}' $expectedImage | Select-Object -Last 1)
+Invoke-CheckedCommand $dockerPath pull $expectedImage
+$imageJson = (& $dockerPath image inspect --format '{{json .}}' $expectedImage | Select-Object -Last 1)
 if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($imageJson)) {
     throw "Unable to inspect lifecycle-refresh image: $expectedImage"
 }
@@ -124,6 +128,7 @@ $dockerArguments = @(
     '-e', "LIFECYCLE_REFRESH_CONTAINER_IMAGE=$expectedImage",
     '-e', "LIFECYCLE_REFRESH_CONTAINER_IMAGE_ID=$imageId",
     '-e', "LIFECYCLE_REFRESH_CONTAINER_IMAGE_DIGEST=$expectedRepoDigest",
+    '-e', "LIFECYCLE_REFRESH_ALPINE_REPOSITORY_BASE=$AlpineRepositoryBase",
     '-e', "LIFECYCLE_REFRESH_BUILD_LIST=$([string]$profileRows[0].buildList)",
     '-e', "LIFECYCLE_REFRESH_EXTRA_CMAKE_ARGS=$extraCMakeArgs",
     '-e', "LIFECYCLE_REFRESH_HOST_DOTNET_VERSION=$dotnetVersion",
@@ -135,7 +140,7 @@ $dockerArguments = @(
     $expectedImage,
     '/bin/sh', './scripts/Invoke-LifecycleRefreshContainerProducer.sh'
 )
-Invoke-CheckedCommand $dockerCommand.Source @dockerArguments
+Invoke-CheckedCommand $dockerPath @dockerArguments
 
 $artifactRoot = Join-Path $repo "$OutputRoot/$Rid-$RuntimeProfile"
 $provenancePath = Join-Path $artifactRoot 'runtime-input.provenance.json'
@@ -160,6 +165,8 @@ $evidence = [ordered]@{
     SchemaVersion = 1
     Status = 'candidate-only'
     PublicationAllowed = $false
+    Rid = $Rid
+    RuntimeProfile = $RuntimeProfile
     Target = "$Rid/$RuntimeProfile"
     CandidateMatrix = $CandidateMatrix
     CandidateMatrixSha256 = (Get-FileHash -LiteralPath $matrixPath -Algorithm SHA256).Hash.ToLowerInvariant()
@@ -168,6 +175,7 @@ $evidence = [ordered]@{
     ContainerImage = $expectedImage
     ContainerImageId = $imageId
     ContainerImageDigest = $expectedRepoDigest
+    AlpineRepositoryBase = if ($Rid -ceq 'alpine.3.23-x64') { $AlpineRepositoryBase } else { '' }
     OpenCvVersion = $OpenCvVersion
     HostDotNetSdkMajor = $parsedDotNetVersion.Major
     HostDotNetSdkVersion = $dotnetVersion

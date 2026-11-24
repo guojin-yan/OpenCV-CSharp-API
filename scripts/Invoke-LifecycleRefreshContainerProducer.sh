@@ -17,6 +17,7 @@ for variable_name in \
   LIFECYCLE_REFRESH_CONTAINER_IMAGE \
   LIFECYCLE_REFRESH_CONTAINER_IMAGE_ID \
   LIFECYCLE_REFRESH_CONTAINER_IMAGE_DIGEST \
+  LIFECYCLE_REFRESH_ALPINE_REPOSITORY_BASE \
   LIFECYCLE_REFRESH_BUILD_LIST \
   LIFECYCLE_REFRESH_HOST_DOTNET_VERSION; do
   require_value "$variable_name"
@@ -70,6 +71,14 @@ case "$LIFECYCLE_REFRESH_RID" in
   alpine.3.23-x64)
     expected_distro="alpine"
     expected_distro_version="3.23"
+    case "$LIFECYCLE_REFRESH_ALPINE_REPOSITORY_BASE" in
+      https://dl-cdn.alpinelinux.org/alpine|https://mirrors.ustc.edu.cn/alpine) ;;
+      *) echo "Unsupported Alpine repository mirror: $LIFECYCLE_REFRESH_ALPINE_REPOSITORY_BASE" >&2; exit 1 ;;
+    esac
+    printf '%s\n' \
+      "$LIFECYCLE_REFRESH_ALPINE_REPOSITORY_BASE/v3.23/main" \
+      "$LIFECYCLE_REFRESH_ALPINE_REPOSITORY_BASE/v3.23/community" \
+      > /etc/apk/repositories
     powershell_version="7.4.17"
     powershell_archive_name="powershell-7.4.17-linux-musl-x64.tar.gz"
     powershell_archive_sha256="143a1de65ea320c36a0b4bd1808fe65561e5ab12fd66d5f63f78b0b3d66b4397"
@@ -92,7 +101,13 @@ esac
 
 . /etc/os-release
 test "${ID:-}" = "$expected_distro"
-test "${VERSION_ID:-}" = "$expected_distro_version"
+case "${VERSION_ID:-}" in
+  "$expected_distro_version"|"$expected_distro_version".*) ;;
+  *)
+    echo "Container distro version mismatch for $LIFECYCLE_REFRESH_RID: expected $expected_distro_version or $expected_distro_version.x, got ${VERSION_ID:-unknown}" >&2
+    exit 1
+    ;;
+esac
 test "$(uname -m)" = "x86_64"
 test "$package_architecture" = "x86_64"
 test -n "$container_libc"
@@ -100,7 +115,58 @@ test -n "$package_evidence"
 
 powershell_archive="/tmp/$powershell_archive_name"
 powershell_url="https://github.com/PowerShell/PowerShell/releases/download/v$powershell_version/$powershell_archive_name"
-curl --fail --location --retry 4 --retry-delay 2 --output "$powershell_archive" "$powershell_url"
+export powershell_archive powershell_url
+powershell_asset_headers="/tmp/$powershell_archive_name.headers"
+curl --fail --silent --show-error --location --range 0-0 \
+  --dump-header "$powershell_asset_headers" --output /dev/null "$powershell_url"
+powershell_asset_size="$(grep -i '^content-range: bytes 0-0/' "$powershell_asset_headers" | tail -n 1 | sed 's#^.*/##;s/\r$//')"
+rm -f "$powershell_asset_headers"
+case "$powershell_asset_size" in
+  ""|*[!0-9]*) echo "Unable to determine the pinned PowerShell archive size from its official ranged response." >&2; exit 1 ;;
+esac
+parallel_download_count=8
+parallel_chunk_size=$(((powershell_asset_size + parallel_download_count - 1) / parallel_download_count))
+echo "POWERSHELL_ASSET_DOWNLOAD_BEGIN url=$powershell_url bytes=$powershell_asset_size ranges=$parallel_download_count"
+rm -f "$powershell_archive.part."*
+for chunk_index in 0 1 2 3 4 5 6 7; do
+  chunk_start=$((chunk_index * parallel_chunk_size))
+  if [ "$chunk_start" -ge "$powershell_asset_size" ]; then
+    break
+  fi
+  chunk_end=$((chunk_start + parallel_chunk_size - 1))
+  if [ "$chunk_end" -ge "$powershell_asset_size" ]; then
+    chunk_end=$((powershell_asset_size - 1))
+  fi
+  printf '%s %s %s\n' "$chunk_index" "$chunk_start" "$chunk_end"
+done | xargs -n 3 -P 8 sh -c '
+  chunk_index="$1"
+  chunk_start="$2"
+  chunk_end="$3"
+  chunk_path="$powershell_archive.part.$chunk_index"
+  curl --fail --silent --show-error --location --retry 4 --retry-delay 2 \
+    --range "$chunk_start-$chunk_end" --output "$chunk_path" "$powershell_url"
+  expected_chunk_size=$((chunk_end - chunk_start + 1))
+  actual_chunk_size="$(wc -c < "$chunk_path" | tr -d "[:space:]")"
+  if [ "$actual_chunk_size" -ne "$expected_chunk_size" ]; then
+    echo "PowerShell archive range size mismatch: range=$chunk_start-$chunk_end expected=$expected_chunk_size actual=$actual_chunk_size" >&2
+    exit 1
+  fi
+' lifecycle-refresh-powershell-download
+: > "$powershell_archive"
+for chunk_index in 0 1 2 3 4 5 6 7; do
+  chunk_path="$powershell_archive.part.$chunk_index"
+  if [ ! -f "$chunk_path" ]; then
+    continue
+  fi
+  cat "$chunk_path" >> "$powershell_archive"
+  rm -f "$chunk_path"
+done
+actual_powershell_archive_size="$(wc -c < "$powershell_archive" | tr -d '[:space:]')"
+if [ "$actual_powershell_archive_size" -ne "$powershell_asset_size" ]; then
+  echo "PowerShell archive size mismatch after parallel range assembly: expected=$powershell_asset_size actual=$actual_powershell_archive_size" >&2
+  exit 1
+fi
+echo "POWERSHELL_ASSET_DOWNLOAD_COMPLETE bytes=$actual_powershell_archive_size ranges=$parallel_download_count"
 printf '%s  %s\n' "$powershell_archive_sha256" "$powershell_archive" | sha256sum -c -
 mkdir -p "/opt/microsoft/powershell/$powershell_version"
 tar -xzf "$powershell_archive" -C "/opt/microsoft/powershell/$powershell_version"
@@ -118,7 +184,7 @@ assembler_target="$(as --version | sed -n '$p' | tr -cd '[:alnum:]_.+-')"
 assembler_version="$(as --version | sed -n '1p') target=$assembler_target"
 cmake_version="$(cmake --version | sed -n '1p')"
 ninja_version="$(ninja --version)"
-cpu_model="$(lscpu | sed -n 's/^Model name:[[:space:]]*//p' | sed -n '1p')"
+cpu_model="$(awk -F ': ' '/^model name[[:space:]]*:/{print $2; exit}' /proc/cpuinfo)"
 memory_bytes="$(( $(awk '/^MemTotal:/ { print $2 }' /proc/meminfo) * 1024 ))"
 disk_available_bytes="$(df -P -B1 / | awk 'NR == 2 { print $4 }')"
 test -x "$compiler_path"
@@ -131,7 +197,7 @@ test "$memory_bytes" -gt 0
 test "$disk_available_bytes" -gt 0
 
 echo "LIFECYCLE_REFRESH_CONTAINER_EVIDENCE target=$LIFECYCLE_REFRESH_RID/$LIFECYCLE_REFRESH_PROFILE distro=$ID version=$VERSION_ID architecture=$(uname -m) package_architecture=$package_architecture libc=$container_libc image=$LIFECYCLE_REFRESH_CONTAINER_IMAGE digest=$LIFECYCLE_REFRESH_CONTAINER_IMAGE_DIGEST"
-echo "LIFECYCLE_REFRESH_TOOLCHAIN_EVIDENCE target=$LIFECYCLE_REFRESH_RID/$LIFECYCLE_REFRESH_PROFILE compiler=$compiler_path compiler_version=$compiler_version assembler=$assembler_version cmake=$cmake_version ninja=$ninja_version powershell=$installed_powershell_version powershell_sha256=$powershell_archive_sha256 host_dotnet=$LIFECYCLE_REFRESH_HOST_DOTNET_VERSION packages=$package_evidence"
+echo "LIFECYCLE_REFRESH_TOOLCHAIN_EVIDENCE target=$LIFECYCLE_REFRESH_RID/$LIFECYCLE_REFRESH_PROFILE compiler=$compiler_path compiler_version=$compiler_version assembler=$assembler_version cmake=$cmake_version ninja=$ninja_version powershell=$installed_powershell_version powershell_sha256=$powershell_archive_sha256 host_dotnet=$LIFECYCLE_REFRESH_HOST_DOTNET_VERSION packages=$package_evidence alpine_repository_base=$LIFECYCLE_REFRESH_ALPINE_REPOSITORY_BASE"
 
 candidate_matrix="packaging/runtime/runtime-lifecycle-refresh-matrix.json"
 pwsh -NoProfile -File ./scripts/Test-LifecycleRefreshRuntimeMatrix.ps1
@@ -157,7 +223,7 @@ esac
 if [ -e "$source_dir" ]; then
   rm -rf -- "$source_dir"
 fi
-git -c advice.detachedHead=false clone --depth 1 --branch "$LIFECYCLE_REFRESH_OPENCV_VERSION" \
+git -c advice.detachedHead=false -c core.autocrlf=false -c core.filemode=false clone --depth 1 --branch "$LIFECYCLE_REFRESH_OPENCV_VERSION" \
   https://github.com/opencv/opencv.git "$source_dir"
 
 with_contrib_argument=""
@@ -170,7 +236,7 @@ if [ "$LIFECYCLE_REFRESH_PROFILE" = "full" ]; then
   if [ -e "$contrib_source_dir" ]; then
     rm -rf -- "$contrib_source_dir"
   fi
-  git -c advice.detachedHead=false clone --depth 1 --branch "$LIFECYCLE_REFRESH_OPENCV_VERSION" \
+  git -c advice.detachedHead=false -c core.autocrlf=false -c core.filemode=false clone --depth 1 --branch "$LIFECYCLE_REFRESH_OPENCV_VERSION" \
     https://github.com/opencv/opencv_contrib.git "$contrib_source_dir"
   with_contrib_argument="-WithContrib"
 fi
@@ -271,7 +337,7 @@ for elf in \
   readelf -h "$elf" | grep -q 'Machine:.*X86-64'
   machine_count=$((machine_count + 1))
   dynamic_paths="$(readelf -d "$elf" | grep -E '\((RPATH|RUNPATH)\)' || true)"
-  printf '%s\n' "$dynamic_paths" | grep -Fq '\$ORIGIN'
+  printf '%s\n' "$dynamic_paths" | grep -Fq '$ORIGIN'
   origin_count=$((origin_count + 1))
   if printf '%s\n' "$dynamic_paths" | grep -Eq '(\[|:)(/[A-Za-z0-9]|[A-Za-z]:)'; then
     producer_path_count=$((producer_path_count + 1))
