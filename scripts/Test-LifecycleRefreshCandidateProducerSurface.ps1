@@ -74,7 +74,7 @@ foreach ($token in @(
 
 foreach ($token in @(
         'powershell-7.4.17-linux-x64.tar.gz',
-        'dcfe6060fc86abcb859ce1ff80843ce50bab0585396de56380ed9f25176ac6d',
+        'dcfe6060fc86abcb859ce1f8f80843ce50bab0585396de56380ed9f25176ac6d',
         'powershell-7.4.17-linux-musl-x64.tar.gz',
         '143a1de65ea320c36a0b4bd1808fe65561e5ab12fd66d5f63f78b0b3d66b4397',
         'fedora.44-x64)',

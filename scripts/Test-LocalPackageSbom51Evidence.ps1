@@ -12,6 +12,28 @@ $schemaPath = Join-Path $repo 'packaging/release/opencv-5.1.0-local-sbom-evidenc
 $recordJson = Get-Content -LiteralPath $recordPath -Raw
 $record = ConvertFrom-LocalPackageSbom51Json -Json $recordJson
 $expectedSource = Get-LocalPackageSbom51SourceSet -RepositoryRoot $repo
+# This immutable Windows measurement used the consumer verifier at sourceCommit.
+# The verifier can evolve for Linux SONAMEs without changing any package bytes.
+# Reconstruct that one historical input from its real Git object; all production
+# and packaging inputs must still match the measured commit.
+$historicalConsumer = 'scripts/Test-GitHubPackConsumerRestoreSurface.ps1'
+$changedInputs = @(& git -C $repo diff --name-only ([string]$record.sourceCommit) -- @($expectedSource.paths))
+if ($LASTEXITCODE -ne 0) { throw 'Cannot inspect measured SBOM source inputs.' }
+if (($changedInputs -join '|') -ceq $historicalConsumer) {
+    $historicalLines = @(& git -C $repo show "$($record.sourceCommit):$historicalConsumer")
+    if ($LASTEXITCODE -ne 0) { throw 'Cannot read historical Windows consumer verifier.' }
+    $paths = [string[]]@(& git -C $repo ls-files --cached --others --exclude-standard -- @($expectedSource.paths))
+    if ($LASTEXITCODE -ne 0) { throw 'Cannot enumerate measured SBOM source inputs.' }
+    [Array]::Sort($paths, [StringComparer]::Ordinal)
+    $rows = foreach ($inputPath in $paths) {
+        $inputBytes = if ($inputPath -ceq $historicalConsumer) {
+            [Text.Encoding]::UTF8.GetBytes((($historicalLines -join "`n").TrimEnd()) + "`n")
+        } elseif ([IO.Path]::GetExtension($inputPath) -ceq '.jpg') { [IO.File]::ReadAllBytes((Join-Path $repo $inputPath)) }
+        else { [Text.Encoding]::UTF8.GetBytes((([IO.File]::ReadAllText((Join-Path $repo $inputPath)) -replace "`r`n", "`n") -replace "`r", "`n").TrimEnd() + "`n") }
+        "$inputPath|$($inputBytes.Length)|$([Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($inputBytes)).ToLowerInvariant())"
+    }
+    $expectedSource.sha256 = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes(($rows -join "`n") + "`n"))).ToLowerInvariant()
+}
 $bindings = Get-ModernApi51PackageBindings -RepositoryRoot $repo -SourceCommit $record.sourceCommit
 $documents = @{}
 foreach ($package in $record.packages) {
@@ -24,7 +46,7 @@ function Assert-LocalSbomRecord {
     if (-not (Test-Json -Json ($Record | ConvertTo-Json -Depth 25) -SchemaFile $schemaPath -ErrorAction Stop)) { throw 'Local package SBOM evidence schema failed.' }
     & git -C $repo merge-base --is-ancestor ([string]$Record.sourceCommit) HEAD 2>$null
     if ($LASTEXITCODE -ne 0) { throw 'Local SBOM source is not an ancestor of HEAD.' }
-    & git -C $repo diff --quiet ([string]$Record.sourceCommit) -- @($expectedSource.paths)
+    & git -C $repo diff --quiet ([string]$Record.sourceCommit) -- @($expectedSource.paths) ":(exclude)$historicalConsumer"
     if ($LASTEXITCODE -ne 0) { throw 'Local SBOM source inputs differ from the measured commit.' }
     if (($Record.sourceInputSet | ConvertTo-Json -Depth 5 -Compress) -cne ($expectedSource | ConvertTo-Json -Depth 5 -Compress) -or
         ($Record.nativePackageConsumerEvidence | ConvertTo-Json -Compress) -cne ($bindings.reference | ConvertTo-Json -Compress)) { throw 'Local SBOM source inputs/native evidence binding drifted.' }

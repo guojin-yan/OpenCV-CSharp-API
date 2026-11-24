@@ -1,0 +1,610 @@
+{
+  "schemaVersion": 1,
+  "evidenceKind": "local-linux-5.1-preview-package-consumer",
+  "status": "verified-local-ubuntu22-x64-preview",
+  "openCvVersion": "5.1.0",
+  "packageVersion": "5.1.0",
+  "sourceBaseCommit": "7cba98b47542bbe24971eea05246f0840b97ea5c",
+  "worktreeChangesIncluded": true,
+  "sourceInputSet": {
+    "paths": [
+      "Directory.Build.props",
+      "README.md",
+      "LICENSE",
+      "nuget/logo.jpg",
+      "src/OpenCvSharp.Native",
+      "packaging/runtime/runtime-generic-linux-preview-matrix.json",
+      "packaging/runtime/runtime-package-matrix.json",
+      "packaging/runtime/runtime-distro-rid-graph.json",
+      "packaging/runtime/patches/opencv-5.1.0-photo-ccm-instance-color-space.patch",
+      "packaging/runtime/JYPPX.OpenCV.runtime/JYPPX.OpenCV.runtime.csproj",
+      "packaging/runtime/JYPPX.OpenCV.runtime/README.md",
+      "packaging/runtime/JYPPX.OpenCV.runtime/buildTransitive",
+      "scripts/Build-OpenCV.ps1",
+      "scripts/Apply-OpenCvSourcePatches.ps1",
+      "scripts/New-RuntimeInputArtifact.ps1",
+      "scripts/New-GenericLinuxPreviewPackage.ps1",
+      "scripts/Stage-Runtime.ps1",
+      "scripts/Normalize-NuGetPackageDeterminism.ps1",
+      "scripts/Test-RuntimeReleaseCandidatePreflight.ps1",
+      "scripts/PackageVersion.ps1",
+      "scripts/Get-NativeRuntimeProfileEvidence.ps1",
+      "scripts/Test-GitHubPackConsumerRestoreSurface.ps1",
+      "scripts/Test-GenericLinuxPreviewConsumer.ps1",
+      "scripts/Audit-Linux51Runtime.py",
+      "scripts/Build-LocalLinux51Preview.ps1",
+      "scripts/LocalLinux51.Common.ps1",
+      "scripts/Measure-LocalLinux51Evidence.ps1",
+      "scripts/Invoke-LocalLinux51Consumer.ps1"
+    ],
+    "fileCount": 165,
+    "sha256": "4c5a513c3088ec76b986e1243615c63646a066962efff14eea0fe538d79503a2"
+  },
+  "execution": "local-docker",
+  "hosted": false,
+  "publicationAllowed": false,
+  "genericStablePromoted": false,
+  "producerIdentity": {
+    "id": "7660033af2e467b9098d0383370a7b0328595689715ec17eb77305811b6d8e6d",
+    "name": "opencv51-linux-producer-7cba98b",
+    "image": "ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982",
+    "imageId": "sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982",
+    "platform": "linux",
+    "nanoCpus": 4000000000,
+    "memoryBytes": 6442450944,
+    "mounts": [
+      {
+        "type": "bind",
+        "source": "E:\\GitSpace\\OpenCV-CSharp-API-workspace\\OpenCV-CSharp-API",
+        "destination": "/repo-input",
+        "writable": false
+      },
+      {
+        "type": "bind",
+        "source": "E:\\GitSpace\\OpenCV-CSharp-API-workspace\\opencv-source",
+        "destination": "/upstream-input",
+        "writable": false
+      },
+      {
+        "type": "volume",
+        "source": "/var/lib/docker/volumes/opencv51-linux-work-7cba98b/_data",
+        "destination": "/workspace",
+        "writable": true
+      }
+    ]
+  },
+  "consumerIdentity": {
+    "id": "6151c285a107cc54a7c71b5545b0fc5b5d449bd6fb27be76bde1c6ef82620593",
+    "name": "opencv51-linux-consumer-7cba98b",
+    "image": "ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982",
+    "imageId": "sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982",
+    "platform": "linux",
+    "nanoCpus": 2000000000,
+    "memoryBytes": 2147483648,
+    "mounts": [
+      {
+        "type": "bind",
+        "source": "C:\\Users\\guoji\\AppData\\Local\\Temp\\opencv51-linux-consumer-kit",
+        "destination": "/kit",
+        "writable": false
+      },
+      {
+        "type": "volume",
+        "source": "/var/lib/docker/volumes/opencv51-linux-consumer-7cba98b/_data",
+        "destination": "/consumer",
+        "writable": true
+      }
+    ]
+  },
+  "producerJson": "{\n  \"schemaVersion\": 1,\n  \"evidenceKind\": \"local-linux-5.1-preview-producer\",\n  \"openCvVersion\": \"5.1.0\",\n  \"sourceCommit\": \"7cba98b47542bbe24971eea05246f0840b97ea5c\",\n  \"execution\": \"local-docker\",\n  \"hosted\": false,\n  \"publicationAllowed\": false,\n  \"genericStablePromoted\": false,\n  \"image\": \"ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982\",\n  \"imageId\": \"sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982\",\n  \"architecture\": \"x86_64\",\n  \"libc\": \"glibc 2.35\",\n  \"toolchain\": {\n    \"powerShell\": \"7.4.17\",\n    \"powerShellArchiveSha256\": \"dcfe6060fc86abcb859ce1f8f80843ce50bab0585396de56380ed9f25176ac6d\",\n    \"dotNetSdk\": \"10.0.401\",\n    \"dotNetArchiveSha512\": \"51c8b999af9e8dd9998c9edc5944e19a90788862068acd38694e098889054ce8c23d4f0c5cccfa16bf187d044562359e5ee69a9f8ad0bbe913ba90311fbce25b\",\n    \"compiler\": \"11.4.0\",\n    \"cmake\": \"3.22.1\",\n    \"ninja\": \"1.10.1\"\n  },\n  \"openCvCommit\": \"e4f78fbcf1a773fbed69e14500e8b734963eb585\",\n  \"contribCommit\": \"b67a855188a3d683813731010f6d39ac614733a4\",\n  \"profiles\": [\n    {\n      \"name\": \"full\",\n      \"modules\": [\n        \"core\",\n        \"imgcodecs\",\n        \"imgproc\",\n        \"videoio\",\n        \"flann\",\n        \"geometry\",\n        \"calib\",\n        \"stereo\",\n        \"dnn\",\n        \"ml\",\n        \"objdetect\",\n        \"photo\",\n        \"features\",\n        \"video\",\n        \"highgui\",\n        \"stitching\",\n        \"ptcloud\"\n      ],\n      \"buildList\": \"core,imgproc,imgcodecs,videoio,flann,geometry,calib,stereo,dnn,ml,objdetect,photo,features,video,highgui,stitching,ptcloud\",\n      \"independentMinimalUpstreamBuild\": false,\n      \"upstreamBuildProfile\": \"full\",\n      \"wrapperSourceCount\": 49,\n      \"wrapperSources\": [\n        \"src/OpenCvSharp.Native/src/alphamat/alphamat.cpp\",\n        \"src/OpenCvSharp.Native/src/bgsegm/bgsegm.cpp\",\n        \"src/OpenCvSharp.Native/src/bioinspired/bioinspired.cpp\",\n        \"src/OpenCvSharp.Native/src/calib3d.cpp\",\n        \"src/OpenCvSharp.Native/src/core/decomp.cpp\",\n        \"src/OpenCvSharp.Native/src/core/mat.cpp\",\n        \"src/OpenCvSharp.Native/src/core/operations.cpp\",\n        \"src/OpenCvSharp.Native/src/core/persistence.cpp\",\n        \"src/OpenCvSharp.Native/src/dnn/dnn.cpp\",\n        \"src/OpenCvSharp.Native/src/error_state.cpp\",\n        \"src/OpenCvSharp.Native/src/face/face.cpp\",\n        \"src/OpenCvSharp.Native/src/features2d/features2d_extra.cpp\",\n        \"src/OpenCvSharp.Native/src/features2d/features2d.cpp\",\n        \"src/OpenCvSharp.Native/src/fuzzy/fuzzy.cpp\",\n        \"src/OpenCvSharp.Native/src/hfs/hfs.cpp\",\n        \"src/OpenCvSharp.Native/src/highgui/highgui.cpp\",\n        \"src/OpenCvSharp.Native/src/img_hash/img_hash.cpp\",\n        \"src/OpenCvSharp.Native/src/imgcodecs.cpp\",\n        \"src/OpenCvSharp.Native/src/imgproc.cpp\",\n        \"src/OpenCvSharp.Native/src/intensity_transform/intensity_transform.cpp\",\n        \"src/OpenCvSharp.Native/src/line_descriptor/line_descriptor.cpp\",\n        \"src/OpenCvSharp.Native/src/ml/ml.cpp\",\n        \"src/OpenCvSharp.Native/src/objdetect/aruco.cpp\",\n        \"src/OpenCvSharp.Native/src/objdetect/objdetect.cpp\",\n        \"src/OpenCvSharp.Native/src/optflow/optflow.cpp\",\n        \"src/OpenCvSharp.Native/src/phase_unwrapping/phase_unwrapping.cpp\",\n        \"src/OpenCvSharp.Native/src/photo/ccm.cpp\",\n        \"src/OpenCvSharp.Native/src/photo/hdr.cpp\",\n        \"src/OpenCvSharp.Native/src/photo/intelligent_scissors.cpp\",\n        \"src/OpenCvSharp.Native/src/photo/photo.cpp\",\n        \"src/OpenCvSharp.Native/src/plot/plot.cpp\",\n        \"src/OpenCvSharp.Native/src/ptcloud/ptcloud.cpp\",\n        \"src/OpenCvSharp.Native/src/quality/quality.cpp\",\n        \"src/OpenCvSharp.Native/src/rapid/rapid.cpp\",\n        \"src/OpenCvSharp.Native/src/reg/reg.cpp\",\n        \"src/OpenCvSharp.Native/src/saliency/saliency.cpp\",\n        \"src/OpenCvSharp.Native/src/shape/shape.cpp\",\n        \"src/OpenCvSharp.Native/src/stereo/stereo.cpp\",\n        \"src/OpenCvSharp.Native/src/stitching/stitching.cpp\",\n        \"src/OpenCvSharp.Native/src/structured_light/structured_light.cpp\",\n        \"src/OpenCvSharp.Native/src/surface_matching/surface_matching.cpp\",\n        \"src/OpenCvSharp.Native/src/tracking/tracking.cpp\",\n        \"src/OpenCvSharp.Native/src/version.cpp\",\n        \"src/OpenCvSharp.Native/src/video/video.cpp\",\n        \"src/OpenCvSharp.Native/src/videoio/videoio.cpp\",\n        \"src/OpenCvSharp.Native/src/ximgproc/ximgproc.cpp\",\n        \"src/OpenCvSharp.Native/src/xobjdetect/xobjdetect.cpp\",\n        \"src/OpenCvSharp.Native/src/xphoto/xphoto.cpp\",\n        \"src/OpenCvSharp.Native/src/xstereo/xstereo.cpp\"\n      ],\n      \"elf\": {\n        \"profile\": \"full\",\n        \"runtimeFileCount\": 52,\n        \"exportCount\": 2669,\n        \"exportNamesSha256\": \"9fcaac6f2bd3501b813397164c65b48d51c53fe053fbf4e1f1cb669c6d137d28\",\n        \"files\": [\n          {\n            \"name\": \"libJYPPX.OpenCV.Native.so\",\n            \"bytes\": 2418504,\n            \"sha256\": \"11282ac0714be2055c1bb156d5c16c7a48f0de6402d4e49cb2d076a62c9df7eb\",\n            \"soname\": \"libJYPPX.OpenCV.Native.so\",\n            \"runtimePaths\": [\n              \"$ORIGIN\"\n            ],\n            \"needed\": [\n              \"libopencv_calib.so.501\",\n              \"libopencv_objdetect.so.501\",\n              \"libopencv_photo.so.501\",\n              \"libopencv_stereo.so.501\",\n              \"libopencv_stitching.so.501\",\n              \"libopencv_ptcloud.so.501\",\n              \"libopencv_ml.so.501\",\n              \"libopencv_highgui.so.501\",\n              \"libopencv_video.so.501\",\n              \"libopencv_videoio.so.501\",\n              \"libopencv_features.so.501\",\n              \"libopencv_dnn.so.501\",\n              \"libopencv_imgcodecs.so.501\",\n              \"libopencv_imgproc.so.501\",\n              \"libopencv_geometry.so.501\",\n              \"libopencv_flann.so.501\",\n              \"libopencv_core.so.501\",\n              \"libstdc++.so.6\",\n              \"libm.so.6\",\n              \"libgcc_s.so.1\",\n              \"libc.so.6\",\n              \"ld-linux-x86-64.so.2\"\n            ],\n            \"symbolFloors\": {\n              \"GLIBC\": \"2.32\",\n              \"GLIBCXX\": \"3.4.29\",\n              \"CXXABI\": \"1.3.9\"\n            },\n            \"lddOutput\": \"\\tlinux-vdso.so.1 (0x00007ffe66564000)\\n\\tlibopencv_calib.so.501 => /workspace/linux51-output/full-runtime/libopencv_calib.so.501 (0x00007ca371b82000)\\n\\tlibopencv_objdetect.so.501 => /workspace/linux51-output/full-runtime/libopencv_objdetect.so.501 (0x00007ca3719ee000)\\n\\tlibopencv_photo.so.501 => /workspace/linux51-output/full-runtime/libopencv_photo.so.501 (0x00007ca3718e1000)\\n\\tlibopencv_stereo.so.501 => /workspace/linux51-output/full-runtime/libopencv_stereo.so.501 (0x00007ca3718aa000)\\n\\tlibopencv_stitching.so.501 => /workspace/linux51-output/full-runtime/libopencv_stitching.so.501 (0x00007ca37180b000)\\n\\tlibopencv_ptcloud.so.501 => /workspace/linux51-output/full-runtime/libopencv_ptcloud.so.501 (0x00007ca3716ee000)\\n\\tlibopencv_ml.so.501 => /workspace/linux51-output/full-runtime/libopencv_ml.so.501 (0x00007ca37165a000)\\n\\tlibopencv_highgui.so.501 => /workspace/linux51-output/full-runtime/libopencv_highgui.so.501 (0x00007ca371626000)\\n\\tlibopencv_video.so.501 => /workspace/linux51-output/full-runtime/libopencv_video.so.501 (0x00007ca371598000)\\n\\tlibopencv_videoio.so.501 => /workspace/linux51-output/full-runtime/libopencv_videoio.so.501 (0x00007ca371532000)\\n\\tlibopencv_features.so.501 => /workspace/linux51-output/full-runtime/libopencv_features.so.501 (0x00007ca371475000)\\n\\tlibopencv_dnn.so.501 => /workspace/linux51-output/full-runtime/libopencv_dnn.so.501 (0x00007ca370600000)\\n\\tlibopencv_imgcodecs.so.501 => /workspace/linux51-output/full-runtime/libopencv_imgcodecs.so.501 (0x00007ca370200000)\\n\\tlibopencv_imgproc.so.501 => /workspace/linux51-output/full-runtime/libopencv_imgproc.so.501 (0x00007ca36f800000)\\n\\tlibopencv_geometry.so.501 => /workspace/linux51-output/full-runtime/libopencv_geometry.so.501 (0x00007ca36f400000)\\n\\tlibopencv_flann.so.501 => /workspace/linux51-output/full-runtime/libopencv_flann.so.501 (0x00007ca3713e9000)\\n\\tlibopencv_core.so.501 => /workspace/linux51-output/full-runtime/libopencv_core.so.501 (0x00007ca36ea00000)\\n\\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007ca36e7d4000)\\n\\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007ca3712fd000)\\n\\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007ca3712dd000)\\n\\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007ca36e5ab000)\\n\\t/lib64/ld-linux-x86-64.so.2 (0x00007ca371de8000)\\n\"\n          },\n          {\n            \"name\": \"libopencv_calib.so.5.1.0\",\n            \"bytes\": 578384,\n            \"sha256\": \"c2a387d63ff41dcea424a43d5923d91fa89aa1e513e411eb2552903344f221ab\",\n            \"soname\": \"libopencv_calib.so.501\",\n            \"runtimePaths\": [\n              \"$ORIGIN\"\n            ],\n            \"needed\": [\n              \"libopencv_geometry.so.501\",\n              \"libopencv_core.so.501\",\n              \"libstdc++.so.6\",\n              \"libm.so.6\",\n              \"libgcc_s.so.1\",\n              \"libc.so.6\"\n            ],\n            \"symbolFloors\": {\n              \"GLIBC\": \"2.32\",\n              \"GLIBCXX\": \"3.4.29\",\n              \"CXXABI\": \"1.3.9\"\n            },\n            \"lddOutput\": \"\\tlinux-vdso.so.1 (0x00007ffe4c1e8000)\\n\\tlibopencv_geometry.so.501 => /workspace/linux51-output/full-runtime/libopencv_geometry.so.501 (0x0000755e6d800000)\\n\\tlibopencv_core.so.501 => /workspace/linux51-output/full-runtime/libopencv_core.so.501 (0x0000755e6ce00000)\\n\\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x0000755e6cbd4000)\\n\\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x0000755e6caed000)\\n\\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x0000755e6da49000)\\n\\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x0000755e6c8c4000)\\n\\tlibopencv_flann.so.501 => /workspace/linux51-output/full-runtime/libopencv_flann.so.501 (0x0000755e6c83a000)\\n\\t/lib64/ld-linux-x86-64.so.2 (0x0000755e6daef000)\\n\"\n          },\n          {\n            \"name\": \"libopencv_core.so.5.1.0\",\n            \"bytes\": 11544992,\n            \"sha256\": \"8797a2d0b1d95b64d619553b86ce5f635170a83a7fb18c9287f9bc066b5b575b\",\n            \"soname\": \"libopencv_core.so.501\",\n            \"runtimePaths\": [\n              \"$ORIGIN\"\n            ],\n            \"needed\": [\n              \"libstdc++.so.6\",\n              \"libm.so.6\",\n              \"libgcc_s.so.1\",\n              \"libc.so.6\"\n            ],\n            \"symbolFloors\": {\n              \"GLIBC\": \"2.34\",\n              \"GLIBCXX\": \"3.4.30\",\n              \"CXXABI\": \"1.3.13\"\n            },\n            \"lddOutput\": \"\\tlinux-vdso.so.1 (0x00007ffe3fdf8000)\\n\\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x000075f8129d4000)\\n\\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x000075f8135db000)\\n\\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x000075f8135bb000)\\n\\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x000075f8127ab000)\\n\\t/lib64/ld-linux-x86-64.so.2 (0x000075f8136c7000)\\n\"\n          },\n          {\n            \"name\": \"libopencv_dnn.so.5.1.0\",\n            \"bytes\": 16218168,\n            \"sha256\": \"2625e29df2f092608b50b8eb047f6737151b0bc902e7c1c1059250eda6a6217e\",\n            \"soname\": \"libopencv_dnn.so.501\",\n            \"runtimePaths\": [\n              \"$ORIGIN\"\n            ],\n            \"needed\": [\n              \"libopencv_imgcodecs.so.501\",\n              \"libopencv_imgproc.so.501\",\n              \"libopencv_geometry.so.501\",\n              \"libopencv_core.so.501\",\n              \"libstdc++.so.6\",\n              \"libm.so.6\",\n              \"libgcc_s.so.1\",\n              \"libc.so.6\",\n              \"ld-linux-x86-64.so.2\"\n            ],\n            \"symbolFloors\": {\n              \"GLIBC\": \"2.33\",\n              \"GLIBCXX\": \"3.4.29\",\n              \"CXXABI\": \"1.3.9\"\n            },\n            \"lddOutput\": \"\\tlinux-vdso.so.1 (0x00007ffe38ceb000)\\n\\tlibopencv_imgcodecs.so.501 => /workspace/linux51-output/full-runtime/libopencv_imgcodecs.so.501 (0x00007bed46600000)\\n\\tlibopencv_imgproc.so.501 => /workspace/linux51-output/full-runtime/libopencv_imgproc.so.501 (0x00007bed45c00000)\\n\\tlibopencv_geometry.so.501 => /workspace/linux51-output/full-runtime/libopencv_geometry.so.501 (0x00007bed45800000)\\n\\tlibopencv_core.so.501 => /workspace/linux51-output/full-runtime/libopencv_core.so.501 (0x00007bed44e00000)\\n\\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007bed44bd4000)\\n\\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007bed46919000)\\n\\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007bed476a2000)\\n\\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007bed449ab000)\\n\\t/lib64/ld-linux-x86-64.so.2 (0x00007bed476c9000)\\n\\tlibopencv_flann.so.501 => /workspace/linux51-output/full-runtime/libopencv_flann.so.501 (0x00007bed45b76000)\\n\"\n          },\n          {\n            \"name\": \"libopencv_features.so.5.1.0\",\n            \"bytes\": 963504,\n            \"sha256\": \"7503a9433c59587fbbe7cf5ae695d12185c33d57e3e1b9ba50879663d3876d70\",\n            \"soname\": \"libopencv_features.so.501\",\n            \"runtimePaths\": [\n              \"$ORIGIN\"\n            ],\n            \"needed\": [\n              \"libopencv_dnn.so.501\",\n              \"libopencv_imgproc.so.501\",\n              \"libopencv_geometry.so.501\",\n              \"libopencv_flann.so.501\",\n              \"libopencv_core.so.501\",\n              \"libstdc++.so.6\",\n              \"libm.so.6\",\n              \"libgcc_s.so.1\",\n              \"libc.so.6\"\n            ],\n            \"symbolFloors\": {\n              \"GLIBC\": \"2.34\",\n              \"GLIBCXX\": \"3.4.29\",\n              \"CXXABI\": \"1.3.9\"\n            },\n            \"lddOutput\": \"\\tlinux-vdso.so.1 (0x00007ffde1547000)\\n\\tlibopencv_dnn.so.501 => /workspace/linux51-output/full-runtime/libopencv_dnn.so.501 (0x00007d7873400000)\\n\\tlibopencv_imgproc.so.501 => /workspace/linux51-output/full-runtime/libopencv_imgproc.so.501 (0x00007d7872a00000)\\n\\tlibopencv_geometry.so.501 => /workspace/linux51-output/full-runtime/libopencv_geometry.so.501 (0x00007d7872600000)\\n\\tlibopencv_flann.so.501 => /workspace/linux51-output/full-runtime/libopencv_flann.so.501 (0x00007d78740b8000)\\n\\tlibopencv_core.so.501 => /workspace/linux51-output/full-runtime/libopencv_core.so.501 (0x00007d7871c00000)\\n\\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007d78719d4000)\\n\\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007d7872919000)\\n\\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007d7874093000)\\n\\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007d78717ab000)\\n\\tlibopencv_imgcodecs.so.501 => /workspace/linux51-output/full-runtime/libopencv_imgcodecs.so.501 (0x00007d7871400000)\\n\\t/lib64/ld-linux-x86-64.so.2 (0x00007d7874201000)\\n\"\n          },\n          {\n            \"name\": \"libopencv_flann.so.5.1.0\",\n            \"bytes\": 687456,\n            \"sha256\": \"de8ea124fd5b5c8fa2446995dfd12118aa1362144bb6ab688280b8edab2ce718\",\n            \"soname\": \"libopencv_flann.so.501\",\n            \"runtimePaths\": [\n              \"$ORIGIN\"\n            ],\n            \"needed\": [\n              \"libopencv_core.so.501\",\n              \"libstdc++.so.6\",\n              \"libm.so.6\",\n              \"libgcc_s.so.1\",\n              \"libc.so.6\",\n              \"ld-linux-x86-64.so.2\"\n            ],\n            \"symbolFloors\": {\n              \"GLIBC\": \"2.32\",\n              \"GLIBCXX\": \"3.4.29\",\n              \"CXXABI\": \"1.3.9\"\n            },\n            \"lddOutput\": \"\\tlinux-vdso.so.1 (0x00007ffccb947000)\\n\\tlibopencv_core.so.501 => /workspace/linux51-output/full-runtime/libopencv_core.so.501 (0x000072b14d600000)\\n\\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x000072b14d3d4000)\\n\\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x000072b14dfdf000)\\n\\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x000072b14dfbf000)\\n\\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x000072b14d1ab000)\\n\\t/lib64/ld-linux-x86-64.so.2 (0x000072b14e155000)\\n\"\n          },\n          {\n            \"name\": \"libopencv_geometry.so.5.1.0\",\n            \"bytes\": 2490104,\n            \"sha256\": \"09fe3542f24d3f71047d66e2aa4b4dc5128a009d9c96d4b0865835760aa8e5c5\",\n            \"soname\": \"libopencv_geometry.so.501\",\n            \"runtimePaths\": [\n              \"$ORIGIN\"\n            ],\n            \"needed\": [\n              \"libopencv_flann.so.501\",\n              \"libopencv_core.so.501\",\n              \"libstdc++.so.6\",\n              \"libm.so.6\",\n              \"libgcc_s.so.1\",\n              \"libc.so.6\"\n            ],\n            \"symbolFloors\": {\n              \"GLIBC\": \"2.35\",\n              \"GLIBCXX\": \"3.4.29\",\n              \"CXXABI\": \"1.3.9\"\n            },\n            \"lddOutput\": \"\\tlinux-vdso.so.1 (0x00007ffdc33b8000)\\n\\tlibopencv_flann.so.501 => /workspace/linux51-output/full-runtime/libopencv_flann.so.501 (0x000072a337576000)\\n\\tlibopencv_core.so.501 => /workspace/linux51-output/full-runtime/libopencv_core.so.501 (0x000072a336a00000)\\n\\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x000072a3367d4000)\\n\\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x000072a33748f000)\\n\\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x000072a337848000)\\n\\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x000072a3365ab000)\\n\\t/lib64/ld-linux-x86-64.so.2 (0x000072a33786d000)\\n\"\n          },\n          {\n            \"name\": \"libopencv_highgui.so.5.1.0\",\n            \"bytes\": 252768,\n            \"sha256\": \"15ce13df4bfda6fadd0613e5d8e3a7afa58c051e31c21e9972364c8f3f4b3f0c\",\n            \"soname\": \"libopencv_highgui.so.501\",\n            \"runtimePaths\": [\n              \"$ORIGIN\"\n            ],\n            \"needed\": [\n              \"libopencv_imgproc.so.501\",\n              \"libopencv_core.so.501\",\n              \"libstdc++.so.6\",\n              \"libgcc_s.so.1\",\n              \"libc.so.6\"\n            ],\n            \"symbolFloors\": {\n              \"GLIBC\": \"2.32\",\n              \"GLIBCXX\": \"3.4.29\",\n              \"CXXABI\": \"1.3.9\"\n            },\n            \"lddOutput\": \"\\tlinux-vdso.so.1 (0x00007fff62be4000)\\n\\tlibopencv_imgproc.so.501 => /workspace/linux51-output/full-runtime/libopencv_imgproc.so.501 (0x000070cd5b400000)\\n\\tlibopencv_core.so.501 => /workspace/linux51-output/full-runtime/libopencv_core.so.501 (0x000070cd5aa00000)\\n\\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x000070cd5a7d4000)\\n\\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x000070cd5bf38000)\\n\\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x000070cd5a5ab000)\\n\\tlibopencv_geometry.so.501 => /workspace/linux51-output/full-runtime/libopencv_geometry.so.501 (0x000070cd5a200000)\\n\\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x000070cd5be4f000)\\n\\t/lib64/ld-linux-x86-64.so.2 (0x000070cd5bf91000)\\n\\tlibopencv_flann.so.501 => /workspace/linux51-output/full-runtime/libopencv_flann.so.501 (0x000070cd5bdc5000)\\n\"\n          },\n          {\n            \"name\": \"libopencv_imgcodecs.so.5.1.0\",\n            \"bytes\": 3418600,\n            \"sha256\": \"c25ba2ec44f30c90619507af6d21a9e41c59c2b29dcfd51b1a9702a3c29cccb2\",\n            \"soname\": \"libopencv_imgcodecs.so.501\",\n            \"runtimePaths\": [\n              \"$ORIGIN\"\n            ],\n            \"needed\": [\n              \"libopencv_imgproc.so.501\",\n              \"libopencv_core.so.501\",\n              \"libm.so.6\",\n              \"libstdc++.so.6\",\n              \"libgcc_s.so.1\",\n              \"libc.so.6\"\n            ],\n            \"symbolFloors\": {\n              \"GLIBC\": \"2.34\",\n              \"GLIBCXX\": \"3.4.29\",\n              \"CXXABI\": \"1.3.9\"\n            },\n            \"lddOutput\": \"\\tlinux-vdso.so.1 (0x00007ffd41f5f000)\\n\\tlibopencv_imgproc.so.501 => /workspace/linux51-output/full-runtime/libopencv_imgproc.so.501 (0x000073f858000000)\\n\\tlibopencv_core.so.501 => /workspace/linux51-output/full-runtime/libopencv_core.so.501 (0x000073f857600000)\\n\\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x000073f857519000)\\n\\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x000073f8572ed000)\\n\\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x000073f858d3e000)\\n\\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x000073f8570c4000)\\n\\tlibopencv_geometry.so.501 => /workspace/linux51-output/full-runtime/libopencv_geometry.so.501 (0x000073f856e00000)\\n\\t/lib64/ld-linux-x86-64.so.2 (0x000073f858d63000)\\n\\tlibopencv_flann.so.501 => /workspace/linux51-output/full-runtime/libopencv_flann.so.501 (0x000073f85703a000)\\n\"\n          },\n          {\n            \"name\": \"libopencv_imgproc.so.5.1.0\",\n            \"bytes\": 11509720,\n            \"sha256\": \"487daadd8aa90061aa82e0c0872690311a3fef082a41490a969694abfe629c86\",\n            \"soname\": \"libopencv_imgproc.so.501\",\n            \"runtimePaths\": [\n              \"$ORIGIN\"\n            ],\n            \"needed\": [\n              \"libopencv_geometry.so.501\",\n              \"libopencv_core.so.501\",\n              \"libstdc++.so.6\",\n              \"libm.so.6\",\n              \"libgcc_s.so.1\",\n              \"libc.so.6\",\n              \"ld-linux-x86-64.so.2\"\n            ],\n            \"symbolFloors\": {\n              \"GLIBC\": \"2.35\",\n              \"GLIBCXX\": \"3.4.29\",\n              \"CXXABI\": \"1.3.9\"\n            },\n            \"lddOutput\": \"\\tlinux-vdso.so.1 (0x00007ffc07f33000)\\n\\tlibopencv_geometry.so.501 => /workspace/linux51-output/full-runtime/libopencv_geometry.so.501 (0x000074864ec00000)\\n\\tlibopencv_core.so.501 => /workspace/linux51-output/full-runtime/libopencv_core.so.501 (0x000074864e200000)\\n\\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x000074864dfd4000)\\n\\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x000074864ef19000)\\n\\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x000074864fa3a000)\\n\\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x000074864ddab000)\\n\\t/lib64/ld-linux-x86-64.so.2 (0x000074864fa5f000)\\n\\tlibopencv_flann.so.501 => /workspace/linux51-output/full-runtime/libopencv_flann.so.501 (0x000074864f9ae000)\\n\"\n          },\n          {\n            \"name\": \"libopencv_ml.so.5.1.0\",\n            \"bytes\": 708328,\n            \"sha256\": \"a5d6778f021179e905acb50fe17378a17627297e33fe4605639d79c56a907607\",\n            \"soname\": \"libopencv_ml.so.501\",\n            \"runtimePaths\": [\n              \"$ORIGIN\"\n            ],\n            \"needed\": [\n              \"libopencv_core.so.501\",\n              \"libstdc++.so.6\",\n              \"libm.so.6\",\n              \"libgcc_s.so.1\",\n              \"libc.so.6\"\n            ],\n            \"symbolFloors\": {\n              \"GLIBC\": \"2.32\",\n              \"GLIBCXX\": \"3.4.29\",\n              \"CXXABI\": \"1.3.9\"\n            },\n            \"lddOutput\": \"\\tlinux-vdso.so.1 (0x00007ffcc45b4000)\\n\\tlibopencv_core.so.501 => /workspace/linux51-output/full-runtime/libopencv_core.so.501 (0x00007124af600000)\\n\\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007124af3d4000)\\n\\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007124af2ed000)\\n\\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007124b0033000)\\n\\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007124af0c4000)\\n\\t/lib64/ld-linux-x86-64.so.2 (0x00007124b00ec000)\\n\"\n          },\n          {\n            \"name\": \"libopencv_objdetect.so.5.1.0\",\n            \"bytes\": 1920104,\n            \"sha256\": \"2ac0bee2e3d65838b84f5d4726038966ade567bc4e50cecc4f26624fb7eeb3e6\",\n            \"soname\": \"libopencv_objdetect.so.501\",\n            \"runtimePaths\": [\n              \"$ORIGIN\"\n            ],\n            \"needed\": [\n              \"libopencv_features.so.501\",\n              \"libopencv_dnn.so.501\",\n              \"libopencv_imgproc.so.501\",\n              \"libopencv_geometry.so.501\",\n              \"libopencv_flann.so.501\",\n              \"libopencv_core.so.501\",\n              \"libstdc++.so.6\",\n              \"libm.so.6\",\n              \"libgcc_s.so.1\",\n              \"libc.so.6\",\n              \"ld-linux-x86-64.so.2\"\n            ],\n            \"symbolFloors\": {\n              \"GLIBC\": \"2.32\",\n              \"GLIBCXX\": \"3.4.29\",\n              \"CXXABI\": \"1.3.9\"\n            },\n            \"lddOutput\": \"\\tlinux-vdso.so.1 (0x00007ffc43d2a000)\\n\\tlibopencv_features.so.501 => /workspace/linux51-output/full-runtime/libopencv_features.so.501 (0x000070e711bfd000)\\n\\tlibopencv_dnn.so.501 => /workspace/linux51-output/full-runtime/libopencv_dnn.so.501 (0x000070e710e00000)\\n\\tlibopencv_imgproc.so.501 => /workspace/linux51-output/full-runtime/libopencv_imgproc.so.501 (0x000070e710400000)\\n\\tlibopencv_geometry.so.501 => /workspace/linux51-output/full-runtime/libopencv_geometry.so.501 (0x000070e710000000)\\n\\tlibopencv_flann.so.501 => /workspace/linux51-output/full-runtime/libopencv_flann.so.501 (0x000070e711b73000)\\n\\tlibopencv_core.so.501 => /workspace/linux51-output/full-runtime/libopencv_core.so.501 (0x000070e70f600000)\\n\\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x000070e70f3d4000)\\n\\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x000070e711a87000)\\n\\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x000070e710de0000)\\n\\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x000070e70f1ab000)\\n\\t/lib64/ld-linux-x86-64.so.2 (0x000070e711e50000)\\n\\tlibopencv_imgcodecs.so.501 => /workspace/linux51-output/full-runtime/libopencv_imgcodecs.so.501 (0x000070e70ee00000)\\n\"\n          },\n          {\n            \"name\": \"libopencv_photo.so.5.1.0\",\n            \"bytes\": 1293960,\n            \"sha256\": \"c317a7afb35edb6271d43ae6af6c3959098877c702c1a1bd2f763b9760b3c48e\",\n            \"soname\": \"libopencv_photo.so.501\",\n            \"runtimePaths\": [\n              \"$ORIGIN\"\n            ],\n            \"needed\": [\n              \"libopencv_imgproc.so.501\",\n              \"libopencv_geometry.so.501\",\n              \"libopencv_core.so.501\",\n              \"libstdc++.so.6\",\n              \"libm.so.6\",\n              \"libgcc_s.so.1\",\n              \"libc.so.6\"\n            ],\n            \"symbolFloors\": {\n              \"GLIBC\": \"2.32\",\n              \"GLIBCXX\": \"3.4.29\",\n              \"CXXABI\": \"1.3.9\"\n            },\n            \"lddOutput\": \"\\tlinux-vdso.so.1 (0x00007fffaa9d9000)\\n\\tlibopencv_imgproc.so.501 => /workspace/linux51-output/full-runtime/libopencv_imgproc.so.501 (0x000072e5fcc00000)\\n\\tlibopencv_geometry.so.501 => /workspace/linux51-output/full-runtime/libopencv_geometry.so.501 (0x000072e5fc800000)\\n\\tlibopencv_core.so.501 => /workspace/linux51-output/full-runtime/libopencv_core.so.501 (0x000072e5fbe00000)\\n\\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x000072e5fbbd4000)\\n\\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x000072e5fcb19000)\\n\\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x000072e5fd61c000)\\n\\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x000072e5fb9ab000)\\n\\t/lib64/ld-linux-x86-64.so.2 (0x000072e5fd750000)\\n\\tlibopencv_flann.so.501 => /workspace/linux51-output/full-runtime/libopencv_flann.so.501 (0x000072e5fd592000)\\n\"\n          },\n          {\n            \"name\": \"libopencv_ptcloud.so.5.1.0\",\n            \"bytes\": 1393760,\n            \"sha256\": \"47971389869393ce6a0e6cc43ac7cbc1b3cfeeede7de9ab799e7590e2148ab14\",\n            \"soname\": \"libopencv_ptcloud.so.501\",\n            \"runtimePaths\": [\n              \"$ORIGIN\"\n            ],\n            \"needed\": [\n              \"libopencv_video.so.501\",\n              \"libopencv_features.so.501\",\n              \"libopencv_imgproc.so.501\",\n              \"libopencv_geometry.so.501\",\n              \"libopencv_flann.so.501\",\n              \"libopencv_core.so.501\",\n              \"libstdc++.so.6\",\n              \"libm.so.6\",\n              \"libgcc_s.so.1\",\n              \"libc.so.6\"\n            ],\n            \"symbolFloors\": {\n              \"GLIBC\": \"2.35\",\n              \"GLIBCXX\": \"3.4.29\",\n              \"CXXABI\": \"1.3.9\"\n            },\n            \"lddOutput\": \"\\tlinux-vdso.so.1 (0x00007fff4d90a000)\\n\\tlibopencv_video.so.501 => /workspace/linux51-output/full-runtime/libopencv_video.so.501 (0x000075fac4133000)\\n\\tlibopencv_features.so.501 => /workspace/linux51-output/full-runtime/libopencv_features.so.501 (0x000075fac4076000)\\n\\tlibopencv_imgproc.so.501 => /workspace/linux51-output/full-runtime/libopencv_imgproc.so.501 (0x000075fac3600000)\\n\\tlibopencv_geometry.so.501 => /workspace/linux51-output/full-runtime/libopencv_geometry.so.501 (0x000075fac3200000)\\n\\tlibopencv_flann.so.501 => /workspace/linux51-output/full-runtime/libopencv_flann.so.501 (0x000075fac3fec000)\\n\\tlibopencv_core.so.501 => /workspace/linux51-output/full-runtime/libopencv_core.so.501 (0x000075fac2800000)\\n\\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x000075fac25d4000)\\n\\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x000075fac3519000)\\n\\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x000075fac3fc7000)\\n\\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x000075fac23ab000)\\n\\tlibopencv_dnn.so.501 => /workspace/linux51-output/full-runtime/libopencv_dnn.so.501 (0x000075fac1600000)\\n\\t/lib64/ld-linux-x86-64.so.2 (0x000075fac42de000)\\n\\tlibopencv_imgcodecs.so.501 => /workspace/linux51-output/full-runtime/libopencv_imgcodecs.so.501 (0x000075fac1200000)\\n\"\n          },\n          {\n            \"name\": \"libopencv_stereo.so.5.1.0\",\n            \"bytes\": 243832,\n            \"sha256\": \"6fdb5f7396e7536e3ec4a4e23c384188666e5a575aff487707f0f525c6c5f66e\",\n            \"soname\": \"libopencv_stereo.so.501\",\n            \"runtimePaths\": [\n              \"$ORIGIN\"\n            ],\n            \"needed\": [\n              \"libopencv_imgproc.so.501\",\n              \"libopencv_geometry.so.501\",\n              \"libopencv_core.so.501\",\n              \"libstdc++.so.6\",\n              \"libm.so.6\",\n              \"libgcc_s.so.1\",\n              \"libc.so.6\"\n            ],\n            \"symbolFloors\": {\n              \"GLIBC\": \"2.14\",\n              \"GLIBCXX\": \"3.4.21\",\n              \"CXXABI\": \"1.3.9\"\n            },\n            \"lddOutput\": \"\\tlinux-vdso.so.1 (0x00007ffe1f1fd000)\\n\\tlibopencv_imgproc.so.501 => /workspace/linux51-output/full-runtime/libopencv_imgproc.so.501 (0x0000715904800000)\\n\\tlibopencv_geometry.so.501 => /workspace/linux51-output/full-runtime/libopencv_geometry.so.501 (0x0000715904400000)\\n\\tlibopencv_core.so.501 => /workspace/linux51-output/full-runtime/libopencv_core.so.501 (0x0000715903a00000)\\n\\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007159037d4000)\\n\\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007159051f3000)\\n\\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007159051d1000)\\n\\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007159035ab000)\\n\\t/lib64/ld-linux-x86-64.so.2 (0x0000715905316000)\\n\\tlibopencv_flann.so.501 => /workspace/linux51-output/full-runtime/libopencv_flann.so.501 (0x0000715904776000)\\n\"\n          },\n          {\n            \"name\": \"libopencv_stitching.so.5.1.0\",\n            \"bytes\": 816480,\n            \"sha256\": \"1d9a61d20f5003cb7098e3c19edb32056ed1104c1c1cab2131be8df40709e7f9\",\n            \"soname\": \"libopencv_stitching.so.501\",\n            \"runtimePaths\": [\n              \"$ORIGIN\"\n            ],\n            \"needed\": [\n              \"libopencv_features.so.501\",\n              \"libopencv_imgproc.so.501\",\n              \"libopencv_geometry.so.501\",\n              \"libopencv_flann.so.501\",\n              \"libopencv_core.so.501\",\n              \"libstdc++.so.6\",\n              \"libm.so.6\",\n              \"libgcc_s.so.1\",\n              \"libc.so.6\"\n            ],\n            \"symbolFloors\": {\n              \"GLIBC\": \"2.32\",\n              \"GLIBCXX\": \"3.4.29\",\n              \"CXXABI\": \"1.3.9\"\n            },\n            \"lddOutput\": \"\\tlinux-vdso.so.1 (0x00007ffd9e1e8000)\\n\\tlibopencv_features.so.501 => /workspace/linux51-output/full-runtime/libopencv_features.so.501 (0x000075ab75cf0000)\\n\\tlibopencv_imgproc.so.501 => /workspace/linux51-output/full-runtime/libopencv_imgproc.so.501 (0x000075ab75200000)\\n\\tlibopencv_geometry.so.501 => /workspace/linux51-output/full-runtime/libopencv_geometry.so.501 (0x000075ab74e00000)\\n\\tlibopencv_flann.so.501 => /workspace/linux51-output/full-runtime/libopencv_flann.so.501 (0x000075ab75c66000)\\n\\tlibopencv_core.so.501 => /workspace/linux51-output/full-runtime/libopencv_core.so.501 (0x000075ab74400000)\\n\\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x000075ab741d4000)\\n\\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x000075ab75119000)\\n\\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x000075ab75c41000)\\n\\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x000075ab73fab000)\\n\\tlibopencv_dnn.so.501 => /workspace/linux51-output/full-runtime/libopencv_dnn.so.501 (0x000075ab73200000)\\n\\t/lib64/ld-linux-x86-64.so.2 (0x000075ab75e4e000)\\n\\tlibopencv_imgcodecs.so.501 => /workspace/linux51-output/full-runtime/libopencv_imgcodecs.so.501 (0x000075ab72e00000)\\n\"\n          },\n          {\n            \"name\": \"libopencv_video.so.5.1.0\",\n            \"bytes\": 703440,\n            \"sha256\": \"feb1684220ab5905cbef3662bf3ae52b85bd0a8466d09fc8014146300ef3b198\",\n            \"soname\": \"libopencv_video.so.501\",\n            \"runtimePaths\": [\n              \"$ORIGIN\"\n            ],\n            \"needed\": [\n              \"libopencv_dnn.so.501\",\n              \"libopencv_imgproc.so.501\",\n              \"libopencv_geometry.so.501\",\n              \"libopencv_core.so.501\",\n              \"libstdc++.so.6\",\n              \"libm.so.6\",\n              \"libgcc_s.so.1\",\n              \"libc.so.6\"\n            ],\n            \"symbolFloors\": {\n              \"GLIBC\": \"2.32\",\n              \"GLIBCXX\": \"3.4.29\",\n              \"CXXABI\": \"1.3.9\"\n            },\n            \"lddOutput\": \"\\tlinux-vdso.so.1 (0x00007ffe11b45000)\\n\\tlibopencv_dnn.so.501 => /workspace/linux51-output/full-runtime/libopencv_dnn.so.501 (0x00007ac6fec00000)\\n\\tlibopencv_imgproc.so.501 => /workspace/linux51-output/full-runtime/libopencv_imgproc.so.501 (0x00007ac6fe200000)\\n\\tlibopencv_geometry.so.501 => /workspace/linux51-output/full-runtime/libopencv_geometry.so.501 (0x00007ac6fde00000)\\n\\tlibopencv_core.so.501 => /workspace/linux51-output/full-runtime/libopencv_core.so.501 (0x00007ac6fd400000)\\n\\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007ac6fd1d4000)\\n\\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007ac6ff8dc000)\\n\\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007ac6ff8bc000)\\n\\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007ac6fcfab000)\\n\\tlibopencv_imgcodecs.so.501 => /workspace/linux51-output/full-runtime/libopencv_imgcodecs.so.501 (0x00007ac6fcc00000)\\n\\t/lib64/ld-linux-x86-64.so.2 (0x00007ac6ffa58000)\\n\\tlibopencv_flann.so.501 => /workspace/linux51-output/full-runtime/libopencv_flann.so.501 (0x00007ac6fe176000)\\n\"\n          },\n          {\n            \"name\": \"libopencv_videoio.so.5.1.0\",\n            \"bytes\": 485832,\n            \"sha256\": \"234425cf01038fc43edf708249d3110959abd9c95d2acc04468e078b50abf774\",\n            \"soname\": \"libopencv_videoio.so.501\",\n            \"runtimePaths\": [\n              \"$ORIGIN\"\n            ],\n            \"needed\": [\n              \"libopencv_imgcodecs.so.501\",\n              \"libopencv_core.so.501\",\n              \"libstdc++.so.6\",\n              \"libgcc_s.so.1\",\n              \"libc.so.6\"\n            ],\n            \"symbolFloors\": {\n              \"GLIBC\": \"2.32\",\n              \"GLIBCXX\": \"3.4.29\",\n              \"CXXABI\": \"1.3.9\"\n            },\n            \"lddOutput\": \"\\tlinux-vdso.so.1 (0x00007ffe0a4d7000)\\n\\tlibopencv_imgcodecs.so.501 => /workspace/linux51-output/full-runtime/libopencv_imgcodecs.so.501 (0x000072ad71000000)\\n\\tlibopencv_core.so.501 => /workspace/linux51-output/full-runtime/libopencv_core.so.501 (0x000072ad70600000)\\n\\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x000072ad703d4000)\\n\\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x000072ad7132e000)\\n\\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x000072ad701ab000)\\n\\tlibopencv_imgproc.so.501 => /workspace/linux51-output/full-runtime/libopencv_imgproc.so.501 (0x000072ad6f800000)\\n\\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x000072ad6f719000)\\n\\t/lib64/ld-linux-x86-64.so.2 (0x000072ad713b9000)\\n\\tlibopencv_geometry.so.501 => /workspace/linux51-output/full-runtime/libopencv_geometry.so.501 (0x000072ad6f400000)\\n\\tlibopencv_flann.so.501 => /workspace/linux51-output/full-runtime/libopencv_flann.so.501 (0x000072ad6f68f000)\\n\"\n          }\n        ]\n      },\n      \"ctestOutput\": \"Internal ctest changing into directory: /workspace/native51-full\\nTest project /workspace/native51-full\\n    Start 1: JYPPX.OpenCV.NativeSmoke\\n1/3 Test #1: JYPPX.OpenCV.NativeSmoke ...............   Passed    0.71 sec\\n    Start 2: JYPPX.OpenCV.NativeAbiGeneratedCheck\\n2/3 Test #2: JYPPX.OpenCV.NativeAbiGeneratedCheck ...   Passed    3.70 sec\\n    Start 3: JYPPX.OpenCV.NativeAbiExportAudit\\n3/3 Test #3: JYPPX.OpenCV.NativeAbiExportAudit ......   Passed    1.13 sec\\n\\n100% tests passed, 0 tests failed out of 3\\n\\nTotal Test time (real) =   5.54 sec\\n\"\n    },\n    {\n      \"name\": \"mini\",\n      \"modules\": [\n        \"core\",\n        \"imgproc\",\n        \"imgcodecs\",\n        \"videoio\",\n        \"geometry\",\n        \"flann\"\n      ],\n      \"buildList\": \"core,imgproc,imgcodecs,videoio,geometry,flann\",\n      \"independentMinimalUpstreamBuild\": false,\n      \"upstreamBuildProfile\": \"full\",\n      \"wrapperSourceCount\": 9,\n      \"wrapperSources\": [\n        \"src/OpenCvSharp.Native/src/core/decomp.cpp\",\n        \"src/OpenCvSharp.Native/src/core/mat.cpp\",\n        \"src/OpenCvSharp.Native/src/core/operations.cpp\",\n        \"src/OpenCvSharp.Native/src/core/persistence.cpp\",\n        \"src/OpenCvSharp.Native/src/error_state.cpp\",\n        \"src/OpenCvSharp.Native/src/imgcodecs.cpp\",\n        \"src/OpenCvSharp.Native/src/imgproc.cpp\",\n        \"src/OpenCvSharp.Native/src/version.cpp\",\n        \"src/OpenCvSharp.Native/src/videoio/videoio.cpp\"\n      ],\n      \"elf\": {\n        \"profile\": \"mini\",\n        \"runtimeFileCount\": 19,\n        \"exportCount\": 527,\n        \"exportNamesSha256\": \"6cc78c4e2fe696c8edc3a97814c8f8e5e1dd3e094bb3c9490c2cd387b120e45f\",\n        \"files\": [\n          {\n            \"name\": \"libJYPPX.OpenCV.Native.so\",\n            \"bytes\": 600752,\n            \"sha256\": \"7991700cfc1dd3751deeb1fe853c52c74152960aba16fabc70c76470a7262acb\",\n            \"soname\": \"libJYPPX.OpenCV.Native.so\",\n            \"runtimePaths\": [\n              \"$ORIGIN\"\n            ],\n            \"needed\": [\n              \"libopencv_videoio.so.501\",\n              \"libopencv_imgcodecs.so.501\",\n              \"libopencv_imgproc.so.501\",\n              \"libopencv_geometry.so.501\",\n              \"libopencv_flann.so.501\",\n              \"libopencv_core.so.501\",\n              \"libstdc++.so.6\",\n              \"libm.so.6\",\n              \"libgcc_s.so.1\",\n              \"libc.so.6\",\n              \"ld-linux-x86-64.so.2\"\n            ],\n            \"symbolFloors\": {\n              \"GLIBC\": \"2.32\",\n              \"GLIBCXX\": \"3.4.29\",\n              \"CXXABI\": \"1.3.9\"\n            },\n            \"lddOutput\": \"\\tlinux-vdso.so.1 (0x00007ffd8cb70000)\\n\\tlibopencv_videoio.so.501 => /workspace/linux51-output/mini-runtime/libopencv_videoio.so.501 (0x00007f5d9aca0000)\\n\\tlibopencv_imgcodecs.so.501 => /workspace/linux51-output/mini-runtime/libopencv_imgcodecs.so.501 (0x00007f5d9a800000)\\n\\tlibopencv_imgproc.so.501 => /workspace/linux51-output/mini-runtime/libopencv_imgproc.so.501 (0x00007f5d99e00000)\\n\\tlibopencv_geometry.so.501 => /workspace/linux51-output/mini-runtime/libopencv_geometry.so.501 (0x00007f5d99a00000)\\n\\tlibopencv_flann.so.501 => /workspace/linux51-output/mini-runtime/libopencv_flann.so.501 (0x00007f5d9ac16000)\\n\\tlibopencv_core.so.501 => /workspace/linux51-output/mini-runtime/libopencv_core.so.501 (0x00007f5d99000000)\\n\\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007f5d98dd4000)\\n\\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f5d9ab2a000)\\n\\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f5d9ab0a000)\\n\\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f5d98bab000)\\n\\t/lib64/ld-linux-x86-64.so.2 (0x00007f5d9ad80000)\\n\"\n          },\n          {\n            \"name\": \"libopencv_core.so.5.1.0\",\n            \"bytes\": 11544992,\n            \"sha256\": \"8797a2d0b1d95b64d619553b86ce5f635170a83a7fb18c9287f9bc066b5b575b\",\n            \"soname\": \"libopencv_core.so.501\",\n            \"runtimePaths\": [\n              \"$ORIGIN\"\n            ],\n            \"needed\": [\n              \"libstdc++.so.6\",\n              \"libm.so.6\",\n              \"libgcc_s.so.1\",\n              \"libc.so.6\"\n            ],\n            \"symbolFloors\": {\n              \"GLIBC\": \"2.34\",\n              \"GLIBCXX\": \"3.4.30\",\n              \"CXXABI\": \"1.3.13\"\n            },\n            \"lddOutput\": \"\\tlinux-vdso.so.1 (0x00007ffc1f193000)\\n\\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007e8e23fd4000)\\n\\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007e8e23eed000)\\n\\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007e8e24c73000)\\n\\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007e8e23cc4000)\\n\\t/lib64/ld-linux-x86-64.so.2 (0x00007e8e24c98000)\\n\"\n          },\n          {\n            \"name\": \"libopencv_flann.so.5.1.0\",\n            \"bytes\": 687456,\n            \"sha256\": \"de8ea124fd5b5c8fa2446995dfd12118aa1362144bb6ab688280b8edab2ce718\",\n            \"soname\": \"libopencv_flann.so.501\",\n            \"runtimePaths\": [\n              \"$ORIGIN\"\n            ],\n            \"needed\": [\n              \"libopencv_core.so.501\",\n              \"libstdc++.so.6\",\n              \"libm.so.6\",\n              \"libgcc_s.so.1\",\n              \"libc.so.6\",\n              \"ld-linux-x86-64.so.2\"\n            ],\n            \"symbolFloors\": {\n              \"GLIBC\": \"2.32\",\n              \"GLIBCXX\": \"3.4.29\",\n              \"CXXABI\": \"1.3.9\"\n            },\n            \"lddOutput\": \"\\tlinux-vdso.so.1 (0x00007fffdc99b000)\\n\\tlibopencv_core.so.501 => /workspace/linux51-output/mini-runtime/libopencv_core.so.501 (0x000076826d800000)\\n\\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x000076826d5d4000)\\n\\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x000076826d4ed000)\\n\\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x000076826d4cd000)\\n\\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x000076826d2a4000)\\n\\t/lib64/ld-linux-x86-64.so.2 (0x000076826e261000)\\n\"\n          },\n          {\n            \"name\": \"libopencv_geometry.so.5.1.0\",\n            \"bytes\": 2490104,\n            \"sha256\": \"09fe3542f24d3f71047d66e2aa4b4dc5128a009d9c96d4b0865835760aa8e5c5\",\n            \"soname\": \"libopencv_geometry.so.501\",\n            \"runtimePaths\": [\n              \"$ORIGIN\"\n            ],\n            \"needed\": [\n              \"libopencv_flann.so.501\",\n              \"libopencv_core.so.501\",\n              \"libstdc++.so.6\",\n              \"libm.so.6\",\n              \"libgcc_s.so.1\",\n              \"libc.so.6\"\n            ],\n            \"symbolFloors\": {\n              \"GLIBC\": \"2.35\",\n              \"GLIBCXX\": \"3.4.29\",\n              \"CXXABI\": \"1.3.9\"\n            },\n            \"lddOutput\": \"\\tlinux-vdso.so.1 (0x00007ffed15cf000)\\n\\tlibopencv_flann.so.501 => /workspace/linux51-output/mini-runtime/libopencv_flann.so.501 (0x00007bdf0c74e000)\\n\\tlibopencv_core.so.501 => /workspace/linux51-output/mini-runtime/libopencv_core.so.501 (0x00007bdf0ba00000)\\n\\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007bdf0b7d4000)\\n\\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007bdf0c664000)\\n\\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007bdf0c644000)\\n\\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007bdf0b5ab000)\\n\\t/lib64/ld-linux-x86-64.so.2 (0x00007bdf0c7da000)\\n\"\n          },\n          {\n            \"name\": \"libopencv_imgcodecs.so.5.1.0\",\n            \"bytes\": 3418600,\n            \"sha256\": \"c25ba2ec44f30c90619507af6d21a9e41c59c2b29dcfd51b1a9702a3c29cccb2\",\n            \"soname\": \"libopencv_imgcodecs.so.501\",\n            \"runtimePaths\": [\n              \"$ORIGIN\"\n            ],\n            \"needed\": [\n              \"libopencv_imgproc.so.501\",\n              \"libopencv_core.so.501\",\n              \"libm.so.6\",\n              \"libstdc++.so.6\",\n              \"libgcc_s.so.1\",\n              \"libc.so.6\"\n            ],\n            \"symbolFloors\": {\n              \"GLIBC\": \"2.34\",\n              \"GLIBCXX\": \"3.4.29\",\n              \"CXXABI\": \"1.3.9\"\n            },\n            \"lddOutput\": \"\\tlinux-vdso.so.1 (0x00007ffd636ca000)\\n\\tlibopencv_imgproc.so.501 => /workspace/linux51-output/mini-runtime/libopencv_imgproc.so.501 (0x0000735f66000000)\\n\\tlibopencv_core.so.501 => /workspace/linux51-output/mini-runtime/libopencv_core.so.501 (0x0000735f65600000)\\n\\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x0000735f66d6e000)\\n\\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x0000735f653d4000)\\n\\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x0000735f66d4e000)\\n\\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x0000735f651ab000)\\n\\tlibopencv_geometry.so.501 => /workspace/linux51-output/mini-runtime/libopencv_geometry.so.501 (0x0000735f64e00000)\\n\\t/lib64/ld-linux-x86-64.so.2 (0x0000735f66e5a000)\\n\\tlibopencv_flann.so.501 => /workspace/linux51-output/mini-runtime/libopencv_flann.so.501 (0x0000735f65121000)\\n\"\n          },\n          {\n            \"name\": \"libopencv_imgproc.so.5.1.0\",\n            \"bytes\": 11509720,\n            \"sha256\": \"487daadd8aa90061aa82e0c0872690311a3fef082a41490a969694abfe629c86\",\n            \"soname\": \"libopencv_imgproc.so.501\",\n            \"runtimePaths\": [\n              \"$ORIGIN\"\n            ],\n            \"needed\": [\n              \"libopencv_geometry.so.501\",\n              \"libopencv_core.so.501\",\n              \"libstdc++.so.6\",\n              \"libm.so.6\",\n              \"libgcc_s.so.1\",\n              \"libc.so.6\",\n              \"ld-linux-x86-64.so.2\"\n            ],\n            \"symbolFloors\": {\n              \"GLIBC\": \"2.35\",\n              \"GLIBCXX\": \"3.4.29\",\n              \"CXXABI\": \"1.3.9\"\n            },\n            \"lddOutput\": \"\\tlinux-vdso.so.1 (0x00007ffc00fb5000)\\n\\tlibopencv_geometry.so.501 => /workspace/linux51-output/mini-runtime/libopencv_geometry.so.501 (0x000073cb75a00000)\\n\\tlibopencv_core.so.501 => /workspace/linux51-output/mini-runtime/libopencv_core.so.501 (0x000073cb75000000)\\n\\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x000073cb74dd4000)\\n\\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x000073cb767bd000)\\n\\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x000073cb7679d000)\\n\\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x000073cb74bab000)\\n\\t/lib64/ld-linux-x86-64.so.2 (0x000073cb768a9000)\\n\\tlibopencv_flann.so.501 => /workspace/linux51-output/mini-runtime/libopencv_flann.so.501 (0x000073cb75d76000)\\n\"\n          },\n          {\n            \"name\": \"libopencv_videoio.so.5.1.0\",\n            \"bytes\": 485832,\n            \"sha256\": \"234425cf01038fc43edf708249d3110959abd9c95d2acc04468e078b50abf774\",\n            \"soname\": \"libopencv_videoio.so.501\",\n            \"runtimePaths\": [\n              \"$ORIGIN\"\n            ],\n            \"needed\": [\n              \"libopencv_imgcodecs.so.501\",\n              \"libopencv_core.so.501\",\n              \"libstdc++.so.6\",\n              \"libgcc_s.so.1\",\n              \"libc.so.6\"\n            ],\n            \"symbolFloors\": {\n              \"GLIBC\": \"2.32\",\n              \"GLIBCXX\": \"3.4.29\",\n              \"CXXABI\": \"1.3.9\"\n            },\n            \"lddOutput\": \"\\tlinux-vdso.so.1 (0x00007ffdc799b000)\\n\\tlibopencv_imgcodecs.so.501 => /workspace/linux51-output/mini-runtime/libopencv_imgcodecs.so.501 (0x00007b52f7e00000)\\n\\tlibopencv_core.so.501 => /workspace/linux51-output/mini-runtime/libopencv_core.so.501 (0x00007b52f7400000)\\n\\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007b52f71d4000)\\n\\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007b52f81c9000)\\n\\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007b52f6fab000)\\n\\tlibopencv_imgproc.so.501 => /workspace/linux51-output/mini-runtime/libopencv_imgproc.so.501 (0x00007b52f6600000)\\n\\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007b52f6519000)\\n\\t/lib64/ld-linux-x86-64.so.2 (0x00007b52f8254000)\\n\\tlibopencv_geometry.so.501 => /workspace/linux51-output/mini-runtime/libopencv_geometry.so.501 (0x00007b52f6200000)\\n\\tlibopencv_flann.so.501 => /workspace/linux51-output/mini-runtime/libopencv_flann.so.501 (0x00007b52f813d000)\\n\"\n          }\n        ]\n      },\n      \"ctestOutput\": \"Internal ctest changing into directory: /workspace/native51-mini\\nTest project /workspace/native51-mini\\n    Start 1: JYPPX.OpenCV.NativeSmoke\\n1/3 Test #1: JYPPX.OpenCV.NativeSmoke ...............   Passed    0.03 sec\\n    Start 2: JYPPX.OpenCV.NativeAbiGeneratedCheck\\n2/3 Test #2: JYPPX.OpenCV.NativeAbiGeneratedCheck ...   Passed    3.71 sec\\n    Start 3: JYPPX.OpenCV.NativeAbiExportAudit\\n3/3 Test #3: JYPPX.OpenCV.NativeAbiExportAudit ......   Passed    1.15 sec\\n\\n100% tests passed, 0 tests failed out of 3\\n\\nTotal Test time (real) =   4.90 sec\\n\"\n    }\n  ],\n  \"modifiedOpenCvFiles\": [\n    \"modules/photo/src/ccm/ccm.cpp\"\n  ],\n  \"contribClean\": true\n}\n",
+  "producerSha256": "f46dd5766f674039765cf611538b4945b57d2acf644598a6b1b7405b34378b88",
+  "consumerDriverOutput": "TARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio,dnn,ml_knn profile=full\nTARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio,not_linked profile=mini\nLOCAL_LINUX_51_INDEPENDENT_CONSUMER_OK compiler_absent=true producer_paths_absent=true loader_overrides_absent=true\n",
+  "consumerDriverOutputSha256": "55af142bdaf3053b8bf9b7c87fb64d1bf9396fb34e86567dcb42718e0cfd989c",
+  "managedPackage": {
+    "artifactPath": "artifacts/opencv-5.1.0-local-candidate/39c73be01bb1a568d9db4051f75ca1516bdfae51/nupkg-managed/JYPPX.OpenCV.CSharp.API.5.1.0.nupkg",
+    "sha256": "0081cd584da74aac7e51187985fbe4ceff3406f960525734633a3ba32768fd80",
+    "bytes": 11924069
+  },
+  "profiles": [
+    {
+      "name": "full",
+      "packageId": "JYPPX.OpenCV.runtime.linux-x64.preview",
+      "packageVersion": "5.1.0",
+      "packageBytes": 57971853,
+      "packageSha256": "d947dbbee1d923c2b3eeb2106c88eb4b4489cee3dbb87c61c0613b209b71cb4d",
+      "artifactPath": "artifacts/opencv-5.1.0-local-linux-preview/7cba98b47542bbe24971eea05246f0840b97ea5c/producer/nupkg-linux-x64-preview-full/JYPPX.OpenCV.runtime.linux-x64.preview.5.1.0.nupkg",
+      "entries": [
+        {
+          "path": "JYPPX.OpenCV.runtime.linux-x64.preview.nuspec",
+          "bytes": 893,
+          "sha256": "0117f337af6b8e4b1747ace683a2277c90aeab8d393911cef8fcbdaa1358ab2c"
+        },
+        {
+          "path": "README.md",
+          "bytes": 39558,
+          "sha256": "5877cdf0ae87562c5890e62fabcfaf51b55938ed9448988ef0c56e18fbe3c529"
+        },
+        {
+          "path": "[Content_Types].xml",
+          "bytes": 933,
+          "sha256": "513e5a007618edceb6e402056432b50ca8ed4aa71a4b00c4d39f8827ac1d146e"
+        },
+        {
+          "path": "_rels/.rels",
+          "bytes": 482,
+          "sha256": "1c49f93ab1c5829f82b99aa820a1417c28350d50afd7bef4d37300417aa4415a"
+        },
+        {
+          "path": "build/JYPPX.OpenCV.runtime.provenance.json",
+          "bytes": 12102,
+          "sha256": "d32e51ea36fe3b281a1e849162f7cb50084add3b6560368855172141b5f74ce6"
+        },
+        {
+          "path": "build/runtime-distro-rid-graph.json",
+          "bytes": 1282,
+          "sha256": "9dfc32941de2daebdee2f8a9bdebd9723627aaec07960bd82fd85939650af8de"
+        },
+        {
+          "path": "licenses/LICENSE",
+          "bytes": 11358,
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        },
+        {
+          "path": "licenses/opencv_contrib-LICENSE",
+          "bytes": 11358,
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        },
+        {
+          "path": "logo.jpg",
+          "bytes": 77499,
+          "sha256": "f85de97828d9f152903c8b90e8ee89aa1575ff8d0ef1c3704526e27dfe0d54d0"
+        },
+        {
+          "path": "package/services/metadata/core-properties/core-properties.psmdcp",
+          "bytes": 718,
+          "sha256": "fec29e4e21faec83f5696f5d49da497176878a264bccecb514e63d7503b3f38d"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libJYPPX.OpenCV.Native.so",
+          "bytes": 2418504,
+          "sha256": "11282ac0714be2055c1bb156d5c16c7a48f0de6402d4e49cb2d076a62c9df7eb"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_calib.so",
+          "bytes": 578384,
+          "sha256": "c2a387d63ff41dcea424a43d5923d91fa89aa1e513e411eb2552903344f221ab"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_calib.so.5.1.0",
+          "bytes": 578384,
+          "sha256": "c2a387d63ff41dcea424a43d5923d91fa89aa1e513e411eb2552903344f221ab"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_calib.so.501",
+          "bytes": 578384,
+          "sha256": "c2a387d63ff41dcea424a43d5923d91fa89aa1e513e411eb2552903344f221ab"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_core.so",
+          "bytes": 11544992,
+          "sha256": "8797a2d0b1d95b64d619553b86ce5f635170a83a7fb18c9287f9bc066b5b575b"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_core.so.5.1.0",
+          "bytes": 11544992,
+          "sha256": "8797a2d0b1d95b64d619553b86ce5f635170a83a7fb18c9287f9bc066b5b575b"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_core.so.501",
+          "bytes": 11544992,
+          "sha256": "8797a2d0b1d95b64d619553b86ce5f635170a83a7fb18c9287f9bc066b5b575b"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_dnn.so",
+          "bytes": 16218168,
+          "sha256": "2625e29df2f092608b50b8eb047f6737151b0bc902e7c1c1059250eda6a6217e"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_dnn.so.5.1.0",
+          "bytes": 16218168,
+          "sha256": "2625e29df2f092608b50b8eb047f6737151b0bc902e7c1c1059250eda6a6217e"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_dnn.so.501",
+          "bytes": 16218168,
+          "sha256": "2625e29df2f092608b50b8eb047f6737151b0bc902e7c1c1059250eda6a6217e"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_features.so",
+          "bytes": 963504,
+          "sha256": "7503a9433c59587fbbe7cf5ae695d12185c33d57e3e1b9ba50879663d3876d70"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_features.so.5.1.0",
+          "bytes": 963504,
+          "sha256": "7503a9433c59587fbbe7cf5ae695d12185c33d57e3e1b9ba50879663d3876d70"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_features.so.501",
+          "bytes": 963504,
+          "sha256": "7503a9433c59587fbbe7cf5ae695d12185c33d57e3e1b9ba50879663d3876d70"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_flann.so",
+          "bytes": 687456,
+          "sha256": "de8ea124fd5b5c8fa2446995dfd12118aa1362144bb6ab688280b8edab2ce718"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_flann.so.5.1.0",
+          "bytes": 687456,
+          "sha256": "de8ea124fd5b5c8fa2446995dfd12118aa1362144bb6ab688280b8edab2ce718"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_flann.so.501",
+          "bytes": 687456,
+          "sha256": "de8ea124fd5b5c8fa2446995dfd12118aa1362144bb6ab688280b8edab2ce718"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_geometry.so",
+          "bytes": 2490104,
+          "sha256": "09fe3542f24d3f71047d66e2aa4b4dc5128a009d9c96d4b0865835760aa8e5c5"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_geometry.so.5.1.0",
+          "bytes": 2490104,
+          "sha256": "09fe3542f24d3f71047d66e2aa4b4dc5128a009d9c96d4b0865835760aa8e5c5"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_geometry.so.501",
+          "bytes": 2490104,
+          "sha256": "09fe3542f24d3f71047d66e2aa4b4dc5128a009d9c96d4b0865835760aa8e5c5"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_highgui.so",
+          "bytes": 252768,
+          "sha256": "15ce13df4bfda6fadd0613e5d8e3a7afa58c051e31c21e9972364c8f3f4b3f0c"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_highgui.so.5.1.0",
+          "bytes": 252768,
+          "sha256": "15ce13df4bfda6fadd0613e5d8e3a7afa58c051e31c21e9972364c8f3f4b3f0c"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_highgui.so.501",
+          "bytes": 252768,
+          "sha256": "15ce13df4bfda6fadd0613e5d8e3a7afa58c051e31c21e9972364c8f3f4b3f0c"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_imgcodecs.so",
+          "bytes": 3418600,
+          "sha256": "c25ba2ec44f30c90619507af6d21a9e41c59c2b29dcfd51b1a9702a3c29cccb2"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_imgcodecs.so.5.1.0",
+          "bytes": 3418600,
+          "sha256": "c25ba2ec44f30c90619507af6d21a9e41c59c2b29dcfd51b1a9702a3c29cccb2"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_imgcodecs.so.501",
+          "bytes": 3418600,
+          "sha256": "c25ba2ec44f30c90619507af6d21a9e41c59c2b29dcfd51b1a9702a3c29cccb2"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_imgproc.so",
+          "bytes": 11509720,
+          "sha256": "487daadd8aa90061aa82e0c0872690311a3fef082a41490a969694abfe629c86"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_imgproc.so.5.1.0",
+          "bytes": 11509720,
+          "sha256": "487daadd8aa90061aa82e0c0872690311a3fef082a41490a969694abfe629c86"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_imgproc.so.501",
+          "bytes": 11509720,
+          "sha256": "487daadd8aa90061aa82e0c0872690311a3fef082a41490a969694abfe629c86"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_ml.so",
+          "bytes": 708328,
+          "sha256": "a5d6778f021179e905acb50fe17378a17627297e33fe4605639d79c56a907607"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_ml.so.5.1.0",
+          "bytes": 708328,
+          "sha256": "a5d6778f021179e905acb50fe17378a17627297e33fe4605639d79c56a907607"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_ml.so.501",
+          "bytes": 708328,
+          "sha256": "a5d6778f021179e905acb50fe17378a17627297e33fe4605639d79c56a907607"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_objdetect.so",
+          "bytes": 1920104,
+          "sha256": "2ac0bee2e3d65838b84f5d4726038966ade567bc4e50cecc4f26624fb7eeb3e6"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_objdetect.so.5.1.0",
+          "bytes": 1920104,
+          "sha256": "2ac0bee2e3d65838b84f5d4726038966ade567bc4e50cecc4f26624fb7eeb3e6"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_objdetect.so.501",
+          "bytes": 1920104,
+          "sha256": "2ac0bee2e3d65838b84f5d4726038966ade567bc4e50cecc4f26624fb7eeb3e6"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_photo.so",
+          "bytes": 1293960,
+          "sha256": "c317a7afb35edb6271d43ae6af6c3959098877c702c1a1bd2f763b9760b3c48e"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_photo.so.5.1.0",
+          "bytes": 1293960,
+          "sha256": "c317a7afb35edb6271d43ae6af6c3959098877c702c1a1bd2f763b9760b3c48e"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_photo.so.501",
+          "bytes": 1293960,
+          "sha256": "c317a7afb35edb6271d43ae6af6c3959098877c702c1a1bd2f763b9760b3c48e"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_ptcloud.so",
+          "bytes": 1393760,
+          "sha256": "47971389869393ce6a0e6cc43ac7cbc1b3cfeeede7de9ab799e7590e2148ab14"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_ptcloud.so.5.1.0",
+          "bytes": 1393760,
+          "sha256": "47971389869393ce6a0e6cc43ac7cbc1b3cfeeede7de9ab799e7590e2148ab14"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_ptcloud.so.501",
+          "bytes": 1393760,
+          "sha256": "47971389869393ce6a0e6cc43ac7cbc1b3cfeeede7de9ab799e7590e2148ab14"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_stereo.so",
+          "bytes": 243832,
+          "sha256": "6fdb5f7396e7536e3ec4a4e23c384188666e5a575aff487707f0f525c6c5f66e"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_stereo.so.5.1.0",
+          "bytes": 243832,
+          "sha256": "6fdb5f7396e7536e3ec4a4e23c384188666e5a575aff487707f0f525c6c5f66e"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_stereo.so.501",
+          "bytes": 243832,
+          "sha256": "6fdb5f7396e7536e3ec4a4e23c384188666e5a575aff487707f0f525c6c5f66e"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_stitching.so",
+          "bytes": 816480,
+          "sha256": "1d9a61d20f5003cb7098e3c19edb32056ed1104c1c1cab2131be8df40709e7f9"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_stitching.so.5.1.0",
+          "bytes": 816480,
+          "sha256": "1d9a61d20f5003cb7098e3c19edb32056ed1104c1c1cab2131be8df40709e7f9"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_stitching.so.501",
+          "bytes": 816480,
+          "sha256": "1d9a61d20f5003cb7098e3c19edb32056ed1104c1c1cab2131be8df40709e7f9"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_video.so",
+          "bytes": 703440,
+          "sha256": "feb1684220ab5905cbef3662bf3ae52b85bd0a8466d09fc8014146300ef3b198"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_video.so.5.1.0",
+          "bytes": 703440,
+          "sha256": "feb1684220ab5905cbef3662bf3ae52b85bd0a8466d09fc8014146300ef3b198"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_video.so.501",
+          "bytes": 703440,
+          "sha256": "feb1684220ab5905cbef3662bf3ae52b85bd0a8466d09fc8014146300ef3b198"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_videoio.so",
+          "bytes": 485832,
+          "sha256": "234425cf01038fc43edf708249d3110959abd9c95d2acc04468e078b50abf774"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_videoio.so.5.1.0",
+          "bytes": 485832,
+          "sha256": "234425cf01038fc43edf708249d3110959abd9c95d2acc04468e078b50abf774"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_videoio.so.501",
+          "bytes": 485832,
+          "sha256": "234425cf01038fc43edf708249d3110959abd9c95d2acc04468e078b50abf774"
+        }
+      ],
+      "producerProvenanceJson": "{\n  \"SchemaVersion\": 1,\n  \"Rid\": \"ubuntu.22.04-x64\",\n  \"OpenCvRid\": \"ubuntu.22.04-x64\",\n  \"PlatformFamily\": \"linux\",\n  \"Distro\": \"ubuntu\",\n  \"DistroVersion\": \"22.04\",\n  \"MatrixRunner\": \"ubuntu-22.04\",\n  \"HostedRunner\": \"\",\n  \"RunnerImage\": \"\",\n  \"RunnerImageVersion\": \"\",\n  \"HostedDistro\": \"\",\n  \"HostedDistroVersion\": \"\",\n  \"HostedArchitecture\": \"\",\n  \"HostedPackageArchitecture\": \"\",\n  \"HostedLibc\": \"\",\n  \"HostedCpuModel\": \"\",\n  \"HostedMemoryBytes\": \"\",\n  \"HostedDiskAvailableBytes\": \"\",\n  \"HostedOsCaption\": \"\",\n  \"HostedOsVersion\": \"\",\n  \"HostedOsBuildNumber\": \"\",\n  \"HostedProcessArchitecture\": \"\",\n  \"VisualStudioVersion\": \"\",\n  \"MsvcVersion\": \"\",\n  \"WindowsSdkVersion\": \"\",\n  \"CMakeVersion\": \"3.22.1\",\n  \"CMakeGenerator\": \"Ninja\",\n  \"CMakePlatform\": \"\",\n  \"BuildConfiguration\": \"Release\",\n  \"CompilerPath\": \"/usr/bin/g++\",\n  \"LinkerPath\": \"\",\n  \"LibrarianPath\": \"\",\n  \"DumpbinPath\": \"\",\n  \"CompilerVersion\": \"11.4.0\",\n  \"AssemblerVersion\": \"\",\n  \"NinjaVersion\": \"1.10.1\",\n  \"DotNetVersion\": \"10.0.401\",\n  \"OpenCvCMakeArguments\": \"\",\n  \"PeAuditEvidence\": \"\",\n  \"WindowsTargetExecutionEvidence\": \"\",\n  \"ElfAuditEvidence\": \"LOCAL_LINUX_51_ELF_OK profile=full modules=17 canonical=18 exports=2669 missing_dependencies=0 producer_paths=0\",\n  \"OpenCvCpuConfiguration\": \"\",\n  \"ExcludedForeignToolDirectories\": \"\",\n  \"OpenCvAsmConfiguration\": \"\",\n  \"NativeWrapperSources\": \"src/OpenCvSharp.Native/src/alphamat/alphamat.cpp;src/OpenCvSharp.Native/src/bgsegm/bgsegm.cpp;src/OpenCvSharp.Native/src/bioinspired/bioinspired.cpp;src/OpenCvSharp.Native/src/calib3d.cpp;src/OpenCvSharp.Native/src/core/decomp.cpp;src/OpenCvSharp.Native/src/core/mat.cpp;src/OpenCvSharp.Native/src/core/operations.cpp;src/OpenCvSharp.Native/src/core/persistence.cpp;src/OpenCvSharp.Native/src/dnn/dnn.cpp;src/OpenCvSharp.Native/src/error_state.cpp;src/OpenCvSharp.Native/src/face/face.cpp;src/OpenCvSharp.Native/src/features2d/features2d_extra.cpp;src/OpenCvSharp.Native/src/features2d/features2d.cpp;src/OpenCvSharp.Native/src/fuzzy/fuzzy.cpp;src/OpenCvSharp.Native/src/hfs/hfs.cpp;src/OpenCvSharp.Native/src/highgui/highgui.cpp;src/OpenCvSharp.Native/src/img_hash/img_hash.cpp;src/OpenCvSharp.Native/src/imgcodecs.cpp;src/OpenCvSharp.Native/src/imgproc.cpp;src/OpenCvSharp.Native/src/intensity_transform/intensity_transform.cpp;src/OpenCvSharp.Native/src/line_descriptor/line_descriptor.cpp;src/OpenCvSharp.Native/src/ml/ml.cpp;src/OpenCvSharp.Native/src/objdetect/aruco.cpp;src/OpenCvSharp.Native/src/objdetect/objdetect.cpp;src/OpenCvSharp.Native/src/optflow/optflow.cpp;src/OpenCvSharp.Native/src/phase_unwrapping/phase_unwrapping.cpp;src/OpenCvSharp.Native/src/photo/ccm.cpp;src/OpenCvSharp.Native/src/photo/hdr.cpp;src/OpenCvSharp.Native/src/photo/intelligent_scissors.cpp;src/OpenCvSharp.Native/src/photo/photo.cpp;src/OpenCvSharp.Native/src/plot/plot.cpp;src/OpenCvSharp.Native/src/ptcloud/ptcloud.cpp;src/OpenCvSharp.Native/src/quality/quality.cpp;src/OpenCvSharp.Native/src/rapid/rapid.cpp;src/OpenCvSharp.Native/src/reg/reg.cpp;src/OpenCvSharp.Native/src/saliency/saliency.cpp;src/OpenCvSharp.Native/src/shape/shape.cpp;src/OpenCvSharp.Native/src/stereo/stereo.cpp;src/OpenCvSharp.Native/src/stitching/stitching.cpp;src/OpenCvSharp.Native/src/structured_light/structured_light.cpp;src/OpenCvSharp.Native/src/surface_matching/surface_matching.cpp;src/OpenCvSharp.Native/src/tracking/tracking.cpp;src/OpenCvSharp.Native/src/version.cpp;src/OpenCvSharp.Native/src/video/video.cpp;src/OpenCvSharp.Native/src/videoio/videoio.cpp;src/OpenCvSharp.Native/src/ximgproc/ximgproc.cpp;src/OpenCvSharp.Native/src/xobjdetect/xobjdetect.cpp;src/OpenCvSharp.Native/src/xphoto/xphoto.cpp;src/OpenCvSharp.Native/src/xstereo/xstereo.cpp\",\n  \"NativeWrapperSourceCount\": \"49\",\n  \"NativeAbiFunctionCount\": \"2669\",\n  \"ContainerImage\": \"ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982\",\n  \"ContainerImageId\": \"sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982\",\n  \"ContainerImageDigest\": \"sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982\",\n  \"ContainerDistro\": \"ubuntu\",\n  \"ContainerDistroVersion\": \"22.04\",\n  \"ContainerArchitecture\": \"x86_64\",\n  \"ContainerPackageArchitecture\": \"amd64\",\n  \"ContainerLibc\": \"glibc 2.35\",\n  \"PowerShellVersion\": \"7.4.17\",\n  \"PowerShellArchiveSha256\": \"dcfe6060fc86abcb859ce1f8f80843ce50bab0585396de56380ed9f25176ac6d\",\n  \"OpenCvExtraCMakeArgs\": \"\",\n  \"OpenCvSourcePatchEvidence\": \"Repository-owned OpenCV 5.1 photo CCM per-instance color-space patch applied and audited.\",\n  \"OpenCvSourcePatches\": [\n    {\n      \"Path\": \"packaging/runtime/patches/opencv-5.1.0-photo-ccm-instance-color-space.patch\",\n      \"Sha256\": \"F0512BDB79E16E49595362E702159B5E3CA7445BAA157BB19E6974B6B2928BA1\",\n      \"Target\": \"modules/photo/src/ccm/ccm.cpp\",\n      \"Reason\": \"keep ColorCorrectionModel color-space state per instance\"\n    }\n  ],\n  \"RuntimeProfile\": \"full\",\n  \"RuntimeProfilePackageIdSuffix\": \"\",\n  \"BuildList\": \"core,imgproc,imgcodecs,videoio,flann,geometry,calib,stereo,dnn,ml,objdetect,photo,features,video,highgui,stitching,ptcloud\",\n  \"OpenCvVersion\": \"5.1.0\",\n  \"GenericLinuxPreview\": true,\n  \"GenericLinuxDependencyPolicy\": \"bundled-codecs-bundled-protobuf-glibc-cxx-system-only-v2\",\n  \"SyntheticRuntimeInputs\": false,\n  \"ArtifactLayout\": {\n    \"NativeWrapper\": \"native-wrapper\",\n    \"OpenCvRuntime\": \"opencv-runtime\",\n    \"OpenCvSource\": \"opencv-source\",\n    \"OpenCvInstall\": \"\"\n  },\n  \"RequiredModules\": [\n    \"core\",\n    \"imgcodecs\",\n    \"imgproc\",\n    \"videoio\",\n    \"flann\",\n    \"geometry\",\n    \"calib\",\n    \"stereo\",\n    \"dnn\",\n    \"ml\",\n    \"objdetect\",\n    \"photo\",\n    \"features\",\n    \"video\",\n    \"highgui\",\n    \"stitching\",\n    \"ptcloud\"\n  ],\n  \"InputRoots\": {\n    \"NativeRuntimeDir\": \"/workspace/native51-full\",\n    \"OpenCvRuntimeDir\": \"/workspace/linux51-output/full-runtime\",\n    \"OpenCvSourceDir\": \"/workspace/opencv-source/opencv-5.1.0\",\n    \"OpenCvContribSourceDir\": \"/workspace/opencv-source/opencv_contrib-5.1.0\",\n    \"OpenCvInstallDir\": \"\"\n  },\n  \"NativeLoaderFiles\": [\n    {\n      \"FileName\": \"libJYPPX.OpenCV.Native.so\",\n      \"SourcePath\": \"/workspace/native51-full/libJYPPX.OpenCV.Native.so\",\n      \"ArtifactPath\": \"native-wrapper/libJYPPX.OpenCV.Native.so\"\n    }\n  ],\n  \"RuntimeFiles\": [\n    {\n      \"FileName\": \"libopencv_core.so\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_core.so\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_core.so\"\n    },\n    {\n      \"FileName\": \"libopencv_imgcodecs.so\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_imgcodecs.so\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_imgcodecs.so\"\n    },\n    {\n      \"FileName\": \"libopencv_imgproc.so\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_imgproc.so\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_imgproc.so\"\n    },\n    {\n      \"FileName\": \"libopencv_videoio.so\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_videoio.so\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_videoio.so\"\n    },\n    {\n      \"FileName\": \"libopencv_flann.so\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_flann.so\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_flann.so\"\n    },\n    {\n      \"FileName\": \"libopencv_geometry.so\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_geometry.so\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_geometry.so\"\n    },\n    {\n      \"FileName\": \"libopencv_calib.so\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_calib.so\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_calib.so\"\n    },\n    {\n      \"FileName\": \"libopencv_stereo.so\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_stereo.so\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_stereo.so\"\n    },\n    {\n      \"FileName\": \"libopencv_dnn.so\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_dnn.so\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_dnn.so\"\n    },\n    {\n      \"FileName\": \"libopencv_ml.so\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_ml.so\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_ml.so\"\n    },\n    {\n      \"FileName\": \"libopencv_objdetect.so\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_objdetect.so\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_objdetect.so\"\n    },\n    {\n      \"FileName\": \"libopencv_photo.so\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_photo.so\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_photo.so\"\n    },\n    {\n      \"FileName\": \"libopencv_features.so\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_features.so\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_features.so\"\n    },\n    {\n      \"FileName\": \"libopencv_video.so\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_video.so\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_video.so\"\n    },\n    {\n      \"FileName\": \"libopencv_highgui.so\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_highgui.so\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_highgui.so\"\n    },\n    {\n      \"FileName\": \"libopencv_stitching.so\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_stitching.so\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_stitching.so\"\n    },\n    {\n      \"FileName\": \"libopencv_ptcloud.so\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_ptcloud.so\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_ptcloud.so\"\n    },\n    {\n      \"FileName\": \"libopencv_calib.so.5.1.0\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_calib.so.5.1.0\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_calib.so.5.1.0\"\n    },\n    {\n      \"FileName\": \"libopencv_calib.so.501\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_calib.so.501\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_calib.so.501\"\n    },\n    {\n      \"FileName\": \"libopencv_core.so.5.1.0\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_core.so.5.1.0\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_core.so.5.1.0\"\n    },\n    {\n      \"FileName\": \"libopencv_core.so.501\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_core.so.501\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_core.so.501\"\n    },\n    {\n      \"FileName\": \"libopencv_dnn.so.5.1.0\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_dnn.so.5.1.0\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_dnn.so.5.1.0\"\n    },\n    {\n      \"FileName\": \"libopencv_dnn.so.501\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_dnn.so.501\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_dnn.so.501\"\n    },\n    {\n      \"FileName\": \"libopencv_features.so.5.1.0\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_features.so.5.1.0\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_features.so.5.1.0\"\n    },\n    {\n      \"FileName\": \"libopencv_features.so.501\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_features.so.501\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_features.so.501\"\n    },\n    {\n      \"FileName\": \"libopencv_flann.so.5.1.0\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_flann.so.5.1.0\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_flann.so.5.1.0\"\n    },\n    {\n      \"FileName\": \"libopencv_flann.so.501\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_flann.so.501\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_flann.so.501\"\n    },\n    {\n      \"FileName\": \"libopencv_geometry.so.5.1.0\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_geometry.so.5.1.0\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_geometry.so.5.1.0\"\n    },\n    {\n      \"FileName\": \"libopencv_geometry.so.501\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_geometry.so.501\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_geometry.so.501\"\n    },\n    {\n      \"FileName\": \"libopencv_highgui.so.5.1.0\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_highgui.so.5.1.0\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_highgui.so.5.1.0\"\n    },\n    {\n      \"FileName\": \"libopencv_highgui.so.501\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_highgui.so.501\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_highgui.so.501\"\n    },\n    {\n      \"FileName\": \"libopencv_imgcodecs.so.5.1.0\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_imgcodecs.so.5.1.0\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_imgcodecs.so.5.1.0\"\n    },\n    {\n      \"FileName\": \"libopencv_imgcodecs.so.501\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_imgcodecs.so.501\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_imgcodecs.so.501\"\n    },\n    {\n      \"FileName\": \"libopencv_imgproc.so.5.1.0\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_imgproc.so.5.1.0\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_imgproc.so.5.1.0\"\n    },\n    {\n      \"FileName\": \"libopencv_imgproc.so.501\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_imgproc.so.501\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_imgproc.so.501\"\n    },\n    {\n      \"FileName\": \"libopencv_ml.so.5.1.0\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_ml.so.5.1.0\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_ml.so.5.1.0\"\n    },\n    {\n      \"FileName\": \"libopencv_ml.so.501\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_ml.so.501\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_ml.so.501\"\n    },\n    {\n      \"FileName\": \"libopencv_objdetect.so.5.1.0\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_objdetect.so.5.1.0\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_objdetect.so.5.1.0\"\n    },\n    {\n      \"FileName\": \"libopencv_objdetect.so.501\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_objdetect.so.501\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_objdetect.so.501\"\n    },\n    {\n      \"FileName\": \"libopencv_photo.so.5.1.0\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_photo.so.5.1.0\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_photo.so.5.1.0\"\n    },\n    {\n      \"FileName\": \"libopencv_photo.so.501\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_photo.so.501\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_photo.so.501\"\n    },\n    {\n      \"FileName\": \"libopencv_ptcloud.so.5.1.0\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_ptcloud.so.5.1.0\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_ptcloud.so.5.1.0\"\n    },\n    {\n      \"FileName\": \"libopencv_ptcloud.so.501\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_ptcloud.so.501\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_ptcloud.so.501\"\n    },\n    {\n      \"FileName\": \"libopencv_stereo.so.5.1.0\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_stereo.so.5.1.0\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_stereo.so.5.1.0\"\n    },\n    {\n      \"FileName\": \"libopencv_stereo.so.501\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_stereo.so.501\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_stereo.so.501\"\n    },\n    {\n      \"FileName\": \"libopencv_stitching.so.5.1.0\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_stitching.so.5.1.0\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_stitching.so.5.1.0\"\n    },\n    {\n      \"FileName\": \"libopencv_stitching.so.501\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_stitching.so.501\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_stitching.so.501\"\n    },\n    {\n      \"FileName\": \"libopencv_video.so.5.1.0\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_video.so.5.1.0\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_video.so.5.1.0\"\n    },\n    {\n      \"FileName\": \"libopencv_video.so.501\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_video.so.501\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_video.so.501\"\n    },\n    {\n      \"FileName\": \"libopencv_videoio.so.5.1.0\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_videoio.so.5.1.0\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_videoio.so.5.1.0\"\n    },\n    {\n      \"FileName\": \"libopencv_videoio.so.501\",\n      \"SourcePath\": \"/workspace/linux51-output/full-runtime/libopencv_videoio.so.501\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_videoio.so.501\"\n    }\n  ],\n  \"LicenseFiles\": [\n    {\n      \"FileName\": \"LICENSE\",\n      \"SourcePath\": \"/workspace/opencv-source/opencv-5.1.0/LICENSE\",\n      \"ArtifactPath\": \"opencv-source/LICENSE\"\n    },\n    {\n      \"FileName\": \"opencv_contrib-LICENSE\",\n      \"SourcePath\": \"/workspace/opencv-source/opencv_contrib-5.1.0/LICENSE\",\n      \"ArtifactPath\": \"opencv-source/opencv_contrib-LICENSE\"\n    }\n  ]\n}\n",
+      "producerProvenanceSha256": "f82f249af7daa6a5045f8ca117a0a57cf3ff619be0e59c2e170f4cdc6b62c065",
+      "packageEvidenceJson": "{\n  \"SchemaVersion\": 1,\n  \"Status\": \"preview-only\",\n  \"PublicationAllowed\": false,\n  \"TargetRid\": \"linux-x64\",\n  \"RuntimeProfile\": \"full\",\n  \"PackageId\": \"JYPPX.OpenCV.runtime.linux-x64.preview\",\n  \"PackageVersion\": \"5.1.0.0\",\n  \"ArtifactName\": \"nupkg-linux-x64-preview-full\",\n  \"ProducerSourceRid\": \"ubuntu.22.04-x64\",\n  \"ProducerInputProvenanceSha256\": \"f82f249af7daa6a5045f8ca117a0a57cf3ff619be0e59c2e170f4cdc6b62c065\",\n  \"PreviewMatrixSha256\": \"b36099bfcba6ae5e2e3aee09a499cc11ac8dbaf829bcb2123ad36fb5e7604478\",\n  \"PackageSha256\": \"d947dbbee1d923c2b3eeb2106c88eb4b4489cee3dbb87c61c0613b209b71cb4d\",\n  \"PackageBytes\": 57971853,\n  \"NativeSmokeExecuted\": false,\n  \"ConsumerEvidencePending\": true\n}\n",
+      "packageEvidenceSha256": "9aa150eafc0952bbe5e20b28c87232a91fa210f6d30cc4d9912f7b360d63eb5e",
+      "consumerEvidenceJson": "{\n  \"SchemaVersion\": 1,\n  \"EvidenceKind\": \"generic-linux-preview-package-consumer-native-smoke\",\n  \"Status\": \"preview-only\",\n  \"PublicationAllowed\": false,\n  \"ConsumerRid\": \"ubuntu.22.04-x64\",\n  \"ConsumerDistro\": \"ubuntu\",\n  \"ConsumerDistroVersion\": \"22.04\",\n  \"RuntimeProfile\": \"full\",\n  \"PackageId\": \"JYPPX.OpenCV.runtime.linux-x64.preview\",\n  \"PackageVersion\": \"5.1.0.0\",\n  \"PreviewPackageSha256\": \"d947dbbee1d923c2b3eeb2106c88eb4b4489cee3dbb87c61c0613b209b71cb4d\",\n  \"ManagedPackageSha256\": \"0081cd584da74aac7e51187985fbe4ceff3406f960525734633a3ba32768fd80\",\n  \"NativeSmokeExecuted\": true,\n  \"RuntimeAssetRid\": \"linux-x64\",\n  \"RecordedAtUtc\": \"2026-11-24T06:45:49.4517739+00:00\"\n}\n",
+      "consumerEvidenceSha256": "54f47c7666f4b0d1f4db2679f54b4038248d84e01da396eca8123860dc97cd5c",
+      "consumerOutput": "TARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio,dnn,ml_knn profile=full\nGitHub pack consumer restore guard passed.\nTemporary local NuGet source and package cache stayed outside the repository and were cleaned.\nConsumer package pairs checked: 1.\nSelected consumer package pair: linux-x64 / full.\nfull consumer package pairs: 1, module counts: 17.\nGENERIC_LINUX_PREVIEW_CONSUMER_OK consumer=ubuntu.22.04-x64 profile=full package=JYPPX.OpenCV.runtime.linux-x64.preview runtime_asset_rid=linux-x64 native_smoke_executed=True publication_allowed=false\nGeneric Linux preview consumer evidence: /consumer/artifacts/generic-linux-preview-consumer-evidence-ubuntu.22.04-x64-full.json\n",
+      "consumerOutputSha256": "baa4e85779284efd25f4b7af9261e7c53c3e6716917d578bb6930e3478628586"
+    },
+    {
+      "name": "mini",
+      "packageId": "JYPPX.OpenCV.runtime.linux-x64.preview.mini",
+      "packageVersion": "5.1.0",
+      "packageBytes": 33030255,
+      "packageSha256": "9dbc87064ad6c35809cc4c48afa8f2cbb5ce0d421a2b8ed55b189145de87af5e",
+      "artifactPath": "artifacts/opencv-5.1.0-local-linux-preview/7cba98b47542bbe24971eea05246f0840b97ea5c/producer/nupkg-linux-x64-preview-mini/JYPPX.OpenCV.runtime.linux-x64.preview.mini.5.1.0.nupkg",
+      "entries": [
+        {
+          "path": "JYPPX.OpenCV.runtime.linux-x64.preview.mini.nuspec",
+          "bytes": 898,
+          "sha256": "c0df813bbbdd76b1a11b56f1cbbeeadd3ec372ca5c598a1845863a4baade15c4"
+        },
+        {
+          "path": "README.md",
+          "bytes": 39558,
+          "sha256": "5877cdf0ae87562c5890e62fabcfaf51b55938ed9448988ef0c56e18fbe3c529"
+        },
+        {
+          "path": "[Content_Types].xml",
+          "bytes": 933,
+          "sha256": "513e5a007618edceb6e402056432b50ca8ed4aa71a4b00c4d39f8827ac1d146e"
+        },
+        {
+          "path": "_rels/.rels",
+          "bytes": 487,
+          "sha256": "a421e812bcd43401d92fb847618377f7335484600cf78ebb68c8b1132db87cdf"
+        },
+        {
+          "path": "build/JYPPX.OpenCV.runtime.provenance.json",
+          "bytes": 5573,
+          "sha256": "28578114d236153551d2869ddba6f4be5b65abbca9301c74cdb89dca88b2f234"
+        },
+        {
+          "path": "build/runtime-distro-rid-graph.json",
+          "bytes": 1282,
+          "sha256": "9dfc32941de2daebdee2f8a9bdebd9723627aaec07960bd82fd85939650af8de"
+        },
+        {
+          "path": "licenses/LICENSE",
+          "bytes": 11358,
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        },
+        {
+          "path": "licenses/opencv_contrib-LICENSE",
+          "bytes": 11358,
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        },
+        {
+          "path": "logo.jpg",
+          "bytes": 77499,
+          "sha256": "f85de97828d9f152903c8b90e8ee89aa1575ff8d0ef1c3704526e27dfe0d54d0"
+        },
+        {
+          "path": "package/services/metadata/core-properties/core-properties.psmdcp",
+          "bytes": 723,
+          "sha256": "d583f11bcfd2ca2a698ca675c23dc62a28ec322e790a39fe91242fb61c7258e3"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libJYPPX.OpenCV.Native.so",
+          "bytes": 600752,
+          "sha256": "7991700cfc1dd3751deeb1fe853c52c74152960aba16fabc70c76470a7262acb"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_core.so",
+          "bytes": 11544992,
+          "sha256": "8797a2d0b1d95b64d619553b86ce5f635170a83a7fb18c9287f9bc066b5b575b"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_core.so.5.1.0",
+          "bytes": 11544992,
+          "sha256": "8797a2d0b1d95b64d619553b86ce5f635170a83a7fb18c9287f9bc066b5b575b"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_core.so.501",
+          "bytes": 11544992,
+          "sha256": "8797a2d0b1d95b64d619553b86ce5f635170a83a7fb18c9287f9bc066b5b575b"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_flann.so",
+          "bytes": 687456,
+          "sha256": "de8ea124fd5b5c8fa2446995dfd12118aa1362144bb6ab688280b8edab2ce718"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_flann.so.5.1.0",
+          "bytes": 687456,
+          "sha256": "de8ea124fd5b5c8fa2446995dfd12118aa1362144bb6ab688280b8edab2ce718"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_flann.so.501",
+          "bytes": 687456,
+          "sha256": "de8ea124fd5b5c8fa2446995dfd12118aa1362144bb6ab688280b8edab2ce718"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_geometry.so",
+          "bytes": 2490104,
+          "sha256": "09fe3542f24d3f71047d66e2aa4b4dc5128a009d9c96d4b0865835760aa8e5c5"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_geometry.so.5.1.0",
+          "bytes": 2490104,
+          "sha256": "09fe3542f24d3f71047d66e2aa4b4dc5128a009d9c96d4b0865835760aa8e5c5"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_geometry.so.501",
+          "bytes": 2490104,
+          "sha256": "09fe3542f24d3f71047d66e2aa4b4dc5128a009d9c96d4b0865835760aa8e5c5"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_imgcodecs.so",
+          "bytes": 3418600,
+          "sha256": "c25ba2ec44f30c90619507af6d21a9e41c59c2b29dcfd51b1a9702a3c29cccb2"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_imgcodecs.so.5.1.0",
+          "bytes": 3418600,
+          "sha256": "c25ba2ec44f30c90619507af6d21a9e41c59c2b29dcfd51b1a9702a3c29cccb2"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_imgcodecs.so.501",
+          "bytes": 3418600,
+          "sha256": "c25ba2ec44f30c90619507af6d21a9e41c59c2b29dcfd51b1a9702a3c29cccb2"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_imgproc.so",
+          "bytes": 11509720,
+          "sha256": "487daadd8aa90061aa82e0c0872690311a3fef082a41490a969694abfe629c86"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_imgproc.so.5.1.0",
+          "bytes": 11509720,
+          "sha256": "487daadd8aa90061aa82e0c0872690311a3fef082a41490a969694abfe629c86"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_imgproc.so.501",
+          "bytes": 11509720,
+          "sha256": "487daadd8aa90061aa82e0c0872690311a3fef082a41490a969694abfe629c86"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_videoio.so",
+          "bytes": 485832,
+          "sha256": "234425cf01038fc43edf708249d3110959abd9c95d2acc04468e078b50abf774"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_videoio.so.5.1.0",
+          "bytes": 485832,
+          "sha256": "234425cf01038fc43edf708249d3110959abd9c95d2acc04468e078b50abf774"
+        },
+        {
+          "path": "runtimes/linux-x64/native/libopencv_videoio.so.501",
+          "bytes": 485832,
+          "sha256": "234425cf01038fc43edf708249d3110959abd9c95d2acc04468e078b50abf774"
+        }
+      ],
+      "producerProvenanceJson": "{\n  \"SchemaVersion\": 1,\n  \"Rid\": \"ubuntu.22.04-x64\",\n  \"OpenCvRid\": \"ubuntu.22.04-x64\",\n  \"PlatformFamily\": \"linux\",\n  \"Distro\": \"ubuntu\",\n  \"DistroVersion\": \"22.04\",\n  \"MatrixRunner\": \"ubuntu-22.04\",\n  \"HostedRunner\": \"\",\n  \"RunnerImage\": \"\",\n  \"RunnerImageVersion\": \"\",\n  \"HostedDistro\": \"\",\n  \"HostedDistroVersion\": \"\",\n  \"HostedArchitecture\": \"\",\n  \"HostedPackageArchitecture\": \"\",\n  \"HostedLibc\": \"\",\n  \"HostedCpuModel\": \"\",\n  \"HostedMemoryBytes\": \"\",\n  \"HostedDiskAvailableBytes\": \"\",\n  \"HostedOsCaption\": \"\",\n  \"HostedOsVersion\": \"\",\n  \"HostedOsBuildNumber\": \"\",\n  \"HostedProcessArchitecture\": \"\",\n  \"VisualStudioVersion\": \"\",\n  \"MsvcVersion\": \"\",\n  \"WindowsSdkVersion\": \"\",\n  \"CMakeVersion\": \"3.22.1\",\n  \"CMakeGenerator\": \"Ninja\",\n  \"CMakePlatform\": \"\",\n  \"BuildConfiguration\": \"Release\",\n  \"CompilerPath\": \"/usr/bin/g++\",\n  \"LinkerPath\": \"\",\n  \"LibrarianPath\": \"\",\n  \"DumpbinPath\": \"\",\n  \"CompilerVersion\": \"11.4.0\",\n  \"AssemblerVersion\": \"\",\n  \"NinjaVersion\": \"1.10.1\",\n  \"DotNetVersion\": \"10.0.401\",\n  \"OpenCvCMakeArguments\": \"\",\n  \"PeAuditEvidence\": \"\",\n  \"WindowsTargetExecutionEvidence\": \"\",\n  \"ElfAuditEvidence\": \"LOCAL_LINUX_51_ELF_OK profile=mini modules=6 canonical=7 exports=527 missing_dependencies=0 producer_paths=0\",\n  \"OpenCvCpuConfiguration\": \"\",\n  \"ExcludedForeignToolDirectories\": \"\",\n  \"OpenCvAsmConfiguration\": \"\",\n  \"NativeWrapperSources\": \"src/OpenCvSharp.Native/src/core/decomp.cpp;src/OpenCvSharp.Native/src/core/mat.cpp;src/OpenCvSharp.Native/src/core/operations.cpp;src/OpenCvSharp.Native/src/core/persistence.cpp;src/OpenCvSharp.Native/src/error_state.cpp;src/OpenCvSharp.Native/src/imgcodecs.cpp;src/OpenCvSharp.Native/src/imgproc.cpp;src/OpenCvSharp.Native/src/version.cpp;src/OpenCvSharp.Native/src/videoio/videoio.cpp\",\n  \"NativeWrapperSourceCount\": \"9\",\n  \"NativeAbiFunctionCount\": \"527\",\n  \"ContainerImage\": \"ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982\",\n  \"ContainerImageId\": \"sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982\",\n  \"ContainerImageDigest\": \"sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982\",\n  \"ContainerDistro\": \"ubuntu\",\n  \"ContainerDistroVersion\": \"22.04\",\n  \"ContainerArchitecture\": \"x86_64\",\n  \"ContainerPackageArchitecture\": \"amd64\",\n  \"ContainerLibc\": \"glibc 2.35\",\n  \"PowerShellVersion\": \"7.4.17\",\n  \"PowerShellArchiveSha256\": \"dcfe6060fc86abcb859ce1f8f80843ce50bab0585396de56380ed9f25176ac6d\",\n  \"OpenCvExtraCMakeArgs\": \"\",\n  \"OpenCvSourcePatchEvidence\": \"Repository-owned OpenCV 5.1 photo CCM per-instance color-space patch applied and audited.\",\n  \"OpenCvSourcePatches\": [\n    {\n      \"Path\": \"packaging/runtime/patches/opencv-5.1.0-photo-ccm-instance-color-space.patch\",\n      \"Sha256\": \"F0512BDB79E16E49595362E702159B5E3CA7445BAA157BB19E6974B6B2928BA1\",\n      \"Target\": \"modules/photo/src/ccm/ccm.cpp\",\n      \"Reason\": \"keep ColorCorrectionModel color-space state per instance\"\n    }\n  ],\n  \"RuntimeProfile\": \"mini\",\n  \"RuntimeProfilePackageIdSuffix\": \".mini\",\n  \"BuildList\": \"core,imgproc,imgcodecs,videoio,geometry,flann\",\n  \"OpenCvVersion\": \"5.1.0\",\n  \"GenericLinuxPreview\": true,\n  \"GenericLinuxDependencyPolicy\": \"bundled-codecs-bundled-protobuf-glibc-cxx-system-only-v2\",\n  \"SyntheticRuntimeInputs\": false,\n  \"ArtifactLayout\": {\n    \"NativeWrapper\": \"native-wrapper\",\n    \"OpenCvRuntime\": \"opencv-runtime\",\n    \"OpenCvSource\": \"opencv-source\",\n    \"OpenCvInstall\": \"\"\n  },\n  \"RequiredModules\": [\n    \"core\",\n    \"imgproc\",\n    \"imgcodecs\",\n    \"videoio\",\n    \"geometry\",\n    \"flann\"\n  ],\n  \"InputRoots\": {\n    \"NativeRuntimeDir\": \"/workspace/native51-mini\",\n    \"OpenCvRuntimeDir\": \"/workspace/linux51-output/mini-runtime\",\n    \"OpenCvSourceDir\": \"/workspace/opencv-source/opencv-5.1.0\",\n    \"OpenCvContribSourceDir\": \"/workspace/opencv-source/opencv_contrib-5.1.0\",\n    \"OpenCvInstallDir\": \"\"\n  },\n  \"NativeLoaderFiles\": [\n    {\n      \"FileName\": \"libJYPPX.OpenCV.Native.so\",\n      \"SourcePath\": \"/workspace/native51-mini/libJYPPX.OpenCV.Native.so\",\n      \"ArtifactPath\": \"native-wrapper/libJYPPX.OpenCV.Native.so\"\n    }\n  ],\n  \"RuntimeFiles\": [\n    {\n      \"FileName\": \"libopencv_core.so\",\n      \"SourcePath\": \"/workspace/linux51-output/mini-runtime/libopencv_core.so\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_core.so\"\n    },\n    {\n      \"FileName\": \"libopencv_imgproc.so\",\n      \"SourcePath\": \"/workspace/linux51-output/mini-runtime/libopencv_imgproc.so\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_imgproc.so\"\n    },\n    {\n      \"FileName\": \"libopencv_imgcodecs.so\",\n      \"SourcePath\": \"/workspace/linux51-output/mini-runtime/libopencv_imgcodecs.so\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_imgcodecs.so\"\n    },\n    {\n      \"FileName\": \"libopencv_videoio.so\",\n      \"SourcePath\": \"/workspace/linux51-output/mini-runtime/libopencv_videoio.so\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_videoio.so\"\n    },\n    {\n      \"FileName\": \"libopencv_geometry.so\",\n      \"SourcePath\": \"/workspace/linux51-output/mini-runtime/libopencv_geometry.so\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_geometry.so\"\n    },\n    {\n      \"FileName\": \"libopencv_flann.so\",\n      \"SourcePath\": \"/workspace/linux51-output/mini-runtime/libopencv_flann.so\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_flann.so\"\n    },\n    {\n      \"FileName\": \"libopencv_core.so.5.1.0\",\n      \"SourcePath\": \"/workspace/linux51-output/mini-runtime/libopencv_core.so.5.1.0\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_core.so.5.1.0\"\n    },\n    {\n      \"FileName\": \"libopencv_core.so.501\",\n      \"SourcePath\": \"/workspace/linux51-output/mini-runtime/libopencv_core.so.501\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_core.so.501\"\n    },\n    {\n      \"FileName\": \"libopencv_flann.so.5.1.0\",\n      \"SourcePath\": \"/workspace/linux51-output/mini-runtime/libopencv_flann.so.5.1.0\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_flann.so.5.1.0\"\n    },\n    {\n      \"FileName\": \"libopencv_flann.so.501\",\n      \"SourcePath\": \"/workspace/linux51-output/mini-runtime/libopencv_flann.so.501\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_flann.so.501\"\n    },\n    {\n      \"FileName\": \"libopencv_geometry.so.5.1.0\",\n      \"SourcePath\": \"/workspace/linux51-output/mini-runtime/libopencv_geometry.so.5.1.0\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_geometry.so.5.1.0\"\n    },\n    {\n      \"FileName\": \"libopencv_geometry.so.501\",\n      \"SourcePath\": \"/workspace/linux51-output/mini-runtime/libopencv_geometry.so.501\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_geometry.so.501\"\n    },\n    {\n      \"FileName\": \"libopencv_imgcodecs.so.5.1.0\",\n      \"SourcePath\": \"/workspace/linux51-output/mini-runtime/libopencv_imgcodecs.so.5.1.0\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_imgcodecs.so.5.1.0\"\n    },\n    {\n      \"FileName\": \"libopencv_imgcodecs.so.501\",\n      \"SourcePath\": \"/workspace/linux51-output/mini-runtime/libopencv_imgcodecs.so.501\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_imgcodecs.so.501\"\n    },\n    {\n      \"FileName\": \"libopencv_imgproc.so.5.1.0\",\n      \"SourcePath\": \"/workspace/linux51-output/mini-runtime/libopencv_imgproc.so.5.1.0\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_imgproc.so.5.1.0\"\n    },\n    {\n      \"FileName\": \"libopencv_imgproc.so.501\",\n      \"SourcePath\": \"/workspace/linux51-output/mini-runtime/libopencv_imgproc.so.501\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_imgproc.so.501\"\n    },\n    {\n      \"FileName\": \"libopencv_videoio.so.5.1.0\",\n      \"SourcePath\": \"/workspace/linux51-output/mini-runtime/libopencv_videoio.so.5.1.0\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_videoio.so.5.1.0\"\n    },\n    {\n      \"FileName\": \"libopencv_videoio.so.501\",\n      \"SourcePath\": \"/workspace/linux51-output/mini-runtime/libopencv_videoio.so.501\",\n      \"ArtifactPath\": \"opencv-runtime/libopencv_videoio.so.501\"\n    }\n  ],\n  \"LicenseFiles\": [\n    {\n      \"FileName\": \"LICENSE\",\n      \"SourcePath\": \"/workspace/opencv-source/opencv-5.1.0/LICENSE\",\n      \"ArtifactPath\": \"opencv-source/LICENSE\"\n    },\n    {\n      \"FileName\": \"opencv_contrib-LICENSE\",\n      \"SourcePath\": \"/workspace/opencv-source/opencv_contrib-5.1.0/LICENSE\",\n      \"ArtifactPath\": \"opencv-source/opencv_contrib-LICENSE\"\n    }\n  ]\n}\n",
+      "producerProvenanceSha256": "78ee8c125ccab33110d39d4a8d1ae493b8af36a11fcba9d1ec7d2539a93debf5",
+      "packageEvidenceJson": "{\n  \"SchemaVersion\": 1,\n  \"Status\": \"preview-only\",\n  \"PublicationAllowed\": false,\n  \"TargetRid\": \"linux-x64\",\n  \"RuntimeProfile\": \"mini\",\n  \"PackageId\": \"JYPPX.OpenCV.runtime.linux-x64.preview.mini\",\n  \"PackageVersion\": \"5.1.0.0\",\n  \"ArtifactName\": \"nupkg-linux-x64-preview-mini\",\n  \"ProducerSourceRid\": \"ubuntu.22.04-x64\",\n  \"ProducerInputProvenanceSha256\": \"78ee8c125ccab33110d39d4a8d1ae493b8af36a11fcba9d1ec7d2539a93debf5\",\n  \"PreviewMatrixSha256\": \"b36099bfcba6ae5e2e3aee09a499cc11ac8dbaf829bcb2123ad36fb5e7604478\",\n  \"PackageSha256\": \"9dbc87064ad6c35809cc4c48afa8f2cbb5ce0d421a2b8ed55b189145de87af5e\",\n  \"PackageBytes\": 33030255,\n  \"NativeSmokeExecuted\": false,\n  \"ConsumerEvidencePending\": true\n}\n",
+      "packageEvidenceSha256": "eba8a189c975ad866e28b7d8ce93b083220f0933b146c053e89f56541f0cd1c4",
+      "consumerEvidenceJson": "{\n  \"SchemaVersion\": 1,\n  \"EvidenceKind\": \"generic-linux-preview-package-consumer-native-smoke\",\n  \"Status\": \"preview-only\",\n  \"PublicationAllowed\": false,\n  \"ConsumerRid\": \"ubuntu.22.04-x64\",\n  \"ConsumerDistro\": \"ubuntu\",\n  \"ConsumerDistroVersion\": \"22.04\",\n  \"RuntimeProfile\": \"mini\",\n  \"PackageId\": \"JYPPX.OpenCV.runtime.linux-x64.preview.mini\",\n  \"PackageVersion\": \"5.1.0.0\",\n  \"PreviewPackageSha256\": \"9dbc87064ad6c35809cc4c48afa8f2cbb5ce0d421a2b8ed55b189145de87af5e\",\n  \"ManagedPackageSha256\": \"0081cd584da74aac7e51187985fbe4ceff3406f960525734633a3ba32768fd80\",\n  \"NativeSmokeExecuted\": true,\n  \"RuntimeAssetRid\": \"linux-x64\",\n  \"RecordedAtUtc\": \"2026-11-24T06:45:54.7472330+00:00\"\n}\n",
+      "consumerEvidenceSha256": "01f4c92a1b9b0833f33b0d421620f28325b8d8c9cd42d78bce7d5b63d2f3a443",
+      "consumerOutput": "TARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio,not_linked profile=mini\nGitHub pack consumer restore guard passed.\nTemporary local NuGet source and package cache stayed outside the repository and were cleaned.\nConsumer package pairs checked: 1.\nSelected consumer package pair: linux-x64 / mini.\nmini consumer package pairs: 1, module counts: 6.\nGENERIC_LINUX_PREVIEW_CONSUMER_OK consumer=ubuntu.22.04-x64 profile=mini package=JYPPX.OpenCV.runtime.linux-x64.preview.mini runtime_asset_rid=linux-x64 native_smoke_executed=True publication_allowed=false\nGeneric Linux preview consumer evidence: /consumer/artifacts/generic-linux-preview-consumer-evidence-ubuntu.22.04-x64-mini.json\n",
+      "consumerOutputSha256": "3948c58b6fe4fb191ab70cd6d29ed18ccabfa76b3890a1cd2746eecd6c88f3f3"
+    }
+  ],
+  "limits": {
+    "consumerDistros": [
+      "ubuntu.22.04-x64"
+    ],
+    "threeDistroGateComplete": false,
+    "arm64Validated": false,
+    "hostedValidated": false,
+    "finalReleaseApproved": false
+  }
+}

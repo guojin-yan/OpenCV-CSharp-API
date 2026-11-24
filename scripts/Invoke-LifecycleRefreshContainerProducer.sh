@@ -56,7 +56,7 @@ case "$LIFECYCLE_REFRESH_RID" in
     expected_distro_version="44"
     powershell_version="7.4.17"
     powershell_archive_name="powershell-7.4.17-linux-x64.tar.gz"
-    powershell_archive_sha256="dcfe6060fc86abcb859ce1ff80843ce50bab0585396de56380ed9f25176ac6d"
+    powershell_archive_sha256="dcfe6060fc86abcb859ce1f8f80843ce50bab0585396de56380ed9f25176ac6d"
     dnf -y --setopt=install_weak_deps=False install \
       binutils ca-certificates cmake curl diffutils findutils gcc-c++ git gzip \
       libicu libunwind ninja-build openssl-libs tar util-linux which zlib

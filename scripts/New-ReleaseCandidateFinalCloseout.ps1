@@ -1184,6 +1184,15 @@ function Get-Record {
         "packaging/performance/perf-001-regression-baseline.schema.json",
         "packaging/performance/perf-001-5.1.0-baseline.json",
         "packaging/performance/perf-001-5.1.0-baseline.schema.json",
+        "packaging/runtime/opencv-5.1.0-local-linux-preview-evidence.json",
+        "packaging/runtime/opencv-5.1.0-local-linux-preview-evidence.schema.json",
+        "docs/articles/linux-5.1-local-preview.md",
+        "scripts/Build-LocalLinux51Preview.ps1",
+        "scripts/Audit-Linux51Runtime.py",
+        "scripts/LocalLinux51.Common.ps1",
+        "scripts/Measure-LocalLinux51Evidence.ps1",
+        "scripts/Invoke-LocalLinux51Consumer.ps1",
+        "scripts/Test-LocalLinux51Evidence.ps1",
         "packaging/performance/native-aot-smoke-evidence.json",
         "packaging/performance/native-aot-smoke-evidence.schema.json",
         "packaging/performance/native-aot-trim-warning-ledger.json",
@@ -1824,6 +1833,9 @@ function Get-Record {
             CurrentPackagePeClosureEvidence = Get-FileEvidence -RelativePath "packaging/runtime/opencv-5.1.0-package-pe-closure-evidence.json"
             CurrentPackagePeClosure51Validated = $true
             CurrentPerformance51Baseline = Get-FileEvidence -RelativePath "packaging/performance/perf-001-5.1.0-baseline.json"
+            CurrentLocalLinux51Preview = Get-FileEvidence -RelativePath "packaging/runtime/opencv-5.1.0-local-linux-preview-evidence.json"
+            CurrentLocalLinux51PreviewValidated = $true
+            CurrentLinux51ThreeDistroGateComplete = $false
             HistoricalPerformanceRevision = "5.0.0"
             CurrentPerformanceHistoricalComparisonClaimed = $false
             LocalBuildRid = "win-x64"

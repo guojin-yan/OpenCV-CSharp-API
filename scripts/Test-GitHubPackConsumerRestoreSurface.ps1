@@ -312,6 +312,10 @@ function Get-NativeFileNames {
     )
 
     $ridIsWindows = $Rid.StartsWith("win-", [System.StringComparison]::OrdinalIgnoreCase)
+    # Upstream ELF ABI uses major + two-digit minor, independently of the
+    # Windows major/minor/patch DLL suffix (5.1.0 => ELF 501, Windows 510).
+    $parsedOpenCvVersion = [version]::Parse($OpenCvVersion)
+    $openCvElfSoversion = '{0}{1:D2}' -f $parsedOpenCvVersion.Major, $parsedOpenCvVersion.Minor
     $primaryLoaderName = if ($ridIsWindows) { "JYPPX.OpenCV.Native.dll" } else { "libJYPPX.OpenCV.Native.so" }
     $moduleFileNames = foreach ($module in $Modules) {
         if ($ridIsWindows) {
@@ -320,7 +324,7 @@ function Get-NativeFileNames {
         elseif ($PlatformFamily -eq "linux" -and -not $SyntheticRuntimeInputs) {
             @(
                 "libopencv_$module.so",
-                "libopencv_$module.so.$OpenCvBinarySuffix",
+                "libopencv_$module.so.$openCvElfSoversion",
                 "libopencv_$module.so.$OpenCvVersion"
             )
         }

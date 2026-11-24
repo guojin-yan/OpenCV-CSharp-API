@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "evidenceKind", "status", "openCvVersion", "packageVersion", "sourceBaseCommit", "worktreeChangesIncluded", "sourceInputSet", "execution", "hosted", "publicationAllowed", "genericStablePromoted", "producerIdentity", "consumerIdentity", "producerJson", "producerSha256", "consumerDriverOutput", "consumerDriverOutputSha256", "managedPackage", "profiles", "limits"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "evidenceKind": {"const": "local-linux-5.1-preview-package-consumer"},
+    "status": {"const": "verified-local-ubuntu22-x64-preview"},
+    "openCvVersion": {"const": "5.1.0"},
+    "packageVersion": {"const": "5.1.0"},
+    "sourceBaseCommit": {"type": "string", "pattern": "^[a-f0-9]{40}$"},
+    "worktreeChangesIncluded": {"const": true},
+    "sourceInputSet": {
+      "type": "object", "additionalProperties": false,
+      "required": ["paths", "fileCount", "sha256"],
+      "properties": {
+        "paths": {"type": "array", "minItems": 20, "uniqueItems": true, "items": {"type": "string"}},
+        "fileCount": {"type": "integer", "minimum": 70},
+        "sha256": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "execution": {"const": "local-docker"},
+    "hosted": {"const": false},
+    "publicationAllowed": {"const": false},
+    "genericStablePromoted": {"const": false},
+    "producerIdentity": {"$ref": "#/$defs/container"},
+    "consumerIdentity": {"$ref": "#/$defs/container"},
+    "producerJson": {"type": "string", "minLength": 1000},
+    "producerSha256": {"$ref": "#/$defs/hash"},
+    "consumerDriverOutput": {"type": "string", "minLength": 100},
+    "consumerDriverOutputSha256": {"$ref": "#/$defs/hash"},
+    "managedPackage": {
+      "type": "object", "additionalProperties": false, "required": ["artifactPath", "sha256", "bytes"],
+      "properties": {"artifactPath": {"type": "string"}, "sha256": {"$ref": "#/$defs/hash"}, "bytes": {"const": 11924069}}
+    },
+    "profiles": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"$ref": "#/$defs/profile"}},
+    "limits": {
+      "type": "object", "additionalProperties": false,
+      "required": ["consumerDistros", "threeDistroGateComplete", "arm64Validated", "hostedValidated", "finalReleaseApproved"],
+      "properties": {
+        "consumerDistros": {"const": ["ubuntu.22.04-x64"]}, "threeDistroGateComplete": {"const": false},
+        "arm64Validated": {"const": false}, "hostedValidated": {"const": false}, "finalReleaseApproved": {"const": false}
+      }
+    }
+  },
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "container": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "name", "image", "imageId", "platform", "nanoCpus", "memoryBytes", "mounts"],
+      "properties": {
+        "id": {"$ref": "#/$defs/hash"}, "name": {"type": "string", "minLength": 1},
+        "image": {"const": "ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982"},
+        "imageId": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}, "platform": {"const": "linux"},
+        "nanoCpus": {"type": "integer", "minimum": 1}, "memoryBytes": {"type": "integer", "minimum": 1},
+        "mounts": {
+          "type": "array", "minItems": 2,
+          "items": {
+            "type": "object", "additionalProperties": false, "required": ["type", "source", "destination", "writable"],
+            "properties": {"type": {"enum": ["bind", "volume"]}, "source": {"type": "string"}, "destination": {"type": "string"}, "writable": {"type": "boolean"}}
+          }
+        }
+      }
+    },
+    "profile": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name", "packageId", "packageVersion", "packageBytes", "packageSha256", "artifactPath", "entries", "producerProvenanceJson", "producerProvenanceSha256", "packageEvidenceJson", "packageEvidenceSha256", "consumerEvidenceJson", "consumerEvidenceSha256", "consumerOutput", "consumerOutputSha256"],
+      "properties": {
+        "name": {"enum": ["full", "mini"]}, "packageId": {"enum": ["JYPPX.OpenCV.runtime.linux-x64.preview", "JYPPX.OpenCV.runtime.linux-x64.preview.mini"]},
+        "packageVersion": {"const": "5.1.0"}, "packageBytes": {"type": "integer", "minimum": 100000}, "packageSha256": {"$ref": "#/$defs/hash"}, "artifactPath": {"type": "string"},
+        "entries": {
+          "type": "array", "minItems": 20,
+          "items": {
+            "type": "object", "additionalProperties": false, "required": ["path", "bytes", "sha256"],
+            "properties": {"path": {"type": "string"}, "bytes": {"type": "integer", "minimum": 0}, "sha256": {"$ref": "#/$defs/hash"}}
+          }
+        },
+        "producerProvenanceJson": {"type": "string", "minLength": 1000}, "producerProvenanceSha256": {"$ref": "#/$defs/hash"},
+        "packageEvidenceJson": {"type": "string", "minLength": 100}, "packageEvidenceSha256": {"$ref": "#/$defs/hash"},
+        "consumerEvidenceJson": {"type": "string", "minLength": 100}, "consumerEvidenceSha256": {"$ref": "#/$defs/hash"},
+        "consumerOutput": {"type": "string", "minLength": 100}, "consumerOutputSha256": {"$ref": "#/$defs/hash"}
+      }
+    }
+  }
+}
