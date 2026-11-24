@@ -1684,6 +1684,7 @@ function Get-Record {
         "scripts/Test-ScenarioBenchmarkHarness.ps1",
         "scripts/Measure-VideoDnnBenchmark.ps1",
         "scripts/Test-ImagePreflightMutationCorpus.ps1",
+        "tests/OpenCvSharp.Tests/ImgCodecs/GifMetadataPreflightTests.cs",
         "scripts/Measure-ImagePreflightFuzz.ps1",
         "scripts/Test-ImagePreflightFuzzEvidence.ps1",
         "scripts/Measure-CodecNativeMutationEvidence.ps1",

@@ -380,7 +380,8 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
         private static PixelFacts ReadGifPixelFacts(byte[] data)
         {
             PixelFacts facts = new PixelFacts();
-            if (data.Length < 13 || data[0] != (byte)'G' || data[1] != (byte)'I' || data[2] != (byte)'F') return facts;
+            if (data.Length < 13 || data[0] != (byte)'G' || data[1] != (byte)'I' || data[2] != (byte)'F' ||
+                data[3] != (byte)'8' || (data[4] != (byte)'7' && data[4] != (byte)'9') || data[5] != (byte)'a') return facts;
 
             int offset = 13;
             int globalDepth = 0;

@@ -54,7 +54,7 @@ The `platform-probe` command is the `PlatformProbe` sample boundary for 5.1.0 ce
 
 Use `ImageIdentifyResult` and `ImageDecodeOptions` before decoding untrusted bytes. Limits cover input bytes, dimensions, pixels, cumulative pixels, frames, metadata, ICC, encoded pixel storage, depth, and channels. Unknown facts remain unknown unless a strict option rejects them. Seekable stream positions are restored by preflight; non-seekable streams are consumed.
 
-Complete GIF containers now expose stored extension and ICC payload lengths. Exact budgets can admit those inputs; truncated or trailing containers keep both facts unknown and are rejected when the corresponding strict-known options are enabled. These facts do not validate ICC content, expanded allocation, or decoded color/precision.
+Complete GIF containers now expose stored extension and ICC payload lengths. Exact budgets can admit those inputs; truncated or trailing containers keep both facts unknown and are rejected when the corresponding strict-known options are enabled. Pixel facts require the exact GIF87a or GIF89a signature; an invalid version keeps depth and channels unknown and is rejected by `RejectUnknownPixelFormat` before native decoding. These facts do not validate LZW or ICC content, expanded allocation, or decoded color/precision.
 
 AVIF dimensions and encoded pixel facts require `pitm`/`ipma` associations to the primary item. Thumbnail and unassociated `ispe/pixi` properties cannot supply those facts. Missing or malformed associations remain unknown and fail the relevant strict-known options.
 
@@ -72,7 +72,7 @@ Untrusted decode policy is documented in [Codec Preflight And Limits](codec-pref
 
 对于不可信输入，先使用 `ImageIdentifyResult` 与 `ImageDecodeOptions` 做预检。限制覆盖输入字节、尺寸、像素、累计像素、帧数、metadata、ICC、编码像素存储、深度和通道。现有 `byte[]` API 仍是兼容基线；`IBufferWriter<byte>` 与 pinned lease 仍是 preview/internal，未进入稳定 ABI。
 
-完整 GIF 容器现在提供扩展块及 ICC 的存储负载长度，可按精确预算准入；截断或尾部多余输入使两项事实保持未知，启用相应 strict-known 选项时会被拒绝。这些事实不验证 ICC 内容、展开后的分配量或解码后的颜色/精度。
+完整 GIF 容器现在提供扩展块及 ICC 的存储负载长度，可按精确预算准入；截断或尾部多余输入使两项事实保持未知，启用相应 strict-known 选项时会被拒绝。像素事实要求精确的 GIF87a 或 GIF89a 签名；非法版本的位深及通道数保持未知，`RejectUnknownPixelFormat` 会在 native 解码前拒绝。这些事实不验证 LZW 或 ICC 内容、展开后的分配量或解码后的颜色/精度。
 
 AVIF 尺寸和编码像素事实要求通过 `pitm`/`ipma` 关联到主图，缩略图或未关联的 `ispe/pixi` 不能提供这些事实；缺失或损坏的关联保持未知，启用相应 strict-known 选项时拒绝。
 

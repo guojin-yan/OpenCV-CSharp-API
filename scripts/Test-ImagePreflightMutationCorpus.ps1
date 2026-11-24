@@ -95,6 +95,7 @@ foreach ($framework in $frameworks) {
             'IdentifyDeterministicMutationCorpusPreservesSeekAndConsumesNonSeekStreams',
             'GifMetadataBudgetsRejectBeforeNativeDecodeAndAcceptExactStoredLengths',
             'GifStrictMetadataPolicyRejectsUnknownLengthsWhilePermissiveIdentifyPreservesThem',
+            'IdentifyDoesNotPublishGifPixelFactsForInvalidVersionSignature',
             'IdentifyDoesNotUseUnassociatedAvifProperties',
             'IdentifyUsesOnlyPropertiesOfThePrimaryAvifItem',
             'AvifPrimaryItemLimitsRejectBeforeNativeDecodeAndPreserveStreamPosition',

@@ -23,6 +23,56 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             Assert.Equal(0, result.MetadataBytes);
             Assert.True(result.IsIccProfileSizeKnown);
             Assert.Equal(0, result.IccProfileBytes);
+            Assert.True(result.IsPixelFormatKnown);
+            Assert.Equal(1, result.BitDepth);
+            Assert.Equal(1, result.ChannelCount);
+        }
+
+        [Theory]
+        [InlineData((byte)'0', (byte)'9', (byte)'a')]
+        [InlineData((byte)'8', (byte)'8', (byte)'a')]
+        [InlineData((byte)'8', (byte)'9', (byte)'b')]
+        public void IdentifyDoesNotPublishGifPixelFactsForInvalidVersionSignature(byte major, byte minor, byte suffix)
+        {
+            byte[] gif = CreateGif(new byte[0]);
+            gif[3] = major;
+            gif[4] = minor;
+            gif[5] = suffix;
+
+            ImageIdentifyResult result = ImgCodecsCv2.Identify(gif);
+
+            Assert.Equal("gif", result.Format);
+            Assert.False(result.IsFrameCountKnown);
+            Assert.False(result.IsBitDepthKnown);
+            Assert.False(result.IsChannelCountKnown);
+            Assert.False(result.IsPixelFormatKnown);
+
+            Assert.False(ImgCodecsCv2.Identify(new ReadOnlySpan<byte>(gif)).IsPixelFormatKnown);
+            ImageDecodeOptions strict = new ImageDecodeOptions(gif.Length, 2, 2, 4, 1, true, true,
+                long.MaxValue, long.MaxValue, false, false, long.MaxValue, 8, 4, true, long.MaxValue);
+            const string message = "Encoded image depth or channel count was not available in the header.";
+            Assert.Equal(message, Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(gif, strict)).Message);
+            Assert.Equal(message, Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(new ReadOnlySpan<byte>(gif), strict)).Message);
+            using (var stream = new MemoryStream())
+            {
+                stream.WriteByte(0x7F);
+                stream.Write(gif, 0, gif.Length);
+                stream.Position = 1;
+                Assert.False(ImgCodecsCv2.Identify(stream).IsPixelFormatKnown);
+                Assert.Equal(1, stream.Position);
+                Assert.Equal(message, Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(stream, strict)).Message);
+                Assert.Equal(1, stream.Position);
+            }
+            using (var stream = new ShortReadNonSeekableStream(gif))
+            {
+                Assert.False(ImgCodecsCv2.Identify(stream).IsPixelFormatKnown);
+                Assert.Equal(gif.Length, stream.BytesRead);
+            }
+            using (var stream = new ShortReadNonSeekableStream(gif))
+            {
+                Assert.Equal(message, Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(stream, strict)).Message);
+                Assert.Equal(gif.Length, stream.BytesRead);
+            }
         }
 
         [Theory]
