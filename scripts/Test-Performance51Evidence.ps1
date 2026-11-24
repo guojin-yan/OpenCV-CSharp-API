@@ -90,6 +90,11 @@ $negativeCases = [ordered]@{
         $o = $r.runs[1].stdoutJson | ConvertFrom-Json; $o.matView.checksum++
         $r.runs[1].stdoutJson = $o | ConvertTo-Json -Depth 8 -Compress; $r.runs[1].stdoutSha256 = Get-Performance51TextHash -Text $r.runs[1].stdoutJson
     }
+    'historical DNN accounting with valid hash' = {
+        param($r)
+        $o = $r.runs[3].stdoutJson | ConvertFrom-Json; $o.dnn.blobBytes = 48; $o.dnn.profileLayerCount = 2
+        $r.runs[3].stdoutJson = $o | ConvertTo-Json -Depth 8 -Compress; $r.runs[3].stdoutSha256 = Get-Performance51TextHash -Text $r.runs[3].stdoutJson
+    }
 }
 foreach ($fixture in $negativeCases.GetEnumerator()) {
     $mutant = $baselineJson | ConvertFrom-Json; & $fixture.Value $mutant

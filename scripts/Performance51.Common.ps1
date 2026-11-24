@@ -73,11 +73,12 @@ function Assert-Performance51Output {
         $video = $Output.video; $dnn = $Output.dnn
         if ($video.targetFramework -cne 'net10.0' -or [int]$video.iterations -ne 100 -or [int]$video.frameCount -ne 3 -or
             [int]$video.rows -ne 24 -or [int]$video.columns -ne 32 -or $video.codec -cne 'MJPG' -or
-            [int]$video.fileBytes -le 0 -or $video.fileSha256 -notmatch '^[0-9a-f]{64}$' -or [int64]$video.metric.checksum -le 0) { throw 'Video workload drifted.' }
+            [int]$video.fileBytes -ne 6288 -or $video.fileSha256 -cne '3137a5dc45d1dadf29aee22d2eb140a55c31fe240a80fe66dd4cc069fe27fd56' -or
+            [int64]$video.metric.checksum -ne 46555200) { throw 'Video workload drifted.' }
         if ($dnn.targetFramework -cne 'net10.0' -or [int]$dnn.iterations -ne 100 -or [int]$dnn.modelBytes -ne 147 -or
             $dnn.modelSha256 -cne '326793cdb2fc2da739a715c3f3ff71d09779b389ad29e56bbfccc4313e900744' -or
             $dnn.outputName -cne 'output' -or [int64]$dnn.outputChecksum -ne 1000000 -or [int64]$dnn.metric.checksum -ne 1000000 -or
-            [int64]$dnn.profileTickCount -lt 0 -or [int]$dnn.profileLayerCount -le 0 -or [int64]$dnn.blobBytes -ne 48 -or [int64]$dnn.weightsBytes -ne 0) { throw 'DNN workload drifted.' }
+            [int64]$dnn.profileTickCount -lt 0 -or [int]$dnn.profileLayerCount -ne 1 -or [int64]$dnn.blobBytes -ne 16 -or [int64]$dnn.weightsBytes -ne 0) { throw 'DNN workload drifted.' }
         foreach ($metric in @($video.metric, $dnn.metric)) {
             if ([int64]$metric.baselineWorkingSetBytes -le 0 -or [int64]$metric.peakWorkingSetBytes -lt [int64]$metric.baselineWorkingSetBytes) { throw 'Peak working set is invalid.' }
         }
