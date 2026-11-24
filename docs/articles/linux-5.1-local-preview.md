@@ -42,4 +42,34 @@ Copy the output preview packages and the recorded managed package into a separat
 
 The record binds the normalized source input set, raw producer/provenance/package/consumer outputs, complete ZIP entry manifests and both package hashes. Its guard includes negative fixtures for skipped native execution, shared producer inputs, changed package payloads, external dependencies, absolute loader paths and overstated publication/hosted coverage.
 
-The package identities remain `JYPPX.OpenCV.runtime.linux-x64.preview` and `.preview.mini`, with publication disabled. Only Ubuntu 22.04 x64 is covered by this local 5.1 measurement. Current Debian/Fedora consumers, hosted execution, ARM64, signing and the final release set remain open. Historical 5.0 three-distro results retain their original revision; stable generic promotion and the active support matrix remain unchanged.
+The package identities remain `JYPPX.OpenCV.runtime.linux-x64.preview` and `.preview.mini`, with publication disabled. The original producer/consumer record above covers Ubuntu 22.04 x64. Historical 5.0 three-distro results retain their original revision; stable generic promotion and the active support matrix remain unchanged.
+
+The [local three-distro consumer evidence](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/opencv-5.1.0-local-linux-distro-consumer-evidence.json) adds independent Debian 12 and Fedora 44 consumers of the same managed/Full/Mini package bytes. It references the original Ubuntu record by hash and preserves that record's one-distro measurement boundary.
+
+| Consumer | glibc | Full / Mini | Execution |
+| --- | --- | --- | --- |
+| Ubuntu 22.04 x64 | 2.35 | Passed / Passed | Original local independent consumer |
+| Debian 12 x64 | 2.36 | Passed / Passed | New local independent container |
+| Fedora 44 x64 | 2.43 | Passed / Passed | New local independent container |
+
+Each new container uses an official image pinned by digest, a separate writable data volume and the same read-only kit. The kit contains eight validation/configuration files, three verified toolchain/CA archives and three NuGet packages. It contains no producer checkout, OpenCV installation or C/C++ toolchain. The bootstrap verifies the PowerShell 7.4.17 SHA256 and .NET SDK 10.0.401 SHA512 before extraction. Debian HTTPS bootstrap uses the recorded CA bundle only when its minimal image lacks one; normal TLS and archive-signature verification remain enabled.
+
+The [local consumer matrix](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/runtime-generic-linux-5.1-local-consumer-matrix.json) preserves the original producer/profile/package contract and selects Fedora 44 for this local check. The new driver adds `fedora.44-x64 -> linux-x64` only in the disposable validation kit's RID graph. Debian already has the required import. The record retains the original and derived graph bytes and hashes; the canonical graph and active package matrix are unchanged.
+
+All four new consumers restore from an isolated local NuGet source, compile net10.0 and execute native code. Full covers core/imgproc/PNG, a missing-file VideoIO check, a DNN blob and a trained KNN prediction. Mini covers the shared image path and omitted-module behavior. Together with the two original Ubuntu results, this completes six local profile/distro pairs. Model inference, video files/devices, additional architectures, hosted execution, stable promotion, signing and the final release set require separate evidence.
+
+After preparing the small kit and verified archives/packages in a fresh matching container, bootstrap and execute:
+
+```sh
+sh /kit/repository/scripts/Initialize-LocalLinux51DistroConsumer.sh debian.12-x64
+pwsh -NoProfile -File /consumer/repository/scripts/Invoke-LocalLinux51DistroConsumer.ps1 -ConsumerRid debian.12-x64
+```
+
+Use `fedora.44-x64` in the matching Fedora image. Retain bootstrap/driver logs and export `/consumer/artifacts` without sharing either consumer's data volume. Collect and verify on the host:
+
+```powershell
+./scripts/Measure-LocalLinux51DistroEvidence.ps1 -DebianOutput <debian-artifacts> -FedoraOutput <fedora-artifacts> -DebianContainer <debian-container> -FedoraContainer <fedora-container> -KitRoot <read-only-kit>
+./scripts/Test-LocalLinux51DistroEvidence.ps1 -RequirePackageArtifacts
+```
+
+The guard binds all twelve source/collector inputs, all fourteen kit files, image architectures, container mounts, package hashes and raw preflight/consumer outputs. Its 25 negative fixtures reject incomplete matrices, altered package bytes, skipped native execution, shared volumes, mutable kits, incorrect RID imports and overstated coverage. The closeout records the completed local consumer set separately from the still-pending hosted release gate.

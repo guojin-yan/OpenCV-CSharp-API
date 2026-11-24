@@ -1,0 +1,328 @@
+{
+  "schemaVersion": 1,
+  "evidenceKind": "local-linux-5.1-three-distro-preview-consumers",
+  "status": "verified-local-three-distro-x64-preview",
+  "openCvVersion": "5.1.0",
+  "packageVersion": "5.1.0",
+  "sourceBaseCommit": "1cdfe409cb0e34b8b21f5c007385b2c1f7bc332e",
+  "worktreeChangesIncluded": true,
+  "execution": "local-docker",
+  "hosted": false,
+  "publicationAllowed": false,
+  "genericStablePromoted": false,
+  "dockerHost": {
+    "architecture": "x86_64",
+    "platform": "linux",
+    "serverVersion": "29.2.0"
+  },
+  "baselineEvidence": {
+    "path": "packaging/runtime/opencv-5.1.0-local-linux-preview-evidence.json",
+    "sha256": "2c6dd26caf75e3fb7fe628224210e0469c68515b9e13cd16812ff972438ff235"
+  },
+  "matrix": {
+    "path": "packaging/runtime/runtime-generic-linux-5.1-local-consumer-matrix.json",
+    "sha256": "feeecf25101721205d3aa1b2bcea276df2313e63f0ca9db94fefa742100b2172"
+  },
+  "baseGraphJson": "{\n  \"runtimes\": {\n    \"ubuntu.22.04-x64\": {\n      \"#import\": [\n        \"linux-x64\"\n      ]\n    },\n    \"ubuntu.22.04-arm64\": {\n      \"#import\": [\n        \"linux-arm64\"\n      ]\n    },\n    \"ubuntu.24.04-x64\": {\n      \"#import\": [\n        \"ubuntu.22.04-x64\"\n      ]\n    },\n    \"ubuntu.24.04-arm64\": {\n      \"#import\": [\n        \"ubuntu.22.04-arm64\"\n      ]\n    },\n    \"debian.12-x64\": {\n      \"#import\": [\n        \"linux-x64\"\n      ]\n    },\n    \"debian.12-arm64\": {\n      \"#import\": [\n        \"linux-arm64\"\n      ]\n    },\n    \"fedora.40-x64\": {\n      \"#import\": [\n        \"linux-x64\"\n      ]\n    },\n    \"rhel.9-x64\": {\n      \"#import\": [\n        \"linux-x64\"\n      ]\n    },\n    \"rocky.9-x64\": {\n      \"#import\": [\n        \"rhel.9-x64\"\n      ]\n    },\n    \"alpine.3.20-x64\": {\n      \"#import\": [\n        \"linux-musl-x64\"\n      ]\n    },\n    \"linux-x64\": {\n      \"#import\": [\n        \"linux\"\n      ]\n    },\n    \"linux-arm64\": {\n      \"#import\": [\n        \"linux\"\n      ]\n    },\n    \"linux-musl-x64\": {\n      \"#import\": [\n        \"linux-musl\"\n      ]\n    },\n    \"linux-musl-arm64\": {\n      \"#import\": [\n        \"linux-musl\"\n      ]\n    },\n    \"linux-musl\": {\n      \"#import\": [\n        \"linux\"\n      ]\n    },\n    \"linux\": {\n      \"#import\": [\n        \"any\"\n      ]\n    },\n    \"any\": {}\n  }\n}\n",
+  "baseGraphSha256": "9dfc32941de2daebdee2f8a9bdebd9723627aaec07960bd82fd85939650af8de",
+  "sourceInputs": [
+    {
+      "path": "Directory.Build.props",
+      "bytes": 1663,
+      "sha256": "3b553c0cc47ccd1d439e56bee88874c92db1d93646933bd0b13d3f60271e0de2"
+    },
+    {
+      "path": "packaging/runtime/runtime-distro-rid-graph.json",
+      "bytes": 1282,
+      "sha256": "9dfc32941de2daebdee2f8a9bdebd9723627aaec07960bd82fd85939650af8de"
+    },
+    {
+      "path": "packaging/runtime/runtime-generic-linux-5.1-local-consumer-matrix.json",
+      "bytes": 3782,
+      "sha256": "feeecf25101721205d3aa1b2bcea276df2313e63f0ca9db94fefa742100b2172"
+    },
+    {
+      "path": "packaging/runtime/runtime-generic-linux-preview-matrix.schema.json",
+      "bytes": 4851,
+      "sha256": "5f852e01317dd86c4bcd75040dfd6b9c0bf83005610498ee14bf4f2fab224f47"
+    },
+    {
+      "path": "scripts/Initialize-LocalLinux51DistroConsumer.sh",
+      "bytes": 2157,
+      "sha256": "c3f06db986ee214135b471805b4b9164023cadf8ee02649dc5a642afecaeb0be"
+    },
+    {
+      "path": "scripts/Invoke-LocalLinux51DistroConsumer.ps1",
+      "bytes": 6011,
+      "sha256": "329f7e391d482fa600b19896feafe645f60ed79ccb36fcb9c53d60a5df5d4692"
+    },
+    {
+      "path": "scripts/LocalLinux51.Common.ps1",
+      "bytes": 4023,
+      "sha256": "0acd17a7d985a661cacc530669fadf3776f49193ea6e0eee394deded06e539c7"
+    },
+    {
+      "path": "scripts/LocalLinux51Distro.Common.ps1",
+      "bytes": 4001,
+      "sha256": "0006dac1cc313fba0d39a072e0339962e9a2e0123b97f101b7014255cc624a44"
+    },
+    {
+      "path": "scripts/Measure-LocalLinux51DistroEvidence.ps1",
+      "bytes": 4131,
+      "sha256": "6304bed97acf11d4ac26893735cd64b8a4f2723f1502dc97ef1d7f5fc63840f6"
+    },
+    {
+      "path": "scripts/PackageVersion.ps1",
+      "bytes": 2839,
+      "sha256": "160fe54349d1c0c19eb69e9b8f15570b4a461199618d75bf8cad4326134da4c1"
+    },
+    {
+      "path": "scripts/Test-GenericLinuxPreviewConsumer.ps1",
+      "bytes": 4727,
+      "sha256": "d87ede696b8ae76c078ecd45e46ca336ed067542f5cf51c9e5a26d815c72701f"
+    },
+    {
+      "path": "scripts/Test-GitHubPackConsumerRestoreSurface.ps1",
+      "bytes": 46026,
+      "sha256": "9ff062e9e0ab872108d0b96982b31cf8775881796625bedf4c384418ca708585"
+    }
+  ],
+  "kitManifest": [
+    {
+      "path": "packages/nupkg-linux-x64-preview-full/JYPPX.OpenCV.runtime.linux-x64.preview.5.1.0.nupkg",
+      "bytes": 57971853,
+      "sha256": "d947dbbee1d923c2b3eeb2106c88eb4b4489cee3dbb87c61c0613b209b71cb4d"
+    },
+    {
+      "path": "packages/nupkg-linux-x64-preview-mini/JYPPX.OpenCV.runtime.linux-x64.preview.mini.5.1.0.nupkg",
+      "bytes": 33030255,
+      "sha256": "9dbc87064ad6c35809cc4c48afa8f2cbb5ce0d421a2b8ed55b189145de87af5e"
+    },
+    {
+      "path": "packages/nupkg-managed/JYPPX.OpenCV.CSharp.API.5.1.0.nupkg",
+      "bytes": 11924069,
+      "sha256": "0081cd584da74aac7e51187985fbe4ceff3406f960525734633a3ba32768fd80"
+    },
+    {
+      "path": "repository/Directory.Build.props",
+      "bytes": 1663,
+      "sha256": "3b553c0cc47ccd1d439e56bee88874c92db1d93646933bd0b13d3f60271e0de2"
+    },
+    {
+      "path": "repository/packaging/runtime/runtime-distro-rid-graph.json",
+      "bytes": 1282,
+      "sha256": "9dfc32941de2daebdee2f8a9bdebd9723627aaec07960bd82fd85939650af8de"
+    },
+    {
+      "path": "repository/packaging/runtime/runtime-generic-linux-5.1-local-consumer-matrix.json",
+      "bytes": 3782,
+      "sha256": "feeecf25101721205d3aa1b2bcea276df2313e63f0ca9db94fefa742100b2172"
+    },
+    {
+      "path": "repository/scripts/Initialize-LocalLinux51DistroConsumer.sh",
+      "bytes": 2157,
+      "sha256": "c3f06db986ee214135b471805b4b9164023cadf8ee02649dc5a642afecaeb0be"
+    },
+    {
+      "path": "repository/scripts/Invoke-LocalLinux51DistroConsumer.ps1",
+      "bytes": 6011,
+      "sha256": "329f7e391d482fa600b19896feafe645f60ed79ccb36fcb9c53d60a5df5d4692"
+    },
+    {
+      "path": "repository/scripts/PackageVersion.ps1",
+      "bytes": 2839,
+      "sha256": "160fe54349d1c0c19eb69e9b8f15570b4a461199618d75bf8cad4326134da4c1"
+    },
+    {
+      "path": "repository/scripts/Test-GenericLinuxPreviewConsumer.ps1",
+      "bytes": 4727,
+      "sha256": "d87ede696b8ae76c078ecd45e46ca336ed067542f5cf51c9e5a26d815c72701f"
+    },
+    {
+      "path": "repository/scripts/Test-GitHubPackConsumerRestoreSurface.ps1",
+      "bytes": 46026,
+      "sha256": "9ff062e9e0ab872108d0b96982b31cf8775881796625bedf4c384418ca708585"
+    },
+    {
+      "path": "toolchain/dotnet.tar.gz",
+      "bytes": 240059572,
+      "sha256": "137268c8ad939c064ff1ee2a6fdf0899d8725377114ea012fbd1ad5fa2550418"
+    },
+    {
+      "path": "toolchain/powershell.tar.gz",
+      "bytes": 72497272,
+      "sha256": "dcfe6060fc86abcb859ce1f8f80843ce50bab0585396de56380ed9f25176ac6d"
+    },
+    {
+      "path": "toolchain/ubuntu-ca-certificates.crt",
+      "bytes": 180744,
+      "sha256": "64e7c24b0536b525fb19b145768bd5e6e12ced0df3db837c34553ea789acd143"
+    }
+  ],
+  "toolchain": {
+    "powerShellArchiveSha256": "dcfe6060fc86abcb859ce1f8f80843ce50bab0585396de56380ed9f25176ac6d",
+    "dotNetArchiveSha512": "51c8b999af9e8dd9998c9edc5944e19a90788862068acd38694e098889054ce8c23d4f0c5cccfa16bf187d044562359e5ee69a9f8ad0bbe913ba90311fbce25b",
+    "bootstrapCaSha256": "64e7c24b0536b525fb19b145768bd5e6e12ced0df3db837c34553ea789acd143"
+  },
+  "consumers": [
+    {
+      "rid": "debian.12-x64",
+      "identity": {
+        "id": "641e92d267a0e8a2871dd5db224948d84da16525b4dd4f244197b6f14758bf9f",
+        "name": "opencv51-debian12-consumer-1cdfe40",
+        "image": "debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc",
+        "imageId": "sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc",
+        "platform": "linux",
+        "nanoCpus": 2000000000,
+        "memoryBytes": 2147483648,
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "C:\\Users\\guoji\\AppData\\Local\\Temp\\opencv51-cross-distro-consumer-kit-1cdfe40",
+            "destination": "/kit",
+            "writable": false
+          },
+          {
+            "type": "volume",
+            "source": "/var/lib/docker/volumes/opencv51-debian12-consumer-1cdfe40/_data",
+            "destination": "/consumer",
+            "writable": true
+          }
+        ],
+        "imageArchitecture": "amd64",
+        "imageOs": "linux"
+      },
+      "outputDirectory": "artifacts/opencv-5.1.0-local-linux-distro-consumers/1cdfe409cb0e34b8b21f5c007385b2c1f7bc332e/debian.12-x64",
+      "bootstrapOutput": "Get:1 https://deb.debian.org/debian bookworm InRelease [151 kB]\r\nGet:2 https://deb.debian.org/debian bookworm-updates InRelease [55.4 kB]\r\nGet:3 https://deb.debian.org/debian-security bookworm-security InRelease [34.8 kB]\r\nGet:4 https://deb.debian.org/debian bookworm/main amd64 Packages [8790 kB]\r\nGet:5 https://deb.debian.org/debian bookworm-updates/main amd64 Packages [6924 B]\r\nGet:6 https://deb.debian.org/debian-security bookworm-security/main amd64 Packages [380 kB]\r\nFetched 9418 kB in 6s (1666 kB/s)\r\nReading package lists...\r\nReading package lists...\r\nBuilding dependency tree...\r\nReading state information...\r\nzlib1g is already the newest version (1:1.2.13.dfsg-1).\r\nzlib1g set to manually installed.\r\nlibstdc++6 is already the newest version (12.2.0-14+deb12u1).\r\nlibstdc++6 set to manually installed.\r\ntar is already the newest version (1.34+dfsg-1.2+deb12u1).\r\ntar set to manually installed.\r\ngzip is already the newest version (1.12-1).\r\ngzip set to manually installed.\r\nThe following additional packages will be installed:\r\n  libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 openssl\r\nSuggested packages:\r\n  krb5-doc krb5-user\r\nRecommended packages:\r\n  krb5-locales\r\nThe following NEW packages will be installed:\r\n  ca-certificates libgssapi-krb5-2 libicu72 libk5crypto3 libkeyutils1\r\n  libkrb5-3 libkrb5support0 libssl3 libunwind8 openssl\r\n0 upgraded, 10 newly installed, 0 to remove and 6 not upgraded.\r\nNeed to get 13.7 MB of archives.\r\nAfter this operation, 48.2 MB of additional disk space will be used.\r\nGet:1 https://deb.debian.org/debian-security bookworm-security/main amd64 libssl3 amd64 3.0.22-1~deb12u2 [2040 kB]\r\nGet:2 https://deb.debian.org/debian-security bookworm-security/main amd64 openssl amd64 3.0.22-1~deb12u2 [1442 kB]\r\nGet:3 https://deb.debian.org/debian-security bookworm-security/main amd64 ca-certificates all 20250419~deb12u2 [161 kB]\r\nGet:4 https://deb.debian.org/debian bookworm/main amd64 libkrb5support0 amd64 1.20.1-2+deb12u5 [33.2 kB]\r\nGet:5 https://deb.debian.org/debian bookworm/main amd64 libk5crypto3 amd64 1.20.1-2+deb12u5 [79.7 kB]\r\nGet:6 https://deb.debian.org/debian bookworm/main amd64 libkeyutils1 amd64 1.6.3-2 [8808 B]\r\nGet:7 https://deb.debian.org/debian bookworm/main amd64 libkrb5-3 amd64 1.20.1-2+deb12u5 [332 kB]\r\nGet:8 https://deb.debian.org/debian bookworm/main amd64 libgssapi-krb5-2 amd64 1.20.1-2+deb12u5 [135 kB]\r\nGet:9 https://deb.debian.org/debian bookworm/main amd64 libicu72 amd64 72.1-3+deb12u1 [9376 kB]\r\nGet:10 https://deb.debian.org/debian bookworm/main amd64 libunwind8 amd64 1.6.2-3 [51.2 kB]\r\ndebconf: delaying package configuration, since apt-utils is not installed\r\nFetched 13.7 MB in 3s (4545 kB/s)\r\nSelecting previously unselected package libssl3:amd64.\r\n(Reading database ... \r\n(Reading database ... 5%\r\n(Reading database ... 10%\r\n(Reading database ... 15%\r\n(Reading database ... 20%\r\n(Reading database ... 25%\r\n(Reading database ... 30%\r\n(Reading database ... 35%\r\n(Reading database ... 40%\r\n(Reading database ... 45%\r\n(Reading database ... 50%\r\n(Reading database ... 55%\r\n(Reading database ... 60%\r\n(Reading database ... 65%\r\n(Reading database ... 70%\r\n(Reading database ... 75%\r\n(Reading database ... 80%\r\n(Reading database ... 85%\r\n(Reading database ... 90%\r\n(Reading database ... 95%\r\n(Reading database ... 100%\r\n(Reading database ... 6096 files and directories currently installed.)\r\nPreparing to unpack .../0-libssl3_3.0.22-1~deb12u2_amd64.deb ...\r\nUnpacking libssl3:amd64 (3.0.22-1~deb12u2) ...\r\nSelecting previously unselected package openssl.\r\nPreparing to unpack .../1-openssl_3.0.22-1~deb12u2_amd64.deb ...\r\nUnpacking openssl (3.0.22-1~deb12u2) ...\r\nSelecting previously unselected package ca-certificates.\r\nPreparing to unpack .../2-ca-certificates_20250419~deb12u2_all.deb ...\r\nUnpacking ca-certificates (20250419~deb12u2) ...\r\nSelecting previously unselected package libkrb5support0:amd64.\r\nPreparing to unpack .../3-libkrb5support0_1.20.1-2+deb12u5_amd64.deb ...\r\nUnpacking libkrb5support0:amd64 (1.20.1-2+deb12u5) ...\r\nSelecting previously unselected package libk5crypto3:amd64.\r\nPreparing to unpack .../4-libk5crypto3_1.20.1-2+deb12u5_amd64.deb ...\r\nUnpacking libk5crypto3:amd64 (1.20.1-2+deb12u5) ...\r\nSelecting previously unselected package libkeyutils1:amd64.\r\nPreparing to unpack .../5-libkeyutils1_1.6.3-2_amd64.deb ...\r\nUnpacking libkeyutils1:amd64 (1.6.3-2) ...\r\nSelecting previously unselected package libkrb5-3:amd64.\r\nPreparing to unpack .../6-libkrb5-3_1.20.1-2+deb12u5_amd64.deb ...\r\nUnpacking libkrb5-3:amd64 (1.20.1-2+deb12u5) ...\r\nSelecting previously unselected package libgssapi-krb5-2:amd64.\r\nPreparing to unpack .../7-libgssapi-krb5-2_1.20.1-2+deb12u5_amd64.deb ...\r\nUnpacking libgssapi-krb5-2:amd64 (1.20.1-2+deb12u5) ...\r\nSelecting previously unselected package libicu72:amd64.\r\nPreparing to unpack .../8-libicu72_72.1-3+deb12u1_amd64.deb ...\r\nUnpacking libicu72:amd64 (72.1-3+deb12u1) ...\r\nSelecting previously unselected package libunwind8:amd64.\r\nPreparing to unpack .../9-libunwind8_1.6.2-3_amd64.deb ...\r\nUnpacking libunwind8:amd64 (1.6.2-3) ...\r\nSetting up libkeyutils1:amd64 (1.6.3-2) ...\r\nSetting up libicu72:amd64 (72.1-3+deb12u1) ...\r\nSetting up libssl3:amd64 (3.0.22-1~deb12u2) ...\r\nSetting up libunwind8:amd64 (1.6.2-3) ...\r\nSetting up libkrb5support0:amd64 (1.20.1-2+deb12u5) ...\r\nSetting up libk5crypto3:amd64 (1.20.1-2+deb12u5) ...\r\nSetting up libkrb5-3:amd64 (1.20.1-2+deb12u5) ...\r\nSetting up openssl (3.0.22-1~deb12u2) ...\r\nSetting up ca-certificates (20250419~deb12u2) ...\r\nUpdating certificates in /etc/ssl/certs...\r\nrehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL\r\n148 added, 0 removed; done.\r\nSetting up libgssapi-krb5-2:amd64 (1.20.1-2+deb12u5) ...\r\nProcessing triggers for libc-bin (2.36-9+deb12u14) ...\r\nProcessing triggers for ca-certificates (20250419~deb12u2) ...\r\nUpdating certificates in /etc/ssl/certs...\r\n0 added, 0 removed; done.\r\nRunning hooks in /etc/ca-certificates/update.d...\r\ndone.\r\n/kit/toolchain/powershell.tar.gz: OK\r\n/kit/toolchain/dotnet.tar.gz: OK\r\nglibc 2.36\r\n7.4.17\r\n10.0.401\r\nLOCAL_LINUX_51_DISTRO_CONSUMER_READY rid=debian.12-x64\r\n",
+      "bootstrapOutputSha256": "61b2d3773a701a50ae2ae63181daaec64622d80634dbc76b979f273f33416ffc",
+      "driverOutput": "TARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio,dnn,ml_knn profile=full\r\nTARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio,not_linked profile=mini\r\nLOCAL_LINUX_51_DISTRO_CONSUMER_OK rid=debian.12-x64 compiler_absent=true producer_paths_absent=true loader_overrides_absent=true\r\n",
+      "driverOutputSha256": "c116f658eca7657d77c38edb6b5f992f074fc6e7c69a6f524d416a9942d6db6b",
+      "preflightJson": "{\n  \"schemaVersion\": 1,\n  \"consumerRid\": \"debian.12-x64\",\n  \"execution\": \"local-docker\",\n  \"hosted\": false,\n  \"publicationAllowed\": false,\n  \"distro\": \"debian\",\n  \"distroVersion\": \"12\",\n  \"architecture\": \"x86_64\",\n  \"libc\": \"glibc 2.36\",\n  \"powerShell\": \"7.4.17\",\n  \"dotNetSdk\": \"10.0.401\",\n  \"compilerAbsent\": true,\n  \"producerPathsAbsent\": true,\n  \"loaderOverridesAbsent\": true,\n  \"matrixSha256\": \"feeecf25101721205d3aa1b2bcea276df2313e63f0ca9db94fefa742100b2172\",\n  \"graphBeforeSha256\": \"9dfc32941de2daebdee2f8a9bdebd9723627aaec07960bd82fd85939650af8de\",\n  \"graphAfterSha256\": \"9dfc32941de2daebdee2f8a9bdebd9723627aaec07960bd82fd85939650af8de\",\n  \"addedGraphRids\": [],\n  \"graphJson\": \"{\\n  \\\"runtimes\\\": {\\n    \\\"ubuntu.22.04-x64\\\": {\\n      \\\"#import\\\": [\\n        \\\"linux-x64\\\"\\n      ]\\n    },\\n    \\\"ubuntu.22.04-arm64\\\": {\\n      \\\"#import\\\": [\\n        \\\"linux-arm64\\\"\\n      ]\\n    },\\n    \\\"ubuntu.24.04-x64\\\": {\\n      \\\"#import\\\": [\\n        \\\"ubuntu.22.04-x64\\\"\\n      ]\\n    },\\n    \\\"ubuntu.24.04-arm64\\\": {\\n      \\\"#import\\\": [\\n        \\\"ubuntu.22.04-arm64\\\"\\n      ]\\n    },\\n    \\\"debian.12-x64\\\": {\\n      \\\"#import\\\": [\\n        \\\"linux-x64\\\"\\n      ]\\n    },\\n    \\\"debian.12-arm64\\\": {\\n      \\\"#import\\\": [\\n        \\\"linux-arm64\\\"\\n      ]\\n    },\\n    \\\"fedora.40-x64\\\": {\\n      \\\"#import\\\": [\\n        \\\"linux-x64\\\"\\n      ]\\n    },\\n    \\\"rhel.9-x64\\\": {\\n      \\\"#import\\\": [\\n        \\\"linux-x64\\\"\\n      ]\\n    },\\n    \\\"rocky.9-x64\\\": {\\n      \\\"#import\\\": [\\n        \\\"rhel.9-x64\\\"\\n      ]\\n    },\\n    \\\"alpine.3.20-x64\\\": {\\n      \\\"#import\\\": [\\n        \\\"linux-musl-x64\\\"\\n      ]\\n    },\\n    \\\"linux-x64\\\": {\\n      \\\"#import\\\": [\\n        \\\"linux\\\"\\n      ]\\n    },\\n    \\\"linux-arm64\\\": {\\n      \\\"#import\\\": [\\n        \\\"linux\\\"\\n      ]\\n    },\\n    \\\"linux-musl-x64\\\": {\\n      \\\"#import\\\": [\\n        \\\"linux-musl\\\"\\n      ]\\n    },\\n    \\\"linux-musl-arm64\\\": {\\n      \\\"#import\\\": [\\n        \\\"linux-musl\\\"\\n      ]\\n    },\\n    \\\"linux-musl\\\": {\\n      \\\"#import\\\": [\\n        \\\"linux\\\"\\n      ]\\n    },\\n    \\\"linux\\\": {\\n      \\\"#import\\\": [\\n        \\\"any\\\"\\n      ]\\n    },\\n    \\\"any\\\": {}\\n  }\\n}\\n\"\n}\n",
+      "preflightSha256": "33d3367f351fad15d5951379be43f09af1f798ef5adf2608893544c9bbb0d8f3",
+      "packages": [
+        {
+          "artifactPath": "artifacts/opencv-5.1.0-local-linux-distro-consumers/1cdfe409cb0e34b8b21f5c007385b2c1f7bc332e/debian.12-x64/nupkg-managed/JYPPX.OpenCV.CSharp.API.5.1.0.nupkg",
+          "bytes": 11924069,
+          "sha256": "0081cd584da74aac7e51187985fbe4ceff3406f960525734633a3ba32768fd80"
+        },
+        {
+          "artifactPath": "artifacts/opencv-5.1.0-local-linux-distro-consumers/1cdfe409cb0e34b8b21f5c007385b2c1f7bc332e/debian.12-x64/nupkg-linux-x64-preview-full/JYPPX.OpenCV.runtime.linux-x64.preview.5.1.0.nupkg",
+          "bytes": 57971853,
+          "sha256": "d947dbbee1d923c2b3eeb2106c88eb4b4489cee3dbb87c61c0613b209b71cb4d"
+        },
+        {
+          "artifactPath": "artifacts/opencv-5.1.0-local-linux-distro-consumers/1cdfe409cb0e34b8b21f5c007385b2c1f7bc332e/debian.12-x64/nupkg-linux-x64-preview-mini/JYPPX.OpenCV.runtime.linux-x64.preview.mini.5.1.0.nupkg",
+          "bytes": 33030255,
+          "sha256": "9dbc87064ad6c35809cc4c48afa8f2cbb5ce0d421a2b8ed55b189145de87af5e"
+        }
+      ],
+      "profiles": [
+        {
+          "name": "full",
+          "consumerEvidenceJson": "{\n  \"SchemaVersion\": 1,\n  \"EvidenceKind\": \"generic-linux-preview-package-consumer-native-smoke\",\n  \"Status\": \"preview-only\",\n  \"PublicationAllowed\": false,\n  \"ConsumerRid\": \"debian.12-x64\",\n  \"ConsumerDistro\": \"debian\",\n  \"ConsumerDistroVersion\": \"12\",\n  \"RuntimeProfile\": \"full\",\n  \"PackageId\": \"JYPPX.OpenCV.runtime.linux-x64.preview\",\n  \"PackageVersion\": \"5.1.0.0\",\n  \"PreviewPackageSha256\": \"d947dbbee1d923c2b3eeb2106c88eb4b4489cee3dbb87c61c0613b209b71cb4d\",\n  \"ManagedPackageSha256\": \"0081cd584da74aac7e51187985fbe4ceff3406f960525734633a3ba32768fd80\",\n  \"NativeSmokeExecuted\": true,\n  \"RuntimeAssetRid\": \"linux-x64\",\n  \"RecordedAtUtc\": \"2026-11-24T08:15:39.6383188+00:00\"\n}\n",
+          "consumerEvidenceSha256": "b0f502552e0eebdd57cdbb209c9eda62d4df8f8fcf3b033582b89bbd2db843bc",
+          "consumerOutput": "TARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio,dnn,ml_knn profile=full\nGitHub pack consumer restore guard passed.\nTemporary local NuGet source and package cache stayed outside the repository and were cleaned.\nConsumer package pairs checked: 1.\nSelected consumer package pair: linux-x64 / full.\nfull consumer package pairs: 1, module counts: 17.\nGENERIC_LINUX_PREVIEW_CONSUMER_OK consumer=debian.12-x64 profile=full package=JYPPX.OpenCV.runtime.linux-x64.preview runtime_asset_rid=linux-x64 native_smoke_executed=True publication_allowed=false\nGeneric Linux preview consumer evidence: /consumer/artifacts/generic-linux-preview-consumer-evidence-debian.12-x64-full.json\n",
+          "consumerOutputSha256": "02fe7aaf8cbc0d07ce5b10155d127c512f5516f82679fb49d6fa08b892d569f7"
+        },
+        {
+          "name": "mini",
+          "consumerEvidenceJson": "{\n  \"SchemaVersion\": 1,\n  \"EvidenceKind\": \"generic-linux-preview-package-consumer-native-smoke\",\n  \"Status\": \"preview-only\",\n  \"PublicationAllowed\": false,\n  \"ConsumerRid\": \"debian.12-x64\",\n  \"ConsumerDistro\": \"debian\",\n  \"ConsumerDistroVersion\": \"12\",\n  \"RuntimeProfile\": \"mini\",\n  \"PackageId\": \"JYPPX.OpenCV.runtime.linux-x64.preview.mini\",\n  \"PackageVersion\": \"5.1.0.0\",\n  \"PreviewPackageSha256\": \"9dbc87064ad6c35809cc4c48afa8f2cbb5ce0d421a2b8ed55b189145de87af5e\",\n  \"ManagedPackageSha256\": \"0081cd584da74aac7e51187985fbe4ceff3406f960525734633a3ba32768fd80\",\n  \"NativeSmokeExecuted\": true,\n  \"RuntimeAssetRid\": \"linux-x64\",\n  \"RecordedAtUtc\": \"2026-11-24T08:15:44.9745725+00:00\"\n}\n",
+          "consumerEvidenceSha256": "bd05a3ed0079d9fd00b3379bab82f5993ba5cbbc17232a657da6408fb5fa989e",
+          "consumerOutput": "TARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio,not_linked profile=mini\nGitHub pack consumer restore guard passed.\nTemporary local NuGet source and package cache stayed outside the repository and were cleaned.\nConsumer package pairs checked: 1.\nSelected consumer package pair: linux-x64 / mini.\nmini consumer package pairs: 1, module counts: 6.\nGENERIC_LINUX_PREVIEW_CONSUMER_OK consumer=debian.12-x64 profile=mini package=JYPPX.OpenCV.runtime.linux-x64.preview.mini runtime_asset_rid=linux-x64 native_smoke_executed=True publication_allowed=false\nGeneric Linux preview consumer evidence: /consumer/artifacts/generic-linux-preview-consumer-evidence-debian.12-x64-mini.json\n",
+          "consumerOutputSha256": "416d89e43d6e3ad206e76d92d2972bb82a59a32f14dc92e4b5c97ba7e1dd8323"
+        }
+      ]
+    },
+    {
+      "rid": "fedora.44-x64",
+      "identity": {
+        "id": "0dd13b568dd6056d68af073012862c9a602287cdc88f78cb11e274eb81c1d639",
+        "name": "opencv51-fedora44-consumer-1cdfe40",
+        "image": "fedora:44@sha256:43b29f65a41eb9c35e1cd5323e3bdf3b655c2357a9f4f1ff2f9c2798e5045d80",
+        "imageId": "sha256:43b29f65a41eb9c35e1cd5323e3bdf3b655c2357a9f4f1ff2f9c2798e5045d80",
+        "platform": "linux",
+        "nanoCpus": 2000000000,
+        "memoryBytes": 2147483648,
+        "mounts": [
+          {
+            "type": "bind",
+            "source": "C:\\Users\\guoji\\AppData\\Local\\Temp\\opencv51-cross-distro-consumer-kit-1cdfe40",
+            "destination": "/kit",
+            "writable": false
+          },
+          {
+            "type": "volume",
+            "source": "/var/lib/docker/volumes/opencv51-fedora44-consumer-1cdfe40/_data",
+            "destination": "/consumer",
+            "writable": true
+          }
+        ],
+        "imageArchitecture": "amd64",
+        "imageOs": "linux"
+      },
+      "outputDirectory": "artifacts/opencv-5.1.0-local-linux-distro-consumers/1cdfe409cb0e34b8b21f5c007385b2c1f7bc332e/fedora.44-x64",
+      "bootstrapOutput": "Updating and loading repositories:\r\n Fedora 44 openh264 (From Cisco) - x86_ 100% | 562.0   B/s |   5.3 KiB |  00m10s\r\n Fedora 44 - x86_64 - Updates           100% | 791.6 KiB/s |  12.7 MiB |  00m16s\r\n Fedora 44 - x86_64                     100% |   2.2 MiB/s |  37.0 MiB |  00m17s\r\nRepositories loaded.\r\nPackage \"ca-certificates-2025.2.80_v9.0.304-7.fc44.noarch\" is already installed.\r\nPackage \"openssl-libs-1:3.5.7-2.fc44.x86_64\" is already installed.\r\nPackage \"krb5-libs-1.22.2-4.fc44.x86_64\" is already installed.\r\nPackage \"zlib-ng-compat-2.3.3-3.fc44.x86_64\" is already installed.\r\nPackage \"libstdc++-16.2.1-2.fc44.x86_64\" is already installed.\r\nPackage \"tar-2:1.35-8.fc44.x86_64\" is already installed.\r\nPackage \"gzip-1.14-2.fc44.x86_64\" is already installed.\r\nPackage \"findutils-1:4.10.0-7.fc44.x86_64\" is already installed.\r\n\r\nPackage    Arch   Version        Repository      Size\r\nInstalling:\r\n libicu    x86_64 0:77.1-4.fc44  updates     36.6 MiB\r\n libunwind x86_64 0:1.8.3-4.fc44 updates    194.0 KiB\r\n\r\nTransaction Summary:\r\n Installing:         2 packages\r\n\r\nTotal size of inbound packages is 11 MiB. Need to download 11 MiB.\r\nAfter this operation, 37 MiB extra will be used (install 37 MiB, remove 0 B).\r\n[1/2] libunwind-0:1.8.3-4.fc44.x86_64   100% |  54.1 KiB/s |  79.6 KiB |  00m01s\r\n[2/2] libicu-0:77.1-4.fc44.x86_64       100% |   2.6 MiB/s |  10.8 MiB |  00m04s\r\n--------------------------------------------------------------------------------\r\n[2/2] Total                             100% |   2.7 MiB/s |  10.9 MiB |  00m04s\r\nRunning transaction\r\n[1/4] Verify package files              100% |  62.0   B/s |   2.0   B |  00m00s\r\n[2/4] Prepare transaction               100% | 153.0   B/s |   2.0   B |  00m00s\r\n[3/4] Installing libunwind-0:1.8.3-4.fc 100% |  12.0 MiB/s | 197.3 KiB |  00m00s\r\n[4/4] Installing libicu-0:77.1-4.fc44.x 100% | 102.6 MiB/s |  36.6 MiB |  00m00s\r\nComplete!\r\n/kit/toolchain/powershell.tar.gz: OK\r\n/kit/toolchain/dotnet.tar.gz: OK\r\nglibc 2.43\r\n7.4.17\r\n10.0.401\r\nLOCAL_LINUX_51_DISTRO_CONSUMER_READY rid=fedora.44-x64\r\n",
+      "bootstrapOutputSha256": "e4d62c63a7fdecc733936696e79c8b9d70d74b95bb3560408e776418e3614644",
+      "driverOutput": "TARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio,dnn,ml_knn profile=full\r\nTARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio,not_linked profile=mini\r\nLOCAL_LINUX_51_DISTRO_CONSUMER_OK rid=fedora.44-x64 compiler_absent=true producer_paths_absent=true loader_overrides_absent=true\r\n",
+      "driverOutputSha256": "dd2f81f6332f4903c104923cd6a5e9348b49fc9a557666df0d10eb4cebe48049",
+      "preflightJson": "{\n  \"schemaVersion\": 1,\n  \"consumerRid\": \"fedora.44-x64\",\n  \"execution\": \"local-docker\",\n  \"hosted\": false,\n  \"publicationAllowed\": false,\n  \"distro\": \"fedora\",\n  \"distroVersion\": \"44\",\n  \"architecture\": \"x86_64\",\n  \"libc\": \"glibc 2.43\",\n  \"powerShell\": \"7.4.17\",\n  \"dotNetSdk\": \"10.0.401\",\n  \"compilerAbsent\": true,\n  \"producerPathsAbsent\": true,\n  \"loaderOverridesAbsent\": true,\n  \"matrixSha256\": \"feeecf25101721205d3aa1b2bcea276df2313e63f0ca9db94fefa742100b2172\",\n  \"graphBeforeSha256\": \"9dfc32941de2daebdee2f8a9bdebd9723627aaec07960bd82fd85939650af8de\",\n  \"graphAfterSha256\": \"8d09b4dcc9093aeb6ca73fbaff9c39b889c55c6f5ca5e27e455ffeaefac9f9a9\",\n  \"addedGraphRids\": [\n    \"fedora.44-x64\"\n  ],\n  \"graphJson\": \"{\\n  \\\"runtimes\\\": {\\n    \\\"ubuntu.22.04-x64\\\": {\\n      \\\"#import\\\": [\\n        \\\"linux-x64\\\"\\n      ]\\n    },\\n    \\\"ubuntu.22.04-arm64\\\": {\\n      \\\"#import\\\": [\\n        \\\"linux-arm64\\\"\\n      ]\\n    },\\n    \\\"ubuntu.24.04-x64\\\": {\\n      \\\"#import\\\": [\\n        \\\"ubuntu.22.04-x64\\\"\\n      ]\\n    },\\n    \\\"ubuntu.24.04-arm64\\\": {\\n      \\\"#import\\\": [\\n        \\\"ubuntu.22.04-arm64\\\"\\n      ]\\n    },\\n    \\\"debian.12-x64\\\": {\\n      \\\"#import\\\": [\\n        \\\"linux-x64\\\"\\n      ]\\n    },\\n    \\\"debian.12-arm64\\\": {\\n      \\\"#import\\\": [\\n        \\\"linux-arm64\\\"\\n      ]\\n    },\\n    \\\"fedora.40-x64\\\": {\\n      \\\"#import\\\": [\\n        \\\"linux-x64\\\"\\n      ]\\n    },\\n    \\\"rhel.9-x64\\\": {\\n      \\\"#import\\\": [\\n        \\\"linux-x64\\\"\\n      ]\\n    },\\n    \\\"rocky.9-x64\\\": {\\n      \\\"#import\\\": [\\n        \\\"rhel.9-x64\\\"\\n      ]\\n    },\\n    \\\"alpine.3.20-x64\\\": {\\n      \\\"#import\\\": [\\n        \\\"linux-musl-x64\\\"\\n      ]\\n    },\\n    \\\"linux-x64\\\": {\\n      \\\"#import\\\": [\\n        \\\"linux\\\"\\n      ]\\n    },\\n    \\\"linux-arm64\\\": {\\n      \\\"#import\\\": [\\n        \\\"linux\\\"\\n      ]\\n    },\\n    \\\"linux-musl-x64\\\": {\\n      \\\"#import\\\": [\\n        \\\"linux-musl\\\"\\n      ]\\n    },\\n    \\\"linux-musl-arm64\\\": {\\n      \\\"#import\\\": [\\n        \\\"linux-musl\\\"\\n      ]\\n    },\\n    \\\"linux-musl\\\": {\\n      \\\"#import\\\": [\\n        \\\"linux\\\"\\n      ]\\n    },\\n    \\\"linux\\\": {\\n      \\\"#import\\\": [\\n        \\\"any\\\"\\n      ]\\n    },\\n    \\\"any\\\": {},\\n    \\\"fedora.44-x64\\\": {\\n      \\\"#import\\\": [\\n        \\\"linux-x64\\\"\\n      ]\\n    }\\n  }\\n}\\n\"\n}\n",
+      "preflightSha256": "9a3ef3455753f16b84ea57d7c62ae819f2fee62d6a043abbec33a2cda0c90ce4",
+      "packages": [
+        {
+          "artifactPath": "artifacts/opencv-5.1.0-local-linux-distro-consumers/1cdfe409cb0e34b8b21f5c007385b2c1f7bc332e/fedora.44-x64/nupkg-managed/JYPPX.OpenCV.CSharp.API.5.1.0.nupkg",
+          "bytes": 11924069,
+          "sha256": "0081cd584da74aac7e51187985fbe4ceff3406f960525734633a3ba32768fd80"
+        },
+        {
+          "artifactPath": "artifacts/opencv-5.1.0-local-linux-distro-consumers/1cdfe409cb0e34b8b21f5c007385b2c1f7bc332e/fedora.44-x64/nupkg-linux-x64-preview-full/JYPPX.OpenCV.runtime.linux-x64.preview.5.1.0.nupkg",
+          "bytes": 57971853,
+          "sha256": "d947dbbee1d923c2b3eeb2106c88eb4b4489cee3dbb87c61c0613b209b71cb4d"
+        },
+        {
+          "artifactPath": "artifacts/opencv-5.1.0-local-linux-distro-consumers/1cdfe409cb0e34b8b21f5c007385b2c1f7bc332e/fedora.44-x64/nupkg-linux-x64-preview-mini/JYPPX.OpenCV.runtime.linux-x64.preview.mini.5.1.0.nupkg",
+          "bytes": 33030255,
+          "sha256": "9dbc87064ad6c35809cc4c48afa8f2cbb5ce0d421a2b8ed55b189145de87af5e"
+        }
+      ],
+      "profiles": [
+        {
+          "name": "full",
+          "consumerEvidenceJson": "{\n  \"SchemaVersion\": 1,\n  \"EvidenceKind\": \"generic-linux-preview-package-consumer-native-smoke\",\n  \"Status\": \"preview-only\",\n  \"PublicationAllowed\": false,\n  \"ConsumerRid\": \"fedora.44-x64\",\n  \"ConsumerDistro\": \"fedora\",\n  \"ConsumerDistroVersion\": \"44\",\n  \"RuntimeProfile\": \"full\",\n  \"PackageId\": \"JYPPX.OpenCV.runtime.linux-x64.preview\",\n  \"PackageVersion\": \"5.1.0.0\",\n  \"PreviewPackageSha256\": \"d947dbbee1d923c2b3eeb2106c88eb4b4489cee3dbb87c61c0613b209b71cb4d\",\n  \"ManagedPackageSha256\": \"0081cd584da74aac7e51187985fbe4ceff3406f960525734633a3ba32768fd80\",\n  \"NativeSmokeExecuted\": true,\n  \"RuntimeAssetRid\": \"linux-x64\",\n  \"RecordedAtUtc\": \"2026-11-24T08:15:38.9953057+00:00\"\n}\n",
+          "consumerEvidenceSha256": "3601bbee20006e9f87345596d78da6487b673c44df0793c6256b314f6a3ba30b",
+          "consumerOutput": "TARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio,dnn,ml_knn profile=full\nGitHub pack consumer restore guard passed.\nTemporary local NuGet source and package cache stayed outside the repository and were cleaned.\nConsumer package pairs checked: 1.\nSelected consumer package pair: linux-x64 / full.\nfull consumer package pairs: 1, module counts: 17.\nGENERIC_LINUX_PREVIEW_CONSUMER_OK consumer=fedora.44-x64 profile=full package=JYPPX.OpenCV.runtime.linux-x64.preview runtime_asset_rid=linux-x64 native_smoke_executed=True publication_allowed=false\nGeneric Linux preview consumer evidence: /consumer/artifacts/generic-linux-preview-consumer-evidence-fedora.44-x64-full.json\n",
+          "consumerOutputSha256": "d4902ab2249ff6e2e70774271c4cf64cd0d3486dc06f97678db45facc914f20b"
+        },
+        {
+          "name": "mini",
+          "consumerEvidenceJson": "{\n  \"SchemaVersion\": 1,\n  \"EvidenceKind\": \"generic-linux-preview-package-consumer-native-smoke\",\n  \"Status\": \"preview-only\",\n  \"PublicationAllowed\": false,\n  \"ConsumerRid\": \"fedora.44-x64\",\n  \"ConsumerDistro\": \"fedora\",\n  \"ConsumerDistroVersion\": \"44\",\n  \"RuntimeProfile\": \"mini\",\n  \"PackageId\": \"JYPPX.OpenCV.runtime.linux-x64.preview.mini\",\n  \"PackageVersion\": \"5.1.0.0\",\n  \"PreviewPackageSha256\": \"9dbc87064ad6c35809cc4c48afa8f2cbb5ce0d421a2b8ed55b189145de87af5e\",\n  \"ManagedPackageSha256\": \"0081cd584da74aac7e51187985fbe4ceff3406f960525734633a3ba32768fd80\",\n  \"NativeSmokeExecuted\": true,\n  \"RuntimeAssetRid\": \"linux-x64\",\n  \"RecordedAtUtc\": \"2026-11-24T08:15:44.2793569+00:00\"\n}\n",
+          "consumerEvidenceSha256": "3ca7b35ee5119fa570a981654026740116d7515c65c5cb616b491bde586fdecf",
+          "consumerOutput": "TARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio,not_linked profile=mini\nGitHub pack consumer restore guard passed.\nTemporary local NuGet source and package cache stayed outside the repository and were cleaned.\nConsumer package pairs checked: 1.\nSelected consumer package pair: linux-x64 / mini.\nmini consumer package pairs: 1, module counts: 6.\nGENERIC_LINUX_PREVIEW_CONSUMER_OK consumer=fedora.44-x64 profile=mini package=JYPPX.OpenCV.runtime.linux-x64.preview.mini runtime_asset_rid=linux-x64 native_smoke_executed=True publication_allowed=false\nGeneric Linux preview consumer evidence: /consumer/artifacts/generic-linux-preview-consumer-evidence-fedora.44-x64-mini.json\n",
+          "consumerOutputSha256": "1e2f473e7ce63c839b4ae0888fa1c6ba579b839cdc44d1eb4811400e6f650d72"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "consumerRids": [
+      "ubuntu.22.04-x64",
+      "debian.12-x64",
+      "fedora.44-x64"
+    ],
+    "profiles": [
+      "full",
+      "mini"
+    ],
+    "totalProfilePairs": 6,
+    "baselineProfilePairs": 2,
+    "newProfilePairs": 4,
+    "localThreeDistroConsumerGateComplete": true,
+    "baselineProducerSourceCommit": "7cba98b47542bbe24971eea05246f0840b97ea5c",
+    "baselineUbuntuEvidenceReused": true,
+    "newProducerBuildExecuted": false,
+    "arm64Validated": false,
+    "hostedValidated": false,
+    "dnnModelInferenceValidated": false,
+    "videoFileOrDeviceValidated": false,
+    "finalReleaseApproved": false
+  }
+}

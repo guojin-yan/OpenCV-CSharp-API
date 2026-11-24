@@ -1058,6 +1058,14 @@ function Get-ExpectedEvidencePaths {
         "packaging/runtime/opencv-5.1.0-local-linux-preview-evidence.schema.json",
         "packaging/runtime/opencv-5.1.0-elf-workflow-evidence.json",
         "packaging/runtime/opencv-5.1.0-elf-workflow-evidence.schema.json",
+        "packaging/runtime/opencv-5.1.0-local-linux-distro-consumer-evidence.json",
+        "packaging/runtime/opencv-5.1.0-local-linux-distro-consumer-evidence.schema.json",
+        "packaging/runtime/runtime-generic-linux-5.1-local-consumer-matrix.json",
+        "scripts/Initialize-LocalLinux51DistroConsumer.sh",
+        "scripts/Invoke-LocalLinux51DistroConsumer.ps1",
+        "scripts/LocalLinux51Distro.Common.ps1",
+        "scripts/Measure-LocalLinux51DistroEvidence.ps1",
+        "scripts/Test-LocalLinux51DistroEvidence.ps1",
         "docs/articles/linux-5.1-local-preview.md",
         "scripts/Build-LocalLinux51Preview.ps1",
         "scripts/Audit-Linux51Runtime.py",
@@ -1884,6 +1892,10 @@ function Test-Record {
     Assert-True -List $List -Condition ($revision.CurrentElfWorkflowEvidence.Path -ceq 'packaging/runtime/opencv-5.1.0-elf-workflow-evidence.json' -and
         $revision.CurrentElfWorkflowEvidence.Sha256 -ceq $currentElfWorkflowHash -and $revision.CurrentElfWorkflowEvidenceValidated -and
         -not $revision.CurrentLinux51ThreeDistroGateComplete) -Issue 'Final closeout local Linux ELF workflow audit scope drifted'
+    $currentDistroConsumerHash = (Get-FileHash -LiteralPath (Join-Path $repo 'packaging/runtime/opencv-5.1.0-local-linux-distro-consumer-evidence.json') -Algorithm SHA256).Hash.ToLowerInvariant()
+    Assert-True -List $List -Condition ($revision.CurrentLocalLinux51DistroConsumerEvidence.Path -ceq 'packaging/runtime/opencv-5.1.0-local-linux-distro-consumer-evidence.json' -and
+        $revision.CurrentLocalLinux51DistroConsumerEvidence.Sha256 -ceq $currentDistroConsumerHash -and $revision.CurrentLocalLinux51ThreeDistroConsumersValidated -and
+        -not $revision.CurrentLinux51ThreeDistroGateComplete) -Issue 'Final closeout local three-distro consumers must retain the pending hosted/release gate'
     Assert-True -List $List -Condition ($revision.CurrentPerformance51Baseline.Path -ceq 'packaging/performance/perf-001-5.1.0-baseline.json' -and
         $revision.CurrentPerformance51Baseline.Sha256 -ceq $currentPerformanceHash -and $revision.HistoricalPerformanceRevision -ceq '5.0.0' -and
         -not $revision.CurrentPerformanceHistoricalComparisonClaimed) -Issue 'Final closeout 5.1 performance measurement boundary drifted'
