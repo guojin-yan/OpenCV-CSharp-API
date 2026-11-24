@@ -191,5 +191,11 @@ if ($calibration.sourceCommit -cne $build.sourceCommit -or $calibration.disableS
     $calibration.bfMatcherMasksWithCrossCheck -or -not $calibration.bfMatcherMasksWithoutCrossCheck -or
     $calibSummary.declarationCount -ne 208 -or $calibSummary.classificationCounts.implemented -ne 169 -or $calibSummary.classificationCounts.missing -ne 0 -or
     $calibSummary.reviewedExistingBindingCount -ne 3 -or $calibSummary.negativeFixtureCount -ne 37) { throw '5.1 calibration/matcher correction or reviewed binding evidence drifted.' }
+$headless = Get-Content (Join-Path $repo 'packaging/runtime/opencv-5.1.0-local-linux-headless-evidence.json') -Raw | ConvertFrom-Json
+$headlessEntry = @($ledger.entries | Where-Object id -CEQ 'V510-LOCAL-LINUX-HEADLESS')
+if ($headlessEntry.Count -ne 1 -or $headlessEntry[0].evidence -cnotcontains 'scripts/Test-Linux51HeadlessEvidence.ps1' -or
+    $headless.status -cne 'verified-local-three-distro-x64-candidate' -or -not $headless.candidateOnly -or $headless.publicationAllowed -or $headless.activePackageIdentityAdded -or
+    $headless.coverage.managedExecutions -ne 12 -or $headless.coverage.nativeCtestPassed -ne 6 -or $headless.coverage.freshMinimalUpstreamBuild -or
+    $headless.coverage.cameraOrNetworkValidated -or $headless.coverage.hostedValidated) { throw '5.1 local headless candidate evidence/ledger scope drifted.' }
 Write-Host "V510_CHANGE_LEDGER_OK entries=$(@($ledger.entries).Count) from=$($ledger.fromVersion) to=$($ledger.toVersion) native_abi=$($ledger.nativeAbiVersion)"
 Write-Host "OPENCV_510_SOURCE_BUILD_EVIDENCE_OK input_files=$($inputPaths.Count) full_exports=2669 mini_exports=527 native_ctest=6 managed=4180 historical_catalog=5.0.0 parser_slices=73 calibration_schur_bit=27"

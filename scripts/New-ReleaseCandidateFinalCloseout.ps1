@@ -1216,6 +1216,18 @@ function Get-Record {
         "scripts/Test-LocalLinux51AotEvidence.ps1",
         "packaging/runtime/opencv-5.1.0-local-linux-aot-evidence.json",
         "packaging/runtime/opencv-5.1.0-local-linux-aot-evidence.schema.json",
+        "scripts/Build-Linux51HeadlessCandidate.py",
+        "scripts/Initialize-Linux51HeadlessConsumer.sh",
+        "scripts/Invoke-Linux51HeadlessConsumer.ps1",
+        "scripts/Linux51Headless.Common.ps1",
+        "scripts/Measure-Linux51HeadlessEvidence.ps1",
+        "scripts/Test-Linux51HeadlessEvidence.ps1",
+        "tools/LinuxHeadlessPackageSmoke/Program.cs",
+        "tools/LinuxHeadlessPackageSmoke/consumer.csproj.in",
+        "packaging/runtime/opencv-5.1.0-local-linux-headless-evidence.json",
+        "packaging/runtime/opencv-5.1.0-local-linux-headless-evidence.schema.json",
+        "packaging/release/opencv-5.1.0-local-headless-sbom/JYPPX.OpenCV.runtime.linux-x64.preview.5.1.0-headless.2963ce5.spdx.json",
+        "packaging/release/opencv-5.1.0-local-headless-sbom/JYPPX.OpenCV.runtime.linux-x64.preview.mini.5.1.0-headless.2963ce5.spdx.json",
         "docs/articles/linux-5.1-local-preview.md",
         "scripts/Build-LocalLinux51Preview.ps1",
         "scripts/Audit-Linux51Runtime.py",
@@ -1876,6 +1888,9 @@ function Get-Record {
             CurrentLocalLinux51VideoOnnxConsumersValidated = $true
             CurrentLocalLinux51AotEvidence = Get-FileEvidence -RelativePath "packaging/runtime/opencv-5.1.0-local-linux-aot-evidence.json"
             CurrentLocalLinux51AotConsumersValidated = $true
+            CurrentLocalLinux51HeadlessEvidence = Get-FileEvidence -RelativePath "packaging/runtime/opencv-5.1.0-local-linux-headless-evidence.json"
+            CurrentLocalLinux51HeadlessCandidatesValidated = $true
+            CurrentHeadlessActiveIdentityPromoted = $false
             CurrentLinux51ThreeDistroGateComplete = $false
             HistoricalPerformanceRevision = "5.0.0"
             CurrentPerformanceHistoricalComparisonClaimed = $false

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Local Linux OpenCV 5.1 headless candidate evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "evidenceKind", "status", "openCvVersion", "packageVersion", "sourceBaseCommit", "worktreeChangesIncluded", "execution", "hosted", "candidateOnly", "publicationAllowed", "activePackageIdentityAdded", "references", "sourceInputs", "kitManifest", "producer", "managedPackage", "packages", "consumers", "coverage"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "evidenceKind": {"const": "local-linux-5.1-headless-candidate"},
+    "status": {"const": "verified-local-three-distro-x64-candidate"},
+    "openCvVersion": {"const": "5.1.0"},
+    "packageVersion": {"type": "string", "pattern": "^5\\.1\\.0-headless\\.[a-f0-9]{7}$"},
+    "sourceBaseCommit": {"type": "string", "pattern": "^[a-f0-9]{40}$"},
+    "worktreeChangesIncluded": {"const": true},
+    "execution": {"const": "local-docker"},
+    "hosted": {"const": false},
+    "candidateOnly": {"const": true},
+    "publicationAllowed": {"const": false},
+    "activePackageIdentityAdded": {"const": false},
+    "references": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"$ref": "#/$defs/reference"}},
+    "sourceInputs": {"$ref": "#/$defs/manifest"},
+    "kitManifest": {"$ref": "#/$defs/manifest"},
+    "producer": {"$ref": "#/$defs/producer"},
+    "managedPackage": {"type": "object", "required": ["id", "version", "bytes", "sha256", "assemblies"], "properties": {"id": {"const": "JYPPX.OpenCV.CSharp.API"}, "version": {"const": "5.1.0"}, "bytes": {"type": "integer", "minimum": 1}, "sha256": {"$ref": "#/$defs/hash"}, "assemblies": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"$ref": "#/$defs/entry"}}}},
+    "packages": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "object", "required": ["profile", "id", "version", "artifactPath", "bytes", "sha256", "entries", "sbom"], "properties": {"profile": {"enum": ["full", "mini"]}, "id": {"type": "string"}, "version": {"type": "string"}, "artifactPath": {"type": "string"}, "bytes": {"type": "integer", "minimum": 1}, "sha256": {"$ref": "#/$defs/hash"}, "entries": {"type": "array", "minItems": 20, "items": {"$ref": "#/$defs/entry"}}, "sbom": {"$ref": "#/$defs/reference"}}}},
+    "consumers": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "object", "additionalProperties": false, "required": ["rid", "identity", "outputDirectory", "blobs", "runs"], "properties": {"rid": {"enum": ["ubuntu.22.04-x64", "ubuntu.24.04-x64", "debian.12-x64"]}, "identity": {"type": "object"}, "outputDirectory": {"type": "string"}, "blobs": {"$ref": "#/$defs/blobs"}, "runs": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"type": "object", "additionalProperties": false, "required": ["targetFramework", "profile", "blobs", "video"], "properties": {"targetFramework": {"enum": ["net8.0", "net10.0"]}, "profile": {"enum": ["full", "mini"]}, "blobs": {"$ref": "#/$defs/blobs"}, "video": {"type": "object", "required": ["bytes", "sha256"], "properties": {"bytes": {"const": 6288}, "sha256": {"const": "35f06c4c8ddfd2f0ac4265353ba17449a576a28fb35c9bc342108950e0963449"}}}}}}}}},
+    "coverage": {"type": "object", "additionalProperties": false, "required": ["targetRids", "profiles", "targetFrameworks", "nativeCtestPassed", "managedExecutions", "guiNegativeCalls", "fullOnnxInferences", "mjpgWriteReadExecutions", "upstreamBuildReused", "freshMinimalUpstreamBuild", "hostedValidated", "arm64Validated", "cameraOrNetworkValidated", "transitiveStaticSbomComplete", "finalReleaseApproved"], "properties": {"targetRids": {"const": ["ubuntu.22.04-x64", "ubuntu.24.04-x64", "debian.12-x64"]}, "profiles": {"const": ["full", "mini"]}, "targetFrameworks": {"const": ["net8.0", "net10.0"]}, "nativeCtestPassed": {"const": 6}, "managedExecutions": {"const": 12}, "guiNegativeCalls": {"const": 72}, "fullOnnxInferences": {"const": 12}, "mjpgWriteReadExecutions": {"const": 12}, "upstreamBuildReused": {"const": true}, "freshMinimalUpstreamBuild": {"const": false}, "hostedValidated": {"const": false}, "arm64Validated": {"const": false}, "cameraOrNetworkValidated": {"const": false}, "transitiveStaticSbomComplete": {"const": false}, "finalReleaseApproved": {"const": false}}}
+  },
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "reference": {"type": "object", "additionalProperties": false, "required": ["path", "sha256"], "properties": {"path": {"type": "string", "minLength": 1}, "sha256": {"$ref": "#/$defs/hash"}}},
+    "file": {"type": "object", "additionalProperties": false, "required": ["path", "bytes", "sha256"], "properties": {"path": {"type": "string", "minLength": 1}, "bytes": {"type": "integer", "minimum": 0}, "sha256": {"$ref": "#/$defs/hash"}}},
+    "manifest": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/file"}},
+    "entry": {"type": "object", "additionalProperties": false, "required": ["path", "bytes", "sha256", "sha1"], "properties": {"path": {"type": "string", "minLength": 1}, "bytes": {"type": "integer", "minimum": 0}, "sha256": {"$ref": "#/$defs/hash"}, "sha1": {"type": "string", "pattern": "^[a-f0-9]{40}$"}}},
+    "blobs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "object", "additionalProperties": false, "required": ["name", "bytes", "sha256", "text"], "properties": {"name": {"type": "string"}, "bytes": {"type": "integer", "minimum": 0}, "sha256": {"$ref": "#/$defs/hash"}, "text": {"type": "string"}}}},
+    "producer": {"type": "object", "additionalProperties": false, "required": ["identity", "outputDirectory", "blobs"], "properties": {"identity": {"type": "object"}, "outputDirectory": {"type": "string"}, "blobs": {"$ref": "#/$defs/blobs"}}}
+  }
+}

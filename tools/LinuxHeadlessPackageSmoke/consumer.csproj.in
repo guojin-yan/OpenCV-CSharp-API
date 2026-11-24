@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>__TFM__</TargetFramework>
+    <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+    <RollForward>Disable</RollForward>
+    <RuntimeFrameworkVersion>__RUNTIME_VERSION__</RuntimeFrameworkVersion>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <NuGetAudit>true</NuGetAudit>
+    <WarningsAsErrors>NU1903</WarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="JYPPX.OpenCV.CSharp.API" Version="5.1.0" />
+    <PackageReference Include="__RUNTIME_PACKAGE__" Version="__CANDIDATE_VERSION__" />
+    <None Include="identity-opset13.onnx.base64" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>
